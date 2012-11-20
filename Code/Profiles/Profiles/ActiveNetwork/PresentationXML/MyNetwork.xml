@@ -1,0 +1,25 @@
+﻿<Presentation PresentationClass="network">
+  <PageOptions Columns="2"/>
+  <WindowName>My Network</WindowName>
+  <PageTitle>My Network</PageTitle>
+  <PageBackLinkName></PageBackLinkName>
+  <PageBackLinkURL></PageBackLinkURL>
+  <PageSubTitle></PageSubTitle>
+  <PageDescription>
+    To add people to your network, search for their profiles and indicate your relationship to them on the left sidebar.
+  </PageDescription>
+  <PanelList>
+    <Panel type="header"  />
+    <Panel type="page" />
+    <Panel Type="active">
+      <Module ID="MainMenu">
+      </Module>
+    </Panel>
+    <Panel Name="" Alias="" Type="main" TabType="Default" TabSort="0">
+      <Module ID="MyNetwork">
+      </Module>
+    </Panel>
+    <Panel type="footer" />
+  </PanelList>
+</Presentation>
+

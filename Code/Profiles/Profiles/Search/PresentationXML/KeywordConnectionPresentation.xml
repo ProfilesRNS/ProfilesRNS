@@ -1,0 +1,42 @@
+﻿<Presentation PresentationClass="connection">
+  <PageOptions Columns="3"/>
+  <WindowName>Keyword Connecton</WindowName>
+  <PageTitle>Search Results ({{{PersonList/@TotalCount}}})</PageTitle>
+  <PageBackLinkName>Back to Search Results</PageBackLinkName>
+  <PageBackLinkURL>~/search/people/results/{{{//Profiles/@QueryID}}}</PageBackLinkURL>
+  <PageSubTitle></PageSubTitle>
+  <PageDescription></PageDescription>
+  <PanelList>
+    <Panel type="header"  />
+    <Panel type="page" />
+    <Panel Type="active" >
+      <Module ID="DefaultMenu">
+      </Module>
+    </Panel>
+    <Panel Type="main">
+      <Module ID="KeywordConnection">        
+      </Module>
+    </Panel>
+    <Panel Type="passive">
+      <Module ID="SearchCriteria"/>
+      <Module ID="SearchOptions"/>
+      <Module ID="HTMLBlock">
+        <ParamList>
+          <Param Name="HTML">
+            <div class="passive_section_head">Connection Strength</div>
+            <div class="passive_section_body">
+              <div class="connectionBriefInfoText">
+                The connection strength is the <u>product</u> of the match scores for each search phrase.
+              </div>
+              <div class="connectionBriefInfoText">
+                The search phrase match scores are the <u>sum</u> of the match scores for each publication matching that phrase.
+              </div>
+              <div class="connectionBriefInfoText">Click any match score value to show details.</div>
+            </div>
+          </Param>
+        </ParamList>
+      </Module>
+    </Panel>
+    <Panel type="footer" />
+  </PanelList>
+</Presentation>

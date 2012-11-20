@@ -1,0 +1,26 @@
+﻿<Presentation PresentationClass="profile">
+  <PageOptions Columns="3"/>
+  <WindowName>Search Results Details</WindowName>
+  <PageTitle>Search Results Details</PageTitle>
+  <PageBackLinkName></PageBackLinkName>
+  <PageBackLinkURL></PageBackLinkURL>
+  <PageSubTitle></PageSubTitle>
+  <PageDescription>This is a "connection" page, showing the details of why an item matched the keywords from your search.</PageDescription>
+  <PanelList>
+    <Panel Type="header"  />
+    <Panel Type="page" />
+    <Panel Type="active">
+      <Module ID="MiniSearch"  />
+      <Module ID="MainMenu">
+      </Module>
+    </Panel>
+    <Panel Name="" Alias="" Type="main" TabType="Fixed" TabSort="1" >
+      <Module ID="SearchConnection" />
+    </Panel>
+    <Panel Type="passive">
+      <Module ID="SearchCriteria"></Module>      
+    </Panel>
+    <Panel type="footer" />
+  </PanelList>
+</Presentation>
+

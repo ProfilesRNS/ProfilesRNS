@@ -1,0 +1,37 @@
+﻿<Presentation PresentationClass="network">
+  <PageOptions Columns="3"/>
+  <WindowName>Search Results</WindowName> 
+  <PageTitle>Search Results ({{{PersonList/@TotalCount}}})</PageTitle>
+  <PageBackLinkName>New Search</PageBackLinkName>
+  <PageBackLinkURL>~/search/people</PageBackLinkURL>
+  <PageSubTitle></PageSubTitle>
+  <PageDescription></PageDescription>  
+  <PanelList>
+    <Panel type="header"  />
+    <Panel type="page" />
+    <Panel Type="active" >
+      <Module ID="DefaultMenu">
+      </Module>
+    </Panel>
+    <Panel Type="main">
+      <Module ID="PersonResults">
+        <ParamList>    
+          <Param Name="XSLTPath">PersonResults.xslt</Param>          
+        </ParamList>
+      </Module>
+    </Panel>
+    <Panel Type="passive">
+      <Module ID="SearchCriteria"/>
+      <Module ID="SearchOptions"/>      
+      <Module ID="HTMLBlock">
+        <ParamList>
+          <Param Name="HTML">
+             <div class="searchSection" style="margin-bottom:15px;" id="divPersonDetail"/>                
+          </Param>
+        </ParamList>
+      </Module>    
+    </Panel>  
+    <Panel type="footer" />
+  </PanelList>
+</Presentation>
+

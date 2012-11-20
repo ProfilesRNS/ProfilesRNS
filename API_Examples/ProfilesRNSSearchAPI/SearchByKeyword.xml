@@ -1,0 +1,9 @@
+<SearchOptions>
+	<MatchOptions>
+		<SearchString>asthma</SearchString>
+	</MatchOptions>
+	<OutputOptions>
+		<Offset>0</Offset>
+		<Limit>15</Limit>
+	</OutputOptions>
+</SearchOptions>

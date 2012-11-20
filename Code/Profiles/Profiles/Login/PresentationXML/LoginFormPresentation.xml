@@ -1,0 +1,24 @@
+﻿<Presentation PresentationClass="profile">
+  <PageOptions Columns="2"/>
+  <WindowName>Login</WindowName>
+  <PageTitle>Login</PageTitle>
+  <PageBackLinkName></PageBackLinkName>
+  <PageBackLinkURL></PageBackLinkURL>
+  <PageSubTitle></PageSubTitle>
+  <PageDescription></PageDescription>
+  <PanelList>
+    <Panel type="header"  />
+    <Panel type="page" />
+    <Panel Type="active">
+      <Module ID="MiniSearch"  />
+      <Module ID="MainMenu">
+      </Module>
+    </Panel>
+    <Panel Name="" Alias="" Type="main" TabType="Default" TabSort="0" >
+      <Module ID="Login" >
+      </Module>
+    </Panel>
+    <Panel type="footer" />
+  </PanelList>
+</Presentation>
+

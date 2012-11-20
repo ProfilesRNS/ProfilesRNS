@@ -1,0 +1,28 @@
+﻿ <Presentation PresentationClass="network">
+  <PageOptions Columns="2"/>
+  <WindowName>Browse</WindowName> 
+  <PageTitle>Browse</PageTitle>
+  <PageBackLinkName>Back to search</PageBackLinkName>
+  <PageBackLinkURL>Default.aspx</PageBackLinkURL>
+  <PageSubTitle>{{{/rdf:RDF/rdf:Description/rdf:subject/prns:matchesClassGroup}}} - {{{/rdf:RDF/rdf:Description/rdf:subject/prns:matchesClass}}}</PageSubTitle>
+  <PageDescription></PageDescription>  
+  <PanelList>
+    <Panel type="header"  />
+    <Panel type="page" />
+    <Panel Type="active">
+      <Module ID="DefaultMenu">
+      </Module>
+    </Panel>
+    <Panel Type="main">
+      <Module ID="ApplyXSLT">
+          <ParamList>        
+          <Param Name="DataURI"></Param><!---->
+          <Param Name="XSLTPath">~/Search/XSLT/SearchResult.xslt</Param>
+          </ParamList>
+      </Module>
+    </Panel>
+    <Panel Type="passive"/>
+    <Panel type="footer" />
+  </PanelList>  
+</Presentation>
+

@@ -1,0 +1,17 @@
+<SearchOptions>
+	<MatchOptions>
+		<SearchString ExactMatch="false">asthma</SearchString> 
+		<SearchFiltersList> 
+			<SearchFilter Property="http://xmlns.com/foaf/0.1/lastName" MatchType="Left">Smith</SearchFilter> 
+		</SearchFiltersList>
+		<ClassURI>http://xmlns.com/foaf/0.1/Person</ClassURI> 
+	</MatchOptions>
+	<OutputOptions>
+		<Offset>0</Offset> 
+		<Limit>15</Limit> 
+		<SortByList>
+			<SortBy IsDesc="0" Property="http://xmlns.com/foaf/0.1/lastName" /> 
+			<SortBy IsDesc="0" Property="http://xmlns.com/foaf/0.1/firstName" /> 
+		</SortByList>
+	</OutputOptions>
+</SearchOptions>

@@ -1,0 +1,67 @@
+﻿<Presentation PresentationClass="profile">
+  <PageOptions Columns="2"/>
+  <WindowName>About</WindowName>  
+  <PageTitle>About Profiles RNS</PageTitle>
+  <PageBackLinkName></PageBackLinkName>
+  <PageBackLinkURL></PageBackLinkURL>
+  <PageSubTitle></PageSubTitle>
+  <PageDescription></PageDescription>  
+  <PanelList>
+    <Panel type="header"  />
+    <Panel type="page" />
+    <Panel Type="active">
+      <Module ID="MiniSearch"  />
+      <Module ID="MainMenu"  />      
+    </Panel>
+    <Panel Type="main">
+      <Module ID="HTMLBlock">
+        <ParamList>
+          <Param Name="HTML">
+            <div class="aboutText">              
+            <h3>Introduction</h3>
+            <br />
+            Profiles is a research networking and expertise mining software tool. It not only shows traditional directory information, but also illustrates how each person is connected to others in the broad research community. <br />
+            <br />
+            When you view a person's profile, three types of information are displayed: <br />
+            <ol>
+              <li>
+                <u>Managed Descriptions</u><br />
+                This is the typical information listed in a research profile, including name, titles, affiliation, phone number and email address. Faculty can edit their own profiles, adding publications, awards, narrative, and a photo. <br />
+                <br />
+              </li>
+              <li>
+                <u>Passive Networks</u><br />
+                Passive networks are formed automatically when faculty share common traits such as being in the same department, working in the same building, co-authoring the same paper, or researching the same topics (as defined, for example, by the "MeSH" keywords or other keywords assigned to their publications). The passive networks a person belongs to are shown on the <u>right</u> side of the page when viewing a profile. <br />
+                <br />
+              </li>
+              <li>
+                <u>Active Networks</u><br />
+                Active networks are the ones that you define. When users who login to the website view other people's profiles, they can mark those people as collaborators, advisors, or advisees. In other words, you can build your own network of people that you know. Currently, you can only see the networks that you build. In the future you will be able to share these lists with others.  Active networks are shown on your <u>left</u> sidebar. <br />
+                <br />
+              </li>
+            </ol>
+
+            <h3>Why are there missing or incorrect publications in my profile?</h3>
+            <br />
+            Publications are added both automatically from PubMed and manually by faculty themselves. Unfortunately, there is no easy way to match articles in PubMed to the profiles on this website. The algorithm used to find articles from PubMed attempts to minimize the number of publications incorrectly added to a profile; however, this method results in some missing publications. Faculty with common names or whose articles were written at other institutions are most likely to have incomplete publication lists. We encourage all faculty to login to the website and add any missing publications or remove incorrect ones.<br />
+            <br />
+
+            <h3>Can I edit my keywords, co-authors, or list of similar people?</h3>
+            <br />
+            These are derived automatically from the PubMed articles listed with your profile. You cannot edit these directly, but you can improve these lists by keeping your publications up to date. Please note that it takes up to 24 hours for the system to update your keywords, co-authors, and similar people after you have modified your publications. Keyword rankings and similar people lists are based on algorithms that weigh multiple factors, such as how many publications you have in a subject area compared to the total number of faculty who have published in that area and how long ago the articles were written.<br />
+            <br />
+
+            <h3>Who created Profiles?</h3>
+            <br />
+            This service is made possible by the Profiles Research Networking Software developed under the supervision of Griffin M Weber, MD, PhD, with support from Grant Number 1 UL1 RR025758-01 to Harvard Catalyst: The Harvard Clinical and Translational Science Center from the National Center for Research Resources and support from Harvard University and its affiliated academic healthcare centers.
+
+            </div>            
+          </Param>
+        </ParamList>
+      </Module>
+      <Panel Type="passive"/>
+      <Panel type="footer" />
+    </Panel> 
+  </PanelList>
+</Presentation>
+

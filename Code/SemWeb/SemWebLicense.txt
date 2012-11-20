@@ -1,0 +1,45 @@
+SemWeb: A Semantic Web Library for C#/.NET
+==========================================
+
+By Joshua Tauberer <http://razor.occams.info>
+
+http://razor.occams.info/code/semweb
+
+
+LICENSE
+-------
+
+The source files and binaries are all GPL-compatible.
+
+Most of the source files were written by me, some source files were 
+written by or are derived from other work, and the binaries are a mix of 
+the above. So the particular license that applies in each case may be
+different. However, everything included can be reused under the terms
+of the GPL (if not something more permissive, depending on what it is).
+
+The portions of this library not written by someone else are Copyright 
+2005-2008 Joshua Tauberer, and are dual-licensed under both the GNU GPL 
+(version 2 or later) and the Creative Commons Attribution License. All 
+source files not listed below were written originally by me. Thus for 
+those source files written by me, you have two license options.
+
+The following components of this library are derived from other works:
+
+sparql-core.dll is based on the SPARQL Engine by Ryan Levering,
+which is covered by the GNU LGPL.  The original Java JAR was
+coverted to a .NET assembly using IKVM (see below).  Actually, I've
+made numerous changes to the library so it can take advantage of
+faster API paths in SemWeb.
+See: http://sparql.sourceforge.net/
+
+IKVM*.dll are auxiliary assemblies for running the SPARQL
+engine.  IKVM was written by Jeroen Frijters.  See http://www.ikvm.net.
+The IVKM license is the zlib license, which is GPL compatible.
+
+Euler.cs is adapted from Jos De Roo's JavaScript Euler inferencing
+engine.  See: http://www.agfa.com/w3c/euler/ The original source
+code (and thus this derived file) was licensed under the W3C Software
+License, which is GPL compatible. 
+
+SQLServerStore.cs was contributed by Khaled Hammouda and is licensed
+under the GPL.

@@ -1,0 +1,258 @@
+﻿/*  
+ 
+    Copyright (c) 2008-2012 by the President and Fellows of Harvard College. All rights reserved.  
+    Profiles Research Networking Software was developed under the supervision of Griffin M Weber, MD, PhD.,
+    and Harvard Catalyst: The Harvard Clinical and Translational Science Center, with support from the 
+    National Center for Research Resources and Harvard University.
+
+
+    Code licensed under a BSD License. 
+    For details, see: LICENSE.txt 
+  
+*/
+
+
+/********************************************/
+/* Sections Headers                         */
+/********************************************/
+
+.profiles .profilesContentMain .sectionHeader
+{
+    font-size: 13px;
+    font-weight: bold;
+    color: #333;
+    padding-top: 18px;
+    padding-bottom: 0px;
+    margin-bottom: 8px;
+    text-decoration: underline;
+}
+.profiles .profilesContentMain .sectionHeader2
+{
+    font-size: 13px;
+    font-weight: bold;
+    color: #333;
+    padding-top: 18px;
+    padding-bottom: 0px;
+    margin-bottom: 8px;
+    text-decoration: underline;
+}
+
+
+/********************************************/
+/* Photo                                    */
+/********************************************/
+
+.profiles .profilesContentMain .content_two_columns .photo
+{
+    text-align: right;
+    padding-right: 8px;
+}
+.profiles .profilesContentMain .content_two_columns .photo img
+{
+    width: 120px;
+    height: 120px;
+    border: 1px solid #000;
+}
+
+
+/********************************************/
+/* Basic Info                               */
+/********************************************/
+
+.profiles .profilesContentMain .basicInfo table
+{
+    border-collapse: collapse;
+}
+.profiles .profilesContentMain .basicInfo th
+{
+    text-align: right;
+    vertical-align: top;
+    font-size: 12px;
+    font-weight: bold;
+    color: #777;
+    padding: 2px 10px 0 0;
+    width: 80px;
+}
+.profiles .profilesContentMain .basicInfo td
+{
+    text-align: left;
+    vertical-align: top;
+    font-size: 12px;
+    padding: 2px 0 0 0;
+}
+
+/********************************************/
+/* Awards                                   */
+/********************************************/
+
+.profiles .profilesContentMain .awardsList td
+{
+    text-align: left;
+    vertical-align: top;
+    padding: 1px 6px 0 0;
+}
+
+/********************************************/
+/* Narrative                                */
+/********************************************/
+
+.profiles .profilesContentMain .narrative
+{
+    padding: 4px 8px 0px 0px;
+    white-space: pre-wrap;
+}
+
+
+/********************************************/
+/* Publications                             */
+/********************************************/
+
+.profiles .profilesContentMain .publications
+{
+    padding-top: 4px;
+    position: relative;
+    left: -8px;
+}
+.profiles .profilesContentMain .publications .intro
+{
+    margin-left: 8px;
+}
+.profiles .profilesContentMain .publications ol
+{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    list-style: decimal;
+}
+.profiles .profilesContentMain .publications li
+{
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-top: 1px solid #CCC;
+}
+.profiles .profilesContentMain .publications li.first
+{
+	padding-top: 4px; border-top: none;
+}
+.profiles .profilesContentMain .publications li .viewIn
+{
+    padding-top: 4px;
+}
+.profiles .profilesContentMain .publications li .viewInLabel
+{
+    color: #666;
+    font-weight: bold;
+}
+
+#publicationTimelineGraph {
+	text-align: right;
+	margin-top: 12px;
+}
+.publicationMenu {
+	margin: 10px 0 4px 0;
+	color: #666;
+}
+.publicationMenu a.selected
+{
+	color: #333 !important;
+	font-weight: bold;
+	cursor: default;
+}
+.publicationMenu a.selected:hover
+{	
+	text-decoration: none;
+}
+.publicationMenu a
+{
+	color: #36C;
+	cursor: pointer;
+}
+
+.SupportText {
+	border-top: 1px solid #666;
+	font-size: 11px;
+	margin: 12px 0 16px 0;
+	padding: 16px 0 0 0;
+	color: #333;
+}
+
+
+/********************************************/
+/* Keywords                                 */
+/********************************************/
+
+.profiles .profilesContentMain .kwCloud0 a
+{
+    color: #B7C3DB;
+}
+.profiles .profilesContentMain .kwCloud1 a
+{
+}
+.profiles .profilesContentMain .kwCloud2 a
+{
+    font-weight: bold;
+    font-size: 14px;
+}
+.profiles .profilesContentMain .keywordCategories table
+{
+    border-collapse: collapse;
+}
+.profiles .profilesContentMain .keywordCategories td, .profiles .profilesContentMain .keywordCategories th
+{
+    font-size: 12px;
+    padding: 2px 5px;
+    text-align: left;
+    border: none;
+}
+.profiles .profilesContentMain .keywordCategories .kwbar
+{
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+}
+.profiles .profilesContentMain .keywordCategories td
+{
+    padding-right: 15px;
+}
+.profiles .profilesContentMain .keywordCategories .kwsg
+{
+    font-weight: bold;
+    padding: 0px 2px;
+}
+.profiles .profilesContentMain .keywordCategories .kwsgbox
+{
+    padding: 2px;
+    margin-bottom: 15px;
+    color: #36C;
+}
+.profiles .profilesContentMain .keywordCategories ul
+{
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+.profiles .profilesContentMain .keywordCategories a
+{
+    font-size: 12px;
+}
+.profiles .profilesContentMain .keywordCategories a:hover
+{
+}
+
+/********************************************/
+/* Network Timelines                        */
+/********************************************/
+
+.keywordTimeline 
+{
+	float: left;
+}
+.keywordTimelineLabels {
+	position: relative;
+	margin-top: 29px;
+	float:left;
+	font-size: 11px;
+	line-height: 20px;
+	width: 150px;
+	white-space: nowrap;
+	overflow: hidden;
+}

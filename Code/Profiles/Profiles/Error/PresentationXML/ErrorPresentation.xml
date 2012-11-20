@@ -1,0 +1,26 @@
+﻿<Presentation PresentationClass="profile">
+  <PageOptions Columns="2"/>
+  <WindowName>Error</WindowName> 
+  <PageTitle>Error</PageTitle>
+  <PageBackLinkName></PageBackLinkName>
+  <PageBackLinkURL></PageBackLinkURL>
+  <PageSubTitle></PageSubTitle>
+  <PageDescription>
+    An application error has occurred</PageDescription>  
+  <PanelList>
+    <Panel type="header"  />
+    <Panel type="page" />
+    <Panel Type="active">
+      <Module ID="MainMenu">
+      </Module>
+    </Panel>
+    <Panel Type="main" >
+      <Module ID="ErrorMessage">
+        <ParamList/>
+      </Module>      
+    </Panel>
+    <Panel Type="passive"/>
+    <Panel type="footer" />
+  </PanelList>
+</Presentation>
+

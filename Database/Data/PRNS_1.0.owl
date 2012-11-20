@@ -1,0 +1,446 @@
+<rdf:RDF xmlns:geo="http://aims.fao.org/aos/geopolitical.owl#" xmlns:afn="http://jena.hpl.hp.com/ARQ/function#" xmlns:prns="http://profiles.catalyst.harvard.edu/ontology/prns#" xmlns:obo="http://purl.obolibrary.org/obo/" xmlns:dcelem="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:event="http://purl.org/NET/c4dm/event.owl#" xmlns:bibo="http://purl.org/ontology/bibo/" xmlns:vann="http://purl.org/vocab/vann/" xmlns:vitro07="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#" xmlns:vitro="http://vitro.mannlib.cornell.edu/ns/vitro/public#" xmlns:vivo="http://vivoweb.org/ontology/core#" xmlns:pvs="http://vivoweb.org/ontology/provenance-support#" xmlns:scirr="http://vivoweb.org/ontology/scientific-research-resource#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:swvs="http://www.w3.org/2003/06/sw-vocab-status/ns#" xmlns:skco="http://www.w3.org/2004/02/skos/core#" xmlns:owl2="http://www.w3.org/2006/12/owl2-xml#" xmlns:skos="http://www.w3.org/2008/05/skos#" xmlns:foaf="http://xmlns.com/foaf/0.1/">
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#sourceCreator">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="source creator" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#sourceIdentifier">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="source identifier" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#sourceModified">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="source modified" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#associatedPerson">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="associated person" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#authorPosition">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="author position" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#authorPositionWeight">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="author position weight" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#authorshipWeight">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="authorship weight" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#awardConferredBy">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="award conferred by" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#canBeProxy">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="can be proxy" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#categoryForPersonFilter">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="category for person filter" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#ClassGroupAwards">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="Awards" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#ClassGroupConcepts">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="Concepts" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#ClassGroupOrganizations">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="Organizations" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#ClassGroupPeople">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="People" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#ClassGroupResearch">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="Research" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#coAuthorOf">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="coauthor of" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#Connection">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="Connection" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#ConnectionDetails">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="Connection Details" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#connectionInNetwork">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="connection in network" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#connectionWeight">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="connection weight" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#emailEncrypted">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="email address" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#endDate">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="end date" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#FacultyRank">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="Faculty Rank" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#fullName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="full name" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#hasConnection">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="has connection" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#hasConnectionDetails">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="has connection details" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#hasFacultyRank">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="has faculty rank" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#hasNetwork">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="has network" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#hasPersonFilter">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="has person filter" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#informationResourceReference">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="information resource reference" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#isActive">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="is active" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#isAlsoCoAuthor">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="is also coauthor" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#isPrimaryPosition">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="is primary position" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#latitude">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="latitude" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#longitude">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="longitude" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#mainImage">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="photo" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#matchesClass">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="matches class" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#matchesClassGroup">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="matches class group" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#maxWeight">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="maximum weight" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#meshDescriptorUI">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="MeSH DescriptorUI" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#meshSemanticGroupName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="MeSH semantic group name" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#meshTreeNumber">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="MeSH tree number" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#minWeight">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="minimum weight" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#Network">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="Network" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#numberOfAuthors">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="number of authors" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#numberOfConnections">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="number of connections" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#numberOfPublications">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="number of publications" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#numberOfSubjectAreas">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="number of subject areas" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#PersonFilter">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="Person Filter" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#PersonFilterCategory">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="Person Filter Category" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#personFilterForPerson">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="person filter for person" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#personFilterInCategory">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="person filter in category" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#personInPrimaryPosition">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="person in primary position" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#physicalNeighborOf">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="physical neighbor" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#positionInDepartment">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="position in department" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#positionInDivision">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="position in division" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#predicateNode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="predicate node" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupAddress">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="Address" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupAffiliation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="Affiliation" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupBibliographic">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="Bibliographic" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupBibliographiconline">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="Bibliographiconline" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupBibmapping">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="Bibmapping" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupBibobscure">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="Bibobscure" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupBiography">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="Biography" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupIdentifiers">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="Identifiers" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupLinks">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="Links" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupLocation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="Location" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupMapping">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="Mapping" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupOutreach">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="Outreach" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupOverview">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="Overview" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupResearch">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="Research" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupTeaching">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="Teaching" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupTime">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="Time" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#publicationDate">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="publication date" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#Session">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="Session" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#similarTo">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="similar to" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#sortOrder">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="sort order" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#startDate">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="start date" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#tagName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="tag name" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#uniquenessWeight">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="uniqueness weight" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#User">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="User" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#year">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="year" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/dc/elements/1.1/description">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="description" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/dc/elements/1.1/source">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="source" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/dc/terms/modified">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="modified" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#object">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="object" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="predicate" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#subject">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="subject" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#comment">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="comment" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#domain">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="domain" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#isDefinedBy">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="is defined by" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#label">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="label" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#range">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="range" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#subClassOf">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="subclass of" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#subPropertyOf">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="subproperty of" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#allValuesFrom">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="all values from" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#equivalentClass">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="equivalent class" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#equivalentProperty">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="equivalent property" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#imports">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="imports" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#inverseOf">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="inverse of" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#maxCardinality">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="max cardinality" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#minCardinality">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="min cardinality" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#onProperty">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="on property" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#someValuesFrom">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="some values from" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#versionInfo">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="version info" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2003/06/sw-vocab-status/ns#term_status">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="term status" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2006/12/owl2-xml#term_status">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="term status" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2008/05/skos#editorialNote">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="editorial note" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2008/05/skos#example">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="example" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2008/05/skos#scopeNote">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="scope note" />
+  </rdf:Description>
+</rdf:RDF>

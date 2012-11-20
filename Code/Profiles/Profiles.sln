@@ -1,0 +1,144 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Profiles", "Profiles\Profiles.csproj", "{3558968D-7E06-4351-AEEE-74A6BC975A74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfilesSPARQLAPI", "..\ProfilesSPARQLAPI\ProfilesSPARQLAPI\ProfilesSPARQLAPI.csproj", "{6BA6B347-6512-4005-93F3-1C99105F8DA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemWeb", "..\SemWeb\src\SemWeb.csproj", "{98EA8780-0045-41A4-BAA1-575582B92BCC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProfilesBetaAPI", "ProfilesBetaAPI", "{EEB42F99-AF50-4BFD-9AE8-8F19F3230B6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Connects.Profiles.Service", "..\ProfilesBetaAPI\Connects.Profiles.Service\Connects.Profiles.Service.csproj", "{5CD869A4-AB6B-43A0-ABB5-EE0DE758492B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Connects.Profiles.Service.DataContracts", "..\ProfilesBetaAPI\Connects.Profiles.Service.DataContracts\Connects.Profiles.Service.DataContracts.csproj", "{4E11DE8F-C111-44E4-8AF8-B66EDEC9152D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Connects.Profiles.Service.ServiceContracts", "..\ProfilesBetaAPI\Connects.Profiles.Service.ServiceContracts\Connects.Profiles.Service.ServiceContracts.csproj", "{D532570D-2CB9-4592-A8B5-C16712B1FACB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Connects.Profiles.Service.ServiceImplementation", "..\ProfilesBetaAPI\Connects.Profiles.Service.ServiceImplementation\Connects.Profiles.Service.ServiceImplementation.csproj", "{24E3696C-B69C-49C8-8276-C4003297C45D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Connects.Profiles.Utility", "..\ProfilesBetaAPI\Connects.Profiles.Utility\Connects.Profiles.Utility.csproj", "{27F9D353-FCCC-430E-A6A6-6864773CBCDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Connects.Profiles.Common", "..\ProfilesBetaAPI\Profiles.Common\Connects.Profiles.Common.csproj", "{72ABCD78-6907-4F63-8C59-392C9F3CE506}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfilesSearchAPI", "..\ProfilesSearchAPI\ProfilesSearchAPI\ProfilesSearchAPI.csproj", "{73838284-0025-4C0B-9E72-D0FEAEE37785}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 10
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.med.harvard.edu:8081/tfs
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Profiles\\Profiles.csproj
+		SccProjectName1 = Profiles
+		SccLocalPath1 = Profiles
+		SccProjectUniqueName2 = ..\\SemWeb\\src\\SemWeb.csproj
+		SccProjectName2 = ../SemWeb/src
+		SccLocalPath2 = ..\\SemWeb\\src
+		SccProjectUniqueName3 = ..\\ProfilesBetaAPI\\Connects.Profiles.Service\\Connects.Profiles.Service.csproj
+		SccProjectTopLevelParentUniqueName3 = Profiles.sln
+		SccProjectName3 = ../ProfilesBetaAPI/Connects.Profiles.Service
+		SccLocalPath3 = ..\\ProfilesBetaAPI\\Connects.Profiles.Service
+		SccProjectUniqueName4 = ..\\ProfilesBetaAPI\\Connects.Profiles.Service.DataContracts\\Connects.Profiles.Service.DataContracts.csproj
+		SccProjectTopLevelParentUniqueName4 = Profiles.sln
+		SccProjectName4 = ../ProfilesBetaAPI/Connects.Profiles.Service.DataContracts
+		SccLocalPath4 = ..\\ProfilesBetaAPI\\Connects.Profiles.Service.DataContracts
+		SccProjectUniqueName5 = ..\\ProfilesBetaAPI\\Connects.Profiles.Service.ServiceContracts\\Connects.Profiles.Service.ServiceContracts.csproj
+		SccProjectTopLevelParentUniqueName5 = Profiles.sln
+		SccProjectName5 = ../ProfilesBetaAPI/Connects.Profiles.Service.ServiceContracts
+		SccLocalPath5 = ..\\ProfilesBetaAPI\\Connects.Profiles.Service.ServiceContracts
+		SccProjectUniqueName6 = ..\\ProfilesBetaAPI\\Connects.Profiles.Service.ServiceImplementation\\Connects.Profiles.Service.ServiceImplementation.csproj
+		SccProjectTopLevelParentUniqueName6 = Profiles.sln
+		SccProjectName6 = ../ProfilesBetaAPI/Connects.Profiles.Service.ServiceImplementation
+		SccLocalPath6 = ..\\ProfilesBetaAPI\\Connects.Profiles.Service.ServiceImplementation
+		SccProjectUniqueName7 = ..\\ProfilesBetaAPI\\Connects.Profiles.Utility\\Connects.Profiles.Utility.csproj
+		SccProjectTopLevelParentUniqueName7 = Profiles.sln
+		SccProjectName7 = ../ProfilesBetaAPI/Connects.Profiles.Utility
+		SccLocalPath7 = ..\\ProfilesBetaAPI\\Connects.Profiles.Utility
+		SccProjectUniqueName8 = ..\\ProfilesBetaAPI\\Profiles.Common\\Connects.Profiles.Common.csproj
+		SccProjectTopLevelParentUniqueName8 = Profiles.sln
+		SccProjectName8 = ../ProfilesBetaAPI/Profiles.Common
+		SccLocalPath8 = ..\\ProfilesBetaAPI\\Profiles.Common
+		SccProjectUniqueName9 = ..\\ProfilesSearchAPI\\ProfilesSearchAPI\\ProfilesSearchAPI.csproj
+		SccProjectName9 = ../ProfilesSearchAPI/ProfilesSearchAPI
+		SccLocalPath9 = ..\\ProfilesSearchAPI\\ProfilesSearchAPI
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Default|Any CPU = Default|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3558968D-7E06-4351-AEEE-74A6BC975A74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3558968D-7E06-4351-AEEE-74A6BC975A74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3558968D-7E06-4351-AEEE-74A6BC975A74}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{3558968D-7E06-4351-AEEE-74A6BC975A74}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{3558968D-7E06-4351-AEEE-74A6BC975A74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3558968D-7E06-4351-AEEE-74A6BC975A74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BA6B347-6512-4005-93F3-1C99105F8DA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BA6B347-6512-4005-93F3-1C99105F8DA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BA6B347-6512-4005-93F3-1C99105F8DA8}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BA6B347-6512-4005-93F3-1C99105F8DA8}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{6BA6B347-6512-4005-93F3-1C99105F8DA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BA6B347-6512-4005-93F3-1C99105F8DA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98EA8780-0045-41A4-BAA1-575582B92BCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98EA8780-0045-41A4-BAA1-575582B92BCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98EA8780-0045-41A4-BAA1-575582B92BCC}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{98EA8780-0045-41A4-BAA1-575582B92BCC}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{98EA8780-0045-41A4-BAA1-575582B92BCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98EA8780-0045-41A4-BAA1-575582B92BCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CD869A4-AB6B-43A0-ABB5-EE0DE758492B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CD869A4-AB6B-43A0-ABB5-EE0DE758492B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CD869A4-AB6B-43A0-ABB5-EE0DE758492B}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CD869A4-AB6B-43A0-ABB5-EE0DE758492B}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{5CD869A4-AB6B-43A0-ABB5-EE0DE758492B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CD869A4-AB6B-43A0-ABB5-EE0DE758492B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E11DE8F-C111-44E4-8AF8-B66EDEC9152D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E11DE8F-C111-44E4-8AF8-B66EDEC9152D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E11DE8F-C111-44E4-8AF8-B66EDEC9152D}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E11DE8F-C111-44E4-8AF8-B66EDEC9152D}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{4E11DE8F-C111-44E4-8AF8-B66EDEC9152D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E11DE8F-C111-44E4-8AF8-B66EDEC9152D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D532570D-2CB9-4592-A8B5-C16712B1FACB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D532570D-2CB9-4592-A8B5-C16712B1FACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D532570D-2CB9-4592-A8B5-C16712B1FACB}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{D532570D-2CB9-4592-A8B5-C16712B1FACB}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{D532570D-2CB9-4592-A8B5-C16712B1FACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D532570D-2CB9-4592-A8B5-C16712B1FACB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24E3696C-B69C-49C8-8276-C4003297C45D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24E3696C-B69C-49C8-8276-C4003297C45D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24E3696C-B69C-49C8-8276-C4003297C45D}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{24E3696C-B69C-49C8-8276-C4003297C45D}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{24E3696C-B69C-49C8-8276-C4003297C45D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24E3696C-B69C-49C8-8276-C4003297C45D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27F9D353-FCCC-430E-A6A6-6864773CBCDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27F9D353-FCCC-430E-A6A6-6864773CBCDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27F9D353-FCCC-430E-A6A6-6864773CBCDC}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{27F9D353-FCCC-430E-A6A6-6864773CBCDC}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{27F9D353-FCCC-430E-A6A6-6864773CBCDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27F9D353-FCCC-430E-A6A6-6864773CBCDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72ABCD78-6907-4F63-8C59-392C9F3CE506}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72ABCD78-6907-4F63-8C59-392C9F3CE506}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72ABCD78-6907-4F63-8C59-392C9F3CE506}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{72ABCD78-6907-4F63-8C59-392C9F3CE506}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{72ABCD78-6907-4F63-8C59-392C9F3CE506}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72ABCD78-6907-4F63-8C59-392C9F3CE506}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73838284-0025-4C0B-9E72-D0FEAEE37785}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73838284-0025-4C0B-9E72-D0FEAEE37785}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73838284-0025-4C0B-9E72-D0FEAEE37785}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{73838284-0025-4C0B-9E72-D0FEAEE37785}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{73838284-0025-4C0B-9E72-D0FEAEE37785}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73838284-0025-4C0B-9E72-D0FEAEE37785}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5CD869A4-AB6B-43A0-ABB5-EE0DE758492B} = {EEB42F99-AF50-4BFD-9AE8-8F19F3230B6E}
+		{4E11DE8F-C111-44E4-8AF8-B66EDEC9152D} = {EEB42F99-AF50-4BFD-9AE8-8F19F3230B6E}
+		{D532570D-2CB9-4592-A8B5-C16712B1FACB} = {EEB42F99-AF50-4BFD-9AE8-8F19F3230B6E}
+		{24E3696C-B69C-49C8-8276-C4003297C45D} = {EEB42F99-AF50-4BFD-9AE8-8F19F3230B6E}
+		{27F9D353-FCCC-430E-A6A6-6864773CBCDC} = {EEB42F99-AF50-4BFD-9AE8-8F19F3230B6E}
+		{72ABCD78-6907-4F63-8C59-392C9F3CE506} = {EEB42F99-AF50-4BFD-9AE8-8F19F3230B6E}
+	EndGlobalSection
+EndGlobal

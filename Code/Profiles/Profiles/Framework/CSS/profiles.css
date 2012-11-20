@@ -1,0 +1,999 @@
+/*  
+ 
+    Copyright (c) 2008-2012 by the President and Fellows of Harvard College. All rights reserved.  
+    Profiles Research Networking Software was developed under the supervision of Griffin M Weber, MD, PhD.,
+    and Harvard Catalyst: The Harvard Clinical and Translational Science Center, with support from the 
+    National Center for Research Resources and Harvard University.
+
+
+    Code licensed under a BSD License. 
+    For details, see: LICENSE.txt 
+  
+*/
+
+body
+{
+	padding: 0px;
+	margin: 0px;
+}
+form
+{
+	padding: 0px;
+	margin: 0px;
+}
+
+.actionbuttons input
+{	
+	margin:0px 2px;
+}
+
+/********************************************/
+/* Customize this part                      */
+/********************************************/
+
+
+.PropertyGroup
+{
+	font-family: Arial;
+	font-weight: bold;
+	font-size: 15px;
+	color: #993333;
+	padding-bottom: 12px;
+}
+.PropertyItemHeader
+{
+	background-color: #EEEBE5;
+	color: #666;
+	font-family: Arial;
+	font-size: 14px;
+	height: 24px;
+	font-weight: bold;
+	vertical-align: middle;
+	padding-left: 6px;
+	padding-top: 2px;
+}
+.PropertyGroupItem
+{
+	border-left: solid 1px #ccc;
+	border-right: solid 1px #ccc;
+	font-family: Arial;
+	border-bottom: solid 1px #ccc;
+	border-top: solid 1px #ccc;
+}
+.PropertyGroupData
+{
+	padding-left: 8px;
+	padding-bottom: 12px;
+	padding-left: 6px;
+}
+.institutionHeader
+{
+	background-color: #000;
+	text-align: center;
+	padding: 4px 0px 4px 0px;
+	border-bottom: 4px solid #B23F45;
+}
+
+.activeSectionDetails 
+{
+    font-size: 11px;
+    margin-left: 2px;
+}
+
+
+/********************************************/
+/* Profiles Shell Layout                    */
+/********************************************/
+
+.profiles
+{
+	margin-top: 15px;
+	text-align: center;
+}
+.profiles .profilesHeader
+{
+	width: 967px;
+	text-align: left;
+}
+.profiles .profilesFooter
+{
+	width: 967px;
+	text-align: left;
+}
+.profiles .profilesPage
+{
+	width: 967px;
+	text-align: left;
+}
+.profiles .profilesPage table
+{
+	/*border-bottom: none;*/
+	border-collapse: collapse;
+}
+.profiles .profilesPageColumnLeft
+{
+	width: 190px;
+	vertical-align: top;
+	margin: 0px;
+	padding: 0px;
+}
+.profiles .profilesPageColumnRight
+{
+	width: 777px;
+	vertical-align: top;
+	margin: 0px;
+	padding: 0px;
+}
+.profiles .profilesPageColumnRightTop
+{
+	background-color: #000000;  /* is this really needed here? */
+	background-image: url('../Images/passive_top.gif');
+	width: 777px;
+	height: 12px;
+	overflow: hidden;
+	padding: 0px;
+	margin: 0px;
+}
+.profiles .profilesPageColumnRightTopLine
+{
+	border-right: 1px solid #FFF;
+	width: 625px;
+	height: 12px;
+	overflow: hidden;
+}
+.profiles .profilesPageColumnRightBottom
+{
+	background-image: url('../Images/passive_bottom.gif');
+	width: 777px;
+	height: 18px;
+	overflow: hidden;
+	padding: 0px;
+	margin: 0px;
+	/* nudge border up and to left */
+	margin-left: -1px;
+	margin-top: -2px;
+}
+.profiles .profilesPageColumnRightCenter
+{
+	width: 777px;
+	vertical-align: top;
+	background: background-image: url('../Images/passive_back.gif') repeat;
+}
+
+.profiles .profilesPageColumnRightCenter table
+{
+	border-collapse: collapse;
+}
+.profiles .profilesMainColumnLeft
+{
+	width: 625px;
+	vertical-align: top;
+	margin: 0px;
+	padding: 0px;
+	background: none;
+}
+.profilesMainColumnRight
+{
+	width: 150px;
+	vertical-align: top;
+	margin: 0px;
+	padding: 0px;
+	display: inline;
+	background: none;
+}
+
+/********************************************/
+/* Profiles Shell Content                   */
+/********************************************/
+
+
+.profiles, .profiles td, .profiles th, .profiles textarea, .profiles select, .profiles h2, .profiles h3, .profiles h4, .profiles h5, .profiles h6, .profiles ul, .profiles ol
+{
+	font-family: arial, sans-serif;
+	font-size: 13px;
+	line-height: 16px;
+}
+.profiles ul, .profiles ol
+{
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+.profiles a
+{
+	color: #3366CC;
+	text-decoration: none;
+}
+.profiles a:hover
+{
+	text-decoration: underline;
+}
+
+/********************************************/
+/* Profiles Content Active                  */
+/********************************************/
+
+.profiles .profilesContentActive
+{
+	width: 190px;
+	padding: 0px;
+	margin: 0px 0px 0px 0px;
+}
+.profiles .profilesContentActive .activeContainer
+{
+	width: 188px;
+}
+.profiles .profilesContentActive .activeContainerTop
+{
+	background-color: #B23F45;
+	background-image: url('../Images/active_top.gif');
+	width: 188px;
+	height: 12px;
+	overflow: hidden;
+}
+.profiles .profilesContentActive .activeContainerCenter
+{
+	background-color: #FFFFFF;
+	background-image: url('../Images/active_center.gif');
+	width: 188px;
+	overflow: hidden;
+}
+.profiles .profilesContentActive .activeContainerBottom
+{
+	background-color: #B23F45;
+	background-image: url('../Images/active_bottom.gif');
+	width: 188px;
+	height: 26px;
+	overflow: hidden;
+}
+.profiles .profilesContentActive .activeSection
+{
+	/* background-color: #FFFFFF; */
+	width: 174px;
+	margin-left: 1px;
+}
+.profiles .profilesContentActive .activeSectionHead
+{
+	background-color: #EEEBE5;
+	padding: 1px 8px;
+	font-weight: bold;
+}
+.profiles .profilesContentActive .activeSectionBody
+{
+	padding: 1px 8px;
+}
+
+
+.profiles .profilesContentActive ul
+{
+	list-style-type: none;
+	padding: 0px;
+	margin: 4px 0px 8px 0px;
+	line-height: 18px;
+}
+
+
+/********************************************/
+/* Profiles Content Main                    */
+/********************************************/
+
+.profiles .profilesContentMain
+{
+	width: 604px;
+	padding: 0px;
+	margin: 10px 10px 0px 10px;
+}
+/* backLink */
+.profiles .profilesContentMain .backLink
+{
+	padding: 0px 8px 0 0;
+	float: right;
+}
+.profiles .profilesContentMain .backLink .backLinkIcon
+{
+	margin-right: 4px;
+	position: relative;
+	top: 1px;
+}
+/* pageTitle */
+.profiles .profilesContentMain .pageTitle
+{
+	display: inline;
+}
+.profiles .profilesContentMain .pageTitle h2
+{
+	display: block;
+	padding: 0px;
+	margin: 0px 0px 12px 0px;
+	color: #AC1B30;
+	font-size: 18px;
+	font-weight: normal;
+}
+.profiles .profilesContentMain .pageTitle .pageIcon
+{
+	margin-right: 4px;
+	position: relative;
+	top: 2px;
+}
+/* pageSubTitle */
+.profiles .profilesContentMain .pageSubTitle
+{
+	display: inline;
+}
+.profiles .profilesContentMain .pageSubTitle h3
+{
+	display: block;
+	padding: 0px;
+	margin: 0px 0px 12px 0px;
+	color: #666666;
+	font-weight: bold;
+}
+/* panelPage */
+.profiles .profilesContentMain .panelPage
+{
+	display: inline;
+}
+/* pageDescription */
+.profiles .profilesContentMain .pageDescription
+{
+	display: inline;
+}
+.profiles .profilesContentMain .pageDescription p
+{
+	display: block;
+	padding: 0px;
+	margin: 0px 0px 12px 0px;
+}
+/* pageTabs */
+.profiles .profilesContentMain .pageTabs .tabBack
+{
+	background-image: url('../Images/tab_back.gif');
+	height: 28px;
+	overflow: hidden;
+	margin: 12px 0 12px 0;
+	padding-left: 4px;
+}
+.profiles .profilesContentMain .pageTabs .tabBack a
+{
+	line-height: 27px;
+	font-weight: bold;
+	font-size: 12px;
+	color: #666;
+	cursor: pointer;
+}
+.profiles .profilesContentMain .pageTabs .tabBack a:hover
+{
+	text-decoration: none;
+	color: #36C;
+}
+.profiles .profilesContentMain .pageTabs .activeTab
+{
+	height: 28px;
+	display: inline;
+	float: left;
+	margin: 0px 2px;
+	line-height: 27px;
+	font-weight: bold;
+	color: #333;
+}
+.profiles .profilesContentMain .pageTabs .disabledTab
+{
+	height: 28px;
+	display: inline;
+	float: left;
+	margin: 0px 2px;
+	line-height: 27px;
+	font-weight: bold;
+	font-size: 12px;
+	color: #666;
+	cursor: pointer;
+}
+.profiles .profilesContentMain .pageTabs .activeTab .tabLeft
+{
+	background-image: url('../Images/tab_a_left.gif');
+	height: 28px;
+	width: 9px;
+	overflow: hidden;
+	float: left;
+}
+.profiles .profilesContentMain .pageTabs .activeTab .tabCenter
+{
+	background-image: url('../Images/tab_a_center.gif');
+	height: 28px;
+	overflow: hidden;
+	float: left;
+	padding: 0 4px;
+}
+.profiles .profilesContentMain .pageTabs .activeTab .tabRight
+{
+	background-image: url('../Images/tab_a_right.gif');
+	height: 28px;
+	width: 9px;
+	overflow: hidden;
+	float: left;
+}
+.profiles .profilesContentMain .pageTabs .disabledTab .tabLeft
+{
+	background-image: url('../Images/tab_d_left.gif');
+	height: 28px;
+	width: 9px;
+	overflow: hidden;
+	float: left;
+}
+.profiles .profilesContentMain .pageTabs .disabledTab .tabCenter
+{
+	background-image: url('../Images/tab_d_center.gif');
+	height: 28px;
+	overflow: hidden;
+	float: left;
+	padding: 0 4px;
+}
+.profiles .profilesContentMain .pageTabs .disabledTab .tabRight
+{
+	background-image: url('../Images/tab_d_right.gif');
+	height: 28px;
+	width: 9px;
+	overflow: hidden;
+	float: left;
+}
+
+.profiles .profilesContentMain .tabInfoText
+{
+	padding-bottom: 12px;
+	margin-bottom: 12px;
+	border-bottom: 1px dotted #999;
+}
+
+
+/********************************************/
+/* Profiles Content Passive                 */
+/********************************************/
+
+.profiles .profilesContentPassive
+{
+	width: 136px;
+	padding: 0px;
+	margin: 0px 8px 0px 8px;
+	height: 100%;
+}
+.profiles .profilesContentPassive .passiveSectionHead
+{
+	overflow: hidden;
+	font-weight: bold;
+	margin-top: 8px;
+}
+.profiles .profilesContentPassive .passiveSectionHead img
+{
+	position: relative;
+	top: 1px;
+	border: none;
+}
+.profiles .profilesContentPassive .passiveSectionHead .passiveSectionHeadDescription
+{
+	font-weight: normal;
+	font-size: 10px;
+	line-height: 11px;
+	color: #333;
+	margin: 4px 0 2px 0;
+	display: none;
+	
+}
+.profiles .profilesContentPassive .passiveSectionBody
+{
+	overflow: hidden;
+	/* the following may or may not be needed */
+	/* white-space: pre; /* CSS 2.0 */
+	/* white-space: pre-wrap; /* CSS 2.1 */
+	/* white-space: pre-line; /* CSS 3.0 */
+	/* white-space: -pre-wrap; /* Opera 4-6 */
+	/* white-space: -o-pre-wrap; /* Opera 7 */
+	/* white-space: -moz-pre-wrap; /* Mozilla */
+}
+.profiles .profilesContentPassive .passiveSectionBody ul
+{
+	list-style-type: none;
+	margin: 0px 0px 4px 0px;
+	padding: 0px;
+}
+.profiles .profilesContentPassive .passiveSectionBody li
+{
+	padding: 4px 0 0 10px;
+	text-indent: -10px;
+	line-height: 14px;
+}
+.profiles .profilesContentPassive .passiveSectionBodyDetails
+{
+	font-size: 11px;
+	color: #666;
+}
+.profiles .profilesContentPassive .passiveSectionBodyDetails a
+{
+	font-size: 11px;
+}
+.profiles .profilesContentPassive .passiveSectionLine
+{
+	height: 1px;
+	overflow: hidden;
+	border-top: 1px solid #CCC;
+	margin: 8px 0 0;
+}
+
+
+/********************************************/
+/* Search                                   */
+/********************************************/
+
+
+
+.searchForm
+{
+	margin: 8px 0px;
+	color: #666;
+}
+.searchForm .searchSection
+{
+	background-color: #EAF0F8;
+	border: 1px solid #CCC;
+	padding: 8px 0;
+	margin-bottom: 12px;
+}
+.searchForm table
+{
+	border-collapse: collapse;
+}
+.searchForm th
+{
+	text-align: right;
+	vertical-align: center;
+	font-size: 13px;
+	font-weight: bold;
+	color: #666;
+	width: 95px;
+	padding: 5px 10px 5px 0px;
+}
+.searchForm td
+{
+	vertical-align: center;
+	font-size: 13px;
+	font-weight: normal;
+	padding: 2px;
+}
+.searchForm .fieldMain
+{
+	width: 255px;
+}
+.searchForm .fieldOptions
+{
+}
+.searchForm .inputText
+{
+	width: 250px;
+}
+.searchForm select
+{
+	width: 250px;
+}
+.searchForm .inputButton
+{
+	width: 70px;
+	margin: 0px 20px 0px 0px;
+}
+.searchForm .spacerRow
+{
+	height: 16px;
+	overflow: hidden;
+}
+.searchForm .spacerRowSmall
+{
+	height: 8px;
+	overflow: hidden;
+}
+.searchForm b
+{
+	color: #666;
+}
+.searchForm .submitTable
+{
+	background-color: #FFF;
+}
+
+.listTable
+{
+	margin: 0px;	
+}
+.listTable table
+{
+	border-collapse: collapse;
+	width: 602px;
+	border: 1px solid #999;
+}
+.listTable tr
+{
+	cursor: pointer;
+}
+.listTable th
+{
+	background-color: #f7f3ef;
+	text-align: center;
+	font-weight: bold;
+	border: 1px inset #efebde;
+	padding: 5px 5px;
+	cursor: default;
+	color: #333;
+}
+.listTable th a
+{
+	color: #333;
+	display: block;
+}
+.listTable th img
+{
+	margin-left: 3px;
+}
+.listTable td
+{
+	text-align: center;
+	border-style: inset;
+	border-color: #efebde;
+	border-width: 1px;
+	padding: 5px 5px;
+}
+.listTable td div
+{
+	/*white-space: nowrap; Removed as long text forces table width to be larger than intended. */ 
+	overflow: hidden;
+}
+.listTable .alignLeft
+{
+	text-align: left;
+}
+.listTable .oddRow
+{
+	background-color: #FFFFFF;
+}
+.listTable .evenRow
+{
+	background-color: #F0F4F6;
+}
+.listTable .overRow
+{
+	background-color: #5A719C;
+	color: #FFF;
+}
+.listTable .listTableLink
+{
+	color: #36C;
+}
+.listTable .overRow .listTableLink
+{
+	color: #FFF;
+}
+.listTable .listTableLinkOver
+{
+	background-color: #36C;
+}
+
+
+.listTablePagination
+{
+	background-color: #f7f3ef;
+	border-left: solid 1px #999;
+	border-right: solid 1px #999;
+	border-bottom: solid 1px #999;
+	padding: 6px;
+	/* Align with results table */
+	margin-left: 1px;
+	width: 588px;
+}
+.listTablePagination table
+{
+	width: 591px;
+	border-collapse: collapse;
+	padding: 0px;
+	margin: 0px;
+}
+.listTablePagination td
+{
+	padding: 0px;
+	margin: 0px;
+	width: 200px;
+}
+.listTablePaginationMiddle
+{
+	width: 205px;
+	text-align: center;
+}
+.listTablePaginationPN
+{
+	display: block;
+	float: right;
+	margin-left: 4px;
+	text-align: center;
+	padding: 2px 6px;
+	color: #999;
+	font-weight: bold;
+	font-size: 11px;
+	line-height: 15px;
+}
+.listTablePagination a
+{
+	font-size: 11px;
+	line-height: 15px;
+	color: #3f4a9d;
+}
+
+.listTablePaginationA img
+{
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+}
+.listTablePaginationP img
+{
+	margin-right: 4px;
+}
+.listTablePaginationN img
+{
+	margin-left: 4px;
+}
+.listTablePaginationN
+{
+	margin-left: 8px;
+}
+.listTablePaginationFL
+{
+	display: block;
+	width: 19px;
+	height: 19px;
+	float: right;
+	margin-left: 4px;
+}
+.listTablePaginationFL img
+{
+	margin: 5px 6px;
+}
+.listTablePaginationA
+{
+	border-color: #999;
+}
+
+/********************************************/
+/* Connection Summary                       */
+/********************************************/
+
+.connectionTableRow
+{
+	padding-left: 6px;
+}
+
+.connectionContainer
+{
+	margin: 12px 0 4px 0;
+}
+.connectionContainerTable
+{
+	width: 100%;
+	border: 1px solid #999;
+	background-color: #EAF0F8;
+}
+.connectionContainerTable td
+{
+	text-align: center;
+	padding: 8px 0px;
+}
+.connectionContainerItem
+{
+	width: 305px;
+}
+.connectionContainerArrow
+{
+	width: 195px;
+}
+.connectionContainerTable a
+{
+	font-size: 13px;
+	text-decoration: underline;
+}
+.connectionItemSubText
+{
+	font-size: 11px;
+}
+.connectionArrowTable td
+{
+	padding: 0px 0px;
+}
+.connectionLine
+{	
+	background-image: url('../Images/connection_center.gif');
+	height: 5px;
+	overflow: hidden;
+	padding: 0px;
+}
+.connectionLine div
+{	
+	height: 5px;
+	overflow: hidden;
+}
+.connectionDescription
+{
+	font-weight: bold;
+	font-size: 12px;
+	color: #333;
+	padding: 0 4px;
+}
+.connectionSubDescription
+{
+	font-weight: normal;
+	font-size: 11px;
+	padding: 0 4px;
+}
+
+/********************************************/
+/* Profile - Concept                        */
+/********************************************/
+.profileKwCondenseList ol, .profileKwCondenseList ul
+{
+	margin-top: 0px;
+	margin-bottom: 0px;
+	position: relative;
+	left: -25px;
+	list-style-type: none;
+}
+.profileKwConcept
+{
+	display: none;
+}
+.publicationKwDesc
+{
+	margin-bottom: 5px;
+}
+.publicationKwMenuBox
+{
+	margin-bottom: 8px;
+}
+.profileKwMeshInfoDesc
+{
+	margin-bottom: 10px;
+}
+
+/********************************************/
+/*        Edit Page                         */
+/********************************************/
+.editPage H2
+{
+	color: #AC1B30;
+	font-size: 13px;
+}
+.editPage table
+{
+	font-family: arial,sans-serif;
+	padding-left: 5px;
+}
+.oddRow
+{
+	background-color: #FFFFFF;
+}
+.evenRow
+{
+	background-color: #F0F4F6;
+}
+.padding
+{
+	padding-left: 6px;
+}
+
+.edittable
+{
+	border: solid 1px #ccc;
+}
+
+.edittable tr
+{
+	padding: 5px;
+}
+
+
+.editDisplayRow
+{
+	padding-top: 6px;
+	padding-left: 6px;
+	padding-right: 6px;
+	padding-bottom: 6px;
+	border-bottom: solid 1px #ccc;
+}
+.editPageDiv
+{
+	font-family: arial,sans-serif;
+	border-left: solid 1px #ccc;
+	border-right: solid 1px #ccc;
+	border-bottom: solid 1px #ccc;
+	border-top: solid 1px #ccc;
+}
+
+.editPage .topRow td
+{
+	background-color: #EEEBE5;
+	font-weight: bold;
+	color: #666;
+	font-family: Arial;
+	font-size: 13px;
+	height: 24px;
+	padding-left: 6px;
+}
+.topRow
+{
+	background-color: #EEEBE5;
+	font-weight: bold;
+	color: #666;
+	font-family: Arial;
+	font-size: 13px;
+	height: 24px;
+	padding-left: 6px;
+	width: 100%;
+}
+.EditMenuTopRow
+{
+	background-color: #EEEBE5;
+	color: #666;
+	font-family: Arial;
+	font-size: 13px;
+	height: 24px;
+	padding-left: 6px;
+	width: 100%;
+}
+.editPage td
+{
+	height: 24px;
+}
+.firstCol
+{
+	padding-left: 6px;
+}
+
+
+.editPage tr
+{
+	height: 24px;
+}
+
+
+/*PubMed Styles*/
+
+.textBoxSmall
+{
+	width: 75px;
+}
+
+.textBoxDate
+{
+    vertical-align: top;
+	width: 75px;
+	margin-right: 3px;
+}
+
+.textBoxBig
+{
+	width: 250px;
+}
+
+.textBoxBigger
+{
+	width: 550px;
+}
+
+.pubHeader
+{
+	margin-top: 20px;
+	font-weight: bold;
+}
+
+.pubSubHeader
+{
+	font-weight: bold;
+	color: #666666;
+}
+
+.pubSubSpacer
+{
+	margin-top: 10px;
+}
