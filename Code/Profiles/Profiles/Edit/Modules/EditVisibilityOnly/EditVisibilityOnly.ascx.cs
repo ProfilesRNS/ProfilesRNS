@@ -35,6 +35,7 @@ namespace Profiles.Edit.Modules.EditVisibilityOnly
         SessionManagement session;
 
         Edit.Utilities.DataIO data;
+        Profile.Utilities.DataIO propdata;
         private ModulesProcessing mp;
           
         override protected void OnInit(EventArgs e)
@@ -61,9 +62,10 @@ namespace Profiles.Edit.Modules.EditVisibilityOnly
             this.XMLData = pagedata;
 
             data = new Edit.Utilities.DataIO();
+            propdata = new Profiles.Profile.Utilities.DataIO();
 
             string predicateuri = Request.QueryString["predicateuri"].Replace("!", "#");
-            this.PropertyListXML = data.GetPropertyList(this.BaseData, base.PresentationXML, predicateuri, false, true, false);
+            this.PropertyListXML = propdata.GetPropertyList(this.BaseData, base.PresentationXML, predicateuri, false, true, false);
             if (Request.QueryString["subject"] != null)
                 this.SubjectID = Convert.ToInt64(Request.QueryString["subject"]);
             else

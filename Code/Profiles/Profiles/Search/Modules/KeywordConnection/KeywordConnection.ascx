@@ -1,2 +1,0 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="KeywordConnection.ascx.cs" Inherits="Profiles.Search.Modules.KeywordConnection.KeywordConnection" %>
-<asp:Literal runat="server" ID="litKeywordConnection"></asp:Literal>

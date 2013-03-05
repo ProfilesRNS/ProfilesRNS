@@ -32,15 +32,15 @@ namespace Profiles.Framework.Modules.MainMenu
         protected void Page_Init(object sender, EventArgs e)
         {
             sm = new SessionManagement();
-            
-            DrawProfilesModule();            
+
+            DrawProfilesModule();
 
 
         }
 
         private void DrawProfilesModule()
-        {            
-            
+        {
+
             Utilities.DataIO data = new Profiles.Framework.Utilities.DataIO();
             SqlDataReader reader;
 
@@ -48,34 +48,29 @@ namespace Profiles.Framework.Modules.MainMenu
 
             this.RelationshipTypes = new List<RelationshipType>();
 
-            
-            if (sm.Session().NodeID != null)
-                try
-                {
-                    this.Subject = sm.Session().NodeID;
-                }
-                catch (Exception ex)
-                {
-                    this.Subject = 0;
-                }
-            else
-                this.Subject = 0;
-            
-            if (sm.Session().NodeID != 0)
+            Int64 subject = 0;
+
+            if (HttpContext.Current.Request.QueryString["subject"] != null)
             {
-                if ((Convert.ToInt64(HttpContext.Current.Request.QueryString["subject"]) != sm.Session().NodeID) && (HttpContext.Current.Request.QueryString["subject"] != null))
+                subject = Convert.ToInt64(HttpContext.Current.Request.QueryString["subject"]);
+            }
+
+            if (sm.Session().UserID != 0)
+            {
+                if (subject != sm.Session().NodeID && subject != 0 && (!Root.AbsolutePath.Contains("/proxy") && !Root.AbsolutePath.Contains("/edit")))
                 {
-                    reader = data.GetActiveNetwork(Convert.ToInt64(HttpContext.Current.Request.QueryString["subject"]), true);
+                    reader = data.GetActiveNetwork(subject, true);
+
                     while (reader.Read())
                     {
                         this.RelationshipTypes.Add(new RelationshipType(reader["RelationshipName"].ToString(), reader["RelationshipType"].ToString(), Convert.ToBoolean(reader["DoesExist"])));
+
                     }
                     if (RelationshipTypes.Count > 0)
                     {
                         rptRelationshipTypes.DataSource = this.RelationshipTypes;
                         rptRelationshipTypes.DataBind();
                         pnlSetActiveNetworks.Visible = true;
-                        
                     }
                     else
                     {
@@ -86,7 +81,6 @@ namespace Profiles.Framework.Modules.MainMenu
                 {
                     pnlSetActiveNetworks.Visible = false;
                 }
-                
             }
 
             reader = data.GetActiveNetwork(0, false);
@@ -106,7 +100,7 @@ namespace Profiles.Framework.Modules.MainMenu
 
                 pnlMyNetwork.Visible = true;
 
-                litActiveNetworkDetails.Text = "<a class='activeSectionDetails' href='" + Root.Domain + "/activenetwork/default.aspx'>View Details</a>";
+                litActiveNetworkDetails.Text = "<a class='activeSectionDetails' href='" + Root.Domain + "/activenetwork/default.aspx'><font style='font-size:10px'>View Details</font></a>";
             }
             else
             {
@@ -138,7 +132,7 @@ namespace Profiles.Framework.Modules.MainMenu
             data.SetActiveNetwork(Convert.ToInt64(remove.CommandArgument), null, false);
 
             this.DrawProfilesModule();
-           // upUpdate.Update();
+            // upUpdate.Update();
         }
 
         protected void rptRelationshipTypes_ItemBound(object sender, RepeaterItemEventArgs e)
@@ -149,7 +143,7 @@ namespace Profiles.Framework.Modules.MainMenu
 
             cb.Text = rt.Text;
             cb.Checked = rt.Selected;
-         cb.Attributes.Add("onclick", "JavaScript:ShowStatus();");
+            cb.Attributes.Add("onclick", "JavaScript:ShowStatus();");
 
         }
         private List<RelationshipType> RelationshipTypes { get; set; }
@@ -161,20 +155,14 @@ namespace Profiles.Framework.Modules.MainMenu
             Utilities.DataIO data = new Profiles.Framework.Utilities.DataIO();
             data.SetActiveNetwork(Convert.ToInt64(HttpContext.Current.Request.QueryString["subject"]), this.FindRelationshipType(cb.Text).Value, cb.Checked);
             this.DrawProfilesModule();
-            
         }
-
 
         private RelationshipType FindRelationshipType(string relationshipname)
         {
             RelationshipType rt;
             rt = this.RelationshipTypes.Find(delegate(RelationshipType rtt) { return rtt.Text == relationshipname; });
-
             return rt;
-
         }
-
-        private Int64 Subject { get; set; }
 
         public class RelationshipType
         {

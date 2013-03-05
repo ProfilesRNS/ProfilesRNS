@@ -32,6 +32,7 @@ For details, see: LICENSE.txt
   <Module ModulePath="Modules" NameSpace="ConceptConnection" FileName="ConceptConnection.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="CoAuthorConnection" FileName="CoAuthorConnection.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="SimilarConnection" FileName="SimilarConnection.ascx" Enabled="true"/>
-  <Module ModulePath="Modules" NameSpace="Timeline" FileName="Timeline.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="CustomViewConceptMeshInfo" FileName="CustomViewConceptMeshInfo.ascx" Enabled="true"/>  
+  <Module ModulePath="Modules" NameSpace="HRFooter" FileName="HRFooter.ascx" Enabled="true"/>
 </ModuleList>
 

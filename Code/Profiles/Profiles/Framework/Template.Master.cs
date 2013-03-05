@@ -46,23 +46,29 @@ namespace Profiles.Framework
         private ModulesProcessing mp;
         #endregion
 
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
+
+
                 toolkitScriptMaster.AsyncPostBackTimeout = 3600;
 
                 if (this.RDFData == null) { this.RDFData = new XmlDocument(); }
                 if (this.RDFNamespaces == null) { this.RDFNamespaces = new XmlNamespaceManager(this.RDFData.NameTable); }
-                
+
                 if (this.GetStringFromPresentationXML("Presentation/PageOptions/@CanEdit") == "true")
                     this.CanEdit = true;
                 else
                     this.CanEdit = false;
-                
+
+
+
                 this.LoadAssets();
+
                 this.InitFrameworkPanels();
+
 
                 this.BindRepeaterToPanel(ref rptHeader, GetPanelByType("header"));
                 this.BindRepeaterToPanel(ref rptActive, GetPanelByType("active"));
@@ -70,6 +76,7 @@ namespace Profiles.Framework
                 this.BindRepeaterToPanel(ref rptMain, GetPanelByType("main"));
                 this.BindRepeaterToPanel(ref rptPassive, GetPanelByType("passive"));
                 this.BindRepeaterToPanel(ref rptFooter, GetPanelByType("footer"));
+
 
                 if (rptHeader.Items.Count == 0)
                 {
@@ -88,8 +95,10 @@ namespace Profiles.Framework
                     divProfilesContentMain.Style.Remove("width");
                     divProfilesContentMain.Style.Add("width", "756px");
                 }
-                
+
+
                 this.DrawTabs();
+
 
             }
             catch (Exception ex)
@@ -100,6 +109,9 @@ namespace Profiles.Framework
                 HttpContext.Current.Session["GLOBAL_ERROR"] = ex.Message + " ++ " + ex.StackTrace;
                 Response.Redirect(Root.Domain + "/error/default.aspx");
             }
+
+
+
         }
 
         /// <summary>
@@ -117,7 +129,7 @@ namespace Profiles.Framework
             Profilescss.Attributes["type"] = "text/css";
             Profilescss.Attributes["media"] = "all";
             //Page.Header.Controls.Add(Profilescss);
-			head.Controls.Add(Profilescss);
+            head.Controls.Add(Profilescss);
 
             HtmlGenericControl jsscript = new HtmlGenericControl("script");
             jsscript.Attributes.Add("type", "text/javascript");
@@ -126,24 +138,20 @@ namespace Profiles.Framework
 
             if (this.GetStringFromPresentationXML("Presentation/PageOptions/@Columns") == "3")
             {
-
                 divPageColumnRightCenter.Style["background-image"] = Root.Domain + "/Framework/Images/passive_back.gif";
                 divPageColumnRightCenter.Style["background-repeat"] = "repeat";
-
-                //trbody.Style["background-image"] = Root.Domain + "/Framework/Images/passive_back.gif";
-                //trbody.Style["background-repeat"] = "repeat";
             }
 
 
-			// IE Only css files
-			Literal ieCss = new Literal();
-			ieCss.Text = String.Format(@"
+            // IE Only css files
+            Literal ieCss = new Literal();
+            ieCss.Text = String.Format(@"
 				<!--[if IE]>
 					<link rel='stylesheet' type='text/css' href='{0}/Framework/CSS/profiles-ie.css' />
 				<![endif]-->
 			",
-			Root.Domain);
-			Page.Header.Controls.Add(ieCss);
+            Root.Domain);
+            Page.Header.Controls.Add(ieCss);
 
 
         }
@@ -167,7 +175,7 @@ namespace Profiles.Framework
                 else
                     currenttab = false;
 
-                if (p.Alias != string.Empty)
+                if (!p.Alias.IsNullOrEmpty())
                     listtabs.Add(new Tab(p.Name, p.Alias, currenttab, p.DefaultTab));
             }
 
@@ -183,11 +191,42 @@ namespace Profiles.Framework
                         {
                             tabs.Append(Framework.Utilities.Tabs.DrawTabsStart());
                             drawstart = false;
-                        }
+                        }               
 
                         if (t.Active)
                         {
                             tabs.Append(Framework.Utilities.Tabs.DrawActiveTab(t.Name));
+                        }
+                        else if (Root.AbsolutePath.ToLower().Contains("display.aspx"))
+                        {
+                            string newtab = t.URL;
+
+                            t.URL = Root.AbsolutePath;
+
+                            t.URL = t.URL.ToLower().Replace("/display.aspx", "");
+
+                            if (!HttpContext.Current.Request.QueryString["subject"].IsNullOrEmpty())
+                                t.URL += "/" + HttpContext.Current.Request.QueryString["subject"].ToString();
+
+                            if (!HttpContext.Current.Request.QueryString["predicate"].IsNullOrEmpty())
+                                t.URL += "/" + HttpContext.Current.Request.QueryString["predicate"].ToString();
+
+                            if (!HttpContext.Current.Request.QueryString["object"].IsNullOrEmpty())
+                                t.URL += "/" + HttpContext.Current.Request.QueryString["object"].ToString();
+
+
+                            if (this.Tab != string.Empty)
+                            {
+                                t.URL = Root.Domain + t.URL + "/" + newtab;
+                            }
+                            else
+                            {
+                                t.URL = Root.Domain + t.URL;
+                            }
+
+
+                            tabs.Append(Framework.Utilities.Tabs.DrawDisabledTab(t.Name, t.URL));
+
                         }
                         else
                         {
@@ -197,10 +236,19 @@ namespace Profiles.Framework
                                 string[] url = Root.AbsolutePath.Split('/');
                                 string buffer = string.Empty;
 
-                                for (int i = 0; i < url.Length - 1; i++)
-                                    buffer = buffer + url[i] + "/";
+                                if (url.Length == 2)
+                                {
 
-                                t.URL = Root.Domain + buffer + t.URL;
+                                    t.URL = Root.Domain + Root.AbsolutePath + "/" + t.URL;
+                                }
+                                else
+                                {
+                                    for (int i = 0; i < url.Length - 1; i++)
+                                        buffer = buffer + url[i] + "/";
+
+                                    t.URL = Root.Domain + buffer + t.URL;
+                                }
+
                             }
                             else
                             {
@@ -209,6 +257,11 @@ namespace Profiles.Framework
 
                             tabs.Append(Framework.Utilities.Tabs.DrawDisabledTab(t.Name, t.URL));
                         }
+
+
+
+
+
                     }
                 }
 
@@ -242,8 +295,6 @@ namespace Profiles.Framework
             {
                 literal = (Literal)e.Item.FindControl("litHeader");
                 return;
-
-
             }
             if (e.Item.ItemType == ListItemType.Footer)
             {
@@ -251,13 +302,10 @@ namespace Profiles.Framework
                 return;
             }
 
-
             Utilities.Module module = (Utilities.Module)e.Item.DataItem;
             bool display = true;
 
             if (module == null) { return; }
-
-
 
             placeholder = (PlaceHolder)e.Item.FindControl("phHeader");
 
@@ -352,14 +400,9 @@ namespace Profiles.Framework
             // Window Title
             buffer = GetStringFromPresentationXML("Presentation/WindowName");
 
-            if (buffer != String.Empty)
-            {
-                buffer = " | " + buffer;
-            }
-            Page.Header.Title = "Profiles RNS" + buffer;
-
+            Page.Header.Title = "Profiles RNS | " + buffer;
         }
-        
+
         #region "Panel Methods"
 
         private void InitFrameworkPanels()
@@ -464,8 +507,8 @@ namespace Profiles.Framework
         {
             return Root.Domain;
         }
-        
-        //public RDFTriple RDFTriple { get; set; }
+
+        #region "Public Properties"
         public XmlDocument PresentationXML
         {
             get { return _presentationxml; }
@@ -489,12 +532,12 @@ namespace Profiles.Framework
         }
         public XmlDocument RDFData { get; set; }
         public XmlNamespaceManager RDFNamespaces { get; set; }
-
+        public string SearchRequest { get; set; }
 
         public string Tab { get; set; }
         public string SessionID { get; set; }
         public Boolean CanEdit { get; set; }
-
+        #endregion
 
     }
 

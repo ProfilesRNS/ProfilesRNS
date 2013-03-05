@@ -80,22 +80,31 @@ namespace Profiles.Framework.Utilities
         public Session Session()
         {
 
-
-            if ((Session)(HttpContext.Current.Session["PROFILES_SESSION"]) == null)
+            try
+            {
+                if ((Session)(HttpContext.Current.Session["PROFILES_SESSION"]) == null)
+                {
+                    this.SessionCreate();
+                }
+                else
+                {
+                    (HttpContext.Current.Session["PROFILES_SESSION"]) = this.SessionGetInfo();
+                    if ((Session)(HttpContext.Current.Session["PROFILES_SESSION"]) == null)
+                        this.SessionCreate();
+                }
+            }
+            catch (Exception ex)
             {
                 this.SessionCreate();
             }
-            else
-            {
-                (HttpContext.Current.Session["PROFILES_SESSION"]) = this.SessionGetInfo();
-                if ((Session)(HttpContext.Current.Session["PROFILES_SESSION"]) == null)
-                    this.SessionCreate();
-            }
+
+
             return (Session)(HttpContext.Current.Session["PROFILES_SESSION"]);
         }
         public void SessionDistroy()
         {
             HttpContext.Current.Session["PROFILES_SESSION"] = null;
+            HttpContext.Current.Session.Abandon();
         }
 
         /// <summary>
@@ -103,9 +112,10 @@ namespace Profiles.Framework.Utilities
         /// </summary>
         public void SessionCreate()
         {
-            string sessionid = HttpContext.Current.Request.Headers["SessionID"];
+            string sessionid = string.Empty;
 
-
+            if (HttpContext.Current.Request.Headers["SessionID"] != null)
+                sessionid = HttpContext.Current.Request.Headers["SessionID"];
 
             DataIO dataio = new DataIO();
             Session session = new Session();
@@ -125,7 +135,7 @@ namespace Profiles.Framework.Utilities
             session.RequestIP = ipaddress;
             session.UserAgent = HttpContext.Current.Request.UserAgent;
 
-            if (sessionid == null)
+            if (sessionid == string.Empty)
                 dataio.SessionCreate(ref session);
             else
             {
@@ -217,20 +227,7 @@ namespace Profiles.Framework.Utilities
         //    dataio.SessionAddHistory(sessionhistory);
         //    dataio = null;
         //}
-
-        public void SessionLogin(int userid, int personid)
-        {
-            DataIO dataio = new DataIO();
-            Session session = this.Session();
-
-            session.UserID = userid;
-            session.PersonID = personid;
-
-            dataio.SessionUpdate(ref session);
-            dataio = null;
-
-            HttpContext.Current.Session["PROFILES_SESSION"] = session;
-        }
+      
 
         public void SessionLogout()
         {

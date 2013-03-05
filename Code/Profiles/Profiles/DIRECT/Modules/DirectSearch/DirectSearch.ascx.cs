@@ -18,11 +18,12 @@ namespace Profiles.DIRECT.Modules.DirectSearch
         string KeywordString = string.Empty;
         string directwaitingimageURL = Root.Domain + "/DIRECT/images/yui-loading.gif";
 
-
+        
 
         public DirectSearch() { }
         public DirectSearch(XmlDocument pagedata, List<ModuleParams> moduleparams, XmlNamespaceManager pagenamespaces)
         {
+
 
 
         }
@@ -49,6 +50,12 @@ namespace Profiles.DIRECT.Modules.DirectSearch
                 Random r = new Random();
                 rnd = r.Next();
             }
+
+            Session["DIRECTKEYWORD"] = this.GetKeywordString();
+            Session["DIRECTSEARCHREQUEST"] = Request.QueryString["searchrequest"];
+            Session["DIRECTSEARCHTYPE"] = Request.QueryString["searchtype"];
+
+            
         }
 
         #region <methods/>

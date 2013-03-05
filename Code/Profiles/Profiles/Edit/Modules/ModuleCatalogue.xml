@@ -22,5 +22,9 @@ For details, see: LICENSE.txt
   <Module ModulePath="Modules" NameSpace="CustomEditMailingAddress" FileName="CustomEditMailingAddress.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="CustomEditMailingAddress" FileName="CustomEditMailingAddress.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="CustomEditEmail" FileName="CustomEditEmail.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="CustomEditMentoringCompletedStudentProject" FileName="CustomEditMentoringCompletedStudentProject.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="CustomEditMentoringCurrentStudentOpportunity" FileName="CustomEditMentoringCurrentStudentOpportunity.ascx" Enabled="true"/>
+
   
+
 </ModuleList>

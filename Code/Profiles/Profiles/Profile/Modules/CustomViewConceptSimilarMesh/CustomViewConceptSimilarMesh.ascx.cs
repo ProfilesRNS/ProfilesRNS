@@ -44,8 +44,17 @@ namespace Profiles.Profile.Modules
 				}
 				reader.Close();
 			}
-			imgQuestion.ImageUrl = Root.Domain + "/Framework/Images/info.png";
-			lineItemLiteral.Text = html.ToString();
+
+			// Hide section title if no Top Journals are returned
+			if (html.ToString().Length == 0)
+			{
+				sectionTitle.Attributes.Add("style", "display: none;");
+			}
+			else
+			{
+				imgQuestion.ImageUrl = Root.Domain + "/Framework/Images/info.png";
+				lineItemLiteral.Text = html.ToString();
+			}			
 		}
 	}
 }

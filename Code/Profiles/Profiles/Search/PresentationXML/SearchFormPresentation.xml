@@ -11,13 +11,11 @@
     <Panel Type="page" />
     <Panel Type="active">
       <Module ID="MainMenu">
-      </Module>
-   
+      </Module>   
     </Panel>
     <Panel Name="Find People" Alias="people" Type="main" TabType="Default" TabSort="0">
       <Module ID="SearchPerson">
-      </Module>
-    
+      </Module>    
     </Panel>
     <Panel Name="Find Everything" Alias="all" Type="main" TabType="Fixed" TabSort="1" >
       <Module ID="SearchEverything" />        

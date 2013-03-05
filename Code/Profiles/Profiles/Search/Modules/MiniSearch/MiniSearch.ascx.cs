@@ -28,14 +28,11 @@ namespace Profiles.Search.Modules.MiniSearch
 {
     public partial class MiniSearch : BaseModule
     {
-        
-        
-        
+                
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            DrawProfilesModule();
-        
+            DrawProfilesModule();       
         
         }
 
@@ -43,8 +40,7 @@ namespace Profiles.Search.Modules.MiniSearch
 
         public MiniSearch(XmlDocument pagedata, List<ModuleParams> moduleparams, XmlNamespaceManager pagenamespaces)
         {
-
-
+            
 
         }
         private void DrawProfilesModule()
@@ -53,30 +49,13 @@ namespace Profiles.Search.Modules.MiniSearch
             //Profiles.Search.Utilities.DataIO dropdowns = new Profiles.Search.Utilities.DataIO();
             if (Convert.ToBoolean(ConfigurationSettings.AppSettings["ShowInstitutions"]) == true)
             {
-                litInstitution.Text = SearcDropDowns.BuildDropdown("institution","150");
+                litInstitution.Text = SearcDropDowns.BuildDropdown("institution","150","");
             }
             else
             {
                 trInstitution.Visible = false;
             }
-
-            if (Convert.ToBoolean(ConfigurationSettings.AppSettings["ShowDepartments"]) == true)
-            {
-                litDepartment.Text = SearcDropDowns.BuildDropdown("department", "150");
-            }
-            else
-            {
-                trDepartment.Visible = false;
-            }
-
-            if (Convert.ToBoolean(ConfigurationSettings.AppSettings["ShowDivisions"]) == true)
-            {
-                litDivision.Text = SearcDropDowns.BuildDropdown("division", "150");
-            }
-            else
-            {
-                trDivision.Visible = false;
-            }
+            
 
         }
 

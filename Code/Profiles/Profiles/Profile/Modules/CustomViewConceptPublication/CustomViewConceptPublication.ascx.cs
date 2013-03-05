@@ -23,6 +23,9 @@ namespace Profiles.Profile.Modules
 		{
 			DrawProfilesModule();
 			ConceptName = this.BaseData.SelectSingleNode("rdf:RDF[1]/rdf:Description[1]/rdfs:label[1]", this.Namespaces).InnerText;
+			
+			// Add plus image
+			plusImage.Src = Root.Domain + "/Profile/Modules/PropertyList/images/minusSign.gif";
 		}
 
 		public CustomViewConceptPublication() : base() { }
@@ -66,7 +69,7 @@ namespace Profiles.Profile.Modules
 							html.AppendFormat(@"
 								<li>
 								<div>{0}</div>
-								<div class='viewIn'>View in: <a href='http://www.ncbi.nlm.nih.gov/pubmed/{1}' target='_new'>PubMed</a></div>	
+								<div class='viewIn'>View in: <a href='//www.ncbi.nlm.nih.gov/pubmed/{1}' target='_new'>PubMed</a></div>	
 								<div>Cited: {2}</div>						
 								</li>
 							",
@@ -78,7 +81,7 @@ namespace Profiles.Profile.Modules
 							html.AppendFormat(@"
 								<li>
 								<div>{0}</div>
-								<div class='viewIn'>View in: <a href='http://www.ncbi.nlm.nih.gov/pubmed/{1}' target='_new'>PubMed</a></div>							
+								<div class='viewIn'>View in: <a href='//www.ncbi.nlm.nih.gov/pubmed/{1}' target='_new'>PubMed</a></div>							
 								</li>
 							", 
 								reader["reference"].ToString(), 

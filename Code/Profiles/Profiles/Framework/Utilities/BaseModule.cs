@@ -41,27 +41,64 @@ namespace Profiles.Framework.Utilities
         }
         public void BaseModule_Init(object sender, EventArgs e)
         {
-            
+
 
         }
 
         public void GetDataByURI()
         {
-           
+
             Profile.Utilities.DataIO dataio = new Profile.Utilities.DataIO();
 
             Namespace rdfnamespaces = new Namespace();
             try
             {
                 if (this.RDFTriple == null)
-                    this.RDFTriple = new RDFTriple(this.BaseData.SelectSingleNode(this.GetModuleParamString("DataURI"), this.Namespaces).InnerText);
+                {
+                    if (this.BaseData.SelectSingleNode(this.GetModuleParamString("DataURI"), this.Namespaces).InnerText.Contains(Root.Domain))
+                    {
+                        string[] vars = this.BaseData.SelectSingleNode(this.GetModuleParamString("DataURI"), this.Namespaces).InnerText.Split('/');
 
+                        //SPO
+                        Int64 subject = 0;
+                        Int64 predicate = 0;
+                        Int64 _object = 0;
+                        Int64 result;
+
+                        for (int i = 0; i < vars.Length; i++)
+                        {
+                            if (Int64.TryParse(vars[i], out result))
+                            {
+
+
+                                if (subject != 0 && predicate != 0 && _object == 0)
+                                    _object = Convert.ToInt64(vars[i]);
+
+                                if (subject != 0 && predicate == 0)
+                                    predicate = Convert.ToInt64(vars[i]);
+
+                                if (subject == 0)
+                                    subject = Convert.ToInt64(vars[i]);
+
+
+                            }
+
+                        }
+
+                        this.RDFTriple = new RDFTriple(subject, predicate, _object);
+                    }
+                    else
+                    {
+                        this.RDFTriple = new RDFTriple(this.BaseData.SelectSingleNode(this.GetModuleParamString("DataURI"), this.Namespaces).InnerText);
+                    }
+
+
+                }
                 if (this.GetModuleParamString("Offset") != string.Empty)
                     this.RDFTriple.Offset = this.GetModuleParamString("Offset");
                 else
                     this.RDFTriple.Offset = string.Empty;
-
-
+                
 
                 if (this.GetModuleParamString("Limit") != string.Empty)
                     this.RDFTriple.Limit = this.GetModuleParamString("Limit");
@@ -71,6 +108,14 @@ namespace Profiles.Framework.Utilities
 
                 if (this.GetModuleParamString("Edit") == "true")
                     this.RDFTriple.Edit = true;
+
+                if (this.GetModuleParamXml("ExpandRDFList") != null)
+                {
+                    XmlNode x = this.GetModuleParamXml("ExpandRDFList");
+
+                    if (x != null)
+                        this.RDFTriple.ExpandRDFList = x.InnerXml;
+                }
 
                 this.RDFTriple.ShowDetails = true;
                 this.RDFTriple.Expand = true;
@@ -89,14 +134,14 @@ namespace Profiles.Framework.Utilities
             Namespace rdfnamespaces = new Namespace();
             try
             {
-                this.RDFTriple = new RDFTriple(subject,predicate);
+                this.RDFTriple = new RDFTriple(subject, predicate);
 
                 this.RDFTriple.ShowDetails = true;
                 this.RDFTriple.Expand = true;
                 //This method is used during the edit process.
                 this.RDFTriple.Edit = true;
 
-                  this.BaseData = dataio.GetRDFData(this.RDFTriple);
+                this.BaseData = dataio.GetRDFData(this.RDFTriple);
                 this.Namespaces = rdfnamespaces.LoadNamespaces(this.BaseData);
 
             }
@@ -119,7 +164,7 @@ namespace Profiles.Framework.Utilities
                 //This method is used during the edit process.
                 this.RDFTriple.Edit = true;
 
-               this.BaseData = dataio.GetRDFData(this.RDFTriple);
+                this.BaseData = dataio.GetRDFData(this.RDFTriple);
                 this.Namespaces = rdfnamespaces.LoadNamespaces(this.BaseData);
 
             }
@@ -129,11 +174,11 @@ namespace Profiles.Framework.Utilities
         public List<ModuleParams> ModuleParams { get; set; }
         public RDFTriple RDFTriple { get; set; }
 
-		// Helpers
-		public string GetRootDomain()
-		{
-			return Root.Domain;
-		}
+        // Helpers
+        public string GetRootDomain()
+        {
+            return Root.Domain;
+        }
 
         //The data
         public XmlDocument BaseData { get; set; }
@@ -231,15 +276,15 @@ namespace Profiles.Framework.Utilities
 
 
         }
-        public string RenderCustomControl(string modulexml,XmlDocument node)
+        public string RenderCustomControl(string modulexml, XmlDocument node)
         {
             XmlDocument module = new XmlDocument();
             module.LoadXml(modulexml);
 
-            return this.RenderCustomControl(module,node);
+            return this.RenderCustomControl(module, node);
         }
 
-        public string RenderCustomControl(XmlDocument moduledoc,XmlDocument node)
+        public string RenderCustomControl(XmlDocument moduledoc, XmlDocument node)
         {
             System.Text.StringBuilder html = new System.Text.StringBuilder();
             Framework.Utilities.ModulesProcessing mp = new ModulesProcessing();
@@ -277,6 +322,6 @@ namespace Profiles.Framework.Utilities
         }
 
         private List<Module> Modules { get; set; }
-		
+
     }
 }

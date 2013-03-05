@@ -33,88 +33,6 @@ namespace Profiles.Framework.Utilities
         public string _ErrorMsg = "";
         public string _ErrorNumber = "";
 
-        #region "GetPropertyList"
-
-        public XmlDocument GetPropertyList(XmlDocument rdf, XmlDocument presentation, string propertyuri, bool withcounts, bool showall, bool cache)
-        {
-            string xmlstr = string.Empty;
-            XmlDocument xmlrtn = new XmlDocument();
-            string key = rdf.InnerXml + presentation.InnerXml + propertyuri + withcounts.ToString() + showall.ToString();
-            SessionManagement sm = new SessionManagement();
-
-            if (Framework.Utilities.Cache.Fetch(key) == null || !cache)
-            {
-                try
-                {
-
-                    Framework.Utilities.DebugLogging.Log("{CLOUD} DATA BASE start GetPropertyList(XmlDocument rdf, XmlDocument presentation, string propertyuri, bool withcounts, bool showall)");
-                    string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
-
-                    SqlConnection dbconnection = new SqlConnection(connstr);
-                    SqlCommand dbcommand = new SqlCommand();
-
-                    SqlDataReader dbreader;
-                    dbconnection.Open();
-                    dbcommand.CommandType = CommandType.StoredProcedure;
-
-                    dbcommand.CommandTimeout = this.GetCommandTimeout();
-
-                    dbcommand.CommandText = "[RDF.].GetPropertyList";
-                    dbcommand.Parameters.Add(new SqlParameter("@RDFStr", rdf.OuterXml));
-                    dbcommand.Parameters.Add(new SqlParameter("@PresentationXML", presentation.OuterXml));
-                    dbcommand.Parameters.Add(new SqlParameter("@returnXMLasStr", true));
-
-
-                    if (withcounts)
-                        dbcommand.Parameters.Add(new SqlParameter("@CountsOnly", 1));
-                    else
-                        dbcommand.Parameters.Add(new SqlParameter("@CountsOnly", 0));
-
-                    if (showall)
-                        dbcommand.Parameters.Add(new SqlParameter("@ShowAllProperties", 1));
-                    else
-                        dbcommand.Parameters.Add(new SqlParameter("@ShowAllProperties", 0));
-
-                    if (propertyuri != string.Empty)
-                    {
-                        dbcommand.Parameters.Add(new SqlParameter("@PropertyURI", propertyuri));
-                    }
-
-                    dbcommand.Connection = dbconnection;
-
-                    dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
-                    Framework.Utilities.DebugLogging.Log("{CLOUD} DATA BASE end GetPropertyList(XmlDocument rdf, XmlDocument presentation, string propertyuri, bool withcounts, bool showall)");
-
-                    while (dbreader.Read())
-                    {
-                        xmlstr += dbreader[0].ToString();
-                    }
-
-                    if (!dbreader.IsClosed)
-                        dbreader.Close();
-
-                    xmlrtn.LoadXml(xmlstr);
-
-                    Framework.Utilities.Cache.Set(key, xmlrtn);
-                    xmlstr = string.Empty;
-
-                }
-                catch (Exception e)
-                {
-                    Framework.Utilities.DebugLogging.Log(e.Message + e.StackTrace);
-                    throw new Exception(e.Message);
-                }
-            }
-            else
-            {
-                Framework.Utilities.DebugLogging.Log("{CLOUD} CACHE start GetPropertyList(XmlDocument rdf, XmlDocument presentation, string propertyuri, bool withcounts, bool showall)");
-                xmlrtn = Framework.Utilities.Cache.Fetch(key);
-                Framework.Utilities.DebugLogging.Log("{CLOUD} CACHE end GetPropertyList(XmlDocument rdf, XmlDocument presentation, string propertyuri, bool withcounts, bool showall)");
-            }
-
-            return xmlrtn;
-        }
-
         public XmlDocument GetPropertyRangeList(string propertyuri)
         {
             string xmlstr = string.Empty;
@@ -157,7 +75,7 @@ namespace Profiles.Framework.Utilities
 
                     xmlrtn.LoadXml(xmlstr);
 
-                    Framework.Utilities.Cache.Set(key, xmlrtn);
+                    Framework.Utilities.Cache.Set(key, xmlrtn,0);
                     xmlstr = string.Empty;
 
                 }
@@ -179,7 +97,6 @@ namespace Profiles.Framework.Utilities
 
         }
 
-        #endregion
 
         #region "RESOLVE"
 
@@ -246,6 +163,7 @@ namespace Profiles.Framework.Utilities
                 rtn = new URLResolve(Convert.ToBoolean(dbreader["Resolved"]), dbreader["ErrorDescription"].ToString(), dbreader["ResponseURL"].ToString(),
                     dbreader["ResponseContentType"].ToString(), dbreader["ResponseStatusCode"].ToString(), Convert.ToBoolean(dbreader["ResponseRedirect"]), Convert.ToBoolean(dbreader["ResponseIncludePostData"]));
 
+                
 
                 //Always close your readers
                 if (!dbreader.IsClosed)
@@ -297,6 +215,10 @@ namespace Profiles.Framework.Utilities
                     rtn = sqldr[0].ToString();
                 }
 
+
+                if (!sqldr.IsClosed)
+                    sqldr.Close();
+
                 Framework.Utilities.Cache.Set("GetRESTBasePath", rtn, 10000);
             }
             else
@@ -322,6 +244,9 @@ namespace Profiles.Framework.Utilities
                 {
                     rtn = sqldr[0].ToString();
                 }
+
+                if (!sqldr.IsClosed)
+                    sqldr.Close();
 
                 Framework.Utilities.Cache.Set("GetRESTBaseURI", rtn, 10000);
             }
@@ -405,6 +330,7 @@ namespace Profiles.Framework.Utilities
             try
             {
                 dbsqlconnection.Open();
+               
             }
             catch (Exception ex)
             {
@@ -501,10 +427,7 @@ namespace Profiles.Framework.Utilities
             for (int i = 0; i < sqlParam.GetLength(0); i++)
             {
                 sqlcmd.Parameters.Add(sqlParam[i]);
-                sqlcmd.Parameters[i].Direction = sqlParam[i].Direction;
-
-                if (sqlParam[i].Value != "")
-                    Framework.Utilities.DebugLogging.Log("SQL PARAM " + i + " : " + sqlParam[i] + " " + sqlParam[i].Value);
+                sqlcmd.Parameters[i].Direction = sqlParam[i].Direction;                
             }
         }
 
@@ -720,10 +643,7 @@ namespace Profiles.Framework.Utilities
 
             }
 
-
         }
-
-
 
         #endregion
 
@@ -735,7 +655,6 @@ namespace Profiles.Framework.Utilities
             XmlDocument data = new XmlDocument();
             try
             {
-
                 SqlParameter[] param = new SqlParameter[3];
                 param[0] = new SqlParameter("@SessionID", sm.Session().SessionID);
 
@@ -748,17 +667,13 @@ namespace Profiles.Framework.Utilities
 
                 dbreader = GetSQLDataReader(GetDBCommand("", "[user.account].[relationship.getrelationship]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param));
 
-
-
             }
             catch (Exception ex)
             {
                 Framework.Utilities.DebugLogging.Log(ex.Message + " ++ " + ex.StackTrace);
             }
 
-
             return dbreader;
-
         }
 
         public void SetActiveNetwork(Int64 subject, string relationshiptype, bool settoexists)

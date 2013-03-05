@@ -22,7 +22,7 @@
 </script>
 
 
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?sensor=false"></script>
 
 <asp:Literal ID="litGoogleCode" runat="server"></asp:Literal>
 

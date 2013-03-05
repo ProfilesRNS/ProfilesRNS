@@ -75,7 +75,7 @@ namespace Profiles.Profile.Modules.NetworkTimeline
 			DataView dataView = dataIO.GetNetworkTimeline(new RDFTriple(qsNodeId), proc);
 		 
 			// Draw timeline chart
-			if (dataView.Count >=0)
+			if (dataView.Count >0)
 			{
 				int x=0, y=0, i, a, b, j, c, d, n, w, k=0;
 				bool drawAvg;
@@ -191,6 +191,12 @@ namespace Profiles.Profile.Modules.NetworkTimeline
 				}
 				timelineDetails.InnerHtml = sb.ToString();
 			}
+
+
+
+            if (dataView.Count == 0)
+                timelineImage.Visible = false;
+
 		 }
 
 		 public string InfoCaption { get; set; }

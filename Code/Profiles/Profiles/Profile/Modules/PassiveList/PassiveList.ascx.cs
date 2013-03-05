@@ -43,6 +43,8 @@ namespace Profiles.Profile.Modules.PassiveList
         }
         public void DrawProfilesModule()
         {
+            DateTime d = DateTime.Now;
+
             //If your module performs a data request, based on the DataURI parameter then call ReLoadBaseData
             base.GetDataByURI();
 
@@ -52,8 +54,7 @@ namespace Profiles.Profile.Modules.PassiveList
 
             System.Text.StringBuilder documentdata = new System.Text.StringBuilder();
 
-            DateTime d = DateTime.Now;
-
+            
             documentdata.Append("<PassiveList");
             documentdata.Append(" InfoCaption=\"");
             documentdata.Append(base.GetModuleParamString("InfoCaption"));
@@ -64,8 +65,8 @@ namespace Profiles.Profile.Modules.PassiveList
             documentdata.Append(" ID=\"");
             documentdata.Append(Guid.NewGuid().ToString());
             documentdata.Append("\"");
-            documentdata.Append(" MoreText=\"");            
-                documentdata.Append(CustomParse.Parse(base.GetModuleParamString("MoreText"), base.BaseData, base.Namespaces));
+            documentdata.Append(" MoreText=\"");
+            documentdata.Append(CustomParse.Parse(base.GetModuleParamString("MoreText"), base.BaseData, base.Namespaces));
 
             documentdata.Append("\"");
 
@@ -79,11 +80,18 @@ namespace Profiles.Profile.Modules.PassiveList
             documentdata.Append(">");
             documentdata.Append("<ItemList>");
 
+
             try
             {
-                XmlNodeList nodes = this.BaseData.SelectNodes(base.GetModuleParamString("ListNode") + "[position() < " + Math.BigMul((Convert.ToInt16(base.GetModuleParamString("MaxDisplay")) + 1), 1).ToString() + "]", this.Namespaces);
+                var items = from XmlNode networknode in this.BaseData.SelectNodes(base.GetModuleParamString("ListNode") + "[position() < " + Math.BigMul((Convert.ToInt16(base.GetModuleParamString("MaxDisplay")) + 1), 1).ToString() + "]", this.Namespaces)                                                        
+                            select new
+                            {
+                                itemurl = CustomParse.Parse(base.GetModuleParamString("ItemURL"), networknode, this.Namespaces),
+                                itemurltext = CustomParse.Parse(base.GetModuleParamString("ItemURLText"), networknode, this.Namespaces),
+                                item = CustomParse.Parse(base.GetModuleParamString("ItemText"), networknode, this.Namespaces)
+                            };
 
-                foreach (XmlNode profiles in nodes)
+                foreach (var i in items)
                 {
                     networkexists = true;
 
@@ -91,13 +99,13 @@ namespace Profiles.Profile.Modules.PassiveList
 
                     if (base.GetModuleParamString("ItemURL") != string.Empty)
                     {
-                        documentdata.Append(" ItemURL=\"" + CustomParse.Parse(base.GetModuleParamString("ItemURL"), profiles, this.Namespaces));
+                        documentdata.Append(" ItemURL=\"" + i.itemurl);
                         documentdata.Append("\"");
-                        documentdata.Append(" ItemURLText=\"" + CustomParse.Parse(base.GetModuleParamString("ItemURLText"), profiles, this.Namespaces));
+                        documentdata.Append(" ItemURLText=\"" + i.itemurltext);
                         documentdata.Append("\"");
                     }
                     documentdata.Append(">");
-                    documentdata.Append(CustomParse.Parse(base.GetModuleParamString("ItemText"), profiles, this.Namespaces));
+                    documentdata.Append(i.item);
                     documentdata.Append("</Item>");
                 }
 
@@ -122,7 +130,7 @@ namespace Profiles.Profile.Modules.PassiveList
 
                 litPassiveNetworkList.Text = XslHelper.TransformInMemory(Server.MapPath("~/Profile/Modules/PassiveList/PassiveList.xslt"), args, document.OuterXml);
 
-                Framework.Utilities.DebugLogging.Log("PASSIVE MODULE end Milliseconds:" + (DateTime.Now - d).TotalMilliseconds);
+                Framework.Utilities.DebugLogging.Log("PASSIVE MODULE end Milliseconds:" + (DateTime.Now - d).TotalSeconds);
             }
         }
     }

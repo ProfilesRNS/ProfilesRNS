@@ -41,7 +41,7 @@ namespace Profiles.Profile.Modules.PropertyList
             XmlDocument presentationxml = base.PresentationXML;
             SessionManagement sm = new SessionManagement();
 
-            Framework.Utilities.DataIO data = new Framework.Utilities.DataIO();
+            Profiles.Profile.Utilities.DataIO data = new Profiles.Profile.Utilities.DataIO();
             
 
             this.PropertyListXML = data.GetPropertyList(pagedata, presentationxml,"",false,false,true);
@@ -105,14 +105,14 @@ namespace Profiles.Profile.Modules.PropertyList
                                             itembuffer.Append("<a href='");
                                             itembuffer.Append(connection.SelectSingleNode("@ResourceURI").Value);
                                             itembuffer.Append("'>");
-                                            itembuffer.Append(connection.InnerText + "<br><br>");
+                                            itembuffer.Append(connection.InnerText.Replace("\n", "<br/>") + "<br><br>");
                                             itembuffer.Append("</a>");
                                             hasitems = true;
 
                                         }
                                         else
                                         {
-                                            itembuffer.Append(connection.InnerText + "<br><br>");
+                                            itembuffer.Append(connection.InnerText.Replace("\n","<br/>") + "<br><br>");
                                             hasitems = true;
 
                                         }

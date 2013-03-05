@@ -55,39 +55,30 @@ namespace Profiles.Framework.Modules.MainMenu
             Utilities.DataIO data = new Profiles.Framework.Utilities.DataIO();
             menulist.Append("<ul>");
 
-            menulist.Append("<li><a href='" + Root.Domain + "/search'>New Search</a></li>");
+            menulist.Append("<li><a href='" + Root.Domain + "/search'>Find People</a></li>");
+            menulist.Append("<li><a href='" + Root.Domain + "/search/all'>Find Everything</a></li>");
 
             //-50 is the profiles Admin
             if (data.GetSessionSecurityGroup() == -50)
                 menulist.Append("<li><a href='" + Root.Domain + "/SPARQL/default.aspx'>SPARQL Query</a></li>");
 
-            menulist.Append("<li><a href='" + Root.Domain + "/about/default.aspx'>About Profiles</a></li>");
-
-            if (sm.Session().NodeID != subject && sm.Session().NodeID > 0)            
-                menulist.Append("<li><a href='" + sm.Session().PersonURI + "'>View My Profile</a></li>");
-
-
-            if (!Root.AbsolutePath.ToLower().Contains("/edit/"))
-            {
-                if ((sm.Session().UserID > 0 && sm.Session().PersonID > 0) || (sm.Session().UserID == 0 && sm.Session().PersonID == 0))
-                {
-                    menulist.Append("<li><a href='" + Root.Domain + "/login/default.aspx?method=login&edit=true'>Edit My Profile</a></li>");
-                }
-            }
-
-            if (base.PresentationXML.SelectSingleNode("Presentation/PageOptions[@CanEdit='true']") != null && !Root.AbsolutePath.ToLower().Contains("/edit/"))
-            {
-                if (sm.Session().NodeID != subject)
-                    menulist.Append("<li><a href='" + Root.Domain + "/edit/" + subject.ToString() + "'>Edit This Profile</a></li>");
-
-            }
+            menulist.Append("<li><a href='" + Root.Domain + "/about/default.aspx'>About This Site</a></li>");
 
             if (sm.Session().NodeID > 0)
+                menulist.Append("<li><a href='" + sm.Session().PersonURI + "'>View My Profile</a></li>");
+            
+            menulist.Append("<li><a href='" + Root.Domain + "/login/default.aspx?method=login&edit=true'>Edit My Profile</a></li>");
+
+
+            if (base.MasterPage.CanEdit)
+            {
+                menulist.Append("<li><a href='" + Root.Domain + "/edit/" + subject.ToString() + "'>Edit This Profile</a></li>");
+            }
+
+            if (sm.Session().UserID > 0)
                 menulist.Append("<li><a href='" + Root.Domain + "/proxy/default.aspx?subject=" + sm.Session().NodeID.ToString() + "'>Manage Proxies</a></li>");
 
-
-
-            if (base.BaseData.SelectSingleNode(".").OuterXml != string.Empty && !Root.AbsolutePath.ToLower().Contains("/search/"))
+            if (base.BaseData.SelectSingleNode(".").OuterXml != string.Empty && !Root.AbsolutePath.ToLower().Contains("/search"))
             {
                 if (base.BaseData.SelectSingleNode("//rdf:RDF/rdf:Description/@rdf:about", base.Namespaces) != null)
                 {
@@ -110,7 +101,7 @@ namespace Profiles.Framework.Modules.MainMenu
 
                         file = file.Substring(0, file.Length - 1);
 
-                        menulist.Append("<li><a href=\"" + uri + "/" + file + ".rdf\" target=\"_blank\">" + "Export RDF" + "</a></li>");
+                        menulist.Append("<li><a href=\"" + uri + "/" + file + ".rdf\" target=\"_blank\">" + "Export RDF" + "</a>&nbsp;<a style='border: none;' href='" + Root.Domain + "/about/default.aspx?tab=data'><img style='border-style: none' src='" + Root.Domain + "/Framework/Images/info.png'  border='0'></a></li>");
 
                         if (base.MasterPage != null)
                         {
@@ -130,16 +121,13 @@ namespace Profiles.Framework.Modules.MainMenu
             {
                 if (!Root.AbsolutePath.Contains("login"))
                 {
-                    menulist.Append("<li><a href='" + Root.Domain + "/login/default.aspx?method=login&redirectto=" + Root.Domain + Root.AbsolutePath + "'>Login to Profiles</a></li>");
+                    menulist.Append("<li><a href='" + Root.Domain + "/login/default.aspx?pin=send&method=login&redirectto=" + Root.Domain + Root.AbsolutePath + "'>Login to Profiles</a></li>");
                 }
-
             }
             else
             {
                 menulist.Append("<li><a href='" + Root.Domain + "/login/default.aspx?method=logout&redirectto=" + Root.Domain + Root.AbsolutePath + "'>Logout</a></li>");
             }
-
-
 
             menulist.Append("</ul>");
 
@@ -152,6 +140,24 @@ namespace Profiles.Framework.Modules.MainMenu
             {
                 ActiveNetworkRelationshipTypes.Visible = false;
             }
+
+            UserHistory uh = new UserHistory();
+
+            ProfileHistory.RDFData = base.BaseData;
+            ProfileHistory.PresentationXML = base.MasterPage.PresentationXML;
+            ProfileHistory.Namespaces = base.Namespaces;
+
+
+            if (uh.GetItems() != null)
+            {
+                ProfileHistory.Visible = true;
+            }
+            else
+            {
+                ProfileHistory.Visible = false;
+            }
+
+
 
             panelMenu.InnerHtml = menulist.ToString();
 

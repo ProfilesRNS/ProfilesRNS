@@ -49,11 +49,9 @@ namespace Profiles.Search.Modules
                     person = true;
             }
 
-
             //Need to strip the two querystring params so they fall out of the search process in the SearchResults.ascx and search/default.aspx processes.
             url = url.Replace("nodeuri=", "_nodeuri=");
             url = url.Replace("nodeid=", "_nodeid=");
-
 
             if (person)
             {
@@ -64,19 +62,17 @@ namespace Profiles.Search.Modules
                 url = url.Replace("searchtype=whyeverything", "searchtype=everything");
             }
 
-            backlink.Text = "<a href='" + Root.Domain + "/search/default.aspx?" + url + "'><img src='" + Root.Domain + "/framework/images/icon_squareArrow.gif'/> Back to Search Results</a>";
+            backlink.Text = "<a href='" + Root.Domain + "/search/default.aspx?" + url + "'><img src='" + Root.Domain + "/framework/images/icon_squareArrow.gif' border='0'/> Back to Search Results</a>";
             litSearchURL.Text = "<a href='" + Root.Domain + "/search/default.aspx?" + url + "'>Search Results</a>";
 
             litPersonURI.Text = "<a href='" + nodeuri + "'>" + node.SelectSingleNode("rdfs:label", base.Namespaces).InnerText + "</a>";
+
             litNodeURI.Text = "<a href='" + nodeuri + "'>" + node.SelectSingleNode("rdfs:label", base.Namespaces).InnerText + "</a>";
 
             if (node != null)
             {
                 if (person)
                 {
-                    directconnections.Add(new DirectConnection("fullName", node.SelectSingleNode("prns:fullName", base.Namespaces).InnerText, nodeuri));
-                    directconnections.Add(new DirectConnection("preferredTitle", node.SelectSingleNode("vivo:preferredTitle", base.Namespaces).InnerText, nodeuri));
-
                     foreach (XmlNode n in base.BaseData.SelectNodes("rdf:RDF/rdf:Description/vivo:overview/DirectMatchList/Match/PropertyList/Property", base.Namespaces))
                     {
                         if (n.SelectSingleNode("Name", base.Namespaces).InnerText == "fullName" || n.SelectSingleNode("Name", base.Namespaces).InnerText == "perferredTitle" || n.SelectSingleNode("Name", base.Namespaces).InnerText == "overview")
@@ -90,20 +86,25 @@ namespace Profiles.Search.Modules
                         directconnections.Add(new DirectConnection(n.SelectSingleNode("Name", base.Namespaces).InnerText, n.SelectSingleNode("Value", base.Namespaces).InnerText, nodeuri));
                     }
                 }
-                gvConnectionDetails.DataSource = directconnections;
-                gvConnectionDetails.DataBind();
+
+                if (directconnections.Count > 0)
+                {
+                    gvConnectionDetails.DataSource = directconnections;
+                    gvConnectionDetails.DataBind();
+                    pnlDirectConnection.Visible = true;
+                }
 
             }
 
             if (base.BaseData.SelectNodes("rdf:RDF/rdf:Description[@rdf:NodeID='ConnectionDetails']/vivo:overview/IndirectMatchList/Match", base.Namespaces).Count > 0)
             {
                 pnlIndirectConnection.Visible = true;
-              
-                    litSubjectName.Text = node.SelectSingleNode("rdfs:label", base.Namespaces).InnerText;
+
+                litSubjectName.Text = "<a href='" + nodeuri + "'>" + node.SelectSingleNode("rdfs:label", base.Namespaces).InnerText + "</a>";                   
 
                     foreach (XmlNode item in base.BaseData.SelectNodes("rdf:RDF/rdf:Description[@rdf:NodeID='ConnectionDetails']/vivo:overview/IndirectMatchList/Match", base.Namespaces))
                     {
-                        indirectconnections.Add(new IndirectConnection(item.SelectSingleNode("ClassName").InnerText, item.SelectSingleNode("PropertyList/Property/Value").InnerText, item.SelectSingleNode("URI").InnerText));
+                        indirectconnections.Add(new IndirectConnection(item.SelectSingleNode("ClassName").InnerText, item.SelectSingleNode("Label").InnerText, item.SelectSingleNode("URI").InnerText));
                     }
 
                 gvIndirectConnectionDetails.DataSource = indirectconnections;

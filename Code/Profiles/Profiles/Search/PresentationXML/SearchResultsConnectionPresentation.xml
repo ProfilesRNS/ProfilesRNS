@@ -1,10 +1,10 @@
-﻿<Presentation PresentationClass="profile">
+﻿<Presentation PresentationClass="connection">
   <PageOptions Columns="3"/>
-  <WindowName>Search Results Details</WindowName>
-  <PageTitle>Search Results Details</PageTitle>
+  <WindowName>Connection</WindowName>
+  <PageTitle>Connection</PageTitle>
   <PageBackLinkName></PageBackLinkName>
   <PageBackLinkURL></PageBackLinkURL>
-  <PageSubTitle></PageSubTitle>
+  <PageSubTitle>Search Results to {{{rdf:RDF/rdf:Description[@rdf:about=//rdf:RDF/rdf:Description/rdf:object/@rdf:resource]/prns:fullName}}}</PageSubTitle>
   <PageDescription>This is a "connection" page, showing the details of why an item matched the keywords from your search.</PageDescription>
   <PanelList>
     <Panel Type="header"  />

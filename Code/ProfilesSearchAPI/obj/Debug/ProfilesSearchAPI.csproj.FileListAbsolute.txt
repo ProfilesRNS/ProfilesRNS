@@ -1,0 +1,16 @@
+C:\Projects\ProfilesSearchAPI\ProfilesSearchAPI\bin\Search.dll
+C:\Projects\ProfilesSearchAPI\ProfilesSearchAPI\bin\Search.pdb
+C:\Projects\ProfilesSearchAPI\ProfilesSearchAPI\obj\Debug\ResolveAssemblyReference.cache
+C:\Projects\ProfilesSearchAPI\ProfilesSearchAPI\obj\Debug\Search.dll
+C:\Projects\ProfilesSearchAPI\ProfilesSearchAPI\obj\Debug\Search.pdb
+C:\Projects\ProfilesSearchAPI\ProfilesSearchAPI\bin\Microsoft.ServiceModel.Web.dll
+C:\Users\nichbrown\Documents\profiles\Versions\OpenSource\ProfilesRNS\Code\ProfilesSearchAPI\bin\Search.dll
+C:\Users\nichbrown\Documents\profiles\Versions\OpenSource\ProfilesRNS\Code\ProfilesSearchAPI\bin\Search.pdb
+C:\Users\nichbrown\Documents\profiles\Versions\OpenSource\ProfilesRNS\Code\ProfilesSearchAPI\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\nichbrown\Documents\profiles\Versions\OpenSource\ProfilesRNS\Code\ProfilesSearchAPI\obj\Debug\Search.dll
+C:\Users\nichbrown\Documents\profiles\Versions\OpenSource\ProfilesRNS\Code\ProfilesSearchAPI\obj\Debug\Search.pdb
+C:\Users\nichbrown\Documents\profiles\OpenSource\ProfilesRNS\Code\ProfilesSearchAPI\bin\Search.dll
+C:\Users\nichbrown\Documents\profiles\OpenSource\ProfilesRNS\Code\ProfilesSearchAPI\bin\Search.pdb
+C:\Users\nichbrown\Documents\profiles\OpenSource\ProfilesRNS\Code\ProfilesSearchAPI\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\nichbrown\Documents\profiles\OpenSource\ProfilesRNS\Code\ProfilesSearchAPI\obj\Debug\Search.dll
+C:\Users\nichbrown\Documents\profiles\OpenSource\ProfilesRNS\Code\ProfilesSearchAPI\obj\Debug\Search.pdb

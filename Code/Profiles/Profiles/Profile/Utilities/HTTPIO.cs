@@ -62,6 +62,8 @@ namespace Profiles.Profile.Utilities
                 request.Headers.Add("ShowDetails", datarequest.ShowDetails.ToString());
                 request.Headers.Add("Expand", datarequest.Expand.ToString());
 
+                if (datarequest.ExpandRDFList != null)
+                    request.Headers.Add("ExpandRDFList", datarequest.ExpandRDFList.ToString());
 
                 using (Stream writeStream = request.GetRequestStream())
                 {

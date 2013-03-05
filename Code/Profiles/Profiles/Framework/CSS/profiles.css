@@ -247,15 +247,17 @@ form
 }
 .profiles .profilesContentActive .activeSection
 {
-	/* background-color: #FFFFFF; */
 	width: 174px;
 	margin-left: 1px;
+	
 }
 .profiles .profilesContentActive .activeSectionHead
 {
 	background-color: #EEEBE5;
 	padding: 1px 8px;
 	font-weight: bold;
+	height:100%;
+	
 }
 .profiles .profilesContentActive .activeSectionBody
 {
@@ -497,7 +499,8 @@ form
 .profiles .profilesContentPassive .passiveSectionBody li
 {
 	padding: 4px 0 0 10px;
-	text-indent: -10px;
+	padding-left: 1em;
+	text-indent: -1em;
 	line-height: 14px;
 }
 .profiles .profilesContentPassive .passiveSectionBodyDetails
@@ -672,16 +675,15 @@ form
 	background-color: #36C;
 }
 
-
 .listTablePagination
 {
 	background-color: #f7f3ef;
+	border-top: none;
 	border-left: solid 1px #999;
 	border-right: solid 1px #999;
 	border-bottom: solid 1px #999;
 	padding: 6px;
 	/* Align with results table */
-	margin-left: 1px;
 	width: 588px;
 }
 .listTablePagination table
@@ -859,7 +861,7 @@ form
 /********************************************/
 /*        Edit Page                         */
 /********************************************/
-.editPage H2
+.editPage h2
 {
 	color: #AC1B30;
 	font-size: 13px;
@@ -868,6 +870,10 @@ form
 {
 	font-family: arial,sans-serif;
 	padding-left: 5px;
+}
+.oddRow td, .evenRow td 
+{
+	border-color: #808080;
 }
 .oddRow
 {
@@ -892,6 +898,16 @@ form
 	padding: 5px;
 }
 
+.colItemCnt, .colSecurity
+{
+    text-align:center;
+    width: 124px;
+}
+
+table tbody .height25 
+{
+    height: 25px;  
+}
 
 .editDisplayRow
 {
@@ -996,4 +1012,32 @@ form
 .pubSubSpacer
 {
 	margin-top: 10px;
+}
+
+/********************************************/
+/* Link tabs								*/
+/********************************************/
+.anchor-tab {
+	margin: 10px 0 4px 0;
+	color: #666;
+}
+.anchor-tab a.selected
+{
+	color: #333 !important;
+	font-weight: bold;
+	cursor: default;
+}
+.anchor-tab a.disabled
+{
+	color: silver !important;
+	cursor: default;
+}
+.anchor-tab a.selected:hover, .anchor-tab a.disabled:hover
+{	
+	text-decoration: none;
+}
+.anchor-tab a
+{
+	color: #36C;
+	cursor: pointer;
 }

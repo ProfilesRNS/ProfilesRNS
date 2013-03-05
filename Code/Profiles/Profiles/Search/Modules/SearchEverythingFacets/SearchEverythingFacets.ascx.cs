@@ -55,6 +55,12 @@ namespace Profiles.Search.Modules.SearchEverythingFacets
 
             XmlDocument xmlsearchrequest;
 
+
+            
+
+
+
+
             if (Request.QueryString["searchfor"] != null)
                 searchfor = Request.QueryString["searchfor"];
             else
@@ -115,7 +121,7 @@ namespace Profiles.Search.Modules.SearchEverythingFacets
             }
 
             //Grab the full results so I can get the counts, this comes from the cache cloud.
-            this.SearchResults = data.Search(data.SearchRequest(searchfor, "", "", "0", "100"),false);
+            this.SearchResults = data.Search(data.SearchRequest(searchfor,"false", "", "", "0", "100"),false);
 
 
 

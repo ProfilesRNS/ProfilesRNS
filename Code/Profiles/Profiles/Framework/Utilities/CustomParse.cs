@@ -40,6 +40,7 @@ namespace Profiles.Framework.Utilities
         static public string ProcessBraces(string custom, XmlDocument data, XmlNamespaceManager namespaces)
         {
 
+
             int start = 0;
             int end = 0;
             int stoploop = 0;
@@ -89,7 +90,6 @@ namespace Profiles.Framework.Utilities
             XmlDocument data = new XmlDocument();
             data.LoadXml(nodexml.OuterXml);
             return ProcessBraces(custom, data, namespaces);
-
         }
 
         //***************************************************************************************************************************************

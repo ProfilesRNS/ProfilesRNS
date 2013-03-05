@@ -43,7 +43,6 @@ namespace Connects.Profiles.Service.ServiceImplementation
         }
 
         public PersonList GetPersonFromPersonId(int personId)
-
         {
             return new ProfileServiceAdapter().GetPersonFromPersonId(personId);
         }

@@ -5,10 +5,10 @@
     <ContentTemplate>
         <asp:UpdateProgress ID="updateProgress" runat="server">
             <ProgressTemplate>
-                <div style="position: fixed; text-align: center; height: 100%; width: 100%; top: 0;
+                <div style="position: fixed; text-align: center; height: 100px; width: 100px; top: 0;
                     right: 0; left: 0; z-index: 9999999; opacity: 0.7;">
                     <span style="border-width: 0px; position: fixed; padding: 50px; background-color: #FFFFFF;
-                        font-size: 25px; left: 40%; top: 40%;">Loading ...</span>
+                        font-size: 25px; left: 40%; top: 40%;"><img alt="Loading..." src="../edit/images/loader.gif" /></span>
                 </div>
             </ProgressTemplate>
         </asp:UpdateProgress>
@@ -42,6 +42,9 @@
                                 </td>
                             </tr>
                         </table>
+                        <br />
+                        <br />
+                         Mailing Address comes from an automatic data feed from Human Resources.
                     </div>
                 </td>
             </tr>

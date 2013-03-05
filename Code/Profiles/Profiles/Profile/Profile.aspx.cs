@@ -33,17 +33,13 @@ namespace Profiles.Profile
         protected void Page_Load(object sender, EventArgs e)
         {
 
-
             Framework.Utilities.RDFTriple request = base.RDFTriple;
-
-
 
             //The system default is True and True for showdetails and expand, but if its an external page call to this page, 
             //then its set to false for expand.           
             if (HttpContext.Current.Request.Headers["Expand"] != null)
             {
                 request.Expand = Convert.ToBoolean(HttpContext.Current.Request.Headers["Expand"].ToString());
-
             }
             else
             {
@@ -54,16 +50,11 @@ namespace Profiles.Profile
             if (HttpContext.Current.Request.Headers["ShowDetails"] != null)
             {
                 request.ShowDetails = Convert.ToBoolean(HttpContext.Current.Request.Headers["ShowDetails"].ToString());
-
             }
             else
             {
                 request.ShowDetails = true;
-            }
-
-
-
-
+            }            
 
             base.LoadRDFData();
 
@@ -72,9 +63,7 @@ namespace Profiles.Profile
             Response.Charset = "charset=UTF-8";
             Response.StatusCode = Convert.ToInt16("200");
 
-
             Response.Write(base.RDFData.InnerXml);
-
         }
     }
 }

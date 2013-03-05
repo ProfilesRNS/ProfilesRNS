@@ -1,70 +1,119 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SearchPerson.ascx.cs"
     Inherits="Profiles.Search.Modules.SearchPerson.SearchPerson" EnableViewState="true" %>
-
-<%@ register src="ComboTreeCheck.ascx" tagname="ComboTreeCheck" tagprefix="uc1" %>
+<%@ Register Src="ComboTreeCheck.ascx" TagName="ComboTreeCheck" TagPrefix="uc1" %>
 
 <script type="text/javascript">
 
 
     function runScript(e) {
         if (e.keyCode == 13) {
-            search();
-            return true;
+            search();            
         }
         return false;
     }
 
     function search() {
-        
 
-        var lname = document.getElementById("txtLname").value;
-        var fname = document.getElementById("txtFname").value
-        var searchfor = document.getElementById("txtSearchFor").value;
-        var exactphrase = document.getElementById("exactphrase").checked;
+        document.getElementById("<%=hdnSearch.ClientID%>").value = "true"
+        document.forms[0].submit();
+    }
 
-        var institution = "";
-        var institutionallexcept = "";
+    function showdiv() {
+        document.getElementById("divChkList").style.display = "block";
 
-        var department = "";
-        var departmentallexcept = "";
+        document.getElementById('chkLstItem_0').focus()
+    }
 
-        var division = "";
-        var divisionallexcept = "";
+    function showdivonClick() {
+        var objDLL = document.getElementById("divChkList");
+        if (objDLL.style.display == "block")
+            objDLL.style.display = "none";
+        else
+            objDLL.style.display = "block";
+    }
 
-        if (document.getElementById("institution") != null) {
-            institution = document.getElementById("institution").value;
-            institutionallexcept = document.getElementById("institutionallexcept").checked;
+    function getSelectedItem(lstValue, lstNo, lstID, ctrlType) {
+
+
+        var noItemChecked = 0;
+        var ddlChkList = document.getElementById("ddlChkList");
+        var selectedItems = "";
+        var selectedValues = "";
+        var arr = document.getElementById("chkLstItem").getElementsByTagName('input');
+        var arrlbl = document.getElementById("chkLstItem").getElementsByTagName('label');
+        var objLstId = document.getElementById('hidList');
+
+        for (i = 0; i < arr.length; i++) {
+            checkbox = arr[i];
+            if (i == lstNo) {
+                if (ctrlType == 'anchor') {
+                    if (!checkbox.checked) {
+                        checkbox.checked = true;
+                    }
+                    else {
+                        checkbox.checked = false;
+                    }
+                }
+            }
+
+            if (checkbox.checked) {                
+
+                var buffer;
+                if (arrlbl[i].innerText == undefined)
+                    buffer = arrlbl[i].textContent;
+                else
+                    buffer = arrlbl[i].innerText;
+
+                if (selectedItems == "") {
+
+                    selectedItems = buffer;
+                }
+                else {
+                    selectedItems = selectedItems + "," + buffer;
+                }
+                noItemChecked = noItemChecked + 1;
+            }
         }
 
-        if (document.getElementById("department") != null) {
-            department = document.getElementById("department").value;
-            departmentallexcept = document.getElementById("departmentallexcept").checked;
+        ddlChkList.title = selectedItems;
+
+        if (noItemChecked != "0")
+            ddlChkList.options[ddlChkList.selectedIndex].text = selectedItems;
+        else
+            ddlChkList.options[ddlChkList.selectedIndex].text = "";
+
+        document.getElementById('hidList').value = ddlChkList.options[ddlChkList.selectedIndex].text;
+
+
+    }
+
+    document.onclick = check;
+    function check(e) {
+        var target = (e && e.target) || (event && event.srcElement);
+        var obj = document.getElementById('divChkList');
+        var obj1 = document.getElementById('ddlChkList');
+        if (target.id != "alst" && !target.id.match("chkLstItem")) {
+            if (!(target == obj || target == obj1)) {
+                //obj.style.display = 'none'
+            }
+            else if (target == obj || target == obj1) {
+                if (obj.style.display == 'block') {
+                    obj.style.display = 'block';
+                }
+                else {
+                    obj.style.display = 'none';
+                    document.getElementById('ddlChkList').blur();
+                }
+            }
         }
-
-        if (document.getElementById("division") != null) {
-            division = document.getElementById("division").value;
-            divisionallexcept = document.getElementById("divisionallexcept").checked;
-        }
-
-        var otherfilters = document.getElementById("hdnSelectedText").value;
-
-        var classuri = 'http://xmlns.com/foaf/0.1/Person';
-
-        document.location.href = '<%=GetURLDomain()%>/search/default.aspx?searchtype=people&otherfilters=' + otherfilters +
-                                '&lname=' + lname + '&fname=' + fname +
-                                '&department=' + department + '&institution=' + institution +
-                                '&searchfor=' + searchfor + '&classuri=' + classuri +
-                                '&institutionallexcept=' + institutionallexcept + '&departmentallexcept=' + departmentallexcept +
-                                '&divisionallexcept=' + divisionallexcept + '&division=' + division +
-                                '&exactphrase=' + exactphrase +
-                                '&perpage=15&offset=0';
     }
 </script>
 
+<asp:HiddenField ID="hdnSearch" runat="server" Value="hdnSearch"></asp:HiddenField>
 <div class="content_container">
     <div class="tabContainer" style="margin-top: 0px;">
         <div class="searchForm">
-            <table onkeypress="JavaScript:runScript(event);"  width="100%">
+            <table onkeypress="JavaScript:runScript(event);" width="100%">
                 <tbody align="left">
                     <tr>
                         <td colspan='3'>
@@ -81,8 +130,8 @@
                                             Keywords
                                         </th>
                                         <td colspan="2" class="fieldOptions">
-                                            <input onkeypress="JavaScript:runScript(event);" type="text" name="txtSearchFor" id="txtSearchFor" class="inputText" />
-                                            <input type="checkbox" id='exactphrase' />
+                                            <asp:TextBox runat="server" ID="txtSearchFor" CssClass="inputText"></asp:TextBox>
+                                            <asp:CheckBox runat="server" ID="chkExactphrase" />
                                             Search for exact phrase
                                         </td>
                                     </tr>
@@ -120,7 +169,7 @@
                                         Last Name
                                     </th>
                                     <td colspan="2">
-                                        <input onkeypress="JavaScript:runScript(event);" type="text" name="txtLname" id="txtLname" class="inputText" />
+                                        <asp:TextBox runat="server" ID="txtLname" CssClass="inputText"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
@@ -128,7 +177,7 @@
                                         First Name
                                     </th>
                                     <td colspan="2">
-                                        <input onkeypress="JavaScript:runScript(event);" type="text" name="txtFname" id="txtFname" class="inputText" />
+                                        <asp:TextBox runat="server" ID="txtFname" CssClass="inputText"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr runat="server" id="trInstitution">
@@ -137,7 +186,7 @@
                                     </th>
                                     <td colspan="2">
                                         <asp:Literal runat="server" ID="litInstitution"></asp:Literal>
-                                        <input type="checkbox" id="institutionallexcept" />
+                                        <asp:CheckBox runat="server" ID="institutionallexcept" />
                                         All <b>except</b> the one selected
                                     </td>
                                 </tr>
@@ -147,18 +196,30 @@
                                     </th>
                                     <td colspan="2">
                                         <asp:Literal runat="server" ID="litDepartment"></asp:Literal>
-                                        <input type="checkbox" id="departmentallexcept" />
+                                        <asp:CheckBox runat="server" ID="departmentallexcept" />
                                         All <b>except</b> the one selected
                                     </td>
                                 </tr>
-                                <tr runat="server" id="trDivision">
+                                <tr runat="server" id="trFacultyType">
                                     <th>
-                                        Division
+                                        Faculty Type
                                     </th>
-                                    <td colspan="2">
-                                        <asp:Literal runat="server" ID="litDivision"></asp:Literal>
-                                        <input type="checkbox" id="divisionallexcept" />
-                                        All <b>except</b> the one selected
+                                    <td style="padding:0" colspan="2">
+                                        <table cellpadding="0" style="padding:0">
+                                            <tr>
+                                                <td>
+                                                    <asp:PlaceHolder ID="phDDLCHK" runat="server"></asp:PlaceHolder>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:PlaceHolder ID="phDDLList" runat="server"></asp:PlaceHolder>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <asp:Label ID="lblSelectedItem" runat="server"></asp:Label>
+                                        <asp:HiddenField ID="hidList" runat="server" />
+                                        <asp:HiddenField ID="hidURIs" runat="server" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -167,13 +228,14 @@
                                     </th>
                                     <td colspan='2'>
                                         <input type="hidden" id="hiddenToggle" value="off" />
-                                        <select id="selOtherOptions" style="width: 249px">
-                                            <option value="">&nbsp;&nbsp;-- Select Options --&nbsp;&nbsp;</option>
+                                        <select id="selOtherOptions" style="width: 249px; height: 20px">
+                                            <option value=""></option>
                                         </select>
                                         <table>
                                             <tr>
                                                 <td>
-                                                    <div id="divOtherOptions" style="position:absolute; margin-top:-2px; margin-left:-2px; width:255px; border-right: solid 1px #000000; border-bottom: solid 1px #000000;
+                                                    <div id="divOtherOptions" style="position: absolute; margin-top: -2px; margin-left: -2px;
+                                                        width: 255px; border-right: solid 1px #000000; border-bottom: solid 1px #000000;
                                                         border-left: solid 1px gray; padding-left: 3px; height: 150; width: 243px; overflow: auto;
                                                         background-color: #ffffff;">
                                                         <br />
@@ -195,12 +257,13 @@
                                         </div>
                                     </td>
                                 </tr>
-                           
                             </table>
+                            <asp:Literal runat="server" ID="litFacRankScript"></asp:Literal>
+                            
                         </div>
                     </td>
                 </tr>
             </table>
         </div>
     </div>
-
+</div>

@@ -224,7 +224,7 @@
           <xsl:value-of select="."/>
           <xsl:choose>
             <xsl:when test="@CoAuthor='true'">
-              <font color="red" >*</font>
+              <font color="gray" >*</font>
             </xsl:when>            
           </xsl:choose>
 				</xsl:when>
@@ -232,7 +232,7 @@
 					<xsl:value-of select="."/>
           <xsl:choose>
             <xsl:when test="@CoAuthor='true'">
-              <font color="red" >*</font>
+              <font color="gray" >*</font>
             </xsl:when>
           </xsl:choose>
 				</xsl:otherwise>

@@ -39,7 +39,7 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
         public Int64 _subject = 0;
 
         public string _predicateuri = string.Empty;
-
+        Profiles.Profile.Utilities.DataIO propdata;
         public DataSet PubMedResults
         {
             get
@@ -61,6 +61,8 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
 
             SessionManagement sm = new SessionManagement();
             Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
+            propdata = new Profiles.Profile.Utilities.DataIO();
+
             this._subject = Convert.ToInt64(Request.QueryString["subject"]);
             this._predicateuri = Request.QueryString["predicateuri"].Replace("!", "#");
             this._personId = data.GetPersonID(_subject);
@@ -68,7 +70,7 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
             Session["NodeID"] = this._subject;
             Session["SessionID"] = sm.Session().SessionID;
 
-            this.PropertyListXML = data.GetPropertyList(pagedata, base.PresentationXML, this._predicateuri, false, true, false);
+            this.PropertyListXML = propdata.GetPropertyList(pagedata, base.PresentationXML, this._predicateuri, false, true, false);
 
             securityOptions.Subject = this._subject;
             securityOptions.PredicateURI = this._predicateuri;
@@ -76,7 +78,35 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
             securityOptions.SecurityGroups = new XmlDataDocument();
             securityOptions.SecurityGroups.LoadXml(base.PresentationXML.DocumentElement.LastChild.OuterXml);
 
+            securityOptions.BubbleClick += SecurityDisplayed;
+
+
         }
+
+        private void SecurityDisplayed(object sender, EventArgs e)
+        {
+
+
+            if (Session["pnlSecurityOptions.Visible"] == null)
+            {
+
+                phAddPubMed.Visible = true;
+                phAddPub.Visible = true;
+                phAddCustom.Visible = true;
+                phDeletePub.Visible = true;
+
+
+            }
+            else
+            {
+                phAddPubMed.Visible = false;
+                phAddPub.Visible = false;
+                phAddCustom.Visible = false;
+                phDeletePub.Visible = false;
+
+            }
+        }
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -117,7 +147,7 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
             Edit.Utilities.DataIO data;
             data = new Edit.Utilities.DataIO();
             string predicateuri = Request.QueryString["predicateuri"].Replace("!", "#");
-            this.PropertyListXML = data.GetPropertyList(this.BaseData, base.PresentationXML, predicateuri, false, true, false);
+            this.PropertyListXML = propdata.GetPropertyList(this.BaseData, base.PresentationXML, predicateuri, false, true, false);
             litBackLink.Text = "<a href='" + Root.Domain + "/edit/" + _subject + "'>Edit Menu</a>" + " &gt; <b>" + PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@Label").Value + "</b>";
 
         }

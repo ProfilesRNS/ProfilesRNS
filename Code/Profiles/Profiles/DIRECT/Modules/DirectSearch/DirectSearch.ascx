@@ -67,8 +67,8 @@ function NoEnter(){
 			el2.innerHTML = ResultCount;
 			var el3 = document.createElement("div");
 			
-			el3.innerHTML = '<div id="SITE_PREVIEW_'+SiteID+'" style="display:none;" ><div style="border:none;"><IFRAME src="'+ResultPrevURL+'" style="width:600px;height:300px;border:0px;" frameborder="0" /></div></div>';
-			document.getElementById('sitePreview').appendChild(el3);
+			//el3.innerHTML = '<div id="SITE_PREVIEW_'+SiteID+'" style="display:none;" ><div style="border:none;"><IFRAME src="'+ResultPrevURL+'" style="width:600px;height:300px;border:0px;" frameborder="0" /></div></div>';
+			//document.getElementById('sitePreview').appendChild(el3);
 		} else {
 			ResultPopType = 'No results were returned by this institution.';
 			el2.innerHTML = '0';
@@ -129,7 +129,7 @@ function NoEnter(){
 		document.getElementById('FSPassiveResultsBox').style.display='block';
 		}catch(err){}
 		try{
-		document.getElementById('sitePreview').innerHTML = '';
+		//document.getElementById('sitePreview').innerHTML = '';
 		}catch(err){}
 		
 		var f = document.getElementById("FSSearchPhrase");
@@ -144,15 +144,6 @@ function NoEnter(){
 		document.getElementById('FSAJAXFrame').src = u;
 	
 	}
-	
-	function submitDirectSearch(e) {
-        if (e.keyCode == 13) {
-            doDirectSearch(); 
-            return false;           
-        }
-        return true;
-    }
-    
 	function doAuto() {	
 		<%
 			if( GetKeywordString() != ""){
@@ -162,17 +153,10 @@ function NoEnter(){
 			}
 		%>
 	}
-	
-	
 
     </script>
  <div class="searchForm">
-        <div class="pageTitle">
-            National Search</div>
-        <div class="pageSubTitle">
-            Distributed Interoperable Research Experts Collaboration Tool (DIRECT)</div>
-        <div class="pageSubTitleCaption">
-            DIRECT is pilot project to demonstrate federated search across multiple institutions.</div>
+        
         <div class="searchForm">
             <input type="hidden" name="request" value="outgoingcount" />
             <%
@@ -188,7 +172,7 @@ function NoEnter(){
                             Keywords
                         </th>
                         <td  class="fieldMain">
-                            <input onkeypress="return submitDirectSearch(event);" type='text' name="SearchPhrase" id="FSSearchPhrase" value="<%Response.Write(GetSearchPhrase()); %>"
+                            <input type='text' name="SearchPhrase" id="FSSearchPhrase" value="<%Response.Write(GetSearchPhrase()); %>"
                                 class="inputText" />
                         </td>
                         <td class="fieldOptions">
@@ -215,9 +199,7 @@ function NoEnter(){
             <%Response.Write(DrawMyTable()); %>
             <iframe name="FSAJAXFrame" id="FSAJAXFrame" src="<%Response.Write(DirectServiceURL());%>?request=outgoingcount&blank=y&r=rnd"
                 frameborder="0" scrolling="no" style="width: 0px; height: 0px;" />
-            </iframe> <b>&nbsp;&nbsp;Preview</b>
-            <div id="sitePreview" style="width: 600px; height: 300px; border: 1px solid #999;">
-            </div>
+            </iframe> 
         </div>
     </div>
 

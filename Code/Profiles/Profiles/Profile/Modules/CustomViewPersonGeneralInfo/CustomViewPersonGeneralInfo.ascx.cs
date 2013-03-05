@@ -56,9 +56,9 @@ namespace Profiles.Profile.Modules.CustomViewPersonGeneralInfo
 
             litPersonalInfo.Text = XslHelper.TransformInMemory(Server.MapPath("~/Profile/Modules/CustomViewPersonGeneralInfo/CustomViewPersonGeneralInfo.xslt"), args, base.BaseData.OuterXml);
 
-            if (base.BaseData.SelectSingleNode("rdf:RDF[1]/rdf:Description[1]/prns:mainImage/@rdf:resource", base.Namespaces) != null)
+            if (base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[1]/prns:mainImage/@rdf:resource", base.Namespaces) != null)
             {
-                string imageurl = base.BaseData.SelectSingleNode("//rdf:RDF[1]/rdf:Description[1]/prns:mainImage/@rdf:resource", base.Namespaces).Value;
+                string imageurl = base.BaseData.SelectSingleNode("//rdf:RDF/rdf:Description[1]/prns:mainImage/@rdf:resource", base.Namespaces).Value;
                 imgPhoto.ImageUrl = imageurl + "&cachekey=" + Guid.NewGuid().ToString();
             }
             else

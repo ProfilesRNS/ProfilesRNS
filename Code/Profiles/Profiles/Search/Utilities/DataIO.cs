@@ -37,7 +37,7 @@ namespace Profiles.Search.Utilities
         }
 
 
-        public XmlDocument SearchRequest(string searchstring, string classgroupuri, string classuri, string limit, string offset)
+        public XmlDocument SearchRequest(string searchstring, string exactphrase, string classgroupuri, string classuri, string limit, string offset)
         {
             System.Text.StringBuilder search = new System.Text.StringBuilder();
             XmlDocument searchxml = new XmlDocument();
@@ -58,15 +58,13 @@ namespace Profiles.Search.Utilities
             if (offset == null)
                 offset = string.Empty;
 
-
-
-
             search.Append("<SearchOptions>");
             search.Append("<MatchOptions>");
 
             if (searchstring != string.Empty)
             {
-                search.Append("<SearchString>");
+
+                search.Append("<SearchString ExactMatch=\"" + exactphrase.ToLower() + "\">");
                 search.Append(this.EscapeXML(searchstring));
                 search.Append("</SearchString>");
             }
@@ -99,10 +97,9 @@ namespace Profiles.Search.Utilities
 
         public XmlDocument SearchRequest(string searchstring, string exactphrase, string fname, string lname,
             string institution, string institutionallexcept, string department, string departmentallexcept,
-            string division, string divisionallexcept,
             string classuri, string limit, string offset,
             string sortby, string sortdirection,
-            string otherfilters, ref string searchrequest)
+            string otherfilters, string facrank, ref string searchrequest)
         {
 
             System.Text.StringBuilder search = new System.Text.StringBuilder();
@@ -114,16 +111,22 @@ namespace Profiles.Search.Utilities
             if (searchrequest != string.Empty)
                 xmlrequest.LoadXml(this.DecryptRequest(searchrequest));
             else
-
-
+            {
                 if (searchstring == null)
                     searchstring = string.Empty;
+            }
 
-            if (fname == null)
-                fname = string.Empty;
+            if (fname.IsNullOrEmpty())
+            {
+                if(xmlrequest.SelectSingleNode("SearchOptions/MatchOptions/SearchFiltersList/SearchFilter[@Property='http://xmlns.com/foaf/0.1/firstName']")!=null)
+                fname = xmlrequest.SelectSingleNode("SearchOptions/MatchOptions/SearchFiltersList/SearchFilter[@Property='http://xmlns.com/foaf/0.1/firstName']").InnerText;
+            }
 
-            if (lname == null)
-                lname = string.Empty;
+            if (lname.IsNullOrEmpty())
+            {
+                if(xmlrequest.SelectSingleNode("SearchOptions/MatchOptions/SearchFiltersList/SearchFilter[@Property='http://xmlns.com/foaf/0.1/lastName']")!=null)
+                lname = xmlrequest.SelectSingleNode("SearchOptions/MatchOptions/SearchFiltersList/SearchFilter[@Property='http://xmlns.com/foaf/0.1/lastName']").InnerText;
+            }
 
             if (classuri == null)
                 classuri = string.Empty;
@@ -169,29 +172,19 @@ namespace Profiles.Search.Utilities
 
                 if (institution != string.Empty)
                 {
-
-                    if (institutionallexcept == "true")
+                    if (institutionallexcept == "on")
                         isexclude = "1";
 
-                    search.Append("<SearchFilter IsExclude=\"" + isexclude + "\" Property=\"http://profiles.catalyst.harvard.edu/ontology/prns#personInPrimaryPosition\"  Property2=\"http://vivoweb.org/ontology/core#positionInOrganization\"  MatchType=\"Left\">" + institution + "</SearchFilter>");
+                    search.Append("<SearchFilter IsExclude=\"" + isexclude + "\" Property=\"http://profiles.catalyst.harvard.edu/ontology/prns#personInPrimaryPosition\"  Property2=\"http://vivoweb.org/ontology/core#positionInOrganization\"  MatchType=\"Exact\">" + institution + "</SearchFilter>");
                     isexclude = "0";
                 }
 
                 if (department != string.Empty)
                 {
-                    if (departmentallexcept == "true")
+                    if (departmentallexcept == "on")
                         isexclude = "1";
 
-                    search.Append("<SearchFilter IsExclude=\"" + isexclude + "\"  Property=\"http://profiles.catalyst.harvard.edu/ontology/prns#personInPrimaryPosition\"  Property2=\"http://profiles.catalyst.harvard.edu/ontology/prns#positionInDepartment\"   MatchType=\"Left\">" + department + "</SearchFilter>");
-                    isexclude = "0";
-                }
-
-                if (division != string.Empty)
-                {
-                    if (divisionallexcept == "true")
-                        isexclude = "1";
-
-                    search.Append("<SearchFilter IsExclude=\"" + isexclude + "\"  Property=\"http://profiles.catalyst.harvard.edu/ontology/prns#personInPrimaryPosition\"  Property2=\"http://profiles.catalyst.harvard.edu/ontology/prns#positionInDivision\"   MatchType=\"Left\">" + division + "</SearchFilter>");
+                    search.Append("<SearchFilter IsExclude=\"" + isexclude + "\"  Property=\"http://profiles.catalyst.harvard.edu/ontology/prns#personInPrimaryPosition\"  Property2=\"http://profiles.catalyst.harvard.edu/ontology/prns#positionInDepartment\"   MatchType=\"Exact\">" + department + "</SearchFilter>");
                     isexclude = "0";
                 }
 
@@ -206,21 +199,59 @@ namespace Profiles.Search.Utilities
 
             List<GenericListItem> filters = new List<GenericListItem>();
 
-            filters = GetOtherOptions(otherfilters);
+            if (!otherfilters.IsNullOrEmpty())
+            {
+                filters = GetOtherOptions(otherfilters);
+            }
+
             if (filters.Count > 0)
             {
                 foreach (GenericListItem item in filters)
                 {
-                    search.Append("<SearchFilter Property=\"http://profiles.catalyst.harvard.edu/ontology/prns#hasPersonFilter\" MatchType=\"Left\">" + item.Value + "</SearchFilter>");
+                    search.Append("<SearchFilter Property=\"http://profiles.catalyst.harvard.edu/ontology/prns#hasPersonFilter\" MatchType=\"Exact\">" + item.Value + "</SearchFilter>");
                 }
             }
-            else
+            else if(searchrequest == string.Empty)
             {
                 foreach (XmlNode node in xmlrequest.SelectNodes("//SearchFiltersList/SearchFilter[@Property='http://profiles.catalyst.harvard.edu/ontology/prns#hasPersonFilter']"))
                 {
                     search.Append(node.OuterXml);
                 }
             }
+            if (facrank != null)
+            {
+                List<GenericListItem> facranks = GetFacultyRanks(facrank);
+
+                if (facranks.Count == 1)
+                {
+
+                    foreach (GenericListItem item in facranks)
+                    {
+                        search.Append("<SearchFilter Property=\"http://profiles.catalyst.harvard.edu/ontology/prns#hasFacultyRank\" MatchType=\"Exact\">" + item.Value + "</SearchFilter>");
+                    }
+                }
+                else if (facranks.Count > 1)
+                {
+                    search.Append("<SearchFilter Property=\"http://profiles.catalyst.harvard.edu/ontology/prns#hasFacultyRank\" MatchType=\"In\">");
+
+                    foreach (GenericListItem item in facranks)
+                    {
+                        search.Append("<Item>" + item.Value + "</Item>");
+
+                    }
+                    search.Append("</SearchFilter>");
+
+                }
+            }
+            else if (searchrequest == string.Empty)
+            {
+                foreach (XmlNode node in xmlrequest.SelectNodes("//SearchFiltersList/SearchFilter[@Property='http://profiles.catalyst.harvard.edu/ontology/prns#hasFacultyRank']"))
+                {
+                    search.Append(node.OuterXml);
+                }
+            }
+
+
 
             search.Append("</SearchFiltersList>");
 
@@ -289,7 +320,6 @@ namespace Profiles.Search.Utilities
             string xmlstr = string.Empty;
             XmlDocument xmlrtn = new XmlDocument();
 
-
             string cachekey = searchoptions.OuterXml + sessionmanagement.Session().SessionID;
 
             if (Framework.Utilities.Cache.Fetch(cachekey) == null)
@@ -297,7 +327,6 @@ namespace Profiles.Search.Utilities
                 try
                 {
                     string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
-
 
                     SqlConnection dbconnection = new SqlConnection(connstr);
                     SqlCommand dbcommand = new SqlCommand();
@@ -330,13 +359,11 @@ namespace Profiles.Search.Utilities
                     if (!dbreader.IsClosed)
                         dbreader.Close();
 
-
                     xmlrtn.LoadXml(xmlstr);
 
                     Framework.Utilities.DebugLogging.Log(xmlstr);
-                    Framework.Utilities.Cache.Set(cachekey, xmlrtn);
+                    Framework.Utilities.Cache.Set(cachekey, xmlrtn,0);
                     xmlstr = string.Empty;
-
                 }
                 catch (Exception e)
                 {
@@ -399,7 +426,7 @@ namespace Profiles.Search.Utilities
                     xmlrtn.LoadXml(xmlstr);
 
                     Framework.Utilities.DebugLogging.Log(xmlstr);
-                    Framework.Utilities.Cache.Set(cachekey, xmlrtn);
+                    Framework.Utilities.Cache.Set(cachekey, xmlrtn,0);
                     xmlstr = string.Empty;
 
                 }
@@ -532,13 +559,8 @@ namespace Profiles.Search.Utilities
 
         private string FacultyRankSort(string direction)
         {
-            string sort = "<SortBy IsDesc=\"" + (direction == "desc" ? "0" : "1") + "\" Property=\"http://profiles.catalyst.harvard.edu/ontology/prns#hasFacultyRank\"  Property2=\"http://www.w3.org/2000/01/rdf-schema#label\"/>";
+            string sort = "<SortBy IsDesc=\"" + (direction == "desc" ? "0" : "1") + "\" Property=\"http://profiles.catalyst.harvard.edu/ontology/prns#hasFacultyRank\"  Property2=\"http://profiles.catalyst.harvard.edu/ontology/prns#sortOrder\"/>";
             sort += "<SortBy IsDesc=\"0\" Property=\"http://xmlns.com/foaf/0.1/lastName\" />";
-
-
-            //string sort = "<SortBy IsDesc=\"" + (direction == "desc" ? "0" : "1") + "\" Property=\"http://profiles.catalyst.harvard.edu/ontology/prns#personInPrimaryPosition\" Property2=\"http://profiles.catalyst.harvard.edu/ontology/prns#hasFacultyRank\"  Property3=\"http://www.w3.org/2000/01/rdf-schema#label\"/>";
-            //sort += "<SortBy IsDesc=\"0\" Property=\"http://xmlns.com/foaf/0.1/lastName\" />";
-
 
             return sort;
         }
@@ -553,7 +575,6 @@ namespace Profiles.Search.Utilities
 
                 SqlConnection dbconnection = new SqlConnection(connstr);
                 SqlCommand dbcommand = new SqlCommand();
-
 
                 dbconnection.Open();
                 dbcommand.CommandType = CommandType.StoredProcedure;
@@ -593,6 +614,15 @@ namespace Profiles.Search.Utilities
 
             return rtnlistitem.Text;
         }
+
+        public string GetTextFromListItem(List<GenericListItem> listitems, string itemtoconvert)
+        {
+            GenericListItem rtnlistitem = null;
+            rtnlistitem = listitems.Find(delegate(GenericListItem module) { return module.Text == itemtoconvert; });
+
+            return rtnlistitem.Text;
+        }
+
 
 
         /// <summary>
@@ -637,9 +667,6 @@ namespace Profiles.Search.Utilities
                 divisions = (List<GenericListItem>)Framework.Utilities.Cache.FetchObject("GetDivisions");
 
             }
-
-
-
 
             return divisions;
         }
@@ -736,8 +763,6 @@ namespace Profiles.Search.Utilities
             {
                 try
                 {
-
-
                     string sql = "EXEC [Profile.Data].[Organization.GetDepartments]";
 
 
@@ -759,9 +784,6 @@ namespace Profiles.Search.Utilities
                     Framework.Utilities.DebugLogging.Log(e.Message + " " + e.StackTrace);
                     throw new Exception(e.Message);
                 }
-
-
-
             }
             else
             {
@@ -770,6 +792,70 @@ namespace Profiles.Search.Utilities
             }
             return departments;
         }
+
+        /// To return the list of all the Departments
+        /// </summary>
+        /// <returns></returns>
+        public List<GenericListItem> GetFacultyRanks()
+        {
+            List<GenericListItem> ranks = new List<GenericListItem>();
+
+            if (Framework.Utilities.Cache.FetchObject("GetFacultyRanks") == null)
+            {
+                try
+                {
+                    string sql = "EXEC [Profile.Data].[Person.GetFacultyRanks]";
+
+                    SqlDataReader sqldr = this.GetSQLDataReader("", sql, CommandType.Text, CommandBehavior.CloseConnection, null);
+
+                    while (sqldr.Read())
+                        ranks.Add(new GenericListItem(sqldr["FacultyRank"].ToString(), sqldr["URI"].ToString()));
+
+                    //Always close your readers
+                    if (!sqldr.IsClosed)
+                        sqldr.Close();
+
+                    //Defaulted this to be one hour
+                    Framework.Utilities.Cache.Set("GetFacultyRanks", ranks, 3600);
+
+                }
+                catch (Exception e)
+                {
+                    Framework.Utilities.DebugLogging.Log(e.Message + " " + e.StackTrace);
+                    throw new Exception(e.Message);
+                }
+
+            }
+            else
+            {
+                ranks = (List<GenericListItem>)Framework.Utilities.Cache.FetchObject("GetFacultyRanks");
+            }
+            return ranks;
+        }
+
+        public List<GenericListItem> GetFacultyRanks(string rankstrings)
+        {
+            List<GenericListItem> ranks = new List<GenericListItem>();
+
+            
+            rankstrings = rankstrings.Replace(" ,", ",").Replace(", ", ",");
+            string[] items = rankstrings.Split(',');
+
+
+            foreach (GenericListItem gli in this.GetFacultyRanks())
+            {
+                if (items.Contains(gli.Text))
+                {
+                    ranks.Add(new GenericListItem(gli.Text, gli.Value));
+
+                }
+
+            }
+
+            return ranks;
+
+        }
+
 
         /// <summary>
         /// Get a list of person types from the database.
@@ -836,6 +922,8 @@ namespace Profiles.Search.Utilities
             return personTypesReturn;
         }
 
+
+
         public List<GenericListItem> GetListOfFilters()
         {
             List<GenericListItem> gli = new List<GenericListItem>();
@@ -852,6 +940,7 @@ namespace Profiles.Search.Utilities
             return gli;
 
         }
+
 
 
         public List<GenericListItem> GetOtherOptions(string otheroptions)

@@ -14,14 +14,14 @@ namespace Profiles.Edit.Utilities
             this.Literal = literal;
             this.Subject = subject;
             this.Predicate = predicate;
-            this.Object = _object;            
+            this.Object = _object;
             this.EditDelete = editdelete;
             this.EditExisting = editexisting;
         }
 
         public Int64 Subject { get; set; }
         public Int64 Predicate { get; set; }
-        public Int64 Object { get; set; }        
+        public Int64 Object { get; set; }
         public string Literal { get; set; }
 
         public bool EditExisting { get; set; }

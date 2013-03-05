@@ -24,7 +24,7 @@ remove that person as your proxy.
                 <div style="position: fixed; text-align: center; height: 100%; width: 100%; top: 0;
                     right: 0; left: 0; z-index: 9999999; opacity: 0.7;">
                     <span style="border-width: 0px; position: fixed; padding: 50px; background-color: #FFFFFF;
-                        font-size: 36px; left: 40%; top: 40%;">Loading ...</span>
+                        font-size: 36px; left: 40%; top: 40%;"><img alt="Loading.." src="<%=GetURLDomain()%>/Edit/Images/loader.gif" /></span>
                 </div>
             </ProgressTemplate>
         </asp:UpdateProgress>
@@ -34,13 +34,13 @@ remove that person as your proxy.
             <RowStyle BorderColor="#ccc" Width="1px" VerticalAlign="Middle" />
             <AlternatingRowStyle CssClass="evenRow" />
             <Columns>
-                <asp:TemplateField HeaderText="Name">
+                <asp:TemplateField HeaderStyle-HorizontalAlign="Center"  HeaderText="Name">
                     <ItemTemplate>
                         <asp:Literal runat="server" ID="litName"></asp:Literal>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:BoundField DataField="Institution" HeaderText="Institution" ReadOnly="true" />
-                <asp:TemplateField HeaderText="Email">
+                <asp:BoundField  HeaderStyle-HorizontalAlign="Center"  DataField="Institution" HeaderText="Institution" ReadOnly="true" />
+                <asp:TemplateField  HeaderStyle-HorizontalAlign="Center" HeaderText="Email">
                     <ItemTemplate>
                         <asp:Literal runat="server" ID="litEmail"></asp:Literal>
                     </ItemTemplate>
@@ -54,6 +54,7 @@ remove that person as your proxy.
                 </asp:TemplateField>
             </Columns>
         </asp:GridView>
+        <asp:Panel runat="server" ID="pnlAddProxy" Visible='false'>
         <br />
         <br />
         <table>
@@ -66,8 +67,8 @@ remove that person as your proxy.
                 </td>
             </tr>
         </table>
-        <br />
-        <br />
+        </asp:Panel>
+        <br />        
         <h3>
             Users who have given you permission to edit their profiles</h3>
         <asp:GridView Width="100%" ID="gvWhoCanIEdit" EmptyDataText="None" AutoGenerateColumns="false"
@@ -76,13 +77,13 @@ remove that person as your proxy.
             <RowStyle BorderColor="#ccc" Width="1px" VerticalAlign="Middle" />
             <AlternatingRowStyle CssClass="evenRow" />
             <Columns>
-                <asp:TemplateField HeaderText="Name">
+                <asp:TemplateField HeaderStyle-HorizontalAlign="Center"  HeaderText="Name">
                     <ItemTemplate>
                         <asp:Literal runat="server" ID="litName"></asp:Literal>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:BoundField DataField="Institution" HeaderText="Institution" ReadOnly="true" />
-                <asp:TemplateField HeaderText="Email">
+                <asp:BoundField  HeaderStyle-HorizontalAlign="Center"  DataField="Institution" HeaderText="Institution" ReadOnly="true" />
+                <asp:TemplateField  HeaderStyle-HorizontalAlign="Center"  HeaderText="Email">
                     <ItemTemplate>
                         <asp:Literal runat="server" ID="litEmail"></asp:Literal>
                     </ItemTemplate>
@@ -103,10 +104,9 @@ remove that person as your proxy.
             <RowStyle BorderColor="#ccc" Width="1px" VerticalAlign="Middle" />
             <AlternatingRowStyle CssClass="evenRow" />
             <Columns>
-                <asp:BoundField DataField="Institution" HeaderText="Institution" ReadOnly="true" />
-                <asp:BoundField DataField="Department" HeaderText="Department" ReadOnly="true" />
-                <asp:BoundField DataField="Division" HeaderText="Division" ReadOnly="true" />
-                <asp:BoundField DataField="Visible" HeaderText="Visible" ReadOnly="true" />
+                <asp:BoundField HeaderStyle-HorizontalAlign="Center" DataField="Institution" HeaderText="Institution" ReadOnly="true" />
+                <asp:BoundField HeaderStyle-HorizontalAlign="Center"  DataField="Department" HeaderText="Department" ReadOnly="true" />
+                <asp:BoundField HeaderStyle-HorizontalAlign="Center"  DataField="Visible" HeaderText="Visible" ReadOnly="true" />
             </Columns>
         </asp:GridView>
     </ContentTemplate>

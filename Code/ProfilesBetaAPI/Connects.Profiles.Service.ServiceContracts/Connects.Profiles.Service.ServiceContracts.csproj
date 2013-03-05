@@ -67,13 +67,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Profiles.Common\Connects.Profiles.Common.csproj">
       <Project>{72ABCD78-6907-4F63-8C59-392C9F3CE506}</Project>
       <Name>Connects.Profiles.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Connects.Profiles.Utility\Connects.Profiles.Utility.csproj">
-      <Project>{27F9D353-FCCC-430E-A6A6-6864773CBCDC}</Project>
-      <Name>Connects.Profiles.Utility</Name>
     </ProjectReference>
     <ProjectReference Include="..\Connects.Profiles.Service.DataContracts\Connects.Profiles.Service.DataContracts.csproj">
       <Project>{4E11DE8F-C111-44E4-8AF8-B66EDEC9152D}</Project>

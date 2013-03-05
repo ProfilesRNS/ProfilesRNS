@@ -41,6 +41,8 @@ namespace Profiles.Edit.Modules.EditPropertyList
         public EditPropertyList(XmlDocument pagedata, List<ModuleParams> moduleparams, XmlNamespaceManager pagenamespaces)
             : base(pagedata, moduleparams, pagenamespaces)
         {
+            imgLock.ImageUrl = Root.Domain + "/edit/images/icons_lock.gif";
+
 
         }
         private void DrawProfilesModule()
@@ -184,20 +186,25 @@ namespace Profiles.Edit.Modules.EditPropertyList
 
                 e.Row.Cells[0].Attributes.Add("onclick", editlink);
                 e.Row.Cells[1].Attributes.Add("onclick", editlink);
+                e.Row.Cells[1].CssClass = "colItemCnt";
+                e.Row.Cells[2].CssClass = "colSecurity";
+
             }
 
         }
         protected void BuildSecurityKey(List<GenericListItem> gli)
         {
-            System.Text.StringBuilder table = new StringBuilder();
-
+            System.Text.StringBuilder table = new StringBuilder();                        
+            
+            //<AlternatingRowStyle CssClass="evenRow" />
 
             table.Append("<table style='width:100%;'>");
+            table.Append("<tr class='EditMenuTopRow' ><td style='padding-left:10px;' align='right'><b>Level</b></td><td style='padding-left:10px;' align='left'><b>Description</b></td></tr>");
 
             foreach (GenericListItem item in gli)
             {
-                table.Append("<tr style='height:25px;'>");
-                table.Append("<td style='padding-left:6px;white-space:nowrap'>");
+                table.Append("<tr>");
+                table.Append("<td class='height25' style='padding-left:6px;white-space:nowrap'>");
                 table.Append("<p align='right'>");
                 table.Append("<b>");
                 table.Append(item.Text);

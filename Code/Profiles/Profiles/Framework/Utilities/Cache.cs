@@ -32,21 +32,22 @@ namespace Profiles.Framework.Utilities
         /// </summary>
         /// <param name="key"></param>
         /// <param name="data"></param>        
-
-        static public void Set(string key, Object data, double cachetimeout)
-        {           
+        static public void Set(string key, Object data, double cachetimeout, Int64 dependencykey)
+        {
             timeout = cachetimeout;
 
             string hashkey = string.Empty;
             hashkey = Cache.HashForKey(key);
+
             try
             {
+
                 if (HttpRuntime.Cache[hashkey] != null)
                 {
                     HttpRuntime.Cache.Remove(hashkey);
                 }
 
-                HttpRuntime.Cache.Insert(hashkey, data, null, DateTime.Now.AddSeconds(timeout), System.Web.Caching.Cache.NoSlidingExpiration);
+                HttpRuntime.Cache.Insert(hashkey, data, CreateDependency(dependencykey.ToString()), DateTime.Now.AddSeconds(timeout), System.Web.Caching.Cache.NoSlidingExpiration);
             }
             catch (Exception e)
             {
@@ -54,28 +55,33 @@ namespace Profiles.Framework.Utilities
             }
 
         }
+
         /// <summary>
         /// Uses the web.config value for CACHE_EXPIRE to set the lenght of time for an object to be stored in RAM on web server.
         /// </summary>
         /// <param name="key">Unique key value to Set and Fetch item from cache</param>
         /// <param name="data">Data value to be Set in cache</param>
-        static public void Set(string key,Object data)
+        static public void Set(string key, Object data, Int64 dependencykey)
         {
             timeout = Convert.ToDouble(ConfigurationSettings.AppSettings["CACHE_EXPIRE"]);
-            Set(key, data, timeout);
+            Set(key, data, timeout, dependencykey);
+
         }
-      /// <summary>
-      /// Used to Fetch RDF data or Presentation data from cache.
-      /// </summary>
-      /// <param name="request"></param>
-      /// <returns></returns>
+
+        /// <summary>
+        /// Used to Fetch RDF data or Presentation data from cache.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         static public XmlDocument Fetch(string key)
         {
-            XmlDocument xmlrtn = null;
-            string hashkey = string.Empty;               
 
+
+            XmlDocument xmlrtn = null;
+            string hashkey = string.Empty;
 
             hashkey = Cache.HashForKey(key);
+
             try
             {
                 if (HttpRuntime.Cache[hashkey] != null)
@@ -87,6 +93,12 @@ namespace Profiles.Framework.Utilities
             {
                 throw new Exception(e.Message);
             }
+
+
+
+
+
+
 
             return xmlrtn;
         }
@@ -119,8 +131,30 @@ namespace Profiles.Framework.Utilities
             return xmlrtn;
         }
 
+        static public void Remove(string key)
+        {
 
-       
+            if (HttpRuntime.Cache[key] != null)
+            {
+                HttpRuntime.Cache.Remove(key);
+            }
+
+        }
+        static public CacheDependency CreateDependency(string key)
+        {
+            String[] dependencyKey = new String[1];
+            dependencyKey[0] = "Node Dependency " + key;
+            CacheDependency dependency = null;
+
+            if (key != "0")
+            {
+                dependency = new CacheDependency(null, dependencyKey);
+                HttpRuntime.Cache.Insert(dependencyKey[0], Guid.NewGuid().ToString());
+            }
+
+            return dependency;
+        }
+
 
         /// <summary>
         /// Takes a string of plain text and then returns a MD5 hash value
@@ -135,7 +169,7 @@ namespace Profiles.Framework.Utilities
             byte[] byteV = System.Text.Encoding.UTF8.GetBytes(plainText);
             byte[] byteH = SHA1.ComputeHash(byteV);
             SHA1.Clear();
-            return Convert.ToBase64String(byteH); 
+            return Convert.ToBase64String(byteH);
 
         }
 
@@ -144,5 +178,5 @@ namespace Profiles.Framework.Utilities
     }
 
 
-    
+
 }

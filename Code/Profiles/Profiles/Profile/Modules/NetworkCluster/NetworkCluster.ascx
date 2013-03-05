@@ -281,7 +281,7 @@
 	<div class="clusterWarning">
 		Please note that this visualization requires a fast computer and video card. It might cause web browsers on slower machines to become unresponsive.
 		<div style='margin-top: 10px;'>
-		<a id='showClusterViewLink' href="javascript:void(0)">
+		<a id='showClusterViewLink'>
 			<img src="<%= Profiles.Framework.Utilities.Root.Domain %>/Framework/images/icon_squareArrow.gif" border="0" style="position:relative;top:1px;">&nbsp;Continue to Cluster View
 		</a>
 		</div>

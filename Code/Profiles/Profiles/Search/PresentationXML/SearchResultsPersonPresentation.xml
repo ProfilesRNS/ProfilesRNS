@@ -1,6 +1,6 @@
 ﻿ <Presentation PresentationClass="network">
   <PageOptions Columns="3"/>
-  <WindowName>Search Results</WindowName>  
+  <WindowName>Search Results ({{{rdf:RDF/rdf:Description/prns:numberOfConnections}}})</WindowName>  
   <PageTitle>Search Results ({{{rdf:RDF/rdf:Description/prns:numberOfConnections}}})</PageTitle>   
    <PageBackLinkName>More Search Options</PageBackLinkName>
   <PageBackLinkURL>~/search/people</PageBackLinkURL>

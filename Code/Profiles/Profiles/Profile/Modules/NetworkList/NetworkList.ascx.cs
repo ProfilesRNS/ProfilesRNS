@@ -29,7 +29,13 @@ namespace Profiles.Framework.Modules.NetworkList
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            DrawProfilesModule();
+            if (base.GetModuleParamString("Cloud") == "true")
+                DrawProfilesCloud();
+            else
+                DrawProfilesModule();
+
+
+
         }
         public NetworkList() { }
         public NetworkList(XmlDocument pagedata, List<ModuleParams> moduleparams, XmlNamespaceManager pagenamespaces)
@@ -37,28 +43,91 @@ namespace Profiles.Framework.Modules.NetworkList
         {
 
         }
+
+
+        public void DrawProfilesCloud()
+        {
+            XmlDocument document = new XmlDocument();
+            string xml = string.Empty;
+
+            Profiles.Profile.Utilities.DataIO pdata = new Profiles.Profile.Utilities.DataIO();
+            RDFTriple request = new RDFTriple(Convert.ToInt64(Request.QueryString["subject"]));
+
+
+            document.LoadXml(pdata.GetNetworkCloud(request).ToString().Replace("&", "&amp;"));
+
+            XslCompiledTransform xslt = new XslCompiledTransform();
+            XsltArgumentList args = new XsltArgumentList();
+            args.AddParam("root", "", Root.Domain);
+
+            litListView.Text = XslHelper.TransformInMemory(Server.MapPath("~/Profile/Modules/NetworkList/NetworkList.xslt"), args, document.OuterXml);
+        }
+
+
+
         public void DrawProfilesModule()
         {
+
+
+
+
+
+
+
+
+            DateTime d = DateTime.Now;
 
             //If your module performs a data request, based on the DataURI parameter then call ReLoadBaseData
             base.GetDataByURI();
             List<CloudItem> weights = new List<CloudItem>();
-
-            double weight;
+            
             double firsttwenty = 0.0;
             double lasttwenty = 0.0;
 
-            if (base.BaseData.SelectNodes(base.GetModuleParamString("NetworkListNode"), base.Namespaces) != null && base.GetModuleParamString("CloudWeightNode") != string.Empty)
-            {
-                foreach (XmlNode networknode in base.BaseData.SelectNodes(base.GetModuleParamString("NetworkListNode"), base.Namespaces))
-                {
-                    if (base.GetModuleParamString("CloudWeightNode") != string.Empty)
-                    {
-                        weight = Convert.ToDouble(networknode.SelectSingleNode(base.GetModuleParamString("CloudWeightNode"), base.Namespaces).InnerText);
-                        weights.Add(new CloudItem(weight, networknode.SelectSingleNode("./rdf:object/@rdf:resource", this.Namespaces).Value));
-                    }
-                }
+            string cloudweightnode = string.Empty;
+            string networklistnode = string.Empty;
+            string itemurl = string.Empty;
+            string itemurltext = string.Empty;
+            string itemtext = string.Empty;
 
+
+
+
+
+
+
+            cloudweightnode = base.GetModuleParamString("CloudWeightNode");
+            networklistnode = base.GetModuleParamString("NetworkListNode");
+            itemurl = base.GetModuleParamString("ItemURL");
+            itemurltext = base.GetModuleParamString("ItemURLText");
+            itemtext = base.GetModuleParamString("ItemText");
+
+            if (base.BaseData.SelectNodes(networklistnode, base.Namespaces) != null && cloudweightnode != string.Empty)
+            {
+                if (cloudweightnode != string.Empty)
+                {
+
+                    var items = from XmlNode networknode in base.BaseData.SelectNodes(networklistnode, base.Namespaces)
+                                select new
+                                {
+                                    weight = Convert.ToDouble(networknode.SelectSingleNode(cloudweightnode, base.Namespaces).InnerText),
+                                    value = networknode.SelectSingleNode("./rdf:object/@rdf:resource", this.Namespaces).Value
+                                };
+
+                    foreach (var i in items)
+                    {
+
+                        weights.Add(new CloudItem(i.weight, i.value));
+
+                    }
+
+                    //foreach (XmlNode networknode in base.BaseData.SelectNodes(networklistnode, base.Namespaces))
+                    //{
+                    //    weight = Convert.ToDouble(networknode.SelectSingleNode(cloudweightnode, base.Namespaces).InnerText);
+                    //    weights.Add(new CloudItem(weight, networknode.SelectSingleNode("./rdf:object/@rdf:resource", this.Namespaces).Value));
+                    //}
+
+                }
                 weights = weights.OrderByDescending(clouditem => clouditem.Weight).ToList();
 
                 firsttwenty = weights.Count * .2;
@@ -107,48 +176,67 @@ namespace Profiles.Framework.Modules.NetworkList
             documentdata.Append("\">");
             string item = string.Empty;
 
-            if (base.BaseData.SelectNodes(base.GetModuleParamString("NetworkListNode"), base.Namespaces) != null)
+            if (base.BaseData.SelectNodes(networklistnode, base.Namespaces) != null)
             {
 
-                foreach (XmlNode networknode in base.BaseData.SelectNodes(base.GetModuleParamString("NetworkListNode"), base.Namespaces))
+                var items = from XmlNode networknode in base.BaseData.SelectNodes(networklistnode, base.Namespaces)
+                            select new
+                            {
+                                itemurl = CustomParse.Parse(itemurl, networknode, base.Namespaces),
+                                item = CustomParse.Parse(itemtext, networknode, base.Namespaces),
+                                weight = GetCloudRank(networknode.SelectSingleNode("./rdf:object/@rdf:resource", base.Namespaces).InnerText, weights),
+                                connectiondetails = networknode.SelectSingleNode("prns:hasConnectionDetails/@rdf:resource", base.Namespaces),
+                                sortorder = networknode.SelectSingleNode("prns:sortOrder", base.Namespaces),
+                                itemxpath = CustomParse.Parse(itemurltext, networknode, base.Namespaces)
+                            };
+
+                foreach (var i in items)
                 {
+                    //foreach (XmlNode networknode in base.BaseData.SelectNodes(networklistnode, base.Namespaces))
+                    //{
+
                     documentdata.Append("<Item");
 
-                    if (base.GetModuleParamString("ItemURL") != string.Empty)
+                    if (itemurl != string.Empty)
                     {
-                        documentdata.Append(" ItemURL=\"" + CustomParse.Parse(base.GetModuleParamString("ItemURL"), networknode, base.Namespaces));
+                        documentdata.Append(" ItemURL=\"");
+                        documentdata.Append(i.itemurl);
                         documentdata.Append("\"");
 
-                        if (base.GetModuleParamString("CloudWeightNode") != string.Empty)
+                        if (cloudweightnode != string.Empty)
                         {
-                            documentdata.Append(" Weight=\"" + GetCloudRank(networknode.SelectSingleNode("./rdf:object/@rdf:resource", base.Namespaces).InnerText, weights));
+                            documentdata.Append(" Weight=\"");
+                            documentdata.Append(i.weight);
                             documentdata.Append("\"");
                         }
 
-                        if (networknode.SelectSingleNode("prns:hasConnectionDetails/@rdf:resource", base.Namespaces) != null)
+                        if (i.connectiondetails != null)
                         {
-                            if (base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + networknode.SelectSingleNode("prns:hasConnectionDetails/@rdf:resource", base.Namespaces).Value + "']/prns:isAlsoCoAuthor", base.Namespaces) != null)
+                            if (base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + i.connectiondetails.InnerText + "']/prns:isAlsoCoAuthor", base.Namespaces) != null)
                             {
-                                documentdata.Append(" CoAuthor=\"" + base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + networknode.SelectSingleNode("prns:hasConnectionDetails/@rdf:resource", base.Namespaces).Value + "']/prns:isAlsoCoAuthor", base.Namespaces).InnerText);
+                                documentdata.Append(" CoAuthor=\"");
+                                documentdata.Append(base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + i.connectiondetails.InnerText + "']/prns:isAlsoCoAuthor", base.Namespaces).InnerText);
                                 documentdata.Append("\"");
                             }
-                            if (networknode.SelectSingleNode("prns:sortOrder", base.Namespaces) != null)
+                            if (i.sortorder != null)
                             {
-                                documentdata.Append(" sortOrder=\"" + networknode.SelectSingleNode("prns:sortOrder", base.Namespaces).InnerText);
+                                documentdata.Append(" sortOrder=\"");
+                                documentdata.Append(i.sortorder.InnerText);
                                 documentdata.Append("\"");
                             }
                         }
 
-                        string itemxpath = CustomParse.Parse(base.GetModuleParamString("ItemURLText"), networknode, base.Namespaces);
+                        string itemxpath = i.itemxpath;
                         if (itemxpath != string.Empty)
                             item = base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about= '" + itemxpath + "']/rdfs:label", base.Namespaces).InnerText;
 
-                        documentdata.Append(" ItemURLText=\"" + item);
+                        documentdata.Append(" ItemURLText=\"");
+                        documentdata.Append(item);
                         documentdata.Append("\"");
                     }
-                    
+
                     documentdata.Append(">");
-                    documentdata.Append(CustomParse.Parse(base.GetModuleParamString("ItemText"), networknode, base.Namespaces));
+                    documentdata.Append(i.item);
                     documentdata.Append("</Item>");
                 }
             }
@@ -159,20 +247,25 @@ namespace Profiles.Framework.Modules.NetworkList
 
             XsltArgumentList args = new XsltArgumentList();
             string xmlbuffer;
-            if(base.GetModuleParamString("SortBy").Equals("Weight")) xmlbuffer = XslHelper.TransformInMemory(Server.MapPath("~/Profile/Modules/NetworkList/SortIntermediateByWeight.xslt"), args, document.OuterXml);
+            if (base.GetModuleParamString("SortBy").Equals("Weight")) xmlbuffer = XslHelper.TransformInMemory(Server.MapPath("~/Profile/Modules/NetworkList/SortIntermediateByWeight.xslt"), args, document.OuterXml);
             else xmlbuffer = XslHelper.TransformInMemory(Server.MapPath("~/Profile/Modules/NetworkList/SortIntermediate.xslt"), args, document.OuterXml);
             litListView.Text = XslHelper.TransformInMemory(Server.MapPath("~/Profile/Modules/NetworkList/NetworkList.xslt"), args, xmlbuffer);
 
+            Framework.Utilities.DebugLogging.Log("Network List MODULE end Milliseconds:" + (DateTime.Now - d).TotalSeconds);
 
         }
 
         //***************************************************************************************************************************************
         public string GetCloudRank(string resource, List<CloudItem> items)
         {
+            string rtn = string.Empty;
             CloudItem weight = null;
             weight = items.Find(delegate(CloudItem item) { return item.About == resource; });
 
-            return weight.Rank;
+            if (weight != null)
+                rtn = weight.Rank;
+
+            return rtn;
         }
     }
 

@@ -13,10 +13,10 @@
     <ContentTemplate>
         <asp:UpdateProgress ID="updateProgress" runat="server">
             <ProgressTemplate>
-                <div style="position: fixed; text-align: center; height: 100%; width: 100%; top: 0;
+                <div style="position: fixed; text-align: center; height: 100px; width: 100px; top: 0;
                     right: 0; left: 0; z-index: 9999999; opacity: 0.7;">
                     <span style="border-width: 0px; position: fixed; padding: 50px; background-color: #FFFFFF;
-                        font-size: 25px; left: 40%; top: 40%;">Loading ...</span>
+                        font-size: 25px; left: 40%; top: 40%;"><img alt="Loading..." src="../edit/images/loader.gif" /></span>
                 </div>
             </ProgressTemplate>
         </asp:UpdateProgress>
@@ -28,33 +28,40 @@
             </tr>
             <tr>
                 <td>
-                <br />
+                        <div style="padding: 10px 0px;">
                     <asp:Panel runat="server" ID="pnlSecurityOptions">
-                        <security:Options runat="server" ID="securityOptions"></security:Options>
+                    <div style="padding-bottom: 10px;">
+                        <security:Options runat="server" ID="securityOptions"></security:Options>                        
+                        </div>
                     </asp:Panel>
-                  
-                    <br />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <table>
-                        <tr>
-                            <td>
-                                <asp:Image runat="server" ID="imgPhoto" />
-                                <i><asp:label runat="server" ID="lblNoImage" Text="No photo found." Visible = "false"></asp:label></i>
-                            </td>
-                        </tr>
-                    </table>
+                    <asp:PlaceHolder ID="phAddCustomPhoto" runat="server">
+                        <div style="padding-bottom: 10px;">
+                            <asp:ImageButton ID="btnImgAddCustomPhoto" runat="server" ImageUrl="~/Framework/Images/icon_squareArrow.gif"
+                                OnClick="btnAddCustomPhoto_OnClick" />&nbsp;
+                            <asp:LinkButton ID="btnAddCustomPhoto" runat="server" OnClick="btnAddCustomPhoto_OnClick"
+                                CssClass="profileHypLinks">Add/Edit Custom Photo</asp:LinkButton>
+                        </div>
+                    </asp:PlaceHolder>
+                    </div>
                 </td>
             </tr>
         </table>
+        <table>
+            <tr>
+                <td>
+                    <asp:Image runat="server" ID="imgPhoto" />
+                    <i>
+                        <asp:Label runat="server" ID="lblNoImage" Text="No photo found." Visible="false"></asp:Label></i>
+                </td>
+            </tr>
+        </table>
+        <div runat="server" ID="pnlUpload" visible="false">
         <br />
-        <asp:Panel runat="server" ID="pnlUpload">
+            Select custom photo for upload
             <cc1:AsyncFileUpload ID="AsyncFileUpload1" runat="server" OnUploadedComplete="ProcessUpload"
-                OnClientUploadComplete="showUploadConfirmation" ThrobberID="spanUploading" />
+                OnClientUploadComplete="showUploadConfirmation" ThrobberID="spanUploading" />                        
             <span id="spanUploading" runat="server">Uploading...</span>
             <br />
-        </asp:Panel>
+        </div>
     </ContentTemplate>
 </asp:UpdatePanel>

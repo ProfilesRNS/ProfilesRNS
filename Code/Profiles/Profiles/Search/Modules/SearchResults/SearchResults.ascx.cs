@@ -77,8 +77,6 @@ namespace Profiles.Search.Modules.SearchResults
             string departmentallexcept = string.Empty;
             string exactphrase = string.Empty;
 
-            string division = string.Empty;
-            string divisionallexcept = string.Empty;
 
             string searchtype = "";
 
@@ -89,7 +87,11 @@ namespace Profiles.Search.Modules.SearchResults
                 searchrequest = data.DecryptRequest(Request.QueryString["searchrequest"]);
                 xmlsearchrequest.LoadXml(searchrequest);
             }
-
+            else if (string.IsNullOrEmpty(base.MasterPage.SearchRequest) == false)
+            {
+                searchrequest = data.DecryptRequest(base.MasterPage.SearchRequest);
+                xmlsearchrequest.LoadXml(searchrequest);
+            }
             
 
             if (String.IsNullOrEmpty(Request.QueryString["searchtype"])==false)
@@ -99,7 +101,6 @@ namespace Profiles.Search.Modules.SearchResults
             else if (String.IsNullOrEmpty(Request.Form["searchtype"])==false)
             {
                 searchtype = Request.Form["searchtype"];
-
             }
 
 
@@ -110,7 +111,6 @@ namespace Profiles.Search.Modules.SearchResults
             else if(String.IsNullOrEmpty(Request.Form["txtSearchFor"])==false)
             {
                 searchfor = Request.Form["txtSearchFor"];
-
             }
             else if (xmlsearchrequest.ChildNodes.Count > 0)
             {
@@ -238,9 +238,6 @@ namespace Profiles.Search.Modules.SearchResults
             if (String.IsNullOrEmpty(Request.QueryString["showcolumns"])==false)
             {
                 showcolumns = Convert.ToInt16(Request.QueryString["showcolumns"]);
-				if (!(showcolumns > 0))				
-					showcolumns = 1;
-				
             }
             else
             {
@@ -248,12 +245,16 @@ namespace Profiles.Search.Modules.SearchResults
             }
 
 
-
             if (String.IsNullOrEmpty(Request.QueryString["otherfilters"])==false)
             {
                 otherfilters = Request.QueryString["otherfilters"];
 
             }
+
+
+
+
+
 
             if (String.IsNullOrEmpty(Request.QueryString["institutionallexcept"])==false)
             {
@@ -276,16 +277,6 @@ namespace Profiles.Search.Modules.SearchResults
             }
 
 
-            if (String.IsNullOrEmpty(Request.QueryString["division"])==false)
-            {
-                division = Request.QueryString["division"];
-            }
-            
-            if (String.IsNullOrEmpty(Request.QueryString["divisionallexcept"])==false)
-            {
-                divisionallexcept = Request.QueryString["divisionallexcept"];
-            }
-
             try
             {
 
@@ -306,24 +297,43 @@ namespace Profiles.Search.Modules.SearchResults
 
                 startrecord = ((Convert.ToInt32(page) * Convert.ToInt32(perpage)) + 1) - Convert.ToInt32(perpage);
 
+                if (startrecord < 0)
+                    startrecord = 1;
+
                 if(searchrequest.Trim() != string.Empty)
                 searchrequest = data.EncryptRequest(searchrequest);
 
+                List<GenericListItem> g = new List<GenericListItem>();
+                g = data.GetListOfFilters();
+
+                if (otherfilters.IsNullOrEmpty() && base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/vivo:overview/SearchOptions/MatchOptions/SearchFiltersList/SearchFilter[@Property='http://profiles.catalyst.harvard.edu/ontology/prns#hasPersonFilter']", base.Namespaces) !=null)
+                {
+                    string s = string.Empty;
+
+                    foreach (XmlNode x in base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/vivo:overview/SearchOptions/MatchOptions/SearchFiltersList/SearchFilter[@Property='http://profiles.catalyst.harvard.edu/ontology/prns#hasPersonFilter']", base.Namespaces))
+                    {
+                        s = data.GetConvertedURIListItem(g, x.InnerText);
+                        otherfilters += "," + s;
+                    }
+                }
 
                 switch (searchtype.ToLower())
                 {
-                    case "everything":
-                       
-                            xmlsearchrequest = data.SearchRequest(searchfor, classgroupuri, classuri, perpage.ToString(), (startrecord - 1).ToString());
+                    case "everything":                       
+                            xmlsearchrequest = data.SearchRequest(searchfor,exactphrase, classgroupuri, classuri, perpage.ToString(), (startrecord - 1).ToString());
                         break;
+
                     default:                       
-                            xmlsearchrequest = data.SearchRequest(searchfor, exactphrase, fname, lname, institution, institutionallexcept, department, departmentallexcept, division, divisionallexcept, "http://xmlns.com/foaf/0.1/Person", perpage.ToString(), (startrecord - 1).ToString(), sort, sortdirection, otherfilters, ref searchrequest);                    
+                            xmlsearchrequest = data.SearchRequest(searchfor, exactphrase, fname, lname, institution, institutionallexcept, department, departmentallexcept,  "http://xmlns.com/foaf/0.1/Person", perpage.ToString(), (startrecord - 1).ToString(), sort, sortdirection, otherfilters, "",ref searchrequest);                    
                         break;
                 }
 
                 this.SearchData = data.Search(xmlsearchrequest,false);
-
                 this.SearchRequest = data.EncryptRequest(xmlsearchrequest.OuterXml);
+                base.MasterPage.SearchRequest = this.SearchRequest;
+                base.MasterPage.RDFData = this.SearchData;
+                base.MasterPage.RDFNamespaces = this.Namespaces;
+
             }
             catch (Exception ex)
             {
@@ -353,7 +363,6 @@ namespace Profiles.Search.Modules.SearchResults
 
                     args.AddParam("showcolumns", "", showcolumns.ToString());
 
-
                     if ((showcolumns & 1) == 1)
                     {
                         args.AddParam("institution", "", "true");
@@ -372,15 +381,7 @@ namespace Profiles.Search.Modules.SearchResults
                         args.AddParam("department", "", "false");
                     }
 
-                    if ((showcolumns & 4) == 4)
-                    {
-                        args.AddParam("division", "", "true");
-                    }
-                    else
-                    {
-                        args.AddParam("division", "", "false");
-                    }
-
+                  
 
                     if ((showcolumns & 8) == 8)
                     {
@@ -413,19 +414,9 @@ namespace Profiles.Search.Modules.SearchResults
                     {
                         args.AddParam("ShowDepartments", "", "false");
                     }
-
-                    if (Convert.ToBoolean(ConfigurationSettings.AppSettings["ShowDivisions"]) == true)
-                    {
-                        args.AddParam("ShowDivisions", "", "true");
-                    }
-                    else
-                    {
-                        args.AddParam("ShowDivisions", "", "false");
-                    }
-
+                 
                     //Faculty Rank always shows
                     args.AddParam("ShowFacRank", "", "true");
-
 
                     args.AddParam("currentsort", "", sort);
                     args.AddParam("currentsortdirection", "", sortdirection);
@@ -435,7 +426,7 @@ namespace Profiles.Search.Modules.SearchResults
                     else
                         args.AddParam("why", "", false);
 
-                    litEverythingResults.Text = XslHelper.TransformInMemory(Server.MapPath("~/Search/Modules/SearchResults/PeopleResults.xslt"), args, this.SearchData.OuterXml);
+                    litEverythingResults.Text = HttpUtility.HtmlDecode( XslHelper.TransformInMemory(Server.MapPath("~/Search/Modules/SearchResults/PeopleResults.xslt"), args, this.SearchData.OuterXml));
                     break;
             }
         }

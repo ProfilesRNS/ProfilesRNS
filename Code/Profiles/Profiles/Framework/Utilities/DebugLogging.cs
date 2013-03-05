@@ -11,46 +11,65 @@ namespace Profiles.Framework.Utilities
     public static class DebugLogging
     {
 
+
+
         public static void Log(string msg)
         {
             //Each error that occurs will trigger this event.
             try
             {
+                string path = string.Empty;
+
+
                 if (Convert.ToBoolean(ConfigurationSettings.AppSettings["DEBUG"]) == true)
                 {
-                    using (StreamWriter w = File.AppendText(ConfigurationSettings.AppSettings["DEBUG_PATH"]))
+                    if (ConfigurationSettings.AppSettings["DEBUG_PATH"] != null)
                     {
-                        // write a line of text to the file
-                        w.WriteLine("\t" + msg.Trim() + " " + DateTime.Now.ToLongTimeString());
-                        w.Close();
+                        path = ConfigurationSettings.AppSettings["DEBUG_PATH"];
+
+                        using (StreamWriter w = File.AppendText(path))
+                        {
+                            // write a line of text to the file
+                            w.WriteLine("\t" + msg.Trim() + " " + DateTime.Now.ToLongTimeString());
+                            w.Close();
+                        }
                     }
+
                 }
             }
             catch (Exception ex)
-            {               
-               
+            {
+
             }
 
         }
-        public static void Log(string msg,RDFTriple triple)
+        public static void Log(string msg, RDFTriple triple)
         {
             //Each error that occurs will trigger this event.
             try
             {
+                string path = string.Empty;
+
                 if (Convert.ToBoolean(ConfigurationSettings.AppSettings["DEBUG"]) == true)
                 {
-                    using (StreamWriter w = File.AppendText(AppDomain.CurrentDomain.BaseDirectory + "/ProfilesDebuggingLog.txt"))
+                    if (ConfigurationSettings.AppSettings["DEBUG_PATH"] != null)
                     {
-                        if (triple.Subject == 0) {
-                            // write a line of text to the file
-                            w.WriteLine("URI= " + triple.URI + "==>" + msg.Trim() + " at= " + DateTime.Now.ToLongTimeString());
-                        }
-                        else
+                        path = ConfigurationSettings.AppSettings["DEBUG_PATH"];
+
+                        using (StreamWriter w = File.AppendText(path))
                         {
-                            // write a line of text to the file
-                            w.WriteLine("SPO= " + triple.Subject.ToString() + " " + triple.Predicate.ToString() + " " + triple.Object.ToString() + "==>" + msg.Trim() + " at= " + DateTime.Now.ToLongTimeString());
+                            if (triple.Subject == 0)
+                            {
+                                // write a line of text to the file
+                                w.WriteLine("URI= " + triple.URI + "==>" + msg.Trim() + " at= " + DateTime.Now.ToLongTimeString());
+                            }
+                            else
+                            {
+                                // write a line of text to the file
+                                w.WriteLine("SPO= " + triple.Subject.ToString() + " " + triple.Predicate.ToString() + " " + triple.Object.ToString() + "==>" + msg.Trim() + " at= " + DateTime.Now.ToLongTimeString());
+                            }
+                            w.Close();
                         }
-                        w.Close();
                     }
                 }
             }

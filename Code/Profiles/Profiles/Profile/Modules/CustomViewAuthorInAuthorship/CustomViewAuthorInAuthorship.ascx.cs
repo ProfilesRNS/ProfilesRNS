@@ -34,18 +34,17 @@ namespace Profiles.Profile.Modules
         }
         private void DrawProfilesModule()
         {
-            
+
+
+            DateTime d = DateTime.Now;
             Profiles.Profile.Utilities.DataIO data = new Profiles.Profile.Utilities.DataIO();
             List<Publication> publication = new List<Publication>();
-
 
             SqlDataReader reader = data.GetPublications(base.RDFTriple);
 
             while (reader.Read())
             {
-
                 publication.Add(new Publication(reader["bibo_pmid"].ToString(), reader["prns_informationResourceReference"].ToString()));
-
             }
 
             rpPublication.DataSource = publication;
@@ -62,11 +61,21 @@ namespace Profiles.Profile.Modules
 					timelineBar.Src = reader["gc"].ToString();
 				}
 				reader.Close();           
+
+               
            }
-		   
+
+           if (timelineBar.Src == "")
+           {
+               timelineBar.Visible = false;
+           }
+
+
 		   // Login link
-		  loginLiteral.Text = String.Format("<a href='{0}'>login</a>", Root.Domain + "/login/default.aspx?method=login&edit=true");
-		   
+		  loginLiteral.Text = String.Format("<a href='{0}'>login</a>", Root.Domain + "/login/default.aspx?pin=send&method=login&edit=true");
+
+          Framework.Utilities.DebugLogging.Log("PUBLICATION MODULE end Milliseconds:" + (DateTime.Now - d).TotalSeconds);
+
         }
 
         protected void rpPublication_OnDataBound(object sender, RepeaterItemEventArgs  e)
@@ -81,7 +90,7 @@ namespace Profiles.Profile.Modules
                 lblPublication.Text = pub.prns_informaitonResourceReference;
                 if (pub.bibo_pmid != string.Empty && pub.bibo_pmid != null)
                 {
-                    litViewIn.Text = "View in: <a href='http://www.ncbi.nlm.nih.gov/pubmed/" + pub.bibo_pmid + "' target='_blank'>PubMed</a>";
+                    litViewIn.Text = "View in: <a href='//www.ncbi.nlm.nih.gov/pubmed/" + pub.bibo_pmid + "' target='_blank'>PubMed</a>";
 
                 }
             }

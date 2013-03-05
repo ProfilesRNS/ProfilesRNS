@@ -40,18 +40,53 @@ namespace Profiles.Profile.Modules.PassiveHeader
         public void DrawProfilesModule()
         {
 
-            string lname = string.Empty;
+            Framework.Utilities.DebugLogging.Log("Passive Header 1");
 
-            if (base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description/rdf:subject/@rdf:resource]/foaf:lastName", base.Namespaces) != null)
+            this.GetDataByURI();
+
+            Framework.Utilities.DebugLogging.Log("Passive Header 2");
+
+            bool display = false;
+
+            if (base.GetModuleParamXml("DisplayRule") == null)
             {
-                lname = base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description/rdf:subject/@rdf:resource]/foaf:lastName", base.Namespaces).InnerText;
+                display = true;
             }
             else
             {
-                lname = base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/foaf:lastName", base.Namespaces).InnerText;
+                foreach (XmlNode x in base.GetModuleParamXml("DisplayRule"))
+                {
+
+                    if (base.BaseData.SelectSingleNode(x.InnerText, base.Namespaces) != null)
+                    {
+                        display = !display;
+                    }
+
+                }
             }
 
-            litLname.Text = lname;           
+            if (display)
+            {
+                string lname = string.Empty;
+
+                if (base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description/rdf:subject/@rdf:resource]/foaf:lastName", base.Namespaces) != null)
+                {
+                    lname = base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description/rdf:subject/@rdf:resource]/foaf:lastName", base.Namespaces).InnerText;
+                }
+                else
+                {
+                    lname = base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/foaf:lastName", base.Namespaces).InnerText;
+                }
+
+                litLname.Text = lname;
+
+            }
+            else
+            {
+                this.Visible = false;
+
+            }
+
 
 
         }

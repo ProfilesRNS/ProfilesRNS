@@ -9,10 +9,18 @@
 //------------------------------------------------------------------------------
 
 namespace Profiles.Profile.Modules {
-
-
-	public partial class CustomViewConceptTopJournal
-	{
+    
+    
+    public partial class CustomViewConceptTopJournal {
+        
+        /// <summary>
+        /// sectionTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sectionTitle;
         
         /// <summary>
         /// imgQuestion control.

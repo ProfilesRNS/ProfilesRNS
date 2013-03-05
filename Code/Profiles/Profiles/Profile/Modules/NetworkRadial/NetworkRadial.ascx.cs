@@ -57,13 +57,13 @@ namespace Profiles.Profile.Modules.NetworkRadial
 
             divSwfScript.InnerHtml = "<script language=\"JavaScript\" type=\"text/javascript\"> " +
                "AC_FL_RunContent(" +
-               "'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0'," +
+               "'codebase', '//download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0'," +
                "'width', '600'," +
                "'height', '600'," +
                "'src', '" + Root.Domain + "/profile/Modules/NetworkRadial/network_browser.swf'," +
                "'movie', '" + Root.Domain + "/profile/Modules/NetworkRadial/network_browser'," +
                "'quality', 'high'," +
-               "'pluginspage', 'http://www.adobe.com/go/getflashplayer'," +
+               "'pluginspage', '//www.adobe.com/go/getflashplayer'," +
                "'align', 'middle'," +
                "'play', 'true'," +
                "'loop', 'true'," +

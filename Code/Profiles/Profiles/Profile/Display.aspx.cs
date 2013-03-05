@@ -31,26 +31,35 @@ namespace Profiles.Profile
 
         public void Page_Load(object sender, EventArgs e)
         {
+            UserHistory uh = new UserHistory();
+
             masterpage = (Framework.Template)base.Master;
             this.Master = masterpage;
 
             this.LoadAssets();
-            
+
             this.LoadPresentationXML();
 
             XmlNode x = this.PresentationXML.SelectSingleNode("Presentation[1]/ExpandRDFList[1]");
 
             if (x != null)
                 base.RDFTriple.ExpandRDFList = x.OuterXml;
+            
+            if (base.RDFTriple.Subject != 0 && base.RDFTriple.Predicate != 0 && base.RDFTriple.Object == 0)
+                base.RDFTriple.Limit = "1";
 
             base.LoadRDFData();
+
+            Framework.Utilities.DebugLogging.Log("Page_Load Profile 1: " + DateTime.Now.ToLongTimeString());
 
             masterpage.Tab = base.Tab;
             masterpage.RDFData = base.RDFData;
             masterpage.RDFNamespaces = base.RDFNamespaces;
             masterpage.PresentationXML = this.PresentationXML;
+            Framework.Utilities.DebugLogging.Log("Page_Load Profile 2: " + DateTime.Now.ToLongTimeString());
 
         }
+
 
         private void LoadAssets()
         {
@@ -65,7 +74,7 @@ namespace Profiles.Profile
 
         public void LoadPresentationXML()
         {
-            Profiles.Profile.Utilities.DataIO data = new Profiles.Profile.Utilities.DataIO();            
+            Profiles.Profile.Utilities.DataIO data = new Profiles.Profile.Utilities.DataIO();
             this.PresentationXML = data.GetPresentationData(this.RDFTriple);
         }
 

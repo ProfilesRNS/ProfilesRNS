@@ -23,7 +23,7 @@ namespace Profiles.Proxy.Modules.ManageProxies
         protected void Page_Load(object sender, EventArgs e)
         {
             sm = new SessionManagement();
-            
+
             DrawProfilesModule();
         }
 
@@ -53,9 +53,9 @@ namespace Profiles.Proxy.Modules.ManageProxies
 
             while (reader.Read())
             {
+
                 proxies.Add(new Proxy(reader["UserID"].ToString(), reader["DisplayName"].ToString(), reader["PersonURI"].ToString(), reader["Institution"].ToString()
-                    , reader["Department"].ToString(), ""
-                    , reader["EmailAddr"].ToString(), Convert.ToBoolean(reader["CanDelete"])));
+                    , reader["Department"].ToString(), reader["EmailAddr"].ToString(), Convert.ToBoolean(reader["CanDelete"])));
             }
             reader.Close();
 
@@ -68,8 +68,9 @@ namespace Profiles.Proxy.Modules.ManageProxies
 
             while (reader.Read())
             {
+
                 proxies.Add(new Proxy(reader["DisplayName"].ToString(), reader["PersonURI"].ToString(), reader["Institution"].ToString()
-                    , "", "", reader["EmailAddr"].ToString()));
+                    , "", reader["EmailAddr"].ToString()));
             }
             reader.Close();
 
@@ -80,8 +81,8 @@ namespace Profiles.Proxy.Modules.ManageProxies
             proxies = null;
             proxies = new List<Proxy>();
             reader = data.ManageProxies("GetDefaultUsersWhoseNodesICanEdit");
-            string yorn = string.Empty;
-
+            string yorn = string.Empty;           
+            
             while (reader.Read())
             {
                 if (Convert.ToBoolean(reader["isVisible"]))
@@ -90,7 +91,7 @@ namespace Profiles.Proxy.Modules.ManageProxies
                     yorn = "N";
 
                 proxies.Add(new Proxy(reader["Institution"].ToString()
-                    , reader["Department"].ToString(), reader["Division"].ToString(), yorn));
+                    , reader["Department"].ToString(), yorn));
             }
 
             gvYouCanEdit.DataSource = proxies;
@@ -98,18 +99,22 @@ namespace Profiles.Proxy.Modules.ManageProxies
             gvYouCanEdit.CellPadding = 2;
             reader.Close();
 
-            string url = Root.Domain + "/proxy/default.aspx?method=search&subject=" + HttpContext.Current.Request.QueryString["subject"];
-            lnkAddProxyTmp.Text = "<a href='" + url + "'>Add A Proxy</a>";
+            if (sm.Session().NodeID > 0)
+            {
+                pnlAddProxy.Visible = true;
+                string url = Root.Domain + "/proxy/default.aspx?method=search&subject=" + HttpContext.Current.Request.QueryString["subject"];
+                lnkAddProxyTmp.Text = "<a href='" + url + "'>Add A Proxy</a>";
+            }
 
-        }    
+        }
 
         protected void lnkDelete_OnClick(object sender, EventArgs e)
         {
             ImageButton lb = (ImageButton)sender;
 
             Utilities.DataIO data = new Profiles.Proxy.Utilities.DataIO();
-            data.DeleteProxy(lb.CommandArgument);         
-            
+            data.DeleteProxy(lb.CommandArgument);
+
 
             DrawProfilesModule();
 
@@ -166,19 +171,12 @@ namespace Profiles.Proxy.Modules.ManageProxies
                 else
                     litName.Text = proxy.Name;
 
-
                 if (proxy.Email != null)
                     litEmail.Text = "<a href='mailto:" + proxy.Email + "'>" + proxy.Email + "</a>";
                 else
                     litEmail.Visible = false;
-
-
-
             }
         }
-
-
-
         protected void gvYouCanEdit_OnRowDataBound(object sender, GridViewRowEventArgs e)
         {
             //nothing.
@@ -187,71 +185,51 @@ namespace Profiles.Proxy.Modules.ManageProxies
                 e.Row.Cells[0].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Cells[1].HorizontalAlign = HorizontalAlign.Center;
                 e.Row.Cells[2].HorizontalAlign = HorizontalAlign.Center;
-                e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Center;
-
-
+                // e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Center;
             }
-
-
-
-
-
         }
-
-
-
-
+        public string GetURLDomain()
+        {
+            return Root.Domain;
+        }
         class Proxy
         {
-            public Proxy(string userid, string name, string personuri, string institution, string department, string division, string email, bool candelete)
+            public Proxy(string userid, string name, string personuri, string institution, string department, string email, bool candelete)
             {
                 this.UserID = userid;
                 this.Name = name;
                 this.PersonURI = personuri;
                 this.Institution = institution;
-                this.Division = division;
                 this.Department = department;
                 this.Email = email;
                 this.CanDelete = candelete;
-
-
             }
 
-            public Proxy(string name, string personuri, string institution, string department, string division, string email)
+            public Proxy(string name, string personuri, string institution, string department, string email)
             {
                 this.Name = name;
                 this.Institution = institution;
-                this.Division = division;
                 this.Department = department;
                 this.Email = email;
                 this.PersonURI = personuri;
-
             }
 
-            public Proxy(string institution, string department, string division, string visible)
+            public Proxy(string institution, string department, string visible)
             {
                 this.Institution = institution;
-                this.Division = division;
                 this.Department = department;
                 this.Visible = visible;
             }
-
 
             public string UserID { get; set; }
             public string Name { get; set; }
             public string Institution { get; set; }
             public string Department { get; set; }
-            public string Division { get; set; }
             public string Email { get; set; }
             public string PersonURI { get; set; }
             public bool CanDelete { get; set; }
             public string Visible { get; set; }
-
-
         }
-
-
-
 
     }
 }

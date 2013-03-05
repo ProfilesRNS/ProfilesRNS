@@ -46,9 +46,8 @@ namespace Profiles.Edit.Modules.CustomEditMailingAddress
             SessionManagement sm = new SessionManagement();
             base.BaseData  = pagedata;
 
-            data = new Edit.Utilities.DataIO();
-
-
+            Profiles.Profile.Utilities.DataIO propdata = new Profiles.Profile.Utilities.DataIO();
+            data = new Profiles.Edit.Utilities.DataIO();
             if (Request.QueryString["subject"] != null)
                 this.SubjectID = Convert.ToInt64(Request.QueryString["subject"]);
             else if (base.GetRawQueryStringItem("subject") != null)
@@ -57,7 +56,7 @@ namespace Profiles.Edit.Modules.CustomEditMailingAddress
                 Response.Redirect("~/search");
 
             string predicateuri = Request.QueryString["predicateuri"].Replace("!", "#");
-            this.PropertyListXML = data.GetPropertyList(this.BaseData, base.PresentationXML, predicateuri, false, true, false);
+            this.PropertyListXML = propdata.GetPropertyList(this.BaseData, base.PresentationXML, predicateuri, false, true, false);
             litBackLink.Text = "<a href='" + Root.Domain + "/edit/" + this.SubjectID.ToString() + "'>Edit Menu</a> &gt; <b>" + PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@Label").Value + "</b>";
 
 

@@ -1,0 +1,36 @@
+﻿<Presentation PresentationClass="profile">
+  <PageOptions Columns="2"/>
+  <WindowName>Logout</WindowName>
+  <PageTitle>Logout</PageTitle>
+  <PageBackLinkName></PageBackLinkName>
+  <PageBackLinkURL></PageBackLinkURL>
+  <PageSubTitle></PageSubTitle>
+  <PageDescription></PageDescription>
+  <PanelList>
+    <Panel Type="header"  />
+    <Panel Type="page" />
+    <Panel Type="active">
+      <Module ID="MiniSearch"  />
+      <Module ID="MainMenu">
+      </Module>
+    </Panel>
+    <Panel Type="main" >
+      <Module ID="HTMLBlock">
+        <ParamList>
+          <Param ID="HTML">
+            <iframe  id="iLogout" src="https://login.pin1.harvard.edu/pin/logout"   frameborder="0" marginheight="0" marginwidth="0" scrolling="no" height="0" width="0" onload="JavaScrit:document.location='[[[Root]]]/search'"></iframe>
+            <table style="margin:auto">
+              <tr>
+                <td>
+                  <b>...logging out of Profiles.  Please wait.</b>
+                </td>
+              </tr>
+            </table>            
+          </Param>
+        </ParamList>
+      </Module>
+    </Panel>
+    <Panel Type="footer" />
+  </PanelList>
+</Presentation>
+

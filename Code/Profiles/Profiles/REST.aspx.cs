@@ -140,30 +140,6 @@ namespace Profiles
             }
             else { }
 
-            Framework.Utilities.DebugLogging.Log("Debug REST URL PARAMETERS ---------------------------- ");
-            Framework.Utilities.DebugLogging.Log("Param0: " + param0);
-
-            if (param1 != string.Empty)
-                Framework.Utilities.DebugLogging.Log("Param1: " + param1);
-            if (param2 != string.Empty)
-                Framework.Utilities.DebugLogging.Log("Param2: " + param2);
-            if (param3 != string.Empty)
-                Framework.Utilities.DebugLogging.Log("Param3: " + param3);
-            if (param4 != string.Empty)
-                Framework.Utilities.DebugLogging.Log("Param4: " + param4);
-            if (param5 != string.Empty)
-                Framework.Utilities.DebugLogging.Log("Param5: " + param5);
-            if (param6 != string.Empty)
-                Framework.Utilities.DebugLogging.Log("Param6: " + param6);
-            if (param7 != string.Empty)
-                Framework.Utilities.DebugLogging.Log("Param7: " + param7);
-            if (param8 != string.Empty)
-                Framework.Utilities.DebugLogging.Log("Param8: " + param8);
-            if (param9 != string.Empty)
-                Framework.Utilities.DebugLogging.Log("Param9: " + param9);
-
-            Framework.Utilities.DebugLogging.Log("Domain: " + Root.Domain);
-
             DataIO data = new DataIO();
 
             //Alias.aspx is the hub for maintaining session state. With the exception of a log in Function.  

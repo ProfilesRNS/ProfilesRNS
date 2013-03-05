@@ -31,6 +31,9 @@ namespace Connects.Profiles.Service.ServiceImplementation
         public Connects.Profiles.Service.DataContracts.PersonList ProfileSearch(Connects.Profiles.Service.DataContracts.Profiles qd, bool isSecure)
         {
             Connects.Profiles.Service.DataContracts.PersonList pl = null;
+            string req = string.Empty;
+            string responseXML = string.Empty;
+
             try
             {
                 DataIO ps = new DataIO();
@@ -38,12 +41,12 @@ namespace Connects.Profiles.Service.ServiceImplementation
                 Utility.Namespace namespacemgr = new Connects.Profiles.Utility.Namespace();
                 XmlNamespaceManager namespaces;
 
-                string responseXML;
 
                 Connects.Profiles.Service.DataContracts.Profiles p = new Connects.Profiles.Service.DataContracts.Profiles();
 
-                string req = Connects.Profiles.Utility.XmlUtilities.SerializeToString(qd);
+                req = Connects.Profiles.Utility.XmlUtilities.SerializeToString(qd);
 
+                DebugLogging.Log("+++++++++ REQUEST=" + req);
 
                 Type type = typeof(Connects.Profiles.Service.DataContracts.PersonList);
 
@@ -51,32 +54,51 @@ namespace Connects.Profiles.Service.ServiceImplementation
 
                 namespaces = namespacemgr.LoadNamespaces(searchrequest);
 
-                if (qd.QueryDefinition.PersonID!=null)
+                if (qd.QueryDefinition.PersonID != null)
                 {
-                    responseXML = ps.Search(qd.QueryDefinition.PersonID).OuterXml;                    
+                    responseXML = ps.Search(qd.QueryDefinition.PersonID).OuterXml;
                 }
                 else
                 {
-                    responseXML = ps.Search(searchrequest,isSecure).OuterXml;
+                    responseXML = ps.Search(searchrequest, isSecure).OuterXml;
                 }
 
                 string queryid = string.Empty;
-                string version = string.Empty;
-                bool individual = false;
-                
                 queryid = qd.QueryDefinition.QueryID;
-                version = qd.Version.ToString();                   
 
-                if (qd.QueryDefinition.PersonID != null)
-                    individual = true;
 
-                responseXML = ps.ConvertV2ToBetaSearch(responseXML, queryid, version, individual);
+                if (responseXML == string.Empty)
+                {
+                    if (queryid == null)
+                        queryid = Guid.NewGuid().ToString();
 
+
+                    responseXML = "<PersonList Complete=\"true\" ThisCount=\"0\" TotalCount=\"0\" QueryID=\"" + queryid + "\" xmlns=\"http://connects.profiles.schema/profiles/personlist\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" />";
+
+                }
+                else
+                {
+
+                    string version = string.Empty;
+                    bool individual = false;
+
+
+                    version = qd.Version.ToString();
+
+                    if (qd.QueryDefinition.PersonID != null || qd.QueryDefinition.InternalIDList != null)
+                        individual = true;
+
+                    responseXML = ps.ConvertV2ToBetaSearch(responseXML, queryid, version, individual);
+                }
+
+                DebugLogging.Log("+++++++++ DONE WITH Convert V2 to Beta Search");
                 pl = Connects.Profiles.Utility.XmlUtilities.DeserializeObject(responseXML, type) as Connects.Profiles.Service.DataContracts.PersonList;
+                DebugLogging.Log("+++++++++ Returned + a total count of = " + pl.TotalCount);
 
             }
             catch (Exception ex)
             {
+                DebugLogging.Log(req + " " + responseXML);
                 DebugLogging.Log("ERROR==> " + ex.Message + " STACK:" + ex.StackTrace + " SOURCE:" + ex.Source);
             }
 
@@ -92,10 +114,17 @@ namespace Connects.Profiles.Service.ServiceImplementation
             string exactphrase = string.Empty;
             string fname = string.Empty;
             string lname = string.Empty;
+
+            string ecomid = string.Empty;
+            string personid = string.Empty;
+            string harvardid = string.Empty;
+
             string institution = string.Empty;
             string institutionallexcept = string.Empty;
             string department = string.Empty;
             string departmentallexcept = string.Empty;
+            string facultyrank = string.Empty;
+
             string division = string.Empty;
             string divisionallexcept = string.Empty;
             string classuri = "http://xmlns.com/foaf/0.1/Person";
@@ -112,6 +141,18 @@ namespace Connects.Profiles.Service.ServiceImplementation
             req = req.Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>", "");
             req = req.Replace("xmlns=\"http://connects.profiles.schema/profiles/query\"", "");
             request.LoadXml(req);
+
+
+
+
+            if (request.SelectSingleNode("//Profiles/QueryDefinition/PersonID") != null)
+                personid = request.SelectSingleNode("//Profiles/QueryDefinition/PersonID").InnerText;
+
+            if (request.SelectSingleNode("//Profiles/QueryDefinition/InternalIDList/InternalID[@Name = 'EcommonsUsername']") != null)
+                ecomid = request.SelectSingleNode("//Profiles/QueryDefinition/InternalIDList/InternalID[@Name = 'EcommonsUsername']").InnerText;
+
+            if (request.SelectSingleNode("//Profiles/QueryDefinition/InternalIDList/InternalID[@Name = 'HarvardID']") != null)
+                harvardid = request.SelectSingleNode("//Profiles/QueryDefinition/InternalIDList/InternalID[@Name = 'HarvardID']").InnerText;
 
 
             if (request.SelectSingleNode("//Profiles/QueryDefinition/Keywords/KeywordString") != null)
@@ -171,7 +212,7 @@ namespace Connects.Profiles.Service.ServiceImplementation
             DataIO data = new DataIO();
 
             newrequest = data.SearchRequest(searchstring, exactphrase, fname, lname, institution, institutionallexcept, department, departmentallexcept,
-                 division, divisionallexcept, classuri, limit.ToString(), offset.ToString(), sortby, sortdirection, otherfilters);
+                 division, divisionallexcept, classuri, limit.ToString(), offset.ToString(), sortby, sortdirection, otherfilters, personid, ecomid, harvardid);
 
 
             return newrequest.InnerXml;

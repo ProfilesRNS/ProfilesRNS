@@ -13,7 +13,7 @@
     var _lname = '';
     var _department = '';
     var _institution = '';
-    var _division = '';
+    
 
 
     function GotoNextPage() {
@@ -37,10 +37,12 @@
         NavToPage();
     }
     function NavToPage() {
+
+        
         
         window.location = _root + '/proxy/default.aspx?method=search&currentpage=' + _page +
                 '&totalrows=' + _totalrows + '&offset=' + _offset + '&totalpages=' + _totalpages + '&subject=' + _subject +
-                '&fname=' + _fname + '&lname=' + _lname + '&institution=' + _institution + '&department=' + _department + '&division=' + _division;
+                '&fname=' + _fname + '&lname=' + _lname + '&institution=' + _institution + '&department=' + _department;
     }
     
 
@@ -55,7 +57,7 @@
 <div id="divStatus" style="position: fixed; text-align: center; height: 100%; width: 100%; top: 0;
     right: 0; left: 0; z-index: 9999999; opacity: 0.7;display:none">
     <span style="border-width: 0px; position: fixed; padding: 50px; background-color: #FFFFFF;
-        font-size: 36px; left: 40%; top: 40%;">Loading ...</span>
+        font-size: 36px; left: 40%; top: 40%;"><img alt="Loading..." src="<%=GetURLDomain()%>/Edit/Images/loader.gif" /></span>
 </div>
 <div class="pageTitle">
     <asp:Literal runat="server" ID="litBackLink"></asp:Literal>
@@ -69,7 +71,7 @@ by your department or institution. You also have the option of designation your
 own proxies.
 <br />
 <div style="margin-top: 10px;">
-    <asp:Panel ID="pnlProxySearch" runat="server" DefaultButton="btnProxySearch">
+    <asp:Panel ID="pnlProxySearch" runat="server">
         <div class="content_container">
             <div class="tabContainer" style="margin-top: 0px;">
                 <div class="searchForm">
@@ -106,15 +108,7 @@ own proxies.
                                 <td>
                                     <asp:DropDownList ID="drpDepartment" runat="server" Width="255px" AutoPostBack="false" />
                                 </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    Division
-                                </th>
-                                <td>
-                                    <asp:DropDownList ID="drpDivision" runat="server" Width="255px" AutoPostBack="false" />
-                                </td>
-                            </tr>
+                            </tr>                           
                             <tr>
                                 <th>
                                 </th>
@@ -150,8 +144,8 @@ own proxies.
                                 <td width="25%" align="left">
                                     <asp:Literal ID="litFirst" runat="server"></asp:Literal>
                                 </td>
-                                <td width="75%">
-                                    &nbsp;
+                                <td width="75%" align="center">
+                                    <asp:Literal ID="litPage" runat="server"></asp:Literal>
                                 </td>
                                 <td width="25%" align="right">
                                     <asp:Literal ID="litLast" runat="server"></asp:Literal>

@@ -49,6 +49,8 @@ namespace Profiles.Proxy
             this.LoadPresentationXML(method);
             this.LoadAssets();
             BaseModule bm = new BaseModule();
+
+            //the subject id should be passed in by query string var.
             XmlNamespaceManager xnm;
             Framework.Utilities.Namespace name = new Namespace();
             bm.GetSubjectProfile();
@@ -66,7 +68,6 @@ namespace Profiles.Proxy
 
             switch (method.ToLower().Trim())
             {
-
                 case "search":
                     presentationxml = System.IO.File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "\\Proxy\\PresentationXML\\SearchProxies.xml");
                     break;

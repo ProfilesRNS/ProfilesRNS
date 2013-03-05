@@ -1,0 +1,58 @@
+<publishData>
+  <publishTarget publishUrl="\\itwwebhstg\inetpub$\Appscommon\Catalyst\Staging\HCProfiles\PublicAPI\ProfilesSearchAPI\">
+    <file relUrl="ProfilesSearchAPI.svc" publishTime="09/28/2012 12:10:57" />
+    <file relUrl="bin/Search.pdb" publishTime="02/11/2013 07:00:38" />
+    <file relUrl="bin/Microsoft.ServiceModel.Web.dll" publishTime="07/28/2010 13:05:58" />
+    <file relUrl="Web.config" publishTime="12/13/2012 09:31:43" />
+    <file relUrl="bin/Search.dll" publishTime="02/11/2013 07:00:38" />
+  </publishTarget>
+  <publishTarget publishUrl="\\itwwebhstg\inetpub$\Appscommon\Catalyst\Staging\HCProfiles\PrivateAPI\ProfilesSearchAPI\">
+    <file relUrl="ProfilesSearchAPI.svc" publishTime="09/28/2012 12:10:57" />
+    <file relUrl="bin/Search.pdb" publishTime="02/11/2013 07:00:38" />
+    <file relUrl="bin/Microsoft.ServiceModel.Web.dll" publishTime="07/28/2010 13:05:58" />
+    <file relUrl="Web.config" publishTime="12/13/2012 09:31:43" />
+    <file relUrl="bin/Search.dll" publishTime="02/11/2013 07:00:38" />
+  </publishTarget>
+  <publishTarget publishUrl="\\itwwebhstg\inetpub$\Appscommon\Catalyst\Staging\HCProfilesTest\PrivateAPI\ProfilesSearchAPI\">
+    <file relUrl="ProfilesSearchAPI.svc" publishTime="09/28/2012 12:10:57" />
+    <file relUrl="bin/Search.pdb" publishTime="12/05/2012 13:26:29" />
+    <file relUrl="bin/Microsoft.ServiceModel.Web.dll" publishTime="07/28/2010 13:05:58" />
+    <file relUrl="Web.config" publishTime="12/13/2012 09:31:43" />
+    <file relUrl="bin/Search.dll" publishTime="12/05/2012 13:26:29" />
+  </publishTarget>
+  <publishTarget publishUrl="\\itwwebhstg\inetpub$\Appscommon\Catalyst\Staging\HCProfilesTest\PublicAPI\ProfilesSearchAPI\">
+    <file relUrl="ProfilesSearchAPI.svc" publishTime="09/28/2012 12:10:57" />
+    <file relUrl="bin/Search.pdb" publishTime="12/05/2012 13:26:29" />
+    <file relUrl="bin/Microsoft.ServiceModel.Web.dll" publishTime="07/28/2010 13:05:58" />
+    <file relUrl="bin/Search.dll" publishTime="12/05/2012 13:26:29" />
+    <file relUrl="Web.config" publishTime="12/13/2012 09:31:43" />
+  </publishTarget>
+  <publishTarget publishUrl="\\itwvwebhs01\inetpub$\Appscommon\Weber\HFFTest\PublicAPI\ProfilesSearchAPI\">
+    <file relUrl="ProfilesSearchAPI.svc" publishTime="07/25/2012 11:17:56" />
+    <file relUrl="bin/Search.pdb" publishTime="08/06/2012 13:55:16" />
+    <file relUrl="bin/Microsoft.ServiceModel.Web.dll" publishTime="07/28/2010 13:05:58" />
+    <file relUrl="bin/Search.dll" publishTime="08/06/2012 13:55:16" />
+    <file relUrl="Web.config" publishTime="08/06/2012 12:48:36" />
+  </publishTarget>
+  <publishTarget publishUrl="\\itwvwebhs01\inetpub$\Appscommon\Weber\HFFTest\PrivateAPI\ProfilesSearchAPI\">
+    <file relUrl="ProfilesSearchAPI.svc" publishTime="07/25/2012 11:17:56" />
+    <file relUrl="bin/Search.pdb" publishTime="08/06/2012 13:55:16" />
+    <file relUrl="bin/Microsoft.ServiceModel.Web.dll" publishTime="07/28/2010 13:05:58" />
+    <file relUrl="bin/Search.dll" publishTime="08/06/2012 13:55:16" />
+    <file relUrl="Web.config" publishTime="08/06/2012 12:48:36" />
+  </publishTarget>
+  <publishTarget publishUrl="\\itwvwebhs01\inetpub$\Appscommon\Weber\HFF\PrivateAPI\ProfilesSearchAPI\">
+    <file relUrl="ProfilesSearchAPI.svc" publishTime="07/25/2012 11:17:56" />
+    <file relUrl="bin/Search.pdb" publishTime="07/25/2012 11:43:24" />
+    <file relUrl="bin/Microsoft.ServiceModel.Web.dll" publishTime="07/28/2010 13:05:58" />
+    <file relUrl="bin/Search.dll" publishTime="07/25/2012 11:43:24" />
+    <file relUrl="Web.config" publishTime="07/25/2012 11:17:56" />
+  </publishTarget>
+  <publishTarget publishUrl="\\itwvwebhs01\inetpub$\Appscommon\Weber\HFF\PublicAPI\ProfilesSearchAPI\">
+    <file relUrl="ProfilesSearchAPI.svc" publishTime="07/25/2012 11:17:56" />
+    <file relUrl="bin/Search.pdb" publishTime="07/25/2012 11:43:24" />
+    <file relUrl="bin/Microsoft.ServiceModel.Web.dll" publishTime="07/28/2010 13:05:58" />
+    <file relUrl="bin/Search.dll" publishTime="07/25/2012 11:43:24" />
+    <file relUrl="Web.config" publishTime="07/25/2012 11:17:56" />
+  </publishTarget>
+</publishData>

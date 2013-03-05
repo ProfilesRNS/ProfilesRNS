@@ -24,7 +24,6 @@ namespace Profiles.Proxy.Utilities
     public class DataIO : Profiles.Framework.Utilities.DataIO
     {
 
-
         public void DeleteProxy(string userid)
         {
             SessionManagement sm = new SessionManagement();
@@ -123,14 +122,13 @@ namespace Profiles.Proxy.Utilities
             return dbreader;
         }
         public DataSet SearchProxies(string lastname, string firstname,
-            string institution,string department, string division,int offset,int limit)
+            string institution,string department,int offset,int limit)
         {
             DataSet ds = new DataSet();
             SqlDataAdapter da;
 
             try
             {
-
                 string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
                 SqlConnection dbconnection = new SqlConnection(connstr);
 
@@ -145,8 +143,7 @@ namespace Profiles.Proxy.Utilities
                 dbcommand.Parameters.Add(new SqlParameter("@LastName",lastname));
                 dbcommand.Parameters.Add(new SqlParameter("@FirstName", firstname));
                 dbcommand.Parameters.Add(new SqlParameter("@Institution", institution));
-                dbcommand.Parameters.Add(new SqlParameter("@Department", department));
-                dbcommand.Parameters.Add(new SqlParameter("@Division", division));
+                dbcommand.Parameters.Add(new SqlParameter("@Department", department));                
 
                 dbcommand.Parameters.Add(new SqlParameter("@offset", offset));
                 dbcommand.Parameters.Add(new SqlParameter("@limit", limit));
@@ -162,6 +159,97 @@ namespace Profiles.Proxy.Utilities
 
             return ds;
         }
+
+        public List<GenericListItem> GetInstitutions()
+        {
+            
+              SqlDataReader dbreader = null;
+            SessionManagement sm = new SessionManagement();
+            List<GenericListItem> institutions = new List<GenericListItem>();
+
+            try
+            {
+
+                string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+                SqlConnection dbconnection = new SqlConnection(connstr);
+
+                dbconnection.Open();
+
+                SqlCommand dbcommand = new SqlCommand();
+                dbcommand.CommandType = CommandType.Text;
+
+                dbcommand.CommandText = "select distinct institution,count(institution) as count from [User.Account].[User] where isnull(institution,'')<>'' and CanBeProxy = 1 group by institution order by institution";
+                dbcommand.CommandTimeout = base.GetCommandTimeout();                
+          
+                dbcommand.Connection = dbconnection;
+                dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
+
+                while (dbreader.Read())
+                    institutions.Add(new GenericListItem(dbreader["institution"].ToString() + " (" + dbreader["count"].ToString() + ")",dbreader["institution"].ToString()));
+
+                //Always close your readers
+                if (!dbreader.IsClosed)
+                    dbreader.Close();
+                
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return institutions;
+        }
+
+        public List<GenericListItem> GetDepartments()
+        {
+
+             
+              SqlDataReader dbreader = null;
+            SessionManagement sm = new SessionManagement();
+            List<GenericListItem> departments = new List<GenericListItem>();
+
+
+
+            try
+            {
+
+                string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+                SqlConnection dbconnection = new SqlConnection(connstr);
+
+                dbconnection.Open();
+
+                SqlCommand dbcommand = new SqlCommand();
+                dbcommand.CommandType = CommandType.Text;
+
+                dbcommand.CommandText = "select distinct department from [User.Account].[User] where isnull(department,'')<>'' and CanBeProxy = 1 order by department";
+                dbcommand.CommandTimeout = base.GetCommandTimeout();                
+          
+                dbcommand.Connection = dbconnection;
+                dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
+
+                while (dbreader.Read())
+                    departments.Add(new GenericListItem(dbreader["department"].ToString(), dbreader["department"].ToString()));
+
+                //Always close your readers
+                if (!dbreader.IsClosed)
+                    dbreader.Close();
+                
+                
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+
+            return departments;
+ 
+
+
+        }
+
+
 
     }
 

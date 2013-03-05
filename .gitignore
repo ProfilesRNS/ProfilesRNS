@@ -3,6 +3,8 @@
 *.suo
 *.csproj.user
 *.vspscc
+/Code/Profiles/Profiles/Profiles.Publish.xml
+/Code/Profiles/Profiles/ProfilesDebuggingLog.txt
 /Code/Profiles/Profiles/obj/Debug
 /Code/Profiles/Profiles/obj/Release
 /Code/Profiles/Profiles/bin/IKVM.GNU.Classpath.dll
@@ -66,3 +68,5 @@
 /Code/SemWeb/src/bin/SemWeb.pdb
 /Code/SemWeb/src/bin/SemWeb.Sparql.dll
 /Code/SemWeb/src/bin/SemWeb.Sparql.pdb
+/Code/ProfilesSPARQLAPI/bin/*
+/Code/ProfilesSPARQLAPI/obj/*

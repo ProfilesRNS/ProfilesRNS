@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CustomViewConceptTopJournal.ascx.cs" Inherits="Profiles.Profile.Modules.CustomViewConceptTopJournal" %>
 
 <div class="passiveSectionHead">
-    <div style="white-space: nowrap; display: inline">
+    <div id='sectionTitle' runat='server' style="white-space: nowrap; display: inline">
         <%= this.GetModuleParamString("InfoCaption") %> <a href="JavaScript:toggleVisibility('topJournal');">
             <asp:Image runat="server" ID="imgQuestion" />
         </a>
@@ -15,4 +15,5 @@
 		<asp:Literal runat="server" ID="lineItemLiteral"></asp:Literal>
 	</ul>
 </div>
+
        

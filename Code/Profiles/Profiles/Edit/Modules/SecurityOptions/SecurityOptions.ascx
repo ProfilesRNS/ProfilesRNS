@@ -4,15 +4,23 @@
 <script type="text/javascript">
     $(document).ready(function() {
         Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
-        function EndRequestHandler(sender, args) {
-            $("[id*=rdoSecurityOption]").click(function() {
-            $("[id*=rdoSecurityOption]").removeAttr('checked');
-                $(this).attr('checked', 'checked');
-            });
-        }
-        $("[id*=rdoSecurityOption]").click(function() {
-        $("[id*=rdoSecurityOption]").removeAttr('checked');
-            $(this).attr(':checked');
+
+        $(document).keypress(function(e) {
+            if (e.which != 13) {
+
+                function EndRequestHandler(sender, args) {
+
+                    $("[id*=rdoSecurityOption]").click(function() {
+                        $("[id*=rdoSecurityOption]").removeAttr('checked');
+                        $(this).attr('checked', 'checked');
+                    });
+
+                }
+                $("[id*=rdoSecurityOption]").click(function() {
+                    $("[id*=rdoSecurityOption]").removeAttr('checked');
+                    $(this).attr(':checked');
+                });
+            }
         });
 
     });

@@ -60,7 +60,12 @@ namespace Profiles.Edit.Modules.EditPropertyContainer
         {
             mp = new ModulesProcessing();
 
+
+            footer.MasterPage = base.MasterPage;
+
         }
+        
+
         private void DrawProfilesModule()
         {
             XmlDocument moduledoc = new XmlDocument();
@@ -122,7 +127,7 @@ namespace Profiles.Edit.Modules.EditPropertyContainer
 
             //html.Append(base.RenderCustomControl(moduledoc, base.BaseData));
             base.RenderAndAttachCustomControl(ref phControlContainer, moduledoc, base.BaseData);
-                     
+
 
 
         }
@@ -190,6 +195,11 @@ namespace Profiles.Edit.Modules.EditPropertyContainer
                 return node;
             }
         }
+
+        
+
+
+
 
     }
 }

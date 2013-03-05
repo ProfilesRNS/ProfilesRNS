@@ -38,6 +38,7 @@ namespace Profiles.Edit.Modules.CustomEditAwardOrHonor
         protected void Page_Load(object sender, EventArgs e)
         {
             this.FillAwardGrid(false);
+            
             if (!IsPostBack)
                 Session["pnlInsertAward.Visible"] = null;
         }
@@ -50,6 +51,7 @@ namespace Profiles.Edit.Modules.CustomEditAwardOrHonor
             this.XMLData = pagedata;
 
             data = new Edit.Utilities.DataIO();
+            Profiles.Profile.Utilities.DataIO propdata = new Profiles.Profile.Utilities.DataIO();
 
             if (Request.QueryString["subject"] != null)
                 this.SubjectID = Convert.ToInt64(Request.QueryString["subject"]);
@@ -59,7 +61,7 @@ namespace Profiles.Edit.Modules.CustomEditAwardOrHonor
                 Response.Redirect("~/search");
 
             string predicateuri = Request.QueryString["predicateuri"].Replace("!", "#");
-            this.PropertyListXML = data.GetPropertyList(this.BaseData, base.PresentationXML, predicateuri, false, true, false);
+            this.PropertyListXML = propdata.GetPropertyList(this.BaseData, base.PresentationXML, predicateuri, false, true, false);
 
             this.PredicateID = data.GetStoreNode(predicateuri);
 
@@ -74,17 +76,45 @@ namespace Profiles.Edit.Modules.CustomEditAwardOrHonor
             securityOptions.SecurityGroups = new XmlDataDocument();
             securityOptions.SecurityGroups.LoadXml(base.PresentationXML.DocumentElement.LastChild.OuterXml);
 
-            if (Request.QueryString["new"] != null && Session["new"]!=null)
+            if (Request.QueryString["new"] != null && Session["new"] != null)
             {
                 Session["pnlInsertAward.Visible"] = null;
                 Session["new"] = null;
-                btnEditAwards_OnClick(this, new EventArgs());
+
+                if (Session["newclose"] != null)
+                {
+                    Session["newclose"] = null;
+                    btnInsertCancel_OnClick(this,new EventArgs());
+
+                }
+                else
+                {
+                    btnEditAwards_OnClick(this, new EventArgs());
+                }
+
             }
 
+            securityOptions.BubbleClick += SecurityDisplayed;
 
         }
 
         #region Awards
+
+        private void SecurityDisplayed(object sender, EventArgs e)
+        {
+
+            
+            if (Session["pnlSecurityOptions.Visible"] == null)
+            {
+                pnlEditAwards.Visible = true;
+                
+            }
+            else
+            {
+                pnlEditAwards.Visible = false;
+                
+            }
+        }
 
         protected void btnEditAwards_OnClick(object sender, EventArgs e)
         {
@@ -134,7 +164,6 @@ namespace Profiles.Edit.Modules.CustomEditAwardOrHonor
                 txtAwardInst = (TextBox)e.Row.Cells[3].FindControl("txtAwardInst");
                 hdURI = (HiddenField)e.Row.Cells[3].FindControl("hdURI");
 
-                
                 lnkEdit = (ImageButton)e.Row.Cells[4].FindControl("lnkEdit");
                 lnkDelete = (ImageButton)e.Row.Cells[4].FindControl("lnkDelete");
 
@@ -175,13 +204,13 @@ namespace Profiles.Edit.Modules.CustomEditAwardOrHonor
             TextBox txtAwardName = (TextBox)GridViewAwards.Rows[e.RowIndex].FindControl("txtAwardName");
             TextBox txtAwardInst = (TextBox)GridViewAwards.Rows[e.RowIndex].FindControl("txtAwardInst");
             HiddenField hdURI = (HiddenField)GridViewAwards.Rows[e.RowIndex].FindControl("hdURI");
-            
+
 
             data.UpdateAward(hdURI.Value, txtAwardName.Text, txtAwardInst.Text, txtYr1.Text, txtYr2.Text);
             GridViewAwards.EditIndex = -1;
             Session["pnlInsertAward.Visible"] = null;
             this.FillAwardGrid(true);
-            upnlEditSection.Update();            
+            upnlEditSection.Update();
         }
 
         protected void GridViewAwards_RowUpdated(object sender, GridViewUpdatedEventArgs e)
@@ -227,11 +256,11 @@ namespace Profiles.Edit.Modules.CustomEditAwardOrHonor
             {
                 data.AddAward(this.SubjectID, txtAwardName.Text, txtInstitution.Text, txtStartYear.Text, txtEndYear.Text);
 
-              
+
                 txtStartYear.Text = "";
                 txtEndYear.Text = "";
                 txtInstitution.Text = "";
-                txtAwardName.Text = "";                
+                txtAwardName.Text = "";
                 Session["pnlInsertAward.Visible"] = null;
                 btnEditAwards_OnClick(sender, e);
                 this.FillAwardGrid(true);
@@ -248,7 +277,7 @@ namespace Profiles.Edit.Modules.CustomEditAwardOrHonor
                 }
 
             }
-         
+
         }
 
         protected void btnInsertClose_OnClick(object sender, EventArgs e)
@@ -259,10 +288,25 @@ namespace Profiles.Edit.Modules.CustomEditAwardOrHonor
                 data.AddAward(this.SubjectID, txtAwardName.Text, txtInstitution.Text, txtStartYear.Text, txtEndYear.Text);
 
                 this.FillAwardGrid(true);
-                btnInsertCancel_OnClick(sender, e);
-                upnlEditSection.Update();
+
+
+                if (GridViewAwards.Rows.Count == 1)
+                {
+                    Session["new"] = true;
+                    Session["newclose"] = true;
+                    //stupid update panel bug we cant figure out.
+                    Response.Redirect(Request.Url.ToString() + "&new=true");
+                }
+                else
+                {
+                    btnInsertCancel_OnClick(sender, e);
+                    upnlEditSection.Update();
+                }
+
+
+              
             }
- 
+
         }
         protected void ibUp_Click(object sender, EventArgs e)
         {
@@ -292,7 +336,7 @@ namespace Profiles.Edit.Modules.CustomEditAwardOrHonor
             data.MoveTripleUp(this.SubjectID, predicate, _object);
 
             this.FillAwardGrid(true);
-            
+
             upnlEditSection.Update();
 
         }
@@ -382,7 +426,7 @@ namespace Profiles.Edit.Modules.CustomEditAwardOrHonor
             }
             else
             {
-                
+
                 lblNoAwards.Visible = true;
                 GridViewAwards.Visible = false;
 

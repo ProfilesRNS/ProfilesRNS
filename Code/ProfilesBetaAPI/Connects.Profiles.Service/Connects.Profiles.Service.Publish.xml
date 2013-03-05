@@ -1,0 +1,128 @@
+<publishData>
+  <publishTarget publishUrl="\\itwwebhstg\inetpub$\Appscommon\Catalyst\Staging\HCProfiles\PublicAPI\ProfilesBetaAPI\">
+    <file relUrl="bin/Connects.Profiles.Common.pdb" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Connects.Profiles.Utility.pdb" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Connects.Profiles.Service.ServiceImplementation.pdb" publishTime="01/28/2013 10:26:36" />
+    <file relUrl="bin/Connects.Profiles.Service.ServiceContracts.pdb" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="Web.config" publishTime="01/28/2013 11:01:19" />
+    <file relUrl="bin/Connects.Profiles.ProfileService.pdb" publishTime="02/06/2013 14:36:26" />
+    <file relUrl="bin/Connects.Profiles.Service.ServiceContracts.dll" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Connects.Profiles.Common.dll" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Connects.Profiles.Utility.dll" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Connects.Profiles.Service.DataContracts.dll" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Connects.Profiles.ProfileService.dll" publishTime="02/06/2013 14:36:26" />
+    <file relUrl="ProfileService.svc" publishTime="09/28/2012 12:10:53" />
+    <file relUrl="bin/Connects.Profiles.Service.DataContracts.pdb" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Microsoft.ServiceModel.Web.dll" publishTime="07/28/2010 13:05:58" />
+    <file relUrl="bin/Connects.Profiles.Service.ServiceImplementation.dll" publishTime="01/28/2013 10:26:36" />
+    <file relUrl="NetworkBrowserService.svc" publishTime="09/28/2012 12:10:53" />
+  </publishTarget>
+  <publishTarget publishUrl="\\itwwebhstg\inetpub$\Appscommon\Catalyst\Staging\HCProfiles\PrivateAPI\ProfilesSearchAPI\">
+    <file relUrl="bin/Connects.Profiles.Common.pdb" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Connects.Profiles.Utility.pdb" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="NetworkBrowserService.svc" publishTime="09/28/2012 12:10:53" />
+    <file relUrl="bin/Connects.Profiles.Service.ServiceContracts.pdb" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="Web.config" publishTime="01/28/2013 11:01:19" />
+    <file relUrl="bin/Connects.Profiles.ProfileService.pdb" publishTime="01/30/2013 14:10:13" />
+    <file relUrl="bin/Microsoft.ServiceModel.Web.dll" publishTime="07/28/2010 13:05:58" />
+    <file relUrl="bin/Connects.Profiles.Service.ServiceContracts.dll" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Connects.Profiles.Common.dll" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Connects.Profiles.Utility.dll" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Connects.Profiles.Service.DataContracts.dll" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Connects.Profiles.ProfileService.dll" publishTime="01/30/2013 14:10:13" />
+    <file relUrl="ProfileService.svc" publishTime="09/28/2012 12:10:53" />
+    <file relUrl="bin/Connects.Profiles.Service.DataContracts.pdb" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Connects.Profiles.Service.ServiceImplementation.pdb" publishTime="01/28/2013 10:26:36" />
+    <file relUrl="bin/Connects.Profiles.Service.ServiceImplementation.dll" publishTime="01/28/2013 10:26:36" />
+  </publishTarget>
+  <publishTarget publishUrl="\\itwwebhstg\inetpub$\Appscommon\Catalyst\Staging\HCProfiles\PrivateAPI\ProfilesBetaAPI\">
+    <file relUrl="bin/Connects.Profiles.Common.pdb" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Connects.Profiles.Utility.pdb" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Connects.Profiles.Service.ServiceImplementation.pdb" publishTime="01/28/2013 10:26:36" />
+    <file relUrl="bin/Connects.Profiles.Service.ServiceContracts.pdb" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="Web.config" publishTime="01/28/2013 11:01:19" />
+    <file relUrl="bin/Connects.Profiles.ProfileService.pdb" publishTime="01/30/2013 12:18:12" />
+    <file relUrl="bin/Connects.Profiles.Service.ServiceContracts.dll" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Connects.Profiles.Common.dll" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Connects.Profiles.Utility.dll" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Connects.Profiles.Service.DataContracts.dll" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Connects.Profiles.ProfileService.dll" publishTime="01/30/2013 12:18:12" />
+    <file relUrl="ProfileService.svc" publishTime="09/28/2012 12:10:53" />
+    <file relUrl="bin/Connects.Profiles.Service.DataContracts.pdb" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Microsoft.ServiceModel.Web.dll" publishTime="07/28/2010 13:05:58" />
+    <file relUrl="bin/Connects.Profiles.Service.ServiceImplementation.dll" publishTime="01/28/2013 10:26:36" />
+    <file relUrl="NetworkBrowserService.svc" publishTime="09/28/2012 12:10:53" />
+  </publishTarget>
+  <publishTarget publishUrl="\\itwwebhstg\inetpub$\Appscommon\Catalyst\Staging\HCProfilesTest\PrivateAPI\ProfilesBetaAPI\">
+    <file relUrl="bin/Connects.Profiles.Common.pdb" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Connects.Profiles.Utility.pdb" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Connects.Profiles.Service.ServiceImplementation.pdb" publishTime="01/28/2013 10:26:36" />
+    <file relUrl="bin/Connects.Profiles.Service.ServiceContracts.pdb" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="Web.config" publishTime="01/28/2013 11:01:19" />
+    <file relUrl="bin/Connects.Profiles.ProfileService.pdb" publishTime="01/28/2013 10:55:13" />
+    <file relUrl="bin/Connects.Profiles.Service.ServiceContracts.dll" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Connects.Profiles.Common.dll" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Connects.Profiles.Utility.dll" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Connects.Profiles.Service.DataContracts.dll" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Connects.Profiles.ProfileService.dll" publishTime="01/28/2013 10:55:13" />
+    <file relUrl="ProfileService.svc" publishTime="09/28/2012 12:10:53" />
+    <file relUrl="bin/Connects.Profiles.Service.DataContracts.pdb" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Microsoft.ServiceModel.Web.dll" publishTime="07/28/2010 13:05:58" />
+    <file relUrl="bin/Connects.Profiles.Service.ServiceImplementation.dll" publishTime="01/28/2013 10:26:36" />
+    <file relUrl="NetworkBrowserService.svc" publishTime="09/28/2012 12:10:53" />
+  </publishTarget>
+  <publishTarget publishUrl="\\itwwebhstg\inetpub$\Appscommon\Catalyst\Staging\HCProfilesTest\PublicAPI\ProfilesBetaAPI\">
+    <file relUrl="bin/Connects.Profiles.Common.pdb" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Connects.Profiles.Utility.pdb" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Connects.Profiles.Service.ServiceImplementation.pdb" publishTime="01/28/2013 10:26:36" />
+    <file relUrl="bin/Connects.Profiles.Service.ServiceContracts.pdb" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="Web.config" publishTime="01/24/2013 10:34:12" />
+    <file relUrl="bin/Connects.Profiles.ProfileService.pdb" publishTime="01/28/2013 10:26:36" />
+    <file relUrl="bin/Connects.Profiles.Service.ServiceContracts.dll" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Connects.Profiles.Common.dll" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Connects.Profiles.Utility.dll" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Connects.Profiles.Service.DataContracts.dll" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Connects.Profiles.ProfileService.dll" publishTime="01/28/2013 10:26:36" />
+    <file relUrl="ProfileService.svc" publishTime="09/28/2012 12:10:53" />
+    <file relUrl="bin/Connects.Profiles.Service.DataContracts.pdb" publishTime="01/28/2013 10:26:35" />
+    <file relUrl="bin/Microsoft.ServiceModel.Web.dll" publishTime="07/28/2010 13:05:58" />
+    <file relUrl="bin/Connects.Profiles.Service.ServiceImplementation.dll" publishTime="01/28/2013 10:26:36" />
+    <file relUrl="NetworkBrowserService.svc" publishTime="09/28/2012 12:10:53" />
+  </publishTarget>
+  <publishTarget publishUrl="\\itwvwebhs01\inetpub$\Appscommon\Weber\HFFTest\PrivateAPI\ProfilesBetaAPI\">
+    <file relUrl="bin/Connects.Profiles.Common.pdb" publishTime="08/07/2012 14:45:42" />
+    <file relUrl="bin/Connects.Profiles.Utility.pdb" publishTime="08/07/2012 14:45:43" />
+    <file relUrl="bin/Connects.Profiles.Service.ServiceImplementation.pdb" publishTime="08/07/2012 14:45:43" />
+    <file relUrl="bin/Connects.Profiles.Service.ServiceContracts.pdb" publishTime="08/07/2012 14:45:43" />
+    <file relUrl="Web.config" publishTime="08/07/2012 12:41:30" />
+    <file relUrl="bin/Connects.Profiles.ProfileService.pdb" publishTime="08/07/2012 14:45:43" />
+    <file relUrl="bin/Connects.Profiles.Service.ServiceContracts.dll" publishTime="08/07/2012 14:45:43" />
+    <file relUrl="bin/Connects.Profiles.Common.dll" publishTime="08/07/2012 14:45:42" />
+    <file relUrl="bin/Connects.Profiles.Utility.dll" publishTime="08/07/2012 14:45:43" />
+    <file relUrl="bin/Connects.Profiles.Service.DataContracts.dll" publishTime="08/07/2012 14:45:42" />
+    <file relUrl="bin/Connects.Profiles.ProfileService.dll" publishTime="08/07/2012 14:45:44" />
+    <file relUrl="ProfileService.svc" publishTime="07/25/2012 11:17:56" />
+    <file relUrl="bin/Connects.Profiles.Service.DataContracts.pdb" publishTime="08/07/2012 14:45:42" />
+    <file relUrl="bin/Microsoft.ServiceModel.Web.dll" publishTime="07/28/2010 13:05:58" />
+    <file relUrl="bin/Connects.Profiles.Service.ServiceImplementation.dll" publishTime="08/07/2012 14:45:43" />
+    <file relUrl="NetworkBrowserService.svc" publishTime="07/25/2012 11:17:56" />
+  </publishTarget>
+  <publishTarget publishUrl="\\itwvwebhs01\inetpub$\Appscommon\Weber\HFFTest\PublicAPI\ProfilesBetaAPI\">
+    <file relUrl="bin/Connects.Profiles.Common.pdb" publishTime="08/07/2012 14:45:42" />
+    <file relUrl="bin/Connects.Profiles.Utility.pdb" publishTime="08/07/2012 14:45:43" />
+    <file relUrl="bin/Connects.Profiles.Service.ServiceImplementation.pdb" publishTime="08/07/2012 14:45:43" />
+    <file relUrl="bin/Connects.Profiles.Service.ServiceContracts.pdb" publishTime="08/07/2012 14:45:43" />
+    <file relUrl="Web.config" publishTime="08/07/2012 12:41:30" />
+    <file relUrl="bin/Connects.Profiles.ProfileService.pdb" publishTime="08/07/2012 14:45:43" />
+    <file relUrl="bin/Connects.Profiles.Service.ServiceContracts.dll" publishTime="08/07/2012 14:45:43" />
+    <file relUrl="bin/Connects.Profiles.Common.dll" publishTime="08/07/2012 14:45:42" />
+    <file relUrl="bin/Connects.Profiles.Utility.dll" publishTime="08/07/2012 14:45:43" />
+    <file relUrl="bin/Connects.Profiles.Service.DataContracts.dll" publishTime="08/07/2012 14:45:42" />
+    <file relUrl="bin/Connects.Profiles.ProfileService.dll" publishTime="08/07/2012 14:45:44" />
+    <file relUrl="ProfileService.svc" publishTime="07/25/2012 11:17:56" />
+    <file relUrl="bin/Connects.Profiles.Service.DataContracts.pdb" publishTime="08/07/2012 14:45:42" />
+    <file relUrl="bin/Microsoft.ServiceModel.Web.dll" publishTime="07/28/2010 13:05:58" />
+    <file relUrl="bin/Connects.Profiles.Service.ServiceImplementation.dll" publishTime="08/07/2012 14:45:43" />
+    <file relUrl="NetworkBrowserService.svc" publishTime="07/25/2012 11:17:56" />
+  </publishTarget>
+</publishData>

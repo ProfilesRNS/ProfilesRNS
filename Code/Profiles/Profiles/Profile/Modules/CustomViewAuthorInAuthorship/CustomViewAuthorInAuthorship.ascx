@@ -2,15 +2,14 @@
 
 
 <div class='publicationList'>	
-	<div class="sectionHeader">Publications</div>
 	<div style="font-weight:bold;color:#888;padding:5px 0px;">
 		Publications listed below are automatically derived from MEDLINE/PubMed and other sources, which might result in incorrect or missing publications. 
 		Faculty can <asp:Literal runat='server' ID='loginLiteral'></asp:Literal> to make corrections and additions.
 	</div>
-	<div class="publicationMenu">
-		<a class='selected' href='javascript:void(0)'>List All</a> 
+	<div class="anchor-tab">
+		<a class='selected'>List All</a> 
 		&nbsp; | &nbsp; 
-		<a href='javascript:void(0)'>Timeline</a>
+		<a>Timeline</a>
 	</div>
 	<asp:Repeater ID="rpPublication" runat="server" OnItemDataBound="rpPublication_OnDataBound">
 		<HeaderTemplate>			
@@ -41,18 +40,22 @@
 	</div>	
 </div>
 
-<script type="text/javascript">
-	$(function() {
-		$("div.publicationList li:first").attr("class", "first");
+<div class="SupportText">
+	<asp:Literal runat='server' ID='supportText'></asp:Literal>
+</div>
 
-		$("div.publicationMenu a").bind("click", function() {
-			var $this = $(this);
-			if ($this.get(0).className != "selected") {
-				// Toggle link classes
-				$this.toggleClass("selected").siblings("a").toggleClass("selected");
-				// Show hide;
-				$("div.publicationList .toggle-vis:visible").hide().siblings().show();
-			}
-		});
-	});
+<script type="text/javascript">
+    $(function() {
+        $("div.publicationList li:first").attr("class", "first");
+
+        $(".publicationList .anchor-tab a").bind("click", function() {
+            var $this = $(this);
+            if ($this.get(0).className != "selected") {
+                // Toggle link classes
+                $this.toggleClass("selected").siblings("a").toggleClass("selected");
+                // Show hide;
+                $("div.publicationList .toggle-vis:visible").hide().siblings().fadeIn("fast");
+            }
+        });
+    });
 </script>

@@ -1,0 +1,6 @@
+C:\Projects\ProfilesSearchAPI\ProfilesSearchAPI\bin\Search.dll
+C:\Projects\ProfilesSearchAPI\ProfilesSearchAPI\bin\Search.pdb
+C:\Projects\ProfilesSearchAPI\ProfilesSearchAPI\bin\Microsoft.ServiceModel.Web.dll
+C:\Projects\ProfilesSearchAPI\ProfilesSearchAPI\obj\Release\ResolveAssemblyReference.cache
+C:\Projects\ProfilesSearchAPI\ProfilesSearchAPI\obj\Release\Search.dll
+C:\Projects\ProfilesSearchAPI\ProfilesSearchAPI\obj\Release\Search.pdb

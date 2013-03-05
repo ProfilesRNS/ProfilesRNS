@@ -46,7 +46,7 @@ namespace Profiles.Profile.Modules.DisplayEmail
                 int MyLen;
 
                 SizeF size;
-                float fontSize = 13;
+                float fontSize = 11;
                 Font font;
 
                 font = new Font("Arial", fontSize, FontStyle.Regular);
@@ -234,7 +234,7 @@ namespace EmailImg
             // Set up the text font.
             //SizeF size;
 
-            float fontSize = 14;
+            float fontSize = 13;
             Font font;
 
             font = new Font(this.familyName, fontSize, FontStyle.Regular);

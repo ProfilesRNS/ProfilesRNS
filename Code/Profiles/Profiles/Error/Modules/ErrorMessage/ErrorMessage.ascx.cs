@@ -28,6 +28,7 @@ namespace Profiles.Error.Modules
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (HttpContext.Current.Session["GLOBAL_ERROR"] !=null)
             litError.Text = HttpContext.Current.Session["GLOBAL_ERROR"].ToString();
         }
 

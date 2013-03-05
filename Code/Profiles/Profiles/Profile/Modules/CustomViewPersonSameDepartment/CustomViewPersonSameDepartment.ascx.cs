@@ -39,22 +39,31 @@ namespace Profiles.Profile.Modules.CustomViewPersonSameDepartment
             XmlDocument xml = data.GetSameDepartment(base.RDFTriple);
             List<ListItem> items = new List<ListItem>();
 
-            string departmenturi = xml.SelectSingleNode("Network/DepartmentURI").InnerText;
-            string insitutitionuri = xml.SelectSingleNode("Network/InstitutionURI").InnerText;
-            string searchrequest = string.Empty;
 
-            search.SearchRequest("", "", "", "", insitutitionuri, "", departmenturi, "", "", "", "http://xmlns.com/foaf/0.1/Person", "25", "0", "", "", "", ref searchrequest);
-
-            this.SearchRequest = searchrequest;
-
-            foreach (XmlNode n in xml.SelectNodes("Network/Connection"))
+            if (xml.SelectSingleNode("Network/NumberOfConnections").InnerText != "0")
             {
-                items.Add(new ListItem(n.InnerText, n.SelectSingleNode("@URI").Value));
+                string departmenturi = xml.SelectSingleNode("Network/DepartmentURI").InnerText;
+                string insitutitionuri = xml.SelectSingleNode("Network/InstitutionURI").InnerText;
+                string searchrequest = string.Empty;
+
+                search.SearchRequest("", "", "", "", insitutitionuri, "", departmenturi, "", "http://xmlns.com/foaf/0.1/Person", "25", "0", "", "", "","", ref searchrequest);
+
+                this.SearchRequest = searchrequest;
+
+                foreach (XmlNode n in xml.SelectNodes("Network/Connection"))
+                {
+                    items.Add(new ListItem(n.InnerText, n.SelectSingleNode("@URI").Value));
+
+                }
+
+                rptSameDepartment.DataSource = items;
+                rptSameDepartment.DataBind();
 
             }
-
-            rptSameDepartment.DataSource = items;
-            rptSameDepartment.DataBind();
+            else
+            {
+                rptSameDepartment.Visible = false;
+            }
 
         }
 
@@ -73,7 +82,7 @@ namespace Profiles.Profile.Modules.CustomViewPersonSameDepartment
             if (e.Item.ItemType == ListItemType.Footer)
             {
                 Literal litFooter = (Literal)e.Item.FindControl("litFooter");
-                litFooter.Text =  "<a href='" + Root.Domain + "/search/default.aspx?searchtype=people&searchfor=&SearchRequest=" + this.SearchRequest + "'>" +
+                litFooter.Text = "<a href='" + Root.Domain + "/search/default.aspx?searchtype=people&searchfor=&SearchRequest=" + this.SearchRequest + "'>" +
               "<img style='margin-right:2px;position:relative;top:1px;border:0'  src='" + Root.Domain + "/Framework/Images/icon_squareArrow.gif'></img>Search Department</a>";
 
             }

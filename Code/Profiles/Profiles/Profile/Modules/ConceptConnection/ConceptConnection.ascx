@@ -48,7 +48,7 @@
 			<li <%= (first==1) ? "class='first'" : "" %> >
 				<%= pub.Description %>	
 				<div class='viewIn'>
-					<span class="viewInLabel">View in</span>: <a href="http://www.ncbi.nlm.nih.gov/pubmed/<%= pub.PMID %>" target="_blank">PubMed</a>			
+					<span class="viewInLabel">View in</span>: <a href="//www.ncbi.nlm.nih.gov/pubmed/<%= pub.PMID %>" target="_blank">PubMed</a>			
 				</div>
 				<div class='viewIn'>
 					<span class="viewInLabel">Score</span>: <%= String.Format("{0:0.000}", pub.Score)%>

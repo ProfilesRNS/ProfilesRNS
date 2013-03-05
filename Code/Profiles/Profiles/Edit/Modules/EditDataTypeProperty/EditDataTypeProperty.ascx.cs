@@ -28,9 +28,9 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
 {
     public partial class EditDataTypeProperty : BaseModule
     {
-        private ModulesProcessing mp;
         Edit.Utilities.DataIO data;
-      
+        Profiles.Profile.Utilities.DataIO propdata;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             this.FillPropertyGrid(false);
@@ -39,7 +39,6 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
                 Session["pnlInsertProperty.Visible"] = null;
             }
 
-
         }
 
         public EditDataTypeProperty() { }
@@ -47,14 +46,11 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
             : base(pagedata, moduleparams, pagenamespaces)
         {
 
-  
-
             SessionManagement sm = new SessionManagement();
-
-            data = new Edit.Utilities.DataIO();
-
+            propdata = new Profiles.Profile.Utilities.DataIO();
+            data = new Profiles.Edit.Utilities.DataIO();
             string predicateuri = Request.QueryString["predicateuri"].Replace("!", "#");
-            this.PropertyListXML = data.GetPropertyList(this.BaseData, base.PresentationXML, predicateuri, false, true, false);
+            this.PropertyListXML = propdata.GetPropertyList(this.BaseData, base.PresentationXML, predicateuri, false, true, false);
             PropertyLabel = this.PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@Label").Value;
 
             if (Request.QueryString["subject"] != null)
@@ -68,13 +64,17 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
 
             btnEditProperty.Text = "Add " + PropertyLabel;
 
-            this.PropertyListXML = data.GetPropertyList(this.BaseData, base.PresentationXML, predicateuri, false, true, false);
+            this.PropertyListXML = propdata.GetPropertyList(this.BaseData, base.PresentationXML, predicateuri, false, true, false);
+            this.MaxCardinality = this.PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@MaxCardinality").Value;
+            this.MinCardinality = this.PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@MinCardinality").Value;
 
             securityOptions.Subject = this.SubjectID;
             securityOptions.PredicateURI = predicateuri;
             securityOptions.PrivacyCode = Convert.ToInt32(this.PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@ViewSecurityGroup").Value);
             securityOptions.SecurityGroups = new XmlDataDocument();
             securityOptions.SecurityGroups.LoadXml(base.PresentationXML.DocumentElement.LastChild.OuterXml);
+
+
         }
 
         #region Property
@@ -107,10 +107,13 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
 
             ImageButton lnkEdit = null;
             ImageButton lnkDelete = null;
+            
             //  System.Web.UI.WebControls.Panel pnlMovePanel = null;
             LiteralState ls = (LiteralState)e.Row.DataItem;
             ImageButton ibUp = (ImageButton)e.Row.FindControl("ibUp");
             ImageButton ibDown = (ImageButton)e.Row.FindControl("ibDown");
+            Label lblLabel = (Label)e.Row.FindControl("lblLabel");
+            
 
             LiteralState literalstate = null;
             if (e.Row.RowType == DataControlRowType.Header)
@@ -143,6 +146,9 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
                 if (lnkDelete != null)
                     lnkDelete.OnClientClick = "Javascript:return confirm('Are you sure you want to delete this " + PropertyLabel + "?');";
 
+                if(lblLabel!=null)
+                lblLabel.Text = literalstate.Literal.Replace("\n", "<br/>");
+                
 
             }
 
@@ -211,7 +217,7 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
             {
                 data.AddLiteral(this.SubjectID, this.PredicateID, data.GetStoreNode(txtLabel.Text.Trim()));
 
-                this.FillPropertyGrid(true);                
+                this.FillPropertyGrid(true);
                 txtLabel.Text = "";
                 Session["pnlInsertProperty.Visible"] = null;
                 btnEditProperty_OnClick(sender, e);
@@ -272,7 +278,7 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
             if (refresh)
             {
                 base.GetSubjectProfile();
-                this.PropertyListXML = data.GetPropertyList(this.BaseData, base.PresentationXML, this.PredicateURI, false, true, false);
+                this.PropertyListXML = propdata.GetPropertyList(this.BaseData, base.PresentationXML, this.PredicateURI, false, true, false);
             }
 
             List<LiteralState> literalstate = new List<LiteralState>();
@@ -307,8 +313,6 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
 
             foreach (XmlNode property in this.PropertyListXML.SelectNodes("PropertyList/PropertyGroup/Property/Network/Connection"))
             {
-
-                //literalstate.Add(new LiteralState(this.SubjectID, this.PredicateID, data.GetStoreNode(property.InnerText.Trim()), property.InnerText.Trim().Replace("\r", "RRRRRRRRRR").Replace("\n", "NNNNNNNNN"), editexisting, editdelete));
                 literalstate.Add(new LiteralState(this.SubjectID, this.PredicateID, data.GetStoreNode(property.InnerText.Trim()), property.InnerText.Trim(), editexisting, editdelete));
             }
 
@@ -319,12 +323,32 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
                 GridViewProperty.DataBind();
                 lblNoItems.Visible = false;
                 GridViewProperty.Visible = true;
+
+
+                if (MaxCardinality == literalstate.Count.ToString())
+                {
+                    imbAddArror.Visible = false;
+                    btnEditProperty.Visible = false;
+                    btnInsertProperty.Visible = false;                    
+                }
+
+
+
             }
             else
             {
                 lblNoItems.Visible = true;
                 GridViewProperty.Visible = false;
-
+                imbAddArror.Visible = true;
+                btnEditProperty.Visible = true;
+                if (MaxCardinality == "1")
+                { 
+                    
+                    
+                    
+                    btnInsertProperty.Visible = false;
+                }
+                upnlEditSection.Update();
             }
 
 
@@ -339,6 +363,8 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
 
         private XmlDocument PropertyListXML { get; set; }
         private string PropertyLabel { get; set; }
+        private string MaxCardinality { get; set; }
+        private string MinCardinality { get; set; }
 
 
     }

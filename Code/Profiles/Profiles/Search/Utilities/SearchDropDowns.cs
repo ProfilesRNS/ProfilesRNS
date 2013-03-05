@@ -4,23 +4,24 @@ using System.Linq;
 using System.Web;
 
 using Profiles.Framework.Utilities;
+
 namespace Profiles.Search.Utilities
 {
     public static class SearcDropDowns
     {
 
 
-        public static string BuildDropdown(string type,string width)
+        public static string BuildDropdown(string type, string width, string defaultitem)
         {
             Utilities.DataIO data = new Profiles.Search.Utilities.DataIO();
             string output = string.Empty;
-
+            
             List<GenericListItem> list = new List<GenericListItem>();
 
             switch (type)
             {
                 case "institution":
-                    list = data.GetInstitutions();
+                    list = data.GetInstitutions();            
                     break;
 
                 case "department":
@@ -31,17 +32,22 @@ namespace Profiles.Search.Utilities
                     break;
             }
 
-            output += "<option value=\"\">&nbsp;&nbsp;-- Select One --&nbsp;&nbsp;</option>";
+            //if (defaultitem.IsNullOrEmpty())
+                output += "<option value=\"\"></option>";
+
 
             foreach (GenericListItem item in list)
             {
-                output += "<option value=\"" + item.Value + "\">" + item.Text + "</option>";
-
+                if (!defaultitem.IsNullOrEmpty() && defaultitem == item.Value)
+                    output += "<option selected=\"true\" value=\"" + item.Value + "\">" + item.Text + "</option>";
+                else
+                    output += "<option value=\"" + item.Value + "\">" + item.Text + "</option>";
             }
 
-            return "<select id=\"" + type + "\" style=\"width:" + width + "\">" + output + "</select>";
+            return "<select name=\"" + type + "\" id=\"" + type + "\" style=\"width:" + width + "px\">" + output + "</select>";
 
         }
 
     }
+
 }

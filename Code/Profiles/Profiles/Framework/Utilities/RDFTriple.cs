@@ -36,17 +36,19 @@ namespace Profiles.Framework.Utilities
     {
         #region "PUBLIC METHODS"
 
+        private string _uri;
+
         public RDFTriple(Int64 s)
         {
             this.Init();
-            this.Subject = s;            
+            this.Subject = s;
         }
         public RDFTriple(Int64 s, Int64 p)
         {
             this.Init();
             this.Subject = s;
             this.Predicate = p;
-            
+
         }
         public RDFTriple(Int64 s, Int64 p, Int64 o)
         {
@@ -54,14 +56,14 @@ namespace Profiles.Framework.Utilities
             this.Subject = s;
             this.Predicate = p;
             this.Object = o;
-            
+
         }
 
         public RDFTriple(string uri)
         {
             this.Init();
             this.URI = uri;
-            
+
         }
 
         private void Init()
@@ -114,8 +116,8 @@ namespace Profiles.Framework.Utilities
 
 
         public bool Edit { get; set; }
-        
-        public  Session Session
+
+        public Session Session
         {
             get
             {
@@ -126,8 +128,16 @@ namespace Profiles.Framework.Utilities
         }
 
         public bool Expand { get; set; }
-        public bool ShowDetails{get;set;}
-        public string URI { get; set; }
+        public bool ShowDetails { get; set; }
+        public string URI
+        {
+            get
+            {
+                return _uri;
+
+            }
+            set { _uri = value; }
+        }
 
         /// <summary>
         /// Internal calls will have a SPO request, external will have a URI request.
@@ -139,11 +149,24 @@ namespace Profiles.Framework.Utilities
                 string rtn = string.Empty;
 
                 if (this.URI == string.Empty)
-                    rtn = Root.Domain + Root.AbsolutePath; // this.Subject.ToString() + this.Predicate.ToString() + this.Object.ToString();
+                {
+
+                    rtn = Root.Domain + "/" + this.Subject.ToString();
+
+                    if (this.Predicate != 0)
+                        rtn += "/" + this.Predicate;
+
+                    if (this.Object != 0)
+                        rtn += "/" + this.Object;
+                }
                 else
                     rtn = this.URI;
 
-                return rtn + this.Session.SessionID + this.Session.UserID.ToString() + this.Expand + this.ShowDetails + this.ExpandRDFList;
+                if (ExpandRDFList == null)
+                    ExpandRDFList = string.Empty;
+
+                return rtn + "|" + this.Session.SessionID + "|" + this.Expand + "|" + this.ShowDetails + "|" + this.ExpandRDFList + "|" + this.Limit;
+
             }
         }
         #endregion

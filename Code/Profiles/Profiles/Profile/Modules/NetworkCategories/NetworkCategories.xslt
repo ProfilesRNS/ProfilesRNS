@@ -33,7 +33,7 @@
 					<div class="kwsgbox">
             <ul>
               <xsl:for-each select="Item[position()&lt;=10]">
-                <xsl:sort select="." order="ascending"/>
+                
                 <li>
                   <a href="{@URL}">
                   <xsl:value-of select="."/>
@@ -55,7 +55,7 @@
 					<div class="kwsgbox">
             <ul>
               <xsl:for-each select="Item[position()&lt;=10]">
-                <xsl:sort select="." order="ascending"/>
+                
                 <li>
                   <a href="{@URL}">
                     <xsl:value-of select="."/>
@@ -79,8 +79,7 @@
 					</div>
 					<div class="kwsgbox">
             <ul>
-						<xsl:for-each select="Item[position()&lt;=10]">
-              <xsl:sort select="." order="ascending"/>
+						<xsl:for-each select="Item[position()&lt;=10]">            
               <li>
                 <a href="{@URL}">
                   <xsl:value-of select="."/>
@@ -95,14 +94,14 @@
 				<xsl:variable name="Count" select="floor($totalCount div 3) + 1"/>
 				<xsl:variable name="Count2" select="(number(2)*floor($totalCount div 3)) + 2"/>
 				<xsl:for-each select="Items/DetailList[position()&gt;$Count and position()&lt;$Count2 ]">
-          <xsl:sort select="." order="ascending"/>
+          
 					<div class="kwsg">
 						<xsl:value-of select="@Category"/>
 					</div>
 					<div class="kwsgbox">
             <ul>
 						<xsl:for-each select="Item[position()&lt;=10]">
-              <xsl:sort select="." order="ascending"/>
+              
               <li><a href="{@URL}">
 								<xsl:value-of select="."/>
 							</a>
@@ -126,7 +125,7 @@
 					<div class="kwsgbox">
             <ul>
 						<xsl:for-each select="Item[position()&lt;=10]">
-              <xsl:sort select="." order="ascending"/>
+              
               <li><a href="{@URL}">
 								<xsl:value-of select="."/>
 							</a>
@@ -147,7 +146,7 @@
 					<div class="kwsgbox">
             <ul>
 						<xsl:for-each select="Item[position()&lt;=10]">
-              <xsl:sort select="." order="ascending"/>
+              
               <li><a href="{@URL}">
 								<xsl:value-of select="."/>
 							</a>

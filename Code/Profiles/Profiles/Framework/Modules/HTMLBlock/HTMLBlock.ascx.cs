@@ -46,7 +46,7 @@ namespace Profiles.Framework.Modules.HTMLBlock
               //  documentdata.Append(" ItemURLText=\"" + CustomParse.Parse(base.GetModuleParamString("ItemURLText"), item.Data, base.Namespaces));
             }
 
-            lblHTMLBlock.Text = base.GetModuleParamXml("HTML").InnerXml;
+            lblHTMLBlock.Text = base.GetModuleParamXml("HTML").InnerXml.Replace("[[[Root]]]",Root.Domain);
         }
     }
 }

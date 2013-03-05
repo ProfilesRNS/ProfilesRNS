@@ -16,6 +16,11 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Xml;
 using System.Configuration;
+using System.IO;
+using System.Web.UI.WebControls;
+using System.Web.UI;
+using System.Data.Common;
+using System.Web;
 
 using Profiles.Framework.Utilities;
 
@@ -28,15 +33,24 @@ namespace Profiles.Profile.Utilities
         {
             string xmlstr = string.Empty;
             XmlDocument xmlrtn = new XmlDocument();
+            bool UsedCache = true;
+            DateTime timer = DateTime.Now;
+
+            Framework.Utilities.DebugLogging.Log("GetRDFData START: KEY=" + request.Key + "|data TIME=" + timer.ToLongTimeString());
+
             try
             {
-                if (Framework.Utilities.Cache.Fetch(request.Key + "data") == null || request.Edit)
+                xmlrtn = Framework.Utilities.Cache.Fetch(request.Key + "|data");
+
+                if (xmlrtn == null || request.Edit)
                 {
+                    xmlrtn = new XmlDocument();
+
+                    UsedCache = false;
 
                     if (request.Type != string.Empty)
                     {
 
-                        Framework.Utilities.DebugLogging.Log("{CLOUD} DATA BASE start GetRDFData(RDFTriple request)", request);
                         string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
 
                         SqlConnection dbconnection = new SqlConnection(connstr);
@@ -52,7 +66,7 @@ namespace Profiles.Profile.Utilities
                         dbcommand.Parameters.Add(new SqlParameter("@predicate", request.Predicate));
                         dbcommand.Parameters.Add(new SqlParameter("@object", request.Object));
                         dbcommand.Parameters.Add(new SqlParameter("@returnXMLasStr", true));
-                        
+
 
                         if (request.Offset != null && request.Offset != string.Empty)
                             dbcommand.Parameters.Add(new SqlParameter("@offset", request.Offset));
@@ -68,8 +82,9 @@ namespace Profiles.Profile.Utilities
                         if (request.ExpandRDFList != string.Empty)
                             dbcommand.Parameters.Add(new SqlParameter("@ExpandRDFListXML", request.ExpandRDFList));
 
+                        Framework.Utilities.DebugLogging.Log("GetRDFData EXPANDRDF: KEY=" + request.ExpandRDFList);
+
                         dbcommand.Connection = dbconnection;
-                        Framework.Utilities.DebugLogging.Log("{CLOUD} DATA BASE end GetRDFData(RDFTriple request)", request);
 
                         using (var dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection))
                         {
@@ -82,28 +97,162 @@ namespace Profiles.Profile.Utilities
                             SqlConnection.ClearPool(dbconnection);
                         }
 
+
+
+
+
                         xmlrtn.LoadXml(xmlstr);
 
-                        Framework.Utilities.Cache.Set(request.Key + "data", xmlrtn);
+                        //Framework.Utilities.Cache.Set(request.Key + "|data", xmlrtn);
+                        Framework.Utilities.Cache.Set(request.Key + "|data", xmlrtn, request.Subject);
                         xmlstr = string.Empty;
 
                     }
                     else if (request.URI != string.Empty)
                     {
-                        Framework.Utilities.DebugLogging.Log("{CLOUD} HTTP POST start GetRDFData(RDFTriple request) ", request);
                         HTTPIO httpio = new HTTPIO();
                         xmlrtn = httpio.QueryHTTPIO(request);
-                        Framework.Utilities.DebugLogging.Log("{CLOUD} HTTP POST end GetRDFData(RDFTriple request)", request);
-                        Framework.Utilities.Cache.Set(request.Key + "data", xmlrtn);
+                        Framework.Utilities.Cache.Set(request.Key + "|data", xmlrtn, 0);
                     }
                 }
 
+            }
+            catch (Exception e)
+            {
+                Framework.Utilities.DebugLogging.Log(e.Message + e.StackTrace);
+                throw new Exception(e.Message);
+            }
 
-                else
+            Framework.Utilities.DebugLogging.Log("GetRDFData END  : KEY=" + request.Key + "|data USEDCACHE=" + UsedCache.ToString() + " TIME=" + timer.ToLongTimeString() + " DURATION=" + (DateTime.Now - timer).TotalMilliseconds);
+
+            return xmlrtn;
+        }
+
+        public XmlDocument GetPresentationData(RDFTriple request)
+        {
+            string xmlstr = string.Empty;
+            XmlDocument xmlrtn = new XmlDocument();           
+
+            try
+            {
+                xmlrtn = new XmlDocument();
+
+                string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+                SqlConnection dbconnection = new SqlConnection(connstr);
+                SqlCommand dbcommand = new SqlCommand("[rdf.].[GetPresentationXML]");
+
+                SqlDataReader dbreader;
+                dbconnection.Open();
+                dbcommand.CommandType = CommandType.StoredProcedure;
+                dbcommand.CommandTimeout = base.GetCommandTimeout();
+                dbcommand.Parameters.Add(new SqlParameter("@subject", request.Subject));
+                if (request.Predicate > 0)
+                    dbcommand.Parameters.Add(new SqlParameter("@predicate", request.Predicate));
+
+                if (request.Object > 0)
+                    dbcommand.Parameters.Add(new SqlParameter("@object", request.Object));
+
+                dbcommand.Parameters.Add(new SqlParameter("@EditMode", request.Edit ? 1 : 0));
+
+                dbcommand.Parameters.Add(new SqlParameter("@sessionid", request.Session.SessionID));
+
+                dbcommand.Connection = dbconnection;
+
+                dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
+
+                while (dbreader.Read())
+                    xmlstr += dbreader[0].ToString();
+
+                xmlrtn.LoadXml(xmlstr);
+
+
+                xmlstr = string.Empty;
+
+
+                if (!dbreader.IsClosed)
+                    dbreader.Close();
+
+            }
+            catch (Exception ex) { }            
+
+            return xmlrtn;
+        }
+
+        #endregion
+
+
+        #region "GetPropertyList"
+
+        public XmlDocument GetPropertyList(XmlDocument rdf, XmlDocument presentation, string propertyuri, bool withcounts, bool showall, bool cache)
+        {
+            string xmlstr = string.Empty;
+            XmlDocument xmlrtn = new XmlDocument();
+            string key = rdf.InnerXml + presentation.InnerXml + propertyuri + withcounts.ToString() + showall.ToString();
+            SessionManagement sm = new SessionManagement();
+
+
+            bool UsedCache = true;
+            DateTime timer = DateTime.Now;
+
+            Framework.Utilities.DebugLogging.Log("GetPropertyList START: KEY=(KEY)|propertylist TIME=" + timer.ToLongTimeString());
+            try
+            {
+                xmlrtn = Framework.Utilities.Cache.Fetch(key + "|propertylist");
+
+                if (xmlrtn == null || !cache)
                 {
-                    Framework.Utilities.DebugLogging.Log("{CLOUD} CACHE start GetRDFData(RDFTriple request)", request);
-                    xmlrtn = Framework.Utilities.Cache.Fetch(request.Key + "data");
-                    Framework.Utilities.DebugLogging.Log("{CLOUD} CACHE end GetRDFData(RDFTriple request)", request);
+                    xmlrtn = new XmlDocument();
+                    UsedCache = true;
+                    string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+
+                    SqlConnection dbconnection = new SqlConnection(connstr);
+                    SqlCommand dbcommand = new SqlCommand();
+
+                    SqlDataReader dbreader;
+                    dbconnection.Open();
+                    dbcommand.CommandType = CommandType.StoredProcedure;
+
+                    dbcommand.CommandTimeout = this.GetCommandTimeout();
+
+                    dbcommand.CommandText = "[RDF.].GetPropertyList";
+                    dbcommand.Parameters.Add(new SqlParameter("@RDFStr", rdf.OuterXml));
+                    dbcommand.Parameters.Add(new SqlParameter("@PresentationXML", presentation.OuterXml));
+                    dbcommand.Parameters.Add(new SqlParameter("@returnXMLasStr", true));
+
+
+                    if (withcounts)
+                        dbcommand.Parameters.Add(new SqlParameter("@CountsOnly", 1));
+                    else
+                        dbcommand.Parameters.Add(new SqlParameter("@CountsOnly", 0));
+
+                    if (showall)
+                        dbcommand.Parameters.Add(new SqlParameter("@ShowAllProperties", 1));
+                    else
+                        dbcommand.Parameters.Add(new SqlParameter("@ShowAllProperties", 0));
+
+                    if (propertyuri != string.Empty)
+                    {
+                        dbcommand.Parameters.Add(new SqlParameter("@PropertyURI", propertyuri));
+                    }
+
+                    dbcommand.Connection = dbconnection;
+
+                    dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
+
+                    while (dbreader.Read())
+                    {
+                        xmlstr += dbreader[0].ToString();
+                    }
+
+                    if (!dbreader.IsClosed)
+                        dbreader.Close();
+
+                    xmlrtn.LoadXml(xmlstr);
+
+                    Framework.Utilities.Cache.Set(key + "|propertylist", xmlrtn, 0);
+                    xmlstr = string.Empty;
+
+
                 }
             }
             catch (Exception e)
@@ -112,137 +261,66 @@ namespace Profiles.Profile.Utilities
                 throw new Exception(e.Message);
             }
 
-            return xmlrtn;
-        }
-
-        public XmlDocument GetPresentationData(RDFTriple request)
-        {
-            string xmlstr = string.Empty;
-            XmlDocument xmlrtn = new XmlDocument();
-            try
-            {
-
-                if (Framework.Utilities.Cache.Fetch(request.Key + "presentation") == null || request.Edit)
-                {
-                    string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
-                    SqlConnection dbconnection = new SqlConnection(connstr);
-                    SqlCommand dbcommand = new SqlCommand("[rdf.].[GetPresentationXML]");
-
-                    SqlDataReader dbreader;
-                    dbconnection.Open();
-                    dbcommand.CommandType = CommandType.StoredProcedure;
-                    dbcommand.CommandTimeout = base.GetCommandTimeout();
-                    dbcommand.Parameters.Add(new SqlParameter("@subject", request.Subject));
-                    if (request.Predicate > 0)
-                        dbcommand.Parameters.Add(new SqlParameter("@predicate", request.Predicate));
-
-                    if (request.Object > 0)
-                        dbcommand.Parameters.Add(new SqlParameter("@object", request.Object));
-
-                    //ZAP, this will need to be worked out on how I tell if its open for edit.                    
-                    dbcommand.Parameters.Add(new SqlParameter("@EditMode", request.Edit ? 1 : 0));
-
-                    dbcommand.Parameters.Add(new SqlParameter("@sessionid", request.Session.SessionID));
-
-                    dbcommand.Connection = dbconnection;
-
-                    dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
-
-                    while (dbreader.Read())
-                        xmlstr += dbreader[0].ToString();
 
 
+            Framework.Utilities.DebugLogging.Log("GetPropertyList END  : KEY=(KEY)|propertylist USEDCACHE=" + UsedCache.ToString() + " TIME=" + timer.ToLongTimeString() + " DURATION=" + (DateTime.Now - timer).TotalMilliseconds.ToString());
 
-
-
-
-                    Framework.Utilities.DebugLogging.Log(xmlstr);
-
-                    xmlrtn.LoadXml(xmlstr);
-
-                    Framework.Utilities.Cache.Set(request.Key + "presentation", xmlrtn);
-                    xmlstr = string.Empty;
-
-
-                    if (!dbreader.IsClosed)
-                        dbreader.Close();
-
-
-                }
-                else
-                {
-                    xmlrtn = Framework.Utilities.Cache.Fetch(request.Key + "presentation");
-                }
-
-
-            }
-            catch (Exception ex) { }
 
 
             return xmlrtn;
         }
+
 
         #endregion
 
+
         #region "Profile Photo"
 
-        public System.IO.Stream GetUserPhotoList(Int64 NodeID)
+        public System.IO.Stream GetUserPhotoList(Int64 NodeID, bool harvarddefault)
         {
             Object result = null;
+            Edit.Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
+            //Use the editor method to resize the photo to 150.
+            Edit.Utilities.DataIO resize = new Profiles.Edit.Utilities.DataIO();
 
-            //if (Framework.Utilities.Cache.FetchBytes(NodeID.ToString() + "photo") == null)
-            //{
             try
             {
                 string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
 
+
                 SqlConnection dbconnection = new SqlConnection(connstr);
                 dbconnection.Open();
 
-                SqlCommand dbcommand = new SqlCommand("[Profile.Data].[Person.GetPhotos]");
-                //SqlCommand dbcommand = new SqlCommand("Select Photo from [profile.data].[person.photo]");
-
-                dbcommand.CommandType = CommandType.StoredProcedure;
-                dbcommand.CommandTimeout = base.GetCommandTimeout();
-                dbcommand.Parameters.Add(new SqlParameter("@NodeID", NodeID));
-
+                SqlCommand dbcommand;
+                if (harvarddefault)
+                {
+                    dbcommand = new SqlCommand("select photo from [Catalyst.].[Person.Photo] where personid = " + data.GetPersonID(NodeID).ToString());
+                    dbcommand.CommandType = CommandType.Text;
+                    dbcommand.CommandTimeout = base.GetCommandTimeout();
+                }
+                else
+                {
+                    dbcommand = new SqlCommand("[Profile.Data].[Person.GetPhotos]");
+                    dbcommand.CommandType = CommandType.StoredProcedure;
+                    dbcommand.CommandTimeout = base.GetCommandTimeout();
+                    dbcommand.Parameters.Add(new SqlParameter("@NodeID", NodeID));
+                }
                 dbcommand.Connection = dbconnection;
 
-                result = dbcommand.ExecuteScalar();
+                result = resize.ResizeImageFile((byte[])dbcommand.ExecuteScalar(), 150);
 
                 if (result == null)
                 {
                     result = (byte[])System.Text.Encoding.ASCII.GetBytes("null");
                 }
 
-
-                //string connstr2 = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
-
-                //SqlConnection dbconnection1 = new SqlConnection(connstr2);
-                //dbconnection1.Open();
-
-                ////Save this chestnut for when we edit 
-                //using (SqlCommand cmd = new SqlCommand("INSERT INTO [profile.data].[person.photo](personid,photo) VALUES (32213,@binaryValue)", dbconnection1))
-                //{
-                //    // Replace 8000, below, with the correct size of the field
-                //    cmd.Parameters.Add("@binaryValue", SqlDbType.VarBinary).Value = result;
-                //    cmd.ExecuteNonQuery();
-                //}
-
-                //dbconnection1.Close();
                 dbconnection.Close();
-
-                //   Framework.Utilities.Cache.Set(NodeID.ToString() + "photo", result);
 
             }
             catch (Exception e)
             {
-
                 throw new Exception(e.Message);
-
             }
-
-
 
             return new System.IO.MemoryStream((byte[])result);
         }
@@ -283,8 +361,6 @@ namespace Profiles.Profile.Utilities
         }
 
         #endregion
-
-
 
         #region
 
@@ -382,7 +458,7 @@ namespace Profiles.Profile.Utilities
                     html.AppendLine("</ul>");
 
 
-                    Framework.Utilities.Cache.Set(connectiontype + node1.ToString() + node2.ToString() + concept, html.ToString());
+                    Framework.Utilities.Cache.Set(connectiontype + node1.ToString() + node2.ToString() + concept, html.ToString(), 0);
 
 
 
@@ -412,6 +488,70 @@ namespace Profiles.Profile.Utilities
 
 
         #endregion
+
+
+
+        public string GetNetworkCloud(RDFTriple request)
+        {
+
+            SessionManagement sm = new SessionManagement();
+            string xml = string.Empty;
+
+            string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+            SqlConnection dbconnection = new SqlConnection(connstr);
+            SqlCommand dbcommand = new SqlCommand("[Profile.Module].[NetworkCloud.Person.HasResearchArea.GetXML]");
+
+            SqlDataReader dbreader;
+            dbconnection.Open();
+            dbcommand.CommandType = CommandType.StoredProcedure;
+            dbcommand.CommandTimeout = base.GetCommandTimeout();
+            dbcommand.Parameters.Add(new SqlParameter("@nodeid", request.Subject));      
+
+            dbcommand.Connection = dbconnection;
+
+            dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
+
+            while (dbreader.Read())
+                xml += dbreader[0].ToString();
+
+            if (!dbreader.IsClosed)
+                dbreader.Close();
+
+            return xml;
+        }
+
+        public string GetNetworkCategory(RDFTriple request)
+        {
+
+            SessionManagement sm = new SessionManagement();
+            string xml = string.Empty;
+
+            string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+            SqlConnection dbconnection = new SqlConnection(connstr);
+            SqlCommand dbcommand = new SqlCommand("[Profile.Module].[NetworkCategory.Person.HasResearchArea.GetXML]");
+
+            SqlDataReader dbreader;
+            dbconnection.Open();
+            dbcommand.CommandType = CommandType.StoredProcedure;
+            dbcommand.CommandTimeout = base.GetCommandTimeout();
+            dbcommand.Parameters.Add(new SqlParameter("@nodeid", request.Subject));
+
+            dbcommand.Connection = dbconnection;
+
+            dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
+
+            while (dbreader.Read())
+                xml += dbreader[0].ToString();
+
+            if (!dbreader.IsClosed)
+                dbreader.Close();
+
+            return xml;
+        }
+
+
+
+
 
         public SqlDataReader GetPublications(RDFTriple request)
         {
@@ -556,9 +696,37 @@ namespace Profiles.Profile.Utilities
             dbcommand.CommandTimeout = base.GetCommandTimeout();
             // Add parameters
             dbcommand.Parameters.Add(new SqlParameter("@NodeId", request.Subject));
-			dbcommand.Parameters.Add(new SqlParameter("@ListType", "newest"));
+            dbcommand.Parameters.Add(new SqlParameter("@ListType", "newest"));
             // Return reader
             return dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
+        }
+
+        public System.Xml.Linq.XDocument GetConceptMeshInfo(RDFTriple request)
+        {
+            SessionManagement sm = new SessionManagement();
+            string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+
+            using (var db = new SqlConnection(connstr))
+            {
+                SqlCommand dbcommand = new SqlCommand("[Profile.Data].[Concept.Mesh.GetDescriptorXML]", db);
+                dbcommand.CommandType = CommandType.StoredProcedure;
+                dbcommand.CommandTimeout = base.GetCommandTimeout();
+                dbcommand.Parameters.Add(new SqlParameter("@NodeId", request.Subject));
+
+                db.Open();
+
+                XmlReader xreader = dbcommand.ExecuteXmlReader();
+
+                System.Xml.Linq.XDocument xDoc = null;
+
+                if (xreader.Read())
+                    xDoc = System.Xml.Linq.XDocument.Load(xreader);
+
+                xreader.Close();
+                db.Close();
+
+                return xDoc;
+            }
         }
 
 
@@ -628,7 +796,9 @@ namespace Profiles.Profile.Utilities
         public String GetGoogleKey()
         {
             XmlDocument val = new XmlDocument();
-            val.Load(Root.Domain + "/Profile/Modules/NetworkMap/config.xml");
+
+            String Filepath = HttpContext.Current.Server.MapPath("~/Profile/Modules/NetworkMap/config.xml");
+            val.Load(Filepath);
             string result = val.SelectSingleNode("//mapconfig/Key").InnerText;
 
             return result;
@@ -640,7 +810,9 @@ namespace Profiles.Profile.Utilities
             Profiles.Profile.Modules.NetworkMap.NetworkMap.GoogleMapLocation link = new Profiles.Profile.Modules.NetworkMap.NetworkMap.GoogleMapLocation();
             try
             {
-                vals.Load(Root.Domain + "/Profile/Modules/NetworkMap/config.xml");
+                String Filepath = HttpContext.Current.Server.MapPath("~/Profile/Modules/NetworkMap/config.xml");
+                vals.Load(Filepath);
+                //vals.Load(Root.Domain + "/Profile/Modules/NetworkMap/config.xml");
             }
             catch (Exception e)
             {

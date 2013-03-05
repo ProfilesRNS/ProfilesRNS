@@ -2,8 +2,8 @@
   <PageOptions Columns="2"/>
   <WindowName>Manage Proxies</WindowName>
   <PageTitle>Manage Proxies</PageTitle>
-  <PageBackLinkName>Back to Profile</PageBackLinkName>
-  <PageBackLinkURL>{{{//rdf:RDF/rdf:Description/rdf:subject/@rdf:resource}}}</PageBackLinkURL>
+  <PageBackLinkName></PageBackLinkName>
+  <PageBackLinkURL></PageBackLinkURL>
   <PageSubTitle></PageSubTitle>
   <PageDescription></PageDescription>
   <PanelList>

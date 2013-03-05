@@ -65,9 +65,8 @@
             <input type="hidden" id="searchtype" name="searchtype" value="everything"/>
           </form>
         </div>
-        <br/>
-        <div style="width:180px;background-color:#F7F3EF;border:1px solid #999999;font-size:11px;padding:1px;text-align:center;">
-          Click the <b>Why</b> column to see why a person matched the search.
+        <div style="width:380px;font-size:11px;padding:1px;text-align:left;">
+          Click the <b>Why</b> column to see why an item matched the search.
         </div>
         <br></br>
         <div class="listTable" style="margin-top:0px;float: left;z-index:1;">
@@ -222,6 +221,7 @@
           }
 
         </script>
+        
         <div class="listTablePagination" style="float: left;">
           <table>
             <tbody>
@@ -269,36 +269,36 @@
                   <xsl:choose>
                     <xsl:when test="$page&lt;$totalpages">
                       <a href="JavaScript:GotoLastPage();" class="listTablePaginationFL listTablePaginationA">
-                        <img src="{$root}/framework/images/arrow_last.gif"/>
+                        <img src="{$root}/framework/images/arrow_last.gif" border="0"/>
                       </a>
                       <a href="javascript:GotoNextPage();" class="listTablePaginationPN listTablePaginationN listTablePaginationA">
-                        Next<img src="{$root}/framework/images/arrow_next.gif"/>
+                        Next<img src="{$root}/framework/images/arrow_next.gif" border="0"/>
                       </a>
                     </xsl:when>
                     <xsl:otherwise>
                       <div class="listTablePaginationFL">
-                        <img src="{$root}/framework/images/arrow_last_d.gif"/>
+                        <img src="{$root}/framework/images/arrow_last_d.gif" border="0"/>
                       </div>
                       <div class="listTablePaginationPN listTablePaginationN">
-                        Next<img src="{$root}/framework/images/arrow_next_d.gif"/>
+                        Next<img src="{$root}/framework/images/arrow_next_d.gif" border="0"/>
                       </div>
                     </xsl:otherwise>
                   </xsl:choose>
                   <xsl:choose>
                     <xsl:when test="$page&gt;1">
                       <a href="JavaScript:GotoPreviousPage();" class="listTablePaginationPN listTablePaginationP listTablePaginationA">
-                        <img src="{$root}/framework/images/arrow_prev.gif"/>Prev
+                        <img src="{$root}/framework/images/arrow_prev.gif" border="0"/>Prev
                       </a>
                       <a href="JavaScript:GotoFirstPage();" class="listTablePaginationFL listTablePaginationA">
-                        <img src="{$root}/framework/images/arrow_first.gif"/>
+                        <img src="{$root}/framework/images/arrow_first.gif" border="0"/>
                       </a>
                     </xsl:when>
                     <xsl:otherwise>
                       <div class="listTablePaginationPN listTablePaginationP">
-                        <img src="{$root}/framework/images/arrow_prev_d.gif"/>Prev
+                        <img src="{$root}/framework/images/arrow_prev_d.gif" border="0"/>Prev
                       </div>
                       <div class="listTablePaginationFL">
-                        <img src="{$root}/framework/images/arrow_first_d.gif"/>
+                        <img src="{$root}/framework/images/arrow_first_d.gif" border="0"/>
                       </div>
                     </xsl:otherwise>
                   </xsl:choose>
@@ -308,7 +308,6 @@
           </table>
         </div>
       </xsl:when>
-
       <xsl:otherwise>
         <xsl:text>No matching results.</xsl:text>
       </xsl:otherwise>

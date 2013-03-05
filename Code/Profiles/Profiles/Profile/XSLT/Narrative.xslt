@@ -6,7 +6,7 @@
 					<xsl:when test="rdf:RDF/rdf:Description/vivo:overview !=''">
 						<div class="sectionHeader">Narrative</div>
 						<div class="narrative">
-							<xsl:value-of select="rdf:RDF/rdf:Description/vivo:overview"/>                           
+							translate(<xsl:value-of select="rdf:RDF/rdf:Description/vivo:overview"/>,"&#10;&#13;","<br/>")             
 						</div>
 					</xsl:when>
 				</xsl:choose>

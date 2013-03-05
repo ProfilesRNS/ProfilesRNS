@@ -48,7 +48,8 @@ namespace Profiles.Edit.Modules.EditObjectTypeProperty
             Edit.Utilities.DataIO data;
             SessionManagement sm = new SessionManagement();
 
-            data = new Edit.Utilities.DataIO();
+            Profiles.Profile.Utilities.DataIO propdata = new Profiles.Profile.Utilities.DataIO();
+            data = new Profiles.Edit.Utilities.DataIO();
 
             if (Request.QueryString["subject"] != null)
                 this.SubjectID = Convert.ToInt64(Request.QueryString["subject"]);
@@ -61,7 +62,7 @@ namespace Profiles.Edit.Modules.EditObjectTypeProperty
 
             GetSubjectProfile();
 
-            this.PropertyListXML = data.GetPropertyList(this.BaseData, base.PresentationXML, PredicateURI, false, true, false);
+            this.PropertyListXML = propdata.GetPropertyList(this.BaseData, base.PresentationXML, PredicateURI, false, true, false);
             this.PropertyLabel = PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@Label").Value;
             litBackLink.Text = "<a href='" + Root.Domain + "/edit/" + this.SubjectID.ToString() + "'>Edit Menu</a> &gt; <b>" + this.PropertyLabel + "</b>";
 
@@ -330,7 +331,7 @@ namespace Profiles.Edit.Modules.EditObjectTypeProperty
 
             searchuri = ddlPropertyList.SelectedValue;
 
-            searchresults = data.Search(data.SearchRequest(txtKeyword.Text.Trim(), "", searchuri, "100", "0"), true);
+            searchresults = data.Search(data.SearchRequest(txtKeyword.Text.Trim(),"false", "", searchuri, "100", "0"), true);
 
             foreach (XmlNode x in searchresults.SelectNodes("SearchResults/Network/Connection"))
             {

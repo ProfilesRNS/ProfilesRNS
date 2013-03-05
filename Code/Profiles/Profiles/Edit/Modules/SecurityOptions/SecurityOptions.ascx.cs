@@ -31,20 +31,17 @@ namespace Profiles.Edit.Modules.SecurityOptions
 {
     public partial class SecurityOptions : System.Web.UI.UserControl
     {
+        public event EventHandler BubbleClick;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
                 Session["pnlSecurityOptions.Visible"] = null;
-            
-            DrawProfilesModule();
 
+            DrawProfilesModule();
         }
 
         private void DrawProfilesModule()
         {
-
-        
-
             List<SecurityItem> si = new List<SecurityItem>();
 
             foreach (XmlNode securityitem in this.SecurityGroups.SelectNodes("SecurityGroupList/SecurityGroup"))
@@ -54,16 +51,11 @@ namespace Profiles.Edit.Modules.SecurityOptions
                     Convert.ToInt32(securityitem.SelectSingleNode("@ID").Value)));
             }
 
-
             grdSecurityGroups.DataSource = si;
             grdSecurityGroups.DataBind();
-
-
         }
         protected void grdSecurityGroups_OnDataBound(object sender, GridViewRowEventArgs e)
         {
-
-
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 SecurityItem si = (SecurityItem)e.Row.DataItem;
@@ -100,6 +92,9 @@ namespace Profiles.Edit.Modules.SecurityOptions
                 imbSecurityOptions.ImageUrl = "~/Framework/Images/icon_squareArrow.gif";
                 Session["pnlSecurityOptions.Visible"] = null;
             }
+
+            if (BubbleClick != null)
+                BubbleClick(this, e);
         }
         protected void rdoSecurityOption_OnCheckedChanged(object sender, EventArgs e)
         {
@@ -116,17 +111,15 @@ namespace Profiles.Edit.Modules.SecurityOptions
             GridViewRow row = (GridViewRow)rb.NamingContainer;
             ((RadioButton)row.FindControl("rdoSecurityOption")).Checked = true;
             lbSecurityOptions.Text = "Edit Visibility (" + row.Cells[1].Text + ")";
-              
-             UpdateSecuritySetting(((HiddenField)row.Cells[0].FindControl("hdnPrivacyCode")).Value);          
-
+            UpdateSecuritySetting(((HiddenField)row.Cells[0].FindControl("hdnPrivacyCode")).Value);
         }
 
         private void UpdateSecuritySetting(string securitygroup)
         {
             Edit.Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
-            
             data.UpdateSecuritySetting(this.Subject, data.GetStoreNode(this.PredicateURI), Convert.ToInt32(securitygroup));
-
+            Framework.Utilities.Cache.Remove("Node Dependency " + this.Subject.ToString());
+            Framework.Utilities.Cache.CreateDependency(this.Subject.ToString());
         }
 
         public XmlDataDocument SecurityGroups { get; set; }
@@ -148,6 +141,5 @@ namespace Profiles.Edit.Modules.SecurityOptions
             public string Description { get; set; }
             public int PrivacyCode { get; set; }
         }
-
     }
 }

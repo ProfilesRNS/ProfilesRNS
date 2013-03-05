@@ -51,18 +51,11 @@ namespace Profiles.Edit.Modules.CustomEditEmail
             SessionManagement sm = new SessionManagement();
             base.BaseData = pagedata;
 
+            data = new Profiles.Edit.Utilities.DataIO();
+            this.Email = base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/vivo:email", base.Namespaces).InnerText;
 
-            if (base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/vivo:email", base.Namespaces) != null)
-            {
 
-                this.Email = base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/vivo:email", base.Namespaces).InnerText;
-            }
-            else
-            {
-                this.Email = string.Empty;
-            }
-
-            data = new Edit.Utilities.DataIO();
+            Profiles.Profile.Utilities.DataIO propdata = new Profiles.Profile.Utilities.DataIO();
 
 
             if (Request.QueryString["subject"] != null)
@@ -73,7 +66,7 @@ namespace Profiles.Edit.Modules.CustomEditEmail
                 Response.Redirect("~/search");
 
             this.PredicateURI = Request.QueryString["predicateuri"].Replace("!", "#");
-            this.PropertyListXML = data.GetPropertyList(this.BaseData, base.PresentationXML, this.PredicateURI, false, true, false);
+            this.PropertyListXML = propdata.GetPropertyList(this.BaseData, base.PresentationXML, this.PredicateURI, false, true, false);
             litBackLink.Text = "<a href='" + Root.Domain + "/edit/" + this.SubjectID.ToString() + "'>Edit Menu</a> &gt; <b>" + PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@Label").Value + "</b>";
 
 

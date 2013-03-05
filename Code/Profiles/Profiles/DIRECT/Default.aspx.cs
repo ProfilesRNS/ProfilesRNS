@@ -26,22 +26,23 @@ using Profiles.Framework.Utilities;
 namespace Profiles.DIRECT
 {
     public partial class Default : System.Web.UI.Page
-    {
-     
+    {     
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
             Profiles.Framework.Template masterpage;
             masterpage = (Framework.Template)base.Master;
             LoadPresentationXML();
             masterpage.PresentationXML = this.PresentationXML;
             masterpage.RDFData = null;
+            
+            if(Request.QueryString["searchrequest"]!=null)
+                masterpage.SearchRequest = Request.QueryString["searchrequest"];
+
             masterpage.RDFNamespaces = null;
 
-
-
         }
-
 
         public void LoadPresentationXML()
         {

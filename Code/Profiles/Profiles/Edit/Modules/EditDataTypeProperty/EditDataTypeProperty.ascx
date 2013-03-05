@@ -14,17 +14,17 @@
         <asp:HiddenField ID="hiddenSubjectID" runat="server" />
         <asp:UpdateProgress ID="updateProgress" runat="server">
             <ProgressTemplate>
-                <div style="position: fixed; text-align: center; height: 100%; width: 100%; top: 0;
+                <div style="position: fixed; text-align: center; height: 100px; width: 100px; top: 0;
                     right: 0; left: 0; z-index: 9999999; opacity: 0.7;">
                     <span style="border-width: 0px; position: fixed; padding: 50px; background-color: #FFFFFF;
-                       font-size: 25px; left: 40%; top: 40%;">Loading ...</span>
+                       font-size: 25px; left: 40%; top: 40%;"><img alt="Loading..." src="../edit/Images/loader.gif" /></span>
                 </div>
             </ProgressTemplate>
         </asp:UpdateProgress>
         <table id="tblEditProperty" width="100%">
             <tr>
                 <td colspan='3'>
-                    <asp:Literal runat="server" ID="Literal1"></asp:Literal>
+                    <asp:Literal runat="server" ID="Literal1"></asp:Literal>                    
                 </td>
             </tr>
             <tr>
@@ -48,7 +48,7 @@
                         </ItemTemplate>
                     </asp:Repeater>
                     <asp:Panel ID="pnlInsertProperty" runat="server" Style="background-color: #F0F4F6;
-                        margin-bottom: 5px; border: solid 1px #ccc;" DefaultButton="btnInsertProperty"
+                        margin-bottom: 5px; border: solid 1px #ccc;" 
                         Visible="false">
                         <table border="0" cellspacing="2" cellpadding="4">
                             <tr>
@@ -61,8 +61,7 @@
                                 <td colspan="3">
                                     <div style="padding-bottom: 5px; text-align: left;">
                                         <asp:LinkButton ID="btnInsertProperty" runat="server" CausesValidation="False" OnClick="btnInsert_OnClick"
-                                            Text="Save and add another" TabIndex="5"></asp:LinkButton>
-                                        &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;
+                                            Text="Save and add another&nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;" TabIndex="5"></asp:LinkButton>                                        
                                         <asp:LinkButton ID="btnInsertProperty2" runat="server" CausesValidation="False" OnClick="btnInsertClose_OnClick"
                                             Text="Save and Close" TabIndex="6"></asp:LinkButton>
                                         &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;
@@ -89,7 +88,7 @@
                                         <asp:HiddenField ID="hdLabel" runat="server" Value='<%# Bind("Literal") %>'></asp:HiddenField>
                                     </EditItemTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="lblLabel" runat="server" Text='<%# Bind("Literal") %>'></asp:Label>
+                                        <asp:Label ID="lblLabel" runat="server"></asp:Label>
                                     </ItemTemplate>
                                     <ControlStyle Width="600px" />
                                     <HeaderStyle HorizontalAlign="Left" />

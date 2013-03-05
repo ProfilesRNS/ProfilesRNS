@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<?altova_samplexml SimilarPeopleNetwork.xml?>
+
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:geo="http://aims.fao.org/aos/geopolitical.owl#" xmlns:afn="http://jena.hpl.hp.com/ARQ/function#" xmlns:prns="http://profiles.catalyst.harvard.edu/ontology/prns#" xmlns:obo="http://purl.obolibrary.org/obo/" xmlns:dcelem="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:event="http://purl.org/NET/c4dm/event.owl#" xmlns:bibo="http://purl.org/ontology/bibo/" xmlns:vann="http://purl.org/vocab/vann/" xmlns:vitro07="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#" xmlns:vitro="http://vitro.mannlib.cornell.edu/ns/vitro/public#" xmlns:vivo="http://vivoweb.org/ontology/core#" xmlns:pvs="http://vivoweb.org/ontology/provenance-support#" xmlns:scirr="http://vivoweb.org/ontology/scientific-research-resource#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:swvs="http://www.w3.org/2003/06/sw-vocab-status/ns#" xmlns:skco="http://www.w3.org/2004/02/skos/core#" xmlns:owl2="http://www.w3.org/2006/12/owl2-xml#" xmlns:skos="http://www.w3.org/2008/05/skos#" xmlns:foaf="http://xmlns.com/foaf/0.1/">
   <xsl:output method="html"/>
   <xsl:key name="EntityList" match="Profile" use="@EntityID"/>
   <xsl:template match="/">
-    <html>
-      <head>
+   
         <script type="text/javascript">
+          <xsl:text disable-output-escaping="yes">
           var hasClickedListTable = false;
           function doListTableRowOver(x) {
           //x.className = 'overRow';
@@ -48,25 +48,24 @@
           function doListTableCellClick(x) {
           hasClickedListTable = true;
           }
-
-
-        </script>
-      </head>
-      <script>        
+        
         function doURL(x){
         if (!hasClickedListTable) { document.location = x;}
-        }
+       }
+</xsl:text>
       </script>
+      
+      
       <div class="tabInfoText">Similar people share similar sets of concepts, but are not necessarily co-authors.</div>
       <div class="listTable" style="margin-top: 12px, margin-bottom:8px ">
         <table id="thetable1">
           <tbody>
             <tr>
-              <th class="alignLeft" style="width: 150px;">Name</th>
+              <th class="alignLeft" style="width: 120px;">Name</th>
               <th style="width: 110px;">
                 Also Co-Authors
               </th>
-              <th style="width: 80px;">
+              <th style="width: 150px;">
                 Similarity Score
               </th>
               <th style="width: 50px;">Why?</th>
@@ -75,7 +74,9 @@
               <xsl:sort select="prns:sortOrder" data-type="number"/>
               <xsl:variable name="connectionResource" select="@rdf:about"/>
               <xsl:variable name="objectResource" select="./rdf:object/@rdf:resource"/>
-              <tr  onclick="doURL('{$objectResource}')" onmouseover="doListTableRowOver(this)">
+			  <xsl:variable name="connectionDetail" select="./prns:hasConnectionDetails/@rdf:resource"/>
+			  <xsl:variable name="isCoAuthor" select="/rdf:RDF/rdf:Description[@rdf:about=$connectionDetail]/prns:isAlsoCoAuthor"/>
+              <tr  onclick="doURL('{$objectResource}')" test="{$connectionDetail}" onmouseover="doListTableRowOver(this)">
                 <xsl:choose>
                   <xsl:when test="position() mod 2 = 0">
                     <xsl:attribute name="class">
@@ -101,15 +102,20 @@
                 </td>
                 <td>
                   <div style="width: 98px;">
-                    <xsl:value-of select="'Data Missing'"/>
+					  <xsl:choose>
+						  <xsl:when test="$isCoAuthor">
+							Yes
+						  </xsl:when>
+						  <xsl:otherwise></xsl:otherwise>
+					  </xsl:choose>
                   </div>
                 </td>
-                <td>
-                  <div style="width: 68px;">
+                <td align="center">
+                  
                     <xsl:value-of select="substring(/rdf:RDF/rdf:Description[@rdf:about=$connectionResource]/prns:connectionWeight,1,5)"/>
-                  </div>
+                  
                 </td>
-                <td onclick="doListTableCellClick(this);doWhyClick('{@rdf:about}');" onmouseout="doListTableCellOut(this);" onmouseover="doListTableCellOver(this);">
+                <td onclick="doListTableCellClick(this);document.location = '{@rdf:about}';" onmouseout="doListTableCellOut(this);" onmouseover="doListTableCellOver(this);">
                   <div class="listTableLink" style="width: 38px; color: rgb(51, 102, 204);">Why?</div>
                 </td>
               </tr>
@@ -117,6 +123,6 @@
           </tbody>
         </table>
       </div>
-    </html>
+   
   </xsl:template>
 </xsl:stylesheet>

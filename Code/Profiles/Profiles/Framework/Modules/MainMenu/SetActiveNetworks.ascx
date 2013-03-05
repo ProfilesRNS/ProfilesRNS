@@ -11,6 +11,18 @@
     
  --%>
 <div class="activeSection" id="activenetworks">
+   <asp:Panel runat="server" ID="pnlSetActiveNetworks" Visible="false">
+        <div class="activeSectionHead">
+            This Person is my...</div>
+        <div class="activeSectionBody">
+            <asp:Repeater ID="rptRelationshipTypes" runat="server" OnItemDataBound="rptRelationshipTypes_ItemBound">
+                <ItemTemplate>
+                    <asp:CheckBox runat="server" AutoPostBack="true" ID="chkRelationshipType" OnCheckedChanged="chkRelationshipTypes_OnCheckedChanged" />
+                    <br />
+                </ItemTemplate>
+            </asp:Repeater>
+        </div>
+    </asp:Panel>
     <asp:Panel ID="pnlMyNetwork" runat="server" Visible="false">
         <div class="activeSectionHead">
             My Network</div>
@@ -34,16 +46,5 @@
             <asp:Literal runat="server" Text="Details" ID="litActiveNetworkDetails"></asp:Literal>
         </div>
     </asp:Panel>
-    <asp:Panel runat="server" ID="pnlSetActiveNetworks" Visible="false">
-        <div class="activeSectionHead">
-            This Person is my...</div>
-        <div class="activeSectionBody">
-            <asp:Repeater ID="rptRelationshipTypes" runat="server" OnItemDataBound="rptRelationshipTypes_ItemBound">
-                <ItemTemplate>
-                    <asp:CheckBox runat="server" AutoPostBack="true" ID="chkRelationshipType" OnCheckedChanged="chkRelationshipTypes_OnCheckedChanged" />
-                    <br />
-                </ItemTemplate>
-            </asp:Repeater>
-        </div>
-    </asp:Panel>
+ 
 </div>

@@ -45,6 +45,9 @@ namespace Profiles.Framework.Modules.ApplyXSLT
             XsltArgumentList args = new XsltArgumentList();
             args.AddParam("root", "", Root.Domain);
 
+            //If your module performs a data request, based on the DataURI parameter then call ReLoadBaseData
+            base.GetDataByURI();
+
             DateTime d = DateTime.Now;
 
             Framework.Utilities.DebugLogging.Log("{ApplyXSLT Start} " + base.GetModuleParamString("XSLTPath"));          

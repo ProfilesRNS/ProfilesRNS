@@ -94,7 +94,7 @@ namespace Profiles.Edit.Utilities
                 ExecuteSQLDataCommand(GetDBCommand(ref dbconnection, "[Profile.Data].[Publication.DoesPublicationExist]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param));
 
                 dbconnection.Close();
-
+                SqlConnection.ClearPool(dbconnection);
                 exists = Convert.ToBoolean(param[1].Value);
 
             }
@@ -110,7 +110,6 @@ namespace Profiles.Edit.Utilities
 
         public void UpdateEntityOnePerson(int personid)
         {
-
             SessionManagement sm = new SessionManagement();
             string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
 
@@ -132,6 +131,15 @@ namespace Profiles.Edit.Utilities
 
                 if (dbconnection.State != ConnectionState.Closed)
                     dbconnection.Close();
+
+                if (HttpContext.Current.Request.QueryString["subjectid"] != null)
+                {
+                    Framework.Utilities.Cache.Remove("Node Dependency " + HttpContext.Current.Request.QueryString["subjectid"].ToString());
+                    Framework.Utilities.Cache.CreateDependency(HttpContext.Current.Request.QueryString["subjectid"].ToString());
+
+                }
+
+
             }
             catch (Exception e)
             {
@@ -164,7 +172,7 @@ namespace Profiles.Edit.Utilities
                 ExecuteSQLDataCommand(GetDBCommand(ref dbconnection, "[Profile.Data].[Publication.Pubmed.AddPubMedXML]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param));
 
                 dbconnection.Close();
-
+                SqlConnection.ClearPool(dbconnection);
 
             }
             catch (Exception e)
@@ -491,6 +499,8 @@ namespace Profiles.Edit.Utilities
 
         }
 
+
+
         public bool SaveImage(Int32 personid, byte[] image)
         {
             SessionManagement sm = new SessionManagement();
@@ -584,13 +594,9 @@ namespace Profiles.Edit.Utilities
             snr.DataType.Value = null;
             snr.DataType.ParamOrdinal = 2;
 
-
             return this.GetNodeId(snr);
 
         }
-
-
-       
 
         public bool DeleteTriple(Int64 subjectid, Int64 predicateid, Int64 objectid)
         {
@@ -623,14 +629,14 @@ namespace Profiles.Edit.Utilities
 
                 comm.Connection.Close();
 
-
                 if (dbconnection.State == ConnectionState.Open)
                     dbconnection.Close();
 
 
                 error = Convert.ToBoolean(param[5].Value);
 
-
+                Framework.Utilities.Cache.Remove("Node Dependency " + subjectid.ToString());
+                Framework.Utilities.Cache.CreateDependency(subjectid.ToString());
 
 
                 if (error)
@@ -720,6 +726,9 @@ namespace Profiles.Edit.Utilities
             if (dbconnection.State == ConnectionState.Open)
                 dbconnection.Close();
 
+
+
+
             return Convert.ToInt64(param[4].Value.ToString());
 
         }
@@ -755,8 +764,6 @@ namespace Profiles.Edit.Utilities
             return error;
 
         }
-
-     
 
         public bool MoveTripleUp(Int64 subjectid, Int64 predicateid, Int64 objectid)
         {
@@ -942,6 +949,9 @@ namespace Profiles.Edit.Utilities
                 sarr.EndDate.Value = enddate;
                 sarr.EndDate.ParamOrdinal = 4;
 
+                sarr.AwardOrHonorForID = new StoreAwardReceiptParam();
+                sarr.AwardOrHonorForID.Value = this.GetStoreNode(subjecturi).ToString();
+                sarr.AwardOrHonorForID.ParamOrdinal = 5;
                 error = this.StoreAwardReceipt(sarr);
 
             }
@@ -970,7 +980,6 @@ namespace Profiles.Edit.Utilities
 
             try
             {
-
                 dbconnection.Open();
 
                 if (sarr.ExistingAwardReceiptURI != null)
@@ -1013,7 +1022,10 @@ namespace Profiles.Edit.Utilities
                 if (dbconnection.State != ConnectionState.Closed)
                     dbconnection.Close();
 
-                error = Convert.ToBoolean(param[sarr.Length - 1].Value);
+                error = Convert.ToBoolean(param[sarr.Length - 2].Value);
+
+                Framework.Utilities.Cache.Remove("Node Dependency " + sarr.AwardOrHonorForID.Value.ToString());
+                Framework.Utilities.Cache.CreateDependency(sarr.AwardOrHonorForID.Value.ToString());
 
             }
             catch (Exception e)
@@ -1028,6 +1040,14 @@ namespace Profiles.Edit.Utilities
 
         private Int64 GetNodeId(StoreNodeRequest snr)
         {
+            System.Web.HttpBrowserCapabilities browser = HttpContext.Current.Request.Browser;
+
+            if (snr.Value.Value.ToString().Contains(Environment.NewLine) && browser.Browser == "IE")
+            {
+                snr.Value.Value = snr.Value.Value.ToString().Replace(Environment.NewLine, ("\n"));
+
+            }
+
             SessionManagement sm = new SessionManagement();
             string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
 
@@ -1043,14 +1063,12 @@ namespace Profiles.Edit.Utilities
 
             if (snr.Value != null)
                 param[snr.Value.ParamOrdinal] = new SqlParameter("@value", snr.Value.Value);
-      
+
             if (snr.Langauge != null)
                 param[snr.Langauge.ParamOrdinal] = new SqlParameter("@language", null);
 
             if (snr.DataType != null)
                 param[snr.DataType.ParamOrdinal] = new SqlParameter("@DataType", null);
-
-
 
             param[snr.Length - 3] = new SqlParameter("@SessionID", sm.Session().SessionID);
 
@@ -1135,6 +1153,8 @@ namespace Profiles.Edit.Utilities
                 }
                 error = Convert.ToBoolean(param[str.Length - 1].Value);
 
+                Framework.Utilities.Cache.Remove("Node Dependency " + str.Subject.Value.ToString());
+                Framework.Utilities.Cache.CreateDependency(str.Subject.Value.ToString());
 
             }
             catch (Exception e)
@@ -1176,6 +1196,9 @@ namespace Profiles.Edit.Utilities
                 comm.Connection.Close();
                 if (dbconnection.State != ConnectionState.Closed)
                     dbconnection.Close();
+
+                Framework.Utilities.Cache.Remove("Node Dependency " + subjectid.ToString());
+                Framework.Utilities.Cache.CreateDependency(subjectid.ToString());
 
 
             }
@@ -1320,7 +1343,7 @@ namespace Profiles.Edit.Utilities
 
             public StoreTripleParam Subject { get; set; }
             public StoreTripleParam Predicate { get; set; }
-            public StoreTripleParam Object { get; set; }            
+            public StoreTripleParam Object { get; set; }
             public StoreTripleParam OldObject { get; set; }
             public StoreTripleParam MoveUpOne { get; set; }
             public StoreTripleParam MoveDownOne { get; set; }
@@ -1376,14 +1399,12 @@ namespace Profiles.Edit.Utilities
 
             public StoreNodeRequest() { }
 
-            public StoreNodeParam Value { get; set; }            
-            public StoreNodeParam Subject { get; set; }
-            public StoreNodeParam Predicate { get; set; }
+            public StoreNodeParam Value { get; set; }
             public StoreNodeParam Langauge { get; set; }
             public StoreNodeParam DataType { get; set; }
             public StoreNodeParam EntityClassURI { get; set; }
             public StoreNodeParam Label { get; set; }
-            
+
 
             public int Length
             {
@@ -1406,15 +1427,10 @@ namespace Profiles.Edit.Utilities
                     if (Label != null)
                         length++;
 
-                  
-                    if (Subject != null)
-                        length++;
-
-                    if (Predicate != null)
-                        length++;
 
                     //then add SessionID, Error and return nodeID params for the array creation
                     length = length + 3;
+
 
                     return length;
 

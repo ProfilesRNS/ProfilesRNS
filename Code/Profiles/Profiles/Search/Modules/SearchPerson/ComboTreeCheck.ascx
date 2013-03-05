@@ -21,7 +21,6 @@
             </ItemTemplate>
         </asp:Repeater>
         <input type='hidden' name="hdnSelectedText" id="hdnSelectedText" />
-        
         <asp:Repeater runat="server" ID="rMaster" OnItemDataBound="rMaster_ItemDataBound">
             <ItemTemplate>
                 <div id='<%# "divMaster_CTC" + DataBinder.Eval(Container.DataItem, DataMasterIDField)%>'>
@@ -45,4 +44,4 @@
         </asp:Repeater>
     </div>
 </div>
-
+<asp:Literal runat="server" ID="litFilterScript"></asp:Literal>

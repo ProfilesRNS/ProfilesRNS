@@ -17,11 +17,10 @@
   <xsl:param name="facrank"></xsl:param>
   <xsl:param name="institution"></xsl:param>
   <xsl:param name="department"></xsl:param>
-  <xsl:param name="division"></xsl:param>
 
   <xsl:param name="ShowFacRank"/>
   <xsl:param name="ShowInstitutions"  />
-  <xsl:param name="ShowDivisions"  />
+
   <xsl:param name="ShowDepartments"  />
 
   <xsl:variable name="totalPages">
@@ -97,24 +96,7 @@
                       <option value="name_asc">Name (Z-A)</option>
                     </xsl:otherwise>
                   </xsl:choose>
-                  <xsl:choose>
-                    <xsl:when test="$currentsort='title'">
-                      <xsl:choose>
-                        <xsl:when test="$currentsortdirection='desc'">
-                          <option selected="true" value="title_desc">Title (A-Z)</option>
-                          <option value="title_asc">Title (Z-A)</option>
-                        </xsl:when>
-                        <xsl:otherwise>
-                          <option value="title_desc">Title (A-Z)</option>
-                          <option selected="true" value="title_asc">Title (Z-A)</option>
-                        </xsl:otherwise>
-                      </xsl:choose>
-                    </xsl:when>
-                    <xsl:otherwise>
-                      <option value="title_desc">Title (A-Z)</option>
-                      <option value="title_asc">Title (Z-A)</option>
-                    </xsl:otherwise>
-                  </xsl:choose>
+
 
                   <xsl:if test="$institution='true'">
                     <xsl:choose>
@@ -159,27 +141,6 @@
                   </xsl:if>
 
 
-                  <xsl:if test="$division='true'">
-                    <xsl:choose>
-                      <xsl:when test="$currentsort='division'">
-                        <xsl:choose>
-                          <xsl:when test="$currentsortdirection='desc'">
-                            <option selected="true" value="division_desc">Division (A-Z)</option>
-                            <option value="division_asc">Division (Z-A)</option>
-                          </xsl:when>
-                          <xsl:otherwise>
-                            <option value="division_desc">Division (A-Z)</option>
-                            <option selected="true" value="division_asc">Division (Z-A)</option>
-                          </xsl:otherwise>
-                        </xsl:choose>
-                      </xsl:when>
-                      <xsl:otherwise>
-                        <option value="division_desc">Division (A-Z)</option>
-                        <option value="division_asc">Division (Z-A)</option>
-                      </xsl:otherwise>
-                    </xsl:choose>
-                  </xsl:if>
-
                   <xsl:if test="$facrank='true'">
                     <xsl:choose>
                       <xsl:when test="$currentsort='facrank'">
@@ -204,7 +165,7 @@
                 </select>
               </div>
             </td>
-			<td style="width:33%;">
+            <td style="width:33%;">
               <div style="float: right;">
                 <input type="hidden" id="hiddenToggle" value="off" />
                 Show&#160;
@@ -219,19 +180,19 @@
                                                 background-color: #ffffff;z-index:5;position: absolute;">
                         <xsl:if test="$ShowInstitutions='true'">
                           <br />
-                          <input type="checkbox" id="chkInstitution" name="chkInstitution" value="Institution" class="otherOptionCheckBox"/> <span>Institution</span>
+                          <input type="checkbox" id="chkInstitution" name="chkInstitution" value="Institution" class="otherOptionCheckBox"/>
+                          <span>Institution</span>
                         </xsl:if>
                         <xsl:if test="$ShowDepartments='true'">
                           <br></br>
-                          <input type="checkbox" id="chkDepartment" name="chkDepartment" value="Department" class="otherOptionCheckBox"/><span>Department</span>
+                          <input type="checkbox" id="chkDepartment" name="chkDepartment" value="Department" class="otherOptionCheckBox"/>
+                          <span>Department</span>
                         </xsl:if>
-                        <xsl:if test="$ShowDivisions='true'">
-                          <br></br>
-                          <input type="checkbox" id="chkDivision" name="chkDivision" value="Division" class="otherOptionCheckBox"/><span>Division</span>
-                        </xsl:if>
+
                         <xsl:if test="$ShowFacRank='true'">
                           <br></br>
-                          <input type="checkbox" id="chkFacRank" name="chkFacRank" value="Faculty Rank" class="otherOptionCheckBox"/><span>Faculty Rank</span>
+                          <input type="checkbox" id="chkFacRank" name="chkFacRank" value="Faculty Rank" class="otherOptionCheckBox"/>
+                          <span>Faculty Rank</span>
                         </xsl:if>
                       </div>
                     </td>
@@ -242,8 +203,8 @@
           </tr>
           <tr>
             <td colspan="3" height="10">
-				<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>nbsp;
-			</td>
+              <xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>nbsp;
+            </td>
           </tr>
 
           <tr>
@@ -257,23 +218,6 @@
                           Name
                           <xsl:choose>
                             <xsl:when test="$currentsort='name'">
-                              <xsl:choose>
-                                <xsl:when test="$currentsortdirection='desc'">
-                                  <img src="{$root}/framework/images/sort_desc.gif" border="0"/>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                  <img src="{$root}/framework/images/sort_asc.gif" border="0"/>
-                                </xsl:otherwise>
-                              </xsl:choose>
-                            </xsl:when>
-                          </xsl:choose>
-                        </a>
-                      </th>
-                      <th>
-                        <a href="JavaScript:Sort('title');">
-                          Title
-                          <xsl:choose>
-                            <xsl:when test="$currentsort='title'">
                               <xsl:choose>
                                 <xsl:when test="$currentsortdirection='desc'">
                                   <img src="{$root}/framework/images/sort_desc.gif" border="0"/>
@@ -313,10 +257,10 @@
                               <xsl:when test="$currentsort='department'">
                                 <xsl:choose>
                                   <xsl:when test="$currentsortdirection='desc'">
-                                    <img src="{$root}/framework/images/sort_desc.gif"/>
+                                    <img src="{$root}/framework/images/sort_desc.gif" border="0"/>
                                   </xsl:when>
                                   <xsl:otherwise>
-                                    <img src="{$root}/framework/images/sort_asc.gif"/>
+                                    <img src="{$root}/framework/images/sort_asc.gif" border="0"/>
                                   </xsl:otherwise>
                                 </xsl:choose>
                               </xsl:when>
@@ -325,25 +269,6 @@
                         </th>
                       </xsl:if>
 
-                      <xsl:if test="$division='true'">
-                        <th>
-                          <a href="JavaScript:Sort('division');">
-                            Division
-                            <xsl:choose>
-                              <xsl:when test="$currentsort='division'">
-                                <xsl:choose>
-                                  <xsl:when test="$currentsortdirection='desc'">
-                                    <img src="{$root}/framework/images/sort_desc.gif"/>
-                                  </xsl:when>
-                                  <xsl:otherwise>
-                                    <img src="{$root}/framework/images/sort_asc.gif"/>
-                                  </xsl:otherwise>
-                                </xsl:choose>
-                              </xsl:when>
-                            </xsl:choose>
-                          </a>
-                        </th>
-                      </xsl:if>
                       <xsl:if test="$facrank='true'">
                         <th>
                           <a href="JavaScript:Sort('facrank');">
@@ -352,10 +277,10 @@
                               <xsl:when test="$currentsort='facrank'">
                                 <xsl:choose>
                                   <xsl:when test="$currentsortdirection='desc'">
-                                    <img src="{$root}/framework/images/sort_desc.gif"/>
+                                    <img src="{$root}/framework/images/sort_desc.gif" border="0"/>
                                   </xsl:when>
                                   <xsl:otherwise>
-                                    <img src="{$root}/framework/images/sort_asc.gif"/>
+                                    <img src="{$root}/framework/images/sort_asc.gif" border="0"/>
                                   </xsl:otherwise>
                                 </xsl:choose>
                               </xsl:when>
@@ -419,8 +344,8 @@
             </td>
           </tr>
         </table>
-
-        <div class="listTablePagination" style="float: left;">
+        
+        <div class="listTablePagination" style="float: left; margin-left: 1px;">
           <table>
             <tbody>
               <tr>
@@ -461,42 +386,42 @@
                   </select>
                 </td>
                 <td>
-                  &#160;&#160;Page&#160;<input size="1" type="textbox" value="{$page}" id="txtPageNumber" onchange="ChangePage()"/>&#160;of&#160;<xsl:value-of select="$totalpages"/>
+                  &#160;&#160;Page&#160;<input size="1" type="textbox" value="{$page}" id="txtPageNumber" onchange="ChangePage()" onkeypress="JavaScript:changePage(event);" />&#160;of&#160;<xsl:value-of select="$totalpages"/>
                 </td>
                 <td>
                   <xsl:choose>
                     <xsl:when test="$page&lt;$totalpages">
                       <a href="JavaScript:GotoLastPage();" class="listTablePaginationFL listTablePaginationA">
-                        <img src="{$root}/framework/images/arrow_last.gif"/>
+                        <img src="{$root}/framework/images/arrow_last.gif" border="0"/>
                       </a>
                       <a href="javascript:GotoNextPage();" class="listTablePaginationPN listTablePaginationN listTablePaginationA">
-                        Next<img src="{$root}/framework/images/arrow_next.gif"/>
+                        Next<img src="{$root}/framework/images/arrow_next.gif" border="0"/>
                       </a>
                     </xsl:when>
                     <xsl:otherwise>
                       <div class="listTablePaginationFL">
-                        <img src="{$root}/framework/images/arrow_last_d.gif"/>
+                        <img src="{$root}/framework/images/arrow_last_d.gif" border="0"/>
                       </div>
                       <div class="listTablePaginationPN listTablePaginationN">
-                        Next<img src="{$root}/framework/images/arrow_next_d.gif"/>
+                        Next<img src="{$root}/framework/images/arrow_next_d.gif" border="0"/>
                       </div>
                     </xsl:otherwise>
                   </xsl:choose>
                   <xsl:choose>
                     <xsl:when test="$page&gt;1">
                       <a href="JavaScript:GotoPreviousPage();" class="listTablePaginationPN listTablePaginationP listTablePaginationA">
-                        <img src="{$root}/framework/images/arrow_prev.gif"/>Prev
+                        <img src="{$root}/framework/images/arrow_prev.gif" border="0"/>Prev
                       </a>
                       <a href="JavaScript:GotoFirstPage();" class="listTablePaginationFL listTablePaginationA">
-                        <img src="{$root}/framework/images/arrow_first.gif"/>
+                        <img src="{$root}/framework/images/arrow_first.gif" border="0"/>
                       </a>
                     </xsl:when>
                     <xsl:otherwise>
                       <div class="listTablePaginationPN listTablePaginationP">
-                        <img src="{$root}/framework/images/arrow_prev_d.gif"/>Prev
+                        <img src="{$root}/framework/images/arrow_prev_d.gif" border="0"/>Prev
                       </div>
                       <div class="listTablePaginationFL">
-                        <img src="{$root}/framework/images/arrow_first_d.gif"/>
+                        <img src="{$root}/framework/images/arrow_first_d.gif" border="0"/>
                       </div>
                     </xsl:otherwise>
                   </xsl:choose>
@@ -510,9 +435,7 @@
         <xsl:text>No matching results.</xsl:text>
       </xsl:otherwise>
     </xsl:choose>
-
-
-	  <script language="JavaScript">
+    <script language="JavaScript">
 
 
       var perpage = 0;
@@ -527,12 +450,24 @@
       var sortdirection = "";
       var institution ="";
       var department ="";
-      var division ="";
+
       var facrank = "";
       var offset = "";
       var sortbydropdown = false;
 
       SetupColCheckboxes();
+
+
+
+      function changePage(e) {
+      if (e.keyCode == 13) {
+      ChangePage();      
+      }
+      return false;
+      }
+
+
+
 
       function SetupColCheckboxes(){
 
@@ -554,139 +489,135 @@
       }
 
 
-      if(document.getElementById("chkDivision")!=null){
-      if((document.getElementById("showcolumns").value <xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text> 4)){
-      document.getElementById("chkDivision").checked = true;
+      if(document.getElementById("chkFacRank")!=null){
+      if((document.getElementById("showcolumns").value <xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text> 8)){
+      document.getElementById("chkFacRank").checked = true;
       }else{
-      document.getElementById("chkDivision").checked = false;
+      document.getElementById("chkFacRank").checked = false;
       }
       }
+
+
+      }
+
+      function DropdownSort(){
+
+      var dropdown = document.getElementById("selSort");
+      var val = dropdown.options[dropdown.selectedIndex].value;
+
+      if(val!=''){
+      this.Sort(val);
+      }
+
+      }
+
+      function GetPageData(){
+
+
+      perpage = document.getElementById("ddlPerPage").value;
+      root = document.getElementById("txtRoot").value;
+      searchfor = document.getElementById("txtSearchFor").value;
+      page = document.getElementById("txtPageNumber").value;
+      totalpages = document.getElementById("txtTotalPages").value;
+      searchrequest = document.getElementById("txtSearchRequest").value;
+
+      if(document.getElementById("selSort").value==''){
+      sortby = document.getElementById("txtCurrentSort").value;
+      }else{
+      sortby = document.getElementById("selSort").value;   
+
+      if(sortby.indexOf("_")!=-1){
+      var mySplitResult = sortby.split("_");
+      sortby = mySplitResult[0];
+      }
+      
+      }
+
+      sortdirection = document.getElementById("txtCurrentSortDirection").value;
+      offset = document.getElementById("txtOffset").value;
+
+      if(page==0){
+      page = 1;
+      }
+
+
+      if(document.getElementById("chkInstitution")!=null){
+      institution = document.getElementById("chkInstitution").checked;
+      }
+
+      if(document.getElementById("chkDepartment")!=null){
+      department = document.getElementById("chkDepartment").checked;
+      }
+
+
 
 
       if(document.getElementById("chkFacRank")!=null){
-      if((document.getElementById("showcolumns").value <xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text> 8)){
-		document.getElementById("chkFacRank").checked = true;
-		}else{
-		document.getElementById("chkFacRank").checked = false;
-		}
-		}
-
-
-		}
-
-		function DropdownSort(){
-
-		var dropdown = document.getElementById("selSort");
-		var val = dropdown.options[dropdown.selectedIndex].value;
-
-		if(val!=''){
-		this.Sort(val);
-		}
-
-		}
-
-		function GetPageData(){
-
-
-		perpage = document.getElementById("ddlPerPage").value;
-		root = document.getElementById("txtRoot").value;
-		searchfor = document.getElementById("txtSearchFor").value;
-		page = document.getElementById("txtPageNumber").value;
-		totalpages = document.getElementById("txtTotalPages").value;
-		searchrequest = document.getElementById("txtSearchRequest").value;
-
-
-		if(document.getElementById("selSort").value==''){
-		sortby = document.getElementById("txtCurrentSort").value;
-		}else{
-		sortby = document.getElementById("selSort").value;
-		}
-
-		sortdirection = document.getElementById("txtCurrentSortDirection").value;
-		offset = document.getElementById("txtOffset").value;
-
-		if(page==0){
-		page = 1;
-		}
-
-
-		if(document.getElementById("chkInstitution")!=null){
-		institution = document.getElementById("chkInstitution").checked;
-		}
-
-		if(document.getElementById("chkDepartment")!=null){
-		department = document.getElementById("chkDepartment").checked;
-		}
-
-		if(document.getElementById("chkDivision")!=null){
-		division = document.getElementById("chkDivision").checked;
-		}
-
-
-		if(document.getElementById("chkFacRank")!=null){
-		facrank = document.getElementById("chkFacRank").checked;
-		}
+      facrank = document.getElementById("chkFacRank").checked;
+      }
 
 
 
-		}
+      }
 
-		function Sort(sort){
+      function Sort(sort){
+
+      GetPageData();
+
+      if(sort.indexOf("_")==-1){
+
+      if(sortby.indexOf("_")!=-1){
+      var mySplitResult = sortby.split("_");
+      sortby = mySplitResult[0];
+      }
+
+      if(sort==sortby){
+
+      if(sortdirection=="desc"){
+      sortdirection = "asc";
+      }else{
+      sortdirection = "desc";
+      }
+
+      }else{
+
+      sortdirection = "desc";
+      sortby = sort;
+      }
+
+      }else{
+
+      var items = sort.split("_");
+
+      sortby = items[0];
+      sortdirection = items[1];
 
 
-		GetPageData();
+      }
 
 
-		if(sort.indexOf("_")==-1){
+      NavToPage();
 
-		if(sort==sortby){
+      }
 
-		if(sortdirection=="desc"){
-		sortdirection = "asc";
-		}else{
-		sortdirection = "desc";
-		}
+      function NavToPage(){
 
-		}else{
+      var showcolumns = 0;
 
-		sortdirection = "desc";
-		sortby = sort;
-		}
-
-		}else{
-
-		var items = sort.split("_");
-
-		sortby = items[0];
-		sortdirection = items[1];
+      if(institution){
+      showcolumns = 1;
+      }
+      if(department){
+      showcolumns = showcolumns | 2;
+      }
 
 
-		}
 
+      if(facrank){
+      showcolumns = showcolumns | 8;
+      }
 
-		NavToPage();
-
-		}
-
-		function NavToPage(){
-
-		var showcolumns = 0;
-		
-		if(institution){
-		showcolumns = 1;
-		}
-		if(department){
-		showcolumns = showcolumns | 2;
-		}
-
-		if(division){
-		showcolumns = showcolumns | 4;
-		}
-
-		if(facrank){
-		showcolumns = showcolumns | 8;
-		}
-		window.location = root + '/search/default.aspx?searchtype=people<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>searchfor=' + searchfor + '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>perpage=' + perpage + '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>offset=' + offset + '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>page=' + page + '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>totalpages=' + totalpages + '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>searchrequest=' + searchrequest +  '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>sortby=' + sortby+ '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>sortdirection=' + sortdirection + '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>showcolumns=' + showcolumns;
+      window.location = root + '/search/default.aspx?searchtype=people<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>searchfor=' + searchfor + '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>perpage=' + perpage + '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>offset=' + offset + '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>page=' + page + '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>totalpages=' + totalpages + '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>searchrequest=' + searchrequest +  '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>sortby=' + sortby+ '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>sortdirection=' + sortdirection + '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>showcolumns=' + showcolumns;
       }
 
       function ChangePerPage(){
@@ -728,115 +659,115 @@
       GetPageData();
       window.location = root + '/search/default.aspx?searchtype=whypeople<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>nodeuri=' + uri + '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>searchfor=' + searchfor + '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>perpage=' + perpage + '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>offset=' + offset + '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>page=' + page + '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>totalpages=' + totalpages + '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>searchrequest=' + searchrequest +  '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>sortby=' + sortby+ '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>sortdirection=' + sortdirection;
 
-		  }
+      }
 
-		  function ShowDetails(nodeURI,obj){
+      function ShowDetails(nodeURI,obj){
 
-		  doListTableRowOver(obj);
-		  document.getElementById('divItemDetails').innerHTML = document.getElementById(nodeURI).value;
+      doListTableRowOver(obj);
+      document.getElementById('divItemDetails').innerHTML = document.getElementById(nodeURI).value;
 
-		  }
+      }
 
-		  function HideDetails(obj,ord){
+      function HideDetails(obj,ord){
 
-		  doListTableRowOut(obj,ord);
-		  document.getElementById('divItemDetails').innerHTML = '';
-		  }
+      doListTableRowOut(obj,ord);
+      document.getElementById('divItemDetails').innerHTML = '';
+      }
 
 
 
-		  <!--// create global code object if not already created-->
-		if (undefined==ProfilesRNS) var ProfilesRNS = {};
+      <!--// create global code object if not already created-->
+      if (undefined==ProfilesRNS) var ProfilesRNS = {};
 
-		
-		var $defaultColumns = null;
-		
-		<!--Reloads page only if new columns are selected-->
-		function reloadColumns()
-		{
-		var reload = false;
-		var $colToShow = $('#divColSelect input:checked');
 
-		// Check column count first.
-		if ($colToShow.length != $defaultColumns.length)
-		{
-		GetPageData();
-		NavToPage();
-		return;
-		}		
-		
-		// See if column selection have changed from default
-		$colToShow.each(function(idx, item){
-		if ($defaultColumns.filter("#"+$(this).get(0).id).length != 1)
-		{
-		GetPageData();
-		NavToPage();
-		return false; // exit loop
-		}
-		});
-		}
+      var $defaultColumns = null;
 
-		<!--// <START::SHOW/HIDE OTHER OPTIONS DROPDOWN LIST>-->
-		$(document).ready(function() {
+      <!--Reloads page only if new columns are selected-->
+      function reloadColumns()
+      {
+      var reload = false;
+      var $colToShow = $('#divColSelect input:checked');
 
-		// initially hide the other options DIV
-		$("#divColSelect").hide();
+      // Check column count first.
+      if ($colToShow.length != $defaultColumns.length)
+      {
+      GetPageData();
+      NavToPage();
+      return;
+      }
 
-		// hide/show event occurs on click of dropdown
-		$("#selColSelect").click(function() {
-		if ($("#divColSelect").is(":visible")) {
-		$("#divColSelect").hide();
+      // See if column selection have changed from default
+      $colToShow.each(function(idx, item){
+      if ($defaultColumns.filter("#"+$(this).get(0).id).length != 1)
+      {
+      GetPageData();
+      NavToPage();
+      return false; // exit loop
+      }
+      });
+      }
 
-		reloadColumns();
+      <!--// <START::SHOW/HIDE OTHER OPTIONS DROPDOWN LIST>-->
+      $(document).ready(function() {
 
-		$("//*[@id='divSearchSection']/descendant::input[@type='submit']").focus();
+      // initially hide the other options DIV
+      $("#divColSelect").hide();
 
-		} else {
-		$("#divColSelect").show();
+      // hide/show event occurs on click of dropdown
+      $("#selColSelect").click(function() {
+      if ($("#divColSelect").is(":visible")) {
+      $("#divColSelect").hide();
 
-		// Set default columns to show
-		$defaultColumns = $('#divColSelect input:checked');
+      reloadColumns();
 
-		$("*[id*=institution]").focus();
-		}
-		});
+      $("//*[@id='divSearchSection']/descendant::input[@type='submit']").focus();
 
-		// hide the other options DIV when a click occurs outside of the DIV while it's shown
-		$(document).click(function(evt) {
-		if ($("#divColSelect").is(":visible")) {
-		switch (evt.target.id) {
-		case "selColSelect":
-		case "divColSelect":
-		break;
-		default:
-		var tmp = evt.target;
-		while (tmp.parentNode) {
-		tmp = tmp.parentNode;
-		if (tmp.id == "divColSelect") { return true; }
-		}
-		$("#divColSelect").hide();
+      } else {
+      $("#divColSelect").show();
 
-		reloadColumns()
-		}
-		}
-		});
+      // Set default columns to show
+      $defaultColumns = $('#divColSelect input:checked');
 
-		});
+      $("*[id*=institution]").focus();
+      }
+      });
 
-		
-		$('#divColSelect span')
-			.hover(
-				function(){ // Mouse in				
-					$(this).css('cursor', 'pointer');				
-				},
-				function(){ // Mouse out				
-					$(this).css('cursort', 'default');				
-			})
-			.click(function(){ // select checkbox when checkbox label is clicked			
-				var $checkbox = $(this).prev('input');		
-				$checkbox.attr('checked', !$checkbox.attr('checked'));
-			});
-		<!--// <END::SHOW/HIDE OTHER OPTIONS DROPDOWN LIST>-->
+      // hide the other options DIV when a click occurs outside of the DIV while it's shown
+      $(document).click(function(evt) {
+      if ($("#divColSelect").is(":visible")) {
+      switch (evt.target.id) {
+      case "selColSelect":
+      case "divColSelect":
+      break;
+      default:
+      var tmp = evt.target;
+      while (tmp.parentNode) {
+      tmp = tmp.parentNode;
+      if (tmp.id == "divColSelect") { return true; }
+      }
+      $("#divColSelect").hide();
+
+      reloadColumns()
+      }
+      }
+      });
+
+      });
+
+
+      $('#divColSelect span')
+      .hover(
+      function(){ // Mouse in
+      $(this).css('cursor', 'pointer');
+      },
+      function(){ // Mouse out
+      $(this).css('cursort', 'default');
+      })
+      .click(function(){ // select checkbox when checkbox label is clicked
+      var $checkbox = $(this).prev('input');
+      $checkbox.attr('checked', !$checkbox.attr('checked'));
+      });
+      <!--// <END::SHOW/HIDE OTHER OPTIONS DROPDOWN LIST>-->
 
 
     </script>
@@ -844,7 +775,7 @@
   </xsl:template>
 
 
-	<xsl:template name="threeColumn">
+  <xsl:template name="threeColumn">
     <xsl:param name="doc"></xsl:param>
     <xsl:param name="nodeURI"></xsl:param>
     <xsl:param name="weight"></xsl:param>
@@ -853,13 +784,6 @@
 
     <td class="alignLeft" style="width:200px" onclick="javascript:GoTo('{$nodeURI}')">
       <xsl:value-of select="prns:fullName"/>
-    </td>
-    <td class="alignLeft" style="width:249px" onclick="javascript:GoTo('{$nodeURI}')">
-      <xsl:choose>
-        <xsl:when test="vivo:preferredTitle!=''">
-          <xsl:value-of select="vivo:preferredTitle"/>
-        </xsl:when>
-      </xsl:choose>
     </td>
 
     <xsl:if test="$institution='true'">
@@ -932,20 +856,6 @@
       </td>
     </xsl:if>
 
-    <xsl:if test="$division='true'">
-      <td class="alignLeft" style="width:250px">
-        <xsl:choose>
-          <xsl:when test ="$doc/rdf:Description[@rdf:about=$doc/rdf:Description[@rdf:about=$positon]/prns:positionInDivision/@rdf:resource]/rdfs:label!=''">
-            <xsl:value-of select ="$doc/rdf:Description[@rdf:about=$doc/rdf:Description[@rdf:about=$positon]/prns:positionInDivision/@rdf:resource]/rdfs:label"/>
-          </xsl:when>
-          <xsl:otherwise>
-            <center>
-              --
-            </center>
-          </xsl:otherwise>
-        </xsl:choose>
-      </td>
-    </xsl:if>
 
     <xsl:if test="$facrank='true'">
       <td class="alignLeft" style="width:250px;">
@@ -980,16 +890,12 @@
       <xsl:value-of select="prns:fullName"/>
 
     </td>
-    <td class="alignLeft" style="width:249px" onclick="javascript:GoTo('{$nodeURI}')">
-
-      <xsl:value-of select="vivo:preferredTitle"/>
-
-    </td>
     <xsl:if test="$institution='true'">
       <td class="alignLeft" style="width:250px" onclick="javascript:GoTo('{$nodeURI}')">
 
         <xsl:value-of select ="$doc/rdf:Description[@rdf:about=$institutionlabel]"/>
 
+        
       </td>
     </xsl:if>
     <xsl:if test="$department='true'">
@@ -1000,20 +906,6 @@
       </td>
     </xsl:if>
 
-    <xsl:if test="$division='true'">
-      <td class="alignLeft" style="width:250px">
-        <xsl:choose>
-          <xsl:when test ="$doc/rdf:Description[@rdf:about=$doc/rdf:Description[@rdf:about=$positon]/prns:positionInDivision/@rdf:resource]/rdfs:label!=''">
-            <xsl:value-of select ="$doc/rdf:Description[@rdf:about=$doc/rdf:Description[@rdf:about=$positon]/prns:positionInDivision/@rdf:resource]/rdfs:label"/>
-          </xsl:when>
-          <xsl:otherwise>
-            <center>
-              --
-            </center>
-          </xsl:otherwise>
-        </xsl:choose>
-      </td>
-    </xsl:if>
 
     <xsl:if test="$facrank='true'">
       <td class="alignLeft" style="width:250px">

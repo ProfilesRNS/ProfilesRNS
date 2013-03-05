@@ -18,6 +18,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using System.Xml;
 
 using Profiles.Framework.Utilities;
 
@@ -25,6 +26,12 @@ namespace Profiles.Search.Modules.SearchPerson
 {
     public partial class ComboTreeCheck : System.Web.UI.UserControl
     {
+        private string script;
+        private bool end;
+        private Profiles.Search.Utilities.DataIO data;
+
+
+
         public string SelectedText
         {
             get
@@ -143,12 +150,18 @@ namespace Profiles.Search.Modules.SearchPerson
         {
             set
             {
+                end = false;
+                data = new Profiles.Search.Utilities.DataIO();
+
 
                 Repeater rMaster = (Repeater)this.FindControl("rMaster");
                 m_DataSet = value;
                 DataTable l_dtMaster = m_DataSet.Tables[DataMasterName];
                 rMaster.DataSource = l_dtMaster;
-                rMaster.DataBind();                
+
+                rMaster.DataBind();
+
+                end = true;
             }
             get
             {
@@ -194,27 +207,29 @@ namespace Profiles.Search.Modules.SearchPerson
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
-          
-            
             ResetContent();
+
         }
-
-
 
 
         public void ResetContent()
         {
             if (!IsPostBack)
             {
-                ImageButton ibExpand = (ImageButton)this.FindControl("ibExpand");              
+                ImageButton ibExpand = (ImageButton)this.FindControl("ibExpand");
 
                 ibExpand.ImageUrl = Root.Domain + "/framework/Images/blank.gif";
 
                 ibExpand.OnClientClick = string.Format("ShowMainContent('{0}'); return false;", ClientID);
-               
+
             }
+            
             ScriptManager.RegisterStartupScript(this, GetType(), "updateOnStart" + ClientID, String.Format("UpadateAllCTC('{0}', true);", ClientID), true);
+
+            if (!script.IsNullOrEmpty())
+                ScriptManager.RegisterStartupScript(this, GetType(), "runOnStaret" + ClientID, script, true);
+            
+            
         }
 
         protected void rMaster_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -235,10 +250,9 @@ namespace Profiles.Search.Modules.SearchPerson
                 }
                 l_hdnIsExpand.Value = l_isExpand ? "1" : "0";
 
-
                 HtmlImage l_imgExpand = (HtmlImage)e.Item.FindControl("imgExpand");
                 l_imgExpand.Attributes.Add("onclick", string.Format("ShowDetailContent('{0}', '{1}'); return false;", ClientID, l_MasterID));
-                l_imgExpand.Attributes.Add("src", l_isExpand ? Root.Domain + "/framework/images/expand.gif" : Root.Domain + "/framework/images/collapse.gif" );
+                l_imgExpand.Attributes.Add("src", l_isExpand ? Root.Domain + "/framework/images/expand.gif" : Root.Domain + "/framework/images/collapse.gif");
 
 
                 HtmlGenericControl l_divDetail = (HtmlGenericControl)e.Item.FindControl("divDetail");
@@ -279,6 +293,7 @@ namespace Profiles.Search.Modules.SearchPerson
 
         protected void rDetail_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
+
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
                 DataRowView l_Item = (DataRowView)e.Item.DataItem;
@@ -288,17 +303,28 @@ namespace Profiles.Search.Modules.SearchPerson
                 {
                     l_checkDetailText.Checked = true;
                 }
+
                 l_checkDetailText.Text = l_Item[DataDetailTextField].ToString();
+
                 HiddenField l_hdnDetailText = (HiddenField)e.Item.FindControl("hdnDetailText");
                 l_hdnDetailText.Value = l_Item[DataDetailTextField].ToString();
 
                 HiddenField l_hdnDetailID = (HiddenField)e.Item.FindControl("hdnDetailID");
                 l_hdnDetailID.Value = l_Item[DataDetailIDField].ToString();
 
+
                 l_checkDetailText.Attributes.Add("onclick", string.Format("ClickCheckBox('{0}', this);", ClientID));
+
+                if (this.SearchRequest != null)
+                {
+                    if (!end && this.SearchRequest.OuterXml.Contains(data.GetConvertedListItem(data.GetListOfFilters(), l_checkDetailText.Text)))
+                    {
+                        script += "document.getElementById('" + l_checkDetailText.ClientID + "').checked=true; ClickCheckBox('" + ClientID + "',document.getElementById('" + l_checkDetailText.ClientID + "'));";
+                    }
+
+                }
             }
         }
-
 
         private DataSet FormingStructure()
         {
@@ -331,6 +357,11 @@ namespace Profiles.Search.Modules.SearchPerson
 
             return l_dsScheme;
         }
+
+
+        public XmlDocument SearchRequest { get; set; }
+
+        public string Script { get; set; }
     }
 
 }

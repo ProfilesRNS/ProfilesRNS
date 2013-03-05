@@ -1,4 +1,4 @@
-<rdf:RDF xmlns:geo="http://aims.fao.org/aos/geopolitical.owl#" xmlns:afn="http://jena.hpl.hp.com/ARQ/function#" xmlns:prns="http://profiles.catalyst.harvard.edu/ontology/prns#" xmlns:obo="http://purl.obolibrary.org/obo/" xmlns:dcelem="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:event="http://purl.org/NET/c4dm/event.owl#" xmlns:bibo="http://purl.org/ontology/bibo/" xmlns:vann="http://purl.org/vocab/vann/" xmlns:vitro07="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#" xmlns:vitro="http://vitro.mannlib.cornell.edu/ns/vitro/public#" xmlns:vivo="http://vivoweb.org/ontology/core#" xmlns:pvs="http://vivoweb.org/ontology/provenance-support#" xmlns:scirr="http://vivoweb.org/ontology/scientific-research-resource#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:swvs="http://www.w3.org/2003/06/sw-vocab-status/ns#" xmlns:skco="http://www.w3.org/2004/02/skos/core#" xmlns:owl2="http://www.w3.org/2006/12/owl2-xml#" xmlns:skos="http://www.w3.org/2008/05/skos#" xmlns:foaf="http://xmlns.com/foaf/0.1/">
+﻿<rdf:RDF xmlns:geo="http://aims.fao.org/aos/geopolitical.owl#" xmlns:afn="http://jena.hpl.hp.com/ARQ/function#" xmlns:catalyst="http://profiles.catalyst.harvard.edu/ontology/catalyst#" xmlns:prns="http://profiles.catalyst.harvard.edu/ontology/prns#" xmlns:obo="http://purl.obolibrary.org/obo/" xmlns:dcelem="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:event="http://purl.org/NET/c4dm/event.owl#" xmlns:bibo="http://purl.org/ontology/bibo/" xmlns:vann="http://purl.org/vocab/vann/" xmlns:vitro07="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#" xmlns:vitro="http://vitro.mannlib.cornell.edu/ns/vitro/public#" xmlns:vivo="http://vivoweb.org/ontology/core#" xmlns:pvs="http://vivoweb.org/ontology/provenance-support#" xmlns:scirr="http://vivoweb.org/ontology/scientific-research-resource#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:swvs="http://www.w3.org/2003/06/sw-vocab-status/ns#" xmlns:skco="http://www.w3.org/2004/02/skos/core#" xmlns:owl2="http://www.w3.org/2006/12/owl2-xml#" xmlns:skos="http://www.w3.org/2008/05/skos#" xmlns:foaf="http://xmlns.com/foaf/0.1/">
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#sourceCreator">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
     <rdfs:label rdf:resource="source creator" />
@@ -95,6 +95,10 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
     <rdfs:label rdf:resource="full name" />
   </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#hasAuthorList">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="author list" />
+  </rdf:Description>
   <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#hasConnection">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
     <rdfs:label rdf:resource="has connection" />
@@ -114,6 +118,18 @@
   <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#hasPersonFilter">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
     <rdfs:label rdf:resource="has person filter" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#hasPublicationVenue">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="published in" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#hasSubjectAreaMajorTopicList">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="has major subject area list" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#hasSubjectAreaMinorTopicList">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="has minor subject area list" />
   </rdf:Description>
   <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#informationResourceReference">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
@@ -154,6 +170,10 @@
   <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#maxWeight">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
     <rdfs:label rdf:resource="maximum weight" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#medlineTA">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="journal title abbreviation" />
   </rdf:Description>
   <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#meshDescriptorUI">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
@@ -206,6 +226,10 @@
   <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#personFilterInCategory">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
     <rdfs:label rdf:resource="person filter in category" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#personId">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="Person ID" />
   </rdf:Description>
   <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#personInPrimaryPosition">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />

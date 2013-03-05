@@ -28,7 +28,11 @@ namespace Profiles.Framework.Utilities
         {
             get
             {
-		
+
+                // If in development mode, return localhost with default vs.net port assignment.
+ //               if (HttpContext.Current.Request.Url.Host.ToUpper() == "LOCALHOST")
+ //                   return "http://localhost:55956";
+
                 DataIO data = new DataIO();
 
                 string restdomain = data.GetRESTBasePath();
@@ -37,8 +41,8 @@ namespace Profiles.Framework.Utilities
                 {
                     restdomain = restdomain.Replace("http:", "https:");
                 }
-              
-               return restdomain;
+
+                return restdomain;
             }
         }
 
@@ -59,9 +63,12 @@ namespace Profiles.Framework.Utilities
             {
                 String url = HttpContext.Current.Request.Url.ToString().ToLower().Replace(Root.Domain.ToLower(), "").Replace("/default.aspx", "");
 
-                //string url = HttpContext.Current.Request.Url.AbsolutePath.ToLower();
+                if (url.Contains("?"))
+                {                    
+                    url = url.Remove(url.IndexOf("?"));                    
+                }
 
-                DebugLogging.Log("!!!!!!!!!!!!!!!!!!!!!!!!" + url);
+
                 //dont use the default physical page, we want to use the clean RESTful path.
                 //IIS can display its idea of a default URL by placing the page in the URL if it exists.
                 return url;

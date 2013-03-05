@@ -47,7 +47,7 @@ namespace Profiles.Proxy.Modules.SearchProxies
         }
         private void DrawProfilesModule()
         {
-            Search.Utilities.DataIO data = new Profiles.Search.Utilities.DataIO();
+            Proxy.Utilities.DataIO data = new Proxy.Utilities.DataIO();
             SessionManagement sm = new SessionManagement();
             string subject = sm.Session().SessionID.ToString();
 
@@ -92,27 +92,18 @@ namespace Profiles.Proxy.Modules.SearchProxies
                 drpDepartment.SelectedIndex = drpDepartment.Items.IndexOf(drpDepartment.Items.FindByText(Request.QueryString["department"]));
                 this.Department = Request.QueryString["department"];
             }
-            
-            drpDivision.DataSource = data.GetDivisions();
-            drpDivision.DataTextField = "Text";
-            drpDivision.DataValueField = "Value";
-            drpDivision.DataBind();
-            drpDivision.Items.Insert(0, new ListItem("--Select--"));
-
-            if (Request.QueryString["division"] != null)
-            {
-                drpDivision.SelectedIndex = drpDivision.Items.IndexOf(drpDivision.Items.FindByText(Request.QueryString["division"]));
-                this.Division = Request.QueryString["division"];
-            }
 
             this.Subject = Convert.ToInt64(Request.QueryString["subject"]);
 
             if (Request.QueryString["offset"] != null && Request.QueryString["totalrows"] != null)
             {
-                this.ExecuteSearch();
+                this.ExecuteSearch(false);
             }
         }
-
+        public string GetURLDomain()
+        {
+            return Root.Domain;
+        }
         public DataSet MyDataSet
         {
             get
@@ -128,14 +119,19 @@ namespace Profiles.Proxy.Modules.SearchProxies
         {
             try
             {
-                this.ExecuteSearch();
+                this.TotalPages = 0;
+                this.TotalRowCount = 0;
+                this.CurrentPage = 0;
+                this.Offset = 0;
+
+                this.ExecuteSearch(true);
             }
             catch (Exception ex)
             {
                 string err = ex.Message;
             }
         }
-        private void ExecuteSearch()
+        private void ExecuteSearch(bool button)
         {
             Utilities.DataIO data = new Profiles.Proxy.Utilities.DataIO();
 
@@ -143,35 +139,37 @@ namespace Profiles.Proxy.Modules.SearchProxies
             Int32 totalpageremainder = 0;
 
             if (drpDepartment.SelectedItem.Text != "--Select--")
-                this.Department = drpDepartment.SelectedItem.Text;
+                this.Department = drpDepartment.SelectedItem.Value;
+            else
+                this.Department = string.Empty;
 
             if (drpInstitution.SelectedItem.Text != "--Select--")
-                this.Institution = drpInstitution.SelectedItem.Text;
-
-            if (drpDivision.SelectedItem.Text != "--Select--")
-                this.Division = drpDivision.SelectedItem.Text;
-
+                this.Institution = drpInstitution.SelectedItem.Value;
+            else
+                this.Institution = string.Empty;
 
             this.Fname = txtFirstName.Text;
             this.Lname = txtLastName.Text;
 
+            if (!button)
+            {
+                if (Request.QueryString["offset"] != null)
+                    this.Offset = Convert.ToInt32(Request.QueryString["offset"]);
 
-            if (Request.QueryString["offset"] != null)
-                this.Offset = Convert.ToInt32(Request.QueryString["offset"]);
+                if (Request.QueryString["totalrows"] != null)
+                    this.TotalRowCount = Convert.ToInt32(Request.QueryString["totalrows"]);
 
-            if (Request.QueryString["totalrows"] != null)
-                this.TotalRowCount = Convert.ToInt32(Request.QueryString["totalrows"]);
+                if (Request.QueryString["CurrentPage"] != null)
+                    this.CurrentPage = Convert.ToInt32(Request.QueryString["CurrentPage"]);
 
-            if (Request.QueryString["CurrentPage"] != null)
-                this.CurrentPage = Convert.ToInt32(Request.QueryString["CurrentPage"]);
+                if (Request.QueryString["TotalPages"] != null)
+                    this.TotalPages = Convert.ToInt32(Request.QueryString["TotalPages"]);
 
-            if (Request.QueryString["TotalPages"] != null)
-                this.TotalPages = Convert.ToInt32(Request.QueryString["TotalPages"]);
-
+            }
 
             if (this.TotalPages == 0)
             {
-                MyDataSet = data.SearchProxies(Lname, Fname, Institution, Department, Division, 0, 1000000);
+                MyDataSet = data.SearchProxies(Lname, Fname, Institution, Department, 0, 1000000);
                 this.TotalRowCount = MyDataSet.Tables[0].Rows.Count;
             }
 
@@ -179,20 +177,21 @@ namespace Profiles.Proxy.Modules.SearchProxies
             {
                 this.CurrentPage = 1;
             }
-
-
-            if (this.TotalPages == 0)
-                this.TotalPages = Math.DivRem(this.TotalRowCount, 25, out totalpageremainder);
+            
+            this.TotalPages = Math.DivRem(this.TotalRowCount, 25, out totalpageremainder);
 
             if (totalpageremainder > 0) { this.TotalPages = this.TotalPages + 1; }
 
-            this.Offset = ((Convert.ToInt32(this.CurrentPage) * 25) + 1) - 25;
+            if (this.CurrentPage > this.TotalPages)
+                this.CurrentPage = this.TotalPages;
+
+            this.Offset = ((Convert.ToInt32(this.CurrentPage) * 25) + 1) - 25;         
 
             if (this.Offset < 0)
                 this.Offset = 0;
 
 
-            MyDataSet = data.SearchProxies(Lname, Fname, Institution, Department, Division, this.Offset - 1, 25);
+            MyDataSet = data.SearchProxies(Lname, Fname, Institution, Department, this.Offset - 1, 25);
 
             gridSearchResults.PageIndex = 0;
             gridSearchResults.DataSource = MyDataSet;
@@ -203,6 +202,7 @@ namespace Profiles.Proxy.Modules.SearchProxies
 
             pnlProxySearchResults.Visible = true;
 
+     
             litPagination.Text = "<script type='text/javascript'>" +
                 "_page = " + this.CurrentPage + ";" +
                 "_offset = " + this.Offset + ";" +
@@ -211,10 +211,10 @@ namespace Profiles.Proxy.Modules.SearchProxies
                 "_root = '" + Root.Domain + "';" +
                 "_subject = '" + Subject + "';" +
                 "_fname = '" + this.Fname + "';" +
-                "_lname = '" + this.Lname + "';" +
-                "_department = '" + this.Department + "';" +
-                "_institution = '" + this.Institution + "';" +
-                "_division = '" + this.Division + "';" +
+                "_lname = '" + this.Lname.Replace("'", "\\'") + "';" +
+                "_department = '" + this.Department.Replace("'","\\'") + "';" +
+                "_institution = '" + this.Institution.Replace("'", "\\'") + "';" +
+
                 "</script>";
         }
 
@@ -225,7 +225,6 @@ namespace Profiles.Proxy.Modules.SearchProxies
             txtFirstName.Text = "";
             drpInstitution.SelectedIndex = -1;
             drpDepartment.SelectedIndex = -1;
-            drpDivision.SelectedIndex = -1;
             gridSearchResults.DataBind();
             pnlProxySearchResults.Visible = false;
         }
@@ -255,7 +254,7 @@ namespace Profiles.Proxy.Modules.SearchProxies
                     }
 
                     e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink((GridView)sender, "Select$" + e.Row.RowIndex);
-                    
+
                     e.Row.Cells[0].Attributes.Add("style", "border-left:#999 1px solid;padding-left:6px;");
                     e.Row.Cells[1].Attributes.Add("style", "border-right:#999 1px solid;padding-left:6px;");
 
@@ -272,7 +271,12 @@ namespace Profiles.Proxy.Modules.SearchProxies
 
                     Literal litFirst = (Literal)e.Row.FindControl("litFirst");
 
-                    Literal litLast = (Literal)e.Row.FindControl("LitLast");
+                    Literal litLast = (Literal)e.Row.FindControl("litLast");
+
+                    Literal litPage = (Literal)e.Row.FindControl("litPage");
+
+
+
 
                     if (CurrentPage > 1)
                         litFirst.Text = "<a href='JavaScript:GotoPreviousPage();' class='listTablePaginationPN listTablePaginationP listTablePaginationA'><img src='" + Root.Domain + "/framework/images/arrow_prev.gif'/>Prev</a>" +
@@ -282,7 +286,7 @@ namespace Profiles.Proxy.Modules.SearchProxies
                         "<img src='" + Root.Domain + "/framework/images/arrow_first_d.gif'/></div>";
 
 
-                    if (this.CurrentPage < this.TotalPages)
+                    if (this.CurrentPage <= (this.TotalPages - 1))
                     {
                         litLast.Text = "<a href='JavaScript:GotoLastPage();' class='listTablePaginationFL listTablePaginationA'><img src='" + Root.Domain + "/framework/images/arrow_last.gif'/></a>" +
                         "<a href='javascript:GotoNextPage();' class='listTablePaginationPN listTablePaginationN listTablePaginationA'>Next<img src='" + Root.Domain + "/framework/images/arrow_next.gif'/></a>";
@@ -292,6 +296,14 @@ namespace Profiles.Proxy.Modules.SearchProxies
                         litLast.Text = "<div class='listTablePaginationFL'><img src='" + Root.Domain + "/framework/images/arrow_last_d.gif'/></div><div class='listTablePaginationPN listTablePaginationN'>" +
                         "Next<img src='" + Root.Domain + "/framework/images/arrow_next_d.gif'/></div>";
                     }
+                    int displaypage = 1;
+                    if (this.CurrentPage != 0)
+                        displaypage = this.CurrentPage;
+
+
+                    litPage.Text = (displaypage).ToString() + " of " + (this.TotalPages).ToString() + " pages";
+
+
 
                     break;
             }
