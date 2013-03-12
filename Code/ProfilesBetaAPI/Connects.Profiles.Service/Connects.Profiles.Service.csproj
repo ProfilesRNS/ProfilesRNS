@@ -70,7 +70,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="NetworkBrowserService.svc" />
-    <EmbeddedResource Include="ProfileService.svc" />
+    <Content Include="ProfileService.svc">
+    </Content>
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
