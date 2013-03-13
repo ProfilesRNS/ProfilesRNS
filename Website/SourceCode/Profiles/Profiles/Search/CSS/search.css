@@ -1,0 +1,47 @@
+﻿/*  
+ 
+    Copyright (c) 2008-2012 by the President and Fellows of Harvard College. All rights reserved.  
+    Profiles Research Networking Software was developed under the supervision of Griffin M Weber, MD, PhD.,
+    and Harvard Catalyst: The Harvard Clinical and Translational Science Center, with support from the 
+    National Center for Research Resources and Harvard University.
+
+
+    Code licensed under a BSD License. 
+    For details, see: LICENSE.txt 
+  
+*/
+/********************************************/
+/* About                                    */
+/********************************************/
+
+.profiles .profilesContentMain .searchSection h3 {
+	margin:0;
+	padding:0;
+	font-size:1.2em;
+	color:#746a42;
+	font-weight:bold;
+}
+
+.profiles .profilesContentMain .searchResults UL
+{
+    list-style-type: none;
+    padding: 0px;
+    margin: 15px 0px 15px 15px;
+    
+}
+.profiles .profilesContentMain .searchResults LI
+{
+    margin-bottom: 8px;
+    text-indent: -15px;
+}
+.searchForm td {
+    font-size: 13px;
+    font-weight: normal;
+    padding: 2px;
+    text-align: left;
+}
+.searchForm a
+{
+text-decoration:none;	
+border : 0;
+}
