@@ -1,9 +1,0 @@
-<query-request><query>PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
-PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
-SELECT DISTINCT ?s ?p ?o 
-WHERE {
-  ?s rdf:type foaf:Person .
-  ?s foaf:lastName "Weber" . 
-  ?s ?p ?o
-}</query></query-request>

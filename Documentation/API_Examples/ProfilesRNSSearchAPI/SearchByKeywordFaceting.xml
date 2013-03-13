@@ -1,0 +1,10 @@
+<SearchOptions>
+	<MatchOptions>
+		<SearchString>asthma</SearchString> 
+		<ClassGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#ClassGroupResearch</ClassGroupURI> 
+	</MatchOptions>
+	<OutputOptions>
+		<Offset>0</Offset> 
+		<Limit>15</Limit> 
+	</OutputOptions>
+</SearchOptions>
