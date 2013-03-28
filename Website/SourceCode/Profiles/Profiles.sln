@@ -1,9 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Profiles", "Profiles\Profiles.csproj", "{3558968D-7E06-4351-AEEE-74A6BC975A74}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProfilesBetaAPI", "ProfilesBetaAPI", "{EEB42F99-AF50-4BFD-9AE8-8F19F3230B6E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProfilesBetaAPI", "..\ProfilesBetaAPI", "{EEB42F99-AF50-4BFD-9AE8-8F19F3230B6E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Profiles", "Profiles\Profiles.csproj", "{3558968D-7E06-4351-AEEE-74A6BC975A74}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfilesSearchAPI", "..\ProfilesSearchAPI\ProfilesSearchAPI.csproj", "{73838284-0025-4C0B-9E72-D0FEAEE37785}"
 EndProject
@@ -27,6 +27,48 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemWeb", "..\SemWeb\src\Sem
 	EndProjectSection
 EndProject
 Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 11
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.med.harvard.edu:8081/tfs
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Profiles\\Profiles.csproj
+		SccProjectName1 = Profiles
+		SccLocalPath1 = Profiles
+		SccProjectUniqueName2 = ..\\..\\ProfilesSearchAPI\\ProfilesSearchAPI\\ProfilesSearchAPI.csproj
+		SccProjectName2 = ../../ProfilesSearchAPI/ProfilesSearchAPI
+		SccLocalPath2 = ..\\..\\ProfilesSearchAPI\\ProfilesSearchAPI
+		SccProjectUniqueName3 = ..\\..\\ProfilesBetaAPI\\Connects.Profiles.Service\\Connects.Profiles.Service.csproj
+		SccProjectTopLevelParentUniqueName3 = Catalyst.sln
+		SccProjectName3 = ../../ProfilesBetaAPI/Connects.Profiles.Service
+		SccLocalPath3 = ..\\..\\ProfilesBetaAPI\\Connects.Profiles.Service
+		SccProjectUniqueName4 = ..\\..\\ProfilesBetaAPI\\Connects.Profiles.Service.DataContracts\\Connects.Profiles.Service.DataContracts.csproj
+		SccProjectTopLevelParentUniqueName4 = Catalyst.sln
+		SccProjectName4 = ../../ProfilesBetaAPI/Connects.Profiles.Service.DataContracts
+		SccLocalPath4 = ..\\..\\ProfilesBetaAPI\\Connects.Profiles.Service.DataContracts
+		SccProjectUniqueName5 = ..\\..\\ProfilesBetaAPI\\Connects.Profiles.Service.ServiceContracts\\Connects.Profiles.Service.ServiceContracts.csproj
+		SccProjectTopLevelParentUniqueName5 = Catalyst.sln
+		SccProjectName5 = ../../ProfilesBetaAPI/Connects.Profiles.Service.ServiceContracts
+		SccLocalPath5 = ..\\..\\ProfilesBetaAPI\\Connects.Profiles.Service.ServiceContracts
+		SccProjectUniqueName6 = ..\\..\\ProfilesBetaAPI\\Connects.Profiles.Service.ServiceImplementation\\Connects.Profiles.Service.ServiceImplementation.csproj
+		SccProjectTopLevelParentUniqueName6 = Catalyst.sln
+		SccProjectName6 = ../../ProfilesBetaAPI/Connects.Profiles.Service.ServiceImplementation
+		SccLocalPath6 = ..\\..\\ProfilesBetaAPI\\Connects.Profiles.Service.ServiceImplementation
+		SccProjectUniqueName7 = ..\\..\\ProfilesBetaAPI\\Connects.Profiles.Utility\\Connects.Profiles.Utility.csproj
+		SccProjectTopLevelParentUniqueName7 = Catalyst.sln
+		SccProjectName7 = ../../ProfilesBetaAPI/Connects.Profiles.Utility
+		SccLocalPath7 = ..\\..\\ProfilesBetaAPI\\Connects.Profiles.Utility
+		SccProjectUniqueName8 = ..\\..\\ProfilesBetaAPI\\Profiles.Common\\Connects.Profiles.Common.csproj
+		SccProjectTopLevelParentUniqueName8 = Catalyst.sln
+		SccProjectName8 = ../../ProfilesBetaAPI/Profiles.Common
+		SccLocalPath8 = ..\\..\\ProfilesBetaAPI\\Profiles.Common
+		SccProjectUniqueName9 = ..\\..\\ProfilesSPARQLAPI\\ProfilesSPARQLAPI\\ProfilesSPARQLAPI.csproj
+		SccProjectName9 = ../../ProfilesSPARQLAPI/ProfilesSPARQLAPI
+		SccLocalPath9 = ..\\..\\ProfilesSPARQLAPI\\ProfilesSPARQLAPI
+		SccProjectUniqueName10 = ..\\..\\SemWeb\\src\\SemWeb.csproj
+		SccProjectName10 = ../../SemWeb/src
+		SccLocalPath10 = ..\\..\\SemWeb\\src
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Default|Any CPU = Default|Any CPU
@@ -104,47 +146,5 @@ Global
 		{24E3696C-B69C-49C8-8276-C4003297C45D} = {EEB42F99-AF50-4BFD-9AE8-8F19F3230B6E}
 		{27F9D353-FCCC-430E-A6A6-6864773CBCDC} = {EEB42F99-AF50-4BFD-9AE8-8F19F3230B6E}
 		{72ABCD78-6907-4F63-8C59-392C9F3CE506} = {EEB42F99-AF50-4BFD-9AE8-8F19F3230B6E}
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 11
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs.med.harvard.edu:8081/tfs
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Profiles\\Profiles.csproj
-		SccProjectName1 = Profiles
-		SccLocalPath1 = Profiles
-		SccProjectUniqueName2 = ..\\..\\ProfilesSearchAPI\\ProfilesSearchAPI\\ProfilesSearchAPI.csproj
-		SccProjectName2 = ../../ProfilesSearchAPI/ProfilesSearchAPI
-		SccLocalPath2 = ..\\..\\ProfilesSearchAPI\\ProfilesSearchAPI
-		SccProjectUniqueName3 = ..\\..\\ProfilesBetaAPI\\Connects.Profiles.Service\\Connects.Profiles.Service.csproj
-		SccProjectTopLevelParentUniqueName3 = Catalyst.sln
-		SccProjectName3 = ../../ProfilesBetaAPI/Connects.Profiles.Service
-		SccLocalPath3 = ..\\..\\ProfilesBetaAPI\\Connects.Profiles.Service
-		SccProjectUniqueName4 = ..\\..\\ProfilesBetaAPI\\Connects.Profiles.Service.DataContracts\\Connects.Profiles.Service.DataContracts.csproj
-		SccProjectTopLevelParentUniqueName4 = Catalyst.sln
-		SccProjectName4 = ../../ProfilesBetaAPI/Connects.Profiles.Service.DataContracts
-		SccLocalPath4 = ..\\..\\ProfilesBetaAPI\\Connects.Profiles.Service.DataContracts
-		SccProjectUniqueName5 = ..\\..\\ProfilesBetaAPI\\Connects.Profiles.Service.ServiceContracts\\Connects.Profiles.Service.ServiceContracts.csproj
-		SccProjectTopLevelParentUniqueName5 = Catalyst.sln
-		SccProjectName5 = ../../ProfilesBetaAPI/Connects.Profiles.Service.ServiceContracts
-		SccLocalPath5 = ..\\..\\ProfilesBetaAPI\\Connects.Profiles.Service.ServiceContracts
-		SccProjectUniqueName6 = ..\\..\\ProfilesBetaAPI\\Connects.Profiles.Service.ServiceImplementation\\Connects.Profiles.Service.ServiceImplementation.csproj
-		SccProjectTopLevelParentUniqueName6 = Catalyst.sln
-		SccProjectName6 = ../../ProfilesBetaAPI/Connects.Profiles.Service.ServiceImplementation
-		SccLocalPath6 = ..\\..\\ProfilesBetaAPI\\Connects.Profiles.Service.ServiceImplementation
-		SccProjectUniqueName7 = ..\\..\\ProfilesBetaAPI\\Connects.Profiles.Utility\\Connects.Profiles.Utility.csproj
-		SccProjectTopLevelParentUniqueName7 = Catalyst.sln
-		SccProjectName7 = ../../ProfilesBetaAPI/Connects.Profiles.Utility
-		SccLocalPath7 = ..\\..\\ProfilesBetaAPI\\Connects.Profiles.Utility
-		SccProjectUniqueName8 = ..\\..\\ProfilesBetaAPI\\Profiles.Common\\Connects.Profiles.Common.csproj
-		SccProjectTopLevelParentUniqueName8 = Catalyst.sln
-		SccProjectName8 = ../../ProfilesBetaAPI/Profiles.Common
-		SccLocalPath8 = ..\\..\\ProfilesBetaAPI\\Profiles.Common
-		SccProjectUniqueName9 = ..\\..\\ProfilesSPARQLAPI\\ProfilesSPARQLAPI\\ProfilesSPARQLAPI.csproj
-		SccProjectName9 = ../../ProfilesSPARQLAPI/ProfilesSPARQLAPI
-		SccLocalPath9 = ..\\..\\ProfilesSPARQLAPI\\ProfilesSPARQLAPI
-		SccProjectUniqueName10 = ..\\..\\SemWeb\\src\\SemWeb.csproj
-		SccProjectName10 = ../../SemWeb/src
-		SccLocalPath10 = ..\\..\\SemWeb\\src
 	EndGlobalSection
 EndGlobal
