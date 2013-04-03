@@ -120,7 +120,7 @@ namespace Profiles.Framework
         protected void LoadAssets()
         {
 
-            //This should loop the applicaiton table or be set based on the contest of the RESTFul URL to know
+            //This should loop the application table or be set based on the contest of the RESTFul URL to know
             //What application is currently being viewed then set the correct asset link.
 
             HtmlLink Profilescss = new HtmlLink();
