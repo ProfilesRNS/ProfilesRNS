@@ -101,7 +101,7 @@ namespace Profiles
 
             System.Data.SqlClient.SqlDataReader reader;         
 
-            //The REST Paths are built based on the applicaitons setup in the Profiles database.
+            //The REST Paths are built based on the applications setup in the Profiles database.
             reader = d.GetRESTApplications();
             int loop = 0;
 
