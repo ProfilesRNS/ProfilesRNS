@@ -19,6 +19,7 @@
 <script type="text/javascript">
     var longitude;
     var latitude;
+    var mapZoom;
 </script>
 
 
@@ -65,7 +66,8 @@
     
         
         // DATASET
-        ProfilesRNS.currentPage.data.mapCenter = new google.maps.LatLng(latitude ,longitude);
+        ProfilesRNS.currentPage.data.mapCenter = new google.maps.LatLng(latitude, longitude);
+        ProfilesRNS.currentPage.data.mapZoom = mapZoom;
 
 
 
@@ -127,7 +129,7 @@
         ProfilesRNS.currentPage.InitPage = function() {
             // Google map options
             var goptions = {
-                zoom: 13,
+                zoom: ProfilesRNS.currentPage.data.mapZoom,
                 center: ProfilesRNS.currentPage.data.mapCenter,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };

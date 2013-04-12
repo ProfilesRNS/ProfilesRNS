@@ -107,6 +107,7 @@ namespace Profiles.Profile.Modules.NetworkMap
 
                     htmlBuilder.Append("longitude = " + cLong + ";");
                     htmlBuilder.Append("latitude = " + cLat + ";");
+                    htmlBuilder.Append("mapZoom = " + sLevel + ";");
 
 
                     // PRNS object hiearchy template 
@@ -117,7 +118,7 @@ namespace Profiles.Profile.Modules.NetworkMap
 
 
                     htmlBuilder.AppendLine(String.Format(" ProfilesRNS.currentPage.data.mapCenter = new google.maps.LatLng({0},{1},{2});", cLat, cLong, sLevel));
-
+                    //htmlBuilder.AppendLine(String.Format(" ProfilesRNS.currentPage.data.mapZoom = {0};", sLevel));
 
 
                     if (personId != 0)
