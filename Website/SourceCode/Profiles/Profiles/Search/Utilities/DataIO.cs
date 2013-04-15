@@ -97,6 +97,7 @@ namespace Profiles.Search.Utilities
 
         public XmlDocument SearchRequest(string searchstring, string exactphrase, string fname, string lname,
             string institution, string institutionallexcept, string department, string departmentallexcept,
+            string division, string divisionallexcept,
             string classuri, string limit, string offset,
             string sortby, string sortdirection,
             string otherfilters, string facrank, ref string searchrequest)
@@ -185,6 +186,15 @@ namespace Profiles.Search.Utilities
                         isexclude = "1";
 
                     search.Append("<SearchFilter IsExclude=\"" + isexclude + "\"  Property=\"http://profiles.catalyst.harvard.edu/ontology/prns#personInPrimaryPosition\"  Property2=\"http://profiles.catalyst.harvard.edu/ontology/prns#positionInDepartment\"   MatchType=\"Exact\">" + department + "</SearchFilter>");
+                    isexclude = "0";
+                }
+
+                if (division != string.Empty)
+                {
+                    if (divisionallexcept == "on")
+                        isexclude = "1";
+
+                    search.Append("<SearchFilter IsExclude=\"" + isexclude + "\"  Property=\"http://profiles.catalyst.harvard.edu/ontology/prns#personInPrimaryPosition\"  Property2=\"http://profiles.catalyst.harvard.edu/ontology/prns#positionInDivision\"   MatchType=\"Exact\">" + division + "</SearchFilter>");
                     isexclude = "0";
                 }
 

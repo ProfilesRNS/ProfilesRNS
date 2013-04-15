@@ -113,6 +113,33 @@ namespace Profiles.Search.Modules.SearchPerson {
         protected global::System.Web.UI.WebControls.CheckBox departmentallexcept;
         
         /// <summary>
+        /// trDivision control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trDivision;
+        
+        /// <summary>
+        /// litDivision control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litDivision;
+
+        /// <summary>
+        /// departmentallexcept control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox divisionallexcept;
+
+        /// <summary>
         /// trFacultyType control.
         /// </summary>
         /// <remarks>

@@ -71,6 +71,16 @@ namespace Profiles.Search.Modules.SearchPerson
                     trDepartment.Visible = false;
                 }
 
+                if (Convert.ToBoolean(ConfigurationSettings.AppSettings["ShowDivisions"]) == true)
+                {
+                    litDivision.Text = SearcDropDowns.BuildDropdown("division", "249", "");
+                }
+                else
+                {
+                    trDivision.Visible = false;
+                }
+
+
             }
 
             
@@ -84,6 +94,7 @@ namespace Profiles.Search.Modules.SearchPerson
 
             bool institutiondropdown = false;
             bool departmentdropdown = false;
+            bool divisiondropdown = false;
             string searchrequest = string.Empty;
 
 
@@ -155,6 +166,17 @@ namespace Profiles.Search.Modules.SearchPerson
                     }
 
 
+                    if (x.SelectSingleNode("@Property").Value == "http://profiles.catalyst.harvard.edu/ontology/prns#personInPrimaryPosition" && x.SelectSingleNode("@Property2").Value == "http://profiles.catalyst.harvard.edu/ontology/prns#positionInDivision")
+                    {
+                        litDivision.Text = SearcDropDowns.BuildDropdown("division", "249", x.InnerText);
+                        divisiondropdown = true;
+
+                        if (x.SelectSingleNode("@IsExclude").Value == "1")
+                            divisionallexcept.Checked = true;
+                        else
+                            divisionallexcept.Checked = false;
+                    }
+
                     if (x.SelectSingleNode("@Property").Value == "http://profiles.catalyst.harvard.edu/ontology/prns#hasPersonFilter")
                     {
 
@@ -182,7 +204,8 @@ namespace Profiles.Search.Modules.SearchPerson
             if (!departmentdropdown)
                 litDepartment.Text = SearcDropDowns.BuildDropdown("department", "249", "");
 
-
+            if (!divisiondropdown)
+                litDivision.Text = SearcDropDowns.BuildDropdown("division", "249", "");
 
 
 
@@ -298,6 +321,9 @@ namespace Profiles.Search.Modules.SearchPerson
             string department = "";
             string departmentallexcept = "";
 
+            string division = "";
+            string divisionallexcept = "";
+
 
             if (Request.Form["institution"] != null)
             {
@@ -311,6 +337,13 @@ namespace Profiles.Search.Modules.SearchPerson
                 departmentallexcept = Request.Form[this.departmentallexcept.UniqueID];
             }
 
+
+            if (!Request.Form["division"].IsNullOrEmpty())
+            {
+                division = Request.Form["division"];
+                divisionallexcept = Request.Form[this.divisionallexcept.UniqueID];
+            }
+
             string otherfilters = Request.Form["hdnSelectedText"];
 
             string classuri = "http://xmlns.com/foaf/0.1/Person";
@@ -322,7 +355,7 @@ namespace Profiles.Search.Modules.SearchPerson
 
 
             data.SearchRequest(searchfor, exactphrase, fname, lname, institution, institutionallexcept,
-                department, departmentallexcept, classuri, "15", "0", "", "", otherfilters, facrank, ref searchrequest);
+                department, departmentallexcept, division, divisionallexcept, classuri, "15", "0", "", "", otherfilters, facrank, ref searchrequest);
 
             Response.Redirect(Root.Domain + "/search/default.aspx?showcolumns=1&searchtype=people&otherfilters=" + otherfilters + "&searchrequest=" + searchrequest, true);
 

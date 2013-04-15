@@ -200,6 +200,16 @@
                                         All <b>except</b> the one selected
                                     </td>
                                 </tr>
+                                <tr runat="server" id="trDivision">
+                                    <th>
+                                        Division
+                                    </th>
+                                    <td colspan="2">
+                                        <asp:Literal runat="server" ID="litDivision"></asp:Literal>
+                                        <asp:CheckBox runat="server" id="divisionallexcept" />
+                                        All <b>except</b> the one selected
+                                    </td>
+                                </tr>
                                 <tr runat="server" id="trFacultyType">
                                     <th>
                                         Faculty Type

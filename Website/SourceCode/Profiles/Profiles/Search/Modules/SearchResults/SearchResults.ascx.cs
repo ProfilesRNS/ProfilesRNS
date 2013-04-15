@@ -64,6 +64,7 @@ namespace Profiles.Search.Modules.SearchResults
             string lname = "";
             string institution = "";
             string department = "";
+            string division = "";
             string sort = "";
             string sortdirection = "";
             string searchrequest = "";
@@ -75,6 +76,7 @@ namespace Profiles.Search.Modules.SearchResults
             string otherfilters = "";
             string institutionallexcept = string.Empty;
             string departmentallexcept = string.Empty;
+            string divisionallexcept = string.Empty;
             string exactphrase = string.Empty;
 
 
@@ -150,8 +152,10 @@ namespace Profiles.Search.Modules.SearchResults
 
             if (String.IsNullOrEmpty(Request.QueryString["department"])==false)
                 department = Request.QueryString["department"];
-            
 
+            if (String.IsNullOrEmpty(Request.QueryString["division"]) == false)
+                division = Request.QueryString["division"];
+            
             if (String.IsNullOrEmpty(Request.QueryString["perpage"])==false)
             {
 				perpage = Convert.ToInt64(Request.QueryString["perpage"]);
@@ -269,6 +273,11 @@ namespace Profiles.Search.Modules.SearchResults
 
             }
 
+            if (String.IsNullOrEmpty(Request.QueryString["divisionallexcept"]) == false)
+            {
+                divisionallexcept = Request.QueryString["divisionallexcept"];
+
+            }
 
             if (String.IsNullOrEmpty(Request.QueryString["exactphrase"])==false)
             {
@@ -324,7 +333,7 @@ namespace Profiles.Search.Modules.SearchResults
                         break;
 
                     default:                       
-                            xmlsearchrequest = data.SearchRequest(searchfor, exactphrase, fname, lname, institution, institutionallexcept, department, departmentallexcept,  "http://xmlns.com/foaf/0.1/Person", perpage.ToString(), (startrecord - 1).ToString(), sort, sortdirection, otherfilters, "",ref searchrequest);                    
+                            xmlsearchrequest = data.SearchRequest(searchfor, exactphrase, fname, lname, institution, institutionallexcept, department, departmentallexcept, division, divisionallexcept,  "http://xmlns.com/foaf/0.1/Person", perpage.ToString(), (startrecord - 1).ToString(), sort, sortdirection, otherfilters, "",ref searchrequest);                    
                         break;
                 }
 
