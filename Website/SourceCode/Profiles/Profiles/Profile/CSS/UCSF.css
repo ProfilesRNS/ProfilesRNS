@@ -1,0 +1,44 @@
+﻿.PropertyGroup,
+.profilesPage .profilesPageColumnLeft { display: none; }
+.profiles .profilesContentMain { width: 680px; margin: 10px 60px 0 10px !important; }
+.profiles .profilesContentPassive { width: 192px; padding: 4px 20px 0 0; }
+img#ctl00_ContentMain_rptMain_ctl00_ctl00_imgPhoto { width: 150px; }
+.PropertyGroupItem { margin: 0 0 10px; border: none; }
+.PropertyItemHeader { color: #CA7C29; font-size: 16px; background-color: #FFF; clear:left;
+  border-top: 1px solid #EEE; padding: 6px 0 0 !important; margin: 15px 0 0; }
+.PropertyItemHeader a { display: none; }
+#toc { margin: 30px 0; background-color: #EEE; border: none; width: 680px\9; padding-bottom: 4px\9; }
+#toc ul { padding: 0 0 0 10px; margin: 0\9; }
+#toc ul li { list-style-type: none; display: inline-block; white-space: nowrap; padding: 0 15px 0 0;
+   border-right: 1px solid #CCC; margin: 5px 15px 5px 0; width: auto\9; float: left\9; } 
+.PropertyGroupData { padding-bottom: 0; }
+.PropertyGroupData div { padding: 0 !important; }
+.profiles .profilesContentMain .sectionHeader { padding-top: 6px;  text-decoration: none; }
+.awardsList:after { content:""; display:block; height: 15px; }
+.profiles .profilesContentMain .awardsList td:first-child { white-space: normal !important; }
+.profiles .profilesContentMain .publications li { border: none; padding-top: 0; }
+#ctl00_lblHTMLBlockLineBreaks { display: block; padding-bottom: 20px; }
+.PropertyGroupData #publicationTimelineGraph { margin-bottom: 20px; }
+#newest { padding-top: 15px; }
+.profiles .basicInfo a, .profiles .basicInfo a:visited, .profiles .basicInfo a:hover { color: #000 !important; }
+
+/* show & hide */
+.box { position: relative; height: auto; width: 680px; }
+.box-collapsed { position: relative;
+     height: 179px; width: 680px;
+     overflow: hidden; 
+}
+.plusbutton, .minusbutton {
+     position: absolute; bottom: 0; right: 0; 
+     margin: 0; padding: 0 20px 0 9px; 
+     color: #CA7C29; line-height: 17px;
+     background-color: #FFF;
+}
+.plusbutton span:hover, .minusbutton span:hover { 
+     color: #CA7C29; text-decoration: underline; cursor: pointer;
+}
+#narrative { margin-top: -15px; }
+
+.awardsList table { width: 680px; }
+.atog { color: #CA7C29; background-color: #FFF; white-space: nowrap; float: right; }
+.atog:hover { text-decoration: underline; cursor: pointer; }

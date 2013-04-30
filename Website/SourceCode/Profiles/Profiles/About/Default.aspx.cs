@@ -50,6 +50,18 @@ namespace Profiles.About
             Aboutcss.Attributes["type"] = "text/css";
             Aboutcss.Attributes["media"] = "all";
             Page.Header.Controls.Add(Aboutcss);
+
+            HtmlLink UCSFcss = new HtmlLink();
+            UCSFcss.Href = Root.Domain + "/About/CSS/UCSF.css";
+            UCSFcss.Attributes["rel"] = "stylesheet";
+            UCSFcss.Attributes["type"] = "text/css";
+            UCSFcss.Attributes["media"] = "all";
+            Page.Header.Controls.Add(UCSFcss);
+
+            HtmlGenericControl UCSFjs = new HtmlGenericControl("script");
+            UCSFjs.Attributes.Add("type", "text/javascript");
+            UCSFjs.Attributes.Add("src", Root.Domain + "/About/JavaScript/UCSF.js");
+            Page.Header.Controls.Add(UCSFjs);
         }
     }
 }

@@ -152,9 +152,19 @@ namespace Profiles.Search
             script.Text = "<script>var _path = \"" + Root.Domain + "\";</script>";
             Page.Header.Controls.Add(script);
 
+            HtmlLink UCSFcss = new HtmlLink();
+            UCSFcss.Href = Root.Domain + "/Search/CSS/UCSF.css";
+            UCSFcss.Attributes["rel"] = "stylesheet";
+            UCSFcss.Attributes["type"] = "text/css";
+            UCSFcss.Attributes["media"] = "all";
+            Page.Header.Controls.Add(UCSFcss);
 
-
+            HtmlGenericControl UCSFjs = new HtmlGenericControl("script");
+            UCSFjs.Attributes.Add("type", "text/javascript");
+            UCSFjs.Attributes.Add("src", Root.Domain + "/Search/JavaScript/UCSF.js");
+            Page.Header.Controls.Add(UCSFjs);
         }
+
         //Need to process this at the page level for the framework data
         //to process the presentation XML
         public void LoadRDFSearchResults()

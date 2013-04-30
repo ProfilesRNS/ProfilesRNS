@@ -24,8 +24,7 @@
         <table id="tblEditProperty" width="100%">
             <tr>
                 <td colspan='3'>
-                    <asp:Literal runat="server" ID="Literal1"></asp:Literal>                    
-                </td>
+                    <asp:Literal runat="server" ID="Literal1"></asp:Literal>                 </td>
             </tr>
             <tr>
                 <td colspan="3">
@@ -61,7 +60,8 @@
                                 <td colspan="3">
                                     <div style="padding-bottom: 5px; text-align: left;">
                                         <asp:LinkButton ID="btnInsertProperty" runat="server" CausesValidation="False" OnClick="btnInsert_OnClick"
-                                            Text="Save and add another&nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;" TabIndex="5"></asp:LinkButton>                                        
+                                            Text="Save and add another" TabIndex="5"></asp:LinkButton>
+					&nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;     
                                         <asp:LinkButton ID="btnInsertProperty2" runat="server" CausesValidation="False" OnClick="btnInsertClose_OnClick"
                                             Text="Save and Close" TabIndex="6"></asp:LinkButton>
                                         &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;

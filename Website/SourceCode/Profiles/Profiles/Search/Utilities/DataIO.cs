@@ -315,14 +315,20 @@ namespace Profiles.Search.Utilities
             return searchxml;
 
         }
+
         public XmlDocument Search(XmlDocument searchoptions, bool lookup)
+        {
+            return Search(searchoptions, lookup, true);
+        }
+
+        public XmlDocument Search(XmlDocument searchoptions, bool lookup, bool useCache)
         {
             string xmlstr = string.Empty;
             XmlDocument xmlrtn = new XmlDocument();
 
             string cachekey = searchoptions.OuterXml + sessionmanagement.Session().SessionID;
 
-            if (Framework.Utilities.Cache.Fetch(cachekey) == null)
+            if (Framework.Utilities.Cache.Fetch(cachekey) == null || !useCache)
             {
                 try
                 {
@@ -362,7 +368,10 @@ namespace Profiles.Search.Utilities
                     xmlrtn.LoadXml(xmlstr);
 
                     Framework.Utilities.DebugLogging.Log(xmlstr);
-                    Framework.Utilities.Cache.Set(cachekey, xmlrtn,0);
+                    if (useCache)
+                    {
+                        Framework.Utilities.Cache.Set(cachekey, xmlrtn, 0);
+                    }
                     xmlstr = string.Empty;
                 }
                 catch (Exception e)
@@ -766,14 +775,11 @@ namespace Profiles.Search.Utilities
                     string sql = "EXEC [Profile.Data].[Organization.GetDepartments]";
 
 
-                    SqlDataReader sqldr = this.GetSQLDataReader("", sql, CommandType.Text, CommandBehavior.CloseConnection, null);
-
-                    while (sqldr.Read())
-                        departments.Add(new GenericListItem(sqldr["Department"].ToString(), sqldr["URI"].ToString()));
-
-                    //Always close your readers
-                    if (!sqldr.IsClosed)
-                        sqldr.Close();
+                    using (SqlDataReader sqldr = this.GetSQLDataReader("", sql, CommandType.Text, CommandBehavior.CloseConnection, null))
+                    {
+                        while (sqldr.Read())
+                            departments.Add(new GenericListItem(sqldr["Department"].ToString(), sqldr["URI"].ToString()));
+                    }
 
                     //Defaulted this to be one hour
                     Framework.Utilities.Cache.Set("GetDepartments", departments, 3600);
@@ -806,14 +812,13 @@ namespace Profiles.Search.Utilities
                 {
                     string sql = "EXEC [Profile.Data].[Person.GetFacultyRanks]";
 
-                    SqlDataReader sqldr = this.GetSQLDataReader("", sql, CommandType.Text, CommandBehavior.CloseConnection, null);
+                    using (SqlDataReader sqldr = this.GetSQLDataReader("", sql, CommandType.Text, CommandBehavior.CloseConnection, null)) 
+                    {
 
-                    while (sqldr.Read())
-                        ranks.Add(new GenericListItem(sqldr["FacultyRank"].ToString(), sqldr["URI"].ToString()));
-
+                        while (sqldr.Read())
+                            ranks.Add(new GenericListItem(sqldr["FacultyRank"].ToString(), sqldr["URI"].ToString()));
+                    }
                     //Always close your readers
-                    if (!sqldr.IsClosed)
-                        sqldr.Close();
 
                     //Defaulted this to be one hour
                     Framework.Utilities.Cache.Set("GetFacultyRanks", ranks, 3600);

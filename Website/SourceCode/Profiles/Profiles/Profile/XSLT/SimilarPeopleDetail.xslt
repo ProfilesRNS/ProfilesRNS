@@ -8,7 +8,7 @@
         <script type="text/javascript">
           <xsl:text disable-output-escaping="yes">
           var hasClickedListTable = false;
-          function doListTableRowOver(x) {
+          function DISABLEDdoListTableRowOver(x) {
           //x.className = 'overRow';
           x.style.backgroundColor = '#5A719C';
           x.style.color = '#FFF';
@@ -56,7 +56,7 @@
       </script>
       
       
-      <div class="tabInfoText">Similar people share similar sets of concepts, but are not necessarily co-authors.</div>
+      <div class="tabInfoText">The people in this list are ordered by decreasing similarity.</div>
       <div class="listTable" style="margin-top: 12px, margin-bottom:8px ">
         <table id="thetable1">
           <tbody>

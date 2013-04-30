@@ -1,0 +1,15 @@
+﻿<Presentation PresentationClass="profile">
+  <WindowName>Shibboleth Login</WindowName>
+  <PageTitle>Shibboleth Login</PageTitle>
+  <PageBackLinkName></PageBackLinkName>
+  <PageBackLinkURL></PageBackLinkURL>
+  <PageSubTitle></PageSubTitle>
+  <PageDescription>Performs redirects to shibboleth IDP</PageDescription>
+  <PanelList>
+    <Panel Name="" Alias="" Type="main" TabType="default" TabSort="0" >
+      <Module ID="ShibLogin" >
+      </Module>
+    </Panel>
+  </PanelList>
+</Presentation>
+

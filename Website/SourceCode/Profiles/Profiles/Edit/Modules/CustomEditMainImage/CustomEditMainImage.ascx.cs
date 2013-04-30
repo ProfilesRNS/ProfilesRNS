@@ -127,7 +127,7 @@ namespace Profiles.Edit.Modules.CustomEditMainImage
             byte[] imageBytes = new byte[AsyncFileUpload1.PostedFile.InputStream.Length + 1];
             AsyncFileUpload1.PostedFile.InputStream.Read(imageBytes, 0, imageBytes.Length);
 
-            data.SaveImage(data.GetPersonID(this.SubjectID), imageBytes);
+            data.SaveImage(data.GetPersonID(this.SubjectID), imageBytes, this.PropertyListXML);
             base.GetSubjectProfile();
             this.PropertyListXML = propdata.GetPropertyList(this.BaseData, base.PresentationXML, this.PredicateURI, false, true, false);
             this.DrawProfilesModule();

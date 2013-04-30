@@ -26,6 +26,7 @@ using System.Xml.Xsl;
 using Profiles.Framework.Utilities;
 using Profiles.Profile.Utilities;
 using Profiles.Edit.Utilities;
+using Profiles.ORNG.Utilities;
 
 
 namespace Profiles.Edit.Modules.EditPropertyList
@@ -106,6 +107,14 @@ namespace Profiles.Edit.Modules.EditPropertyList
 
             BuildSecurityKey(gli);
 
+            // Profiles OpenSocial Extension by UCSF
+            string uri = this.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/@rdf:about", base.Namespaces).Value;
+            OpenSocialManager om = OpenSocialManager.GetOpenSocialManager(uri, Page, true, true);
+            if (om.IsVisible())
+            {
+                om.LoadAssets();
+                pnlOpenSocial.Visible = true;
+            }
         }
         protected void repPropertyGroups_OnItemDataBound(object sender, RepeaterItemEventArgs e)
         {

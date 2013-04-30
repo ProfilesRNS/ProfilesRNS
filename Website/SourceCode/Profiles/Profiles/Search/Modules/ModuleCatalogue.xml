@@ -21,4 +21,5 @@ For details, see: LICENSE.txt
   <Module ModulePath="Modules" NameSpace="TopSearchPhrase" FileName="TopSearchPhrase.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="SearchConnection" FileName="SearchConnection.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="SearchEverything" FileName="SearchEverything.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="SearchConcept" FileName="SearchConcept.ascx" Enabled="true"/>
 </ModuleList>

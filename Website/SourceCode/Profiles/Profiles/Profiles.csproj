@@ -75,10 +75,145 @@
     <Reference Include="System.Web.Services" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="About\AboutUCSFProfiles.aspx" />
+    <Content Include="About\CloseBrowser.aspx" />
+    <Content Include="About\CSS\UCSF.css" />
+    <Content Include="About\ForDevelopers.aspx" />
+    <Content Include="About\GadgetLibrary.aspx" />
+    <Content Include="About\Help.aspx" />
+    <Content Include="About\HowProfilesWorks.aspx" />
+    <Content Include="About\Images\arrows.gif" />
+    <Content Include="About\Images\cloud.png" />
+    <Content Include="About\Images\comment.gif" />
+    <Content Include="About\Images\conceptsearch.jpg" />
+    <Content Include="About\Images\detailstab.jpg" />
+    <Content Include="About\Images\develop-profile.gif" />
+    <Content Include="About\Images\feed.jpg" />
+    <Content Include="About\Images\gear.gif" />
+    <Content Include="About\Images\googleGadget.png" />
+    <Content Include="About\Images\groupsGadget.png" />
+    <Content Include="About\Images\help.gif" />
+    <Content Include="About\Images\linksGadget.png" />
+    <Content Include="About\Images\mentorGadget.png" />
+    <Content Include="About\Images\minisearch.jpg" />
+    <Content Include="About\Images\minisearch.png" />
+    <Content Include="About\Images\newfeatures.gif" />
+    <Content Include="About\Images\opensocial-slideset.jpeg" />
+    <Content Include="About\Images\orange-tick.gif" />
+    <Content Include="About\Images\orangeArrow.gif" />
+    <Content Include="About\Images\presentationGadget.png" />
+    <Content Include="About\Images\profiles.jpg" />
+    <Content Include="About\Images\profilesnapshot.png" />
+    <Content Include="About\Images\pubsGadget.png" />
+    <Content Include="About\Images\pubsgraph.jpg" />
+    <Content Include="About\Images\quote-begin.png" />
+    <Content Include="About\Images\search-icon.gif" />
+    <Content Include="About\Images\timeline.jpg" />
+    <Content Include="About\Images\toc.jpg" />
+    <Content Include="About\Images\tryit.gif" />
+    <Content Include="About\Images\video.JPG" />
+    <Content Include="About\JavaScript\UCSF.js" />
+    <Content Include="About\NewFeatures.aspx" />
+    <Content Include="About\PresentationXML\AboutUCSFProfiles.xml" />
+    <Content Include="About\PresentationXML\CloseBrowser.xml" />
+    <Content Include="About\PresentationXML\ForDevelopers.xml" />
+    <Content Include="About\PresentationXML\GadgetLibrary.xml" />
+    <Content Include="About\PresentationXML\Help.xml" />
+    <Content Include="About\PresentationXML\HowProfilesWorks.xml" />
+    <Content Include="About\PresentationXML\NewFeatures.xml" />
+    <Content Include="ActiveNetwork\CSS\UCSF.css" />
+    <Content Include="ActiveNetwork\JavaScript\UCSF.js" />
+    <Content Include="CustomAPI\v1\EditedCount.aspx" />
+    <Content Include="CustomAPI\v1\JSONProfile.aspx" />
+    <Content Include="CustomAPI\v1\PubDate.aspx" />
+    <Content Include="CustomAPI\v1\PubXML.aspx" />
+    <Content Include="CustomAPI\v1\Statistics.aspx" />
+    <Content Include="CustomAPI\v1\XMLProfile.aspx" />
+    <Content Include="DIRECT\CSS\UCSF.css" />
+    <Content Include="DIRECT\JavaScript\UCSF.js" />
+    <Content Include="Edit\CSS\UCSF.css" />
+    <Content Include="Edit\Images\Icons_downSort.gif" />
+    <Content Include="Edit\Images\icons_greenStar.gif" />
+    <Content Include="Edit\Images\icons_green_BlueRow.gif" />
+    <Content Include="Edit\Images\icons_redCircle.gif" />
+    <Content Include="Edit\Images\icons_red_BlueRow.gif" />
+    <Content Include="Edit\Images\Icons_upSort.gif" />
+    <Content Include="Edit\Images\Icon_add_item.gif" />
+    <Content Include="Edit\Images\sophcat-boat.jpg" />
+    <Content Include="Edit\JavaScript\UCSF.js" />
+    <Content Include="Error\CSS\UCSF.css" />
+    <Content Include="Error\JavaScript\UCSF.js" />
+    <Content Include="Framework\CSS\UCSF.css" />
+    <Content Include="Framework\Images\arrow-orgbg.gif" />
+    <Content Include="Framework\Images\arrow-tealbg.gif" />
+    <Content Include="Framework\Images\backtotop.gif" />
+    <Content Include="Framework\Images\chatter-follow.png" />
+    <Content Include="Framework\Images\chatter-group.png" />
+    <Content Include="Framework\Images\collapseRound.gif" />
+    <Content Include="Framework\Images\expandRound.gif" />
+    <Content Include="Framework\Images\favicon.gif" />
+    <Content Include="Framework\Images\gadgetcollapse.gif" />
+    <Content Include="Framework\Images\gadgetexpand.gif" />
+    <Content Include="Framework\Images\glyphicons-halflings.png" />
+    <Content Include="Framework\Images\info1.png" />
+    <Content Include="Framework\Images\info4.png" />
+    <Content Include="Framework\Images\link.gif" />
+    <Content Include="Framework\Images\photodefault.jpg" />
+    <Content Include="Framework\Images\ProfilesLogo.gif" />
+    <Content Include="Framework\Images\search-icon.gif" />
+    <Content Include="Framework\Images\ucsf.png" />
+    <Content Include="Framework\JavaScript\UCSF.js" />
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Login\CSS\UCSF.css" />
+    <Content Include="Login\JavaScript\UCSF.js" />
+    <Content Include="Login\Modules\ShibLogin\ShibLogin.ascx" />
+    <Content Include="Login\PresentationXML\ShibbolethLoginPresentation.xml" />
+    <Content Include="ORNG\CSS\gadgets.css" />
+    <Content Include="ORNG\CSS\UCSF.css" />
+    <Content Include="ORNG\Default.aspx" />
+    <Content Include="ORNG\GadgetDetails.aspx" />
+    <Content Include="ORNG\Images\gadgetcollapse.gif" />
+    <Content Include="ORNG\Images\gadgetexpand.gif" />
+    <Content Include="ORNG\Images\icon_squareArrow.gif" />
+    <Content Include="ORNG\Images\icon_squareDownArrow.gif" />
+    <Content Include="ORNG\JavaScript\orng.js" />
+    <Content Include="ORNG\JavaScript\UCSF.js" />
+    <Content Include="ORNG\Modules\GadgetSandbox\GadgetSandbox.ascx" />
+    <Content Include="ORNG\Modules\Gadgets\Gadgets.ascx" />
+    <Content Include="ORNG\Modules\ModuleCatalogue.xml" />
+    <Content Include="ORNG\Modules\SearchGadgets\SearchGadgets.ascx" />
+    <Content Include="ORNG\PresentationXML\GadgetDetailsPresentation.xml" />
+    <Content Include="ORNG\PresentationXML\SandboxFormPresentation.xml" />
+    <Content Include="Profile\CSS\UCSF.css" />
+    <Content Include="Profile\Images\default_img.png" />
+    <Content Include="Profile\JavaScript\UCSF.js" />
+    <Content Include="RobotsTxt.aspx" />
+    <Content Include="Search\CSS\UCSF.css" />
+    <Content Include="Search\Images\icon_squareArrow.gif" />
+    <Content Include="Search\Images\search-red.jpg" />
+    <Content Include="Search\JavaScript\UCSF.js" />
+    <Content Include="Search\Modules\SearchConcept\SearchConcept.ascx" />
+    <Content Include="SiteMap.aspx" />
+    <Content Include="trace.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="About\AboutUCSFProfiles.aspx.cs">
+      <DependentUpon>AboutUCSFProfiles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="About\AboutUCSFProfiles.aspx.designer.cs">
+      <DependentUpon>AboutUCSFProfiles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="About\CloseBrowser.aspx.cs">
+      <DependentUpon>CloseBrowser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="About\CloseBrowser.aspx.designer.cs">
+      <DependentUpon>CloseBrowser.aspx</DependentUpon>
+    </Compile>
     <Compile Include="About\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -86,12 +221,47 @@
     <Compile Include="About\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="About\ForDevelopers.aspx.cs">
+      <DependentUpon>ForDevelopers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="About\ForDevelopers.aspx.designer.cs">
+      <DependentUpon>ForDevelopers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="About\GadgetLibrary.aspx.cs">
+      <DependentUpon>GadgetLibrary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="About\GadgetLibrary.aspx.designer.cs">
+      <DependentUpon>GadgetLibrary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="About\Help.aspx.cs">
+      <DependentUpon>Help.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="About\Help.aspx.designer.cs">
+      <DependentUpon>Help.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="About\HowProfilesWorks.aspx.cs">
+      <DependentUpon>HowProfilesWorks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="About\HowProfilesWorks.aspx.designer.cs">
+      <DependentUpon>HowProfilesWorks.aspx</DependentUpon>
+    </Compile>
     <Compile Include="About\Modules\About\About.ascx.cs">
       <DependentUpon>About.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="About\Modules\About\About.ascx.designer.cs">
       <DependentUpon>About.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="About\NewFeatures.aspx.cs">
+      <DependentUpon>NewFeatures.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="About\NewFeatures.aspx.designer.cs">
+      <DependentUpon>NewFeatures.aspx</DependentUpon>
     </Compile>
     <Compile Include="ActiveNetwork\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -106,6 +276,31 @@
     </Compile>
     <Compile Include="ActiveNetwork\Modules\MyNetwork\MyNetwork.ascx.designer.cs">
       <DependentUpon>MyNetwork.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomAPI\Utilities\DataIO.cs" />
+    <Compile Include="CustomAPI\v1\EditedCount.aspx.cs">
+      <DependentUpon>EditedCount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomAPI\v1\JSONProfile.aspx.cs">
+      <DependentUpon>JSONProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomAPI\v1\PubDate.aspx.cs">
+      <DependentUpon>PubDate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomAPI\v1\PubXML.aspx.cs">
+      <DependentUpon>PubXML.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomAPI\v1\Statistics.aspx.cs">
+      <DependentUpon>Statistics.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomAPI\v1\XMLProfile.aspx.cs">
+      <DependentUpon>XMLProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -150,6 +345,52 @@
     <Compile Include="Login\Modules\Login\Login.ascx.designer.cs">
       <DependentUpon>Login.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Login\Modules\ShibLogin\ShibLogin.ascx.cs">
+      <DependentUpon>ShibLogin.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login\Modules\ShibLogin\ShibLogin.ascx.designer.cs">
+      <DependentUpon>ShibLogin.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ORNG\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORNG\GadgetDetails.aspx.cs">
+      <DependentUpon>GadgetDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORNG\GadgetDetails.aspx.designer.cs">
+      <DependentUpon>GadgetDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ORNG\Modules\GadgetSandbox\GadgetSandbox.ascx.cs">
+      <DependentUpon>GadgetSandbox.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORNG\Modules\GadgetSandbox\GadgetSandbox.ascx.designer.cs">
+      <DependentUpon>GadgetSandbox.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ORNG\Modules\Gadgets\Gadgets.ascx.cs">
+      <DependentUpon>Gadgets.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORNG\Modules\Gadgets\Gadgets.ascx.designer.cs">
+      <DependentUpon>Gadgets.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ORNG\Modules\SearchGadgets\SearchGadgets.ascx.cs">
+      <DependentUpon>SearchGadgets.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORNG\Modules\SearchGadgets\SearchGadgets.ascx.designer.cs">
+      <DependentUpon>SearchGadgets.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ORNG\Utilities\DataIO.cs" />
+    <Compile Include="ORNG\Utilities\GadgetSpec.cs" />
+    <Compile Include="ORNG\Utilities\GadgetViewRequirements.cs" />
+    <Compile Include="ORNG\Utilities\OpenSocialManager.cs" />
+    <Compile Include="ORNG\Utilities\ORNGCallbackResponder.cs" />
+    <Compile Include="ORNG\Utilities\PreparedGadget.cs" />
+    <Compile Include="ORNG\Utilities\SocketConnectionPool.cs" />
     <Compile Include="ProfilesDisplay.aspx.cs">
       <DependentUpon>ProfilesDisplay.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -537,6 +778,20 @@
       <DependentUpon>SearchProxies.ascx</DependentUpon>
     </Compile>
     <Compile Include="Proxy\Utilities\DataIO.cs" />
+    <Compile Include="RobotsTxt.aspx.cs">
+      <DependentUpon>RobotsTxt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RobotsTxt.aspx.designer.cs">
+      <DependentUpon>RobotsTxt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Search\Modules\SearchConcept\SearchConcept.ascx.cs">
+      <DependentUpon>SearchConcept.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Search\Modules\SearchConcept\SearchConcept.ascx.designer.cs">
+      <DependentUpon>SearchConcept.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Search\Modules\SearchEverythingFacets\SearchEverythingFacets.ascx.cs">
       <DependentUpon>SearchEverythingFacets.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -606,6 +861,13 @@
     </Compile>
     <Compile Include="Search\Utilities\CacheWrapper.cs" />
     <Compile Include="Search\Utilities\SearchDropDowns.cs" />
+    <Compile Include="SiteMap.aspx.cs">
+      <DependentUpon>SiteMap.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SiteMap.aspx.designer.cs">
+      <DependentUpon>SiteMap.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SPARQL\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -850,7 +1112,9 @@
     <Content Include="Profile\Modules\CustomViewInformationResource\CustomViewInformationResource.xslt" />
     <Content Include="Profile\Modules\CustomViewPersonSameDepartment\CustomViewPersonSameDepartment.ascx" />
     <Content Include="Profile\Profile.aspx" />
-    <Content Include="Profile\XSLT\Awards.xslt" />
+    <Content Include="Profile\XSLT\Awards.xslt">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Profile\Modules\CustomViewPersonGeneralInfo\CustomViewPersonGeneralInfo.xslt" />
     <Content Include="Profile\XSLT\CoAuthorDetail.xslt" />
     <Content Include="Profile\XSLT\ConceptDetail.xslt" />
@@ -968,6 +1232,32 @@
     <Folder Include="ActiveNetwork\Utilities\" />
     <Folder Include="App_Data\" />
     <Folder Include="Login\Modules\App_LocalResources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ProfilesBetaAPI\Connects.Profiles.Service.DataContracts\Connects.Profiles.Service.DataContracts.csproj">
+      <Project>{4E11DE8F-C111-44E4-8AF8-B66EDEC9152D}</Project>
+      <Name>Connects.Profiles.Service.DataContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ProfilesBetaAPI\Connects.Profiles.Service.ServiceContracts\Connects.Profiles.Service.ServiceContracts.csproj">
+      <Project>{D532570D-2CB9-4592-A8B5-C16712B1FACB}</Project>
+      <Name>Connects.Profiles.Service.ServiceContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ProfilesBetaAPI\Connects.Profiles.Service.ServiceImplementation\Connects.Profiles.Service.ServiceImplementation.csproj">
+      <Project>{24E3696C-B69C-49C8-8276-C4003297C45D}</Project>
+      <Name>Connects.Profiles.Service.ServiceImplementation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ProfilesBetaAPI\Connects.Profiles.Service\Connects.Profiles.Service.csproj">
+      <Project>{5CD869A4-AB6B-43A0-ABB5-EE0DE758492B}</Project>
+      <Name>Connects.Profiles.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ProfilesBetaAPI\Connects.Profiles.Utility\Connects.Profiles.Utility.csproj">
+      <Project>{27F9D353-FCCC-430E-A6A6-6864773CBCDC}</Project>
+      <Name>Connects.Profiles.Utility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ProfilesBetaAPI\Profiles.Common\Connects.Profiles.Common.csproj">
+      <Project>{72ABCD78-6907-4F63-8C59-392C9F3CE506}</Project>
+      <Name>Connects.Profiles.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

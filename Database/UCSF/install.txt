@@ -1,0 +1,3 @@
+AddFreetext.sql
+CapatalizeCategories.sql
+PresentationXMLTweaks.sql

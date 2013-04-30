@@ -82,6 +82,18 @@ namespace Profiles.Edit
             Displaycss.Attributes["type"] = "text/css";
             Displaycss.Attributes["media"] = "all";
             Page.Header.Controls.Add(Displaycss);
+
+            HtmlLink UCSFcss = new HtmlLink();
+            UCSFcss.Href = Root.Domain + "/Edit/CSS/UCSF.css";
+            UCSFcss.Attributes["rel"] = "stylesheet";
+            UCSFcss.Attributes["type"] = "text/css";
+            UCSFcss.Attributes["media"] = "all";
+            Page.Header.Controls.Add(UCSFcss);
+
+            HtmlGenericControl UCSFjs = new HtmlGenericControl("script");
+            UCSFjs.Attributes.Add("type", "text/javascript");
+            UCSFjs.Attributes.Add("src", Root.Domain + "/Edit/JavaScript/UCSF.js");
+            Page.Header.Controls.Add(UCSFjs);
         }
 
         public void LoadPageData()

@@ -63,18 +63,6 @@
         <table>
           <tr>
             <td style="width:33%;">
-              <xsl:choose>
-                <xsl:when test="$why">
-                  <div style="width:200px;background-color:#F7F3EF;border:1px solid #999999;font-size:11px;padding:1px;text-align:center">
-                    Click the <b>Why</b> column to see why a person matched the search.
-                  </div>
-                </xsl:when>
-                <xsl:otherwise>
-                  <div style="width:150px"></div>
-                </xsl:otherwise>
-              </xsl:choose>
-            </td>
-            <td style="width:33%;">
               <div style="float:right">
                 Sort&#160;<select id="selSort" onchange="JavaScript:DropdownSort();">
                   <option value="">Query Relevance</option>
@@ -103,18 +91,18 @@
                       <xsl:when test="$currentsort='institution'">
                         <xsl:choose>
                           <xsl:when test="$currentsortdirection='desc'">
-                            <option selected="true" value="institution_desc">Institution (A-Z)</option>
-                            <option value="institution_asc">Institution (Z-A)</option>
+                            <option selected="true" value="institution_desc">School (A-Z)</option>
+                            <option value="institution_asc">School (Z-A)</option>
                           </xsl:when>
                           <xsl:otherwise>
-                            <option value="institution_desc">Institution (A-Z)</option>
-                            <option selected="true" value="institution_asc">Institution (Z-A)</option>
+                            <option value="institution_desc">School (A-Z)</option>
+                            <option selected="true" value="institution_asc">School (Z-A)</option>
                           </xsl:otherwise>
                         </xsl:choose>
                       </xsl:when>
                       <xsl:otherwise>
-                        <option value="institution_desc">Institution (A-Z)</option>
-                        <option value="institution_asc">Institution (Z-A)</option>
+                        <option value="institution_desc">School (A-Z)</option>
+                        <option value="institution_asc">School (Z-A)</option>
                       </xsl:otherwise>
                     </xsl:choose>
                   </xsl:if>
@@ -146,18 +134,18 @@
                       <xsl:when test="$currentsort='facrank'">
                         <xsl:choose>
                           <xsl:when test="$currentsortdirection='desc'">
-                            <option selected="true" value="facrank_desc">Faculty Rank(low-high)</option>
-                            <option value="facrank_asc">Faculty Rank(high-low)</option>
+                            <option selected="true" value="facrank_desc">Researcher Type(low-high)</option>
+                            <option value="facrank_asc">Researcher Type (high-low)</option>
                           </xsl:when>
                           <xsl:otherwise>
-                            <option value="facrank_desc">Faculty Rank(low-high)</option>
-                            <option selected="true" value="facrank_asc">Faculty Rank(high-low)</option>
+                            <option value="facrank_desc">Researcher Type (low-high)</option>
+                            <option selected="true" value="facrank_asc">Researcher Type(high-low)</option>
                           </xsl:otherwise>
                         </xsl:choose>
                       </xsl:when>
                       <xsl:otherwise>
-                        <option value="facrank_desc">Faculty Rank(low-high)</option>
-                        <option value="facrank_asc">Faculty Rank(high-low)</option>
+                        <option value="facrank_desc">Researcher Type (low-high)</option>
+                        <option value="facrank_asc">Researcher Type (high-low)</option>
                       </xsl:otherwise>
                     </xsl:choose>
                   </xsl:if>
@@ -181,7 +169,7 @@
                         <xsl:if test="$ShowInstitutions='true'">
                           <br />
                           <input type="checkbox" id="chkInstitution" name="chkInstitution" value="Institution" class="otherOptionCheckBox"/>
-                          <span>Institution</span>
+                          <span>School</span>
                         </xsl:if>
                         <xsl:if test="$ShowDepartments='true'">
                           <br></br>
@@ -192,13 +180,25 @@
                         <xsl:if test="$ShowFacRank='true'">
                           <br></br>
                           <input type="checkbox" id="chkFacRank" name="chkFacRank" value="Faculty Rank" class="otherOptionCheckBox"/>
-                          <span>Faculty Rank</span>
+                          <span>Researcher Type</span>
                         </xsl:if>
                       </div>
                     </td>
                   </tr>
                 </table>
               </div>
+            </td>
+            <td style="width:33%;">
+              <xsl:choose>
+                <xsl:when test="$why">
+                  <div id="why">
+                    Click <b>Why?</b> to see a researcher's relevant publications.
+                  </div>
+                </xsl:when>
+                <xsl:otherwise>
+                  <div style="width:150px"></div>
+                </xsl:otherwise>
+              </xsl:choose>
             </td>
           </tr>
           <tr>
@@ -233,7 +233,7 @@
                       <xsl:if test="$institution='true'">
                         <th>
                           <a href="JavaScript:Sort('institution');">
-                            Institution
+                            School
                             <xsl:choose>
                               <xsl:when test="$currentsort='institution'">
                                 <xsl:choose>
@@ -272,7 +272,7 @@
                       <xsl:if test="$facrank='true'">
                         <th>
                           <a href="JavaScript:Sort('facrank');">
-                            Faculty Rank
+                            Researcher Type
                             <xsl:choose>
                               <xsl:when test="$currentsort='facrank'">
                                 <xsl:choose>

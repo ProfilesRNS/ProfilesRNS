@@ -1,0 +1,48 @@
+﻿.profilesPage .profilesPageColumnLeft { display: none; }
+.profiles .profilesContentMain { width: 680px; margin: 10px 60px 0 10px !important; }
+#about td { width:230px; vertical-align:top;border-top:2px solid #B8D0D0; }
+* html #about img.sdn { width: 160px; margin: 0 -20px; }
+#what-is { font-size: 20px; color: #FFF; padding: 15px 10px; background-color: #8fb5b5;
+  font-weight:bold; line-height: 20px; letter-spacing: .5px; }
+#what-is span { font-size: 16px; }
+#about td#what-is { background: #659191 url(smbg.gif) repeat-x 0 bottom; }
+* html #about td#what-is { width: 600px; } 
+*+html #about td#what-is { width: 690px; } 
+#about h2 { text-align: center; font-size: 20px; padding: 14px 0 8px; color: #CA7C29; margin: 0; }
+#about h3 { font-size: 14px; padding-bottom: 4px; padding-top: 4px; margin: 0; }
+h2.about { color: #CA7C29; font-size: 16px; }
+ul.square { padding-left: 14px; margin-top: 6px; margin-left: 8px; margin-bottom: 8px; }
+* html ul.square { margin-left: 0; }
+*+html ul.square { margin-left: 0; }
+ul.square li { list-style-type: square; } 
+* html #forDevelopers { width: 620px; }
+*+html #forDevelopers { width: 770px; }
+blockquote { 
+  background:url("../images/quote-begin.png") no-repeat scroll 0 0 transparent;
+  margin-left:0; padding-left: 25px; width: 460px;
+}
+img { border: none; }
+.content-block {
+  width: 370px; float: left;
+  padding-right: 40px; 
+}
+.content-block h2 { font-size: 16px; line-height: 20px; margin-top: 12px; color: #CA7C29;
+  padding: 0;
+  margin-bottom: 14px;
+}
+
+.doublearrow { font-weight: bold;
+  background: url(../images/arrows.gif) no-repeat scroll right 4px transparent;
+  padding-right: 13px;
+}
+
+ul.highlights { padding-left: 20px; }
+ul.highlights li {
+  background:transparent url(../images/orangeArrow.gif) no-repeat scroll 0px 0.45em;
+  list-style-image:none;
+  list-style-position:outside;
+  list-style-type:none;
+  margin: 0;
+  padding:0 0 5px 18px;
+  font-size: 14px;
+}

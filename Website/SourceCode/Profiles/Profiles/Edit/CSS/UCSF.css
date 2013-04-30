@@ -1,0 +1,20 @@
+﻿.profilesPage .profilesPageColumnLeft { display: none; }
+.profiles .profilesPageColumnRightCenter { width: 960px; }
+.evenRow { background-color: #FFFFFF; }
+#suckerfishmenu li.edit a { background-color: #6A7D7D !important; }
+.editPage H2 { color: #666; }
+#profile-components { width: 400px; float: left; border-top: 1px solid #CCC; }
+#profile-components table { margin-bottom: -20px; border: none; }
+#profile-components table td { border: none; border-bottom: 1px solid #CCC; height: 30px; }
+.EditMenuTopRow { display: none; }
+#profile-visibility { width: 450px; float: left; margin-left: 40px; border: 1px solid #CCC; }
+#profile-visibility td { vertical-align: top; padding: 4px 10px; }
+.EditMenuTopRow { display: none; }
+#profile-components table tr td.first { color: #0088CC; }
+#profile-components table tr td.first:hover { color: #005580; text-decoration: underline; cursor: pointer; }
+#profile-components table td#namedegree { color: #0088CC; width: 150px; }
+#profile-components table td#namedegree:hover { text-decoration: none; cursor: default; }
+#profile-components table td span#cls { display: inline-block; float: right; color: #990000; font-size: 10px; line-height: 13px; width: 260px; margin-right: -10px; }
+#profile-components table td span#public { display: inline-block;color: #000; }
+#profile-components table td span#public img { margin: 0 43px 0 84px; margin: 0 40px 0 78px\9; }
+#editmenu .rdf { display: none; }

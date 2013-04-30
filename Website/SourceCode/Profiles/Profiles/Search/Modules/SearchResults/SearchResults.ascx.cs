@@ -23,6 +23,7 @@ using System.Configuration;
 
 using Profiles.Framework.Utilities;
 using Profiles.Search.Utilities;
+using Profiles.ORNG.Utilities;
 
 namespace Profiles.Search.Modules.SearchResults
 {
@@ -241,7 +242,7 @@ namespace Profiles.Search.Modules.SearchResults
             }
             else
             {
-                showcolumns = 1;
+                showcolumns = 10;
             }
 
 
@@ -327,6 +328,9 @@ namespace Profiles.Search.Modules.SearchResults
                             xmlsearchrequest = data.SearchRequest(searchfor, exactphrase, fname, lname, institution, institutionallexcept, department, departmentallexcept,  "http://xmlns.com/foaf/0.1/Person", perpage.ToString(), (startrecord - 1).ToString(), sort, sortdirection, otherfilters, "",ref searchrequest);                    
                         break;
                 }
+
+                OpenSocialManager om = OpenSocialManager.GetOpenSocialManager(null, Page, false, false);
+                om.RegisterORNGCallbackResponder(OpenSocialManager.JSON_PERSONID_CHANNEL, new Responder(xmlsearchrequest));
 
                 this.SearchData = data.Search(xmlsearchrequest,false);
                 this.SearchRequest = data.EncryptRequest(xmlsearchrequest.OuterXml);
@@ -434,6 +438,42 @@ namespace Profiles.Search.Modules.SearchResults
 
         private string SearchRequest { get; set; }
 
+        public class Responder : ORNGCallbackResponder
+        {
+            XmlDocument searchRequest;
+
+            public Responder(XmlDocument searchRequest)
+            {
+                this.searchRequest = searchRequest;
+            }
+
+            public string getCallbackResponse(OpenSocialManager om, string channel)
+            {
+                try
+                {
+                    searchRequest.SelectSingleNode("/SearchOptions/OutputOptions/Offset").InnerText = "0";
+                    searchRequest.SelectSingleNode("/SearchOptions/OutputOptions/Limit").InnerText = "500";
+                    XmlDocument searchData = new Profiles.Search.Utilities.DataIO().Search(searchRequest, false, false);
+
+                    List<string> peopleURIs = new List<string>();
+                    XmlNodeList people = searchData.GetElementsByTagName("rdf:object");
+                    for (int i = 0; i < people.Count; i++)
+                    {
+                        peopleURIs.Add(people[i].Attributes["rdf:resource"].Value);
+                    }
+                    if (peopleURIs.Count > 0)
+                    {
+                        return OpenSocialManager.BuildJSONPersonIds(peopleURIs, "" + peopleURIs.Count + " people found");
+                    }
+                }
+                catch (Exception e)
+                {
+                    DebugLogging.Log(e.Message);
+                }
+
+                return null;
+            }
+        }
 
     }
 }

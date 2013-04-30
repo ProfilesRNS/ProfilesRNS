@@ -24,10 +24,10 @@
     <ContentTemplate>
         <asp:UpdateProgress ID="updateProgress" runat="server">
             <ProgressTemplate>
-                <div style="position: fixed; text-align: center; height: 100px; width: 100px; top: 0;
+                <div style="position: fixed; text-align: center; height: 100%; width: 100%; top: 0;
                     right: 0; left: 0; z-index: 9999999; opacity: 0.7;">
                     <span style="border-width: 0px; position: fixed; padding: 50px; background-color: #FFFFFF;
-                        font-size: 12px; left: 40%; top: 40%;"><img alt="Loading..." src="../edit/images/loader.gif" /><br />
+                        font-size: 25px; left: 40%; top: 40%;"><img alt="Loading..." src="../edit/images/loader.gif" /><br />
                         <i>This operation might take several minutes to complete. Please do not close your browser.</i>
                         </span>
                 </div>
@@ -79,7 +79,7 @@
                                 <asp:ImageButton ID="btnImgDeletePub" runat="server" ImageUrl="~/Framework/Images/icon_squareArrow.gif"
                                     OnClick="btnDeletePub_OnClick" />&nbsp;
                                 <asp:LinkButton ID="btnDeletePub" runat="server" OnClick="btnDeletePub_OnClick" CssClass="profileHypLinks">Delete</asp:LinkButton>
-                                &nbsp;(Remove multiple publications from your profile.)
+                                &nbsp;(Remove multiple publications from your profile)
                             </div>
                         </asp:PlaceHolder>
                     </td>
@@ -87,8 +87,8 @@
                 <tr>
                     <td>
                         <%--Start Add By Id--%>
-                        <asp:Panel ID="pnlAddPubById" runat="server" Style="background-color: #F0F4F6; margin-bottom: 5px;
-                            border: solid 1px #999;" Visible="false">
+                        <asp:Panel ID="pnlAddPubById" runat="server" Style="background-color: #EEEEEE; margin-bottom: 5px;
+                            border: solid 1px #CCC;" Visible="false">
                             <table border="0" cellspacing="2" cellpadding="4" width="100%">
                                 <tr>
                                     <td>
@@ -121,8 +121,8 @@
                         </asp:Panel>
                         <%--End Add By Id--%>
                         <%--Start Add By Search--%>
-                        <asp:Panel ID="pnlAddPubMed" runat="server" Style="background-color: #F0F4F6; margin-bottom: 5px;
-                            border: solid 1px #999;" Visible="false">
+                        <asp:Panel ID="pnlAddPubMed" runat="server" Style="background-color: #EEEEEE; margin-bottom: 5px;
+                            border: solid 1px #CCC;" Visible="false">
                             <div style="padding: 5px;">
                                 <div>
                                     <b>Search PubMed</b>
@@ -182,8 +182,8 @@
                         </asp:Panel>
                         <%--End Add By Search--%>
                         <%--Start Search Results--%>
-                        <asp:Panel ID="pnlAddPubMedResults" runat="server" Style="background-color: #F0F4F6;
-                            margin-bottom: 5px; border: solid 1px #999;" Visible="false">
+                        <asp:Panel ID="pnlAddPubMedResults" runat="server" Style="background-color: #EEEEEE;
+                            margin-bottom: 5px; border: solid 1px #CCC;" Visible="false">
                             <div style="padding: 5px;">
                                 <div>
                                     <div style="width: 25px; float: left;">
@@ -244,8 +244,8 @@
                         </asp:Panel>
                         <%--End Search Results--%>
                         <%--Start Custom Publication--%>
-                        <asp:Panel ID="pnlAddCustomPubMed" runat="server" Style="background-color: #F0F4F6;
-                            margin-bottom: 5px; border: solid 1px #999;" Visible="false">
+                        <asp:Panel ID="pnlAddCustomPubMed" runat="server" Style="background-color: #EEEEEE;
+                            margin-bottom: 5px; border: solid 1px #CCC;" Visible="false">
                             <div style="padding: 5px;">
                                 <div>
                                     <b>Select the type of publication you would like to add</b>&nbsp;&nbsp;
@@ -446,8 +446,8 @@
                         </asp:Panel>
                         <%--End Custom Publication--%>
                         <%--Start Delete Publications--%>
-                        <asp:Panel ID="pnlDeletePubMed" runat="server" Style="background-color: #F0F4F6;
-                            margin-bottom: 5px; border: solid 1px #999;" Visible="false">
+                        <asp:Panel ID="pnlDeletePubMed" runat="server" Style="background-color: #EEEEEE;
+                            margin-bottom: 5px; border: solid 1px #CCC;" Visible="false">
                             <div style="padding: 5px;">
                                 <div>
                                     To delete a single publication, click the X to the right of the citation. To delete
@@ -512,7 +512,7 @@
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>
-                                <SelectedRowStyle BackColor="#F0F4F6" />
+                                <SelectedRowStyle BackColor="#EEEEEE" />
                                 <FooterStyle VerticalAlign="Middle"></FooterStyle>
                             </asp:GridView>
                         </div>

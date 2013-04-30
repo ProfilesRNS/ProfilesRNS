@@ -12,10 +12,18 @@
     <Panel Type="active">
       <Module ID="MiniSearch"  />
       <Module ID="MainMenu"  />
+      <Module ID="Gadgets" >
+        <ParamList>
+          <Param Name="HTML">
+            <div id="gadgets-tools" class="gadgets-gadget-parent"></div>
+          </Param>
+        </ParamList>
+      </Module>
     </Panel>
     <Panel Type="main" TabType="Fixed" TabSort="0" >
       <Module ID="SearchResults">        
       </Module>
+      <Module ID="SearchGadgets"/>
     </Panel>
     <Panel Type="passive">
       <Module ID="SearchCriteria"></Module>

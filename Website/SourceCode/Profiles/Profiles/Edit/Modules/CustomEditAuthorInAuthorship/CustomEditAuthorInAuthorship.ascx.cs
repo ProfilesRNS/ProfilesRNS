@@ -292,7 +292,7 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
             Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
 
 
-            data.DeleteOnePublication(Convert.ToInt32(Session["ProfileUsername"]), key);
+            data.DeleteOnePublication(Convert.ToInt32(Session["ProfileUsername"]), key, this.PropertyListXML);
             this.Counter = 0;
             grdEditPublications.DataBind();
             upnlEditSection.Update();
@@ -414,7 +414,7 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
                     data.AddPublication(pmid, node.OuterXml);
 
                 // Assign the user to the publication
-                data.AddPublication(_personId, Convert.ToInt32(pmid));
+                data.AddPublication(_personId, Convert.ToInt32(pmid), this.PropertyListXML);
 
             }
             this.Counter = 0;
@@ -967,7 +967,7 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
             {
                 myParameters.Add("@PersonID", _personId);
                 myParameters.Add("@created_by", _personId);
-                data.AddCustomPublication(myParameters, _personId);
+                data.AddCustomPublication(myParameters, _personId, this.PropertyListXML);
             }
             this.Counter = 0;
             grdEditPublications.DataBind();

@@ -136,6 +136,24 @@ namespace Profiles.Framework
             jsscript.Attributes.Add("src", Root.Domain + "/Framework/JavaScript/profiles.js");
             Page.Header.Controls.Add(jsscript);
 
+            HtmlLink UCSFcss = new HtmlLink();
+            UCSFcss.Href = Root.Domain + "/Framework/CSS/UCSF.css";
+            UCSFcss.Attributes["rel"] = "stylesheet";
+            UCSFcss.Attributes["type"] = "text/css";
+            UCSFcss.Attributes["media"] = "all";
+            Page.Header.Controls.Add(UCSFcss);
+
+            HtmlGenericControl UCSFjs = new HtmlGenericControl("script");
+            UCSFjs.Attributes.Add("type", "text/javascript");
+            UCSFjs.Attributes.Add("src", Root.Domain + "/Framework/JavaScript/UCSF.js");
+            Page.Header.Controls.Add(UCSFjs);
+
+            // UCSF Eric Meeks. This is handy to have in JavaScriopt form
+            HtmlGenericControl rootDomainjs = new HtmlGenericControl("script");
+            rootDomainjs.Attributes.Add("type", "text/javascript");
+            rootDomainjs.InnerHtml = Environment.NewLine + "var _rootDomain = \"" + Root.Domain + "\";" + Environment.NewLine;
+            Page.Header.Controls.Add(rootDomainjs);
+
             if (this.GetStringFromPresentationXML("Presentation/PageOptions/@Columns") == "3")
             {
                 divPageColumnRightCenter.Style["background-image"] = Root.Domain + "/Framework/Images/passive_back.gif";
@@ -362,6 +380,11 @@ namespace Profiles.Framework
                 {
                     buffer = PresentationClass.Substring(0, 1).ToUpper() + PresentationClass.Substring(1, PresentationClass.Length - 1);
                 }
+                // UCSF schema.org hack
+                if (PresentationClass == "profile")
+                {
+                    buffer = "<span itemprop=\"name\">" + buffer + "</span>";
+                }
                 litPageTitle.Text = "<h2><a><img class=\"pageIcon\" src=\"" + Root.Domain + "/Framework/Images/icon_" + PresentationClass + ".gif\"/></a>" + buffer + "</h2>";
             }
 
@@ -400,7 +423,11 @@ namespace Profiles.Framework
             // Window Title
             buffer = GetStringFromPresentationXML("Presentation/WindowName");
 
-            Page.Header.Title = "Profiles RNS | " + buffer;
+            if (buffer != String.Empty)
+            {
+                buffer = buffer + " | ";
+            }
+            Page.Header.Title = buffer + "UCSF Profiles";
         }
 
         #region "Panel Methods"

@@ -28,16 +28,20 @@
       <tr>
         <th>Title</th>
         <td>
-          <xsl:value-of select="rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:personInPrimaryPosition/@rdf:resource]/vivo:hrJobTitle "/>
+          <span itemprop="jobTitle">
+            <xsl:value-of select="rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:personInPrimaryPosition/@rdf:resource]/vivo:hrJobTitle "/>
+          </span>
         </td>
       </tr>
     </xsl:if>
     <xsl:variable name="uriOrganization" select="rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:personInPrimaryPosition/@rdf:resource]/vivo:positionInOrganization/@rdf:resource"/>
     <xsl:if test="rdf:RDF/rdf:Description[@rdf:about=$uriOrganization]/rdfs:label !=''">
       <tr>
-        <th>Institution</th>
+        <th>School</th>
         <td>
-          <xsl:value-of select="rdf:RDF/rdf:Description[@rdf:about= $uriOrganization]/rdfs:label"/>
+          <span itemprop="affiliation">
+            <xsl:value-of select="rdf:RDF/rdf:Description[@rdf:about= $uriOrganization]/rdfs:label"/>
+          </span>
         </td>
       </tr>
     </xsl:if>
@@ -54,26 +58,30 @@
       <tr>
         <th>Address</th>
         <td>
-          <xsl:if test="rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:mailingAddress/@rdf:resource]/vivo:address1 !=''">
-            <xsl:value-of select="rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:mailingAddress/@rdf:resource]/vivo:address1 "/>
-            <br/>
-          </xsl:if>
-          <xsl:if test="rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:mailingAddress/@rdf:resource]/vivo:address2 !=''">
-            <xsl:value-of select="rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:mailingAddress/@rdf:resource]/vivo:address2 "/>
-            <br/>
-          </xsl:if>
-          <xsl:if test="rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:mailingAddress/@rdf:resource]/vivo:address3 !=''">
-            <xsl:value-of select="rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:mailingAddress/@rdf:resource]/vivo:address3 "/>
-            <br/>
-          </xsl:if>         
-          <xsl:if test="rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:mailingAddress/@rdf:resource]/vivo:addressCity !=''">
-            <xsl:value-of select="rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:mailingAddress/@rdf:resource]/vivo:addressCity"/>
-            <xsl:text> </xsl:text>
-            <xsl:value-of select="rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:mailingAddress/@rdf:resource]/vivo:addressState"/>
-            <xsl:text> </xsl:text>
-            <xsl:value-of select="rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:mailingAddress/@rdf:resource]/vivo:addressPostalCode"/>
-            <br/>
-          </xsl:if>
+          <span itemprop="address" itemscope="itemscope" itemtype="http://schema.org/PostalAddress">
+            <span itemprop="streetAddress">
+              <xsl:if test="rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:mailingAddress/@rdf:resource]/vivo:address1 !=''">
+                <xsl:value-of select="rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:mailingAddress/@rdf:resource]/vivo:address1 "/>
+                <br/>
+              </xsl:if>
+              <xsl:if test="rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:mailingAddress/@rdf:resource]/vivo:address2 !=''">
+                <xsl:value-of select="rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:mailingAddress/@rdf:resource]/vivo:address2 "/>
+                <br/>
+              </xsl:if>
+              <xsl:if test="rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:mailingAddress/@rdf:resource]/vivo:address3 !=''">
+                <xsl:value-of select="rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:mailingAddress/@rdf:resource]/vivo:address3 "/>
+                <br/>
+              </xsl:if>
+              <xsl:if test="rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:mailingAddress/@rdf:resource]/vivo:addressCity !=''">
+                <xsl:value-of select="rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:mailingAddress/@rdf:resource]/vivo:addressCity"/>
+                <xsl:text> </xsl:text>
+                <xsl:value-of select="rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:mailingAddress/@rdf:resource]/vivo:addressState"/>
+                <xsl:text> </xsl:text>
+                <xsl:value-of select="rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:mailingAddress/@rdf:resource]/vivo:addressPostalCode"/>
+                <br/>
+              </xsl:if>
+            </span>
+          </span>
         </td>
       </tr>
     </xsl:if>
@@ -81,10 +89,13 @@
       <tr>
         <th>Phone</th>
         <td>
-          <xsl:value-of select="rdf:RDF[1]/rdf:Description[1]/vivo:phoneNumber"/>
+          <span itemprop="telephone">
+            <xsl:value-of select="rdf:RDF[1]/rdf:Description[1]/vivo:phoneNumber"/>
+          </span>
         </td>
       </tr>
     </xsl:if>
+<!--
     <xsl:choose>
       <xsl:when test="rdf:RDF[1]/rdf:Description[1]/vivo:faxNumber !=''">
         <tr>
@@ -95,6 +106,7 @@
         </tr>
       </xsl:when>
     </xsl:choose>
+-->
     <xsl:choose>
       <xsl:when test="$email!=''">
         <tr>
@@ -110,7 +122,7 @@
             <tr>
               <th>Email</th>
               <td>
-                <a href="mailto:{rdf:RDF[1]/rdf:Description[1]/vivo:email}">
+                <a href="mailto:{rdf:RDF[1]/rdf:Description[1]/vivo:email}" onlick="return handleMailTo(this, '{rdf:RDF[1]/rdf:Description[1]/vivo:email}')" itemprop="email">
                   <xsl:value-of select="rdf:RDF[1]/rdf:Description[1]/vivo:email"/>
                 </a>
               </td>

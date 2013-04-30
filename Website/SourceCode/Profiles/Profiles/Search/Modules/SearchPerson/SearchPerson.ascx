@@ -2,6 +2,12 @@
     Inherits="Profiles.Search.Modules.SearchPerson.SearchPerson" EnableViewState="true" %>
 <%@ Register Src="ComboTreeCheck.ascx" TagName="ComboTreeCheck" TagPrefix="uc1" %>
 
+<style type="text/css">
+.profiles .profilesContentMain { width: 584px; }
+.profiles .profilesContentPassive { margin-right: 20px; }
+.profiles .profilesContentMain .pageTitle h2 { display: none; }
+</style>
+
 <script type="text/javascript">
 
 
@@ -112,13 +118,13 @@
 <asp:HiddenField ID="hdnSearch" runat="server" Value="hdnSearch"></asp:HiddenField>
 <div class="content_container">
     <div class="tabContainer" style="margin-top: 0px;">
-        <div class="searchForm">
+        <div class="searchForm nonavbar">
             <table onkeypress="JavaScript:runScript(event);" width="100%">
                 <tbody align="left">
                     <tr>
                         <td colspan='3'>
-                            <div style="font-size: 18px; color: #b23f45; font-weight: bold; margin-bottom: 3px;">
-                                Find people by keyword</div>
+                            <div class='header'>
+                                Find People by Research Topic or Name</div>
                         </td>
                     </tr>
                     <tr>
@@ -126,19 +132,21 @@
                             <div class="searchSection" id="divSearchSection">
                                 <table width="100%" class='searchForm'>
                                     <tr>
-                                        <th>
-                                            Keywords
+                                        <th style="width: 140px">
+                                            Research Topics
                                         </th>
                                         <td colspan="2" class="fieldOptions">
                                             <asp:TextBox runat="server" ID="txtSearchFor" CssClass="inputText"></asp:TextBox>
                                             <asp:CheckBox runat="server" ID="chkExactphrase" />
-                                            Search for exact phrase
                                         </td>
+<!--  NOTE: checkboxes are hidden in css
+                                            Search for exact phrase
                                     </tr>
                                     <tr>
                                         <tr>
                                             <th>
                                             </th>
+-->
                                             <td style="text-decoration: none" colspan="2">
                                                 <div style="float: left; display: inline">
                                                     <a href="JavaScript:search();">
@@ -153,17 +161,26 @@
                         </td>
                     </tr>
             </table>
-            <table width="100%">
+            <table width="100%" id="searchOptions">
+<!--
                 <tr>
                     <td colspan='3'>
-                        <div style="font-size: 18px; color: #b23f45; font-weight: bold; margin-bottom: 3px;">
+                        <div class='header'>
                             Find people by name/organization</div>
                     </td>
                 </tr>
+-->
                 <tr>
                     <td colspan='3'>
                         <div class="searchSection" id="div1">
                             <table width="100%" class='searchForm'>
+<!--
+                <tr>
+                    <td colspan='3' class="andor">
+                       AND / OR
+                    </td>
+                </tr>
+-->
                                 <tr>
                                     <th>
                                         Last Name
@@ -182,12 +199,14 @@
                                 </tr>
                                 <tr runat="server" id="trInstitution">
                                     <th>
-                                        Institution
+                                        School
                                     </th>
                                     <td colspan="2">
                                         <asp:Literal runat="server" ID="litInstitution"></asp:Literal>
                                         <asp:CheckBox runat="server" ID="institutionallexcept" />
+<!--
                                         All <b>except</b> the one selected
+-->
                                     </td>
                                 </tr>
                                 <tr runat="server" id="trDepartment">
@@ -197,12 +216,14 @@
                                     <td colspan="2">
                                         <asp:Literal runat="server" ID="litDepartment"></asp:Literal>
                                         <asp:CheckBox runat="server" ID="departmentallexcept" />
+<!--
                                         All <b>except</b> the one selected
+-->
                                     </td>
                                 </tr>
                                 <tr runat="server" id="trFacultyType">
                                     <th>
-                                        Faculty Type
+                                        Researcher Type
                                     </th>
                                     <td style="padding:0" colspan="2">
                                         <table cellpadding="0" style="padding:0">
@@ -224,7 +245,7 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        Other Options
+                                        More Options
                                     </th>
                                     <td colspan='2'>
                                         <input type="hidden" id="hiddenToggle" value="off" />
@@ -246,6 +267,7 @@
                                         </table>
                                     </td>
                                 </tr>
+<!--
                                 <tr>
                                     <th>
                                     </th>
@@ -257,6 +279,7 @@
                                         </div>
                                     </td>
                                 </tr>
+-->
                             </table>
                             <asp:Literal runat="server" ID="litFacRankScript"></asp:Literal>
                             
@@ -265,5 +288,6 @@
                 </tr>
             </table>
         </div>
+            <p><img src="<%=GetURLDomain()%>/Search/Images/icon_squareArrow.gif" /> <a href="<%=GetURLDomain()%>/direct">Search other institutions</a></p>
     </div>
 </div>

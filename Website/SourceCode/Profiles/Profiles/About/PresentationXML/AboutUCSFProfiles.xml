@@ -1,0 +1,109 @@
+﻿<Presentation PresentationClass="profile">
+  <PageOptions Columns="2"/>
+  <WindowName>About</WindowName>  
+  <PageTitle>What is UCSF Profiles?</PageTitle>
+  <PageBackLinkName></PageBackLinkName>
+  <PageBackLinkURL></PageBackLinkURL>
+  <PageSubTitle></PageSubTitle>
+  <PageDescription></PageDescription>  
+  <PanelList>
+    <Panel type="header"  />
+    <Panel type="page" />
+    <Panel Type="active">
+      <Module ID="MiniSearch"  />
+      <Module ID="MainMenu"  />      
+    </Panel>
+    <Panel Type="main">
+      <Module ID="HTMLBlock">
+        <ParamList>
+          <Param Name="HTML">
+
+<style type="text/css">
+#suckerfishmenu li#about a { background-color: #6A7D7D !important; }
+</style>
+<h3 style="text-align:center;font-size:20px;padding:10px 0 16px;color:#999;margin:0">
+  A Research Networking and Expertise Mining Tool</h3>
+<table cellspacing="0" id="about">
+ <tr>
+  <td style="background-color:#B8D0D0;padding:0 8px">
+    <h2>Search</h2>
+    <img src="images/search-icon.gif" alt="Magnifying Glass" class="sdn" style="margin:0 0 8px 25px" />
+    <h3 style="text-align:center;color:#333">Experts, Collaborators, Mentors</h3>
+    <ul class="square">
+       <li>100,000+ publications</li>
+       <li>3000+ UCSF faculty</li>
+       <li>1400+ UCSF residents and fellows</li>
+       <li>1000+ UCSF postdocs</li>
+       <li>30 biomedical institutions nationwide</li>
+    </ul>
+  </td>
+
+  <td style="padding:0 8px">
+    <h2>Discover Networks</h2>
+    <img src="images/profiles.jpg" alt="Discover Networks" class="sdn" style="margin:0 0 8px 30px" />
+    <h3 style="text-align:center;color:#333">Peoples' Research Connections</h3>
+    <ul class="square">
+       <li>Who co-authored together</li>
+       <li>Who worked on similar research topics</li>
+    </ul>
+  </td>
+
+  <td style="background-color:#B8D0D0;padding:0 8px">
+    <h2>Edit Your Profile</h2>
+    <img src="images/develop-profile.gif" alt="Develop Your Profile" class="sdn" style="margin:0 0 8px 20px" />
+    <h3 style="text-align:center;color:#333">Information about Your Research</h3>
+    <ul class="square">
+       <li>Overview to describe your work</li>
+       <li>Photo, website links, and awards</li>
+       <li>Mentoring information</li>
+       <li>Your presentations on SlideShare</li>
+       <li>Edit your publications if necessary</li>
+    </ul>
+     <p style="text-align:center;margin:15px 40px 6px;padding:5px 0;border-left: solid 1px #8fb5b5;
+       border-top: solid 1px #8fb5b5;background-color:#FFF;">
+       <a href="../login/default.aspx?method=login&amp;edit=true" class="doublearrow">Edit your profile now</a></p>
+ </td>
+ </tr>
+ <tr>
+  <td colspan="3" align="center" style="padding:15px 0 20px;">
+    <a href="NewFeatures.aspx"><img src="images/newfeatures.gif" alt="New Features" style="border:none;margin-left:192px\9;" /></a>
+  </td>
+ </tr>
+ <tr>
+  <td style="padding:8px 0 0 20px; font-size: 110%; border-bottom: 2px solid #B8D0D0;
+    background: transparent url(images/gear.gif) no-repeat 20px 14px;">
+    <h3 style="padding: 12px 0 8px 40px">Toolbox</h3> 
+    <ul class="square" style="margin-left: 0;">
+      <li><a href="ForDevelopers.aspx">Profiles data tools for your website</a></li>
+      <li><a href="http://www.orng.info/index.html">Profiles OpenSocial extensions</a></li>
+    </ul>
+  </td>
+  <td style="padding:8px 0 0 20px; font-size: 110%; border-bottom: 2px solid #B8D0D0;
+    background: transparent url(images/help.gif) no-repeat 20px 12px;">
+    <h3 style="padding: 12px 0 8px 40px">Help</h3>
+    <ul class="square" style="margin-left: 0;">
+      <li><a href="Help.aspx#faq">Frequently Asked Questions</a></li>
+      <li><a href="mailto:profiles@ucsf.edu">Contact us</a></li>
+    </ul>
+  </td>
+  <td style="padding:8px 0 0 20px; font-size: 110%; border-bottom: 2px solid #B8D0D0;
+    background: transparent url(images/comment.gif) no-repeat 20px 14px;">
+     <h3 style="padding: 12px 0 15px 40px">Feedback</h3> 
+     <p style="margin:0; font-size:12px"><a href="mailto:profiles@ucsf.edu">Contact us</a> to share your ideas and success stories.</p>
+  </td>
+ </tr>
+</table>
+
+<h3 style="padding-top:20px">Acknowledgement</h3>
+<p>UCSF Profiles is UCSF’s version of the ground-breaking, open source "Profiles Research Networking Software" that was developed under the supervision of Griffin M Weber, MD, PhD, with support from Grant Number 1 UL1 RR025758-01 to <a href="http://catalyst.harvard.edu/" target="_new">Harvard Catalyst: The Harvard Clinical and Translational Science Center</a> from the National Center for Research Resources and support from Harvard University and its affiliated academic healthcare centers.</p>
+
+<p>Harvard Catalyst Profiles is available as an <a href="http://connects.catalyst.harvard.edu/profiles/about/opensource" target="_new">open source platform</a> for institutions seeking a web-based means of facilitating collaboration among their academic researchers. </p>        
+          </Param>
+        </ParamList>
+      </Module>
+      <Panel Type="passive"/>
+      <Panel type="footer" />
+    </Panel> 
+  </PanelList>
+</Presentation>
+

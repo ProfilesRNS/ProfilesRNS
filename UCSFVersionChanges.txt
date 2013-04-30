@@ -1,0 +1,9 @@
+roll back [Profile.Framework].[ResolveURL]
+
+
+About
+ActiveNetwork
+DIRECT
+Edit --> do in VS
+Error
+Framework --> do in VS

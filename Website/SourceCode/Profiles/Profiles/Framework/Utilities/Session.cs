@@ -42,7 +42,7 @@ namespace Profiles.Framework.Utilities
         public Int64 NodeID { get; set; }
         public string PersonURI { get; set; }
         public string UserAgent { get; set; }
-
+        public string ShortDisplayName { get; set; } // added by UCSF for menu
     }
     public class SessionHistory
     {

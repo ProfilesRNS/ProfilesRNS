@@ -1,0 +1,114 @@
+﻿<Presentation PresentationClass="profile">
+  <PageOptions Columns="2"/>
+  <WindowName>New Features</WindowName>  
+  <PageTitle>New Features</PageTitle>
+  <PageBackLinkName></PageBackLinkName>
+  <PageBackLinkURL></PageBackLinkURL>
+  <PageSubTitle></PageSubTitle>
+  <PageDescription></PageDescription>  
+  <PanelList>
+    <Panel type="header"  />
+    <Panel type="page" />
+    <Panel Type="active">
+      <Module ID="MiniSearch"  />
+      <Module ID="MainMenu"  />      
+    </Panel>
+    <Panel Type="main">
+      <Module ID="HTMLBlock">
+        <ParamList>
+          <Param Name="HTML">
+
+<style type="text/css">
+#suckerfishmenu li#about a { background-color: #6A7D7D !important; }
+ul li { padding-top: 10px; }
+#new-features { display: none; }
+</style>
+
+<p>The new and improved UCSF Profiles offers a variety of features that make it an even more effective research networking and collaboration tool. Find out what's new and please <a href="mailto:profiles@ucsf.edu?Subject=New%20Features%20Feedback">share any comments</a>.</p>
+
+<div style="border: 1px solid #CCC; padding:5px 15px; margin-bottom: 10px;">
+<h2 style="color: #CA7C29;font-size: 16px;">Highlights</h2>
+<ul class="highlights"> 
+  <li><strong>Search by topic for all recent UCSF papers</strong> with automated help in pinpointing
+      specific concepts (e.g. all recent papers from UCSF on Post-Traumatic Epilepsies)
+  </li>
+  <li><strong>Add customized keywords</strong> to reflect your personal interests (e.g. comparative 
+      effectiveness research, digital health, mentoring) – 
+      <span style="color:#990000;font-style:italic;">Top User Request!</span>
+  </li>
+  <li><strong>Get a personalized URL</strong> for your profile page
+      (e.g. profiles.ucsf.edu/jane.smith)
+  </li>
+  <li><strong>View the time course of an individual's publishing and collaborations</strong> 
+      (e.g. assess whether someone is an expert because of a classic paper written a decade ago 
+      or because of recent contributions)
+  </li>
+</ul>
+
+<h3 style="font-size: 14px;padding-left:38px">And there’s more. See other new features and details below.</h3>
+</div>
+
+<ul>
+  <li><strong>Videos</strong><br />
+      You can now enhance your profile page with YouTube and UCTV videos. In the Featured Videos
+      section, simply enter the title and web address for your YouTube and/or UCTV video. Videos 
+      will appear on your profile page within several minutes.<br />
+      <img src="images/video.jpg" alt="Video" style="padding:10px 0 0 89px;width:506px;" />
+  </li>
+  <li><strong>New Search Options</strong><br />
+      UCSF Profiles now allows you to search by a keyword or concept and return not only the 
+      list of experts at UCSF (6000+) but also all recent papers from UCSF on a topic.<br />
+      <img src="images/conceptsearch.jpg" alt="Search Options" style="padding:10px 0 0 90px" />
+  </li>
+  <li><strong>Highlight Your Interests</strong><br />
+      The feature most requested by profile owners over the last 2 years has been the option to 
+      add customized keywords that reflect personal interests. Now you can! Your customized and searchable 
+      keywords complement the existing automatically generated concepts derived from publications.     
+  </li>
+  <li><strong>Personalized URLs</strong><br />
+      It's now easy to remember your profile page web address, and to share it on business cards,
+      email signatures, etc. Your new USCF Profiles address is based on your first and last name (e.g.
+      profiles.ucsf.edu/john.smith). Find your customized address in the browser address bar when you 
+      visit your profile.    
+  </li>
+  <li><strong>New Visualizations of Helpful Information </strong>
+     <ul>
+        <li><strong>View the time course of publishing and collaborations </strong>
+            (e.g. assess whether someone is an expert because of a classic paper written a decade ago
+            or because of recent contributions; identify recent versus long-past co-authors). Each 
+            individual's publishing timeline appears above the list of relevant publications. <br />
+            <img src="images/pubsgraph.jpg" alt="Publication timeline" style="padding:10px 0 0 45px" />
+        </li>
+        <li><strong>Explore Networks Associated with an Expert</strong> (right column on each profile) 
+            <ul> 
+               <li><strong>Related Concepts</strong> includes subject areas related to an individual's 
+                   publishing history. Select "See all" to view different visualizations, including a 
+                   timeline that demonstrates topics an individual has published on over time. <br />  
+                   <img src="images/timeline.jpg" alt="Expertise timeline" style="padding:10px 0 0 0" />
+               </li>   
+               <li><strong>Related Co-Authors</strong> includes subject areas related to an individual's
+                   publishing history. Select "See all" to view visualizations including number of 
+                   co-publications by individual, a map of co-author publications, etc.   <br />  
+                   <img src="images/detailstab.jpg" alt="Related Co-Authors" style="padding:10px 0 0 0" />
+               </li>   
+            </ul>    
+        </li>      
+     </ul>
+  </li>
+  <li><strong>Updated Look and Feel</strong><br />
+      You'll notice some subtle but helpful changes, including a new table of contents that make it
+      easy to quickly review individual profiles.<br />
+      <img src="images/toc.jpg" alt="Look and Feel" style="padding:10px 0 0 80px" />
+  </li>
+</ul>
+<p><br />Do you have questions or ideas for new UCSF Profiles features? Let us know at <a href="mailo:profiles@ucsf.edu">profiles@ucsf.edu</a>. </p>
+        
+          </Param>
+        </ParamList>
+      </Module>
+      <Panel Type="passive"/>
+      <Panel type="footer" />
+    </Panel> 
+  </PanelList>
+</Presentation>
+

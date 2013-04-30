@@ -218,7 +218,7 @@ namespace Profiles.Search.Modules.SearchPerson
 
 
             litFacRankScript.Text = "<script>";
-            for (int i = 0; i < rowNo - 1; i++)
+            for (int i = 0; i < rowNo; i++)
             {
                 lstValue = dtListItem[i].Text;
                 lstID = dtListItem[i].Value;
@@ -324,7 +324,7 @@ namespace Profiles.Search.Modules.SearchPerson
             data.SearchRequest(searchfor, exactphrase, fname, lname, institution, institutionallexcept,
                 department, departmentallexcept, classuri, "15", "0", "", "", otherfilters, facrank, ref searchrequest);
 
-            Response.Redirect(Root.Domain + "/search/default.aspx?showcolumns=1&searchtype=people&otherfilters=" + otherfilters + "&searchrequest=" + searchrequest, true);
+            Response.Redirect(Root.Domain + "/search/default.aspx?showcolumns=10&searchtype=people&otherfilters=" + otherfilters + "&searchrequest=" + searchrequest, true);
 
 
 

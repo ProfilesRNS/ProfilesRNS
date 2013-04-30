@@ -4,12 +4,12 @@
 	<div class="PropertyItemHeader">
 		<a href="javascript:toggleBlock('propertyitem','conceptPub')"> 
 			<img id='plusImage' runat='server' style="border: none; text-decoration: none !important" border="0" /></a>
-			publications
+			Publications
 	</div>
 	<div class="PropertyGroupData">
 		<div id="conceptPub" class='publicationList'>
 
-			<div class="anchor-tab">
+			<div class="anchor-tab" style="display:none">
 				<a class='selected' rel="#timelineContainer" href='javascript:void(0)'>Timeline</a>
 				&nbsp; | &nbsp; 
 				<% if (ShowOtherPub) { %>
@@ -39,7 +39,7 @@
 			</div>	
 			<% } %>
 			
-			<div id="newest" class="newest publications toggle-vis" style="display:none;">
+			<div id="newest" class="newest publications toggle-vis">
 				<div class='intro'><%= this.GetModuleParamString("NewestCaption").Replace("@ConceptName", this.ConceptName)%></div>
 				<ol style="margin-top: 8px;">		
 					<asp:Literal ID='newest' runat="server" />
