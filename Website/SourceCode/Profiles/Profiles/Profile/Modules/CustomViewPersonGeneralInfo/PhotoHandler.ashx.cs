@@ -24,14 +24,10 @@ namespace Profiles.Profile.Modules.ProfileImage
     public class PhotoHandler : IHttpHandler, System.Web.SessionState.IRequiresSessionState
     {
         static byte[] silhouetteImage = null;
+        static readonly string IMAGE_CACHE_PREFIX = "UCSF.Image_";
 
         public void ProcessRequest(HttpContext context)
         {
-            // Set up the response settings
-            context.Response.ContentType = "image/jpeg";
-            context.Response.Cache.SetCacheability(HttpCacheability.Public);
-            context.Response.BufferOutput = false;
-
             Utilities.DataIO data = new Profiles.Profile.Utilities.DataIO();
 
             Int64 nodeid = -1;
@@ -47,66 +43,79 @@ namespace Profiles.Profile.Modules.ProfileImage
             }
             
             if (nodeid > 0)
-            {
-                
-                // get the id for the image
-                bool harvarddefault = false;
-
-                if (context.Request.QueryString["HarvardDefault"] != null)
+            {                
+                // UCSF items
+                bool thumbnail = false;
+                int width = 150;
+                int height = 300; 
+                if (context.Request.QueryString["Thumbnail"] != null)
                 {
-                    harvarddefault = true;
+                    thumbnail = true;
+                }
+                if (context.Request.QueryString["Width"] != null)
+                {
+                    width = Convert.ToInt32(context.Request.QueryString["Width"]);
+                    height = 2*width;
+                }
+                if (context.Request.QueryString["Height"] != null)
+                {
+                    height = Convert.ToInt32(context.Request.QueryString["Height"]);
                 }
 
-                Framework.Utilities.RDFTriple request = new Profiles.Framework.Utilities.RDFTriple(nodeid);
-
-                request.Expand = true;
-                Framework.Utilities.Namespace xmlnamespace = new Profiles.Framework.Utilities.Namespace();
-                XmlDocument person ;
-
-                person = data.GetRDFData(request);
-                XmlNamespaceManager namespaces =  xmlnamespace.LoadNamespaces(person);
-
-                Stream stream = null;
-
-                if (person.SelectSingleNode("rdf:RDF/rdf:Description[1]/prns:mainImage/@rdf:resource", namespaces) != null)
+                byte[] image = null;
+                // we know that it is OK to cache this
+                if (thumbnail)
                 {
+                    image = (byte[])Framework.Utilities.Cache.FetchObject(IMAGE_CACHE_PREFIX + nodeid);
+                }
 
-                    //Set up the response settings
+                if (image == null)
+                {
+                    // stuff below this and if statement is what makes it slow
+                    Framework.Utilities.RDFTriple request = new Profiles.Framework.Utilities.RDFTriple(nodeid);
+
+                    request.Expand = true;
+                    Framework.Utilities.Namespace xmlnamespace = new Profiles.Framework.Utilities.Namespace();
+                    XmlDocument person;
+
+                    person = data.GetRDFData(request);
+                    XmlNamespaceManager namespaces = xmlnamespace.LoadNamespaces(person);
+
+                    if (person.SelectSingleNode("rdf:RDF/rdf:Description[1]/prns:mainImage/@rdf:resource", namespaces) != null)
+                    {
+                        image = data.GetUserPhotoList(nodeid);
+                        if (thumbnail && image != null)
+                        {
+                            Framework.Utilities.Cache.Set(IMAGE_CACHE_PREFIX + nodeid, image, 0);
+                        }
+                    }
+                    else if (thumbnail)
+                    {
+                        // It's OK that this isn't synchronized even though it would be cleaner if it were
+                        if (silhouetteImage == null)
+                        {
+                            // this method is limited to 2^32 byte files (4.2 GB)
+                            using (FileStream fs = File.OpenRead(AppDomain.CurrentDomain.BaseDirectory + "/Profile/Images/default_img.png"))
+                            {
+                                silhouetteImage = new byte[fs.Length];
+                                fs.Read(silhouetteImage, 0, Convert.ToInt32(fs.Length));
+                            }
+                        }
+                        // added by UCSF
+                        image = silhouetteImage;
+                    }
+                }
+
+                if (image != null)
+                {
+                    Edit.Utilities.DataIO resize = new Profiles.Edit.Utilities.DataIO();
+                    image = resize.ResizeImageFile(image, width, height);
+                    Stream stream = new System.IO.MemoryStream(image);
+
+                    // Set up the response settings
                     context.Response.ContentType = "image/jpeg";
                     context.Response.Cache.SetCacheability(HttpCacheability.Public);
                     context.Response.BufferOutput = false;
-
-                    stream = data.GetUserPhotoList(nodeid,harvarddefault);
-                }
-                else if ("True".Equals(context.Request.QueryString["ShowSilhouetteAsDefault"]))
-                {
-
-                    // It's OK that this isn't synchronized even though it would be cleaner if it were
-                    if (silhouetteImage == null)
-                    {
-                        // this method is limited to 2^32 byte files (4.2 GB)
-                        FileStream fs = File.OpenRead(AppDomain.CurrentDomain.BaseDirectory + "/Profile/Images/default_img.png");
-                        try
-                        {
-                            silhouetteImage = new byte[fs.Length];
-                            fs.Read(silhouetteImage, 0, Convert.ToInt32(fs.Length));
-                        }
-                        finally
-                        {
-                            fs.Close();
-                        }
-                    }
-                    // added by UCSF
-                    stream = new System.IO.MemoryStream(silhouetteImage);
-                }
-                else 
-                {
-                    context.Response.Write("No Image Found");
-                }
-
-                if (stream != null)
-                {
-                    // added by UCSF
                     context.Response.AddHeader("Content-Length", stream.Length.ToString());
 
                     const int buffersize = 1024 * 16;
@@ -118,6 +127,11 @@ namespace Profiles.Profile.Modules.ProfileImage
                         count = stream.Read(buffer2, 0, buffersize);
                     }
                 }
+                else
+                {
+                    context.Response.Write("No Image Found");
+                }
+
             }
         }
 

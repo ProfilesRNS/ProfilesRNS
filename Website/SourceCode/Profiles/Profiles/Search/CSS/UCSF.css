@@ -1,5 +1,5 @@
 ﻿.searchForm td div.header { color: #CA7C29; font-size: 30px; font-weight: bold; margin: 16px 0 8px; }
-.searchForm #div1 { border-top: none; padding-top: 12px; } 
+.searchForm #div1 { border-top: none; padding-top: 12px; padding-top: 20px\9; } 
 .searchForm #div1 th { font-weight: normal; width: 140px; }
 #searchOptions { margin-top: -16px; margin-bottom: 25px; }
 #txtSearchFor { padding-left: 2px; height: 30px; height: 22px\9; padding-top: 6px\9; }
@@ -22,4 +22,17 @@ image { border: none; }
 .profiles .profilesContentPassive { margin-top: 38px; margin-top: 35px\9; } 
 
 input#chkExactphrase, input#institutionallexcept, input#departmentallexcept { display: none; }
+.searchForm .inputText { width: 249px; }
+#divChkList { border: 1px solid #CCC !important; margin-top: -5px; width: 247px !important; padding-top: 15px !important; }
+#divOtherOptions { 
+  border-right: 1px solid #CCC !important;
+  border-bottom: 1px solid #CCC !important;
+  border-left: 1px solid #CCC !important;
+}
 #why { width:190px; font-size:11px; padding:1px; text-align:center; background-color:#F2F7F7; margin-left:30px }
+ 
+/* #andor { width: 100%; height: 3px\9; margin-top: -25px; } */
+#andor span { display: inline-block; position: relative; left: 150px; top: -25px;
+  width: 46px; height: 15px; margin-bottom: -15px;
+  color: #666; background-color: #EEE; padding: 0 0 0 6px; font-size: 11px; letter-spacing: 2px; }
+

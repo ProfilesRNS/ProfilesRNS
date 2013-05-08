@@ -26,28 +26,33 @@ namespace Profiles.Framework.Utilities
 {
     static public class Cache
     {
-        private static double timeout;
+
+        static readonly string DEPENDENCY_PREFIX = "Node Dependency ";
+        static int defaultTimeout = Convert.ToInt32(ConfigurationSettings.AppSettings["CACHE_EXPIRE"]);
         /// <summary>
         /// Used to Set objects in cache for a set timout lenght of time.
         /// </summary>
         /// <param name="key"></param>
         /// <param name="data"></param>        
-        static public void Set(string key, Object data, double cachetimeout, Int64 dependencykey)
+        static private void Set(string key, Object data, Int32 cachetimeout, Int64 dependencykey)
         {
-            timeout = cachetimeout;
-
             string hashkey = string.Empty;
             hashkey = Cache.HashForKey(key);
 
             try
             {
-
                 if (HttpRuntime.Cache[hashkey] != null)
                 {
                     HttpRuntime.Cache.Remove(hashkey);
                 }
-
-                HttpRuntime.Cache.Insert(hashkey, data, CreateDependency(dependencykey.ToString()), DateTime.Now.AddSeconds(timeout), System.Web.Caching.Cache.NoSlidingExpiration);
+                if (cachetimeout < 0 && dependencykey == 0)
+                {
+                    HttpRuntime.Cache.Insert(hashkey, data);
+                }
+                else
+                {
+                    HttpRuntime.Cache.Insert(hashkey, data, CreateDependency(dependencykey.ToString()), DateTime.Now.AddSeconds(cachetimeout), System.Web.Caching.Cache.NoSlidingExpiration);
+                }
             }
             catch (Exception e)
             {
@@ -63,11 +68,13 @@ namespace Profiles.Framework.Utilities
         /// <param name="data">Data value to be Set in cache</param>
         static public void Set(string key, Object data, Int64 dependencykey)
         {
-            timeout = Convert.ToDouble(ConfigurationSettings.AppSettings["CACHE_EXPIRE"]);
-            Set(key, data, timeout, dependencykey);
-
+            Set(key, data, defaultTimeout, dependencykey);
         }
 
+        static public void SetNoDependency(string key, Object data, int cacheTimeout)
+        {
+            Set(key, data, cacheTimeout, 0);
+        }
         /// <summary>
         /// Used to Fetch RDF data or Presentation data from cache.
         /// </summary>
@@ -93,12 +100,6 @@ namespace Profiles.Framework.Utilities
             {
                 throw new Exception(e.Message);
             }
-
-
-
-
-
-
 
             return xmlrtn;
         }
@@ -131,7 +132,19 @@ namespace Profiles.Framework.Utilities
             return xmlrtn;
         }
 
-        static public void Remove(string key)
+        static public void ClearDependentItems(Int64 nodeId)
+        {
+            ClearDependentItems(nodeId.ToString());
+        }
+
+        // this one should be deprecated!
+        static public void ClearDependentItems(string key)
+        {
+            Remove(DEPENDENCY_PREFIX + key);
+            CreateDependency(key);
+        }
+
+        static private void Remove(string key)
         {
 
             if (HttpRuntime.Cache[key] != null)
@@ -140,16 +153,20 @@ namespace Profiles.Framework.Utilities
             }
 
         }
-        static public CacheDependency CreateDependency(string key)
+
+        static private CacheDependency CreateDependency(string key)
         {
             String[] dependencyKey = new String[1];
-            dependencyKey[0] = "Node Dependency " + key;
+            dependencyKey[0] = DEPENDENCY_PREFIX + key;
             CacheDependency dependency = null;
 
             if (key != "0")
             {
+                if (HttpRuntime.Cache[dependencyKey[0]] == null)
+                {
+                    HttpRuntime.Cache.Insert(dependencyKey[0], Guid.NewGuid().ToString());
+                }
                 dependency = new CacheDependency(null, dependencyKey);
-                HttpRuntime.Cache.Insert(dependencyKey[0], Guid.NewGuid().ToString());
             }
 
             return dependency;

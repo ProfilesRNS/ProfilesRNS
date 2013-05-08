@@ -970,7 +970,9 @@
     <Content Include="About\Modules\ModuleCatalogue.xml" />
     <Content Include="About\PresentationXML\AboutPresentation.xml" />
     <Content Include="ActiveNetwork\Default.aspx" />
-    <Content Include="ActiveNetwork\Modules\ModuleCatalogue.xml" />
+    <Content Include="ActiveNetwork\Modules\ModuleCatalogue.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="ActiveNetwork\Modules\MyNetwork\MyNetwork.ascx" />
     <Content Include="ActiveNetwork\PresentationXML\MyNetwork.xml" />
     <Content Include="ApplicationModuleCatalogue.xml" />

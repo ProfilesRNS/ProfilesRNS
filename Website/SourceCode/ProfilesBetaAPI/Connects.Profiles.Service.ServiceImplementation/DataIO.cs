@@ -918,6 +918,19 @@ namespace Connects.Profiles.Service.ServiceImplementation
                     returnxml.Append("</Address>");
                     //END ADDRESS
 
+                    // NARRATIVE (UCSF)
+                    returnxml.Append("<Narrative>");
+                    if (RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + uri + "']/vivo:overview", namespaces) != null)
+                        returnxml.Append(RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + uri + "']/vivo:overview", namespaces).InnerText);
+                    returnxml.Append("</Narrative>");
+                    // END NARRATIVE
+
+                    // PHOTOURL (UCSF)
+                    returnxml.Append("<PhotoUrl>");
+                    if (RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + uri + "']/prns:mainImage/@rdf:resource", namespaces) != null)
+                        returnxml.Append(RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + uri + "']/prns:mainImage/@rdf:resource", namespaces).InnerText);
+                    returnxml.Append("</PhotoUrl>");
+                    // END PHOTOURL
 
                     returnxml.Append("<AffiliationList Visible=\"true\">");
                     if (RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + uri + "']/prns:personInPrimaryPosition/@rdf:resource", namespaces) != null)
@@ -1018,9 +1031,13 @@ namespace Connects.Profiles.Service.ServiceImplementation
                                 returnxml.Append(publication.SelectSingleNode("@rdf:resource", namespaces).Value);
                                 returnxml.Append("</PublicationID>");
 
-                                returnxml.Append("<PublicationReference>");
-                                returnxml.Append(((pub.SelectSingleNode("rdfs:label", namespaces).InnerText).Replace("<", "&lt").Replace(">", "&gt")));
-                                returnxml.Append("</PublicationReference>");
+                                if (pub.SelectSingleNode("prns:informationResourceReference", namespaces) != null)
+                                {
+                                    returnxml.Append("<PublicationReference>");
+                                    returnxml.Append(pub.SelectSingleNode("prns:informationResourceReference", namespaces).InnerText.Replace("&", "&amp;").Replace(">", "&gt;").Replace("<", "&lt;").Replace("%", "&#37;"));
+                                    // UCSF returnxml.Append(((pub.SelectSingleNode("rdfs:label", namespaces).InnerText).Replace("<", "&lt").Replace(">", "&gt")));
+                                    returnxml.Append("</PublicationReference>");
+                                }
 
                                 returnxml.Append("<PublicationMatchDetailList>");
 

@@ -42,7 +42,7 @@ namespace Profiles.Framework.Modules.MainMenu
         {
             menulist = new System.Text.StringBuilder();
             sm = new SessionManagement();
-            ActiveNetworkRelationshipTypes.ClassURI = "";
+            //ActiveNetworkRelationshipTypes.ClassURI = "";
         }
 
         private void DrawProfilesModule()
@@ -69,7 +69,7 @@ namespace Profiles.Framework.Modules.MainMenu
             //    menulist.Append("<li><a href='" + sm.Session().PersonURI + "'>View My Profile</a></li>");
             if (sm.Session().NodeID > 0)
             {
-                menulist.Append("<li><img src='" + Root.Domain + "/profile/Modules/CustomViewPersonGeneralInfo/PhotoHandler.ashx?NodeID=" + sm.Session().NodeID + "&ShowSilhouetteAsDefault=True'></li>");
+                menulist.Append("<li><img src='" + Root.Domain + "/profile/Modules/CustomViewPersonGeneralInfo/PhotoHandler.ashx?NodeID=" + sm.Session().NodeID + "&Thumbnail=True&Width=20'></li>");
                 menulist.Append("<li><a href='" + sm.Session().PersonURI + "'>" + sm.Session().ShortDisplayName + "</a></li>");
             }
             
@@ -138,6 +138,7 @@ namespace Profiles.Framework.Modules.MainMenu
             menulist.Append("</ul>");
 
             // hide active networks DIV if not logged in
+            /** UCSF
             if (sm.Session().UserID > 0)
             {
                 ActiveNetworkRelationshipTypes.Visible = true;
@@ -146,6 +147,7 @@ namespace Profiles.Framework.Modules.MainMenu
             {
                 ActiveNetworkRelationshipTypes.Visible = false;
             }
+             **/
 
             UserHistory uh = new UserHistory();
 

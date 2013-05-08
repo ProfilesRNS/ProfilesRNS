@@ -11,5 +11,5 @@ Code licensed under a BSD License.
 For details, see: LICENSE.txt
 -->
 <ModuleList>
-  <Module ModulePath="Modules" NameSpace="MyNetwork" FileName="MyNetwork.ascx" Enabled="true"/>  
+  <Module ModulePath="Modules" NameSpace="MyNetwork" FileName="MyNetwork.ascx" Enabled="false"/>  
 </ModuleList>

@@ -80,6 +80,18 @@ namespace Profiles.ORNG
             OpenSocialManager om = OpenSocialManager.GetOpenSocialManager(new Guid(guid));
             return om != null ? om.GetCallbackRespose(channel) : null;
         }
+
+        [System.Web.Services.WebMethod]
+        public static string ClearOwnerCache(string guid)
+        {
+            OpenSocialManager om = OpenSocialManager.GetOpenSocialManager(new Guid(guid));
+            if (om != null)
+            {
+                om.ClearOwnerCache();
+                return "Success!";
+            }
+            return "Unrecognized GUID :" + guid;
+        }
     }
 
 }

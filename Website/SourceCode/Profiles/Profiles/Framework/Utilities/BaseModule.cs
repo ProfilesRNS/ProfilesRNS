@@ -51,48 +51,55 @@ namespace Profiles.Framework.Utilities
             Profile.Utilities.DataIO dataio = new Profile.Utilities.DataIO();
 
             Namespace rdfnamespaces = new Namespace();
+            string dataURI = null;
             try
             {
                 if (this.RDFTriple == null)
                 {
-                    if (this.BaseData.SelectSingleNode(this.GetModuleParamString("DataURI"), this.Namespaces).InnerText.Contains(Root.Domain))
+                    dataURI = this.GetModuleParamString("DataURI");
+                    if (!dataURI.IsNullOrEmpty())
                     {
-                        string[] vars = this.BaseData.SelectSingleNode(this.GetModuleParamString("DataURI"), this.Namespaces).InnerText.Split('/');
-
-                        //SPO
-                        Int64 subject = 0;
-                        Int64 predicate = 0;
-                        Int64 _object = 0;
-                        Int64 result;
-
-                        for (int i = 0; i < vars.Length; i++)
+                        if (this.BaseData.SelectSingleNode(dataURI, this.Namespaces).InnerText.Contains(Root.Domain))
                         {
-                            if (Int64.TryParse(vars[i], out result))
+                            string[] vars = this.BaseData.SelectSingleNode(dataURI, this.Namespaces).InnerText.Split('/');
+
+                            //SPO
+                            Int64 subject = 0;
+                            Int64 predicate = 0;
+                            Int64 _object = 0;
+                            Int64 result;
+
+                            for (int i = 0; i < vars.Length; i++)
                             {
+                                if (Int64.TryParse(vars[i], out result))
+                                {
 
 
-                                if (subject != 0 && predicate != 0 && _object == 0)
-                                    _object = Convert.ToInt64(vars[i]);
+                                    if (subject != 0 && predicate != 0 && _object == 0)
+                                        _object = Convert.ToInt64(vars[i]);
 
-                                if (subject != 0 && predicate == 0)
-                                    predicate = Convert.ToInt64(vars[i]);
+                                    if (subject != 0 && predicate == 0)
+                                        predicate = Convert.ToInt64(vars[i]);
 
-                                if (subject == 0)
-                                    subject = Convert.ToInt64(vars[i]);
+                                    if (subject == 0)
+                                        subject = Convert.ToInt64(vars[i]);
 
+
+                                }
 
                             }
 
+                            this.RDFTriple = new RDFTriple(subject, predicate, _object);
                         }
-
-                        this.RDFTriple = new RDFTriple(subject, predicate, _object);
+                        else
+                        {
+                            this.RDFTriple = new RDFTriple(this.BaseData.SelectSingleNode(dataURI, this.Namespaces).InnerText);
+                        }
                     }
                     else
                     {
-                        this.RDFTriple = new RDFTriple(this.BaseData.SelectSingleNode(this.GetModuleParamString("DataURI"), this.Namespaces).InnerText);
+                        return;
                     }
-
-
                 }
                 if (this.GetModuleParamString("Offset") != string.Empty)
                     this.RDFTriple.Offset = this.GetModuleParamString("Offset");
@@ -123,7 +130,9 @@ namespace Profiles.Framework.Utilities
                 this.Namespaces = rdfnamespaces.LoadNamespaces(this.BaseData);
 
             }
-            catch (Exception ex) { Framework.Utilities.DebugLogging.Log(ex.Message + " ++ " + ex.StackTrace); }
+            catch (Exception ex) { 
+                Framework.Utilities.DebugLogging.Log(ex.Message + "(" + dataURI + ") ++ " + ex.StackTrace); 
+            }
 
         }
 

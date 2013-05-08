@@ -161,6 +161,7 @@
                         </td>
                     </tr>
             </table>
+            <div id="andor"><span>and/or</span></div>
             <table width="100%" id="searchOptions">
 <!--
                 <tr>
@@ -174,13 +175,6 @@
                     <td colspan='3'>
                         <div class="searchSection" id="div1">
                             <table width="100%" class='searchForm'>
-<!--
-                <tr>
-                    <td colspan='3' class="andor">
-                       AND / OR
-                    </td>
-                </tr>
--->
                                 <tr>
                                     <th>
                                         Last Name

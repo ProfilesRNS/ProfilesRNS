@@ -165,7 +165,8 @@ namespace Profiles.Framework.Utilities
                 if (ExpandRDFList == null)
                     ExpandRDFList = string.Empty;
 
-                return rtn + "|" + this.Session.SessionID + "|" + this.Expand + "|" + this.ShowDetails + "|" + this.ExpandRDFList + "|" + this.Limit;
+                // UCSF Treat all anonymous users as the same
+                return rtn + "|" + (this.Session.UserID != 0 ? this.Session.SessionID : "ANONYMOUS") + "|" + this.Expand + "|" + this.ShowDetails + "|" + this.ExpandRDFList + "|" + this.Limit;
 
             }
         }

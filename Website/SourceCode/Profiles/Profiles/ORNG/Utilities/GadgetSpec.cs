@@ -10,6 +10,9 @@ namespace Profiles.ORNG.Utilities
 {
     public class GadgetSpec
     {
+
+        static readonly string REGISTERED_APPS_CACHE_PREFIX = "ORNG.REGISTERED_APPS_";
+
         private int appId = 0;
         private string name;
         private string openSocialGadgetURL;
@@ -114,7 +117,7 @@ namespace Profiles.ORNG.Utilities
             return show;
         }
 
-        // Bad idea to cache this
+        // OK to cache as long as dependency is working!
         public string GetRegistryDefinedVisiblity(string personId)
         {
             if (personId == null || personId.Trim().Length == 0)
@@ -122,7 +125,7 @@ namespace Profiles.ORNG.Utilities
                 return null;
             }
 
-            Dictionary<int, string> registeredApps = null;//(Dictionary<int, Boolean>)Framework.Utilities.Cache.FetchObject(OpenSocialManager.GADGET_SPEC_KEY + "_registeredApps_" + personId);
+            Dictionary<int, string> registeredApps = (Dictionary<int, string>)Framework.Utilities.Cache.FetchObject(REGISTERED_APPS_CACHE_PREFIX + personId);
             if (registeredApps == null)
             {
                 registeredApps = new Dictionary<int, string>();
@@ -136,7 +139,7 @@ namespace Profiles.ORNG.Utilities
                     }
                 }
 
-                //Framework.Utilities.Cache.Set(OpenSocialManager.GADGET_SPEC_KEY + "_registeredApps_" + personId, registeredApps);
+                Framework.Utilities.Cache.Set(REGISTERED_APPS_CACHE_PREFIX + personId, registeredApps, OpenSocialManager.GetNodeID(personId));
             }
 
             return registeredApps.ContainsKey(GetAppId()) ? registeredApps[GetAppId()] : null;
@@ -151,5 +154,6 @@ namespace Profiles.ORNG.Utilities
         {
             return enabled;
         }
+
     }
 }

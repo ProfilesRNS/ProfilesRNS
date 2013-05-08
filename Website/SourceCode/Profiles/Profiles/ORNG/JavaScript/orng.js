@@ -124,7 +124,24 @@ my.onSubscribe = function (sender, channel) {
       makeRequestParams,
       "application/json"
     );
-};
+  };
+
+  my.clearServerCache = function () {
+      // send an ajax command to the server letting them know to clear the cache
+      var event = { "guid": my.guid };
+      var makeRequestParams = {
+          "CONTENT_TYPE": "JSON",
+          "METHOD": "POST",
+          "POST_DATA": gadgets.json.stringify(event)
+      };
+
+      gadgets.io.makeNonProxiedRequest(_rootDomain + "/ORNG/Default.aspx/ClearOwnerCache",
+          function (data) {
+          },
+        makeRequestParams,
+        "application/json"
+      );
+  };
 
 my.removeParameterFromURL = function (url, parameter) {
     var urlparts = url.split('?');   // prefer to use l.search if you have a location/link object
@@ -557,17 +574,18 @@ ORNGToggleGadget.prototype.showRegisteredVisibility = function () {
 };
 
 ORNGToggleGadget.prototype.setRegisteredVisibility = function (value) {
-      var makeRequestParams = {
-          "CONTENT_TYPE": "JSON",
-          "METHOD": "POST",
-          "POST_DATA": value
-      };
+    var makeRequestParams = {
+        "CONTENT_TYPE": "JSON",
+        "METHOD": "POST",
+        "POST_DATA": value
+    };
 
-      var moduleId = this.id;
+    var moduleId = this.id;
 
-      gadgets.io.makeNonProxiedRequest(my.openSocialURL + "/rest/registry?st=" + my.gadgets[this.id].secureToken,
+    gadgets.io.makeNonProxiedRequest(my.openSocialURL + "/rest/registry?st=" + my.gadgets[this.id].secureToken,
       function () {
           shindig.container.getGadget(moduleId).showRegisteredVisibility();
+          my.clearServerCache();
       },
       makeRequestParams,
       "application/javascript"

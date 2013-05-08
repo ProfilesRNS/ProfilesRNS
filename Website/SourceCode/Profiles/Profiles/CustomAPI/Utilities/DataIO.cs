@@ -102,7 +102,7 @@ namespace Profiles.CustomAPI.Utilities
             if (cnt == null) 
             {
                 cnt = GetCount("select count(*) from [ORNG].[AppRegistry] where appId = " + appId + ";");
-                Framework.Utilities.Cache.Set("ORNG._appRegistryCount_" + appId, (Nullable<int>)cnt, 0);
+                Framework.Utilities.Cache.SetNoDependency("ORNG._appRegistryCount_" + appId, (Nullable<int>)cnt, -1);
             }
 
             return cnt.Value;

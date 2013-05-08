@@ -36,7 +36,7 @@
     <xsl:if test ="@MoreURL!=''">
       <div class="passiveSectionBodyDetails">
         <a href="{@MoreURL}">
-          <img style="margin-right:2px;position:relative;top:1px;border:0"  src="{$root}/Framework/Images/icon_squareArrow.gif" />
+          <img style="margin-right:4px;position:relative;top:1px;border:0"  src="{$root}/Framework/Images/icon_squareArrow.gif" />
           <xsl:value-of select="@MoreText"/>
         </a>
       </div>

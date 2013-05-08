@@ -78,6 +78,12 @@ namespace Profiles.Search
                 masterpage.RDFData = null;
                 masterpage.RDFNamespaces = null;
             }
+            // added by UCSF.  A hack THAT NEEDS TO BE TESTED (try not doing the UrlEncode)
+            else if (Request.QueryString["tab"] == "concept")
+            {
+                Response.Redirect(Root.Domain + "/search/default.aspx?searchtype=everything&searchfor=" + HttpUtility.UrlEncode(Request.Form["txtSearchFor"]) +
+                    "&ClassGroupURI=" + HttpUtility.UrlEncode("http://profiles.catalyst.harvard.edu/ontology/prns!ClassGroupConcepts") + "&perpage=15&offset=");
+            }
             else
             {
                 if (Request.QueryString["tab"] != null)

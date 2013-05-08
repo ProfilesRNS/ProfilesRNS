@@ -1,6 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MainMenu.ascx.cs"
     Inherits="Profiles.Framework.Modules.MainMenu.MainMenu" %>
-<%@ Register TagName="Networks" TagPrefix="RelationshipType" Src="~/Framework/Modules/MainMenu/SetActiveNetworks.ascx" %>
 <%@ Register TagName="History" TagPrefix="HistoryItem" Src="~/Framework/Modules/MainMenu/History.ascx"  %>
 <%--
     Copyright (c) 2008-2012 by the President and Fellows of Harvard College. All rights reserved.  
@@ -22,7 +21,6 @@
                 <div runat="server" id="panelMenu" visible="true"></div>
             </div>
         </div>
-        <RelationshipType:Networks runat="server" ID="ActiveNetworkRelationshipTypes" Visible="false" />        
         <HistoryItem:History runat="server" ID="ProfileHistory" Visible="false" />        
     </div>
     <div class="activeContainerBottom"></div>

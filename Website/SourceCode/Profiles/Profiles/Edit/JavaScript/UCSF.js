@@ -23,8 +23,8 @@ $("#namedegree").hover(
 );
 
 // edit overview help text
-if ($('#ctl00_ContentMain_rptMain_ctl00_ctl00_ctl00_GridViewProperty tr.topRow th:first-child').text() == 'Overview') {
-    $('#ctl00_ContentMain_rptMain_ctl00_ctl00_ctl00_GridViewProperty tr.topRow th:first-child').append(' <span style="font-weight:normal">(Note: to see paragraph breaks, edit overview or view profile)</span>');
-}
+//if ($('#ctl00_ContentMain_rptMain_ctl00_ctl00_ctl00_GridViewProperty tr.topRow th:first-child').text() == 'Overview') {
+//    $('#ctl00_ContentMain_rptMain_ctl00_ctl00_ctl00_GridViewProperty tr.topRow th:first-child').append(' <span style="font-weight:normal">(Note: to see paragraph breaks, edit overview or view profile)</span>');
+//}
 
 });

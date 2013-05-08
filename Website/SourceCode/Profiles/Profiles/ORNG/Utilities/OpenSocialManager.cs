@@ -170,15 +170,35 @@ namespace Profiles.ORNG.Utilities
                     }
                 }
             }
+            // if we are in edit mode, clear the cache
+            if (editMode)
+            {
+                ClearOwnerCache();
+            }
+
             // sort the gadgets
             DebugLogging.Log("Visible Gadget Count : " + gadgets.Count);
             gadgets.Sort();
+        }
+
+        public void ClearOwnerCache()
+        {
+            if (ownerId != null)
+            {
+                Framework.Utilities.Cache.ClearDependentItems(GetNodeID(ownerId));
+            }
         }
 
         private static string GetGadgetFileNameFromURL(string url)
         {
             string[] urlbits = url.ToString().Split('/');
             return urlbits[urlbits.Length - 1];
+        }
+
+        public static Int64 GetNodeID(string personId)
+        {
+            string[] s = personId.Split('/');
+            return Convert.ToInt64(s[s.Length - 1]);
         }
 
         public bool IsDebug()
@@ -459,7 +479,7 @@ namespace Profiles.ORNG.Utilities
                 if (useCache)
                 {
                     // set it to not timeout
-                    Cache.Set(GADGET_SPEC_KEY, dbApps, -1);
+                    Cache.SetNoDependency(GADGET_SPEC_KEY, dbApps, -1);
                 }
             }
 

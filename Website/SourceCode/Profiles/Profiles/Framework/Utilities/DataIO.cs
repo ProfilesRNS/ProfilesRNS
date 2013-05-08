@@ -77,7 +77,7 @@ namespace Profiles.Framework.Utilities
 
                     xmlrtn.LoadXml(xmlstr);
 
-                    Framework.Utilities.Cache.Set(key, xmlrtn,0);
+                    Framework.Utilities.Cache.Set(key, xmlrtn, 0);
                     xmlstr = string.Empty;
 
                 }
@@ -221,7 +221,7 @@ namespace Profiles.Framework.Utilities
                 if (!sqldr.IsClosed)
                     sqldr.Close();
 
-                Framework.Utilities.Cache.Set("GetRESTBasePath", rtn, 10000);
+                Framework.Utilities.Cache.SetNoDependency("GetRESTBasePath", rtn, 10000);
             }
             else
             {
@@ -250,7 +250,7 @@ namespace Profiles.Framework.Utilities
                 if (!sqldr.IsClosed)
                     sqldr.Close();
 
-                Framework.Utilities.Cache.Set("GetRESTBaseURI", rtn, 10000);
+                Framework.Utilities.Cache.SetNoDependency("GetRESTBaseURI", rtn, 10000);
             }
             else
             {
@@ -272,7 +272,7 @@ namespace Profiles.Framework.Utilities
 
             SqlParameter[] param;
 
-            param = new SqlParameter[6];
+            param = new SqlParameter[4];
 
             SqlCommand dbcommand = new SqlCommand();
 
@@ -294,10 +294,11 @@ namespace Profiles.Framework.Utilities
             {
                 //For Output Parameters you need to pass a connection object to the framework so you can close it before reading the output params value.
                 ExecuteSQLDataCommand(GetDBCommand(ref dbconnection, "[RDF.Security].[GetSessionSecurityGroup]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param));
-
-
             }
-            catch (Exception ex) { }
+            catch (Exception ex) 
+            {
+                Framework.Utilities.DebugLogging.Log(ex.Message + " ++ " + ex.StackTrace);
+            }
 
             dbcommand.Connection.Close();
             if (param[1] != null)

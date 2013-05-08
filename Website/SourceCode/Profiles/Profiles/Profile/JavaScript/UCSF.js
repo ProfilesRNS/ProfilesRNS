@@ -60,8 +60,8 @@
     $('.awardsList td:nth-child(2)').css('white-space', 'nowrap').css('width', '36px');
     if ($('.awardsList tr').length > 4) {
         $('.awardsList tr:gt(2)').hide();
-        $("<div class='atog' id='moreawards'><span> <strong>...</strong> Show more</span> <img src='" + _rootDomain + "/Framework/Images/expandRound.gif' alt='+' style='vertical-align:top' /></div>").appendTo('.awardsList tr:nth-child(3) td:nth-child(4)');
-        $("<div class='atog' id='lessawards'><span>Show less</span> <img src='" + _rootDomain + "/Framework/Images/collapseRound.gif' alt='-' style='vertical-align:top' /></div>").appendTo('.awardsList tr:last-child td:nth-child(4)');
+        $("<div class='atog' id='moreawards'><span> <strong>...</strong> Show more</span> <img src='" + _rootDomain + "/Framework/Images/expandRound.gif' alt='+' style='vertical-align:top' /></div>").appendTo('.awardsList tr:nth-child(3) td:last-child');
+        $("<div class='atog' id='lessawards'><span>Show less</span> <img src='" + _rootDomain + "/Framework/Images/collapseRound.gif' alt='-' style='vertical-align:top' /></div>").appendTo('.awardsList tr:last-child td:last-child');
     }
     $('#moreawards').click(function () {
         $('.awardsList tr:gt(2)').toggle();
@@ -76,12 +76,12 @@
 
 
     //Overview expand/collapse
-    $('span#ctl00_lblHTMLBlockLineBreaks').wrap("<div id='narrative' />");
+    $('.PropertyItemHeader:contains("Overview")').next('.PropertyGroupData').attr("id","narrative");
     if ($('#narrative').text().length > 800) {
         $('#narrative').addClass('box');
     }
     $('.box').addClass('box-collapsed');
-    $('.box').first().prepend("<div class='plusbutton'><span> <strong>&nbsp;...</strong> Show more</span> <img src='" +_rootDomain + "/Framework/Images/expandRound.gif' alt='+' style='vertical-align:top' /></div><div class='minusbutton'><span>Show less</span> <img src='../Framework/Images/collapseRound.gif' alt='-' style='vertical-align:top' /></div>");
+    $('.box').first().prepend("<div class='plusbutton'><span> <strong>&nbsp;...</strong> Show more</span> <img src='" +_rootDomain + "/Framework/Images/expandRound.gif' alt='+' style='vertical-align:top' /></div><div class='minusbutton'><span>Show less</span> <img src='" + _rootDomain + "/Framework/Images/collapseRound.gif' alt='-' style='vertical-align:top' /></div>");
     $('.minusbutton').hide();
     $('.plusbutton').click(function () {
         $(this).parent().removeClass('box-collapsed');

@@ -1,6 +1,7 @@
 ﻿.profilesPage .profilesPageColumnLeft { display: none; }
 .profiles .profilesContentMain { width: 680px; margin: 10px 60px 0 10px !important; }
 .profiles .profilesContentPassive { width: 192px; padding: 4px 20px 0 0; }
+.profiles .profilesContentPassive .passiveSectionBody  div { padding: 8px 0 12px; }
 .listTable tr:first-child td { color: #000; font-weight: bold; background-color: #EEE; }
 .listTable tr:first-child td:hover { color: #000; text-decoration: none; cursor: default; }
 #btnsearch { font-size: 0; height: 30px; width: 110px; border: none; margin-top: 0.2em; 

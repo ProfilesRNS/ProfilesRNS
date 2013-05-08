@@ -97,20 +97,21 @@ h1 a:hover { color: #457272; text-decoration: none; }
 .profiles a, .profiles a:visited { text-decoration: none; color: #0088CC !important; }
 .profiles a:hover { color: #005580 !important; }
 .EditMenuTopRow, .topRow, .editPage .topRow td, .profiles .profilesContentActive .activeSectionHead, .listTable th { background-color: #EEE; }
-.searchForm .searchSection { background-color: #EEEEEE; }
+.searchForm .searchSection { background-color: #EEEEEE; padding: 18px 0\9; }
 .listTable table { border: 1px solid #CCC; }
 .listTable .evenRow { background-color: #F2F7F7; }
 .listTable td { border: none; border-right: solid 1px #CCC; }
 .listTable td:first-child { color: #0088CC; }
 .listTable td:first-child:hover { color: #005580; text-decoration: underline; }
-.listTablePagination { border-color: #CCC; background-color: #FFF; margin-left: 0; margin-bottom: 10px; width: 666px; }
+.listTablePagination { border-color: #CCC; background-color: #FFF; 
+  margin-left: 0 !important; margin-bottom: 10px; width: 666px; }
 * html .listTablePagination { width: 678px; margin-bottom: 40px; }
 *+html .listTablePagination { width: 678px; margin-bottom: 40px; }
 .listTablePaginationFL img { margin-top: 4px; } 
 .listTablePaginationFL img { margin-top: 5px\9; } 
 
 #defaultmenu, #minisearch { display: none; } 
-
+.SupportText { border: none; }
 
 .profiles .profilesFooter { background-color: #849696; text-align: center; font-size: 89%;
   width: 980px; border-top: 3px solid #666; margin: 10px auto; }

@@ -661,7 +661,7 @@ namespace Profiles.Search.Utilities
 
 
                     //Defaulted this to be one hour
-                    Framework.Utilities.Cache.Set("GetDivisions", divisions, 3600);
+                    Framework.Utilities.Cache.SetNoDependency("GetDivisions", divisions, 3600);
 
 
                 }
@@ -705,7 +705,7 @@ namespace Profiles.Search.Utilities
                         sqldr.Close();
 
                     //Defaulted this to be one hour
-                    Framework.Utilities.Cache.Set("GetInstitutions", institutions, 3600);
+                    Framework.Utilities.Cache.SetNoDependency("GetInstitutions", institutions, 3600);
 
 
                 }
@@ -740,7 +740,7 @@ namespace Profiles.Search.Utilities
 
                     da.Fill(ds, "Table");
                     //Defaulted this to be one hour
-                    Framework.Utilities.Cache.Set("GetFilters", ds, 3600);
+                    Framework.Utilities.Cache.SetNoDependency("GetFilters", ds, 3600);
 
                     conn.Close();
 
@@ -782,7 +782,7 @@ namespace Profiles.Search.Utilities
                     }
 
                     //Defaulted this to be one hour
-                    Framework.Utilities.Cache.Set("GetDepartments", departments, 3600);
+                    Framework.Utilities.Cache.SetNoDependency("GetDepartments", departments, 3600);
 
                 }
                 catch (Exception e)
@@ -821,7 +821,7 @@ namespace Profiles.Search.Utilities
                     //Always close your readers
 
                     //Defaulted this to be one hour
-                    Framework.Utilities.Cache.Set("GetFacultyRanks", ranks, 3600);
+                    Framework.Utilities.Cache.SetNoDependency("GetFacultyRanks", ranks, 3600);
 
                 }
                 catch (Exception e)

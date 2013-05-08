@@ -15,7 +15,7 @@ this website.
 <br />
 <br />
 -->
-<p style="color:#CC0000;font-weight:bold;margin-top:2px;">Please note that your changes may take up to 15 minutes to show on the public site.</p>
+<p style="color:#990000;font-weight:bold;margin-top:2px;">Please note that your changes may take up to 15 minutes to show on the public site.</p>
 <h3>Basic Components:</h3>
 <div id="profile-components">
   <table style="width:100%;margin-bottom:0;">

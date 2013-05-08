@@ -43,8 +43,6 @@ namespace Profiles.Edit
 
             if (Request.QueryString["subject"] != null)
             {
-
-
                 this.RDFTriple = new RDFTriple(Convert.ToInt64(Request.QueryString["subject"]));
                 this.RDFTriple.Edit = true;
                 this.RDFTriple.Predicate = 0;
@@ -52,10 +50,8 @@ namespace Profiles.Edit
                 this.RDFTriple.Object = 0;
                 this.RDFTriple.ShowDetails = true;
 
-
                 session.RDFTriple = this.RDFTriple;
                 session.ClearEditSession();
-
             }
             else
             {
