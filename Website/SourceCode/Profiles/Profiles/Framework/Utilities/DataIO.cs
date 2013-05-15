@@ -32,6 +32,9 @@ namespace Profiles.Framework.Utilities
     /// </summary>
     public partial class DataIO
     {
+        private static Dictionary<Int64, string> prettyURLs = new Dictionary<Int64,string>();
+        private static Dictionary<Int64, Int64> nodeIDs = new Dictionary<Int64, Int64>();
+
         public string _ErrorMsg = "";
         public string _ErrorNumber = "";
 
@@ -194,13 +197,24 @@ namespace Profiles.Framework.Utilities
 
         public SqlDataReader GetRESTApplications()
         {
-            // UCSF  Order matter so that Jane.Doe.2 does not get picked up by Jane.Doe
             string sql = "Select * from [Framework.].RestPath with(nolock) order by len(ApplicationName) desc";
 
             SqlDataReader sqldr = this.GetSQLDataReader("", sql, CommandType.Text, CommandBehavior.CloseConnection, null);
 
             return sqldr;
         }
+
+        // UCSF
+        public SqlDataReader GetPrettyURLs()
+        {
+            // UCSF  Order matter so that Jane.Doe.2 does not get picked up by Jane.Doe
+            string sql = "Select URL_NAME from cls.dbo.uniqueNames";
+
+            SqlDataReader sqldr = this.GetSQLDataReader("", sql, CommandType.Text, CommandBehavior.CloseConnection, null);
+
+            return sqldr;
+        }
+        
         public string GetRESTBasePath()
         {
             string rtn = string.Empty;
@@ -850,83 +864,48 @@ namespace Profiles.Framework.Utilities
         #endregion
 
         // Other UCSF extension to fix bug with old style redirects
-        public Int64 GetNodeID(int personId)
+        public Int64 GetNodeID(Int64 personId)
         {
-            SessionManagement sm = new SessionManagement();
-            string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
-
-            SqlConnection dbconnection = new SqlConnection(connstr);
-            SqlDataReader reader = null;
             Int64 nodeId = 0;
 
-            try
+            if (nodeIDs.ContainsKey(personId))
             {
-
-                dbconnection.Open();
-
-
-                //For Output Parameters you need to pass a connection object to the framework so you can close it before reading the output params value.
-                reader = GetDBCommand(dbconnection, "select i.nodeid from [RDF.Stage].internalnodemap i with(nolock) where [class] = 'http://xmlns.com/foaf/0.1/Person' and i.internalid = " + personId, CommandType.Text, CommandBehavior.CloseConnection, null).ExecuteReader();
-                while (reader.Read())
+                nodeId = nodeIDs[personId];
+            }
+            else
+            {
+                using (SqlDataReader reader = GetDBCommand(ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString, "select i.nodeid from [RDF.Stage].internalnodemap i with(nolock) where [class] = 'http://xmlns.com/foaf/0.1/Person' and i.internalid = " + personId, CommandType.Text, CommandBehavior.CloseConnection, null).ExecuteReader())
                 {
-                    nodeId = Convert.ToInt64(reader[0]);
+                    if (reader.Read())
+                    {
+                        nodeId = Convert.ToInt64(reader[0]);
+                        nodeIDs[personId] = nodeId;
+                    }
                 }
-            }
-            catch (Exception e)
-            {
-                Framework.Utilities.DebugLogging.Log(e.Message + e.StackTrace);
-                throw new Exception(e.Message);
-            }
-            finally
-            {
-                if (reader != null && !reader.IsClosed)
-                    reader.Close();
-
-                if (dbconnection.State != ConnectionState.Closed)
-                    dbconnection.Close();
             }
 
             return nodeId;
         }
 
-        public string GetPrettyURL(string personId)
+        public string GetPrettyURL(Int64 personId)
         {
-            Framework.Utilities.DebugLogging.Log("Getting PrettyURL for Person=" + personId);
-            SessionManagement sm = new SessionManagement();
-            string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
-
-            SqlConnection dbconnection = new SqlConnection(connstr);
-            SqlDataReader reader = null;
+            // we restart the server whenever we add or remove new profiles, so no need to put this in a timeout cache.
             string prettyURL = null;
-
-            try
+            if (prettyURLs.ContainsKey(personId))
             {
-
-                dbconnection.Open();
-
-
-                //For Output Parameters you need to pass a connection object to the framework so you can close it before reading the output params value.
-                //Force the Convert.ToInt64 in order to preven SQL Injection!!!!
-                reader = GetDBCommand(dbconnection, "select URL_NAME from cls.dbo.uniqueNames where 2569307 + cast(SUBSTRING(INDIVIDUAL_ID, 2, 7) as numeric) = " + Convert.ToInt64(personId), CommandType.Text, CommandBehavior.CloseConnection, null).ExecuteReader();
-                if (reader.Read())
+                prettyURL = prettyURLs[personId];
+            }
+            else
+            {
+                using (SqlDataReader reader = GetDBCommand(ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString, "select URL_NAME from cls.dbo.uniqueNames where 2569307 + cast(SUBSTRING(INDIVIDUAL_ID, 2, 7) as numeric) = " + personId, CommandType.Text, CommandBehavior.CloseConnection, null).ExecuteReader())
                 {
-                    prettyURL = reader[0].ToString();
+                    if (reader.Read())
+                    {
+                        prettyURL = reader[0].ToString();
+                        prettyURLs[personId] = prettyURL;
+                    }
                 }
             }
-            catch (Exception e)
-            {
-                Framework.Utilities.DebugLogging.Log(e.Message + e.StackTrace);
-                throw new Exception(e.Message);
-            }
-            finally
-            {
-                if (reader != null && !reader.IsClosed)
-                    reader.Close();
-
-                if (dbconnection.State != ConnectionState.Closed)
-                    dbconnection.Close();
-            }
-            Framework.Utilities.DebugLogging.Log("Returning PrettyURL = " + prettyURL + " for Person=" + personId);
 
             return prettyURL;
         }

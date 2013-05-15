@@ -25,6 +25,7 @@ namespace Connects.Profiles.Service.ServiceImplementation
 {
     public class DataIO
     {
+        private static Dictionary<Int64, int> personIDs = new Dictionary<Int64, int>();
 
         #region "DB SQL.NET Methods"
 
@@ -1289,7 +1290,6 @@ namespace Connects.Profiles.Service.ServiceImplementation
             SqlConnection dbconnection = new SqlConnection(connstr);
             SqlCommand dbcommand = new SqlCommand();
 
-            SqlDataReader dbreader;
             dbconnection.Open();
             dbcommand.CommandType = CommandType.Text;
 
@@ -1298,16 +1298,15 @@ namespace Connects.Profiles.Service.ServiceImplementation
 
             dbcommand.Connection = dbconnection;
 
-            dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
-
-            while (dbreader.Read())
+            using (SqlDataReader dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection))
             {
-                pubs.Add(new CustomPub(dbreader["MPID"].ToString(), dbreader["HmsPubCategory"].ToString(), dbreader["PubTitle"].ToString(),
-                    dbreader["ArticleTitle"].ToString(), dbreader["EDITION"].ToString(), dbreader["Publisher"].ToString()));
-            }
 
-            if (dbcommand.Connection.State == ConnectionState.Open)
-                dbreader.Close();
+                while (dbreader.Read())
+                {
+                    pubs.Add(new CustomPub(dbreader["MPID"].ToString(), dbreader["HmsPubCategory"].ToString(), dbreader["PubTitle"].ToString(),
+                        dbreader["ArticleTitle"].ToString(), dbreader["EDITION"].ToString(), dbreader["Publisher"].ToString()));
+                }
+            }
 
             return pubs;
 
@@ -1318,37 +1317,37 @@ namespace Connects.Profiles.Service.ServiceImplementation
             System.Text.StringBuilder sql = new System.Text.StringBuilder();
             int personid = 0;
 
-            string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
-
-
-            sql.AppendLine("select i.internalid from  [RDF.Stage].internalnodemap i with(nolock) where  i.class = 'http://xmlns.com/foaf/0.1/Person' and i.nodeid = " + nodeid);
-
-            SqlConnection dbconnection = new SqlConnection(connstr);
-            SqlCommand dbcommand = new SqlCommand();
-
-            SqlDataReader dbreader;
-            dbconnection.Open();
-            dbcommand.CommandType = CommandType.Text;
-
-            dbcommand.CommandText = sql.ToString();
-            dbcommand.CommandTimeout = 5000;
-
-            dbcommand.Connection = dbconnection;
-
-            dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
-
-            while (dbreader.Read())
+            if (personIDs.ContainsKey(nodeid))
             {
-                personid = Convert.ToInt32(dbreader[0].ToString());
+                personid = personIDs[nodeid];
             }
+            else
+            {
+                string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
 
-            if (!dbreader.IsClosed)
-                dbreader.Close();
 
+                sql.AppendLine("select i.internalid from  [RDF.Stage].internalnodemap i with(nolock) where  i.class = 'http://xmlns.com/foaf/0.1/Person' and i.nodeid = " + nodeid);
 
+                SqlConnection dbconnection = new SqlConnection(connstr);
+                SqlCommand dbcommand = new SqlCommand();
+
+                dbconnection.Open();
+                dbcommand.CommandType = CommandType.Text;
+
+                dbcommand.CommandText = sql.ToString();
+                dbcommand.CommandTimeout = 5000;
+
+                dbcommand.Connection = dbconnection;
+
+                using (SqlDataReader dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection))
+                {
+                    while (dbreader.Read())
+                    {
+                        personid = Convert.ToInt32(dbreader[0].ToString());
+                    }
+                }
+            }
             return personid;
-
-
         }
 
         private int GetPubCount(Int64 nodeid)
@@ -1369,7 +1368,6 @@ namespace Connects.Profiles.Service.ServiceImplementation
             SqlConnection dbconnection = new SqlConnection(connstr);
             SqlCommand dbcommand = new SqlCommand();
 
-            SqlDataReader dbreader;
             dbconnection.Open();
             dbcommand.CommandType = CommandType.Text;
 
@@ -1378,18 +1376,16 @@ namespace Connects.Profiles.Service.ServiceImplementation
 
             dbcommand.Connection = dbconnection;
 
-            dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
-
-            while (dbreader.Read())
+            using (SqlDataReader dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection))
             {
-                count = Convert.ToInt32(dbreader[0].ToString());
+
+                while (dbreader.Read())
+                {
+                    count = Convert.ToInt32(dbreader[0].ToString());
+                }
             }
 
-            if (!dbreader.IsClosed)
-                dbreader.Close();
-
             return count;
-
         }
 
         private string NameSort(string direction)

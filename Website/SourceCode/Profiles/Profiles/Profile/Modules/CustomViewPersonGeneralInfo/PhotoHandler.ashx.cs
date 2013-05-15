@@ -26,6 +26,17 @@ namespace Profiles.Profile.Modules.ProfileImage
         static byte[] silhouetteImage = null;
         static readonly string IMAGE_CACHE_PREFIX = "UCSF.Image_";
 
+
+        static PhotoHandler()
+        {
+            // this method is limited to 2^32 byte files (4.2 GB)
+            using (FileStream fs = File.OpenRead(AppDomain.CurrentDomain.BaseDirectory + "/Profile/Images/default_img.png"))
+            {
+                silhouetteImage = new byte[fs.Length];
+                fs.Read(silhouetteImage, 0, Convert.ToInt32(fs.Length));
+            }
+        }
+
         public void ProcessRequest(HttpContext context)
         {
             Utilities.DataIO data = new Profiles.Profile.Utilities.DataIO();
@@ -39,7 +50,7 @@ namespace Profiles.Profile.Modules.ProfileImage
             else if (!string.IsNullOrEmpty(context.Request.QueryString["person"]))
             {
                 // UCSF.  Allow old id to work
-                nodeid = data.GetNodeID(Convert.ToInt32(context.Request.QueryString["person"].ToString()));
+                nodeid = data.GetNodeID(Convert.ToInt64(context.Request.QueryString["person"]));
             }
             
             if (nodeid > 0)
@@ -91,17 +102,6 @@ namespace Profiles.Profile.Modules.ProfileImage
                     }
                     else if (thumbnail)
                     {
-                        // It's OK that this isn't synchronized even though it would be cleaner if it were
-                        if (silhouetteImage == null)
-                        {
-                            // this method is limited to 2^32 byte files (4.2 GB)
-                            using (FileStream fs = File.OpenRead(AppDomain.CurrentDomain.BaseDirectory + "/Profile/Images/default_img.png"))
-                            {
-                                silhouetteImage = new byte[fs.Length];
-                                fs.Read(silhouetteImage, 0, Convert.ToInt32(fs.Length));
-                            }
-                        }
-                        // added by UCSF
                         image = silhouetteImage;
                     }
                 }

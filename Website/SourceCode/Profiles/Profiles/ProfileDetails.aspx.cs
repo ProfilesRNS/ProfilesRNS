@@ -18,7 +18,7 @@ namespace Profiles
                 // need to convert personid to nodeid
                 // send them to the pretty URL
                 Response.Status = "301 Moved Permanently";
-                Response.AddHeader("Location", Root.Domain + "/" + new Profiles.Framework.Utilities.DataIO().GetPrettyURL(Request.QueryString["person"].ToString()));
+                Response.AddHeader("Location", Root.Domain + "/" + new Profiles.Framework.Utilities.DataIO().GetPrettyURL(Convert.ToInt64(Request.QueryString["person"])));
             }
 
             Response.End();

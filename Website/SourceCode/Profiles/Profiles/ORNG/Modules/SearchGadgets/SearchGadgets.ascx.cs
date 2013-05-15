@@ -48,13 +48,37 @@ namespace Profiles.ORNG.Modules.Gadgets
         {
             string searchfor = string.Empty;
             if (Request.QueryString["searchfor"] != null)
+            {
                 searchfor = Request.QueryString["searchfor"];
-
-            if (Request.Form["txtSearchFor"] != null)
+            }
+            else if (Request.Form["txtSearchFor"] != null)
             {
                 searchfor = Request.Form["txtSearchFor"];
             }
+            else {
+                Search.Utilities.DataIO data = new Profiles.Search.Utilities.DataIO();
+                XmlDocument xmlsearchrequest = new XmlDocument();
+                if (String.IsNullOrEmpty(Request.QueryString["searchrequest"]) == false)
+                {
+                    xmlsearchrequest.LoadXml(data.DecryptRequest(Request.QueryString["searchrequest"]));
+                }
+                else if (string.IsNullOrEmpty(base.MasterPage.SearchRequest) == false)
+                {
+                    xmlsearchrequest.LoadXml(data.DecryptRequest(base.MasterPage.SearchRequest));
+                }
 
+                if (xmlsearchrequest.ChildNodes.Count > 0)
+                {
+                    try
+                    {
+                        searchfor = xmlsearchrequest.SelectSingleNode("SearchOptions/MatchOptions/SearchString").InnerText;
+                    }
+                    catch (Exception)
+                    {
+                        // Do nothing, leave searchfor = null
+                    }
+                }
+            }
             return searchfor;
         }
 

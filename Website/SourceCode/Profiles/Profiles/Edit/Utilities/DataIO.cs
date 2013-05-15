@@ -28,40 +28,21 @@ using Profiles.Framework.Utilities;
 
 namespace Profiles.Edit.Utilities
 {
+
     public class DataIO : Framework.Utilities.DataIO
     {
         public int GetPersonID(Int64 nodeid)
         {
-            SessionManagement sm = new SessionManagement();
-            string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
-
-            SqlConnection dbconnection = new SqlConnection(connstr);
-            SqlDataReader reader;
             int personid = 0;
 
-            try
+            using (SqlDataReader reader = GetDBCommand(ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString, "select i.internalid from [RDF.Stage].internalnodemap i with(nolock) where i.nodeid = " + nodeid.ToString(), CommandType.Text, CommandBehavior.CloseConnection, null).ExecuteReader())
             {
-
-                dbconnection.Open();
-
-
-                //For Output Parameters you need to pass a connection object to the framework so you can close it before reading the output params value.
-                reader = GetDBCommand(connstr, "select i.internalid from  [RDF.Stage].internalnodemap i with(nolock) where i.nodeid = " + nodeid.ToString(), CommandType.Text, CommandBehavior.CloseConnection, null).ExecuteReader();
                 while (reader.Read())
                 {
                     personid = Convert.ToInt32(reader[0]);
                 }
 
                 reader.Close();
-
-                if (dbconnection.State != ConnectionState.Closed)
-                    dbconnection.Close();
-
-            }
-            catch (Exception e)
-            {
-                Framework.Utilities.DebugLogging.Log(e.Message + e.StackTrace);
-                throw new Exception(e.Message);
             }
 
             return personid;
