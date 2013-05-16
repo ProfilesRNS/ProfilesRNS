@@ -134,8 +134,7 @@ namespace Profiles.Edit.Utilities
 
                 if (HttpContext.Current.Request.QueryString["subjectid"] != null)
                 {
-                    Framework.Utilities.Cache.Remove("Node Dependency " + HttpContext.Current.Request.QueryString["subjectid"].ToString());
-                    Framework.Utilities.Cache.CreateDependency(HttpContext.Current.Request.QueryString["subjectid"].ToString());
+                    Framework.Utilities.Cache.ClearDependentItems(HttpContext.Current.Request.QueryString["subjectid"].ToString());
 
                 }
 
@@ -635,8 +634,7 @@ namespace Profiles.Edit.Utilities
 
                 error = Convert.ToBoolean(param[5].Value);
 
-                Framework.Utilities.Cache.Remove("Node Dependency " + subjectid.ToString());
-                Framework.Utilities.Cache.CreateDependency(subjectid.ToString());
+                Framework.Utilities.Cache.ClearDependentItems(subjectid);
 
 
                 if (error)
@@ -1024,8 +1022,7 @@ namespace Profiles.Edit.Utilities
 
                 error = Convert.ToBoolean(param[sarr.Length - 2].Value);
 
-                Framework.Utilities.Cache.Remove("Node Dependency " + sarr.AwardOrHonorForID.Value.ToString());
-                Framework.Utilities.Cache.CreateDependency(sarr.AwardOrHonorForID.Value.ToString());
+                Framework.Utilities.Cache.ClearDependentItems(sarr.AwardOrHonorForID.Value.ToString());
 
             }
             catch (Exception e)
@@ -1153,8 +1150,7 @@ namespace Profiles.Edit.Utilities
                 }
                 error = Convert.ToBoolean(param[str.Length - 1].Value);
 
-                Framework.Utilities.Cache.Remove("Node Dependency " + str.Subject.Value.ToString());
-                Framework.Utilities.Cache.CreateDependency(str.Subject.Value.ToString());
+                Framework.Utilities.Cache.ClearDependentItems(str.Subject.Value.ToString());
 
             }
             catch (Exception e)
@@ -1197,8 +1193,7 @@ namespace Profiles.Edit.Utilities
                 if (dbconnection.State != ConnectionState.Closed)
                     dbconnection.Close();
 
-                Framework.Utilities.Cache.Remove("Node Dependency " + subjectid.ToString());
-                Framework.Utilities.Cache.CreateDependency(subjectid.ToString());
+                Framework.Utilities.Cache.ClearDependentItems(subjectid.ToString());
 
 
             }

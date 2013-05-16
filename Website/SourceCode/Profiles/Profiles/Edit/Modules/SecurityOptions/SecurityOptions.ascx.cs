@@ -118,8 +118,7 @@ namespace Profiles.Edit.Modules.SecurityOptions
         {
             Edit.Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
             data.UpdateSecuritySetting(this.Subject, data.GetStoreNode(this.PredicateURI), Convert.ToInt32(securitygroup));
-            Framework.Utilities.Cache.Remove("Node Dependency " + this.Subject.ToString());
-            Framework.Utilities.Cache.CreateDependency(this.Subject.ToString());
+            Framework.Utilities.Cache.ClearDependentItems(this.Subject);
         }
 
         public XmlDataDocument SecurityGroups { get; set; }
