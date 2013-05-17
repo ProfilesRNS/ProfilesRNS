@@ -325,14 +325,20 @@ namespace Profiles.Search.Utilities
             return searchxml;
 
         }
+
         public XmlDocument Search(XmlDocument searchoptions, bool lookup)
+        {
+            return Search(searchoptions, lookup, true);
+        }
+
+        public XmlDocument Search(XmlDocument searchoptions, bool lookup, bool useCache)
         {
             string xmlstr = string.Empty;
             XmlDocument xmlrtn = new XmlDocument();
 
             string cachekey = searchoptions.OuterXml + sessionmanagement.Session().SessionID;
 
-            if (Framework.Utilities.Cache.Fetch(cachekey) == null)
+            if (Framework.Utilities.Cache.Fetch(cachekey) == null || !useCache)
             {
                 try
                 {

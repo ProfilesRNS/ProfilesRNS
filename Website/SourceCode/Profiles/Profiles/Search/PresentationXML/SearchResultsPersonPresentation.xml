@@ -27,6 +27,13 @@
           </Param>          
         </ParamList>        
       </Module>
+      <Module ID="Gadgets" >
+        <ParamList>
+          <Param Name="HTML">
+            <div id="gadgets-tools" class="gadgets-gadget-parent"></div>
+          </Param>
+        </ParamList>
+      </Module>
     </Panel>
     <Panel type="footer" />
   </PanelList>  

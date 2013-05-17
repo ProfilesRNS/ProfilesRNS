@@ -69,3 +69,11 @@ this website.
 </table>
 --%>
 </div>
+<div style="clear:left">
+  <br />
+  <h3>Add-ons:</h3>
+</div>
+<%-- Profiles OpenSocial Extension by UCSF --%>    
+<asp:Panel ID="pnlOpenSocial" runat="server" Visible="false">
+    <div id="gadgets-edit" class="gadgets-gadget-parent"></div>
+</asp:Panel>

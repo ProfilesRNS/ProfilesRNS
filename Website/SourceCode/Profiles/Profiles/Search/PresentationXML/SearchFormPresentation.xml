@@ -11,7 +11,14 @@
     <Panel Type="page" />
     <Panel Type="active">
       <Module ID="MainMenu">
-      </Module>   
+      </Module>
+      <Module ID="Gadgets" >
+        <ParamList>
+          <Param Name="HTML">
+            <div id="gadgets-tools-left" class="gadgets-gadget-parent"></div>
+          </Param>
+        </ParamList>
+      </Module>
     </Panel>
     <Panel Name="Find People" Alias="people" Type="main" TabType="Default" TabSort="0">
       <Module ID="SearchPerson">
