@@ -225,9 +225,11 @@ namespace Profiles
 
         public IHttpHandler GetHttpHandler(RequestContext requestContext)
         {
-            String path = HttpContext.Current.Request.Url.ToString();
+            String path = HttpContext.Current.Request.Url.ToString().Replace("https://", "").Replace("http://", "");
 
-            string PathWithoutRoot = path.Substring(Root.Domain.Length + 1);
+            String baseURI = Root.Domain.Replace("https://", "").Replace("http://", "");
+
+            string PathWithoutRoot = path.Substring(baseURI.Length + 1);
 
             //This manualy loads the Profiles Application into Param0 of the collection.  
             if (PathWithoutRoot.Contains('/'))
