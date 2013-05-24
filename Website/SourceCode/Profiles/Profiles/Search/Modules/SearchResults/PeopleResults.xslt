@@ -664,6 +664,7 @@
       function ShowDetails(nodeURI,obj){
 
       doListTableRowOver(obj);
+      debugger;
       document.getElementById('divItemDetails').innerHTML = document.getElementById(nodeURI).value;
 
       }
@@ -782,70 +783,78 @@
     <xsl:variable name="positon" select="prns:personInPrimaryPosition/@rdf:resource"></xsl:variable>
     <xsl:variable name="institutionlabel" select="$doc/rdf:Description[@rdf:about=$positon]/vivo:positionInOrganization/@rdf:resource"></xsl:variable>
 
+    <xsl:variable name="titlelink">
+      <xsl:choose>
+        <xsl:when test="vivo:preferredTitle!=''">
+          &lt;br/&gt;&lt;br/&gt;&lt;u&gt;Title&lt;/u&gt; &lt;br/&gt;<xsl:value-of select="vivo:preferredTitle"/>
+        </xsl:when>
+        <xsl:otherwise>
+
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="institutionlink">
+      <xsl:choose>
+        <xsl:when test="$doc/rdf:Description[@rdf:about=$institutionlabel]!=''">
+          &lt;br/&gt;&lt;br/&gt;&lt;u&gt;Institution&lt;/u&gt;&lt;br/&gt;<xsl:value-of select="$doc/rdf:Description[@rdf:about=$institutionlabel]"/>
+        </xsl:when>
+        <xsl:otherwise>
+
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="departmentlink">
+      <xsl:choose>
+        <xsl:when test="$doc/rdf:Description[@rdf:about=$doc/rdf:Description[@rdf:about=$positon]/prns:positionInDepartment/@rdf:resource]/rdfs:label!=''">
+          &lt;br/&gt;&lt;br/&gt;&lt;u&gt;Department&lt;/u&gt;&lt;br/&gt;<xsl:value-of select="$doc/rdf:Description[@rdf:about=$doc/rdf:Description[@rdf:about=$positon]/prns:positionInDepartment/@rdf:resource]/rdfs:label"/>
+        </xsl:when>
+        <xsl:otherwise>
+
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="divisionlink">
+      <xsl:choose>
+        <xsl:when test="$doc/rdf:Description[@rdf:about=$doc/rdf:Description[@rdf:about=$positon]/prns:positionInDivision/@rdf:resource]/rdfs:label!=''">
+          &lt;br/&gt;&lt;br/&gt;&lt;u&gt;Division&lt;/u&gt;&lt;br/&gt;<xsl:value-of select="$doc/rdf:Description[@rdf:about=$doc/rdf:Description[@rdf:about=$positon]/prns:positionInDivision/@rdf:resource]/rdfs:label"/>
+        </xsl:when>
+        <xsl:otherwise>
+
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="facranklink">
+      <xsl:choose>
+        <xsl:when test="$doc/rdf:Description[@rdf:about=$doc/rdf:Description[@rdf:about=$nodeURI]/prns:hasFacultyRank/@rdf:resource]/rdfs:label">
+          &lt;br/&gt;&lt;br/&gt;&lt;u&gt;Faculty Rank&lt;/u&gt;&lt;br/&gt;<xsl:value-of select="$doc/rdf:Description[@rdf:about=$doc/rdf:Description[@rdf:about=$nodeURI]/prns:hasFacultyRank/@rdf:resource]/rdfs:label"/>
+        </xsl:when>
+        <xsl:otherwise>
+
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+
+    <input type="hidden" id="{$nodeURI}" value="&lt;div class='passiveSectionHead'&gt;&lt;b&gt;Person Summary&lt;/b&gt;&lt;/div&gt;&lt;div class='passiveSectionBody'&gt;&lt;br/&gt;&lt;u&gt;Name&lt;/u&gt;&lt;br/&gt;{prns:fullName}{$titlelink}{$institutionlink}{$departmentlink}{$divisionlink}{$facranklink}&lt;/div&gt;"></input>
+
+
+
+
     <td class="alignLeft" style="width:200px" onclick="javascript:GoTo('{$nodeURI}')">
       <xsl:value-of select="prns:fullName"/>
+     
     </td>
 
     <xsl:if test="$institution='true'">
+      
       <td class="alignLeft" style="width:250px" onclick="javascript:GoTo('{$nodeURI}')">
         <xsl:value-of select ="$doc/rdf:Description[@rdf:about=$institutionlabel]"/>
 
-        <xsl:variable name="titlelink">
-          <xsl:choose>
-            <xsl:when test="vivo:preferredTitle!=''">
-              &lt;br/&gt;&lt;br/&gt;&lt;u&gt;Title&lt;/u&gt; &lt;br/&gt;<xsl:value-of select="vivo:preferredTitle"/>
-            </xsl:when>
-            <xsl:otherwise>
-
-            </xsl:otherwise>
-          </xsl:choose>
-        </xsl:variable>
-
-        <xsl:variable name="institutionlink">
-          <xsl:choose>
-            <xsl:when test="$doc/rdf:Description[@rdf:about=$institutionlabel]!=''">
-              &lt;br/&gt;&lt;br/&gt;&lt;u&gt;Institution&lt;/u&gt;&lt;br/&gt;<xsl:value-of select="$doc/rdf:Description[@rdf:about=$institutionlabel]"/>
-            </xsl:when>
-            <xsl:otherwise>
-
-            </xsl:otherwise>
-          </xsl:choose>
-        </xsl:variable>
-
-        <xsl:variable name="departmentlink">
-          <xsl:choose>
-            <xsl:when test="$doc/rdf:Description[@rdf:about=$doc/rdf:Description[@rdf:about=$positon]/prns:positionInDepartment/@rdf:resource]/rdfs:label!=''">
-              &lt;br/&gt;&lt;br/&gt;&lt;u&gt;Department&lt;/u&gt;&lt;br/&gt;<xsl:value-of select="$doc/rdf:Description[@rdf:about=$doc/rdf:Description[@rdf:about=$positon]/prns:positionInDepartment/@rdf:resource]/rdfs:label"/>
-            </xsl:when>
-            <xsl:otherwise>
-
-            </xsl:otherwise>
-          </xsl:choose>
-        </xsl:variable>
-
-        <xsl:variable name="divisionlink">
-          <xsl:choose>
-            <xsl:when test="$doc/rdf:Description[@rdf:about=$doc/rdf:Description[@rdf:about=$positon]/prns:positionInDivision/@rdf:resource]/rdfs:label!=''">
-              &lt;br/&gt;&lt;br/&gt;&lt;u&gt;Division&lt;/u&gt;&lt;br/&gt;<xsl:value-of select="$doc/rdf:Description[@rdf:about=$doc/rdf:Description[@rdf:about=$positon]/prns:positionInDivision/@rdf:resource]/rdfs:label"/>
-            </xsl:when>
-            <xsl:otherwise>
-
-            </xsl:otherwise>
-          </xsl:choose>
-        </xsl:variable>
-
-        <xsl:variable name="facranklink">
-          <xsl:choose>
-            <xsl:when test="$doc/rdf:Description[@rdf:about=$doc/rdf:Description[@rdf:about=$nodeURI]/prns:hasFacultyRank/@rdf:resource]/rdfs:label">
-              &lt;br/&gt;&lt;br/&gt;&lt;u&gt;Faculty Rank&lt;/u&gt;&lt;br/&gt;<xsl:value-of select="$doc/rdf:Description[@rdf:about=$doc/rdf:Description[@rdf:about=$nodeURI]/prns:hasFacultyRank/@rdf:resource]/rdfs:label"/>
-            </xsl:when>
-            <xsl:otherwise>
-
-            </xsl:otherwise>
-          </xsl:choose>
-        </xsl:variable>
-
-        <input type="hidden" id="{$nodeURI}" value="&lt;div class='passiveSectionHead'&gt;&lt;b&gt;Person Summary&lt;/b&gt;&lt;/div&gt;&lt;div class='passiveSectionBody'&gt;&lt;br/&gt;&lt;u&gt;Name&lt;/u&gt;&lt;br/&gt;{prns:fullName}{$titlelink}{$institutionlink}{$departmentlink}{$divisionlink}{$facranklink}&lt;/div&gt;"></input>
+  
 
       </td>
     </xsl:if>
@@ -871,7 +880,6 @@
         </xsl:choose>
       </td>
     </xsl:if>
-
 
 
 
