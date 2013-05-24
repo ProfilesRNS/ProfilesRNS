@@ -142,6 +142,9 @@ namespace Profiles.Search.Utilities
             search.Append("<SearchOptions>");
             search.Append("<MatchOptions>");
 
+            if (exactphrase.IsNullOrEmpty())
+                exactphrase = string.Empty;
+
             if (searchstring != string.Empty)
             {
                 search.Append("<SearchString ExactMatch=\"" + exactphrase.ToLower() + "\">");
