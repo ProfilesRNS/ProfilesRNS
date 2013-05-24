@@ -110,6 +110,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DirectService.aspx.cs">
+      <DependentUpon>DirectService.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DirectService.aspx.designer.cs">
+      <DependentUpon>DirectService.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Framework\Modules\MainMenu\History.ascx.cs">
       <DependentUpon>History.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -710,6 +717,9 @@
     <Content Include="ApplicationModuleCatalogue.xml" />
     <Content Include="About\Default.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="DIRECT.xml" />
+    <Content Include="DirectService.asp" />
+    <Content Include="DirectService.aspx" />
     <Content Include="Edit\Images\loader.gif" />
     <Content Include="Framework\Modules\MainMenu\History.ascx" />
     <Content Include="History\Default.aspx" />
