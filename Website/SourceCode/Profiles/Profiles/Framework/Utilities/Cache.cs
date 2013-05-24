@@ -149,10 +149,16 @@ namespace Profiles.Framework.Utilities
             if (key != "0")
             {
                 dependency = new CacheDependency(null, dependencyKey);
-                HttpRuntime.Cache.Insert(dependencyKey[0], Guid.NewGuid().ToString());
+                if (HttpRuntime.Cache[dependencyKey[0]] == null)
+                    AlterDependency(key);
             }
 
             return dependency;
+        }
+
+        static public void AlterDependency(string key)
+        {
+            HttpRuntime.Cache.Insert("Node Dependency " + key, Guid.NewGuid().ToString());
         }
 
 

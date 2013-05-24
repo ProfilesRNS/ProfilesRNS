@@ -134,8 +134,7 @@ namespace Profiles.Edit.Utilities
 
                 if (HttpContext.Current.Request.QueryString["subjectid"] != null)
                 {
-                    Framework.Utilities.Cache.Remove("Node Dependency " + HttpContext.Current.Request.QueryString["subjectid"].ToString());
-                    Framework.Utilities.Cache.CreateDependency(HttpContext.Current.Request.QueryString["subjectid"].ToString());
+                    Framework.Utilities.Cache.AlterDependency(HttpContext.Current.Request.QueryString["subjectid"].ToString());
 
                 }
 
@@ -635,9 +634,7 @@ namespace Profiles.Edit.Utilities
 
                 error = Convert.ToBoolean(param[5].Value);
 
-                Framework.Utilities.Cache.Remove("Node Dependency " + subjectid.ToString());
-                Framework.Utilities.Cache.CreateDependency(subjectid.ToString());
-
+                Framework.Utilities.Cache.AlterDependency(subjectid.ToString());
 
                 if (error)
                     Framework.Utilities.DebugLogging.Log("Delete Triple blew up with the following values -- {[RDF.].DeleteTriple} DeleteInverse: 1 SubjectID:" + subjectid.ToString() + " PredicateID:" + predicateid.ToString() + " ObjectID:" + objectid.ToString() + " SessionID:" + sm.Session().SessionID);
