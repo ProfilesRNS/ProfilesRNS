@@ -44,8 +44,8 @@ namespace Profiles.ORNG.Utilities
         private List<PreparedGadget> gadgets = new List<PreparedGadget>();
         private Dictionary<string, ORNGCallbackResponder> callbackResponders = new Dictionary<string, ORNGCallbackResponder>();
         private Guid guid;
-        private string viewerId = null;
-        internal string ownerId = null;
+        private string viewerUri = null;
+        internal string ownerUri = null;
         internal bool isDebug = false;
         internal bool noCache = false;
         private string pageName;
@@ -71,12 +71,12 @@ namespace Profiles.ORNG.Utilities
             sockets = new SocketConnectionPool(tokenService[0], Int32.Parse(tokenService[1]), min, max, expire, timeout);
         }
 
-        public static OpenSocialManager GetOpenSocialManager(string ownerId, Page page, bool editMode)
+        public static OpenSocialManager GetOpenSocialManager(string ownerUri, Page page, bool editMode)
         {
-            return GetOpenSocialManager(ownerId, page, editMode, false);
+            return GetOpenSocialManager(ownerUri, page, editMode, false);
         }
 
-        public static OpenSocialManager GetOpenSocialManager(string ownerId, Page page, bool editMode, bool loadingAssets)
+        public static OpenSocialManager GetOpenSocialManager(string ownerUri, Page page, bool editMode, bool loadingAssets)
         {
             // synchronize?  From the debugger this seems to be single threaded, so synchronization is not needed
             if (page.Items.Contains(OPENSOCIAL_MANAGER))
@@ -89,7 +89,7 @@ namespace Profiles.ORNG.Utilities
             }
             else
             {
-                page.Items.Add(OPENSOCIAL_MANAGER, new OpenSocialManager(ownerId, page, editMode));
+                page.Items.Add(OPENSOCIAL_MANAGER, new OpenSocialManager(ownerUri, page, editMode));
                 page.Items.Add(OPENSOCIAL_PAGE_REQUESTS, loadingAssets ? 1 : 0);
             }
             return (OpenSocialManager)page.Items[OPENSOCIAL_MANAGER];
@@ -112,7 +112,7 @@ namespace Profiles.ORNG.Utilities
             return retval;
         }
         
-        private OpenSocialManager(string ownerId, Page page, bool editMode)
+        private OpenSocialManager(string ownerUri, Page page, bool editMode)
         {
             this.guid = Guid.NewGuid();
             managers.Add(new WeakReference(this));
@@ -121,27 +121,27 @@ namespace Profiles.ORNG.Utilities
             this.page = page;
             this.pageName = page.AppRelativeVirtualPath.Substring(2).ToLower();
 
-            DebugLogging.Log("Creating OpenSocialManager for " + ownerId + ", " + pageName);
+            DebugLogging.Log("Creating OpenSocialManager for " + ownerUri + ", " + pageName);
             if (ConfigurationManager.AppSettings["ORNG.ShindigURL"] == null)
             {
                 // do nothing
                 return;
             }
 
-            this.ownerId = ownerId;
+            this.ownerUri = ownerUri;
     		// in editMode we need to set the viewer to be the same as the owner
 	    	// otherwise, the gadget will not be able to save appData correctly            
             if (editMode)
             {
-                viewerId = ownerId;
+                viewerUri = ownerUri;
             }
             else
             {
                 Profiles.Framework.Utilities.SessionManagement sm = new Profiles.Framework.Utilities.SessionManagement();
-                viewerId = sm.Session().PersonURI;
-                if (viewerId != null && viewerId.Trim().Length == 0)
+                viewerUri = sm.Session().PersonURI;
+                if (viewerUri != null && viewerUri.Trim().Length == 0)
                 {
-                    viewerId = null;
+                    viewerUri = null;
                 }
 
             }
@@ -163,9 +163,9 @@ namespace Profiles.ORNG.Utilities
                 {
                     // only add ones that are visible in this context!
                     int moduleId = 0;
-                    if (((requestAppId == null && gadgetSpec.IsEnabled()) || gadgetSpec.GetAppId() == Convert.ToInt32(requestAppId)) && gadgetSpec.Show(viewerId, ownerId, GetPageName()))
+                    if (((requestAppId == null && gadgetSpec.IsEnabled()) || gadgetSpec.GetAppId() == Convert.ToInt32(requestAppId)) && gadgetSpec.Show(viewerUri, ownerUri, GetPageName()))
                     {
-                        String securityToken = SocketSendReceive(viewerId, ownerId, gadgetSpec.GetGadgetURL());
+                        String securityToken = SocketSendReceive(viewerUri, ownerUri, gadgetSpec.GetGadgetURL());
                         gadgets.Add(new PreparedGadget(gadgetSpec, this, moduleId++, securityToken));
                     }
                 }
@@ -183,9 +183,9 @@ namespace Profiles.ORNG.Utilities
 
         public void ClearOwnerCache()
         {
-            if (ownerId != null)
+            if (ownerUri != null)
             {
-                Framework.Utilities.Cache.ClearDependentItems(GetNodeID(ownerId));
+                Framework.Utilities.Cache.ClearDependentItems(GetNodeID(ownerUri));
             }
         }
 
@@ -195,9 +195,9 @@ namespace Profiles.ORNG.Utilities
             return urlbits[urlbits.Length - 1];
         }
 
-        public static Int64 GetNodeID(string personId)
+        public static Int64 GetNodeID(string uri)
         {
-            string[] s = personId.Split('/');
+            string[] s = uri.Split('/');
             return Convert.ToInt64(s[s.Length - 1]);
         }
 
@@ -212,20 +212,20 @@ namespace Profiles.ORNG.Utilities
         }
 
         // JSON Helper Functions
-        public static string BuildJSONPersonIds(List<string> personIds, string message)
+        public static string BuildJSONPersonIds(List<string> uris, string message)
         {
             Dictionary<string, Object> foundPeople = new Dictionary<string, object>();
-            foundPeople.Add("personIds", personIds);
+            foundPeople.Add("personIds", uris);
             foundPeople.Add("message", message);
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             return serializer.Serialize(foundPeople);
         }
 
-        public static string BuildJSONPersonIds(string personId, string message)
+        public static string BuildJSONPersonIds(string uri, string message)
         {
-            DebugLogging.Log("BuildJSONPersonIds " + personId + " : " + message);
+            DebugLogging.Log("BuildJSONPersonIds " + uri + " : " + message);
             List<string> personIds = new List<string>();
-            personIds.Add(personId);
+            personIds.Add(uri);
             return BuildJSONPersonIds(personIds, message);
         }
 
@@ -526,9 +526,9 @@ namespace Profiles.ORNG.Utilities
                 GadgetSpec gadgetSpec = new GadgetSpec(appId, name, openSocialGadgetURL, true, sandboxOnly);
                 // only add ones that are visible in this context!
                 int moduleId = 0;
-                if (sandboxOnly || gadgetSpec.Show(viewerId, ownerId, page.AppRelativeVirtualPath.Substring(2).ToLower()))
+                if (sandboxOnly || gadgetSpec.Show(viewerUri, ownerUri, page.AppRelativeVirtualPath.Substring(2).ToLower()))
                 {
-                    String securityToken = SocketSendReceive(viewerId, ownerId, gadgetSpec.GetGadgetURL());
+                    String securityToken = SocketSendReceive(viewerUri, ownerUri, gadgetSpec.GetGadgetURL());
                     sandboxGadgets.Add(new PreparedGadget(gadgetSpec, this, moduleId++, securityToken));
                 }
             }

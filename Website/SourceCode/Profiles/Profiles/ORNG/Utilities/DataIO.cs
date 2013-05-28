@@ -31,9 +31,9 @@ namespace Profiles.ORNG.Utilities
             return sqldr;
         }
 
-        public SqlDataReader GetRegisteredApps(string personId)
+        public SqlDataReader GetRegisteredApps(string uri)
         {
-            string sql = "select appId, visibility from [ORNG].[AppRegistry] where personId = '" + personId + "';";
+            string sql = "select appId, visibility from [ORNG].[AppRegistry] where uri = '" + uri + "';";
             SqlDataReader sqldr = this.GetSQLDataReader("ProfilesDB", sql, CommandType.Text, CommandBehavior.CloseConnection, null);
             return sqldr;
         }

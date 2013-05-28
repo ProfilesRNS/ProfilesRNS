@@ -89,7 +89,7 @@ GO
 
 CREATE TABLE [ORNG].[AppRegistry](
 	[appId] [int] NOT NULL,
-	[personId] [nvarchar](255) NOT NULL,
+	[uri] [nvarchar](255) NOT NULL,
 	[createdDT] [datetime] NULL,
 	[visibility] [nvarchar](50) NULL
 ) ON [PRIMARY]
@@ -106,10 +106,10 @@ GO
 ALTER TABLE [ORNG].[AppRegistry] ADD  CONSTRAINT [DF_orng_app_registry_createdDT]  DEFAULT (getdate()) FOR [createdDT]
 GO
 
-/****** Object:  Index [IX_AppRegistry_personId]    Script Date: 05/17/2013 13:26:51 ******/
-CREATE CLUSTERED INDEX [IX_AppRegistry_personId] ON [ORNG].[AppRegistry] 
+/****** Object:  Index [IX_AppRegistry_uri]    Script Date: 05/17/2013 13:26:51 ******/
+CREATE CLUSTERED INDEX [IX_AppRegistry_uri] ON [ORNG].[AppRegistry] 
 (
-	[personId] ASC
+	[uri] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 GO
 
@@ -121,7 +121,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [ORNG].[AppData](
-	[userId] [nvarchar](255) NOT NULL,
+	[uri] [nvarchar](255) NOT NULL,
 	[appId] [int] NOT NULL,
 	[keyname] [nvarchar](255) NOT NULL,
 	[value] [nvarchar](4000) NULL,
@@ -140,7 +140,7 @@ GO
 /****** Object:  Index [IDX_PersonApp]    Script Date: 05/17/2013 13:27:31 ******/
 CREATE NONCLUSTERED INDEX [IDX_PersonApp] ON [ORNG].[AppData] 
 (
-	[userId] ASC,
+	[uri] ASC,
 	[appId] ASC
 )
 INCLUDE ( [keyname],
@@ -156,7 +156,7 @@ GO
 
 CREATE TABLE [ORNG].[Activity](
 	[activityId] [int] IDENTITY(1,1) NOT NULL,
-	[userId] [nvarchar](255) NULL,
+	[uri] [nvarchar](255) NULL,
 	[appId] [int] NULL,
 	[createdDT] [datetime] NULL,
 	[activity] [xml] NULL,
@@ -180,8 +180,8 @@ GO
 
 CREATE TABLE [ORNG].[Messages](
 	[msgId] [nvarchar](255) NOT NULL,
-	[senderId] [nvarchar](255) NULL,
-	[recipientId] [nvarchar](255) NULL,
+	[senderUri] [nvarchar](255) NULL,
+	[recipientUri] [nvarchar](255) NULL,
 	[coll] [nvarchar](255) NULL,
 	[title] [nvarchar](255) NULL,
 	[body] [nvarchar](4000) NULL,
@@ -206,28 +206,28 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 /****** Object:  StoredProcedure [ORNG].[RegisterAppPerson]    Script Date: 09/23/2010 09:52:53 ******/
-CREATE PROCEDURE [ORNG].[RegisterAppPerson](@userid nvarchar(255),@appId INT, @visibility nvarchar(50))
+CREATE PROCEDURE [ORNG].[RegisterAppPerson](@uri nvarchar(255),@appId INT, @visibility nvarchar(50))
 As
 BEGIN
 	SET NOCOUNT ON
 		BEGIN TRAN		
 			DECLARE @PERSON_FILTER_ID INT
-			DECLARE @PROFILE_ID INT
+			DECLARE @PERSON_ID INT
 			SELECT @PERSON_FILTER_ID = (SELECT PersonFilterID FROM Apps WHERE appId = @appId)
-			SELECT @PROFILE_ID = cast(InternalID as INT) from [RDF.Stage].InternalNodeMap where
-				NodeID = cast(RIGHT(@userid, CHARINDEX('/', REVERSE(@userId))-1) as INT)
+			SELECT @PERSON_ID = cast(InternalID as INT) from [RDF.Stage].InternalNodeMap where
+				NodeID = cast(RIGHT(@uri, CHARINDEX('/', REVERSE(@uri))-1) as INT)
 
-			IF ((SELECT COUNT(*) FROM AppRegistry WHERE appId = @appId AND personId = @userId) = 0)
-				INSERT [ORNG].[AppRegistry](appId, personId, [visibility]) values (@appId, @userId, @visibility)
+			IF ((SELECT COUNT(*) FROM AppRegistry WHERE appId = @appId AND uri = @uri) = 0)
+				INSERT [ORNG].[AppRegistry](appId, uri, [visibility]) values (@appId, @uri, @visibility)
 			ELSE 
-				UPDATE [ORNG].[AppRegistry] set [visibility] = @visibility where appId = @appId and personId =  @userId
+				UPDATE [ORNG].[AppRegistry] set [visibility] = @visibility where appId = @appId and uri =  @uri
 								
 			IF (@PERSON_FILTER_ID IS NOT NULL) 
 				BEGIN
 					IF (@visibility = 'Public') 
-						INSERT [Profile.Data].[Person.FilterRelationship](personID, personFilterId) values (@PROFILE_ID, @PERSON_FILTER_ID)
+						INSERT [Profile.Data].[Person.FilterRelationship](PersonID, personFilterId) values (@PERSON_ID, @PERSON_FILTER_ID)
 					ELSE						
-						DELETE FROM [Profile.Data].[Person.FilterRelationship] WHERE personId = @PROFILE_ID AND personFilterId = @PERSON_FILTER_ID
+						DELETE FROM [Profile.Data].[Person.FilterRelationship] WHERE PersonID = @PERSON_ID AND personFilterId = @PERSON_FILTER_ID
 				END
 		COMMIT
 END
@@ -247,15 +247,15 @@ GO
 
 
 /****** Object:  StoredProcedure [ORNG].[UpsertAppData]    Script Date: 09/23/2010 09:53:03 ******/
-CREATE PROCEDURE [ORNG].[UpsertAppData](@userid nvarchar(255),@appId INT, @keyname nvarchar(255),@value nvarchar(4000))
+CREATE PROCEDURE [ORNG].[UpsertAppData](@uri nvarchar(255),@appId INT, @keyname nvarchar(255),@value nvarchar(4000))
 As
 BEGIN
 	SET NOCOUNT ON
 		BEGIN TRAN				 
-			IF (SELECT COUNT(*) FROM AppData WHERE userId = @userId AND appId = @appId and keyname = @keyName) > 0
-				UPDATE [ORNG].[AppData] set [value] = @value, updatedDT = GETDATE() WHERE userId = @userId AND appId = @appId and keyname = @keyName
+			IF (SELECT COUNT(*) FROM AppData WHERE uri = @uri AND appId = @appId and keyname = @keyName) > 0
+				UPDATE [ORNG].[AppData] set [value] = @value, updatedDT = GETDATE() WHERE uri = @uri AND appId = @appId and keyname = @keyName
 			ELSE
-				INSERT [ORNG].[AppData] (userId, appId, keyname, [value]) values (@userId, @appId, @keyname, @value)
+				INSERT [ORNG].[AppData] (uri, appId, keyname, [value]) values (@uri, @appId, @keyname, @value)
 		COMMIT
 END								
 
@@ -271,15 +271,15 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 /****** Object:  StoredProcedure [ORNG].[DeleteAppData]    Script Date: 09/23/2010 09:53:12 ******/
-CREATE PROCEDURE [ORNG].[DeleteAppData](@userid nvarchar(255),@appId INT, @keyname nvarchar(255))
+CREATE PROCEDURE [ORNG].[DeleteAppData](@uri nvarchar(255),@appId INT, @keyname nvarchar(255))
 As
 BEGIN
 	SET NOCOUNT ON
 		BEGIN TRAN				 
-			DELETE [ORNG].[AppData] WHERE userId = @userId AND appId = @appId and keyname = @keyName
+			DELETE [ORNG].[AppData] WHERE uri = @uri AND appId = @appId and keyname = @keyName
 			-- if keyname is VISIBLE, do more
 			IF (@keyname = 'VISIBLE' ) 
-				EXEC [ORNG].[RegisterAppPerson] @userid, @appId, 0
+				EXEC [ORNG].[RegisterAppPerson] @uri, @appId, 0
 		COMMIT
 END		
 

@@ -82,7 +82,7 @@ namespace Profiles.ORNG.Utilities
         }
 
         // based on security and securityGroup settings, do we show this?
-        public bool Show(string viewerId, string ownerId, String page)
+        public bool Show(string viewerUri, string ownerUri, String page)
         {
             page = page.ToLower();
             bool show = true;
@@ -96,20 +96,20 @@ namespace Profiles.ORNG.Utilities
             if (viewRequirements.ContainsKey(page))
             {
                 GadgetViewRequirements req = GetGadgetViewRequirements(page);
-                string visibility = (req.GetVisiblity() == OpenSocialManager.REGISTRY_DEFINED ? GetRegistryDefinedVisiblity(ownerId) : req.GetVisiblity());
+                string visibility = (req.GetVisiblity() == OpenSocialManager.REGISTRY_DEFINED ? GetRegistryDefinedVisiblity(ownerUri) : req.GetVisiblity());
                 if (OpenSocialManager.PUBLIC.Equals(visibility))
                 {
                     show = true;
                 }
-                else if (OpenSocialManager.USERS.Equals(visibility) && viewerId != null)
+                else if (OpenSocialManager.USERS.Equals(visibility) && viewerUri != null)
                 {
                     show = true;
                 }
-                else if (OpenSocialManager.PRIVATE.Equals(visibility) && (viewerId != null) && (viewerId == ownerId)) 
+                else if (OpenSocialManager.PRIVATE.Equals(visibility) && (viewerUri != null) && (viewerUri == ownerUri)) 
                 {
                     show = true;
                 }
-                else if (OpenSocialManager.IS_REGISTERED.Equals(visibility) && GetRegistryDefinedVisiblity(ownerId) != null) 
+                else if (OpenSocialManager.IS_REGISTERED.Equals(visibility) && GetRegistryDefinedVisiblity(ownerUri) != null) 
                 {
                     show = true;
                 }
@@ -118,20 +118,20 @@ namespace Profiles.ORNG.Utilities
         }
 
         // OK to cache as long as dependency is working!
-        public string GetRegistryDefinedVisiblity(string personId)
+        public string GetRegistryDefinedVisiblity(string ownerUri)
         {
-            if (personId == null || personId.Trim().Length == 0)
+            if (ownerUri == null || ownerUri.Trim().Length == 0)
             {
                 return null;
             }
 
-            Dictionary<int, string> registeredApps = (Dictionary<int, string>)Framework.Utilities.Cache.FetchObject(REGISTERED_APPS_CACHE_PREFIX + personId);
+            Dictionary<int, string> registeredApps = (Dictionary<int, string>)Framework.Utilities.Cache.FetchObject(REGISTERED_APPS_CACHE_PREFIX + ownerUri);
             if (registeredApps == null)
             {
                 registeredApps = new Dictionary<int, string>();
                 Profiles.ORNG.Utilities.DataIO data = new Profiles.ORNG.Utilities.DataIO();
 
-                using (SqlDataReader dr = data.GetRegisteredApps(personId))
+                using (SqlDataReader dr = data.GetRegisteredApps(ownerUri))
                 {
                     while (dr.Read())
                     {
@@ -139,7 +139,7 @@ namespace Profiles.ORNG.Utilities
                     }
                 }
 
-                Framework.Utilities.Cache.Set(REGISTERED_APPS_CACHE_PREFIX + personId, registeredApps, OpenSocialManager.GetNodeID(personId));
+                Framework.Utilities.Cache.Set(REGISTERED_APPS_CACHE_PREFIX + ownerUri, registeredApps, OpenSocialManager.GetNodeID(ownerUri));
             }
 
             return registeredApps.ContainsKey(GetAppId()) ? registeredApps[GetAppId()] : null;

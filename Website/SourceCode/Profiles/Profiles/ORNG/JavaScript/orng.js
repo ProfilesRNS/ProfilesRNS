@@ -31,7 +31,7 @@ gadgets.pubsubrouter.init(function (id) {
             var moduleId = shindig.container.gadgetService.getGadgetIdFromModuleId(sender);
         }
 
-        if (channel == 'added' && my.gadgets[moduleId].view == 'home') {
+        if (channel == 'added' && my.gadgets[moduleId].chrome_id == 'gadgets-edit') {
             if (message == 'Y') {
                 _gaq.push(['_trackEvent', my.gadgets[moduleId].name, 'SHOW', 'profile_edit_view']);
             }
@@ -464,7 +464,7 @@ ORNGToggleGadget.prototype.handleToggle = function (track) {
 						.reload(true);
             }
 
-            if (my.gadgets[this.id].view == 'home') {
+            if (my.gadgets[this.id].chrome_id == 'gadgets-edit') {
                 if (track) {
                     // record in google analytics     
                     _gaq.push(['_trackEvent', my.gadgets[this.id].name,
@@ -502,7 +502,7 @@ ORNGToggleGadget.prototype.handleToggle = function (track) {
             gadgetContent.style.display = 'none';
             gadgetImg.src = _rootDomain + '/Framework/Images/gadgetexpand.gif';
             if (track) {
-                if (my.gadgets[this.id].view == 'home') {
+                if (my.gadgets[this.id].chrome_id == 'gadgets-edit') {
                     // record in google analytics     
                     _gaq.push(['_trackEvent', my.gadgets[this.id].name,
 							'CLOSE_IN_EDIT', 'profile_edit_view']);
@@ -641,7 +641,7 @@ ORNGToggleGadget.prototype.finishRender = function (chrome) {
         chrome.style.width = this.width + 'px';
     }
 
-    if (my.gadgets[this.id].view == 'home' && my.gadgets[this.id].hasRegisteredVisibility) {
+    if (my.gadgets[this.id].chrome_id == 'gadgets-edit' && my.gadgets[this.id].hasRegisteredVisibility) {
         this.showRegisteredVisibility();
     }
 };

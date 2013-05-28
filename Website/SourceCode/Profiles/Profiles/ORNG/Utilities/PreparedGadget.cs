@@ -140,7 +140,7 @@ namespace Profiles.ORNG.Utilities
 
         public string CanvasURL
         {
-            get { return "~/orng/gadgetdetails.aspx?appId=" + GetAppId() + "&Person=" + HttpUtility.UrlEncode(openSocialManager.ownerId); }
+            get { return "~/orng/gadgetdetails.aspx?appId=" + GetAppId() + "&Person=" + HttpUtility.UrlEncode(openSocialManager.ownerUri); }
         }
 
         public int AppId
