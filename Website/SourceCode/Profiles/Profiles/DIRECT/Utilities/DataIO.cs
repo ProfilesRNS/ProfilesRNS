@@ -86,7 +86,8 @@ namespace Profiles.DIRECT.Utilities
 
             try
             {
-                vals.Load(Root.Domain + "/DIRECT/Modules/DirectSearch/Config.xml");
+                String Filepath = System.Web.HttpContext.Current.Server.MapPath("~/DIRECT/Modules/DirectSearch/Config.xml");
+                vals.Load(Filepath);
             }
             catch (Exception e)
             {
