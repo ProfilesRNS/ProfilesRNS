@@ -104,7 +104,7 @@ namespace Profiles.Profile.Utilities
                         xmlrtn.LoadXml(xmlstr);
 
                         //Framework.Utilities.Cache.Set(request.Key + "|data", xmlrtn);
-                        Framework.Utilities.Cache.Set(request.Key + "|data", xmlrtn, request.Subject);
+                        Framework.Utilities.Cache.Set(request.Key + "|data", xmlrtn, request.Subject, request.Session.SessionID);
                         xmlstr = string.Empty;
 
                     }
@@ -112,7 +112,7 @@ namespace Profiles.Profile.Utilities
                     {
                         HTTPIO httpio = new HTTPIO();
                         xmlrtn = httpio.QueryHTTPIO(request);
-                        Framework.Utilities.Cache.Set(request.Key + "|data", xmlrtn, 0);
+                        Framework.Utilities.Cache.Set(request.Key + "|data", xmlrtn);
                     }
                 }
 
@@ -249,7 +249,7 @@ namespace Profiles.Profile.Utilities
 
                     xmlrtn.LoadXml(xmlstr);
 
-                    Framework.Utilities.Cache.Set(key + "|propertylist", xmlrtn, 0);
+                    Framework.Utilities.Cache.Set(key + "|propertylist", xmlrtn);
                     xmlstr = string.Empty;
 
 
@@ -458,7 +458,7 @@ namespace Profiles.Profile.Utilities
                     html.AppendLine("</ul>");
 
 
-                    Framework.Utilities.Cache.Set(connectiontype + node1.ToString() + node2.ToString() + concept, html.ToString(), 0);
+                    Framework.Utilities.Cache.Set(connectiontype + node1.ToString() + node2.ToString() + concept, html.ToString());
 
 
 

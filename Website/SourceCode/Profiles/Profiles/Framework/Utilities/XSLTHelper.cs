@@ -32,7 +32,7 @@ namespace Profiles.Framework.Utilities
             {
                 xsl = new XslCompiledTransform(false);
                 xsl.Load(xsltpath);
-                Framework.Utilities.Cache.Set("Transform in memory" + xsltpath, xsl, 604800, 0); // Cache for 7 days
+                Framework.Utilities.Cache.SetWithTimeout("Transform in memory" + xsltpath, xsl, 604800); // Cache for 7 days
             }
             //Only fragment will work for RDF/XML processing for some reason.  The XML is complete and well formed but
             // only Fragment works.

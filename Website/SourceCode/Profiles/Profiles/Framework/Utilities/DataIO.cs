@@ -75,7 +75,7 @@ namespace Profiles.Framework.Utilities
 
                     xmlrtn.LoadXml(xmlstr);
 
-                    Framework.Utilities.Cache.Set(key, xmlrtn,0);
+                    Framework.Utilities.Cache.Set(key, xmlrtn);
                     xmlstr = string.Empty;
 
                 }
@@ -219,7 +219,7 @@ namespace Profiles.Framework.Utilities
                 if (!sqldr.IsClosed)
                     sqldr.Close();
 
-                Framework.Utilities.Cache.Set("GetRESTBasePath", rtn, 10000);
+                Framework.Utilities.Cache.SetWithTimeout("GetRESTBasePath", rtn, 10000);
             }
             else
             {
@@ -248,7 +248,7 @@ namespace Profiles.Framework.Utilities
                 if (!sqldr.IsClosed)
                     sqldr.Close();
 
-                Framework.Utilities.Cache.Set("GetRESTBaseURI", rtn, 10000);
+                Framework.Utilities.Cache.SetWithTimeout("GetRESTBaseURI", rtn, 10000);
             }
             else
             {

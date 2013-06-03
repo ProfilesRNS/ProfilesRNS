@@ -1021,9 +1021,7 @@ namespace Profiles.Edit.Utilities
 
                 error = Convert.ToBoolean(param[sarr.Length - 2].Value);
 
-                Framework.Utilities.Cache.Remove("Node Dependency " + sarr.AwardOrHonorForID.Value.ToString());
-                Framework.Utilities.Cache.CreateDependency(sarr.AwardOrHonorForID.Value.ToString());
-
+                Framework.Utilities.Cache.AlterDependency(sarr.AwardOrHonorForID.Value.ToString());
             }
             catch (Exception e)
             {
@@ -1150,8 +1148,7 @@ namespace Profiles.Edit.Utilities
                 }
                 error = Convert.ToBoolean(param[str.Length - 1].Value);
 
-                Framework.Utilities.Cache.Remove("Node Dependency " + str.Subject.Value.ToString());
-                Framework.Utilities.Cache.CreateDependency(str.Subject.Value.ToString());
+                Framework.Utilities.Cache.AlterDependency(str.Subject.Value.ToString());
 
             }
             catch (Exception e)
@@ -1194,9 +1191,7 @@ namespace Profiles.Edit.Utilities
                 if (dbconnection.State != ConnectionState.Closed)
                     dbconnection.Close();
 
-                Framework.Utilities.Cache.Remove("Node Dependency " + subjectid.ToString());
-                Framework.Utilities.Cache.CreateDependency(subjectid.ToString());
-
+                Framework.Utilities.Cache.AlterDependency(subjectid.ToString());
 
             }
             catch (Exception e)
