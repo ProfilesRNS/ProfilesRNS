@@ -39,8 +39,7 @@ namespace Connects.Profiles.Service.ServiceImplementation
                 DataIO ps = new DataIO();
                 XmlDocument searchrequest = new XmlDocument();
                 Utility.Namespace namespacemgr = new Connects.Profiles.Utility.Namespace();
-                XmlNamespaceManager namespaces;
-
+                
 
                 Connects.Profiles.Service.DataContracts.Profiles p = new Connects.Profiles.Service.DataContracts.Profiles();
 
@@ -50,18 +49,26 @@ namespace Connects.Profiles.Service.ServiceImplementation
 
                 Type type = typeof(Connects.Profiles.Service.DataContracts.PersonList);
 
-                searchrequest.LoadXml(this.ConvertToRDFRequest(req));
+                searchrequest.LoadXml(this.ConvertToRDFRequest(req, qd.Version.ToString()));
 
-                namespaces = namespacemgr.LoadNamespaces(searchrequest);
+
+
+                if (qd.QueryDefinition.PersonID != null && qd.Version != 2)
+                {
+                    qd.QueryDefinition.PersonID = ps.GetPersonID(qd.QueryDefinition.PersonID).ToString();
+                }
+
+
 
                 if (qd.QueryDefinition.PersonID != null)
                 {
-                    responseXML = ps.Search(qd.QueryDefinition.PersonID).OuterXml;
+                    responseXML = ps.Search(qd.QueryDefinition.PersonID, isSecure).OuterXml;
                 }
                 else
                 {
                     responseXML = ps.Search(searchrequest, isSecure).OuterXml;
                 }
+
 
                 string queryid = string.Empty;
                 queryid = qd.QueryDefinition.QueryID;
@@ -107,7 +114,7 @@ namespace Connects.Profiles.Service.ServiceImplementation
         }
 
 
-        private string ConvertToRDFRequest(string req)
+        private string ConvertToRDFRequest(string req, string version)
         {
 
             string searchstring = string.Empty;
@@ -128,7 +135,7 @@ namespace Connects.Profiles.Service.ServiceImplementation
             string division = string.Empty;
             string divisionallexcept = string.Empty;
             string classuri = "http://xmlns.com/foaf/0.1/Person";
-            int limit = 15;
+            int limit = 100;
             int offset = 0;
             string sortby = string.Empty;
             string sortdirection = string.Empty;
@@ -142,18 +149,14 @@ namespace Connects.Profiles.Service.ServiceImplementation
             req = req.Replace("xmlns=\"http://connects.profiles.schema/profiles/query\"", "");
             request.LoadXml(req);
 
-
-
-
-            if (request.SelectSingleNode("//Profiles/QueryDefinition/PersonID") != null)
-                personid = request.SelectSingleNode("//Profiles/QueryDefinition/PersonID").InnerText;
-
+            if (request.SelectSingleNode("//Profiles/QueryDefinition/PersonID") != null)           
+                personid = request.SelectSingleNode("//Profiles/QueryDefinition/PersonID").InnerText;           
+           
             if (request.SelectSingleNode("//Profiles/QueryDefinition/InternalIDList/InternalID[@Name = 'EcommonsUsername']") != null)
                 ecomid = request.SelectSingleNode("//Profiles/QueryDefinition/InternalIDList/InternalID[@Name = 'EcommonsUsername']").InnerText;
 
             if (request.SelectSingleNode("//Profiles/QueryDefinition/InternalIDList/InternalID[@Name = 'HarvardID']") != null)
                 harvardid = request.SelectSingleNode("//Profiles/QueryDefinition/InternalIDList/InternalID[@Name = 'HarvardID']").InnerText;
-
 
             if (request.SelectSingleNode("//Profiles/QueryDefinition/Keywords/KeywordString") != null)
                 searchstring = request.SelectSingleNode("//Profiles/QueryDefinition/Keywords/KeywordString").InnerText;
@@ -218,9 +221,6 @@ namespace Connects.Profiles.Service.ServiceImplementation
             return newrequest.InnerXml;
 
         }
-
-
-
 
 
         public Connects.Profiles.Service.DataContracts.PersonList GetPersonFromPersonId(int personId)

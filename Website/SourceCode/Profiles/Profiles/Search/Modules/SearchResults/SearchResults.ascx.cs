@@ -110,6 +110,7 @@ namespace Profiles.Search.Modules.SearchResults
             if (String.IsNullOrEmpty(Request.QueryString["searchfor"])==false)
             {
                 searchfor = Request.QueryString["searchfor"];
+                exactphrase = Request.QueryString["exactphrase"];
             }
             else if(String.IsNullOrEmpty(Request.Form["txtSearchFor"])==false)
             {

@@ -37,6 +37,7 @@ namespace Profiles.DIRECT.Modules.DirectSearch
             oDataIO = new DIRECT.Utilities.DataIO();
 
             Profiles.DIRECT.Utilities.DataIO searchDataIO;
+            Profiles.Search.Utilities.DataIO profileDataIO;
 
             string DirectServiceURL = Root.Domain + "/DIRECT/Modules/DirectSearch/directservice.aspx";// Request.Url.AbsoluteUri.Replace("&", "&amp;");
             string ProfilesURL = Root.Domain;
@@ -114,8 +115,8 @@ namespace Profiles.DIRECT.Modules.DirectSearch
                               "</SearchOptions>";
                     query.LoadXml(x);
 
-                    searchDataIO = new Profiles.DIRECT.Utilities.DataIO();
-                    result = searchDataIO.Search(query);
+                    profileDataIO = new Profiles.Search.Utilities.DataIO();
+                    result = profileDataIO.Search(query,false);
                     namespaces = rdfnamespaces.LoadNamespaces(result);
 
                     string ResultCount = result.SelectSingleNode("rdf:RDF/rdf:Description/prns:numberOfConnections", namespaces).InnerText;
@@ -165,8 +166,8 @@ namespace Profiles.DIRECT.Modules.DirectSearch
                            "</SearchOptions>");
 
 
-                    searchDataIO = new Profiles.DIRECT.Utilities.DataIO();
-                    result = searchDataIO.Search(query);
+                    profileDataIO = new Profiles.Search.Utilities.DataIO();
+                    result = profileDataIO.Search(query,false);
 
                     strResult = result.InnerXml;
 

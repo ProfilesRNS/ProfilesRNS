@@ -134,7 +134,7 @@ namespace Profiles.Edit.Utilities
 
                 if (HttpContext.Current.Request.QueryString["subjectid"] != null)
                 {
-                    Framework.Utilities.Cache.ClearDependentItems(HttpContext.Current.Request.QueryString["subjectid"].ToString());
+                    Framework.Utilities.Cache.AlterDependency(HttpContext.Current.Request.QueryString["subjectid"].ToString());
 
                 }
 
@@ -634,8 +634,7 @@ namespace Profiles.Edit.Utilities
 
                 error = Convert.ToBoolean(param[5].Value);
 
-                Framework.Utilities.Cache.ClearDependentItems(subjectid);
-
+                Framework.Utilities.Cache.AlterDependency(subjectid.ToString());
 
                 if (error)
                     Framework.Utilities.DebugLogging.Log("Delete Triple blew up with the following values -- {[RDF.].DeleteTriple} DeleteInverse: 1 SubjectID:" + subjectid.ToString() + " PredicateID:" + predicateid.ToString() + " ObjectID:" + objectid.ToString() + " SessionID:" + sm.Session().SessionID);
@@ -1022,8 +1021,7 @@ namespace Profiles.Edit.Utilities
 
                 error = Convert.ToBoolean(param[sarr.Length - 2].Value);
 
-                Framework.Utilities.Cache.ClearDependentItems(sarr.AwardOrHonorForID.Value.ToString());
-
+                Framework.Utilities.Cache.AlterDependency(sarr.AwardOrHonorForID.Value.ToString());
             }
             catch (Exception e)
             {
@@ -1150,7 +1148,7 @@ namespace Profiles.Edit.Utilities
                 }
                 error = Convert.ToBoolean(param[str.Length - 1].Value);
 
-                Framework.Utilities.Cache.ClearDependentItems(str.Subject.Value.ToString());
+                Framework.Utilities.Cache.AlterDependency(str.Subject.Value.ToString());
 
             }
             catch (Exception e)
@@ -1193,8 +1191,7 @@ namespace Profiles.Edit.Utilities
                 if (dbconnection.State != ConnectionState.Closed)
                     dbconnection.Close();
 
-                Framework.Utilities.Cache.ClearDependentItems(subjectid.ToString());
-
+                Framework.Utilities.Cache.AlterDependency(subjectid.ToString());
 
             }
             catch (Exception e)

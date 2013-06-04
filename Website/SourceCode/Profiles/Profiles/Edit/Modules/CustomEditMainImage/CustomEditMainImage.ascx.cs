@@ -176,7 +176,7 @@ namespace Profiles.Edit.Modules.CustomEditMainImage
 
         private void KillCache()
         {
-            Framework.Utilities.Cache.ClearDependentItems(this.SubjectID);
+            Framework.Utilities.Cache.AlterDependency(this.SubjectID.ToString());
         }
         private Int64 SubjectID { get; set; }
         private XmlDocument XMLData { get; set; }

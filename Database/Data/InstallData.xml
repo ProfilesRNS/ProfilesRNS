@@ -15530,8 +15530,8 @@
       <CustomDisplay>1</CustomDisplay>
       <CustomEdit>1</CustomEdit>
       <ViewSecurityGroup>-10</ViewSecurityGroup>
-      <EditSecurityGroup>-40</EditSecurityGroup>
-      <EditPermissionsSecurityGroup>-40</EditPermissionsSecurityGroup>
+      <EditSecurityGroup>-20</EditSecurityGroup>
+      <EditPermissionsSecurityGroup>-20</EditPermissionsSecurityGroup>
       <EditExistingSecurityGroup>-40</EditExistingSecurityGroup>
       <EditAddNewSecurityGroup>-40</EditAddNewSecurityGroup>
       <EditAddExistingSecurityGroup>-40</EditAddExistingSecurityGroup>
@@ -16186,8 +16186,8 @@
       <CustomDisplay>1</CustomDisplay>
       <CustomEdit>1</CustomEdit>
       <ViewSecurityGroup>-1</ViewSecurityGroup>
-      <EditSecurityGroup>-40</EditSecurityGroup>
-      <EditPermissionsSecurityGroup>-40</EditPermissionsSecurityGroup>
+      <EditSecurityGroup>-20</EditSecurityGroup>
+      <EditPermissionsSecurityGroup>-20</EditPermissionsSecurityGroup>
       <EditExistingSecurityGroup>-40</EditExistingSecurityGroup>
       <EditAddNewSecurityGroup>-40</EditAddNewSecurityGroup>
       <EditAddExistingSecurityGroup>-40</EditAddExistingSecurityGroup>

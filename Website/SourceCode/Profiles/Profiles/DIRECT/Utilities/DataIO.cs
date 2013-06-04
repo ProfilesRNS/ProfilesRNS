@@ -28,72 +28,6 @@ namespace Profiles.DIRECT.Utilities
     {
 
 
-        public XmlDocument Search(XmlDocument SearchData)
-        {
-
-            string result = string.Empty;
-            XmlDocument rawdata = null;
-            string _xml;
-            //Do not use the web caching, this process uses the old database cache tables for performance.
-
-            try
-            {
-
-                _xml = SearchData.InnerXml.Trim();
-
-                rawdata = new XmlDocument();
-
-                HttpWebRequest request = null;
-                request = (HttpWebRequest)WebRequest.Create(Root.Domain + "/search/data.aspx");
-                request.Method = "POST";
-
-                request.ContentType = "application/rdf+xml";
-                request.ContentLength = _xml.Length;
-
-                using (Stream writeStream = request.GetRequestStream())
-                {
-                    UTF8Encoding encoding = new UTF8Encoding();
-                    byte[] bytes = encoding.GetBytes(_xml);
-                    writeStream.Write(bytes, 0, bytes.Length);
-                }
-
-                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-                {
-                    using (Stream responseStream = response.GetResponseStream())
-                    {
-                        using (StreamReader readStream = new StreamReader(responseStream, Encoding.UTF8))
-                        {
-                            result = readStream.ReadToEnd();
-                        }
-                    }
-                }
-
-
-            }
-            catch (Exception e)
-            {
-                Framework.Utilities.DebugLogging.Log(e.Message + " " + e.StackTrace);
-                throw new Exception(e.Message);
-            }
-
-
-            try
-            {
-                rawdata.LoadXml(result);
-
-            }
-            catch (Exception ex) { }
-            //// create a writer and open the file
-            //TextWriter tw = new StreamWriter("c:\\data.xml");
-
-            //// write a line of text to the file
-            //tw.WriteLine(rawdata.InnerXml);
-
-            //// close the stream
-            //tw.Close();
-
-            return rawdata;
-        }
         public string Search(string searchfor)
         {
 
@@ -142,8 +76,6 @@ namespace Profiles.DIRECT.Utilities
             }
 
 
-
-
             return result;
         }
 
@@ -154,7 +86,8 @@ namespace Profiles.DIRECT.Utilities
 
             try
             {
-                vals.Load(Root.Domain + "/DIRECT/Modules/DirectSearch/Config.xml");
+                String Filepath = System.Web.HttpContext.Current.Server.MapPath("~/DIRECT/Modules/DirectSearch/Config.xml");
+                vals.Load(Filepath);
             }
             catch (Exception e)
             {
@@ -169,7 +102,7 @@ namespace Profiles.DIRECT.Utilities
 
 
         public SqlDataReader DirectResultset()
-        { //ref List<T> ResultSet
+        { 
             string sql = "select * from [Direct.].Sites with (NOLOCK) where isactive = 1 order by SortOrder";
             SqlDataReader sqldr = this.GetSQLDataReader("ProfilesDB", sql, CommandType.Text, CommandBehavior.CloseConnection, null);
             return sqldr;

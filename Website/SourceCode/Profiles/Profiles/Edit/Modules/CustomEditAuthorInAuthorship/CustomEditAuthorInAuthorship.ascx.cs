@@ -851,8 +851,8 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
                     phPubPageNumbers.Visible = true;
                     phNewsSection.Visible = true;
 
-                    lblTitle.Text = "Title of Article";
-                    lblTitle2.Text = "Title of Publication";
+                    lblTitle.Text = "Title of Publication";
+                    lblTitle2.Text = "Title of Article";
                     break;
                 case "Patents":
                     phPublisherNumbers.Visible = true;

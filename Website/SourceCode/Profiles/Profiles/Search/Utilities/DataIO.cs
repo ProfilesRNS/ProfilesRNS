@@ -142,6 +142,9 @@ namespace Profiles.Search.Utilities
             search.Append("<SearchOptions>");
             search.Append("<MatchOptions>");
 
+            if (exactphrase.IsNullOrEmpty())
+                exactphrase = string.Empty;
+
             if (searchstring != string.Empty)
             {
                 search.Append("<SearchString ExactMatch=\"" + exactphrase.ToLower() + "\">");
@@ -378,7 +381,7 @@ namespace Profiles.Search.Utilities
                     xmlrtn.LoadXml(xmlstr);
 
                     Framework.Utilities.DebugLogging.Log(xmlstr);
-                    Framework.Utilities.Cache.Set(cachekey, xmlrtn,0);
+                    Framework.Utilities.Cache.Set(cachekey, xmlrtn);
                     xmlstr = string.Empty;
                 }
                 catch (Exception e)
@@ -442,7 +445,7 @@ namespace Profiles.Search.Utilities
                     xmlrtn.LoadXml(xmlstr);
 
                     Framework.Utilities.DebugLogging.Log(xmlstr);
-                    Framework.Utilities.Cache.Set(cachekey, xmlrtn,0);
+                    Framework.Utilities.Cache.Set(cachekey, xmlrtn);
                     xmlstr = string.Empty;
 
                 }
@@ -668,7 +671,7 @@ namespace Profiles.Search.Utilities
 
 
                     //Defaulted this to be one hour
-                    Framework.Utilities.Cache.Set("GetDivisions", divisions, 3600);
+                    Framework.Utilities.Cache.SetWithTimeout("GetDivisions", divisions, 3600);
 
 
                 }
@@ -712,7 +715,7 @@ namespace Profiles.Search.Utilities
                         sqldr.Close();
 
                     //Defaulted this to be one hour
-                    Framework.Utilities.Cache.Set("GetInstitutions", institutions, 3600);
+                    Framework.Utilities.Cache.SetWithTimeout("GetInstitutions", institutions, 3600);
 
 
                 }
@@ -747,7 +750,7 @@ namespace Profiles.Search.Utilities
 
                     da.Fill(ds, "Table");
                     //Defaulted this to be one hour
-                    Framework.Utilities.Cache.Set("GetFilters", ds, 3600);
+                    Framework.Utilities.Cache.SetWithTimeout("GetFilters", ds, 3600);
 
                     conn.Close();
 
@@ -792,7 +795,7 @@ namespace Profiles.Search.Utilities
                         sqldr.Close();
 
                     //Defaulted this to be one hour
-                    Framework.Utilities.Cache.Set("GetDepartments", departments, 3600);
+                    Framework.Utilities.Cache.SetWithTimeout("GetDepartments", departments, 3600);
 
                 }
                 catch (Exception e)
@@ -832,7 +835,7 @@ namespace Profiles.Search.Utilities
                         sqldr.Close();
 
                     //Defaulted this to be one hour
-                    Framework.Utilities.Cache.Set("GetFacultyRanks", ranks, 3600);
+                    Framework.Utilities.Cache.SetWithTimeout("GetFacultyRanks", ranks, 3600);
 
                 }
                 catch (Exception e)
