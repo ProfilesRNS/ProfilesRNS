@@ -70,8 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="NetworkBrowserService.svc" />
-    <Content Include="ProfileService.svc">
-    </Content>
+    <Content Include="ProfileService.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -117,7 +116,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>11821</DevelopmentServerPort>
+          <DevelopmentServerPort>25145</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost/Connects.Profiles.Service</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

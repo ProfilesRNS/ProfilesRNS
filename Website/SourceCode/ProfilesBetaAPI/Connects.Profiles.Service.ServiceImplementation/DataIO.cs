@@ -366,10 +366,6 @@ namespace Connects.Profiles.Service.ServiceImplementation
                 isexclude = "0";
             }
 
-
-
-
-
             if (personid != string.Empty)
             {
                 search.Append("<SearchFilter IsExclude=\"0\"  Property=\"http://profiles.catalyst.harvard.edu/ontology/prns#personId\" MatchType=\"Exact\">" + personid + "</SearchFilter>");
@@ -630,11 +626,12 @@ namespace Connects.Profiles.Service.ServiceImplementation
                     dbconnection.Open();
                     dbcommand.CommandType = CommandType.StoredProcedure;
 
-
                     dbcommand.CommandText = "[Search.].[GetNodes]";
 
-
                     dbcommand.CommandTimeout = this.GetCommandTimeout();
+
+                    Session session = new Session();
+                    session.SessionID = sessionid;
 
                     if (secure)
                     {
@@ -643,19 +640,12 @@ namespace Connects.Profiles.Service.ServiceImplementation
                         user.UserName = ConfigurationSettings.AppSettings["SecureGenericUserName"];
                         user.UserID = Convert.ToInt32(ConfigurationSettings.AppSettings["SecureGenericUserID"]);
 
-                        Session session = new Session();
-                        session.UserID = user.UserID;
-                        session.SessionID = sessionid;
-                        this.SessionUpdate(ref session);
-
-                        dbcommand.Parameters.Add(new SqlParameter("@sessionid", sessionid));
-
                     }
-                    else
-                    {
 
-                        dbcommand.Parameters.Add(new SqlParameter("@sessionid", null));
-                    }
+                    this.SessionUpdate(ref session);
+
+
+                    dbcommand.Parameters.Add(new SqlParameter("@sessionid", sessionid));
 
                     dbcommand.Parameters.Add(new SqlParameter("@SearchOptions", searchoptions.OuterXml));
 
@@ -695,13 +685,21 @@ namespace Connects.Profiles.Service.ServiceImplementation
 
         }
 
-        public XmlDocument Search(string personid)
+        public XmlDocument Search(string personid, bool secure)
         {
             System.Text.StringBuilder sql = new System.Text.StringBuilder();
             string xmlstr = string.Empty;
             XmlDocument xmlrtn = new XmlDocument();
-
+            SessionManagement sm = new SessionManagement();
             Int64 nodeid = 0;
+
+            string sessionid = string.Empty;
+
+            try { Convert.ToInt16(personid); }
+            catch (Exception ex)
+            {
+                personid = "'" + personid + "'";
+            }
 
             string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
 
@@ -740,10 +738,27 @@ namespace Connects.Profiles.Service.ServiceImplementation
             dbcommand.Parameters.Add(new SqlParameter("@subject", nodeid));
             dbcommand.Parameters.Add(new SqlParameter("@predicate", 0));
             dbcommand.Parameters.Add(new SqlParameter("@object", 0));
-            
+
             dbcommand.Parameters.Add(new SqlParameter("@showDetails", "true"));
             dbcommand.Parameters.Add(new SqlParameter("@expand", "true"));
-            dbcommand.Parameters.Add(new SqlParameter("@SessionID", null));
+
+            sessionid = sm.SessionCreate();
+            Session session = new Session();
+            if (secure)
+            {
+
+                User user = new User();
+                user.UserName = ConfigurationSettings.AppSettings["SecureGenericUserName"];
+                user.UserID = Convert.ToInt32(ConfigurationSettings.AppSettings["SecureGenericUserID"]);
+
+
+                session.UserID = user.UserID;
+                session.SessionID = sessionid;
+
+
+            }
+            this.SessionUpdate(ref session);
+            dbcommand.Parameters.Add(new SqlParameter("@sessionid", sessionid));
 
             dbcommand.Connection = dbconnection;
 
@@ -770,6 +785,9 @@ namespace Connects.Profiles.Service.ServiceImplementation
             return xmlrtn;
 
         }
+
+
+
 
         public string ConvertV2ToBetaSearch(string RDFResults, string queryid, string version, bool individual)
         {
@@ -799,7 +817,7 @@ namespace Connects.Profiles.Service.ServiceImplementation
             if (RDF.SelectNodes("//prns:hasConnection[@rdf:nodeID!='']", namespaces) != null && RDF.SelectSingleNode("rdf:RDF/rdf:Description[1]/@rdf:about", namespaces) == null)
                 bynodeid = true;
 
-            if (individual&& !bynodeid)
+            if (individual && !bynodeid)
             {
                 persons = RDF.SelectNodes("//rdf:RDF", namespaces);
             }
@@ -808,28 +826,28 @@ namespace Connects.Profiles.Service.ServiceImplementation
                 persons = RDF.SelectNodes("//prns:hasConnection[@rdf:nodeID!='']", namespaces);
             }
 
-            
+
 
             foreach (XmlNode person in persons)
             {
                 if (individual && !bynodeid)
                 {
-                    if (RDF.SelectSingleNode("rdf:RDF/rdf:Description/@rdf:about", namespaces) != null)
+                    if (RDF.SelectSingleNode("rdf:RDF/rdf:Description[1]/@rdf:about", namespaces) != null)
                     {
-                        uri = RDF.SelectSingleNode("rdf:RDF/rdf:Description/@rdf:about", namespaces).Value;
+                        uri = RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[1]/@rdf:about", namespaces).Value;
                         returnxml.Append("<Person QueryRelevance=\"1\" Visible=\"true\">");
                     }
                 }
                 else
                 {
-                    if (RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:nodeID='" + person.SelectSingleNode("@rdf:nodeID", namespaces).Value + "']/rdf:object/@rdf:resource", namespaces) != null)
+                    if (RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:nodeID='" + person.SelectSingleNode("@rdf:nodeID", namespaces).Value + "']/rdf:object/@rdf:resource", namespaces) != null)
                     {
-                        uri = RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:nodeID='" + person.SelectSingleNode("@rdf:nodeID", namespaces).Value + "']/rdf:object/@rdf:resource", namespaces).Value;
-                        returnxml.Append("<Person QueryRelevance=\"" + RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:nodeID='" + person.SelectSingleNode("@rdf:nodeID", namespaces).Value + "']/prns:connectionWeight", namespaces).InnerText + "\" Visible=\"true\">");
+                        uri = RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:nodeID='" + person.SelectSingleNode("@rdf:nodeID", namespaces).Value + "']/rdf:object/@rdf:resource", namespaces).Value;
+                        returnxml.Append("<Person QueryRelevance=\"" + RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:nodeID='" + person.SelectSingleNode("@rdf:nodeID", namespaces).Value + "']/prns:connectionWeight", namespaces).InnerText + "\" Visible=\"true\">");
                     }
                     else
                     {
-                        returnxml.Append("<Person QueryRelevance=\"" + RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:nodeID='" + person.SelectSingleNode("@rdf:nodeID", namespaces).Value + "']/prns:connectionWeight", namespaces).InnerText + "\" Visible=\"true\">");
+                        returnxml.Append("<Person QueryRelevance=\"" + RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:nodeID='" + person.SelectSingleNode("@rdf:nodeID", namespaces).Value + "']/prns:connectionWeight", namespaces).InnerText + "\" Visible=\"true\">");
 
                     }
                 }
@@ -839,139 +857,229 @@ namespace Connects.Profiles.Service.ServiceImplementation
 
                     currentnode = Convert.ToInt64(uri.Split('/')[uri.Split('/').Length - 1]);
 
-                    returnxml.Append("<PersonID>" + this.GetPersonID(currentnode).ToString() + "</PersonID>");
+
+                    if (version == "2")
+                    {
+                        returnxml.Append("<PersonID>" + this.GetPersonID(currentnode).ToString() + "</PersonID>");
+                    }
+                    else
+                    {
+                        returnxml.Append("<PersonID>" + RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + uri + "']/catalyst:eCommonsLogin", namespaces).InnerText + "</PersonID>");
+                    }
+
+
                     persondata = this.GetPersonData(this.GetPersonID(currentnode));
 
                     //NAME
                     returnxml.Append("<Name>");
                     returnxml.Append("<FullName>");
-                    if (RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + uri + "']/prns:fullName", namespaces) != null)
-                        returnxml.Append(RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + uri + "']/prns:fullName", namespaces).InnerText);
+                    if (RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + uri + "']/prns:fullName", namespaces) != null)
+                        returnxml.Append(RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + uri + "']/prns:fullName", namespaces).InnerText);
                     returnxml.Append("</FullName>");
 
                     returnxml.Append("<FirstName>");
-                    if (RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + uri + "']/foaf:firstName", namespaces) != null)
-                        returnxml.Append(RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + uri + "']/foaf:firstName", namespaces).InnerText);
+                    if (RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + uri + "']/foaf:firstName", namespaces) != null)
+                        returnxml.Append(RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + uri + "']/foaf:firstName", namespaces).InnerText);
                     returnxml.Append("</FirstName>");
 
                     returnxml.Append("<LastName>");
-                    if (RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + uri + "']/foaf:lastName", namespaces) != null)
-                        returnxml.Append(RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + uri + "']/foaf:lastName", namespaces).InnerText);
+                    if (RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + uri + "']/foaf:lastName", namespaces) != null)
+                        returnxml.Append(RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + uri + "']/foaf:lastName", namespaces).InnerText);
                     returnxml.Append("</LastName>");
                     returnxml.Append("</Name>");
                     //END NAME                
+
+
 /*
+
                     returnxml.Append("<InternalIDList>");
-                    if (RDF.SelectSingleNode("rdf:RDF/rdf:Description/catalyst:eCommonsLogin", namespaces) != null)
+                    if (RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + uri + "']/catalyst:eCommonsLogin", namespaces) != null)
                     {
                         returnxml.Append("<InternalID Name=\"EcommonsUsername\">");
-                        returnxml.Append(RDF.SelectSingleNode("rdf:RDF/rdf:Description/catalyst:eCommonsLogin", namespaces).InnerText);
+                        returnxml.Append(RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + uri + "']/catalyst:eCommonsLogin", namespaces).InnerText);
                         returnxml.Append("</InternalID>");
                     }
 
-                    if (RDF.SelectSingleNode("rdf:RDF/rdf:Description/catalyst:harvardId", namespaces) != null)
+                    if (RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + uri + "']/catalyst:harvardId", namespaces) != null)
                     {
                         returnxml.Append("<InternalID Name=\"HarvardID\">");
-                        returnxml.Append(RDF.SelectSingleNode("rdf:RDF/rdf:Description/catalyst:harvardId", namespaces).InnerText);
+                        returnxml.Append(RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + uri + "']/catalyst:harvardId", namespaces).InnerText);
                         returnxml.Append("</InternalID>");
                     }
 
                     returnxml.Append("</InternalIDList>");
 */
+                    if (version == "2")
+                    {
+                        ////ADDRESS
+                        returnxml.Append("<Address>");
+                        returnxml.Append("<Address1>");
+                        returnxml.Append(persondata.AddressLine1);
+                        returnxml.Append("</Address1>");
 
-                    ////ADDRESS
-                    returnxml.Append("<Address>");
-                    returnxml.Append("<Address1>");
-                    returnxml.Append(persondata.AddressLine1);
-                    returnxml.Append("</Address1>");
+                        returnxml.Append("<Address2>");
+                        returnxml.Append(persondata.AddressLine2);
+                        returnxml.Append("</Address2>");
 
-                    returnxml.Append("<Address2>");
-                    returnxml.Append(persondata.AddressLine2);
-                    returnxml.Append("</Address2>");
+                        returnxml.Append("<Address3>");
+                        returnxml.Append(persondata.AddressLine3);
+                        returnxml.Append("</Address3>");
 
-                    returnxml.Append("<Address3>");
-                    returnxml.Append(persondata.AddressLine3);
-                    returnxml.Append("</Address3>");
+                        returnxml.Append("<Address4>");
+                        returnxml.Append(persondata.AddressLine4);
+                        returnxml.Append("</Address4>");
 
-                    returnxml.Append("<Address4>");
-                    returnxml.Append(persondata.AddressLine4);
-                    returnxml.Append("</Address4>");
+                        returnxml.Append("<Telephone>");
+                        returnxml.Append(persondata.Phone);
+                        returnxml.Append("</Telephone>");
 
-                    returnxml.Append("<Telephone>");
-                    returnxml.Append(persondata.Phone);
-                    returnxml.Append("</Telephone>");
+                        returnxml.Append("<Fax>");
+                        returnxml.Append(persondata.Fax);
+                        returnxml.Append("</Fax>");
 
-                    returnxml.Append("<Fax>");
-                    returnxml.Append(persondata.Fax);
-                    returnxml.Append("</Fax>");
+                        returnxml.Append("<Latitude>");
+                        if (RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + uri + "']/prns:latitude", namespaces) != null)
+                            returnxml.Append(Convert.ToDecimal(RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + uri + "']/prns:latitude", namespaces).InnerText));
+                        returnxml.Append("</Latitude>");
 
-                    returnxml.Append("<Latitude>");
-                    if (RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + uri + "']/prns:latitude", namespaces) != null)
-                        returnxml.Append(Convert.ToDecimal(RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + uri + "']/prns:latitude", namespaces).InnerText));
-                    returnxml.Append("</Latitude>");
+                        returnxml.Append("<Longitude>");
+                        if (RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + uri + "']/prns:longitude", namespaces) != null)
+                            returnxml.Append(Convert.ToDecimal(RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + uri + "']/prns:longitude", namespaces).InnerText));
+                        returnxml.Append("</Longitude>");
 
-                    returnxml.Append("<Longitude>");
-                    if (RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + uri + "']/prns:longitude", namespaces) != null)
-                        returnxml.Append(Convert.ToDecimal(RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + uri + "']/prns:longitude", namespaces).InnerText));
-                    returnxml.Append("</Longitude>");
-
-                    returnxml.Append("</Address>");
-                    //END ADDRESS
-
+                        returnxml.Append("</Address>");
+                        //END ADDRESS
+                    }
 
                     returnxml.Append("<AffiliationList Visible=\"true\">");
-                    if (RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + uri + "']/prns:personInPrimaryPosition/@rdf:resource", namespaces) != null)
-                        affiliationuri = RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + uri + "']/prns:personInPrimaryPosition/@rdf:resource", namespaces).Value;
+                    string organization = string.Empty;
+                    string department = string.Empty;
+                    string primary = string.Empty;
 
-
-                    foreach (XmlNode affiliation in RDF.SelectNodes("rdf:RDF/rdf:Description[@rdf:about='" + affiliationuri + "']", namespaces))
+                    if (RDF.SelectNodes("rdf:RDF[1]/rdf:Description[@rdf:about='" + uri + "']/vivo:personInPosition/@rdf:resource", namespaces) != null)
                     {
-
-                        if (affiliationuri != string.Empty)
+                        try
                         {
-                            returnxml.Append("<Affiliation Primary=\"" + affiliation.SelectSingleNode("prns:isPrimaryPosition", namespaces).InnerText + "\">");
-                            returnxml.Append("<JobTitle>");
-                            returnxml.Append(affiliation.SelectSingleNode("vivo:hrJobTitle", namespaces).InnerText);
-                            returnxml.Append("</JobTitle>");
+                            affiliationuri = RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + uri + "']/prns:personInPrimaryPosition/@rdf:resource", namespaces).Value;
+                        }
+                        catch (Exception ex) { }
 
-                            returnxml.Append("<InstitutionAbbreviation>");
+                        XmlNodeList afflist = null;
 
-                            returnxml.Append("</InstitutionAbbreviation>");
-
-                            returnxml.Append("<InstitutionName>");
-                            if (affiliation.SelectSingleNode("vivo:positionInOrganization/@rdf:resource", namespaces) != null)
-                            {
-                                returnxml.Append(RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" +
-                                    affiliation.SelectSingleNode("vivo:positionInOrganization/@rdf:resource", namespaces).Value + "']", namespaces).InnerText);
-                            }
-                            returnxml.Append("</InstitutionName>");
-
-                            returnxml.Append("<DepartmentName>");
-                            if (affiliation.SelectSingleNode("prns:positionInDepartment/@rdf:resource", namespaces) != null)
-                            {
-                                returnxml.Append(RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" +
-                                    affiliation.SelectSingleNode("prns:positionInDepartment/@rdf:resource", namespaces).Value + "']", namespaces).InnerText);
-                            }
-                            returnxml.Append("</DepartmentName>");
+                        if (individual)
+                        {
+                            afflist = RDF.SelectNodes("rdf:RDF[1]/rdf:Description[@rdf:about='" + uri + "']/vivo:personInPosition/@rdf:resource", namespaces);
+                        }
+                        else
+                        {
+                            afflist = RDF.SelectNodes("rdf:RDF[1]/rdf:Description[@rdf:about='" + affiliationuri + "']", namespaces);
                         }
 
-
-                        if (affiliation.SelectSingleNode("prns:hasFacultyRank", namespaces) != null)
+                        foreach (XmlNode affiliation in afflist)
                         {
-                            returnxml.Append("<FacultyType>");
-                            returnxml.Append(RDF.SelectSingleNode("rdf:Description[@rdf:about='" +
-                               affiliation.SelectSingleNode("prns:hasFacultyRank", namespaces).InnerText + "']/rdfs:label", namespaces).InnerText);
-                            returnxml.Append("</FacultyType>");
+
+                            if (affiliationuri != string.Empty)
+                            {
+
+                                if (RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + affiliation.Value + "']/prns:isPrimaryPosition", namespaces) != null && individual)
+                                {
+                                    primary = "true";
+                                }
+                                else if (RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + affiliationuri + "']/prns:isPrimaryPosition", namespaces) != null && !individual)
+                                {
+                                    primary = "true";
+                                }
+                                else
+                                {
+
+                                    primary = "false";
+                                }
+
+
+                                returnxml.Append("<Affiliation Primary=\"" + primary + "\">");
+
+                                returnxml.Append("<JobTitle>");
+                                if (individual)
+                                    returnxml.Append(RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + affiliation.Value + "']/vivo:hrJobTitle", namespaces).InnerText);
+                                else
+                                    returnxml.Append(RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + affiliationuri + "']/vivo:hrJobTitle", namespaces).InnerText);
+                                returnxml.Append("</JobTitle>");
+
+                                returnxml.Append("<InstitutionAbbreviation>");
+                                try
+                                {
+                                    if (individual)
+                                        organization = RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + affiliation.Value + "']/vivo:positionInOrganization/@rdf:resource", namespaces).InnerText;
+                                    else
+                                        organization = RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + affiliationuri + "']/vivo:positionInOrganization/@rdf:resource", namespaces).InnerText;
+                                    returnxml.Append(GetInstitutionAbbreviation(RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + organization + "']/rdfs:label", namespaces).InnerText));
+                                }
+                                catch (Exception e) { }
+                                returnxml.Append("</InstitutionAbbreviation>");
+
+                                returnxml.Append("<InstitutionName>");
+                                try
+                                {
+                                    returnxml.Append(RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + organization + "']/rdfs:label", namespaces).InnerText);
+                                }
+                                catch (Exception e) { }
+                                returnxml.Append("</InstitutionName>");
+
+                                returnxml.Append("<DepartmentName>");
+                                try
+                                {
+                                    if (individual)
+                                        department = RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + affiliation.Value + "']/prns:positionInDepartment/@rdf:resource", namespaces).InnerText;
+                                    else
+                                        department = RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + affiliationuri + "']/prns:positionInDepartment/@rdf:resource", namespaces).InnerText;
+
+                                    returnxml.Append(RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + department + "']/rdfs:label", namespaces).InnerText);
+                                }
+                                catch (Exception e) { }
+                                returnxml.Append("</DepartmentName>");
+                            }
+
+
+                            if (RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description[@rdf:about='" + uri + "']/prns:hasFacultyRank/@rdf:resource]/rdfs:label", namespaces) != null)
+                            {
+                                returnxml.Append("<FacultyType>");
+                                returnxml.Append(RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description[@rdf:about='" + uri + "']/prns:hasFacultyRank/@rdf:resource]/rdfs:label", namespaces).InnerText);
+                                returnxml.Append("</FacultyType>");
+                            }
+
+                            returnxml.Append("</Affiliation>");
+
                         }
-
-                        returnxml.Append("</Affiliation>");
-
 
                     }
 
                     returnxml.Append("</AffiliationList>");
 
                     returnxml.Append("<ProfileURL Visible=\"true\">" + uri + "</ProfileURL>");
+
+                    if (RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + uri + "']/vivo:email", namespaces) != null)
+                    {
+
+                        returnxml.Append("<EmailImageUrl Visible=\"true\">");                     
+                        returnxml.Append(RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + uri + "']/vivo:email", namespaces).InnerText);
+                        returnxml.Append("</EmailImageUrl>");
+                    }
+                    else
+                    {
+                        returnxml.Append("<EmailImageUrl/>");
+                    }
+
+                    if (RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + uri + "']/prns:mainImage/@rdf:resource", namespaces) != null)
+                    {
+                        returnxml.Append("<PhotoUrl Visible=\"true\">");
+                        returnxml.Append(RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + uri + "']/prns:mainImage/@rdf:resource", namespaces).InnerText);
+                        returnxml.Append("</PhotoUrl>");
+                    }
+                    else
+                    {
+                        returnxml.Append("<PhotoUrl/>");
+                    }
+
 
                     returnxml.Append("<BasicStatistics Visible=\"true\">");
                     returnxml.Append("<PublicationCount>");
@@ -980,7 +1088,7 @@ namespace Connects.Profiles.Service.ServiceImplementation
                     returnxml.Append("<MatchingPublicationCount>0</MatchingPublicationCount>");  //No equlivant to new system
                     try
                     {
-                        returnxml.Append("<MatchScore>" + RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:nodeID='" + person.SelectSingleNode("@rdf:nodeID", namespaces).Value + "']/prns:connectionWeight", namespaces).InnerText + "</MatchScore>");
+                        returnxml.Append("<MatchScore>" + RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:nodeID='" + person.SelectSingleNode("@rdf:nodeID", namespaces).Value + "']/prns:connectionWeight", namespaces).InnerText + "</MatchScore>");
                     }
                     catch (Exception ex) { }
                     returnxml.Append("</BasicStatistics>");
@@ -1001,7 +1109,7 @@ namespace Connects.Profiles.Service.ServiceImplementation
                             try
                             {
 
-                                pub = RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + publication.SelectSingleNode("@rdf:resource", namespaces).Value + "']/vivo:linkedInformationResource/@rdf:resource", namespaces).Value + "']", namespaces);
+                                pub = RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + publication.SelectSingleNode("@rdf:resource", namespaces).Value + "']/vivo:linkedInformationResource/@rdf:resource", namespaces).Value + "']", namespaces);
                             }
                             catch (Exception ex) { pub = null; }
 
@@ -1019,28 +1127,49 @@ namespace Connects.Profiles.Service.ServiceImplementation
                                 returnxml.Append("</PublicationID>");
 
                                 returnxml.Append("<PublicationReference>");
-                                returnxml.Append(((pub.SelectSingleNode("rdfs:label", namespaces).InnerText).Replace("<", "&lt").Replace(">", "&gt")));
+                                returnxml.Append(((pub.SelectSingleNode("prns:informationResourceReference", namespaces).InnerText).Replace("<", "&lt").Replace(">", "&gt")));
                                 returnxml.Append("</PublicationReference>");
 
                                 returnxml.Append("<PublicationMatchDetailList>");
 
                                 returnxml.Append("</PublicationMatchDetailList>");
 
-                                returnxml.Append("<PublicationSourceList>");
-
-                                if (pub.SelectSingleNode("bibo:pmid", namespaces) != null)
+                                if (version == "2")
                                 {
+                                    returnxml.Append("<PublicationSourceList>");
 
-                                    returnxml.Append("<PublicationSource ID='" + pub.SelectSingleNode("bibo:pmid", namespaces).InnerText + "' URL='" + "http://www.ncbi.nlm.nih.gov/pubmed/" + pub.SelectSingleNode("bibo:pmid", namespaces).InnerText + "' Primary='true' Name='PubMed'/>");
+                                    if (pub.SelectSingleNode("bibo:pmid", namespaces) != null)
+                                    {
+
+                                        returnxml.Append("<PublicationSource ID='" + pub.SelectSingleNode("bibo:pmid", namespaces).InnerText + "' URL='" + "http://www.ncbi.nlm.nih.gov/pubmed/" + pub.SelectSingleNode("bibo:pmid", namespaces).InnerText + "' Primary='true' Name='PubMed'/>");
+                                    }
+                                    returnxml.Append("</PublicationSourceList>");
+
                                 }
-                                returnxml.Append("</PublicationSourceList>");
+                                else
+                                {
+                                    returnxml.Append("<PublicationURL>");
+                                    try
+                                    {
+                                        returnxml.Append("http://www.ncbi.nlm.nih.gov/pubmed/" + pub.SelectSingleNode("bibo:pmid", namespaces).InnerText);
+                                    }
+                                    catch (Exception ex) { }
+                                    returnxml.Append("</PublicationURL>");
+                                    returnxml.Append("<PubMedID>");
+                                    try
+                                    {
+                                        returnxml.Append(pub.SelectSingleNode("bibo:pmid", namespaces).InnerText);
+                                    }
+                                    catch (Exception ex) { }
+                                    returnxml.Append("</PubMedID>");
 
+                                    returnxml.Append("<PublicationSourceList/>");
+                                }
                                 returnxml.Append("</Publication>");
 
                                 pub = null;
                             }
                         }
-
 
                         returnxml.Append("</PublicationList>");
 
@@ -1057,21 +1186,21 @@ namespace Connects.Profiles.Service.ServiceImplementation
                     {
                         returnxml.Append("<PassiveNetworks>");
 
-                        returnxml.Append("<SimilarPersonList TotalSimilarPeopleCount=\"" + RDF.SelectNodes("rdf:RDF/rdf:Description/prns:similarTo", namespaces).Count + "\">");
-                        foreach (XmlNode similarto in RDF.SelectNodes("rdf:RDF/rdf:Description/prns:similarTo", namespaces))
+                        returnxml.Append("<SimilarPersonList TotalSimilarPeopleCount=\"" + RDF.SelectNodes("rdf:RDF[1]/rdf:Description/prns:similarTo", namespaces).Count + "\">");
+                        foreach (XmlNode similarto in RDF.SelectNodes("rdf:RDF[1]/rdf:Description/prns:similarTo", namespaces))
                         {
                             if (similarto.SelectSingleNode("@rdf:resource", namespaces).Value != uri)
                             {
                                 currentnode = Convert.ToInt64(similarto.SelectSingleNode("@rdf:resource", namespaces).Value.Split('/')[uri.Split('/').Length - 1]);
 
                                 returnxml.Append("<SimilarPerson PersonID=\"" + this.GetPersonID(currentnode) + "\">");
-                                returnxml.Append(RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + similarto.SelectSingleNode("@rdf:resource", namespaces).Value + "']/prns:fullName", namespaces).InnerText);
+                                returnxml.Append(RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + similarto.SelectSingleNode("@rdf:resource", namespaces).Value + "']/prns:fullName", namespaces).InnerText);
                                 returnxml.Append("</SimilarPerson>");
                             }
                         }
                         returnxml.Append("</SimilarPersonList>");
 
-                        returnxml.Append("<CoAuthorList TotalCoAuthorCount=\"" + RDF.SelectNodes("rdf:RDF/rdf:Description/vivo:authorInAuthorship", namespaces).Count + "\">");
+                        returnxml.Append("<CoAuthorList TotalCoAuthorCount=\"" + RDF.SelectNodes("rdf:RDF/rdf:Description[1]/vivo:authorInAuthorship", namespaces).Count + "\">");
 
 
                         foreach (XmlNode coauthorpub in RDF.SelectNodes("rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:coAuthorOf/@rdf:resource][position() < 5]", namespaces))
@@ -1088,24 +1217,24 @@ namespace Connects.Profiles.Service.ServiceImplementation
                         returnxml.Append("</CoAuthorList>");
 
                         returnxml.Append("<NeighborList>");
-                        foreach (XmlNode neighbor in RDF.SelectNodes("rdf:RDF/rdf:Description/prns:physicalNeighborOf", namespaces))
+                        foreach (XmlNode neighbor in RDF.SelectNodes("rdf:RDF/rdf:Description[1]/prns:physicalNeighborOf", namespaces))
                         {
 
                             if (neighbor.SelectSingleNode("@rdf:resource", namespaces).Value != uri)
                             {
                                 currentnode = Convert.ToInt64(neighbor.SelectSingleNode("@rdf:resource", namespaces).Value.Split('/')[uri.Split('/').Length - 1]);
                                 returnxml.Append("<Neighbor PersonID=\"" + this.GetPersonID(currentnode) + "\">");
-                                returnxml.Append(RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + neighbor.SelectSingleNode("@rdf:resource", namespaces).Value + "']/prns:fullName", namespaces).InnerText);
+                                returnxml.Append(RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + neighbor.SelectSingleNode("@rdf:resource", namespaces).Value + "']/prns:fullName", namespaces).InnerText);
                                 returnxml.Append("</Neighbor>");
                             }
                         }
                         returnxml.Append("</NeighborList>");
 
-                        returnxml.Append("<KeywordList TotalKeywordCount=\"" + RDF.SelectNodes("rdf:RDF/rdf:Description/vivo:hasResearchArea", namespaces).Count + "\">");
-                        foreach (XmlNode keyword in RDF.SelectNodes("rdf:RDF/rdf:Description/vivo:hasResearchArea", namespaces))
+                        returnxml.Append("<KeywordList TotalKeywordCount=\"" + RDF.SelectNodes("rdf:RDF/rdf:Description[1]/vivo:hasResearchArea", namespaces).Count + "\">");
+                        foreach (XmlNode keyword in RDF.SelectNodes("rdf:RDF/rdf:Description[1]/vivo:hasResearchArea", namespaces))
                         {
                             returnxml.Append("<Keyword>");
-                            returnxml.Append(RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + keyword.SelectSingleNode("@rdf:resource", namespaces).Value + "']/rdfs:label", namespaces).InnerText);
+                            returnxml.Append(RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:about='" + keyword.SelectSingleNode("@rdf:resource", namespaces).Value + "']/rdfs:label", namespaces).InnerText);
                             returnxml.Append("</Keyword>");
                         }
                         returnxml.Append("</KeywordList>");
@@ -1119,26 +1248,32 @@ namespace Connects.Profiles.Service.ServiceImplementation
                 else
                 {
                     if (person.SelectSingleNode("@rdf:nodeID", namespaces) != null)
-                        returnxml.Append("<PersonID>" + RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:nodeID='" + RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:nodeID='" + person.SelectSingleNode("@rdf:nodeID", namespaces).Value + "']/rdf:object/@rdf:nodeID", namespaces).Value + "']/prns:personId", namespaces).InnerText + "</PersonID></Person>");
+                        returnxml.Append("<PersonID>" + RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:nodeID='" + RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description[@rdf:nodeID='" + person.SelectSingleNode("@rdf:nodeID", namespaces).Value + "']/rdf:object/@rdf:nodeID", namespaces).Value + "']/prns:personId", namespaces).InnerText + "</PersonID></Person>");
                 }
             }
 
             string complete = "false";
+            string totalcount = string.Empty;
 
             if (!individual)
             {
-                if (count.ToString() == RDF.SelectSingleNode("rdf:RDF/rdf:Description/prns:numberOfConnections", namespaces).InnerText)
+                if (count.ToString() == RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description/prns:numberOfConnections", namespaces).InnerText)
                     complete = "true";
+
+                totalcount = RDF.SelectSingleNode("rdf:RDF[1]/rdf:Description/prns:numberOfConnections", namespaces).InnerText;
+
             }
             else
             {
+
                 count = 1;
+                totalcount = count.ToString();
                 complete = "true";
 
             }
 
             topnode = "<?xml version=\"1.0\"?><PersonList Complete=\"" + complete + "\"  ThisCount=\"" + count.ToString() + "\"  TotalCount=\"" +
-                        count.ToString() + "\"  QueryID=\"" +
+                      totalcount + "\"  QueryID=\"" +
                         queryid + "\"  xmlns=\"http://connects.profiles.schema/profiles/personlist\"  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" +
                         " xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">";
 
@@ -1149,6 +1284,38 @@ namespace Connects.Profiles.Service.ServiceImplementation
 
             return returnstring;
         }
+
+        public string GetRESTBasePath()
+        {
+            string rtn = string.Empty;
+
+            if (ServiceImplementation.Cache.Fetch("GetRESTBasePath") == null)
+            {
+
+                string sql = "select [value] from [Framework.].[parameter] with(nolock) where parameterid = 'basepath'";
+
+                SqlDataReader sqldr = this.GetSQLDataReader("", sql, CommandType.Text, CommandBehavior.CloseConnection, null);
+
+                while (sqldr.Read())
+                {
+                    rtn = sqldr[0].ToString();
+                }
+
+
+                if (!sqldr.IsClosed)
+                    sqldr.Close();
+
+                ServiceImplementation.Cache.Set("GetRESTBasePath", rtn);
+            }
+            else
+            {
+                rtn = (string)ServiceImplementation.Cache.FetchObject("GetRESTBasePath");
+            }
+
+            return rtn;
+        }
+
+
 
         public List<GenericListItem> GetFacultyRanks()
         {
@@ -1334,6 +1501,45 @@ namespace Connects.Profiles.Service.ServiceImplementation
 
         }
 
+
+        public int GetPersonID(string ecomid)
+        {
+            System.Text.StringBuilder sql = new System.Text.StringBuilder();
+            int personid = 0;
+
+            string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+
+            sql.AppendLine("select ProfilesUserID FROM [resnav_home].[dbo].[MPI] where eCommonsLogin ='" + ecomid + "'");
+
+            SqlConnection dbconnection = new SqlConnection(connstr);
+            SqlCommand dbcommand = new SqlCommand();
+
+            SqlDataReader dbreader;
+            dbconnection.Open();
+            dbcommand.CommandType = CommandType.Text;
+
+            dbcommand.CommandText = sql.ToString();
+            dbcommand.CommandTimeout = 5000;
+
+            dbcommand.Connection = dbconnection;
+
+            dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
+
+            while (dbreader.Read())
+            {
+                personid = Convert.ToInt32(dbreader[0].ToString());
+            }
+
+            if (!dbreader.IsClosed)
+                dbreader.Close();
+
+
+            return personid;
+
+
+        }
+
+
         private int GetPubCount(Int64 nodeid)
         {
             System.Text.StringBuilder sql = new System.Text.StringBuilder();
@@ -1475,7 +1681,33 @@ namespace Connects.Profiles.Service.ServiceImplementation
             List<Utility.GenericListItem> divisions = GetDivisions();
             return this.GetConvertedListItem(divisions, division);
         }
+        public string GetInstitutionAbbreviation(string institutionname)
+        {
+            string abb = string.Empty;
 
+            try
+            {
+                string sql = "SELECT [InstitutionAbbreviation] FROM [Profile.Data].[Organization.Institution] where [InstitutionName] = '" + institutionname.Replace("'", "''") + "'";
+
+                SqlDataReader sqldr = this.GetSQLDataReader("", sql, CommandType.Text, CommandBehavior.CloseConnection, null);
+
+                sqldr.Read();
+
+                abb = sqldr["InstitutionAbbreviation"].ToString();
+
+                //Always close your readers
+                if (!sqldr.IsClosed)
+                    sqldr.Close();
+
+            }
+            catch (Exception e)
+            {
+                //do nothing.   
+            }
+
+            return abb;
+
+        }
 
         /// <summary>
         /// To return the list of all the Institutions
@@ -1526,7 +1758,6 @@ namespace Connects.Profiles.Service.ServiceImplementation
             List<Utility.GenericListItem> institutions = GetInstitutions();
             return this.GetConvertedListItem(institutions, institution);
         }
-
 
         /// <summary>
         /// To return the list of all the Departments

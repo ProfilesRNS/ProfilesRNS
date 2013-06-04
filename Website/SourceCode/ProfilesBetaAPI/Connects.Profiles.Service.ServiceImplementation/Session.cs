@@ -108,7 +108,7 @@ namespace Connects.Profiles.Service.ServiceImplementation
             }
 
             session.RequestIP = ipaddress;
-            session.UserAgent = "Search API";
+            session.UserAgent = "PROFILES RNS";
             
             dataio.SessionCreate(ref session);
             

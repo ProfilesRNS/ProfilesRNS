@@ -61,6 +61,32 @@ namespace Connects.Profiles.Service.ServiceImplementation
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
+        static public Object FetchObject(string key)
+        {
+            Object rtn = null;
+            string hashkey = string.Empty;
+
+
+            hashkey = Cache.HashForKey(key);
+            try
+            {
+                if (HttpRuntime.Cache[hashkey] != null)
+                {
+                    rtn = HttpRuntime.Cache[hashkey];
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return rtn;
+        }
+        /// <summary>
+        /// Used to Fetch RDF data or Presentation data from cache.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         static public XmlDocument Fetch(string key)
         {
             XmlDocument xmlrtn = null;
