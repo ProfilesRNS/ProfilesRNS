@@ -26,7 +26,8 @@ namespace Profiles.Framework.Utilities
 {
     static public class Cache
     {
-        private static double timeout;
+        static readonly string DEPENDENCY_PREFIX = "Dependency ";
+        private static double defaultTimeout = Convert.ToInt32(ConfigurationSettings.AppSettings["CACHE_EXPIRE"]);
         /// <summary>
         /// Used to Set objects in cache for a set timout lenght of time.
         /// </summary>
@@ -36,8 +37,6 @@ namespace Profiles.Framework.Utilities
 
         static public void Set(string key, Object data, double cachetimeout, CacheDependency dependency)
         {
-            timeout = cachetimeout;
-
             string hashkey = string.Empty;
             hashkey = Cache.HashForKey(key);
 
@@ -49,7 +48,14 @@ namespace Profiles.Framework.Utilities
                     HttpRuntime.Cache.Remove(hashkey);
                 }
 
-                HttpRuntime.Cache.Insert(hashkey, data, dependency, DateTime.Now.AddSeconds(timeout), System.Web.Caching.Cache.NoSlidingExpiration);
+                if (cachetimeout < 0 && dependency == null)
+                {
+                    HttpRuntime.Cache.Insert(hashkey, data);
+                }
+                else
+                {
+                    HttpRuntime.Cache.Insert(hashkey, data, dependency, DateTime.Now.AddSeconds(defaultTimeout), System.Web.Caching.Cache.NoSlidingExpiration);
+                }
             }
             catch (Exception e)
             {
@@ -65,8 +71,7 @@ namespace Profiles.Framework.Utilities
 
         static public void Set(string key, Object data)
         {
-            double cachetimeout = Convert.ToDouble(ConfigurationSettings.AppSettings["CACHE_EXPIRE"]);
-            Set(key, data, cachetimeout, null);
+            Set(key, data, defaultTimeout, null);
         }
 
 
@@ -75,23 +80,21 @@ namespace Profiles.Framework.Utilities
         /// </summary>
         /// <param name="key">Unique key value to Set and Fetch item from cache</param>
         /// <param name="data">Data value to be Set in cache</param>
-        static public void Set(string key, Object data, Int64 dependencykey, String sessionID)
+        static public void Set(string key, Object data, Int64 nodeId, String sessionID)
         {
-            double cachetimeout = Convert.ToDouble(ConfigurationSettings.AppSettings["CACHE_EXPIRE"]);
-            
-            String[] dependencyKey = new String[2];
-            dependencyKey[0] = "Dependency " + dependencykey.ToString();
-            dependencyKey[1] = "Dependency " + sessionID;
+            String[] dependencyKey = new String[sessionID == null ? 1 : 2];
+            dependencyKey[0] = DEPENDENCY_PREFIX + nodeId.ToString();
 
-            CacheDependency dependency = null;
-
-            dependency = new CacheDependency(null, dependencyKey);
             if (HttpRuntime.Cache[dependencyKey[0]] == null)
-                AlterDependency(dependencykey.ToString());
-            if (HttpRuntime.Cache[dependencyKey[1]] == null)
-                AlterDependency(sessionID);
-          
-            Set(key, data, cachetimeout, dependency);
+                AlterDependency(nodeId.ToString());
+
+            if (sessionID != null)
+            {
+                dependencyKey[1] = DEPENDENCY_PREFIX + sessionID;
+                if (HttpRuntime.Cache[dependencyKey[1]] == null)
+                    AlterDependency(sessionID);
+            }
+            Set(key, data, defaultTimeout, new CacheDependency(null, dependencyKey));
         }
 
         /// <summary>
@@ -163,7 +166,7 @@ namespace Profiles.Framework.Utilities
 
         static public void AlterDependency(string key)
         {
-            HttpRuntime.Cache.Insert("Dependency " + key, Guid.NewGuid().ToString());
+            HttpRuntime.Cache.Insert(DEPENDENCY_PREFIX + key, Guid.NewGuid().ToString());
         }
 
 

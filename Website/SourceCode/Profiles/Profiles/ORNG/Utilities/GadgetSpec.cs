@@ -139,7 +139,7 @@ namespace Profiles.ORNG.Utilities
                     }
                 }
 
-                Framework.Utilities.Cache.Set(REGISTERED_APPS_CACHE_PREFIX + ownerUri, registeredApps, OpenSocialManager.GetNodeID(ownerUri));
+                Framework.Utilities.Cache.Set(REGISTERED_APPS_CACHE_PREFIX + ownerUri, registeredApps, OpenSocialManager.GetNodeID(ownerUri), null);
             }
 
             return registeredApps.ContainsKey(GetAppId()) ? registeredApps[GetAppId()] : null;

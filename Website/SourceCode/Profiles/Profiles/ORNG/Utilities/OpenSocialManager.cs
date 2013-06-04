@@ -185,7 +185,7 @@ namespace Profiles.ORNG.Utilities
         {
             if (ownerUri != null)
             {
-                Framework.Utilities.Cache.ClearDependentItems(GetNodeID(ownerUri));
+                Framework.Utilities.Cache.AlterDependency(GetNodeID(ownerUri).ToString());
             }
         }
 
@@ -479,7 +479,7 @@ namespace Profiles.ORNG.Utilities
                 if (useCache)
                 {
                     // set it to not timeout
-                    Cache.SetNoDependency(GADGET_SPEC_KEY, dbApps, -1);
+                    Cache.Set(GADGET_SPEC_KEY, dbApps, -1, null);
                 }
             }
 
