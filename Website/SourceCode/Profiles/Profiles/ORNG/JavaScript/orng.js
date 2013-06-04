@@ -4,10 +4,8 @@ Orng Shindig Helper functions for gadget-to-container commands
 */
 
 // dummy function so google analytics does not break for institutions who do not use it
-
-_gaq = {};
-_gaq.push = function (data) {    // 
-};
+var _gaq = _gaq || {};
+_gaq.push = function (data) { };
 
 // pubsub
 gadgets.pubsubrouter.init(function (id) {
@@ -455,7 +453,7 @@ ORNGToggleGadget.prototype.handleToggle = function (track) {
             }
 
             gadgetContent.style.display = '';
-            gadgetImg.src = _rootDomain + '/Framework/Images/gadgetcollapse.gif';
+            gadgetImg.src = _rootDomain + '/ORNG/Images/gadgetcollapse.gif';
             // refresh if certain features require so
             //if (this.hasFeature('dynamic-height')) {
             if (my.gadgets[this.id].chrome_id == 'gadgets-search') {
@@ -500,7 +498,7 @@ ORNGToggleGadget.prototype.handleToggle = function (track) {
             }
 
             gadgetContent.style.display = 'none';
-            gadgetImg.src = _rootDomain + '/Framework/Images/gadgetexpand.gif';
+            gadgetImg.src = _rootDomain + '/ORNG/Images/gadgetexpand.gif';
             if (track) {
                 if (my.gadgets[this.id].chrome_id == 'gadgets-edit') {
                     // record in google analytics     
@@ -542,7 +540,7 @@ ORNGToggleGadget.prototype.getTitleBarContent = function (continuation) {
 				+ this.cssClassTitleButton
 				+ '"><img id="gadgets-gadget-title-image-'
 				+ this.id
-				+ '" src="' + _rootDomain + '/Framework/Images/gadgetcollapse.gif"/></a></span> <span id="'
+				+ '" src="' + _rootDomain + '/ORNG/Images/gadgetcollapse.gif"/></a></span> <span id="'
 				+ this.getIframeId() + '_title" class="' + this.cssClassTitle
 				+ '">' + this.getTitleHtml(this.title)
 				+ '</span><span id="' + this.getIframeId()

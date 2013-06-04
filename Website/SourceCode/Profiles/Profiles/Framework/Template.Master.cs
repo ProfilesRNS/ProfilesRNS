@@ -136,6 +136,12 @@ namespace Profiles.Framework
             jsscript.Attributes.Add("src", Root.Domain + "/Framework/JavaScript/profiles.js");
             Page.Header.Controls.Add(jsscript);
 
+            // UCSF. This is handy to have in JavaScript form and is required for ORNG
+            HtmlGenericControl rootDomainjs = new HtmlGenericControl("script");
+            rootDomainjs.Attributes.Add("type", "text/javascript");
+            rootDomainjs.InnerHtml = Environment.NewLine + "var _rootDomain = \"" + Root.Domain + "\";" + Environment.NewLine;
+            Page.Header.Controls.Add(rootDomainjs);
+
             if (this.GetStringFromPresentationXML("Presentation/PageOptions/@Columns") == "3")
             {
                 divPageColumnRightCenter.Style["background-image"] = Root.Domain + "/Framework/Images/passive_back.gif";

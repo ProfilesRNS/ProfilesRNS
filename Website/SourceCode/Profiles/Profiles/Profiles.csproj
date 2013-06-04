@@ -92,7 +92,9 @@
     <Content Include="ORNG\Modules\SearchGadgets\SearchGadgets.ascx" />
     <Content Include="ORNG\PresentationXML\GadgetDetailsPresentation.xml" />
     <Content Include="ORNG\PresentationXML\SandboxFormPresentation.xml" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="About\Default.aspx.cs">
