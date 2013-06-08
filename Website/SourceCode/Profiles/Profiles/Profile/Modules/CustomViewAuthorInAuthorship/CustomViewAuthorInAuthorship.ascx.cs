@@ -40,29 +40,25 @@ namespace Profiles.Profile.Modules
             Profiles.Profile.Utilities.DataIO data = new Profiles.Profile.Utilities.DataIO();
             List<Publication> publication = new List<Publication>();
 
-            SqlDataReader reader = data.GetPublications(base.RDFTriple);
-
-            while (reader.Read())
+            using (SqlDataReader reader = data.GetPublications(base.RDFTriple))
             {
-                publication.Add(new Publication(reader["bibo_pmid"].ToString(), reader["prns_informationResourceReference"].ToString()));
+                while (reader.Read())
+                {
+                    publication.Add(new Publication(reader["bibo_pmid"].ToString(), reader["prns_informationResourceReference"].ToString()));
+                }
+
+                rpPublication.DataSource = publication;
+                rpPublication.DataBind();
             }
-
-            rpPublication.DataSource = publication;
-            rpPublication.DataBind();
-
-            if (!reader.IsClosed)
-                reader.Close();
            
            // Get timeline bar chart			
-           using (reader = data.GetGoogleTimeline(base.RDFTriple, "[Profile.Module].[NetworkAuthorshipTimeline.Person.GetData]"))
+            using (SqlDataReader reader = data.GetGoogleTimeline(base.RDFTriple, "[Profile.Module].[NetworkAuthorshipTimeline.Person.GetData]"))
            {
 				while(reader.Read())
 				{
 					timelineBar.Src = reader["gc"].ToString();
 				}
-				reader.Close();           
-
-               
+				reader.Close();                          
            }
 
            if (timelineBar.Src == "")

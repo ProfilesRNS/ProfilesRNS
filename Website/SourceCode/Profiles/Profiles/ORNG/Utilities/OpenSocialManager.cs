@@ -8,7 +8,6 @@ using System.Net;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Web.UI;
-using System.Web.Script.Serialization;
 using System.Web.UI.HtmlControls;
 using System.Text;
 using Profiles.Framework.Utilities;
@@ -20,11 +19,6 @@ namespace Profiles.ORNG.Utilities
         public static string OPENSOCIAL_DEBUG = "OPENSOCIAL_DEBUG";
         public static string OPENSOCIAL_NOCACHE = "OPENSOCIAL_NOCACHE";
         public static string OPENSOCIAL_GADGETS = "OPENSOCIAL_GADGETS";
-
-        public static string JSON_PERSONID_CHANNEL = "JSONPersonIds";
-        public static string CHANNEL = "CHANNEL";
-        public static string SENDER = "SENDER";
-        public static string RESPONSE = "RESPONSE";
 
         // Visibility Values.  TODO Should be an Enum
         public static string PUBLIC = "Public";
@@ -51,8 +45,6 @@ namespace Profiles.ORNG.Utilities
         private string pageName;
         private Page page;
         private static SocketConnectionPool sockets = null;
-        private static List<WeakReference> managers = new List<WeakReference>();
-
 
         #endregion
 
@@ -95,27 +87,9 @@ namespace Profiles.ORNG.Utilities
             return (OpenSocialManager)page.Items[OPENSOCIAL_MANAGER];
         }
 
-        public static OpenSocialManager GetOpenSocialManager(Guid guid)
-        {
-            OpenSocialManager retval = null;
-            foreach (WeakReference wr in managers.ToArray<WeakReference>()) 
-            {
-                if (wr.Target == null)
-                {
-                    managers.Remove(wr);
-                }
-                else if (guid.Equals(((OpenSocialManager)wr.Target).guid))
-                {
-                    retval = wr.Target as OpenSocialManager;
-                }
-            }
-            return retval;
-        }
-        
         private OpenSocialManager(string ownerUri, Page page, bool editMode)
         {
             this.guid = Guid.NewGuid();
-            managers.Add(new WeakReference(this));
             this.isDebug = page.Session != null && page.Session[OPENSOCIAL_DEBUG] != null && (bool)page.Session[OPENSOCIAL_DEBUG];
             this.noCache = page.Session != null && page.Session[OPENSOCIAL_NOCACHE] != null && (bool)page.Session[OPENSOCIAL_NOCACHE];
             this.page = page;
@@ -181,6 +155,11 @@ namespace Profiles.ORNG.Utilities
             gadgets.Sort();
         }
 
+        internal Guid GetGuid()
+        {
+            return guid;
+        }
+
         public void ClearOwnerCache()
         {
             if (ownerUri != null)
@@ -209,46 +188,6 @@ namespace Profiles.ORNG.Utilities
         public bool NoCache()
         {
             return noCache;
-        }
-
-        // JSON Helper Functions
-        public static string BuildJSONPersonIds(List<string> uris, string message)
-        {
-            Dictionary<string, Object> foundPeople = new Dictionary<string, object>();
-            foundPeople.Add("personIds", uris);
-            foundPeople.Add("message", message);
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
-            return serializer.Serialize(foundPeople);
-        }
-
-        public static string BuildJSONPersonIds(string uri, string message)
-        {
-            DebugLogging.Log("BuildJSONPersonIds " + uri + " : " + message);
-            List<string> personIds = new List<string>();
-            personIds.Add(uri);
-            return BuildJSONPersonIds(personIds, message);
-        }
-
-
-        public void RegisterORNGCallbackResponder(string channel, ORNGCallbackResponder responder)
-        {
-            if (callbackResponders.ContainsKey(channel))
-            {
-                callbackResponders.Remove(channel);
-            }
-            if (responder != null)
-            {
-                callbackResponders.Add(channel, responder);
-            }
-        }
-
-        public string GetCallbackRespose(string channel)
-        {
-            if (callbackResponders.ContainsKey(channel))
-            {
-                return callbackResponders[channel].getCallbackResponse(this, channel);
-            }
-            return null;
         }
 
         public void RemoveGadget(string name)
@@ -439,6 +378,7 @@ namespace Profiles.ORNG.Utilities
                     "};" + Environment.NewLine;
             gadgetScriptText += "my.openSocialURL = '" + ConfigurationManager.AppSettings["ORNG.ShindigURL"].ToString().Trim() + "';" + Environment.NewLine +
                 "my.guid = '" + guid.ToString() + "';" + Environment.NewLine +
+                "my.containerSessionId = '" + new SessionManagement().Session().SessionID + "';" + Environment.NewLine +
                 "my.debug = " + (IsDebug() ? "1" : "0") + ";" + Environment.NewLine +
                 "my.noCache = " + (NoCache() ? "1" : "0") + ";" + Environment.NewLine +
                 "my.gadgets = [";

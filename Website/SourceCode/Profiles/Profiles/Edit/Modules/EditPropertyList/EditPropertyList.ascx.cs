@@ -114,6 +114,7 @@ namespace Profiles.Edit.Modules.EditPropertyList
             {
                 om.LoadAssets();
                 pnlOpenSocial.Visible = true;
+                new Responder(uri, Page);
             }
         }
         protected void repPropertyGroups_OnItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -279,6 +280,20 @@ namespace Profiles.Edit.Modules.EditPropertyList
         private XmlDocument PropertyList { get; set; }
         private XmlDocument SecurityGroups { get; set; }
         private List<GenericListItem> Dropdown { get; set; }
+
+        public class Responder : ORNGCallbackResponder
+        {
+            public Responder(string uri, Page page)
+                : base(uri, page, true, ORNGCallbackResponder.CLEAR_OWNER_CACHE_REQ)
+            {
+            }
+
+            public override string getCallbackResponse()
+            {
+                GetOpenSocialManager().ClearOwnerCache();
+                return "Success";
+            }
+        }
 
     }
 

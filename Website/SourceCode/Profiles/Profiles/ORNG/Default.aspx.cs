@@ -75,23 +75,15 @@ namespace Profiles.ORNG
         public XmlDocument PresentationXML { get; set; }
 
         [System.Web.Services.WebMethod]
-        public static string OnSubscribe(string guid, string sender, string channel)
+        public static string CallORNGResponder(string guid, string request)
         {
-            OpenSocialManager om = OpenSocialManager.GetOpenSocialManager(new Guid(guid));
-            return om != null ? om.GetCallbackRespose(channel) : null;
+            DebugLogging.Log("OpenSocialManager CallORNGResponder " + guid + ":" + request);
+            ORNGCallbackResponder responder = ORNGCallbackResponder.GetORNGCallbackResponder(new Guid(guid), request);
+            string retval = responder != null ? responder.getCallbackResponse() : null;
+            DebugLogging.Log("OpenSocialManager CallORNGResponder " + (responder == null ? "CallbackReponder not found! " : retval));
+            return retval;
         }
 
-        [System.Web.Services.WebMethod]
-        public static string ClearOwnerCache(string guid)
-        {
-            OpenSocialManager om = OpenSocialManager.GetOpenSocialManager(new Guid(guid));
-            if (om != null)
-            {
-                om.ClearOwnerCache();
-                return "Success!";
-            }
-            return "Unrecognized GUID :" + guid;
-        }
     }
 
 }

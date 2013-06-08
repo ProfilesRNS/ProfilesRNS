@@ -101,7 +101,7 @@ namespace Profiles.Framework.Utilities
 
             return (Session)(HttpContext.Current.Session["PROFILES_SESSION"]);
         }
-        public void SessionDistroy()
+        public void SessionDestroy()
         {
             HttpContext.Current.Session["PROFILES_SESSION"] = null;
             HttpContext.Current.Session.Abandon();
@@ -113,8 +113,15 @@ namespace Profiles.Framework.Utilities
         public void SessionCreate()
         {
             string sessionid = string.Empty;
+            string ORNGViewer = null;
 
-            if (HttpContext.Current.Request.Headers["SessionID"] != null)
+            if (HttpContext.Current.Request["ContainerSessionID"] != null)
+            {
+                // ORNG this means it is from shindigorng. Grab the associated session and user
+                sessionid = HttpContext.Current.Request["ContainerSessionID"];
+                ORNGViewer = HttpContext.Current.Request["Viewer"];
+            }
+            else if (HttpContext.Current.Request.Headers["SessionID"] != null)
                 sessionid = HttpContext.Current.Request.Headers["SessionID"];
 
             DataIO dataio = new DataIO();
@@ -140,6 +147,10 @@ namespace Profiles.Framework.Utilities
             else
             {
                 session.SessionID = sessionid;
+                if (ORNGViewer != null && ORNGViewer.LastIndexOf('/') > 0)
+                {
+                    session.UserID = Convert.ToInt32(ORNGViewer.Substring(ORNGViewer.LastIndexOf('/') + 1));
+                }
             }
 
             //Store the object in the current session of the user.

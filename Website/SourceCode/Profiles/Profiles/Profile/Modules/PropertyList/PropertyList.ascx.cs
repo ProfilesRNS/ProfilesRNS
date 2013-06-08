@@ -68,8 +68,7 @@ namespace Profiles.Profile.Modules.PropertyList
                 XmlNode node = this.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/@rdf:about", base.Namespaces);
                 uri = node != null ? node.Value : null;
             }
-            OpenSocialManager om = OpenSocialManager.GetOpenSocialManager(uri, Page, false); // we just want to add pubsub data, not a gadget, so do NOT increment count
-            om.RegisterORNGCallbackResponder(OpenSocialManager.JSON_PERSONID_CHANNEL, new Responder(uri));
+            new Responder(uri, Page);
             bool gadgetsShown = false;
 
             foreach (XmlNode propertygroup in this.PropertyListXML.SelectNodes("PropertyList/PropertyGroup"))
@@ -207,14 +206,14 @@ namespace Profiles.Profile.Modules.PropertyList
         {
             string uri;
 
-            public Responder(string uri)
+            public Responder(string uri, Page page) : base(uri, page, false, ORNGCallbackResponder.JSON_PERSONID_REQ)
             {
                 this.uri = uri;
             }
 
-            public string getCallbackResponse(OpenSocialManager om, string channel)
+            public override string getCallbackResponse()
             {
-                return OpenSocialManager.BuildJSONPersonIds(uri, "one person");
+                return BuildJSONPersonIds(uri, "one person");
             }
         }
     }

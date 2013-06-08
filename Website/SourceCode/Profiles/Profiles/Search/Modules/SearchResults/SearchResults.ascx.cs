@@ -339,8 +339,7 @@ namespace Profiles.Search.Modules.SearchResults
                         break;
                 }
 
-                OpenSocialManager om = OpenSocialManager.GetOpenSocialManager(null, Page, false, false);
-                om.RegisterORNGCallbackResponder(OpenSocialManager.JSON_PERSONID_CHANNEL, new Responder(xmlsearchrequest)); 
+                new Responder(Page, xmlsearchrequest); 
                 
                 this.SearchData = data.Search(xmlsearchrequest, false);
                 this.SearchRequest = data.EncryptRequest(xmlsearchrequest.OuterXml);
@@ -452,18 +451,20 @@ namespace Profiles.Search.Modules.SearchResults
         {
             XmlDocument searchRequest;
 
-            public Responder(XmlDocument searchRequest)
+            public Responder(Page page, XmlDocument searchRequest) : base(null, page, false, ORNGCallbackResponder.JSON_PERSONID_REQ)
             {
                 this.searchRequest = searchRequest;
             }
 
-            public string getCallbackResponse(OpenSocialManager om, string channel)
+            public override string getCallbackResponse()
             {
                 try
                 {
                     searchRequest.SelectSingleNode("/SearchOptions/OutputOptions/Offset").InnerText = "0";
                     searchRequest.SelectSingleNode("/SearchOptions/OutputOptions/Limit").InnerText = "500";
                     XmlDocument searchData = new Profiles.Search.Utilities.DataIO().Search(searchRequest, false, false);
+
+                    DebugLogging.Log("SeachCallbackResponse :" + searchRequest.ToString());
 
                     List<string> peopleURIs = new List<string>();
                     XmlNodeList people = searchData.GetElementsByTagName("rdf:object");
@@ -473,7 +474,7 @@ namespace Profiles.Search.Modules.SearchResults
                     }
                     if (peopleURIs.Count > 0)
                     {
-                        return OpenSocialManager.BuildJSONPersonIds(peopleURIs, "" + peopleURIs.Count + " people found");
+                        return BuildJSONPersonIds(peopleURIs, "" + peopleURIs.Count + " people found");
                     }
                 }
                 catch (Exception e)

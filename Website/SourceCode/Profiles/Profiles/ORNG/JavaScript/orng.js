@@ -12,7 +12,7 @@ gadgets.pubsubrouter.init(function (id) {
     return my.gadgets[shindig.container.gadgetService.getGadgetIdFromModuleId(id)].url;
 }, {
     onSubscribe: function (sender, channel) {
-        setTimeout("my.onSubscribe('" + sender + "', '" + channel + "')", 3000);
+        setTimeout("my.callORNGResponder('" + channel + "')", 3000);
         // return true to reject the request.
         return false;
     },
@@ -106,39 +106,22 @@ my.removeGadgets = function (gadgetsToRemove) {
     }
 };
 
-my.onSubscribe = function (sender, channel) {
+my.callORNGResponder = function (channel) {
     // send an ajax command to the server letting them know we need data
-    var event = { "guid" : my.guid, "sender": sender, "channel": channel };
+    var event = { "guid": my.guid, "request": channel };
     var makeRequestParams = {
         "CONTENT_TYPE": "JSON",
         "METHOD": "POST",
         "POST_DATA": gadgets.json.stringify(event)
     };
 
-    gadgets.io.makeNonProxiedRequest(_rootDomain + "/ORNG/Default.aspx/OnSubscribe",
+    gadgets.io.makeNonProxiedRequest(_rootDomain + "/ORNG/Default.aspx/CallORNGResponder",
       function (data) {
           gadgets.pubsubrouter.publish(channel, data.data.d);
       },
       makeRequestParams,
       "application/json"
     );
-  };
-
-  my.clearServerCache = function () {
-      // send an ajax command to the server letting them know to clear the cache
-      var event = { "guid": my.guid };
-      var makeRequestParams = {
-          "CONTENT_TYPE": "JSON",
-          "METHOD": "POST",
-          "POST_DATA": gadgets.json.stringify(event)
-      };
-
-      gadgets.io.makeNonProxiedRequest(_rootDomain + "/ORNG/Default.aspx/ClearOwnerCache",
-          function (data) {
-          },
-        makeRequestParams,
-        "application/json"
-      );
   };
 
 my.removeParameterFromURL = function (url, parameter) {
@@ -583,7 +566,7 @@ ORNGToggleGadget.prototype.setRegisteredVisibility = function (value) {
     gadgets.io.makeNonProxiedRequest(my.openSocialURL + "/rest/registry?st=" + my.gadgets[this.id].secureToken,
       function () {
           shindig.container.getGadget(moduleId).showRegisteredVisibility();
-          my.clearServerCache();
+          my.callORNGResponder('ClearOwnerCache');
       },
       makeRequestParams,
       "application/javascript"

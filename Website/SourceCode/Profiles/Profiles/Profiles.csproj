@@ -92,6 +92,8 @@
     <Content Include="ORNG\Modules\SearchGadgets\SearchGadgets.ascx" />
     <Content Include="ORNG\PresentationXML\GadgetDetailsPresentation.xml" />
     <Content Include="ORNG\PresentationXML\SandboxFormPresentation.xml" />
+    <Content Include="RobotsTxt.aspx" />
+    <Content Include="SiteMap.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -663,6 +665,13 @@
     </Compile>
     <Compile Include="Search\Utilities\CacheWrapper.cs" />
     <Compile Include="Search\Utilities\SearchDropDowns.cs" />
+    <Compile Include="SiteMap.aspx.cs">
+      <DependentUpon>SiteMap.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SiteMap.aspx.designer.cs">
+      <DependentUpon>SiteMap.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SPARQL\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

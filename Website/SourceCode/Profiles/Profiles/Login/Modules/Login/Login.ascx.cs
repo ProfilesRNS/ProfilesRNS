@@ -37,7 +37,7 @@ namespace Profiles.Login.Modules.Login
                 {
 
                     sm.SessionLogout();
-                    sm.SessionDistroy();
+                    sm.SessionDestroy();
                     Response.Redirect(Root.Domain + "/search");
                 }
                 else if(Request.QueryString["method"].ToString()=="login" && sm.Session().PersonID>0)

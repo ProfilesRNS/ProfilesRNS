@@ -347,37 +347,36 @@ namespace Profiles.Search.Utilities
                 {
                     string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
 
-                    SqlConnection dbconnection = new SqlConnection(connstr);
-                    SqlCommand dbcommand = new SqlCommand();
-
-                    SqlDataReader dbreader;
-                    dbconnection.Open();
-                    dbcommand.CommandType = CommandType.StoredProcedure;
-
-                    dbcommand.CommandText = "[Search.].[GetNodes]";
-                    dbcommand.CommandTimeout = base.GetCommandTimeout();
-
-                    dbcommand.Parameters.Add(new SqlParameter("@SearchOptions", searchoptions.OuterXml));
-
-                    dbcommand.Parameters.Add(new SqlParameter("@SessionId", sessionmanagement.Session().SessionID));
-
-                    if (lookup)
-                        dbcommand.Parameters.Add(new SqlParameter("@Lookup", 1));
-
-                    dbcommand.Connection = dbconnection;
-
-                    string query = dbcommand.CommandText;
-
-                    dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
-
-                    while (dbreader.Read())
+                    using (SqlConnection dbconnection = new SqlConnection(connstr))
                     {
-                        xmlstr += dbreader[0].ToString();
+                        SqlCommand dbcommand = new SqlCommand();
+
+                        dbconnection.Open();
+                        dbcommand.CommandType = CommandType.StoredProcedure;
+
+                        dbcommand.CommandText = "[Search.].[GetNodes]";
+                        dbcommand.CommandTimeout = base.GetCommandTimeout();
+
+                        dbcommand.Parameters.Add(new SqlParameter("@SearchOptions", searchoptions.OuterXml));
+
+                        dbcommand.Parameters.Add(new SqlParameter("@SessionId", sessionmanagement.Session().SessionID));
+
+                        if (lookup)
+                            dbcommand.Parameters.Add(new SqlParameter("@Lookup", 1));
+
+                        dbcommand.Connection = dbconnection;
+
+                        string query = dbcommand.CommandText;
+
+                        using (SqlDataReader dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection))
+                        {
+
+                            while (dbreader.Read())
+                            {
+                                xmlstr += dbreader[0].ToString();
+                            }
+                        }
                     }
-
-                    if (!dbreader.IsClosed)
-                        dbreader.Close();
-
                     xmlrtn.LoadXml(xmlstr);
 
                     Framework.Utilities.DebugLogging.Log(xmlstr);
@@ -414,40 +413,38 @@ namespace Profiles.Search.Utilities
                 {
                     string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
 
-                    SqlConnection dbconnection = new SqlConnection(connstr);
-                    SqlCommand dbcommand = new SqlCommand();
-
-                    SqlDataReader dbreader;
-                    dbconnection.Open();
-                    dbcommand.CommandType = CommandType.StoredProcedure;
-
-                    dbcommand.CommandText = "[Search.].[GetConnection]";
-                    dbcommand.CommandTimeout = base.GetCommandTimeout();
-
-                    dbcommand.Parameters.Add(new SqlParameter("@SearchOptions", searchoptions.OuterXml));
-                    dbcommand.Parameters.Add(new SqlParameter("@NodeID", nodeid.ToString()));
-                    dbcommand.Parameters.Add(new SqlParameter("@NodeURI", uri));
-                    dbcommand.Parameters.Add(new SqlParameter("@sessionid", sessionmanagement.Session().SessionID));
-
-                    dbcommand.Connection = dbconnection;
-
-                    dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
-
-                    while (dbreader.Read())
+                    using (SqlConnection dbconnection = new SqlConnection(connstr))
                     {
-                        xmlstr += dbreader[0].ToString();
+                        SqlCommand dbcommand = new SqlCommand();
+
+                        dbconnection.Open();
+                        dbcommand.CommandType = CommandType.StoredProcedure;
+
+                        dbcommand.CommandText = "[Search.].[GetConnection]";
+                        dbcommand.CommandTimeout = base.GetCommandTimeout();
+
+                        dbcommand.Parameters.Add(new SqlParameter("@SearchOptions", searchoptions.OuterXml));
+                        dbcommand.Parameters.Add(new SqlParameter("@NodeID", nodeid.ToString()));
+                        dbcommand.Parameters.Add(new SqlParameter("@NodeURI", uri));
+                        dbcommand.Parameters.Add(new SqlParameter("@sessionid", sessionmanagement.Session().SessionID));
+
+                        dbcommand.Connection = dbconnection;
+
+                        using (SqlDataReader dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection))
+                        {
+
+                            while (dbreader.Read())
+                            {
+                                xmlstr += dbreader[0].ToString();
+                            }
+                        }
                     }
-
-                    if (!dbreader.IsClosed)
-                        dbreader.Close();
-
 
                     xmlrtn.LoadXml(xmlstr);
 
                     Framework.Utilities.DebugLogging.Log(xmlstr);
                     Framework.Utilities.Cache.Set(cachekey, xmlrtn);
                     xmlstr = string.Empty;
-
                 }
                 catch (Exception e)
                 {

@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Configuration;
 
 
 
@@ -34,6 +35,9 @@ namespace Profiles.Framework.Utilities
     /// </summary>
     public class RDFTriple
     {
+        // UCSF
+        private static Boolean sharedAnonymousCache = Convert.ToBoolean(ConfigurationSettings.AppSettings["SHARED_ANONYMOUS_CACHE"]);
+
         #region "PUBLIC METHODS"
 
         private string _uri;
@@ -165,7 +169,7 @@ namespace Profiles.Framework.Utilities
                 if (ExpandRDFList == null)
                     ExpandRDFList = string.Empty;
 
-                return rtn + "|" + this.Session.SessionID + "|" + this.Expand + "|" + this.ShowDetails + "|" + this.ExpandRDFList + "|" + this.Limit;
+                return rtn + "|" + (sharedAnonymousCache && this.Session.UserID == 0 ? "ANONYMOUS" : this.Session.SessionID) + "|" + this.Expand + "|" + this.ShowDetails + "|" + this.ExpandRDFList + "|" + this.Limit;
 
             }
         }
