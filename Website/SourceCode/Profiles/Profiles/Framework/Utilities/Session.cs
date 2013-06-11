@@ -12,6 +12,10 @@
 */
 using System;
 using System.Web;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
+using System.Text.RegularExpressions;
 
 namespace Profiles.Framework.Utilities
 {
@@ -42,7 +46,11 @@ namespace Profiles.Framework.Utilities
         public Int64 NodeID { get; set; }
         public string PersonURI { get; set; }
         public string UserAgent { get; set; }
-
+        public bool IsBot { get; set; }
+        public bool IsAnonymousUser()
+        {
+            return !IsBot && UserID == 0;
+        }
     }
     public class SessionHistory
     {
@@ -68,6 +76,31 @@ namespace Profiles.Framework.Utilities
     /// </summary>
     public class SessionManagement
     {
+        // UCSF
+        private static List<string> BotUserAgents = new List<string>();
+        static SessionManagement() 
+        {
+            using (SqlDataReader reader = new DataIO().GetSQLDataReader("ProfilesDB", "select UserAgent from [User.Session].[Bot]", CommandType.Text, CommandBehavior.CloseConnection, null))
+            {
+                while (reader.Read())
+                {
+                    BotUserAgents.Add(reader[0].ToString());
+                }
+            }
+        }
+
+        private static bool IsBot(string userAgent) 
+        {
+            foreach(string bot in BotUserAgents) 
+            {
+                if (new Regex(@"\A" + new Regex(@"\.|\$|\^|\{|\[|\(|\||\)|\*|\+|\?|\\").Replace(bot, ch => @"\" + ch).Replace('_', '.').Replace("%", ".*") + @"\z", RegexOptions.Singleline).IsMatch(userAgent))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        
         //ZAP - I need some type of redreict in this class for when session has expired
         public SessionManagement() { }
 
@@ -141,6 +174,7 @@ namespace Profiles.Framework.Utilities
 
             session.RequestIP = ipaddress;
             session.UserAgent = HttpContext.Current.Request.UserAgent;
+            session.IsBot = IsBot(session.UserAgent);
 
             if (sessionid == string.Empty)
                 dataio.SessionCreate(ref session);
@@ -184,7 +218,6 @@ namespace Profiles.Framework.Utilities
             return (Session)HttpContext.Current.Session["PROFILES_SESSION"];
 
         }
-
 
         public RDFTriple RDFTriple
         {
