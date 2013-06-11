@@ -2,17 +2,15 @@
 
 Run this script on:
 
-	Profiles RNS Version 1.0.2
+	Profiles RNS Version 1.0.3
 
 to update its data to:
 
-	Profiles RNS Version 1.0.3
+	Profiles RNS Version 1.0.4
 
 *** You are recommended to back up your database before running this script!
 
 *** Make sure you run the ProfilesRNS_Upgrade_Schema.sql file before running this file.
-
-*** Make sure the file path of InstallData.xml is correct in line 25.
 
 */
 
