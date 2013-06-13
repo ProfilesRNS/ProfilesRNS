@@ -169,7 +169,7 @@ namespace Profiles.Framework.Utilities
                 if (ExpandRDFList == null)
                     ExpandRDFList = string.Empty;
 
-                return rtn + "|" + (sharedAnonymousCache && this.Session.IsAnonymousUser() ? "ANONYMOUS" : this.Session.SessionID) + "|" + this.Expand + "|" + this.ShowDetails + "|" + this.ExpandRDFList + "|" + this.Limit;
+                return rtn + "|" + (sharedAnonymousCache ? this.Session.GetRDFTripleKeySegment() : this.Session.SessionID) + "|" + this.Expand + "|" + this.ShowDetails + "|" + this.ExpandRDFList + "|" + this.Limit;
 
             }
         }

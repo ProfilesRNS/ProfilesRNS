@@ -3,9 +3,8 @@ Orng Shindig Helper functions for gadget-to-container commands
 
 */
 
-// dummy function so google analytics does not break for institutions who do not use it
+// This allows us to use Google Analytics when present, but not throw errors when not.
 var _gaq = _gaq || {};
-_gaq.push = function (data) { };
 
 // pubsub
 gadgets.pubsubrouter.init(function (id) {
@@ -249,6 +248,11 @@ my.init = function () {
             views[view] = view;
             my.requestGadgetMetaData(view, my.generateGadgets);
         }
+    }
+
+    // create dummy function if necessary so google analytics does not break for institutions who do not use it
+    if (typeof _gaq.push != 'function') {
+        _gaq.push = function (data) { };
     }
 };
 

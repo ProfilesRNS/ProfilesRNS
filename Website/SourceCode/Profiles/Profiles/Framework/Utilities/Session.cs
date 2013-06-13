@@ -47,9 +47,9 @@ namespace Profiles.Framework.Utilities
         public string PersonURI { get; set; }
         public string UserAgent { get; set; }
         public bool IsBot { get; set; }
-        public bool IsAnonymousUser()
-        {
-            return !IsBot && UserID == 0;
+        public string GetRDFTripleKeySegment()
+        {   // Treat all bots the same, and treat all anonymous users the same.  Logged in users get their globally unique SessionID
+            return IsBot ? "BOT" : (UserID == 0 ? "ANONYMOUS" : SessionID);
         }
     }
     public class SessionHistory
