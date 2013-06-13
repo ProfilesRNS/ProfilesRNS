@@ -39,12 +39,12 @@ namespace Profiles.Search.Utilities
 
         public XmlDocument SearchRequest(string searchstring, string exactphrase, string classgroupuri, string classuri, string limit, string offset)
         {
+
             System.Text.StringBuilder search = new System.Text.StringBuilder();
             XmlDocument searchxml = new XmlDocument();
 
             if (searchstring == null)
                 searchstring = string.Empty;
-
 
             if (classgroupuri == null)
                 classgroupuri = string.Empty;

@@ -27,29 +27,21 @@ namespace Profiles
                                     "<url><loc>" + Root.Domain + "/About/Help.aspx</loc></url>" + Environment.NewLine +
                                     "<url><loc>" + Root.Domain + "/About/HowProfilesWorks.aspx</loc></url>" + Environment.NewLine);
 
-            System.Data.SqlClient.SqlDataReader reader = new Framework.Utilities.DataIO().GetRESTApplications();
-
-            while (reader.Read())
+            using (System.Data.SqlClient.SqlDataReader reader = new Framework.Utilities.DataIO().GetRESTApplications())
             {
-                // if it has a . then it's a pretty name for a user
-                if (reader[0].ToString().Contains("."))
-                    Response.Write("<url><loc>" + Root.Domain + "/" + reader[0].ToString() + "</loc></url>" + Environment.NewLine);
+                while (reader.Read())
+                {
+                    // if it has a . then it's a pretty name for a user
+                    if (reader[0].ToString().Contains("."))
+                        Response.Write("<url><loc>" + Root.Domain + "/" + reader[0].ToString() + "</loc></url>" + Environment.NewLine);
 
+                }
             }
 
-            if (!reader.IsClosed)
-                reader.Close();
-
             Response.Write("</urlset>");
+            Response.ContentType = "application/xml";
+            Response.Charset = "charset=UTF-8";
             Response.End();
-        }
-    }
-
-    public class SiteMapHandler : IRouteHandler
-    {
-        public IHttpHandler GetHttpHandler(RequestContext requestContext)
-        {
-            return BuildManager.CreateInstanceFromVirtualPath("~/SiteMap.aspx", typeof(Page)) as IHttpHandler;
         }
     }
 

@@ -78,7 +78,9 @@ namespace Profiles.ORNG
         public static string OnSubscribe(string guid, string sender, string channel)
         {
             OpenSocialManager om = OpenSocialManager.GetOpenSocialManager(new Guid(guid));
-            return om != null ? om.GetCallbackRespose(channel) : null;
+            string retval = om != null ? om.GetCallbackRespose(channel) : null;
+            DebugLogging.Log("OpenSocialManager OnSubscribe " + guid + ":" + sender + ":" + channel + Environment.NewLine + retval);
+            return retval;
         }
 
         [System.Web.Services.WebMethod]

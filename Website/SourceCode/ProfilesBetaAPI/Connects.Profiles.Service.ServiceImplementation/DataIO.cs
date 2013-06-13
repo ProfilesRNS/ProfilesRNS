@@ -143,10 +143,9 @@ namespace Connects.Profiles.Service.ServiceImplementation
             {
                 sqlcmd.Parameters.Add(sqlParam[i]);
                 sqlcmd.Parameters[i].Direction = sqlParam[i].Direction;
-
-
             }
         }
+
 
         public SqlDataReader GetSQLDataReader(SqlCommand sqlcmd)
         {
@@ -572,6 +571,12 @@ namespace Connects.Profiles.Service.ServiceImplementation
             {
                 param[5] = new SqlParameter("@LogoutDate", session.LogoutDate.ToString());
             }
+            else
+            {
+                SqlParameter[] newparam = new SqlParameter[5];
+                Array.Copy(param, newparam, 5);
+                param = newparam;
+            }
 
             dbcommand.Connection = dbconnection;
 
@@ -708,60 +713,53 @@ namespace Connects.Profiles.Service.ServiceImplementation
 
             sql.AppendLine("select i.nodeid from  [RDF.Stage].internalnodemap i with(nolock) join [Profile.Data].Person p with(nolock) on i.InternalID = p.PersonID  where  i.class = 'http://xmlns.com/foaf/0.1/Person' and i.internalid = " + personid + " and p.IsActive = 1 ");
 
-            SqlConnection dbconnection = new SqlConnection(connstr);
-            SqlCommand dbcommand = new SqlCommand();
-
-            SqlDataReader dbreader;
-            dbconnection.Open();
-            dbcommand.CommandType = CommandType.Text;
-
-            dbcommand.CommandText = sql.ToString();
-            dbcommand.CommandTimeout = 5000;
-
-            dbcommand.Connection = dbconnection;
-
-            dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
-
-            while (dbreader.Read())
+            using (SqlConnection dbconnection = new SqlConnection(connstr))
             {
-                nodeid = Convert.ToInt32(dbreader[0].ToString());
+                SqlCommand dbcommand = new SqlCommand();
+
+                dbconnection.Open();
+                dbcommand.CommandType = CommandType.Text;
+
+                dbcommand.CommandText = sql.ToString();
+                dbcommand.CommandTimeout = 5000;
+
+                dbcommand.Connection = dbconnection;
+
+                using (SqlDataReader dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection))
+                {
+
+                    while (dbreader.Read())
+                    {
+                        nodeid = Convert.ToInt32(dbreader[0].ToString());
+                    }
+                }
+
+                dbcommand = new SqlCommand();
+                dbcommand.CommandType = CommandType.StoredProcedure;
+                dbcommand.CommandTimeout = 5000;
+                dbconnection.Open();
+                dbcommand.Connection = dbconnection;
+
+                dbcommand.CommandText = "[RDF.].[GetDataRDF]";
+                dbcommand.Parameters.Add(new SqlParameter("@subject", nodeid));
+                dbcommand.Parameters.Add(new SqlParameter("@predicate", 0));
+                dbcommand.Parameters.Add(new SqlParameter("@object", 0));
+
+                dbcommand.Parameters.Add(new SqlParameter("@showDetails", "true"));
+                dbcommand.Parameters.Add(new SqlParameter("@expand", "true"));
+                dbcommand.Parameters.Add(new SqlParameter("@SessionID", null));
+
+                dbcommand.Connection = dbconnection;
+
+                using (SqlDataReader dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection))
+                {
+
+                    while (dbreader.Read())
+                    {
+                        xmlstr += dbreader[0].ToString();
+                    }
+                }
             }
-
-            if (!dbreader.IsClosed)
-                dbreader.Close();
-
-
-            dbcommand = new SqlCommand();
-            dbcommand.CommandType = CommandType.StoredProcedure;
-            dbcommand.CommandTimeout = 5000;
-            dbconnection.Open();
-            dbcommand.Connection = dbconnection;
-
-            dbcommand.CommandText = "[RDF.].[GetDataRDF]";
-            dbcommand.Parameters.Add(new SqlParameter("@subject", nodeid));
-            dbcommand.Parameters.Add(new SqlParameter("@predicate", 0));
-            dbcommand.Parameters.Add(new SqlParameter("@object", 0));
-            
-            dbcommand.Parameters.Add(new SqlParameter("@showDetails", "true"));
-            dbcommand.Parameters.Add(new SqlParameter("@expand", "true"));
-            dbcommand.Parameters.Add(new SqlParameter("@SessionID", null));
-
-            dbcommand.Connection = dbconnection;
-
-            dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
-
-            while (dbreader.Read())
-            {
-                xmlstr += dbreader[0].ToString();
-            }
-
-            dbconnection.Dispose();
-
-
-            if (!dbreader.IsClosed)
-                dbreader.Close();
-
-            dbreader.Dispose();
             try
             {
                 xmlrtn.LoadXml(xmlstr);

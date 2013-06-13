@@ -1,3 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RobotsTxt.aspx.cs" Inherits="Profiles.RobotsTxt" %>
-
-
+﻿<%@ Page Language="C#" %>
+<%Response.Write("Sitemap: " + Profiles.Framework.Utilities.Root.Domain + "/sitemap.xml");%>
+User-Agent: *
+Crawl-Delay: 10

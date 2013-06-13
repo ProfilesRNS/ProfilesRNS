@@ -50,7 +50,7 @@ namespace Profiles.Profile.Modules.ProfileImage
             else if (!string.IsNullOrEmpty(context.Request.QueryString["person"]))
             {
                 // UCSF.  Allow old id to work
-                nodeid = data.GetNodeID(Convert.ToInt64(context.Request.QueryString["person"]));
+                nodeid = Framework.Utilities.UCSFIDSet.ByPersonId[Convert.ToInt64(context.Request.QueryString["person"])].NodeId;
             }
             
             if (nodeid > 0)

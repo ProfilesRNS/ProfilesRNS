@@ -43,6 +43,7 @@ namespace Profiles
         /// <param name="e"> .Net Event Arguments</param>
         protected void Application_Start(object sender, EventArgs e)
         {
+            new Framework.Utilities.DataIO().LoadUCSFIdSet();
             RegisterRoutes(RouteTable.Routes);
             LoadModuleCatalogue();
         }
@@ -117,8 +118,8 @@ namespace Profiles
                 routes.RouteExistingFiles = false;
 
                 // by UCSF
-                routes.Add("RobotsTxt", new Route("robots.txt", new RobotsTxtHandler()));
-                routes.Add("SiteMap", new Route("sitemap.xml", new SiteMapHandler()));
+                routes.Add("RobotsTxt", new Route("robots.txt", new AspxHandler("~/RobotsTxt.aspx")));
+                routes.Add("SiteMap", new Route("sitemap.xml", new AspxHandler("~/SiteMap.aspx")));
 
                 while (reader.Read())
                 {
@@ -300,6 +301,22 @@ namespace Profiles
             }
 
             return BuildManager.CreateInstanceFromVirtualPath("~/REST.aspx", typeof(Page)) as IHttpHandler;
+        }     
+    }
+
+    public class AspxHandler : IRouteHandler
+    {
+        private string aspx;
+
+        public AspxHandler(string aspx)
+        {
+            this.aspx = aspx;
+        }
+
+        public IHttpHandler GetHttpHandler(RequestContext requestContext)
+        {
+            return BuildManager.CreateInstanceFromVirtualPath(aspx, typeof(Page)) as IHttpHandler;
         }
     }
+
 }

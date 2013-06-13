@@ -85,14 +85,13 @@ namespace Profiles.CustomAPI.Utilities
         public string ProcessPMID(string PMID)
         {
             string sql = "select cast(x as varchar(max)) from [Profile.Data].[Publication.PubMed.AllXML] where pmid = '" + PMID + "';";
-            SqlDataReader sqldr = this.GetSQLDataReader("ProfilesDB", sql, CommandType.Text, CommandBehavior.CloseConnection, null);
-
-            if (sqldr.Read())
+            using (SqlDataReader sqldr = this.GetSQLDataReader("ProfilesDB", sql, CommandType.Text, CommandBehavior.CloseConnection, null))
             {
-                return sqldr[0].ToString();
+                if (sqldr.Read())
+                {
+                    return sqldr[0].ToString();
+                }
             }
-            if (!sqldr.IsClosed)
-                sqldr.Close();
             return "";
         }
 
@@ -112,15 +111,13 @@ namespace Profiles.CustomAPI.Utilities
         {
             Int32 cnt = 0;
 
-            SqlDataReader sqldr = this.GetSQLDataReader("ProfilesDB", sql, CommandType.Text, CommandBehavior.CloseConnection, null);
-
-            if (sqldr.Read())
+            using (SqlDataReader sqldr = this.GetSQLDataReader("ProfilesDB", sql, CommandType.Text, CommandBehavior.CloseConnection, null))
             {
-                cnt = Convert.ToInt32(sqldr[0].ToString());
+                if (sqldr.Read())
+                {
+                    cnt = Convert.ToInt32(sqldr[0].ToString());
+                }
             }
-
-            if (!sqldr.IsClosed)
-                sqldr.Close();
 
             return cnt;
         }
@@ -139,7 +136,6 @@ namespace Profiles.CustomAPI.Utilities
             SqlConnection dbconnection = new SqlConnection(connstr);
             SqlCommand dbcommand = new SqlCommand();
 
-            SqlDataReader dbreader;
             dbconnection.Open();
             dbcommand.CommandType = CommandType.Text;
 
@@ -147,95 +143,17 @@ namespace Profiles.CustomAPI.Utilities
             dbcommand.CommandTimeout = 5000;
 
             dbcommand.Connection = dbconnection;
-
-            dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
 
             string dateStr = null;
-            if (dbreader.Read())
+            using (SqlDataReader dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection))
             {
-                dateStr = dbreader[0].ToString();
+                if (dbreader.Read())
+                {
+                    dateStr = dbreader[0].ToString();
+                }
             }
-
-            if (!dbreader.IsClosed)
-                dbreader.Close();
 
             return dateStr != null ? Convert.ToDateTime(dateStr).ToShortDateString() : "";
-        }
-
-        public Int32 GetPersonIdFromInternalUsername(string internalUsername)
-        {
-            System.Text.StringBuilder sql = new System.Text.StringBuilder();
-            string xmlstr = string.Empty;
-            XmlDocument xmlrtn = new XmlDocument();
-
-            Int32 personId = 0;
-
-            string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
-
-
-            sql.AppendLine("select p.personId from [Profile.Data].Person p with(nolock) where p.internalusername = '" + internalUsername + "'");
-
-            SqlConnection dbconnection = new SqlConnection(connstr);
-            SqlCommand dbcommand = new SqlCommand();
-
-            SqlDataReader dbreader;
-            dbconnection.Open();
-            dbcommand.CommandType = CommandType.Text;
-
-            dbcommand.CommandText = sql.ToString();
-            dbcommand.CommandTimeout = 5000;
-
-            dbcommand.Connection = dbconnection;
-
-            dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
-
-            if (dbreader.Read())
-            {
-                personId = Convert.ToInt32(dbreader[0].ToString());
-            }
-
-            if (!dbreader.IsClosed)
-                dbreader.Close();
-
-            return personId;
-        }
-
-        public Int32 GetPersonIdFromFNO(string FNO)
-        {
-            System.Text.StringBuilder sql = new System.Text.StringBuilder();
-            string xmlstr = string.Empty;
-            XmlDocument xmlrtn = new XmlDocument();
-
-            Int32 personId = 0;
-
-            string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
-
-
-            sql.AppendLine("select p.PersonID from [Profile.Data].Person p join cls.dbo.vw_FNO f on p.InternalUsername = f.INDIVIDUAL_ID where f.UID_USERID = '" + FNO + "'");
-
-            SqlConnection dbconnection = new SqlConnection(connstr);
-            SqlCommand dbcommand = new SqlCommand();
-
-            SqlDataReader dbreader;
-            dbconnection.Open();
-            dbcommand.CommandType = CommandType.Text;
-
-            dbcommand.CommandText = sql.ToString();
-            dbcommand.CommandTimeout = 5000;
-
-            dbcommand.Connection = dbconnection;
-
-            dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
-
-            if (dbreader.Read())
-            {
-                personId = Convert.ToInt32(dbreader[0].ToString());
-            }
-
-            if (!dbreader.IsClosed)
-                dbreader.Close();
-
-            return personId;
         }
 
         public bool GetIsActive(int personid)
@@ -254,7 +172,6 @@ namespace Profiles.CustomAPI.Utilities
             SqlConnection dbconnection = new SqlConnection(connstr);
             SqlCommand dbcommand = new SqlCommand();
 
-            SqlDataReader dbreader;
             dbconnection.Open();
             dbcommand.CommandType = CommandType.Text;
 
@@ -263,15 +180,13 @@ namespace Profiles.CustomAPI.Utilities
 
             dbcommand.Connection = dbconnection;
 
-            dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
-
-            if (dbreader.Read())
+            using (SqlDataReader dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection))
             {
-                isactive = Convert.ToBoolean(dbreader[0].ToString());
+                if (dbreader.Read())
+                {
+                    isactive = Convert.ToBoolean(dbreader[0].ToString());
+                }
             }
-
-            if (!dbreader.IsClosed)
-                dbreader.Close();
 
             return isactive;
         }

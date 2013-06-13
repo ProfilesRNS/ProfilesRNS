@@ -75,8 +75,8 @@ ul li { padding-top: 10px; }
      <ul>
         <li><strong>View the time course of publishing and collaborations </strong>
             (e.g. assess whether someone is an expert because of a classic paper written a decade ago
-            or because of recent contributions; identify recent versus long-past co-authors). Each 
-            individual's publishing timeline appears above the list of relevant publications. <br />
+            or because of recent contributions; identify recent versus long-past co-authors). To view, 
+            click the Timeline link above an individual's list of publications. <br />
             <img src="images/pubsgraph.jpg" alt="Publication timeline" style="padding:10px 0 0 45px" />
         </li>
         <li><strong>Explore Networks Associated with an Expert</strong> (right column on each profile) 

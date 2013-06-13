@@ -72,13 +72,13 @@ public partial class JSONProfile : System.Web.UI.Page
 
     private string GetJSONProfilesFromEmployeeID(string employeeID, bool showPublications, bool mobile)
     {
-        int personId = new DataIO().GetPersonIdFromInternalUsername(employeeID);
+        int personId = (int)Profiles.Framework.Utilities.UCSFIDSet.ByEmployeeID[employeeID].PersonId;
         return GetJSONProfiles(personId, showPublications, mobile);
     }
 
     private string GetJSONProfilesFromFNO(string FNO, bool showPublications, bool mobile)
     {
-        int personId = new DataIO().GetPersonIdFromFNO(FNO);
+        int personId = (int)Profiles.Framework.Utilities.UCSFIDSet.ByFNO[FNO.ToLower()].PersonId;
         return GetJSONProfiles(personId, showPublications, mobile);
     }
 

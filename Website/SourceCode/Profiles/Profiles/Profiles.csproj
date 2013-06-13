@@ -129,6 +129,7 @@
     <Content Include="CustomAPI\v1\PubXML.aspx" />
     <Content Include="CustomAPI\v1\Statistics.aspx" />
     <Content Include="CustomAPI\v1\XMLProfile.aspx" />
+    <Content Include="CustomAPI\v2\Default.aspx" />
     <Content Include="DIRECT\CSS\UCSF.css" />
     <Content Include="DIRECT\JavaScript\UCSF.js" />
     <Content Include="Edit\CSS\UCSF.css" />
@@ -152,8 +153,8 @@
     <Content Include="Framework\Images\collapseRound.gif" />
     <Content Include="Framework\Images\expandRound.gif" />
     <Content Include="Framework\Images\favicon.gif" />
-    <Content Include="Framework\Images\gadgetcollapse.gif" />
-    <Content Include="Framework\Images\gadgetexpand.gif" />
+    <Content Include="ORNG\Images\gadgetcollapse.gif" />
+    <Content Include="ORNG\Images\gadgetexpand.gif" />
     <Content Include="Framework\Images\glyphicons-halflings.png" />
     <Content Include="Framework\Images\info1.png" />
     <Content Include="Framework\Images\info4.png" />
@@ -172,8 +173,6 @@
     <Content Include="ORNG\CSS\UCSF.css" />
     <Content Include="ORNG\Default.aspx" />
     <Content Include="ORNG\GadgetDetails.aspx" />
-    <Content Include="ORNG\Images\gadgetcollapse.gif" />
-    <Content Include="ORNG\Images\gadgetexpand.gif" />
     <Content Include="ORNG\Images\icon_squareArrow.gif" />
     <Content Include="ORNG\Images\icon_squareDownArrow.gif" />
     <Content Include="ORNG\JavaScript\orng.js" />
@@ -302,6 +301,13 @@
       <DependentUpon>XMLProfile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="CustomAPI\v2\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomAPI\v2\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -316,6 +322,7 @@
     <Compile Include="Framework\Modules\MainMenu\History.ascx.designer.cs">
       <DependentUpon>History.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Framework\Utilities\UCSFIDSet.cs" />
     <Compile Include="Framework\Utilities\UserHistory.cs" />
     <Compile Include="History\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -778,13 +785,6 @@
       <DependentUpon>SearchProxies.ascx</DependentUpon>
     </Compile>
     <Compile Include="Proxy\Utilities\DataIO.cs" />
-    <Compile Include="RobotsTxt.aspx.cs">
-      <DependentUpon>RobotsTxt.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="RobotsTxt.aspx.designer.cs">
-      <DependentUpon>RobotsTxt.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Search\Modules\SearchConcept\SearchConcept.ascx.cs">
       <DependentUpon>SearchConcept.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1148,8 +1148,12 @@
     <Content Include="Search\Modules\SearchEverything\SearchEverything.ascx" />
     <Content Include="Search\Modules\SearchOptions\SearchOptions.ascx" />
     <Content Include="Search\PresentationXML\SearchResultsConnectionPresentation.xml" />
-    <Content Include="Search\PresentationXML\SearchResultsPersonPresentation.xml" />
-    <Content Include="Search\PresentationXML\SearchFormPresentation.xml" />
+    <Content Include="Search\PresentationXML\SearchResultsPersonPresentation.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Search\PresentationXML\SearchFormPresentation.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Search\PresentationXML\SearchResultsEverythingPresentation.xml" />
     <Content Include="Search\Modules\SearchResults\EverythingResults.xslt" />
     <Content Include="SPARQL\PresentationXML\SPARQLPresentation.xml" />

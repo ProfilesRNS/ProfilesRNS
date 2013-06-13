@@ -148,7 +148,7 @@ namespace Profiles.Framework
             UCSFjs.Attributes.Add("src", Root.Domain + "/Framework/JavaScript/UCSF.js");
             Page.Header.Controls.Add(UCSFjs);
 
-            // UCSF Eric Meeks. This is handy to have in JavaScriopt form
+            // UCSF Eric Meeks. This is handy to have in JavaScript form
             HtmlGenericControl rootDomainjs = new HtmlGenericControl("script");
             rootDomainjs.Attributes.Add("type", "text/javascript");
             rootDomainjs.InnerHtml = Environment.NewLine + "var _rootDomain = \"" + Root.Domain + "\";" + Environment.NewLine;

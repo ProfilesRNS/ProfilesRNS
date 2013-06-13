@@ -22,6 +22,7 @@ using System.Xml;
 
 using System.Diagnostics;
 using System.Web.Security;
+using System.Web;
 
 namespace Connects.Profiles.Service.ServiceImplementation
 {
@@ -54,7 +55,7 @@ namespace Connects.Profiles.Service.ServiceImplementation
 
                 namespaces = namespacemgr.LoadNamespaces(searchrequest);
 
-                if (qd.QueryDefinition.PersonID != null)
+                if (qd.QueryDefinition.PersonID != null && qd.QueryDefinition.PersonID.Trim().Length > 0)
                 {
                     responseXML = ps.Search(qd.QueryDefinition.PersonID).OuterXml;
                 }

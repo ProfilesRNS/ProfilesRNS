@@ -101,7 +101,14 @@ namespace Profiles.Login.Modules.ShibLogin
             }
             else if (Request.QueryString["redirectto"] != null)
             {
-                Response.Redirect(Request.QueryString["redirectto"].ToString());
+                if ("mypage".Equals(Request.QueryString["redirectto"].ToLower())) 
+                {
+                    Response.Redirect(Root.Domain + "/profile/" + sm.Session().NodeID);
+                }
+                else 
+                {
+                    Response.Redirect(Request.QueryString["redirectto"].ToString());
+                }
             }
             Response.Redirect(Root.Domain);
         }

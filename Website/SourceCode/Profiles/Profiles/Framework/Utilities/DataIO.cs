@@ -32,9 +32,6 @@ namespace Profiles.Framework.Utilities
     /// </summary>
     public partial class DataIO
     {
-        private static Dictionary<Int64, string> prettyURLs = new Dictionary<Int64,string>();
-        private static Dictionary<Int64, Int64> nodeIDs = new Dictionary<Int64, Int64>();
-
         public string _ErrorMsg = "";
         public string _ErrorNumber = "";
 
@@ -145,7 +142,6 @@ namespace Profiles.Framework.Utilities
 
             try
             {
-                SqlDataReader dbreader;
                 SqlParameter[] param = new SqlParameter[14];
                 param[0] = new SqlParameter("@ApplicationName", applicationname);
                 param[1] = new SqlParameter("@param1", param1);
@@ -162,18 +158,14 @@ namespace Profiles.Framework.Utilities
                 param[12] = new SqlParameter("@useragent", useragent);
                 param[13] = new SqlParameter("@ContentType", contenttype);
 
-                dbreader = GetSQLDataReader(GetDBCommand("", "[Framework.].[ResolveURL]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param));
-                dbreader.Read();
+                using (SqlDataReader dbreader = GetSQLDataReader(GetDBCommand("", "[Framework.].[ResolveURL]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param)))
+                {
+                    dbreader.Read();
 
-                rtn = new URLResolve(Convert.ToBoolean(dbreader["Resolved"]), dbreader["ErrorDescription"].ToString(), dbreader["ResponseURL"].ToString(),
-                    dbreader["ResponseContentType"].ToString(), dbreader["ResponseStatusCode"].ToString(), Convert.ToBoolean(dbreader["ResponseRedirect"]), Convert.ToBoolean(dbreader["ResponseIncludePostData"]));
+                    rtn = new URLResolve(Convert.ToBoolean(dbreader["Resolved"]), dbreader["ErrorDescription"].ToString(), dbreader["ResponseURL"].ToString(),
+                        dbreader["ResponseContentType"].ToString(), dbreader["ResponseStatusCode"].ToString(), Convert.ToBoolean(dbreader["ResponseRedirect"]), Convert.ToBoolean(dbreader["ResponseIncludePostData"]));
 
-                
-
-                //Always close your readers
-                if (!dbreader.IsClosed)
-                    dbreader.Close();
-
+                }
             }
             catch (Exception ex)
             {
@@ -863,52 +855,19 @@ namespace Profiles.Framework.Utilities
 
         #endregion
 
-        // Other UCSF extension to fix bug with old style redirects
-        public Int64 GetNodeID(Int64 personId)
+        // Load all the ID's for people so we don't have to hit the DB all the time
+        public void LoadUCSFIdSet()
         {
-            Int64 nodeId = 0;
-
-            if (nodeIDs.ContainsKey(personId))
+            using (SqlDataReader reader = GetDBCommand(ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString,
+                "select p.personid, p.nodeid, p.internalusername, p.url_name, f.UID_USERID from UCSF.vwPersonExport p join cls.dbo.vw_FNO f on p.InternalUsername = f.INDIVIDUAL_ID"
+                , CommandType.Text, CommandBehavior.CloseConnection, null).ExecuteReader())
             {
-                nodeId = nodeIDs[personId];
-            }
-            else
-            {
-                using (SqlDataReader reader = GetDBCommand(ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString, "select i.nodeid from [RDF.Stage].internalnodemap i with(nolock) where [class] = 'http://xmlns.com/foaf/0.1/Person' and i.internalid = " + personId, CommandType.Text, CommandBehavior.CloseConnection, null).ExecuteReader())
+                while (reader.Read())
                 {
-                    if (reader.Read())
-                    {
-                        nodeId = Convert.ToInt64(reader[0]);
-                        nodeIDs[personId] = nodeId;
-                    }
+                    new UCSFIDSet(Convert.ToInt64(reader[0]), Convert.ToInt64(reader[1]), reader[2].ToString(), reader[3].ToString(), reader[4].ToString());
                 }
             }
-
-            return nodeId;
         }
 
-        public string GetPrettyURL(Int64 personId)
-        {
-            // we restart the server whenever we add or remove new profiles, so no need to put this in a timeout cache.
-            string prettyURL = null;
-            if (prettyURLs.ContainsKey(personId))
-            {
-                prettyURL = prettyURLs[personId];
-            }
-            else
-            {
-                using (SqlDataReader reader = GetDBCommand(ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString, "select URL_NAME from cls.dbo.uniqueNames where 2569307 + cast(SUBSTRING(INDIVIDUAL_ID, 2, 7) as numeric) = " + personId, CommandType.Text, CommandBehavior.CloseConnection, null).ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        prettyURL = reader[0].ToString();
-                        prettyURLs[personId] = prettyURL;
-                    }
-                }
-            }
-
-            return prettyURL;
-        }
-    
     }
 }

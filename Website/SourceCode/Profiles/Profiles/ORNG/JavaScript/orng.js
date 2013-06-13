@@ -2,12 +2,8 @@
 Orng Shindig Helper functions for gadget-to-container commands
 
 */
-
-// dummy function so google analytics does not break for institutions who do not use it
-
-_gaq = {};
-_gaq.push = function (data) {    // 
-};
+// This allows us to use Google Analytics when present, but not throw errors when not.
+var _gaq = _gaq || {};
 
 // pubsub
 gadgets.pubsubrouter.init(function (id) {
@@ -31,7 +27,7 @@ gadgets.pubsubrouter.init(function (id) {
             var moduleId = shindig.container.gadgetService.getGadgetIdFromModuleId(sender);
         }
 
-        if (channel == 'added' && my.gadgets[moduleId].view == 'home') {
+        if (channel == 'added' && my.gadgets[moduleId].chrome_id == 'gadgets-edit') {
             if (message == 'Y') {
                 _gaq.push(['_trackEvent', my.gadgets[moduleId].name, 'SHOW', 'profile_edit_view']);
             }
@@ -269,6 +265,11 @@ my.init = function () {
             my.requestGadgetMetaData(view, my.generateGadgets);
         }
     }
+
+    // create dummy function if necessary so google analytics does not break for institutions who do not use it
+    if (typeof _gaq.push != 'function') {
+        _gaq.push = function (data) { };
+    }
 };
 
 //ORNGContainer
@@ -455,7 +456,7 @@ ORNGToggleGadget.prototype.handleToggle = function (track) {
             }
 
             gadgetContent.style.display = '';
-            gadgetImg.src = _rootDomain + '/Framework/Images/gadgetcollapse.gif';
+            gadgetImg.src = _rootDomain + '/ORNG/Images/gadgetcollapse.gif';
             // refresh if certain features require so
             //if (this.hasFeature('dynamic-height')) {
             if (my.gadgets[this.id].chrome_id == 'gadgets-search') {
@@ -464,7 +465,7 @@ ORNGToggleGadget.prototype.handleToggle = function (track) {
 						.reload(true);
             }
 
-            if (my.gadgets[this.id].view == 'home') {
+            if (my.gadgets[this.id].chrome_id == 'gadgets-edit') {
                 if (track) {
                     // record in google analytics     
                     _gaq.push(['_trackEvent', my.gadgets[this.id].name,
@@ -500,9 +501,9 @@ ORNGToggleGadget.prototype.handleToggle = function (track) {
             }
 
             gadgetContent.style.display = 'none';
-            gadgetImg.src = _rootDomain + '/Framework/Images/gadgetexpand.gif';
+            gadgetImg.src = _rootDomain + '/ORNG/Images/gadgetexpand.gif';
             if (track) {
-                if (my.gadgets[this.id].view == 'home') {
+                if (my.gadgets[this.id].chrome_id == 'gadgets-edit') {
                     // record in google analytics     
                     _gaq.push(['_trackEvent', my.gadgets[this.id].name,
 							'CLOSE_IN_EDIT', 'profile_edit_view']);
@@ -542,7 +543,7 @@ ORNGToggleGadget.prototype.getTitleBarContent = function (continuation) {
 				+ this.cssClassTitleButton
 				+ '"><img id="gadgets-gadget-title-image-'
 				+ this.id
-				+ '" src="' + _rootDomain + '/Framework/Images/gadgetcollapse.gif"/></a></span> <span id="'
+				+ '" src="' + _rootDomain + '/ORNG/Images/gadgetcollapse.gif"/></a></span> <span id="'
 				+ this.getIframeId() + '_title" class="' + this.cssClassTitle
 				+ '">' + this.getTitleHtml(this.title)
 				+ '</span><span id="' + this.getIframeId()
@@ -641,7 +642,7 @@ ORNGToggleGadget.prototype.finishRender = function (chrome) {
         chrome.style.width = this.width + 'px';
     }
 
-    if (my.gadgets[this.id].view == 'home' && my.gadgets[this.id].hasRegisteredVisibility) {
+    if (my.gadgets[this.id].chrome_id == 'gadgets-edit' && my.gadgets[this.id].hasRegisteredVisibility) {
         this.showRegisteredVisibility();
     }
 };

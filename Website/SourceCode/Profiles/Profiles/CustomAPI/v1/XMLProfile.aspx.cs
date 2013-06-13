@@ -12,6 +12,7 @@ using Connects.Profiles.Service.DataContracts;
 using Connects.Profiles.Utility;
 using System.Web.Script.Serialization;
 using Profiles.CustomAPI.Utilities;
+using Profiles.Framework.Utilities;
 
 public partial class XMLProfile : System.Web.UI.Page
 {
@@ -64,14 +65,14 @@ public partial class XMLProfile : System.Web.UI.Page
     private string GetXMLProfilesFromEmployeeID(string employeeID)
     {
         // lookup personid 
-        int personId = new DataIO().GetPersonIdFromInternalUsername(employeeID);
+        int personId = (int)UCSFIDSet.ByEmployeeID[employeeID].PersonId;
         return GetXMLProfiles(personId);
     }
 
     private string GetXMLProfilesFromFNO(string FNO)
     {
         // lookup personid from FNO
-        int personId = new DataIO().GetPersonIdFromFNO(FNO);
+        int personId = (int)UCSFIDSet.ByFNO[FNO.ToLower()].PersonId;
         return GetXMLProfiles(personId);
     }
 

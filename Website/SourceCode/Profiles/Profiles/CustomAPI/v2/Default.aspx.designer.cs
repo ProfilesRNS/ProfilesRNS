@@ -7,9 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Profiles {
+namespace Profiles.CustomAPI {
     
     
-    public partial class RobotsTxt {
+    public partial class Default {
     }
 }

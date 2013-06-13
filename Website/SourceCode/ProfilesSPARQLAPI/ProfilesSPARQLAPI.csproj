@@ -43,7 +43,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.ServiceModel.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.ServiceModel.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Microsoft.ServiceModel.Web.dll</HintPath>
+    </Reference>
     <Reference Include="sparql-core, Version=1.0.6.2, Culture=neutral, PublicKeyToken=3e1051c7e190e42e">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\SemWeb\src\bin\Debug\sparql-core.dll</HintPath>
