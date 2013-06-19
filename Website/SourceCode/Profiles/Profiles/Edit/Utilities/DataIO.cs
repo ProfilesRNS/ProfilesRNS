@@ -35,36 +35,30 @@ namespace Profiles.Edit.Utilities
             SessionManagement sm = new SessionManagement();
             string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
 
-            SqlConnection dbconnection = new SqlConnection(connstr);
-            SqlDataReader reader;
-            int personid = 0;
-
-            try
+            using (SqlConnection dbconnection = new SqlConnection(connstr))
             {
+                int personid = 0;
 
-                dbconnection.Open();
-
-
-                //For Output Parameters you need to pass a connection object to the framework so you can close it before reading the output params value.
-                reader = GetDBCommand(connstr, "select i.internalid from  [RDF.Stage].internalnodemap i with(nolock) where i.nodeid = " + nodeid.ToString(), CommandType.Text, CommandBehavior.CloseConnection, null).ExecuteReader();
-                while (reader.Read())
+                try
                 {
-                    personid = Convert.ToInt32(reader[0]);
+                    dbconnection.Open();
+                    //For Output Parameters you need to pass a connection object to the framework so you can close it before reading the output params value.
+                    using (SqlDataReader reader = GetDBCommand(connstr, "select i.internalid from  [RDF.Stage].internalnodemap i with(nolock) where i.nodeid = " + nodeid.ToString(), CommandType.Text, CommandBehavior.CloseConnection, null).ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            personid = Convert.ToInt32(reader[0]);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Framework.Utilities.DebugLogging.Log(e.Message + e.StackTrace);
+                    throw new Exception(e.Message);
                 }
 
-                reader.Close();
-
-                if (dbconnection.State != ConnectionState.Closed)
-                    dbconnection.Close();
-
+                return personid;
             }
-            catch (Exception e)
-            {
-                Framework.Utilities.DebugLogging.Log(e.Message + e.StackTrace);
-                throw new Exception(e.Message);
-            }
-
-            return personid;
         }
 
         public bool CheckPublicationExists(string mpid)

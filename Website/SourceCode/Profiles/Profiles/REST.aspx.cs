@@ -161,7 +161,7 @@ namespace Profiles
                                    session.SessionID,
                                    Root.Domain + Root.AbsolutePath,
                                    session.UserAgent,
-                                   HttpContext.Current.Request.ContentType);
+                                   HttpContext.Current.Request.AcceptTypes[0]);
 
 
             Framework.Utilities.DebugLogging.Log("{REST.aspx.cs} ProcessRequest() redirect=" + resolve.Redirect.ToString() + " to=>" + resolve.ResponseURL);

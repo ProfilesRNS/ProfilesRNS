@@ -76,6 +76,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="ORNG\JavaScript\jsonld-helper.js" />
+    <Content Include="ORNG\JsonAPI.aspx" />
     <Content Include="ORNG\CSS\gadgets.css" />
     <Content Include="ORNG\CSS\UCSF.css" />
     <Content Include="ORNG\Default.aspx" />
@@ -169,6 +171,10 @@
     </Compile>
     <Compile Include="Login\Modules\Login\Login.ascx.designer.cs">
       <DependentUpon>Login.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ORNG\JsonAPI.aspx.cs">
+      <DependentUpon>JsonAPI.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ORNG\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

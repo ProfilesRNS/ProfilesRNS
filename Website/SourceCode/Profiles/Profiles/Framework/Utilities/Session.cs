@@ -47,7 +47,7 @@ namespace Profiles.Framework.Utilities
         public string PersonURI { get; set; }
         public string UserAgent { get; set; }
         public bool IsBot { get; set; }
-        public string GetRDFTripleKeySegment()
+        public string GetSessionCacheKey()
         {   // Treat all bots the same, and treat all anonymous users the same.  Logged in users get their globally unique SessionID
             return IsBot ? "BOT" : (UserID == 0 ? "ANONYMOUS" : SessionID);
         }
@@ -91,11 +91,14 @@ namespace Profiles.Framework.Utilities
 
         private static bool IsBot(string userAgent) 
         {
-            foreach(string bot in BotUserAgents) 
+            if (userAgent != null)
             {
-                if (new Regex(@"\A" + new Regex(@"\.|\$|\^|\{|\[|\(|\||\)|\*|\+|\?|\\").Replace(bot, ch => @"\" + ch).Replace('_', '.').Replace("%", ".*") + @"\z", RegexOptions.Singleline).IsMatch(userAgent))
+                foreach (string bot in BotUserAgents)
                 {
-                    return true;
+                    if (new Regex(@"\A" + new Regex(@"\.|\$|\^|\{|\[|\(|\||\)|\*|\+|\?|\\").Replace(bot, ch => @"\" + ch).Replace('_', '.').Replace("%", ".*") + @"\z", RegexOptions.Singleline).IsMatch(userAgent))
+                    {
+                        return true;
+                    }
                 }
             }
             return false;

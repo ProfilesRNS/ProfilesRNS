@@ -45,14 +45,16 @@ namespace Profiles.ORNG.Utilities
         private string pageName;
         private Page page;
         private static SocketConnectionPool sockets = null;
+        private static string shindigURL;
 
         #endregion
 
         #region InitPage Helpers
 
         static OpenSocialManager()
-        {            
-            if (ConfigurationManager.AppSettings["ORNG.ShindigURL"] == null)
+        {
+            shindigURL = ConfigurationManager.AppSettings["ORNG.ShindigURL"];
+            if (shindigURL == null)
                 return;
             string[] tokenService = ConfigurationManager.AppSettings["ORNG.TokenService"].ToString().Trim().Split(':');
             int min = Convert.ToInt32(ConfigurationManager.AppSettings["ORNG.SocketPoolMin"].ToString());
@@ -96,7 +98,7 @@ namespace Profiles.ORNG.Utilities
             this.pageName = page.AppRelativeVirtualPath.Substring(2).ToLower();
 
             DebugLogging.Log("Creating OpenSocialManager for " + ownerUri + ", " + pageName);
-            if (ConfigurationManager.AppSettings["ORNG.ShindigURL"] == null)
+            if (shindigURL == null)
             {
                 // do nothing
                 return;
@@ -225,7 +227,7 @@ namespace Profiles.ORNG.Utilities
         {
             // always have turned on for Profile/Display.aspx because we want to generate the "profile was viewed" in Javascript (bot proof) 
             // regardless of any gadgets being visible, and we need this to be True for the shindig javascript libraries to load
-            bool retval = ConfigurationManager.AppSettings["ORNG.ShindigURL"] != null && (GetVisibleGadgets().Count > 0 || GetPageName().Equals("Profile/Display.aspx"));
+            bool retval = shindigURL != null && (GetVisibleGadgets().Count > 0 || GetPageName().Equals("Profile/Display.aspx"));
             DebugLogging.Log("OpenSocialIsVisible = " + retval);
             return retval;
 
@@ -358,7 +360,7 @@ namespace Profiles.ORNG.Utilities
 
         private string GetContainerJavascriptSrc()
         {
-            return ConfigurationManager.AppSettings["ORNG.ShindigURL"].ToString().Trim() + "/gadgets/js/core:dynamic-height:osapi:pubsub:rpc:views:rdf:shindig-container.js?c=1" +
+            return shindigURL + "/gadgets/js/core:dynamic-height:osapi:pubsub:rpc:views:rdf:shindig-container.js?c=1" +
                 (isDebug ? "&debug=1" : "");
         }
 
@@ -376,7 +378,7 @@ namespace Profiles.ORNG.Utilities
                     "this.opt_params = opt_params;" + Environment.NewLine +
                     "this.secureToken = secureToken;" + Environment.NewLine +
                     "};" + Environment.NewLine;
-            gadgetScriptText += "my.openSocialURL = '" + ConfigurationManager.AppSettings["ORNG.ShindigURL"].ToString().Trim() + "';" + Environment.NewLine +
+            gadgetScriptText += "my.openSocialURL = '" + shindigURL + "';" + Environment.NewLine +
                 "my.guid = '" + guid.ToString() + "';" + Environment.NewLine +
                 "my.containerSessionId = '" + new SessionManagement().Session().SessionID + "';" + Environment.NewLine +
                 "my.debug = " + (IsDebug() ? "1" : "0") + ";" + Environment.NewLine +

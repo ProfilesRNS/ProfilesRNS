@@ -41,7 +41,11 @@ namespace Profiles.Profile
             {
                 request.Expand = Convert.ToBoolean(HttpContext.Current.Request.Headers["Expand"].ToString());
             }
-            else
+            else if (HttpContext.Current.Request["Expand"] != null)
+            {
+                request.Expand = Convert.ToBoolean(HttpContext.Current.Request["Expand"].ToString());
+            }
+            else 
             {
                 request.Expand = false;
             }
@@ -50,6 +54,10 @@ namespace Profiles.Profile
             if (HttpContext.Current.Request.Headers["ShowDetails"] != null)
             {
                 request.ShowDetails = Convert.ToBoolean(HttpContext.Current.Request.Headers["ShowDetails"].ToString());
+            }
+            else if (HttpContext.Current.Request["ShowDetails"] != null)
+            {
+                request.ShowDetails = Convert.ToBoolean(HttpContext.Current.Request["ShowDetails"].ToString());
             }
             else
             {
