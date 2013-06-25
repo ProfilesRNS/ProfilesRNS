@@ -26,17 +26,10 @@ using Profiles.ORNG.Utilities;
 using System.Configuration;
 using System.Net;
 
-namespace Profiles.ORNG
+namespace Profiles.ORNG.JSONLD
 {
-    public partial class JsonAPI : System.Web.UI.Page
+    public partial class Default : System.Web.UI.Page
     {
-
-        private static string jsonld;
-
-        static JsonAPI()
-        {
-            jsonld = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "/ORNG/JavaScript/jsonld-helper.js");
-        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -49,11 +42,11 @@ namespace Profiles.ORNG
             string callback = Request["callback"];
 
             Int64 nodeid = -1;
-            if (subject != null)
+            if (subject != null && subject.Trim().Length > 0)
             {
                 nodeid = Convert.ToInt64(subject);
             }
-            else if (person != null)
+            else if (person != null && person.Trim().Length > 0)
             {
                 nodeid = new DataIO().GetNodeId(Convert.ToInt32(person));
             }
@@ -73,16 +66,21 @@ namespace Profiles.ORNG
                 URL += "&ShowDetails=" + showDetails;
             URL = ConfigurationManager.AppSettings["ORNG.ShindigURL"] + "/rest/rdf?userId=" + HttpUtility.UrlEncode(URL);
 
-            WebClient client = new WebClient();
-            String jsonProfiles = client.DownloadString(URL);
+            HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create(URL);
+            myReq.Accept = "application/json"; // "application/ld+json";
+            String jsonProfiles = new StreamReader(myReq.GetResponse().GetResponseStream()).ReadToEnd();
+
+            //WebClient client = new WebClient();
+            //String jsonProfiles = client.DownloadString(URL);
+
             if (callback != null && callback.Length > 0)
             {
                 Response.ContentType = "application/javascript";
-                Response.Write(jsonld + Environment.NewLine + callback + "(orng.rdf.deserialize('" + Profiles.Framework.Utilities.Root.Domain + "/profile/" + nodeid + "'," + jsonProfiles + "));");
+                Response.Write(callback + "(" + jsonProfiles + ");");
             }
             else
             {
-                Response.ContentType = "application/ld+json";
+                Response.ContentType = "application/json";
                 Response.Write(jsonProfiles);
             }
         }

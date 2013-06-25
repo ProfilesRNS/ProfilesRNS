@@ -88,10 +88,10 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [ORNG].[AppRegistry](
+	[nodeid] [bigint] NOT NULL,
 	[appId] [int] NOT NULL,
-	[uri] [nvarchar](255) NOT NULL,
-	[createdDT] [datetime] NULL,
-	[visibility] [nvarchar](50) NULL
+	[visibility] [nvarchar](50) NULL,
+	[createdDT] [datetime] NULL
 ) ON [PRIMARY]
 
 GO
@@ -109,7 +109,7 @@ GO
 /****** Object:  Index [IX_AppRegistry_uri]    Script Date: 05/17/2013 13:26:51 ******/
 CREATE CLUSTERED INDEX [IX_AppRegistry_uri] ON [ORNG].[AppRegistry] 
 (
-	[uri] ASC
+	[nodeId] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 GO
 
@@ -121,7 +121,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [ORNG].[AppData](
-	[uri] [nvarchar](255) NOT NULL,
+	[nodeId] [bigint] NOT NULL,
 	[appId] [int] NOT NULL,
 	[keyname] [nvarchar](255) NOT NULL,
 	[value] [nvarchar](4000) NULL,
@@ -140,7 +140,7 @@ GO
 /****** Object:  Index [IDX_PersonApp]    Script Date: 05/17/2013 13:27:31 ******/
 CREATE NONCLUSTERED INDEX [IDX_PersonApp] ON [ORNG].[AppData] 
 (
-	[uri] ASC,
+	[nodeid] ASC,
 	[appId] ASC
 )
 INCLUDE ( [keyname],
@@ -156,7 +156,7 @@ GO
 
 CREATE TABLE [ORNG].[Activity](
 	[activityId] [int] IDENTITY(1,1) NOT NULL,
-	[uri] [nvarchar](255) NULL,
+	[nodeid] [bigint] NULL,
 	[appId] [int] NULL,
 	[createdDT] [datetime] NULL,
 	[activity] [xml] NULL,
@@ -180,8 +180,8 @@ GO
 
 CREATE TABLE [ORNG].[Messages](
 	[msgId] [nvarchar](255) NOT NULL,
-	[senderUri] [nvarchar](255) NULL,
-	[recipientUri] [nvarchar](255) NULL,
+	[senderNodeId] [bigint] NULL,
+	[recipientNodeId] [bigint] NULL,
 	[coll] [nvarchar](255) NULL,
 	[title] [nvarchar](255) NULL,
 	[body] [nvarchar](4000) NULL,
@@ -198,29 +198,31 @@ GO
 --	Create Stored Procedures
 --
 ---------------------------------------------------------------------------------------------------------------------
-/****** Object:  StoredProcedure [ORNG].[RegisterAppPerson]    Script Date: 05/17/2013 13:29:33 ******/
+/****** Object:  StoredProcedure [ORNG].[RegisterAppPerson]    Script Date: 06/25/2013 13:36:16 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-/****** Object:  StoredProcedure [ORNG].[RegisterAppPerson]    Script Date: 09/23/2010 09:52:53 ******/
 CREATE PROCEDURE [ORNG].[RegisterAppPerson](@uri nvarchar(255),@appId INT, @visibility nvarchar(50))
 As
 BEGIN
 	SET NOCOUNT ON
 		BEGIN TRAN		
+			DECLARE @NodeID bigint
 			DECLARE @PERSON_FILTER_ID INT
 			DECLARE @PERSON_ID INT
+				
+			SELECT @NodeID = [RDF.].[fnURI2NodeID](@uri)
 			SELECT @PERSON_FILTER_ID = (SELECT PersonFilterID FROM Apps WHERE appId = @appId)
 			SELECT @PERSON_ID = cast(InternalID as INT) from [RDF.Stage].InternalNodeMap where
-				NodeID = cast(RIGHT(@uri, CHARINDEX('/', REVERSE(@uri))-1) as INT)
+				NodeID = @NodeID
 
-			IF ((SELECT COUNT(*) FROM AppRegistry WHERE appId = @appId AND uri = @uri) = 0)
-				INSERT [ORNG].[AppRegistry](appId, uri, [visibility]) values (@appId, @uri, @visibility)
+			IF ((SELECT COUNT(*) FROM AppRegistry WHERE nodeId= @nodeId AND appId = @appId) = 0)
+				INSERT [ORNG].[AppRegistry](nodeId, appid, [visibility]) values (@NodeID, @appId, @visibility)
 			ELSE 
-				UPDATE [ORNG].[AppRegistry] set [visibility] = @visibility where appId = @appId and uri =  @uri
+				UPDATE [ORNG].[AppRegistry] set [visibility] = @visibility where nodeId = @NodeID and appId = @appId 
 								
 			IF (@PERSON_FILTER_ID IS NOT NULL) 
 				BEGIN
@@ -232,57 +234,217 @@ BEGIN
 		COMMIT
 END
 
-/****** Object:  StoredProcedure [ORNG].[UpsertAppData]    Script Date: 08/31/2011 14:35:13 ******/
-SET ANSI_NULLS ON
 GO
 
-/****** Object:  StoredProcedure [ORNG].[UpsertAppData]    Script Date: 05/17/2013 13:30:05 ******/
+/****** Object:  StoredProcedure [ORNG].[ReadAppData]    Script Date: 06/25/2013 13:38:21 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-
-
-
-/****** Object:  StoredProcedure [ORNG].[UpsertAppData]    Script Date: 09/23/2010 09:53:03 ******/
-CREATE PROCEDURE [ORNG].[UpsertAppData](@uri nvarchar(255),@appId INT, @keyname nvarchar(255),@value nvarchar(4000))
-As
+CREATE PROCEDURE  [ORNG].[ReadAppData](@uri nvarchar(255),@appId INT, @keyname nvarchar(255))
+AS
 BEGIN
-	SET NOCOUNT ON
-		BEGIN TRAN				 
-			IF (SELECT COUNT(*) FROM AppData WHERE uri = @uri AND appId = @appId and keyname = @keyName) > 0
-				UPDATE [ORNG].[AppData] set [value] = @value, updatedDT = GETDATE() WHERE uri = @uri AND appId = @appId and keyname = @keyName
-			ELSE
-				INSERT [ORNG].[AppData] (uri, appId, keyname, [value]) values (@uri, @appId, @keyname, @value)
-		COMMIT
-END								
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+	DECLARE @nodeid bigint
+	
+	SELECT @nodeid = [RDF.].[fnURI2NodeID](@uri);
 
-/****** Object:  StoredProcedure [ORNG].[DeleteAppData]    Script Date: 08/31/2011 14:35:55 ******/
-SET ANSI_NULLS ON
+	SELECT value from [ORNG].AppData where appId=@appId AND nodeId = @nodeid AND keyName = @keyname
+END
 GO
-
-/****** Object:  StoredProcedure [ORNG].[DeleteAppData]    Script Date: 05/17/2013 13:30:30 ******/
+/****** Object:  StoredProcedure [ORNG].[DeleteAppData]    Script Date: 06/25/2013 13:39:51 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-/****** Object:  StoredProcedure [ORNG].[DeleteAppData]    Script Date: 09/23/2010 09:53:12 ******/
 CREATE PROCEDURE [ORNG].[DeleteAppData](@uri nvarchar(255),@appId INT, @keyname nvarchar(255))
 As
 BEGIN
 	SET NOCOUNT ON
-		BEGIN TRAN				 
-			DELETE [ORNG].[AppData] WHERE uri = @uri AND appId = @appId and keyname = @keyName
-			-- if keyname is VISIBLE, do more
-			IF (@keyname = 'VISIBLE' ) 
-				EXEC [ORNG].[RegisterAppPerson] @uri, @appId, 0
-		COMMIT
+	DECLARE @nodeid bigint
+	
+	SELECT @nodeid = [RDF.].[fnURI2NodeID](@uri);
+	DELETE [ORNG].[AppData] WHERE nodeId = @nodeId AND appId = @appId and keyname = @keyName
 END		
 
+GO
+/****** Object:  StoredProcedure [ORNG].[UpsertAppData]    Script Date: 06/25/2013 13:40:22 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [ORNG].[UpsertAppData](@uri nvarchar(255),@appId INT, @keyname nvarchar(255),@value nvarchar(4000))
+As
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @nodeid bigint
+	
+	SELECT @nodeid = [RDF.].[fnURI2NodeID](@uri);
+	IF (SELECT COUNT(*) FROM AppData WHERE nodeId = @nodeId AND appId = @appId and keyname = @keyName) > 0
+		UPDATE [ORNG].[AppData] set [value] = @value, updatedDT = GETDATE() WHERE nodeId = @nodeId AND appId = @appId and keyname = @keyName
+	ELSE
+		INSERT [ORNG].[AppData] (nodeId, appId, keyname, [value]) values (@nodeId, @appId, @keyname, @value)
+END		
+GO
+/****** Object:  StoredProcedure [ORNG].[ReadActivity]    Script Date: 06/25/2013 13:42:09 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE  [ORNG].[ReadActivity](@uri nvarchar(255),@appId INT, @activityId INT)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+	DECLARE @nodeid bigint
+	
+	select @nodeid = [RDF.].[fnURI2NodeID](@uri);
+
+	select activity from [ORNG].Activity where nodeId = @nodeid AND appId=@appId AND activityId =@activityId
+END
+GO
+/****** Object:  StoredProcedure [ORNG].[ReadAllActivities]    Script Date: 06/25/2013 13:42:33 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE  [ORNG].[ReadAllActivities](@uri nvarchar(255),@appId INT)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+	DECLARE @nodeid bigint
+	
+	select @nodeid = [RDF.].[fnURI2NodeID](@uri);
+
+	IF (@appId IS NULL)
+		select activity from [ORNG].Activity where nodeId = @nodeid
+	ELSE		
+		select activity from [ORNG].Activity where nodeId = @nodeid AND appId=@appId 
+END
+GO
+/****** Object:  StoredProcedure [ORNG].[DeleteActivity]    Script Date: 06/25/2013 13:43:12 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [ORNG].[DeleteActivity](@uri nvarchar(255),@appId INT, @activityId int)
+As
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @nodeid bigint
+	
+	select @nodeid = [RDF.].[fnURI2NodeID](@uri);	
+	DELETE [ORNG].[Activity] WHERE nodeId = @nodeId AND appId = @appId and activityId = @activityId
+END		
+GO
+/****** Object:  StoredProcedure [ORNG].[InsertActivity]    Script Date: 06/25/2013 13:43:37 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [ORNG].[InsertActivity](@uri nvarchar(255),@appId INT, @activityId int, @activity XML)
+As
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @nodeid bigint
+	
+	select @nodeid = [RDF.].[fnURI2NodeID](@uri);	
+	IF (@activityId IS NULL OR @activityId < 0)
+		INSERT [ORNG].[Activity] (nodeId, appId, activity) values (@nodeid, @appId, @activity)
+	ELSE 		
+		INSERT [ORNG].[Activity] (activityId, nodeId, appId, activity) values (@activityId, @nodeid, @appId, @activity)
+END		
+GO
+/****** Object:  StoredProcedure [ORNG].[ReadMessages]    Script Date: 06/25/2013 13:44:28 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE  [ORNG].[ReadMessages](@recipientUri nvarchar(255),@coll nvarchar(255), @msgIds nvarchar(max))
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+	DECLARE @recipientNodeId bigint
+	DECLARE @baseURI nvarchar(255)
+	DECLARE @sql nvarchar(255)
+	
+	select @recipientNodeId = [RDF.].[fnURI2NodeID](@recipientUri)
+	select @baseURI = [Value] FROM [Framework.].[Parameter] WHERE ParameterID = 'baseURI';
+	
+	SET @sql = 'SELECT msgId, coll, body, title, ''' + @baseURI  + '''+ senderNodeId , ''' + @baseURI + '''+ recipientNodeId ' +
+		'FROM [ORNG].[Messages] WHERE recipientNodeId = ' + @recipientNodeId
+	IF (@coll IS NOT NULL)
+		SET @sql = @sql + ' AND coll = ''' + @coll + '''';
+	IF (@msgIds IS NOT NULL)
+		SET @sql = @sql + ' AND msgId IN ' + @msgIds
+		
+	EXEC @sql;
+END
+GO
+/****** Object:  StoredProcedure [ORNG].[ReadMessageCollections]    Script Date: 06/25/2013 13:44:52 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE  [ORNG].[ReadMessageCollections](@recipientUri nvarchar(255))
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+	DECLARE @recipientNodeId bigint
+	
+	select @recipientNodeId = [RDF.].[fnURI2NodeID](@recipientUri)
+
+	SELECT DISTINCT coll	FROM [ORNG].[Messages] WHERE recipientNodeId =  @recipientNodeId
+END
+GO
+/****** Object:  StoredProcedure [ORNG].[InsertMessage]    Script Date: 06/25/2013 13:45:19 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [ORNG].[InsertMessage](@msgId nvarchar(255),@coll nvarchar(255), @title nvarchar(255), @body nvarchar(255),
+										@senderUri nvarchar(255), @recipientUri nvarchar(255))
+As
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @senderNodeId bigint
+	DECLARE @recipientNodeId bigint
+	
+	select @senderNodeId = [RDF.].[fnURI2NodeID](@senderUri)
+	select @recipientNodeId = [RDF.].[fnURI2NodeID](@recipientUri)
+	
+	INSERT [ORNG].[Messages]  (msgId, coll, title, body, senderNodeId, recipientNodeId) 
+			VALUES (@msgId, @coll, @title, @body, @senderNodeId, @recipientNodeId)
+END		
 GO
 
 ---------------------------------------------------------------------------------------------------------------------

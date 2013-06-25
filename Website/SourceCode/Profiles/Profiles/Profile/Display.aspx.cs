@@ -58,6 +58,26 @@ namespace Profiles.Profile
             masterpage.PresentationXML = this.PresentationXML;
             Framework.Utilities.DebugLogging.Log("Page_Load Profile 2: " + DateTime.Now.ToLongTimeString());
 
+            // UCSF added schema.org info
+            // Only do this for a person only version of this page !
+            XmlNode presentationClass = PresentationXML.SelectSingleNode("//Presentation/@PresentationClass", base.RDFNamespaces);
+            if (presentationClass != null && "profile".Equals(presentationClass.InnerText.ToLower()))
+            {
+                ((HtmlGenericControl)masterpage.FindControl("divProfilesContentMain")).Attributes.Add("itemscope", "itemscope");
+                ((HtmlGenericControl)masterpage.FindControl("divProfilesContentMain")).Attributes.Add("itemtype", "http://schema.org/Person");
+
+                HtmlMeta Description = new HtmlMeta();
+                Description.Name = "Description";
+                string name = this.RDFData.SelectSingleNode("rdf:RDF[1]/rdf:Description[1]/foaf:firstName", base.RDFNamespaces).InnerText + " " +
+                     this.RDFData.SelectSingleNode("rdf:RDF[1]/rdf:Description[1]/foaf:lastName", base.RDFNamespaces).InnerText;
+                Description.Content = name + "'s profile, publications, research topics, and co-authors";
+                Page.Header.Controls.Add(Description);
+
+                HtmlLink Canonical = new HtmlLink();
+                Canonical.Href = Root.Domain + Request.Url.AbsolutePath.ToLower();
+                Canonical.Attributes["rel"] = "canonical";
+                Page.Header.Controls.Add(Canonical);
+            }
         }
 
 

@@ -6,7 +6,7 @@
             <asp:Literal runat="server" ID="litPersonalInfo"></asp:Literal>
         </td>
         <td style="width:250px;padding-left:25px" align="right" valign="top">
-            <asp:Image runat="server" ID="imgPhoto" />
+            <asp:Image itemprop="image" runat="server" ID="imgPhoto" />
         </td>
     </tr>
 </table>

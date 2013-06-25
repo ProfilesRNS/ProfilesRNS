@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>JSON Test</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js"></script>
+    <script src="../JavaScript/jsonld-helper.js"></script>
+    <script src="../JavaScript/prettyprint.js"></script>
+    <script type="text/javascript">
+        function callJson() {
+            $('#result').html('<img src="../Images/waiting.gif">');
+            var nodeId = $("#nodeid").val();
+            var personId = $("#person").val();
+
+            var url = 'Default.aspx?subject=' + nodeId +
+                '&person=' + personId +
+                '&expand=' + $("#expand").is(':checked') +
+                '&showdetails=' + $("#showdetails").is(':checked');
+
+            if ($('input:radio[name=Output]:checked').val() == 'OutputJSON') {
+                $.get(url, function (data) {
+                    $('#result').html('<pre>' + JSON.stringify(data, null, '\t') + '</pre>');
+                });
+            }
+            else if ($('input:radio[name=Output]:checked').val() == 'OutputJSONLD') {
+                $.get(url, function (data) {
+                    $('#result').html('<pre>' + JSON.stringify(data.entry.jsonld, null, '\t') + '</pre>');
+                });
+            }
+            else {  // show the Javascript object by passing the data through jsonldHelper.getItem
+                $.getJSON(url + '&callback=?', function (data) {
+                    var item = jsonldHelper.getItem(data);
+                    var ppTable = prettyPrint(item);
+                    $('#result').html(ppTable);
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <p>
+        This page will show you the output of the JSON-LD API.&nbsp; If you are calling 
+        the API from JavaScript then you will want to include the jsonld-helper.js 
+        library and use it to get the single Javascript object containing your data 
+        (jsonldHelper.getItem). Note that the &quot;over the wire&quot; JSON-LD data is flattened out, with all object-to-object references represented by URI&#39;s.&nbsp; This allows for serialization of the 
+        RDF graph even when we have circular references, but having your code work the 
+        flat JSOND-LD 
+        directly is cumbersome so it is recommended to use the jsonldHelper.getItem 
+        method.&nbsp; View the source for this page to see how all of this is done.</p>
+    <p>
+        If you are not calling 
+        the JSON-LD API from JavaScript and are instead using server side 
+        code, you will need to work with the raw JSON-LD.&nbsp; You should look at 
+        jsonld-helper.js and port the jsonldHelper.getItem algorithm to whatever server 
+        side language you are using.&nbsp; While this is not necessary, it will likely 
+        make your life much easier!</p>
+    <p>
+        Note: Gadgets should not use this API directly, but should instead use the 
+        osapi.rdf methods which provide the same functionality (and more), all within 
+        the OpenSocial framework.&nbsp; Please see the ORNG documentation for details.</p>
+    <p>
+        NodeID
+        <input id="nodeid" type="text" /></p>
+    <p>
+        or PersonID
+        <input id="person" type="text" /></p>
+    <p>
+        Expand<input id="expand" type="checkbox" /></p>
+    <p>
+        ShowDetails<input id="showdetails" type="checkbox" /></p>
+    <p>
+        Show:</p>
+        <table style="width:20%;">
+            <tr>
+                <td>Javascript Object</td>
+                <td><input id="OuptputJS" checked="checked" name="Output" type="radio" value="OutputJS" /></td>
+            </tr>
+            <tr>
+                <td>JSON</td>
+                <td><input id="OutputJSON" name="Output" type="radio" value="OutputJSON" /></td>
+            </tr>
+            <tr>
+                <td>JSON-LD (subset of JSON)</td>
+                <td><input id="OutputJSONLD"name="Output" type="radio" value="OutputJSONLD" /></td>
+            </tr>
+        </table>
+    <p>
+        <input id="Submit" type="submit" value="submit" onclick="callJson();"/></p> 
+    <div id="result"></div>
+</body>
+</html>
