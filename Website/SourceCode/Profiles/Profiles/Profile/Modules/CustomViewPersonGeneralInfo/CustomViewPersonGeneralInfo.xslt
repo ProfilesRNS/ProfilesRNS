@@ -28,7 +28,9 @@
       <tr>
         <th>Title</th>
         <td>
-          <xsl:value-of select="rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:personInPrimaryPosition/@rdf:resource]/vivo:hrJobTitle "/>
+          <span itemprop="jobTitle">
+            <xsl:value-of select="rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:personInPrimaryPosition/@rdf:resource]/vivo:hrJobTitle "/>
+          </span>
         </td>
       </tr>
     </xsl:if>
@@ -37,7 +39,9 @@
       <tr>
         <th>Institution</th>
         <td>
-          <xsl:value-of select="rdf:RDF/rdf:Description[@rdf:about= $uriOrganization]/rdfs:label"/>
+          <span itemprop="affiliation">
+            <xsl:value-of select="rdf:RDF/rdf:Description[@rdf:about= $uriOrganization]/rdfs:label"/>
+          </span>
         </td>
       </tr>
     </xsl:if>

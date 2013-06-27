@@ -1,4 +1,4 @@
 ﻿<%@ Page Language="C#" %>
+<%Response.ContentType = "text/plain";%>User-Agent: *
 <%Response.Write("Sitemap: " + Profiles.Framework.Utilities.Root.Domain + "/sitemap.xml");%>
-User-Agent: *
 Crawl-Delay: 10
