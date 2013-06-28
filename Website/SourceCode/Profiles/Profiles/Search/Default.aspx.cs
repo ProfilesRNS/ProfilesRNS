@@ -306,7 +306,7 @@ namespace Profiles.Search
                     if (searchrequest != string.Empty)
                         xml.LoadXml(data.DecryptRequest(searchrequest));
                     else
-                        xml = data.SearchRequest(searchfor, "false", classgroupuri, classuri, perpage, offset);
+                        xml = data.SearchRequest(searchfor, exactphrase, classgroupuri, classuri, perpage, offset);
 
                     break;
                 default:                //Person is the default

@@ -61,7 +61,7 @@ namespace Profiles.Search.Utilities
             search.Append("<SearchOptions>");
             search.Append("<MatchOptions>");
 
-            if (searchstring != string.Empty)
+            if (searchstring != string.Empty && !(string.IsNullOrEmpty(exactphrase)))
             {
 
                 search.Append("<SearchString ExactMatch=\"" + exactphrase.ToLower() + "\">");
@@ -141,11 +141,13 @@ namespace Profiles.Search.Utilities
 
             search.Append("<SearchOptions>");
             search.Append("<MatchOptions>");
+            if (string.IsNullOrEmpty(exactphrase))
+               exactphrase = string.Empty;
 
-            if (exactphrase.IsNullOrEmpty())
-                exactphrase = string.Empty;
+           // if (exactphrase.IsNullOrEmpty())
+               // exactphrase = string.Empty;
 
-            if (searchstring != string.Empty)
+            if (searchstring != string.Empty && exactphrase != string.Empty)
             {
                 search.Append("<SearchString ExactMatch=\"" + exactphrase.ToLower() + "\">");
 

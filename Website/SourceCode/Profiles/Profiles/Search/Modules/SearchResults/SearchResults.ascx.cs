@@ -360,6 +360,7 @@ namespace Profiles.Search.Modules.SearchResults
             args.AddParam("totalpages", "", totalpages);
             args.AddParam("page", "", page);
             args.AddParam("searchfor", "", searchfor);
+            args.AddParam("exactphrase", "", exactphrase);
             args.AddParam("classGrpURIpassedin", "", classgroupuri);
             args.AddParam("classURIpassedin", "", classuri);
             args.AddParam("searchrequest", "", this.SearchRequest);
