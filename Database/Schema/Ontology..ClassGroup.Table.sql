@@ -1,0 +1,21 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [Ontology.].[ClassGroup](
+	[ClassGroupURI] [varchar](400) NOT NULL,
+	[SortOrder] [int] NULL,
+	[_ClassGroupLabel] [nvarchar](400) NULL,
+	[_ClassGroupNode] [bigint] NULL,
+	[_NumberOfNodes] [bigint] NULL,
+	[IsVisible] [bit] NULL,
+ CONSTRAINT [PK__ClassGroup__2DE6CDE9] PRIMARY KEY CLUSTERED 
+(
+	[ClassGroupURI] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO

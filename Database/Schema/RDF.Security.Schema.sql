@@ -1,0 +1,2 @@
+CREATE SCHEMA [RDF.Security] AUTHORIZATION [dbo]
+GO

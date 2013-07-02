@@ -1,0 +1,32 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [Ontology.Presentation].[XML](
+	[PresentationID] [int] NOT NULL,
+	[Type] [char](1) NOT NULL,
+	[Subject] [nvarchar](400) NULL,
+	[Predicate] [nvarchar](400) NULL,
+	[Object] [nvarchar](400) NULL,
+	[PresentationXML] [xml] NULL,
+	[_SubjectNode] [bigint] NULL,
+	[_PredicateNode] [bigint] NULL,
+	[_ObjectNode] [bigint] NULL,
+ CONSTRAINT [PK__Presenta__B3613E3C635F3AE9] PRIMARY KEY CLUSTERED 
+(
+	[PresentationID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [idx_spo] ON [Ontology.Presentation].[XML] 
+(
+	[Type] ASC,
+	[Subject] ASC,
+	[Predicate] ASC,
+	[Object] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
