@@ -41,9 +41,11 @@
     <p>
         This page will show you the output of the JSON-LD API.&nbsp; If you are calling 
         the API from JavaScript then you will want to include the jsonld-helper.js 
-        library and use it to get the single Javascript object containing your data 
-        (jsonldHelper.getItem). Note that the &quot;over the wire&quot; JSON-LD data is flattened out, with all object-to-object references represented by URI&#39;s.&nbsp; This allows for serialization of the 
-        RDF graph even when we have circular references, but having your code work the 
+        library and use it to get the single Javascript object containing your data (via 
+        jsonldHelper.getItem). Note that the &quot;over the wire&quot; JSON-LD data is flattened 
+        out, with all object-to-object references represented by URI&#39;s.&nbsp; This 
+        allows for serialization of the RDF graph even when we have circular references, 
+        but having your code work with the 
         flat JSOND-LD 
         directly is cumbersome so it is recommended to use the jsonldHelper.getItem 
         method.&nbsp; View the source for this page to see how all of this is done.</p>
