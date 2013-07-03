@@ -313,7 +313,7 @@ namespace Profiles.Search.Modules.SearchPerson
             if (exactphrase == "on")
                 exactphrase = "true";
             else
-                exactphrase = string.Empty;
+                exactphrase = "false";
 
             string institution = "";
             string institutionallexcept = "";

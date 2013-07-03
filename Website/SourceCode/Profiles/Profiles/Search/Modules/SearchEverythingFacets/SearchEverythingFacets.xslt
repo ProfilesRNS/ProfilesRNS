@@ -4,6 +4,7 @@
   <xsl:output method="html"/>
   <xsl:param name="root"/>
   <xsl:param name="searchfor"/>
+  <xsl:param name="exactphrase"/>
   <xsl:param name="perpage" select="number(15)"/>
   <xsl:param name="classGrpURIpassedin"/>
   <xsl:param name="classURIpassedin"/>
@@ -15,7 +16,7 @@
     <div class="passiveSectionBody" style="margin-top: 6px;">
       <xsl:variable name="allURL">
         
-        <xsl:value-of select="$root"/><![CDATA[/Search/Default.aspx?searchtype=everything&searchfor=]]><xsl:value-of select="$searchfor"/><![CDATA[&perpage=15&offset=]]>
+        <xsl:value-of select="$root"/><![CDATA[/Search/Default.aspx?searchtype=everything&searchfor=]]><xsl:value-of select="$searchfor"/><![CDATA[&exactphrase=]]><xsl:value-of select="$exactphrase"/><![CDATA[&perpage=15&offset=]]>
       </xsl:variable>
       <ul>
         <li>
@@ -41,7 +42,7 @@
       <xsl:for-each select="rdf:RDF/rdf:Description/vivo:overview/prns:matchesClassGroupsList/prns:matchesClassGroup">
         <xsl:variable name="classGrpURI" select="@rdf:resource"/>
         <xsl:variable name="typeURL">
-          <xsl:value-of select="$root"/><![CDATA[/Search/Default.aspx?searchtype=everything&searchfor=]]><xsl:value-of select="$searchfor"/><![CDATA[&ClassGroupURI=]]><xsl:value-of select="translate($classGrpURI, '#','!')"/><![CDATA[&perpage=15&offset=]]>
+          <xsl:value-of select="$root"/><![CDATA[/Search/Default.aspx?searchtype=everything&searchfor=]]><xsl:value-of select="$searchfor"/><![CDATA[&exactphrase=]]><xsl:value-of select="$exactphrase"/><![CDATA[&ClassGroupURI=]]><xsl:value-of select="translate($classGrpURI, '#','!')"/><![CDATA[&perpage=15&offset=]]>
         </xsl:variable>
         <ul>
           <li>

@@ -4,7 +4,7 @@
 <script type="text/javascript">
 
     function searchThisPhrase(keyword,classuri,searchtype) {        
-        document.location.href = '<%=GetURLDomain()%>/search/default.aspx?searchtype=' + searchtype + '&searchfor=' + keyword + '&classuri=' + classuri;
+        document.location.href = '<%=GetURLDomain()%>/search/default.aspx?searchtype=' + searchtype + '&searchfor=' + keyword + '&exactphrase=false&classuri=' + classuri;
     }    
     
 </script>

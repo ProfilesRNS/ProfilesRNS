@@ -38,7 +38,7 @@
         }
         
         var classuri = 'http://xmlns.com/foaf/0.1/Person';
-        document.location.href = '<%=GetURLDomain()%>/search/default.aspx?searchtype=people&lname=' + lname + '&searchfor=' + keyword + '&institution=' + institution + '&classuri=' + classuri + '&perpage=15&offset=0';
+        document.location.href = '<%=GetURLDomain()%>/search/default.aspx?searchtype=people&lname=' + lname + '&searchfor=' + keyword + '&exactphrase=false&institution=' + institution + '&classuri=' + classuri + '&perpage=15&offset=0';
         return false;
     }
 
