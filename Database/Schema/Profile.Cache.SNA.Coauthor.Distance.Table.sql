@@ -1,0 +1,16 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [Profile.Cache].[SNA.Coauthor.Distance](
+	[PersonID1] [int] NOT NULL,
+	[PersonID2] [int] NOT NULL,
+	[Distance] [tinyint] NULL,
+	[NumPaths] [smallint] NULL,
+ CONSTRAINT [PK__sna_distance__6BDD104C] PRIMARY KEY CLUSTERED 
+(
+	[PersonID1] ASC,
+	[PersonID2] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO

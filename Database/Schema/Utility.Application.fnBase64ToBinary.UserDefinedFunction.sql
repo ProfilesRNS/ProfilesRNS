@@ -1,0 +1,11 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE FUNCTION [Utility.Application].[fnBase64ToBinary] (@Base64 VARCHAR(MAX))
+RETURNS VARBINARY(MAX)
+AS
+BEGIN
+	RETURN CAST(N'' AS XML).value('xs:base64Binary(sql:variable("@Base64"))', 'VARBINARY(MAX)')
+END
+GO

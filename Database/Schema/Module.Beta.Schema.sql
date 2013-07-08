@@ -1,0 +1,2 @@
+CREATE SCHEMA [Module.Beta] AUTHORIZATION [dbo]
+GO

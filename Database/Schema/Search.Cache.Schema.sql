@@ -1,0 +1,2 @@
+CREATE SCHEMA [Search.Cache] AUTHORIZATION [dbo]
+GO

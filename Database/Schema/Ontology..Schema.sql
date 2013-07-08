@@ -1,0 +1,2 @@
+CREATE SCHEMA [Ontology.] AUTHORIZATION [dbo]
+GO
