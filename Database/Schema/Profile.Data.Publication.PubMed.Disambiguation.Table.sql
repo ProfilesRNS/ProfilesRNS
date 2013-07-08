@@ -1,0 +1,16 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [Profile.Data].[Publication.PubMed.Disambiguation](
+	[PersonID] [int] NOT NULL,
+	[PMID] [int] NOT NULL,
+	[K] [float] NULL,
+	[P] [float] NULL,
+ CONSTRAINT [PK_disambiguation_pubmed] PRIMARY KEY CLUSTERED 
+(
+	[PersonID] ASC,
+	[PMID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO

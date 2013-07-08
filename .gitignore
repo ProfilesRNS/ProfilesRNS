@@ -71,3 +71,4 @@
 /Website/SourceCode/ProfilesSPARQLAPI/bin/*
 /Website/SourceCode/ProfilesSPARQLAPI/obj/*
 /Website/SourceCode/ProfilesBetaAPI/Connects.Profiles.Service/ProfilesDebuggingLog.txt
+/Database/ProfilesRNS_CreateSchema.sql

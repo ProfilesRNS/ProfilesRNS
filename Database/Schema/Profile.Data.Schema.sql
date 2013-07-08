@@ -1,0 +1,2 @@
+CREATE SCHEMA [Profile.Data] AUTHORIZATION [dbo]
+GO

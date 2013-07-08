@@ -1,0 +1,21 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [Profile.Cache].[Concept.Mesh.Word2mesh3](
+	[word] [varchar](255) NOT NULL,
+	[MeshTerm] [varchar](255) NOT NULL,
+	[MeshHeader] [varchar](255) NOT NULL,
+	[NumWords] [int] NULL,
+ CONSTRAINT [PK_cache_word2mesh3] PRIMARY KEY CLUSTERED 
+(
+	[word] ASC,
+	[MeshTerm] ASC,
+	[MeshHeader] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
