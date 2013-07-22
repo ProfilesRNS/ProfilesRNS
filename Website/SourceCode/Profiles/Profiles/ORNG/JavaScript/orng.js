@@ -73,7 +73,7 @@ gadgets.pubsubrouter.init(function (id) {
         else if (channel == 'hide') {
             document.getElementById(sender).parentNode.parentNode.style.display = 'none';
         }
-        else if (channel == 'JSONPersonIds' || channel == 'JSONPubMedIds') {
+        else if (channel == 'JSONPersonIds' || channel == 'ClearOwnerCache') {
             // do nothing, no need to alert
         }
         else {

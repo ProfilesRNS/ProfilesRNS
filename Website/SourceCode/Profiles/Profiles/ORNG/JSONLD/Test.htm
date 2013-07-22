@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>JSON Test</title>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js"></script>
-    <script src="../JavaScript/jsonld-helper.js"></script>
-    <script src="../JavaScript/prettyprint.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.4.2.min.js" type="text/javascript"></script>
+    <script src="../JavaScript/jsonld-helper.js" type="text/javascript"></script>
+    <script src="../JavaScript/prettyprint.js" type="text/javascript"></script>
     <script type="text/javascript">
         function callJson() {
             $('#result').html('<img src="../Images/waiting.gif">');
@@ -17,17 +17,17 @@
                 '&showdetails=' + $("#showdetails").is(':checked');
 
             if ($('input:radio[name=Output]:checked').val() == 'OutputJSON') {
-                $.get(url, function (data) {
+                $.getJSON(url, function (data) {
                     $('#result').html('<pre>' + JSON.stringify(data, null, '\t') + '</pre>');
                 });
             }
             else if ($('input:radio[name=Output]:checked').val() == 'OutputJSONLD') {
-                $.get(url, function (data) {
+                $.getJSON(url, function (data) {
                     $('#result').html('<pre>' + JSON.stringify(data.entry.jsonld, null, '\t') + '</pre>');
                 });
             }
             else {  // show the Javascript object by passing the data through jsonldHelper.getItem
-                $.getJSON(url + '&callback=?', function (data) {
+                $.getJSON(url, function (data) {
                     var item = jsonldHelper.getItem(data);
                     var ppTable = prettyPrint(item);
                     $('#result').html(ppTable);

@@ -198,6 +198,28 @@ GO
 --	Create Stored Procedures
 --
 ---------------------------------------------------------------------------------------------------------------------
+/****** Object:  StoredProcedure [ORNG].[ReadRegistry]    Script Date: 07/22/2013 11:10:29 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE  [ORNG].[ReadRegistry](@uri nvarchar(255),@appId INT)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+	DECLARE @nodeid bigint
+	
+	SELECT @nodeid = [RDF.].[fnURI2NodeID](@uri);
+
+	SELECT visibility from [ORNG].AppRegistry where appId=@appId AND nodeId = @nodeid 
+END
+
+GO
+
 /****** Object:  StoredProcedure [ORNG].[RegisterAppPerson]    Script Date: 06/25/2013 13:36:16 ******/
 SET ANSI_NULLS ON
 GO
