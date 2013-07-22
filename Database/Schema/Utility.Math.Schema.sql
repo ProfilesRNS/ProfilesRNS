@@ -1,0 +1,2 @@
+CREATE SCHEMA [Utility.Math] AUTHORIZATION [dbo]
+GO

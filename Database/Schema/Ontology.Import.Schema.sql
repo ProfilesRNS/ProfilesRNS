@@ -1,0 +1,2 @@
+CREATE SCHEMA [Ontology.Import] AUTHORIZATION [dbo]
+GO

@@ -1,0 +1,2 @@
+CREATE SCHEMA [History.Framework] AUTHORIZATION [dbo]
+GO

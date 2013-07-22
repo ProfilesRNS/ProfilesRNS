@@ -1,0 +1,2 @@
+CREATE SCHEMA [User.Session] AUTHORIZATION [dbo]
+GO

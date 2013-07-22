@@ -1,0 +1,2 @@
+CREATE SCHEMA [Direct.Framework] AUTHORIZATION [dbo]
+GO
