@@ -411,7 +411,7 @@ namespace Profiles.Framework
             // Window Title
             buffer = GetStringFromPresentationXML("Presentation/WindowName");
 
-            Page.Header.Title = "Profiles RNS | " + buffer;
+            Page.Header.Title = buffer + " | Profiles RNS";
         }
 
         #region "Panel Methods"
