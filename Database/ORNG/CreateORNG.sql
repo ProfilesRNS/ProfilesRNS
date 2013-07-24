@@ -106,8 +106,8 @@ GO
 ALTER TABLE [ORNG.].[AppRegistry] ADD  CONSTRAINT [DF_orng_app_registry_createdDT]  DEFAULT (getdate()) FOR [createdDT]
 GO
 
-/****** Object:  Index [IX_AppRegistry_uri]    Script Date: 05/17/2013 13:26:51 ******/
-CREATE CLUSTERED INDEX [IX_AppRegistry_uri] ON [ORNG.].[AppRegistry] 
+/****** Object:  Index [IX_AppRegistry_nodeid]    Script Date: 05/17/2013 13:26:51 ******/
+CREATE CLUSTERED INDEX [IX_AppRegistry_nodeid] ON [ORNG.].[AppRegistry] 
 (
 	[nodeId] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]

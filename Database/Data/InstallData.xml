@@ -23203,6 +23203,13 @@
                 </ParamList>
               </Module>
               <Module ID="CustomViewPersonSameDepartment" />
+              <Module ID="Gadgets">
+                <ParamList>
+                  <Param Name="HTML">
+                    <div id="gadgets-tools" class="gadgets-gadget-parent" />
+                  </Param>
+                </ParamList>
+              </Module>
               <Module ID="PassiveList">
                 <ParamList>
                   <Param Name="InfoCaption">Physical Neighbors</Param>

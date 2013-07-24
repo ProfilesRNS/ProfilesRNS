@@ -81,7 +81,6 @@
     <Content Include="ORNG\JavaScript\jsonld-helper.js" />
     <Content Include="ORNG\JSONLD\Default.aspx" />
     <Content Include="ORNG\CSS\gadgets.css" />
-    <Content Include="ORNG\CSS\UCSF.css" />
     <Content Include="ORNG\Default.aspx" />
     <Content Include="ORNG\GadgetDetails.aspx" />
     <Content Include="ORNG\Images\gadgetcollapse.gif" />
@@ -89,7 +88,6 @@
     <Content Include="ORNG\Images\icon_squareArrow.gif" />
     <Content Include="ORNG\Images\icon_squareDownArrow.gif" />
     <Content Include="ORNG\JavaScript\orng.js" />
-    <Content Include="ORNG\JavaScript\UCSF.js" />
     <Content Include="ORNG\JSONLD\Test.htm" />
     <Content Include="ORNG\Modules\GadgetSandbox\GadgetSandbox.ascx" />
     <Content Include="ORNG\Modules\Gadgets\Gadgets.ascx" />
