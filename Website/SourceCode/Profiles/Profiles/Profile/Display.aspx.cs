@@ -61,7 +61,9 @@ namespace Profiles.Profile
             // UCSF added schema.org info
             // Only do this for a person only version of this page !
             XmlNode presentationClass = PresentationXML.SelectSingleNode("//Presentation/@PresentationClass", base.RDFNamespaces);
-            if (presentationClass != null && "profile".Equals(presentationClass.InnerText.ToLower()))
+            if (presentationClass != null && "profile".Equals(presentationClass.InnerText.ToLower()) &&
+                this.RDFData.SelectSingleNode("rdf:RDF[1]/rdf:Description[1]/foaf:firstName", base.RDFNamespaces) != null &&
+                this.RDFData.SelectSingleNode("rdf:RDF[1]/rdf:Description[1]/foaf:lastName", base.RDFNamespaces) != null)
             {
                 ((HtmlGenericControl)masterpage.FindControl("divProfilesContentMain")).Attributes.Add("itemscope", "itemscope");
                 ((HtmlGenericControl)masterpage.FindControl("divProfilesContentMain")).Attributes.Add("itemtype", "http://schema.org/Person");
