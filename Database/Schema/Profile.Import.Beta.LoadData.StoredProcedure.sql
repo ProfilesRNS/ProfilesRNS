@@ -85,7 +85,7 @@ AS BEGIN
 	--	[Profile.Data].[Person]dbo.person
 	DELETE FROM [profile.Data].[Person]
 	SET IDENTITY_INSERT [profile.data].[Person] ON 
-	SELECT @sql = 'SELECT p.[PersonID],p.[UserID],[FirstName],[LastName],[MiddleName],[DisplayName],[Suffix],p.[IsActive],[EmailAddr],[Phone],[Fax],[AddressLine1],[AddressLine2],[AddressLine3],[AddressLine4],[City],[State],[Zip],[Building],[Floor],[Room],[AddressString],[Latitude],[Longitude],[GeoScore],pa.[FacultyRankID],p.[PersonID],isnull([Visible], 1) FROM '+ @SourceDBName + '.dbo.person p'
+	SELECT @sql = 'SELECT p.[PersonID],p.[UserID],[FirstName],[LastName],[MiddleName],[DisplayName],[Suffix],p.[IsActive],[EmailAddr],[Phone],[Fax],[AddressLine1],[AddressLine2],[AddressLine3],[AddressLine4],[City],[State],[Zip],[Building],[Floor],[Room],[AddressString],[Latitude],[Longitude],[GeoScore],pa.[FacultyRankID],p.[InternalUsername],isnull([Visible], 1) FROM '+ @SourceDBName + '.dbo.person p'
 	+ ' left join ' + @SourceDBName + '.dbo.person_affiliations pa on p.PersonID = pa.PersonID and PA.IsPrimary = 1'
 	INSERT INTO [profile.data].[Person]([PersonID],[UserID],[FirstName],[LastName],[MiddleName],[DisplayName],[Suffix],[IsActive],[EmailAddr],[Phone],[Fax],[AddressLine1],[AddressLine2],[AddressLine3],[AddressLine4],[City],[State],[Zip],[Building],[Floor],[Room],[AddressString],[Latitude],[Longitude],[GeoScore],[FacultyRankID],[InternalUsername],[Visible]  )
 	EXEC sp_executesql @sql	 
