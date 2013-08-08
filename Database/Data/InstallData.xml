@@ -26567,6 +26567,14 @@
       <SortOrder>45</SortOrder>
       <IsActive>1</IsActive>
     </Row>
+	<Row>
+      <SiteID>46</SiteID>
+      <BootstrapURL>http://profiles.umassmed.edu/profiles/Direct.xml</BootstrapURL>
+      <SiteName>University of Massachusetts Medical School</SiteName>
+      <QueryURL>http://profiles.umassmed.edu/profiles/DirectService.aspx?Request=IncomingCount&SearchPhrase=</QueryURL>
+      <SortOrder>46</SortOrder>
+      <IsActive>1</IsActive>
+    </Row>
   </Table>
   <Table Name="[Profile.Data].[Publication.Type]">
     <Row>
