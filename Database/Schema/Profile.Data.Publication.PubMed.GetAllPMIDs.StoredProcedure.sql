@@ -14,7 +14,7 @@ BEGIN
 		IF @GetOnlyNewXML = 1 
 		-- ONLY GET XML FOR NEW Publications
 			BEGIN
-				SELECT pmid
+				SELECT distinct pmid
 				  FROM [Profile.Data].[Publication.PubMed.Disambiguation]
 				 WHERE pmid NOT IN(SELECT PMID FROM [Profile.Data].[Publication.PubMed.General])
 				   AND pmid IS NOT NULL 
