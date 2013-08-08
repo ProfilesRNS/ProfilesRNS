@@ -668,7 +668,6 @@
       function ShowDetails(nodeURI,obj){
 
       doListTableRowOver(obj);
-      debugger;
       document.getElementById('divItemDetails').innerHTML = document.getElementById(nodeURI).value;
 
       }
