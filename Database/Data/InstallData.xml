@@ -26571,7 +26571,7 @@
       <SiteID>46</SiteID>
       <BootstrapURL>http://profiles.umassmed.edu/profiles/Direct.xml</BootstrapURL>
       <SiteName>University of Massachusetts Medical School</SiteName>
-      <QueryURL>http://profiles.umassmed.edu/profiles/DirectService.aspx?Request=IncomingCount&SearchPhrase=</QueryURL>
+      <QueryURL>http://profiles.umassmed.edu/profiles/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
       <SortOrder>46</SortOrder>
       <IsActive>1</IsActive>
     </Row>
