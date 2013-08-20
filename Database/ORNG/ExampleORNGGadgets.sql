@@ -1,4 +1,4 @@
-INSERT [ORNG.].[Apps] VALUES(10,'Featured Presentations','http://stage-profiles.ucsf.edu/apps_200/RDFTest.xml',NULL,0);
+INSERT [ORNG.].[Apps] VALUES(10,'Example RDF Gadget','http://stage-profiles.ucsf.edu/apps_200/RDFTest.xml',NULL,0);
 INSERT [ORNG.].[Apps] VALUES(101,'Featured Presentations','http://stage-profiles.ucsf.edu/apps_200/SlideShare.xml',NULL,1);
 INSERT [ORNG.].[Apps] VALUES(102,'Faculty Mentoring','http://stage-profiles.ucsf.edu/apps_200/Mentor.xml',NULL,0);
 INSERT [ORNG.].[Apps] VALUES(103,'Websites','http://stage-profiles.ucsf.edu/apps_200/Links.xml',NULL,1);
