@@ -1,14 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <publishData>
-  <publishProfile publishUrl="Z:\Profiles103SPARQLAPI" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="FileSystem" replaceMatchingFiles="True" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
+  <publishProfile publishUrl="X:\Profiles103SPARQLAPI" deleteExistingFiles="True" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="FileSystem" replaceMatchingFiles="False" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
     <file relUrl="bin/IKVM.GNU.Classpath.dll" publishTime="03/28/2013 10:17:23" />
-    <file relUrl="bin/SemWeb.dll" publishTime="05/05/2013 20:48:18" />
-    <file relUrl="ProfilesSPARQLAPI.svc" publishTime="03/28/2013 10:17:22" />
+    <file relUrl="bin/SemWeb.dll" publishTime="07/03/2013 09:29:00" />
+    <file relUrl="bin/SemWeb.pdb" publishTime="07/03/2013 09:29:00" />
     <file relUrl="bin/sparql-core.dll" publishTime="03/28/2013 10:17:23" />
+    <file relUrl="bin/Microsoft.ServiceModel.Web.dll" publishTime="03/28/2013 10:17:23" />
     <file relUrl="Web.config" publishTime="03/28/2013 13:29:22" />
-    <file relUrl="bin/ProfilesSPARQLAPI.pdb" publishTime="05/05/2013 20:48:18" />
-    <file relUrl="bin/ProfilesSPARQLAPI.dll" publishTime="05/05/2013 20:48:18" />
+    <file relUrl="bin/ProfilesSPARQLAPI.pdb" publishTime="07/03/2013 09:29:01" />
+    <file relUrl="bin/ProfilesSPARQLAPI.dll" publishTime="07/03/2013 09:29:01" />
+    <file relUrl="ProfilesSPARQLAPI.svc" publishTime="03/28/2013 10:17:22" />
     <file relUrl="bin/IKVM.Runtime.dll" publishTime="03/28/2013 10:17:23" />
-    <file relUrl="bin/SemWeb.pdb" publishTime="05/05/2013 20:48:18" />
   </publishProfile>
 </publishData>

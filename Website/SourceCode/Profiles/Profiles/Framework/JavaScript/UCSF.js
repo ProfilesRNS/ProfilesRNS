@@ -109,6 +109,10 @@
             + "<img src='" + _rootDomain + "/framework/images/chatter-follow.png' /></p>"
             + "<p><strong>Login</strong> and follow people on UCSF Chatter! "
             + "Receive updates when people you follow publish new articles.</p></div></a></li>";
+    var videointro = "<li><a href='https://www.youtube.com/watch?v=YCOA2GWyplY' target='_blank'>"
+            + "<div class='badge'><p style='padding-left:3px'>"
+            + "<img src='" + _rootDomain + "/framework/images/video-ad.png' /></p>"
+            + "<p><strong>Watch UCSF Profiles video introduction!</strong></p></div></a></li>";
     // for individual profile pages
     if ($('.basicInfo').length) {
         var badge = "<ul id='badge'>" + chattergroup + chatterfollow + "</ul>";
@@ -121,7 +125,7 @@
     }
     // for search form pages
     if ($('.nonavbar').length && !$('#FSSiteDescription').length) {
-        var badge = "<ul id='badge'>" + chattergroup + chatterfollow + mentor + links + "</ul>";
+        var badge = "<ul id='badge'>" + chattergroup + chatterfollow + mentor + links + videointro + "</ul>";
         $(badge).insertAfter('.profilesContentPassive');
         var login = $('#ctl00_ContentActive_rptActive_ctl00_ctl00_panelMenu li:last-child a').attr('href');
         $('.chatterlink').attr('href', login);

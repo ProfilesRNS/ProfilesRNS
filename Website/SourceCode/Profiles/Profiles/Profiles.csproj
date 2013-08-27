@@ -153,6 +153,7 @@
     <Content Include="Framework\Images\collapseRound.gif" />
     <Content Include="Framework\Images\expandRound.gif" />
     <Content Include="Framework\Images\favicon.gif" />
+    <Content Include="Framework\Images\video-ad.png" />
     <Content Include="ORNG\Images\gadgetcollapse.gif" />
     <Content Include="ORNG\Images\gadgetexpand.gif" />
     <Content Include="Framework\Images\glyphicons-halflings.png" />

@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemWeb", "..\SemWeb\src\Sem
 		{3558968D-7E06-4351-AEEE-74A6BC975A74} = {3558968D-7E06-4351-AEEE-74A6BC975A74}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfilesSecureAPI", "..\ProfilesSecureAPI\ProfilesSecureAPI.csproj", "{BE990BEC-75C3-4D0C-8260-0FBB95AA1BAA}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 11
@@ -135,6 +137,12 @@ Global
 		{98EA8780-0045-41A4-BAA1-575582B92BCC}.Default|Any CPU.Build.0 = Debug|Any CPU
 		{98EA8780-0045-41A4-BAA1-575582B92BCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98EA8780-0045-41A4-BAA1-575582B92BCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE990BEC-75C3-4D0C-8260-0FBB95AA1BAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE990BEC-75C3-4D0C-8260-0FBB95AA1BAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE990BEC-75C3-4D0C-8260-0FBB95AA1BAA}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE990BEC-75C3-4D0C-8260-0FBB95AA1BAA}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{BE990BEC-75C3-4D0C-8260-0FBB95AA1BAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE990BEC-75C3-4D0C-8260-0FBB95AA1BAA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

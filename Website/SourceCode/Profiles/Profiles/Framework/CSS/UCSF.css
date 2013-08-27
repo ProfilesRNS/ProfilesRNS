@@ -109,6 +109,8 @@ h1 a:hover { color: #457272; text-decoration: none; }
 *+html .listTablePagination { width: 678px; margin-bottom: 40px; }
 .listTablePaginationFL img { margin-top: 4px; } 
 .listTablePaginationFL img { margin-top: 5px\9; } 
+#ctl00_ContentMain_rptMain_ctl00_ctl00_pnlProxySearchResults tr td:first-child { 
+  color: #0088CC; font-weight: bold; }
 
 #defaultmenu, #minisearch { display: none; } 
 .SupportText { border: none; }

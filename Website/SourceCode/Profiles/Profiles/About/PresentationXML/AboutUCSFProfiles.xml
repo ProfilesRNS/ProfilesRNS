@@ -65,8 +65,9 @@
  </td>
  </tr>
  <tr>
-  <td colspan="3" align="center" style="padding:15px 0 20px;">
-    <a href="NewFeatures.aspx"><img src="images/newfeatures.gif" alt="New Features" style="border:none;margin-left:192px\9;" /></a>
+  <td colspan="3" align="center" style="padding:5px 0 20px;">
+    <h2>Watch this short introduction video!</h2>
+    <iframe width="560" height="325" src="//www.youtube.com/embed/YCOA2GWyplY" frameborder="0" allowfullscreen="true"></iframe>
   </td>
  </tr>
  <tr>
