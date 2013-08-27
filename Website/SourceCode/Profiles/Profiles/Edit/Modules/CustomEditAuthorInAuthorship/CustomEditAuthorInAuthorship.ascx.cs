@@ -292,7 +292,7 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
             Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
 
 
-            data.DeleteOnePublication(Convert.ToInt32(Session["ProfileUsername"]), key, this.PropertyListXML);
+            data.DeleteOnePublication(Convert.ToInt32(Session["ProfileUsername"]), key);
             this.Counter = 0;
             grdEditPublications.DataBind();
             upnlEditSection.Update();
@@ -414,7 +414,7 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
                     data.AddPublication(pmid, node.OuterXml);
 
                 // Assign the user to the publication
-                data.AddPublication(_personId, Convert.ToInt32(pmid), this.PropertyListXML);
+                data.AddPublication(_personId, Convert.ToInt32(pmid));
 
             }
             this.Counter = 0;
@@ -851,8 +851,8 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
                     phPubPageNumbers.Visible = true;
                     phNewsSection.Visible = true;
 
-                    lblTitle.Text = "Title of Article";
-                    lblTitle2.Text = "Title of Publication";
+                    lblTitle.Text = "Title of Publication";
+                    lblTitle2.Text = "Title of Article";
                     break;
                 case "Patents":
                     phPublisherNumbers.Visible = true;
@@ -967,7 +967,7 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
             {
                 myParameters.Add("@PersonID", _personId);
                 myParameters.Add("@created_by", _personId);
-                data.AddCustomPublication(myParameters, _personId, this.PropertyListXML);
+                data.AddCustomPublication(myParameters, _personId);
             }
             this.Counter = 0;
             grdEditPublications.DataBind();

@@ -26,23 +26,36 @@ namespace Profiles.ORNG.Utilities
 
         public SqlDataReader GetGadgetViewRequirements(int appId)
         {
-            string sql = "select page, [view], chromeId, visibility, display_order, opt_params from [ORNG].[AppViews] where appId = " + appId;
+            string sql = "select page, [view], chromeId, visibility, display_order, opt_params from [ORNG.].[AppViews] where appId = " + appId;
             SqlDataReader sqldr = this.GetSQLDataReader("ProfilesDB", sql, CommandType.Text, CommandBehavior.CloseConnection, null);
             return sqldr;
         }
 
-        public SqlDataReader GetRegisteredApps(string personId)
+        public SqlDataReader GetRegisteredApps(string uri)
         {
-            string sql = "select appId, visibility from [ORNG].[AppRegistry] where personId = '" + personId + "';";
+            string sql = "select appId, visibility from [ORNG.].[AppRegistry] where nodeId = " + uri.Substring(uri.LastIndexOf('/') + 1);
             SqlDataReader sqldr = this.GetSQLDataReader("ProfilesDB", sql, CommandType.Text, CommandBehavior.CloseConnection, null);
             return sqldr;
         }
 
         public SqlDataReader GetGadgets()
         {
-            string sql = "select appId, name, url, enabled from [ORNG].[Apps]";
+            string sql = "select appId, name, url, enabled from [ORNG.].[Apps]";
             SqlDataReader sqldr = this.GetSQLDataReader("ProfilesDB", sql, CommandType.Text, CommandBehavior.CloseConnection, null);
             return sqldr;
+        }
+
+        public Int64 GetNodeId(Int32 personid)
+        {
+            string sql = "select nodeid from [RDF.Stage].[InternalNodeMap] where Class = 'http://xmlns.com/foaf/0.1/Person' and InternalID = " + personid;
+            using (SqlDataReader sqldr = this.GetSQLDataReader("ProfilesDB", sql, CommandType.Text, CommandBehavior.CloseConnection, null))
+            {
+                if (sqldr.Read())
+                {
+                    return sqldr.GetInt64(0);
+                }
+            }
+            return -1;
         }
 
         public void ExecuteSQLDataCommand(string sqltext)

@@ -61,8 +61,10 @@
         <asp:HiddenField ID="hiddenSubjectID" runat="server" />
         <asp:UpdateProgress ID="updateProgress" runat="server">
             <ProgressTemplate>
-                <div class="progress">
-                    <span><img alt="Loading..." src="../edit/images/loader.gif" /></span>
+                <div style="position: fixed; text-align: center; height: 100px; width: 100px; top: 0;
+                    right: 0; left: 0; z-index: 9999999; opacity: 0.7;">
+                    <span style="border-width: 0px; position: fixed; padding: 50px; background-color: #FFFFFF;
+                        font-size: 25px; left: 40%; top: 40%;"><img alt="Loading..." src="../edit/images/loader.gif" /></span>
                 </div>
             </ProgressTemplate>
         </asp:UpdateProgress>
@@ -83,7 +85,7 @@
                     </asp:PlaceHolder>
                     <asp:PlaceHolder ID="phAddByURL" runat="server">
                         <div style="padding-bottom: 10px;">
-                            <asp:ImageButton runat="server" ID="imgAddArror" ImageUrl="~/Framework/Images/icon_squareArrow.gif"
+                            <asp:ImageButton runat="server" ID="imgAddArror" ImageUrl="../../../Framework/Images/icon_squareArrow.gif"
                                 OnClick="btnAddByURI_OnClick" />&nbsp;
                             <asp:LinkButton ID="btnEditProperty" runat="server" CommandArgument="Show" OnClick="btnAddByURI_OnClick"
                                 CssClass="profileHypLinks">Add Item By URL</asp:LinkButton>
@@ -92,7 +94,7 @@
                     </asp:PlaceHolder>
                     <asp:PlaceHolder ID="phAddBySearch" runat="server">
                         <div style="padding-bottom: 10px;">
-                            <asp:ImageButton runat="server" ID="imgAddSearch" ImageUrl="~/Framework/Images/icon_squareArrow.gif"
+                            <asp:ImageButton runat="server" ID="imgAddSearch" ImageUrl="../../../Framework/Images/icon_squareArrow.gif"
                                 OnClick="btnAddBySearch_OnClick" />&nbsp;
                             <asp:LinkButton ID="LinkButton1" runat="server" CommandArgument="Show" OnClick="btnAddBySearch_OnClick"
                                 CssClass="profileHypLinks">Add Item by Search</asp:LinkButton>
@@ -101,7 +103,7 @@
                     </asp:PlaceHolder>
                     <asp:PlaceHolder ID="phAddNew" runat="server">
                         <div style="padding-bottom: 10px;">
-                            <asp:ImageButton runat="server" ID="imgAddNew" ImageUrl="~/Framework/Images/icon_squareArrow.gif"
+                            <asp:ImageButton runat="server" ID="imgAddNew" ImageUrl="../../../Framework/Images/icon_squareArrow.gif"
                                 OnClick="btnAddNew_OnClick" />&nbsp;
                             <asp:LinkButton ID="lnkAddNew" runat="server" CommandArgument="Show" OnClick="btnAddNew_OnClick"
                                 CssClass="profileHypLinks">Add New Item</asp:LinkButton>

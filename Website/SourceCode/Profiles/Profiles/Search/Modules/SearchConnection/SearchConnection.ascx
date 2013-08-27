@@ -56,7 +56,7 @@
     </div>    
     <asp:Panel runat="server" ID="pnlDirectConnection" Visible="false">
     <br />
-        One or more search terms matched the following properties of
+        One or more keywords matched the following properties of
         <asp:Literal runat="server" ID="litPersonURI"></asp:Literal>
         <br />
         <br />
@@ -84,7 +84,7 @@
     </asp:Panel>    
     <asp:Panel runat="server" ID="pnlIndirectConnection" Visible="false">
     <br />
-        One or more search terms matched the following items that are connected to
+        One or more keywords matched the following items that are connected to
         <asp:Literal runat="server" ID="litSubjectName"></asp:Literal>
         <br />
         <br />

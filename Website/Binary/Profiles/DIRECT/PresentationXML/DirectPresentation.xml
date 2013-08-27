@@ -1,0 +1,43 @@
+﻿<Presentation PresentationClass="Network">
+  <PageOptions Columns="3"/>
+  <WindowName>DIRECT</WindowName>
+  <PageTitle>National Search</PageTitle>
+  <PageBackLinkName>Back to Local Search</PageBackLinkName>
+  <PageBackLinkURL>~/search/default.aspx</PageBackLinkURL>
+  <PageSubTitle>Distributed Interoperable Research Experts Collaboration Tool (DIRECT)</PageSubTitle>
+  <PageDescription>DIRECT is pilot project to demonstrate federated search across multiple institutions.</PageDescription>
+  <PanelList>
+    <Panel type="header" />
+    <Panel type="page" />
+    <Panel Type="active">
+      <Module ID="MiniSearch"/>
+      <Module ID="MainMenu">
+      </Module>
+    </Panel>
+    <Panel Type="main">
+      <Module ID="DirectSearch" >        
+      </Module>
+    </Panel>
+    <Panel Type="passive">
+      <Module ID="HTMLBlock">
+        <ParamList>
+          <Param Name="HTML">
+            <div class="passiveSectionHead">
+              <div style="white-space: nowrap;display:inline">
+                Data Comments
+              </div>
+              <br></br>
+            </div>
+            <div class="passiveSectionBody">
+              <div id="FSSiteDescription">
+                Important information about an institution's data will appear here when you place
+                your mouse over the institution's name.
+              </div>             
+            </div>          
+          </Param>
+        </ParamList>        
+      </Module>
+    </Panel>
+    <Panel type="footer" />
+  </PanelList>
+</Presentation>

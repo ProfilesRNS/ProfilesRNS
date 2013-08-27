@@ -15,13 +15,13 @@ namespace Profiles
         {
             if (Request.QueryString["person"] != null)
             {
-                // need to convert personid to nodeid
-                // send them to the pretty URL
+                // need to convert personid to nodeid!!!.  Doesn't really make sense to use an ORNG DataIO to do this, but since we don't have one in Framework that is what we do
+                Int64 nodeId = new Profiles.ORNG.Utilities.DataIO().GetNodeId(Convert.ToInt32(Request.QueryString["person"].ToString()));
+                // send them to the new location wiht a 301, this is better for SEO than a standard Response.SendRedirect call
                 Response.Status = "301 Moved Permanently";
-                Response.AddHeader("Location", Root.Domain + "/" + UCSFIDSet.ByPersonId[Convert.ToInt64(Request.QueryString["person"])].PrettyURL);
+                Response.AddHeader("Location", Root.Domain + "/display/" + nodeId);
+                Response.End();
             }
-
-            Response.End();
         }
     }
 }

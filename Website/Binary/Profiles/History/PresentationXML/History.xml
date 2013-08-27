@@ -1,0 +1,25 @@
+﻿<Presentation PresentationClass="network">
+  <PageOptions Columns="2"/>
+  <WindowName>Site Navigation History</WindowName>
+  <PageTitle>Site Navigation History</PageTitle>
+  <PageBackLinkName></PageBackLinkName>
+  <PageBackLinkURL></PageBackLinkURL>
+  <PageSubTitle></PageSubTitle>
+  <PageDescription>    
+  </PageDescription>
+  <PanelList>
+    <Panel type="header"  />
+    <Panel type="page" />
+    <Panel Type="active">
+      <Module ID="MiniSearch" />
+      <Module ID="MainMenu">
+      </Module>
+    </Panel>
+    <Panel Type="main" TabType="Default" TabSort="0">
+      <Module ID="HistoryList">
+      </Module>
+    </Panel>    
+    <Panel type="footer" />
+  </PanelList>
+</Presentation>
+

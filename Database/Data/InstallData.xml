@@ -15530,8 +15530,8 @@
       <CustomDisplay>1</CustomDisplay>
       <CustomEdit>1</CustomEdit>
       <ViewSecurityGroup>-10</ViewSecurityGroup>
-      <EditSecurityGroup>-40</EditSecurityGroup>
-      <EditPermissionsSecurityGroup>-40</EditPermissionsSecurityGroup>
+      <EditSecurityGroup>-20</EditSecurityGroup>
+      <EditPermissionsSecurityGroup>-20</EditPermissionsSecurityGroup>
       <EditExistingSecurityGroup>-40</EditExistingSecurityGroup>
       <EditAddNewSecurityGroup>-40</EditAddNewSecurityGroup>
       <EditAddExistingSecurityGroup>-40</EditAddExistingSecurityGroup>
@@ -16186,8 +16186,8 @@
       <CustomDisplay>1</CustomDisplay>
       <CustomEdit>1</CustomEdit>
       <ViewSecurityGroup>-1</ViewSecurityGroup>
-      <EditSecurityGroup>-40</EditSecurityGroup>
-      <EditPermissionsSecurityGroup>-40</EditPermissionsSecurityGroup>
+      <EditSecurityGroup>-20</EditSecurityGroup>
+      <EditPermissionsSecurityGroup>-20</EditPermissionsSecurityGroup>
       <EditExistingSecurityGroup>-40</EditExistingSecurityGroup>
       <EditAddNewSecurityGroup>-40</EditAddNewSecurityGroup>
       <EditAddExistingSecurityGroup>-40</EditAddExistingSecurityGroup>
@@ -23203,6 +23203,13 @@
                 </ParamList>
               </Module>
               <Module ID="CustomViewPersonSameDepartment" />
+              <Module ID="Gadgets">
+                <ParamList>
+                  <Param Name="HTML">
+                    <div id="gadgets-tools" class="gadgets-gadget-parent" />
+                  </Param>
+                </ParamList>
+              </Module>
               <Module ID="PassiveList">
                 <ParamList>
                   <Param Name="InfoCaption">Physical Neighbors</Param>
@@ -23230,7 +23237,7 @@
       <presentationXML>
         <Presentation PresentationClass="network">
           <PageOptions Columns="3" />
-          <WindowName>{{{rdf:RDF[1]/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:firstName}}} {{{rdf:RDF[1]/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:lastName}}}</WindowName>
+          <WindowName>{{{rdf:RDF[1]/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:firstName}}} {{{rdf:RDF[1]/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:lastName}}}'s co-authors</WindowName>
           <PageColumns>3</PageColumns>
           <PageTitle>{{{rdf:RDF[1]/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:firstName}}} {{{rdf:RDF[1]/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:lastName}}}</PageTitle>
           <PageBackLinkName>Back to Profile</PageBackLinkName>
@@ -23373,7 +23380,7 @@
       <presentationXML>
         <Presentation PresentationClass="network">
           <PageOptions Columns="3" />
-          <WindowName>{{{rdf:RDF[1]/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:firstName}}} {{{rdf:RDF[1]/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:lastName}}}</WindowName>
+          <WindowName>{{{rdf:RDF[1]/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:firstName}}} {{{rdf:RDF[1]/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:lastName}}}'s related authors</WindowName>
           <PageColumns>3</PageColumns>
           <PageTitle>{{{rdf:RDF[1]/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:firstName}}} {{{rdf:RDF[1]/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:lastName}}}</PageTitle>
           <PageBackLinkName>Back to Profile</PageBackLinkName>
@@ -23504,7 +23511,7 @@
       <presentationXML>
         <Presentation PresentationClass="network">
           <PageOptions Columns="3" />
-          <WindowName>{{{//rdf:RDF/rdf:Description[@rdf:about= ../rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:firstName}}} {{{//rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:lastName}}}</WindowName>
+          <WindowName>{{{//rdf:RDF/rdf:Description[@rdf:about= ../rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:firstName}}} {{{//rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:lastName}}}'s research topics</WindowName>
           <PageColumns>3</PageColumns>
           <PageTitle>{{{//rdf:RDF/rdf:Description[@rdf:about= ../rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:firstName}}} {{{//rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:lastName}}}</PageTitle>
           <PageBackLinkName>Back to Profile</PageBackLinkName>
@@ -26558,6 +26565,14 @@
       <SiteName>Weill Cornell Medical College</SiteName>
       <QueryURL>http://vivoexperts.ctsi.ufl.edu/weill_fs.php?return=xml&amp;querytext=</QueryURL>
       <SortOrder>45</SortOrder>
+      <IsActive>1</IsActive>
+    </Row>
+	<Row>
+      <SiteID>46</SiteID>
+      <BootstrapURL>http://profiles.umassmed.edu/profiles/Direct.xml</BootstrapURL>
+      <SiteName>University of Massachusetts Medical School</SiteName>
+      <QueryURL>http://profiles.umassmed.edu/profiles/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
+      <SortOrder>46</SortOrder>
       <IsActive>1</IsActive>
     </Row>
   </Table>

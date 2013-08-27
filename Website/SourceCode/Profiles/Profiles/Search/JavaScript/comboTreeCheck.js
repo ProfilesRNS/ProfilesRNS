@@ -67,7 +67,6 @@ function ShowDetailContent(controlID, masterID) {
     var l_main = GetCTCMainDiv(controlID);
     var l_MasterDiv = $("div[id=divMaster_CTC" + masterID + "]", l_main).get(0);
     checkExpandCTC(l_MasterDiv, true);
-
 }
 
 function checkExpandCTC(masterDiv, modify) {
@@ -87,12 +86,13 @@ function checkExpandCTC(masterDiv, modify) {
     }
 }
 
-function ClickCheckBox(controlID, sender) {
+function ClickCheckBox(controlID, sender) {    
     UpadateAllCTC(controlID, false);
 }
 
 
-function UpadateAllCTC(controlID, expandUpdate) {
+function UpadateAllCTC(controlID, expandUpdate) {    
+    
     var l_main = GetCTCMainDiv(controlID);
     var l_AllMains = $("div[id*=divMaster_CTC]", l_main);
 
@@ -141,7 +141,7 @@ function UpadateAllCTC(controlID, expandUpdate) {
     }
 
     if (l_HeaderText == "") {
-        $('#selOtherOptions')[0].children[0].innerHTML = "&nbsp;&nbsp;-- Select Options --&nbsp;&nbsp;";
+        $('#selOtherOptions')[0].children[0].innerHTML = "";
     }
     else {
         $('#selOtherOptions')[0].children[0].innerHTML = l_HdnSelectText.value;
@@ -202,7 +202,7 @@ ProfilesRNS.setOtherOptionsDisplayBox = function() {
         if (chk.checked) txtSelection.push(chk.nextSibling.innerHTML);
     });
     if (txtSelection.length == 0) {
-        $('#selOtherOptions')[0].children[0].innerHTML = "&nbsp;&nbsp;-- Select Options --&nbsp;&nbsp;";
+        $('#selOtherOptions')[0].children[0].innerHTML = "";
     } else {
         $('#selOtherOptions')[0].children[0].innerHTML = txtSelection.join(", ");
     }

@@ -1,13 +1,12 @@
 ﻿<Presentation PresentationClass="profile">
   <PageOptions Columns="2"/>
   <WindowName>Error</WindowName> 
-  <PageTitle>Ooops. Something went wrong.</PageTitle>
+  <PageTitle>Error</PageTitle>
   <PageBackLinkName></PageBackLinkName>
   <PageBackLinkURL></PageBackLinkURL>
   <PageSubTitle></PageSubTitle>
   <PageDescription>
-    We’re sorry for this inconvenience. The website administrator has been notified. Please check back in a few minutes.
-  </PageDescription>  
+    An application error has occurred</PageDescription>  
   <PanelList>
     <Panel type="header"  />
     <Panel type="page" />

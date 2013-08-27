@@ -104,7 +104,7 @@ namespace Profiles.Profile.Utilities
                         xmlrtn.LoadXml(xmlstr);
 
                         //Framework.Utilities.Cache.Set(request.Key + "|data", xmlrtn);
-                        Framework.Utilities.Cache.Set(request.Key + "|data", xmlrtn, request.Subject);
+                        Framework.Utilities.Cache.Set(request.Key + "|data", xmlrtn, request.Subject, request.Session.SessionID);
                         xmlstr = string.Empty;
 
                     }
@@ -112,7 +112,7 @@ namespace Profiles.Profile.Utilities
                     {
                         HTTPIO httpio = new HTTPIO();
                         xmlrtn = httpio.QueryHTTPIO(request);
-                        Framework.Utilities.Cache.Set(request.Key + "|data", xmlrtn, 0);
+                        Framework.Utilities.Cache.Set(request.Key + "|data", xmlrtn);
                     }
                 }
 
@@ -249,7 +249,7 @@ namespace Profiles.Profile.Utilities
 
                     xmlrtn.LoadXml(xmlstr);
 
-                    Framework.Utilities.Cache.Set(key + "|propertylist", xmlrtn, 0);
+                    Framework.Utilities.Cache.Set(key + "|propertylist", xmlrtn);
                     xmlstr = string.Empty;
 
 
@@ -276,19 +276,53 @@ namespace Profiles.Profile.Utilities
 
         #region "Profile Photo"
 
-        public byte[] GetUserPhotoList(Int64 NodeID)
+        public System.IO.Stream GetUserPhotoList(Int64 NodeID, bool harvarddefault)
         {
-            using (SqlConnection dbconnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString))
+            Object result = null;
+            Edit.Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
+            //Use the editor method to resize the photo to 150.
+            Edit.Utilities.DataIO resize = new Profiles.Edit.Utilities.DataIO();
+
+            try
             {
+                string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+
+
+                SqlConnection dbconnection = new SqlConnection(connstr);
                 dbconnection.Open();
 
-                SqlCommand dbcommand = new SqlCommand("[Profile.Data].[Person.GetPhotos]");
-                dbcommand.CommandType = CommandType.StoredProcedure;
-                dbcommand.CommandTimeout = base.GetCommandTimeout();
-                dbcommand.Parameters.Add(new SqlParameter("@NodeID", NodeID));
+                SqlCommand dbcommand;
+                if (harvarddefault)
+                {
+                    dbcommand = new SqlCommand("select photo from [Catalyst.].[Person.Photo] where personid = " + data.GetPersonID(NodeID).ToString());
+                    dbcommand.CommandType = CommandType.Text;
+                    dbcommand.CommandTimeout = base.GetCommandTimeout();
+                }
+                else
+                {
+                    dbcommand = new SqlCommand("[Profile.Data].[Person.GetPhotos]");
+                    dbcommand.CommandType = CommandType.StoredProcedure;
+                    dbcommand.CommandTimeout = base.GetCommandTimeout();
+                    dbcommand.Parameters.Add(new SqlParameter("@NodeID", NodeID));
+                }
                 dbcommand.Connection = dbconnection;
-                return (byte[])dbcommand.ExecuteScalar();
+
+                result = resize.ResizeImageFile((byte[])dbcommand.ExecuteScalar(), 150);
+
+                if (result == null)
+                {
+                    result = (byte[])System.Text.Encoding.ASCII.GetBytes("null");
+                }
+
+                dbconnection.Close();
+
             }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return new System.IO.MemoryStream((byte[])result);
         }
 
         #endregion
@@ -424,7 +458,7 @@ namespace Profiles.Profile.Utilities
                     html.AppendLine("</ul>");
 
 
-                    Framework.Utilities.Cache.Set(connectiontype + node1.ToString() + node2.ToString() + concept, html.ToString(), 0);
+                    Framework.Utilities.Cache.Set(connectiontype + node1.ToString() + node2.ToString() + concept, html.ToString());
 
 
 

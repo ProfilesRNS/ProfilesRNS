@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+
+Copyright (c) 2008-2012 by the President and Fellows of Harvard College. All rights reserved.
+Profiles Research Networking Software was developed under the supervision of Griffin M Weber, MD, PhD.,
+and Harvard Catalyst: The Harvard Clinical and Translational Science Center, with support from the
+National Center for Research Resources and Harvard University.
+
+
+Code licensed under a BSD License.
+For details, see: LICENSE.txt
+-->
+<ModuleList>
+  <Module ModulePath="Modules" NameSpace="EditObjectTypeProperty" FileName="EditObjectTypeProperty.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="EditPropertyList" FileName="EditPropertyList.ascx" Enabled="true"/>  
+  <Module ModulePath="Modules" NameSpace="EditPropertyContainer" FileName="EditPropertyContainer.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="EditDataTypeProperty" FileName="EditDataTypeProperty.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="CustomEditAwardOrHonor" FileName="CustomEditAwardOrHonor.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="CustomEditAuthorInAuthorship" FileName="CustomEditAuthorInAuthorship.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="EditVisibilityOnly" FileName="EditVisibilityOnly.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="CustomEditMainImage" FileName="CustomEditMainImage.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="CustomEditMailingAddress" FileName="CustomEditMailingAddress.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="CustomEditMailingAddress" FileName="CustomEditMailingAddress.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="CustomEditEmail" FileName="CustomEditEmail.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="CustomEditMentoringCompletedStudentProject" FileName="CustomEditMentoringCompletedStudentProject.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="CustomEditMentoringCurrentStudentOpportunity" FileName="CustomEditMentoringCurrentStudentOpportunity.ascx" Enabled="true"/>
+
+  
+
+</ModuleList>

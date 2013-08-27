@@ -28,24 +28,37 @@ using Profiles.Framework.Utilities;
 
 namespace Profiles.Edit.Utilities
 {
-
     public class DataIO : Framework.Utilities.DataIO
     {
         public int GetPersonID(Int64 nodeid)
         {
-            int personid = 0;
+            SessionManagement sm = new SessionManagement();
+            string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
 
-            using (SqlDataReader reader = GetDBCommand(ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString, "select i.internalid from [RDF.Stage].internalnodemap i with(nolock) where i.nodeid = " + nodeid.ToString(), CommandType.Text, CommandBehavior.CloseConnection, null).ExecuteReader())
+            using (SqlConnection dbconnection = new SqlConnection(connstr))
             {
-                while (reader.Read())
+                int personid = 0;
+
+                try
                 {
-                    personid = Convert.ToInt32(reader[0]);
+                    dbconnection.Open();
+                    //For Output Parameters you need to pass a connection object to the framework so you can close it before reading the output params value.
+                    using (SqlDataReader reader = GetDBCommand(connstr, "select i.internalid from  [RDF.Stage].internalnodemap i with(nolock) where i.nodeid = " + nodeid.ToString(), CommandType.Text, CommandBehavior.CloseConnection, null).ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            personid = Convert.ToInt32(reader[0]);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Framework.Utilities.DebugLogging.Log(e.Message + e.StackTrace);
+                    throw new Exception(e.Message);
                 }
 
-                reader.Close();
+                return personid;
             }
-
-            return personid;
         }
 
         public bool CheckPublicationExists(string mpid)
@@ -115,7 +128,8 @@ namespace Profiles.Edit.Utilities
 
                 if (HttpContext.Current.Request.QueryString["subjectid"] != null)
                 {
-                    Framework.Utilities.Cache.ClearDependentItems(HttpContext.Current.Request.QueryString["subjectid"].ToString());
+                    Framework.Utilities.Cache.AlterDependency(HttpContext.Current.Request.QueryString["subjectid"].ToString());
+
                 }
 
 
@@ -163,9 +177,8 @@ namespace Profiles.Edit.Utilities
 
         }
 
-        public void AddPublication(int userid, int pmid, XmlDocument PropertyListXML)
+        public void AddPublication(int userid, int pmid)
         {
-            ActivityLog(PropertyListXML, userid, "PMID", "" + pmid);
 
             SessionManagement sm = new SessionManagement();
             string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
@@ -242,9 +255,8 @@ namespace Profiles.Edit.Utilities
 
         }
 
-        public void DeleteOnePublication(int personid, string pubid, XmlDocument PropertyListXML)
+        public void DeleteOnePublication(int personid, string pubid)
         {
-            ActivityLog(PropertyListXML, personid, "PubID", pubid);
             string skey = string.Empty;
             string sparam = string.Empty;
 
@@ -328,9 +340,8 @@ namespace Profiles.Edit.Utilities
 
         }
 
-        public void AddCustomPublication(Hashtable parameters, int personid, XmlDocument PropertyListXML)
+        public void AddCustomPublication(Hashtable parameters, int personid)
         {
-            ActivityLog(PropertyListXML, personid, parameters["@HMS_PUB_CATEGORY"].ToString(), parameters["@PUB_TITLE"].ToString());
             string skey = string.Empty;
             string sparam = string.Empty;
 
@@ -483,13 +494,12 @@ namespace Profiles.Edit.Utilities
 
 
 
-        public bool SaveImage(Int32 personid, byte[] image, XmlDocument PropertyListXML)
+        public bool SaveImage(Int32 personid, byte[] image)
         {
-            ActivityLog(PropertyListXML, personid);
             SessionManagement sm = new SessionManagement();
             string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
 
-            image = this.ResizeImageFile(image, 150, 300);
+            image = this.ResizeImageFile(image, 150);
 
             SqlConnection dbconnection = new SqlConnection(connstr);
 
@@ -527,26 +537,19 @@ namespace Profiles.Edit.Utilities
 
         }
 
-        public byte[] ResizeImageFile(byte[] imageFile, int targetWidth, int targetHeight)
+        public byte[] ResizeImageFile(byte[] imageFile, int targetSize)
         {
             System.Drawing.Image original = System.Drawing.Image.FromStream(new System.IO.MemoryStream(imageFile));
             int targetH, targetW;
-            // if it is too tall and tall and skinny
-            if (original.Height > targetHeight && ((float)original.Height / (float)original.Width) > ((float)targetHeight / (float)targetWidth))
+            if (original.Height > original.Width)
             {
-                targetH = targetHeight;
-                targetW = (int)(original.Width * ((float)targetHeight / (float)original.Height));
+                targetH = targetSize;
+                targetW = (int)(original.Width * ((float)targetSize / (float)original.Height));
             }
-            // if it is too wide
-            else if (original.Width > targetWidth)
+            else
             {
-                targetW = targetWidth;
-                targetH = (int)(original.Height * ((float)targetWidth / (float)original.Width));
-            }
-            else // leave it as is
-            {
-                targetH = original.Height;
-                targetW = original.Width;
+                targetW = targetSize;
+                targetH = (int)(original.Height * ((float)targetSize / (float)original.Width));
             }
             System.Drawing.Image imgPhoto = System.Drawing.Image.FromStream(new System.IO.MemoryStream(imageFile));
             // Create a new blank canvas.  The resized image will be drawn on this canvas.
@@ -625,8 +628,7 @@ namespace Profiles.Edit.Utilities
 
                 error = Convert.ToBoolean(param[5].Value);
 
-                Framework.Utilities.Cache.ClearDependentItems(subjectid);
-
+                Framework.Utilities.Cache.AlterDependency(subjectid.ToString());
 
                 if (error)
                     Framework.Utilities.DebugLogging.Log("Delete Triple blew up with the following values -- {[RDF.].DeleteTriple} DeleteInverse: 1 SubjectID:" + subjectid.ToString() + " PredicateID:" + predicateid.ToString() + " ObjectID:" + objectid.ToString() + " SessionID:" + sm.Session().SessionID);
@@ -721,11 +723,8 @@ namespace Profiles.Edit.Utilities
             return Convert.ToInt64(param[4].Value.ToString());
 
         }
-
-        public bool AddLiteral(Int64 subjectid, Int64 predicateid, Int64 objectid, XmlDocument PropertyListXML)
+        public bool AddLiteral(Int64 subjectid, Int64 predicateid, Int64 objectid)
         {
-            // UCSF
-            ActivityLog(PropertyListXML, GetPersonID(subjectid));
 
             bool error = false;
             try
@@ -832,10 +831,8 @@ namespace Profiles.Edit.Utilities
 
         }
 
-        public bool UpdateLiteral(Int64 subjectid, Int64 predicateid, Int64 oldobjectid, Int64 newobjectid, XmlDocument PropertyListXML)
+        public bool UpdateLiteral(Int64 subjectid, Int64 predicateid, Int64 oldobjectid, Int64 newobjectid)
         {
-            // UCSF
-            ActivityLog(PropertyListXML, GetPersonID(subjectid));
             SessionManagement sm = new SessionManagement();
 
             bool error = false;
@@ -875,9 +872,8 @@ namespace Profiles.Edit.Utilities
         }
 
         public bool AddAward(Int64 subjectid, string label, string institution,
-                    string startdate, string enddate, XmlDocument PropertyListXML)
+                    string startdate, string enddate)
         {
-            ActivityLog(PropertyListXML, GetPersonID(subjectid), label, institution);
             bool error = false;
             try
             {
@@ -1019,8 +1015,7 @@ namespace Profiles.Edit.Utilities
 
                 error = Convert.ToBoolean(param[sarr.Length - 2].Value);
 
-                Framework.Utilities.Cache.ClearDependentItems(sarr.AwardOrHonorForID.Value.ToString());
-
+                Framework.Utilities.Cache.AlterDependency(sarr.AwardOrHonorForID.Value.ToString());
             }
             catch (Exception e)
             {
@@ -1147,7 +1142,7 @@ namespace Profiles.Edit.Utilities
                 }
                 error = Convert.ToBoolean(param[str.Length - 1].Value);
 
-                Framework.Utilities.Cache.ClearDependentItems(str.Subject.Value.ToString());
+                Framework.Utilities.Cache.AlterDependency(str.Subject.Value.ToString());
 
             }
             catch (Exception e)
@@ -1162,7 +1157,6 @@ namespace Profiles.Edit.Utilities
 
         public bool UpdateSecuritySetting(Int64 subjectid, Int64 predicateid, int securitygroup)
         {
-            ActivityLog(GetPersonID(subjectid), GetProperty(predicateid), "" + securitygroup);
 
             string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
             SqlConnection dbconnection = new SqlConnection(connstr);
@@ -1191,7 +1185,8 @@ namespace Profiles.Edit.Utilities
                 if (dbconnection.State != ConnectionState.Closed)
                     dbconnection.Close();
 
-                Framework.Utilities.Cache.ClearDependentItems(subjectid);
+                Framework.Utilities.Cache.AlterDependency(subjectid.ToString());
+
             }
             catch (Exception e)
             {
@@ -1491,33 +1486,5 @@ namespace Profiles.Edit.Utilities
         }
         #endregion
 
-        #region UCSF ActivityLog
-        protected void ActivityLog(XmlDocument PropertyListXML)
-        {
-            ActivityLog(PropertyListXML, -1, null, null);
-        }
-
-        protected void ActivityLog(XmlDocument PropertyListXML, int personId)
-        {
-            ActivityLog(PropertyListXML, personId, null, null);
-        }
-
-        protected void ActivityLog(XmlDocument PropertyListXML, int personId, string param1, string param2)
-        {
-            if (Convert.ToBoolean(ConfigurationSettings.AppSettings["ActivityLog"]) == true)
-            {
-                string property = null;
-                string privacyCode = null;
-                if (PropertyListXML != null)
-                {
-                    if (PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@URI") != null)
-                        property = PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@URI").Value;
-                    if (PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@ViewSecurityGroup") != null)
-                        privacyCode = PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@ViewSecurityGroup").Value;
-                }
-                ActivityLog(personId, property, privacyCode, param1, param2);
-            }
-        }
-        #endregion
     }
 }

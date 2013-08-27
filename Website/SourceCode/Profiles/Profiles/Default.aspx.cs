@@ -26,7 +26,9 @@ namespace Profiles
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Response.Redirect(Root.Domain + "/search", true);
+            Response.Status = "301 Moved Permanently";
+            Response.AddHeader("Location", Root.Domain + "/search/");
+            Response.End();
         }
     }
 }

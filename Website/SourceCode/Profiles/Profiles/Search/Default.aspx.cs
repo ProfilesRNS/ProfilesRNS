@@ -59,7 +59,7 @@ namespace Profiles.Search
 
                 Utilities.DataIO data = new Profiles.Search.Utilities.DataIO();
 
-                data.SearchRequest("", "", "", "", "", "", "", "", "", "15", "0", "", "", "", "", ref searchrequest);
+                data.SearchRequest("", "", "", "", "", "", "", "", "", "", "", "15", "0", "", "", "", "", ref searchrequest);
 
                 Response.Redirect(Root.Domain + "/search/default.aspx?searchtype=" + this.SearchType + "&searchrequest=" + searchrequest, true);
 
@@ -77,12 +77,6 @@ namespace Profiles.Search
 
                 masterpage.RDFData = null;
                 masterpage.RDFNamespaces = null;
-            }
-            // added by UCSF.  A hack THAT NEEDS TO BE TESTED (try not doing the UrlEncode)
-            else if (Request.QueryString["tab"] == "concept")
-            {
-                Response.Redirect(Root.Domain + "/search/default.aspx?searchtype=everything&searchfor=" + HttpUtility.UrlEncode(Request.Form["txtSearchFor"]) +
-                    "&ClassGroupURI=" + HttpUtility.UrlEncode("http://profiles.catalyst.harvard.edu/ontology/prns!ClassGroupConcepts") + "&perpage=15&offset=");
             }
             else
             {
@@ -185,6 +179,7 @@ namespace Profiles.Search
             string fname = string.Empty;
             string institution = string.Empty;
             string department = string.Empty;
+            string division = string.Empty;
 
             string searchfor = string.Empty;
             string classgroupuri = string.Empty;
@@ -197,6 +192,7 @@ namespace Profiles.Search
             string otherfilters = string.Empty;
             string institutionallexcept = string.Empty;
             string departmentallexcept = string.Empty;
+            string divisionallexcept = string.Empty;
             string exactphrase = string.Empty;
             string nodeuri = string.Empty;
             string nodeid = string.Empty;
@@ -225,6 +221,9 @@ namespace Profiles.Search
             if (Request.QueryString["department"].IsNullOrEmpty() == false)
                 department = Request.QueryString["department"];
 
+            if (Request.QueryString["division"].IsNullOrEmpty() == false)
+                division = Request.QueryString["division"];
+            
             if (Request.QueryString["fname"].IsNullOrEmpty() == false)
                 fname = Request.QueryString["fname"];
 
@@ -298,6 +297,9 @@ namespace Profiles.Search
             if (Request.QueryString["departmentallexcept"].IsNullOrEmpty() == false)
                 departmentallexcept = Request.QueryString["departmentallexcept"];
 
+            if (Request.QueryString["divisionallexcept"].IsNullOrEmpty() == false)
+                divisionallexcept = Request.QueryString["divisionallexcept"];
+
             if (Request.QueryString["exactphrase"].IsNullOrEmpty() == false)
                 exactphrase = Request.QueryString["exactphrase"];
 
@@ -314,14 +316,14 @@ namespace Profiles.Search
                     if (searchrequest != string.Empty)
                         xml.LoadXml(data.DecryptRequest(searchrequest));
                     else
-                        xml = data.SearchRequest(searchfor, "false", classgroupuri, classuri, perpage, offset);
+                        xml = data.SearchRequest(searchfor, exactphrase, classgroupuri, classuri, perpage, offset);
 
                     break;
                 default:                //Person is the default
                     if (searchrequest != string.Empty)
                         xml.LoadXml(data.DecryptRequest(searchrequest));
                     else
-                        xml = data.SearchRequest(searchfor, exactphrase, fname, lname, institution, institutionallexcept, department, departmentallexcept, classuri, perpage, offset, sortby, sortdirection, otherfilters, "", ref searchrequest);
+                        xml = data.SearchRequest(searchfor, exactphrase, fname, lname, institution, institutionallexcept, department, departmentallexcept, division, divisionallexcept, classuri, perpage, offset, sortby, sortdirection, otherfilters, "", ref searchrequest);
                     break;
             }
 

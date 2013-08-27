@@ -14,3 +14,8 @@ C:\Users\nichbrown\Documents\profiles\OpenSource\ProfilesRNS\Code\ProfilesSearch
 C:\Users\nichbrown\Documents\profiles\OpenSource\ProfilesRNS\Code\ProfilesSearchAPI\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\nichbrown\Documents\profiles\OpenSource\ProfilesRNS\Code\ProfilesSearchAPI\obj\Debug\Search.dll
 C:\Users\nichbrown\Documents\profiles\OpenSource\ProfilesRNS\Code\ProfilesSearchAPI\obj\Debug\Search.pdb
+C:\Development\ProfilesRNS-2.0.0\Website\SourceCode\ProfilesSearchAPI\bin\Search.dll
+C:\Development\ProfilesRNS-2.0.0\Website\SourceCode\ProfilesSearchAPI\bin\Search.pdb
+C:\Development\ProfilesRNS-2.0.0\Website\SourceCode\ProfilesSearchAPI\obj\Debug\ResolveAssemblyReference.cache
+C:\Development\ProfilesRNS-2.0.0\Website\SourceCode\ProfilesSearchAPI\obj\Debug\Search.dll
+C:\Development\ProfilesRNS-2.0.0\Website\SourceCode\ProfilesSearchAPI\obj\Debug\Search.pdb

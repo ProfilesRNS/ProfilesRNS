@@ -58,7 +58,7 @@ namespace Profiles.ORNG.Modules.GadgetSandbox
         public GadgetSandbox(XmlDocument pagedata, List<ModuleParams> moduleparams, XmlNamespaceManager pagenamespaces)
         {
            sm = new Profiles.Framework.Utilities.SessionManagement();
-           sandboxPassword = ConfigurationManager.AppSettings["OpenSocial.SandboxPassword"].ToString().Trim();
+           sandboxPassword = ConfigurationManager.AppSettings["ORNG.SandboxPassword"].ToString().Trim();
            if (sandboxPassword != null && sandboxPassword.Length > 0)
            {
                LoadAssets();

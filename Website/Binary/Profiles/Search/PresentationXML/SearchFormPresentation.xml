@@ -1,0 +1,47 @@
+﻿<Presentation PresentationClass="profile">
+  <PageOptions Columns="3"/>
+  <WindowName>Search</WindowName>
+  <PageTitle>Search</PageTitle>
+  <PageBackLinkName></PageBackLinkName>
+  <PageBackLinkURL></PageBackLinkURL>
+  <PageSubTitle></PageSubTitle>
+  <PageDescription></PageDescription>
+  <PanelList>
+    <Panel Type="header"  />
+    <Panel Type="page" />
+    <Panel Type="active">
+      <Module ID="MainMenu">
+      </Module>
+      <Module ID="Gadgets" >
+        <ParamList>
+          <Param Name="HTML">
+            <div id="gadgets-tools-left" class="gadgets-gadget-parent"></div>
+          </Param>
+        </ParamList>
+      </Module>
+    </Panel>
+    <Panel Name="Find People" Alias="people" Type="main" TabType="Default" TabSort="0">
+      <Module ID="SearchPerson">
+      </Module>    
+    </Panel>
+    <Panel Name="Find Everything" Alias="all" Type="main" TabType="Fixed" TabSort="1" >
+      <Module ID="SearchEverything" />        
+    </Panel>
+    <Panel Type="passive" >
+      <Module ID="TopSearchPhrase">
+        <ParamList>
+          <Param Name="Description">Most viewed (today)</Param>
+          <Param Name="TimePeriod">d</Param>
+        </ParamList>
+      </Module>
+      <Module ID="TopSearchPhrase">
+        <ParamList>
+          <Param Name="Description">Most viewed (month)</Param>
+          <Param Name="TimePeriod">m</Param>
+        </ParamList>
+      </Module>
+    </Panel>
+    <Panel type="footer" />
+  </PanelList>
+</Presentation>
+

@@ -1,14 +1,12 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CustomViewPersonGeneralInfo.ascx.cs"
     Inherits="Profiles.Profile.Modules.CustomViewPersonGeneralInfo.CustomViewPersonGeneralInfo" %>
-<table style="margin-top: 15px;">
+<table>
     <tr>
-        <td style="padding-right:30px;padding-top:10px;" align="right" valign="top">
-            <asp:Image itemprop="image" runat="server" ID="imgPhoto" />
-        </td>
-        <td valign="top">
+        <td>
             <asp:Literal runat="server" ID="litPersonalInfo"></asp:Literal>
+        </td>
+        <td style="width:250px;padding-left:25px" align="right" valign="top">
+            <asp:Image itemprop="image" runat="server" ID="imgPhoto" />
         </td>
     </tr>
 </table>
-<div id="toc"><ul></ul></div>
-

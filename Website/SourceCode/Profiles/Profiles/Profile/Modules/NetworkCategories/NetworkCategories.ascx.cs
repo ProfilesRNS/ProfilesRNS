@@ -52,7 +52,7 @@ namespace Profiles.Profile.Modules.NetworkCategories
             RDFTriple request = new RDFTriple(Convert.ToInt64(Request.QueryString["subject"]));
 
 
-            document.LoadXml(data.GetNetworkCategory(request).ToString().Replace("&", "&amp;"));
+            document.LoadXml(data.GetNetworkCategory(request).ToString());
 
             XslCompiledTransform xslt = new XslCompiledTransform();
             XsltArgumentList args = new XsltArgumentList();

@@ -46,7 +46,7 @@ namespace Profiles.Profile.Modules.CustomViewPersonSameDepartment
                 string insitutitionuri = xml.SelectSingleNode("Network/InstitutionURI").InnerText;
                 string searchrequest = string.Empty;
 
-                search.SearchRequest("", "", "", "", insitutitionuri, "", departmenturi, "", "http://xmlns.com/foaf/0.1/Person", "25", "0", "", "", "","", ref searchrequest);
+                search.SearchRequest("", "", "", "", insitutitionuri, "", departmenturi, "", "", "", "http://xmlns.com/foaf/0.1/Person", "25", "0", "", "", "","", ref searchrequest);
 
                 this.SearchRequest = searchrequest;
 

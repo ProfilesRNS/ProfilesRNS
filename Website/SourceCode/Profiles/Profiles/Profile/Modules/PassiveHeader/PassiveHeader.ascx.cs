@@ -67,18 +67,18 @@ namespace Profiles.Profile.Modules.PassiveHeader
 
             if (display)
             {
-                string fname = string.Empty;
+                string lname = string.Empty;
 
-                if (base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description/rdf:subject/@rdf:resource]/foaf:firstName", base.Namespaces) != null)
+                if (base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description/rdf:subject/@rdf:resource]/foaf:lastName", base.Namespaces) != null)
                 {
-                    fname = base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description/rdf:subject/@rdf:resource]/foaf:firstName", base.Namespaces).InnerText;
+                    lname = base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description/rdf:subject/@rdf:resource]/foaf:lastName", base.Namespaces).InnerText;
                 }
                 else
                 {
-                    fname = base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/foaf:firstName", base.Namespaces).InnerText;
+                    lname = base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/foaf:lastName", base.Namespaces).InnerText;
                 }
 
-                litFname.Text = fname;
+                litLname.Text = lname;
 
             }
             else

@@ -26,32 +26,35 @@ namespace Profiles.Framework.Utilities
 {
     static public class Cache
     {
-
-        static readonly string DEPENDENCY_PREFIX = "Node Dependency ";
-        static int defaultTimeout = Convert.ToInt32(ConfigurationSettings.AppSettings["CACHE_EXPIRE"]);
+        static readonly string DEPENDENCY_PREFIX = "Dependency ";
+        private static double defaultTimeout = Convert.ToInt32(ConfigurationSettings.AppSettings["CACHE_EXPIRE"]);
         /// <summary>
         /// Used to Set objects in cache for a set timout lenght of time.
         /// </summary>
         /// <param name="key"></param>
         /// <param name="data"></param>        
-        static private void Set(string key, Object data, Int32 cachetimeout, Int64 dependencykey)
+
+
+        static public void Set(string key, Object data, double cachetimeout, CacheDependency dependency)
         {
             string hashkey = string.Empty;
             hashkey = Cache.HashForKey(key);
 
             try
             {
+
                 if (HttpRuntime.Cache[hashkey] != null)
                 {
                     HttpRuntime.Cache.Remove(hashkey);
                 }
-                if (cachetimeout < 0 && dependencykey == 0)
+
+                if (cachetimeout < 0 && dependency == null)
                 {
                     HttpRuntime.Cache.Insert(hashkey, data);
                 }
                 else
                 {
-                    HttpRuntime.Cache.Insert(hashkey, data, CreateDependency(dependencykey.ToString()), DateTime.Now.AddSeconds(cachetimeout), System.Web.Caching.Cache.NoSlidingExpiration);
+                    HttpRuntime.Cache.Insert(hashkey, data, dependency, DateTime.Now.AddSeconds(defaultTimeout), System.Web.Caching.Cache.NoSlidingExpiration);
                 }
             }
             catch (Exception e)
@@ -61,20 +64,39 @@ namespace Profiles.Framework.Utilities
 
         }
 
+        static public void SetWithTimeout(string key, Object data, double cachetimeout)
+        {
+            Set(key, data, cachetimeout, null);
+        }
+
+        static public void Set(string key, Object data)
+        {
+            Set(key, data, defaultTimeout, null);
+        }
+
+
         /// <summary>
         /// Uses the web.config value for CACHE_EXPIRE to set the lenght of time for an object to be stored in RAM on web server.
         /// </summary>
         /// <param name="key">Unique key value to Set and Fetch item from cache</param>
         /// <param name="data">Data value to be Set in cache</param>
-        static public void Set(string key, Object data, Int64 dependencykey)
+        static public void Set(string key, Object data, Int64 nodeId, String sessionID)
         {
-            Set(key, data, defaultTimeout, dependencykey);
+            String[] dependencyKey = new String[sessionID == null ? 1 : 2];
+            dependencyKey[0] = DEPENDENCY_PREFIX + nodeId.ToString();
+
+            if (HttpRuntime.Cache[dependencyKey[0]] == null)
+                AlterDependency(nodeId.ToString());
+
+            if (sessionID != null)
+            {
+                dependencyKey[1] = DEPENDENCY_PREFIX + sessionID;
+                if (HttpRuntime.Cache[dependencyKey[1]] == null)
+                    AlterDependency(sessionID);
+            }
+            Set(key, data, defaultTimeout, new CacheDependency(null, dependencyKey));
         }
 
-        static public void SetNoDependency(string key, Object data, int cacheTimeout)
-        {
-            Set(key, data, cacheTimeout, 0);
-        }
         /// <summary>
         /// Used to Fetch RDF data or Presentation data from cache.
         /// </summary>
@@ -100,7 +122,6 @@ namespace Profiles.Framework.Utilities
             {
                 throw new Exception(e.Message);
             }
-
             return xmlrtn;
         }
 
@@ -132,19 +153,7 @@ namespace Profiles.Framework.Utilities
             return xmlrtn;
         }
 
-        static public void ClearDependentItems(Int64 nodeId)
-        {
-            ClearDependentItems(nodeId.ToString());
-        }
-
-        // this one should be deprecated!
-        static public void ClearDependentItems(string key)
-        {
-            Remove(DEPENDENCY_PREFIX + key);
-            CreateDependency(key);
-        }
-
-        static private void Remove(string key)
+        static public void Remove(string key)
         {
 
             if (HttpRuntime.Cache[key] != null)
@@ -154,22 +163,10 @@ namespace Profiles.Framework.Utilities
 
         }
 
-        static private CacheDependency CreateDependency(string key)
+
+        static public void AlterDependency(string key)
         {
-            String[] dependencyKey = new String[1];
-            dependencyKey[0] = DEPENDENCY_PREFIX + key;
-            CacheDependency dependency = null;
-
-            if (key != "0")
-            {
-                if (HttpRuntime.Cache[dependencyKey[0]] == null)
-                {
-                    HttpRuntime.Cache.Insert(dependencyKey[0], Guid.NewGuid().ToString());
-                }
-                dependency = new CacheDependency(null, dependencyKey);
-            }
-
-            return dependency;
+            HttpRuntime.Cache.Insert(DEPENDENCY_PREFIX + key, Guid.NewGuid().ToString());
         }
 
 

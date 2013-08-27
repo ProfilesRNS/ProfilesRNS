@@ -42,7 +42,7 @@ namespace Profiles.Framework.Modules.MainMenu
         {
             menulist = new System.Text.StringBuilder();
             sm = new SessionManagement();
-            //ActiveNetworkRelationshipTypes.ClassURI = "";
+            ActiveNetworkRelationshipTypes.ClassURI = "";
         }
 
         private void DrawProfilesModule()
@@ -64,14 +64,8 @@ namespace Profiles.Framework.Modules.MainMenu
 
             menulist.Append("<li><a href='" + Root.Domain + "/about/default.aspx'>About This Site</a></li>");
 
-            // UCSF
-            //if (sm.Session().NodeID != subject && sm.Session().NodeID > 0)            
-            //    menulist.Append("<li><a href='" + sm.Session().PersonURI + "'>View My Profile</a></li>");
             if (sm.Session().NodeID > 0)
-            {
-                menulist.Append("<li><img src='" + Root.Domain + "/profile/Modules/CustomViewPersonGeneralInfo/PhotoHandler.ashx?NodeID=" + sm.Session().NodeID + "&Thumbnail=True&Width=20'></li>");
-                menulist.Append("<li><a href='" + sm.Session().PersonURI + "'>" + sm.Session().ShortDisplayName + "</a></li>");
-            }
+                menulist.Append("<li><a href='" + sm.Session().PersonURI + "'>View My Profile</a></li>");
             
             menulist.Append("<li><a href='" + Root.Domain + "/login/default.aspx?method=login&edit=true'>Edit My Profile</a></li>");
 
@@ -86,7 +80,7 @@ namespace Profiles.Framework.Modules.MainMenu
 
             if (base.BaseData.SelectSingleNode(".").OuterXml != string.Empty && !Root.AbsolutePath.ToLower().Contains("/search"))
             {
-                if (base.BaseData.SelectSingleNode("//rdf:RDF/rdf:Description/@rdf:about", base.Namespaces) != null)
+                if (base.BaseData.SelectSingleNode("//rdf:RDF/rdf:Description/@rdf:about", base.Namespaces) != null && !Root.AbsolutePath.ToLower().Contains("proxy"))
                 {
                     string uri = this.BaseData.SelectSingleNode("//rdf:RDF/rdf:Description/@rdf:about", base.Namespaces).Value;
 
@@ -132,13 +126,12 @@ namespace Profiles.Framework.Modules.MainMenu
             }
             else
             {
-                menulist.Append("<li><a href='" + Root.Domain + "/login/default.aspx?method=logout&redirectto=" + Root.Domain + "/About/CloseBrowser.aspx" + "'>Sign out</a></li>");
+                menulist.Append("<li><a href='" + Root.Domain + "/login/default.aspx?method=logout&redirectto=" + Root.Domain + Root.AbsolutePath + "'>Logout</a></li>");
             }
 
             menulist.Append("</ul>");
 
             // hide active networks DIV if not logged in
-            /** UCSF
             if (sm.Session().UserID > 0)
             {
                 ActiveNetworkRelationshipTypes.Visible = true;
@@ -147,7 +140,6 @@ namespace Profiles.Framework.Modules.MainMenu
             {
                 ActiveNetworkRelationshipTypes.Visible = false;
             }
-             **/
 
             UserHistory uh = new UserHistory();
 

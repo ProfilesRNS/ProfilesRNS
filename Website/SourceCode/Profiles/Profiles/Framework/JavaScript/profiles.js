@@ -68,11 +68,11 @@ function toggleImage(key,id) {
 
 var hasClickedListTable = false;
 
-function DISABLEDdoListTableRowOver(x) {
+function doListTableRowOver(x) {
     
     //x.className = 'overRow';
-    x.style.backgroundColor = '#B8D0D0';
-    //x.style.color = '#FFF';
+    x.style.backgroundColor = '#5A719C';
+    x.style.color = '#FFF';
     x.style.cursor = 'pointer';    
     for (var i = 0; i < x.childNodes.length; i++) {
     	if (x.childNodes[i].childNodes.length > 0) {
@@ -84,14 +84,14 @@ function DISABLEDdoListTableRowOver(x) {
     }    
 }
 
-function DISABLEDdoListTableRowOut(x, eo) {
+function doListTableRowOut(x, eo) {
     
     if (eo == 1) {
         x.className = 'oddRow';
         x.style.backgroundColor = '#FFFFFF';
     } else {
         x.className = 'evenRow';
-        x.style.backgroundColor = '#F3F3F1';
+        x.style.backgroundColor = '#F0F4F6';
     }
     x.style.color = '';
     for (var i = 0; i < x.childNodes.length; i++) {

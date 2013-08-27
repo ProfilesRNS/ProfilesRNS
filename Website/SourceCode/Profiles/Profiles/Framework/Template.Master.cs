@@ -120,7 +120,7 @@ namespace Profiles.Framework
         protected void LoadAssets()
         {
 
-            //This should loop the applicaiton table or be set based on the contest of the RESTFul URL to know
+            //This should loop the application table or be set based on the contest of the RESTFul URL to know
             //What application is currently being viewed then set the correct asset link.
 
             HtmlLink Profilescss = new HtmlLink();
@@ -148,7 +148,7 @@ namespace Profiles.Framework
             UCSFjs.Attributes.Add("src", Root.Domain + "/Framework/JavaScript/UCSF.js");
             Page.Header.Controls.Add(UCSFjs);
 
-            // UCSF Eric Meeks. This is handy to have in JavaScript form
+            // UCSF. This is handy to have in JavaScript form and is required for ORNG
             HtmlGenericControl rootDomainjs = new HtmlGenericControl("script");
             rootDomainjs.Attributes.Add("type", "text/javascript");
             rootDomainjs.InnerHtml = Environment.NewLine + "var _rootDomain = \"" + Root.Domain + "\";" + Environment.NewLine;
@@ -380,7 +380,7 @@ namespace Profiles.Framework
                 {
                     buffer = PresentationClass.Substring(0, 1).ToUpper() + PresentationClass.Substring(1, PresentationClass.Length - 1);
                 }
-                // UCSF schema.org hack
+                // UCSF schema.org addition to improve SEO
                 if (PresentationClass == "profile")
                 {
                     buffer = "<span itemprop=\"name\">" + buffer + "</span>";
@@ -423,11 +423,7 @@ namespace Profiles.Framework
             // Window Title
             buffer = GetStringFromPresentationXML("Presentation/WindowName");
 
-            if (buffer != String.Empty)
-            {
-                buffer = buffer + " | ";
-            }
-            Page.Header.Title = buffer + "UCSF Profiles";
+            Page.Header.Title = buffer + " | Profiles RNS";
         }
 
         #region "Panel Methods"

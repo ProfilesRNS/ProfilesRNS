@@ -37,7 +37,7 @@
     <xsl:variable name="uriOrganization" select="rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:personInPrimaryPosition/@rdf:resource]/vivo:positionInOrganization/@rdf:resource"/>
     <xsl:if test="rdf:RDF/rdf:Description[@rdf:about=$uriOrganization]/rdfs:label !=''">
       <tr>
-        <th>School</th>
+        <th>Institution</th>
         <td>
           <span itemprop="affiliation">
             <xsl:value-of select="rdf:RDF/rdf:Description[@rdf:about= $uriOrganization]/rdfs:label"/>
@@ -95,7 +95,6 @@
         </td>
       </tr>
     </xsl:if>
-<!--
     <xsl:choose>
       <xsl:when test="rdf:RDF[1]/rdf:Description[1]/vivo:faxNumber !=''">
         <tr>
@@ -106,7 +105,6 @@
         </tr>
       </xsl:when>
     </xsl:choose>
--->
     <xsl:choose>
       <xsl:when test="$email!=''">
         <tr>
@@ -122,7 +120,7 @@
             <tr>
               <th>Email</th>
               <td>
-                <a href="mailto:{rdf:RDF[1]/rdf:Description[1]/vivo:email}" onlick="return handleMailTo(this, '{rdf:RDF[1]/rdf:Description[1]/vivo:email}')" itemprop="email">
+                <a href="mailto:{rdf:RDF[1]/rdf:Description[1]/vivo:email}" itemprop="email">
                   <xsl:value-of select="rdf:RDF[1]/rdf:Description[1]/vivo:email"/>
                 </a>
               </td>

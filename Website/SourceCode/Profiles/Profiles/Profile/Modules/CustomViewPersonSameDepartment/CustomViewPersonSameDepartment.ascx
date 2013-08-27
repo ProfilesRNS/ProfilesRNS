@@ -4,15 +4,12 @@
     <HeaderTemplate>
         <div class="passiveSectionHead">
             <div style="white-space: nowrap; display: inline">
-                Same Department 
-<!--
-<a href="JavaScript:toggleVisibility('sdDescript');">
+                Same Department <a href="JavaScript:toggleVisibility('sdDescript');">
                     <asp:Image runat="server" ID="imgQuestion" />
                 </a>
             </div>
             <div id="sdDescript" class="passiveSectionHeadDescription" style="display: none;">
 				People who are also in this person's primary department.
--->
 			</div>
         </div>        
         <div class="passiveSectionBody">

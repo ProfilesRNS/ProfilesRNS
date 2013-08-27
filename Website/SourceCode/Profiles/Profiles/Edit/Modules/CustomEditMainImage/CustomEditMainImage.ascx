@@ -13,8 +13,10 @@
     <ContentTemplate>
         <asp:UpdateProgress ID="updateProgress" runat="server">
             <ProgressTemplate>
-                <div class="progress">
-                    <span><img alt="Loading..." src="../edit/images/loader.gif" /></span>
+                <div style="position: fixed; text-align: center; height: 100px; width: 100px; top: 0;
+                    right: 0; left: 0; z-index: 9999999; opacity: 0.7;">
+                    <span style="border-width: 0px; position: fixed; padding: 50px; background-color: #FFFFFF;
+                        font-size: 25px; left: 40%; top: 40%;"><img alt="Loading..." src="../edit/images/loader.gif" /></span>
                 </div>
             </ProgressTemplate>
         </asp:UpdateProgress>

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+
+Copyright (c) 2008-2012 by the President and Fellows of Harvard College. All rights reserved.
+Profiles Research Networking Software was developed under the supervision of Griffin M Weber, MD, PhD.,
+and Harvard Catalyst: The Harvard Clinical and Translational Science Center, with support from the
+National Center for Research Resources and Harvard University.
+
+
+Code licensed under a BSD License.
+For details, see: LICENSE.txt
+
+-->
+<ApplicationList>  
+  <Application ApplicaitonPath="Framework" ModulePath="Modules" Enabled="true"/>
+  <Application ApplicaitonPath="SPARQL" ModulePath="Modules" Enabled="true"/>
+  <Application ApplicaitonPath="Search" ModulePath="Modules" Enabled="true"/>
+  <Application ApplicaitonPath="Profile" ModulePath="Modules" Enabled="true"/>  
+  <Application ApplicaitonPath="Error" ModulePath="Modules" Enabled="true"/>  
+  <Application ApplicaitonPath="Edit" ModulePath="Modules" Enabled="true"/>
+  <Application ApplicaitonPath="Proxy" ModulePath="Modules" Enabled="true"/>
+  <Application ApplicaitonPath="ActiveNetwork" ModulePath="Modules" Enabled="true"/>
+  <Application ApplicaitonPath="DIRECT" ModulePath="Modules" Enabled="true"/>
+  <Application ApplicaitonPath="History" ModulePath="Modules" Enabled="true"/>
+  <Application ApplicaitonPath="About" ModulePath="Modules" Enabled="true"/>
+  <Application ApplicaitonPath="Login" ModulePath="Modules" Enabled="true"/>
+  <Application ApplicaitonPath="ORNG" ModulePath="Modules" Enabled="true"/>
+</ApplicationList>
+
+

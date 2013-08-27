@@ -39,12 +39,12 @@ namespace Profiles.Search.Utilities
 
         public XmlDocument SearchRequest(string searchstring, string exactphrase, string classgroupuri, string classuri, string limit, string offset)
         {
-
             System.Text.StringBuilder search = new System.Text.StringBuilder();
             XmlDocument searchxml = new XmlDocument();
 
             if (searchstring == null)
                 searchstring = string.Empty;
+
 
             if (classgroupuri == null)
                 classgroupuri = string.Empty;
@@ -61,7 +61,7 @@ namespace Profiles.Search.Utilities
             search.Append("<SearchOptions>");
             search.Append("<MatchOptions>");
 
-            if (searchstring != string.Empty)
+            if (searchstring != string.Empty && !(string.IsNullOrEmpty(exactphrase)))
             {
 
                 search.Append("<SearchString ExactMatch=\"" + exactphrase.ToLower() + "\">");
@@ -97,6 +97,7 @@ namespace Profiles.Search.Utilities
 
         public XmlDocument SearchRequest(string searchstring, string exactphrase, string fname, string lname,
             string institution, string institutionallexcept, string department, string departmentallexcept,
+            string division, string divisionallexcept,
             string classuri, string limit, string offset,
             string sortby, string sortdirection,
             string otherfilters, string facrank, ref string searchrequest)
@@ -140,8 +141,13 @@ namespace Profiles.Search.Utilities
 
             search.Append("<SearchOptions>");
             search.Append("<MatchOptions>");
+            if (string.IsNullOrEmpty(exactphrase))
+               exactphrase = string.Empty;
 
-            if (searchstring != string.Empty)
+           // if (exactphrase.IsNullOrEmpty())
+               // exactphrase = string.Empty;
+
+            if (searchstring != string.Empty && exactphrase != string.Empty)
             {
                 search.Append("<SearchString ExactMatch=\"" + exactphrase.ToLower() + "\">");
 
@@ -185,6 +191,15 @@ namespace Profiles.Search.Utilities
                         isexclude = "1";
 
                     search.Append("<SearchFilter IsExclude=\"" + isexclude + "\"  Property=\"http://profiles.catalyst.harvard.edu/ontology/prns#personInPrimaryPosition\"  Property2=\"http://profiles.catalyst.harvard.edu/ontology/prns#positionInDepartment\"   MatchType=\"Exact\">" + department + "</SearchFilter>");
+                    isexclude = "0";
+                }
+
+                if (division != string.Empty)
+                {
+                    if (divisionallexcept == "on")
+                        isexclude = "1";
+
+                    search.Append("<SearchFilter IsExclude=\"" + isexclude + "\"  Property=\"http://profiles.catalyst.harvard.edu/ontology/prns#personInPrimaryPosition\"  Property2=\"http://profiles.catalyst.harvard.edu/ontology/prns#positionInDivision\"   MatchType=\"Exact\">" + division + "</SearchFilter>");
                     isexclude = "0";
                 }
 
@@ -334,44 +349,40 @@ namespace Profiles.Search.Utilities
                 {
                     string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
 
-                    SqlConnection dbconnection = new SqlConnection(connstr);
-                    SqlCommand dbcommand = new SqlCommand();
-
-                    SqlDataReader dbreader;
-                    dbconnection.Open();
-                    dbcommand.CommandType = CommandType.StoredProcedure;
-
-                    dbcommand.CommandText = "[Search.].[GetNodes]";
-                    dbcommand.CommandTimeout = base.GetCommandTimeout();
-
-                    dbcommand.Parameters.Add(new SqlParameter("@SearchOptions", searchoptions.OuterXml));
-
-                    dbcommand.Parameters.Add(new SqlParameter("@SessionId", sessionmanagement.Session().SessionID));
-
-                    if (lookup)
-                        dbcommand.Parameters.Add(new SqlParameter("@Lookup", 1));
-
-                    dbcommand.Connection = dbconnection;
-
-                    string query = dbcommand.CommandText;
-
-                    dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
-
-                    while (dbreader.Read())
+                    using (SqlConnection dbconnection = new SqlConnection(connstr))
                     {
-                        xmlstr += dbreader[0].ToString();
+                        SqlCommand dbcommand = new SqlCommand();
+
+                        dbconnection.Open();
+                        dbcommand.CommandType = CommandType.StoredProcedure;
+
+                        dbcommand.CommandText = "[Search.].[GetNodes]";
+                        dbcommand.CommandTimeout = base.GetCommandTimeout();
+
+                        dbcommand.Parameters.Add(new SqlParameter("@SearchOptions", searchoptions.OuterXml));
+
+                        dbcommand.Parameters.Add(new SqlParameter("@SessionId", sessionmanagement.Session().SessionID));
+
+                        if (lookup)
+                            dbcommand.Parameters.Add(new SqlParameter("@Lookup", 1));
+
+                        dbcommand.Connection = dbconnection;
+
+                        string query = dbcommand.CommandText;
+
+                        using (SqlDataReader dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection))
+                        {
+
+                            while (dbreader.Read())
+                            {
+                                xmlstr += dbreader[0].ToString();
+                            }
+                        }
                     }
-
-                    if (!dbreader.IsClosed)
-                        dbreader.Close();
-
                     xmlrtn.LoadXml(xmlstr);
 
                     Framework.Utilities.DebugLogging.Log(xmlstr);
-                    if (useCache)
-                    {
-                        Framework.Utilities.Cache.Set(cachekey, xmlrtn, 0);
-                    }
+                    Framework.Utilities.Cache.Set(cachekey, xmlrtn);
                     xmlstr = string.Empty;
                 }
                 catch (Exception e)
@@ -404,40 +415,38 @@ namespace Profiles.Search.Utilities
                 {
                     string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
 
-                    SqlConnection dbconnection = new SqlConnection(connstr);
-                    SqlCommand dbcommand = new SqlCommand();
-
-                    SqlDataReader dbreader;
-                    dbconnection.Open();
-                    dbcommand.CommandType = CommandType.StoredProcedure;
-
-                    dbcommand.CommandText = "[Search.].[GetConnection]";
-                    dbcommand.CommandTimeout = base.GetCommandTimeout();
-
-                    dbcommand.Parameters.Add(new SqlParameter("@SearchOptions", searchoptions.OuterXml));
-                    dbcommand.Parameters.Add(new SqlParameter("@NodeID", nodeid.ToString()));
-                    dbcommand.Parameters.Add(new SqlParameter("@NodeURI", uri));
-                    dbcommand.Parameters.Add(new SqlParameter("@sessionid", sessionmanagement.Session().SessionID));
-
-                    dbcommand.Connection = dbconnection;
-
-                    dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
-
-                    while (dbreader.Read())
+                    using (SqlConnection dbconnection = new SqlConnection(connstr))
                     {
-                        xmlstr += dbreader[0].ToString();
+                        SqlCommand dbcommand = new SqlCommand();
+
+                        dbconnection.Open();
+                        dbcommand.CommandType = CommandType.StoredProcedure;
+
+                        dbcommand.CommandText = "[Search.].[GetConnection]";
+                        dbcommand.CommandTimeout = base.GetCommandTimeout();
+
+                        dbcommand.Parameters.Add(new SqlParameter("@SearchOptions", searchoptions.OuterXml));
+                        dbcommand.Parameters.Add(new SqlParameter("@NodeID", nodeid.ToString()));
+                        dbcommand.Parameters.Add(new SqlParameter("@NodeURI", uri));
+                        dbcommand.Parameters.Add(new SqlParameter("@sessionid", sessionmanagement.Session().SessionID));
+
+                        dbcommand.Connection = dbconnection;
+
+                        using (SqlDataReader dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection))
+                        {
+
+                            while (dbreader.Read())
+                            {
+                                xmlstr += dbreader[0].ToString();
+                            }
+                        }
                     }
-
-                    if (!dbreader.IsClosed)
-                        dbreader.Close();
-
 
                     xmlrtn.LoadXml(xmlstr);
 
                     Framework.Utilities.DebugLogging.Log(xmlstr);
-                    Framework.Utilities.Cache.Set(cachekey, xmlrtn,0);
+                    Framework.Utilities.Cache.Set(cachekey, xmlrtn);
                     xmlstr = string.Empty;
-
                 }
                 catch (Exception e)
                 {
@@ -661,7 +670,7 @@ namespace Profiles.Search.Utilities
 
 
                     //Defaulted this to be one hour
-                    Framework.Utilities.Cache.SetNoDependency("GetDivisions", divisions, 3600);
+                    Framework.Utilities.Cache.SetWithTimeout("GetDivisions", divisions, 3600);
 
 
                 }
@@ -705,7 +714,7 @@ namespace Profiles.Search.Utilities
                         sqldr.Close();
 
                     //Defaulted this to be one hour
-                    Framework.Utilities.Cache.SetNoDependency("GetInstitutions", institutions, 3600);
+                    Framework.Utilities.Cache.SetWithTimeout("GetInstitutions", institutions, 3600);
 
 
                 }
@@ -740,7 +749,7 @@ namespace Profiles.Search.Utilities
 
                     da.Fill(ds, "Table");
                     //Defaulted this to be one hour
-                    Framework.Utilities.Cache.SetNoDependency("GetFilters", ds, 3600);
+                    Framework.Utilities.Cache.SetWithTimeout("GetFilters", ds, 3600);
 
                     conn.Close();
 
@@ -775,14 +784,17 @@ namespace Profiles.Search.Utilities
                     string sql = "EXEC [Profile.Data].[Organization.GetDepartments]";
 
 
-                    using (SqlDataReader sqldr = this.GetSQLDataReader("", sql, CommandType.Text, CommandBehavior.CloseConnection, null))
-                    {
-                        while (sqldr.Read())
-                            departments.Add(new GenericListItem(sqldr["Department"].ToString(), sqldr["URI"].ToString()));
-                    }
+                    SqlDataReader sqldr = this.GetSQLDataReader("", sql, CommandType.Text, CommandBehavior.CloseConnection, null);
+
+                    while (sqldr.Read())
+                        departments.Add(new GenericListItem(sqldr["Department"].ToString(), sqldr["URI"].ToString()));
+
+                    //Always close your readers
+                    if (!sqldr.IsClosed)
+                        sqldr.Close();
 
                     //Defaulted this to be one hour
-                    Framework.Utilities.Cache.SetNoDependency("GetDepartments", departments, 3600);
+                    Framework.Utilities.Cache.SetWithTimeout("GetDepartments", departments, 3600);
 
                 }
                 catch (Exception e)
@@ -812,16 +824,17 @@ namespace Profiles.Search.Utilities
                 {
                     string sql = "EXEC [Profile.Data].[Person.GetFacultyRanks]";
 
-                    using (SqlDataReader sqldr = this.GetSQLDataReader("", sql, CommandType.Text, CommandBehavior.CloseConnection, null)) 
-                    {
+                    SqlDataReader sqldr = this.GetSQLDataReader("", sql, CommandType.Text, CommandBehavior.CloseConnection, null);
 
-                        while (sqldr.Read())
-                            ranks.Add(new GenericListItem(sqldr["FacultyRank"].ToString(), sqldr["URI"].ToString()));
-                    }
+                    while (sqldr.Read())
+                        ranks.Add(new GenericListItem(sqldr["FacultyRank"].ToString(), sqldr["URI"].ToString()));
+
                     //Always close your readers
+                    if (!sqldr.IsClosed)
+                        sqldr.Close();
 
                     //Defaulted this to be one hour
-                    Framework.Utilities.Cache.SetNoDependency("GetFacultyRanks", ranks, 3600);
+                    Framework.Utilities.Cache.SetWithTimeout("GetFacultyRanks", ranks, 3600);
 
                 }
                 catch (Exception e)

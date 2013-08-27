@@ -37,7 +37,7 @@ namespace Profiles.Login.Modules.ShibLogin
                 {
 
                     sm.SessionLogout();
-                    sm.SessionDistroy();
+                    sm.SessionDestroy();
                     Response.Redirect(Request.QueryString["redirectto"].ToString());
                 }
                 else if (Request.QueryString["method"].ToString() == "shibboleth")

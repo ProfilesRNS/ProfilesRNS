@@ -1,6 +1,6 @@
 ﻿<Presentation PresentationClass="profile">
   <PageOptions Columns="3"/>
-  <WindowName>Find UCSF's top medical research experts</WindowName>
+  <WindowName>Search</WindowName>
   <PageTitle>Search</PageTitle>
   <PageBackLinkName></PageBackLinkName>
   <PageBackLinkURL></PageBackLinkURL>
@@ -24,25 +24,22 @@
       <Module ID="SearchPerson">
       </Module>    
     </Panel>
-    <Panel Name="Find Research" Alias="concept" Type="main" TabType="Fixed" TabSort="1" >
-      <Module ID="SearchConcept" />
-    </Panel>
-    <!--Panel Name="Find Everything" Alias="all" Type="main" TabType="Fixed" TabSort="2" >
+    <Panel Name="Find Everything" Alias="all" Type="main" TabType="Fixed" TabSort="1" >
       <Module ID="SearchEverything" />        
-    </Panel-->
+    </Panel>
     <Panel Type="passive" >
       <Module ID="TopSearchPhrase">
         <ParamList>
-          <Param Name="Description">Most viewed</Param>
+          <Param Name="Description">Most viewed (today)</Param>
           <Param Name="TimePeriod">d</Param>
         </ParamList>
       </Module>
-      <!--Module ID="TopSearchPhrase">
+      <Module ID="TopSearchPhrase">
         <ParamList>
           <Param Name="Description">Most viewed (month)</Param>
           <Param Name="TimePeriod">m</Param>
         </ParamList>
-      </Module-->
+      </Module>
     </Panel>
     <Panel type="footer" />
   </PanelList>

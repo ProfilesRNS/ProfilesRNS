@@ -7,17 +7,13 @@
       <div style="white-space: nowrap;display:inline">
         <xsl:value-of select="@InfoCaption"/>
         <xsl:text> </xsl:text>
-<!--
         <xsl:if test="@Description">
           <a href="JavaScript:toggleVisibility('{@ID}');">
             <img alt="" src="{$root}/Framework/Images/info.png"/>
           </a>
         </xsl:if>
-      </div> delete 1st 2 lines below if toggle is reactivated
-      <div id="{@ID}" class="passiveSectionHeadDescription" style="display:none;">
--->
       </div>
-      <div id="{@ID}" class="passiveSectionHeadDescription" style="display:block;">
+      <div id="{@ID}" class="passiveSectionHeadDescription" style="display:none;">
         <xsl:value-of select="@Description"/>
       </div>
     </div>
@@ -36,7 +32,7 @@
     <xsl:if test ="@MoreURL!=''">
       <div class="passiveSectionBodyDetails">
         <a href="{@MoreURL}">
-          <img style="margin-right:4px;position:relative;top:1px;border:0"  src="{$root}/Framework/Images/icon_squareArrow.gif" />
+          <img style="margin-right:2px;position:relative;top:1px;border:0"  src="{$root}/Framework/Images/icon_squareArrow.gif" />
           <xsl:value-of select="@MoreText"/>
         </a>
       </div>

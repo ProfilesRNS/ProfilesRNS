@@ -123,13 +123,6 @@
     <Content Include="About\PresentationXML\NewFeatures.xml" />
     <Content Include="ActiveNetwork\CSS\UCSF.css" />
     <Content Include="ActiveNetwork\JavaScript\UCSF.js" />
-    <Content Include="CustomAPI\v1\EditedCount.aspx" />
-    <Content Include="CustomAPI\v1\JSONProfile.aspx" />
-    <Content Include="CustomAPI\v1\PubDate.aspx" />
-    <Content Include="CustomAPI\v1\PubXML.aspx" />
-    <Content Include="CustomAPI\v1\Statistics.aspx" />
-    <Content Include="CustomAPI\v1\XMLProfile.aspx" />
-    <Content Include="CustomAPI\v2\Default.aspx" />
     <Content Include="DIRECT\CSS\UCSF.css" />
     <Content Include="DIRECT\JavaScript\UCSF.js" />
     <Content Include="Edit\CSS\UCSF.css" />
@@ -142,42 +135,22 @@
     <Content Include="Edit\Images\Icon_add_item.gif" />
     <Content Include="Edit\Images\sophcat-boat.jpg" />
     <Content Include="Edit\JavaScript\UCSF.js" />
-    <Content Include="Error\CSS\UCSF.css" />
-    <Content Include="Error\JavaScript\UCSF.js" />
-    <Content Include="Framework\CSS\UCSF.css" />
-    <Content Include="Framework\Images\arrow-orgbg.gif" />
-    <Content Include="Framework\Images\arrow-tealbg.gif" />
-    <Content Include="Framework\Images\backtotop.gif" />
-    <Content Include="Framework\Images\chatter-follow.png" />
-    <Content Include="Framework\Images\chatter-group.png" />
-    <Content Include="Framework\Images\collapseRound.gif" />
-    <Content Include="Framework\Images\expandRound.gif" />
-    <Content Include="Framework\Images\favicon.gif" />
-    <Content Include="Framework\Images\video-ad.png" />
-    <Content Include="ORNG\Images\gadgetcollapse.gif" />
-    <Content Include="ORNG\Images\gadgetexpand.gif" />
-    <Content Include="Framework\Images\glyphicons-halflings.png" />
-    <Content Include="Framework\Images\info1.png" />
-    <Content Include="Framework\Images\info4.png" />
-    <Content Include="Framework\Images\link.gif" />
-    <Content Include="Framework\Images\photodefault.jpg" />
-    <Content Include="Framework\Images\ProfilesLogo.gif" />
-    <Content Include="Framework\Images\search-icon.gif" />
-    <Content Include="Framework\Images\ucsf.png" />
-    <Content Include="Framework\JavaScript\UCSF.js" />
     <Content Include="Global.asax" />
-    <Content Include="Login\CSS\UCSF.css" />
-    <Content Include="Login\JavaScript\UCSF.js" />
     <Content Include="Login\Modules\ShibLogin\ShibLogin.ascx" />
     <Content Include="Login\PresentationXML\ShibbolethLoginPresentation.xml" />
+    <Content Include="ORNG\Images\waiting.gif" />
+    <Content Include="ORNG\JavaScript\prettyprint.js" />
+    <Content Include="ORNG\JavaScript\jsonld-helper.js" />
+    <Content Include="ORNG\JSONLD\Default.aspx" />
     <Content Include="ORNG\CSS\gadgets.css" />
-    <Content Include="ORNG\CSS\UCSF.css" />
     <Content Include="ORNG\Default.aspx" />
     <Content Include="ORNG\GadgetDetails.aspx" />
+    <Content Include="ORNG\Images\gadgetcollapse.gif" />
+    <Content Include="ORNG\Images\gadgetexpand.gif" />
     <Content Include="ORNG\Images\icon_squareArrow.gif" />
     <Content Include="ORNG\Images\icon_squareDownArrow.gif" />
     <Content Include="ORNG\JavaScript\orng.js" />
-    <Content Include="ORNG\JavaScript\UCSF.js" />
+    <Content Include="ORNG\JSONLD\Test.htm" />
     <Content Include="ORNG\Modules\GadgetSandbox\GadgetSandbox.ascx" />
     <Content Include="ORNG\Modules\Gadgets\Gadgets.ascx" />
     <Content Include="ORNG\Modules\ModuleCatalogue.xml" />
@@ -192,9 +165,7 @@
     <Content Include="Search\Images\icon_squareArrow.gif" />
     <Content Include="Search\Images\search-red.jpg" />
     <Content Include="Search\JavaScript\UCSF.js" />
-    <Content Include="Search\Modules\SearchConcept\SearchConcept.ascx" />
     <Content Include="SiteMap.aspx" />
-    <Content Include="trace.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -277,38 +248,6 @@
     <Compile Include="ActiveNetwork\Modules\MyNetwork\MyNetwork.ascx.designer.cs">
       <DependentUpon>MyNetwork.ascx</DependentUpon>
     </Compile>
-    <Compile Include="CustomAPI\Utilities\DataIO.cs" />
-    <Compile Include="CustomAPI\v1\EditedCount.aspx.cs">
-      <DependentUpon>EditedCount.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CustomAPI\v1\JSONProfile.aspx.cs">
-      <DependentUpon>JSONProfile.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CustomAPI\v1\PubDate.aspx.cs">
-      <DependentUpon>PubDate.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CustomAPI\v1\PubXML.aspx.cs">
-      <DependentUpon>PubXML.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CustomAPI\v1\Statistics.aspx.cs">
-      <DependentUpon>Statistics.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CustomAPI\v1\XMLProfile.aspx.cs">
-      <DependentUpon>XMLProfile.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CustomAPI\v2\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CustomAPI\v2\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -323,7 +262,6 @@
     <Compile Include="Framework\Modules\MainMenu\History.ascx.designer.cs">
       <DependentUpon>History.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Framework\Utilities\UCSFIDSet.cs" />
     <Compile Include="Framework\Utilities\UserHistory.cs" />
     <Compile Include="History\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -359,6 +297,10 @@
     </Compile>
     <Compile Include="Login\Modules\ShibLogin\ShibLogin.ascx.designer.cs">
       <DependentUpon>ShibLogin.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ORNG\JSONLD\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ORNG\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -786,13 +728,6 @@
       <DependentUpon>SearchProxies.ascx</DependentUpon>
     </Compile>
     <Compile Include="Proxy\Utilities\DataIO.cs" />
-    <Compile Include="Search\Modules\SearchConcept\SearchConcept.ascx.cs">
-      <DependentUpon>SearchConcept.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Search\Modules\SearchConcept\SearchConcept.ascx.designer.cs">
-      <DependentUpon>SearchConcept.ascx</DependentUpon>
-    </Compile>
     <Compile Include="Search\Modules\SearchEverythingFacets\SearchEverythingFacets.ascx.cs">
       <DependentUpon>SearchEverythingFacets.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -971,9 +906,7 @@
     <Content Include="About\Modules\ModuleCatalogue.xml" />
     <Content Include="About\PresentationXML\AboutPresentation.xml" />
     <Content Include="ActiveNetwork\Default.aspx" />
-    <Content Include="ActiveNetwork\Modules\ModuleCatalogue.xml">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="ActiveNetwork\Modules\ModuleCatalogue.xml" />
     <Content Include="ActiveNetwork\Modules\MyNetwork\MyNetwork.ascx" />
     <Content Include="ActiveNetwork\PresentationXML\MyNetwork.xml" />
     <Content Include="ApplicationModuleCatalogue.xml" />
@@ -1115,9 +1048,7 @@
     <Content Include="Profile\Modules\CustomViewInformationResource\CustomViewInformationResource.xslt" />
     <Content Include="Profile\Modules\CustomViewPersonSameDepartment\CustomViewPersonSameDepartment.ascx" />
     <Content Include="Profile\Profile.aspx" />
-    <Content Include="Profile\XSLT\Awards.xslt">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Profile\XSLT\Awards.xslt" />
     <Content Include="Profile\Modules\CustomViewPersonGeneralInfo\CustomViewPersonGeneralInfo.xslt" />
     <Content Include="Profile\XSLT\CoAuthorDetail.xslt" />
     <Content Include="Profile\XSLT\ConceptDetail.xslt" />
@@ -1149,12 +1080,8 @@
     <Content Include="Search\Modules\SearchEverything\SearchEverything.ascx" />
     <Content Include="Search\Modules\SearchOptions\SearchOptions.ascx" />
     <Content Include="Search\PresentationXML\SearchResultsConnectionPresentation.xml" />
-    <Content Include="Search\PresentationXML\SearchResultsPersonPresentation.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Search\PresentationXML\SearchFormPresentation.xml">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Search\PresentationXML\SearchResultsPersonPresentation.xml" />
+    <Content Include="Search\PresentationXML\SearchFormPresentation.xml" />
     <Content Include="Search\PresentationXML\SearchResultsEverythingPresentation.xml" />
     <Content Include="Search\Modules\SearchResults\EverythingResults.xslt" />
     <Content Include="SPARQL\PresentationXML\SPARQLPresentation.xml" />
@@ -1239,32 +1166,6 @@
     <Folder Include="ActiveNetwork\Utilities\" />
     <Folder Include="App_Data\" />
     <Folder Include="Login\Modules\App_LocalResources\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\ProfilesBetaAPI\Connects.Profiles.Service.DataContracts\Connects.Profiles.Service.DataContracts.csproj">
-      <Project>{4E11DE8F-C111-44E4-8AF8-B66EDEC9152D}</Project>
-      <Name>Connects.Profiles.Service.DataContracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ProfilesBetaAPI\Connects.Profiles.Service.ServiceContracts\Connects.Profiles.Service.ServiceContracts.csproj">
-      <Project>{D532570D-2CB9-4592-A8B5-C16712B1FACB}</Project>
-      <Name>Connects.Profiles.Service.ServiceContracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ProfilesBetaAPI\Connects.Profiles.Service.ServiceImplementation\Connects.Profiles.Service.ServiceImplementation.csproj">
-      <Project>{24E3696C-B69C-49C8-8276-C4003297C45D}</Project>
-      <Name>Connects.Profiles.Service.ServiceImplementation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ProfilesBetaAPI\Connects.Profiles.Service\Connects.Profiles.Service.csproj">
-      <Project>{5CD869A4-AB6B-43A0-ABB5-EE0DE758492B}</Project>
-      <Name>Connects.Profiles.Service</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ProfilesBetaAPI\Connects.Profiles.Utility\Connects.Profiles.Utility.csproj">
-      <Project>{27F9D353-FCCC-430E-A6A6-6864773CBCDC}</Project>
-      <Name>Connects.Profiles.Utility</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ProfilesBetaAPI\Profiles.Common\Connects.Profiles.Common.csproj">
-      <Project>{72ABCD78-6907-4F63-8C59-392C9F3CE506}</Project>
-      <Name>Connects.Profiles.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

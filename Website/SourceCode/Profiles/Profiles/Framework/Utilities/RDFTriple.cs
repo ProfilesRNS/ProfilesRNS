@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Configuration;
 
 
 
@@ -34,6 +35,7 @@ namespace Profiles.Framework.Utilities
     /// </summary>
     public class RDFTriple
     {
+
         #region "PUBLIC METHODS"
 
         private string _uri;
@@ -165,8 +167,7 @@ namespace Profiles.Framework.Utilities
                 if (ExpandRDFList == null)
                     ExpandRDFList = string.Empty;
 
-                // UCSF Treat all anonymous users as the same
-                return rtn + "|" + (this.Session.UserID != 0 ? this.Session.SessionID : "ANONYMOUS") + "|" + this.Expand + "|" + this.ShowDetails + "|" + this.ExpandRDFList + "|" + this.Limit;
+                return rtn + "|" + this.Session.GetSessionCacheKey() + "|" + this.Expand + "|" + this.ShowDetails + "|" + this.ExpandRDFList + "|" + this.Limit;
 
             }
         }

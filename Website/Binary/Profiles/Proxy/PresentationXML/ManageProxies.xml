@@ -1,0 +1,23 @@
+﻿<Presentation PresentationClass="profile">
+  <PageOptions Columns="2"/>
+  <WindowName>Manage Proxies</WindowName>
+  <PageTitle>Manage Proxies</PageTitle>
+  <PageBackLinkName></PageBackLinkName>
+  <PageBackLinkURL></PageBackLinkURL>
+  <PageSubTitle></PageSubTitle>
+  <PageDescription></PageDescription>
+  <PanelList>
+    <Panel type="header"  />
+    <Panel type="page" />
+    <Panel Type="active">
+      <Module ID="MainMenu">
+      </Module>
+    </Panel>
+    <Panel Name="" Alias="" Type="main" TabType="Default" TabSort="0">
+      <Module ID="ManageProxies">
+      </Module>      
+    </Panel>    
+    <Panel type="footer" />
+  </PanelList>
+</Presentation>
+

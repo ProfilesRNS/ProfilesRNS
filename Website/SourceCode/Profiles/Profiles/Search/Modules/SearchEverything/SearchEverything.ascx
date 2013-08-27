@@ -26,7 +26,7 @@
 Search or browse for people, publications, concepts, and other items in Profiles.
 <div class="content_container">
     <div class="tabContainer" style="margin-top: 0px;">
-        <div class="searchForm nonavbar">
+        <div class="searchForm">
             <table width="100%">
                 <tr>
                     <td colspan='3'>

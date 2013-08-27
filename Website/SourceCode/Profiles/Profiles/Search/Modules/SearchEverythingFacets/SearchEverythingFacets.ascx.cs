@@ -52,6 +52,7 @@ namespace Profiles.Search.Modules.SearchEverythingFacets
             string classgroupuri = string.Empty;
             string classuri = string.Empty;
             string searchrequest = string.Empty;
+            string exactphrase = string.Empty;
 
             XmlDocument xmlsearchrequest;
 
@@ -120,8 +121,14 @@ namespace Profiles.Search.Modules.SearchEverythingFacets
                 }
             }
 
+            if (Request.QueryString["exactphrase"] != null)
+            {
+                exactphrase = Request.QueryString["exactphrase"];
+            }
+            else exactphrase = "false";
+
             //Grab the full results so I can get the counts, this comes from the cache cloud.
-            this.SearchResults = data.Search(data.SearchRequest(searchfor,"false", "", "", "0", "100"),false);
+            this.SearchResults = data.Search(data.SearchRequest(searchfor, exactphrase, "", "", "0", "100"), false);
 
 
 
@@ -135,6 +142,7 @@ namespace Profiles.Search.Modules.SearchEverythingFacets
 
             args.AddParam("total", "", total);
             args.AddParam("searchfor", "", searchfor);
+            args.AddParam("exactphrase", "", exactphrase);
             args.AddParam("root", "", Root.Domain);
             args.AddParam("classGrpURIpassedin", "", classgroupuri);
             args.AddParam("classURIpassedin", "", classuri);

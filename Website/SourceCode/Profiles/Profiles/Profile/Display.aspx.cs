@@ -60,7 +60,10 @@ namespace Profiles.Profile
 
             // UCSF added schema.org info
             // Only do this for a person only version of this page !
-            if (this.RDFData.SelectSingleNode("rdf:RDF[1]/rdf:Description[1]/foaf:firstName", base.RDFNamespaces) != null)
+            XmlNode presentationClass = PresentationXML.SelectSingleNode("//Presentation/@PresentationClass", base.RDFNamespaces);
+            if (presentationClass != null && "profile".Equals(presentationClass.InnerText.ToLower()) &&
+                this.RDFData.SelectSingleNode("rdf:RDF[1]/rdf:Description[1]/foaf:firstName", base.RDFNamespaces) != null &&
+                this.RDFData.SelectSingleNode("rdf:RDF[1]/rdf:Description[1]/foaf:lastName", base.RDFNamespaces) != null)
             {
                 ((HtmlGenericControl)masterpage.FindControl("divProfilesContentMain")).Attributes.Add("itemscope", "itemscope");
                 ((HtmlGenericControl)masterpage.FindControl("divProfilesContentMain")).Attributes.Add("itemtype", "http://schema.org/Person");
@@ -73,21 +76,9 @@ namespace Profiles.Profile
                 Page.Header.Controls.Add(Description);
 
                 HtmlLink Canonical = new HtmlLink();
-                Canonical.Href = Root.Domain + Request.Url.AbsolutePath.ToLower();
+                Canonical.Href = Request.Url.AbsoluteUri.IndexOf('?') == -1 ? Request.Url.AbsoluteUri.ToLower() : Request.Url.AbsoluteUri.ToLower().Substring(0, Request.Url.AbsoluteUri.IndexOf('?'));
                 Canonical.Attributes["rel"] = "canonical";
                 Page.Header.Controls.Add(Canonical);
-
-                // email tracking
-                HtmlGenericControl trackMailClickJs = new HtmlGenericControl("script");
-                trackMailClickJs.Attributes.Add("type", "text/javascript");
-                trackMailClickJs.InnerHtml =
-                    "\n   // per http://stackoverflow.com/a/8570258/31100\n" +
-                    "       function handleMailto(link, email) {\n" +
-                    "       _gaq.push(['_trackEvent', 'Profile Page Interaction', 'activate_email_link', email, , false]);\n" +
-                    "       _gaq.push(function () { document.location = link.href });\n" +
-                    "       return false;\n" +
-                    "   }\n";
-                Page.Header.Controls.Add(trackMailClickJs);
             }
         }
 

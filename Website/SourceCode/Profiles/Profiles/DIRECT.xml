@@ -1,0 +1,4 @@
+﻿<site-description>
+  <name>Harvard University</name>
+  <aggregate-query>http://connects.catalyst.harvard.edu/profiles/DIRECT/Modules/DirectSearch/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</aggregate-query>
+</site-description>

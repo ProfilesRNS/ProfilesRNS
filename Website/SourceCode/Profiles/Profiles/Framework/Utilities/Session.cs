@@ -12,6 +12,10 @@
 */
 using System;
 using System.Web;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
+using System.Text.RegularExpressions;
 
 namespace Profiles.Framework.Utilities
 {
@@ -42,7 +46,11 @@ namespace Profiles.Framework.Utilities
         public Int64 NodeID { get; set; }
         public string PersonURI { get; set; }
         public string UserAgent { get; set; }
-        public string ShortDisplayName { get; set; } // added by UCSF for menu
+        public bool IsBot { get; set; }
+        public string GetSessionCacheKey()
+        {   // Treat all bots the same, and treat all anonymous users the same.  Logged in users get their globally unique SessionID
+            return IsBot ? "BOT" : (UserID == 0 ? "ANONYMOUS" : SessionID);
+        }
     }
     public class SessionHistory
     {
@@ -68,6 +76,34 @@ namespace Profiles.Framework.Utilities
     /// </summary>
     public class SessionManagement
     {
+        // UCSF
+        private static List<string> BotUserAgents = new List<string>();
+        static SessionManagement() 
+        {
+            using (SqlDataReader reader = new DataIO().GetSQLDataReader("ProfilesDB", "select UserAgent from [User.Session].[Bot]", CommandType.Text, CommandBehavior.CloseConnection, null))
+            {
+                while (reader.Read())
+                {
+                    BotUserAgents.Add(reader[0].ToString());
+                }
+            }
+        }
+
+        private static bool IsBot(string userAgent) 
+        {
+            if (userAgent != null)
+            {
+                foreach (string bot in BotUserAgents)
+                {
+                    if (new Regex(@"\A" + new Regex(@"\.|\$|\^|\{|\[|\(|\||\)|\*|\+|\?|\\").Replace(bot, ch => @"\" + ch).Replace('_', '.').Replace("%", ".*") + @"\z", RegexOptions.Singleline).IsMatch(userAgent))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        
         //ZAP - I need some type of redreict in this class for when session has expired
         public SessionManagement() { }
 
@@ -101,7 +137,7 @@ namespace Profiles.Framework.Utilities
 
             return (Session)(HttpContext.Current.Session["PROFILES_SESSION"]);
         }
-        public void SessionDistroy()
+        public void SessionDestroy()
         {
             HttpContext.Current.Session["PROFILES_SESSION"] = null;
             HttpContext.Current.Session.Abandon();
@@ -113,8 +149,15 @@ namespace Profiles.Framework.Utilities
         public void SessionCreate()
         {
             string sessionid = string.Empty;
+            string ORNGViewer = null;
 
-            if (HttpContext.Current.Request.Headers["SessionID"] != null)
+            if (HttpContext.Current.Request["ContainerSessionID"] != null)
+            {
+                // ORNG this means it is from shindigorng. Grab the associated session and user
+                sessionid = HttpContext.Current.Request["ContainerSessionID"];
+                ORNGViewer = HttpContext.Current.Request["Viewer"];
+            }
+            else if (HttpContext.Current.Request.Headers["SessionID"] != null)
                 sessionid = HttpContext.Current.Request.Headers["SessionID"];
 
             DataIO dataio = new DataIO();
@@ -134,12 +177,17 @@ namespace Profiles.Framework.Utilities
 
             session.RequestIP = ipaddress;
             session.UserAgent = HttpContext.Current.Request.UserAgent;
+            session.IsBot = IsBot(session.UserAgent);
 
             if (sessionid == string.Empty)
                 dataio.SessionCreate(ref session);
             else
             {
                 session.SessionID = sessionid;
+                if (ORNGViewer != null && ORNGViewer.LastIndexOf('/') > 0)
+                {
+                    session.UserID = Convert.ToInt32(ORNGViewer.Substring(ORNGViewer.LastIndexOf('/') + 1));
+                }
             }
 
             //Store the object in the current session of the user.
@@ -173,7 +221,6 @@ namespace Profiles.Framework.Utilities
             return (Session)HttpContext.Current.Session["PROFILES_SESSION"];
 
         }
-
 
         public RDFTriple RDFTriple
         {

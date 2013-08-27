@@ -65,6 +65,7 @@ namespace Profiles.Search.Modules.SearchResults
             string lname = "";
             string institution = "";
             string department = "";
+            string division = "";
             string sort = "";
             string sortdirection = "";
             string searchrequest = "";
@@ -76,6 +77,7 @@ namespace Profiles.Search.Modules.SearchResults
             string otherfilters = "";
             string institutionallexcept = string.Empty;
             string departmentallexcept = string.Empty;
+            string divisionallexcept = string.Empty;
             string exactphrase = string.Empty;
 
 
@@ -108,6 +110,7 @@ namespace Profiles.Search.Modules.SearchResults
             if (String.IsNullOrEmpty(Request.QueryString["searchfor"])==false)
             {
                 searchfor = Request.QueryString["searchfor"];
+                exactphrase = Request.QueryString["exactphrase"];
             }
             else if(String.IsNullOrEmpty(Request.Form["txtSearchFor"])==false)
             {
@@ -151,8 +154,10 @@ namespace Profiles.Search.Modules.SearchResults
 
             if (String.IsNullOrEmpty(Request.QueryString["department"])==false)
                 department = Request.QueryString["department"];
-            
 
+            if (String.IsNullOrEmpty(Request.QueryString["division"]) == false)
+                division = Request.QueryString["division"];
+            
             if (String.IsNullOrEmpty(Request.QueryString["perpage"])==false)
             {
 				perpage = Convert.ToInt64(Request.QueryString["perpage"]);
@@ -242,7 +247,7 @@ namespace Profiles.Search.Modules.SearchResults
             }
             else
             {
-                showcolumns = 10;
+                showcolumns = 1;
             }
 
 
@@ -270,6 +275,11 @@ namespace Profiles.Search.Modules.SearchResults
 
             }
 
+            if (String.IsNullOrEmpty(Request.QueryString["divisionallexcept"]) == false)
+            {
+                divisionallexcept = Request.QueryString["divisionallexcept"];
+
+            }
 
             if (String.IsNullOrEmpty(Request.QueryString["exactphrase"])==false)
             {
@@ -325,14 +335,13 @@ namespace Profiles.Search.Modules.SearchResults
                         break;
 
                     default:                       
-                            xmlsearchrequest = data.SearchRequest(searchfor, exactphrase, fname, lname, institution, institutionallexcept, department, departmentallexcept,  "http://xmlns.com/foaf/0.1/Person", perpage.ToString(), (startrecord - 1).ToString(), sort, sortdirection, otherfilters, "",ref searchrequest);                    
+                            xmlsearchrequest = data.SearchRequest(searchfor, exactphrase, fname, lname, institution, institutionallexcept, department, departmentallexcept, division, divisionallexcept,  "http://xmlns.com/foaf/0.1/Person", perpage.ToString(), (startrecord - 1).ToString(), sort, sortdirection, otherfilters, "",ref searchrequest);                    
                         break;
                 }
 
-                OpenSocialManager om = OpenSocialManager.GetOpenSocialManager(null, Page, false, false);
-                om.RegisterORNGCallbackResponder(OpenSocialManager.JSON_PERSONID_CHANNEL, new Responder(xmlsearchrequest));
-
-                this.SearchData = data.Search(xmlsearchrequest,false);
+                new Responder(Page, xmlsearchrequest); 
+                
+                this.SearchData = data.Search(xmlsearchrequest, false);
                 this.SearchRequest = data.EncryptRequest(xmlsearchrequest.OuterXml);
                 base.MasterPage.SearchRequest = this.SearchRequest;
                 base.MasterPage.RDFData = this.SearchData;
@@ -354,6 +363,7 @@ namespace Profiles.Search.Modules.SearchResults
             args.AddParam("totalpages", "", totalpages);
             args.AddParam("page", "", page);
             args.AddParam("searchfor", "", searchfor);
+            args.AddParam("exactphrase", "", exactphrase);
             args.AddParam("classGrpURIpassedin", "", classgroupuri);
             args.AddParam("classURIpassedin", "", classuri);
             args.AddParam("searchrequest", "", this.SearchRequest);
@@ -442,18 +452,20 @@ namespace Profiles.Search.Modules.SearchResults
         {
             XmlDocument searchRequest;
 
-            public Responder(XmlDocument searchRequest)
+            public Responder(Page page, XmlDocument searchRequest) : base(null, page, false, ORNGCallbackResponder.JSON_PERSONID_REQ)
             {
                 this.searchRequest = searchRequest;
             }
 
-            public string getCallbackResponse(OpenSocialManager om, string channel)
+            public override string getCallbackResponse()
             {
                 try
                 {
                     searchRequest.SelectSingleNode("/SearchOptions/OutputOptions/Offset").InnerText = "0";
                     searchRequest.SelectSingleNode("/SearchOptions/OutputOptions/Limit").InnerText = "500";
                     XmlDocument searchData = new Profiles.Search.Utilities.DataIO().Search(searchRequest, false, false);
+
+                    DebugLogging.Log("SeachCallbackResponse :" + searchRequest.ToString());
 
                     List<string> peopleURIs = new List<string>();
                     XmlNodeList people = searchData.GetElementsByTagName("rdf:object");
@@ -463,7 +475,7 @@ namespace Profiles.Search.Modules.SearchResults
                     }
                     if (peopleURIs.Count > 0)
                     {
-                        return OpenSocialManager.BuildJSONPersonIds(peopleURIs, "" + peopleURIs.Count + " people found");
+                        return BuildJSONPersonIds(peopleURIs, "" + peopleURIs.Count + " people found");
                     }
                 }
                 catch (Exception e)

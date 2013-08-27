@@ -85,17 +85,17 @@ namespace Profiles.Framework.Utilities
                 {
                     if (app.SelectSingleNode("@Enabled").Value == "true")
                     {
-                        modulecache.Load(new StreamReader(AppDomain.CurrentDomain.BaseDirectory + app.SelectSingleNode("@ApplicationPath").Value + "\\" + app.SelectSingleNode("@ModulePath").Value + "\\Modulecatalogue.xml"));
+                        modulecache.Load(new StreamReader(AppDomain.CurrentDomain.BaseDirectory + app.SelectSingleNode("@ApplicaitonPath").Value + "\\" + app.SelectSingleNode("@ModulePath").Value + "\\Modulecatalogue.xml"));
 
                         foreach (XmlNode module in modulecache.SelectNodes("ModuleList/Module"))
                         {
                             if (module.SelectSingleNode("@Enabled").Value == "true")
                             {
-                                modulepath = "~/" + app.SelectSingleNode("@ApplicationPath").Value + "/" + module.SelectSingleNode("@ModulePath").Value + "/" + module.SelectSingleNode("@NameSpace").Value + "/" + module.SelectSingleNode("@FileName").Value;
+                                modulepath = "~/" + app.SelectSingleNode("@ApplicaitonPath").Value + "/" + module.SelectSingleNode("@ModulePath").Value + "/" + module.SelectSingleNode("@NameSpace").Value + "/" + module.SelectSingleNode("@FileName").Value;
                                 if (this.GetModule(module.SelectSingleNode("@NameSpace").Value)==null){
                                     _modules.Add(new Module(modulepath, module.SelectSingleNode("@NameSpace").Value, null, ""));
                                 }
-                                _modules.Add(new Module(modulepath, app.SelectSingleNode("@ApplicationPath").Value+"."+module.SelectSingleNode("@NameSpace").Value, null, ""));
+                                _modules.Add(new Module(modulepath, app.SelectSingleNode("@ApplicaitonPath").Value+"."+module.SelectSingleNode("@NameSpace").Value, null, ""));
                                 moduleparams = new List<ModuleParams>();
                             }
                         }

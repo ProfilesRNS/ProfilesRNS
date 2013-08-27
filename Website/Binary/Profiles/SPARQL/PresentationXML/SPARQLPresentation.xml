@@ -1,0 +1,23 @@
+﻿<Presentation PresentationClass="profile">
+  <PageOptions Columns="2"/>
+  <WindowName>SPARQL | Profiles RNS</WindowName>
+  <PageTitle>SPARQL</PageTitle>
+  <PageBackLinkName></PageBackLinkName>
+  <PageBackLinkURL></PageBackLinkURL>
+  <PageSubTitle>Use the query form below to run a SPARQL query.</PageSubTitle>
+  <PageDescription></PageDescription>
+  <PanelList>
+    <Panel type="header"  />
+    <Panel type="page" />
+    <Panel Type="active">
+      <Module ID="MiniSearch"  />
+      <Module ID="MainMenu"  />
+    </Panel>
+    <Panel Type="main">
+      <Module ID="SPARQLSearch" />
+    </Panel>
+    <Panel Type="passive"/>
+    <Panel type="footer" />
+  </PanelList>
+</Presentation>
+

@@ -1,0 +1,24 @@
+﻿<Presentation PresentationClass="profile">
+  <PageOptions Columns="2"/>
+  <WindowName>Gadget Sandbox</WindowName>
+  <PageTitle>Gadget Sandbox</PageTitle>
+  <PageBackLinkName></PageBackLinkName>
+  <PageBackLinkURL></PageBackLinkURL>
+  <PageSubTitle></PageSubTitle>
+  <PageDescription></PageDescription>
+  <PanelList>
+    <Panel type="header"  />
+    <Panel type="page" />
+    <Panel Type="active">
+      <Module ID="MiniSearch"  />
+      <Module ID="DefaultMenu">
+      </Module>
+    </Panel>
+    <Panel Name="" Alias="" Type="main" TabType="default" TabSort="0" >
+      <Module ID="GadgetSandbox" >
+      </Module>
+    </Panel>
+    <Panel type="footer" />
+  </PanelList>
+</Presentation>
+

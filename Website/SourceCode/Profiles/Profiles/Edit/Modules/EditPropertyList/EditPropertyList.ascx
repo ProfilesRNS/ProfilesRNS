@@ -1,10 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="EditPropertyList.ascx.cs"
     Inherits="Profiles.Edit.Modules.EditPropertyList.EditPropertyList" %>
-
-
 <asp:Literal runat="server" ID="litBackLink"></asp:Literal>
 <br />
-<!--
 <br />
 Below are the types of content that can be included on this profile. Locked items
 <asp:Image runat="server" ID="imgLock" />
@@ -14,20 +11,6 @@ Human Resources office; however, you may upload a custom photo to your profile u
 this website.
 <br />
 <br />
-<p style="color:#990000;font-weight:bold;margin-top:2px;">Please note that your changes may take up to 15 minutes to show on the public site.</p>
--->
-<h3>Basic Components:</h3>
-<div id="profile-components">
-  <table style="width:100%;margin-bottom:0;">
-    <tr style="border-bottom:1px solid #CCC;">
-       <td class="padding" id="namedegree">Name and Degrees</td>
-       <td colspan="2">
-         <span id="public"><img src="Images/icons_lock.gif" />Always Public</span>
-         <span id="cls">This info is drawn from the Campus Locator System. 
-         Please contact your HR representative for corrections.</span>
-       </td>
-    </tr>
-  </table>
 <asp:Repeater runat="server" ID="repPropertyGroups" OnItemDataBound="repPropertyGroups_OnItemDataBound">
     <ItemTemplate>
         <asp:GridView runat="server" ID="grdSecurityGroups" AutoGenerateColumns="false" OnRowDataBound="grdSecurityGroups_OnDataBound"
@@ -37,9 +20,9 @@ this website.
             <AlternatingRowStyle CssClass="evenRow" />
             <Columns>
                 <asp:BoundField HeaderStyle-CssClass="padding" ItemStyle-CssClass="padding" HeaderStyle-HorizontalAlign="Left"
-                    ItemStyle-HorizontalAlign="Left" DataField="item" HeaderText="Item" ItemStyle-Width="150px" />
+                    ItemStyle-HorizontalAlign="Left" DataField="item" HeaderText="Item" />
                 <asp:TemplateField HeaderStyle-HorizontalAlign="Center"
-                    HeaderText="Items" ItemStyle-Width="50px">
+                    HeaderText="Items" >
                     <ItemTemplate>
                         <asp:Image runat="server" ID="imgBlank" Visible="false" ImageUrl="~/Edit/Images/icons_blank.gif" />
                         <asp:Label runat="server" ID="lblItems"></asp:Label>
@@ -47,7 +30,7 @@ this website.
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderStyle-HorizontalAlign="Center" 
-                    HeaderText="Privacy" ItemStyle-Width="100px">
+                    HeaderText="Privacy" >
                     <ItemTemplate>
                         <asp:HiddenField ID="hfPropertyURI" runat="server" />
                         <asp:DropDownList AutoPostBack="true" Visible="false" OnSelectedIndexChanged="updateSecurity" runat="server"
@@ -61,30 +44,31 @@ this website.
         <br />
     </ItemTemplate>
 </asp:Repeater>
-</div>
-<table id="profile-visibility">
+<div style="display:block">
+<%--
+<table width='100%'>
     <tr>
-        <td colspan='3'>
-            <div class='editPage'>
-                <table width="100%">
-                    <tr>
-                        <td>
-                            <h3>Visibility Settings</h3>
-                        </td>
-                        <td align="right">
+        <td>
+--%>            <table width="100%">
+                <tr>
+                    <td>
+                        <h2>Privacy Levels</h2>
+                    </td>
+                    <td align="right">
                         <%-- <b>Set All</b>&nbsp;
                             <asp:DropDownList runat="server" ID="ddlSetAll" AutoPostBack="true" OnSelectedIndexChanged="ddlSetAll_IndexChanged">
                             </asp:DropDownList>--%>
                     </td>
                 </tr>
             </table>
-            </div>
-            <div>
+            <div style='border: solid 1px #ccc; margin-bottom: 2px; width: 100%'>
                 <asp:Literal runat="server" ID="litSecurityKey"></asp:Literal>
             </div>
-        </td>
+<%--        </td>
     </tr>
 </table>
+--%>
+</div>
 <div style="clear:left">
   <br />
   <h3>Add-ons:</h3>

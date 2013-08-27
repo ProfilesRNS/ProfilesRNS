@@ -75,7 +75,7 @@ namespace Profiles.Search.Modules
                 {
                     foreach (XmlNode n in base.BaseData.SelectNodes("rdf:RDF/rdf:Description/vivo:overview/DirectMatchList/Match/PropertyList/Property", base.Namespaces))
                     {
-                        if (n.SelectSingleNode("Name", base.Namespaces).InnerText == "fullName" || n.SelectSingleNode("Name", base.Namespaces).InnerText == "perferredTitle" || n.SelectSingleNode("Name", base.Namespaces).InnerText == "overview")
+                       // if (n.SelectSingleNode("Name", base.Namespaces).InnerText == "fullName" || n.SelectSingleNode("Name", base.Namespaces).InnerText == "perferredTitle" || n.SelectSingleNode("Name", base.Namespaces).InnerText == "overview")
                             directconnections.Add(new DirectConnection(n.SelectSingleNode("Name", base.Namespaces).InnerText, n.SelectSingleNode("Value", base.Namespaces).InnerText, nodeuri));
                     }
                 }
