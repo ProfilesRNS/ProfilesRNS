@@ -26,3 +26,5 @@ Msg 1204, Level 19, State 4, Procedure ChangeBaseURI, Line 23
 The instance of the SQL Server Database Engine cannot obtain a LOCK resource at this time. Rerun your statement when there are fewer active users. Ask the database administrator to check the lock and memory configuration for this instance, or to check for long-running transactions.
 
 Fix global health input to point to new ORNG schema and nodeId items
+
+Fix grant import sp to use new ORNG schema
