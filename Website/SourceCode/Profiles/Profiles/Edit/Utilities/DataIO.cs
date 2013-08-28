@@ -499,7 +499,7 @@ namespace Profiles.Edit.Utilities
             SessionManagement sm = new SessionManagement();
             string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
 
-            image = this.ResizeImageFile(image, 150);
+            image = this.ResizeImageFile(image, 150, 300);
 
             SqlConnection dbconnection = new SqlConnection(connstr);
 
@@ -537,20 +537,27 @@ namespace Profiles.Edit.Utilities
 
         }
 
-        public byte[] ResizeImageFile(byte[] imageFile, int targetSize)
+        public byte[] ResizeImageFile(byte[] imageFile, int targetWidth, int targetHeight)
         {
             System.Drawing.Image original = System.Drawing.Image.FromStream(new System.IO.MemoryStream(imageFile));
             int targetH, targetW;
-            if (original.Height > original.Width)
+            // if it is too tall and tall and skinny
+            if (original.Height > targetHeight && ((float)original.Height / (float)original.Width) > ((float)targetHeight / (float)targetWidth))
             {
-                targetH = targetSize;
-                targetW = (int)(original.Width * ((float)targetSize / (float)original.Height));
+                targetH = targetHeight;
+                targetW = (int)(original.Width * ((float)targetHeight / (float)original.Height));
             }
-            else
+            // if it is too wide
+            else if (original.Width > targetWidth)
             {
-                targetW = targetSize;
-                targetH = (int)(original.Height * ((float)targetSize / (float)original.Width));
+                targetW = targetWidth;
+                targetH = (int)(original.Height * ((float)targetWidth / (float)original.Width));
             }
+            else // leave it as is
+            {
+                targetH = original.Height;
+                targetW = original.Width;
+            } 
             System.Drawing.Image imgPhoto = System.Drawing.Image.FromStream(new System.IO.MemoryStream(imageFile));
             // Create a new blank canvas.  The resized image will be drawn on this canvas.
             System.Drawing.Bitmap bmPhoto = new System.Drawing.Bitmap(targetW, targetH, System.Drawing.Imaging.PixelFormat.Format24bppRgb);

@@ -307,7 +307,7 @@ namespace Profiles.Profile.Utilities
                 }
                 dbcommand.Connection = dbconnection;
 
-                result = resize.ResizeImageFile((byte[])dbcommand.ExecuteScalar(), 150);
+                result = resize.ResizeImageFile((byte[])dbcommand.ExecuteScalar(), 150, 300);
 
                 if (result == null)
                 {
