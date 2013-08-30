@@ -1,2 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<publishData />
+<publishData>
+  <publishProfile publishUrl="Z:\Profiles200SecureAPI" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="FileSystem" replaceMatchingFiles="True" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
+    <file relUrl="bin/ProfilesSecureAPI.pdb" publishTime="08/30/2013 12:45:49" />
+    <file relUrl="Scripts/jquery-1.4.1-vsdoc.js" publishTime="08/27/2013 10:30:25" />
+    <file relUrl="Web.config" publishTime="08/30/2013 12:26:57" />
+    <file relUrl="Scripts/jquery-1.4.1.min.js" publishTime="08/27/2013 10:30:25" />
+    <file relUrl="Default.aspx" publishTime="08/27/2013 10:30:25" />
+    <file relUrl="ActivityLog.aspx" publishTime="08/30/2013 12:16:29" />
+    <file relUrl="Scripts/jquery-1.4.1.js" publishTime="08/27/2013 10:30:25" />
+    <file relUrl="bin/ProfilesSecureAPI.dll" publishTime="08/30/2013 12:45:49" />
+  </publishProfile>
+</publishData>
