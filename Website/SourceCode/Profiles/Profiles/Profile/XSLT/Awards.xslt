@@ -9,8 +9,16 @@
             <xsl:for-each select="rdf:RDF/rdf:Description[1]/vivo:awardOrHonor">
               <xsl:variable name="awardUri" select="@rdf:resource"/>              
               <tr>
-                <td stlye="white-space:nowrap;" width="100px">                  
-                  <xsl:value-of select="/rdf:RDF[1]/rdf:Description[@rdf:about=$awardUri]/prns:startDate"/> -               
+                <td stlye="white-space:nowrap;">
+                  <xsl:value-of select="/rdf:RDF[1]/rdf:Description[@rdf:about=$awardUri]/prns:awardConferredBy"/>
+                </td>
+                <td>
+                  <xsl:value-of select="/rdf:RDF[1]/rdf:Description[@rdf:about=$awardUri]/prns:startDate"/>
+                  <xsl:if test="/rdf:RDF[1]/rdf:Description[@rdf:about=$awardUri]/prns:endDate">
+                    -
+                  </xsl:if>
+                </td>
+                <td>
                   <xsl:value-of select="/rdf:RDF[1]/rdf:Description[@rdf:about=$awardUri]/prns:endDate"/>
                 </td>
                 <td>

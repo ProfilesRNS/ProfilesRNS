@@ -51,7 +51,9 @@ namespace Profiles.Framework.Utilities
         {   // Treat all bots the same, and treat all anonymous users the same.  Logged in users get their globally unique SessionID
             return IsBot ? "BOT" : (UserID == 0 ? "ANONYMOUS" : SessionID);
         }
+        public string ShortDisplayName { get; set; } // added by UCSF for menu
     }
+
     public class SessionHistory
     {
         public string SessionID { get; set; }

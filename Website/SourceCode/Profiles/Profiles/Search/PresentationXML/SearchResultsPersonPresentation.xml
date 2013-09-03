@@ -16,6 +16,7 @@
     <Panel Type="main" TabType="Fixed" TabSort="0" >
       <Module ID="SearchResults">        
       </Module>
+      <Module ID="SearchGadgets"/>
     </Panel>
     <Panel Type="passive">
       <Module ID="SearchCriteria"></Module>

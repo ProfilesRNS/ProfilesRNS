@@ -193,7 +193,9 @@
     <Content Include="Search\Images\icon_squareArrow.gif" />
     <Content Include="Search\Images\search-red.jpg" />
     <Content Include="Search\JavaScript\UCSF.js" />
+    <Content Include="Search\Modules\SearchConcept\SearchConcept.ascx" />
     <Content Include="SiteMap.aspx" />
+    <Content Include="trace.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -789,6 +791,13 @@
       <DependentUpon>SearchProxies.ascx</DependentUpon>
     </Compile>
     <Compile Include="Proxy\Utilities\DataIO.cs" />
+    <Compile Include="Search\Modules\SearchConcept\SearchConcept.ascx.cs">
+      <DependentUpon>SearchConcept.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Search\Modules\SearchConcept\SearchConcept.ascx.designer.cs">
+      <DependentUpon>SearchConcept.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Search\Modules\SearchEverythingFacets\SearchEverythingFacets.ascx.cs">
       <DependentUpon>SearchEverythingFacets.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

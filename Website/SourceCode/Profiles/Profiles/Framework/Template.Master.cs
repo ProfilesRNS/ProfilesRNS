@@ -423,7 +423,11 @@ namespace Profiles.Framework
             // Window Title
             buffer = GetStringFromPresentationXML("Presentation/WindowName");
 
-            Page.Header.Title = buffer + " | Profiles RNS";
+            if (buffer != String.Empty)
+            {
+                buffer = buffer + " | ";
+            }
+            Page.Header.Title = buffer + "UCSF Profiles";
         }
 
         #region "Panel Methods"

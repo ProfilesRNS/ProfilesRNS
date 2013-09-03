@@ -37,7 +37,7 @@
     <xsl:variable name="uriOrganization" select="rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:personInPrimaryPosition/@rdf:resource]/vivo:positionInOrganization/@rdf:resource"/>
     <xsl:if test="rdf:RDF/rdf:Description[@rdf:about=$uriOrganization]/rdfs:label !=''">
       <tr>
-        <th>Institution</th>
+        <th>School</th>
         <td>
           <span itemprop="affiliation">
             <xsl:value-of select="rdf:RDF/rdf:Description[@rdf:about= $uriOrganization]/rdfs:label"/>

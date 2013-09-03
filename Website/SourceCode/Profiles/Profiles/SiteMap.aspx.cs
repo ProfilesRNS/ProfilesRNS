@@ -23,10 +23,16 @@ namespace Profiles
                                     "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"" + Environment.NewLine +
                                     "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" + Environment.NewLine +
                                     "xsi:schemaLocation=\"http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd\">" + Environment.NewLine +
+                                    "<url><loc>" + Root.Domain + "</loc></url>" + Environment.NewLine +
+                                    "<url><loc>" + Root.Domain + "/About</loc></url>" + Environment.NewLine +
+                                    "<url><loc>" + Root.Domain + "/About/AboutUCSFProfiles.aspx</loc></url>" + Environment.NewLine +
+                                    "<url><loc>" + Root.Domain + "/About/ForDevelopers.aspx</loc></url>" + Environment.NewLine +
+                                    "<url><loc>" + Root.Domain + "/About/GadgetLibrary.aspx</loc></url>" + Environment.NewLine +
+                                    "<url><loc>" + Root.Domain + "/About/Help.aspx</loc></url>" + Environment.NewLine +
+                                    "<url><loc>" + Root.Domain + "/About/HowProfilesWorks.aspx</loc></url>" + Environment.NewLine +
                                     "<url><loc>" + Root.Domain + "/search</loc></url>" + Environment.NewLine +
                                     "<url><loc>" + Root.Domain + "/search/people</loc></url>" + Environment.NewLine +
-                                    "<url><loc>" + Root.Domain + "/search/all</loc></url>" + Environment.NewLine +
-                                    "<url><loc>" + Root.Domain + "/about/default.aspx</loc></url>" + Environment.NewLine);
+                                    "<url><loc>" + Root.Domain + "/search/all</loc></url>" + Environment.NewLine);
             foreach (Int64 nodeId in LoadPeople()) 
             {
                     Response.Write("<url><loc>" + Root.Domain + "/display/" + nodeId + "</loc></url>" + Environment.NewLine);

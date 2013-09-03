@@ -172,7 +172,7 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
             HiddenField hdLabel = (HiddenField)GridViewProperty.Rows[e.RowIndex].FindControl("hdLabel");
             TextBox txtLabel = (TextBox)GridViewProperty.Rows[e.RowIndex].FindControl("txtLabel");
 
-            data.UpdateLiteral(this.SubjectID, this.PredicateID, data.GetStoreNode(hdLabel.Value), data.GetStoreNode(txtLabel.Text.Trim()));
+            data.UpdateLiteral(this.SubjectID, this.PredicateID, data.GetStoreNode(hdLabel.Value), data.GetStoreNode(txtLabel.Text.Trim()), this.PropertyListXML);
             GridViewProperty.EditIndex = -1;
             this.FillPropertyGrid(true);
             upnlEditSection.Update();
@@ -215,7 +215,7 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
         {
             if (Session["pnlInsertProperty.Visible"] != null)
             {
-                data.AddLiteral(this.SubjectID, this.PredicateID, data.GetStoreNode(txtLabel.Text.Trim()));
+                data.AddLiteral(this.SubjectID, this.PredicateID, data.GetStoreNode(txtLabel.Text.Trim()), this.PropertyListXML);
 
                 this.FillPropertyGrid(true);
                 txtLabel.Text = "";
@@ -229,7 +229,7 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
         {
             if (Session["pnlInsertProperty.Visible"] != null)
             {
-                data.AddLiteral(this.SubjectID, this.PredicateID, data.GetStoreNode(txtLabel.Text.Trim()));
+                data.AddLiteral(this.SubjectID, this.PredicateID, data.GetStoreNode(txtLabel.Text.Trim()), this.PropertyListXML);
                 this.FillPropertyGrid(true);
                 Session["pnlInsertProperty.Visible"] = null;
                 btnInsertCancel_OnClick(sender, e);

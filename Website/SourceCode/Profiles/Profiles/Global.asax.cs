@@ -120,6 +120,7 @@ namespace Profiles
                     }
                     else
                     {
+                        routes.Add("ProfilesAliasPath0" + loop, new Route(reader[0].ToString(), new ProfilesRouteHandler()));
                         routes.Add("ProfilesAliasPath1" + loop, new Route(reader[0].ToString() + "/{Param1}", new ProfilesRouteHandler()));
                         routes.Add("ProfilesAliasPath2" + loop, new Route(reader[0].ToString() + "/{Param1}/{Param2}", new ProfilesRouteHandler()));
                         routes.Add("ProfilesAliasPath3" + loop, new Route(reader[0].ToString() + "/{Param1}/{Param2}/{Param3}", new ProfilesRouteHandler()));
