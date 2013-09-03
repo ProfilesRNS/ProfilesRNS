@@ -23,46 +23,99 @@ namespace Profiles.Profile.Modules.ProfileImage
 {
     public class PhotoHandler : IHttpHandler, System.Web.SessionState.IRequiresSessionState
     {
+        static byte[] silhouetteImage = null;
+        static readonly string IMAGE_CACHE_PREFIX = "UCSF.Image_";
+
+        static PhotoHandler()
+        {
+            // this method is limited to 2^32 byte files (4.2 GB)
+            using (FileStream fs = File.OpenRead(AppDomain.CurrentDomain.BaseDirectory + "/Profile/Images/default_img.png"))
+            {
+                silhouetteImage = new byte[fs.Length];
+                fs.Read(silhouetteImage, 0, Convert.ToInt32(fs.Length));
+            }
+        }
 
         public void ProcessRequest(HttpContext context)
         {
-            // Set up the response settings
-            context.Response.ContentType = "image/jpeg";
-            context.Response.Cache.SetCacheability(HttpCacheability.Public);
-            context.Response.BufferOutput = false;
+            Utilities.DataIO data = new Profiles.Profile.Utilities.DataIO();
 
+            Int64 nodeid = -1;
             if (!string.IsNullOrEmpty(context.Request.QueryString["NodeID"]))
             {
-                
                 // get the id for the image
-                Int64 nodeid = Convert.ToInt32(context.Request.QueryString["NodeID"]);
-                bool harvarddefault = false;
+                nodeid = Convert.ToInt32(context.Request.QueryString["NodeID"]);
+            }
+            else if (!string.IsNullOrEmpty(context.Request.QueryString["person"]))
+            {
+                // UCSF.  Allow old id to work
+                nodeid = Framework.Utilities.UCSFIDSet.ByPersonId[Convert.ToInt64(context.Request.QueryString["person"])].NodeId;
+            }
 
-                if (context.Request.QueryString["HarvardDefault"] != null)
+            if (nodeid > 0)
+            {
+                // UCSF items
+                bool thumbnail = false;
+                int width = 150;
+                int height = 300;
+                if (context.Request.QueryString["Thumbnail"] != null)
                 {
-                    harvarddefault = true;
+                    thumbnail = true;
+                }
+                if (context.Request.QueryString["Width"] != null)
+                {
+                    width = Convert.ToInt32(context.Request.QueryString["Width"]);
+                    height = 2 * width;
+                }
+                if (context.Request.QueryString["Height"] != null)
+                {
+                    height = Convert.ToInt32(context.Request.QueryString["Height"]);
                 }
 
-                Utilities.DataIO data = new Profiles.Profile.Utilities.DataIO();
-
-                Framework.Utilities.RDFTriple request = new Profiles.Framework.Utilities.RDFTriple(nodeid);
-
-                request.Expand = true;
-                Framework.Utilities.Namespace xmlnamespace = new Profiles.Framework.Utilities.Namespace();
-                XmlDocument person ;
-
-                person = data.GetRDFData(request);
-                XmlNamespaceManager namespaces =  xmlnamespace.LoadNamespaces(person);
-
-                if (person.SelectSingleNode("rdf:RDF/rdf:Description[1]/prns:mainImage/@rdf:resource", namespaces) != null)
+                byte[] image = null;
+                // we know that it is OK to cache this
+                if (thumbnail)
                 {
+                    image = (byte[])Framework.Utilities.Cache.FetchObject(IMAGE_CACHE_PREFIX + nodeid);
+                }
 
-                    //Set up the response settings
+                if (image == null)
+                {
+                    // stuff below this and if statement is what makes it slow
+                    Framework.Utilities.RDFTriple request = new Profiles.Framework.Utilities.RDFTriple(nodeid);
+
+                    request.Expand = true;
+                    Framework.Utilities.Namespace xmlnamespace = new Profiles.Framework.Utilities.Namespace();
+                    XmlDocument person;
+
+                    person = data.GetRDFData(request);
+                    XmlNamespaceManager namespaces = xmlnamespace.LoadNamespaces(person);
+
+                    if (person.SelectSingleNode("rdf:RDF/rdf:Description[1]/prns:mainImage/@rdf:resource", namespaces) != null)
+                    {
+                        image = data.GetUserPhotoList(nodeid);
+                        if (thumbnail && image != null)
+                        {
+                            Framework.Utilities.Cache.Set(IMAGE_CACHE_PREFIX + nodeid, image);
+                        }
+                    }
+                    else if (thumbnail)
+                    {
+                        image = silhouetteImage;
+                    }
+                }
+
+                if (image != null)
+                {
+                    Edit.Utilities.DataIO resize = new Profiles.Edit.Utilities.DataIO();
+                    image = resize.ResizeImageFile(image, width, height);
+                    Stream stream = new System.IO.MemoryStream(image);
+
+                    // Set up the response settings
                     context.Response.ContentType = "image/jpeg";
                     context.Response.Cache.SetCacheability(HttpCacheability.Public);
                     context.Response.BufferOutput = false;
-
-                    Stream stream = data.GetUserPhotoList(nodeid,harvarddefault);
+                    context.Response.AddHeader("Content-Length", stream.Length.ToString());
 
                     const int buffersize = 1024 * 16;
                     byte[] buffer2 = new byte[buffersize];
@@ -72,13 +125,12 @@ namespace Profiles.Profile.Modules.ProfileImage
                         context.Response.OutputStream.Write(buffer2, 0, count);
                         count = stream.Read(buffer2, 0, buffersize);
                     }
-
                 }
                 else
                 {
-
                     context.Response.Write("No Image Found");
                 }
+
             }
         }
 

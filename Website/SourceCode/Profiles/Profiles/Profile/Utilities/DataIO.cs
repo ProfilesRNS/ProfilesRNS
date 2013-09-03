@@ -276,6 +276,21 @@ namespace Profiles.Profile.Utilities
 
         #region "Profile Photo"
 
+        public byte[] GetUserPhotoList(Int64 NodeID)
+        {
+            using (SqlConnection dbconnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString))
+            {
+                dbconnection.Open();
+
+                SqlCommand dbcommand = new SqlCommand("[Profile.Data].[Person.GetPhotos]");
+                dbcommand.CommandType = CommandType.StoredProcedure;
+                dbcommand.CommandTimeout = base.GetCommandTimeout();
+                dbcommand.Parameters.Add(new SqlParameter("@NodeID", NodeID));
+                dbcommand.Connection = dbconnection;
+                return (byte[])dbcommand.ExecuteScalar();
+            }
+        }
+
         public System.IO.Stream GetUserPhotoList(Int64 NodeID, bool harvarddefault)
         {
             Object result = null;
