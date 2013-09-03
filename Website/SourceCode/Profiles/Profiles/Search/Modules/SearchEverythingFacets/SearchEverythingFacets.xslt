@@ -11,7 +11,7 @@
   <xsl:param name="total"/>
   <xsl:template match="/">
     <div class="passiveSectionHead">
-      <xsl:text>Filter by Type</xsl:text>
+      <xsl:text>Search Result Filters</xsl:text>
     </div>
     <div class="passiveSectionBody" style="margin-top: 6px;">
       <xsl:variable name="allURL">

@@ -23,15 +23,14 @@
 <input type="hidden" id="classuri" name="classuri" value="" />
 <input type="hidden" id="searchtype" name="searchtype" value="everything" />
 <input type="hidden" id="txtSearchFor" name="txtSearchFor" value="" />
-Search or browse for people, publications, concepts, and other items in Profiles.
 <div class="content_container">
     <div class="tabContainer" style="margin-top: 0px;">
-        <div class="searchForm">
+        <div class="searchForm nonavbar">
             <table width="100%">
                 <tr>
                     <td colspan='3'>
-                        <div style="font-size: 18px; color: #b23f45; font-weight: bold; margin-bottom: 3px;">
-                            Search by keywords
+                        <div class="header">
+                            Find Research Publications by Topic
                         </div>
                     </td>
                 </tr>

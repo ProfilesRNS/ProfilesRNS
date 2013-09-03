@@ -68,10 +68,10 @@ function toggleImage(key,id) {
 
 var hasClickedListTable = false;
 
-function doListTableRowOver(x) {
+function DISABLEDdoListTableRowOver(x) {
     
     //x.className = 'overRow';
-    x.style.backgroundColor = '#5A719C';
+    x.style.backgroundColor = '#B8D0D0';
     x.style.color = '#FFF';
     x.style.cursor = 'pointer';    
     for (var i = 0; i < x.childNodes.length; i++) {
@@ -84,7 +84,7 @@ function doListTableRowOver(x) {
     }    
 }
 
-function doListTableRowOut(x, eo) {
+function DISABLEDdoListTableRowOut(x, eo) {
     
     if (eo == 1) {
         x.className = 'oddRow';

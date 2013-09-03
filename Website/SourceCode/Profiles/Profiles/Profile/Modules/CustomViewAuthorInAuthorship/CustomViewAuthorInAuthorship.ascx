@@ -2,15 +2,22 @@
 
 
 <div class='publicationList'>	
-	<div style="font-weight:bold;color:#888;padding:5px 0px;">
+	<div style="font-weight:bold;color:#888;margin-bottom: 12px;margin-top:6px">
 		Publications listed below are automatically derived from MEDLINE/PubMed and other sources, which might result in incorrect or missing publications. 
-		Faculty can <asp:Literal runat='server' ID='loginLiteral'></asp:Literal> to make corrections and additions.
+		Researchers can <asp:Literal runat='server' ID='loginLiteral'></asp:Literal> to make corrections and additions, or <a href="mailto:profiles@ucsf.edu">contact us for help</a>.
 	</div>
 	<div class="anchor-tab">
 		<a class='selected'>List All</a> 
 		&nbsp; | &nbsp; 
 		<a>Timeline</a>
 	</div>
+	<div class='toggle-vis' style='display:none;margin-top: 6px;'>		
+		Publications by year:
+		<div id="publicationTimelineGraph">
+			<img id='timelineBar' runat='server' border='0'/>
+		</div>
+	</div>	
+
 	<asp:Repeater ID="rpPublication" runat="server" OnItemDataBound="rpPublication_OnDataBound">
 		<HeaderTemplate>			
 			<div id="publicationListAll" class="publications toggle-vis">
@@ -32,12 +39,6 @@
 		</FooterTemplate>
 	</asp:Repeater>
 	
-	<div class='toggle-vis' style='display:none;margin-top: 6px;'>		
-		This graph shows the total number of publications by year, by first, middle/unknown, or last author.
-		<div id="publicationTimelineGraph">
-			<img id='timelineBar' runat='server' border='0'/>
-		</div>
-	</div>	
 </div>
 
 <div class="SupportText">
