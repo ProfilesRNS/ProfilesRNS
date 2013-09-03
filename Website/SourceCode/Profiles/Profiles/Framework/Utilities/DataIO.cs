@@ -728,5 +728,21 @@ namespace Profiles.Framework.Utilities
         }
 
         #endregion
+
+        // UCSF
+        // Load all the ID's for people so we don't have to hit the DB all the time
+        public void LoadUCSFIdSet()
+        {
+            using (SqlDataReader reader = GetDBCommand(ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString,
+                "select p.personid, p.nodeid, p.internalusername, p.url_name, f.UID_USERID from UCSF.vwPersonExport p join cls.dbo.vw_FNO f on p.InternalUsername = f.INDIVIDUAL_ID"
+                , CommandType.Text, CommandBehavior.CloseConnection, null).ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    new UCSFIDSet(Convert.ToInt64(reader[0]), Convert.ToInt64(reader[1]), reader[2].ToString(), reader[3].ToString(), reader[4].ToString());
+                }
+            }
+        }
+
     }
 }

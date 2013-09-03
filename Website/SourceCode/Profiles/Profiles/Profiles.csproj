@@ -123,6 +123,13 @@
     <Content Include="About\PresentationXML\NewFeatures.xml" />
     <Content Include="ActiveNetwork\CSS\UCSF.css" />
     <Content Include="ActiveNetwork\JavaScript\UCSF.js" />
+    <Content Include="CustomAPI\v1\EditedCount.aspx" />
+    <Content Include="CustomAPI\v1\JSONProfile.aspx" />
+    <Content Include="CustomAPI\v1\PubDate.aspx" />
+    <Content Include="CustomAPI\v1\PubXML.aspx" />
+    <Content Include="CustomAPI\v1\Statistics.aspx" />
+    <Content Include="CustomAPI\v1\XMLProfile.aspx" />
+    <Content Include="CustomAPI\v2\Default.aspx" />
     <Content Include="DIRECT\CSS\UCSF.css" />
     <Content Include="DIRECT\JavaScript\UCSF.js" />
     <Content Include="Edit\CSS\UCSF.css" />
@@ -269,6 +276,38 @@
     <Compile Include="ActiveNetwork\Modules\MyNetwork\MyNetwork.ascx.designer.cs">
       <DependentUpon>MyNetwork.ascx</DependentUpon>
     </Compile>
+    <Compile Include="CustomAPI\Utilities\DataIO.cs" />
+    <Compile Include="CustomAPI\v1\EditedCount.aspx.cs">
+      <DependentUpon>EditedCount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomAPI\v1\JSONProfile.aspx.cs">
+      <DependentUpon>JSONProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomAPI\v1\PubDate.aspx.cs">
+      <DependentUpon>PubDate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomAPI\v1\PubXML.aspx.cs">
+      <DependentUpon>PubXML.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomAPI\v1\Statistics.aspx.cs">
+      <DependentUpon>Statistics.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomAPI\v1\XMLProfile.aspx.cs">
+      <DependentUpon>XMLProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomAPI\v2\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomAPI\v2\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -283,6 +322,7 @@
     <Compile Include="Framework\Modules\MainMenu\History.ascx.designer.cs">
       <DependentUpon>History.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Framework\Utilities\UCSFIDSet.cs" />
     <Compile Include="Framework\Utilities\UserHistory.cs" />
     <Compile Include="History\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -1187,6 +1227,32 @@
     <Folder Include="ActiveNetwork\Utilities\" />
     <Folder Include="App_Data\" />
     <Folder Include="Login\Modules\App_LocalResources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ProfilesBetaAPI\Connects.Profiles.Service.DataContracts\Connects.Profiles.Service.DataContracts.csproj">
+      <Project>{4E11DE8F-C111-44E4-8AF8-B66EDEC9152D}</Project>
+      <Name>Connects.Profiles.Service.DataContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ProfilesBetaAPI\Connects.Profiles.Service.ServiceContracts\Connects.Profiles.Service.ServiceContracts.csproj">
+      <Project>{D532570D-2CB9-4592-A8B5-C16712B1FACB}</Project>
+      <Name>Connects.Profiles.Service.ServiceContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ProfilesBetaAPI\Connects.Profiles.Service.ServiceImplementation\Connects.Profiles.Service.ServiceImplementation.csproj">
+      <Project>{24E3696C-B69C-49C8-8276-C4003297C45D}</Project>
+      <Name>Connects.Profiles.Service.ServiceImplementation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ProfilesBetaAPI\Connects.Profiles.Service\Connects.Profiles.Service.csproj">
+      <Project>{5CD869A4-AB6B-43A0-ABB5-EE0DE758492B}</Project>
+      <Name>Connects.Profiles.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ProfilesBetaAPI\Connects.Profiles.Utility\Connects.Profiles.Utility.csproj">
+      <Project>{27F9D353-FCCC-430E-A6A6-6864773CBCDC}</Project>
+      <Name>Connects.Profiles.Utility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ProfilesBetaAPI\Profiles.Common\Connects.Profiles.Common.csproj">
+      <Project>{72ABCD78-6907-4F63-8C59-392C9F3CE506}</Project>
+      <Name>Connects.Profiles.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -74,7 +74,6 @@ namespace Profiles.Framework.Utilities
             Set(key, data, defaultTimeout, null);
         }
 
-
         /// <summary>
         /// Uses the web.config value for CACHE_EXPIRE to set the lenght of time for an object to be stored in RAM on web server.
         /// </summary>
