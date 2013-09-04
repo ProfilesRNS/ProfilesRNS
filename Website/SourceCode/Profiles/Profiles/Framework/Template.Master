@@ -288,6 +288,7 @@
 </body>
 <form id="navbarsearch" action="<%=GetURLDomain()%>/Search/Default.aspx?">
 <input type="hidden" name="searchtype" value="everything" />
+<input type="hidden" name="exactphrase" value="false" />
 <input id="searchterm" type="text" name="searchfor" value="" /><input type="hidden" name="ClassGroupURI" value="http://profiles.catalyst.harvard.edu/ontology/prns!ClassGroupPeople" /><input type="submit" value="" id="navbarsubmit" />
 </form>
 </html>

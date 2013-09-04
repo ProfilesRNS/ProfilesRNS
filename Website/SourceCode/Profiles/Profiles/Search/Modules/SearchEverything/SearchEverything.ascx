@@ -4,8 +4,9 @@
 <script type="text/javascript">
 
     function submitEverythingSearch() {
-        
-        document.location = "default.aspx?searchtype=everything&searchfor=" + document.getElementById("<%=searchfor.ClientID%>").value + "&exactphrase=" + document.getElementById("<%=chkExactPhrase.ClientID%>").checked;
+
+        document.location = "default.aspx?searchtype=everything&searchfor=" + document.getElementById("<%=searchfor.ClientID%>").value + "&exactphrase=" + document.getElementById("<%=chkExactPhrase.ClientID%>").checked +
+        "&ClassGroupURI=http://profiles.catalyst.harvard.edu/ontology/prns!ClassGroupConcepts"; //UCSF added to jump straight to concepts
     }
     function runScript(e) {
         $(document).keypress(function(e) {

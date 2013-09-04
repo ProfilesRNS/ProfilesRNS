@@ -24,12 +24,9 @@
       <Module ID="SearchPerson">
       </Module>    
     </Panel>
-    <Panel Name="Find Research" Alias="concept" Type="main" TabType="Fixed" TabSort="1" >
-      <Module ID="SearchConcept" />
-    </Panel>
-    <!--Panel Name="Find Everything" Alias="all" Type="main" TabType="Fixed" TabSort="2" >
+    <Panel Name="Find Research" Alias="all" Type="main" TabType="Fixed" TabSort="2" >
       <Module ID="SearchEverything" />        
-    </Panel-->
+    </Panel>
     <Panel Type="passive" >
       <Module ID="TopSearchPhrase">
         <ParamList>

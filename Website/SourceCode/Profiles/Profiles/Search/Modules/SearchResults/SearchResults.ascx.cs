@@ -78,7 +78,7 @@ namespace Profiles.Search.Modules.SearchResults
             string institutionallexcept = string.Empty;
             string departmentallexcept = string.Empty;
             string divisionallexcept = string.Empty;
-            string exactphrase = string.Empty;
+            string exactphrase = "false"; // UCSF default value to allow old Mini Search to work
 
 
             string searchtype = "";
