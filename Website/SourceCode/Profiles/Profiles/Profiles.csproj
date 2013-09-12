@@ -149,6 +149,7 @@
     <Content Include="Framework\Images\chatter-follow.png" />
     <Content Include="Framework\Images\chatter-group.png" />
     <Content Include="Framework\Images\collapseRound.gif" />
+    <Content Include="Framework\Images\connection.gif" />
     <Content Include="Framework\Images\expandRound.gif" />
     <Content Include="Framework\Images\favicon.gif" />
     <Content Include="Framework\Images\glyphicons-halflings.png" />

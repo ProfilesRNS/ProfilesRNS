@@ -95,6 +95,7 @@
         </td>
       </tr>
     </xsl:if>
+<!--
     <xsl:choose>
       <xsl:when test="rdf:RDF[1]/rdf:Description[1]/vivo:faxNumber !=''">
         <tr>
@@ -105,6 +106,7 @@
         </tr>
       </xsl:when>
     </xsl:choose>
+-->
     <xsl:choose>
       <xsl:when test="$email!=''">
         <tr>

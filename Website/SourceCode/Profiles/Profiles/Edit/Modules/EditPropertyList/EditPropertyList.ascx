@@ -2,6 +2,7 @@
     Inherits="Profiles.Edit.Modules.EditPropertyList.EditPropertyList" %>
 <asp:Literal runat="server" ID="litBackLink"></asp:Literal>
 <br />
+<!--
 <br />
 Below are the types of content that can be included on this profile. Locked items
 <asp:Image runat="server" ID="imgLock" />
@@ -11,6 +12,19 @@ Human Resources office; however, you may upload a custom photo to your profile u
 this website.
 <br />
 <br />
+-->
+<h3>Basic Components:</h3>
+<div id="profile-components">
+  <table style="width:100%;margin-bottom:0;">
+    <tr style="border-bottom:1px solid #CCC;">
+       <td class="padding" id="namedegree">Name and Degrees</td>
+       <td colspan="2">
+         <span id="public"><img src="Images/icons_lock.gif" />Always Public</span>
+         <span id="cls">This info is drawn from the Campus Locator System. 
+         Please contact your HR representative for corrections.</span>
+       </td>
+    </tr>
+  </table>
 <asp:Repeater runat="server" ID="repPropertyGroups" OnItemDataBound="repPropertyGroups_OnItemDataBound">
     <ItemTemplate>
         <asp:GridView runat="server" ID="grdSecurityGroups" AutoGenerateColumns="false" OnRowDataBound="grdSecurityGroups_OnDataBound"
@@ -20,9 +34,9 @@ this website.
             <AlternatingRowStyle CssClass="evenRow" />
             <Columns>
                 <asp:BoundField HeaderStyle-CssClass="padding" ItemStyle-CssClass="padding" HeaderStyle-HorizontalAlign="Left"
-                    ItemStyle-HorizontalAlign="Left" DataField="item" HeaderText="Item" />
+                    ItemStyle-HorizontalAlign="Left" DataField="item" HeaderText="Item" ItemStyle-Width="150px" />
                 <asp:TemplateField HeaderStyle-HorizontalAlign="Center"
-                    HeaderText="Items" >
+                    HeaderText="Items" ItemStyle-Width="50px">
                     <ItemTemplate>
                         <asp:Image runat="server" ID="imgBlank" Visible="false" ImageUrl="~/Edit/Images/icons_blank.gif" />
                         <asp:Label runat="server" ID="lblItems"></asp:Label>
@@ -30,7 +44,7 @@ this website.
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderStyle-HorizontalAlign="Center" 
-                    HeaderText="Privacy" >
+                    HeaderText="Privacy" ItemStyle-Width="100px">
                     <ItemTemplate>
                         <asp:HiddenField ID="hfPropertyURI" runat="server" />
                         <asp:DropDownList AutoPostBack="true" Visible="false" OnSelectedIndexChanged="updateSecurity" runat="server"
@@ -44,15 +58,15 @@ this website.
         <br />
     </ItemTemplate>
 </asp:Repeater>
-<div style="display:block">
-<%--
-<table width='100%'>
+</div>
+<table id="profile-visibility">
     <tr>
-        <td>
---%>            <table width="100%">
+        <td colspan='3'>
+            <div class='editPage'>
+              <table width="100%">
                 <tr>
                     <td>
-                        <h2>Privacy Levels</h2>
+                        <h2>Visibility Settings</h2>
                     </td>
                     <td align="right">
                         <%-- <b>Set All</b>&nbsp;
@@ -60,14 +74,13 @@ this website.
                             </asp:DropDownList>--%>
                     </td>
                 </tr>
-            </table>
-            <div style='border: solid 1px #ccc; margin-bottom: 2px; width: 100%'>
+              </table>
+              <div>
                 <asp:Literal runat="server" ID="litSecurityKey"></asp:Literal>
-            </div>
-<%--        </td>
+              </div>
+        </td>
     </tr>
 </table>
---%>
 </div>
 <div style="clear:left">
   <br />

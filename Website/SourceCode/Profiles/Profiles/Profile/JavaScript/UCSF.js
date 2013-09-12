@@ -46,7 +46,7 @@
             $('#toc ul').append('<li><a href="#remote_iframe_' + i + '_title">' + gadg + '</a></li>');
         }
     }
-    if ($('#toc ul li').length < 2) {
+    if ($('#toc ul li').length < 3) {
         $('#toc').hide();
     }
     $('#toc ul li:contains("Publications")').appendTo('#toc ul');

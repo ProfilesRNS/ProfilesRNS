@@ -5,10 +5,8 @@
     <ContentTemplate>   
         <asp:UpdateProgress ID="updateProgress" runat="server">
             <ProgressTemplate>
-                <div style="position: fixed; text-align: center; height: 100px; width: 100px; top: 0;
-                    right: 0; left: 0; z-index: 9999999; opacity: 0.7;">
-                    <span style="border-width: 0px; position: fixed; padding: 50px; background-color: #FFFFFF;
-                        font-size: 25px; left: 40%; top: 40%;"><img alt="Loading..." src="../edit/images/loader.gif" /></span>
+                <div class="progress">
+                    <span><img alt="Loading..." src="../edit/images/loader.gif" /></span>
                 </div>
             </ProgressTemplate>                        
         </asp:UpdateProgress>
@@ -44,7 +42,7 @@
                             <br />
                         </ItemTemplate>
                     </asp:Repeater>
-                    <asp:Panel ID="pnlInsertAward" runat="server" Style="background-color: #F0F4F6; margin-bottom: 5px;
+                    <asp:Panel ID="pnlInsertAward" runat="server" Style="background-color: #EEE; margin-bottom: 5px;
                         border: solid 1px #ccc;" Visible="false" >
                         <table border="0" cellspacing="2" cellpadding="4">
                             <tr>

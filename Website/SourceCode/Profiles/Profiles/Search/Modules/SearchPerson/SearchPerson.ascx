@@ -147,10 +147,10 @@
                                             <th>
                                             </th>
 -->
-                                            <td style="text-decoration: none" colspan="2">
+                                            <td style="text-decoration: none;" colspan="2">
                                                 <div style="float: left; display: inline">
                                                     <a href="JavaScript:search();">
-                                                        <img src="<%=GetURLDomain()%>/Search/Images/search.jpg" style="border: 0;" alt="Search" />
+                                                        <img src="<%=GetURLDomain()%>/Search/Images/search.jpg" style="border: 0;margin-bottom: -4px;" alt="Search" />
                                                     </a>
                                                 </div>
                                             </td>

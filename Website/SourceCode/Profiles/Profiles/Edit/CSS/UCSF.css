@@ -9,6 +9,7 @@
 .EditMenuTopRow { display: none; }
 #profile-visibility { width: 450px; float: left; margin-left: 40px; border: 1px solid #CCC; }
 #profile-visibility td { vertical-align: top; padding: 4px 10px; }
+#profile-visibility td p { margin: 0; }
 .EditMenuTopRow { display: none; }
 #profile-components table tr td.first { color: #0088CC; }
 #profile-components table tr td.first:hover { color: #005580; text-decoration: underline; cursor: pointer; }

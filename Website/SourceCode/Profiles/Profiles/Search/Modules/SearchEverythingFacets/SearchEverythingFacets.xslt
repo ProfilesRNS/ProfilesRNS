@@ -13,7 +13,7 @@
     <div class="passiveSectionHead">
       <xsl:text>Search Result Filters</xsl:text>
     </div>
-    <div class="passiveSectionBody" style="margin-top: 6px;">
+    <div class="passiveSectionBody" style="margin-top: 6px;" id="filters">
       <xsl:variable name="allURL">
         
         <xsl:value-of select="$root"/><![CDATA[/Search/Default.aspx?searchtype=everything&searchfor=]]><xsl:value-of select="$searchfor"/><![CDATA[&exactphrase=]]><xsl:value-of select="$exactphrase"/><![CDATA[&perpage=15&offset=]]>

@@ -24,12 +24,10 @@
     <ContentTemplate>
         <asp:UpdateProgress ID="updateProgress" runat="server">
             <ProgressTemplate>
-                <div style="position: fixed; text-align: center; height: 100px; width: 100px; top: 0;
-                    right: 0; left: 0; z-index: 9999999; opacity: 0.7;">
-                    <span style="border-width: 0px; position: fixed; padding: 50px; background-color: #FFFFFF;
-                        font-size: 12px; left: 40%; top: 40%;"><img alt="Loading..." src="../edit/images/loader.gif" /><br />
+                <div class="progress">
+                    <span><img alt="Loading..." src="../edit/images/loader.gif" /><br />
                         <i>This operation might take several minutes to complete. Please do not close your browser.</i>
-                        </span>
+                    </span>
                 </div>
                 
             </ProgressTemplate>
@@ -87,8 +85,8 @@
                 <tr>
                     <td>
                         <%--Start Add By Id--%>
-                        <asp:Panel ID="pnlAddPubById" runat="server" Style="background-color: #F0F4F6; margin-bottom: 5px;
-                            border: solid 1px #999;" Visible="false">
+                        <asp:Panel ID="pnlAddPubById" runat="server" Style="background-color: #EEEEEE; margin-bottom: 5px;
+                            border: solid 1px #CCC;" Visible="false">
                             <table border="0" cellspacing="2" cellpadding="4" width="100%">
                                 <tr>
                                     <td>
@@ -121,7 +119,7 @@
                         </asp:Panel>
                         <%--End Add By Id--%>
                         <%--Start Add By Search--%>
-                        <asp:Panel ID="pnlAddPubMed" runat="server" Style="background-color: #F0F4F6; margin-bottom: 5px;
+                        <asp:Panel ID="pnlAddPubMed" runat="server" Style="background-color: #EEEEEE; margin-bottom: 5px;
                             border: solid 1px #999;" Visible="false">
                             <div style="padding: 5px;">
                                 <div>
@@ -182,7 +180,7 @@
                         </asp:Panel>
                         <%--End Add By Search--%>
                         <%--Start Search Results--%>
-                        <asp:Panel ID="pnlAddPubMedResults" runat="server" Style="background-color: #F0F4F6;
+                        <asp:Panel ID="pnlAddPubMedResults" runat="server" Style="background-color: #EEEEEE;
                             margin-bottom: 5px; border: solid 1px #999;" Visible="false">
                             <div style="padding: 5px;">
                                 <div>
@@ -244,7 +242,7 @@
                         </asp:Panel>
                         <%--End Search Results--%>
                         <%--Start Custom Publication--%>
-                        <asp:Panel ID="pnlAddCustomPubMed" runat="server" Style="background-color: #F0F4F6;
+                        <asp:Panel ID="pnlAddCustomPubMed" runat="server" Style="background-color: #EEEEEE;
                             margin-bottom: 5px; border: solid 1px #999;" Visible="false">
                             <div style="padding: 5px;">
                                 <div>
@@ -446,7 +444,7 @@
                         </asp:Panel>
                         <%--End Custom Publication--%>
                         <%--Start Delete Publications--%>
-                        <asp:Panel ID="pnlDeletePubMed" runat="server" Style="background-color: #F0F4F6;
+                        <asp:Panel ID="pnlDeletePubMed" runat="server" Style="background-color: #EEEEEE;
                             margin-bottom: 5px; border: solid 1px #999;" Visible="false">
                             <div style="padding: 5px;">
                                 <div>
@@ -512,7 +510,7 @@
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>
-                                <SelectedRowStyle BackColor="#F0F4F6" />
+                                <SelectedRowStyle BackColor="#EEEEEE" />
                                 <FooterStyle VerticalAlign="Middle"></FooterStyle>
                             </asp:GridView>
                         </div>

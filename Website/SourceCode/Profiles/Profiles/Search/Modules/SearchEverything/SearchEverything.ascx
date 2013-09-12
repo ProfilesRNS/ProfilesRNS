@@ -1,6 +1,11 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SearchEverything.ascx.cs"
     Inherits="Profiles.Search.Modules.SearchEverything.SearchEverything" %>
 
+<style type="text/css">
+.profiles .profilesContentMain { width: 584px; }
+.profiles .profilesContentPassive { margin-right: 20px; }
+.profiles .profilesContentMain .pageTitle h2 { display: none; }
+</style>
 <script type="text/javascript">
 
     function submitEverythingSearch() {

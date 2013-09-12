@@ -59,11 +59,13 @@ remove that person as your proxy.
         <br />
         <table>
             <tr>
+<!--
                 <td valign="middle">
                     <asp:Image runat="server" ID="imgAdd" OnClick="lnkAddProxy_OnClick" />&nbsp;
                 </td>
+-->
                 <td style="padding-bottom: 4px" valign="middle">                    
-                    <asp:Literal runat="server" ID='lnkAddProxyTmp' Text = "Add A Proxy"></asp:Literal>
+                    <img src="<%=GetURLDomain()%>/Framework/Images/icon_squareArrow.gif" alt=">" /> &nbsp;<asp:Literal runat="server" ID='lnkAddProxyTmp' Text = "Add A Proxy"></asp:Literal>
                 </td>
             </tr>
         </table>

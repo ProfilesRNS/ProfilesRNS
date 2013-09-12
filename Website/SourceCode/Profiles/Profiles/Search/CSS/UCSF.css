@@ -1,7 +1,8 @@
 ﻿.searchForm td div.header { color: #CA7C29; font-size: 30px; font-weight: bold; margin: 16px 0 8px; }
 .searchForm #div1 { border-top: none; padding-top: 12px; padding-top: 20px\9; } 
 .searchForm #div1 th { font-weight: normal; width: 140px; }
-#searchOptions { margin-top: -16px; margin-bottom: 25px; }
+#searchOptions { margin-top: -36px; margin-bottom: 25px; }
+#ctl00_ContentMain_rptMain_ctl00_ctl00_searchfor,
 #txtSearchFor { padding-left: 2px; height: 30px; height: 22px\9; padding-top: 6px\9; }
 .listTable th { border: 1px solid #CCC !important; }
 #tblSearchResults tr td:first-child { font-weight: bold; text-decoration: underline; }
@@ -13,8 +14,9 @@
 #filtersContainer #filters ul li { display: inline; list-style-type: none; }
 */
 #filters ul li strong { font-size: 150%; line-height: 20px; }
-.connectionContainerTable { background-color: #F0F4F6; }
-td.connectionLine { vertical-align: middle; }
+.connectionContainerTable { background-color: #F0F4F6; height: 60px; border-color: #CCC; }
+#ctl00_ContentMain_rptMain_ctl00_ctl00_gvConnectionDetails th,
+#ctl00_ContentMain_rptMain_ctl00_ctl00_gvIndirectConnectionDetails th { text-align: left; padding-left: 6px; }
 image { border: none; }
 .profiles .profilesContentMain .pageTabs { padding-left: 345px; 
   background-image: url('../../Framework/Images/tab_back.gif'); }
@@ -22,7 +24,7 @@ image { border: none; }
 .profiles .profilesContentPassive { margin-top: 38px; margin-top: 35px\9; } 
 
 input#chkExactphrase, input#institutionallexcept, input#departmentallexcept { display: none; }
-.searchForm .inputText { width: 249px; }
+.searchForm .inputText { width: 245px; }
 #divChkList { border: 1px solid #CCC !important; margin-top: -5px; width: 247px !important; padding-top: 15px !important; }
 #divOtherOptions { 
   border-right: 1px solid #CCC !important;

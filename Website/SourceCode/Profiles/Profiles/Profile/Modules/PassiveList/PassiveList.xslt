@@ -7,13 +7,16 @@
       <div style="white-space: nowrap;display:inline">
         <xsl:value-of select="@InfoCaption"/>
         <xsl:text> </xsl:text>
+<!--
         <xsl:if test="@Description">
           <a href="JavaScript:toggleVisibility('{@ID}');">
             <img alt="" src="{$root}/Framework/Images/info.png"/>
           </a>
         </xsl:if>
-      </div>
-      <div id="{@ID}" class="passiveSectionHeadDescription" style="display:none;">
+changed display none to block for next div
+-->
+      </div> 
+      <div id="{@ID}" class="passiveSectionHeadDescription" style="display:block;">
         <xsl:value-of select="@Description"/>
       </div>
     </div>

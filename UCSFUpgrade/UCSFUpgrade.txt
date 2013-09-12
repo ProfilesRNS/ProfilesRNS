@@ -28,3 +28,5 @@ The instance of the SQL Server Database Engine cannot obtain a LOCK resource at 
 Fix global health input to point to new ORNG schema and nodeId items
 
 Fix grant import sp to use new ORNG schema
+
+Edit getnewhrandpubs script so that person filters are NOT wiped out!

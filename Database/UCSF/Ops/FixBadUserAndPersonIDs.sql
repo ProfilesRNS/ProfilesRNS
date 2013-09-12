@@ -185,6 +185,10 @@ UPDATE i set i.PersonID = UCSF.fnGeneratePersonID(p.internalusername)
 UPDATE a set a.PersonID = UCSF.fnGeneratePersonID(p.internalusername)  
  FROM [Profile.Data].[Publication.Person.Add] a join [Profile.Data].Person p on 
  p.PersonID = a.PersonID where p.PersonID != UCSF.fnGeneratePersonID(internalusername); --11
+ 
+UPDATE e set e.PersonID = UCSF.fnGeneratePersonID(p.internalusername)  
+ FROM [Profile.Data].[Publication.Person.Exclude] e join [Profile.Data].Person p on 
+ p.PersonID = e.PersonID where p.PersonID != UCSF.fnGeneratePersonID(internalusername); --1
 
 -- disambiguation 
 UPDATE d set d.PersonID = UCSF.fnGeneratePersonID(p.internalusername)  
@@ -218,6 +222,11 @@ select * from [User.Account].[User] where PersonID is not null and PersonID not 
 
 select * from [Profile.Data].[Person] where UserID not in 
 (select UserID from [User.Account].[User]);
+
+select * from [Profile.Data].[Person] where LastName = 'Milov';
+
+-- should maybe do more generit version of this?
+update [Profile.Data].[Person] set UserID = PersonID where PersonID = 5296470;
 
 select * from [Profile.Data].[Person] where UserID != PersonID;
 

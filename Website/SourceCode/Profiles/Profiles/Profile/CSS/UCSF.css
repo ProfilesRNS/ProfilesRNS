@@ -22,6 +22,7 @@ img#ctl00_ContentMain_rptMain_ctl00_ctl00_imgPhoto { width: 150px; }
 #newest { padding-top: 15px; }
 .profiles .basicInfo a, .profiles .basicInfo a:visited, .profiles .basicInfo a:hover { color: #000 !important; }
 #meshDetails .label { vertical-align: top; padding-right: 10px; }
+.keywordTimelineLabels { width: 220px; }
 
 /* show & hide */
 .box { position: relative; height: auto; width: 680px; }

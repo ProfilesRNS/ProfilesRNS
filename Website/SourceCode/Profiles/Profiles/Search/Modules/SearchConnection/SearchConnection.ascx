@@ -10,7 +10,9 @@
                             <asp:Literal runat="server" ID="litSearchURL"></asp:Literal>
                         </div>
                     </td>
-                    <td class="connectionContainerArrow">
+                    <td class="connectionContainerArrow" style="vertical-align: middle">
+                        <img src="<%=GetURLDomain()%>/Framework/Images/connection.gif" />
+<!--
                         <table class="connectionArrowTable">
                             <tbody>
                                 <tr>
@@ -44,6 +46,7 @@
                                 </tr>
                             </tbody>
                         </table>
+-->
                     </td>
                     <td class="connectionContainerItem">
                         <div>

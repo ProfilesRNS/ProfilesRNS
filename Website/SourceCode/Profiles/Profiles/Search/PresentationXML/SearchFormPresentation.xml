@@ -1,6 +1,6 @@
 ﻿<Presentation PresentationClass="profile">
   <PageOptions Columns="3"/>
-  <WindowName>Find UCSF's top medical research experts</WindowName>
+  <WindowName>Find/collaborate with leading health researchers</WindowName>
   <PageTitle>Search</PageTitle>
   <PageBackLinkName></PageBackLinkName>
   <PageBackLinkURL></PageBackLinkURL>
@@ -24,7 +24,7 @@
       <Module ID="SearchPerson">
       </Module>    
     </Panel>
-    <Panel Name="Find Research" Alias="all" Type="main" TabType="Fixed" TabSort="2" >
+    <Panel Name="Find Research" Alias="all" Type="main" TabType="Fixed" TabSort="1" >
       <Module ID="SearchEverything" />        
     </Panel>
     <Panel Type="passive" >
