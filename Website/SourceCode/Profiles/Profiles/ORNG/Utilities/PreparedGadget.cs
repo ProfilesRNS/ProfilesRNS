@@ -12,6 +12,9 @@ namespace Profiles.ORNG.Utilities
         private OpenSocialManager openSocialManager;
         private int moduleId;
         private string securityToken;
+        private string view;
+        private string optParams;
+        private string chromeId;
 
         public PreparedGadget(GadgetSpec gadgetSpec, OpenSocialManager openSocialManager, int moduleId, string securityToken)
         {
@@ -19,6 +22,20 @@ namespace Profiles.ORNG.Utilities
             this.openSocialManager = openSocialManager;
             this.moduleId = moduleId;
             this.securityToken = securityToken;
+            this.view = null;
+            this.optParams = null;
+        }
+
+        // OntologyGadgets
+        public PreparedGadget(GadgetSpec gadgetSpec, OpenSocialManager openSocialManager, string securityToken, string view, string optParams)
+        {
+            this.gadgetSpec = gadgetSpec;
+            this.openSocialManager = openSocialManager;
+            this.moduleId = 1;
+            this.securityToken = securityToken;
+            this.view = view;
+            this.optParams = optParams;
+            this.chromeId = "gadgets-ontology";
         }
 
         public int CompareTo(PreparedGadget other)
@@ -65,6 +82,10 @@ namespace Profiles.ORNG.Utilities
 
         public String GetView()
         {
+            if (view != null)
+            {
+                return view;
+            }
             GadgetViewRequirements reqs = GetGadgetViewRequirements();
             if (reqs != null)
             {
@@ -95,12 +116,20 @@ namespace Profiles.ORNG.Utilities
 
         public string GetOptParams()
         {
+            if (optParams != null)
+            {
+                return optParams;
+            }
             GadgetViewRequirements reqs = GetGadgetViewRequirements();
             return reqs != null ? reqs.GetOptParams() : "{}";
         }
 
         public string GetChromeId()
         {
+            if (chromeId != null)
+            {
+                return chromeId;
+            }
             GadgetViewRequirements reqs = GetGadgetViewRequirements();
             if (reqs != null)
             {

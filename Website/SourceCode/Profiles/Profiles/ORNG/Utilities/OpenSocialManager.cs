@@ -192,6 +192,17 @@ namespace Profiles.ORNG.Utilities
             return noCache;
         }
 
+        public void AddGadget(string name, string view, string optParams)
+        {
+            foreach (KeyValuePair<string, GadgetSpec> spec in GetAllDBGadgets(true))
+            {
+                if (spec.Value.GetName().Equals(name))
+                {
+                    gadgets.Add(new PreparedGadget(spec.Value, this, SocketSendReceive(viewerUri, ownerUri, spec.Value.GetGadgetURL()), view, optParams));
+                }
+            }
+        }
+
         public void RemoveGadget(string name)
         {
             // if any visible gadgets depend on pubsub data that isn't present, throw them out

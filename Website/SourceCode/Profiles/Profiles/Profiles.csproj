@@ -180,6 +180,7 @@
     <Content Include="ORNG\Images\icon_squareDownArrow.gif" />
     <Content Include="ORNG\JavaScript\orng.js" />
     <Content Include="ORNG\JSONLD\Test.htm" />
+    <Content Include="ORNG\Modules\EditOntologyGadget\EditOntologyGadget.ascx" />
     <Content Include="ORNG\Modules\GadgetSandbox\GadgetSandbox.ascx" />
     <Content Include="ORNG\Modules\Gadgets\Gadgets.ascx" />
     <Content Include="ORNG\Modules\ModuleCatalogue.xml" />
@@ -375,6 +376,13 @@
     </Compile>
     <Compile Include="ORNG\GadgetDetails.aspx.designer.cs">
       <DependentUpon>GadgetDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ORNG\Modules\EditOntologyGadget\EditOntologyGadget.ascx.cs">
+      <DependentUpon>EditOntologyGadget.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORNG\Modules\EditOntologyGadget\EditOntologyGadget.ascx.designer.cs">
+      <DependentUpon>EditOntologyGadget.ascx</DependentUpon>
     </Compile>
     <Compile Include="ORNG\Modules\GadgetSandbox\GadgetSandbox.ascx.cs">
       <DependentUpon>GadgetSandbox.ascx</DependentUpon>
