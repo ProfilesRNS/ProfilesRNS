@@ -10,32 +10,29 @@ namespace Profiles.ORNG.Utilities
     {
         private GadgetSpec gadgetSpec;
         private OpenSocialManager openSocialManager;
-        private int moduleId;
         private string securityToken;
         private string view;
         private string optParams;
         private string chromeId;
 
-        public PreparedGadget(GadgetSpec gadgetSpec, OpenSocialManager openSocialManager, int moduleId, string securityToken)
+        public PreparedGadget(GadgetSpec gadgetSpec, OpenSocialManager openSocialManager, string securityToken)
         {
             this.gadgetSpec = gadgetSpec;
             this.openSocialManager = openSocialManager;
-            this.moduleId = moduleId;
             this.securityToken = securityToken;
             this.view = null;
             this.optParams = null;
         }
 
         // OntologyGadgets
-        public PreparedGadget(GadgetSpec gadgetSpec, OpenSocialManager openSocialManager, string securityToken, string view, string optParams)
+        public PreparedGadget(GadgetSpec gadgetSpec, OpenSocialManager openSocialManager, string securityToken, string view, string optParams, string chromeId)
         {
             this.gadgetSpec = gadgetSpec;
             this.openSocialManager = openSocialManager;
-            this.moduleId = 1;
             this.securityToken = securityToken;
             this.view = view;
             this.optParams = optParams;
-            this.chromeId = "gadgets-ontology";
+            this.chromeId = chromeId; 
         }
 
         public int CompareTo(PreparedGadget other)
@@ -63,11 +60,6 @@ namespace Profiles.ORNG.Utilities
         public string GetName()
         {
             return gadgetSpec.GetName();
-        }
-
-        public int GetModuleId()
-        {
-            return moduleId;
         }
 
         public String GetGadgetURL()
@@ -160,26 +152,6 @@ namespace Profiles.ORNG.Utilities
             {
                 return null;
             }
-        }
-
-        public string Name
-        {
-            get { return gadgetSpec.GetName(); }
-        }
-
-        public string CanvasURL
-        {
-            get { return "~/orng/gadgetdetails.aspx?appId=" + GetAppId() + "&Person=" + HttpUtility.UrlEncode(openSocialManager.ownerUri); }
-        }
-
-        public int AppId
-        {
-            get { return GetAppId(); }
-        }
-
-        public int ModuleId
-        {
-            get { return GetModuleId(); }
         }
 
     }

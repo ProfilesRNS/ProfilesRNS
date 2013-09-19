@@ -7,7 +7,8 @@ img#ctl00_ContentMain_rptMain_ctl00_ctl00_imgPhoto { width: 150px; }
 .PropertyItemHeader { color: #CA7C29; font-size: 16px; background-color: #FFF; clear:left;
   border-top: 1px solid #EEE; padding: 6px 0 0 !important; margin: 15px 0 0; }
 .PropertyItemHeader a { display: none; }
-#toc { margin: 30px 0; background-color: #EEE; border: none; width: 680px\9; padding-bottom: 4px\9; }
+#toc { min-height: 27px; margin: 30px 0; background-color: #EEE; border: none; width: 680px\9; padding-bottom: 4px\9; }
+#toc.twoline { height: 58px\9; }
 #toc ul { padding: 0 0 0 10px; margin: 0\9; }
 #toc ul li { list-style-type: none; display: inline-block; white-space: nowrap; padding: 0 15px 0 0;
    border-right: 1px solid #CCC; margin: 5px 15px 5px 0; width: auto\9; float: left\9; } 

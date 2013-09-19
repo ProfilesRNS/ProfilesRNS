@@ -33,3 +33,5 @@ Edit getnewhrandpubs script so that person filters are NOT wiped out!
 
 Remove fix gadget filters from weekly, add to nightly
 Remove cleaning of import filter from weekly
+
+Remove MaxCardinality from Overview

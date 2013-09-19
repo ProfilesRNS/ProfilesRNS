@@ -50,8 +50,17 @@
         $('#toc').hide();
     }
     $('#toc ul li:contains("Publications")').appendTo('#toc ul');
-    $('#toc ul li').last().css('border-right', 'none');
-    $('#toc ul li').last().css('margin-right', '0');
+    $('#toc ul li').last().css('border-right', 'none').css('margin-right', '0');
+    var tocWidth = 0;  // background fix for IE
+    var tocPad = 31*($('#toc li').size()-1);
+    $('#toc ul li').each(function() {
+        tocWidth += $(this).outerWidth();
+    });
+    tocWidth += tocPad;
+    // $(tocWidth).appendTo('#toc ul');
+    if (tocWidth > 660){
+        $('#toc').addClass('twoline');
+    }
 
     //remove border for 1st section
     $('.PropertyItemHeader').first().css('border', 'none');

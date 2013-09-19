@@ -5,6 +5,7 @@
 #ctl00_ContentMain_rptMain_ctl00_ctl00_searchfor,
 #txtSearchFor { padding-left: 2px; height: 30px; height: 22px\9; padding-top: 6px\9; }
 .listTable th { border: 1px solid #CCC !important; }
+#tblSearchResults th { text-align: left; }
 #tblSearchResults tr td:first-child { font-weight: bold; text-decoration: underline; }
 #suckerfishmenu li.item-home a { background-color: #6A7D7D !important; }
 /* we didn't use this filters display
@@ -25,7 +26,10 @@ image { border: none; }
 
 input#chkExactphrase, input#institutionallexcept, input#departmentallexcept { display: none; }
 .searchForm .inputText { width: 245px; }
-#divChkList { border: 1px solid #CCC !important; margin-top: -5px; width: 247px !important; padding-top: 15px !important; }
+#divChkList { border: 1px solid #CCC !important; margin-top: -5px; width: 248px !important; 
+  height: 160px !important; padding-top: 15px !important; }
+/* move global health checkboxes up */
+#divMaster_CTC1 { margin-top: -25px; }
 #divOtherOptions { 
   border-right: 1px solid #CCC !important;
   border-bottom: 1px solid #CCC !important;

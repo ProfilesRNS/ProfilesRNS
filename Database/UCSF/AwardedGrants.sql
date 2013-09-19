@@ -203,18 +203,39 @@ EXEC [Ontology.].[CleanUp] @Action = 'UpdateIDs';
 -- then run CapitalizeCategories
 
 
---UPDATE [Ontology.].[ClassProperty] set EditExistingSecurityGroup = -40, IsDetail = 0, IncludeDescription = 0,
---		CustomEdit = 1, CustomEditModule = '<Module ID="EditOntologyGadget" >
---        <ParamList>
---          <Param Name="GadgetName">Awarded Grants</Param>
---          <Param Name="View">home</Param>
---          <Param Name="OptParams">{''gadget_class'':''ORNGToggleGadget'', ''start_closed'':0, ''closed_width'':700}</Param>
---        </ParamList>
---      </Module>',
---		EditSecurityGroup = -40, EditPermissionsSecurityGroup = -40, -- was -20's
---		EditAddNewSecurityGroup = -40, EditAddExistingSecurityGroup = -40, EditDeleteSecurityGroup = -40, 
---		_PropertyLabel = 'Awarded Grants'
---where 
---property = 'http://vivoweb.org/ontology/core#hasPrincipalInvestigatorRole';
+UPDATE [Ontology.].[ClassProperty] set EditExistingSecurityGroup = -40, IsDetail = 0, IncludeDescription = 0,
+		CustomEdit = 1, CustomEditModule = '<Module ID="EditOntologyGadget" >
+        <ParamList>
+          <Param Name="GadgetName">Awarded Grants</Param>
+          <Param Name="View">home</Param>
+          <Param Name="OptParams">{''gadget_class'':''ORNGToggleGadget'', ''start_closed'':0, ''closed_width'':700}</Param>
+        </ParamList>
+      </Module>',
+		EditSecurityGroup = -20, EditPermissionsSecurityGroup = -40, -- was -20's
+		EditAddNewSecurityGroup = -40, EditAddExistingSecurityGroup = -40, EditDeleteSecurityGroup = -40, 
+		_PropertyLabel = 'Awarded Grants'
+where 
+property = 'http://vivoweb.org/ontology/core#hasPrincipalInvestigatorRole';
 ---- note, above stuff seems like it might be all wrong :)
+
+UPDATE [Ontology.].[ClassProperty] set EditExistingSecurityGroup = -20, IsDetail = 0, IncludeDescription = 0,
+		CustomDisplay = 1, CustomDisplayModule = '<Module ID="ViewOntologyGadget" >
+        <ParamList>
+          <Param Name="GadgetName">Awarded Grants</Param>
+          <Param Name="View">profile</Param>
+          <Param Name="OptParams">{''gadget_class'':''ORNGToggleGadget'', ''start_closed'':0, ''closed_width'':330}</Param>
+        </ParamList>
+      </Module>',
+		CustomEdit = 1, CustomEditModule = '<Module ID="EditOntologyGadget" >
+        <ParamList>
+          <Param Name="GadgetName">Awarded Grants</Param>
+          <Param Name="View">home</Param>
+          <Param Name="OptParams">{''gadget_class'':''ORNGToggleGadget'', ''start_closed'':0, ''closed_width'':700}</Param>
+        </ParamList>
+      </Module>',
+		EditSecurityGroup = -20, EditPermissionsSecurityGroup = -20, -- was -20's
+		EditAddNewSecurityGroup = -20, EditAddExistingSecurityGroup = -20, EditDeleteSecurityGroup = -20, 
+		_PropertyLabel = 'Awarded Grants Test'
+where 
+property = 'http://vivoweb.org/ontology/core#hasPrincipalInvestigatorRole';
 

@@ -180,6 +180,7 @@
     <Content Include="ORNG\Images\icon_squareDownArrow.gif" />
     <Content Include="ORNG\JavaScript\orng.js" />
     <Content Include="ORNG\JSONLD\Test.htm" />
+    <Content Include="ORNG\Modules\ViewOntologyGadget\ViewOntologyGadget.ascx" />
     <Content Include="ORNG\Modules\EditOntologyGadget\EditOntologyGadget.ascx" />
     <Content Include="ORNG\Modules\GadgetSandbox\GadgetSandbox.ascx" />
     <Content Include="ORNG\Modules\Gadgets\Gadgets.ascx" />
@@ -376,6 +377,13 @@
     </Compile>
     <Compile Include="ORNG\GadgetDetails.aspx.designer.cs">
       <DependentUpon>GadgetDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ORNG\Modules\ViewOntologyGadget\ViewOntologyGadget.ascx.cs">
+      <DependentUpon>ViewOntologyGadget.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORNG\Modules\ViewOntologyGadget\ViewOntologyGadget.ascx.designer.cs">
+      <DependentUpon>ViewOntologyGadget.ascx</DependentUpon>
     </Compile>
     <Compile Include="ORNG\Modules\EditOntologyGadget\EditOntologyGadget.ascx.cs">
       <DependentUpon>EditOntologyGadget.ascx</DependentUpon>
@@ -1152,7 +1160,9 @@
     <Content Include="Search\Modules\SearchOptions\SearchOptions.ascx" />
     <Content Include="Search\PresentationXML\SearchResultsConnectionPresentation.xml" />
     <Content Include="Search\PresentationXML\SearchResultsPersonPresentation.xml" />
-    <Content Include="Search\PresentationXML\SearchFormPresentation.xml" />
+    <Content Include="Search\PresentationXML\SearchFormPresentation.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Search\PresentationXML\SearchResultsEverythingPresentation.xml" />
     <Content Include="Search\Modules\SearchResults\EverythingResults.xslt" />
     <Content Include="SPARQL\PresentationXML\SPARQLPresentation.xml" />

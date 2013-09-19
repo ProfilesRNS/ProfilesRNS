@@ -36,6 +36,7 @@ namespace Profiles.ORNG.Modules.Gadgets
     public partial class EditOntologyGadget : BaseModule
     {
         private OpenSocialManager om;
+        private string chromeId;
 
         Edit.Utilities.DataIO data;
         protected void Page_Load(object sender, EventArgs e)
@@ -90,13 +91,13 @@ namespace Profiles.ORNG.Modules.Gadgets
                 uri = node != null ? node.Value : null;
             }
             om = OpenSocialManager.GetOpenSocialManager(uri, Page, true, true);
-            om.AddGadget(base.GetModuleParamString("GadgetName"), base.GetModuleParamString("View"), base.GetModuleParamString("OptParams"));
+            chromeId = om.AddGadget(base.GetModuleParamString("GadgetName"), base.GetModuleParamString("View"), base.GetModuleParamString("OptParams"));
         }
 
         private void DrawProfilesModule()
         {
+            litGadgetDiv.Text = "<div id='" + chromeId + "' class='gadgets-gadget-parent'></div>";
             om.LoadAssets();
-            //litEmailAddress.Text = this.Email;
         }
 
 

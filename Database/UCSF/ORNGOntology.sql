@@ -15,6 +15,7 @@ EXEC [Ontology.].[UpdateDerivedFields];
 
 INSERT INTO [Ontology.].[ClassGroupClass] (ClassGroupURI, ClassURI, SortOrder) 
 	VALUES ('http://profiles.catalyst.harvard.edu/ontology/prns#ORNGApplications', 'http://orng.info/ontology/orng#Application',1);
+-- NEED TO ADD TO [Ontology.].[ClassGroup] as well!!!	
 
 -- Add ClassPoperty for ORNGApplication 
 INSERT INTO [Ontology.].[ClassProperty] (ClassPropertyID, 

@@ -136,18 +136,18 @@
                       <xsl:when test="$currentsort='facrank'">
                         <xsl:choose>
                           <xsl:when test="$currentsortdirection='desc'">
-                            <option selected="true" value="facrank_desc">Researcher Type(low-high)</option>
-                            <option value="facrank_asc">Researcher Type(high-low)</option>
+                            <option selected="true" value="facrank_desc">Researcher Type(high-low)</option>
+                            <option value="facrank_asc">Researcher Type(low-high)</option>
                           </xsl:when>
                           <xsl:otherwise>
-                            <option value="facrank_desc">Researcher Type(low-high)</option>
-                            <option selected="true" value="facrank_asc">Researcher Type(high-low)</option>
+                            <option value="facrank_desc">Researcher Type(high-low)</option>
+                            <option selected="true" value="facrank_asc">Researcher Type(low-high)</option>
                           </xsl:otherwise>
                         </xsl:choose>
                       </xsl:when>
                       <xsl:otherwise>
-                        <option value="facrank_desc">Researcher Type(low-high)</option>
-                        <option value="facrank_asc">Researcher Type(high-low)</option>
+                        <option value="facrank_desc">Researcher Type(high-low)</option>
+                        <option value="facrank_asc">Researcher Type(low-high)</option>
                       </xsl:otherwise>
                     </xsl:choose>
                   </xsl:if>
@@ -274,7 +274,7 @@
                       <xsl:if test="$facrank='true'">
                         <th>
                           <a href="JavaScript:Sort('facrank');">
-                            Faculty Rank
+                            Researcher Type
                             <xsl:choose>
                               <xsl:when test="$currentsort='facrank'">
                                 <xsl:choose>

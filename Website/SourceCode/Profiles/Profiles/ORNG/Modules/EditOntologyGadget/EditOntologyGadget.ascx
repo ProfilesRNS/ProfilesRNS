@@ -26,13 +26,7 @@
                     </div>
                 </td>
             </tr>
-            <tr>
-                <td colspan="3">
-                    <div class="editPage">
-                        <div id="gadgets-ontology" class="gadgets-gadget-parent"></div>
-                    </div>
-                </td>
-            </tr>
         </table>
     </ContentTemplate>
 </asp:UpdatePanel>
+<asp:Literal runat="server" ID="litGadgetDiv"></asp:Literal>

@@ -138,11 +138,10 @@ namespace Profiles.ORNG.Utilities
                 foreach (GadgetSpec gadgetSpec in allDBGadgets.Values)
                 {
                     // only add ones that are visible in this context!
-                    int moduleId = 0;
                     if (((requestAppId == null && gadgetSpec.IsEnabled()) || gadgetSpec.GetAppId() == Convert.ToInt32(requestAppId)) && gadgetSpec.Show(viewerUri, ownerUri, GetPageName()))
                     {
                         String securityToken = SocketSendReceive(viewerUri, ownerUri, gadgetSpec.GetGadgetURL());
-                        gadgets.Add(new PreparedGadget(gadgetSpec, this, moduleId++, securityToken));
+                        gadgets.Add(new PreparedGadget(gadgetSpec, this, securityToken));
                     }
                 }
             }
@@ -192,15 +191,17 @@ namespace Profiles.ORNG.Utilities
             return noCache;
         }
 
-        public void AddGadget(string name, string view, string optParams)
+        public string AddGadget(string name, string view, string optParams)
         {
             foreach (KeyValuePair<string, GadgetSpec> spec in GetAllDBGadgets(true))
             {
                 if (spec.Value.GetName().Equals(name))
                 {
-                    gadgets.Add(new PreparedGadget(spec.Value, this, SocketSendReceive(viewerUri, ownerUri, spec.Value.GetGadgetURL()), view, optParams));
+                    string chromeId = "gadgets-" + gadgets.Count;
+                    gadgets.Add(new PreparedGadget(spec.Value, this, SocketSendReceive(viewerUri, ownerUri, spec.Value.GetGadgetURL()), view, optParams, chromeId));
                 }
             }
+            return null;
         }
 
         public void RemoveGadget(string name)
@@ -478,11 +479,10 @@ namespace Profiles.ORNG.Utilities
                 }
                 GadgetSpec gadgetSpec = new GadgetSpec(appId, name, openSocialGadgetURL, true, sandboxOnly);
                 // only add ones that are visible in this context!
-                int moduleId = 0;
                 if (sandboxOnly || gadgetSpec.Show(viewerUri, ownerUri, page.AppRelativeVirtualPath.Substring(2).ToLower()))
                 {
                     String securityToken = SocketSendReceive(viewerUri, ownerUri, gadgetSpec.GetGadgetURL());
-                    sandboxGadgets.Add(new PreparedGadget(gadgetSpec, this, moduleId++, securityToken));
+                    sandboxGadgets.Add(new PreparedGadget(gadgetSpec, this, securityToken));
                 }
             }
             return sandboxGadgets;
