@@ -1,0 +1,53 @@
+﻿<Presentation PresentationClass="profile">
+  <PageOptions Columns="2"/>
+  <WindowName>Optin</WindowName>  
+  <PageTitle>Welcome to Profiles!</PageTitle>
+  <PageBackLinkName></PageBackLinkName>
+  <PageBackLinkURL></PageBackLinkURL>
+  <PageSubTitle></PageSubTitle>
+  <PageDescription></PageDescription>  
+  <PanelList>
+    <Panel type="header"  />
+    <Panel type="page" />
+    <Panel Type="active">
+      <Module ID="MiniSearch"  />
+      <Module ID="MainMenu"  />      
+    </Panel>
+    <Panel Type="main">
+      <Module ID="HTMLBlock">
+        <ParamList>
+          <Param Name="HTML">
+            <style type="text/css">
+            #suckerfishmenu li#about a { background-color: #6A7D7D !important; }
+            </style>
+            <h3 style="text-align:center;font-size:20px;padding:10px 0 16px;color:#999;margin:0">
+              Congratulations. A profile is being automatically created for you on UCSF Profiles!
+            </h3>
+            <div class="shaded">
+              <p>You will receive an email in approximately one week when your UCSF Profiles page is published.</p>
+
+              <p>Your page will automatically include: </p>
+              <ul>
+                <li>Campus directory data</li>
+                <li>Publications from PubMed, if applicable</li>
+                <li>Co-author networks, if applicable</li>
+                <li>Similar people based on research topics, if applicable</li>
+                <li>Physical neighbors</li>
+                <li>People in your department</li>
+              </ul>
+
+              <p>It will then be easy for you to further customize your page with additional information such as a photo, research narrative, links, presentations, awards, and more.</p>
+              <p>
+                <a href="AboutUCSFProfiles.aspx" style="background: url(../Framework/Images/arrows.gif) no-repeat scroll right 4px transparent;padding-right:13px;">Learn more about what you can do with UCSF Profiles</a>
+              </p>
+
+            </div>
+          </Param>
+        </ParamList>
+      </Module>
+      <Panel Type="passive"/>
+      <Panel type="footer" />
+    </Panel> 
+  </PanelList>
+</Presentation>
+
