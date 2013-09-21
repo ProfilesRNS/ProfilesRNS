@@ -28,7 +28,7 @@ INSERT INTO [Ontology.].[ClassGroupClass] (ClassGroupURI, ClassURI, SortOrder)
 UPDATE [Ontology.].[ClassProperty] set EditExistingSecurityGroup = -40, IsDetail = 0, IncludeDescription = 1,
 		CustomEdit = 1, CustomEditModule = NULL,
 		CustomDisplay = 1, CustomDisplayModule = NULL,
-		EditSecurityGroup = -40, EditPermissionsSecurityGroup = -40, -- was -20's
+		EditSecurityGroup = -20, EditPermissionsSecurityGroup = -20, -- was -20's
 		EditAddNewSecurityGroup = -40, EditAddExistingSecurityGroup = -40, EditDeleteSecurityGroup = -40, 
 		_PropertyLabel = 'Awarded Grants'
 where property = 'http://vivoweb.org/ontology/core#hasPrincipalInvestigatorRole';
@@ -219,18 +219,19 @@ property = 'http://vivoweb.org/ontology/core#hasPrincipalInvestigatorRole';
 ---- note, above stuff seems like it might be all wrong :)
 
 UPDATE [Ontology.].[ClassProperty] set EditExistingSecurityGroup = -20, IsDetail = 0, IncludeDescription = 0,
-		CustomDisplay = 1, CustomDisplayModule = '<Module ID="ViewOntologyGadget" >
-        <ParamList>
-          <Param Name="GadgetName">Awarded Grants</Param>
-          <Param Name="View">profile</Param>
-          <Param Name="OptParams">{''gadget_class'':''ORNGToggleGadget'', ''start_closed'':0, ''closed_width'':330}</Param>
-        </ParamList>
-      </Module>',
+		CustomDisplay = 1, CustomDisplayModule = null,
+		 --'<Module ID="ViewOntologyGadget" >
+   --     <ParamList>
+   --       <Param Name="GadgetName">Awarded Grants</Param>
+   --       <Param Name="View">profile</Param>
+   --       <Param Name="OptParams">{}</Param>
+   --     </ParamList>
+   --   </Module>',
 		CustomEdit = 1, CustomEditModule = '<Module ID="EditOntologyGadget" >
         <ParamList>
           <Param Name="GadgetName">Awarded Grants</Param>
           <Param Name="View">home</Param>
-          <Param Name="OptParams">{''gadget_class'':''ORNGToggleGadget'', ''start_closed'':0, ''closed_width'':700}</Param>
+          <Param Name="OptParams">{}</Param>
         </ParamList>
       </Module>',
 		EditSecurityGroup = -20, EditPermissionsSecurityGroup = -20, -- was -20's

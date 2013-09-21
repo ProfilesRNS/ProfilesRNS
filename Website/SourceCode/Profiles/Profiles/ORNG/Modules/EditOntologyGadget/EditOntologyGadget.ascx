@@ -29,4 +29,7 @@
         </table>
     </ContentTemplate>
 </asp:UpdatePanel>
-<asp:Literal runat="server" ID="litGadgetDiv"></asp:Literal>
+<asp:Panel ID="pnlOpenSocial" runat="server" Visible="false">
+    <div id='gadgets-edit' class='gadgets-gadget-parent'></div>
+</asp:Panel>
+

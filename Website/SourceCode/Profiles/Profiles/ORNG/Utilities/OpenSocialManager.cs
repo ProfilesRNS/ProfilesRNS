@@ -199,6 +199,7 @@ namespace Profiles.ORNG.Utilities
                 {
                     string chromeId = "gadgets-" + gadgets.Count;
                     gadgets.Add(new PreparedGadget(spec.Value, this, SocketSendReceive(viewerUri, ownerUri, spec.Value.GetGadgetURL()), view, optParams, chromeId));
+                    return chromeId;
                 }
             }
             return null;

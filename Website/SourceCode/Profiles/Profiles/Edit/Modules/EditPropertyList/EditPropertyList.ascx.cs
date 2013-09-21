@@ -26,7 +26,6 @@ using System.Xml.Xsl;
 using Profiles.Framework.Utilities;
 using Profiles.Profile.Utilities;
 using Profiles.Edit.Utilities;
-using Profiles.ORNG.Utilities;
 
 
 namespace Profiles.Edit.Modules.EditPropertyList
@@ -107,15 +106,6 @@ namespace Profiles.Edit.Modules.EditPropertyList
 
             BuildSecurityKey(gli);
 
-            // Profiles OpenSocial Extension by UCSF
-            string uri = this.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/@rdf:about", base.Namespaces).Value;
-            OpenSocialManager om = OpenSocialManager.GetOpenSocialManager(uri, Page, true, true);
-            if (om.IsVisible())
-            {
-                om.LoadAssets();
-                pnlOpenSocial.Visible = true;
-                new Responder(uri, Page);
-            }
         }
         protected void repPropertyGroups_OnItemDataBound(object sender, RepeaterItemEventArgs e)
         {
@@ -280,21 +270,6 @@ namespace Profiles.Edit.Modules.EditPropertyList
         private XmlDocument PropertyList { get; set; }
         private XmlDocument SecurityGroups { get; set; }
         private List<GenericListItem> Dropdown { get; set; }
-
-        public class Responder : ORNGCallbackResponder
-        {
-            public Responder(string uri, Page page)
-                : base(uri, page, true, ORNGCallbackResponder.CLEAR_OWNER_CACHE_REQ)
-            {
-            }
-
-            public override string getCallbackResponse()
-            {
-                GetOpenSocialManager().ClearOwnerCache();
-                return "Success";
-            }
-        }
-
     }
 
     public class SecurityItem

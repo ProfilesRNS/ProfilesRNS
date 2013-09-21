@@ -82,22 +82,20 @@ namespace Profiles.ORNG.Modules.Gadgets
             securityOptions.PrivacyCode = Convert.ToInt32(this.PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@ViewSecurityGroup").Value);
             securityOptions.SecurityGroups = new XmlDataDocument();
             securityOptions.SecurityGroups.LoadXml(base.PresentationXML.DocumentElement.LastChild.OuterXml);
-
-            string uri = null;
-            // code to convert from numeric node ID to URI
-            if (base.Namespaces.HasNamespace("rdf"))
-            {
-                XmlNode node = this.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/@rdf:about", base.Namespaces);
-                uri = node != null ? node.Value : null;
-            }
-            om = OpenSocialManager.GetOpenSocialManager(uri, Page, true, true);
-            chromeId = om.AddGadget(base.GetModuleParamString("GadgetName"), base.GetModuleParamString("View"), base.GetModuleParamString("OptParams"));
         }
 
         private void DrawProfilesModule()
         {
-            litGadgetDiv.Text = "<div id='" + chromeId + "' class='gadgets-gadget-parent'></div>";
-            om.LoadAssets();
+            // Profiles OpenSocial Extension by UCSF
+            string uri = this.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/@rdf:about", base.Namespaces).Value;
+            uri = uri.Substring(0, uri.IndexOf(Convert.ToString(this.SubjectID)) + Convert.ToString(this.SubjectID).Length);
+            OpenSocialManager om = OpenSocialManager.GetOpenSocialManager(uri, Page, true, true);
+            if (om.IsVisible())
+            {
+                om.LoadAssets();
+                pnlOpenSocial.Visible = true;
+                new Responder(uri, Page);
+            }
         }
 
 
@@ -105,5 +103,19 @@ namespace Profiles.ORNG.Modules.Gadgets
         public XmlDocument PropertyListXML { get; set; }
         public string PredicateURI { get; set; }
 
+        public class Responder : ORNGCallbackResponder
+        {
+            public Responder(string uri, Page page)
+                : base(uri, page, true, ORNGCallbackResponder.CLEAR_OWNER_CACHE_REQ)
+            {
+            }
+
+            public override string getCallbackResponse()
+            {
+                GetOpenSocialManager().ClearOwnerCache();
+                return "Success";
+            }
+        }
     }
+
 }

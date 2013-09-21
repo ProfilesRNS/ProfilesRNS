@@ -36,7 +36,7 @@ namespace Profiles.ORNG.Modules.Gadgets
     public partial class ViewOntologyGadget : BaseModule
     {
         private OpenSocialManager om;
-        private string chromeId;
+        private string uri = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -48,41 +48,42 @@ namespace Profiles.ORNG.Modules.Gadgets
         public ViewOntologyGadget(XmlDocument pagedata, List<ModuleParams> moduleparams, XmlNamespaceManager pagenamespaces)
             : base(pagedata, moduleparams, pagenamespaces)
         {
-            // UCSF OpenSocial items
-            string uri = null;
             // code to convert from numeric node ID to URI
             if (base.Namespaces.HasNamespace("rdf"))
             {
                 XmlNode node = this.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/@rdf:about", base.Namespaces);
                 uri = node != null ? node.Value : null;
             }
-            new Responder(uri, Page);
             om = OpenSocialManager.GetOpenSocialManager(uri, Page, false, true);
-            chromeId = om.AddGadget(base.GetModuleParamString("GadgetName"), base.GetModuleParamString("View"), base.GetModuleParamString("OptParams"));
+            // UCSF OpenSocial items
+            if (om.IsVisible())
+            {
+                om.LoadAssets();
+                pnlOpenSocial.Visible = true;
+                new Responder(uri, Page);  // for some reason doing this in DrawProfilesModule (remove that???) fails!
+            }
         }
 
         private void DrawProfilesModule()
         {
-            litGadgetDiv.Text = "<div id='" + chromeId + "' class='gadgets-gadget-parent'></div>";
-            om.LoadAssets();
-            //litEmailAddress.Text = this.Email;
         }
-    }
 
-    public class Responder : ORNGCallbackResponder
-    {
-        string uri;
-
-        public Responder(string uri, Page page)
-            : base(uri, page, false, ORNGCallbackResponder.JSON_PERSONID_REQ)
+        public class Responder : ORNGCallbackResponder
         {
-            this.uri = uri;
+            string uri;
+
+            public Responder(string uri, Page page)
+                : base(uri, page, false, ORNGCallbackResponder.JSON_PERSONID_REQ)
+            {
+                this.uri = uri;
+            }
+
+            public override string getCallbackResponse()
+            {
+                return BuildJSONPersonIds(uri, "one person");
+            }
         }
 
-        public override string getCallbackResponse()
-        {
-            return BuildJSONPersonIds(uri, "one person");
-        }
     }
 
 }

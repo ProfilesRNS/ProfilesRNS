@@ -31,7 +31,7 @@ namespace Profiles.ORNG.Utilities
             this.openSocialManager = openSocialManager;
             this.securityToken = securityToken;
             this.view = view;
-            this.optParams = optParams;
+            this.optParams = optParams == null || optParams == string.Empty ? "{}" : optParams;
             this.chromeId = chromeId; 
         }
 
