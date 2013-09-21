@@ -77,6 +77,7 @@
   <ItemGroup>
     <Content Include="About\AboutUCSFProfiles.aspx" />
     <Content Include="About\CloseBrowser.aspx" />
+    <Content Include="About\Optin.aspx" />
     <Content Include="About\CSS\UCSF.css" />
     <Content Include="About\ForDevelopers.aspx" />
     <Content Include="About\GadgetLibrary.aspx" />
@@ -116,6 +117,7 @@
     <Content Include="About\NewFeatures.aspx" />
     <Content Include="About\PresentationXML\AboutUCSFProfiles.xml" />
     <Content Include="About\PresentationXML\CloseBrowser.xml" />
+    <Content Include="About\PresentationXML\Optin.xml" />
     <Content Include="About\PresentationXML\ForDevelopers.xml" />
     <Content Include="About\PresentationXML\GadgetLibrary.xml" />
     <Content Include="About\PresentationXML\Help.xml" />
@@ -213,6 +215,13 @@
     </Compile>
     <Compile Include="About\CloseBrowser.aspx.designer.cs">
       <DependentUpon>CloseBrowser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="About\Optin.aspx.cs">
+      <DependentUpon>Optin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="About\Optin.aspx.designer.cs">
+      <DependentUpon>Optin.aspx</DependentUpon>
     </Compile>
     <Compile Include="About\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
