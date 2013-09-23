@@ -30,7 +30,7 @@ this website.
         <asp:GridView runat="server" ID="grdSecurityGroups" AutoGenerateColumns="false" OnRowDataBound="grdSecurityGroups_OnDataBound"
             Width="100%">
             <HeaderStyle BorderStyle="None" CssClass="EditMenuTopRow" />
-            <RowStyle BorderColor="#ccc" Width="1px" VerticalAlign="Middle" />
+            <RowStyle VerticalAlign="Middle" />
             <AlternatingRowStyle CssClass="evenRow" />
             <Columns>
                 <asp:BoundField HeaderStyle-CssClass="padding" ItemStyle-CssClass="padding" HeaderStyle-HorizontalAlign="Left"

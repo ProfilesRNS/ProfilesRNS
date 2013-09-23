@@ -1,4 +1,7 @@
 ﻿$(document).ready(function () {
+    $("table").removeAttr("border").removeAttr("rules");
+
+
     // logged in/out subnav
     $('#ctl00_ContentActive_rptActive_ctl01_ctl00_panelMenu ul').addClass('mainmenu');
     $('#ctl00_ContentActive_rptActive_ctl00_ctl00_panelMenu ul').addClass('mainmenu');

@@ -191,11 +191,11 @@ namespace Profiles.ORNG.Utilities
             return noCache;
         }
 
-        public string AddGadget(string name, string view, string optParams)
+        public string AddGadget(int appId, string view, string optParams)
         {
             foreach (KeyValuePair<string, GadgetSpec> spec in GetAllDBGadgets(true))
             {
-                if (spec.Value.GetName().Equals(name))
+                if (spec.Value.GetAppId() == appId)
                 {
                     string chromeId = "gadgets-" + gadgets.Count;
                     gadgets.Add(new PreparedGadget(spec.Value, this, SocketSendReceive(viewerUri, ownerUri, spec.Value.GetGadgetURL()), view, optParams, chromeId));
@@ -402,7 +402,7 @@ namespace Profiles.ORNG.Utilities
                 foreach (PreparedGadget gadget in GetVisibleGadgets())
                 {
                     gadgetScriptText += "new my.gadgetSpec(" + gadget.GetAppId() + ",'" + gadget.GetName() + "','" + gadget.GetGadgetURL() + "','" +
-                        gadget.GetView() + "','" + gadget.GetChromeId() + "'," + (gadget.GetGadgetSpec().HasRegisteredVisibility() ? "1" : "0") + "," +
+                        gadget.GetView() + "','" + gadget.GetChromeId() + "'," + (gadget.GetRegisteredVisibility() ? "1" : "0") + "," +
                         gadget.GetOptParams() + ",'" + gadget.GetSecurityToken() + "'), " + Environment.NewLine;
                 }
                 gadgetScriptText = gadgetScriptText.Substring(0, gadgetScriptText.LastIndexOf(','));

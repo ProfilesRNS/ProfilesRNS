@@ -28,39 +28,11 @@
         $('#toc ul').append(alink);
     });
 
-    //drawGadgetsTOC
-    for (var i = 0; (typeof my !== 'undefined') && (i < my.gadgets.length); i++) {
-        if (my.gadgets[i].chrome_id == 'gadgets-view') {
-            var gadg = my.gadgets[i].name;
-            $('#toc ul').append('<li><a href="#remote_iframe_' + i + '_title">' + gadg + '</a></li>');
-        }
-    }
-    //$('#gadgets_toc').html(gadgetsTOC).css('display', 'inline'); ;
-    //$('#toc ul li:contains("Publications")').insertAfter('#toc ul li:last-child');
-
-    // Add another thing to TOC
-    for (var i = 0; (typeof my !== 'undefined') && (i < my.gadgets.length); i++) {
-        if (my.gadgets[i].chrome_id == 'gadgets-view-bottom') {
-            var gadg = my.gadgets[i].name;
-            var gadg = my.gadgets[i].name;
-            $('#toc ul').append('<li><a href="#remote_iframe_' + i + '_title">' + gadg + '</a></li>');
-        }
-    }
     if ($('#toc ul li').length < 3) {
         $('#toc').hide();
     }
     $('#toc ul li:contains("Publications")').appendTo('#toc ul');
     $('#toc ul li').last().css('border-right', 'none').css('margin-right', '0');
-    var tocWidth = 0;  // background fix for IE
-    var tocPad = 31*($('#toc li').size()-1);
-    $('#toc ul li').each(function() {
-        tocWidth += $(this).outerWidth();
-    });
-    tocWidth += tocPad;
-    // $(tocWidth).appendTo('#toc ul');
-    if (tocWidth > 660){
-        $('#toc').addClass('twoline');
-    }
 
     //remove border for 1st section
     $('.PropertyItemHeader').first().css('border', 'none');

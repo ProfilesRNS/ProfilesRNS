@@ -14,6 +14,7 @@ namespace Profiles.ORNG.Utilities
         private string view;
         private string optParams;
         private string chromeId;
+        private bool personalGadget = false;
 
         public PreparedGadget(GadgetSpec gadgetSpec, OpenSocialManager openSocialManager, string securityToken)
         {
@@ -32,7 +33,15 @@ namespace Profiles.ORNG.Utilities
             this.securityToken = securityToken;
             this.view = view;
             this.optParams = optParams == null || optParams == string.Empty ? "{}" : optParams;
-            this.chromeId = chromeId; 
+            this.chromeId = chromeId;
+            personalGadget = true;
+        }
+
+
+        // temp hack,
+        public bool GetRegisteredVisibility()
+        {
+            return personalGadget || GetGadgetSpec().HasRegisteredVisibility();
         }
 
         public int CompareTo(PreparedGadget other)

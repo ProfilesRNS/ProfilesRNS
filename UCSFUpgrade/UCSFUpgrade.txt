@@ -37,3 +37,5 @@ Remove cleaning of import filter from weekly
 Remove MaxCardinality from Overview
 
 NEed to fix RDF..GetStoreNode and [RDF.].[DeleteNode]
+
+Script all ORNG sp,s including old one that have changed!

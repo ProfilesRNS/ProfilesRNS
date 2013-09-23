@@ -25,6 +25,8 @@ EXEC [Ontology.].[UpdateDerivedFields];
 
 --SELECT * FROM [Ontology.].[ClassProperty] where Class like '%orng%' or Property like '%orng%';
 --DELETE FROM [Ontology.].[ClassProperty] where Class like '%orng%' or Property like '%orng%';
+--SELECT * FROM [Ontology.].[PropertyGroupProperty] where PropertyURI like '%orng%';
+--DELETE FROM [Ontology.].[PropertyGroupProperty] where PropertyURI like '%orng%';
 
 -- Add ClassPoperty for ORNGApplication 
 INSERT INTO [Ontology.].[ClassProperty] (ClassPropertyID, 
@@ -71,10 +73,9 @@ INSERT INTO [Ontology.].[ClassProperty] (ClassPropertyID,
 			-40, -40, -40, -40, -40, -40,
 			0, NULL,
 			NULL, NULL);
--- DELETE FROM [Ontology.].[ClassProperty] WHERE ClassPropertyID in (9998, 9999);			EXEC [Ontology.].[UpdateDerivedFields];
-SELECT * FROM [Ontology.].[PropertyGroupProperty] where PropertyURI like '%orng%';
---DELETE FROM  [Ontology.].[ClassProperty] where Property like '%orng%' or Class like '%orng%';
---DELETE FROM [Ontology.].[PropertyGroupProperty] where PropertyURI like '%orng%';
+-----
+EXEC [Ontology.].[UpdateDerivedFields];
+-----
 EXEC [Ontology.].[AddProperty]	@OWL = 'ORNG_1.0',
 								@PropertyURI = 'http://orng.info/ontology/orng#applicationId',
 								@PropertyName = 'ORNG Application Id',
@@ -92,23 +93,46 @@ EXEC [Ontology.].[AddProperty]	@OWL = 'ORNG_1.0',
 								@ClassURI = 'http://orng.info/ontology/orng#Application',
 								@IsDetail = 0,
 								@IncludeDescription = 0
+
 -----------------------
--- Wire the person to the ApplicationInstance
+-- Wire the ApplicationInstance to the Application
 -----------------------								
 EXEC [Ontology.].[AddProperty]	@OWL = 'ORNG_1.0', 
-								@PropertyURI = 'http://orng.info/ontology/orng#hasApplicationInstance',
-								@PropertyName = 'has ORNG Application Instance',
+								@PropertyURI = 'http://orng.info/ontology/orng#applicationInstanceOfApplication',
+								@PropertyName = 'ORNG Application Instance of Application',
 								@ObjectType = 0,
 								@PropertyGroupURI = 'http://orng.info/ontology/orng#PropertyGroupORNGApplications', 
-								@ClassURI = 'http://xmlns.com/foaf/0.1/Person',
+								@ClassURI = 'http://orng.info/ontology/orng#ApplicationInstance',
 								@IsDetail = 0,
-								@IncludeDescription = 1								
-UPDATE [Ontology.].[ClassProperty] set EditExistingSecurityGroup = -20, IsDetail = 0, IncludeDescription = 1,
-		CustomEdit = 1, CustomEditModule = '<Module ID="EditOntologyGadget" />',		
-		CustomDisplay = 1, CustomDisplayModule = '<Module ID="ViewOntologyGadget" />',
-		EditSecurityGroup = -20, EditPermissionsSecurityGroup = -20, -- was -20's
-		EditAddNewSecurityGroup = -20, EditAddExistingSecurityGroup = -20, EditDeleteSecurityGroup = -20 
-where property = 'http://orng.info/ontology/orng#hasApplicationInstance';
+								@IncludeDescription = 1	
+-----------------------
+-- Wire the person to the ApplicationInstance
+-----------------------						
+--
+--  Instead do this as a custom property per each type of application, see AddAppToOntology
+--		
+--EXEC [Ontology.].[AddProperty]	@OWL = 'ORNG_1.0', 
+--								@PropertyURI = 'http://orng.info/ontology/orng#hasApplicationInstance',
+--								@PropertyName = 'has ORNG Application Instance',
+--								@ObjectType = 0,
+--								@PropertyGroupURI = 'http://orng.info/ontology/orng#PropertyGroupORNGApplications', 
+--								@ClassURI = 'http://xmlns.com/foaf/0.1/Person',
+--								@IsDetail = 0,
+--								@IncludeDescription = 1								
+--UPDATE [Ontology.].[ClassProperty] set EditExistingSecurityGroup = -20, IsDetail = 0, IncludeDescription = 1,
+--		CustomEdit = 1, CustomEditModule = '<Module ID="EditOntologyGadgets">
+--			<ParamList>
+--			  <Param Name="ChromeId">gadgets-edit</Param>
+--			</ParamList>
+--		  </Module>',
+--		CustomDisplay = 1, CustomDisplayModule = '<Module ID="ViewOntologyGadgets">
+--			<ParamList>
+--			  <Param Name="ChromeId">gadgets-view</Param>
+--			</ParamList>
+--		  </Module>',
+--		EditSecurityGroup = -20, EditPermissionsSecurityGroup = -20, -- was -20's
+--		EditAddNewSecurityGroup = -20, EditAddExistingSecurityGroup = -20, EditDeleteSecurityGroup = -20 
+--where property = 'http://orng.info/ontology/orng#hasApplicationInstance';
 
 EXEC [Ontology.].[AddProperty]	@OWL = 'ORNG_1.0',
 								@PropertyURI = 'http://orng.info/ontology/orng#applicationInstanceForPerson',
@@ -290,12 +314,75 @@ INSERT INTO [Ontology.].[DataMap] (DataMapID, DataMapGroup, IsAutoFeed, Graph,
 		'http://orng.info/ontology/orng#ApplicationInstanceData', 'ORNG Application Instance Data', 'PrimaryId', NULL, NULL, NULL,
 		0, 1, NULL, -1, -40);
 
-SELECT * FROM [Ontology.].[DataMap] where Property is nullDataMapID >= 900;
+SELECT * FROM [Ontology.].[DataMap] where DataMapID >= 900;
 
 --DELETE from [Ontology.].[DataMap] where DataMapID >= 900;
 -- update DataMap
 EXEC [Ontology.].UpdateDerivedFields;  
 -- then run CapitalizeCategories
+
+exec [ORNG.].[RemoveAppFromOntology] 103;
+exec [ORNG.].[RemoveAppFromOntology] 114;
+exec [ORNG.].[RemoveAppFromOntology] 115;
+exec [ORNG.].[RemoveAppFromOntology] 101;
+exec [ORNG.].[RemoveAppFromOntology] 102;
+--exec [ORNG.].[RemoveAppFromOntology] 108;
+exec [ORNG.].[RemoveAppFromOntology] 109;
+exec [ORNG.].[RemoveAppFromOntology] 112;
+exec [ORNG.].[RemoveAppFromOntology] 118;
+exec [ORNG.].[RemoveAppFromOntology] 116;
+
+exec [ORNG.].[AddAppToOntology] 103;
+exec [ORNG.].[AddAppToOntology] 114;
+exec [ORNG.].[AddAppToOntology] 115;
+exec [ORNG.].[AddAppToOntology] 101;
+exec [ORNG.].[AddAppToOntology] 102;
+--exec [ORNG.].[AddAppToOntology] 108;
+exec [ORNG.].[AddAppToOntology] 109;
+exec [ORNG.].[AddAppToOntology] 112;
+exec [ORNG.].[AddAppToOntology] 118;
+exec [ORNG.].[AddAppToOntology] 116;
+
+EXEC [Ontology.].[UpdateDerivedFields];
+
+SELECT * from [ORNG.].AppViews where appId in (103, 114, 115, 101, 102, 109, 112, 118, 116);
+DELETE from [ORNG.].AppViews where appId in (103, 114, 115, 101, 102, 109, 112, 118, 116);
+
+-- run the following and execute the resulting sql
+SELECT 'EXEC [ORNG.].[AddAppToPerson] @appId = ' + cast(appId as varchar) + ', @SubjectID = ' + cast(nodeId as varchar) + ';'
+	FROM [ORNG.].[AppRegistry] WHERE visibility = 'Public' and appId in (103, 114, 115, 101, 102, 109, 112, 118, 116);	
+
+-- test
+-- Add and view Application
+DECLARE @ApplicationNodeID BIGINT
+EXEC [ORNG.].[AddAppToOntology] @appId = 103,  @NodeID = @ApplicationNodeID OUTPUT
+--EXEC [ORNG.].RemoveAppFromOntology @appId = 103,  @NodeID = @ApplicationNodeID OUTPUT
+SELECT @ApplicationNodeID; --14891931
+EXEC [RDF.].[GetDataRDF] @subject = 14891931, @showDetails = 1, @expand = 1;
+
+-- Associate person with Application Kirsten Bibbins-Domingo
+DECLARE @ApplicationInstanceID BIGINT
+EXEC [ORNG.].[AddAppToPerson] @appId = 103, @SubjectID = 370012, @NodeID = @ApplicationInstanceID OUTPUT
+--EXEC [ORNG.].[RemoveAppFromPerson] @appId = 103, @SubjectID = 370012, @NodeID = @ApplicationInstanceID OUTPUT
+SELECT @ApplicationInstanceID --14891932
+EXEC [RDF.].[GetDataRDF] @subject = 14891944, @showDetails = 1, @expand = 1;
+EXEC [RDF.].[GetDataRDF] @subject = 370012, @showDetails = 1, @expand = 1;
+
+DECLARE @ApplicationInstanceID BIGINT --Eric Meeks
+EXEC [ORNG.].[AddAppToPerson] @appId = 103, @SubjectID = 368698, @NodeID = @ApplicationInstanceID OUTPUT
+--EXEC [ORNG.].[RemoveAppFromPerson] @appId = 103, @SubjectID = 368698, @NodeID = @ApplicationInstanceID OUTPUT
+SELECT @ApplicationInstanceID --14891933
+EXEC [RDF.].[GetDataRDF] @subject = 14891936, @showDetails = 1, @expand = 1;
+EXEC [RDF.].[GetDataRDF] @subject = 368698, @showDetails = 1, @expand = 1;
+
+DECLARE @PersonNodeID BIGINT
+SELECT @PersonNodeID = NodeID
+	FROM [RDF.Stage].[InternalNodeMap]
+	WHERE Class = 'http://xmlns.com/foaf/0.1/Person' AND InternalType = 'Person' AND InternalID = '5138614'
+EXEC [RDF.].[GetDataRDF] @subject = @PersonNodeID, @showDetails = 1, @expand = 1;
+
+EXEC [RDF.].[GetDataRDF] @subject = 14874837, @showDetails = 1, @expand = 1;
+EXEC [RDF.].DeleteNode @NodeID = 14874640, @DeleteType = 0
 
 --EXEC [RDF.Stage].[ProcessDataMap] @DataMapID = 1001, @ShowCounts = 1
 --EXEC [RDF.Stage].[ProcessDataMap] @DataMapID = 1002, @ShowCounts = 1
@@ -309,17 +396,6 @@ EXEC [RDF.Stage].[ProcessDataMap] @DataMapID = 1009, @ShowCounts = 1
 EXEC [RDF.Stage].[ProcessDataMap] @DataMapID = 1010, @ShowCounts = 1		
 EXEC [RDF.Stage].[ProcessDataMap] @DataMapID = 1011, @ShowCounts = 1		
 
--- test
-DECLARE @PersonNodeID BIGINT
-SELECT @PersonNodeID = NodeID
-	FROM [RDF.Stage].[InternalNodeMap]
-	WHERE Class = 'http://xmlns.com/foaf/0.1/Person' AND InternalType = 'Person' AND InternalID = '5138614'
-EXEC [RDF.].[GetDataRDF] @subject = @PersonNodeID, @showDetails = 1, @expand = 1;
-
-EXEC [RDF.].[GetDataRDF] @subject = 14843292, @showDetails = 1, @expand = 1;
-
-EXEC [RDF.].[GetDataRDF] @subject = 14843323, @showDetails = 1, @expand = 1;
-
 --- THE FOLLOWING HAS NOT YET BEEN RUN!!!
 EXEC [Ontology.].[CleanUp] @Action = 'UpdateIDs';
 
@@ -327,7 +403,7 @@ EXEC [Ontology.].[CleanUp] @Action = 'UpdateIDs';
 select * from [rdf.].Node where NodeID = 14843323;
 select * from [rdf.].Triple where Subject = 14843323
 
-select * from [rdf.].Triple t join [rdf.].Node n on t.Object = n.NodeID where t.Subject = 370012;
+select * from [rdf.].Triple t join [rdf.].Node n on t.Object = n.NodeID where t.Subject = 14891880;
 --t.Predicate  in (14866933, 14866934, 14866925) ;
 
 select * from [rdf.].Triple t join [rdf.].Node n on t.Object = n.NodeID where t.Subject in (14866933, 14866934, 14866925) 
@@ -338,9 +414,6 @@ SELECT * from [Ontology.].[ClassProperty] where Property like '%orng%';
 SELECT * from [Ontology.].[PropertyGroupProperty] where PropertyURI like '%orng%';
 SELECT * from [Ontology.].[DataMap] where DataMapID  > 900;
 
-exec [ORNG.].[AddApplicationToOntology] 103;
-exec [ORNG.].[AddApplicationToOntology] 114;
-exec [ORNG.].[AddApplicationToOntology] 115;
 
 --delete from [Ontology.].[ClassProperty] where Property like '%orng#%' and Class = 'http://xmlns.com/foaf/0.1/Person';
 --delete from [Ontology.].[PropertyGroupProperty] where PropertyURI like '%orng%' and SortOrder > 4;
@@ -349,5 +422,4 @@ exec [ORNG.].[AddApplicationToOntology] 115;
 EXEC [RDF.Stage].[ProcessDataMap] @DataMapID = 1012, @ShowCounts = 1	
 EXEC [RDF.Stage].[ProcessDataMap] @DataMapID = 1013, @ShowCounts = 1	
 EXEC [RDF.Stage].[ProcessDataMap] @DataMapID = 1014, @ShowCounts = 1	
-
 

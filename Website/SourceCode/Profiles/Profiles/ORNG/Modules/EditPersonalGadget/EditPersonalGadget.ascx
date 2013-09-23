@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="EditOntologyGadget.ascx.cs" Inherits="Profiles.ORNG.Modules.Gadgets.EditOntologyGadget" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="EditPersonalGadget.ascx.cs" Inherits="Profiles.ORNG.Modules.Gadgets.EditPersonalGadget" %>
 <%@ Register TagName="Options" TagPrefix="security" Src="~/Edit/Modules/SecurityOptions/SecurityOptions.ascx" %>
 <asp:UpdatePanel ID="upnlEditSection" runat="server">
     <ContentTemplate>
@@ -29,7 +29,6 @@
         </table>
     </ContentTemplate>
 </asp:UpdatePanel>
-<asp:Panel ID="pnlOpenSocial" runat="server" Visible="false">
-    <div id='gadgets-edit' class='gadgets-gadget-parent'></div>
-</asp:Panel>
+<asp:Literal runat="server" ID="litGadget">Add-ons are currently not configured for this system</asp:Literal>
+
 

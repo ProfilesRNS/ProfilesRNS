@@ -27,16 +27,23 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
     <rdfs:label rdf:resource="ORNG Application Instance" />
   </rdf:Description>
+  <rdf:Description rdf:about="http://orng.info/ontology/orng#applicationInstanceOfApplication">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="ORNG Application Instance of Application" />
+    <rdfs:domain rdf:resource="http://orng.info/ontology/orng#ApplicationInstance" />
+  </rdf:Description>
   <rdf:Description rdf:about="http://orng.info/ontology/orng#applicationInstanceForPerson">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
     <rdfs:label rdf:resource="ORNG Application Instance for Person" />
     <rdfs:domain rdf:resource="http://orng.info/ontology/orng#ApplicationInstance" />
-  </rdf:Description>  
+  </rdf:Description>
+  <!-- We instead create a uniuqe relastionship for every registered application 
   <rdf:Description rdf:about="http://orng.info/ontology/orng#hasApplicationInstance">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
     <rdfs:label rdf:resource="has ORNG Application Instance" />
     <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Person" />
   </rdf:Description>
+  -->
   <rdf:Description rdf:about="http://orng.info/ontology/orng#ApplicationInstanceData">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
     <rdfs:label rdf:resource="ORNG Application Instance Data" />

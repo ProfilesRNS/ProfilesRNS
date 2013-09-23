@@ -67,7 +67,7 @@
             <asp:GridView Width="100%" ID="gvConnectionDetails" AutoGenerateColumns="false" GridLines="Both"
                 CellSpacing="-1" runat="server" OnRowDataBound="gvConnectionDetails_OnRowDataBound">
                 <HeaderStyle CssClass="topRow" BorderStyle="None" />
-                <RowStyle CssClass="edittable" />
+                
                 <AlternatingRowStyle CssClass="evenRow" />
                 <Columns>
                     <asp:TemplateField ItemStyle-CssClass="connectionTableRow" HeaderText="Property"
@@ -95,7 +95,7 @@
             <asp:GridView Width="100%" ID="gvIndirectConnectionDetails" AutoGenerateColumns="false"
                 GridLines="Both" CellSpacing="-1" runat="server" OnRowDataBound="gvIndirectConnectionDetails_OnRowDataBound">
                 <HeaderStyle CssClass="topRow" BorderStyle="None" />
-                <RowStyle CssClass="edittable" />
+                
                 <AlternatingRowStyle CssClass="evenRow" />
                 <Columns>
                     <asp:TemplateField ItemStyle-CssClass="connectionTableRow" HeaderText="Item Type"

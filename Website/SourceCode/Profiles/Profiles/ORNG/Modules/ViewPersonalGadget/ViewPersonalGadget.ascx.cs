@@ -33,7 +33,7 @@ using Profiles.ORNG.Utilities;
 namespace Profiles.ORNG.Modules.Gadgets
 {
 
-    public partial class ViewOntologyGadget : BaseModule
+    public partial class ViewPersonalGadget : BaseModule
     {
         private OpenSocialManager om;
         private string uri = null;
@@ -43,9 +43,9 @@ namespace Profiles.ORNG.Modules.Gadgets
             DrawProfilesModule();
         }
 
-        public ViewOntologyGadget() : base() { }
+        public ViewPersonalGadget() : base() { }
 
-        public ViewOntologyGadget(XmlDocument pagedata, List<ModuleParams> moduleparams, XmlNamespaceManager pagenamespaces)
+        public ViewPersonalGadget(XmlDocument pagedata, List<ModuleParams> moduleparams, XmlNamespaceManager pagenamespaces)
             : base(pagedata, moduleparams, pagenamespaces)
         {
             // code to convert from numeric node ID to URI
@@ -55,11 +55,12 @@ namespace Profiles.ORNG.Modules.Gadgets
                 uri = node != null ? node.Value : null;
             }
             om = OpenSocialManager.GetOpenSocialManager(uri, Page, false, true);
+            string chromeId = om.AddGadget(Convert.ToInt32(base.GetModuleParamString("AppId")), base.GetModuleParamString("View"), base.GetModuleParamString("OptParams"));
             // UCSF OpenSocial items
             if (om.IsVisible())
             {
                 om.LoadAssets();
-                pnlOpenSocial.Visible = true;
+                litGadget.Text = "<div id='" + chromeId + "' class='gadgets-gadget-parent'></div>";
                 new Responder(uri, Page);  // for some reason doing this in DrawProfilesModule (remove that???) fails!
             }
         }

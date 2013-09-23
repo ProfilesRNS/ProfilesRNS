@@ -98,26 +98,32 @@ h1 a:hover { color: #457272; text-decoration: none; }
 .profiles a:hover { color: #005580 !important; }
 .EditMenuTopRow, .topRow, .editPage .topRow td, .profiles .profilesContentActive .activeSectionHead, .listTable th { background-color: #EEE; }
 .searchForm .searchSection { background-color: #EEEEEE; padding: 18px 0\9; }
-.listTable table { border: 1px solid #CCC; }
 .listTable .evenRow { background-color: #F2F7F7; }
-.listTable td { border: none; border-right: solid 1px #CCC; }
-.listTable td:first-child { color: #0088CC; }
-.listTable td:first-child:hover { color: #005580; text-decoration: underline; }
+.listTable td { border: none; border-right: solid 1px #CCC; cursor: default; }
+.linky,
+.listTable td:first-child { color: #0088CC; /* font-weight: bold; */ }
+.linky:hover,
+.listTable td:first-child:hover { color: #005580; text-decoration: underline; cursor: pointer; }
 .listTablePagination { border-color: #CCC; background-color: #FFF; 
-  margin-bottom: 10px; margin-top: -1px; width: 667px; }
+  margin-bottom: 10px; width: 667px; }
 * html .listTablePagination { width: 678px; margin-bottom: 40px; }
 *+html .listTablePagination { width: 678px; margin-bottom: 40px; }
 .listTablePaginationFL img { margin-top: 4px; } 
 .listTablePaginationFL img { margin-top: 5px\9; } 
+.listTable table, .oddRow td, .evenRow td, .topRow th,
+#ctl00_ContentMain_rptMain_ctl00_ctl00_gvIndirectConnectionDetails,
+#ctl00_ContentMain_rptMain_ctl00_ctl00_gvWhoCanIEdit td,
+#ctl00_ContentMain_rptMain_ctl00_ctl00_gvYouCanEdit td,
+#ctl00_ContentMain_rptMain_ctl00_ctl00_gvMyProxies tr td,
 #ctl00_ContentMain_rptMain_ctl00_ctl00_pnlProxySearchResults tr th,
 #ctl00_ContentMain_rptMain_ctl00_ctl00_pnlProxySearchResults tr td { 
-  border: 1px solid #CCC; 
+  border: 1px solid #CCC !important; 
 }
 #ctl00_ContentMain_rptMain_ctl00_ctl00_pnlProxySearchResults .listTablePagination tr td { 
-  border: none; padding-top: 5px; }
+  border: none !important; padding-top: 5px; }
 #ctl00_ContentMain_rptMain_ctl00_ctl00_pnlProxySearchResults tr.edittable td:first-child, 
 #ctl00_ContentMain_rptMain_ctl00_ctl00_pnlProxySearchResults tr.evenRow td:first-child { 
-  color: #0088CC; font-weight: bold; cursor: pointer; }
+  color: #0088CC; cursor: pointer; }
 
 
 #defaultmenu, #minisearch { display: none; } 

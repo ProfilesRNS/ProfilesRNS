@@ -85,13 +85,7 @@ namespace Profiles.ORNG.Utilities
         public bool Show(string viewerUri, string ownerUri, String page)
         {
             page = page.ToLower();
-            bool show = true;
-            // if there are no view requirements, go ahead and show it.  We are likely testing out a new gadget
-            // if there are some, turn it off unless this page says its OK to turn it on
-            if (viewRequirements.Count > 0)
-            {
-                show = false;
-            }
+            bool show = false;
 
             if (viewRequirements.ContainsKey(page))
             {

@@ -5,7 +5,7 @@
 .editPage H2 { color: #666; }
 #profile-components { width: 400px; float: left; border-top: 1px solid #CCC; }
 #profile-components table { margin-bottom: -20px; border: none; }
-#profile-components table td { border: none; border-bottom: 1px solid #CCC; height: 30px; }
+#profile-components table td { border: none; height: 30px; border-width: 0 0 1px !important; }
 .EditMenuTopRow { display: none; }
 #profile-visibility { width: 450px; float: left; margin-left: 40px; border: 1px solid #CCC; }
 #profile-visibility td { vertical-align: top; padding: 4px 10px; }

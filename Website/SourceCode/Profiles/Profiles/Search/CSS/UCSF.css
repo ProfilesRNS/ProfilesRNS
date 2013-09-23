@@ -6,7 +6,6 @@
 #txtSearchFor { padding-left: 2px; height: 30px; height: 22px\9; padding-top: 6px\9; }
 .listTable th { border: 1px solid #CCC !important; }
 #tblSearchResults th { text-align: left; }
-#tblSearchResults tr td:first-child { font-weight: bold; text-decoration: underline; }
 #suckerfishmenu li.item-home a { background-color: #6A7D7D !important; }
 /* we didn't use this filters display
 #filtersContainer { width: 680px; }

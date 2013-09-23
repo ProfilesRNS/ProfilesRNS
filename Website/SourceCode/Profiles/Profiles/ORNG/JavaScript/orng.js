@@ -401,14 +401,7 @@ ORNGGadget.prototype.getTitleBarContent = function (continuation) {
         continuation('<span class="gadgets-gadget-canvas-title"></span>');
     }
     else {
-        continuation(
-	      '<div id="' + this.cssClassTitleBar + '-' + this.id +
-	      '" class="' + this.cssClassTitleBar + '"><span class="' +
-	      this.cssClassTitleButtonBar + '">' +
-	      '</span> <span id="' +
-	      this.getIframeId() + '_title" class="' + this.cssClassTitle + '">' +
-	      this.getTitleHtml(this.title) + '</span><span id="' +
-		  this.getIframeId() + '_status" class="gadgets-gadget-status"></span></div>');
+        continuation();
     }
 };
 
@@ -518,19 +511,7 @@ ORNGToggleGadget.prototype.getTitleBarContent = function (continuation) {
 				+ this.id
 				+ '" class="'
 				+ this.cssClassTitleBar
-				+ '"><span class="'
-				+ this.cssClassTitleButtonBar
-				+ '">'
-				+ '<a href="#" onclick="shindig.container.getGadget('
-				+ this.id
-				+ ').handleToggle(true);return false;" class="'
-				+ this.cssClassTitleButton
-				+ '"><img id="gadgets-gadget-title-image-'
-				+ this.id
-				+ '" src="' + _rootDomain + '/ORNG/Images/gadgetcollapse.gif"/></a></span> <span id="'
-				+ this.getIframeId() + '_title" class="' + this.cssClassTitle
-				+ '">' + this.getTitleHtml(this.title)
-				+ '</span><span id="' + this.getIframeId()
+				+ '"><span id="' + this.getIframeId()
 				+ '_status" class="gadgets-gadget-status">'
 				+ '</span><span id="' + this.getIframeId() + '_hideshow" class="gadgets-gadget-hideshow">'
                 + '</span></div>');
@@ -581,8 +562,9 @@ ORNGToggleGadget.prototype.showVisibilityStatus = function (message) {
     var statusId = document.getElementById(this.getIframeId() + '_status');
     if (message == 'Public') {
         statusId.style.color = 'GREEN';
-        statusId.innerHTML = 'This section is PUBLIC';
+        statusId.innerHTML = 'This section is INCLUDED';
     }
+    /*** These no longer apply
     else if (message == 'Users') {
         statusId.style.color = 'YELLOW';
         statusId.innerHTML = 'This section is UCSF ONLY';
@@ -591,9 +573,10 @@ ORNGToggleGadget.prototype.showVisibilityStatus = function (message) {
         statusId.style.color = 'ORANGE';
         statusId.innerHTML = 'This section is PRIVATE';
     }
+    *****/
     else {
         statusId.style.color = '#CC0000';
-        statusId.innerHTML = 'This section is HIDDEN';
+        statusId.innerHTML = 'This section is REMOVED';
     }
 
     // should maybe put this in it's own function but OK to just put here
@@ -602,7 +585,7 @@ ORNGToggleGadget.prototype.showVisibilityStatus = function (message) {
         // should have a different block to do hideshowId, and only engage if appview registry is RegistryDefined
         if (message == 'Public') {
             hideshowId.innerHTML = '&nbsp;<a href="#" onclick="shindig.container.getGadget('
-		            + this.id + ').setRegisteredVisibility(\'Nobody\');return false;">Hide</a>&nbsp;|&nbsp;Show';
+		            + this.id + ').setRegisteredVisibility(\'Nobody\');return false;">Remove</a>&nbsp;|&nbsp;Include';
         }
         else if (message == 'Users') {
         // TODO
@@ -611,8 +594,8 @@ ORNGToggleGadget.prototype.showVisibilityStatus = function (message) {
         // TODO
         }
         else {
-            hideshowId.innerHTML = '&nbsp;Hide&nbsp;|&nbsp;<a href=#" onclick="shindig.container.getGadget('
-		            + this.id + ').setRegisteredVisibility(\'Public\');return false;">Show</a>';
+            hideshowId.innerHTML = '&nbsp;Remove&nbsp;|&nbsp;<a href=#" onclick="shindig.container.getGadget('
+		            + this.id + ').setRegisteredVisibility(\'Public\');return false;">Include</a>';
         }
     }
 };
@@ -626,7 +609,7 @@ ORNGToggleGadget.prototype.finishRender = function (chrome) {
         chrome.style.width = this.width + 'px';
     }
 
-    if (my.gadgets[this.id].chrome_id == 'gadgets-edit' && my.gadgets[this.id].hasRegisteredVisibility) {
+    if (this.hideShow) {
         this.showRegisteredVisibility();
     }
 };

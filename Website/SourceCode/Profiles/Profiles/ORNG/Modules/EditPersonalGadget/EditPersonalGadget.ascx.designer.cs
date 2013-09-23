@@ -10,7 +10,7 @@
 namespace Profiles.ORNG.Modules.Gadgets {
     
     
-    public partial class EditOntologyGadget {
+    public partial class EditPersonalGadget {
         
         /// <summary>
         /// upnlEditSection control.
@@ -58,12 +58,12 @@ namespace Profiles.ORNG.Modules.Gadgets {
         protected global::Profiles.Edit.Modules.SecurityOptions.SecurityOptions securityOptions;
         
         /// <summary>
-        /// pnlOpenSocial control.
+        /// litGadget control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlOpenSocial;
+        protected global::System.Web.UI.WebControls.Literal litGadget;
     }
 }

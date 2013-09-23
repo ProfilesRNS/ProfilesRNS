@@ -10,4 +10,4 @@
         </td>
     </tr>
 </table>
-<div id="toc"><ul></ul></div>
+<div id="toc"><ul></ul><div style="clear:both;"></div></div>

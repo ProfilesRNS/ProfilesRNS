@@ -33,10 +33,9 @@ using Profiles.ORNG.Utilities;
 namespace Profiles.ORNG.Modules.Gadgets
 {
 
-    public partial class EditOntologyGadget : BaseModule
+    public partial class EditPersonalGadget : BaseModule
     {
         private OpenSocialManager om;
-        private string chromeId;
 
         Edit.Utilities.DataIO data;
         protected void Page_Load(object sender, EventArgs e)
@@ -44,8 +43,8 @@ namespace Profiles.ORNG.Modules.Gadgets
             DrawProfilesModule();
         }
 
-        public EditOntologyGadget() : base() { }
-        public EditOntologyGadget(XmlDocument pagedata, List<ModuleParams> moduleparams, XmlNamespaceManager pagenamespaces)
+        public EditPersonalGadget() : base() { }
+        public EditPersonalGadget(XmlDocument pagedata, List<ModuleParams> moduleparams, XmlNamespaceManager pagenamespaces)
             : base(pagedata, moduleparams, pagenamespaces)
         {
             SessionManagement sm = new SessionManagement();
@@ -90,10 +89,12 @@ namespace Profiles.ORNG.Modules.Gadgets
             string uri = this.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/@rdf:about", base.Namespaces).Value;
             uri = uri.Substring(0, uri.IndexOf(Convert.ToString(this.SubjectID)) + Convert.ToString(this.SubjectID).Length);
             OpenSocialManager om = OpenSocialManager.GetOpenSocialManager(uri, Page, true, true);
+            string chromeId = om.AddGadget(Convert.ToInt32(base.GetModuleParamString("AppId")), base.GetModuleParamString("View"), base.GetModuleParamString("OptParams"));
+            // add the gadget, use appId
             if (om.IsVisible())
             {
+                litGadget.Text = "<div id='" + chromeId + "' class='gadgets-gadget-parent'></div>";
                 om.LoadAssets();
-                pnlOpenSocial.Visible = true;
                 new Responder(uri, Page);
             }
         }

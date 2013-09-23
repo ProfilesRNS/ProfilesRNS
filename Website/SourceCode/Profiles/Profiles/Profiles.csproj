@@ -115,9 +115,13 @@
     <Content Include="About\Images\video.JPG" />
     <Content Include="About\JavaScript\UCSF.js" />
     <Content Include="About\NewFeatures.aspx" />
-    <Content Include="About\PresentationXML\AboutUCSFProfiles.xml" />
+    <Content Include="About\PresentationXML\AboutUCSFProfiles.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="About\PresentationXML\CloseBrowser.xml" />
-    <Content Include="About\PresentationXML\Optin.xml" />
+    <Content Include="About\PresentationXML\Optin.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="About\PresentationXML\ForDevelopers.xml" />
     <Content Include="About\PresentationXML\GadgetLibrary.xml" />
     <Content Include="About\PresentationXML\Help.xml" />
@@ -182,8 +186,8 @@
     <Content Include="ORNG\Images\icon_squareDownArrow.gif" />
     <Content Include="ORNG\JavaScript\orng.js" />
     <Content Include="ORNG\JSONLD\Test.htm" />
-    <Content Include="ORNG\Modules\ViewOntologyGadget\ViewOntologyGadget.ascx" />
-    <Content Include="ORNG\Modules\EditOntologyGadget\EditOntologyGadget.ascx" />
+    <Content Include="ORNG\Modules\ViewPersonalGadget\ViewPersonalGadget.ascx" />
+    <Content Include="ORNG\Modules\EditPersonalGadget\EditPersonalGadget.ascx" />
     <Content Include="ORNG\Modules\GadgetSandbox\GadgetSandbox.ascx" />
     <Content Include="ORNG\Modules\Gadgets\Gadgets.ascx" />
     <Content Include="ORNG\Modules\ModuleCatalogue.xml" />
@@ -387,19 +391,19 @@
     <Compile Include="ORNG\GadgetDetails.aspx.designer.cs">
       <DependentUpon>GadgetDetails.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ORNG\Modules\ViewOntologyGadget\ViewOntologyGadget.ascx.cs">
-      <DependentUpon>ViewOntologyGadget.ascx</DependentUpon>
+    <Compile Include="ORNG\Modules\ViewPersonalGadget\ViewPersonalGadget.ascx.cs">
+      <DependentUpon>ViewPersonalGadget.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ORNG\Modules\ViewOntologyGadget\ViewOntologyGadget.ascx.designer.cs">
-      <DependentUpon>ViewOntologyGadget.ascx</DependentUpon>
+    <Compile Include="ORNG\Modules\ViewPersonalGadget\ViewPersonalGadget.ascx.designer.cs">
+      <DependentUpon>ViewPersonalGadget.ascx</DependentUpon>
     </Compile>
-    <Compile Include="ORNG\Modules\EditOntologyGadget\EditOntologyGadget.ascx.cs">
-      <DependentUpon>EditOntologyGadget.ascx</DependentUpon>
+    <Compile Include="ORNG\Modules\EditPersonalGadget\EditPersonalGadget.ascx.cs">
+      <DependentUpon>EditPersonalGadget.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ORNG\Modules\EditOntologyGadget\EditOntologyGadget.ascx.designer.cs">
-      <DependentUpon>EditOntologyGadget.ascx</DependentUpon>
+    <Compile Include="ORNG\Modules\EditPersonalGadget\EditPersonalGadget.ascx.designer.cs">
+      <DependentUpon>EditPersonalGadget.ascx</DependentUpon>
     </Compile>
     <Compile Include="ORNG\Modules\GadgetSandbox\GadgetSandbox.ascx.cs">
       <DependentUpon>GadgetSandbox.ascx</DependentUpon>
