@@ -39,3 +39,9 @@ Remove MaxCardinality from Overview
 NEed to fix RDF..GetStoreNode and [RDF.].[DeleteNode]
 
 Script all ORNG sp,s including old one that have changed!
+
+See if this is needed;
+update   [Ontology.].[ClassProperty] set MaxCardinality = 0 where _PropertyLabel = 'Overview'
+and Class = 'http://xmlns.com/foaf/0.1/Person';
+
+

@@ -17,16 +17,18 @@ namespace Profiles.ORNG.Utilities
         private string name;
         private string openSocialGadgetURL;
         private bool enabled;
+        private string unavailableMessage;
         private bool sandboxOnly = false;
         private Dictionary<string, GadgetViewRequirements> viewRequirements = new Dictionary<string, GadgetViewRequirements>();
 
-        public GadgetSpec(int appId, string name, string openSocialGadgetURL, bool enabled, bool sandboxOnly)
+        public GadgetSpec(int appId, string name, string openSocialGadgetURL, string unavailableMessage, bool enabled, bool sandboxOnly)
         {
             this.appId = appId;
             this.name = name;
             this.openSocialGadgetURL = openSocialGadgetURL;
             this.enabled = enabled;
             this.sandboxOnly = sandboxOnly;
+            this.unavailableMessage = String.IsNullOrEmpty(unavailableMessage) ? null : unavailableMessage;
 
             // if it's sandboxOnly, you will not find view requirements in the DB
             if (!sandboxOnly)
@@ -59,18 +61,6 @@ namespace Profiles.ORNG.Utilities
             return openSocialGadgetURL;
         }
 
-        public bool HasRegisteredVisibility()
-        {
-            foreach (GadgetViewRequirements req in viewRequirements.Values)
-            {
-                if (OpenSocialManager.REGISTRY_DEFINED.Equals(req.GetVisiblity()))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
         public GadgetViewRequirements GetGadgetViewRequirements(String page)
         {
             page = page.ToLower();
@@ -90,7 +80,7 @@ namespace Profiles.ORNG.Utilities
             if (viewRequirements.ContainsKey(page))
             {
                 GadgetViewRequirements req = GetGadgetViewRequirements(page);
-                string visibility = (req.GetVisiblity() == OpenSocialManager.REGISTRY_DEFINED ? GetRegistryDefinedVisiblity(ownerUri) : req.GetVisiblity());
+                string visibility = req.GetVisiblity();
                 if (OpenSocialManager.PUBLIC.Equals(visibility))
                 {
                     show = true;
@@ -103,7 +93,7 @@ namespace Profiles.ORNG.Utilities
                 {
                     show = true;
                 }
-                else if (OpenSocialManager.IS_REGISTERED.Equals(visibility) && GetRegistryDefinedVisiblity(ownerUri) != null) 
+                else if (OpenSocialManager.IS_REGISTERED.Equals(visibility) && IsRegistered(ownerUri) ) 
                 {
                     show = true;
                 }
@@ -112,31 +102,42 @@ namespace Profiles.ORNG.Utilities
         }
 
         // OK to cache as long as dependency is working!
-        public string GetRegistryDefinedVisiblity(string ownerUri)
+        // think about this, as this is now only set manually via DB
+        public bool IsRegistered(string ownerUri)
         {
             if (ownerUri == null || ownerUri.Trim().Length == 0)
             {
-                return null;
+                return false;
             }
 
-            Dictionary<int, string> registeredApps = (Dictionary<int, string>)Framework.Utilities.Cache.FetchObject(REGISTERED_APPS_CACHE_PREFIX + ownerUri);
+            HashSet<int> registeredApps = (HashSet<int>)Framework.Utilities.Cache.FetchObject(REGISTERED_APPS_CACHE_PREFIX + ownerUri);
             if (registeredApps == null)
             {
-                registeredApps = new Dictionary<int, string>();
+                registeredApps = new HashSet<int>();
                 Profiles.ORNG.Utilities.DataIO data = new Profiles.ORNG.Utilities.DataIO();
 
                 using (SqlDataReader dr = data.GetRegisteredApps(ownerUri))
                 {
                     while (dr.Read())
                     {
-                        registeredApps[dr.GetInt32(0)] = dr.GetString(1);
+                        registeredApps.Add(dr.GetInt32(0));
                     }
                 }
 
                 Framework.Utilities.Cache.Set(REGISTERED_APPS_CACHE_PREFIX + ownerUri, registeredApps, OpenSocialManager.GetNodeID(ownerUri), null);
             }
 
-            return registeredApps.ContainsKey(GetAppId()) ? registeredApps[GetAppId()] : null;
+            return registeredApps.Contains(GetAppId());
+        }
+
+        public string GetUnavailableMessage()
+        {
+            return unavailableMessage;
+        }
+
+        public bool RequiresRegitration()
+        {
+            return unavailableMessage != null;
         }
 
         public bool FromSandbox()

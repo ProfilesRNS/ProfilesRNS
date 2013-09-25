@@ -44,6 +44,11 @@ namespace Profiles.Edit.Modules.SecurityOptions
         {
             List<SecurityItem> si = new List<SecurityItem>();
 
+            if (this.PredicateURI.StartsWith(Profiles.ORNG.Utilities.OpenSocialManager.OPENSOCIAL_ONTOLOGY_PREFIX))
+            {
+                si.Add(new SecurityItem("Hidden", "Not visible on your profile page", 0));
+            }
+
             foreach (XmlNode securityitem in this.SecurityGroups.SelectNodes("SecurityGroupList/SecurityGroup"))
             {
                 si.Add(new SecurityItem(securityitem.SelectSingleNode("@Label").Value,
@@ -116,8 +121,24 @@ namespace Profiles.Edit.Modules.SecurityOptions
 
         private void UpdateSecuritySetting(string securitygroup)
         {
-            Edit.Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
-            data.UpdateSecuritySetting(this.Subject, data.GetStoreNode(this.PredicateURI), Convert.ToInt32(securitygroup));
+            // maybe be able to make this more general purpose
+            if (this.PredicateURI.StartsWith(Profiles.ORNG.Utilities.OpenSocialManager.OPENSOCIAL_ONTOLOGY_PREFIX))
+            {
+                Profiles.ORNG.Utilities.DataIO data = new Profiles.ORNG.Utilities.DataIO();
+                if ("0".Equals(securitygroup))
+                {
+                    data.RemovePersonalGadget(this.Subject, this.PredicateURI);
+                }
+                else
+                {
+                    data.AddPersonalGadget(this.Subject, this.PredicateURI);
+                }
+            }
+            else if (!"0".Equals(securitygroup))
+            {
+                Edit.Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
+                data.UpdateSecuritySetting(this.Subject, data.GetStoreNode(this.PredicateURI), Convert.ToInt32(securitygroup));
+            }
             Framework.Utilities.Cache.AlterDependency(this.Subject.ToString());
         }
 

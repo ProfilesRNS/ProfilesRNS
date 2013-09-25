@@ -14,7 +14,8 @@
         <table id="tblEditOntologyGadget" width="100%">
             <tr>
                 <td colspan='3'>
-                    <asp:Literal runat="server" ID="litBackLink"></asp:Literal>
+                    <asp:Literal runat="server" ID="litBackLink"></asp:Literal>&nbsp;&nbsp;
+                    <asp:HyperLink runat="server" ID="lnkOrng" Visible="true" ImageUrl="~/ORNG/Images/orng.gif" NavigateUrl="http://orng.info" Target="_blank"/>
                 </td>
             </tr>
             <tr>
@@ -29,6 +30,5 @@
         </table>
     </ContentTemplate>
 </asp:UpdatePanel>
-<asp:Literal runat="server" ID="litGadget">Add-ons are currently not configured for this system</asp:Literal>
-
+<asp:Literal runat="server" ID="litGadget"/>
 

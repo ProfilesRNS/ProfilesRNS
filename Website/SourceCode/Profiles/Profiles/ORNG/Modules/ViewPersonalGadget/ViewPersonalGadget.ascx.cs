@@ -37,6 +37,7 @@ namespace Profiles.ORNG.Modules.Gadgets
     {
         private OpenSocialManager om;
         private string uri = null;
+        private PreparedGadget gadget;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -55,12 +56,12 @@ namespace Profiles.ORNG.Modules.Gadgets
                 uri = node != null ? node.Value : null;
             }
             om = OpenSocialManager.GetOpenSocialManager(uri, Page, false, true);
-            string chromeId = om.AddGadget(Convert.ToInt32(base.GetModuleParamString("AppId")), base.GetModuleParamString("View"), base.GetModuleParamString("OptParams"));
+            gadget = om.AddGadget(Convert.ToInt32(base.GetModuleParamString("AppId")), base.GetModuleParamString("View"), base.GetModuleParamString("OptParams"));
             // UCSF OpenSocial items
             if (om.IsVisible())
             {
                 om.LoadAssets();
-                litGadget.Text = "<div id='" + chromeId + "' class='gadgets-gadget-parent'></div>";
+                litGadget.Text = "<div id='" + gadget.GetChromeId() + "' class='gadgets-gadget-parent'></div>";
                 new Responder(uri, Page);  // for some reason doing this in DrawProfilesModule (remove that???) fails!
             }
         }

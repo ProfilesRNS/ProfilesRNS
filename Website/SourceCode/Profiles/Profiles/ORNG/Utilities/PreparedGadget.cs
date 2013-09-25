@@ -32,16 +32,9 @@ namespace Profiles.ORNG.Utilities
             this.openSocialManager = openSocialManager;
             this.securityToken = securityToken;
             this.view = view;
-            this.optParams = optParams == null || optParams == string.Empty ? "{}" : optParams;
+            this.optParams = optParams == null || optParams.Trim() == string.Empty ? "{}" : optParams;
             this.chromeId = chromeId;
             personalGadget = true;
-        }
-
-
-        // temp hack,
-        public bool GetRegisteredVisibility()
-        {
-            return personalGadget || GetGadgetSpec().HasRegisteredVisibility();
         }
 
         public int CompareTo(PreparedGadget other)
@@ -161,6 +154,11 @@ namespace Profiles.ORNG.Utilities
             {
                 return null;
             }
+        }
+
+        public bool RequiresRegistration()
+        {
+            return this.GetGadgetSpec().RequiresRegitration();
         }
 
     }

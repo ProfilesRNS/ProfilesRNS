@@ -28,15 +28,7 @@ gadgets.pubsubrouter.init(function (id) {
             var moduleId = shindig.container.gadgetService.getGadgetIdFromModuleId(sender);
         }
 
-        if (channel == 'added' && my.gadgets[moduleId].chrome_id == 'gadgets-edit') {
-            if (message == 'Y') {
-                _gaq.push(['_trackEvent', my.gadgets[moduleId].name, 'SHOW', 'profile_edit_view']);
-            }
-            else {
-                _gaq.push(['_trackEvent', my.gadgets[moduleId].name, 'HIDE', 'profile_edit_view']);
-            }
-        }
-        else if (channel == 'status') {
+        if (channel == 'status') {
             // message should be of the form 'COLOR:Message Content'
             var statusId = document.getElementById(sender + '_status');
             if (statusId) {
@@ -70,10 +62,7 @@ gadgets.pubsubrouter.init(function (id) {
             _gaq.push(['_trackEvent', my.gadgets[moduleId].name, 'go_to_profile', message]);
             document.location.href = '/' + location.pathname.split('/')[1] + '/display/n' + message;
         }
-        else if (channel == 'hide') {
-            document.getElementById(sender).parentNode.parentNode.style.display = 'none';
-        }
-        else if (channel == 'JSONPersonIds' || channel == 'ClearOwnerCache') {
+        else if (channel == 'JSONPersonIds') {
             // do nothing, no need to alert
         }
         else {
@@ -306,7 +295,9 @@ ORNGGadgetService.prototype.setTitle = function (title) {
     }
     else {
         var element = document.getElementById(this.f + '_title');
-        element.innerHTML = my.renderableGadgets[moduleId].getTitleHtml(title);
+        if (element) {
+            element.innerHTML = my.renderableGadgets[moduleId].getTitleHtml(title);
+        }
     }
 };
 
@@ -413,204 +404,30 @@ ORNGGadget.prototype.finishRender = function (chrome) {
     }
 };
 
-// ORNGToggleGadget
-ORNGToggleGadget = function (opt_params) {
+// ORNGTitleBarGadget
+ORNGTitleBarGadget = function (opt_params) {
     ORNGGadget.call(this, opt_params);
 };
 
-ORNGToggleGadget.inherits(ORNGGadget);
+ORNGTitleBarGadget.inherits(ORNGGadget);
 
-ORNGToggleGadget.prototype.handleToggle = function (track) {
-    var gadgetIframe = document.getElementById(this.getIframeId());
-    if (gadgetIframe) {
-        var gadgetContent = gadgetIframe.parentNode;
-        var gadgetImg = document.getElementById('gadgets-gadget-title-image-'
-				+ this.id);
-        if (gadgetContent.style.display) {
-            //OPEN
-            if (this.width) {
-                gadgetContent.parentNode.style.width = this.width + 'px';
-            }
-
-            gadgetContent.style.display = '';
-            gadgetImg.src = _rootDomain + '/ORNG/Images/gadgetcollapse.gif';
-            // refresh if certain features require so
-            //if (this.hasFeature('dynamic-height')) {
-            if (my.gadgets[this.id].chrome_id == 'gadgets-search') {
-                this.refresh();
-                document.getElementById(this.getIframeId()).contentWindow.location
-						.reload(true);
-            }
-
-            if (my.gadgets[this.id].chrome_id == 'gadgets-edit') {
-                if (track) {
-                    // record in google analytics     
-                    _gaq.push(['_trackEvent', my.gadgets[this.id].name,
-						'OPEN_IN_EDIT', 'profile_edit_view']);
-                }
-            } else {
-                // only do this for user centric activities
-                if (gadgets.util.getUrlParameters()['Person'] != undefined) {
-                    osapi.activities
-							.create(
-									{
-									    'userId': gadgets.util
-												.getUrlParameters()['Person'],
-									    'appId': my.gadgets[this.id].appId,
-									    'activity': {
-									        'postedTime': new Date().getTime(),
-									        'title': 'gadget was viewed',
-									        'body': my.gadgets[this.id].name
-													+ ' gadget was viewed'
-									    }
-									}).execute(function (response) {
-									});
-                }
-                if (track) {
-                    // record in google analytics     
-                    _gaq.push(['_trackEvent', my.gadgets[this.id].name, 'OPEN']);
-                }
-            }
-        } else {
-            //CLOSE
-            if (this.closed_width) {
-                gadgetContent.parentNode.style.width = this.closed_width + 'px';
-            }
-
-            gadgetContent.style.display = 'none';
-            gadgetImg.src = _rootDomain + '/ORNG/Images/gadgetexpand.gif';
-            if (track) {
-                if (my.gadgets[this.id].chrome_id == 'gadgets-edit') {
-                    // record in google analytics     
-                    _gaq.push(['_trackEvent', my.gadgets[this.id].name,
-							'CLOSE_IN_EDIT', 'profile_edit_view']);
-                } else {
-                    // record in google analytics     
-                    _gaq.push(['_trackEvent', my.gadgets[this.id].name, 'CLOSE']);
-                }
-            }
-        }
-    }
+ORNGTitleBarGadget.prototype.getTitleHtml = function (title) {
+    return title ? title.replace(/&/g, '&amp;').replace(/</g, '&lt;') : 'Gagdget';
 };
 
-ORNGToggleGadget.prototype.getTitleHtml = function (title) {
-    return '<a href="#" onclick="shindig.container.getGadget('
-		+ this.id + ').handleToggle(true);return false;">'
-		+ (title ? title.replace(/&/g, '&amp;').replace(/</g, '&lt;') : 'Gadget') + '</a>';
-};
-
-
-ORNGToggleGadget.prototype.getTitleBarContent = function (continuation) {
+ORNGTitleBarGadget.prototype.getTitleBarContent = function (continuation) {
     if (my.gadgets[this.id].view == 'canvas') {
-        ORNGGadgetService.setCanvasTitle(title);
+        ORNGGadgetService.setCanvasTitle(this.title);
         continuation('<span class="gadgets-gadget-canvas-title"></span>');
-    } else {
-        continuation('<div id="'
-				+ this.cssClassTitleBar
-				+ '-'
-				+ this.id
-				+ '" class="'
-				+ this.cssClassTitleBar
-				+ '"><span id="' + this.getIframeId()
-				+ '_status" class="gadgets-gadget-status">'
-				+ '</span><span id="' + this.getIframeId() + '_hideshow" class="gadgets-gadget-hideshow">'
-                + '</span></div>');
     }
-};
-
-ORNGToggleGadget.prototype.showRegisteredVisibility = function () {
-    var moduleId = this.id;
-    var makeRequestParams = {
-        "CONTENT_TYPE": "JSON",
-        "METHOD": "GET"
-    };
-
-    gadgets.io.makeNonProxiedRequest(my.openSocialURL + "/rest/registry?st=" + my.gadgets[moduleId].secureToken + "&rnd=" + Math.random(),
-        function (data) {
-            var message = 'Nobody';
-            for (p in data.data.entry) {
-                message = data.data.entry[p];
-                break;
-            }
-            shindig.container.getGadget(moduleId).showVisibilityStatus(message);
-        },
-        makeRequestParams,
-        "application/javascript"
-    );
-};
-
-ORNGToggleGadget.prototype.setRegisteredVisibility = function (value) {
-    var makeRequestParams = {
-        "CONTENT_TYPE": "JSON",
-        "METHOD": "POST",
-        "POST_DATA": value
-    };
-
-    var moduleId = this.id;
-
-    gadgets.io.makeNonProxiedRequest(my.openSocialURL + "/rest/registry?st=" + my.gadgets[this.id].secureToken,
-      function () {
-          shindig.container.getGadget(moduleId).showRegisteredVisibility();
-          my.callORNGResponder('ClearOwnerCache');
-      },
-      makeRequestParams,
-      "application/javascript"
-    );
-};
-
-ORNGToggleGadget.prototype.showVisibilityStatus = function (message) {
-    var statusId = document.getElementById(this.getIframeId() + '_status');
-    if (message == 'Public') {
-        statusId.style.color = 'GREEN';
-        statusId.innerHTML = 'This section is INCLUDED';
-    }
-    /*** These no longer apply
-    else if (message == 'Users') {
-        statusId.style.color = 'YELLOW';
-        statusId.innerHTML = 'This section is UCSF ONLY';
-    }
-    else if (message == 'Private') {
-        statusId.style.color = 'ORANGE';
-        statusId.innerHTML = 'This section is PRIVATE';
-    }
-    *****/
     else {
-        statusId.style.color = '#CC0000';
-        statusId.innerHTML = 'This section is REMOVED';
-    }
-
-    // should maybe put this in it's own function but OK to just put here
-    if (my.gadgets[this.id].hasRegisteredVisibility) {
-        var hideshowId = document.getElementById(this.getIframeId() + '_hideshow');
-        // should have a different block to do hideshowId, and only engage if appview registry is RegistryDefined
-        if (message == 'Public') {
-            hideshowId.innerHTML = '&nbsp;<a href="#" onclick="shindig.container.getGadget('
-		            + this.id + ').setRegisteredVisibility(\'Nobody\');return false;">Remove</a>&nbsp;|&nbsp;Include';
-        }
-        else if (message == 'Users') {
-        // TODO
-        }
-        else if (message == 'Private') {
-        // TODO
-        }
-        else {
-            hideshowId.innerHTML = '&nbsp;Remove&nbsp;|&nbsp;<a href=#" onclick="shindig.container.getGadget('
-		            + this.id + ').setRegisteredVisibility(\'Public\');return false;">Include</a>';
-        }
+        continuation(
+	      '<div id="' + this.cssClassTitleBar + '-' + this.id +
+	      '" class="' + this.cssClassTitleBar + '"><span class="' +
+	      this.cssClassTitleButtonBar + '">' +
+	      '</span> <span id="' +
+	      this.getIframeId() + '_title" class="' + this.cssClassTitle + '">' +
+	      this.getTitleHtml(this.title) + '</span><span id="' +
+		  this.getIframeId() + '_status" class="gadgets-gadget-status"></span></div>');
     }
 };
-
-ORNGToggleGadget.prototype.finishRender = function (chrome) {
-    window.frames[this.getIframeId()].location = this.getIframeUrl();
-    if (this.start_closed) {
-        this.handleToggle(false);
-    }
-    else if (chrome && this.width) {
-        chrome.style.width = this.width + 'px';
-    }
-
-    if (this.hideShow) {
-        this.showRegisteredVisibility();
-    }
-};
-

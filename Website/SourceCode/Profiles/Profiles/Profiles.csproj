@@ -172,6 +172,8 @@
     <Content Include="Login\Modules\ShibLogin\ShibLogin.ascx" />
     <Content Include="Login\PresentationXML\ShibbolethLoginPresentation.xml" />
     <Content Include="ORNG\CSS\UCSF.css" />
+    <Content Include="ORNG\Images\orng.gif" />
+    <Content Include="ORNG\Images\orng.png" />
     <Content Include="ORNG\Images\waiting.gif" />
     <Content Include="ORNG\JavaScript\prettyprint.js" />
     <Content Include="ORNG\JavaScript\jsonld-helper.js" />

@@ -71,11 +71,12 @@ namespace Profiles.Edit
             masterpage.RDFData = this.RDFData;
             masterpage.RDFNamespaces = this.RDFNamespaces;
             masterpage.PresentationXML = this.PresentationXML;
-
         }
 
         private void LoadAssets()
         {
+            this.Master.FindControl("pnlNavBarSearch").Visible = false;
+
             HtmlLink Displaycss = new HtmlLink();
             Displaycss.Href = Root.Domain + "/Profile/CSS/display.css";
             Displaycss.Attributes["rel"] = "stylesheet";

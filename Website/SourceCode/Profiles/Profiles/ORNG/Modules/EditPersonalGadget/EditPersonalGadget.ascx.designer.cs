@@ -40,6 +40,15 @@ namespace Profiles.ORNG.Modules.Gadgets {
         protected global::System.Web.UI.WebControls.Literal litBackLink;
         
         /// <summary>
+        /// lnkOrng control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink lnkOrng;
+        
+        /// <summary>
         /// pnlSecurityOptions control.
         /// </summary>
         /// <remarks>

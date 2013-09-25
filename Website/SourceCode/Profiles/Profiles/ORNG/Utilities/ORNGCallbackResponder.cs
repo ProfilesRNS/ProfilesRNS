@@ -13,7 +13,6 @@ namespace Profiles.ORNG.Utilities
         private static readonly string KEY_PREFIX = "ORNG.ORNGCallbackResponder :";
 
         public static string JSON_PERSONID_REQ = "JSONPersonIds";
-        public static string CLEAR_OWNER_CACHE_REQ = "ClearOwnerCache";
 
         private static List<WeakReference> managers = new List<WeakReference>();
 

@@ -16,6 +16,7 @@ namespace Profiles.ORNG.Utilities
 {
     public class OpenSocialManager
     {
+        public static string OPENSOCIAL_ONTOLOGY_PREFIX = "http://orng.info/ontology/orng#";
         public static string OPENSOCIAL_DEBUG = "OPENSOCIAL_DEBUG";
         public static string OPENSOCIAL_NOCACHE = "OPENSOCIAL_NOCACHE";
         public static string OPENSOCIAL_GADGETS = "OPENSOCIAL_GADGETS";
@@ -172,7 +173,7 @@ namespace Profiles.ORNG.Utilities
         private static string GetGadgetFileNameFromURL(string url)
         {
             string[] urlbits = url.ToString().Split('/');
-            return urlbits[urlbits.Length - 1];
+            return urlbits[urlbits.Length - 1].Split('.')[0];
         }
 
         public static Int64 GetNodeID(string uri)
@@ -191,15 +192,16 @@ namespace Profiles.ORNG.Utilities
             return noCache;
         }
 
-        public string AddGadget(int appId, string view, string optParams)
+        public PreparedGadget AddGadget(int appId, string view, string optParams)
         {
             foreach (KeyValuePair<string, GadgetSpec> spec in GetAllDBGadgets(true))
             {
                 if (spec.Value.GetAppId() == appId)
                 {
                     string chromeId = "gadgets-" + gadgets.Count;
-                    gadgets.Add(new PreparedGadget(spec.Value, this, SocketSendReceive(viewerUri, ownerUri, spec.Value.GetGadgetURL()), view, optParams, chromeId));
-                    return chromeId;
+                    PreparedGadget retval = new PreparedGadget(spec.Value, this, SocketSendReceive(viewerUri, ownerUri, spec.Value.GetGadgetURL()), view, optParams, chromeId);
+                    gadgets.Add(retval);
+                    return retval;
                 }
             }
             return null;
@@ -381,13 +383,12 @@ namespace Profiles.ORNG.Utilities
         {
             string gadgetScriptText = Environment.NewLine +
                     "var my = {};" + Environment.NewLine +
-                    "my.gadgetSpec = function(appId, name, url, view, chrome_id, hasRegisteredVisibility, opt_params, secureToken) {" + Environment.NewLine +
+                    "my.gadgetSpec = function(appId, name, url, view, chrome_id, opt_params, secureToken) {" + Environment.NewLine +
                     "this.appId = appId;" + Environment.NewLine +
                     "this.name = name;" + Environment.NewLine +
                     "this.url = url;" + Environment.NewLine +
                     "this.view = view || 'default';" + Environment.NewLine +
                     "this.chrome_id = chrome_id;" + Environment.NewLine +
-                    "this.hasRegisteredVisibility = hasRegisteredVisibility;" + Environment.NewLine +
                     "this.opt_params = opt_params;" + Environment.NewLine +
                     "this.secureToken = secureToken;" + Environment.NewLine +
                     "};" + Environment.NewLine;
@@ -402,7 +403,7 @@ namespace Profiles.ORNG.Utilities
                 foreach (PreparedGadget gadget in GetVisibleGadgets())
                 {
                     gadgetScriptText += "new my.gadgetSpec(" + gadget.GetAppId() + ",'" + gadget.GetName() + "','" + gadget.GetGadgetURL() + "','" +
-                        gadget.GetView() + "','" + gadget.GetChromeId() + "'," + (gadget.GetRegisteredVisibility() ? "1" : "0") + "," +
+                        gadget.GetView() + "','" + gadget.GetChromeId() + "'," +
                         gadget.GetOptParams() + ",'" + gadget.GetSecurityToken() + "'), " + Environment.NewLine;
                 }
                 gadgetScriptText = gadgetScriptText.Substring(0, gadgetScriptText.LastIndexOf(','));
@@ -410,6 +411,18 @@ namespace Profiles.ORNG.Utilities
             gadgetScriptText += "];" + Environment.NewLine;
 
             return gadgetScriptText;
+        }
+
+        public static GadgetSpec GetGadgetByPropertyURI(string propertyURI)
+        {
+            foreach (GadgetSpec spec in GetAllDBGadgets(true).Values)
+            {
+                if (propertyURI.Equals(OPENSOCIAL_ONTOLOGY_PREFIX + "has" + GetGadgetFileNameFromURL(spec.GetGadgetURL())))
+                {
+                    return spec;
+                }
+            }
+            return null;
         }
 
         public static Dictionary<string, GadgetSpec> GetAllDBGadgets(bool useCache)
@@ -424,7 +437,8 @@ namespace Profiles.ORNG.Utilities
                 {
                     while (dr.Read())
                     {
-                        GadgetSpec spec = new GadgetSpec(Convert.ToInt32(dr[0]), dr[1].ToString(), dr[2].ToString(), Convert.ToBoolean(dr[3]), false);
+                        GadgetSpec spec = new GadgetSpec(Convert.ToInt32(dr[0]), dr[1].ToString(), dr[2].ToString(), 
+                            dr[3].ToString(), Convert.ToBoolean(dr[4]), false);
                         string gadgetFileName = GetGadgetFileNameFromURL(dr[2].ToString());
                         dbApps.Add(gadgetFileName, spec);
                     }
@@ -478,7 +492,7 @@ namespace Profiles.ORNG.Utilities
                 {
                     continue;
                 }
-                GadgetSpec gadgetSpec = new GadgetSpec(appId, name, openSocialGadgetURL, true, sandboxOnly);
+                GadgetSpec gadgetSpec = new GadgetSpec(appId, name, openSocialGadgetURL, null, true, sandboxOnly);
                 // only add ones that are visible in this context!
                 if (sandboxOnly || gadgetSpec.Show(viewerUri, ownerUri, page.AppRelativeVirtualPath.Substring(2).ToLower()))
                 {

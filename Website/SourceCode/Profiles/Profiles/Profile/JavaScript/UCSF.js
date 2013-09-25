@@ -31,7 +31,7 @@
     if ($('#toc ul li').length < 3) {
         $('#toc').hide();
     }
-    $('#toc ul li:contains("Publications")').appendTo('#toc ul');
+   // $('#toc ul li:contains("Publications")').appendTo('#toc ul');
     $('#toc ul li').last().css('border-right', 'none').css('margin-right', '0');
 
     //remove border for 1st section

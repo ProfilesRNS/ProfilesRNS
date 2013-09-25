@@ -13,7 +13,7 @@ this website.
 <br />
 <br />
 -->
-<h3>Basic Components:</h3>
+<h3>Components:</h3>
 <div id="profile-components">
   <table style="width:100%;margin-bottom:0;">
     <tr style="border-bottom:1px solid #CCC;">
@@ -41,6 +41,7 @@ this website.
                         <asp:Image runat="server" ID="imgBlank" Visible="false" ImageUrl="~/Edit/Images/icons_blank.gif" />
                         <asp:Label runat="server" ID="lblItems"></asp:Label>
                         <asp:Image runat="server" ID="imgLock" Visible="false" ImageUrl="~/Edit/Images/icons_lock.gif" />
+                        <asp:Image runat="server" ID="imgOrng" Visible="false" ImageUrl="~/ORNG/Images/orng.gif" />
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderStyle-HorizontalAlign="Center" 

@@ -19,8 +19,3 @@ C:\Development\ProfilesRNS-2.0.0\Website\SourceCode\ProfilesSearchAPI\bin\Search
 C:\Development\ProfilesRNS-2.0.0\Website\SourceCode\ProfilesSearchAPI\obj\Debug\ResolveAssemblyReference.cache
 C:\Development\ProfilesRNS-2.0.0\Website\SourceCode\ProfilesSearchAPI\obj\Debug\Search.dll
 C:\Development\ProfilesRNS-2.0.0\Website\SourceCode\ProfilesSearchAPI\obj\Debug\Search.pdb
-C:\Development\ProfilesRNS\ProfilesRNS\Website\SourceCode\ProfilesSearchAPI\bin\Search.dll
-C:\Development\ProfilesRNS\ProfilesRNS\Website\SourceCode\ProfilesSearchAPI\bin\Search.pdb
-C:\Development\ProfilesRNS\ProfilesRNS\Website\SourceCode\ProfilesSearchAPI\obj\Debug\ResolveAssemblyReference.cache
-C:\Development\ProfilesRNS\ProfilesRNS\Website\SourceCode\ProfilesSearchAPI\obj\Debug\Search.dll
-C:\Development\ProfilesRNS\ProfilesRNS\Website\SourceCode\ProfilesSearchAPI\obj\Debug\Search.pdb

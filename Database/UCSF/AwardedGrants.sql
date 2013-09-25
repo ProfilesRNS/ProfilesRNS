@@ -25,10 +25,11 @@ EXEC [Ontology.].[UpdateDerivedFields];
 INSERT INTO [Ontology.].[ClassGroupClass] (ClassGroupURI, ClassURI, SortOrder) 
 	VALUES ('http://profiles.catalyst.harvard.edu/ontology/prns#ClassGroupResearch', 'http://vivoweb.org/ontology/core#Grant',2);
 
+-- turn off UI for now, let the gadget handle it
 UPDATE [Ontology.].[ClassProperty] set EditExistingSecurityGroup = -40, IsDetail = 0, IncludeDescription = 1,
 		CustomEdit = 1, CustomEditModule = NULL,
 		CustomDisplay = 1, CustomDisplayModule = NULL,
-		EditSecurityGroup = -20, EditPermissionsSecurityGroup = -20, -- was -20's
+		EditSecurityGroup = -40, EditPermissionsSecurityGroup = -40, -- was -20's
 		EditAddNewSecurityGroup = -40, EditAddExistingSecurityGroup = -40, EditDeleteSecurityGroup = -40, 
 		_PropertyLabel = 'Awarded Grants'
 where property = 'http://vivoweb.org/ontology/core#hasPrincipalInvestigatorRole';
