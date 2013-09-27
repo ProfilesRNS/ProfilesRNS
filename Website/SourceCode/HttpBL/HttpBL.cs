@@ -205,10 +205,10 @@ namespace HttpBL
                     // no redirect; emit the default "denied"  page
                     sResponse = "<html><head><title>403.6 IP Address Rejected.</title></head><body><center>" +
                                 "<h1>403.6 IP Address Rejected.</h1><p>Access from " + this._client + 
-                                " denied, IP is blacklisted due to bad behaviour.</p>";
+                                " denied, IP is blacklisted due to bad behavior.</p>";
                                 if (!this._isDenied) {
                                     // if not locally denied (deny list), add the reference URL
-                                    sResponse = sResponse + "<p>See <a href='" + _lookup_url + reverseIP(this._client) + "'><b>HERE</b></a> for further informations</p>";
+                                    sResponse = sResponse + "<p>See <a href='" + _lookup_url + reverseIP(this._client) + "'><b>HERE</b></a> for further information</p>";
                                 }
                                 sResponse = sResponse + "</center></body></html>\n";
                 }
