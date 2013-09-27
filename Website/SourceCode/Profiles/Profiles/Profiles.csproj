@@ -132,6 +132,7 @@
     <Content Include="CustomAPI\v1\Statistics.aspx" />
     <Content Include="CustomAPI\v1\XMLProfile.aspx" />
     <Content Include="CustomAPI\v2\Default.aspx" />
+    <Content Include="denied.txt" />
     <Content Include="DIRECT\CSS\UCSF.css" />
     <Content Include="DIRECT\JavaScript\UCSF.js" />
     <Content Include="Edit\CSS\UCSF.css" />
@@ -156,6 +157,7 @@
     <Content Include="Framework\Images\expandRound.gif" />
     <Content Include="Framework\Images\favicon.gif" />
     <Content Include="Framework\Images\video-ad.png" />
+    <Content Include="google6b93ad5a56d431a7.html" />
     <Content Include="ORNG\Images\gadgetcollapse.gif" />
     <Content Include="ORNG\Images\gadgetexpand.gif" />
     <Content Include="Framework\Images\glyphicons-halflings.png" />
@@ -1250,6 +1252,10 @@
     <Folder Include="Login\Modules\App_LocalResources\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\HttpBL\HttpBL.csproj">
+      <Project>{B669358D-6374-40F0-8053-A79900BCBC61}</Project>
+      <Name>HttpBL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\ProfilesBetaAPI\Connects.Profiles.Service.DataContracts\Connects.Profiles.Service.DataContracts.csproj">
       <Project>{4E11DE8F-C111-44E4-8AF8-B66EDEC9152D}</Project>
       <Name>Connects.Profiles.Service.DataContracts</Name>

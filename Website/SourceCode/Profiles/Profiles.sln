@@ -28,6 +28,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemWeb", "..\SemWeb\src\Sem
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfilesSecureAPI", "..\ProfilesSecureAPI\ProfilesSecureAPI.csproj", "{BE990BEC-75C3-4D0C-8260-0FBB95AA1BAA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpBL", "..\HttpBL\HttpBL.csproj", "{B669358D-6374-40F0-8053-A79900BCBC61}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 11
@@ -143,6 +145,12 @@ Global
 		{BE990BEC-75C3-4D0C-8260-0FBB95AA1BAA}.Default|Any CPU.Build.0 = Debug|Any CPU
 		{BE990BEC-75C3-4D0C-8260-0FBB95AA1BAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE990BEC-75C3-4D0C-8260-0FBB95AA1BAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B669358D-6374-40F0-8053-A79900BCBC61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B669358D-6374-40F0-8053-A79900BCBC61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B669358D-6374-40F0-8053-A79900BCBC61}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{B669358D-6374-40F0-8053-A79900BCBC61}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{B669358D-6374-40F0-8053-A79900BCBC61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B669358D-6374-40F0-8053-A79900BCBC61}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
