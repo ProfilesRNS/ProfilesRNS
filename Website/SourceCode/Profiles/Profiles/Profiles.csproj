@@ -136,6 +136,7 @@
     <Content Include="CustomAPI\v1\Statistics.aspx" />
     <Content Include="CustomAPI\v1\XMLProfile.aspx" />
     <Content Include="CustomAPI\v2\Default.aspx" />
+    <Content Include="denied.txt" />
     <Content Include="DIRECT\CSS\UCSF.css" />
     <Content Include="DIRECT\JavaScript\UCSF.js" />
     <Content Include="Edit\CSS\UCSF.css" />
@@ -148,6 +149,7 @@
     <Content Include="Edit\Images\Icon_add_item.gif" />
     <Content Include="Edit\Images\sophcat-boat.jpg" />
     <Content Include="Edit\JavaScript\UCSF.js" />
+    <Content Include="Edit\Modules\EditSingleDataTypeProperty\EditSingleDataTypeProperty.ascx" />
     <Content Include="Framework\CSS\UCSF.css" />
     <Content Include="Framework\Images\arrow-orgbg.gif" />
     <Content Include="Framework\Images\arrow-tealbg.gif" />
@@ -333,6 +335,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Edit\Modules\EditSingleDataTypeProperty\EditSingleDataTypeProperty.ascx.cs">
+      <DependentUpon>EditSingleDataTypeProperty.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Edit\Modules\EditSingleDataTypeProperty\EditSingleDataTypeProperty.ascx.designer.cs">
+      <DependentUpon>EditSingleDataTypeProperty.ascx</DependentUpon>
     </Compile>
     <Compile Include="Framework\Modules\MainMenu\History.ascx.cs">
       <DependentUpon>History.ascx</DependentUpon>
@@ -1264,6 +1273,10 @@
     <Folder Include="Login\Modules\App_LocalResources\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\HttpBL\HttpBL.csproj">
+      <Project>{B669358D-6374-40F0-8053-A79900BCBC61}</Project>
+      <Name>HttpBL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\ProfilesBetaAPI\Connects.Profiles.Service.DataContracts\Connects.Profiles.Service.DataContracts.csproj">
       <Project>{4E11DE8F-C111-44E4-8AF8-B66EDEC9152D}</Project>
       <Name>Connects.Profiles.Service.DataContracts</Name>

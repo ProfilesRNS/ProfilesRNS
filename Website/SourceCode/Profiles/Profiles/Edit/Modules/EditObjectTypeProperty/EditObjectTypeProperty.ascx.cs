@@ -44,7 +44,6 @@ namespace Profiles.Edit.Modules.EditObjectTypeProperty
         public EditObjectTypeProperty(XmlDocument pagedata, List<ModuleParams> moduleparams, XmlNamespaceManager pagenamespaces)
             : base(pagedata, moduleparams, pagenamespaces)
         {
-
             Edit.Utilities.DataIO data;
             SessionManagement sm = new SessionManagement();
 

@@ -51,8 +51,6 @@ namespace Profiles.Framework
         {
             try
             {
-
-
                 toolkitScriptMaster.AsyncPostBackTimeout = 3600;
 
                 if (this.RDFData == null) { this.RDFData = new XmlDocument(); }

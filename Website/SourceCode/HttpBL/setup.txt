@@ -1,0 +1,185 @@
+
+--------------------------------------------------------
+HttpBL: implements bad hosts filtering for IIS web sites
+--------------------------------------------------------
+
+The HttpBL components is a native C# library which can be used on any .NET (IIS)
+website; the component is configured using some custom sections of the web.config
+file and once enabled/loaded allows to use the "Project Honeypot" [1] Http:BL API
+[2] to check the "reputation" of a host and reject or redirect requests coming from
+"bad hosts" so, keeping a given site safe from address harvesting and comment spam
+
+Before going on with the setup and inner working of the module and, to avoid the
+need to rewrite some already good documents, I suggest you to visit the "Project
+Honeypot" website (http://www.projecthoneypot.org) and reading the full informations
+offered, including the ones regarding the Http:BL API; after doing so you should
+have a grip about the whole filtering concept and, setting up and operating the
+HttpBL filter module should be easy
+
+The first thing to do, before installing the module on your web site is creating a
+Project HoneyPot account, this is easy (and free), to do it, just visit the Project
+Honeypot web site (http://www.projecthoneypot.org) and create a new account, go on
+confirming it (you'll need to click the confirmation link you'll get in email) and
+then, you'll be able to log onto the site using your credentials
+
+After you'll log onto the Project HoneyPot (PHP) site, just select the "services"
+option, there you'll find "Http:BL" once there select the "request Http:BL" key,
+in a matter of seconds you'll see a new page showing your own Http:BL key, copy it
+and paste it somewhere (e.g. in notepad)
+
+Once you'll have your Http:BL key, you may go on and install the HttpBL.DLL module,
+to do so, start by copying the HttpBL.DLL to your site "bin" folder and, since you're
+at it, creating a new folder (wherever you want) to keep the module logs; it would be
+a good idea keeping those outside the site root, but if you can't, a folder under the
+root will still be ok, just ensure it's writable
+
+Now that you have the DLL in place, you'll need to edit your "web.config" file and add
+it the needed infos so that the filtering module will be loaded; to do so, edit the
+"web.config" and add something like the following
+
+<configuration>
+  <configSections>
+    <section name="HttpBL" type="HttpBL.Settings"/>
+  </configSections>
+...other stuff...
+  <appSettings/>
+...other stuff...
+  <HttpBL
+    Enabled="true"
+    AlwaysAllow=""
+    AlwaysDeny=""
+    AccessKey="abcdefghijkl"
+    QueryDomain="dnsbl.httpbl.org"
+    MaxAge="30"
+    MaxScore="40"
+    CacheTTL="3600"
+    CacheWhite="true"
+    RedirectOnHit="false"
+    RedirectURL="/denied.aspx?ip=$IP&amp;result=$RESULT"
+    Logging="true"
+    LogPath="D:\LogFiles\IIS\W3SVC1234\HttpBL"
+    LogHits="true"
+  />
+...
+  <connectionStrings/>
+...
+  <system.web>
+    <httpModules>
+      <add name="HttpBL" type="HttpBL.HttpBL"/>
+    </httpModules>
+...
+
+Note: the above config may change depending from the version of IIS you're running and
+      how you configured it (kudos to Brandi for the note !!); that is
+
+<!-- If IIS 6 or IIS 7 running in Classic mode -->
+  <system.web>
+    <httpModules>
+      <add name="HttpBL" type="HttpBL.HttpBL"/>
+    </httpModules>
+
+...
+
+<!-- If IIS 7 running in Integrated mode -->
+  <system.webServer>
+    <modules>
+      <add name="HttpBL" type="HttpBL.HttpBL"/>
+    </modules>
+
+
+basically with the above you're telling IIS to load the DLL module whenever starting
+up your site (to disable the module, either set "Enabled" to "false" or comment the line
+"<add name...>" related to the module; once modified your web.config as above, ensure that
+the "LogPath" folder exists (and is writable) and that the "AccessKey" matches your own key
+(paste there the one you got from Project Honeypot) then save it; done that, just restart 
+your web site and there you go, from that moment on, the module will start working and 
+rejecting requests from bad IP addresses (and logging them to the log folder); to check if
+the module is working, just issue a request to your webserver and check the response headers,
+if the module was correctly loaded you'll see an "X-HttpBL" header
+
+
+Easy, isn't it :) ? But then, you may want to customize the parameters to match your needs,
+so, here are some short infos about the various configuration parameters
+
+Enabled             true = enable filtering
+
+AlwaysAllow			pathname of a file containing IPs (one on each line) which will never
+					be blocked nor looked up; the IPs may be partial ones, so, for example
+					"192.0.2." will match all the IPs starting with the given three octets
+					while "198.51.2" will match the first two octets and any IP whose third
+					octed starts with "2"; the pathname may be an absolute one, a relative
+					one (not recommended) or a virtual path
+
+AlwaysDeny			pathname of a file containing IPs (one on each line) which will always
+					be rejected (w/o any lookup); this list supports partial IPs as seen
+					for the allow one (path notes as for allow)
+
+AccessKey           this MUST be a valid Http:BL key obtained from Project Honeypot (PHP)
+					for infos, please visit http://www.projecthoneypot.org
+
+QueryDomain         the domain used for the DNS queries, change it ONLY if needed (as of
+                    today, the default should be kept to allow the module to work)
+
+MaxAge              bad IPs BELOW this age (days) will be rejected (see "PHP" for details)
+
+MaxScore            bad IPs ABOVE this threat score will be rejected (see "PHP" for details)
+
+CacheTTL            time (seconds) for which a given IP infos will be cached (good IPs will stay
+                    in cache for 1/4 of this time, the default value of 3600, that is, 1 hour is
+                    generally a good pick, change it only in case of problems); notice that the TTL
+                    is "dynamic" that is, a given cached entry will only expire "TTL" seconds after
+                    the last time it was requested, this helps further improving the caching and, in
+                    turn, reducing requests to the Http:BL DNS servers
+
+CacheWhite          true = also cache "good" IPs (helps avoiding too much queries), such IPs will
+                    stay in cache for 1/4 of the TTL, so if using the default TTL of 3600 good IPs
+                    will be cached for 15 minutes, this avoids the need to query the Http:BL DNS
+					servers for good IPs from regular visitors browsing your web site
+
+RedirectOnHit       true = bad hosts will be redirected to the specified URL, (false = they will 
+                    be rejected using the default, built-in error page)
+
+RedirectURL         bad hosts will be redirected to the URL specified here (it can be a relative 
+                    or absolute URL) the URL may contain optional parameters, the macros $IP and
+					$RESULT will be replaced with the visitor IP (the "bad IP") and the result 
+					from the Http:BL lookup, this way you may setup some kind of custom "informative
+					page" if you want, which will explain why the access was denied and what to do
+
+Logging             true = enable writing infos to log files
+
+LogPath             path where the logs will be created, the path may be absolute or relative, just
+                    ensure that the folder exists and that the IIS process has write rights on the
+					folder, otherwise no logging will take place, the log file names will have the
+					format HttpBL-MM.log where MM=month; older logs will be automatically replaced
+					by newer ones, this means that we'll have a max of 12 logs (one each month) so
+					we won't need to worry about mantaining older logs or filling up the disk; the
+					path can be specified as seen for the allow/deny lists
+
+LogHits             true = logs the bad IPs hitting your site, false = only logs errors/warnings
+                    notice that the hits and the errors/messages will be logged using different
+					logfiles (same naming approach as above)
+
+notes:
+
+First of all, I must thank Chris Crowther, aka "Shad0w" which published the 
+HttpBL.NET module on sourceforge http://sourceforge.net/projects/httpbl-net/
+since I used his project as a "foundation" to build my filtering module
+
+Then, as for the ProjectHoneypot, it offers more than just the Http:BL API
+and I sincerely suggest you to explore the site and, if possible, setup some
+honeypot or trap-page or even (I did it) donate some MX; it's easy and will
+help keeping the internet clean
+
+A final note; the HttpBL module is built using .NET 4, but it will build on
+.NET 3.5 and 2, so, in case your website uses a different version of the .NET
+runtime, just rebuild the solution using the desired framework and install it
+as described above.
+
+* ObiWan <obiwan@mvps.org>
+
+references:
+
+[1] http://www.projecthoneypot.org/
+
+[2] http://www.projecthoneypot.org/httpbl_api.php
+

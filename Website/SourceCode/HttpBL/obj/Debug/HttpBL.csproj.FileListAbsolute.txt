@@ -1,0 +1,10 @@
+K:\Develop\Testing\HttpBL\HttpBL\bin\Debug\HttpBL.dll
+K:\Develop\Testing\HttpBL\HttpBL\bin\Debug\HttpBL.pdb
+K:\Develop\Testing\HttpBL\HttpBL\obj\Debug\ResolveAssemblyReference.cache
+K:\Develop\Testing\HttpBL\HttpBL\obj\Debug\HttpBL.dll
+K:\Develop\Testing\HttpBL\HttpBL\obj\Debug\HttpBL.pdb
+D:\Develop\Testing\HttpBL\HttpBL\bin\Debug\HttpBL.dll
+D:\Develop\Testing\HttpBL\HttpBL\bin\Debug\HttpBL.pdb
+D:\Develop\Testing\HttpBL\HttpBL\obj\Debug\ResolveAssemblyReference.cache
+D:\Develop\Testing\HttpBL\HttpBL\obj\Debug\HttpBL.dll
+D:\Develop\Testing\HttpBL\HttpBL\obj\Debug\HttpBL.pdb

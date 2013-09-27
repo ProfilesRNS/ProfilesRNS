@@ -30,7 +30,6 @@ namespace Profiles.Edit
     {
         private Profiles.Framework.Template masterpage;
 
-
         override protected void OnInit(EventArgs e)
         {
 

@@ -45,7 +45,6 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
         public EditDataTypeProperty(XmlDocument pagedata, List<ModuleParams> moduleparams, XmlNamespaceManager pagenamespaces)
             : base(pagedata, moduleparams, pagenamespaces)
         {
-
             SessionManagement sm = new SessionManagement();
             propdata = new Profiles.Profile.Utilities.DataIO();
             data = new Profiles.Edit.Utilities.DataIO();
@@ -103,7 +102,7 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
 
         protected void GridViewProperty_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            TextBox txtLabel = null;
+            TextBox txtLabelGrid = null;
 
             ImageButton lnkEdit = null;
             ImageButton lnkDelete = null;
@@ -147,15 +146,15 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
                     lnkDelete.OnClientClick = "Javascript:return confirm('Are you sure you want to delete this " + PropertyLabel + "?');";
 
                 if(lblLabel!=null)
-                lblLabel.Text = literalstate.Literal.Replace("\n", "<br/>");
+                lblLabel.Text = "" + literalstate.Literal.Replace("\n", "<br/>");
                 
 
             }
 
             if (e.Row.RowType == DataControlRowType.DataRow && (e.Row.RowState & DataControlRowState.Edit) == DataControlRowState.Edit)
             {
-                txtLabel = (TextBox)e.Row.Cells[0].FindControl("txtLabel");
-                txtLabel.Text = literalstate.Literal.Trim();
+                txtLabelGrid = (TextBox)e.Row.Cells[0].FindControl("txtLabelGrid");
+                txtLabelGrid.Text = "" + literalstate.Literal.Trim();
             }
         }
 
@@ -168,9 +167,12 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
 
         protected void GridViewProperty_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-
             HiddenField hdLabel = (HiddenField)GridViewProperty.Rows[e.RowIndex].FindControl("hdLabel");
             TextBox txtLabel = (TextBox)GridViewProperty.Rows[e.RowIndex].FindControl("txtLabel");
+
+            Connects.Profiles.Service.ServiceImplementation.DebugLogging.Log("EditDataTypeProperty: Attempting to update: " + hdLabel.Value);
+            Connects.Profiles.Service.ServiceImplementation.DebugLogging.Log("EditDataTypeProperty: Attempting to update2: " + txtLabel.Text.Trim());
+            Connects.Profiles.Service.ServiceImplementation.DebugLogging.Log("EditDataTypeProperty: Attempting to update3: " + this.SubjectID + "," + this.PredicateID + "," + data.GetStoreNode(hdLabel.Value));
 
             data.UpdateLiteral(this.SubjectID, this.PredicateID, data.GetStoreNode(hdLabel.Value), data.GetStoreNode(txtLabel.Text.Trim()), this.PropertyListXML);
             GridViewProperty.EditIndex = -1;
@@ -197,6 +199,10 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
             Int64 subject = Convert.ToInt64(GridViewProperty.DataKeys[e.RowIndex].Values[0].ToString());
             Int64 predicate = Convert.ToInt64(GridViewProperty.DataKeys[e.RowIndex].Values[1].ToString());
             Int64 _object = Convert.ToInt64(GridViewProperty.DataKeys[e.RowIndex].Values[2].ToString());
+
+            Connects.Profiles.Service.ServiceImplementation.DebugLogging.Log("EditDataTypeProperty: Attempting to delete: " + GridViewProperty.DataKeys[e.RowIndex].Values[1].ToString());
+            Connects.Profiles.Service.ServiceImplementation.DebugLogging.Log("EditDataTypeProperty: Attempting to delete2: " + GridViewProperty.DataKeys[e.RowIndex].Values[2].ToString());
+            Connects.Profiles.Service.ServiceImplementation.DebugLogging.Log("EditDataTypeProperty: Attempting to delete3: " + subject + "," + predicate + "," + _object);
 
             data.DeleteTriple(subject, predicate, _object);
 
