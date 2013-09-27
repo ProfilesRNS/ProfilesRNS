@@ -72,3 +72,8 @@
 /Website/SourceCode/ProfilesSPARQLAPI/obj/*
 /Website/SourceCode/ProfilesSecureAPI/bin/*
 /Website/SourceCode/ProfilesSecureAPI/obj/*
+/Website/SourceCode/ProfilesSearchAPI/bin/*
+/Website/SourceCode/ProfilesSearchAPI/obj/*
+/Website/SourceCode/HttpBL/bin/*
+/Website/SourceCode/HttpBL/obj/*
+
