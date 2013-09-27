@@ -125,7 +125,9 @@
     <Content Include="About\PresentationXML\ForDevelopers.xml" />
     <Content Include="About\PresentationXML\GadgetLibrary.xml" />
     <Content Include="About\PresentationXML\Help.xml" />
-    <Content Include="About\PresentationXML\HowProfilesWorks.xml" />
+    <Content Include="About\PresentationXML\HowProfilesWorks.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="About\PresentationXML\NewFeatures.xml" />
     <Content Include="ActiveNetwork\CSS\UCSF.css" />
     <Content Include="ActiveNetwork\JavaScript\UCSF.js" />
