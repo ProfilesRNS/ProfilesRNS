@@ -2,39 +2,68 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Configuration;
+using System.Text;
+using Profiles.Framework.Utilities;
+
 
 namespace Profiles.ORNG.Utilities
 {
 
     public class PreparedGadget : IComparable<PreparedGadget>
     {
+        private static SocketConnectionPool sockets = null;
+
         private GadgetSpec gadgetSpec;
         private OpenSocialManager openSocialManager;
         private string securityToken;
         private string view;
         private string optParams;
         private string chromeId;
-        private bool personalGadget = false;
 
-        public PreparedGadget(GadgetSpec gadgetSpec, OpenSocialManager openSocialManager, string securityToken)
+        internal static void Init()
+        {
+            string[] tokenService = ConfigurationManager.AppSettings["ORNG.TokenService"].ToString().Trim().Split(':');
+            int min = Convert.ToInt32(ConfigurationManager.AppSettings["ORNG.SocketPoolMin"].ToString());
+            int max = Convert.ToInt32(ConfigurationManager.AppSettings["ORNG.SocketPoolMax"].ToString());
+            int expire = Convert.ToInt32(ConfigurationManager.AppSettings["ORNG.SocketPoolExpire"].ToString());
+            int timeout = Convert.ToInt32(ConfigurationManager.AppSettings["ORNG.SocketReceiveTimeout"].ToString());
+
+            sockets = new SocketConnectionPool(tokenService[0], Int32.Parse(tokenService[1]), min, max, expire, timeout);
+        }
+
+        // tool gadgets
+        public PreparedGadget(GadgetSpec gadgetSpec, OpenSocialManager openSocialManager)
         {
             this.gadgetSpec = gadgetSpec;
             this.openSocialManager = openSocialManager;
-            this.securityToken = securityToken;
-            this.view = null;
-            this.optParams = null;
+            this.securityToken = SocketSendReceive(openSocialManager.GetViewerURI(), openSocialManager.GetOwnerURI(), gadgetSpec.GetGadgetURL());
+
+            // look at the view requirements and what page we are on to set some things
+            GadgetViewRequirements viewReqs = GetGadgetViewRequirements();
+            if (viewReqs != null)
+            {
+                this.view = viewReqs.GetView();
+                this.chromeId = viewReqs.GetChromeId();
+                this.optParams = viewReqs.GetOptParams();
+            }
+            else  // might be a sandbox gadget
+            {
+                this.view = GetDefaultViewForPage();
+                this.chromeId = GetDefaultChromeIdForPage();
+                this.optParams = "{}";
+            }
         }
 
         // OntologyGadgets
-        public PreparedGadget(GadgetSpec gadgetSpec, OpenSocialManager openSocialManager, string securityToken, string view, string optParams, string chromeId)
+        public PreparedGadget(GadgetSpec gadgetSpec, OpenSocialManager openSocialManager, string view, string optParams, string chromeId)
         {
             this.gadgetSpec = gadgetSpec;
             this.openSocialManager = openSocialManager;
-            this.securityToken = securityToken;
+            this.securityToken = SocketSendReceive(openSocialManager.GetViewerURI(), openSocialManager.GetOwnerURI(), gadgetSpec.GetGadgetURL());
             this.view = view;
-            this.optParams = optParams == null || optParams.Trim() == string.Empty ? "{}" : optParams;
             this.chromeId = chromeId;
-            personalGadget = true;
+            this.optParams = optParams == null || optParams.Trim() == string.Empty ? "{}" : optParams;
         }
 
         public int CompareTo(PreparedGadget other)
@@ -44,49 +73,61 @@ namespace Profiles.ORNG.Utilities
             return ("" + this.GetChromeId() + (gvr1 != null ? 1000 + gvr1.GetDisplayOrder() : Int32.MaxValue)).CompareTo("" + other.GetChromeId() + (gvr2 != null ? 1000 + gvr2.GetDisplayOrder() : Int32.MaxValue));
         }
 
-        public GadgetSpec GetGadgetSpec()
+        private GadgetViewRequirements GetGadgetViewRequirements() 
         {
-            return gadgetSpec;
+            return gadgetSpec.GetGadgetViewRequirements(openSocialManager.GetPageName());
         }
 
-        public String GetSecurityToken()
+        public string GetSecurityToken()
         {
             return securityToken;
         }
 
+        public string GetChromeId()
+        {
+            return chromeId;
+        }
+
+        public string GetView()
+        {
+            return view;
+        }
+
+        public string GetOptParams()
+        {
+            return optParams;
+        }
+
+        // passthroughs
         public int GetAppId()
         {
             return gadgetSpec.GetAppId();
         }
 
-        public string GetName()
+        public string GetLabel()
         {
-            return gadgetSpec.GetName();
+            return gadgetSpec.GetLabel();
         }
 
-        public String GetGadgetURL()
+        public string GetGadgetURL()
         {
             return gadgetSpec.GetGadgetURL();
         }
 
-        GadgetViewRequirements GetGadgetViewRequirements()
+        public string GetUnavailableMessage()
         {
-            return gadgetSpec.GetGadgetViewRequirements(openSocialManager.GetPageName());
+            return gadgetSpec.GetUnavailableMessage();
         }
 
-        public String GetView()
+        public bool RequiresRegistration()
         {
-            if (view != null)
-            {
-                return view;
-            }
-            GadgetViewRequirements reqs = GetGadgetViewRequirements();
-            if (reqs != null)
-            {
-                return reqs.GetView();
-            }
+            return gadgetSpec.RequiresRegitration();
+        }
+
+        private String GetDefaultViewForPage()
+        {
             // default behavior that will get invoked when there is no reqs.  Useful for sandbox gadgets
-            else if (openSocialManager.GetPageName().Equals("edit/default.aspx"))
+            if (openSocialManager.GetPageName().Equals("edit/default.aspx"))
             {
                 return "home";
             }
@@ -108,29 +149,10 @@ namespace Profiles.ORNG.Utilities
             }
         }
 
-        public string GetOptParams()
+        public string GetDefaultChromeIdForPage()
         {
-            if (optParams != null)
-            {
-                return optParams;
-            }
-            GadgetViewRequirements reqs = GetGadgetViewRequirements();
-            return reqs != null ? reqs.GetOptParams() : "{}";
-        }
-
-        public string GetChromeId()
-        {
-            if (chromeId != null)
-            {
-                return chromeId;
-            }
-            GadgetViewRequirements reqs = GetGadgetViewRequirements();
-            if (reqs != null)
-            {
-                return reqs.GetChromeId();
-            }
             // default behavior that will get invoked when there is no reqs.  Useful for sandbox gadgets
-            else if (gadgetSpec.GetGadgetURL().Contains("Tool"))
+            if (gadgetSpec.GetGadgetURL().Contains("Tool"))
             {
                 return "gadgets-tools";
             }
@@ -156,11 +178,58 @@ namespace Profiles.ORNG.Utilities
             }
         }
 
-        public bool RequiresRegistration()
-        {
-            return this.GetGadgetSpec().RequiresRegitration();
-        }
+        #region Socket Communications
 
+        private static string SocketSendReceive(string viewer, string owner, string gadget)
+        {
+            //  These keys need to match what you see in edu.ucsf.profiles.shindig.service.SecureTokenGeneratorService in Shindig
+            string[] tokenService = ConfigurationManager.AppSettings["ORNG.TokenService"].ToString().Trim().Split(':');
+
+            string request = "c=default" + (viewer != null ? "&v=" + HttpUtility.UrlEncode(viewer) : "") +
+                    (owner != null ? "&o=" + HttpUtility.UrlEncode(owner) : "") + "&g=" + HttpUtility.UrlEncode(gadget) + "\r\n";
+            Byte[] bytesSent = System.Text.Encoding.ASCII.GetBytes(request);
+            Byte[] bytesReceived = new Byte[256];
+
+            // Create a socket connection with the specified server and port.
+            //Socket s = ConnectSocket(tokenService[0], Int32.Parse(tokenService[1]));
+            CustomSocket s = null;
+            string page = "";
+            try
+            {
+                s = sockets.GetSocket();
+
+                if (s == null)
+                    return ("Connection failed");
+
+                // Send request to the server.
+                DebugLogging.Log("Sending Bytes");
+                s.Send(bytesSent, bytesSent.Length, 0);
+
+                // Receive the server home page content.
+                int bytes = 0;
+
+                // The following will block until te page is transmitted.
+                do
+                {
+                    DebugLogging.Log("Receiving Bytes");
+                    bytes = s.Receive(bytesReceived, bytesReceived.Length, 0);
+                    page = page + Encoding.ASCII.GetString(bytesReceived, 0, bytes);
+                    DebugLogging.Log("Socket Page=" + page + "|");
+                }
+                while (page.Length == page.TrimEnd().Length && bytes > 0);
+            }
+            catch (Exception ex)
+            {
+                DebugLogging.Log("Socket Error :" + ex.Message);
+            }
+            finally
+            {
+                sockets.PutSocket(s);
+            }
+
+            return page.TrimEnd();
+        }
+        #endregion
     }
 
 }

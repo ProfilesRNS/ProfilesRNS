@@ -13,6 +13,7 @@ using System.Xml.Xsl;
 
 using Profiles.Framework.Utilities;
 using Profiles.Profile.Utilities;
+using Profiles.ORNG.Utilities;
 
 namespace Profiles.Profile.Modules.CustomViewPersonGeneralInfo
 {
@@ -66,7 +67,15 @@ namespace Profiles.Profile.Modules.CustomViewPersonGeneralInfo
                 imgPhoto.Visible = false;
             }
 
-
+            // OpenSocial.  Allows gadget developers to show test gadgets if you have them installed
+            string uri = this.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/@rdf:about", base.Namespaces).Value;
+            OpenSocialManager om = OpenSocialManager.GetOpenSocialManager(uri, Page);
+            if (om.IsVisible() && om.HasGadgetsAttachingTo("gadgets-test"))
+            {
+                litGadget.Visible = true;
+                litGadget.Text = "<div id='gadgets-test' class='gadgets-gadget-parent'></div>";
+                om.LoadAssets();
+            }
 
         }
 

@@ -78,18 +78,18 @@ namespace Profiles.ORNG.Modules.GadgetSandbox
             {
                 // Allow anonymous access.  Do not log in person.
                 // Add the gadgets
-                Session[OpenSocialManager.OPENSOCIAL_GADGETS] = txtGadgetURLS.Text;
-                Session[OpenSocialManager.OPENSOCIAL_DEBUG] = chkDebug.Checked;
-                Session[OpenSocialManager.OPENSOCIAL_NOCACHE] = !chkUseCache.Checked;
+                Session[OpenSocialManager.ORNG_GADGETS] = txtGadgetURLS.Text;
+                Session[OpenSocialManager.ORNG_DEBUG] = chkDebug.Checked;
+                Session[OpenSocialManager.ORNG_NOCACHE] = !chkUseCache.Checked;
                 Response.Redirect(Root.Domain);
             }
             else if (sandboxPassword.Equals(txtPassword.Text.Trim()) && data.UserLogin(ref user))
             {
                 // User logged in, now add the gadgets
                 // add the gadgets
-                Session[OpenSocialManager.OPENSOCIAL_GADGETS] = txtGadgetURLS.Text;
-                Session[OpenSocialManager.OPENSOCIAL_DEBUG] = chkDebug.Checked;
-                Session[OpenSocialManager.OPENSOCIAL_NOCACHE] = !chkUseCache.Checked; 
+                Session[OpenSocialManager.ORNG_GADGETS] = txtGadgetURLS.Text;
+                Session[OpenSocialManager.ORNG_DEBUG] = chkDebug.Checked;
+                Session[OpenSocialManager.ORNG_NOCACHE] = !chkUseCache.Checked; 
                 Response.Redirect(Root.Domain);
             }
             else

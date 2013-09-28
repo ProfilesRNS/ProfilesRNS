@@ -80,7 +80,7 @@ namespace Profiles.ORNG.Modules.Gadgets
             uri = this.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/@rdf:about", base.Namespaces).Value;
             uri = uri.Substring(0, uri.IndexOf(Convert.ToString(this.SubjectID)) + Convert.ToString(this.SubjectID).Length);
             appId = Convert.ToInt32(base.GetModuleParamString("AppId"));
-            om = OpenSocialManager.GetOpenSocialManager(uri, Page, true, true);
+            om = OpenSocialManager.GetOpenSocialManager(uri, Page, true);
             gadget = om.AddGadget(appId, base.GetModuleParamString("View"), base.GetModuleParamString("OptParams"));
 
             securityOptions.Subject = this.SubjectID;
@@ -94,20 +94,20 @@ namespace Profiles.ORNG.Modules.Gadgets
 
         private void DrawProfilesModule()
         {
-            if (gadget.RequiresRegistration() && !data.IsRegistered(uri, appId))
+            if (gadget == null || !om.IsVisible())
             {
                 pnlSecurityOptions.Visible = false;
-                litGadget.Text = gadget.GetGadgetSpec().GetUnavailableMessage();
+                litGadget.Text = "This feature is currently turned off on your system";
             }
-            else if (om.IsVisible())
+            else if (gadget.RequiresRegistration() && !data.IsRegistered(uri, appId))
+            {
+                pnlSecurityOptions.Visible = false;
+                litGadget.Text = gadget.GetUnavailableMessage();
+            }
+            else 
             {
                 litGadget.Text = "<div id='" + gadget.GetChromeId() + "' class='gadgets-gadget-parent'></div>";
                 om.LoadAssets();
-            }
-            else
-            {
-                pnlSecurityOptions.Visible = false;
-                litGadget.Text = "This feature is currently turned off on you system";
             }
         }
 

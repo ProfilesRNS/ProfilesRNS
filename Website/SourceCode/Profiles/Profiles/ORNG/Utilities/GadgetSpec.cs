@@ -8,41 +8,68 @@ using Profiles.Framework.Utilities;
 
 namespace Profiles.ORNG.Utilities
 {
-    public class GadgetSpec
+    public class GadgetSpec 
     {
 
         static readonly string REGISTERED_APPS_CACHE_PREFIX = "ORNG.REGISTERED_APPS_";
 
         private int appId = 0;
-        private string name;
+        private string label;
         private string openSocialGadgetURL;
         private bool enabled;
         private string unavailableMessage;
-        private bool sandboxOnly = false;
+        private bool fromSandbox = false;
         private Dictionary<string, GadgetViewRequirements> viewRequirements = new Dictionary<string, GadgetViewRequirements>();
 
-        public GadgetSpec(int appId, string name, string openSocialGadgetURL, string unavailableMessage, bool enabled, bool sandboxOnly)
+        // these are loaded from the DB
+        public GadgetSpec(int appId, string label, string openSocialGadgetURL, string unavailableMessage, bool enabled)
         {
-            this.appId = appId;
-            this.name = name;
             this.openSocialGadgetURL = openSocialGadgetURL;
+            this.label = label;
+            this.appId = appId;
             this.enabled = enabled;
-            this.sandboxOnly = sandboxOnly;
+            this.fromSandbox = false;
             this.unavailableMessage = String.IsNullOrEmpty(unavailableMessage) ? null : unavailableMessage;
 
-            // if it's sandboxOnly, you will not find view requirements in the DB
-            if (!sandboxOnly)
+            // load view requirements
+            Profiles.ORNG.Utilities.DataIO data = new Profiles.ORNG.Utilities.DataIO();
+            using (SqlDataReader dr = data.GetGadgetViewRequirements(appId))
             {
-                Profiles.ORNG.Utilities.DataIO data = new Profiles.ORNG.Utilities.DataIO();
-                using (SqlDataReader dr = data.GetGadgetViewRequirements(appId))
+                while (dr.Read())
                 {
-                    while (dr.Read())
-                    {
-                        viewRequirements.Add(dr[0].ToString().ToLower(), new GadgetViewRequirements(dr[0].ToString().ToLower(),
-                                dr[1].ToString(), dr[2].ToString(), dr[3].ToString(),
-                                dr.IsDBNull(4) ? Int32.MaxValue : dr.GetInt32(4), dr[5].ToString()));
-                    }
+                    viewRequirements.Add(dr[0].ToString().ToLower(), new GadgetViewRequirements(dr[0].ToString().ToLower(),
+                            dr[1].ToString(), dr[2].ToString(), dr[3].ToString(),
+                            dr.IsDBNull(4) ? Int32.MaxValue : dr.GetInt32(4), dr[5].ToString()));
                 }
+            }
+        }
+
+        // this is for sandbox gadgets
+        public GadgetSpec(string openSocialGadgetURL)
+        {
+            this.openSocialGadgetURL = openSocialGadgetURL;
+            this.label = GetFileName();
+            CharEnumerator ce = label.GetEnumerator();
+            while (ce.MoveNext())
+            {
+                appId += (int)ce.Current;
+            }
+            this.enabled = true;
+            this.fromSandbox = true;
+            this.unavailableMessage = null;
+        }
+
+        internal void MergeWithSandboxGadget(GadgetSpec sandboxGadget)
+        {
+            // basically just grab it's URL, but check some things first!
+            if (this.GetFileName() == sandboxGadget.GetFileName() && !this.fromSandbox && sandboxGadget.fromSandbox)
+            {
+                this.openSocialGadgetURL = sandboxGadget.openSocialGadgetURL;
+                this.enabled = true;
+            }
+            else
+            {
+                throw new Exception("This merge is not allowed!");
             }
         }
 
@@ -51,9 +78,20 @@ namespace Profiles.ORNG.Utilities
             return appId;
         }
 
-        public String GetName()
+        public string GetFileName()
         {
-            return name;
+            return GetGadgetFileNameFromURL(GetGadgetURL());
+        }
+
+        private string GetGadgetFileNameFromURL(string url)
+        {
+            string[] urlbits = url.ToString().Split('/');
+            return urlbits[urlbits.Length - 1].Split('.')[0];
+        }
+
+        public String GetLabel()
+        {
+            return label;
         }
 
         public String GetGadgetURL()
@@ -74,6 +112,12 @@ namespace Profiles.ORNG.Utilities
         // based on security and securityGroup settings, do we show this?
         public bool Show(string viewerUri, string ownerUri, String page)
         {
+            // if it is a sandbox gadget with no match in the db, always show it because
+            // this means a developer is trying to test things
+            if (fromSandbox)
+            {
+                return true;
+            }
             page = page.ToLower();
             bool show = false;
 
@@ -138,11 +182,6 @@ namespace Profiles.ORNG.Utilities
         public bool RequiresRegitration()
         {
             return unavailableMessage != null;
-        }
-
-        public bool FromSandbox()
-        {
-            return sandboxOnly;
         }
 
         public bool IsEnabled()

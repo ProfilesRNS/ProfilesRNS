@@ -46,20 +46,20 @@ gadgets.pubsubrouter.init(function (id) {
             // publish to google analytics
             // message should be JSON encoding object with required action and optional label and value 
             // as documented here: http://code.google.com/apis/analytics/docs/tracking/eventTrackerGuide.html
-            // note that event category will be set to the gadget name automatically by this code
+            // note that event category will be set to the gadget label automatically by this code
             // Note: message will be already converted to an object 
             if (message.hasOwnProperty('value')) {
-                _gaq.push(['_trackEvent', my.gadgets[moduleId].name, message.action, message.label, message.value]);
+                _gaq.push(['_trackEvent', my.gadgets[moduleId].label, message.action, message.label, message.value]);
             }
             else if (message.hasOwnProperty('label')) {
-                _gaq.push(['_trackEvent', my.gadgets[moduleId].name, message.action, message.label]);
+                _gaq.push(['_trackEvent', my.gadgets[moduleId].label, message.action, message.label]);
             }
             else {
-                _gaq.push(['_trackEvent', my.gadgets[moduleId].name, message.action]);
+                _gaq.push(['_trackEvent', my.gadgets[moduleId].label, message.action]);
             }
         }
         else if (channel == 'profile') {
-            _gaq.push(['_trackEvent', my.gadgets[moduleId].name, 'go_to_profile', message]);
+            _gaq.push(['_trackEvent', my.gadgets[moduleId].label, 'go_to_profile', message]);
             document.location.href = '/' + location.pathname.split('/')[1] + '/display/n' + message;
         }
         else if (channel == 'JSONPersonIds') {
@@ -181,10 +181,12 @@ my.generateGadgets = function (metadata) {
         // Notes by Eric.  Not sure if I should have to calculate this myself, but I will.
         var height = metadata.gadgets[i].height;
         var width = metadata.gadgets[i].width;
-        var viewPrefs = metadata.gadgets[i].views[my.gadgets[moduleId].view];
-        if (viewPrefs) {
-            height = viewPrefs.preferredHeight || height;
-            width = viewPrefs.preferredWidth || width;
+        if (metadata.gadgets[i].views) {
+            var viewPrefs = metadata.gadgets[i].views[my.gadgets[moduleId].view];
+            if (viewPrefs) {
+                height = viewPrefs.preferredHeight || height;
+                width = viewPrefs.preferredWidth || width;
+            }
         }
 
         var opt_params = { 'specUrl': metadata.gadgets[i].url, 'secureToken': my.gadgets[moduleId].secureToken,

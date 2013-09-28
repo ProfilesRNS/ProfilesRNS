@@ -82,4 +82,6 @@ this website.
         </td>
     </tr>
 </table>
-</div>
+<!-- for testing -->
+<asp:Literal runat="server" ID="litGadget" Visible="false"/>
+

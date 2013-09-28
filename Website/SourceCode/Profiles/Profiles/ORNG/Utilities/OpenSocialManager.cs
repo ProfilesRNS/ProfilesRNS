@@ -16,10 +16,14 @@ namespace Profiles.ORNG.Utilities
 {
     public class OpenSocialManager
     {
-        public static string OPENSOCIAL_ONTOLOGY_PREFIX = "http://orng.info/ontology/orng#";
-        public static string OPENSOCIAL_DEBUG = "OPENSOCIAL_DEBUG";
-        public static string OPENSOCIAL_NOCACHE = "OPENSOCIAL_NOCACHE";
-        public static string OPENSOCIAL_GADGETS = "OPENSOCIAL_GADGETS";
+        public static string ORNG_ONTOLOGY_PREFIX = "http://orng.info/ontology/orng#";
+        public static string ORNG_DEBUG = "ORNG_DEBUG";
+        public static string ORNG_NOCACHE = "ORNG_NOCACHE";
+        public static string ORNG_GADGETS = "ORNG_GADGETS";
+
+        // for controls we need to keep track of
+        public static string ORNG_CONTAINER_CONTROL_ID = "cntlORNGContainer";
+        public static string ORNG_GADGET_CONTROL_ID = "cntlORNGGadgets";
 
         // Visibility Values.  TODO Should be an Enum
         public static string PUBLIC = "Public";
@@ -29,10 +33,8 @@ namespace Profiles.ORNG.Utilities
         public static string REGISTRY_DEFINED = "RegistryDefined";
         public static string NOBODY = "Nobody";
 
-        private static string OPENSOCIAL_MANAGER = "OPENSOCIAL_MANAGER";
-        private static string OPENSOCIAL_PAGE_REQUESTS = "OPENSOCIAL_PAGE_REQUESTS";
-
-        public static string GADGET_SPEC_KEY = "ORNG.GADGET_SPEC_KEY";
+        private static string ORNG_MANAGER = "ORNG_MANAGER";
+        public static string ORNG_GADGET_SPEC_KEY = "ORNG_GADGET_SPEC_KEY";
 
         #region "LocalVars"
 
@@ -40,12 +42,11 @@ namespace Profiles.ORNG.Utilities
         private Dictionary<string, ORNGCallbackResponder> callbackResponders = new Dictionary<string, ORNGCallbackResponder>();
         private Guid guid;
         private string viewerUri = null;
-        internal string ownerUri = null;
+        private string ownerUri = null;
         internal bool isDebug = false;
         internal bool noCache = false;
         private string pageName;
         private Page page;
-        private static SocketConnectionPool sockets = null;
         private static string shindigURL;
 
         #endregion
@@ -55,46 +56,32 @@ namespace Profiles.ORNG.Utilities
         static OpenSocialManager()
         {
             shindigURL = ConfigurationManager.AppSettings["ORNG.ShindigURL"];
-            if (shindigURL == null)
-                return;
-            string[] tokenService = ConfigurationManager.AppSettings["ORNG.TokenService"].ToString().Trim().Split(':');
-            int min = Convert.ToInt32(ConfigurationManager.AppSettings["ORNG.SocketPoolMin"].ToString());
-            int max = Convert.ToInt32(ConfigurationManager.AppSettings["ORNG.SocketPoolMax"].ToString());
-            int expire = Convert.ToInt32(ConfigurationManager.AppSettings["ORNG.SocketPoolExpire"].ToString());
-            int timeout = Convert.ToInt32(ConfigurationManager.AppSettings["ORNG.SocketReceiveTimeout"].ToString());
+            if (shindigURL != null)
+            {
+                PreparedGadget.Init();
+            }
+        }
 
-            sockets = new SocketConnectionPool(tokenService[0], Int32.Parse(tokenService[1]), min, max, expire, timeout);
+        public static OpenSocialManager GetOpenSocialManager(string ownerUri, Page page)
+        {
+            return GetOpenSocialManager(ownerUri, page, false);
         }
 
         public static OpenSocialManager GetOpenSocialManager(string ownerUri, Page page, bool editMode)
         {
-            return GetOpenSocialManager(ownerUri, page, editMode, false);
-        }
-
-        public static OpenSocialManager GetOpenSocialManager(string ownerUri, Page page, bool editMode, bool loadingAssets)
-        {
             // synchronize?  From the debugger this seems to be single threaded, so synchronization is not needed
-            if (page.Items.Contains(OPENSOCIAL_MANAGER))
+            if (!page.Items.Contains(ORNG_MANAGER))
             {
-                if (loadingAssets)
-                {
-                    int currentCount = (int)page.Items[OPENSOCIAL_PAGE_REQUESTS];
-                    page.Items[OPENSOCIAL_PAGE_REQUESTS] = ++currentCount;
-                }
+                page.Items.Add(ORNG_MANAGER, new OpenSocialManager(ownerUri, page, editMode));
             }
-            else
-            {
-                page.Items.Add(OPENSOCIAL_MANAGER, new OpenSocialManager(ownerUri, page, editMode));
-                page.Items.Add(OPENSOCIAL_PAGE_REQUESTS, loadingAssets ? 1 : 0);
-            }
-            return (OpenSocialManager)page.Items[OPENSOCIAL_MANAGER];
+            return (OpenSocialManager)page.Items[ORNG_MANAGER];
         }
 
         private OpenSocialManager(string ownerUri, Page page, bool editMode)
         {
             this.guid = Guid.NewGuid();
-            this.isDebug = page.Session != null && page.Session[OPENSOCIAL_DEBUG] != null && (bool)page.Session[OPENSOCIAL_DEBUG];
-            this.noCache = page.Session != null && page.Session[OPENSOCIAL_NOCACHE] != null && (bool)page.Session[OPENSOCIAL_NOCACHE];
+            this.isDebug = page.Session != null && page.Session[ORNG_DEBUG] != null && (bool)page.Session[ORNG_DEBUG];
+            this.noCache = page.Session != null && page.Session[ORNG_NOCACHE] != null && (bool)page.Session[ORNG_NOCACHE];
             this.page = page;
             this.pageName = page.AppRelativeVirtualPath.Substring(2).ToLower();
 
@@ -120,32 +107,18 @@ namespace Profiles.ORNG.Utilities
                 {
                     viewerUri = null;
                 }
-
             }
 
             string requestAppId = page.Request.QueryString["appId"];
-
-            DebugLogging.Log("OpenSocialManager GetAllDBGadgets " + !noCache);
-            Dictionary<string, GadgetSpec> allDBGadgets = GetAllDBGadgets(!noCache);
-
-            // if someone used the sandbox to log in, grab those gadgets refreshed from the DB
-            if (page.Session != null && (string)page.Session[OPENSOCIAL_GADGETS] != null)
+            foreach (GadgetSpec gadgetSpec in GetGadgetSpecifications())
             {
-                gadgets = GetSandboxGadgets(allDBGadgets, requestAppId);
-            }
-            else
-            {
-                DebugLogging.Log("OpenSocialManager GetSecurityToken " + !noCache);
-                foreach (GadgetSpec gadgetSpec in allDBGadgets.Values)
+                // only add ones that are visible in this context!
+                if (((requestAppId == null && gadgetSpec.IsEnabled()) || gadgetSpec.GetAppId() == Convert.ToInt32(requestAppId)) && gadgetSpec.Show(viewerUri, ownerUri, GetPageName()))
                 {
-                    // only add ones that are visible in this context!
-                    if (((requestAppId == null && gadgetSpec.IsEnabled()) || gadgetSpec.GetAppId() == Convert.ToInt32(requestAppId)) && gadgetSpec.Show(viewerUri, ownerUri, GetPageName()))
-                    {
-                        String securityToken = SocketSendReceive(viewerUri, ownerUri, gadgetSpec.GetGadgetURL());
-                        gadgets.Add(new PreparedGadget(gadgetSpec, this, securityToken));
-                    }
+                    gadgets.Add(new PreparedGadget(gadgetSpec, this));
                 }
             }
+
             // if we are in edit mode, clear the cache
             if (editMode)
             {
@@ -155,6 +128,48 @@ namespace Profiles.ORNG.Utilities
             // sort the gadgets
             DebugLogging.Log("Visible Gadget Count : " + gadgets.Count);
             gadgets.Sort();
+        }
+
+        public PreparedGadget AddGadget(int appId, string view, string optParams)
+        {
+            // this only returns enabled gadgets, and that's what we want!
+            foreach (GadgetSpec spec in GetGadgetSpecifications())
+            {
+                if (spec.GetAppId() == appId)
+                {
+                    string chromeId = "gadgets-" + gadgets.Count;
+                    PreparedGadget retval = new PreparedGadget(spec, this, view, optParams, chromeId);
+                    gadgets.Add(retval);
+                    gadgets.Sort();
+                    return retval;
+                }
+            }
+            return null;
+        }
+
+        public void RemoveGadget(string label)
+        {
+            // if any visible gadgets depend on pubsub data that isn't present, throw them out
+            PreparedGadget gadgetToRemove = null;
+            foreach (PreparedGadget gadget in gadgets)
+            {
+                if (label.Equals(gadget.GetLabel()))
+                {
+                    gadgetToRemove = gadget;
+                    break;
+                }
+            }
+            gadgets.Remove(gadgetToRemove);
+        }
+
+        internal string GetViewerURI()
+        {
+            return this.viewerUri;
+        }
+
+        internal string GetOwnerURI()
+        {
+            return this.ownerUri;
         }
 
         internal Guid GetGuid()
@@ -168,12 +183,6 @@ namespace Profiles.ORNG.Utilities
             {
                 Framework.Utilities.Cache.AlterDependency(GetNodeID(ownerUri).ToString());
             }
-        }
-
-        private static string GetGadgetFileNameFromURL(string url)
-        {
-            string[] urlbits = url.ToString().Split('/');
-            return urlbits[urlbits.Length - 1].Split('.')[0];
         }
 
         public static Int64 GetNodeID(string uri)
@@ -192,63 +201,33 @@ namespace Profiles.ORNG.Utilities
             return noCache;
         }
 
-        public PreparedGadget AddGadget(int appId, string view, string optParams)
-        {
-            foreach (KeyValuePair<string, GadgetSpec> spec in GetAllDBGadgets(true))
-            {
-                if (spec.Value.GetAppId() == appId)
-                {
-                    string chromeId = "gadgets-" + gadgets.Count;
-                    PreparedGadget retval = new PreparedGadget(spec.Value, this, SocketSendReceive(viewerUri, ownerUri, spec.Value.GetGadgetURL()), view, optParams, chromeId);
-                    gadgets.Add(retval);
-                    return retval;
-                }
-            }
-            return null;
-        }
-
-        public void RemoveGadget(string name)
-        {
-            // if any visible gadgets depend on pubsub data that isn't present, throw them out
-            PreparedGadget gadgetToRemove = null;
-            foreach (PreparedGadget gadget in gadgets)
-            {
-                if (name.Equals(gadget.GetName()))
-                {
-                    gadgetToRemove = gadget;
-                    break;
-                }
-            }
-            gadgets.Remove(gadgetToRemove);
-        }
-
         public string GetPageName()
         {
             return pageName;
-        }
-
-        public string GetIdToUrlMapJavascript()
-        {
-            string retval = "var idToUrlMap = {";
-            foreach (PreparedGadget gadget in gadgets)
-            {
-                //retval += gadget.GetAppId() + ":'" + gadget.GetGadgetURL() + "', ";
-                retval += "'remote_iframe_" + gadget.GetAppId() + "':'" + gadget.GetGadgetURL() + "', ";
-            }
-            return retval.Substring(0, retval.Length - 2) + "};";
         }
 
         public bool IsVisible()
         {
             // always have turned on for Profile/Display.aspx because we want to generate the "profile was viewed" in Javascript (bot proof) 
             // regardless of any gadgets being visible, and we need this to be True for the shindig javascript libraries to load
-            bool retval = shindigURL != null && (GetVisibleGadgets().Count > 0 || GetPageName().Equals("Profile/Display.aspx"));
+            bool retval = shindigURL != null && (GetVisibleGadgets().Count > 0);
             DebugLogging.Log("OpenSocialIsVisible = " + retval);
             return retval;
-
         }
 
-        public List<PreparedGadget> GetVisibleGadgets()
+        public bool HasGadgetsAttachingTo(string chromeId)
+        {
+            foreach (PreparedGadget gadget in gadgets)
+            {
+                if (chromeId.Equals(gadget.GetChromeId()))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private List<PreparedGadget> GetVisibleGadgets()
         {
             return gadgets;
         }
@@ -280,97 +259,52 @@ namespace Profiles.ORNG.Utilities
         }
         #endregion
 
-        #region Socket Communications
-
-        private static string SocketSendReceive(string viewer, string owner, string gadget)
-        {
-            //  These keys need to match what you see in edu.ucsf.profiles.shindig.service.SecureTokenGeneratorService in Shindig
-            string[] tokenService = ConfigurationManager.AppSettings["ORNG.TokenService"].ToString().Trim().Split(':');
-
-            string request = "c=default" + (viewer != null ? "&v=" + HttpUtility.UrlEncode(viewer) : "") +
-                    (owner != null ? "&o=" + HttpUtility.UrlEncode(owner) : "") + "&g=" + HttpUtility.UrlEncode(gadget) + "\r\n";
-            Byte[] bytesSent = Encoding.ASCII.GetBytes(request);
-            Byte[] bytesReceived = new Byte[256];
-
-            // Create a socket connection with the specified server and port.
-            //Socket s = ConnectSocket(tokenService[0], Int32.Parse(tokenService[1]));
-            CustomSocket s = null;
-            string page = "";
-            try
-            {
-                s = sockets.GetSocket();
-
-                if (s == null)
-                    return ("Connection failed");
-
-                // Send request to the server.
-                DebugLogging.Log("Sending Bytes");
-                s.Send(bytesSent, bytesSent.Length, 0);
-
-                // Receive the server home page content.
-                int bytes = 0;
-
-                // The following will block until te page is transmitted.
-                do
-                {
-                    DebugLogging.Log("Receiving Bytes");
-                    bytes = s.Receive(bytesReceived, bytesReceived.Length, 0);
-                    page = page + Encoding.ASCII.GetString(bytesReceived, 0, bytes);
-                    DebugLogging.Log("Socket Page=" + page + "|");
-                }
-                while (page.Length == page.TrimEnd().Length && bytes > 0);
-            }
-            catch (Exception ex)
-            {
-                DebugLogging.Log("Socket Error :" + ex.Message);
-            }
-            finally
-            {
-                sockets.PutSocket(s);
-            }
-
-            return page.TrimEnd();
-        }
-        #endregion
-
         public void LoadAssets()
         {
-            // Only do this once per page, and do it only for the last request!
-            // should synchronize
-            int currentCount = (int)page.Items[OPENSOCIAL_PAGE_REQUESTS];
-            page.Items[OPENSOCIAL_PAGE_REQUESTS] = --currentCount;
-
-            DebugLogging.Log("OpenSocialCurrentCount = " + currentCount);
-            if (!IsVisible() || currentCount > 0)
+            // this is not really necessary, but it doesn't hurt to check 
+            if (!IsVisible() ) 
             {
                 return;
             }
 
-            // trigger the javascript to render gadgets
-            HtmlGenericControl body = (HtmlGenericControl)page.Master.FindControl("bodyMaster");
-            body.Attributes.Add("onload", "my.init();");
+            // this will get called potentially multiple times per page, see if this is the first time
+            if (page.Header.FindControl(ORNG_CONTAINER_CONTROL_ID) == null)
+            {
+                // first one!
+                // trigger the javascript to render gadgets
+                HtmlGenericControl body = (HtmlGenericControl)page.Master.FindControl("bodyMaster");
+                body.Attributes.Add("onload", "my.init();");
 
-            HtmlLink gadgetscss = new HtmlLink();
-            gadgetscss.Href = Root.Domain + "/ORNG/CSS/gadgets.css";
-            gadgetscss.Attributes["rel"] = "stylesheet";
-            gadgetscss.Attributes["type"] = "text/css";
-            gadgetscss.Attributes["media"] = "all";
-            page.Header.Controls.Add(gadgetscss);
+                HtmlLink gadgetscss = new HtmlLink();
+                gadgetscss.Href = Root.Domain + "/ORNG/CSS/gadgets.css";
+                gadgetscss.Attributes["rel"] = "stylesheet";
+                gadgetscss.Attributes["type"] = "text/css";
+                gadgetscss.Attributes["media"] = "all";
+                page.Header.Controls.Add(gadgetscss);
 
-            HtmlGenericControl containerjs = new HtmlGenericControl("script");
-            containerjs.Attributes.Add("type", "text/javascript");
-            containerjs.Attributes.Add("src", GetContainerJavascriptSrc());
-            page.Header.Controls.Add(containerjs);
+                HtmlGenericControl containerjs = new HtmlGenericControl("script");
+                containerjs.ID = ORNG_CONTAINER_CONTROL_ID;
+                containerjs.Attributes.Add("type", "text/javascript");
+                containerjs.Attributes.Add("src", GetContainerJavascriptSrc());
+                page.Header.Controls.Add(containerjs);
 
-            HtmlGenericControl gadgetjs = new HtmlGenericControl("script");
-            gadgetjs.Attributes.Add("type", "text/javascript");
-            gadgetjs.InnerHtml = GetGadgetJavascipt();
-            page.Header.Controls.Add(gadgetjs);
+                HtmlGenericControl gadgetjs = new HtmlGenericControl("script");
+                gadgetjs.ID = ORNG_GADGET_CONTROL_ID;
+                gadgetjs.Attributes.Add("type", "text/javascript");
+                gadgetjs.InnerHtml = GetGadgetJavascipt();
+                page.Header.Controls.Add(gadgetjs);
 
-            HtmlGenericControl shindigjs = new HtmlGenericControl("script");
-            shindigjs.Attributes.Add("type", "text/javascript");
-            shindigjs.Attributes.Add("src", Root.Domain + "/ORNG/JavaScript/orng.js");
-            page.Header.Controls.Add(shindigjs);
+                HtmlGenericControl shindigjs = new HtmlGenericControl("script");
+                shindigjs.Attributes.Add("type", "text/javascript");
+                shindigjs.Attributes.Add("src", Root.Domain + "/ORNG/JavaScript/orng.js");
+                page.Header.Controls.Add(shindigjs);
+            }
+            else
+            {
+                // this will have more gadgets then when called earlier, so we need to rebuilt that script
+                HtmlGenericControl gadgetjs = (HtmlGenericControl)page.Header.FindControl(ORNG_GADGET_CONTROL_ID);
+                gadgetjs.InnerHtml = GetGadgetJavascipt();
+            }
         }
 
         private string GetContainerJavascriptSrc()
@@ -383,9 +317,9 @@ namespace Profiles.ORNG.Utilities
         {
             string gadgetScriptText = Environment.NewLine +
                     "var my = {};" + Environment.NewLine +
-                    "my.gadgetSpec = function(appId, name, url, view, chrome_id, opt_params, secureToken) {" + Environment.NewLine +
+                    "my.gadgetSpec = function(appId, label, url, view, chrome_id, opt_params, secureToken) {" + Environment.NewLine +
                     "this.appId = appId;" + Environment.NewLine +
-                    "this.name = name;" + Environment.NewLine +
+                    "this.label = label;" + Environment.NewLine +
                     "this.url = url;" + Environment.NewLine +
                     "this.view = view || 'default';" + Environment.NewLine +
                     "this.chrome_id = chrome_id;" + Environment.NewLine +
@@ -402,7 +336,7 @@ namespace Profiles.ORNG.Utilities
             {
                 foreach (PreparedGadget gadget in GetVisibleGadgets())
                 {
-                    gadgetScriptText += "new my.gadgetSpec(" + gadget.GetAppId() + ",'" + gadget.GetName() + "','" + gadget.GetGadgetURL() + "','" +
+                    gadgetScriptText += "new my.gadgetSpec(" + gadget.GetAppId() + ",'" + gadget.GetLabel() + "','" + gadget.GetGadgetURL() + "','" +
                         gadget.GetView() + "','" + gadget.GetChromeId() + "'," +
                         gadget.GetOptParams() + ",'" + gadget.GetSecurityToken() + "'), " + Environment.NewLine;
                 }
@@ -417,7 +351,7 @@ namespace Profiles.ORNG.Utilities
         {
             foreach (GadgetSpec spec in GetAllDBGadgets(true).Values)
             {
-                if (propertyURI.Equals(OPENSOCIAL_ONTOLOGY_PREFIX + "has" + GetGadgetFileNameFromURL(spec.GetGadgetURL())))
+                if (propertyURI.Equals(ORNG_ONTOLOGY_PREFIX + "has" + spec.GetFileName()))
                 {
                     return spec;
                 }
@@ -428,7 +362,7 @@ namespace Profiles.ORNG.Utilities
         public static Dictionary<string, GadgetSpec> GetAllDBGadgets(bool useCache)
         {
             // check cache first
-            Dictionary<string, GadgetSpec> dbApps = useCache ? (Dictionary<string, GadgetSpec>)Cache.FetchObject(GADGET_SPEC_KEY) : null;
+            Dictionary<string, GadgetSpec> dbApps = useCache ? (Dictionary<string, GadgetSpec>)Cache.FetchObject(ORNG_GADGET_SPEC_KEY) : null;
             if (dbApps == null)
             {
                 dbApps = new Dictionary<string, GadgetSpec>();
@@ -438,9 +372,8 @@ namespace Profiles.ORNG.Utilities
                     while (dr.Read())
                     {
                         GadgetSpec spec = new GadgetSpec(Convert.ToInt32(dr[0]), dr[1].ToString(), dr[2].ToString(), 
-                            dr[3].ToString(), Convert.ToBoolean(dr[4]), false);
-                        string gadgetFileName = GetGadgetFileNameFromURL(dr[2].ToString());
-                        dbApps.Add(gadgetFileName, spec);
+                            dr[3].ToString(), Convert.ToBoolean(dr[4]));
+                        dbApps.Add(spec.GetFileName(), spec);
                     }
                 }
 
@@ -448,59 +381,53 @@ namespace Profiles.ORNG.Utilities
                 if (useCache)
                 {
                     // set it to not timeout
-                    Cache.Set(GADGET_SPEC_KEY, dbApps, -1, null);
+                    Cache.Set(ORNG_GADGET_SPEC_KEY, dbApps, -1, null);
                 }
             }
 
             return dbApps;
         }
 
-        private List<PreparedGadget>  GetSandboxGadgets(Dictionary<string, GadgetSpec> allDBGadgets, string requestAppId)
+        private List<GadgetSpec> GetGadgetSpecifications()
         {
-            List<PreparedGadget> sandboxGadgets = new List<PreparedGadget>();
-            // Add sandbox gadgets if there are any
-            // Note that this block of code only gets executed after someone logs in with GadgetSandbox.aspx!
-            String openSocialGadgetURLS = (string)page.Session[OPENSOCIAL_GADGETS];
-            String[] urls = openSocialGadgetURLS.Split(Environment.NewLine.ToCharArray());
-            for (int i = 0; i < urls.Length; i++)
+            DebugLogging.Log("OpenSocialManager GetAllDBGadgets " + !noCache);
+            Dictionary<string, GadgetSpec> allDBGadgets = GetAllDBGadgets(!noCache);
+            List<GadgetSpec> gadgetSpecs = new List<GadgetSpec>();
+
+            // if someone used the sandbox to log in, grab those gadgets, and only those gadget.
+            // if a gadget with the same file name is in the DB, merge it in so that we can inherit it's configuruation
+            if (page.Session != null && (string)page.Session[ORNG_GADGETS] != null)
             {
-                String openSocialGadgetURL = urls[i];
-                if (openSocialGadgetURL.Length == 0)
-                    continue;
-                int appId = 0;  // if URL matches one in the DB, use DB provided appId, otherwise generate one
-                string gadgetFileName = GetGadgetFileNameFromURL(openSocialGadgetURL);
-                string name = gadgetFileName;
-                string[] channels = new string[0];
-                bool sandboxOnly = true;
-                // see if we have a gadget with the same file name in the DB, if so use its configuration
-                if (allDBGadgets.ContainsKey(gadgetFileName))
+                // Add sandbox gadgets if there are any
+                // Note that this block of code only gets executed after someone logs in with GadgetSandbox.aspx!
+                String openSocialGadgetURLS = (string)page.Session[ORNG_GADGETS];
+                String[] urls = openSocialGadgetURLS.Split(Environment.NewLine.ToCharArray());
+                for (int i = 0; i < urls.Length; i++)
                 {
-                    appId = allDBGadgets[gadgetFileName].GetAppId();
-                    name = allDBGadgets[gadgetFileName].GetName();
-                    sandboxOnly = false;
-                }
-                else
-                {
-                    CharEnumerator ce = openSocialGadgetURL.GetEnumerator();
-                    while (ce.MoveNext())
+                    String openSocialGadgetURL = urls[i];
+                    if (openSocialGadgetURL.Length == 0)
+                        continue;
+                    GadgetSpec sandboxGadget = new GadgetSpec(openSocialGadgetURL);
+                    // see if we have a gadget with the same file name in the DB, if so use its configuration
+                    GadgetSpec gadget = allDBGadgets[sandboxGadget.GetFileName()];
+                    if (gadget != null)
                     {
-                        appId += (int)ce.Current;
+                        gadget.MergeWithSandboxGadget(sandboxGadget);
+                        gadgetSpecs.Add(gadget);
+                    }
+                    else
+                    {
+                        gadgetSpecs.Add(sandboxGadget);
                     }
                 }
-                // if they asked for a specific one, only let it in
-                if (requestAppId != null && Convert.ToInt32(requestAppId) != appId)
-                {
-                    continue;
-                }
-                GadgetSpec gadgetSpec = new GadgetSpec(appId, name, openSocialGadgetURL, null, true, sandboxOnly);
-                // only add ones that are visible in this context!
-                if (sandboxOnly || gadgetSpec.Show(viewerUri, ownerUri, page.AppRelativeVirtualPath.Substring(2).ToLower()))
-                {
-                    String securityToken = SocketSendReceive(viewerUri, ownerUri, gadgetSpec.GetGadgetURL());
-                    sandboxGadgets.Add(new PreparedGadget(gadgetSpec, this, securityToken));
-                }
             }
-            return sandboxGadgets;
+            else 
+            {
+                // the normal use case
+                // just add in the db gadgets
+                gadgetSpecs.AddRange(allDBGadgets.Values);
+            }
+            return gadgetSpecs;
         }
 
     }

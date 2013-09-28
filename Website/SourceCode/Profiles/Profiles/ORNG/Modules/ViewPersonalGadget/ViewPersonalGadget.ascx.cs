@@ -55,19 +55,19 @@ namespace Profiles.ORNG.Modules.Gadgets
                 XmlNode node = this.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/@rdf:about", base.Namespaces);
                 uri = node != null ? node.Value : null;
             }
-            om = OpenSocialManager.GetOpenSocialManager(uri, Page, false, true);
+            om = OpenSocialManager.GetOpenSocialManager(uri, Page);
             gadget = om.AddGadget(Convert.ToInt32(base.GetModuleParamString("AppId")), base.GetModuleParamString("View"), base.GetModuleParamString("OptParams"));
-            // UCSF OpenSocial items
-            if (om.IsVisible())
-            {
-                om.LoadAssets();
-                litGadget.Text = "<div id='" + gadget.GetChromeId() + "' class='gadgets-gadget-parent'></div>";
-                new Responder(uri, Page);  // for some reason doing this in DrawProfilesModule (remove that???) fails!
-            }
+            new Responder(uri, Page);  // for some reason doing this in DrawProfilesModule (remove that???) fails!
         }
 
         private void DrawProfilesModule()
         {
+            // UCSF OpenSocial items
+            if (gadget != null && om.IsVisible())
+            {
+                litGadget.Text = "<div id='" + gadget.GetChromeId() + "' class='gadgets-gadget-parent'></div>";
+                om.LoadAssets();
+            }
         }
 
         public class Responder : ORNGCallbackResponder

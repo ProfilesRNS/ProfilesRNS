@@ -36,7 +36,7 @@ namespace Profiles.ORNG
         {
             if (Request.RawUrl.ToLower().Contains("clearcache"))
             {
-                Cache.Remove(OpenSocialManager.GADGET_SPEC_KEY);
+                Cache.Remove(OpenSocialManager.ORNG_GADGET_SPEC_KEY);
             }
             masterpage = (Framework.Template)base.Master;
 

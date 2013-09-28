@@ -13,6 +13,15 @@ namespace Profiles.Profile.Modules.CustomViewPersonGeneralInfo {
     public partial class CustomViewPersonGeneralInfo {
         
         /// <summary>
+        /// imgPhoto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgPhoto;
+        
+        /// <summary>
         /// litPersonalInfo control.
         /// </summary>
         /// <remarks>
@@ -22,12 +31,12 @@ namespace Profiles.Profile.Modules.CustomViewPersonGeneralInfo {
         protected global::System.Web.UI.WebControls.Literal litPersonalInfo;
         
         /// <summary>
-        /// imgPhoto control.
+        /// litGadget control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgPhoto;
+        protected global::System.Web.UI.WebControls.Literal litGadget;
     }
 }

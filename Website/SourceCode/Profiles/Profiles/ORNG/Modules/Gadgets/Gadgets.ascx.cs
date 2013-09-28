@@ -32,10 +32,7 @@ namespace Profiles.ORNG.Modules.Gadgets
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (om.IsVisible())
-            {
-                DrawProfilesModule();
-            }
+            DrawProfilesModule();
         }
 
         public Gadgets() { }
@@ -49,13 +46,16 @@ namespace Profiles.ORNG.Modules.Gadgets
                 XmlNode node = this.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/@rdf:about", base.Namespaces);
                 uri = node != null ? node.Value : null;
             }
-            om = OpenSocialManager.GetOpenSocialManager(uri, Page, false, true);
+            om = OpenSocialManager.GetOpenSocialManager(uri, Page);
         }
 
         protected void DrawProfilesModule()
         {
-            om.LoadAssets();
-            litGadget.Text = base.GetModuleParamXml("HTML").InnerXml;
+            if (om.IsVisible())
+            {
+                litGadget.Text = base.GetModuleParamXml("HTML").InnerXml;
+                om.LoadAssets();
+            }
         }
 
     }

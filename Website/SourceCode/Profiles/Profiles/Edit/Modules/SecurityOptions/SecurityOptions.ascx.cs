@@ -44,7 +44,7 @@ namespace Profiles.Edit.Modules.SecurityOptions
         {
             List<SecurityItem> si = new List<SecurityItem>();
 
-            if (this.PredicateURI.StartsWith(Profiles.ORNG.Utilities.OpenSocialManager.OPENSOCIAL_ONTOLOGY_PREFIX))
+            if (this.PredicateURI.StartsWith(Profiles.ORNG.Utilities.OpenSocialManager.ORNG_ONTOLOGY_PREFIX))
             {
                 si.Add(new SecurityItem("Hidden", "Not visible on your profile page", 0));
             }
@@ -122,7 +122,7 @@ namespace Profiles.Edit.Modules.SecurityOptions
         private void UpdateSecuritySetting(string securitygroup)
         {
             // maybe be able to make this more general purpose
-            if (this.PredicateURI.StartsWith(Profiles.ORNG.Utilities.OpenSocialManager.OPENSOCIAL_ONTOLOGY_PREFIX))
+            if (this.PredicateURI.StartsWith(Profiles.ORNG.Utilities.OpenSocialManager.ORNG_ONTOLOGY_PREFIX))
             {
                 Profiles.ORNG.Utilities.DataIO data = new Profiles.ORNG.Utilities.DataIO();
                 if ("0".Equals(securitygroup))

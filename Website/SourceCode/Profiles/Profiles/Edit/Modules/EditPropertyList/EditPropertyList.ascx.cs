@@ -82,7 +82,7 @@ namespace Profiles.Edit.Modules.EditPropertyList
                     }
 
                     // treat ORNG items as "special", because they may not be available and they may be turned off
-                    if (node.SelectSingleNode("@URI").Value.StartsWith(Profiles.ORNG.Utilities.OpenSocialManager.OPENSOCIAL_ONTOLOGY_PREFIX))
+                    if (node.SelectSingleNode("@URI").Value.StartsWith(Profiles.ORNG.Utilities.OpenSocialManager.ORNG_ONTOLOGY_PREFIX))
                     {
                         GadgetSpec spec = OpenSocialManager.GetGadgetByPropertyURI(node.SelectSingleNode("@URI").Value);
                         if (spec != null && spec.RequiresRegitration() && !orngData.IsRegistered(this.Subject, spec.GetAppId()))
@@ -132,7 +132,17 @@ namespace Profiles.Edit.Modules.EditPropertyList
 
             BuildSecurityKey(gli);
 
+            // OpenSocial.  Allows gadget developers to show test gadgets if you have them installed
+            string uri = this.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/@rdf:about", base.Namespaces).Value;
+            OpenSocialManager om = OpenSocialManager.GetOpenSocialManager(uri, Page, true);
+            if (om.IsVisible() && om.HasGadgetsAttachingTo("gadgets-test"))
+            {
+                litGadget.Visible = true;
+                litGadget.Text = "<div id='gadgets-test' class='gadgets-gadget-parent'></div>";
+                om.LoadAssets();
+            }
         }
+
         protected void repPropertyGroups_OnItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             if (e.Item.ItemType == ListItemType.AlternatingItem || e.Item.ItemType == ListItemType.Item)
@@ -179,7 +189,7 @@ namespace Profiles.Edit.Modules.EditPropertyList
 
                 //ddl.Attributes.Add("onchange", "JavaScript:showstatus()");
                 hf.Value = si.ItemURI;
-                if (si.ItemURI.StartsWith(Profiles.ORNG.Utilities.OpenSocialManager.OPENSOCIAL_ONTOLOGY_PREFIX))
+                if (si.ItemURI.StartsWith(Profiles.ORNG.Utilities.OpenSocialManager.ORNG_ONTOLOGY_PREFIX))
                 {
                     ((Control)e.Row.FindControl("imgOrng")).Visible = true ;
                 }
@@ -291,7 +301,7 @@ namespace Profiles.Edit.Modules.EditPropertyList
         private void UpdateSecuritySetting(string securitygroup)
         {
             // maybe be able to make this more general purpose
-            if (this.PredicateURI.StartsWith(Profiles.ORNG.Utilities.OpenSocialManager.OPENSOCIAL_ONTOLOGY_PREFIX))
+            if (this.PredicateURI.StartsWith(Profiles.ORNG.Utilities.OpenSocialManager.ORNG_ONTOLOGY_PREFIX))
             {
                 Profiles.ORNG.Utilities.DataIO data = new Profiles.ORNG.Utilities.DataIO();
                 if ("0".Equals(securitygroup))

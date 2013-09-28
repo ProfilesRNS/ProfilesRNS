@@ -21,7 +21,7 @@ namespace Profiles.ORNG.Utilities
 
         public ORNGCallbackResponder(string uri, Page page, bool editMode, string request)
         {
-            this.om = OpenSocialManager.GetOpenSocialManager(uri, page, editMode, false);
+            this.om = OpenSocialManager.GetOpenSocialManager(uri, page, editMode);
             this.requestToRespondTo = request;
             // Add to Session so that it does not get prematurely garbage collected
             HttpContext.Current.Session[KEY_PREFIX + requestToRespondTo + ":" + om.GetGuid().ToString()] = this;
