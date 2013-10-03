@@ -282,13 +282,13 @@ namespace Profiles.Search.Modules.SearchResults
             {
 
                 totalcount = data.GetTotalSearchConnections(this.SearchData, base.Namespaces);
-                
+
                 if (page < 0)
                 {
                     page = 1;
                 }
 
-         
+
                 totalpages = Math.DivRem(totalcount, Convert.ToInt64(perpage), out totalpageremainder);
 
                 if (totalpageremainder > 0) { totalpages = totalpages + 1; }
@@ -301,13 +301,13 @@ namespace Profiles.Search.Modules.SearchResults
                 if (startrecord < 0)
                     startrecord = 1;
 
-                if(searchrequest.Trim() != string.Empty)
-                searchrequest = data.EncryptRequest(searchrequest);
+                if (searchrequest.Trim() != string.Empty)
+                    searchrequest = data.EncryptRequest(searchrequest);
 
                 List<GenericListItem> g = new List<GenericListItem>();
                 g = data.GetListOfFilters();
 
-                if (otherfilters.IsNullOrEmpty() && base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/vivo:overview/SearchOptions/MatchOptions/SearchFiltersList/SearchFilter[@Property='http://profiles.catalyst.harvard.edu/ontology/prns#hasPersonFilter']", base.Namespaces) !=null)
+                if (otherfilters.IsNullOrEmpty() && base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/vivo:overview/SearchOptions/MatchOptions/SearchFiltersList/SearchFilter[@Property='http://profiles.catalyst.harvard.edu/ontology/prns#hasPersonFilter']", base.Namespaces) != null)
                 {
                     string s = string.Empty;
 
@@ -320,24 +320,29 @@ namespace Profiles.Search.Modules.SearchResults
 
                 switch (searchtype.ToLower())
                 {
-                    case "everything":                       
-                            xmlsearchrequest = data.SearchRequest(searchfor,exactphrase, classgroupuri, classuri, perpage.ToString(), (startrecord - 1).ToString());
+                    case "everything":
+                        xmlsearchrequest = data.SearchRequest(searchfor, exactphrase, classgroupuri, classuri, perpage.ToString(), (startrecord - 1).ToString());
                         break;
 
-                    default:                       
-                            xmlsearchrequest = data.SearchRequest(searchfor, exactphrase, fname, lname, institution, institutionallexcept, department, departmentallexcept,  "http://xmlns.com/foaf/0.1/Person", perpage.ToString(), (startrecord - 1).ToString(), sort, sortdirection, otherfilters, "",ref searchrequest);                    
+                    default:
+                        xmlsearchrequest = data.SearchRequest(searchfor, exactphrase, fname, lname, institution, institutionallexcept, department, departmentallexcept, "http://xmlns.com/foaf/0.1/Person", perpage.ToString(), (startrecord - 1).ToString(), sort, sortdirection, otherfilters, "", ref searchrequest);
                         break;
                 }
 
                 OpenSocialManager om = OpenSocialManager.GetOpenSocialManager(null, Page, false, false);
                 om.RegisterORNGCallbackResponder(OpenSocialManager.JSON_PERSONID_CHANNEL, new Responder(xmlsearchrequest));
 
-                this.SearchData = data.Search(xmlsearchrequest,false);
+                this.SearchData = data.Search(xmlsearchrequest, false);
                 this.SearchRequest = data.EncryptRequest(xmlsearchrequest.OuterXml);
                 base.MasterPage.SearchRequest = this.SearchRequest;
                 base.MasterPage.RDFData = this.SearchData;
                 base.MasterPage.RDFNamespaces = this.Namespaces;
 
+            }
+            catch (BadSearchException se)
+            {
+                litEverythingResults.Text = se.Message;
+                return;
             }
             catch (Exception ex)
             {

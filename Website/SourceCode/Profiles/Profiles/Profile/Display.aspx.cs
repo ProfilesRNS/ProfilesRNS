@@ -29,6 +29,8 @@ namespace Profiles.Profile
     {
         private Profiles.Framework.Template masterpage;
 
+        private static Random random = new Random();
+
         public void Page_Load(object sender, EventArgs e)
         {
             UserHistory uh = new UserHistory();
@@ -88,6 +90,12 @@ namespace Profiles.Profile
                     "       return false;\n" +
                     "   }\n";
                 Page.Header.Controls.Add(trackMailClickJs);
+            }
+            else
+            {
+                // Tell the bots that this is slow moving data, add an exires at some random date up to 30 days out
+                DateTime expires = DateTime.Now.Add( TimeSpan.FromDays( random.NextDouble() * 29 + 1 ));
+                Response.AddHeader("Expires", expires.ToUniversalTime().ToString("r"));
             }
         }
 

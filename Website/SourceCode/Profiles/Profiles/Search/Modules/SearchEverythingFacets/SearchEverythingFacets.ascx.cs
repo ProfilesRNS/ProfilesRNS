@@ -120,10 +120,15 @@ namespace Profiles.Search.Modules.SearchEverythingFacets
                 }
             }
 
-            //Grab the full results so I can get the counts, this comes from the cache cloud.
-            this.SearchResults = data.Search(data.SearchRequest(searchfor,"false", "", "", "0", "100"),false);
-
-
+            try
+            {
+                this.SearchResults = data.Search(data.SearchRequest(searchfor, "false", "", "", "0", "100"), false);
+            }
+            catch (BadSearchException se)
+            {
+                litEverythingPassiveResults.Text = se.Message;
+                return;
+            }
 
             Int64 total = 0;
 
@@ -143,14 +148,6 @@ namespace Profiles.Search.Modules.SearchEverythingFacets
 
             XslCompiledTransform xslt = new XslCompiledTransform();
             litEverythingPassiveResults.Text = XslHelper.TransformInMemory(Server.MapPath("~/Search/Modules/SearchEverythingFacets/SearchEverythingFacets.xslt"), args, this.SearchResults.OuterXml);
-
-
-
-
-
-
-
-
 
         }
         private XmlNamespaceManager Namespaces { get; set; }
