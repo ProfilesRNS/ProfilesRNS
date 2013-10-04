@@ -85,44 +85,39 @@ namespace Profiles.ORNG.Utilities
             }
         }
 
-        public bool HasPersonalGadget(string uri, int appId)
+        public void AddPersonalGadget(long Subject, string propertyURI)
         {
-            SqlParameter[] param = new SqlParameter[2];
-
-            param[0] = new SqlParameter("@uri", uri);
-            param[1] = new SqlParameter("@appId", appId);
-
-            using (SqlDataReader dbreader = GetSQLDataReader(GetDBCommand("", "[ORNG.].[ReadRegistry]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param)))
+            GadgetSpec spec = OpenSocialManager.GetGadgetByPropertyURI(propertyURI);
+            if (spec != null)
             {
-                if (dbreader.Read())
-                    return "Public".Equals(dbreader[0].ToString());
+                AddPersonalGadget(Subject, spec.GetAppId());
             }
-            return false;
-        }
-
-        public bool HasPersonalGadget(long Subject, int appId)
-        {
-            SqlParameter[] param = new SqlParameter[2];
-
-            param[0] = new SqlParameter("@Subject", Subject);
-            param[1] = new SqlParameter("@appId", appId);
-
-            using (SqlDataReader dbreader = GetSQLDataReader(GetDBCommand("", "[ORNG.].[ReadRegistry]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param)))
-            {
-                if (dbreader.Read())
-                    return "Public".Equals(dbreader[0].ToString());
-            }
-            return false;
         }
 
         public void AddPersonalGadget(string uri, int appId)
         {
-            AddRemovePersonalGadget(uri, appId, true);
+            SqlParameter[] param = new SqlParameter[2];
+
+            param[0] = new SqlParameter("@SubjectURI", uri);
+            param[1] = new SqlParameter("@appId", appId);
+
+            using (SqlCommand comm = GetDBCommand("", "[ORNG.].[AddAppToPerson]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param))
+            {
+                ExecuteSQLDataCommand(comm);
+            }
         }
 
-        public void RemovePersonalGadget(string uri, int appId)
+        public void AddPersonalGadget(long Subject, int appId)
         {
-            AddRemovePersonalGadget(uri, appId, false);
+            SqlParameter[] param = new SqlParameter[2];
+
+            param[0] = new SqlParameter("@SubjectID", Subject);
+            param[1] = new SqlParameter("@appId", appId);
+
+            using (SqlCommand comm = GetDBCommand("", "[ORNG.].[AddAppToPerson]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param))
+            {
+                ExecuteSQLDataCommand(comm);
+            }
         }
 
         public void RemovePersonalGadget(long Subject, string propertyURI)
@@ -130,55 +125,35 @@ namespace Profiles.ORNG.Utilities
             GadgetSpec spec = OpenSocialManager.GetGadgetByPropertyURI(propertyURI);
             if (spec != null)
             {
-                AddRemovePersonalGadget(Subject, spec.GetAppId(), false);
+                RemovePersonalGadget(Subject, spec.GetAppId());
             }
         }
 
-        public void AddPersonalGadget(long Subject, string propertyURI)
+        public void RemovePersonalGadget(string uri, int appId)
         {
-            GadgetSpec spec = OpenSocialManager.GetGadgetByPropertyURI(propertyURI);
-            if (spec != null)
+            SqlParameter[] param = new SqlParameter[2];
+
+            param[0] = new SqlParameter("@SubjectURI", uri);
+            param[1] = new SqlParameter("@appId", appId);
+
+            using (SqlCommand comm = GetDBCommand("", "[ORNG.].[RemoveAppFromPerson]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param))
             {
-                AddRemovePersonalGadget(Subject, spec.GetAppId(), true);
+                ExecuteSQLDataCommand(comm);
             }
-        }
-
-        public void AddPersonalGadget(long Subject, int appId)
-        {
-            AddRemovePersonalGadget(Subject, appId, true);
         }
 
         public void RemovePersonalGadget(long Subject, int appId)
         {
-            AddRemovePersonalGadget(Subject, appId, false);
-        }
+            SqlParameter[] param = new SqlParameter[2];
 
-        private void AddRemovePersonalGadget(string uri, int appId, bool add)
-        {
-            SqlParameter[] param = new SqlParameter[3];
-
-            param[0] = new SqlParameter("@uri", uri);
+            param[0] = new SqlParameter("@SubjectID", Subject);
             param[1] = new SqlParameter("@appId", appId);
-            param[2] = new SqlParameter("@visibility", add ? "Public" : "Nobody");
 
-            using (SqlCommand comm = GetDBCommand("", "[ORNG.].[RegisterAppPerson]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param))
+            using (SqlCommand comm = GetDBCommand("", "[ORNG.].[RemoveAppFromPerson]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param))
             {
                 ExecuteSQLDataCommand(comm);
             }
         }
 
-        private void AddRemovePersonalGadget(long Subject, int appId, bool add)
-        {
-            SqlParameter[] param = new SqlParameter[3];
-
-            param[0] = new SqlParameter("@Subject", Subject);
-            param[1] = new SqlParameter("@appId", appId);
-            param[2] = new SqlParameter("@visibility", add ? "Public" : "Nobody");
-
-            using (SqlCommand comm = GetDBCommand("", "[ORNG.].[RegisterAppPerson]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param))
-            {
-                ExecuteSQLDataCommand(comm);
-            }
-        }
     }
 }

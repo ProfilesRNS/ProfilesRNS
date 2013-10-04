@@ -72,14 +72,10 @@ namespace Profiles.Profile.Modules.ProfileImage
                     height = Convert.ToInt32(context.Request.QueryString["Height"]);
                 }
 
-                byte[] image = null;
                 // we know that it is OK to cache this
-                if (thumbnail)
-                {
-                    image = (byte[])Framework.Utilities.Cache.FetchObject(IMAGE_CACHE_PREFIX + nodeid);
-                }
+                byte[] rawimage = (byte[])Framework.Utilities.Cache.FetchObject(IMAGE_CACHE_PREFIX + nodeid);
 
-                if (image == null)
+                if (rawimage == null)
                 {
                     // stuff below this and if statement is what makes it slow
                     Framework.Utilities.RDFTriple request = new Profiles.Framework.Utilities.RDFTriple(nodeid);
@@ -93,22 +89,22 @@ namespace Profiles.Profile.Modules.ProfileImage
 
                     if (person.SelectSingleNode("rdf:RDF/rdf:Description[1]/prns:mainImage/@rdf:resource", namespaces) != null)
                     {
-                        image = data.GetUserPhotoList(nodeid);
-                        if (thumbnail && image != null)
+                        rawimage = data.GetUserPhotoList(nodeid);
+                        if (rawimage != null)
                         {
-                            Framework.Utilities.Cache.Set(IMAGE_CACHE_PREFIX + nodeid, image);
+                            Framework.Utilities.Cache.Set(IMAGE_CACHE_PREFIX + nodeid, rawimage, nodeid, request.Session.SessionID);
                         }
                     }
                     else if (thumbnail)
                     {
-                        image = silhouetteImage;
+                        rawimage = silhouetteImage;
                     }
                 }
 
-                if (image != null)
+                if (rawimage != null)
                 {
                     Edit.Utilities.DataIO resize = new Profiles.Edit.Utilities.DataIO();
-                    image = resize.ResizeImageFile(image, width, height);
+                    byte[] image = resize.ResizeImageFile(rawimage, width, height);
                     Stream stream = new System.IO.MemoryStream(image);
 
                     // Set up the response settings

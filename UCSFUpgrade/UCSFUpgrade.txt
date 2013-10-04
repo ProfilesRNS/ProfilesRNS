@@ -44,4 +44,9 @@ See if this is needed;
 update   [Ontology.].[ClassProperty] set MaxCardinality = 0 where _PropertyLabel = 'Overview'
 and Class = 'http://xmlns.com/foaf/0.1/Person';
 
+Think about 
+[RDF.].[DeleteTriples] which we created
 
+Add gadget to filter as part of sp to add gadget to ontology
+http://profiles.ucsf.edu/profile/Modules/CustomViewPersonGeneralInfo/PhotoHandler.ashx?person=4704376&Thumbnail=True&Width=45
+http://stage-profiles.ucsf.edu/profiles200/profile/Modules/CustomViewPersonGeneralInfo/PhotoHandler.ashx?NodeID=368698&Thumbnail=True&Width=20

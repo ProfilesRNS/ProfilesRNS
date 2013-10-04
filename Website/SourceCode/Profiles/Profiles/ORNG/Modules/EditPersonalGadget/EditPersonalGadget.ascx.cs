@@ -85,8 +85,8 @@ namespace Profiles.ORNG.Modules.Gadgets
 
             securityOptions.Subject = this.SubjectID;
             securityOptions.PredicateURI = this.PredicateURI;
-            securityOptions.PrivacyCode = data.HasPersonalGadget(uri, appId) ?
-                Convert.ToInt32(this.PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@ViewSecurityGroup").Value) : 0;
+            securityOptions.PrivacyCode = "0".Equals(this.PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/@NumberOfConnections").Value) ? 
+                0 : Convert.ToInt32(this.PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@ViewSecurityGroup").Value);
             securityOptions.SecurityGroups = new XmlDataDocument();
             securityOptions.SecurityGroups.LoadXml(base.PresentationXML.DocumentElement.LastChild.OuterXml);
 

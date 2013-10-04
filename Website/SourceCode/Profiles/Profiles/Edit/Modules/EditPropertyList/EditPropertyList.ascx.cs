@@ -95,7 +95,7 @@ namespace Profiles.Edit.Modules.EditPropertyList
                                 node.SelectSingleNode("@ObjectType").Value, canedit));
                             continue;
                         }
-                        else if (spec != null && !orngData.HasPersonalGadget(this.Subject, spec.GetAppId())) 
+                        else if (spec != null && "0".Equals(node.SelectSingleNode("@NumberOfConnections").Value)) 
                         {
                             singlesi.Add(new SecurityItem(node.ParentNode.SelectSingleNode("@Label").Value, node.SelectSingleNode("@Label").Value,
                                 node.SelectSingleNode("@URI").Value,
