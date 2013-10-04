@@ -71,8 +71,11 @@ namespace Profiles.Profile.Utilities
                         if (request.Offset != null && request.Offset != string.Empty)
                             dbcommand.Parameters.Add(new SqlParameter("@offset", request.Offset));
 
+                        // from UCSF.  Having no offset or limit can kill the server with certain calls, so don't ever allow that
                         if (request.Limit != null && request.Limit != string.Empty)
                             dbcommand.Parameters.Add(new SqlParameter("@limit", request.Limit));
+                        else if (request.Offset == null || request.Offset == string.Empty)
+                            dbcommand.Parameters.Add(new SqlParameter("@limit", "100"));
 
                         dbcommand.Parameters.Add(new SqlParameter("@showDetails", request.ShowDetails));
                         dbcommand.Parameters.Add(new SqlParameter("@expand", request.Expand));
