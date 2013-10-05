@@ -80,7 +80,7 @@ People working in the same department
   <li><a href="#enhance">How do I edit and enhance my individual profile?</a></li>
   <li><a href="#login">How do I login to UCSF Profiles?</a></li>
   <li><a href="#why">Why should I login to UCSF Profiles?</a></li>
-  <li><a href="#data">What are the sources of data for UCSF Profiles?</a></li>
+  <li><a href="#datasources">What are the sources of data for UCSF Profiles?</a></li>
   <li><a href="#network">What are the lists of networks on the right side of my profile?</a></li>
   <li><a href="#missing">Why are there missing or incorrect publications in my profile? How can I correct this?</a></li>
   <li><a href="#update">How frequently are the data in UCSF Profiles updated?</a></li>
@@ -136,7 +136,7 @@ People working in the same department
   <li>In addition, you can edit your profile and manage your designated proxies only if you're logged in.</li>
 </ul>
 
-<h3 id="data">What are the sources of data for UCSF Profiles?</h3> 
+<h3 id="datasources">What are the sources of data for UCSF Profiles?</h3> 
 <ul>
   <li>All data in automatically generated profiles are currently available on other public websites, specifically the UCSF Directory, PubMed, and NIH RePORTER. 
   <ul>

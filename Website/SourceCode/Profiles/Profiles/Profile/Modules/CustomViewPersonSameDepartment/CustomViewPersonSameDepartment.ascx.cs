@@ -52,7 +52,7 @@ namespace Profiles.Profile.Modules.CustomViewPersonSameDepartment
 
                 foreach (XmlNode n in xml.SelectNodes("Network/Connection"))
                 {
-                    items.Add(new ListItem(n.InnerText, n.SelectSingleNode("@URI").Value));
+                    items.Add(new ListItem(n.InnerText, n.SelectSingleNode("@URI").Value, n.SelectSingleNode("@NodeID").Value));
 
                 }
 
@@ -77,7 +77,9 @@ namespace Profiles.Profile.Modules.CustomViewPersonSameDepartment
 
             Literal litListItem = (Literal)e.Item.FindControl("litListItem");
             if (litListItem != null)
-                litListItem.Text = "<li><a href='" + x.URI + "'>" + x.Name + "</a></li>";
+                litListItem.Text = "<li><a href='" + x.URI + "'>" + "<img src='" + Root.Domain + 
+                    "/profile/Modules/CustomViewPersonGeneralInfo/PhotoHandler.ashx?NodeID=" + x.NodeID + "&Thumbnail=True&Width=15'></img>" + 
+                    x.Name + "</a></li>";
 
             if (e.Item.ItemType == ListItemType.Footer)
             {
@@ -93,13 +95,15 @@ namespace Profiles.Profile.Modules.CustomViewPersonSameDepartment
 
         public class ListItem
         {
-            public ListItem(string name, string uri)
+            public ListItem(string name, string uri, string nodeId)
             {
                 Name = name;
                 URI = uri;
+                NodeID = nodeId;
             }
             public string Name { get; set; }
             public string URI { get; set; }
+            public string NodeID { get; set; }
         }
 
 

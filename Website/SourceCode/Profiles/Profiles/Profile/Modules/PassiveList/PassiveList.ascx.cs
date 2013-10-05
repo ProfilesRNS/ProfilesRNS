@@ -88,7 +88,8 @@ namespace Profiles.Profile.Modules.PassiveList
                             {
                                 itemurl = CustomParse.Parse(base.GetModuleParamString("ItemURL"), networknode, this.Namespaces),
                                 itemurltext = CustomParse.Parse(base.GetModuleParamString("ItemURLText"), networknode, this.Namespaces),
-                                item = CustomParse.Parse(base.GetModuleParamString("ItemText"), networknode, this.Namespaces)
+                                item = CustomParse.Parse(base.GetModuleParamString("ItemText"), networknode, this.Namespaces),
+                                personid = CustomParse.Parse("{{{rdf:Description/prns:personId}}}", networknode, this.Namespaces)
                             };
 
                 foreach (var i in items)
@@ -103,6 +104,11 @@ namespace Profiles.Profile.Modules.PassiveList
                         documentdata.Append("\"");
                         documentdata.Append(" ItemURLText=\"" + i.itemurltext);
                         documentdata.Append("\"");
+                        if (i.personid != string.Empty)
+                        {
+                            documentdata.Append(" PersonID=\"" + i.personid);
+                            documentdata.Append("\"");
+                        }
                     }
                     documentdata.Append(">");
                     documentdata.Append(i.item);

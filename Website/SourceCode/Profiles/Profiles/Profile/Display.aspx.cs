@@ -29,6 +29,8 @@ namespace Profiles.Profile
     {
         private Profiles.Framework.Template masterpage;
 
+        private static Random random = new Random();
+
         public void Page_Load(object sender, EventArgs e)
         {
             UserHistory uh = new UserHistory();
@@ -79,6 +81,12 @@ namespace Profiles.Profile
                 Canonical.Href = Request.Url.AbsoluteUri.IndexOf('?') == -1 ? Request.Url.AbsoluteUri.ToLower() : Request.Url.AbsoluteUri.ToLower().Substring(0, Request.Url.AbsoluteUri.IndexOf('?'));
                 Canonical.Attributes["rel"] = "canonical";
                 Page.Header.Controls.Add(Canonical);
+            }
+            else
+            {
+                // Tell the bots that this is slow moving data, add an exires at some random date up to 30 days out
+                DateTime expires = DateTime.Now.Add( TimeSpan.FromDays( random.NextDouble() * 29 + 1 ));
+                Response.AddHeader("Expires", expires.ToUniversalTime().ToString("r"));
             }
         }
 

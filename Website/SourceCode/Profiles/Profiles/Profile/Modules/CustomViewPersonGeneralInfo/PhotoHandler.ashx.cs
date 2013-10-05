@@ -72,10 +72,9 @@ namespace Profiles.Profile.Modules.ProfileImage
                     height = Convert.ToInt32(context.Request.QueryString["Height"]);
                 }
 
-                // we know that it is OK to cache this
-                byte[] rawimage = (byte[])Framework.Utilities.Cache.FetchObject(IMAGE_CACHE_PREFIX + nodeid);
+                byte[] image = (byte[])Framework.Utilities.Cache.FetchObject(GetCacheKey(nodeid, width, height));
 
-                if (rawimage == null)
+                if (image == null)
                 {
                     // stuff below this and if statement is what makes it slow
                     Framework.Utilities.RDFTriple request = new Profiles.Framework.Utilities.RDFTriple(nodeid);
@@ -87,24 +86,26 @@ namespace Profiles.Profile.Modules.ProfileImage
                     person = data.GetRDFData(request);
                     XmlNamespaceManager namespaces = xmlnamespace.LoadNamespaces(person);
 
+                    byte[] rawimage = null;
                     if (person.SelectSingleNode("rdf:RDF/rdf:Description[1]/prns:mainImage/@rdf:resource", namespaces) != null)
                     {
                         rawimage = data.GetUserPhotoList(nodeid);
-                        if (rawimage != null)
-                        {
-                            Framework.Utilities.Cache.Set(IMAGE_CACHE_PREFIX + nodeid, rawimage, nodeid, request.Session.SessionID);
-                        }
                     }
                     else if (thumbnail)
                     {
                         rawimage = silhouetteImage;
                     }
+                    if (rawimage != null)
+                    {
+                        Edit.Utilities.DataIO resize = new Profiles.Edit.Utilities.DataIO();
+                        image = resize.ResizeImageFile(rawimage, width, height);
+                        // we are caching silhouettes many times, but that is OK
+                        Framework.Utilities.Cache.Set(GetCacheKey(nodeid, width, height), image, nodeid, request.Session.SessionID);
+                    }
                 }
 
-                if (rawimage != null)
+                if (image != null)
                 {
-                    Edit.Utilities.DataIO resize = new Profiles.Edit.Utilities.DataIO();
-                    byte[] image = resize.ResizeImageFile(rawimage, width, height);
                     Stream stream = new System.IO.MemoryStream(image);
 
                     // Set up the response settings
@@ -128,6 +129,11 @@ namespace Profiles.Profile.Modules.ProfileImage
                 }
 
             }
+        }
+
+        private static string GetCacheKey(Int64 nodeid, int width, int height)
+        {
+            return IMAGE_CACHE_PREFIX + nodeid + "_" + width + "_" + height;
         }
 
         //this is required for using the IHttpHandler interface. 

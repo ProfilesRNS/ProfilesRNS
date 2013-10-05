@@ -333,11 +333,17 @@ namespace Profiles.Search
                     break;
             }
 
-
-            if (nodeuri != string.Empty && nodeid != string.Empty)
-                masterpage.RDFData = data.WhySearch(xml, nodeuri, Convert.ToInt64(nodeid));
-            else
-                masterpage.RDFData = data.Search(xml, false);
+            try
+            {
+                if (nodeuri != string.Empty && nodeid != string.Empty)
+                    masterpage.RDFData = data.WhySearch(xml, nodeuri, Convert.ToInt64(nodeid));
+                else
+                    masterpage.RDFData = data.Search(xml, false);
+            }
+            catch (DisallowedSearchException se)
+            {
+                masterpage.RDFData = se.GetDisallowedSearchResults();
+            }
 
             Framework.Utilities.DebugLogging.Log(masterpage.RDFData.OuterXml);
             masterpage.RDFNamespaces = rdfnamespaces.LoadNamespaces(masterpage.RDFData);

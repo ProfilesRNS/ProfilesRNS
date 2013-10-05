@@ -341,6 +341,26 @@ namespace Profiles.Search.Utilities
             string xmlstr = string.Empty;
             XmlDocument xmlrtn = new XmlDocument();
 
+            // reject a search that is too broad or malformed
+            XmlNode classURI = searchoptions.SelectSingleNode("//ClassURI");
+            XmlNode searchString = searchoptions.SelectSingleNode("//SearchString");
+            if (classURI == null && searchString == null)
+            {
+                throw new DisallowedSearchException("Search is too broad", searchoptions);
+            }
+            else if (classURI != null && !classURI.InnerText.StartsWith("http:")) 
+            {
+                throw new DisallowedSearchException("Invalid search type :" + classURI, searchoptions);
+            }
+            else if (classURI == null || !"http://xmlns.com/foaf/0.1/Person".Equals(classURI.InnerText))
+            {
+                // OK to do a wide search for just people, but for anything else bail
+                if (searchString == null || searchString.InnerText.Trim().Length < 2 || (searchString.InnerText.Trim().Length < 4 && searchString.InnerText.IndexOfAny("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray()) == -1))
+                {
+                    throw new DisallowedSearchException("Search is too broad", searchoptions);
+                }
+            }
+
             string cachekey = searchoptions.OuterXml + sessionmanagement.Session().SessionID;
 
             if (Framework.Utilities.Cache.Fetch(cachekey) == null || !useCache)

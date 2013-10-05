@@ -127,10 +127,16 @@ namespace Profiles.Search.Modules.SearchEverythingFacets
             }
             else exactphrase = "false";
 
-            //Grab the full results so I can get the counts, this comes from the cache cloud.
-            this.SearchResults = data.Search(data.SearchRequest(searchfor, exactphrase, "", "", "0", "100"), false);
-
-
+            try 
+            {
+                //Grab the full results so I can get the counts, this comes from the cache cloud.
+                this.SearchResults = data.Search(data.SearchRequest(searchfor, "false", "", "", "0", "100"), false);
+            }
+            catch (DisallowedSearchException se)
+            {
+                litEverythingPassiveResults.Text = se.Message;
+                return;
+            }
 
             Int64 total = 0;
 

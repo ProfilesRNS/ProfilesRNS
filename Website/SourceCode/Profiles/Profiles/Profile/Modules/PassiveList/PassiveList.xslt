@@ -25,6 +25,9 @@ changed display none to block for next div
         <xsl:for-each select="ItemList/Item">
           <li>
             <a href="{@ItemURL}">
+              <xsl:if test ="@PersonID!=''">
+                <img src="{$root}/profile/Modules/CustomViewPersonGeneralInfo/PhotoHandler.ashx?person={@PersonID}&amp;Thumbnail=True&amp;Width=15" />
+              </xsl:if>
               <xsl:value-of select="@ItemURLText"/>
             </a>
             <xsl:value-of select="."/>

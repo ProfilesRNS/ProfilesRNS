@@ -25,11 +25,14 @@ using System.Configuration;
 
 
 using Profiles.Profile.Utilities;
+using System.Web.UI.HtmlControls;
 
 namespace Profiles.Profile
 {
     public partial class Profile : ProfileData
     {
+        static private Random random = new Random();
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -70,6 +73,10 @@ namespace Profiles.Profile
             Response.ContentType = "application/rdf+xml";
             Response.Charset = "charset=UTF-8";
             Response.StatusCode = Convert.ToInt16("200");
+
+            // Tell the bots that this is slow moving data, add an exires at some random date up to 30 days out
+            DateTime expires = DateTime.Now.Add(TimeSpan.FromDays(random.NextDouble() * 29 + 1));
+            Response.AddHeader("Expires", expires.ToUniversalTime().ToString("r"));
 
             Response.Write(base.RDFData.InnerXml);
         }

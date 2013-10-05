@@ -74,6 +74,7 @@ h1 a:hover { color: #457272; text-decoration: none; }
 #new-features a:hover { text-decoration: underline; }
 #new-features a img { vertical-align: top; }
 
+table, tr { border-width: 0; border-spacing: 0; border-color: transparent; } /* so Chrome won't put black lines everywhere */
 #page-container { background-color: #FFF; width: 980px; } 
 .profiles { background-color: #FFF; margin-top: 0; }
 .profiles .profilesPage { padding-top: 15px; }

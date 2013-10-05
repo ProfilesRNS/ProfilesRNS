@@ -1,8 +1,6 @@
 ﻿$(document).ready(function () {
-    $("table").removeAttr("border").removeAttr("rules");
-
-
     // logged in/out subnav
+  if ($('#ctl00_ContentActive_rptActive_ctl01_ctl00_panelMenu') && $('#ctl00_ContentActive_rptActive_ctl01_ctl00_panelMenu').length) {
     $('#ctl00_ContentActive_rptActive_ctl01_ctl00_panelMenu ul').addClass('mainmenu');
     $('#ctl00_ContentActive_rptActive_ctl00_ctl00_panelMenu ul').addClass('mainmenu');
     $(".mainmenu li:contains('RDF')").addClass('rdf').appendTo('.profilesMainColumnRight').hide();
@@ -28,19 +26,11 @@
             $('#editmenu li:first-child').append(' <span>is signed in</span>');
         }
     }
-
-    // get links count
-    $.ajax({
-        type: "GET",
-        url: _rootDomain + "/CustomAPI/v1/Statistics.aspx",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (response) { buildGadgetAds(response.links); },
-        failure: function (response) { buildGadgetAds('2147'); }
-    });
+  }
 
     // navbarsearch
     // move & hide on main search pages
+  if ($('#navbarsearch') && $('#navbarsearch').length) {
     $('#navbarsearch').appendTo('#suckerfishmenu');
     if ($('.nonavbar').length) {
         $('#navbarsearch').remove();
@@ -65,6 +55,20 @@
             $("#searchterm").value = default_value;
         }
     });
+  }
+
+  if(window.location.href.indexOf("coauthors") == -1) {
+    $("table").removeAttr("border").removeAttr("rules");
+
+    // get links count
+    $.ajax({
+        type: "GET",
+        url: _rootDomain + "/CustomAPI/v1/Statistics.aspx",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) { buildGadgetAds(response.links); },
+        failure: function (response) { buildGadgetAds('2147'); }
+    });
 
     // Back to top http://typicalwhiner.com/116/effortless-jquery-floating-back-to-top-script-v2/
     var pxShow = 300; //height on which the button will show  
@@ -86,7 +90,9 @@
         }
         return false;
     });
- });
+
+  }
+});
 
  function buildGadgetAds(linksCount) {
     //Gadget ads  
@@ -138,7 +144,6 @@
     if ($('.mainmenu li').last().text() == 'Sign out') {
         $("#badge").hide();
     }
-
 
 }
 

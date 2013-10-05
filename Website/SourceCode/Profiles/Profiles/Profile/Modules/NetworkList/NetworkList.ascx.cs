@@ -231,7 +231,7 @@ namespace Profiles.Framework.Modules.NetworkList
                             item = base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about= '" + itemxpath + "']/rdfs:label", base.Namespaces).InnerText;
 
                         documentdata.Append(" ItemURLText=\"");
-                        documentdata.Append(item);
+                        documentdata.Append(item.Replace("\"", "'"));
                         documentdata.Append("\"");
                     }
 

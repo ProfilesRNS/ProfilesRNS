@@ -54,9 +54,9 @@
 <script type="text/javascript" src="//s3.amazonaws.com/ki.js/21116/49p.js" async="true"></script>
 
     <div id="divStatus" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 999999; display:none;">
-        <div style="width: 400px; border: solid #666 1px; padding: 5px; position: relative; left: 50%; margin-left: -200px; top: 40%; background-color: #FFFFFF;">
-          <img alt="Loading..." src="<%=GetURLDomain()%>/Edit/Images/loader.gif" />
-        </div>
+         <div class="progress">
+             <span><img alt="Loading..." src="../edit/images/loader.gif" /></span>
+         </div>
     </div>
     
     <asp:ToolkitScriptManager AsyncPostBackTimeout="36000" CombineScripts="false" ID="toolkitScriptMaster"
@@ -175,7 +175,7 @@
 												</div>
 											</div>
 											<div class="profilesPageColumnRightCenter" runat="server" id="divPageColumnRightCenter">
-												<table id="tblTableBody" runat="server" style="border-left: 1px solid #CCC; border-right: 1px solid #CCC;">
+												<table id="tblTableBody" runat="server">
 													<tbody>
 														<tr id="trbody">
 															<td class="profilesMainColumnLeft" runat="server" id="divProfilesMainColumnLeft">
