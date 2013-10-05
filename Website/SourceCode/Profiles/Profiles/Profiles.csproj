@@ -902,7 +902,7 @@
     <Compile Include="Search\Modules\SearchOptions\SearchOptions.ascx.designer.cs">
       <DependentUpon>SearchOptions.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Search\Utilities\BadSearchException.cs" />
+    <Compile Include="Search\Utilities\DisallowedSearchException.cs" />
     <Compile Include="Search\Utilities\CacheWrapper.cs" />
     <Compile Include="Search\Utilities\SearchDropDowns.cs" />
     <Compile Include="SiteMap.aspx.cs">
