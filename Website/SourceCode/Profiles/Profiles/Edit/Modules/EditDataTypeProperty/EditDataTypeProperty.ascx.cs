@@ -168,13 +168,13 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
         protected void GridViewProperty_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             HiddenField hdLabel = (HiddenField)GridViewProperty.Rows[e.RowIndex].FindControl("hdLabel");
-            TextBox txtLabel = (TextBox)GridViewProperty.Rows[e.RowIndex].FindControl("txtLabel");
+            TextBox txtLabelGrid = (TextBox)GridViewProperty.Rows[e.RowIndex].FindControl("txtLabelGrid");
 
             Connects.Profiles.Service.ServiceImplementation.DebugLogging.Log("EditDataTypeProperty: Attempting to update: " + hdLabel.Value);
-            Connects.Profiles.Service.ServiceImplementation.DebugLogging.Log("EditDataTypeProperty: Attempting to update2: " + txtLabel.Text.Trim());
+            Connects.Profiles.Service.ServiceImplementation.DebugLogging.Log("EditDataTypeProperty: Attempting to update2: " + txtLabelGrid.Text.Trim());
             Connects.Profiles.Service.ServiceImplementation.DebugLogging.Log("EditDataTypeProperty: Attempting to update3: " + this.SubjectID + "," + this.PredicateID + "," + data.GetStoreNode(hdLabel.Value));
 
-            data.UpdateLiteral(this.SubjectID, this.PredicateID, data.GetStoreNode(hdLabel.Value), data.GetStoreNode(txtLabel.Text.Trim()), this.PropertyListXML);
+            data.UpdateLiteral(this.SubjectID, this.PredicateID, data.GetStoreNode(hdLabel.Value), data.GetStoreNode(txtLabelGrid.Text.Trim()), this.PropertyListXML);
             GridViewProperty.EditIndex = -1;
             this.FillPropertyGrid(true);
             upnlEditSection.Update();

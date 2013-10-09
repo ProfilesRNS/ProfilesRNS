@@ -125,7 +125,7 @@ namespace Profiles.Edit.Modules.EditPropertyList
 
                 gli.Add(new GenericListItem(securityitem.SelectSingleNode("@Label").Value, securityitem.SelectSingleNode("@Description").Value));
             }
-            gli.Add(new GenericListItem("Unavailable", "This feaure depends on automatically collected data that we do not have for your Profile."));
+            gli.Add(new GenericListItem("Unavailable", "This feature depends on automatically collected data that we do not have for your Profile."));
 
             repPropertyGroups.DataSource = si;
             repPropertyGroups.DataBind();

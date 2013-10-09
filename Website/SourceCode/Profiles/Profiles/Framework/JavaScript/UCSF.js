@@ -1,8 +1,7 @@
 ﻿$(document).ready(function () {
     // logged in/out subnav
-  if ($('#ctl00_ContentActive_rptActive_ctl01_ctl00_panelMenu') && $('#ctl00_ContentActive_rptActive_ctl01_ctl00_panelMenu').length) {
-    $('#ctl00_ContentActive_rptActive_ctl01_ctl00_panelMenu ul').addClass('mainmenu');
-    $('#ctl00_ContentActive_rptActive_ctl00_ctl00_panelMenu ul').addClass('mainmenu');
+  if ($('#defaultmenu') && $('#defaultmenu').length) {
+    $('#defaultmenu ul').addClass('mainmenu');
     $(".mainmenu li:contains('RDF')").addClass('rdf').appendTo('.profilesMainColumnRight').hide();
     if ($('.mainmenu li').last().text() == 'Login to Profiles') {
         var login = $('.mainmenu li:last-child a').attr('href');

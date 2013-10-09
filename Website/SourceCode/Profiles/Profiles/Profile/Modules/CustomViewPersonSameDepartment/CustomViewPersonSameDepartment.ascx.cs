@@ -77,8 +77,8 @@ namespace Profiles.Profile.Modules.CustomViewPersonSameDepartment
 
             Literal litListItem = (Literal)e.Item.FindControl("litListItem");
             if (litListItem != null)
-                litListItem.Text = "<li><a href='" + x.URI + "'>" + "<img src='" + Root.Domain + 
-                    "/profile/Modules/CustomViewPersonGeneralInfo/PhotoHandler.ashx?NodeID=" + x.NodeID + "&Thumbnail=True&Width=15'></img>" + 
+                litListItem.Text = "<li><a href='" + x.URI + "'>" + "<div class='thumbnail'><img src='" + Root.Domain + 
+                    "/profile/Modules/CustomViewPersonGeneralInfo/PhotoHandler.ashx?NodeID=" + x.NodeID + "&Thumbnail=True&Width=15'></img></div>" + 
                     x.Name + "</a></li>";
 
             if (e.Item.ItemType == ListItemType.Footer)

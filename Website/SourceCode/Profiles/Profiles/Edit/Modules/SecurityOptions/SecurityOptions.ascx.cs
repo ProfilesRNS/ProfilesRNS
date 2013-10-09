@@ -113,7 +113,7 @@ namespace Profiles.Edit.Modules.SecurityOptions
 
             //Set the new selected row
             RadioButton rb = (RadioButton)sender;
-            GridViewRow row = (GridViewRow)rb.NamingContainer;
+            GridViewRow row = (GridViewRow)rb.NamingContainer;  
             ((RadioButton)row.FindControl("rdoSecurityOption")).Checked = true;
             lbSecurityOptions.Text = "Edit Visibility (" + row.Cells[1].Text + ")";
             UpdateSecuritySetting(((HiddenField)row.Cells[0].FindControl("hdnPrivacyCode")).Value);

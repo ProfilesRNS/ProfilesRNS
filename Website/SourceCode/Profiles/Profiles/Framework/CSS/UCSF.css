@@ -11,11 +11,7 @@
 {
 	font-family: arial, helvetica, sans-serif;
 }
-
-/*
-form#aspnetForm { border: 1px solid red; }
-#container, #container div { border: none; }
-*/
+img { border: none; }
 
 #header-ucsf { background-color: #666; font-family: Arial,Helvetica,sans serif; }
 #header-ucsf img { border: none; }
@@ -301,7 +297,7 @@ ul#editmenu li { list-style-type: none; display: inline-block; padding: 0 13px 0
    width: auto\9; float: left\9; }
 ul#editmenu li img { width: 20px; height: auto; margin-top: -10%; }
 ul#editmenu li span { color: #666; }
-#menuthumb { float: left; height: 20px; width: 20px; overflow: hidden; margin-right: 4px; }
+#menuthumb { float: left; height: 20px; width: 20px; overflow: hidden; margin-right: 4px; background-color: #666; }
 #ctl00_trbody .rdf { list-style-type: none; margin: 20px 10px; width: 190px; }
 
 #navbarsearch { float: right; width: 400px; text-align: right; padding-right: 20px; margin: 0;
@@ -330,6 +326,10 @@ h2.badge-top  { padding: 12px 0 14px 4px; margin: -68px 0 0 60px; width: 70px; f
 .counter { background-color: #849696; color: #FFF; padding: 1px 2px 1px 5px; margin-right: 4px;
   letter-spacing: 3px; font-family: 'Courier New', Courier, monospace; font-weight:bold; }
 
+.thumbnail { display: inline-block; height: 15px; width: 15px; overflow: hidden; 
+  padding: 0 0 0 16px; margin-right: -6px;  }
+.thumbnail { padding: 0 0 0 1px\9; margin-right: 5px\9; }
+.thumbnail img { display: table-cell; vertical-align: bottom; }
 
 /* Back to top */
 #backtotop {  
