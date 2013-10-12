@@ -50,3 +50,12 @@ Think about
 Add gadget to filter as part of sp to add gadget to ontology
 http://profiles.ucsf.edu/profile/Modules/CustomViewPersonGeneralInfo/PhotoHandler.ashx?person=4704376&Thumbnail=True&Width=45
 http://stage-profiles.ucsf.edu/profiles200/profile/Modules/CustomViewPersonGeneralInfo/PhotoHandler.ashx?NodeID=368698&Thumbnail=True&Width=20
+
+Be very careful in the UCSF to UCSF. schema change. Be sureto hunt down ALL db dependencies, including the one to geneate people IDs
+
+Create ORNG.UCSF schema as well
+
+Install new grant loader
+Update Ontology..DataMap to point to [ORGN.UCSF].vwGrant
+
+GetNewHR job has changed, as has the globalheatlh and other gadget ones

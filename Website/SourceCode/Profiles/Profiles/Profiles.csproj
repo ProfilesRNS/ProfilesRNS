@@ -1117,7 +1117,9 @@
     <Content Include="Profile\Modules\NetworkDetails\NetworkDetails.ascx" />
     <Content Include="Profile\Modules\NetworkDetails\NetworkDetails.xslt" />
     <Content Include="Profile\Modules\PassiveList\PassiveList.ascx" />
-    <Content Include="Profile\Modules\PassiveList\PassiveList.xslt" />
+    <Content Include="Profile\Modules\PassiveList\PassiveList.xslt">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Profile\Modules\PassiveText\PassiveText.ascx" />
     <Content Include="Profile\Modules\PassiveText\PassiveText.xslt" />
     <Content Include="Login\Default.aspx" />

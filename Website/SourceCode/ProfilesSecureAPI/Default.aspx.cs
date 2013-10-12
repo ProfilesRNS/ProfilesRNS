@@ -20,7 +20,7 @@ namespace ProfilesSecureAPI
             using (SqlConnection conn = new SqlConnection(profilesdb)) 
             {
                 conn.Open();
-                using (SqlDataReader dbreader = new SqlCommand("SELECT internalusername, nodeid from UCSF.vwPersonExport", conn).ExecuteReader(CommandBehavior.CloseConnection))
+                using (SqlDataReader dbreader = new SqlCommand("SELECT internalusername, nodeid from [UCSF.].vwPerson", conn).ExecuteReader(CommandBehavior.CloseConnection))
                 {
                     while (dbreader.Read())
                     {

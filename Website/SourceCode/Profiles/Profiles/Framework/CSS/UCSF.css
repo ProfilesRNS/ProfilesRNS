@@ -327,9 +327,8 @@ h2.badge-top  { padding: 12px 0 14px 4px; margin: -68px 0 0 60px; width: 70px; f
   letter-spacing: 3px; font-family: 'Courier New', Courier, monospace; font-weight:bold; }
 
 .thumbnail { display: inline-block; height: 15px; width: 15px; overflow: hidden; 
-  padding: 0 0 0 16px; margin-right: -6px;  }
-.thumbnail { padding: 0 0 0 1px\9; margin-right: 5px\9; }
-.thumbnail img { display: table-cell; vertical-align: bottom; }
+  position: relative; margin: 2px 4px -2px 0; }
+.thumbnail img { position: absolute; left: 2px; }
 
 /* Back to top */
 #backtotop {  

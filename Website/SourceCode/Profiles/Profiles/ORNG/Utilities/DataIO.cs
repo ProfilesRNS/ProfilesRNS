@@ -26,28 +26,28 @@ namespace Profiles.ORNG.Utilities
 
         public SqlDataReader GetGadgetViewRequirements(int appId)
         {
-            string sql = "select page, [view], chromeId, visibility, display_order, opt_params from [ORNG.].[AppViews] where appId = " + appId;
+            string sql = "select Page, [view], ChromeID, Visibility, DisplayOrder, OptParams from [ORNG.].[AppViews] where AppID = " + appId;
             SqlDataReader sqldr = this.GetSQLDataReader("ProfilesDB", sql, CommandType.Text, CommandBehavior.CloseConnection, null);
             return sqldr;
         }
 
         public SqlDataReader GetRegisteredApps(string uri)
         {
-            string sql = "select appId from [ORNG.].[AppRegistry] where nodeId = " + uri.Substring(uri.LastIndexOf('/') + 1);
+            string sql = "select AppID from [ORNG.].[AppRegistry] where NodeID = " + uri.Substring(uri.LastIndexOf('/') + 1);
             SqlDataReader sqldr = this.GetSQLDataReader("ProfilesDB", sql, CommandType.Text, CommandBehavior.CloseConnection, null);
             return sqldr;
         }
 
         public SqlDataReader GetGadgets()
         {
-            string sql = "select appId, name, url, unavailableMessage, enabled from [ORNG.].[Apps]";
+            string sql = "select AppID, Name, Url, UnavailableMessage, Enabled from [ORNG.].[Apps]";
             SqlDataReader sqldr = this.GetSQLDataReader("ProfilesDB", sql, CommandType.Text, CommandBehavior.CloseConnection, null);
             return sqldr;
         }
 
         public Int64 GetNodeId(Int32 personid)
         {
-            string sql = "select nodeid from [RDF.Stage].[InternalNodeMap] where Class = 'http://xmlns.com/foaf/0.1/Person' and InternalID = " + personid;
+            string sql = "select NodeID from [RDF.Stage].[InternalNodeMap] where Class = 'http://xmlns.com/foaf/0.1/Person' and InternalID = " + personid;
             using (SqlDataReader sqldr = this.GetSQLDataReader("ProfilesDB", sql, CommandType.Text, CommandBehavior.CloseConnection, null))
             {
                 if (sqldr.Read())
@@ -63,10 +63,10 @@ namespace Profiles.ORNG.Utilities
         {
             SqlParameter[] param = new SqlParameter[2];
 
-            param[0] = new SqlParameter("@uri", uri);
-            param[1] = new SqlParameter("@appId", appId);
+            param[0] = new SqlParameter("@Uri", uri);
+            param[1] = new SqlParameter("@AppID", appId);
 
-            using (SqlDataReader dbreader = GetSQLDataReader(GetDBCommand("", "[ORNG.].[ReadRegistry]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param)))
+            using (SqlDataReader dbreader = GetSQLDataReader(GetDBCommand("", "[ORNG.].[IsRegistered]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param)))
             {
                 return dbreader.Read();
             }
@@ -77,9 +77,9 @@ namespace Profiles.ORNG.Utilities
             SqlParameter[] param = new SqlParameter[2];
 
             param[0] = new SqlParameter("@Subject", Subject);
-            param[1] = new SqlParameter("@appId", appId);
+            param[1] = new SqlParameter("@AppID", appId);
 
-            using (SqlDataReader dbreader = GetSQLDataReader(GetDBCommand("", "[ORNG.].[ReadRegistry]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param)))
+            using (SqlDataReader dbreader = GetSQLDataReader(GetDBCommand("", "[ORNG.].[IsRegistered]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param)))
             {
                 return dbreader.Read();
             }
@@ -99,7 +99,7 @@ namespace Profiles.ORNG.Utilities
             SqlParameter[] param = new SqlParameter[2];
 
             param[0] = new SqlParameter("@SubjectURI", uri);
-            param[1] = new SqlParameter("@appId", appId);
+            param[1] = new SqlParameter("@AppID", appId);
 
             using (SqlCommand comm = GetDBCommand("", "[ORNG.].[AddAppToPerson]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param))
             {
@@ -112,7 +112,7 @@ namespace Profiles.ORNG.Utilities
             SqlParameter[] param = new SqlParameter[2];
 
             param[0] = new SqlParameter("@SubjectID", Subject);
-            param[1] = new SqlParameter("@appId", appId);
+            param[1] = new SqlParameter("@AppID", appId);
 
             using (SqlCommand comm = GetDBCommand("", "[ORNG.].[AddAppToPerson]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param))
             {
@@ -134,7 +134,7 @@ namespace Profiles.ORNG.Utilities
             SqlParameter[] param = new SqlParameter[2];
 
             param[0] = new SqlParameter("@SubjectURI", uri);
-            param[1] = new SqlParameter("@appId", appId);
+            param[1] = new SqlParameter("@AppID", appId);
 
             using (SqlCommand comm = GetDBCommand("", "[ORNG.].[RemoveAppFromPerson]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param))
             {
@@ -147,7 +147,7 @@ namespace Profiles.ORNG.Utilities
             SqlParameter[] param = new SqlParameter[2];
 
             param[0] = new SqlParameter("@SubjectID", Subject);
-            param[1] = new SqlParameter("@appId", appId);
+            param[1] = new SqlParameter("@AppID", appId);
 
             using (SqlCommand comm = GetDBCommand("", "[ORNG.].[RemoveAppFromPerson]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param))
             {

@@ -23,7 +23,7 @@ namespace ProfilesSecureAPI
             using (SqlConnection conn = new SqlConnection(profilesdb)) 
             {
                 conn.Open();
-                SqlCommand dbcommand = new SqlCommand("[UCSF].[ReadActivityLog]", conn);
+                SqlCommand dbcommand = new SqlCommand("[UCSF.].[ReadActivityLog]", conn);
                 dbcommand.CommandType = CommandType.StoredProcedure;
                 dbcommand.Parameters.Add(methodName != null ? new SqlParameter("@methodName", methodName) : new SqlParameter("@methodName", DBNull.Value));
                 dbcommand.Parameters.Add(afterDate != null ? new SqlParameter("@afterDT", afterDate) : new SqlParameter("@afterDT", DBNull.Value));
