@@ -59,3 +59,5 @@ Install new grant loader
 Update Ontology..DataMap to point to [ORGN.UCSF].vwGrant
 
 GetNewHR job has changed, as has the globalheatlh and other gadget ones
+
+Set max cardinality to 1 for overview, see if anyone has 2

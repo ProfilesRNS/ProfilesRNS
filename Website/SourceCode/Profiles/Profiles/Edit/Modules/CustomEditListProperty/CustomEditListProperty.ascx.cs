@@ -24,9 +24,9 @@ using Profiles.Profile.Utilities;
 using System.Globalization;
 using Profiles.Edit.Utilities;
 
-namespace Profiles.Edit.Modules.EditSingleDataTypeProperty
+namespace Profiles.Edit.Modules.CustomEditListProperty
 {
-    public partial class EditSingleDataTypeProperty : BaseModule
+    public partial class CustomEditListProperty : BaseModule
     {
         Edit.Utilities.DataIO data;
         Profiles.Profile.Utilities.DataIO propdata;
@@ -41,8 +41,8 @@ namespace Profiles.Edit.Modules.EditSingleDataTypeProperty
 
         }
 
-        public EditSingleDataTypeProperty() { }
-        public EditSingleDataTypeProperty(XmlDocument pagedata, List<ModuleParams> moduleparams, XmlNamespaceManager pagenamespaces)
+        public CustomEditListProperty() { }
+        public CustomEditListProperty(XmlDocument pagedata, List<ModuleParams> moduleparams, XmlNamespaceManager pagenamespaces)
             : base(pagedata, moduleparams, pagenamespaces)
         {
             SessionManagement sm = new SessionManagement();
@@ -81,8 +81,6 @@ namespace Profiles.Edit.Modules.EditSingleDataTypeProperty
         protected void btnEditProperty_OnClick(object sender, EventArgs e)
         {
 
-
-
             if (Session["pnlInsertProperty.Visible"] != null)
             {
 
@@ -102,19 +100,16 @@ namespace Profiles.Edit.Modules.EditSingleDataTypeProperty
 
         protected void GridViewProperty_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            TextBox txtLabel = null;
+            TextBox txtLabelGrid = null;
 
             ImageButton lnkEdit = null;
             ImageButton lnkDelete = null;
             
             //  System.Web.UI.WebControls.Panel pnlMovePanel = null;
-            LiteralState ls = (LiteralState)e.Row.DataItem;
-            ImageButton ibUp = (ImageButton)e.Row.FindControl("ibUp");
-            ImageButton ibDown = (ImageButton)e.Row.FindControl("ibDown");
+            LiteralListState ls = (LiteralListState)e.Row.DataItem;
             Label lblLabel = (Label)e.Row.FindControl("lblLabel");
-            
 
-            LiteralState literalstate = null;
+            LiteralListState literalstate = null;
             if (e.Row.RowType == DataControlRowType.Header)
             {
                 e.Row.Cells[0].Text = PropertyLabel;
@@ -127,7 +122,7 @@ namespace Profiles.Edit.Modules.EditSingleDataTypeProperty
                 // pnlMovePanel = (System.Web.UI.WebControls.Panel)e.Row.Cells[2].FindControl("pnlMovePanel");
 
 
-                literalstate = (LiteralState)e.Row.DataItem;
+                literalstate = (LiteralListState)e.Row.DataItem;
 
                 if (literalstate.EditDelete == false)
                     lnkDelete.Visible = false;
@@ -136,28 +131,81 @@ namespace Profiles.Edit.Modules.EditSingleDataTypeProperty
                     lnkEdit.Visible = false;
                     //     pnlMovePanel.Visible = false;
                 }
-                else
-                {
-                    if (ibUp != null)
-                        ibUp.CommandArgument = ls.Subject.ToString();
-                }
 
                 if (lnkDelete != null)
-                    lnkDelete.OnClientClick = "Javascript:return confirm('Are you sure you want to delete this " + PropertyLabel + "?');";
+                    lnkDelete.OnClientClick = "Javascript:return confirm('Are you sure you want to delete these " + PropertyLabel + "?');";
 
-                if(lblLabel!=null)
-                lblLabel.Text = literalstate.Literal.Replace("\n", "<br/>");
-                
-
+                if (lblLabel != null)
+                    lblLabel.Text = "" + literalstate.Literal.Replace("\n", "<br/>");               
             }
 
             if (e.Row.RowType == DataControlRowType.DataRow && (e.Row.RowState & DataControlRowState.Edit) == DataControlRowState.Edit)
             {
-                txtLabel = (TextBox)e.Row.Cells[0].FindControl("txtLabel");
-                txtLabel.Text = literalstate.Literal.Trim();
+                txtLabelGrid = (TextBox)e.Row.Cells[0].FindControl("txtLabelGrid");
+                txtLabelGrid.Text = "" + literalstate.Literal.Trim();
             }
         }
 
+        protected void GridViewProperty_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            GridViewProperty.EditIndex = e.NewEditIndex;
+            this.FillPropertyGrid(false);
+            upnlEditSection.Update();
+        }
+
+        protected void GridViewProperty_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            // remove them all, then rebuild
+            // put this in one spot
+            string _objects = GridViewProperty.DataKeys[e.RowIndex].Values[0].ToString();
+            foreach (string _object in _objects.Split(new Char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                data.DeleteTriple(this.SubjectID, this.PredicateID, Convert.ToInt64(_object));
+            }
+
+            TextBox txtLabelGrid = (TextBox)GridViewProperty.Rows[e.RowIndex].FindControl("txtLabelGrid");
+
+            // this as well, put in one spot and remove subject, predicate from literalliststate if redundant
+            // grab them all, separated by carriage return or commas or tab
+            foreach (string item in txtLabelGrid.Text.Trim().Split(new Char[] { '\n', ',', '\t' }))
+            {
+                if (item.Trim().Length > 0)
+                {
+                    data.AddLiteral(this.SubjectID, this.PredicateID, data.GetStoreNode(item.Trim()), this.PropertyListXML);
+                }
+            }
+
+            GridViewProperty.EditIndex = -1;
+            this.FillPropertyGrid(true);
+            upnlEditSection.Update();
+        }
+
+        protected void GridViewProperty_RowUpdated(object sender, GridViewUpdatedEventArgs e)
+        {
+            this.FillPropertyGrid(false);
+            upnlEditSection.Update();
+        }
+
+        protected void GridViewProperty_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            GridViewProperty.EditIndex = -1;
+
+            this.FillPropertyGrid(false);
+            upnlEditSection.Update();
+        }
+
+        protected void GridViewProperty_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            string _objects = GridViewProperty.DataKeys[e.RowIndex].Values[0].ToString();
+
+            foreach(string _object in _objects.Split(new Char[] {','}, StringSplitOptions.RemoveEmptyEntries))
+            {
+                data.DeleteTriple(this.SubjectID, this.PredicateID, Convert.ToInt64(_object));
+            }
+
+            this.FillPropertyGrid(true);
+            upnlEditSection.Update();
+        }
 
         protected void btnInsertCancel_OnClick(object sender, EventArgs e)
         {
@@ -166,30 +214,24 @@ namespace Profiles.Edit.Modules.EditSingleDataTypeProperty
             upnlEditSection.Update();
         }
 
-        protected void btnInsert_OnClick(object sender, EventArgs e)
-        {
-            if (Session["pnlInsertProperty.Visible"] != null)
-            {
-                data.AddLiteral(this.SubjectID, this.PredicateID, data.GetStoreNode(txtLabel.Text.Trim()), this.PropertyListXML);
-
-                this.FillPropertyGrid(true);
-                txtLabel.Text = "";
-                Session["pnlInsertProperty.Visible"] = null;
-                btnEditProperty_OnClick(sender, e);
-                upnlEditSection.Update();
-            }
-        }
-
         protected void btnInsertClose_OnClick(object sender, EventArgs e)
         {
             if (Session["pnlInsertProperty.Visible"] != null)
             {
-                data.AddLiteral(this.SubjectID, this.PredicateID, data.GetStoreNode(txtLabel.Text.Trim()), this.PropertyListXML);
+                // grab them all, separated by carriage return or commas or tab
+                foreach (string item in txtLabel.Text.Trim().Split(new Char[] { '\n', ',', '\t' }))
+                {
+                    if (item.Trim().Length > 0)
+                    {
+                        data.AddLiteral(this.SubjectID, this.PredicateID, data.GetStoreNode(item.Trim()), this.PropertyListXML);
+                    }
+                }
                 this.FillPropertyGrid(true);
                 Session["pnlInsertProperty.Visible"] = null;
                 btnInsertCancel_OnClick(sender, e);
             }
         }
+
         protected void FillPropertyGrid(bool refresh)
         {
             if (refresh)
@@ -198,7 +240,7 @@ namespace Profiles.Edit.Modules.EditSingleDataTypeProperty
                 this.PropertyListXML = propdata.GetPropertyList(this.BaseData, base.PresentationXML, this.PredicateURI, false, true, false);
             }
 
-            List<LiteralState> literalstate = new List<LiteralState>();
+            List<LiteralListState> literalstate = new List<LiteralListState>();
 
             bool editexisting = false;
             bool editaddnew = false;
@@ -228,31 +270,43 @@ namespace Profiles.Edit.Modules.EditSingleDataTypeProperty
             this.PredicateURI = Server.UrlDecode(base.GetRawQueryStringItem("predicateuri").Replace("!", "#"));
             this.PredicateID = data.GetStoreNode(this.PredicateURI);
 
+            string itemsAsTxt = "";
+            string objects = "";
             foreach (XmlNode property in this.PropertyListXML.SelectNodes("PropertyList/PropertyGroup/Property/Network/Connection"))
             {
-                literalstate.Add(new LiteralState(this.SubjectID, this.PredicateID, data.GetStoreNode(property.InnerText.Trim()), property.InnerText.Trim(), editexisting, editdelete));
+                objects += "" + (data.GetStoreNode(property.InnerText.Trim())) + ",";
+                itemsAsTxt += property.InnerText.Trim() + Environment.NewLine;//"<br/>";
+            }
+            if (itemsAsTxt.Length > 0)
+            {
+                literalstate.Add(new LiteralListState(objects, itemsAsTxt, editexisting, editdelete));
             }
 
             if (literalstate.Count > 0)
             {
 
+                GridViewProperty.DataSource = literalstate;
+                GridViewProperty.DataBind();
                 lblNoItems.Visible = false;
-
+                GridViewProperty.Visible = true;
 
                 if (MaxCardinality == literalstate.Count.ToString())
                 {
                     imbAddArror.Visible = false;
                     btnEditProperty.Visible = false;
+                    btnInsertProperty.Visible = false;                    
                 }
-
-
-
             }
             else
             {
                 lblNoItems.Visible = true;
+                GridViewProperty.Visible = false;
                 imbAddArror.Visible = true;
                 btnEditProperty.Visible = true;
+                if (MaxCardinality == "1") // not sure about this
+                { 
+                    btnInsertProperty.Visible = false;
+                }
                 upnlEditSection.Update();
             }
 

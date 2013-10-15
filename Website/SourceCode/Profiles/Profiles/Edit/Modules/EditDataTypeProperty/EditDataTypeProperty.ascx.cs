@@ -81,8 +81,6 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
         protected void btnEditProperty_OnClick(object sender, EventArgs e)
         {
 
-
-
             if (Session["pnlInsertProperty.Visible"] != null)
             {
 
@@ -112,6 +110,15 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
             ImageButton ibUp = (ImageButton)e.Row.FindControl("ibUp");
             ImageButton ibDown = (ImageButton)e.Row.FindControl("ibDown");
             Label lblLabel = (Label)e.Row.FindControl("lblLabel");
+
+            // UCSF, no need to move up and down if you can only have one
+            if ("1".Equals(MaxCardinality))
+            {
+                if (ibUp != null) 
+                    ibUp.Visible = false;
+                if (ibDown != null)
+                    ibDown.Visible = false;
+            }
             
 
             LiteralState literalstate = null;
@@ -172,7 +179,7 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
 
             Connects.Profiles.Service.ServiceImplementation.DebugLogging.Log("EditDataTypeProperty: Attempting to update: " + hdLabel.Value);
             Connects.Profiles.Service.ServiceImplementation.DebugLogging.Log("EditDataTypeProperty: Attempting to update2: " + txtLabelGrid.Text.Trim());
-            Connects.Profiles.Service.ServiceImplementation.DebugLogging.Log("EditDataTypeProperty: Attempting to update3: " + this.SubjectID + "," + this.PredicateID + "," + data.GetStoreNode(hdLabel.Value));
+            Connects.Profiles.Service.ServiceImplementation.DebugLogging.Log("EditDataTypeProperty: Attempting to update3: " + this.SubjectID + "," + this.PredicateID );
 
             data.UpdateLiteral(this.SubjectID, this.PredicateID, data.GetStoreNode(hdLabel.Value), data.GetStoreNode(txtLabelGrid.Text.Trim()), this.PropertyListXML);
             GridViewProperty.EditIndex = -1;

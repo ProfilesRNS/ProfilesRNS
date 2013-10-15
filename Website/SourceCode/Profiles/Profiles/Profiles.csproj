@@ -152,7 +152,7 @@
     <Content Include="Edit\Images\Icon_add_item.gif" />
     <Content Include="Edit\Images\sophcat-boat.jpg" />
     <Content Include="Edit\JavaScript\UCSF.js" />
-    <Content Include="Edit\Modules\EditSingleDataTypeProperty\EditSingleDataTypeProperty.ascx" />
+    <Content Include="Edit\Modules\CustomEditListProperty\CustomEditListProperty.ascx" />
     <Content Include="Framework\CSS\UCSF.css" />
     <Content Include="Framework\Images\arrow-orgbg.gif" />
     <Content Include="Framework\Images\arrow-tealbg.gif" />
@@ -205,6 +205,7 @@
     <Content Include="Profile\CSS\UCSF.css" />
     <Content Include="Profile\Images\default_img.png" />
     <Content Include="Profile\JavaScript\UCSF.js" />
+    <Content Include="Profile\Modules\CustomViewListProperty\CustomViewListProperty.ascx" />
     <Content Include="RobotsTxt.aspx" />
     <Content Include="Search\CSS\UCSF.css" />
     <Content Include="Search\Images\icon_squareArrow.gif" />
@@ -340,13 +341,14 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Edit\Modules\EditSingleDataTypeProperty\EditSingleDataTypeProperty.ascx.cs">
-      <DependentUpon>EditSingleDataTypeProperty.ascx</DependentUpon>
+    <Compile Include="Edit\Modules\CustomEditListProperty\CustomEditListProperty.ascx.cs">
+      <DependentUpon>CustomEditListProperty.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Edit\Modules\EditSingleDataTypeProperty\EditSingleDataTypeProperty.ascx.designer.cs">
-      <DependentUpon>EditSingleDataTypeProperty.ascx</DependentUpon>
+    <Compile Include="Edit\Modules\CustomEditListProperty\CustomEditListProperty.ascx.designer.cs">
+      <DependentUpon>CustomEditListProperty.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Edit\Utilities\LiteralListState.cs" />
     <Compile Include="Framework\Modules\MainMenu\History.ascx.cs">
       <DependentUpon>History.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -454,6 +456,13 @@
     </Compile>
     <Compile Include="ProfilesDisplay.aspx.designer.cs">
       <DependentUpon>ProfilesDisplay.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\Modules\CustomViewListProperty\CustomViewListProperty.ascx.cs">
+      <DependentUpon>CustomViewListProperty.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profile\Modules\CustomViewListProperty\CustomViewListProperty.ascx.designer.cs">
+      <DependentUpon>CustomViewListProperty.ascx</DependentUpon>
     </Compile>
     <Compile Include="Profile\Modules\CustomViewAuthorInAuthorship\CustomViewAuthorInAuthorship.ascx.designer.cs">
       <DependentUpon>CustomViewAuthorInAuthorship.ascx</DependentUpon>

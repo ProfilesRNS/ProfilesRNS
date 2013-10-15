@@ -81,7 +81,7 @@
                             <Columns>
                                 <asp:TemplateField HeaderText="">
                                     <EditItemTemplate>
-                                        <asp:TextBox ID="txtLabelGrid" Rows="5" runat="server" TextMode="MultiLine" Width="500px"
+                                        <asp:TextBox ID="txtLabelGrid" Rows="20" runat="server" TextMode="MultiLine" Width="500px"
                                             Text='<%# Bind("Literal") %>'></asp:TextBox>
                                         <asp:HiddenField ID="hdLabel" runat="server" Value='<%# Bind("Literal") %>'></asp:HiddenField>
                                     </EditItemTemplate>
