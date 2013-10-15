@@ -27,7 +27,9 @@
         var alink = '<li><a href=#' + id + '>' + txt + '</a></li>';
         $('#toc ul').append(alink);
     });
-
+ 
+    // important to grab this BEFORE drawing gadgets so that we do not pick up Featured Publications
+    var pubs = $('#toc ul li:contains("Publications")');
     //drawGadgetsTOC
     for (var i = 0; (typeof my !== 'undefined') && (i < my.gadgets.length); i++) {
         if (my.gadgets[i].chrome_id == 'gadgets-view') {
@@ -49,7 +51,9 @@
     if ($('#toc ul li').length < 2) {
         $('#toc').hide();
     }
-    $('#toc ul li:contains("Publications")').appendTo('#toc ul');
+    if (pubs) {
+    	pubs.appendTo('#toc ul');
+    }
     $('#toc ul li').last().css('border-right', 'none');
     $('#toc ul li').last().css('margin-right', '0');
 
