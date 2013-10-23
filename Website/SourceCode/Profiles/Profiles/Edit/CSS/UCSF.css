@@ -26,6 +26,7 @@ textarea#ctl00_ContentMain_rptMain_ctl00_ctl00_ctl00_GridViewProperty_ctl02_txtL
 #ctl00_ContentMain_rptMain_ctl00_ctl00_ctl00_securityOptions_grdSecurityGroups td { border: 1px solid #CCC; }
 .actionbuttons td { border: none !important; }
 .orng { display: inline-block;margin: 20px 0 0 80px; text-indent: -30px; width: 420px; }
+.edithelp {margin: 4px 6px 8px; }
 
 .progress { position: fixed; text-align: center; height: 100px; 
   width: 100px; top: 0; right: 0; left: 0; z-index: 9999999; opacity: 0.7; }

@@ -1,0 +1,16 @@
+Do regular install, but use InstallDataUCSF.xml
+
+Afterwards to ORNG install
+ORNG_CreateSchema.sql
+ORNG_DataLoad.sql
+
+-- fix RDF..GetStoreNode first!!!
+ORNG_ExampleGadgets.sql
+
+Then to UCSF install
+UCSF_CreateSchema.sql
+
+If doing ORNG.Grant then
+we need to add rows to DataMap for grants!!  
+
+

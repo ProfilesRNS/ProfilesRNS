@@ -48,6 +48,7 @@
                     <asp:Panel ID="pnlInsertProperty" runat="server" Style="background-color: #EEE;
                         margin-bottom: 5px; border: solid 1px #ccc;" 
                         Visible="false">
+<p class="edithelp">Please enter your research, academic, and/or clinical interests <strong><span class="notice">as keywords separated by commas</span></strong>. <br />Set the visibility to Public to display your Interests to others and make them searchable.</p>
                         <table border="0" cellspacing="2" cellpadding="4">
                             <tr>
                                 <td>
@@ -79,6 +80,7 @@
                             <Columns>
                                 <asp:TemplateField HeaderText="">
                                     <EditItemTemplate>
+<p class="edithelp">Please enter your research, academic, and/or clinical interests <strong><span class="notice">as keywords separated by commas</span></strong>. <br />Set the visibility to Public to display your Interests to others and make them searchable.</p>
                                         <asp:TextBox ID="txtLabelGrid" Rows="20" runat="server" TextMode="MultiLine" Width="500px"
                                             Text='<%# Bind("Literal") %>'></asp:TextBox>
                                     </EditItemTemplate>

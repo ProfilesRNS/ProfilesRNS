@@ -275,10 +275,11 @@ namespace Profiles.Edit.Modules.CustomEditListProperty
             foreach (XmlNode property in this.PropertyListXML.SelectNodes("PropertyList/PropertyGroup/Property/Network/Connection"))
             {
                 objects += "" + (data.GetStoreNode(property.InnerText.Trim())) + ",";
-                itemsAsTxt += property.InnerText.Trim() + Environment.NewLine;//"<br/>";
+                itemsAsTxt += property.InnerText.Trim() + ", ";// Environment.NewLine;//"<br/>";
             }
             if (itemsAsTxt.Length > 0)
             {
+                itemsAsTxt = itemsAsTxt.Substring(0, itemsAsTxt.Length - 2);
                 literalstate.Add(new LiteralListState(objects, itemsAsTxt, editexisting, editdelete));
             }
 
@@ -290,10 +291,11 @@ namespace Profiles.Edit.Modules.CustomEditListProperty
                 lblNoItems.Visible = false;
                 GridViewProperty.Visible = true;
 
+                imbAddArror.Visible = false;
+                btnEditProperty.Visible = false;
+                // not sure of this
                 if (MaxCardinality == literalstate.Count.ToString())
                 {
-                    imbAddArror.Visible = false;
-                    btnEditProperty.Visible = false;
                     btnInsertProperty.Visible = false;                    
                 }
             }

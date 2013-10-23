@@ -84,7 +84,7 @@ People working in the same department
   <li><a href="#network">What are the lists of networks on the right side of my profile?</a></li>
   <li><a href="#missing">Why are there missing or incorrect publications in my profile? How can I correct this?</a></li>
   <li><a href="#update">How frequently are the data in UCSF Profiles updated?</a></li>
-  <li><a href="#keyword">Can I add/edit my keywords?</a></li>
+  <li><a href="#keyword">Can I add/edit research, career and academic interests?</a></li>
   <li><a href="#mynetwork">Can I edit my co-authors or similar people lists?</a></li>
   <li><a href="#learn">How can I learn more about UCSF Profile?</a></li>
   <li><a href="#ideas">Where should I send my ideas on how to improve the tool?</a></li>
@@ -173,10 +173,10 @@ People working in the same department
   <li>Changes made to a profile manually will be reflected within minutes.</li>
 </ul>
 
-<h3 id="keyword">Can I add/edit my keywords?</h3>
+<h3 id="keyword">Can I add/edit research, career and academic interests?</h3>
 <ul>
-  <li>Yes! You can enter keywords when you are editing your profile. These are useful to indicate research topics or fields in which you haven't yet published. Users who search UCSF Profiles by these topics will find your profile. </li>
-  <li>The new keyword feature is different from the concepts associated to your publications (MeSH terms derived by the National Library of Medicine), are not editable. However, you can ensure these are accurate by keeping your publications up to date. <strong>Please note that it can take up to 24 hours for the system to update your keywords, co-authors, and similar people after you have modified your publications.</strong></li> 
+  <li>Yes! You can enter interests when you are editing your profile. These are useful to indicate research topics or fields in which you haven’t yet published. Users who search UCSF Profiles by these topics will find your profile. </li>
+  <li>The new interests feature is different from the concepts associated to your publications (MeSH terms derived by the National Library of Medicine), which are not editable. However, you can ensure these accurately reflect your work by keeping your publications up to date and correct in UCSF Profiles. Please note that it can take up to 24 hours for the system to update your concepts, co-authors, and similar people after you have modified your publications.</li> 
 </ul>
 
 <h3 id="mynetwork">Can I edit my co-authors or similar people lists?</h3>
