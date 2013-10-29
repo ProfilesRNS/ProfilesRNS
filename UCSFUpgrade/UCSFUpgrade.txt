@@ -55,9 +55,19 @@ Be very careful in the UCSF to UCSF. schema change. Be sureto hunt down ALL db d
 
 Create ORNG.UCSF schema as well
 
+-- this stuff is real
+
 Install new grant loader
 Update Ontology..DataMap to point to [ORGN.UCSF].vwGrant
 
 GetNewHR job has changed, as has the globalheatlh and other gadget ones
 
 Set max cardinality to 1 for overview, see if anyone has 2
+
+PresentationXML for item 4 ----
+
+
+Release notes
+
+ALTER procedure [RDF.].[DeleteNode]
+add custom modules to freetextKeyword in ClassProperty table

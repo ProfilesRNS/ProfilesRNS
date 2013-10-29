@@ -13,19 +13,18 @@
 					<table class="connectionArrowTable">
 					<tbody>
 					<tr>
-						<td>&nbsp;</td>
 						<td><div class="connectionSubDescription">Connection Strength</div></td>
-						<td>&nbsp;</td>
 					</tr>
 					<tr>
-						<td class="connectionLine"><img src="<%= this.GetRootDomain() %>/Framework/Images/connection_left.gif"></td>
-						<td class="connectionLine"><div>&nbsp;</div></td>
-						<td class="connectionLine"><img src="<%= this.GetRootDomain() %>/Framework/Images/connection_right.gif"></td>
+					<td style="height:6px"><img src="<%= this.GetRootDomain() %>/Framework/Images/connection.gif"></td>
+<!--
+					<td class="connectionLine"><img src="<%= this.GetRootDomain() %>/Framework/Images/connection_left.gif"></td>
+					<td class="connectionLine"><div>&nbsp;</div></td>
+					<td class="connectionLine"><img src="<%= this.GetRootDomain() %>/Framework/Images/connection_right.gif"></td>
+-->
 					</tr>
 					<tr>
-						<td>&nbsp;</td>
 						<td><div class="connectionSubDescription"><%= String.Format("{0:0.000}", this.ConnectionStrength) %></div></td>
-						<td>&nbsp;</td>
 					</tr>
 					</tbody>
 					</table>
@@ -50,7 +49,7 @@
 		}
 	</script>
 	<div class="listTable" style="margin-top:12px;margin-bottom:8px;">
-		<table>
+		<table id="similarConnection">
 			<tbody>
 			<tr>
 				<th style="width:365px;" class="alignLeft">Concept</th>
@@ -71,10 +70,10 @@
 				<td class="alignLeft" style="text-align:left;">
 					<div style="width:353px;"><%= concept.MeshTerm %></div>
 				</td>
-				<td onmouseover="doListTableCellOver(this);" onmouseout="doListTableCellOut(this);" onclick="doListTableCellClick(this);doGoPersonMesh('<%= concept.Subject.ConceptConnectionURI %>');">
+				<td class="linky" onclick="doListTableCellClick(this);doGoPersonMesh('<%= concept.Subject.ConceptConnectionURI %>');">
 					<div style="width: 68px; color: rgb(51, 102, 204);" class="listTableLink"><%= String.Format("{0:0.000}", concept.Subject.KeywordWeight) %></div>
 				</td>
-				<td onmouseover="doListTableCellOver(this);" onmouseout="doListTableCellOut(this);" onclick="doListTableCellClick(this);doGoPersonMesh('<%= concept.Object.ConceptConnectionURI %>');">
+				<td class="linky" onclick="doListTableCellClick(this);doGoPersonMesh('<%= concept.Object.ConceptConnectionURI %>');">
 					<div class='listTableLink' style="width: 68px; color: rgb(51, 102, 204); "><%= String.Format("{0:0.000}", concept.Object.KeywordWeight) %></div>
 				</td>
 				<td><div style="width:68px;"><%= String.Format("{0:0.000}", concept.OverallWeight) %></div></td>

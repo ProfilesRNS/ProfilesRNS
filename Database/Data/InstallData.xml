@@ -23009,7 +23009,6 @@
                   <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
                   <Param Name="BulletType">disc</Param>
                   <Param Name="Columns">2</Param>
-                  <Param Name="Limit">500</Param>
                   <Param Name="NetworkListNode">rdf:RDF/rdf:Description[@rdf:about= ../rdf:Description[1]/prns:hasConnection/@rdf:resource]</Param>
                   <Param Name="ItemURLText">{{{rdf:Description/rdf:object/@rdf:resource}}}</Param>
                   <Param Name="ItemURL">{{{rdf:Description/rdf:object/@rdf:resource}}}</Param>
@@ -23081,7 +23080,7 @@
             <Panel Type="main" TabSort="0" TabType="Default">
               <Module ID="CustomViewConceptPublication">
                 <ParamList>
-                  <Param Name="TimelineCaption">This graph shows the total number of publications written about "@ConceptName" by people in Harvard Catalyst Profiles by year, and whether "@ConceptName" was a major or minor topic of these publication. &lt;!--In all years combined, a total of [[[TODO:PUBLICATION COUNT]]] publications were written by people in Profiles.--&gt;</Param>
+                  <Param Name="TimelineCaption">This graph shows the total number of publications written about "@ConceptName" by people in UCSF Profiles by year, and whether "@ConceptName" was a major or minor topic of these publication. &lt;!--In all years combined, a total of [[[TODO:PUBLICATION COUNT]]] publications were written by people in Profiles.--&gt;</Param>
                   <Param Name="CitedCaption">Below are the publications written about "@ConceptName" that have been cited the most by articles in Pubmed Central.</Param>
                   <Param Name="NewestCaption">Below are the most recent publications written about "@ConceptName" by people in Profiles.</Param>
                   <Param Name="OldestCaption">Below are the earliest publications written about "@ConceptName" by people in Profiles.</Param>
@@ -23099,13 +23098,13 @@
                   <Param Name="ItemURLText">{{{rdf:Description/rdfs:label}}}</Param>
                   <Param Name="ItemText" />
                   <Param Name="ItemURL">{{{rdf:Description/@rdf:about}}}</Param>
-                  <Param Name="MoreURL">/search/default.aspx?searchtype=people&amp;searchfor={{{rdf:RDF/rdf:Description/rdfs:label}}}&amp;classuri=http://xmlns.com/foaf/0.1/Person&amp;erpage=15&amp;offset=0 </Param>
+                  <Param Name="MoreURL">/search/default.aspx?searchtype=people&amp;searchfor={{{rdf:RDF/rdf:Description/rdfs:label}}}&amp;exactphrase=true&amp;classuri=http://xmlns.com/foaf/0.1/Person&amp;erpage=15&amp;offset=0 </Param>
                   <Param Name="MoreText">See all people</Param>
                 </ParamList>
               </Module>
               <Module ID="CustomViewConceptSimilarMesh">
                 <ParamList>
-                  <Param Name="InfoCaption">Similar Concepts</Param>
+                  <Param Name="InfoCaption">Related Concepts</Param>
                   <Param Name="Description">People who have written about this concept.</Param>
                 </ParamList>
               </Module>
@@ -23167,7 +23166,7 @@
                   <Param Name="ExpandRDFList">
                     <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#authorInAuthorship" Limit="1" />
                   </Param>
-                  <Param Name="InfoCaption">Concepts</Param>
+                  <Param Name="InfoCaption">Related Concepts</Param>
                   <Param Name="Description">Derived automatically from this person's publications.</Param>
                   <Param Name="MaxDisplay">5</Param>
                   <Param Name="ListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:hasResearchArea/@rdf:resource]</Param>
@@ -23192,8 +23191,8 @@
               </Module>
               <Module ID="PassiveList">
                 <ParamList>
-                  <Param Name="InfoCaption">Similar People</Param>
-                  <Param Name="Description">People who share similar concepts with this person.</Param>
+                  <Param Name="InfoCaption">Related Authors</Param>
+                  <Param Name="Description">People who share related concepts with this person.</Param>
                   <Param Name="MaxDisplay">11</Param>
                   <Param Name="ListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:similarTo/@rdf:resource]</Param>
                   <Param Name="ItemURLText">{{{rdf:Description/rdfs:label}}}</Param>
@@ -23211,7 +23210,7 @@
                   </Param>
                 </ParamList>
               </Module>
-              <Module ID="PassiveList">
+              <!--Module ID="PassiveList">
                 <ParamList>
                   <Param Name="InfoCaption">Physical Neighbors</Param>
                   <Param Name="Description">People whose addresses are nearby this person.</Param>
@@ -23221,7 +23220,7 @@
                   <Param Name="ItemText" />
                   <Param Name="ItemURL">{{{rdf:Description/@rdf:about}}}</Param>
                 </ParamList>
-              </Module>
+              </Module-->
             </Panel>
           </PanelList>
           <ExpandRDFList>
@@ -23308,7 +23307,7 @@
                   <Param Name="ExpandRDFList">
                     <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#authorInAuthorship" Limit="1" />
                   </Param>
-                  <Param Name="InfoCaption">Concepts</Param>
+                  <Param Name="InfoCaption">Related Concepts</Param>
                   <Param Name="Description">Derived automatically from this person's publications.</Param>
                   <Param Name="MaxDisplay">5</Param>
                   <Param Name="ListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:hasResearchArea/@rdf:resource]</Param>
@@ -23341,7 +23340,7 @@
                   <Param Name="ExpandRDFList">
                     <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#authorInAuthorship" Limit="1" />
                   </Param>
-                  <Param Name="InfoCaption">Similar People</Param>
+                  <Param Name="InfoCaption">Related Authors</Param>
                   <Param Name="Description">People who share similar concepts with this person.</Param>
                   <Param Name="MaxDisplay">11</Param>
                   <Param Name="ListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:similarTo/@rdf:resource]</Param>
@@ -23353,7 +23352,7 @@
                 </ParamList>
               </Module>
               <Module ID="CustomViewPersonSameDepartment" />
-              <Module ID="PassiveList">
+              <!--Module ID="PassiveList">
                 <ParamList>
                   <Param Name="DataURI">rdf:RDF/rdf:Description/rdf:subject/@rdf:resource</Param>
                   <Param Name="ExpandRDFList">
@@ -23367,7 +23366,7 @@
                   <Param Name="ItemText" />
                   <Param Name="ItemURL">{{{rdf:Description/@rdf:about}}}</Param>
                 </ParamList>
-              </Module>
+              </Module-->
             </Panel>
           </PanelList>
         </Presentation>
@@ -23386,8 +23385,8 @@
           <PageTitle>{{{rdf:RDF[1]/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:firstName}}} {{{rdf:RDF[1]/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:lastName}}}</PageTitle>
           <PageBackLinkName>Back to Profile</PageBackLinkName>
           <PageBackLinkURL>{{{//rdf:RDF/rdf:Description/rdf:subject/@rdf:resource}}}</PageBackLinkURL>
-          <PageSubTitle>Similar People ({{{//rdf:RDF/rdf:Description/prns:numberOfConnections}}})</PageSubTitle>
-          <PageDescription>Similar people share similar sets of concepts, but are not necessarily co-authors.</PageDescription>
+          <PageSubTitle>Related Authors ({{{//rdf:RDF/rdf:Description/prns:numberOfConnections}}})</PageSubTitle>
+          <PageDescription>Related authors share similar sets of concepts, but are not necessarily co-authors.</PageDescription>
           <PanelTabType>Default</PanelTabType>
           <PanelList>
             <Panel Type="active">
@@ -23439,7 +23438,7 @@
                   <Param Name="ExpandRDFList">
                     <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#authorInAuthorship" Limit="1" />
                   </Param>
-                  <Param Name="InfoCaption">Concepts</Param>
+                  <Param Name="InfoCaption">Related Concepts</Param>
                   <Param Name="Description">Derived automatically from this person's publications.</Param>
                   <Param Name="MaxDisplay">5</Param>
                   <Param Name="ListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:hasResearchArea/@rdf:resource]</Param>
@@ -23472,7 +23471,7 @@
                   <Param Name="ExpandRDFList">
                     <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#authorInAuthorship" Limit="1" />
                   </Param>
-                  <Param Name="InfoCaption">Similar People</Param>
+                  <Param Name="InfoCaption">Related Authors</Param>
                   <Param Name="Description">People who share similar concepts with this person.</Param>
                   <Param Name="MaxDisplay">11</Param>
                   <Param Name="ListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:similarTo/@rdf:resource]</Param>
@@ -23484,7 +23483,7 @@
                 </ParamList>
               </Module>
               <Module ID="CustomViewPersonSameDepartment" />
-              <Module ID="PassiveList">
+              <!--Module ID="PassiveList">
                 <ParamList>
                   <Param Name="DataURI">rdf:RDF/rdf:Description/rdf:subject/@rdf:resource</Param>
                   <Param Name="ExpandRDFList">
@@ -23498,7 +23497,7 @@
                   <Param Name="ItemText" />
                   <Param Name="ItemURL">{{{rdf:Description/@rdf:about}}}</Param>
                 </ParamList>
-              </Module>
+              </Module-->
             </Panel>
           </PanelList>
         </Presentation>
@@ -23517,8 +23516,8 @@
           <PageTitle>{{{//rdf:RDF/rdf:Description[@rdf:about= ../rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:firstName}}} {{{//rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:lastName}}}</PageTitle>
           <PageBackLinkName>Back to Profile</PageBackLinkName>
           <PageBackLinkURL>{{{//rdf:RDF/rdf:Description/rdf:subject/@rdf:resource}}}</PageBackLinkURL>
-          <PageSubTitle>Concepts  ({{{//rdf:RDF/rdf:Description/prns:numberOfConnections}}})</PageSubTitle>
-          <PageDescription>Concepts are derived automatically from a person's publications.</PageDescription>
+          <PageSubTitle>Related Concepts  ({{{//rdf:RDF/rdf:Description/prns:numberOfConnections}}})</PageSubTitle>
+          <PageDescription>Related concepts are derived automatically from a person's publications.</PageDescription>
           <PanelTabType>Default</PanelTabType>
           <PanelList>
             <Panel Type="active">
@@ -23581,7 +23580,7 @@
                   <Param Name="ExpandRDFList">
                     <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#authorInAuthorship" Limit="1" />
                   </Param>
-                  <Param Name="InfoCaption">Concepts</Param>
+                  <Param Name="InfoCaption">Related Concepts</Param>
                   <Param Name="Description">Derived automatically from this person's publications.</Param>
                   <Param Name="MaxDisplay">5</Param>
                   <Param Name="ListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:hasResearchArea/@rdf:resource]</Param>
@@ -23614,7 +23613,7 @@
                   <Param Name="ExpandRDFList">
                     <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#authorInAuthorship" Limit="1" />
                   </Param>
-                  <Param Name="InfoCaption">Similar People</Param>
+                  <Param Name="InfoCaption">Related Authors</Param>
                   <Param Name="Description">People who share similar concepts with this person.</Param>
                   <Param Name="MaxDisplay">11</Param>
                   <Param Name="ListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:similarTo/@rdf:resource]</Param>
@@ -23747,7 +23746,7 @@
               Connection Strength
             </div>
                     <br />
-                    <div class="passiveSectonBody"> The connection strength for similar people is the <u>sum</u> of the scores for each shared concept.<p>A shared concept score is the <u>product</u> of the concept scores for each person.</p><p>Click any person's concept score value to show details.</p></div>
+                    <div class="passiveSectonBody"> The connection strength for related authors is the <u>sum</u> of the scores for each shared concept.<p>A shared concept score is the <u>product</u> of the concept scores for each person.</p><p>Click any person's concept score value to show details.</p></div>
                   </Param>
                 </ParamList>
               </Module>

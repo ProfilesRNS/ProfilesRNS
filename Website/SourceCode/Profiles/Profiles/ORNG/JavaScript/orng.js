@@ -65,6 +65,9 @@ gadgets.pubsubrouter.init(function (id) {
         else if (channel == 'JSONPersonIds') {
             // do nothing, no need to alert
         }
+        else if (channel == 'hide') { // still used by Knode search
+            document.getElementById(sender).parentNode.parentNode.style.display = 'none';
+        }
         else {
             alert(sender + " publishes '" + message + "' to channel '" + channel + "'");
         }

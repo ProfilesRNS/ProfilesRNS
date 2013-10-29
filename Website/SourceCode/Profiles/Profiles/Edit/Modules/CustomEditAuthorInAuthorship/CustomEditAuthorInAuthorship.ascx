@@ -25,8 +25,7 @@
         <asp:UpdateProgress ID="updateProgress" runat="server">
             <ProgressTemplate>
                 <div class="progress">
-                    <span><img alt="Loading..." src="../edit/images/loader.gif" /><br />
-                        <i>This operation might take several minutes to complete. Please do not close your browser.</i>
+                    <span><img alt="Loading..." src="../edit/images/loader.gif" /><br />                        <i>This operation might take several minutes to complete. <br />Please do not close your browser.</i>
                     </span>
                 </div>
                 

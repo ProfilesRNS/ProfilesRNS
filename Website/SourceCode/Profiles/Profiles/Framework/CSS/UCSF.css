@@ -108,6 +108,7 @@ table, tr { border-width: 0; border-spacing: 0; border-color: transparent; } /* 
 .listTablePaginationFL img { margin-top: 4px; } 
 .listTablePaginationFL img { margin-top: 5px\9; } 
 .listTable table, .oddRow td, .evenRow td, .topRow th,
+#thetable1 th, #similarConnection th,
 #ctl00_ContentMain_rptMain_ctl00_ctl00_gvIndirectConnectionDetails,
 #ctl00_ContentMain_rptMain_ctl00_ctl00_gvWhoCanIEdit td,
 #ctl00_ContentMain_rptMain_ctl00_ctl00_gvYouCanEdit td,
@@ -121,7 +122,8 @@ table, tr { border-width: 0; border-spacing: 0; border-color: transparent; } /* 
 #ctl00_ContentMain_rptMain_ctl00_ctl00_pnlProxySearchResults tr.edittable td:first-child, 
 #ctl00_ContentMain_rptMain_ctl00_ctl00_pnlProxySearchResults tr.evenRow td:first-child { 
   color: #0088CC; cursor: pointer; }
-
+.connectionContainerTable { background-color: #F2F7F7; border: 1px solid #CCC; }
+.connectionContainerTable td { width: 220px; }
 
 #defaultmenu, #minisearch { display: none; } 
 .SupportText { border: none; }

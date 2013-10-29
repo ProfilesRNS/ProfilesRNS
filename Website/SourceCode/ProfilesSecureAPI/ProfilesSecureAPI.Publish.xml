@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <publishData>
-  <publishProfile publishUrl="Y:\Profiles103SecureAPI" deleteExistingFiles="True" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="FileSystem" replaceMatchingFiles="False" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
-    <file relUrl="bin/ProfilesSecureAPI.pdb" publishTime="09/12/2013 14:18:51" />
+  <publishProfile publishUrl="Z:\Profiles200SecureAPI" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="FileSystem" replaceMatchingFiles="True" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
+    <file relUrl="bin/ProfilesSecureAPI.pdb" publishTime="10/28/2013 00:21:07" />
     <file relUrl="Scripts/jquery-1.4.1-vsdoc.js" publishTime="08/27/2013 10:30:25" />
-    <file relUrl="Web.config" publishTime="09/12/2013 14:10:28" />
+    <file relUrl="Web.config" publishTime="10/15/2013 11:24:40" />
     <file relUrl="Scripts/jquery-1.4.1.min.js" publishTime="08/27/2013 10:30:25" />
     <file relUrl="Default.aspx" publishTime="08/27/2013 10:30:25" />
     <file relUrl="ActivityLog.aspx" publishTime="08/30/2013 13:18:49" />
     <file relUrl="Scripts/jquery-1.4.1.js" publishTime="08/27/2013 10:30:25" />
-    <file relUrl="bin/ProfilesSecureAPI.dll" publishTime="09/12/2013 14:18:51" />
+    <file relUrl="bin/ProfilesSecureAPI.dll" publishTime="10/28/2013 00:21:07" />
   </publishProfile>
 </publishData>

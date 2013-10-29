@@ -76,7 +76,7 @@
               <xsl:variable name="objectResource" select="./rdf:object/@rdf:resource"/>
 			  <xsl:variable name="connectionDetail" select="./prns:hasConnectionDetails/@rdf:resource"/>
 			  <xsl:variable name="isCoAuthor" select="/rdf:RDF/rdf:Description[@rdf:about=$connectionDetail]/prns:isAlsoCoAuthor"/>
-              <tr  onclick="doURL('{$objectResource}')" test="{$connectionDetail}" onmouseover="doListTableRowOver(this)">
+              <tr  onclick="doURL('{$objectResource}')" test="{$connectionDetail}">
                 <xsl:choose>
                   <xsl:when test="position() mod 2 = 0">
                     <xsl:attribute name="class">
@@ -115,8 +115,8 @@
                     <xsl:value-of select="substring(/rdf:RDF/rdf:Description[@rdf:about=$connectionResource]/prns:connectionWeight,1,5)"/>
                   
                 </td>
-                <td onclick="doListTableCellClick(this);document.location = '{@rdf:about}';" onmouseout="doListTableCellOut(this);" onmouseover="doListTableCellOver(this);">
-                  <div class="listTableLink" style="width: 38px; color: rgb(51, 102, 204);">Why?</div>
+                <td onclick="doListTableCellClick(this);document.location = '{@rdf:about}';" class="linky" style="text-align:center;">
+                  <div class="listTableLink" style="width: 38px;">Why?</div>
                 </td>
               </tr>
             </xsl:for-each>

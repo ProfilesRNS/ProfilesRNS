@@ -110,7 +110,7 @@ namespace Profiles.Search.Modules.SearchResults
             if (String.IsNullOrEmpty(Request.QueryString["searchfor"])==false)
             {
                 searchfor = Request.QueryString["searchfor"];
-                exactphrase = Request.QueryString["exactphrase"];
+                //exactphrase = Request.QueryString["exactphrase"];  This is causing a bug. We test and set this if present later in this block anyway
             }
             else if(String.IsNullOrEmpty(Request.Form["txtSearchFor"])==false)
             {
@@ -339,13 +339,15 @@ namespace Profiles.Search.Modules.SearchResults
                         break;
                 }
 
-                new Responder(Page, xmlsearchrequest); 
+                new Responder(Page, xmlsearchrequest);
+DebugLogging.Log("ONE");
                 
                 this.SearchData = data.Search(xmlsearchrequest, false);
                 this.SearchRequest = data.EncryptRequest(xmlsearchrequest.OuterXml);
                 base.MasterPage.SearchRequest = this.SearchRequest;
                 base.MasterPage.RDFData = this.SearchData;
                 base.MasterPage.RDFNamespaces = this.Namespaces;
+DebugLogging.Log("TWO");
 
             }
             catch (DisallowedSearchException se)
@@ -356,6 +358,7 @@ namespace Profiles.Search.Modules.SearchResults
             catch (Exception ex)
             {
                 ex = ex;
+                DebugLogging.Log("ERROR" + ex.Message);
                 //for now just flip it back to the defaults. This is if someone keys some funky divide by zero stuff in the URL
                 // to try and break the system.
                 startrecord = 1;

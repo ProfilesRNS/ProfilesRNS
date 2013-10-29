@@ -7,7 +7,7 @@
 Proxies are people who can edit other people's profiles on their behalf. For example,
 faculty can designate their assistants as proxies to edit their profiles. If you
 have a profile, then one or more proxies might be assigned to you automatically
-by your department or institution. You also have the option of designation your
+by your department or institution. You also have the option of designating your
 own proxies.
 <br />
 <br />

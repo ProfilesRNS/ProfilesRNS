@@ -538,8 +538,8 @@ BEGIN
 										@PropertyGroupURI = 'http://orng.info/ontology/orng#PropertyGroupORNGApplications', 
 										@ClassURI = 'http://xmlns.com/foaf/0.1/Person',
 										@IsDetail = 0,
-										@IncludeDescription = 1								
-		UPDATE [Ontology.].[ClassProperty] set EditExistingSecurityGroup = -20, IsDetail = 0, IncludeDescription = 1,
+										@IncludeDescription = 0								
+		UPDATE [Ontology.].[ClassProperty] set EditExistingSecurityGroup = -20, IsDetail = 0, IncludeDescription = 0,
 				CustomEdit = 1, CustomEditModule = @CustomEditModule,
 				CustomDisplay = 1, CustomDisplayModule = @CustomDisplayModule,
 				EditSecurityGroup = -20, EditPermissionsSecurityGroup = -20, -- was -20's
