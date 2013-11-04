@@ -33,9 +33,9 @@ namespace Profiles
                                     "<url><loc>" + Root.Domain + "/search</loc></url>" + Environment.NewLine +
                                     "<url><loc>" + Root.Domain + "/search/people</loc></url>" + Environment.NewLine +
                                     "<url><loc>" + Root.Domain + "/search/all</loc></url>" + Environment.NewLine);
-            foreach (Int64 nodeId in LoadPeople()) 
+            foreach (string urlname in LoadPeople()) 
             {
-                    Response.Write("<url><loc>" + Root.Domain + "/display/" + nodeId + "</loc></url>" + Environment.NewLine);
+                    Response.Write("<url><loc>" + Root.Domain + "/" + urlname + "</loc></url>" + Environment.NewLine);
             }
 
             Response.Write("</urlset>");
@@ -45,21 +45,20 @@ namespace Profiles
         }
 
         // can do this via Search API but this is much faster since we know exactly what we want
-        private List<Int64> LoadPeople()
+        private List<string> LoadPeople()
         {
-            List<Int64> nodeIds = new List<Int64>();
+            List<string> urlNames = new List<string>();
             DataIO data = new DataIO();
             using (SqlDataReader reader = data.GetDBCommand(ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString,
-                "select n.nodeId from [Profile.Data].Person p join [RDF.Stage].InternalNodeMap n on cast(p.PersonID as varchar) = n.InternalID " +
-                "and Class = 'http://xmlns.com/foaf/0.1/Person' where p.IsActive = 1"
+                "select n.UrlName from [Profile.Data].Person p join [UCSF.].NameAdditions n on p.InternalUserName = n.InternalUserName where p.IsActive = 1"
                 , CommandType.Text, CommandBehavior.CloseConnection, null).ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    nodeIds.Add(reader.GetInt64(0));
+                    urlNames.Add(reader[0].ToString());
                 }
             }
-            return nodeIds;
+            return urlNames;
         }
     }
 

@@ -26,7 +26,7 @@ image { border: none; }
 input#chkExactphrase, input#institutionallexcept, input#departmentallexcept { display: none; }
 .searchForm .inputText { width: 245px; }
 #divChkList { border: 1px solid #CCC !important; margin-top: -5px; width: 248px !important; 
-  height: 160px !important; padding-top: 15px !important; }
+  height: 190px !important; padding-top: 15px !important; }
 /* move global health checkboxes up */
 #divMaster_CTC1 { margin-top: -25px; }
 #divOtherOptions { 

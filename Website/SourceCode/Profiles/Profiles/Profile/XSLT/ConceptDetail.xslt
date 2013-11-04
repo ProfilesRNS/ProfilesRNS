@@ -8,10 +8,10 @@
     <script type="text/javascript">
       <xsl:text disable-output-escaping="yes">
       var hasClickedListTable = false;
-      function doListTableRowOver(x) {
+      function DISABLEDdoListTableRowOver(x) {
       //x.className = 'overRow';
-      x.style.backgroundColor = '#5A719C';
-      x.style.color = '#FFF';
+      //x.style.backgroundColor = '#5A719C';
+      //x.style.color = '#FFF';
       for (var i = 0; i &lt; x.childNodes.length; i++) {
       if (x.childNodes[i].childNodes.length > 0) {
       if (x.childNodes[i].childNodes[0].className == 'listTableLink') {
@@ -20,7 +20,7 @@
       }
       }
       }
-      function doListTableRowOut(x, eo) {
+      function DISABLEDdoListTableRowOut(x, eo) {
       if (eo == 1) {
       //x.className = 'oddRow';
       x.style.backgroundColor = '#FFFFFF';
@@ -37,11 +37,11 @@
       }
       }
       }
-      function doListTableCellOver(x) {
+      function DISABLEDdoListTableCellOver(x) {
       //x.className = 'listTableLinkOver';
-      x.style.backgroundColor = '#36C';
+      //x.style.backgroundColor = '#36C';
       }
-      function doListTableCellOut(x) {
+      function DISABLEDdoListTableCellOut(x) {
       //x.className = 'listTableLink';
       x.style.backgroundColor = '';
       }
@@ -87,23 +87,23 @@
             <xsl:variable name="connectionResource" select="./prns:hasConnectionDetails/@rdf:resource"/>
             <xsl:variable name="whyLink" select="./@rdf:about"/>
             <xsl:variable name="detailsResource" select="./prns:hasConnectionDetails/@rdf:resource"/>
-            <tr  onclick="doURL('{$objectResource}')" onmouseover="doListTableRowOver(this)">
+            <tr  onclick="doURL('{$objectResource}')">
               <xsl:choose>
                 <xsl:when test="position() mod 2 = 0">
                   <xsl:attribute name="class">
                     <xsl:value-of select="'evenRow'"/>
                   </xsl:attribute>
-                  <xsl:attribute name="onmouseout">
+<!--                  <xsl:attribute name="onmouseout">
                     <xsl:value-of  select="'doListTableRowOut(this,0)'"/>
-                  </xsl:attribute>
+                  </xsl:attribute>  -->
                 </xsl:when>
                 <xsl:otherwise>
                   <xsl:attribute name="class">
                     <xsl:value-of select="'oddRow'"/>
                   </xsl:attribute>
-                  <xsl:attribute name="onmouseout">
+<!--                  <xsl:attribute name="onmouseout">
                     <xsl:value-of  select="'doListTableRowOut(this,1)'"/>
-                  </xsl:attribute>
+                  </xsl:attribute>  -->
                 </xsl:otherwise>
               </xsl:choose>
               <td style="text-align: left;" class="alignLeft">

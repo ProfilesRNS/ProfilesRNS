@@ -241,7 +241,7 @@ namespace Profiles.Search.Modules.SearchPerson
 
 
             litFacRankScript.Text = "<script>";
-            for (int i = 0; i < rowNo - 1; i++)
+            for (int i = 0; i < rowNo; i++)
             {
                 lstValue = dtListItem[i].Text;
                 lstID = dtListItem[i].Value;
