@@ -1,4 +1,4 @@
-﻿.searchForm td div.header { color: #CA7C29; font-size: 30px; font-weight: bold; margin: 16px 0 8px; }
+﻿.searchForm td div.header { color: #900; font-size: 30px; font-weight: bold; margin: 16px 0 8px; }
 .searchForm #div1 { border-top: none; padding-top: 12px; padding-top: 20px\9; } 
 .searchForm #div1 th { font-weight: normal; width: 140px; }
 #searchOptions { margin-top: -36px; margin-bottom: 25px; }
@@ -6,7 +6,7 @@
 #txtSearchFor { padding-left: 2px; height: 30px; height: 22px\9; padding-top: 6px\9; }
 .listTable th { border: 1px solid #CCC !important; }
 #tblSearchResults th { text-align: left; }
-#suckerfishmenu li.item-home a { background-color: #6A7D7D !important; }
+#suckerfishmenu li.item-home a { background-color: #880000 !important; }
 /* we didn't use this filters display
 #filtersContainer { width: 680px; }
 #filtersContainer #filters { display: inline-block; width: 580px; margin-bottom: 5px; white-space: nowrap; }
@@ -26,7 +26,7 @@ image { border: none; }
 input#chkExactphrase, input#institutionallexcept, input#departmentallexcept { display: none; }
 .searchForm .inputText { width: 245px; }
 #divChkList { border: 1px solid #CCC !important; margin-top: -5px; width: 248px !important; 
-  height: 190px !important; padding-top: 15px !important; }
+  height: 160px !important; padding-top: 15px !important; }
 /* move global health checkboxes up */
 #divMaster_CTC1 { margin-top: -25px; }
 #divOtherOptions { 

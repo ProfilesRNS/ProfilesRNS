@@ -4,7 +4,7 @@
 .profiles .profilesContentPassive { width: 192px; padding: 4px 20px 0 0; }
 img#ctl00_ContentMain_rptMain_ctl00_ctl00_imgPhoto { width: 150px; }
 .PropertyGroupItem { margin: 0 0 10px; border: none; }
-.PropertyItemHeader { color: #CA7C29; font-size: 16px; background-color: #FFF; clear:left;
+.PropertyItemHeader { color: #900; font-size: 16px; background-color: #FFF; clear:left;
   border-top: 1px solid #EEE; padding: 6px 0 0 !important; margin: 15px 0 0; }
 .PropertyItemHeader a { display: none; }
 #toc { min-height: 27px; margin: 30px 0; background-color: #EEE; border: none; width: 680px\9; padding-bottom: 4px\9; }
@@ -34,14 +34,14 @@ img#ctl00_ContentMain_rptMain_ctl00_ctl00_imgPhoto { width: 150px; }
 .plusbutton, .minusbutton {
      position: absolute; bottom: 0; right: 0; 
      margin: 0; padding: 0 20px 0 9px; 
-     color: #CA7C29; line-height: 17px;
+     color: #990; line-height: 17px;
      background-color: #FFF;
 }
 .plusbutton span:hover, .minusbutton span:hover { 
-     color: #CA7C29; text-decoration: underline; cursor: pointer;
+     color: #990; text-decoration: underline; cursor: pointer;
 }
 
 
 .awardsList table { width: 680px; }
-.atog { color: #CA7C29; background-color: #FFF; white-space: nowrap; float: right; }
+.atog { color: #990; background-color: #FFF; white-space: nowrap; float: right; }
 .atog:hover { text-decoration: underline; cursor: pointer; }

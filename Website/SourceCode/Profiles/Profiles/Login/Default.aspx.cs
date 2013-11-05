@@ -56,8 +56,9 @@ namespace Profiles.Login
         {
             string presentationxml = string.Empty;
             
-            //presentationxml = System.IO.File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "/Login/PresentationXML/LoginFormPresentation.xml");
-            presentationxml = System.IO.File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "/Login/PresentationXML/ShibbolethLoginPresentation.xml");
+            // TEMP for USC
+            presentationxml = System.IO.File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "/Login/PresentationXML/LoginFormPresentation.xml");
+            //presentationxml = System.IO.File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "/Login/PresentationXML/ShibbolethLoginPresentation.xml");
 
             this.PresentationXML = new XmlDocument();
             this.PresentationXML.LoadXml(presentationxml);

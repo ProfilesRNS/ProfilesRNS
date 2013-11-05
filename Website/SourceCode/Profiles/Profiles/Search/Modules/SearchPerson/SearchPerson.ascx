@@ -294,6 +294,8 @@
                 </tr>
             </table>
         </div>
+<!--
             <p><img src="<%=GetURLDomain()%>/Search/Images/icon_squareArrow.gif" /> <a href="<%=GetURLDomain()%>/direct">Search other institutions</a></p>
+-->
     </div>
 </div>
