@@ -50,6 +50,10 @@ namespace Profiles.ORNG.JSONLD
             {
                 nodeid = new DataIO().GetNodeId(Convert.ToInt32(person));
             }
+            else
+            {
+                Response.Redirect(Profiles.Framework.Utilities.Root.Domain + "/ORNG/JSONLD/Test.htm");
+            }
 
             Response.Clear();
             Response.Charset = "charset=UTF-8";
