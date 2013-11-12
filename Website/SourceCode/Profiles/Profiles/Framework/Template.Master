@@ -49,9 +49,9 @@
 </head>
 <body id="bodyMaster" runat="server">
 <form runat="server" id="form1" enctype="multipart/form-data" method="post">   
-<!-- Qualaroo for ucsf.edu -->
+<!-- Qualaroo for ucsf.edu 
 <script type="text/javascript">    var _kiq = _kiq || [];</script>
-<script type="text/javascript" src="//s3.amazonaws.com/ki.js/21116/49p.js" async="true"></script>
+<script type="text/javascript" src="//s3.amazonaws.com/ki.js/21116/49p.js" async="true"></script> -->
 
     <div id="divStatus" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 999999; display:none;">
          <div class="progress">
@@ -108,7 +108,7 @@
           <a id="powered-by-ctsi" href="http://ctsi.ucsf.edu/" target="_blank">Powered by <span>SC CTSI</span></a>
         </div>
         <div id="new-features">
-          <a href="<%=GetURLDomain()%>/about/NewFeatures.aspx">New Features: Learn more <span>></span></a>
+          <a href="http://sc-ctsi.org/index.php/resources/resources_overview">Find more research resources <span>»</span></a>
         </div>
     </div>	    
     <div id="suckerfish-container">
@@ -117,8 +117,8 @@
            <ul class="menu">
               <li class="item-home"><asp:HyperLink ID="navResearch" runat="server" Text="Search" NavigateUrl="~/"></asp:HyperLink></li>
               <li id="about"><a href="<%=GetURLDomain()%>/about/AboutUCSFProfiles.aspx">About</a></li>
-              <li id="data"><a href="<%=GetURLDomain()%>/about/ForDevelopers.aspx">Use our Data</a></li>
-              <li id="contact"><a href="<%=GetURLDomain()%>/about/Help.aspx">Help / Contact Us</a></li>                     </ul>
+              <li id="data"><a href="<%=GetURLDomain()%>/about/ForDevelopers.aspx">Use this Data for Your Site</a></li>
+              <li id="contact"><a href="<%=GetURLDomain()%>/about/Help.aspx">Help</a></li>                     </ul>
          </div>
        </div>
     </div>
@@ -244,6 +244,7 @@
 and must comply with the
 <a target="blank" href="http://publicaccess.nih.gov/">NIH Public Access Policy.</a></p>
                                         </div>
+<!--
                                         <div id="footer-contact">
                                            <ul>
                                               <li><a href="<%=GetURLDomain()%>/">Home</a></li>
@@ -254,6 +255,7 @@ and must comply with the
                                            <p>Copyright &copy; 2013 The University of Southern California  
                                            </p>
                                         </div>
+-->
 					<asp:ContentPlaceHolder ID="ContentFooter" runat="server">
 						<asp:Repeater runat="server" ID="rptFooter" OnItemDataBound="DrawModule">
 							<ItemTemplate>
@@ -275,15 +277,6 @@ and must comply with the
        <img src="<%=GetURLDomain()%>/framework/images/backtotop.gif" border="0" alt="Back to TOP" />  
     </a>  
 </div>
-
-<script type="text/javascript">
-    setTimeout(function () {
-        var a = document.createElement("script");
-        var b = document.getElementsByTagName("script")[0];
-        a.src = document.location.protocol + "//dnn506yrbagrg.cloudfront.net/pages/scripts/0010/2559.js?" + Math.floor(new Date().getTime() / 3600000);
-        a.async = true; a.type = "text/javascript"; b.parentNode.insertBefore(a, b)
-    }, 1);
-</script>
 </body>
 <asp:Panel runat="server" ID="pnlNavBarSearch" Visible="true">
     <form id="navbarsearch" action="<%=GetURLDomain()%>/Search/Default.aspx?">

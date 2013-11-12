@@ -1,4 +1,4 @@
-﻿.searchForm td div.header { color: #900; font-size: 30px; font-weight: bold; margin: 16px 0 8px; }
+﻿.searchForm td div.header { color: #000; font-size: 30px; font-weight: bold; margin: 16px 0 8px; }
 .searchForm #div1 { border-top: none; padding-top: 12px; padding-top: 20px\9; } 
 .searchForm #div1 th { font-weight: normal; width: 140px; }
 #searchOptions { margin-top: -36px; margin-bottom: 25px; }
@@ -23,7 +23,7 @@ image { border: none; }
 .panelActive { margin-top: 29px; margin-top: 35px\9; }
 .profiles .profilesContentPassive { margin-top: 38px; margin-top: 35px\9; } 
 
-input#chkExactphrase, input#institutionallexcept, input#departmentallexcept { display: none; }
+input#chkExactphrase, input#institutionallexcept, input#departmentallexcept, .except input { display: none; }
 .searchForm .inputText { width: 245px; }
 #divChkList { border: 1px solid #CCC !important; margin-top: -5px; width: 248px !important; 
   height: 160px !important; padding-top: 15px !important; }

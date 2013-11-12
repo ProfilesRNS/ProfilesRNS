@@ -2,9 +2,10 @@
 .profilesPage .profilesPageColumnLeft { display: none; }
 .profiles .profilesContentMain { width: 680px; margin: 10px 60px 0 10px !important; }
 .profiles .profilesContentPassive { width: 192px; padding: 4px 20px 0 0; }
+.myNetworks { color: #000; font-weight: bold; margin: 10px 0 -8px; background-color: #EEE; padding: 8px 2px; text-align: center; }
 img#ctl00_ContentMain_rptMain_ctl00_ctl00_imgPhoto { width: 150px; }
 .PropertyGroupItem { margin: 0 0 10px; border: none; }
-.PropertyItemHeader { color: #900; font-size: 16px; background-color: #FFF; clear:left;
+.PropertyItemHeader { color: #000; font-size: 16px; background-color: #FFF; clear:left;
   border-top: 1px solid #EEE; padding: 6px 0 0 !important; margin: 15px 0 0; }
 .PropertyItemHeader a { display: none; }
 #toc { min-height: 27px; margin: 30px 0; background-color: #EEE; border: none; width: 680px\9; padding-bottom: 4px\9; }

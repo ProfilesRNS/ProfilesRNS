@@ -52,7 +52,6 @@ namespace Profiles.ORNG.JSONLD
             }
             else
             {
-                // send them to the Test.htm page
                 Response.Redirect(Profiles.Framework.Utilities.Root.Domain + "/ORNG/JSONLD/Test.htm");
             }
 

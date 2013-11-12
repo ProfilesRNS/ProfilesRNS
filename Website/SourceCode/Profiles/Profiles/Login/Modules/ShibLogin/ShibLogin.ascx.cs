@@ -105,6 +105,10 @@ namespace Profiles.Login.Modules.ShibLogin
                 {
                     Response.Redirect(Root.Domain + "/profile/" + sm.Session().NodeID);
                 }
+                else if ("myproxies".Equals(Request.QueryString["redirectto"].ToLower()))
+                {
+                    Response.Redirect(Root.Domain + "/proxy/default.aspx?subject=" + sm.Session().NodeID);
+                }
                 else 
                 {
                     Response.Redirect(Request.QueryString["redirectto"].ToString());

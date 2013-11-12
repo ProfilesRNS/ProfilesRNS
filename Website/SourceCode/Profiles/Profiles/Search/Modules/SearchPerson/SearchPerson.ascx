@@ -3,8 +3,9 @@
 <%@ Register Src="ComboTreeCheck.ascx" TagName="ComboTreeCheck" TagPrefix="uc1" %>
 
 <style type="text/css">
-.profiles .profilesContentMain { width: 584px; }
-.profiles .profilesContentPassive { margin-right: 20px; }
+.profilesPage .profilesPageColumnLeft { display: none; }
+.profiles .profilesContentMain { width: 584px; margin: 10px 60px 0 !important; }
+.profiles .profilesContentPassive { width: 236px; padding: 4px 0 0; margin-right: 20px; }
 .profiles .profilesContentMain .pageTitle h2 { display: none; }
 </style>
 
@@ -137,7 +138,7 @@
                                         </th>
                                         <td colspan="2" class="fieldOptions">
                                             <asp:TextBox runat="server" ID="txtSearchFor" CssClass="inputText"></asp:TextBox>
-                                            <asp:CheckBox runat="server" ID="chkExactphrase" />
+                                            <span class="except"><asp:CheckBox runat="server" ID="chkExactphrase" /></span>
                                         </td>
 <!--  NOTE: checkboxes are hidden in css
                                             Search for exact phrase
@@ -195,7 +196,7 @@
                                     <th>
                                         School
                                     </th>
-                                    <td colspan="2">
+                                    <td colspan="2" class="except">
                                         <asp:Literal runat="server" ID="litInstitution"></asp:Literal>
                                         <asp:CheckBox runat="server" ID="institutionallexcept" />
 <!--
@@ -207,7 +208,7 @@
                                     <th>
                                         Department
                                     </th>
-                                    <td colspan="2">
+                                    <td colspan="2" class="except">
                                         <asp:Literal runat="server" ID="litDepartment"></asp:Literal>
                                         <asp:CheckBox runat="server" ID="departmentallexcept" />
 <!--
@@ -294,8 +295,6 @@
                 </tr>
             </table>
         </div>
-<!--
-            <p><img src="<%=GetURLDomain()%>/Search/Images/icon_squareArrow.gif" /> <a href="<%=GetURLDomain()%>/direct">Search other institutions</a></p>
--->
+            <p><img src="<%=GetURLDomain()%>/Framework/Images/icon_squareArrow.gif" /> <a href="<%=GetURLDomain()%>/direct">Search other institutions</a></p>
     </div>
 </div>
