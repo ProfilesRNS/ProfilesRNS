@@ -43,23 +43,14 @@ namespace Profiles.Login.Modules.ShibLogin
                 else if (Request.QueryString["method"].ToString() == "shibboleth")
                 {
                     // added by Eric
-                    String employeeID = Request.Headers.Get(ConfigurationManager.AppSettings["Shibboleth.InternalUserNameHeader"].ToString()); //"025693078";
-                    // new IDP
-                    if (employeeID == null || employeeID.Trim().Length == 0)
-                    {
-                        employeeID = Request.Headers.Get("uid"); //"025693078";
-                        if (employeeID != null && employeeID.Trim().Length > 9)
-                        {
-                            employeeID = employeeID.Substring(0, 9);
-                        }
-                    }
-                    if (employeeID != null && employeeID.Trim().Length > 0)
+                    String userName = Request.Headers.Get(ConfigurationManager.AppSettings["Shibboleth.InternalUserNameHeader"].ToString()); //"025693078";
+                    if (userName != null && userName.Trim().Length > 0)
                     {
                         Profiles.Login.Utilities.DataIO data = new Profiles.Login.Utilities.DataIO();
                         Profiles.Login.Utilities.User user = new Profiles.Login.Utilities.User();
 
-                        user.UserName = employeeID;
-                        user.Password = employeeID;
+                        user.UserName = userName;
+                        user.Password = userName;
                         if (data.UserLogin(ref user))
                         {
                             RedirectAuthenticatedUser();
