@@ -43,7 +43,7 @@ namespace Profiles.Login.Modules.ShibLogin
                 else if (Request.QueryString["method"].ToString() == "shibboleth")
                 {
                     // added by Eric
-                    String employeeID = Request.Headers.Get("employeeNumber"); //"025693078";
+                    String employeeID = Request.Headers.Get(ConfigurationManager.AppSettings["Shibboleth.InternalUserNameHeader"].ToString()); //"025693078";
                     // new IDP
                     if (employeeID == null || employeeID.Trim().Length == 0)
                     {
