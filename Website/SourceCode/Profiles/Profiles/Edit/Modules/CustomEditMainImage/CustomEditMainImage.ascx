@@ -55,7 +55,7 @@
         </table>
         <div runat="server" ID="pnlUpload" visible="false">
         <br />
-            Select custom photo for upload
+            Select custom photo for upload.<br />Maximum file size: 2MB<br />Photos will be scaled to 150 pixels wide and optimized for the web.
             <cc1:AsyncFileUpload ID="AsyncFileUpload1" runat="server" OnUploadedComplete="ProcessUpload"
                 OnClientUploadComplete="showUploadConfirmation" ThrobberID="spanUploading" />                        
             <span id="spanUploading" runat="server">Uploading...</span>

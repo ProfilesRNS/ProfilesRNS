@@ -7,7 +7,7 @@
     <script type="text/javascript">
       <xsl:text disable-output-escaping="yes">
       var hasClickedListTable = false;
-      function doListTableRowOver(x) {
+      function DISABLEDdoListTableRowOver(x) {
       //x.className = 'overRow';
       x.style.backgroundColor = '#5A719C';
       x.style.color = '#FFF';
@@ -19,7 +19,7 @@
       }
       }
       }
-      function doListTableRowOut(x, eo) {
+      function DISABLEDdoListTableRowOut(x, eo) {
       if (eo == 1) {
       //x.className = 'oddRow';
       x.style.backgroundColor = '#FFFFFF';
@@ -36,7 +36,7 @@
       }
       }
       }
-      function doListTableCellOver(x) {
+      function DISABLEDdoListTableCellOver(x) {
       //x.className = 'listTableLinkOver';
       x.style.backgroundColor = '#36C';
       }
@@ -79,7 +79,7 @@
             <xsl:variable name="objectResource" select="./rdf:object/@rdf:resource"/>
             <xsl:variable name="detailsResource" select="./prns:hasConnectionDetails/@rdf:resource"/>
             <xsl:variable name="whyLink" select="./@rdf:about"/>
-            <tr  onclick="doURL('{$objectResource}')" onmouseover="doListTableRowOver(this)">
+            <tr  onclick="doURL('{$objectResource}')">
               <xsl:choose>
                 <xsl:when test="position() mod 2 = 0">
                   <xsl:attribute name="class">
