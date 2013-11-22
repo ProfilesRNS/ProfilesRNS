@@ -10,8 +10,8 @@
 				<div><a href="<%= this.Subject.Uri%>"><%= this.Subject.Name %></a></div>
 				<%--<div class="connectionItemSubText">25 Total Publications</div>--%>
 			</td>
-			<td class="connectionContainerArrow">
-				<table class="connectionArrowTable" style="width:150px;">
+			<td class="connectionContainerArrow" style="width:150px;">
+				<table class="connectionArrowTable">
 				<tbody><tr>
 					<td><div class="connectionSubDescription">Connection Strength</div></td>
 				</tr>
@@ -22,7 +22,6 @@
 					<td class="connectionLine"><div>&nbsp;</div></td>
 					<td class="connectionLine"><img src="<%= this.GetRootDomain() %>/Framework/Images/connection_right.gif"></td>
 -->
-				</tr>
 				<tr>
 					<td><div class="connectionSubDescription"><%= String.Format("{0:0.000}", this.ConnectionStrength) %></div></td>
 				</tr>

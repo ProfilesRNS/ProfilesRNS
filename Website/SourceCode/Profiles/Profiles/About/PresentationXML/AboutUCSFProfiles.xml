@@ -1,7 +1,7 @@
 ﻿<Presentation PresentationClass="profile">
   <PageOptions Columns="2"/>
   <WindowName>About</WindowName>  
-  <PageTitle>What is UCSF Profiles?</PageTitle>
+  <PageTitle>What is Profiles?</PageTitle>
   <PageBackLinkName></PageBackLinkName>
   <PageBackLinkURL></PageBackLinkURL>
   <PageSubTitle></PageSubTitle>
@@ -19,85 +19,91 @@
           <Param Name="HTML">
 
 <style type="text/css">
-#suckerfishmenu li#about a { background-color: #6A7D7D !important; }
+#suckerfishmenu li#about a { background-color: #900 !important; }
+.profilesPage .profilesPageColumnLeft { display: none; }
+.profiles .profilesContentMain { width: 784px; margin: 10px 65px 0 !important; }
+#signin { padding-left: 72px; }
+.profiles .profilesContentMain .pageTitle h2 { text-align: center; font-weight: normal; }
 </style>
-<h3 style="text-align:center;font-size:20px;padding:10px 0 16px;color:#999;margin:0">
+<h3 style="text-align:center;font-size:20px;padding:10px 0 16px;color:#777;margin:0;font-weight: normal;">
   A Research Networking and Expertise Mining Tool</h3>
-<p class="sautter"><a href="http://ctsi.ucsf.edu/news/about-ctsi/ucsf-profiles-receives-2013-sautter-award" target="_blank">Winner of the 2013 UC Sautter Golden Award</a></p>
 <table cellspacing="0" id="about">
  <tr>
-  <td style="background-color:#B8D0D0;padding:0 8px">
-    <h2>Search</h2>
-    <img src="images/search-icon.gif" alt="Magnifying Glass" class="sdn" style="margin:0 0 8px 25px" />
+  <td style="background-color:#CCC;padding:0 8px">
+    <h2>Find People</h2>
+    <img src="images/search-icon.gif" alt="Magnifying Glass" class="sdn" style="margin:4px 0 4px 55px" />
     <h3 style="text-align:center;color:#333">Experts, Collaborators, Mentors</h3>
     <ul class="square">
-       <li>100,000+ publications</li>
-       <li>3000+ UCSF faculty</li>
-       <li>1400+ UCSF residents and fellows</li>
-       <li>1000+ UCSF postdocs</li>
-       <li>30 biomedical institutions nationwide</li>
+       <li>2400+ USC faculty</li>
+       <li>Researchers at 30 biomedical institutions nationwide</li>
+       <li>Data on over 40,000+ publications</li>
     </ul>
   </td>
 
-  <td style="padding:0 8px">
+  <td style="padding:0 6px;border-left: 3px solid #999; border-right: 3px solid #999;">
     <h2>Discover Networks</h2>
-    <img src="images/profiles.jpg" alt="Discover Networks" class="sdn" style="margin:0 0 8px 30px" />
+    <img src="images/profiles.jpg" alt="Discover Networks" class="sdn" style="margin:10px 0 8px 65px" />
     <h3 style="text-align:center;color:#333">Peoples' Research Connections</h3>
     <ul class="square">
        <li>Who co-authored together</li>
        <li>Who worked on similar research topics</li>
+       <li>Who works in a person's department</li>
     </ul>
   </td>
 
-  <td style="background-color:#B8D0D0;padding:0 8px">
+  <td style="background-color:#CCC;padding:0 8px;">
     <h2>Edit Your Profile</h2>
-    <img src="images/develop-profile.gif" alt="Develop Your Profile" class="sdn" style="margin:0 0 8px 20px" />
+    <img src="images/develop-profile.gif" alt="Develop Your Profile" class="sdn" style="margin:4px 0 4px 65px" />
     <h3 style="text-align:center;color:#333">Information about Your Research</h3>
     <ul class="square">
-       <li>Overview to describe your work</li>
+       <li>Narrative to describe your work</li>
        <li>Photo, website links, and awards</li>
        <li>Mentoring information</li>
-       <li>Your presentations on SlideShare</li>
-       <li>Edit your publications if necessary</li>
+       <li>Auto-populated publications, if necessary</li>
     </ul>
-     <p style="text-align:center;margin:15px 40px 6px;padding:5px 0;border-left: solid 1px #8fb5b5;
-       border-top: solid 1px #8fb5b5;background-color:#FFF;">
-       <a href="../login/default.aspx?method=login&amp;edit=true" class="doublearrow">Edit your profile now</a></p>
+     <p style="text-align:center;">
+       <a href="../login/default.aspx?method=login&amp;edit=true"><img src="images/editProfile.gif" alt="Edit Your Profile" style="margin:4px 0 0" /></a></p>
  </td>
  </tr>
  <tr>
-  <td colspan="3" align="center" style="padding:5px 0 20px;">
+  <td colspan="3" align="center" style="padding:15px 0;border-bottom: 1px solid #CCC;"> 
+<!--
+    <a href="http://www.slideshare.net/scctsi/usc-health-sciences-researcher-profiles-tour">
+      <img src="images/TourProfiles-3D.png" alt="Tour Profiles" />
+    </a>
     <h2>Watch this short introduction video!</h2>
     <iframe width="560" height="325" src="//www.youtube.com/embed/YCOA2GWyplY" frameborder="0" allowfullscreen="true"></iframe>
+-->
   </td>
  </tr>
  <tr>
-  <td style="padding:8px 0 0 20px; font-size: 110%; border-bottom: 2px solid #B8D0D0;
-    background: transparent url(images/gear.gif) no-repeat 20px 14px;">
-    <h3 style="padding: 12px 0 8px 40px">Toolbox</h3> 
-    <ul class="square" style="margin-left: 0;">
-      <li><a href="ForDevelopers.aspx">Profiles data tools for your website</a></li>
-      <li><a href="http://www.orng.info/index.html">Profiles OpenSocial extensions</a></li>
-    </ul>
+  <td colspan="3" align="center" style="padding:5px 0;"> </td> 
+ </tr>
+ <tr>
+  <td style="text-align: center">    
+    <a href="http://www.youtube.com/watch?v=YCOA2GWyplY" target="_blank"><img src="images/video.png" alt="Profiles Video" /><br />Introduction video:<br />How USC Profiles works</a>
   </td>
-  <td style="padding:8px 0 0 20px; font-size: 110%; border-bottom: 2px solid #B8D0D0;
-    background: transparent url(images/help.gif) no-repeat 20px 12px;">
-    <h3 style="padding: 12px 0 8px 40px">Help</h3>
-    <ul class="square" style="margin-left: 0;">
-      <li><a href="Help.aspx#faq">Frequently Asked Questions</a></li>
-      <li><a href="mailto:profiles@ucsf.edu">Contact us</a></li>
-    </ul>
+  <td style="padding: 20px; text-align: center; color:#777; border-left: 1px solid #CCC; 
+    border-right: 1px solid #CCC;">
+    <div style="display: inline-block; font-size: 80px;  padding-right: 15px;">
+      ?</div>
+    <div style="display: inline-block; font-size: 130%; text-align: left">
+      Frequently<br />Asked<br />Questions</div><br /><br />
+      <a href="../About/help.aspx#faq">View the FAQ</a>
   </td>
-  <td style="padding:8px 0 0 20px; font-size: 110%; border-bottom: 2px solid #B8D0D0;
-    background: transparent url(images/comment.gif) no-repeat 20px 14px;">
-     <h3 style="padding: 12px 0 15px 40px">Feedback</h3> 
-     <p style="margin:0; font-size:12px"><a href="mailto:profiles@ucsf.edu">Contact us</a> to share your ideas and success stories.</p>
+  <td style="padding: 40px 0; text-align: center; color:#777;">
+     <span style="font-size: 130%">Profiles Updates</span> <br /><br /><br />
+     <a href="https://twitter.com/scctsi" class="twitter-follow-button" data-show-count="false">Follow @scctsi</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
   </td>
+ </tr>
+ <tr>
+  <td colspan="3" align="center" style="padding:5px 0;border-bottom: 1px solid #CCC;"> </td> 
  </tr>
 </table>
 
 <h3 style="padding-top:20px">Acknowledgements</h3>
-<p>UCSF Profiles is UCSF’s version of the ground-breaking, open source "Profiles Research Networking Software" that was developed under the supervision of Griffin M Weber, MD, PhD, with support from Grant Number 1 UL1 RR025758-01 to <a href="http://catalyst.harvard.edu/" target="_new">Harvard Catalyst: The Harvard Clinical and Translational Science Center</a> from the National Center for Research Resources and support from Harvard University and its affiliated academic healthcare centers.</p>
+<p>UCS Profiles is UCS’s version of the ground-breaking, open source "Profiles Research Networking Software" that was developed under the supervision of Griffin M Weber, MD, PhD, with support from Grant Number 1 UL1 RR025758-01 to <a href="http://catalyst.harvard.edu/" target="_new">Harvard Catalyst: The Harvard Clinical and Translational Science Center</a> from the National Center for Research Resources and support from Harvard University and its affiliated academic healthcare centers.</p>
 
 <p>Profiles Research Networking Software is available as an <a href="http://connects.catalyst.harvard.edu/Profiles/about/default.aspx?tab=open" target="_blank">open source platform</a> for institutions seeking a web-based means of facilitating collaboration among their academic researchers. </p>  
 

@@ -48,24 +48,20 @@ h1 a:hover { color: #457272; text-decoration: none; }
   font-family: Arial,Helvetica,sans serif;
 }
 #powered-by-block a, #powered-by-block a:visited {
-  background:url("../images/powered_by_scctsi.jpg") no-repeat scroll 0 2px transparent;
-  padding-left: 20px; margin-left: 285px;
+  background:url("../images/powered_by_scctsi.jpg") no-repeat scroll 0 1px transparent;
+  padding-left: 20px; margin-left: 292px;
   color: #000;
   font-size: 13px;
-  font-weight: 600;
   text-decoration: none;
   padding-top: 2px; 
-}
-#powered-by-block a span {
-  font-weight: 700;
 }
 #powered-by-block a:hover {
   color: #333;
   text-decoration: underline;
 } 
-#new-features { float: left; width: 237px; margin: 25px 0 0 219px; margin-top: 15px\9; }
+#new-features { float: left; width: 237px; margin: 25px 0 0 220px; margin-top: 15px\9; }
 #new-features a, #new-features a:visited,
-#new-features a:hover { background-color: #EEE; color: #267196; padding: 6px 12px; margin: 0;
+#new-features a:hover { background-color: #EEE; color: #267196; padding: 6px; margin: 0;
   font-family: Arial, Helvetica, sans serif; font-size: 13px; text-decoration: none;
   display: inline-block\9;
 }
@@ -94,7 +90,7 @@ table, tr { border-width: 0; border-spacing: 0; border-color: transparent; } /* 
 .profiles .profilesContentMain .pageTitle h2 a img { display: none; }  
 .profiles .profilesContentMain .pageTitle h2 { color: #000 !important; }
 .profiles .profilesContentMain .pageTitle h2 { font-size: 30px; font-weight: bold; line-height: 30px; }
-.profiles .profilesContentMain .aboutText h3, h3 { color: #666; }
+.profiles .profilesContentMain .aboutText h3, h3 { color: #777; }
 .profiles .profilesPageColumnLeft { padding-top: 6px; }
 .profiles a, .profiles a:visited { text-decoration: none; color: #267196 !important; }
 .profiles a:hover { color: #1f5d7b !important; }
@@ -164,7 +160,7 @@ table, tr { border-width: 0; border-spacing: 0; border-color: transparent; } /* 
 */
 
 #suckerfishmenu {
-	background-color: #990000; 
+	background-color: #771111; 
 	line-height: 35px; 
 	width: 980px; height: 37px;
 	font-family: Arial,Sans-Serif; 
@@ -200,7 +196,7 @@ table, tr { border-width: 0; border-spacing: 0; border-color: transparent; } /* 
   text-decoration: none;
   font-weight: bold;
   font-size: 1em; color: #FFF;
-  background-color: #990000; 
+  background-color: #771111; 
 }
 
 #suckerfishmenu	 a:active,
@@ -215,7 +211,7 @@ table, tr { border-width: 0; border-spacing: 0; border-color: transparent; } /* 
   margin: 0;
   padding: 0;
   font-variant: normal;
-  border-right: 1px solid #777;
+/*  border-right: 1px solid #777; */
 }
  
 /* second-level lists */
@@ -300,15 +296,15 @@ table, tr { border-width: 0; border-spacing: 0; border-color: transparent; } /* 
 
 /* login & edit links */
 #active-nav { text-align: left; padding: 5px 0; width: 100%; height: 21px; }
-#signin { display: block; padding-left: 20px; font-weight: bold; color: #888; }
+#signin { display: block; padding-left: 20px; color: #888; }
 ul#editmenu { padding: 0 0 0 20px; margin: 0; }
 ul#editmenu li { list-style-type: none; display: inline-block; padding: 0 13px 0 0;
    border-right: 1px solid #CCC; margin: 0 15px 0 0; line-height: 20px;
    height: 20px; overflow: hidden;
    width: auto\9; float: left\9; }
-ul#editmenu li img { width: 20px; height: auto; margin-top: -10%; }
-ul#editmenu li span { color: #666; }
-#menuthumb { float: left; height: 20px; width: 20px; overflow: hidden; margin-right: 4px; background-color: #666; }
+ul#editmenu li img { width: 20px; height: auto; }
+ul#editmenu li span { color: #777; }
+#menuthumb { float: left; height: 20px; width: 20px; overflow: hidden; margin-right: 4px; background-color: #CCC; }
 #ctl00_trbody .rdf { list-style-type: none; margin: 20px 10px; width: 190px; }
 
 #navbarsearch { float: right; width: 400px; text-align: right; padding-right: 20px; margin: 0;

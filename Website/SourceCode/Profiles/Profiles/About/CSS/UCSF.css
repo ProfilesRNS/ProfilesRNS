@@ -1,6 +1,6 @@
 ﻿.profilesPage .profilesPageColumnLeft { display: none; }
 .profiles .profilesContentMain { width: 680px; margin: 10px 60px 0 10px !important; }
-#about td { width:230px; vertical-align:top;border-top:2px solid #B8D0D0; }
+#about td { width:230px; vertical-align:top; }
 * html #about img.sdn { width: 160px; margin: 0 -20px; }
 #what-is { font-size: 20px; color: #FFF; padding: 15px 10px; background-color: #8fb5b5;
   font-weight:bold; line-height: 20px; letter-spacing: .5px; }
@@ -8,9 +8,9 @@
 #about td#what-is { background: #659191 url(smbg.gif) repeat-x 0 bottom; }
 * html #about td#what-is { width: 600px; } 
 *+html #about td#what-is { width: 690px; } 
-#about h2 { text-align: center; font-size: 20px; padding: 14px 0 8px; color: #CA7C29; margin: 0; }
-#about h3 { font-size: 14px; padding-bottom: 4px; padding-top: 4px; margin: 0; }
-h2.about { color: #CA7C29; font-size: 16px; }
+#about h2 { text-align: center; font-size: 20px; padding: 14px 0 8px; color: #000; margin: 0; }
+#about h3 { font-size: 14px; padding-bottom: 10px; padding-top: 4px; margin: 0; }
+h2.about { color: #000; font-size: 16px; }
 ul.square { padding-left: 14px; margin-top: 6px; margin-left: 8px; margin-bottom: 8px; }
 * html ul.square { margin-left: 0; }
 *+html ul.square { margin-left: 0; }
@@ -26,7 +26,7 @@ img { border: none; }
   width: 370px; float: left;
   padding-right: 40px; 
 }
-.content-block h2 { font-size: 16px; line-height: 20px; margin-top: 12px; color: #CA7C29;
+.content-block h2 { font-size: 16px; line-height: 20px; margin-top: 12px; color: #000;
   padding: 0;
   margin-bottom: 14px;
 }

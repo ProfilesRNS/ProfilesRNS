@@ -46,6 +46,21 @@
         })();
 
     </script>
+<script id="_webengage_script_tag" type="text/javascript">
+  var _weq = _weq || {};
+  _weq['webengage.licenseCode'] = 'd3a4a16b';
+  _weq['webengage.widgetVersion'] = "4.0";
+  
+  (function(d){
+    var _we = d.createElement('script');
+    _we.type = 'text/javascript';
+    _we.async = true;
+    _we.src = (d.location.protocol == 'https:' ? "https://ssl.widgets.webengage.com" : "http://cdn.widgets.webengage.com") + "/js/widget/webengage-min-v-4.0.js";
+    var _sNode = d.getElementById('_webengage_script_tag');
+    _sNode.parentNode.insertBefore(_we, _sNode);
+  })(document);
+</script>
+
 </head>
 <body id="bodyMaster" runat="server">
 <form runat="server" id="form1" enctype="multipart/form-data" method="post">   
@@ -108,7 +123,7 @@
           <a id="powered-by-ctsi" href="http://ctsi.ucsf.edu/" target="_blank">Powered by <span>SC CTSI</span></a>
         </div>
         <div id="new-features">
-          <a href="http://sc-ctsi.org/index.php/resources/resources_overview">Find more research resources <span>»</span></a>
+          <a href="http://sc-ctsi.org/index.php/resources/resources_overview">Find More Research Resources <span>»</span></a>
         </div>
     </div>	    
     <div id="suckerfish-container">
@@ -117,7 +132,7 @@
            <ul class="menu">
               <li class="item-home"><asp:HyperLink ID="navResearch" runat="server" Text="Search" NavigateUrl="~/"></asp:HyperLink></li>
               <li id="about"><a href="<%=GetURLDomain()%>/about/AboutUCSFProfiles.aspx">About</a></li>
-              <li id="data"><a href="<%=GetURLDomain()%>/about/ForDevelopers.aspx">Use this Data for Your Site</a></li>
+              <li id="data"><a href="<%=GetURLDomain()%>/about/ForDevelopers.aspx">Use Profiles Data for Your Website</a></li>
               <li id="contact"><a href="<%=GetURLDomain()%>/about/Help.aspx">Help</a></li>                     </ul>
          </div>
        </div>

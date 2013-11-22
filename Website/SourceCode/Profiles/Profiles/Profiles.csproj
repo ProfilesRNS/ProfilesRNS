@@ -78,6 +78,7 @@
     <Content Include="About\AboutUCSFProfiles.aspx" />
     <Content Include="About\CloseBrowser.aspx" />
     <Content Include="About\expeditionaryaquili.aspx" />
+    <Content Include="About\Images\TourProfiles-3D.png" />
     <Content Include="About\Optin.aspx" />
     <Content Include="About\CSS\UCSF.css" />
     <Content Include="About\ForDevelopers.aspx" />
