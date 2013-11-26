@@ -2,9 +2,11 @@
     Inherits="Profiles.Search.Modules.SearchEverything.SearchEverything" %>
 
 <style type="text/css">
-.profiles .profilesContentMain { width: 584px; }
-.profiles .profilesContentPassive { margin-right: 20px; }
+.profilesPage .profilesPageColumnLeft { display: none; }
+.profiles .profilesContentMain { width: 584px; margin: 10px 60px 0 !important; }
+.profiles .profilesContentPassive { width: 236px; padding: 4px 0 0; margin-right: 20px; }
 .profiles .profilesContentMain .pageTitle h2 { display: none; }
+#signin { padding-left: 72px; }
 </style>
 <script type="text/javascript">
 

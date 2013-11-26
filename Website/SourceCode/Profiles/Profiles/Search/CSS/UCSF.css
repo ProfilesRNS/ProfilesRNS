@@ -1,12 +1,12 @@
 ﻿.searchForm td div.header { color: #000; font-size: 30px; font-weight: bold; margin: 16px 0 8px; }
 .searchForm #div1 { border-top: none; padding-top: 12px; padding-top: 20px\9; } 
 .searchForm #div1 th { font-weight: normal; width: 140px; }
-#searchOptions { margin-top: -36px; margin-bottom: 25px; }
+#searchOptions { margin-top: -36px; margin-bottom: -5px; }
 #ctl00_ContentMain_rptMain_ctl00_ctl00_searchfor,
 #txtSearchFor { padding-left: 2px; height: 30px; height: 22px\9; padding-top: 6px\9; }
 .listTable th { border: 1px solid #CCC !important; }
 #tblSearchResults th { text-align: left; }
-#suckerfishmenu li.item-home a { background-color: #880000 !important; }
+#suckerfishmenu li.item-home a { background-color: #990000 !important; }
 /* we didn't use this filters display
 #filtersContainer { width: 680px; }
 #filtersContainer #filters { display: inline-block; width: 580px; margin-bottom: 5px; white-space: nowrap; }
