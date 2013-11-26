@@ -64,10 +64,15 @@ namespace Profiles.Framework.Modules.MainMenu
 
             menulist.Append("<li><a href='" + Root.Domain + "/about/default.aspx'>About This Site</a></li>");
 
+            // logged in Person
             if (sm.Session().NodeID > 0)
             {
                 menulist.Append("<li><img src='" + Root.Domain + "/profile/Modules/CustomViewPersonGeneralInfo/PhotoHandler.ashx?NodeID=" + sm.Session().NodeID + "&Thumbnail=True&Width=20'></li>");
                 menulist.Append("<li><a href='" + sm.Session().PersonURI + "'>" + sm.Session().ShortDisplayName + "</a></li>");
+            }
+            else if (sm.Session().UserID > 0) // logged in person
+            {
+                menulist.Append("<li>" + sm.Session().ShortDisplayName + "</li>");
             }
             
             menulist.Append("<li><a href='" + Root.Domain + "/login/default.aspx?method=login&edit=true'>Edit My Profile</a></li>");

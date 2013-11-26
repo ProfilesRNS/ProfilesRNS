@@ -627,7 +627,10 @@ namespace Profiles.Framework.Utilities
             try
             {
                 dbcommand.Connection.Close();
-                session.NodeID = Convert.ToInt64(param[3].Value);
+                if (param[3].Value != null && param[3].Value != DBNull.Value)
+                {
+                    session.NodeID = Convert.ToInt64(param[3].Value);
+                }
                 session.PersonURI = param[4].Value.ToString();
                 session.ShortDisplayName = param[5].Value.ToString();
             }
