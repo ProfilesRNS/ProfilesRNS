@@ -1128,13 +1128,19 @@ namespace Connects.Profiles.Service.ServiceImplementation
                                     returnxml.Append("<Publication CustomCategory='' Type='Custom' Visible='true'>");
 
 
-                                returnxml.Append("<PublicationID>");
-                                returnxml.Append(publication.SelectSingleNode("@rdf:resource", namespaces).Value);
-                                returnxml.Append("</PublicationID>");
+                                if ((publication.SelectSingleNode("@rdf:resource", namespaces) != null))
+                                {
+                                    returnxml.Append("<PublicationID>");
+                                    returnxml.Append(publication.SelectSingleNode("@rdf:resource", namespaces).Value);
+                                    returnxml.Append("</PublicationID>");
+                                }
 
-                                returnxml.Append("<PublicationReference>");
-                                returnxml.Append(((pub.SelectSingleNode("prns:informationResourceReference", namespaces).InnerText).Replace("<", "&lt").Replace(">", "&gt")));
-                                returnxml.Append("</PublicationReference>");
+                                if (pub.SelectSingleNode("prns:informationResourceReference", namespaces) != null)
+                                {
+                                    returnxml.Append("<PublicationReference>");
+                                    returnxml.Append(((pub.SelectSingleNode("prns:informationResourceReference", namespaces).InnerText).Replace("<", "&lt").Replace(">", "&gt")));
+                                    returnxml.Append("</PublicationReference>");
+                                }
 
                                 returnxml.Append("<PublicationMatchDetailList>");
 
