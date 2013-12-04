@@ -140,7 +140,10 @@ public partial class JSONProfile : System.Web.UI.Page
                     {
                         Dictionary<string, Object> pubData = new Dictionary<string, Object>();
                         pubData.Add("PublicationID", pub.PublicationID);
-                        pubData.Add("PublicationTitle", pub.PublicationReference.Replace("&amp;", "&").Replace("&gt;", ">").Replace("&lt;", "<").Replace("&#37;", "%"));
+                        if (pub.PublicationReference != null)
+                        {
+                            pubData.Add("PublicationTitle", pub.PublicationReference.Replace("&amp;", "&").Replace("&gt;", ">").Replace("&lt;", "<").Replace("&#37;", "%"));
+                        }
                         //pubData.Add("PublicationAbstract", pub.PublicationDetails);
 
                         List<Object> pubSourceList = new List<object>();
