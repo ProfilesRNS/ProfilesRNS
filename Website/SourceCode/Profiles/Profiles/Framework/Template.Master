@@ -30,13 +30,7 @@
     <script type="text/javascript">
 
         var _gaq = _gaq || [];
-        if (window.location.hostname.match(/^dev-profiles.ucsf.edu$/i)) {
-            _gaq.push(['_setAccount', 'UA-1142388-9']);
-        } else if (window.location.hostname.match(/^stage-profiles.ucsf.edu$/i)) {
-            _gaq.push(['_setAccount', 'UA-1142388-20']);
-        } else {
-            _gaq.push(['_setAccount', 'UA-1142388-6']);
-        }
+        _gaq.push(['_setAccount', 'UA-26525218-1']);
         _gaq.push(['_trackPageview']);
 
         (function () {
@@ -120,10 +114,10 @@
         <h1><a href="<%=GetURLDomain()%>/"><img src="<%=GetURLDomain()%>/framework/images/usc-ctsi.jpg" alt="USC Health Sciences Profiles" /></a></h1>
         </div>
         <div id="powered-by-block">
-          <a id="powered-by-ctsi" href="http://ctsi.ucsf.edu/" target="_blank">Powered by <span>SC CTSI</span></a>
+          <a id="powered-by-ctsi" href="http://sc-ctsi.org/" target="_blank">Powered by <span>SC CTSI</span></a>
         </div>
         <div id="new-features">
-          <a href="http://sc-ctsi.org/index.php/resources/resources_overview">Find More Research Resources <span>»</span></a>
+          <a href="http://sc-ctsi.org/index.php/resources/resources_overview"><img src="<%=GetURLDomain()%>/Framework/Images/icon_squareArrow.gif" /> Find More Research Resources</a>
         </div>
     </div>	    
     <div id="suckerfish-container">
@@ -131,7 +125,7 @@
          <div class="content">
            <ul class="menu">
               <li class="item-home"><asp:HyperLink ID="navResearch" runat="server" Text="Search" NavigateUrl="~/"></asp:HyperLink></li>
-              <li id="about"><a href="<%=GetURLDomain()%>/about/AboutUCSFProfiles.aspx">About</a></li>
+              <li id="about"><a href="<%=GetURLDomain()%>/about/AboutUSCProfiles.aspx">About</a></li>
               <li id="data"><a href="<%=GetURLDomain()%>/about/ForDevelopers.aspx">Use Profiles Data for Your Website</a></li>
               <li id="contact"><a href="<%=GetURLDomain()%>/about/Help.aspx">Help</a></li>                     </ul>
          </div>

@@ -30,13 +30,13 @@
     <Panel Type="passive" >
       <Module ID="TopSearchPhrase">
         <ParamList>
-          <Param Name="Description">Most viewed</Param>
+          <Param Name="Description">Most Viewed</Param>
           <Param Name="TimePeriod">d</Param>
         </ParamList>
       </Module>
       <!--Module ID="TopSearchPhrase">
         <ParamList>
-          <Param Name="Description">Most viewed (month)</Param>
+          <Param Name="Description">Most Viewed (month)</Param>
           <Param Name="TimePeriod">m</Param>
         </ParamList>
       </Module-->

@@ -31,4 +31,4 @@
 </p>
 </div>
 
-<div class="tour"><a href="<%=GetURLDomain()%>/about/AboutUCSFProfiles.aspx">Tour Profiles <span>»</span></a></div>
+<div class="tour"><a href="<%=GetURLDomain()%>/about/AboutUSCProfiles.aspx">Tour Profiles <span>»</span></a></div>

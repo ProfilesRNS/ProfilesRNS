@@ -22,7 +22,6 @@
 #suckerfishmenu li#contact a { background-color: #900 !important; }
 .profilesPage .profilesPageColumnLeft { display: none; }
 .profiles .profilesContentMain { width: 784px; margin: 10px 65px 0 !important; }
-#signin { padding-left: 72px; }
 .profiles .profilesContentMain .pageTitle h2 { font-weight: normal; }
 * html .profiles .profilesContentMain { margin-right: 0 !important; }
 *+html .profiles .profilesContentMain { margin-right: 0 !important; }
@@ -36,171 +35,13 @@
   <li>and more.</li>
 </ul>
 <h2 class="about">Name, Degree, Contact Information</h2>
-    <p>Profiles gets this data from the UCS GDS System. Please direct changes to your data to the Payroll/Personnel Analyst for your UCS campus department. If unsure who this person is, contact your department's Business Officer. 
+    <p>Profiles gets this data from the USC GDS System. Please direct changes to your data to the Payroll/Personnel Analyst for your USC campus department. If unsure who this person is, contact your department's Business Officer. 
     </p>
-    <p><a href="mailto:profiles@sc-ctsi.org">Contact the Profiles team »</a></p>
+    <p><a href="../About/FAQ.aspx"><img src="../Framework/Images/icon_squareArrow.gif" /> FAQ: View Frequently Asked Questions</a></p>
+    <p><a href="mailto:profiles@sc-ctsi.org"><img src="../Framework/Images/icon_squareArrow.gif" /> Contact the Profiles team</a></p>
 
-<!--
-<h2 id="info" class="about" style="clear:left; padding-top:20px;">Information about UCS Profiles</h2>
-<h3>When you view a person's profile, you will see:</h3>
 
-<table width="940">
-<tr>
-<td valign="top" style="font-size:11px;line-height:16px;padding-top:90px;">
-<strong>Information about the individual</strong><br /><br />
-At a minimum, an individual's profile will include the person's name, degrees and basic contact information (sourced from the UCS Directory). <br /><br /><br /><br />
-Profile owners can edit and enhance their own profiles by providing a research overview, a photo, awards, links to other sites, etc. <br /><br /><br /><br />
-Any published articles available in PubMed are listed, and Profile owners can add additional publications.
-</td>
-<td valign="top" style="padding-bottom:15px;"><img src="images/profilesnapshot.png" /></td>
-<td valign="top" style="font-size:11px;line-height:16px;padding-top:90px;">
-<strong>Networks &#38; other information about the individual's research</strong><br /><br />
-If the individual has publications available from PubMed, UCS Profiles builds and displays networks related to their research.<br /><br />
-Lists of research concepts/topics based on PubMed "MeSH" terms<br /><br /><br />
-Co-authors<br /><br /><br />
-Researchers working on the same topics<br /><br /><br />
-People working in the same department
-</td>
-</tr>
-</table>
--->
-<h2 id="faq" class="about">FAQ: Frequently Asked Questions</h2>
-<ul> 
-  <li><a href="#who">Who is listed in UCS Profiles?</a></li>
-  <li><a href="#view">Who can view UCS Profiles?</a></li>
-  <li><a href="#enhance">How do I edit and enhance my individual profile?</a></li>
-  <li><a href="#login">How do I login to UCS Profiles?</a></li>
-  <li><a href="#why">Why should I login to UCS Profiles?</a></li>
-  <li><a href="#datasources">What are the sources of data for UCS Profiles?</a></li>
-  <li><a href="#network">What are the lists of networks on the right side of my profile?</a></li>
-  <li><a href="#missing">Why are there missing or incorrect publications in my profile? How can I correct this?</a></li>
-  <li><a href="#update">How frequently are the data in UCS Profiles updated?</a></li>
-  <li><a href="#keyword">Can I add/edit research, career and academic interests?</a></li>
-  <li><a href="#mynetwork">Can I edit my co-authors or similar people lists?</a></li>
-  <li><a href="#learn">How can I learn more about UCS Profile?</a></li>
-  <li><a href="#ideas">Where should I send my ideas on how to improve the tool?</a></li>
-  <li><a href="#sysreq">What are the system requirements for using UCS Profiles?</a></li>
-  <li><a href="#manage">Who manages UCS Profiles?</a></li>
-</ul>
 
-<h3 id="who">Who is listed in UCS Profiles?</h3>
-
-<ul>
-  <li>UCS Profiles was created for research networking so we initially focused on adding UCS faculty members, researchers with academic leadership appointments, residents, postdoctoral scholars and non-faculty academic researchers. </li>
-  <li>We are expanding UCS Profiles to include research staff, individuals and additional groups in the UCS community, as requested.</li>
-  <li>Profile creation requires that an individual's data be in the UCS Campus Locator System. If you are a UCS employee and do not have a profile, <a href="mailto:profiles@sc-ctsi.org">request yours now</a> by sending us your UCS Employee ID.</li>
-</ul>
-
-<h3 id="view">Who can view UCS Profiles?</h3>
-<ul>
-  <li>UCS Profiles is searchable on the web and can be viewed by the general public as well as the UCS community.</li>
-</ul>
-
-<h3 id="enhance">How do I edit and enhance my individual profile?</h3>
-<ul>
-  <li>To edit your individual profile, click the <strong>Login/Edit My Profile</strong> link in the menu bar. You will be prompted to login with your MyAccess account. </li>
-  <li>Your profile is divided into several sections: directory information (not editable in Profiles), photo, awards and honors, overview, keywords (a new feature!!) and publications.
-  <ul>
-  <li>For directory information, UCS Profiles uses Campus Locator System data (name, degrees, and contact information). Changes to this information should be directed to the Payroll/Personnel Analyst for your UCS campus department. If unsure who this person is, contact your department's Business Officer.</li>
-  <li>You can upload a photo and also add/edit awards and your overview.</li>
-  <li>Keywords are research topics that you can add or edit yourself. These are searchable from within UCS Profiles, so if you're focusing on a new area of research and haven't published a paper on it yet, people can still find you if they search using that term.</li>
-  <li>Publications are automatically added from PubMed, and you can also add other publications yourself.</li>
-  </ul></li>
-  <li><a href="mailto:profiles@sc-ctsi.org">Contact us</a> if you have questions about editing your profile.</li>
-</ul>
-
-<h3 id="login">How do I login to UCS Profiles?</h3>
-<p>Click the <strong>Login/Edit My Profile</strong> link on any UCS Profiles page. Then enter your MyAccess username and password.</p>
-<ul>
-  <li>If you have never used your MyAccess account or for password support: go to <a href="https://myaccess.ucsf.edu/" title="Go to the UCS ITS website" target="_blank">https://myaccess.ucsf.edu/</a> or call ITS Customer Support at (415) 514-4100 (option 2).</li> 
-  <li><a href="http://it.ucsf.edu/services/myaccess-single-sign" title="Go to the UCS IT website" target="_blank">Learn more about MyAccess</a></li>
-</ul>
-
-<h3 id="why">Why should I login to UCS Profiles?</h3>
-<ul>
-  <li>Many special UCS Profiles features are available only if you're logged-in. These include:
-  <ul>
-  <li>Create a group of individuals based on search results. This group can then then be used to create a UCS Chatter Group or to export information about these individuals. (Accessing the group's emails is by special permission only. Please email us to request permission.)</li>
-  <li>Follow someone on UCS Chatter directly from his/her profile.</li>
-  <li>Export a list of an individual's publications.</li>
-  </ul></li>
-  <li>In addition, you can edit your profile and manage your designated proxies only if you're logged in.</li>
-</ul>
-
-<h3 id="datasources">What are the sources of data for UCS Profiles?</h3> 
-<ul>
-  <li>All data in automatically generated profiles are currently available on other public websites, specifically the UCS Directory, PubMed, and NIH RePORTER. 
-  <ul>
-  <li>Contact information is obtained from the Campus Locator System, which also feeds the central UCS Directory. This information is updated weekly. </li>
-  <li>Publications are derived from the MEDLINE/PubMed citation database. These are retrieved monthly.</li>
-  <li>Grant information from NIH RePORTER is updated monthly. </li>
-  </ul></li>
-  <li>Overview and other personalized data is entered by the profile owner or a designated proxy. </li>
-</ul>
-
-<h3 id="network">What are the lists of networks on the right side of my profile?</h3>
-<ul>
-  <li>The lists at the right side of a profile page provide additional information about the individual. The first three lists are based on MeSH terms assigned to the individual's publications by the National Library of Medicine.
-  <ul>
-  <li>"Related Concepts" includes the top five research concepts derived from publications' MeSH terms. There is also a link to show all the concepts associated with this individual.</li>
-  <li>"Co-Authors" includes those who have published with this individual.</li>
-  <li>"Similar People" includes people who have research concepts/MeSH terms in common with this individual. </li>
-  </ul></li>
-  <li>Department lists are determined from Campus Locator System data (see data sources above) and reflect people in the same department.</li>
-</ul>
-
-<h3 id="missing">Why are there missing or incorrect publications in my profile? How can I correct this?</h3> 
-<ul>
-  <li>UCS Profiles uses a complex mix of names, institution, and manually entered publication information to find your publications in PubMed's repository. Unfortunately, there is no easy way to exactly match all articles in PubMed with complete precision and accuracy. The algorithm used to find articles from PubMed attempts to minimize the number of publications incorrectly added to a profile; however, this method may result in some missing or incorrectly listed publications.</li>
-  <li>People with common names or whose articles were written at other institutions are most likely to have incomplete publication lists. </li>
-  <li>You can make corrections by manually searching PubMed from within Profiles to add, edit or delete publications (see <a href="HowProfilesWorks.aspx#enhance">How do I edit my Profile?</a> above). By curating publications manually, you are helping UCS Profiles to identify which concepts are associated with your profile and increasing the likelihood of finding the right publications on subsequent attempts. </li>
-  <li>We encourage you to login to the site and add any missing publications or remove incorrect ones.</li>
-</ul>
-
-<h3 id="update">How frequently are the data in UCS Profiles updated?</h3>
-<ul>
-  <li>Changes made to your primary campus information via your HR representative, such as names, degrees, and contact information, are automatically updated once a week.</li>
-  <li>Publications from PubMed are updated monthly.</li>
-  <li>Changes made to a profile manually will be reflected within minutes.</li>
-</ul>
-
-<h3 id="keyword">Can I add/edit research, career and academic interests?</h3>
-<ul>
-  <li>Yes! You can enter interests when you are editing your profile. These are useful to indicate research topics or fields in which you haven’t yet published. Users who search UCS Profiles by these topics will find your profile. </li>
-  <li>The new interests feature is different from the concepts associated to your publications (MeSH terms derived by the National Library of Medicine), which are not editable. However, you can ensure these accurately reflect your work by keeping your publications up to date and correct in UCS Profiles. Please note that it can take up to 24 hours for the system to update your concepts, co-authors, and similar people after you have modified your publications.</li> 
-</ul>
-
-<h3 id="mynetwork">Can I edit my co-authors or similar people lists?</h3>
-<ul>
-  <li>These networks are derived from the MeSH terms automatically. Keeping your publications accurate and up to date will improve these networks. However, they can't be edited directly.</li>
-</ul>
-
-<h3 id="learn">How can I learn more about UCS Profiles?</h3>
-<ul>
-  <li><a href="AboutUCSFProfiles.aspx">Read more</a> about the UCS Profiles tool, ongoing development and exciting collaborations.</li>
-  <li>If you have specific questions not answered here, please <a href="mailto:profiles@sc-ctsi.org">contact us</a>.</li>
-</ul>
-
-<h3 id="ideas">Where should I send my ideas on how to improve the tool?</h3> 
-<ul>
-  <li>We encourage you to <a href="mailto:profiles@sc-ctsi.org">get in touch</a> with your ideas on how to improve UCS Profiles.  We especially look forward to hearing from you if Profiles has enabled your research in any way.  Your success stories allow us to continue to build on such tools and to continue to get support.</li>
-  <li>To tell us how we're doing or for questions please send a note to <a href="mailto:profiles@sc-ctsi.org">profiles@sc-ctsi.org</a>.</li>
-</ul>
-
-<h3 id="sysreq">What are the system requirements for using UCS Profiles?</h3>
-<ul>
-  <li>UCS Profiles works best using any of the following web browsers:
-    <ul>
-      <li>Internet Explorer 8 or 9</li>
-      <li>Firefox 12 or later</li>
-      <li>Chrome</li>
-      <li>Safari 5 or later</li>
-    </ul></li>
-  <li>If you are using an older browser or a browser not listed above, you may experience some errors in functionality.</li>
-</ul>
-
-<h3 id="manage">Who manages UCS Profiles?</h3>
-<p>UCS Profiles is managed by UCS's <a href="http://sc-ctsi.org/" target="_blank">Clinical and Translational Science Institute (SC CTSI)</a>.</p>
 
 
           </Param>

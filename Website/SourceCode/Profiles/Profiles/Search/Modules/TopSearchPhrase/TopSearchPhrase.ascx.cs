@@ -55,9 +55,8 @@ namespace Profiles.Search.Modules.TopSearchPhrase
                 searchtype = "people";
             }
 
-
-
-            while (reader.Read())
+            int i = 0; // USC request
+            while (reader.Read() && i++ < 5)
             {
                 list.Append("<li>");
                 list.Append("<a href=\"JavaScript:searchThisPhrase('" + reader["phrase"].ToString() + "','" + classuri + "','" + searchtype + "')\">" + reader["phrase"] + "</a>");

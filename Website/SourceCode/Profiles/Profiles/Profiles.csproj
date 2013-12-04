@@ -75,8 +75,9 @@
     <Reference Include="System.Web.Services" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="About\AboutUCSFProfiles.aspx" />
+    <Content Include="About\AboutUSCProfiles.aspx" />
     <Content Include="About\CloseBrowser.aspx" />
+    <Content Include="About\FAQ.aspx" />
     <Content Include="About\expeditionaryaquili.aspx" />
     <Content Include="About\Images\editProfile.gif" />
     <Content Include="About\Images\TourProfiles-3D.png" />
@@ -118,16 +119,19 @@
     <Content Include="About\Images\video.JPG" />
     <Content Include="About\JavaScript\UCSF.js" />
     <Content Include="About\NewFeatures.aspx" />
-    <Content Include="About\PresentationXML\AboutUCSFProfiles.xml">
+    <Content Include="About\PresentationXML\AboutUSCProfiles.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="About\PresentationXML\CloseBrowser.xml" />
+    <Content Include="About\PresentationXML\FAQ.xml" />
     <Content Include="About\PresentationXML\Optin.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="About\PresentationXML\ForDevelopers.xml" />
     <Content Include="About\PresentationXML\GadgetLibrary.xml" />
-    <Content Include="About\PresentationXML\Help.xml" />
+    <Content Include="About\PresentationXML\Help.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="About\PresentationXML\HowProfilesWorks.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -223,12 +227,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="About\AboutUCSFProfiles.aspx.cs">
-      <DependentUpon>AboutUCSFProfiles.aspx</DependentUpon>
+    <Compile Include="About\AboutUSCProfiles.aspx.cs">
+      <DependentUpon>AboutUSCProfiles.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="About\AboutUCSFProfiles.aspx.designer.cs">
-      <DependentUpon>AboutUCSFProfiles.aspx</DependentUpon>
+    <Compile Include="About\AboutUSCProfiles.aspx.designer.cs">
+      <DependentUpon>AboutUSCProfiles.aspx</DependentUpon>
     </Compile>
     <Compile Include="About\CloseBrowser.aspx.cs">
       <DependentUpon>CloseBrowser.aspx</DependentUpon>
@@ -236,6 +240,13 @@
     </Compile>
     <Compile Include="About\CloseBrowser.aspx.designer.cs">
       <DependentUpon>CloseBrowser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="About\FAQ.aspx.cs">
+      <DependentUpon>FAQ.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="About\FAQ.aspx.designer.cs">
+      <DependentUpon>FAQ.aspx</DependentUpon>
     </Compile>
     <Compile Include="About\Optin.aspx.cs">
       <DependentUpon>Optin.aspx</DependentUpon>

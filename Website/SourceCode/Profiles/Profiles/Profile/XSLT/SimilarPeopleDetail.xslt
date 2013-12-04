@@ -32,7 +32,7 @@
           for (var i = 0; i &lt; x.childNodes.length; i++) {
           if (x.childNodes[i].childNodes.length > 0) {
           if (x.childNodes[i].childNodes[0].className == 'listTableLink') {
-          x.childNodes[i].childNodes[0].style.color = '#36C';
+          x.childNodes[i].childNodes[0].style.color = '#4D8BA9';
           }
           }
           }

@@ -25,7 +25,7 @@ namespace Profiles
                                     "xsi:schemaLocation=\"http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd\">" + Environment.NewLine +
                                     "<url><loc>" + Root.Domain + "</loc></url>" + Environment.NewLine +
                                     "<url><loc>" + Root.Domain + "/About</loc></url>" + Environment.NewLine +
-                                    "<url><loc>" + Root.Domain + "/About/AboutUCSFProfiles.aspx</loc></url>" + Environment.NewLine +
+                                    "<url><loc>" + Root.Domain + "/About/AboutUSCProfiles.aspx</loc></url>" + Environment.NewLine +
                                     "<url><loc>" + Root.Domain + "/About/ForDevelopers.aspx</loc></url>" + Environment.NewLine +
                                     "<url><loc>" + Root.Domain + "/About/GadgetLibrary.aspx</loc></url>" + Environment.NewLine +
                                     "<url><loc>" + Root.Domain + "/About/Help.aspx</loc></url>" + Environment.NewLine +

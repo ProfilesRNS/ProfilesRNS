@@ -21,7 +21,6 @@
 #suckerfishmenu li#data a { background-color: #900 !important; }
 .profilesPage .profilesPageColumnLeft { display: none; }
 .profiles .profilesContentMain { width: 784px; margin: 10px 65px 0 !important; }
-#signin { padding-left: 72px; }
 .profiles .profilesContentMain .pageTitle h2 { font-weight: normal; }
 </style>
 

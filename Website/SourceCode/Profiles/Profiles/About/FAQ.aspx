@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Framework/Template.Master" ValidateRequest="false" AutoEventWireup="true" CodeBehind="AboutUCSFProfiles.aspx.cs" Inherits="Profiles.About.AboutUCSFProfiles" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Framework/Template.Master" ValidateRequest="false" AutoEventWireup="true" CodeBehind="FAQ.aspx.cs" Inherits="Profiles.About.FAQ" %>
  <%--
     Copyright (c) 2008-2012 by the President and Fellows of Harvard College. All rights reserved.  
     Profiles Research Networking Software was developed under the supervision of Griffin M Weber, MD, PhD.,

@@ -59,15 +59,7 @@
   if(window.location.href.indexOf("coauthors") == -1) {
     $("table").removeAttr("border").removeAttr("rules");
 
-    // get links count
-    $.ajax({
-        type: "GET",
-        url: _rootDomain + "/CustomAPI/v1/Statistics.aspx",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (response) { buildGadgetAds(response.links); },
-        failure: function (response) { buildGadgetAds('2147'); }
-    });
+
 
     // Back to top http://typicalwhiner.com/116/effortless-jquery-floating-back-to-top-script-v2/
     var pxShow = 300; //height on which the button will show  
@@ -93,46 +85,4 @@
   }
 });
 
- function buildGadgetAds(linksCount) {
-    //Gadget ads  
-    var links = "<li><div class='badge'>"
-            + "<p><span class='counter'>" + linksCount + "</span> profiles now<br />"
-            + "include <strong>links</strong> to departments, labs and other websites.</p>"
-            + "<p class='linkAd'>"
-            + "<a href='" + _rootDomain + "/login/default.aspx?method=login&amp;edit=true'>Add web links <br />to your profile</a></p>"
-            + "</div></li>";
-    var videointro = "<li><a href='https://www.youtube.com/watch?v=YCOA2GWyplY' target='_blank'>"
-            + "<div class='badge'><p style='padding-left:3px'>"
-            + "<img src='" + _rootDomain + "/framework/images/video-ad.png' /></p>"
-            + "<p><strong>Watch UCSF Profiles video introduction!</strong></p></div></a></li>";
-    // for individual profile pages
-    if ($('.basicInfo').length) {
-        var badge = "<ul id='badge'>" + chattergroup + chatterfollow + "</ul>";
-        $(badge).insertAfter('.profilesContentPassive');
-        $(".badge").css('width', '192px');
-        var login = $('#ctl00_ContentActive_rptActive_ctl01_ctl00_panelMenu li:last-child a').attr('href');
-        $('.chatterlink').attr('href', login);
-        $("#badge li").hide();
-        //randomtip();  DISABLE ADS
-    }
-    // for search form pages
-    if ($('.nonavbar').length && !$('#FSSiteDescription').length) {
-        var badge = "<ul id='badge'>" + links + videointro + "</ul>";
-        $(badge).insertAfter('.profilesContentPassive');
-        var login = $('#ctl00_ContentActive_rptActive_ctl00_ctl00_panelMenu li:last-child a').attr('href');
-        $('.chatterlink').attr('href', login);
-        $("#badge li").hide();
-        //randomtip();
-    }
-    if ($('.mainmenu li').last().text() == 'Sign out') {
-        $("#badge").hide();
-    }
 
-}
-
-
-        this.randomtip = function () {
-            var length = $("#badge li").length;
-            var ran = Math.floor(Math.random() * length) + 1;
-            $("#badge li:nth-child(" + ran + ")").show();
-        };
