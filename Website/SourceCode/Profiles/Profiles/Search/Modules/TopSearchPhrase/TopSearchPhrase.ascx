@@ -18,17 +18,17 @@
     </div>
 </div>
 
+<div class="tour"><a href="<%=GetURLDomain()%>/about/AboutUSCProfiles.aspx"><img src="<%=GetURLDomain()%>/Framework/Images/icon_squareArrow.gif" /> Tour Profiles </a></div>
 
-<div style="border: 1px solid #CCC;">
-<p style="margin: 0; padding: 3px 8px 6px"><strong>Updates</strong></p>
-<div style="">
-<a class="twitter-timeline"  href="https://twitter.com/scctsi"  data-widget-id="353227474164936704" data-chrome="nofooter noborders noheader" data-tweet-limit="2">Updates by @ResidentsatCTSI</a>
+<p style="margin: 0; padding: 20px 0 6px"><strong>USC Profiles Updates</strong></p>
+<div style="margin-left: -6px;">
+<a class="twitter-timeline"  href="https://twitter.com/USCProfiles"  data-widget-id="407943177664860160" data-chrome="nofooter noborders noheader" data-tweet-limit="2" data-link-color="#4D8BA9">Updates by @USCProfiles</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 </div>
-<p style="margin: 0; padding: 12px 8px 6px;text-align:center">
-<a href="https://twitter.com/scctsi" class="twitter-follow-button" data-show-count="false">Follow @scctsi</a>
+<p style="margin: 0;">
+<a href="https://twitter.com/USCProfiles" class="twitter-follow-button" data-show-count="false">Follow @USCProfiles</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 </p>
-</div>
 
-<div class="tour"><a href="<%=GetURLDomain()%>/about/AboutUSCProfiles.aspx">Tour Profiles <span>»</span></a></div>
+
+

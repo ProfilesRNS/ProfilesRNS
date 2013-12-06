@@ -93,7 +93,7 @@
   <td style="padding: 20px 10px 0;  color:#777; text-align: center">
      <span style="font-size: 130%;">USC Profiles Updates</span> <br /><br />
 
-<a class="twitter-timeline"  href="https://twitter.com/UCSProfiles"  data-widget-id="407943177664860160" data-chrome="nofooter noborders noheader" data-tweet-limit="1" data-link-color="#4D8BA9">Updates by @USCProfiles</a>
+<a class="twitter-timeline"  href="https://twitter.com/USCProfiles"  data-widget-id="407943177664860160" data-chrome="nofooter noborders noheader" data-tweet-limit="1" data-link-color="#4D8BA9">Updates by @USCProfiles</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
 
@@ -107,7 +107,7 @@
 </table>
 
 <h3 style="padding-top:20px">Acknowledgements</h3>
-<p>UCS Profiles is UCS’s version of the ground-breaking, open source "Profiles Research Networking Software" that was developed under the supervision of Griffin M Weber, MD, PhD, with support from Grant Number 1 UL1 RR025758-01 to <a href="http://catalyst.harvard.edu/" target="_new">Harvard Catalyst: The Harvard Clinical and Translational Science Center</a> from the National Center for Research Resources and support from Harvard University and its affiliated academic healthcare centers.</p>
+<p>USC Profiles is USC’s version of the ground-breaking, open source "Profiles Research Networking Software" that was developed under the supervision of Griffin M Weber, MD, PhD, with support from Grant Number 1 UL1 RR025758-01 to <a href="http://catalyst.harvard.edu/" target="_new">Harvard Catalyst: The Harvard Clinical and Translational Science Center</a> from the National Center for Research Resources and support from Harvard University and its affiliated academic healthcare centers.</p>
 
 <p>Profiles Research Networking Software is available as an <a href="http://connects.catalyst.harvard.edu/Profiles/about/default.aspx?tab=open" target="_blank">open source platform</a> for institutions seeking a web-based means of facilitating collaboration among their academic researchers. </p>  
 

@@ -35,7 +35,10 @@ namespace ProfilesSecureAPI
                                        dbreader[1].ToString() + "', " +
                                        dbreader[2].ToString() + ", " +
                                        dbreader[3].ToString() + ", " +
-                                       dbreader[4].ToString() + Environment.NewLine);
+                                       dbreader[4].ToString() + "', " +
+                                       dbreader[5].ToString() + ", " +
+                                       dbreader[6].ToString() + ", " +
+                                       dbreader[7].ToString() + Environment.NewLine);
                     }
                 }
             }

@@ -14,7 +14,7 @@
 <!DOCTYPE html> 
 <html>
 <head id="Head1" runat="server">
-    <title>UCSF Profiles</title>
+    <title>USC Profiles</title>
     
     <%--Force ie out of quirks mode (Catalyst)--%>
     <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1' />
@@ -98,7 +98,7 @@
            <a title="USC Home" href="http://www.usc.edu/" target="_blank">USC Home</a>
          </li>
          <li>
-           <a title="About UCS" href="http://about.usc.edu/" target="_blank">About UCS</a>
+           <a title="About USC" href="http://about.usc.edu/" target="_blank">About USC</a>
          </li>
          <li>
            <a title="Keck Hospital of USC" href="http://www.keckmedicine.org/" target="_blank">Keck Hospital of USC</a>
