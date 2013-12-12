@@ -13,4 +13,9 @@ UCSF_CreateSchema.sql
 If doing ORNG.Grant then
 we need to add rows to DataMap for grants!!  
 
+Change internalusername varchar(50) in [Profile.Import].[PersonFilterFlag] to nvarchar(50)
+
+For each Add-on that shows up in the search filter, add it to a person (public) and run nightly batch, this sets up the RDF needed so 
+EXEC [Profile.Data].[Person.GetFilters] returns non null URI's. A requirement for search to work.
+
 
