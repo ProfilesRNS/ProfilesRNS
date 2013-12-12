@@ -110,7 +110,9 @@ namespace Profiles.Profile.Modules.ProfileImage
 
                     // Set up the response settings
                     context.Response.ContentType = "image/jpeg";
+                    context.Response.Cache.SetExpires(DateTime.Now.AddDays(7));
                     context.Response.Cache.SetCacheability(HttpCacheability.Public);
+                    context.Response.Cache.SetValidUntilExpires(true);
                     context.Response.BufferOutput = false;
                     context.Response.AddHeader("Content-Length", stream.Length.ToString());
 
