@@ -1,4 +1,0 @@
-﻿<site-description>
-  <name>[INSTUTION NAME HERE]/name>
-  <aggregate-query>http://[Profiles Domain Name]/[Profiles SubWeb Name]/DIRECT/Modules/DirectSearch/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</aggregate-query>
-</site-description>
