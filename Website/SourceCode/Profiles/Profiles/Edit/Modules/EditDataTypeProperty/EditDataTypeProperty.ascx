@@ -15,7 +15,7 @@
         <asp:UpdateProgress ID="updateProgress" runat="server">
             <ProgressTemplate>
                 <div class="progress">
-                    <span><img alt="Loading..." src="../edit/Images/loader.gif" /></span>
+                    <span><img alt="Loading..." src="../edit/Images/loader.gif" width="400" height="213"/></span>
                 </div>
             </ProgressTemplate>
         </asp:UpdateProgress>

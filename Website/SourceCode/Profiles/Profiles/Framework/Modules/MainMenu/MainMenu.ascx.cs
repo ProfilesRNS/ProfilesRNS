@@ -67,7 +67,7 @@ namespace Profiles.Framework.Modules.MainMenu
             // logged in Person
             if (sm.Session().NodeID > 0)
             {
-                menulist.Append("<li><img src='" + Root.Domain + "/profile/Modules/CustomViewPersonGeneralInfo/PhotoHandler.ashx?NodeID=" + sm.Session().NodeID + "&Thumbnail=True&Width=20'></li>");
+                menulist.Append("<li><img src='" + Root.Domain + "/profile/Modules/CustomViewPersonGeneralInfo/PhotoHandler.ashx?NodeID=" + sm.Session().NodeID + "&Thumbnail=True&Width=20' width='20' height='40'></li>");
                 menulist.Append("<li><a href='" + sm.Session().PersonURI + "'>" + sm.Session().ShortDisplayName + "</a></li>");
             }
             else if (sm.Session().UserID > 0) // logged in person
@@ -109,7 +109,7 @@ namespace Profiles.Framework.Modules.MainMenu
 
                         file = file.Substring(0, file.Length - 1);
 
-                        menulist.Append("<li><a href=\"" + uri + "/" + file + ".rdf\" target=\"_blank\">" + "Export RDF" + "</a>&nbsp;<a style='border: none;' href='" + Root.Domain + "/about/default.aspx?tab=data'><img style='border-style: none' src='" + Root.Domain + "/Framework/Images/info.png'  border='0'></a></li>");
+                        menulist.Append("<li><a href=\"" + uri + "/" + file + ".rdf\" target=\"_blank\">" + "Export RDF" + "</a>&nbsp;<a style='border: none;' href='" + Root.Domain + "/about/default.aspx?tab=data'><img style='border-style: none' src='" + Root.Domain + "/Framework/Images/info.png' width='11' height='11' border='0'></a></li>");
 
                         if (base.MasterPage != null)
                         {

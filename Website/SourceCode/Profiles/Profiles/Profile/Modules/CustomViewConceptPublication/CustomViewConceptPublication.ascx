@@ -26,7 +26,7 @@
 			<div id="timelineContainer" class='toggle-vis' style='margin-top: 6px;'>		
 				<div style='padding-right: 3px;'><%= this.GetModuleParamString("TimelineCaption").Replace("@ConceptName", this.ConceptName) %></div>
 				<div id="publicationTimelineGraph">
-					<img id='timeline' runat='server' border='0'/>
+					<img id='timeline' runat='server' border='0' width='595' height='100'/>
 				</div>
 			</div>	
 			

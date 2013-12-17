@@ -26,6 +26,8 @@ namespace Profiles.Profile.Modules
 			
 			// Add plus image
 			plusImage.Src = Root.Domain + "/Profile/Modules/PropertyList/images/minusSign.gif";
+            plusImage.Width = 9;
+            plusImage.Height = 9;
 		}
 
 		public CustomViewConceptPublication() : base() { }

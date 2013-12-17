@@ -1,6 +1,8 @@
 /*
 Orng Shindig Helper functions for gadget-to-container commands
 
+NOTE THAT WE minimize this via http://closure-compiler.appspot.com/home and save the results as orng.min.js to load!!!!!!!!!!!!!!!!!!!!!!!!!
+
 */
 
 // This allows us to use Google Analytics when present, but not throw errors when not.

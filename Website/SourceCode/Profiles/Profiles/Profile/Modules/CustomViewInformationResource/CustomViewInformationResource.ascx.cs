@@ -56,8 +56,12 @@ namespace Profiles.Profile.Modules.CustomViewInformationResource
 
 
             imgSubjectArea.Src = Root.Domain + "/Profile/Modules/PropertyList/images/minusSign.gif";
+            imgSubjectArea.Width = 9;
+            imgSubjectArea.Height = 9;
 
             imgAuthor.Src = Root.Domain + "/Profile/Modules/PropertyList/images/minusSign.gif";
+            imgAuthor.Width = 9;
+            imgAuthor.Height = 9;
 
 
             if (subjectareas.Count > 0)

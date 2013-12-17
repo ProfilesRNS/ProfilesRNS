@@ -14,7 +14,7 @@
         <div class="PropertyItemHeader">
             <a href="javascript:toggleBlock('propertyitem','subjectAreaItems')">
                 <img runat="server" id="imgSubjectArea" src="minusSign.gif" style="border: none;
-                    text-decoration: none !important" border="0" />
+                    text-decoration: none !important" border="0" width="9" height="9"/>
             </a>subject areas
         </div>
         <div class="PropertyGroupData">
@@ -37,7 +37,7 @@
     <div class="PropertyItemHeader">
         <a href="javascript:toggleBlock('propertyitem','authorshipItems')">
             <img runat="server" id="imgAuthor" src="minusSign.gif" style="border: none; text-decoration: none !important"
-                border="0" />
+                border="0" width="9" height="9"/>
         </a>authors with profiles
     </div>
     <div class="PropertyGroupData">
