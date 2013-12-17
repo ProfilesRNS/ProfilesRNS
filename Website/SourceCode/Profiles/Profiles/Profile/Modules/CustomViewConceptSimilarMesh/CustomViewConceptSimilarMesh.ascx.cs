@@ -53,6 +53,8 @@ namespace Profiles.Profile.Modules
 			else
 			{
 				imgQuestion.ImageUrl = Root.Domain + "/Framework/Images/info.png";
+                imgQuestion.Width = 11;
+                imgQuestion.Height = 11;
 				lineItemLiteral.Text = html.ToString();
 			}			
 		}

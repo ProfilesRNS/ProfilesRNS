@@ -40,8 +40,8 @@
   }
     if ($('.awardsList') && $('.awardsList tr').length > 4) {
         $('.awardsList tr:gt(2)').hide();
-        $("<div class='atog' id='moreawards'><span> <strong>...</strong> Show more</span> <img src='" + _rootDomain + "/Framework/Images/expandRound.gif' alt='+' style='vertical-align:top' /></div>").appendTo('.awardsList tr:nth-child(3) td:last-child');
-        $("<div class='atog' id='lessawards'><span>Show less</span> <img src='" + _rootDomain + "/Framework/Images/collapseRound.gif' alt='-' style='vertical-align:top' /></div>").appendTo('.awardsList tr:last-child td:last-child');
+        $("<div class='atog' id='moreawards'><span> <strong>...</strong> Show more</span> <img src='" + _rootDomain + "/Framework/Images/expandRound.gif' alt='+' style='vertical-align:top'  width='28' height='17'/></div>").appendTo('.awardsList tr:nth-child(3) td:last-child');
+        $("<div class='atog' id='lessawards'><span>Show less</span> <img src='" + _rootDomain + "/Framework/Images/collapseRound.gif' alt='-' style='vertical-align:top' width='28' height='17'/></div>").appendTo('.awardsList tr:last-child td:last-child');
     }
   if ($('#moreawards') && $('#moreawards').length) {
     $('#moreawards').click(function () {
@@ -63,7 +63,7 @@
     $('.PropertyItemHeader:contains("Overview")').next('.PropertyGroupData').attr("id","narrative");
     if ($('#narrative').text().length > 800) {
         $('#narrative').addClass('box').addClass('box-collapsed');
-        $('.box').first().prepend("<div class='plusbutton'><span> <strong>&nbsp;...</strong> Show more</span> <img src='" +_rootDomain + "/Framework/Images/expandRound.gif' alt='+' style='vertical-align:top' /></div><div class='minusbutton'><span>Show less</span> <img src='" + _rootDomain + "/Framework/Images/collapseRound.gif' alt='-' style='vertical-align:top' /></div>");
+        $('.box').first().prepend("<div class='plusbutton'><span> <strong>&nbsp;...</strong> Show more</span> <img src='" + _rootDomain + "/Framework/Images/expandRound.gif' alt='+' style='vertical-align:top'  width='28' height='17'/></div><div class='minusbutton'><span>Show less</span> <img src='" + _rootDomain + "/Framework/Images/collapseRound.gif' alt='-' style='vertical-align:top' width='28' height='17'/></div>");
         $('.minusbutton').hide();
     }
    // $('.box').addClass('box-collapsed');

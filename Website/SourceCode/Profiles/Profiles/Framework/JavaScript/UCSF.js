@@ -109,12 +109,12 @@
             + "</div></li>";
     var chattergroup = "<li class='chatter'><a href='' class='chatterlink'>"
             + "<div class='badge'><p style='text-align:center'>"
-            + "<img src='" + _rootDomain + "/framework/images/chatter-group.png' /></p>"
+            + "<img src='" + _rootDomain + "/framework/images/chatter-group.png' width='130' height='95'/></p>"
             + "<p><strong>Login</strong> to create a "
             + "UCSF Chatter group right from UCSF Profiles!</p></div></a></li>";
     var chatterfollow = "<li class='chatter'><a href='' class='chatterlink'>"
             + "<div class='badge'><p style='text-align:center'>"
-            + "<img src='" + _rootDomain + "/framework/images/chatter-follow.png' /></p>"
+            + "<img src='" + _rootDomain + "/framework/images/chatter-follow.png' width='130' height='95'/></p>"
             + "<p><strong>Login</strong> and follow people on UCSF Chatter! "
             + "Receive updates when people you follow publish new articles.</p></div></a></li>";
     var videointro = "<li><a href='https://www.youtube.com/watch?v=YCOA2GWyplY' target='_blank'>"

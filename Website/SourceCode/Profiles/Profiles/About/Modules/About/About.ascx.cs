@@ -81,6 +81,8 @@ namespace Profiles.About.Modules.About
 
 
             imgProfilesIcon.ImageUrl = Root.Domain + "/framework/images/icon_profile.gif";
+            imgProfilesIcon.Width = 17;
+            imgProfilesIcon.Height = 17;
             imgNetworkIcon.ImageUrl = Root.Domain + "/framework/images/icon_network.gif";
             imgConnectionIcon.ImageUrl = Root.Domain + "/framework/images/icon_connection.gif";
             imgVis.ImageUrl = Root.Domain + "/framework/images/about_visualizations.jpg";

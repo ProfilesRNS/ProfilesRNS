@@ -10,7 +10,7 @@
 <!--
         <xsl:if test="@Description">
           <a href="JavaScript:toggleVisibility('{@ID}');">
-            <img alt="" src="{$root}/Framework/Images/info.png"/>
+            <img alt="" src="{$root}/Framework/Images/info.png" width="11" height="11"/>
           </a>
         </xsl:if>
 changed display none to block for next div
@@ -27,7 +27,7 @@ changed display none to block for next div
             <a href="{@ItemURL}">
               <xsl:if test ="@PersonID!=''">
                 <div class="thumbnail">
-                  <img src="{$root}/profile/Modules/CustomViewPersonGeneralInfo/PhotoHandler.ashx?person={@PersonID}&amp;Thumbnail=True&amp;Width=15" />
+                  <img src="{$root}/profile/Modules/CustomViewPersonGeneralInfo/PhotoHandler.ashx?person={@PersonID}&amp;Thumbnail=True&amp;Width=15" width="15" height="30"/>
                 </div>
               </xsl:if>
               <xsl:value-of select="@ItemURLText"/>
@@ -40,7 +40,7 @@ changed display none to block for next div
     <xsl:if test ="@MoreURL!=''">
       <div class="passiveSectionBodyDetails">
         <a href="{@MoreURL}">
-          <img style="margin-right:2px;position:relative;top:1px;border:0"  src="{$root}/Framework/Images/icon_squareArrow.gif" />
+          <img style="margin-right:2px;position:relative;top:1px;border:0"  src="{$root}/Framework/Images/icon_squareArrow.gif" width="11" height="11"/>
           <xsl:value-of select="@MoreText"/>
         </a>
       </div>

@@ -272,8 +272,8 @@ namespace Profiles.ORNG.Utilities
             {
                 // first one!
                 // trigger the javascript to render gadgets
-                HtmlGenericControl body = (HtmlGenericControl)page.Master.FindControl("bodyMaster");
-                body.Attributes.Add("onload", "my.init();");
+                //HtmlGenericControl body = (HtmlGenericControl)page.Master.FindControl("bodyMaster");
+                //body.Attributes.Add("onload", "my.init();");
 
                 HtmlLink gadgetscss = new HtmlLink();
                 gadgetscss.Href = Root.Domain + "/ORNG/CSS/gadgets.css";
@@ -296,7 +296,7 @@ namespace Profiles.ORNG.Utilities
 
                 HtmlGenericControl shindigjs = new HtmlGenericControl("script");
                 shindigjs.Attributes.Add("type", "text/javascript");
-                shindigjs.Attributes.Add("src", Root.Domain + "/ORNG/JavaScript/orng.js");
+                shindigjs.Attributes.Add("src", Root.Domain + "/ORNG/JavaScript/orng.min.js");
                 page.Header.Controls.Add(shindigjs);
             }
             else
@@ -343,6 +343,12 @@ namespace Profiles.ORNG.Utilities
                 gadgetScriptText = gadgetScriptText.Substring(0, gadgetScriptText.LastIndexOf(','));
             }
             gadgetScriptText += "];" + Environment.NewLine;
+
+            // this uses jquery to kickstart the gadgets
+            // better than using onload because this happens before the images finish
+            gadgetScriptText += "$(document).ready(function(){" + Environment.NewLine +
+                                "my.init();" + Environment.NewLine +
+                                "});" + Environment.NewLine;
 
             return gadgetScriptText;
         }

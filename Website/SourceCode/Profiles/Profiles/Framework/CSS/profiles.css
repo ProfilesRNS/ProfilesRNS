@@ -222,6 +222,7 @@ form
 {
 	width: 188px;
 }
+/****
 .profiles .profilesContentActive .activeContainerTop
 {
 	background-color: #B23F45;
@@ -244,7 +245,7 @@ form
 	width: 188px;
 	height: 26px;
 	overflow: hidden;
-}
+}*****/
 .profiles .profilesContentActive .activeSection
 {
 	width: 174px;

@@ -25,7 +25,7 @@
         <asp:UpdateProgress ID="updateProgress" runat="server">
             <ProgressTemplate>
                 <div class="progress">
-                    <span><img alt="Loading..." src="../edit/images/loader.gif" /><br />                        <i>This operation might take several minutes to complete. <br />Please do not close your browser.</i>
+                    <span><img alt="Loading..." src="../edit/images/loader.gif" width="400" height="213"/><br />                        <i>This operation might take several minutes to complete. <br />Please do not close your browser.</i>
                     </span>
                 </div>
                 
@@ -49,7 +49,7 @@
                         </asp:PlaceHolder>
                         <asp:PlaceHolder ID="phAddPubMed" runat="server">
                             <div style="padding-bottom: 10px;">
-                                <asp:ImageButton ID="btnImgAddPubMed" runat="server" ImageUrl="~/Framework/Images/icon_squareArrow.gif"
+                                <asp:ImageButton ID="btnImgAddPubMed" runat="server" ImageUrl="~/Framework/Images/icon_squareArrow.gif" Width="11" Height="11"
                                     OnClick="btnAddPubMed_OnClick" />&nbsp;
                                 <asp:LinkButton ID="btnAddPubMed" runat="server" OnClick="btnAddPubMed_OnClick" CssClass="profileHypLinks">Add PubMed</asp:LinkButton>
                                 &nbsp;(Search PubMed and add multiple articles.)
@@ -57,7 +57,7 @@
                         </asp:PlaceHolder>
                         <asp:PlaceHolder ID="phAddPub" runat="server">
                             <div style="padding-bottom: 10px;">
-                                <asp:ImageButton ID="btnImgAddPub" runat="server" ImageUrl="~/Framework/Images/icon_squareArrow.gif"
+                                <asp:ImageButton ID="btnImgAddPub" runat="server" ImageUrl="~/Framework/Images/icon_squareArrow.gif" Width="11" Height="11"
                                     OnClick="btnAddPub_OnClick" />&nbsp;
                                 <asp:LinkButton ID="btnAddPub" runat="server" OnClick="btnAddPub_OnClick" CssClass="profileHypLinks">Add by ID</asp:LinkButton>
                                 &nbsp;(Add one or more articles using codes, e.g., PubMed ID.)
@@ -65,7 +65,7 @@
                         </asp:PlaceHolder>
                         <asp:PlaceHolder ID="phAddCustom" runat="server">
                             <div style="padding-bottom: 10px;">
-                                <asp:ImageButton ID="btnImgAddCustom" runat="server" ImageUrl="~/Framework/Images/icon_squareArrow.gif"
+                                <asp:ImageButton ID="btnImgAddCustom" runat="server" ImageUrl="~/Framework/Images/icon_squareArrow.gif" Width="11" Height="11"
                                     OnClick="btnAddCustom_OnClick" />&nbsp;
                                 <asp:LinkButton ID="btnAddCustom" runat="server" OnClick="btnAddCustom_OnClick" CssClass="profileHypLinks">Add Custom</asp:LinkButton>
                                 &nbsp;(Enter your own publication using an online form.)
@@ -73,7 +73,7 @@
                         </asp:PlaceHolder>
                         <asp:PlaceHolder ID="phDeletePub" runat="server">
                             <div style="padding-bottom: 10px;">
-                                <asp:ImageButton ID="btnImgDeletePub" runat="server" ImageUrl="~/Framework/Images/icon_squareArrow.gif"
+                                <asp:ImageButton ID="btnImgDeletePub" runat="server" ImageUrl="~/Framework/Images/icon_squareArrow.gif" Width="11" Height="11"
                                     OnClick="btnDeletePub_OnClick" />&nbsp;
                                 <asp:LinkButton ID="btnDeletePub" runat="server" OnClick="btnDeletePub_OnClick" CssClass="profileHypLinks">Delete</asp:LinkButton>
                                 &nbsp;(Remove multiple publications from your profile.)

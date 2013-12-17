@@ -73,19 +73,22 @@ namespace Profiles.Profile.Modules.CustomViewPersonSameDepartment
             Image img = (Image)e.Item.FindControl("imgQuestion");
 
             if (img != null)
+            {
                 img.ImageUrl = Root.Domain + "/Framework/Images/info.png";
-
+                img.Width = 11;
+                img.Height = 11;
+            }
             Literal litListItem = (Literal)e.Item.FindControl("litListItem");
             if (litListItem != null)
                 litListItem.Text = "<li><a href='" + x.URI + "'>" + "<div class='thumbnail'><img src='" + Root.Domain + 
-                    "/profile/Modules/CustomViewPersonGeneralInfo/PhotoHandler.ashx?NodeID=" + x.NodeID + "&Thumbnail=True&Width=15'></img></div>" + 
+                    "/profile/Modules/CustomViewPersonGeneralInfo/PhotoHandler.ashx?NodeID=" + x.NodeID + "&Thumbnail=True&Width=15' width='15' height='30'></img></div>" + 
                     x.Name + "</a></li>";
 
             if (e.Item.ItemType == ListItemType.Footer)
             {
                 Literal litFooter = (Literal)e.Item.FindControl("litFooter");
                 litFooter.Text = "<a href='" + Root.Domain + "/search/default.aspx?searchtype=people&searchfor=&SearchRequest=" + this.SearchRequest + "'>" +
-              "<img style='margin-right:2px;position:relative;top:1px;border:0'  src='" + Root.Domain + "/Framework/Images/icon_squareArrow.gif'></img>Search Department</a>";
+              "<img style='margin-right:2px;position:relative;top:1px;border:0'  src='" + Root.Domain + "/Framework/Images/icon_squareArrow.gif' width='11' height='11'></img>Search Department</a>";
 
             }
 

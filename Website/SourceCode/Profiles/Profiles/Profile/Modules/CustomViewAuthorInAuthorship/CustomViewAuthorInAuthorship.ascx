@@ -14,7 +14,7 @@
 	<div class='toggle-vis' style='display:none;margin-top: 6px;'>		
 		Publications by year:
 		<div id="publicationTimelineGraph">
-			<img id='timelineBar' runat='server' border='0'/>
+			<img id='timelineBar' runat='server' border='0' width='595' height='100'/>
 		</div>
 	</div>	
 

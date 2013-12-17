@@ -57,7 +57,7 @@
 <div id="divStatus" style="position: fixed; text-align: center; height: 100%; width: 100%; top: 0;
     right: 0; left: 0; z-index: 9999999; opacity: 0.7;display:none">
     <span style="border-width: 0px; position: fixed; padding: 50px; background-color: #FFFFFF;
-        font-size: 36px; left: 40%; top: 40%;"><img alt="Loading..." src="<%=GetURLDomain()%>/Edit/Images/loader.gif" /></span>
+        font-size: 36px; left: 40%; top: 40%;"><img alt="Loading..." src="<%=GetURLDomain()%>/Edit/Images/loader.gif" width="400" height="213"/></span>
 </div>
 <div class="pageTitle">
     <asp:Literal runat="server" ID="litBackLink"></asp:Literal>

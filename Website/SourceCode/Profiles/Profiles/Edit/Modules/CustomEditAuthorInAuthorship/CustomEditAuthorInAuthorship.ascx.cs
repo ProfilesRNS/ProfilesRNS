@@ -338,6 +338,8 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
             txtPubId.Text = "";
             pnlAddPubById.Visible = false;
             btnImgAddPub.ImageUrl = Root.Domain + "/Framework/images/icon_squareArrow.gif";
+            btnImgAddPub.Width = 11;
+            btnImgAddPub.Height = 11;
             Session["phAddPub.Visible"] = null;
             upnlEditSection.Update();
         }
@@ -384,6 +386,8 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
                     pnlAddPubById.Visible = false;
                     grdEditPublications.DataBind();
                     btnImgAddPub.ImageUrl = Root.Domain + "/Framework/images/icon_squareArrow.gif";
+                    btnImgAddPub.Width = 11;
+                    btnImgAddPub.Height = 11;
                     upnlEditSection.Update();
                 }
                 catch (Exception ex)
@@ -481,6 +485,8 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
             phDeletePub.Visible = true;
             phSecuritySettings.Visible = true;
             btnImgAddPubMed.ImageUrl = Root.Domain + "/Framework/images/icon_squareArrow.gif";
+            btnImgAddPub.Width = 11;
+            btnImgAddPub.Height = 11;
             upnlEditSection.Update();
         }
 
@@ -685,6 +691,8 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
             phDeletePub.Visible = true;
             phSecuritySettings.Visible = true;
             btnImgAddPubMed.ImageUrl = Root.Domain + "/Framework/images/icon_squareArrow.gif";
+            btnImgAddPub.Width = 11;
+            btnImgAddPub.Height = 11;
             PubMedResults = null;
             upnlEditSection.Update();
         }
@@ -983,6 +991,8 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
                 phMain.Visible = false;
                 pnlAddCustomPubMed.Visible = false;
                 btnImgAddCustom.ImageUrl = Root.Domain + "/Framework/images/icon_squareArrow.gif";
+                btnImgAddPub.Width = 11;
+                btnImgAddPub.Height = 11;
             }
             Session["pnlAddCustomPubMed.Visible"] = null;
             upnlEditSection.Update();
@@ -1000,6 +1010,8 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
             phMain.Visible = false;
             pnlAddCustomPubMed.Visible = false;
             btnImgAddCustom.ImageUrl = Root.Domain + "/Framework/images/icon_squareArrow.gif";
+            btnImgAddPub.Width = 11;
+            btnImgAddPub.Height = 11;
             Session["pnlAddCustomPubMed.Visible"] = null;
             upnlEditSection.Update();
         }
@@ -1054,6 +1066,8 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
             pnlDeletePubMed.Visible = false;
             phSecuritySettings.Visible = true;
             btnImgDeletePub.ImageUrl = Root.Domain + "/Framework/images/icon_squareArrow.gif";
+            btnImgAddPub.Width = 11;
+            btnImgAddPub.Height = 11;
 
             grdEditPublications.DataBind();
             upnlEditSection.Update();
@@ -1072,6 +1086,8 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
             pnlDeletePubMed.Visible = false;
             phSecuritySettings.Visible = true;
             btnImgDeletePub.ImageUrl = Root.Domain + "/Framework/images/icon_squareArrow.gif";
+            btnImgAddPub.Width = 11;
+            btnImgAddPub.Height = 11;
 
             grdEditPublications.DataBind();
             upnlEditSection.Update();
@@ -1090,6 +1106,8 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
             phSecuritySettings.Visible = true;
             pnlDeletePubMed.Visible = false;
             btnImgDeletePub.ImageUrl = Root.Domain + "/Framework/images/icon_squareArrow.gif";
+            btnImgAddPub.Width = 11;
+            btnImgAddPub.Height = 11;
 
             grdEditPublications.DataBind();
             upnlEditSection.Update();
@@ -1103,6 +1121,8 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
             phSecuritySettings.Visible = true;
             pnlDeletePubMed.Visible = false;
             btnImgDeletePub.ImageUrl = Root.Domain + "/Framework/images/icon_squareArrow.gif";
+            btnImgAddPub.Width = 11;
+            btnImgAddPub.Height = 11;
             upnlEditSection.Update();
         }
 

@@ -55,7 +55,7 @@
 
     <div id="divStatus" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 999999; display:none;">
          <div class="progress">
-             <span><img alt="Loading..." src="<%=GetURLDomain()%>/Edit/Images/loader.gif" /></span>
+             <span><img alt="Loading..." src="<%=GetURLDomain()%>/Edit/Images/loader.gif" width="400" height="213"/></span>
          </div>
     </div>
     
@@ -110,7 +110,7 @@
           <a id="powered-by-ctsi" href="http://ctsi.ucsf.edu/" target="_blank">Powered by CTSI</a>
         </div>
         <div id="new-features">
-          <a href="<%=GetURLDomain()%>/about/NewFeatures.aspx">New Features: Learn more <img src="<%=GetURLDomain()%>/Framework/images/arrow-orgbg.gif" alt=">" style="border:none" /></a>
+          <a href="<%=GetURLDomain()%>/about/NewFeatures.aspx">New Features: Learn more <img src="<%=GetURLDomain()%>/Framework/images/arrow-orgbg.gif" alt=">" style="border:none" width="12" height="16"/></a>
         </div>
     </div>	    
     <div id="suckerfish-container">
@@ -274,7 +274,7 @@
 </form>
 <div id="backtotop">  
     <a href="#">  
-       <img src="<%=GetURLDomain()%>/framework/images/backtotop.gif" border="0" alt="Back to TOP" />  
+       <img src="<%=GetURLDomain()%>/framework/images/backtotop.gif" border="0" alt="Back to TOP"  width="33" height="116"/>  
     </a>  
 </div>
 

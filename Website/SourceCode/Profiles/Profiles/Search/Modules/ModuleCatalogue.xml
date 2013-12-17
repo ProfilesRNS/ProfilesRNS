@@ -17,7 +17,7 @@ For details, see: LICENSE.txt
   <Module ModulePath="Modules" NameSpace="SearchOptions" FileName="SearchOptions.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="SearchEverythingFacets" FileName="SearchEverythingFacets.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="SearchResults" FileName="SearchResults.ascx" Enabled="true"/>
-  <Module ModulePath="Modules" NameSpace="MiniSearch" FileName="MiniSearch.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="MiniSearch" FileName="MiniSearch.ascx" Enabled="false"/>
   <Module ModulePath="Modules" NameSpace="TopSearchPhrase" FileName="TopSearchPhrase.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="SearchConnection" FileName="SearchConnection.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="SearchEverything" FileName="SearchEverything.ascx" Enabled="true"/>
