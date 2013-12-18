@@ -39,7 +39,7 @@
   <li><a href="#update">How frequently are the data in USC Profiles updated?</a></li>
   <li><a href="#keyword">Can I add/edit research, career and academic interests?</a></li>
   <li><a href="#mynetwork">Can I edit my co-authors or similar people lists?</a></li>
-  <li><a href="#learn">How can I learn more about USC Profile?</a></li>
+<!--  <li><a href="#learn">How can I learn more about USC Profiles?</a></li> -->
   <li><a href="#ideas">Where should I send my ideas on how to improve the tool?</a></li>
   <li><a href="#sysreq">What are the system requirements for using USC Profiles?</a></li>
   <li><a href="#manage">Who manages USC Profiles?</a></li>
@@ -48,42 +48,40 @@
 <h3 id="who">Who is listed in USC Profiles?</h3>
 
 <ul>
-  <li>USC Profiles was created for research networking so we initially focused on adding USC faculty members, researchers with academic leadership appointments, residents, postdoctoral scholars and non-faculty academic researchers. </li>
-  <li>We are expanding USC Profiles to include research staff, individuals and additional groups in the USC community, as requested.</li>
-  <li>Profile creation requires that an individual's data be in the USC Campus Locator System. If you are a USC employee and do not have a profile, <a href="mailto:profiles@sc-ctsi.org">request yours now</a> by sending us your USC Employee ID.</li>
+  <li>USC Profiles was created for research networking and initially focused on adding USC faculty members within the health sciences. </li>
+  <li>We are expanding USC Profiles to include academic leadership at USC, fellows and residents, postdoctoral scholars, non-faculty academic researchers, research staff, s and additional groups in the USC community, as requested.</li>
+  <li>Profile creation requires that an individual's data be in the USC GDS System which is connected to the PPBS system (now being replaced by the new HR system Workday).</li>
 </ul>
 
 <h3 id="view">Who can view USC Profiles?</h3>
 <ul>
-  <li>USC Profiles is searchable on the web and can be viewed by the general public as well as the USC community.</li>
+  <li>USC Profiles is a public searchable information resource available to everyone on the web including the general public and the USC community.</li>
 </ul>
 
 <h3 id="enhance">How do I edit and enhance my individual profile?</h3>
 <ul>
-  <li>To edit your individual profile, click the <strong>Login/Edit My Profile</strong> link in the menu bar. You will be prompted to login with your MyAccess account. </li>
-  <li>Your profile is divided into several sections: directory information (not editable in Profiles), photo, awards and honors, overview, keywords (a new feature!!) and publications.
+  <li>To edit your individual profile, click the <strong>Sign in</strong> link. You will be prompted to login with your USC Net ID.</li>
+  <li>Your profile is divided into several sections: directory information (not editable in Profiles), photo, awards and honors, overview, keywords, publications, and more.
   <ul>
-  <li>For directory information, USC Profiles uses Campus Locator System data (name, degrees, and contact information). Changes to this information should be directed to the Payroll/Personnel Analyst for your USC campus department. If unsure who this person is, contact your department's Business Officer.</li>
-  <li>You can upload a photo and also add/edit awards and your overview.</li>
-  <li>Keywords are research topics that you can add or edit yourself. These are searchable from within USC Profiles, so if you're focusing on a new area of research and haven't published a paper on it yet, people can still find you if they search using that term.</li>
-  <li>Publications are automatically added from PubMed, and you can also add other publications yourself.</li>
+  <li>For directory information, USC Profiles uses the USC GDS System (name, degrees, and contact information). Changes to this information should be directed to the Payroll/Personnel Analyst for your USC campus department. If unsure who this person is, contact your department's Business Officer.</li>
+  <li>You can upload a photo and also add/edit awards, your overview, and more.</li>
+  <li>Keywords are research topics that you can add or edit. These are searchable from within USC Profiles, so if you're focusing on a new area of research and haven't published a paper on it yet, people can still find you if they search using that term.</li>
+  <li>Publications are automatically added from PubMed. You can edit, delete and add other publications.</li>
   </ul></li>
   <li><a href="mailto:profiles@sc-ctsi.org">Contact us</a> if you have questions about editing your profile.</li>
 </ul>
 
 <h3 id="login">How do I login to USC Profiles?</h3>
-<p>Click the <strong>Login/Edit My Profile</strong> link on any USC Profiles page. Then enter your MyAccess username and password.</p>
+<p>Click the <strong>Login/Edit My Profile</strong> link on any USC Profiles page. Then enter your USC Net ID username and password.</p>
 <ul>
-  <li>If you have never used your MyAccess account or for password support: go to <a href="https://myaccess.ucsf.edu/" title="Go to the USC ITS website" target="_blank">https://myaccess.ucsf.edu/</a> or call ITS Customer Support at (415) 514-4100 (option 2).</li> 
-  <li><a href="http://it.ucsf.edu/services/myaccess-single-sign" title="Go to the USC IT website" target="_blank">Learn more about MyAccess</a></li>
+  <li>If you have never used your USC Net ID account, or for password support: go to <a href="https://mypassword.usc.edu/" title="Go to the USC Mypassword website" target="_blank">https://mypassword.usc.edu/</a> or call USC ITS at (213) 740-5555.</li> 
+  <li><a href="http://www.usc.edu/its/accounts/password" title="Go to the USC ITS website" target="_blank">Learn more about your USC Net ID at http://www.usc.edu/its/accounts/password</a></li>
 </ul>
 
 <h3 id="why">Why should I login to USC Profiles?</h3>
 <ul>
   <li>Many special USC Profiles features are available only if you're logged-in. These include:
   <ul>
-  <li>Create a group of individuals based on search results. This group can then then be used to create a USC Chatter Group or to export information about these individuals. (Accessing the group's emails is by special permission only. Please email us to request permission.)</li>
-  <li>Follow someone on USC Chatter directly from his/her profile.</li>
   <li>Export a list of an individual's publications.</li>
   </ul></li>
   <li>In addition, you can edit your profile and manage your designated proxies only if you're logged in.</li>
@@ -91,11 +89,10 @@
 
 <h3 id="datasources">What are the sources of data for USC Profiles?</h3> 
 <ul>
-  <li>All data in automatically generated profiles are currently available on other public websites, specifically the USC Directory, PubMed, and NIH RePORTER. 
+  <li>The data that is automatically included in a person’s profile is currently available on other public websites, specifically the USC Directory and PubMed. 
   <ul>
-  <li>Contact information is obtained from the Campus Locator System, which also feeds the central USC Directory. This information is updated weekly. </li>
+  <li>Contact information is obtained from the USC GDS System, which also feeds the central USC Directory. This information is updated weekly.</li>
   <li>Publications are derived from the MEDLINE/PubMed citation database. These are retrieved monthly.</li>
-  <li>Grant information from NIH RePORTER is updated monthly. </li>
   </ul></li>
   <li>Overview and other personalized data is entered by the profile owner or a designated proxy. </li>
 </ul>
@@ -104,31 +101,31 @@
 <ul>
   <li>The lists at the right side of a profile page provide additional information about the individual. The first three lists are based on MeSH terms assigned to the individual's publications by the National Library of Medicine.
   <ul>
-  <li>"Related Concepts" includes the top five research concepts derived from publications' MeSH terms. There is also a link to show all the concepts associated with this individual.</li>
-  <li>"Co-Authors" includes those who have published with this individual.</li>
-  <li>"Similar People" includes people who have research concepts/MeSH terms in common with this individual. </li>
+  <li>"Related Concepts" includes the top five research concepts derived from publications' MeSH terms. There is also a link to show all the concepts associated with this person.</li>
+  <li>"Co-Authors" includes those who have published with this person.</li>
+  <li>"Related Authors" includes people who have research concepts/MeSH terms in common with this person.</li>
   </ul></li>
-  <li>Department lists are determined from Campus Locator System data (see data sources above) and reflect people in the same department.</li>
+  <li>Department lists are determined from USC GDS data (see data sources above) and reflect people in the same department.</li>
 </ul>
 
 <h3 id="missing">Why are there missing or incorrect publications in my profile? How can I correct this?</h3> 
 <ul>
-  <li>USC Profiles uses a complex mix of names, institution, and manually entered publication information to find your publications in PubMed's repository. Unfortunately, there is no easy way to exactly match all articles in PubMed with complete precision and accuracy. The algorithm used to find articles from PubMed attempts to minimize the number of publications incorrectly added to a profile; however, this method may result in some missing or incorrectly listed publications.</li>
-  <li>People with common names or whose articles were written at other institutions are most likely to have incomplete publication lists. </li>
-  <li>You can make corrections by manually searching PubMed from within Profiles to add, edit or delete publications (see <a href="HowProfilesWorks.aspx#enhance">How do I edit my Profile?</a> above). By curating publications manually, you are helping USC Profiles to identify which concepts are associated with your profile and increasing the likelihood of finding the right publications on subsequent attempts. </li>
+  <li>USC Profiles uses a complex mix of names, institution, and manually entered publication information to find your publications in PubMed's repository. Unfortunately, there is no easy way to exactly match all articles in PubMed with complete precision and accuracy. The algorithm used to find articles from PubMed attempts to minimize the number of publications incorrectly added to a profile. However, this method may result in some missing or incorrectly listed publications.</li>
+  <li>People with common names or whose articles were written at other institutions are most likely to have incomplete publication lists.</li>
+  <li>You can make corrections by manually searching PubMed from within Profiles to add, edit or delete publications (see <a href="HowProfilesWorks.aspx#enhance">How do I edit my Profile?</a> above). By curating publications manually, you are helping USC Profiles to identify which concepts are associated with your profile and increasing the likelihood of finding the right publications on subsequent attempts.</li>
   <li>We encourage you to login to the site and add any missing publications or remove incorrect ones.</li>
 </ul>
 
 <h3 id="update">How frequently are the data in USC Profiles updated?</h3>
 <ul>
-  <li>Changes made to your primary campus information via your HR representative, such as names, degrees, and contact information, are automatically updated once a week.</li>
+  <li>Changes made to your directory information via your HR representative, such as names, degrees, and contact information, are automatically updated once a week.</li>
   <li>Publications from PubMed are updated monthly.</li>
   <li>Changes made to a profile manually will be reflected within minutes.</li>
 </ul>
 
 <h3 id="keyword">Can I add/edit research, career and academic interests?</h3>
 <ul>
-  <li>Yes! You can enter interests when you are editing your profile. These are useful to indicate research topics or fields in which you haven’t yet published. Users who search USC Profiles by these topics will find your profile. </li>
+  <li>Yes. You can enter interests when you are editing your profile. These are useful to indicate research topics or fields in which you haven’t yet published. Users who search USC Profiles by these topics will find your profile.</li>
   <li>The new interests feature is different from the concepts associated to your publications (MeSH terms derived by the National Library of Medicine), which are not editable. However, you can ensure these accurately reflect your work by keeping your publications up to date and correct in USC Profiles. Please note that it can take up to 24 hours for the system to update your concepts, co-authors, and similar people after you have modified your publications.</li> 
 </ul>
 
@@ -136,17 +133,16 @@
 <ul>
   <li>These networks are derived from the MeSH terms automatically. Keeping your publications accurate and up to date will improve these networks. However, they can't be edited directly.</li>
 </ul>
-
+<!--
 <h3 id="learn">How can I learn more about USC Profiles?</h3>
 <ul>
   <li><a href="AboutUSCProfiles.aspx">Read more</a> about the USC Profiles tool, ongoing development and exciting collaborations.</li>
   <li>If you have specific questions not answered here, please <a href="mailto:profiles@sc-ctsi.org">contact us</a>.</li>
 </ul>
-
+-->
 <h3 id="ideas">Where should I send my ideas on how to improve the tool?</h3> 
 <ul>
-  <li>We encourage you to <a href="mailto:profiles@sc-ctsi.org">get in touch</a> with your ideas on how to improve USC Profiles.  We especially look forward to hearing from you if Profiles has enabled your research in any way.  Your success stories allow us to continue to build on such tools and to continue to get support.</li>
-  <li>To tell us how we're doing or for questions please send a note to <a href="mailto:profiles@sc-ctsi.org">profiles@sc-ctsi.org</a>.</li>
+  <li>Contact us and share your comments, feedback, stories on how Profiles helped you: <a href="mailto:profiles@sc-ctsi.org">profiles@sc-ctsi.org</a>.</li>
 </ul>
 
 <h3 id="sysreq">What are the system requirements for using USC Profiles?</h3>
@@ -162,7 +158,7 @@
 </ul>
 
 <h3 id="manage">Who manages USC Profiles?</h3>
-<p>USC Profiles is managed by USC's <a href="http://sc-ctsi.org/" target="_blank">Clinical and Translational Science Institute (SC CTSI)</a>.</p>
+<p>USC Profiles is managed by the Southern California <a href="http://sc-ctsi.org/" target="_blank">Clinical and Translational Science Institute (SC CTSI)</a> at USC and CHLA.</p>
 
 
           </Param>

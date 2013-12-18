@@ -79,8 +79,10 @@
   <td colspan="3" align="center" style="padding:5px 0;"> </td> 
  </tr>
  <tr>
-  <td style="text-align: center">    
-     <div class="tour" style="width: 115px;margin: 30px 0 0 50px;font-size:130%;font-weight: normal;"><a href=""><img src="../Framework/Images/icon_squareArrow.gif" style="vertical-align: 0px; " /> Tour Profiles </a></div>
+  <td style="padding: 20px 10px 0;  color:#777; text-align: center">    
+     <!--<div class="tour" style="width: 115px;margin: 30px 0 0 50px;font-size:130%;font-weight: normal;"></div>-->
+       <span style="font-size: 130%;">Tour Profiles</span>  <br /><br />
+       <p style="color:#000;padding-top:21px"><img src="images/ppt.jpg" alt="PPT Coming Soon" style="vertical-align:middle" /> Coming Soon</p>
   </td>
   <td style="padding: 20px; text-align: center; color:#777; border-left: 1px solid #CCC; 
     border-right: 1px solid #CCC;">
@@ -88,7 +90,7 @@
       ?</div>
     <div style="display: inline-block; font-size: 130%; text-align: left">
       Frequently<br />Asked<br />Questions</div><br /><br />
-      <a href="../About/help.aspx#faq">View the FAQ</a>
+      <a href="../About/faq.aspx">View the FAQ</a>
   </td>
   <td style="padding: 20px 10px 0;  color:#777; text-align: center">
      <span style="font-size: 130%;">USC Profiles Updates</span> <br /><br />
@@ -107,7 +109,9 @@
 </table>
 
 <h3 style="padding-top:20px">Acknowledgements</h3>
-<p>USC Profiles is USC’s version of the ground-breaking, open source "Profiles Research Networking Software" that was developed under the supervision of Griffin M Weber, MD, PhD, with support from Grant Number 1 UL1 RR025758-01 to <a href="http://catalyst.harvard.edu/" target="_new">Harvard Catalyst: The Harvard Clinical and Translational Science Center</a> from the National Center for Research Resources and support from Harvard University and its affiliated academic healthcare centers.</p>
+<p>USC Profiles was developed from <a href="http://connects.catalyst.harvard.edu/Profiles/about/default.aspx" target="_blank">Profiles Research Networking Software</a>, which was created by Griffin M. Weber, MD, PhD, with support from <a href="http://catalyst.harvard.edu/" target="_new">Harvard Catalyst | The Harvard Clinical and Translational Science Center</a> (grant numbers 8UL1 TR000170-05 and 1UL1 TR001102-01).</p>
+
+<p>USC Profiles is managed by the UCSF <a href="http://ctsi.ucsf.edu" target="_blank">Clinical and Translational Science Institute (CTSI)</a>, part of the Clinical and Translational Science Award program funded by the National Center for Advancing Translational Sciences (grant number UL1 TR000004) at the National Institutes of Health (NIH).</p>
 
 <p>Profiles Research Networking Software is available as an <a href="http://connects.catalyst.harvard.edu/Profiles/about/default.aspx?tab=open" target="_blank">open source platform</a> for institutions seeking a web-based means of facilitating collaboration among their academic researchers. </p>  
 

@@ -80,6 +80,7 @@
     <Content Include="About\FAQ.aspx" />
     <Content Include="About\expeditionaryaquili.aspx" />
     <Content Include="About\Images\editProfile.gif" />
+    <Content Include="About\Images\ppt.jpg" />
     <Content Include="About\Images\TourProfiles-3D.png" />
     <Content Include="About\Optin.aspx" />
     <Content Include="About\CSS\UCSF.css" />

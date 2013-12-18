@@ -9,7 +9,7 @@
     
 </script>
 
-<div class="passiveSectionHead">
+<div class="passiveSectionHead" style="margin-top:-24px">
     <asp:Literal runat="server" ID="litDescription"></asp:Literal>
 </div>
 <div class="passiveSectionBody">
@@ -22,7 +22,7 @@
 
 <p style="margin: 0; padding: 20px 0 6px"><strong>USC Profiles Updates</strong></p>
 <div style="margin-left: -6px;">
-<a class="twitter-timeline"  href="https://twitter.com/USCProfiles"  data-widget-id="407943177664860160" data-chrome="nofooter noborders noheader" data-tweet-limit="2" data-link-color="#4D8BA9">Updates by @USCProfiles</a>
+<a class="twitter-timeline"  href="https://twitter.com/USCProfiles"  data-widget-id="407943177664860160" data-chrome="nofooter noborders noheader" data-tweet-limit="1" data-link-color="#4D8BA9">Updates by @USCProfiles</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 </div>
 <p style="margin: 0;">
