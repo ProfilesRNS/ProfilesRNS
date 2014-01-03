@@ -102,7 +102,15 @@ namespace Profiles.ORNG.Utilities
             else
             {
                 Profiles.Framework.Utilities.SessionManagement sm = new Profiles.Framework.Utilities.SessionManagement();
-                viewerUri = sm.Session().PersonURI;
+                // if they have a Profile, use the Profile URI otherwise use the User URI.  This allows admins and other folks without profile pages to use gadgets
+                if (sm.Session().PersonURI != null && sm.Session().PersonURI.Trim().Length > 0)
+                {
+                    viewerUri = sm.Session().PersonURI;
+                }
+                else 
+                {
+                    viewerUri = sm.Session().UserURI;
+                }
                 if (viewerUri != null && viewerUri.Trim().Length == 0)
                 {
                     viewerUri = null;

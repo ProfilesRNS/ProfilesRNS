@@ -584,7 +584,7 @@ namespace Profiles.Framework.Utilities
 
             SqlParameter[] param;
 
-            param = new SqlParameter[7];
+            param = new SqlParameter[8];
 
             SqlCommand dbcommand = new SqlCommand();
 
@@ -605,12 +605,16 @@ namespace Profiles.Framework.Utilities
             param[4].Direction = ParameterDirection.Output;
 
             // UCSF
-            param[5] = new SqlParameter("@ShortDisplayName", SqlDbType.VarChar, 400);
+            param[5] = new SqlParameter("@UserURI", SqlDbType.VarChar, 400);
             param[5].Direction = ParameterDirection.Output;
+
+            // UCSF
+            param[6] = new SqlParameter("@ShortDisplayName", SqlDbType.VarChar, 400);
+            param[6].Direction = ParameterDirection.Output;
 
             if (session.LogoutDate > DateTime.Now.AddDays(-5))
             {
-                param[6] = new SqlParameter("@LogoutDate", session.LogoutDate.ToString());
+                param[7] = new SqlParameter("@LogoutDate", session.LogoutDate.ToString());
             }
 
             dbcommand.Connection = dbconnection;
@@ -632,7 +636,8 @@ namespace Profiles.Framework.Utilities
                     session.NodeID = Convert.ToInt64(param[3].Value);
                 }
                 session.PersonURI = param[4].Value.ToString();
-                session.ShortDisplayName = param[5].Value.ToString();
+                session.UserURI = param[5].Value.ToString();
+                session.ShortDisplayName = param[6].Value.ToString();
             }
             catch (Exception ex)
             {
