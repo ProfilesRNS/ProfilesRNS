@@ -27,6 +27,7 @@ changed display none to block for next div
             <a href="{@ItemURL}">
               <xsl:if test ="@PersonID!=''">
                 <div class="thumbnail">
+                  <!--img src="{$root}/PhotoHandler.jpg?person={@PersonID}" width="15" height="30"/-->
                   <img src="{$root}/profile/Modules/CustomViewPersonGeneralInfo/PhotoHandler.ashx?person={@PersonID}&amp;Thumbnail=True&amp;Width=15" width="15" height="30"/>
                 </div>
               </xsl:if>
