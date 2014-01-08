@@ -14,7 +14,7 @@ ALTER PROCEDURE [User.Session].[UpdateSession]
 	@LogoutDate DATETIME=NULL,
 	@SessionPersonNodeID BIGINT = NULL OUTPUT,
 	@SessionPersonURI VARCHAR(400) = NULL OUTPUT,
-	@UserURI VARCHAR(400) = NULL OUTPUT,
+	@UserURI VARCHAR(400) = NULL OUTPUT,  -- Added by UCSF
 	@ShortDisplayName VARCHAR(400) = NULL OUTPUT  -- Added by UCSF
 
 AS
