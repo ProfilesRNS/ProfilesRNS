@@ -13,3 +13,8 @@ C:\Development\HttpBL\HttpBL\HttpBL\bin\Release\HttpBL.pdb
 C:\Development\HttpBL\HttpBL\HttpBL\obj\Release\ResolveAssemblyReference.cache
 C:\Development\HttpBL\HttpBL\HttpBL\obj\Release\HttpBL.dll
 C:\Development\HttpBL\HttpBL\HttpBL\obj\Release\HttpBL.pdb
+C:\Development\ProfilesRNS\ProfilesRNS\Website\SourceCode\HttpBL\bin\Release\HttpBL.dll
+C:\Development\ProfilesRNS\ProfilesRNS\Website\SourceCode\HttpBL\bin\Release\HttpBL.pdb
+C:\Development\ProfilesRNS\ProfilesRNS\Website\SourceCode\HttpBL\obj\Release\ResolveAssemblyReference.cache
+C:\Development\ProfilesRNS\ProfilesRNS\Website\SourceCode\HttpBL\obj\Release\HttpBL.dll
+C:\Development\ProfilesRNS\ProfilesRNS\Website\SourceCode\HttpBL\obj\Release\HttpBL.pdb

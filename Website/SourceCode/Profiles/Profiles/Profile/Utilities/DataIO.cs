@@ -921,6 +921,39 @@ namespace Profiles.Profile.Utilities
 
         #endregion
 
+        #region UCSF
+        public SqlDataReader GetExternalCoauthors(Int64 nodeid)
+        {
+            SqlDataReader dbreader = null;
+            try
+            {
+
+
+                string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+                SqlConnection dbconnection = new SqlConnection(connstr);
+
+                dbconnection.Open();
+
+                SqlCommand dbcommand = new SqlCommand();
+                dbcommand.CommandType = CommandType.StoredProcedure;
+                dbcommand.CommandText = "[UCSF.].[GetCoauthors]";
+                dbcommand.CommandTimeout = base.GetCommandTimeout();
+
+                dbcommand.Parameters.Add(new SqlParameter("@NodeID", nodeid));
+                dbcommand.Connection = dbconnection;
+                dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
+
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return dbreader;
+        }
+        #endregion
+
     }
 
 
