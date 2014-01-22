@@ -216,6 +216,7 @@
     <Content Include="Profile\CSS\UCSF.css" />
     <Content Include="Profile\Images\default_img.png" />
     <Content Include="Profile\JavaScript\UCSF.js" />
+    <Content Include="Profile\Modules\CustomViewExternalCoauthors\CustomViewExternalCoauthors.ascx" />
     <Content Include="Profile\Modules\CustomViewListProperty\CustomViewListProperty.ascx" />
     <Content Include="RobotsTxt.aspx" />
     <Content Include="Search\CSS\UCSF.css" />
@@ -474,6 +475,13 @@
     </Compile>
     <Compile Include="ProfilesDisplay.aspx.designer.cs">
       <DependentUpon>ProfilesDisplay.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\Modules\CustomViewExternalCoauthors\CustomViewExternalCoauthors.ascx.cs">
+      <DependentUpon>CustomViewExternalCoauthors.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profile\Modules\CustomViewExternalCoauthors\CustomViewExternalCoauthors.ascx.designer.cs">
+      <DependentUpon>CustomViewExternalCoauthors.ascx</DependentUpon>
     </Compile>
     <Compile Include="Profile\Modules\CustomViewListProperty\CustomViewListProperty.ascx.cs">
       <DependentUpon>CustomViewListProperty.ascx</DependentUpon>
