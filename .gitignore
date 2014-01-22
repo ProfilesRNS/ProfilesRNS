@@ -76,4 +76,6 @@
 /Website/SourceCode/ProfilesSearchAPI/obj/*
 /Website/SourceCode/HttpBL/bin/*
 /Website/SourceCode/HttpBL/obj/*
+/Website/SourceCode/Profiles/Profiles/bin/*
+/Website/SourceCode/Profiles/Profiles/obj/*
 

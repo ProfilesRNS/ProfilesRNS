@@ -91,17 +91,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\IKVM.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.GetOptions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Mono.GetOptions.dll</HintPath>
-    </Reference>
     <Reference Include="SemWeb, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\SemWeb.dll</HintPath>
-    </Reference>
-    <Reference Include="SemWeb.Sparql, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\SemWeb.Sparql.dll</HintPath>
     </Reference>
     <Reference Include="sparql-core, Version=1.0.6.2, Culture=neutral, PublicKeyToken=3e1051c7e190e42e">
       <SpecificVersion>False</SpecificVersion>
