@@ -4,7 +4,7 @@
 <div class='publicationList'>	
 	<div style="font-weight:bold;color:#888;margin-bottom: 12px;margin-top:6px">
 		Publications listed below are automatically derived from MEDLINE/PubMed and other sources, which might result in incorrect or missing publications. 
-		Researchers can <asp:Literal runat='server' ID='loginLiteral'></asp:Literal> to make corrections and additions, or <a href="mailto:profiles@ucsf.edu">contact us for help</a>.
+		Researchers can <asp:Literal runat='server' ID='loginLiteral'></asp:Literal> to make corrections and additions, or <a href="mailto:profiles@sc-ctsi.org">contact us for help</a>.
 	</div>
 	<div class="anchor-tab">
 		<a class='selected'>List All</a> 
@@ -14,7 +14,7 @@
 	<div class='toggle-vis' style='display:none;margin-top: 6px;'>		
 		Publications by year:
 		<div id="publicationTimelineGraph">
-			<img id='timelineBar' runat='server' border='0' width='595' height='100'/>
+			<img id='timelineBar' runat='server' border='0'/>
 		</div>
 	</div>	
 

@@ -1,11 +1,13 @@
 ﻿$(document).ready(function () {
     //move other position below primary title
     if ($('.sectionHeader2') && $('.sectionHeader2').length) {
-        $('<br><span id="othpos">&nbsp;</span>').appendTo('.basicInfo tr:nth-child(1) td:nth-child(2)');
+        $('<br><span id="othpos">&nbsp;</span>').appendTo('.basicInfo:first-child tr:nth-child(1) td:nth-child(2)');
         $('.sectionHeader2').siblings().addClass('otherpos');
         $('.otherpos th').html('');
+	$('.otherpos td:not(:empty)').append('%');
         var str = $('.otherpos').text();
-        str = str.replace(";", "<br>");
+        //str = str.slice(0,-1);
+	str = str.replace(/\%/g, "<br>");
         $("#othpos").html(str);
         $('.sectionHeader2').parents('.content_two_columns').hide();
     }
@@ -36,12 +38,14 @@
 
     //Awards table 
   if ($('.awardsList') && $('.awardsList').length) {
+    $('.awardsList td:first-child').css('min-width', '190px');
+    $('.awardsList td:last-child').css('padding-left', '10px');
     $('.awardsList td:nth-child(2)').css('white-space', 'nowrap').css('width', '36px');
   }
     if ($('.awardsList') && $('.awardsList tr').length > 4) {
         $('.awardsList tr:gt(2)').hide();
-        $("<div class='atog' id='moreawards'><span> <strong>...</strong> Show more</span> <img src='" + _rootDomain + "/Framework/Images/expandRound.gif' alt='+' style='vertical-align:top'  width='28' height='17'/></div>").appendTo('.awardsList tr:nth-child(3) td:last-child');
-        $("<div class='atog' id='lessawards'><span>Show less</span> <img src='" + _rootDomain + "/Framework/Images/collapseRound.gif' alt='-' style='vertical-align:top' width='28' height='17'/></div>").appendTo('.awardsList tr:last-child td:last-child');
+        $("<div class='atog' id='moreawards'><span> <strong>...</strong> Show more</span> <img src='" + _rootDomain + "/Framework/Images/expandRound.gif' alt='+' style='vertical-align:top' /></div>").appendTo('.awardsList tr:nth-child(3) td:last-child');
+        $("<div class='atog' id='lessawards'><span>Show less</span> <img src='" + _rootDomain + "/Framework/Images/collapseRound.gif' alt='-' style='vertical-align:top' /></div>").appendTo('.awardsList tr:last-child td:last-child');
     }
   if ($('#moreawards') && $('#moreawards').length) {
     $('#moreawards').click(function () {
@@ -63,7 +67,7 @@
     $('.PropertyItemHeader:contains("Overview")').next('.PropertyGroupData').attr("id","narrative");
     if ($('#narrative').text().length > 800) {
         $('#narrative').addClass('box').addClass('box-collapsed');
-        $('.box').first().prepend("<div class='plusbutton'><span> <strong>&nbsp;...</strong> Show more</span> <img src='" + _rootDomain + "/Framework/Images/expandRound.gif' alt='+' style='vertical-align:top'  width='28' height='17'/></div><div class='minusbutton'><span>Show less</span> <img src='" + _rootDomain + "/Framework/Images/collapseRound.gif' alt='-' style='vertical-align:top' width='28' height='17'/></div>");
+        $('.box').first().prepend("<div class='plusbutton'><span> <strong>&nbsp;...</strong> Show more</span> <img src='" +_rootDomain + "/Framework/Images/expandRound.gif' alt='+' style='vertical-align:top' /></div><div class='minusbutton'><span>Show less</span> <img src='" + _rootDomain + "/Framework/Images/collapseRound.gif' alt='-' style='vertical-align:top' /></div>");
         $('.minusbutton').hide();
     }
    // $('.box').addClass('box-collapsed');

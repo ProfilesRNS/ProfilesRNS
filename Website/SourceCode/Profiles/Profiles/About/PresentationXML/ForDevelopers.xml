@@ -71,17 +71,8 @@ look and feel.</p>
 </ul>
 </div>
 
-<h2 style="clear:left;padding-top:15px" class="about">Have Questions?</h2>
-<h3>Building a regular website?</h3>
-<ul>
-  <li>Displaying data about users in real-time? Use the new <a href="">JSON API version 2.0</a> </li>
-</ul>
-<h3>Building a more complex app?</h3>
-<ul>
-  <li>Need data about small/known sets of users? Use the new <a href="">JSON API version 2.0</a> </li>
-  <li>Need to search Profiles? Use the <a href="">XML API</a> </li>
-</ul>
-<h2 class="about" id="gethelp">Get Help</h2>
+
+<h2 style="clear:left;padding-top:15px" class="about" id="gethelp">Have Questions?</h2>
 <!-- paragraph with mailto link inserted with js
 <p><a href="mailto:profiles@sc-ctsi.org">For questions or support, please contact us »</a></p>
 -->

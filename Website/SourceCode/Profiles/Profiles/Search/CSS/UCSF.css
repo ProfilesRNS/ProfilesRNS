@@ -22,7 +22,16 @@ image { border: none; }
 .profiles .profilesContentMain .pageTabs { padding-left: 345px; 
   background-image: url('../../Framework/Images/tab_back.gif'); }
 .panelActive { margin-top: 29px; margin-top: 35px\9; }
-.profiles .profilesContentPassive { margin-top: 38px; margin-top: 35px\9; } 
+.profiles .profilesContentPassive { margin-top: 17px; padding-top: 0; } 
+/* saf3+, chrome1+ */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+ .profiles .profilesContentPassive { margin-top: -5px; }
+}
+/* Safari only override */
+::i-block-chrome,.profiles .profilesContentPassive  {
+ margin-top: 19px;
+}}
+
 
 input#chkExactphrase, input#institutionallexcept, input#departmentallexcept, .except input { display: none; }
 .searchForm .inputText { width: 245px; }

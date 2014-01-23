@@ -17,7 +17,6 @@ img#ctl00_ContentMain_rptMain_ctl00_ctl00_imgPhoto { width: 150px; }
 .PropertyGroupData div { padding: 0 !important; }
 .profiles .profilesContentMain .sectionHeader { padding-top: 6px;  text-decoration: none; }
 .awardsList:after { content:""; display:block; height: 15px; }
-.profiles .profilesContentMain .awardsList td:first-child { white-space: normal !important; }
 .profiles .profilesContentMain .publications li { border: none; padding-top: 0; }
 #ctl00_lblHTMLBlockLineBreaks { display: block; padding-bottom: 20px; }
 .PropertyGroupData #publicationTimelineGraph { margin-bottom: 20px; }
@@ -35,11 +34,11 @@ img#ctl00_ContentMain_rptMain_ctl00_ctl00_imgPhoto { width: 150px; }
 .plusbutton, .minusbutton {
      position: absolute; bottom: 0; right: 0; 
      margin: 0; padding: 0 20px 0 9px; 
-     color: #990; line-height: 17px;
+     color: #4d8ba9; line-height: 17px;
      background-color: #FFF;
 }
 .plusbutton span:hover, .minusbutton span:hover { 
-     color: #990; text-decoration: underline; cursor: pointer;
+     color: #267196; text-decoration: underline; cursor: pointer;
 }
 
 

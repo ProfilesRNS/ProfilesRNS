@@ -9,7 +9,7 @@
     
 </script>
 
-<div class="passiveSectionHead" style="margin-top:-24px">
+<div class="passiveSectionHead">
     <asp:Literal runat="server" ID="litDescription"></asp:Literal>
 </div>
 <div class="passiveSectionBody">
