@@ -18,4 +18,5 @@ Change internalusername varchar(50) in [Profile.Import].[PersonFilterFlag] to nv
 For each Add-on that shows up in the search filter, add it to a person (public) and run nightly batch, this sets up the RDF needed so 
 EXEC [Profile.Data].[Person.GetFilters] returns non null URI's. A requirement for search to work.
 
-
+To get HTTPS working in stage:
+http://blogs.msdn.com/b/varunm/archive/2013/06/18/bind-multiple-sites-on-same-ip-address-and-port-in-ssl.aspx

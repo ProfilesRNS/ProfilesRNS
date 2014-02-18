@@ -7,8 +7,21 @@ TRUNCATE TABLE [Profile.Data].[Publication.PubMed.Mesh];
 TRUNCATE TABLE [Profile.Data].[Publication.PubMed.PubType];
 TRUNCATE TABLE [Profile.Data].[Publication.PubMed.Keyword];
 TRUNCATE TABLE [Profile.Data].[Publication.PubMed.Investigator];
-	
-exec [Profile.Import].[Beta.LoadData] @SourceDBName = 'profiles_usc';
+TRUNCATE TABLE [Profile.Data].[Publication.PubMed.Author2Person];
+DELETE FROM [Profile.Data].[Person.FilterRelationship];
+TRUNCATE TABLE [Profile.Data].[Publication.PubMed.Author2Person];
+-- serious stuff
+UPDATE [Profile.Data].[Person] SET UserID = NULL;
+DELETE FROM [User.Account].[User];
+TRUNCATE TABLE [Profile.Data].[Person.Affiliation];
+DELETE FROM [Profile.Data].[Person];
+
+select * from [Framework.].[Parameter];
+--update Framework..Parameter 
+exec [Framework.].ChangeBaseURI @oldBaseURI = 'http://profilesstage.sc-ctsi.org/profile/', @newBaseURI = 'http://profiles.sc-ctsi.org/profile/'
+
+
+exec [Profile.Import].[Beta.LoadData] @SourceDBName = 'profiles_usc_prod';
 
 select * from [Profile.Data].[Person];
 update [Profile.Data].[Person] set InternalUsername = HASHBYTES('SHA1', internalusername);
