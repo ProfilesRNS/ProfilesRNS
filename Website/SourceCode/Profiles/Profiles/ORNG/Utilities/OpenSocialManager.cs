@@ -223,6 +223,19 @@ namespace Profiles.ORNG.Utilities
             return retval;
         }
 
+        public List<PreparedGadget> GetSandboxGadgets()
+        {
+            List<PreparedGadget> sandboxGadgets = new List<PreparedGadget>();
+            foreach (PreparedGadget gadget in gadgets)
+            {
+                if (gadget.IsSandboxGadget())
+                {
+                    sandboxGadgets.Add(gadget);
+                }
+            }
+            return sandboxGadgets;
+        }
+
         public bool HasGadgetsAttachingTo(string chromeId)
         {
             foreach (PreparedGadget gadget in gadgets)
@@ -304,7 +317,7 @@ namespace Profiles.ORNG.Utilities
 
                 HtmlGenericControl shindigjs = new HtmlGenericControl("script");
                 shindigjs.Attributes.Add("type", "text/javascript");
-                shindigjs.Attributes.Add("src", Root.Domain + "/ORNG/JavaScript/orng.min.js");
+                shindigjs.Attributes.Add("src", Root.Domain + (isDebug ? "/ORNG/JavaScript/orng.js" : "/ORNG/JavaScript/orng.min.js"));
                 page.Header.Controls.Add(shindigjs);
             }
             else
@@ -317,8 +330,11 @@ namespace Profiles.ORNG.Utilities
 
         private string GetContainerJavascriptSrc()
         {
-            return shindigURL + "/gadgets/js/core:dynamic-height:osapi:pubsub:rpc:views:rdf:shindig-container.js?c=1" +
-                (isDebug ? "&debug=1" : "");
+            return shindigURL + "/gadgets/js/container:open-views:opensearch:rpc:xmlutil:pubsub-2.js?c=1&container=default" +
+                (isDebug ? "&debug=1" : "") + (noCache ? "&nocache=1" : "");
+
+            //return shindigURL + "/gadgets/js/shindig-container:rpc:osapi:rdf.js?c=1" +
+            //    (isDebug ? "&debug=1" : "") + (noCache ? "&nocache=1" : "");
         }
 
         private string GetGadgetJavascipt()
@@ -354,10 +370,10 @@ namespace Profiles.ORNG.Utilities
 
             // this uses jquery to kickstart the gadgets
             // better than using onload because this happens before the images finish
+            /*** Either use this or the my.init call in LoadAssets!  Only use one.  This one is faster but seems to be having issues with Shindig 2.5.0 **/
             gadgetScriptText += "$(document).ready(function(){" + Environment.NewLine +
                                 "my.init();" + Environment.NewLine +
                                 "});" + Environment.NewLine;
-
             return gadgetScriptText;
         }
 
@@ -423,9 +439,9 @@ namespace Profiles.ORNG.Utilities
                         continue;
                     GadgetSpec sandboxGadget = new GadgetSpec(openSocialGadgetURL);
                     // see if we have a gadget with the same file name in the DB, if so use its configuration
-                    GadgetSpec gadget = allDBGadgets[sandboxGadget.GetFileName()];
-                    if (gadget != null)
+                    if (allDBGadgets.ContainsKey(sandboxGadget.GetFileName()))
                     {
+                        GadgetSpec gadget = allDBGadgets[sandboxGadget.GetFileName()];
                         gadget.MergeWithSandboxGadget(sandboxGadget);
                         gadgetSpecs.Add(gadget);
                     }

@@ -338,17 +338,15 @@ namespace Profiles.Search.Modules.SearchResults
                             xmlsearchrequest = data.SearchRequest(searchfor, exactphrase, fname, lname, institution, institutionallexcept, department, departmentallexcept, division, divisionallexcept,  "http://xmlns.com/foaf/0.1/Person", perpage.ToString(), (startrecord - 1).ToString(), sort, sortdirection, otherfilters, "",ref searchrequest);                    
                         break;
                 }
-
-                new Responder(Page, xmlsearchrequest);
-DebugLogging.Log("ONE");
                 
                 this.SearchData = data.Search(xmlsearchrequest, false);
                 this.SearchRequest = data.EncryptRequest(xmlsearchrequest.OuterXml);
                 base.MasterPage.SearchRequest = this.SearchRequest;
                 base.MasterPage.RDFData = this.SearchData;
                 base.MasterPage.RDFNamespaces = this.Namespaces;
-DebugLogging.Log("TWO");
 
+                new SearchLimitResponder(Page, this.SearchData, this.Namespaces);
+                new SearchResultsResponder(Page, xmlsearchrequest, this.Namespaces);
             }
             catch (DisallowedSearchException se)
             {
@@ -456,30 +454,77 @@ DebugLogging.Log("TWO");
 
         private string SearchRequest { get; set; }
 
-        public class Responder : ORNGCallbackResponder
+        public class SearchLimitResponder : ORNGCallbackResponder
         {
-            XmlDocument searchRequest;
+            XmlDocument searchData;
+            XmlNamespaceManager namespaceManager;
 
-            public Responder(Page page, XmlDocument searchRequest) : base(null, page, false, ORNGCallbackResponder.JSON_PERSONID_REQ)
+            public SearchLimitResponder(Page page, XmlDocument searchData, XmlNamespaceManager namespaceManager)
+                : base(null, page, false, ORNGCallbackResponder.CURRENT_PAGE_ITEMS_METADATA)
             {
-                this.searchRequest = searchRequest;
+                this.searchData = searchData;
+                this.namespaceManager = namespaceManager;
             }
 
             public override string getCallbackResponse()
             {
                 try
                 {
-                    searchRequest.SelectSingleNode("/SearchOptions/OutputOptions/Offset").InnerText = "0";
-                    searchRequest.SelectSingleNode("/SearchOptions/OutputOptions/Limit").InnerText = "500";
-                    XmlDocument searchData = new Profiles.Search.Utilities.DataIO().Search(searchRequest, false, false);
-
-                    DebugLogging.Log("SeachCallbackResponse :" + searchRequest.ToString());
-
-                    List<string> peopleURIs = new List<string>();
-                    XmlNodeList people = searchData.GetElementsByTagName("rdf:object");
-                    for (int i = 0; i < people.Count; i++)
+                    XmlNode node = searchData.SelectSingleNode("rdf:RDF/rdf:Description/prns:numberOfConnections", namespaceManager);
+                    Int32 resultSize = Convert.ToInt32(node.InnerText);
+                    if (resultSize <= GetSearchLimit())
                     {
-                        peopleURIs.Add(people[i].Attributes["rdf:resource"].Value);
+                        return "" + resultSize + " search results";
+                    }
+                    else
+                    {
+                        return "top " + GetSearchLimit() + " search results";
+                    }
+                }
+                catch (Exception e)
+                {
+                    DebugLogging.Log(e.Message);
+                }
+                return "Error reading results";
+            }
+        }
+
+        public class SearchResultsResponder : ORNGCallbackResponder
+        {
+            XmlDocument searchRequest;
+            XmlNamespaceManager namespaceManager;
+
+            public SearchResultsResponder(Page page, XmlDocument searchRequest, XmlNamespaceManager namespaceManager)
+                : base(null, page, false, ORNGCallbackResponder.CURRENT_PAGE_ITEMS)
+            {
+                this.searchRequest = searchRequest;
+                this.namespaceManager = namespaceManager;
+            }
+
+            public override string getCallbackResponse()
+            {
+                try
+                {
+                    List<string> peopleURIs = new List<string>();
+                    int offSet = 0;
+                    Boolean hasMorePeople = true;
+                    while (peopleURIs.Count < GetSearchLimit() && hasMorePeople)
+                    {
+                        searchRequest.SelectSingleNode("/SearchOptions/OutputOptions/Offset").InnerText = "" + offSet;
+                        searchRequest.SelectSingleNode("/SearchOptions/OutputOptions/Limit").InnerText = "" + GetSearchLimit();
+                        XmlDocument searchData = new Profiles.Search.Utilities.DataIO().Search(searchRequest, false, false);
+
+                        DebugLogging.Log("SeachCallbackResponse :" + searchRequest.ToString());
+
+                        XmlNodeList people = searchData.GetElementsByTagName("rdf:object");
+                        for (int i = 0; i < people.Count; i++)
+                        {
+                            peopleURIs.Add(people[i].Attributes["rdf:resource"].Value);
+                        }
+                        // increase offset by amount found
+                        XmlNode node = searchData.SelectSingleNode("rdf:RDF/rdf:Description/prns:numberOfConnections", namespaceManager);
+                        offSet += people.Count;
+                        hasMorePeople = Convert.ToInt32(node.InnerText) > peopleURIs.Count;
                     }
                     if (peopleURIs.Count > 0)
                     {

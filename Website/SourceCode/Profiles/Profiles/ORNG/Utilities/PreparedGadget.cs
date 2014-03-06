@@ -47,10 +47,10 @@ namespace Profiles.ORNG.Utilities
                 this.chromeId = viewReqs.GetChromeId();
                 this.optParams = viewReqs.GetOptParams();
             }
-            else  // might be a sandbox gadget
+            else  // must be a sandbox gadget
             {
-                this.view = GetDefaultViewForPage();
-                this.chromeId = GetDefaultChromeIdForPage();
+                this.view = "";
+                this.chromeId = "gadgets-test-" + gadgetSpec.GetAppId();
                 this.optParams = "{}";
             }
         }
@@ -124,58 +124,9 @@ namespace Profiles.ORNG.Utilities
             return gadgetSpec.RequiresRegitration();
         }
 
-        private String GetDefaultViewForPage()
+        public bool IsSandboxGadget()
         {
-            // default behavior that will get invoked when there is no reqs.  Useful for sandbox gadgets
-            if (openSocialManager.GetPageName().Equals("edit/default.aspx"))
-            {
-                return "home";
-            }
-            else if (openSocialManager.GetPageName().Equals("profile/display.aspx"))
-            {
-                return "profile";
-            }
-            else if (openSocialManager.GetPageName().Equals("orng/gadgetdetails.aspx"))
-            {
-                return "canvas";
-            }
-            else if (gadgetSpec.GetGadgetURL().Contains("Tool"))
-            {
-                return "small";
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        public string GetDefaultChromeIdForPage()
-        {
-            // default behavior that will get invoked when there is no reqs.  Useful for sandbox gadgets
-            if (gadgetSpec.GetGadgetURL().Contains("Tool"))
-            {
-                return "gadgets-tools";
-            }
-            else if (openSocialManager.GetPageName().Equals("edit/default.aspx"))
-            {
-                return "gadgets-edit";
-            }
-            else if (openSocialManager.GetPageName().Equals("profile/display.aspx"))
-            {
-                return "gadgets-view";
-            }
-            else if (openSocialManager.GetPageName().Equals("orng/gadgetdetails.aspx"))
-            {
-                return "gadgets-detail";
-            }
-            else if (openSocialManager.GetPageName().Equals("search/default.aspx"))
-            {
-                return "gadgets-search";
-            }
-            else
-            {
-                return null;
-            }
+            return gadgetSpec.IsSandboxGadget();
         }
 
         #region Socket Communications
@@ -186,47 +137,52 @@ namespace Profiles.ORNG.Utilities
             string[] tokenService = ConfigurationManager.AppSettings["ORNG.TokenService"].ToString().Trim().Split(':');
 
             string request = "c=default" + (viewer != null ? "&v=" + HttpUtility.UrlEncode(viewer) : "") +
-                    (owner != null ? "&o=" + HttpUtility.UrlEncode(owner) : "") + "&g=" + HttpUtility.UrlEncode(gadget) + "\r\n";
+                    (owner != null ? "&o=" + HttpUtility.UrlEncode(owner) : "") + "&u=" + HttpUtility.UrlEncode(gadget) + "\r\n";
             Byte[] bytesSent = System.Text.Encoding.ASCII.GetBytes(request);
             Byte[] bytesReceived = new Byte[256];
 
             // Create a socket connection with the specified server and port.
             //Socket s = ConnectSocket(tokenService[0], Int32.Parse(tokenService[1]));
-            CustomSocket s = null;
+
+            // during startup we might fail a few times, so be will to retry 
             string page = "";
-            try
+            for (int i = 0; i < 3 && page.Length == 0; i++)
             {
-                s = sockets.GetSocket();
-
-                if (s == null)
-                    return ("Connection failed");
-
-                // Send request to the server.
-                DebugLogging.Log("Sending Bytes");
-                s.Send(bytesSent, bytesSent.Length, 0);
-
-                // Receive the server home page content.
-                int bytes = 0;
-
-                // The following will block until te page is transmitted.
-                do
+                CustomSocket s = null;
+                try
                 {
-                    DebugLogging.Log("Receiving Bytes");
-                    bytes = s.Receive(bytesReceived, bytesReceived.Length, 0);
-                    page = page + Encoding.ASCII.GetString(bytesReceived, 0, bytes);
-                    DebugLogging.Log("Socket Page=" + page + "|");
-                }
-                while (page.Length == page.TrimEnd().Length && bytes > 0);
-            }
-            catch (Exception ex)
-            {
-                DebugLogging.Log("Socket Error :" + ex.Message);
-            }
-            finally
-            {
-                sockets.PutSocket(s);
-            }
+                    s = sockets.GetSocket();
 
+                    if (s == null)
+                        return ("Connection failed");
+
+                    // Send request to the server.
+                    DebugLogging.Log("Sending Bytes");
+                    s.Send(bytesSent, bytesSent.Length, 0);
+
+                    // Receive the server home page content.
+                    int bytes = 0;
+
+                    // The following will block until te page is transmitted.
+                    do
+                    {
+                        DebugLogging.Log("Receiving Bytes");
+                        bytes = s.Receive(bytesReceived, bytesReceived.Length, 0);
+                        page = page + Encoding.ASCII.GetString(bytesReceived, 0, bytes);
+                        DebugLogging.Log("Socket Page=" + page + "|");
+                    }
+                    while (page.Length == page.TrimEnd().Length && bytes > 0);
+                }
+                catch (Exception ex)
+                {
+                    DebugLogging.Log("Socket Error :" + ex.Message);
+                    page = "";
+                }
+                finally
+                {
+                    sockets.PutSocket(s);
+                }
+            }
             return page.TrimEnd();
         }
         #endregion

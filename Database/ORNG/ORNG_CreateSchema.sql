@@ -444,9 +444,9 @@ GO
 
 CREATE PROCEDURE [ORNG.].[AddAppToOntology](@AppID INT, 
 										   @EditView nvarchar(100) = 'home',
-										   @EditOptParams nvarchar(255) = '{}', --'{''gadget_class'':''ORNGToggleGadget'', ''start_closed'':0, ''hideShow'':1, ''closed_width'':700}',
+										   @EditOptParams nvarchar(255) = '{''hide_titlebar'':1}', --'{''gadget_class'':''ORNGToggleGadget'', ''start_closed'':0, ''hideShow'':1, ''closed_width'':700}',
 										   @ProfileView nvarchar(100) = 'profile',
-										   @ProfileOptParams nvarchar(255) = '{}',
+										   @ProfileOptParams nvarchar(255) = '{''hide_titlebar'':1}',
 										   @SessionID UNIQUEIDENTIFIER=NULL, 
 										   @Error BIT=NULL OUTPUT, 
 										   @NodeID BIGINT=NULL OUTPUT)

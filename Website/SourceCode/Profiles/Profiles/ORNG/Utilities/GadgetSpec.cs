@@ -189,5 +189,10 @@ namespace Profiles.ORNG.Utilities
             return enabled;
         }
 
+        public bool IsSandboxGadget()
+        {
+            return fromSandbox;
+        }
+
     }
 }

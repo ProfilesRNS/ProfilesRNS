@@ -240,6 +240,7 @@
 					</table>
 				</div>
 			        <div class="profilesFooter">
+                                        <div id="gadgets-log"></div>
                                         <div id="footer-collaboration">
                                           <p>UCSF Profiles is managed by the UCSF 
                                           <a href="http://ctsi.ucsf.edu" target="_blank">Clinical and Translational Science Institute (CTSI)</a>, 
