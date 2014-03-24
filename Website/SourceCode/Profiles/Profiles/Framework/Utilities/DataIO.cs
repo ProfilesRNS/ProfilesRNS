@@ -635,7 +635,10 @@ namespace Profiles.Framework.Utilities
                 {
                     session.NodeID = Convert.ToInt64(param[3].Value);
                 }
-                session.PersonURI = param[4].Value.ToString();
+                if (param[4].Value != null && param[4].Value != DBNull.Value)
+                {
+                    session.PersonURI = param[4].Value.ToString();
+                }
                 session.UserURI = param[5].Value.ToString();
                 session.ShortDisplayName = param[6].Value.ToString();
             }

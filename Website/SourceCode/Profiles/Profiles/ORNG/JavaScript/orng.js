@@ -227,6 +227,27 @@ my.init = function () {
     });
 };
 
+// helper functions
+my.findGadgetsAttachingTo = function (chromeId) {
+    var retval = [];
+    for (var i = 0; i < my.gadgets.length; i++) {
+        if (my.gadgets[i].chrome_id == chromeId) {
+            retval[retval.length] = my.gadgets[i];
+        }
+    }
+    return retval;
+};
+
+my.removeGadgets = function (gadgetsToRemove) {
+    for (var i = 0; i < gadgetsToRemove.length; i++) {
+        for (var j = 0; j < my.gadgets.length; j++) {
+            if (gadgetsToRemove[i].url == my.gadgets[j].url) {
+                my.gadgets.splice(j, 1);
+                break;
+            }
+        }
+    }
+};
 
 //create a gadget with navigation tool bar header enabling gadget collapse, expand, remove, navigate to view actions.
 window.buildGadget = function (result, myGadget) {
