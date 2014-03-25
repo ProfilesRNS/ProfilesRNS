@@ -267,7 +267,8 @@ window.buildGadget = function (result, myGadget) {
             chrome.style.width = width + 'px';
         }
         if (result[myGadget.url].modulePrefs && result[myGadget.url].modulePrefs.features && result[myGadget.url].modulePrefs.features['start-hidden']) {
-            chrome.style.visibility = 'hidden';
+            //chrome.style.visibility = 'hidden';
+            chrome.style.display = 'none';
         }
         layoutRoot.appendChild(chrome);
 

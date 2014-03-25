@@ -335,7 +335,7 @@ namespace Profiles.Search.Modules.SearchResults
                         break;
 
                     default:
-                            xmlsearchrequest = data.SearchRequest(searchfor, exactphrase, fname, lname, institution, institutionallexcept, department, departmentallexcept, division, divisionallexcept,  "http://xmlns.com/foaf/0.1/Person", perpage.ToString(), (startrecord - 1).ToString(), sort, sortdirection, otherfilters, "",ref searchrequest);                    
+                        xmlsearchrequest = data.SearchRequest(searchfor, exactphrase, fname, lname, institution, institutionallexcept, department, departmentallexcept, division, divisionallexcept,  "http://xmlns.com/foaf/0.1/Person", perpage.ToString(), (startrecord - 1).ToString(), sort, sortdirection, otherfilters, "",ref searchrequest);                    
                         break;
                 }
                 
@@ -345,8 +345,12 @@ namespace Profiles.Search.Modules.SearchResults
                 base.MasterPage.RDFData = this.SearchData;
                 base.MasterPage.RDFNamespaces = this.Namespaces;
 
-                new SearchLimitResponder(Page, this.SearchData, this.Namespaces);
-                new SearchResultsResponder(Page, xmlsearchrequest, this.Namespaces);
+                // only shows these if we are not doing an everything search, or we are looking at people in the everything search
+                if (!"everything".Equals(searchtype.ToLower()) || "http://profiles.catalyst.harvard.edu/ontology/prns#ClassGroupPeople".Equals(classgroupuri))
+                {
+                    new SearchLimitResponder(Page, this.SearchData, this.Namespaces);
+                    new SearchResultsResponder(Page, xmlsearchrequest, this.Namespaces);
+                }
             }
             catch (DisallowedSearchException se)
             {
@@ -472,7 +476,11 @@ namespace Profiles.Search.Modules.SearchResults
                 {
                     XmlNode node = searchData.SelectSingleNode("rdf:RDF/rdf:Description/prns:numberOfConnections", namespaceManager);
                     Int32 resultSize = Convert.ToInt32(node.InnerText);
-                    if (resultSize <= GetSearchLimit())
+                    if (resultSize == 1)
+                    {
+                        return "" + resultSize + " search result";
+                    }
+                    else if (resultSize <= GetSearchLimit())
                     {
                         return "" + resultSize + " search results";
                     }

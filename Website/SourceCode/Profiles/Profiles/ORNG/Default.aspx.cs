@@ -81,7 +81,7 @@ namespace Profiles.ORNG
             ORNGCallbackResponder responder = ORNGCallbackResponder.GetORNGCallbackResponder(new Guid(guid), request);
             string retval = responder != null ? responder.getCallbackResponse() : null;
             DebugLogging.Log("OpenSocialManager CallORNGResponder " + (responder == null ? "CallbackReponder not found! " : retval));
-            return retval;
+            return retval != null ? retval : "";
         }
 
     }
