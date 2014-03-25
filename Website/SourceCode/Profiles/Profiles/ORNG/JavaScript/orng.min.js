@@ -267,7 +267,6 @@ window.buildGadget = function (result, myGadget) {
             chrome.style.width = width + 'px';
         }
         if (result[myGadget.url].modulePrefs && result[myGadget.url].modulePrefs.features && result[myGadget.url].modulePrefs.features['start-hidden']) {
-            //chrome.style.visibility = 'hidden';
             chrome.style.display = 'none';
         }
         layoutRoot.appendChild(chrome);
@@ -307,10 +306,10 @@ window.hideOrShowGadget = function (rpc, hideOrShow, opt_params) {
     if ("hide" === hideOrShow) {
         // get parent div as well
         OrngContainer.closeGadget(rpc.gs);
-        parentDiv.style.visibility = 'hidden'
+        parentDiv.style.display = 'none'
     }
     else {
-        parentDiv.style.visibility = 'visible'
+        parentDiv.style.display = 'block'
     }
 };
 

@@ -22,6 +22,7 @@ using System.Xml.Xsl;
 using Profiles.Framework.Utilities;
 
 using Profiles.Profile.Utilities;
+using Profiles.ORNG.Utilities;
 
 namespace Profiles.Framework.Modules.NetworkList
 {
@@ -190,6 +191,8 @@ namespace Profiles.Framework.Modules.NetworkList
                                 itemxpath = CustomParse.Parse(itemurltext, networknode, base.Namespaces)
                             };
 
+                List<string> orngCallbackItems = new List<string>();
+
                 foreach (var i in items)
                 {
                     //foreach (XmlNode networknode in base.BaseData.SelectNodes(networklistnode, base.Namespaces))
@@ -199,6 +202,8 @@ namespace Profiles.Framework.Modules.NetworkList
 
                     if (itemurl != string.Empty)
                     {
+                        orngCallbackItems.Add(i.itemurl);
+
                         documentdata.Append(" ItemURL=\"");
                         documentdata.Append(i.itemurl);
                         documentdata.Append("\"");
@@ -239,8 +244,9 @@ namespace Profiles.Framework.Modules.NetworkList
                     documentdata.Append(i.item);
                     documentdata.Append("</Item>");
                 }
+                new NetworkListMetadataResponder(Page, orngCallbackItems);
+                new NetworkListResponder(Page, orngCallbackItems);
             }
-
 
             documentdata.Append("</ListView>");
             document.LoadXml(documentdata.ToString().Replace("&", "&amp;"));
@@ -281,4 +287,43 @@ namespace Profiles.Framework.Modules.NetworkList
         public string Rank { get; set; }
     }
 
+    // OpenSocial 
+    public class NetworkListMetadataResponder : ORNGCallbackResponder
+    {
+        List<string> orngCallbackItems;
+
+        public NetworkListMetadataResponder(Page page, List<string> orngCallbackItems)
+            : base(null, page, false, ORNGCallbackResponder.CURRENT_PAGE_ITEMS_METADATA)
+        {
+            this.orngCallbackItems = orngCallbackItems;
+        }
+
+        public override string getCallbackResponse()
+        {
+            if (orngCallbackItems.Count == 1)
+            {
+                return "add 1 person";
+            }
+            else
+            {
+                return "" + orngCallbackItems.Count + " people";
+            }
+        }
+    }
+
+    public class NetworkListResponder : ORNGCallbackResponder
+    {
+        List<string> orngCallbackItems;
+
+        public NetworkListResponder(Page page, List<string> orngCallbackItems)
+            : base(null, page, false, ORNGCallbackResponder.CURRENT_PAGE_ITEMS)
+        {
+            this.orngCallbackItems = orngCallbackItems;
+        }
+
+        public override string getCallbackResponse()
+        {
+            return BuildJSONPersonIds(orngCallbackItems, "" + orngCallbackItems.Count + " people found");
+        }
+    }
 }

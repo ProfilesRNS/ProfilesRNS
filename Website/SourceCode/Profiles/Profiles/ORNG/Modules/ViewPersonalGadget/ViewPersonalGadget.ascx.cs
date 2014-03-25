@@ -57,8 +57,6 @@ namespace Profiles.ORNG.Modules.Gadgets
             }
             om = OpenSocialManager.GetOpenSocialManager(uri, Page);
             gadget = om.AddGadget(Convert.ToInt32(base.GetModuleParamString("AppId")), base.GetModuleParamString("View"), base.GetModuleParamString("OptParams"));
-            new LimitResponder(this.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/foaf:firstName", base.Namespaces).InnerText, Page);  // for some reason doing this in DrawProfilesModule (remove that???) fails!
-            new PersonResponder(uri, Page);  // for some reason doing this in DrawProfilesModule (remove that???) fails!
         }
 
         private void DrawProfilesModule()
@@ -71,37 +69,6 @@ namespace Profiles.ORNG.Modules.Gadgets
             }
         }
 
-        public class LimitResponder : ORNGCallbackResponder
-        {
-            string name;
-
-            public LimitResponder(string name, Page page)
-                : base(null, page, false, ORNGCallbackResponder.CURRENT_PAGE_ITEMS_METADATA)
-            {
-                this.name = name;
-            }
-
-            public override string getCallbackResponse()
-            {
-                return name;
-            }
-        }
-
-        public class PersonResponder : ORNGCallbackResponder
-        {
-            string uri;
-
-            public PersonResponder(string uri, Page page)
-                : base(uri, page, false, ORNGCallbackResponder.CURRENT_PAGE_ITEMS)
-            {
-                this.uri = uri;
-            }
-
-            public override string getCallbackResponse()
-            {
-                return BuildJSONPersonIds(uri, "one person");
-            }
-        }
 
     }
 

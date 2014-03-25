@@ -348,7 +348,7 @@ namespace Profiles.Search.Modules.SearchResults
                 // only shows these if we are not doing an everything search, or we are looking at people in the everything search
                 if (!"everything".Equals(searchtype.ToLower()) || "http://profiles.catalyst.harvard.edu/ontology/prns#ClassGroupPeople".Equals(classgroupuri))
                 {
-                    new SearchLimitResponder(Page, this.SearchData, this.Namespaces);
+                    new SearchMetadataResponder(Page, this.SearchData, this.Namespaces);
                     new SearchResultsResponder(Page, xmlsearchrequest, this.Namespaces);
                 }
             }
@@ -458,12 +458,13 @@ namespace Profiles.Search.Modules.SearchResults
 
         private string SearchRequest { get; set; }
 
-        public class SearchLimitResponder : ORNGCallbackResponder
+        // OpenSocial 
+        public class SearchMetadataResponder : ORNGCallbackResponder
         {
             XmlDocument searchData;
             XmlNamespaceManager namespaceManager;
 
-            public SearchLimitResponder(Page page, XmlDocument searchData, XmlNamespaceManager namespaceManager)
+            public SearchMetadataResponder(Page page, XmlDocument searchData, XmlNamespaceManager namespaceManager)
                 : base(null, page, false, ORNGCallbackResponder.CURRENT_PAGE_ITEMS_METADATA)
             {
                 this.searchData = searchData;
