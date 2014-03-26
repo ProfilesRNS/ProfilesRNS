@@ -39,7 +39,7 @@ namespace Profiles.ORNG.Utilities
         #region "LocalVars"
 
         private List<PreparedGadget> gadgets = new List<PreparedGadget>();
-        private Dictionary<string, ORNGCallbackResponder> callbackResponders = new Dictionary<string, ORNGCallbackResponder>();
+        private Dictionary<string, ORNGRPCService> callbackResponders = new Dictionary<string, ORNGRPCService>();
         private Guid guid;
         private string viewerUri = null;
         private string ownerUri = null;
@@ -354,6 +354,7 @@ namespace Profiles.ORNG.Utilities
                 "my.guid = '" + guid.ToString() + "';" + Environment.NewLine +
                 "my.containerSessionId = '" + new SessionManagement().Session().SessionID + "';" + Environment.NewLine +
                 "my.debug = " + (IsDebug() ? "1" : "0") + ";" + Environment.NewLine +
+                "my.noCache = " + (NoCache() ? "1" : "0") + ";" + Environment.NewLine +
                 "my.noCache = " + (NoCache() ? "1" : "0") + ";" + Environment.NewLine +
                 "my.gadgets = [";
             if (GetVisibleGadgets().Count > 0)

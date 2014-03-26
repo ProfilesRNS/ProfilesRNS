@@ -348,8 +348,7 @@ namespace Profiles.Search.Modules.SearchResults
                 // only shows these if we are not doing an everything search, or we are looking at people in the everything search
                 if (!"everything".Equals(searchtype.ToLower()) || "http://profiles.catalyst.harvard.edu/ontology/prns#ClassGroupPeople".Equals(classgroupuri))
                 {
-                    new SearchMetadataResponder(Page, this.SearchData, this.Namespaces);
-                    new SearchResultsResponder(Page, xmlsearchrequest, this.Namespaces);
+                    new ORNGSearchRPCService(Page, this.SearchData, xmlsearchrequest, this.Namespaces);
                 }
             }
             catch (DisallowedSearchException se)
@@ -459,19 +458,29 @@ namespace Profiles.Search.Modules.SearchResults
         private string SearchRequest { get; set; }
 
         // OpenSocial 
-        public class SearchMetadataResponder : ORNGCallbackResponder
+        public class ORNGSearchRPCService : PeopleListRPCService
         {
+            private static int searchLimit;
+
+            static ORNGSearchRPCService()
+            {
+                // should make this able to take a Dictionary of things
+                searchLimit = Convert.ToInt32(ConfigurationManager.AppSettings["ORNG.SearchLimit"].ToString());
+            }
+
             XmlDocument searchData;
+            XmlDocument searchRequest;
             XmlNamespaceManager namespaceManager;
 
-            public SearchMetadataResponder(Page page, XmlDocument searchData, XmlNamespaceManager namespaceManager)
-                : base(null, page, false, ORNGCallbackResponder.CURRENT_PAGE_ITEMS_METADATA)
+            public ORNGSearchRPCService(Page page, XmlDocument searchData, XmlDocument searchRequest, XmlNamespaceManager namespaceManager)
+                : base(null, page, false)
             {
                 this.searchData = searchData;
+                this.searchRequest = searchRequest;
                 this.namespaceManager = namespaceManager;
             }
 
-            public override string getCallbackResponse()
+            public override string getPeopleListMetadata()
             {
                 try
                 {
@@ -481,13 +490,13 @@ namespace Profiles.Search.Modules.SearchResults
                     {
                         return "" + resultSize + " search result";
                     }
-                    else if (resultSize <= GetSearchLimit())
+                    else if (resultSize <= searchLimit)
                     {
                         return "" + resultSize + " search results";
                     }
                     else
                     {
-                        return "top " + GetSearchLimit() + " search results";
+                        return "top " + searchLimit + " search results";
                     }
                 }
                 catch (Exception e)
@@ -496,31 +505,18 @@ namespace Profiles.Search.Modules.SearchResults
                 }
                 return "Error reading results";
             }
-        }
 
-        public class SearchResultsResponder : ORNGCallbackResponder
-        {
-            XmlDocument searchRequest;
-            XmlNamespaceManager namespaceManager;
-
-            public SearchResultsResponder(Page page, XmlDocument searchRequest, XmlNamespaceManager namespaceManager)
-                : base(null, page, false, ORNGCallbackResponder.CURRENT_PAGE_ITEMS)
-            {
-                this.searchRequest = searchRequest;
-                this.namespaceManager = namespaceManager;
-            }
-
-            public override string getCallbackResponse()
+            public override List<string> getPeople()
             {
                 try
                 {
                     List<string> peopleURIs = new List<string>();
                     int offSet = 0;
                     Boolean hasMorePeople = true;
-                    while (peopleURIs.Count < GetSearchLimit() && hasMorePeople)
+                    while (peopleURIs.Count < searchLimit && hasMorePeople)
                     {
                         searchRequest.SelectSingleNode("/SearchOptions/OutputOptions/Offset").InnerText = "" + offSet;
-                        searchRequest.SelectSingleNode("/SearchOptions/OutputOptions/Limit").InnerText = "" + GetSearchLimit();
+                        searchRequest.SelectSingleNode("/SearchOptions/OutputOptions/Limit").InnerText = "" + searchLimit;
                         XmlDocument searchData = new Profiles.Search.Utilities.DataIO().Search(searchRequest, false, false);
 
                         DebugLogging.Log("SeachCallbackResponse :" + searchRequest.ToString());
@@ -537,7 +533,7 @@ namespace Profiles.Search.Modules.SearchResults
                     }
                     if (peopleURIs.Count > 0)
                     {
-                        return BuildJSONPersonIds(peopleURIs, "" + peopleURIs.Count + " people found");
+                        return peopleURIs;
                     }
                 }
                 catch (Exception e)

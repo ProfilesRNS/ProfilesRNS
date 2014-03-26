@@ -449,7 +449,8 @@
     <Compile Include="ORNG\Utilities\GadgetSpec.cs" />
     <Compile Include="ORNG\Utilities\GadgetViewRequirements.cs" />
     <Compile Include="ORNG\Utilities\OpenSocialManager.cs" />
-    <Compile Include="ORNG\Utilities\ORNGCallbackResponder.cs" />
+    <Compile Include="ORNG\Utilities\ORNGRPCService.cs" />
+    <Compile Include="ORNG\Utilities\PeopleListRPCService.cs" />
     <Compile Include="ORNG\Utilities\PreparedGadget.cs" />
     <Compile Include="ORNG\Utilities\SocketConnectionPool.cs" />
     <Compile Include="ProfilesDisplay.aspx.cs">

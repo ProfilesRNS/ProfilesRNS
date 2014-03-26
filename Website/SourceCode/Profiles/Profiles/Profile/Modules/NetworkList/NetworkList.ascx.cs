@@ -244,8 +244,7 @@ namespace Profiles.Framework.Modules.NetworkList
                     documentdata.Append(i.item);
                     documentdata.Append("</Item>");
                 }
-                new NetworkListMetadataResponder(Page, orngCallbackItems);
-                new NetworkListResponder(Page, orngCallbackItems);
+                new ORNGNetworkListRPCService(Page, orngCallbackItems);
             }
 
             documentdata.Append("</ListView>");
@@ -288,17 +287,17 @@ namespace Profiles.Framework.Modules.NetworkList
     }
 
     // OpenSocial 
-    public class NetworkListMetadataResponder : ORNGCallbackResponder
+    public class ORNGNetworkListRPCService : PeopleListRPCService
     {
         List<string> orngCallbackItems;
 
-        public NetworkListMetadataResponder(Page page, List<string> orngCallbackItems)
-            : base(null, page, false, ORNGCallbackResponder.CURRENT_PAGE_ITEMS_METADATA)
+        public ORNGNetworkListRPCService(Page page, List<string> orngCallbackItems)
+            : base(null, page, false)
         {
             this.orngCallbackItems = orngCallbackItems;
         }
 
-        public override string getCallbackResponse()
+        public override string getPeopleListMetadata()
         {
             if (orngCallbackItems.Count == 1)
             {
@@ -309,21 +308,11 @@ namespace Profiles.Framework.Modules.NetworkList
                 return "" + orngCallbackItems.Count + " people";
             }
         }
-    }
 
-    public class NetworkListResponder : ORNGCallbackResponder
-    {
-        List<string> orngCallbackItems;
-
-        public NetworkListResponder(Page page, List<string> orngCallbackItems)
-            : base(null, page, false, ORNGCallbackResponder.CURRENT_PAGE_ITEMS)
+        public override List<string> getPeople()
         {
-            this.orngCallbackItems = orngCallbackItems;
-        }
-
-        public override string getCallbackResponse()
-        {
-            return BuildJSONPersonIds(orngCallbackItems, "" + orngCallbackItems.Count + " people found");
+            return orngCallbackItems;
         }
     }
+
 }

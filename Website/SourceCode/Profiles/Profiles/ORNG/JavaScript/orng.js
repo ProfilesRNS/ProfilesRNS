@@ -25,7 +25,7 @@ my.init = function () {
     }
 
     var orngConfig = {};
-    orngConfig[osapi.container.ServiceConfig.API_PATH] = "/shindigucsf/rpc";
+    orngConfig[osapi.container.ServiceConfig.API_PATH] = my.openSocialURL.substring(my.openSocialURL.lastIndexOf('/')) + "/rpc";
     orngConfig[osapi.container.ContainerConfig.RENDER_DEBUG] = my.debug;
     orngConfig[osapi.container.ContainerConfig.TOKEN_REFRESH_INTERVAL] = 0; // disable for now
     orngConfig[osapi.container.ContainerConfig.PRELOAD_TOKENS] = tokens; // hash keyed by chromeId seems to be the correct thing to put in here
@@ -55,7 +55,7 @@ my.init = function () {
             hub: OrngContainer.managedHub
         });
 
-        OrngContainer.rpcRegister('orng_responder', OrngContainer.callORNGResponder);
+        OrngContainer.rpcRegister('orng_container_rpc', OrngContainer.callORNGRPC);
         OrngContainer.rpcRegister('orng_hide_show', window.hideOrShowGadget);
         OrngContainer.rpcRegister('requestNavigateTo', OrngContainer.doProfilesNavigation);
         OrngContainer.rpcRegister('set_title', OrngContainer.setTitleHandler);
@@ -163,15 +163,15 @@ my.init = function () {
         //    }
     };
 
-    OrngContainer.callORNGResponder = function (rpc, channel, opt_params) {
+    OrngContainer.callORNGRPC = function (rpc, channel, opt_params) {
         // send an ajax command to the server letting them know we need data
         // since this is directly into Profiles and has nothing to do with Shindig, we just use jquery
-        var event = { "guid": my.guid, "request": channel };
+        var data = { "guid": my.guid, "request": channel };
 
         $.ajax({
             type: "POST",
-            url: _rootDomain + "/ORNG/Default.aspx/CallORNGResponder",
-            data: gadgets.json.stringify(event),
+            url: _rootDomain + "/ORNG/Default.aspx/CallORNGRPC",
+            data: gadgets.json.stringify(data),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             async: true,

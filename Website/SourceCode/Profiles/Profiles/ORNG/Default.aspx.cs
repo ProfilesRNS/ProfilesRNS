@@ -75,12 +75,12 @@ namespace Profiles.ORNG
         public XmlDocument PresentationXML { get; set; }
 
         [System.Web.Services.WebMethod]
-        public static string CallORNGResponder(string guid, string request)
+        public static string CallORNGRPC(string guid, string request)
         {
-            DebugLogging.Log("OpenSocialManager CallORNGResponder " + guid + ":" + request);
-            ORNGCallbackResponder responder = ORNGCallbackResponder.GetORNGCallbackResponder(new Guid(guid), request);
-            string retval = responder != null ? responder.getCallbackResponse() : null;
-            DebugLogging.Log("OpenSocialManager CallORNGResponder " + (responder == null ? "CallbackReponder not found! " : retval));
+            DebugLogging.Log("CallORNGRPC " + guid + ":" + request);
+            ORNGRPCService responder = ORNGRPCService.GetRPCService(new Guid(guid));
+            string retval = responder != null ? responder.call(request) : null;
+            DebugLogging.Log("CallORNGRPC " + (responder == null ? "ORNGRPCService not found! guid =" : guid));
             return retval != null ? retval : "";
         }
 
