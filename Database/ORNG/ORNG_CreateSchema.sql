@@ -26,6 +26,7 @@ CREATE TABLE [ORNG.].[Apps](
 	[PersonFilterID] [int] NULL,
 	[RequiresRegistration] [bit] NOT NULL,
 	[UnavailableMessage] [text] NULL,
+	[OAuthSecret] [nvarchar](255) NULL,
 	[Enabled] [bit] NOT NULL,
  CONSTRAINT [PK__app] PRIMARY KEY CLUSTERED 
 (

@@ -151,16 +151,13 @@ my.init = function () {
 
     // TODO: need to test and make work
     OrngContainer.setTitleHandler = function (rpcArgs, title) {
-        //    var moduleId = shindig.container.gadgetService.getGadgetIdFromModuleId(this.f);
-        //    if (my.gadgets[moduleId].view == 'canvas') {
-        //        document.getElementById("gadgets-title").innerHTML = title.replace(/&/g, '&amp;').replace(/</g, '&lt;');
-        //    }
-        //    else {
-        //        var element = document.getElementById(this.f + '_title');
-        //        if (element) {
-        //            element.innerHTML = my.renderableGadgets[moduleId].getTitleHtml(title);
-        //        }
-        //    }
+        var myGadget = OrngContainer.gadgetsByGadgetSiteId[rpcArgs.gs.getId()];
+        if (myGadget.view == 'canvas') {
+            document.getElementById("gadgets-title").innerHTML = cleanTitle(title);
+        }
+        else {
+            document.getElementById(myGadget.appId + '_title').innerHTML = cleanTitle(title);
+        }
     };
 
     OrngContainer.callORNGRPC = function (rpc, channel, opt_params) {

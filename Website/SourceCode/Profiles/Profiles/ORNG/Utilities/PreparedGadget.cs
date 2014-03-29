@@ -23,11 +23,11 @@ namespace Profiles.ORNG.Utilities
 
         internal static void Init()
         {
-            string[] tokenService = ConfigurationManager.AppSettings["ORNG.TokenService"].ToString().Trim().Split(':');
-            int min = Convert.ToInt32(ConfigurationManager.AppSettings["ORNG.SocketPoolMin"].ToString());
-            int max = Convert.ToInt32(ConfigurationManager.AppSettings["ORNG.SocketPoolMax"].ToString());
-            int expire = Convert.ToInt32(ConfigurationManager.AppSettings["ORNG.SocketPoolExpire"].ToString());
-            int timeout = Convert.ToInt32(ConfigurationManager.AppSettings["ORNG.SocketReceiveTimeout"].ToString());
+            string[] tokenService = ORNGSettings.getSettings().TokenService.Split(':');
+            int min = ORNGSettings.getSettings().SocketPoolMin;
+            int max = ORNGSettings.getSettings().SocketPoolMax;
+            int expire = ORNGSettings.getSettings().SocketPoolExpire;
+            int timeout = ORNGSettings.getSettings().SocketReceiveTimeout;
 
             sockets = new SocketConnectionPool(tokenService[0], Int32.Parse(tokenService[1]), min, max, expire, timeout);
         }
@@ -134,8 +134,6 @@ namespace Profiles.ORNG.Utilities
         private static string SocketSendReceive(string viewer, string owner, string gadget)
         {
             //  These keys need to match what you see in edu.ucsf.profiles.shindig.service.SecureTokenGeneratorService in Shindig
-            string[] tokenService = ConfigurationManager.AppSettings["ORNG.TokenService"].ToString().Trim().Split(':');
-
             string request = "c=default" + (viewer != null ? "&v=" + HttpUtility.UrlEncode(viewer) : "") +
                     (owner != null ? "&o=" + HttpUtility.UrlEncode(owner) : "") + "&u=" + HttpUtility.UrlEncode(gadget) + "\r\n";
             Byte[] bytesSent = System.Text.Encoding.ASCII.GetBytes(request);

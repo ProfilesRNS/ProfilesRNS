@@ -465,7 +465,7 @@ namespace Profiles.Search.Modules.SearchResults
             static ORNGSearchRPCService()
             {
                 // should make this able to take a Dictionary of things
-                searchLimit = Convert.ToInt32(ConfigurationManager.AppSettings["ORNG.SearchLimit"].ToString());
+                searchLimit = ORNGSettings.getSettings().SearchLimit;
             }
 
             XmlDocument searchData;
@@ -488,15 +488,15 @@ namespace Profiles.Search.Modules.SearchResults
                     Int32 resultSize = Convert.ToInt32(node.InnerText);
                     if (resultSize == 1)
                     {
-                        return "" + resultSize + " search result";
+                        return "" + resultSize + " profile";
                     }
                     else if (resultSize <= searchLimit)
                     {
-                        return "" + resultSize + " search results";
+                        return "" + resultSize + " profiles";
                     }
                     else
                     {
-                        return "top " + searchLimit + " search results";
+                        return "top " + searchLimit + " profiles";
                     }
                 }
                 catch (Exception e)

@@ -254,7 +254,7 @@
                                            </ul>
                                         </div>
                                         <div id="footer-copyright">
-                                           <p>Copyright &copy; 2013 The Regents of the University of California. 
+                                           <p>Copyright &copy; 2014 The Regents of the University of California. 
                                            All Rights Reserved.</p>
                                         </div>
 					<asp:ContentPlaceHolder ID="ContentFooter" runat="server">

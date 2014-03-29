@@ -48,6 +48,7 @@ namespace Profiles.ORNG.Utilities
         private string pageName;
         private Page page;
         private static string shindigURL;
+        private static string features;
 
         #endregion
 
@@ -55,9 +56,10 @@ namespace Profiles.ORNG.Utilities
 
         static OpenSocialManager()
         {
-            shindigURL = ConfigurationManager.AppSettings["ORNG.ShindigURL"];
-            if (shindigURL != null)
+            if (ORNGSettings.getSettings().Enabled)
             {
+                shindigURL = ORNGSettings.getSettings().ShindigURL;
+                features = ORNGSettings.getSettings().Features;
                 PreparedGadget.Init();
             }
         }
@@ -330,7 +332,7 @@ namespace Profiles.ORNG.Utilities
 
         private string GetContainerJavascriptSrc()
         {
-            return shindigURL + "/gadgets/js/container:open-views:opensearch:rpc:xmlutil:pubsub-2.js?c=1&container=default" +
+            return shindigURL + "/gadgets/js/" + features + ".js?c=1&container=default" +
                 (isDebug ? "&debug=1" : "") + (noCache ? "&nocache=1" : "");
 
             //return shindigURL + "/gadgets/js/shindig-container:rpc:osapi:rdf.js?c=1" +

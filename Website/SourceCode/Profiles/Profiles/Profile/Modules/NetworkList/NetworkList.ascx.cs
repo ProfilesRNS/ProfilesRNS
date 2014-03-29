@@ -301,11 +301,11 @@ namespace Profiles.Framework.Modules.NetworkList
         {
             if (orngCallbackItems.Count == 1)
             {
-                return "add 1 person";
+                return "" + orngCallbackItems.Count + " profile";
             }
             else
             {
-                return "" + orngCallbackItems.Count + " people";
+                return "" + orngCallbackItems.Count + " profiles";
             }
         }
 

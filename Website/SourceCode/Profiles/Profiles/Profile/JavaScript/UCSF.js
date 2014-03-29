@@ -1,11 +1,13 @@
 ﻿$(document).ready(function () {
     //move other position below primary title
     if ($('.sectionHeader2') && $('.sectionHeader2').length) {
-        $('<br><span id="othpos">&nbsp;</span>').appendTo('.basicInfo tr:nth-child(1) td:nth-child(2)');
+        $('<br><span id="othpos">&nbsp;</span>').appendTo('.basicInfo:first-child tr:nth-child(1) td:nth-child(2)');
         $('.sectionHeader2').siblings().addClass('otherpos');
         $('.otherpos th').html('');
+	$('.otherpos td:not(:empty)').append('%');
         var str = $('.otherpos').text();
-        str = str.replace(";", "<br>");
+ 	str = str.replace(/\%/g, "<br>");
+ 	str = str.replace(/\;/g, "<br>");
         $("#othpos").html(str);
         $('.sectionHeader2').parents('.content_two_columns').hide();
     }

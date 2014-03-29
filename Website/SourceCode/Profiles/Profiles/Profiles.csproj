@@ -150,6 +150,7 @@
     <Content Include="Edit\Images\icons_red_BlueRow.gif" />
     <Content Include="Edit\Images\Icons_upSort.gif" />
     <Content Include="Edit\Images\Icon_add_item.gif" />
+    <Content Include="ORNG\Images\orng-asterisk.png" />
     <Content Include="Edit\Images\sophcat-boat.jpg" />
     <Content Include="Edit\JavaScript\UCSF.js" />
     <Content Include="Edit\Modules\CustomEditListProperty\CustomEditListProperty.ascx" />
@@ -183,7 +184,7 @@
     <Content Include="ORNG\Images\waiting.gif" />
     <Content Include="ORNG\JavaScript\orng.min.js" />
     <Content Include="ORNG\JavaScript\prettyprint.js" />
-    <Content Include="ORNG\JavaScript\jsonld-helper.js" />
+    <Content Include="ORNG\JavaScript\jsonldParser.js" />
     <Content Include="ORNG\JavaScript\UCSF.js" />
     <Content Include="ORNG\JSONLD\Default.aspx" />
     <Content Include="ORNG\CSS\gadgets.css" />
@@ -450,6 +451,7 @@
     <Compile Include="ORNG\Utilities\GadgetViewRequirements.cs" />
     <Compile Include="ORNG\Utilities\OpenSocialManager.cs" />
     <Compile Include="ORNG\Utilities\ORNGRPCService.cs" />
+    <Compile Include="ORNG\Utilities\ORNGSettings.cs" />
     <Compile Include="ORNG\Utilities\PeopleListRPCService.cs" />
     <Compile Include="ORNG\Utilities\PreparedGadget.cs" />
     <Compile Include="ORNG\Utilities\SocketConnectionPool.cs" />

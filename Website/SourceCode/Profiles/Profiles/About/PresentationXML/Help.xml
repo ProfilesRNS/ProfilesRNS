@@ -77,15 +77,15 @@ People working in the same department
 <ul> 
   <li><a href="#who">Who is listed in UCSF Profiles?</a></li>
   <li><a href="#view">Who can view UCSF Profiles?</a></li>
-  <li><a href="#enhance">How do I edit and enhance my individual profile?</a></li>
+  <li><a href="#enhance">How do I edit and enhance a profile page?</a></li>
   <li><a href="#login">How do I login to UCSF Profiles?</a></li>
   <li><a href="#why">Why should I login to UCSF Profiles?</a></li>
-  <li><a href="#datasources">What are the sources of data for UCSF Profiles?</a></li>
+  <li><a href="#datasources">Where does the information in UCSF Profiles originate?</a></li>
   <li><a href="#network">What are the lists of networks on the right side of my profile?</a></li>
   <li><a href="#missing">Why are there missing or incorrect publications in my profile? How can I correct this?</a></li>
   <li><a href="#update">How frequently are the data in UCSF Profiles updated?</a></li>
   <li><a href="#keyword">Can I add/edit research, career and academic interests?</a></li>
-  <li><a href="#mynetwork">Can I edit my co-authors or similar people lists?</a></li>
+  <li><a href="#mynetwork">Can I edit my co-authors or related authors network lists?</a></li>
   <li><a href="#learn">How can I learn more about UCSF Profile?</a></li>
   <li><a href="#ideas">Where should I send my ideas on how to improve the tool?</a></li>
   <li><a href="#sysreq">What are the system requirements for using UCSF Profiles?</a></li>
@@ -96,8 +96,8 @@ People working in the same department
 
 <ul>
   <li>UCSF Profiles was created for research networking so we initially focused on adding UCSF faculty members, researchers with academic leadership appointments, residents, postdoctoral scholars and non-faculty academic researchers. </li>
-  <li>We are expanding UCSF Profiles to include research staff, individuals and additional groups in the UCSF community, as requested.</li>
-  <li>Profile creation requires that an individual's data be in the UCSF Campus Locator System. If you are a UCSF employee and do not have a profile, <a href="mailto:profiles@ucsf.edu">request yours now</a> by sending us your UCSF Employee ID.</li>
+  <li>We are happy to include research staff and other individuals in the UCSF community, on request and if possible.</li>
+  <li>Profile creation requires that an individual's data be in the UCSF Campus Locator System and set to be shared with public websites. If you are a UCSF employee and do not have a profile, <a href="mailto:profiles@ucsf.edu">request yours now</a> by sending us your UCSF Employee ID.</li>
 </ul>
 
 <h3 id="view">Who can view UCSF Profiles?</h3>
@@ -105,21 +105,26 @@ People working in the same department
   <li>UCSF Profiles is searchable on the web and can be viewed by the general public as well as the UCSF community.</li>
 </ul>
 
-<h3 id="enhance">How do I edit and enhance my individual profile?</h3>
+<h3 id="enhance">How do I edit and enhance a profile page?</h3>
 <ul>
-  <li>To edit your individual profile, click the <strong>Login/Edit My Profile</strong> link in the menu bar. You will be prompted to login with your MyAccess account. </li>
-  <li>Your profile is divided into several sections: directory information (not editable in Profiles), photo, awards and honors, overview, keywords (a new feature!!) and publications.
+  <li>To edit your own profile page, click the <strong><a href="../login/default.aspx?method=login&amp;edit=true">Sign in</a></strong> link from any page. Use your MyAccess credentials to sign in. Then click Edit My Profile.
   <ul>
-  <li>For directory information, UCSF Profiles uses Campus Locator System data (name, degrees, and contact information). Changes to this information should be directed to the Payroll/Personnel Analyst for your UCSF campus department. If unsure who this person is, contact your department's Business Officer.</li>
-  <li>You can upload a photo and also add/edit awards and your overview.</li>
-  <li>Keywords are research topics that you can add or edit yourself. These are searchable from within UCSF Profiles, so if you're focusing on a new area of research and haven't published a paper on it yet, people can still find you if they search using that term.</li>
-  <li>Publications are automatically added from PubMed, and you can also add other publications yourself.</li>
+    <li>You can designate a "proxy" to manage your profile page information for you.</li>
   </ul></li>
-  <li><a href="mailto:profiles@ucsf.edu">Contact us</a> if you have questions about editing your profile.</li>
+  <li>If you are a proxy and need to edit someone else's profile page, sign in as above using your MyAccess credentials. Search for the person’s page you want to edit. The menu will then show the option to "Edit this Profile." Click that link to go to the editing page. </li>
+  <li>A profile page is divided into several sections: directory information (not editable in Profiles), photo, awards and honors, overview, interests, featured publications (a new feature!), several other optional sections and publications.
+  <ul>
+  <li>For directory information, UCSF Profiles uses Campus Locator System data (name, degrees, and contact information). Changes to this information need to be directed to the Payroll/Personnel Analyst for your UCSF campus department. Your department's Business Officer can tell you who that is if you don't know.</li>
+  <li>You can upload a photo, add an overview (bio), add/edit awards and many other optional sections.</li>
+  <li>Interests are research topics that you can add or edit yourself. These are searchable so people can still find you if they search using these terms. This useful for new areas of research on which you haven't published a paper on it yet.</li>
+  <li>Publications are automatically added from PubMed, and you can also add other publications yourself. Co-authors, Related Authors and Related Concepts are derived from your publications. Note: Keeping your publications updated in UCSF Profiles is important since Advance allows you to import this list. No more manually typing publication details!</li>
+  <li>Sections can be set to the privacy levels of your choice.</li>
+  </ul></li>
+  <li><a href="mailto:profiles@ucsf.edu">Contact us</a> if you have questions about editing a profile.</li>
 </ul>
 
 <h3 id="login">How do I login to UCSF Profiles?</h3>
-<p>Click the <strong>Login/Edit My Profile</strong> link on any UCSF Profiles page. Then enter your MyAccess username and password.</p>
+<p>Click the <strong><a href="../login/default.aspx?method=login&amp;edit=true">Sign in</a></strong> link on any UCSF Profiles page. Then enter your MyAccess username and password.</p>
 <ul>
   <li>If you have never used your MyAccess account or for password support: go to <a href="https://myaccess.ucsf.edu/" title="Go to the UCSF ITS website" target="_blank">https://myaccess.ucsf.edu/</a> or call ITS Customer Support at (415) 514-4100 (option 2).</li> 
   <li><a href="http://it.ucsf.edu/services/myaccess-single-sign" title="Go to the UCSF IT website" target="_blank">Learn more about MyAccess</a></li>
@@ -129,22 +134,22 @@ People working in the same department
 <ul>
   <li>Many special UCSF Profiles features are available only if you're logged-in. These include:
   <ul>
-  <li>Create a group of individuals based on search results. This group can then then be used to create a UCSF Chatter Group or to export information about these individuals. (Accessing the group's emails is by special permission only. Please email us to request permission.)</li>
-  <li>Follow someone on UCSF Chatter directly from his/her profile.</li>
-  <li>Export a list of an individual's publications.</li>
+  <li>Editing your profile page content to keep it current. Keeping your publications updated is important since you can import this list into Advance.</li>
+  <li>Designating a proxy to manage your profile page for you.</li>
+  <li>Creating a group of individuals based on search results. This group can then then be used to create a UCSF Chatter Group or to export information about these individuals.</li>
+  <li>Following someone on UCSF Chatter directly from his/her profile.</li>
   </ul></li>
-  <li>In addition, you can edit your profile and manage your designated proxies only if you're logged in.</li>
 </ul>
 
-<h3 id="datasources">What are the sources of data for UCSF Profiles?</h3> 
+<h3 id="datasources">Where does the information in UCSF Profiles originate?</h3> 
 <ul>
-  <li>All data in automatically generated profiles are currently available on other public websites, specifically the UCSF Directory, PubMed, and NIH RePORTER. 
+  <li>All information automatically added to your profile page is  currently available on other public websites, specifically the UCSF Directory, PubMed, and NIH RePORTER. 
   <ul>
   <li>Contact information is obtained from the Campus Locator System, which also feeds the central UCSF Directory. This information is updated weekly. </li>
   <li>Publications are derived from the MEDLINE/PubMed citation database. These are retrieved monthly.</li>
   <li>Grant information from NIH RePORTER is updated monthly. </li>
   </ul></li>
-  <li>Overview and other personalized data is entered by the profile owner or a designated proxy. </li>
+  <li>Overview and other personalized information is entered by the profile owner or a designated proxy. </li>
 </ul>
 
 <h3 id="network">What are the lists of networks on the right side of my profile?</h3>
@@ -153,35 +158,34 @@ People working in the same department
   <ul>
   <li>"Related Concepts" includes the top five research concepts derived from publications' MeSH terms. There is also a link to show all the concepts associated with this individual.</li>
   <li>"Co-Authors" includes those who have published with this individual.</li>
-  <li>"Similar People" includes people who have research concepts/MeSH terms in common with this individual. </li>
+  <li>"Related Authors" includes people who have research concepts/MeSH terms in common with this individual. </li>
   </ul></li>
-  <li>Department lists are determined from Campus Locator System data (see data sources above) and reflect people in the same department.</li>
 </ul>
 
 <h3 id="missing">Why are there missing or incorrect publications in my profile? How can I correct this?</h3> 
 <ul>
-  <li>UCSF Profiles uses a complex mix of names, institution, and manually entered publication information to find your publications in PubMed's repository. Unfortunately, there is no easy way to exactly match all articles in PubMed with complete precision and accuracy. The algorithm used to find articles from PubMed attempts to minimize the number of publications incorrectly added to a profile; however, this method may result in some missing or incorrectly listed publications.</li>
-  <li>People with common names or whose articles were written at other institutions are most likely to have incomplete publication lists. </li>
-  <li>You can make corrections by manually searching PubMed from within Profiles to add, edit or delete publications (see <a href="HowProfilesWorks.aspx#enhance">How do I edit my Profile?</a> above). By curating publications manually, you are helping UCSF Profiles to identify which concepts are associated with your profile and increasing the likelihood of finding the right publications on subsequent attempts. </li>
-  <li>We encourage you to login to the site and add any missing publications or remove incorrect ones.</li>
+  <li>UCSF Profiles uses a complex mix of names, institution, and manually entered publication information to find your publications in PubMed's repository. Unfortunately, there is no easy way to exactly match all articles in PubMed to UCSF authors with complete precision and accuracy. The algorithm used to find articles from PubMed attempts to minimize the number of publications incorrectly added to a profile; however, this method may result in some missing or incorrectly listed publications.</li>
+  <li>People who have common names, who published under multiple names or whose articles were written at other institutions are most likely to have incomplete publication lists. </li>
+  <li>You can make corrections by manually searching PubMed from within Profiles to add, edit or delete publications (see <a href="HowProfilesWorks.aspx#enhance">How do I edit my Profile?</a> above). By curating publications manually, you are helping UCSF Profiles to identify which concepts and co-authors are correctly associated with your profile, thereby increasing the likelihood of finding the right publications on subsequent attempts. </li>
+  <li>We encourage you to sign in to the site and add any missing publications or remove incorrect ones because these publications can be imported into Advance and many departments pull publication lists from UCSF Profiles for use on their department and faculty website pages.</li>
 </ul>
 
 <h3 id="update">How frequently are the data in UCSF Profiles updated?</h3>
 <ul>
   <li>Changes made to your primary campus information via your HR representative, such as names, degrees, and contact information, are automatically updated once a week.</li>
-  <li>Publications from PubMed are updated monthly.</li>
-  <li>Changes made to a profile manually will be reflected within minutes.</li>
+  <li>Publications are added from PubMed weekly. MeSH terms and other publication data are updated monthly.</li>
+  <li>Changes made to a profile manually will be reflected immediately.</li>
 </ul>
 
 <h3 id="keyword">Can I add/edit research, career and academic interests?</h3>
 <ul>
   <li>Yes! You can enter interests when you are editing your profile. These are useful to indicate research topics or fields in which you haven’t yet published. Users who search UCSF Profiles by these topics will find your profile. </li>
-  <li>The new interests feature is different from the concepts associated to your publications (MeSH terms derived by the National Library of Medicine), which are not editable. However, you can ensure these accurately reflect your work by keeping your publications up to date and correct in UCSF Profiles. Please note that it can take up to 24 hours for the system to update your concepts, co-authors, and similar people after you have modified your publications.</li> 
+  <li>Interests you add are  different from the concepts associated to your publications (MeSH terms derived by the National Library of Medicine) automatically, which are not editable. However, you can ensure these accurately reflect your work by keeping your publications up to date and correct in UCSF Profiles. Please note that system updates to your related concepts, co-authors, and related authors after you have modified your publications will happen after the next weekly update.</li> 
 </ul>
 
-<h3 id="mynetwork">Can I edit my co-authors or similar people lists?</h3>
+<h3 id="mynetwork">Can I edit my co-authors or related authors network lists?</h3>
 <ul>
-  <li>These networks are derived from the MeSH terms automatically. Keeping your publications accurate and up to date will improve these networks. However, they can't be edited directly.</li>
+  <li>These networks are automatically derived from publications and their MeSH terms. Keeping your publications accurate and up to date will improve these networks. However, these lists can't be edited directly.</li>
 </ul>
 
 <h3 id="learn">How can I learn more about UCSF Profiles?</h3>
@@ -192,7 +196,7 @@ People working in the same department
 
 <h3 id="ideas">Where should I send my ideas on how to improve the tool?</h3> 
 <ul>
-  <li>We encourage you to <a href="mailto:profiles@ucsf.edu">get in touch</a> with your ideas on how to improve UCSF Profiles.  We especially look forward to hearing from you if Profiles has enabled your research in any way.  Your success stories allow us to continue to build on such tools and to continue to get support.</li>
+  <li>We encourage you to <a href="mailto:profiles@ucsf.edu">share your thoughts</a> on how to improve UCSF Profiles.  We especially look forward to hearing from you if Profiles has enabled your research in any way.  <em>Your success stories allow us to continue to build on such tools and to continue to get support.</em></li>
   <li>To tell us how we're doing or for questions please send a note to <a href="mailto:profiles@ucsf.edu">profiles@ucsf.edu</a>.</li>
 </ul>
 
@@ -200,7 +204,7 @@ People working in the same department
 <ul>
   <li>UCSF Profiles works best using any of the following web browsers:
     <ul>
-      <li>Internet Explorer 8 or 9</li>
+      <li>Internet Explorer 9 or later</li>
       <li>Firefox 12 or later</li>
       <li>Chrome</li>
       <li>Safari 5 or later</li>
