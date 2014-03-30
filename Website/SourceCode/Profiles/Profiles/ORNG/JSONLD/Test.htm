@@ -28,7 +28,7 @@
             }
             else {  // show the Javascript object by passing the data through jsonldParser.parse
                 $.getJSON(url, function (data) {
-                    var item = jsonldParser.parse(data.entry)[data.entry.uris[0]];
+                    var item = jsonldParser.parse(data.entry);
                     var ppTable = prettyPrint(item);
                     $('#result').html(ppTable);
                 });

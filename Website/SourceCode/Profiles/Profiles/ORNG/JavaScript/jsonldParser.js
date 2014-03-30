@@ -7,11 +7,9 @@ var jsonldParser = {};
 */
 jsonldParser.parse = function (data) {
     var jsonld = data.jsonld;
-    var retval = {};
     // when this happens, just return the jsonld as the only entry
     if (!jsonld.hasOwnProperty('@graph')) {
-        retval[data.uris[0]] = jsonld;
-        return retval;
+        return jsonld;
     }
 
     // put everything in a map keyed by ID
@@ -46,9 +44,10 @@ jsonldParser.parse = function (data) {
 
     // there are many items in the fatObjMap all wired together, return the ones they 
     // specifically asked for aka. data.uris in a map keyed by uri 
+    retval = [];
     for (var i = 0; i < data.uris.length; i++) {
         var uri = data.uris[i];
-        retval[uri] = fatObjMap[uri];
+        retval.push(fatObjMap[uri]);
     }
-    return retval;
+    return retval.length == 1 ? retval[0] : retval;
 };
