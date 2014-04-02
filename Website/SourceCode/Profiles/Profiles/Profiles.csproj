@@ -182,6 +182,7 @@
     <Content Include="ORNG\Images\orng.gif" />
     <Content Include="ORNG\Images\orng.png" />
     <Content Include="ORNG\Images\waiting.gif" />
+    <Content Include="ORNG\JavaScript\jsonld\jsonld.js" />
     <Content Include="ORNG\JavaScript\orng.min.js" />
     <Content Include="ORNG\JavaScript\prettyprint.js" />
     <Content Include="ORNG\JavaScript\jsonldParser.js" />
