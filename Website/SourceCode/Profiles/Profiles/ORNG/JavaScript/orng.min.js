@@ -1,4 +1,4 @@
-/*
+﻿/*
 Orng Shindig Helper functions for gadget-to-container commands
 
 NOTE THAT WE minimize this via http://closure-compiler.appspot.com/home and save the results as orng.min.js to load!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -340,5 +340,5 @@ function removeParameterFromURL(url, parameter) {
 };
 
 function addParameterToURL(url, parameter, value) {
-    return url + ((url.slice(-1) !== "?" && url.slice(-1) !== "&") ? "&" : "") + parameter + "=" + value; 
+    return url + ((url.slice(-1) !== "?" && url.slice(-1) !== "&") ? "&" : "") + parameter + "=" + value;
 };

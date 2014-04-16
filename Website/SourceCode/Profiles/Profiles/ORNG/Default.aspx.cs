@@ -36,7 +36,7 @@ namespace Profiles.ORNG
         {
             if (Request.RawUrl.ToLower().Contains("clearcache"))
             {
-                Cache.Remove(OpenSocialManager.GADGET_SPEC_KEY);
+                Cache.Remove(OpenSocialManager.ORNG_GADGET_SPEC_KEY);
             }
             masterpage = (Framework.Template)base.Master;
 
@@ -48,6 +48,17 @@ namespace Profiles.ORNG
 
         private void LoadAssets()
         {
+            HtmlLink UCSFcss = new HtmlLink();
+            UCSFcss.Href = Root.Domain + "/ORNG/CSS/UCSF.css";
+            UCSFcss.Attributes["rel"] = "stylesheet";
+            UCSFcss.Attributes["type"] = "text/css";
+            UCSFcss.Attributes["media"] = "all";
+            Page.Header.Controls.Add(UCSFcss);
+
+            HtmlGenericControl UCSFjs = new HtmlGenericControl("script");
+            UCSFjs.Attributes.Add("type", "text/javascript");
+            UCSFjs.Attributes.Add("src", Root.Domain + "/ORNG/JavaScript/UCSF.js");
+            Page.Header.Controls.Add(UCSFjs);
         }
 
         public void LoadPresentationXML()
@@ -64,13 +75,13 @@ namespace Profiles.ORNG
         public XmlDocument PresentationXML { get; set; }
 
         [System.Web.Services.WebMethod]
-        public static string CallORNGResponder(string guid, string request)
+        public static string CallORNGRPC(string guid, string request)
         {
-            DebugLogging.Log("OpenSocialManager CallORNGResponder " + guid + ":" + request);
-            ORNGCallbackResponder responder = ORNGCallbackResponder.GetORNGCallbackResponder(new Guid(guid), request);
-            string retval = responder != null ? responder.getCallbackResponse() : null;
-            DebugLogging.Log("OpenSocialManager CallORNGResponder " + (responder == null ? "CallbackReponder not found! " : retval));
-            return retval;
+            DebugLogging.Log("CallORNGRPC " + guid + ":" + request);
+            ORNGRPCService responder = ORNGRPCService.GetRPCService(new Guid(guid));
+            string retval = responder != null ? responder.call(request) : null;
+            DebugLogging.Log("CallORNGRPC " + (responder == null ? "ORNGRPCService not found! guid =" : guid));
+            return retval != null ? retval : "";
         }
 
     }

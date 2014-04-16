@@ -27,6 +27,7 @@ this website.
                         <asp:Image runat="server" ID="imgBlank" Visible="false" ImageUrl="~/Edit/Images/icons_blank.gif" />
                         <asp:Label runat="server" ID="lblItems"></asp:Label>
                         <asp:Image runat="server" ID="imgLock" Visible="false" ImageUrl="~/Edit/Images/icons_lock.gif" />
+                        <asp:Image runat="server" ID="imgOrng" Visible="false" ImageUrl="~/ORNG/Images/orng-asterisk.png" />
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderStyle-HorizontalAlign="Center" 
@@ -64,16 +65,8 @@ this website.
             <div style='border: solid 1px #ccc; margin-bottom: 2px; width: 100%'>
                 <asp:Literal runat="server" ID="litSecurityKey"></asp:Literal>
             </div>
-<%--        </td>
+     </td>
     </tr>
 </table>
---%>
-</div>
-<div style="clear:left">
-  <br />
-  <h3>Add-ons:</h3>
-</div>
-<%-- Profiles OpenSocial Extension by UCSF --%>    
-<asp:Panel ID="pnlOpenSocial" runat="server" Visible="false">
-    <div id="gadgets-edit" class="gadgets-gadget-parent"></div>
-</asp:Panel>
+
+<asp:Literal runat="server" ID="litGadget" Visible="false"/>

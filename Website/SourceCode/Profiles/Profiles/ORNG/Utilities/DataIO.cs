@@ -26,28 +26,28 @@ namespace Profiles.ORNG.Utilities
 
         public SqlDataReader GetGadgetViewRequirements(int appId)
         {
-            string sql = "select page, [view], chromeId, visibility, display_order, opt_params from [ORNG.].[AppViews] where appId = " + appId;
+            string sql = "select Page, [view], ChromeID, Visibility, DisplayOrder, OptParams from [ORNG.].[AppViews] where AppID = " + appId;
             SqlDataReader sqldr = this.GetSQLDataReader("ProfilesDB", sql, CommandType.Text, CommandBehavior.CloseConnection, null);
             return sqldr;
         }
 
         public SqlDataReader GetRegisteredApps(string uri)
         {
-            string sql = "select appId, visibility from [ORNG.].[AppRegistry] where nodeId = " + uri.Substring(uri.LastIndexOf('/') + 1);
+            string sql = "select AppID from [ORNG.].[AppRegistry] where NodeID = " + uri.Substring(uri.LastIndexOf('/') + 1);
             SqlDataReader sqldr = this.GetSQLDataReader("ProfilesDB", sql, CommandType.Text, CommandBehavior.CloseConnection, null);
             return sqldr;
         }
 
         public SqlDataReader GetGadgets()
         {
-            string sql = "select appId, name, url, enabled from [ORNG.].[Apps]";
+            string sql = "select AppID, Name, Url, UnavailableMessage, Enabled from [ORNG.].[Apps]";
             SqlDataReader sqldr = this.GetSQLDataReader("ProfilesDB", sql, CommandType.Text, CommandBehavior.CloseConnection, null);
             return sqldr;
         }
 
         public Int64 GetNodeId(Int32 personid)
         {
-            string sql = "select nodeid from [RDF.Stage].[InternalNodeMap] where Class = 'http://xmlns.com/foaf/0.1/Person' and InternalID = " + personid;
+            string sql = "select NodeID from [RDF.Stage].[InternalNodeMap] where Class = 'http://xmlns.com/foaf/0.1/Person' and InternalID = " + personid;
             using (SqlDataReader sqldr = this.GetSQLDataReader("ProfilesDB", sql, CommandType.Text, CommandBehavior.CloseConnection, null))
             {
                 if (sqldr.Read())
@@ -58,15 +58,100 @@ namespace Profiles.ORNG.Utilities
             return -1;
         }
 
-        public void ExecuteSQLDataCommand(string sqltext)
+        // the ones below should change
+        public bool IsRegistered(string uri, int appId)
         {
+            SqlParameter[] param = new SqlParameter[2];
 
-            using (SqlConnection conn = GetDBConnection(""))
+            param[0] = new SqlParameter("@Uri", uri);
+            param[1] = new SqlParameter("@AppID", appId);
+
+            using (SqlDataReader dbreader = GetSQLDataReader(GetDBCommand("", "[ORNG.].[IsRegistered]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param)))
             {
-                SqlCommand sqlcmd = new SqlCommand(sqltext, conn);
-                sqlcmd.CommandType = CommandType.Text;
-                sqlcmd.CommandTimeout = GetCommandTimeout();
-                sqlcmd.ExecuteNonQuery();
+                return dbreader.Read();
+            }
+        }
+
+        public bool IsRegistered(long Subject, int appId)
+        {
+            SqlParameter[] param = new SqlParameter[2];
+
+            param[0] = new SqlParameter("@Subject", Subject);
+            param[1] = new SqlParameter("@AppID", appId);
+
+            using (SqlDataReader dbreader = GetSQLDataReader(GetDBCommand("", "[ORNG.].[IsRegistered]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param)))
+            {
+                return dbreader.Read();
+            }
+        }
+
+        public void AddPersonalGadget(long Subject, string propertyURI)
+        {
+            GadgetSpec spec = OpenSocialManager.GetGadgetByPropertyURI(propertyURI);
+            if (spec != null)
+            {
+                AddPersonalGadget(Subject, spec.GetAppId());
+            }
+        }
+
+        public void AddPersonalGadget(string uri, int appId)
+        {
+            SqlParameter[] param = new SqlParameter[2];
+
+            param[0] = new SqlParameter("@SubjectURI", uri);
+            param[1] = new SqlParameter("@AppID", appId);
+
+            using (SqlCommand comm = GetDBCommand("", "[ORNG.].[AddAppToPerson]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param))
+            {
+                ExecuteSQLDataCommand(comm);
+            }
+        }
+
+        public void AddPersonalGadget(long Subject, int appId)
+        {
+            SqlParameter[] param = new SqlParameter[2];
+
+            param[0] = new SqlParameter("@SubjectID", Subject);
+            param[1] = new SqlParameter("@AppID", appId);
+
+            using (SqlCommand comm = GetDBCommand("", "[ORNG.].[AddAppToPerson]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param))
+            {
+                ExecuteSQLDataCommand(comm);
+            }
+        }
+
+        public void RemovePersonalGadget(long Subject, string propertyURI)
+        {
+            GadgetSpec spec = OpenSocialManager.GetGadgetByPropertyURI(propertyURI);
+            if (spec != null)
+            {
+                RemovePersonalGadget(Subject, spec.GetAppId());
+            }
+        }
+
+        public void RemovePersonalGadget(string uri, int appId)
+        {
+            SqlParameter[] param = new SqlParameter[2];
+
+            param[0] = new SqlParameter("@SubjectURI", uri);
+            param[1] = new SqlParameter("@AppID", appId);
+
+            using (SqlCommand comm = GetDBCommand("", "[ORNG.].[RemoveAppFromPerson]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param))
+            {
+                ExecuteSQLDataCommand(comm);
+            }
+        }
+
+        public void RemovePersonalGadget(long Subject, int appId)
+        {
+            SqlParameter[] param = new SqlParameter[2];
+
+            param[0] = new SqlParameter("@SubjectID", Subject);
+            param[1] = new SqlParameter("@AppID", appId);
+
+            using (SqlCommand comm = GetDBCommand("", "[ORNG.].[RemoveAppFromPerson]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param))
+            {
+                ExecuteSQLDataCommand(comm);
             }
         }
 
