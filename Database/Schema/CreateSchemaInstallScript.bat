@@ -36,6 +36,7 @@ type Edit.Module.Schema.sql
 type Edit.Framework.Schema.sql
 type Direct.Framework.Schema.sql
 type Direct..Schema.sql
+type ORNG..Schema.sql
 
 type ft.FullTextCatalog.sql
 
@@ -179,6 +180,12 @@ type Profile.Data.Publication.PubMed.Investigator.Table.sql
 type Profile.Data.Publication.PubMed.Grant.Table.sql
 type Profile.Data.Publication.PubMed.Author2Person.Table.sql
 type Profile.Data.Publication.Person.Include.Table.sql
+type ORNG..Activity.Table.sql
+type ORNG..AppData.Table.sql
+type ORNG..AppRegistry.Table.sql
+type ORNG..Apps.Table.sql
+type ORNG..AppViews.Table.sql
+type ORNG..Messages.Table.sql
 
 type RDF..fnTripleHash.UserDefinedFunction.sql
 type Utility.Application.fnText2Bool.UserDefinedFunction.sql
@@ -247,6 +254,8 @@ type RDF..vwPropertyWide.View.sql
 type Ontology..vwPropertyWide.View.sql
 type Ontology..vwMissingPropertyGroupProperty.View.sql
 type Ontology..vwMissingClassProperty.View.sql
+type ORNG..vwAppPersonData.View.sql
+type ORNG..vwPerson.View.sql
 
 type PresentationXML.SqlAssembly.sql
 
@@ -386,3 +395,19 @@ type Profile.Cache.Concept.Mesh.UpdateWord2MeshAll.StoredProcedure.sql
 type Search..LookupNodes.StoredProcedure.sql
 type Search..GetNodes.StoredProcedure.sql
 type Search..GetConnection.StoredProcedure.sql
+type ORNG..AddAppToOntology.StoredProcedure.sql
+type ORNG..AddAppToPerson.StoredProcedure.sql
+type ORNG..DeleteActivity.StoredProcedure.sql
+type ORNG..DeleteAppData.StoredProcedure.sql
+type ORNG..InsertActivity.StoredProcedure.sql
+type ORNG..InsertMessage.StoredProcedure.sql
+type ORNG..IsRegistered.StoredProcedure.sql
+type ORNG..ReadActivity.StoredProcedure.sql
+type ORNG..ReadAllActivities.StoredProcedure.sql
+type ORNG..ReadAppData.StoredProcedure.sql
+type ORNG..ReadMessages.StoredProcedure.sql
+type ORNG..ReadMessageCollections.StoredProcedure.sql
+type ORNG..ReadPerson.StoredProcedure.sql
+type ORNG..RemoveAppFromOntology.StoredProcedure.sql
+type ORNG..RemoveAppFromPerson.StoredProcedure.sql
+type ORNG..UpsertAppData.StoredProcedure.sql
