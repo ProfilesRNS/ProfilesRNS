@@ -166,7 +166,7 @@ BEGIN
 				DECLARE @InternalNodeMapID BIGINT
 				INSERT INTO [RDF.Stage].[InternalNodeMap] (InternalType, InternalID, NodeType, Status, InternalHash)
 					SELECT @InternalType, @InternalID, @Class, 4, 
-						[R DF.].fnValueHash(null,null,@Class+'^^'+@InternalType+'^^'+@InternalID)
+						[RDF.].fnValueHash(null,null,@Class+'^^'+@InternalType+'^^'+@InternalID)
 				SET @InternalNodeMapID = @@IDENTITY
 				-- Create the Node
 				INSERT INTO [RDF.].[Node] (ViewSecurityGroup, EditSecurityGroup, InternalNodeMapID, ObjectType, Value, ValueHash)
