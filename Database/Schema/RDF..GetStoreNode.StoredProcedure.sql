@@ -164,7 +164,7 @@ BEGIN
 			BEGIN
 				-- Create the InternalNodeMap record
 				DECLARE @InternalNodeMapID BIGINT
-				INSERT INTO [RDF.Stage].[InternalNodeMap] (InternalType, InternalID, NodeType, Status, InternalHash)
+				INSERT INTO [RDF.Stage].[InternalNodeMap] (InternalType, InternalID, Class, Status, InternalHash)
 					SELECT @InternalType, @InternalID, @Class, 4, 
 						[RDF.].fnValueHash(null,null,@Class+'^^'+@InternalType+'^^'+@InternalID)
 				SET @InternalNodeMapID = @@IDENTITY
@@ -176,7 +176,7 @@ BEGIN
 				SET @NodeID = @@IDENTITY
 				-- Update the InternalNodeMap, given the NodeID
 				UPDATE [RDF.Stage].[InternalNodeMap]
-					SET NodeID = @NodeID, Status = 0,
+					SET NodeID = @NodeID, Status = 3,
 						ValueHash = [RDF.].fnValueHash(null,null,@baseURI+cast(@NodeID as nvarchar(50)))
 					WHERE InternalNodeMapID = @InternalNodeMapID
 				-- Update the Node, given the NodeID
