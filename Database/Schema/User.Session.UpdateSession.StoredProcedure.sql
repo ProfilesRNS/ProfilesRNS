@@ -8,7 +8,8 @@ CREATE PROCEDURE [User.Session].[UpdateSession]
 	@LastUsedDate DATETIME=NULL, 
 	@LogoutDate DATETIME=NULL,
 	@SessionPersonNodeID BIGINT = NULL OUTPUT,
-	@SessionPersonURI VARCHAR(400) = NULL OUTPUT
+	@SessionPersonURI VARCHAR(400) = NULL OUTPUT,
+	@UserURI VARCHAR(400) = NULL OUTPUT
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -45,6 +46,16 @@ BEGIN
 				LastUsedDate = IsNull(@LastUsedDate,LastUsedDate),
 				LogoutDate = IsNull(@LogoutDate,LogoutDate)
 			WHERE SessionID = @SessionID
+
+	IF @UserID IS NOT NULL
+	BEGIN
+		SELECT @UserURI = p.Value + CAST(m.NodeID AS VARCHAR(50))
+			FROM [RDF.Stage].InternalNodeMap m, [Framework.].[Parameter] p
+			WHERE m.InternalID = @UserID
+				AND m.InternalType = 'User'
+				AND m.Class = 'http://profiles.catalyst.harvard.edu/ontology/prns#User'
+				AND p.ParameterID = 'baseURI'
+	END
 
 END
 GO
