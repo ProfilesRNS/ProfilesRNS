@@ -79,6 +79,7 @@
     <Content Include="DirectService.aspx" />
     <Content Include="Edit\Modules\CustomEditListProperty\CustomEditListProperty.ascx" />
     <Content Include="Global.asax" />
+    <Content Include="ORNG\Images\orng.gif" />
     <Content Include="ORNG\Images\waiting.gif" />
     <Content Include="ORNG\JavaScript\jsonldParser.js" />
     <Content Include="ORNG\JavaScript\jsonld\jsonld.js" />

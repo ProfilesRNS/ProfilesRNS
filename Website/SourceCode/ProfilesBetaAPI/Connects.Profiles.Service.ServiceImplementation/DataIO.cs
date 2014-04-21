@@ -864,7 +864,7 @@ namespace Connects.Profiles.Service.ServiceImplementation
                     }
                     else
                     {
-                        returnxml.Append("<PersonID>" + RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + uri + "']/catalyst:eCommonsLogin", namespaces).InnerText + "</PersonID>");
+                        returnxml.Append("<PersonID>" + RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + uri + "']", namespaces).InnerText + "</PersonID>");
                     }
 
 
