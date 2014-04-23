@@ -47,7 +47,7 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-/****** Object:  Table [UCSF].[ActivityLog]    Script Date: 10/11/2013 10:33:48 ******/
+/****** Object:  Table [UCSF.].[ActivityLog]    Script Date: 10/11/2013 10:33:48 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -397,14 +397,14 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
-	INSERT INTO [UCSF].[ActivityLog] (userId, personId, methodName, property, privacyCode, param1, param2) 
+	INSERT INTO [UCSF.].[ActivityLog] (userId, personId, methodName, property, privacyCode, param1, param2) 
 		VALUES(@userId, @personId, @methodName, @property, @privacyCode, @param1, @param2)
 END
 
 
 GO
 
-/****** Object:  StoredProcedure [UCSF].[ReadActivityLog]    Script Date: 10/11/2013 10:35:30 ******/
+/****** Object:  StoredProcedure [UCSF.].[ReadActivityLog]    Script Date: 10/11/2013 10:35:30 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -415,7 +415,7 @@ CREATE PROCEDURE [UCSF.].[ReadActivityLog] @methodName nvarchar(255), @afterDT d
 AS   
 
 SELECT p.personid, p.displayname, p.url_name, p.emailaddr, l.createdDT
-  FROM [UCSF].[ActivityLog] l  join [UCSF].[vwPersonExport] p on l.personId = p.PersonID
+  FROM [UCSF.].[ActivityLog] l  join [UCSF].[vwPersonExport] p on l.personId = p.PersonID
   where l.methodName = @methodName and l.createdDT >= isnull(@afterDT, '01/01/1970')
    order by activityLogId desc;
 
