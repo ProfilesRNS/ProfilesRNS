@@ -838,7 +838,7 @@ namespace Profiles.Framework.Utilities
         public void LoadUCSFIdSet()
         {
             using (SqlDataReader reader = GetDBCommand(ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString,
-                "select p.personid, p.nodeid, p.internalusername, p.urlname, f.UID_USERID from [UCSF.].vwPerson p join cls.dbo.vw_FNO f on p.InternalUsername = f.INDIVIDUAL_ID"
+                "select p.personid, p.nodeid, p.internalusername, p.urlname, f.UID_USERID from [UCSF.].vwPerson p join import_ucsf.dbo.vw_FNO f on p.InternalUsername = f.INDIVIDUAL_ID"
                 , CommandType.Text, CommandBehavior.CloseConnection, null).ExecuteReader())
             {
                 while (reader.Read())
