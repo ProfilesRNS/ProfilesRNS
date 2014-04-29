@@ -75,12 +75,12 @@
 <p>Click the <strong>Login/Edit My Profile</strong> link on any USC Profiles page. Then enter your USC Net ID username and password.</p>
 <ul>
   <li>If you have never used your USC Net ID account, or for password support: go to <a href="https://mypassword.usc.edu/" title="Go to the USC Mypassword website" target="_blank">https://mypassword.usc.edu/</a> or call USC ITS at (213) 740-5555.</li> 
-  <li><a href="http://www.usc.edu/its/accounts/password" title="Go to the USC ITS website" target="_blank">Learn more about your USC Net ID at http://www.usc.edu/its/accounts/password</a></li>
+  <li><a href="http://www.usc.edu/its/accounts/password" title="Go to the USC ITS website" target="_blank">Learn more about your USC Net ID</a></li>
 </ul>
 
 <h3 id="why">Why should I login to USC Profiles?</h3>
 <ul>
-  <li>Many special USC Profiles features are available only if you're logged-in. These include:
+  <li>Many USC Profiles features are available only if you're logged-in. These include:
   <ul>
   <li>Export a list of an individual's publications.</li>
   </ul></li>
@@ -91,7 +91,7 @@
 <ul>
   <li>The data that is automatically included in a person’s profile is currently available on other public websites, specifically the USC Directory and PubMed. 
   <ul>
-  <li>Contact information is obtained from the USC GDS System, which also feeds the central USC Directory. This information is updated weekly.</li>
+  <li>Contact information is obtained from the USC GDS System, which also feeds the central USC Directory. This information is updated daily.</li>
   <li>Publications are derived from the MEDLINE/PubMed citation database. These are retrieved monthly.</li>
   </ul></li>
   <li>Overview and other personalized data is entered by the profile owner or a designated proxy. </li>
@@ -112,7 +112,7 @@
 <ul>
   <li>USC Profiles uses a complex mix of names, institution, and manually entered publication information to find your publications in PubMed's repository. Unfortunately, there is no easy way to exactly match all articles in PubMed with complete precision and accuracy. The algorithm used to find articles from PubMed attempts to minimize the number of publications incorrectly added to a profile. However, this method may result in some missing or incorrectly listed publications.</li>
   <li>People with common names or whose articles were written at other institutions are most likely to have incomplete publication lists.</li>
-  <li>You can make corrections by manually searching PubMed from within Profiles to add, edit or delete publications (see <a href="HowProfilesWorks.aspx#enhance">How do I edit my Profile?</a> above). By curating publications manually, you are helping USC Profiles to identify which concepts are associated with your profile and increasing the likelihood of finding the right publications on subsequent attempts.</li>
+  <li>You can make corrections by manually searching PubMed from within Profiles to add, edit or delete publications. By curating publications manually, you are helping USC Profiles to identify which concepts are associated with your profile and increasing the likelihood of finding the right publications on subsequent attempts.</li>
   <li>We encourage you to login to the site and add any missing publications or remove incorrect ones.</li>
 </ul>
 

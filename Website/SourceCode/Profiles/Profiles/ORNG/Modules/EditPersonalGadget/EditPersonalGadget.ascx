@@ -15,7 +15,7 @@
             <tr>
                 <td colspan='3'>
                     <asp:Literal runat="server" ID="litBackLink"></asp:Literal>&nbsp;&nbsp;
-                    <asp:HyperLink runat="server" ID="lnkOrng" Visible="true" ImageUrl="~/ORNG/Images/orng.gif" NavigateUrl="http://orng.info" Target="_blank"/>
+                    <asp:HyperLink runat="server" ID="lnkOrng" Visible="true" ImageUrl="~/ORNG/Images/orng-asterisk.png" NavigateUrl="http://orng.info" Target="_blank"/>
                 </td>
             </tr>
             <tr>

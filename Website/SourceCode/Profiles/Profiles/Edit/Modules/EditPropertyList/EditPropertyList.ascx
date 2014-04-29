@@ -41,7 +41,7 @@ this website.
                         <asp:Image runat="server" ID="imgBlank" Visible="false" ImageUrl="~/Edit/Images/icons_blank.gif" />
                         <asp:Label runat="server" ID="lblItems"></asp:Label>
                         <asp:Image runat="server" ID="imgLock" Visible="false" ImageUrl="~/Edit/Images/icons_lock.gif" />
-                        <asp:Image runat="server" ID="imgOrng" Visible="false" ImageUrl="~/ORNG/Images/orng.gif" />
+                        <asp:Image runat="server" ID="imgOrng" Visible="false" ImageUrl="~/ORNG/Images/orng-asterisk.png" />
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderStyle-HorizontalAlign="Center" 
@@ -82,7 +82,7 @@ this website.
         </td>
     </tr>
 </table>
-<p class="orng"><img style="border-width:0px;" src="../ORNG/Images/orng.gif" /> Components developed by the UCSF <a href="http://www.orng.info/index.html" target="_blank">Open Research Networking Gadgets (ORNG)</a> initiative. 
+<p class="orng"><img style="border-width:0px;" src="../ORNG/Images/orng-asterisk.png" /> Components developed by the UCSF <a href="http://www.orng.info/index.html" target="_blank">Open Research Networking Gadgets (ORNG)</a> initiative. 
 Have an idea for a new component you would like to see in Profiles, or are you a software developer who knows HTML and Javascript that would like to build 
 one yourself? Contact <a href="mailto:profiles@ucsf.edu">profiles@ucsf.edu</a> to let us know!</p>
 <!-- for testing -->

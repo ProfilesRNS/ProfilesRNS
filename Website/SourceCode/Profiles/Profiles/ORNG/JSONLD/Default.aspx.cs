@@ -68,7 +68,7 @@ namespace Profiles.ORNG.JSONLD
                 URL += "&Expand=" + expand;
             if (showDetails != null) 
                 URL += "&ShowDetails=" + showDetails;
-            URL = ConfigurationManager.AppSettings["ORNG.ShindigURL"] + "/rest/rdf?userId=" + HttpUtility.UrlEncode(URL);
+            URL = ORNGSettings.getSettings().ShindigURL + "/rest/jsonld?userId=" + HttpUtility.UrlEncode(URL);
 
             HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create(URL);
             myReq.Accept = "application/json"; // "application/ld+json";

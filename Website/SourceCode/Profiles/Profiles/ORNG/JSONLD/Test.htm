@@ -3,7 +3,8 @@
 <head>
     <title>JSON Test</title>
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.4.2.min.js" type="text/javascript"></script>
-    <script src="../JavaScript/jsonld-helper.js" type="text/javascript"></script>
+    <script src="../JavaScript/jsonldParser.js" type="text/javascript"></script>
+    <script src="../JavaScript/jsonld/jsonld.js" type="text/javascript"></script>
     <script src="../JavaScript/prettyprint.js" type="text/javascript"></script>
     <script type="text/javascript">
         function callJson() {
@@ -26,11 +27,27 @@
                     $('#result').html('<pre>' + JSON.stringify(data.entry.jsonld, null, '\t') + '</pre>');
                 });
             }
-            else {  // show the Javascript object by passing the data through jsonldHelper.getItem
+            else {  // show the Javascript object by passing the data through jsonldParser.parse
                 $.getJSON(url, function (data) {
-                    var item = jsonldHelper.getItem(data);
-                    var ppTable = prettyPrint(item);
-                    $('#result').html(ppTable);
+                    //var item = jsonldParser.parse(data.entry);
+                    //var ppTable = prettyPrint(item);
+                    //$('#result').html(ppTable);
+
+                    // return the first person in the result
+                    //var frame = JSON.parse('{"@type": "http://xmlns.com/foaf/0.1/Person"}');
+                    //jsonld.frame(data.entry.jsonld, frame, function (err, framed) {
+                    //    var ppTable = prettyPrint(framed);
+                    //    $('#result').html(ppTable);
+                    //});
+                    var options = {};
+                    options.base = data.entry.base;
+                    jsonld.expand(data.entry.jsonld, options, function (err, expanded) {
+                        var frame = JSON.parse('[{"@type": "http://xmlns.com/foaf/0.1/Person"}]');
+                        jsonld.frame(expanded, frame, function (err, framed) {
+                            var ppTable = prettyPrint(framed);
+                            $('#result').html(ppTable);
+                        });
+                    });
                 });
             }
         }
@@ -40,7 +57,7 @@
 
     <p>
         This page will show you the output of the JSON-LD API.&nbsp; If you are calling 
-        the API from JavaScript then you will want to include the jsonld-helper.js 
+        the API from JavaScript then you will want to include the jsonldParser.js 
         library and use it to get the single Javascript object containing your data (via 
         jsonldHelper.getItem). Note that the &quot;over the wire&quot; JSON-LD data is flattened 
         out, with all object-to-object references represented by URI&#39;s.&nbsp; This 
@@ -53,7 +70,7 @@
         If you are not calling 
         the JSON-LD API from JavaScript and are instead using server side 
         code, you will need to work with the raw JSON-LD.&nbsp; You should look at 
-        jsonld-helper.js and port the jsonldHelper.getItem algorithm to whatever server 
+        jsonldParser.js and port the jsonldHelper.getItem algorithm to whatever server 
         side language you are using.&nbsp; While this is not necessary, it will likely 
         make your life much easier!</p>
     <p>

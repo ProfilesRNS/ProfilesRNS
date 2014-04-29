@@ -55,10 +55,26 @@ namespace Profiles
     /// </summary>
     public partial class REST : System.Web.UI.Page
     {
+        private static string[] knownAcceptTypes =new string[] {"text/html", "application/rdf+xml"};
+
         //***************************************************************************************************************************************
         protected void Page_Load(object sender, EventArgs e)
         {
             ProcessRequest();
+        }
+
+        private string getBestAcceptType(String[] acceptTypes) {
+            // If we find a known one, grab it.  Otherwise just go for the first one.
+            foreach (string acceptType in acceptTypes) 
+            {
+                // remove the suff after a ; if present
+                string baseType = acceptType.Split(';')[0];
+                if (knownAcceptTypes.Contains(baseType))
+                {
+                    return baseType;
+                }
+            }
+            return acceptTypes[0];
         }
 
         //***************************************************************************************************************************************
@@ -161,7 +177,7 @@ namespace Profiles
                                    session.SessionID,
                                    Root.Domain + Root.AbsolutePath,
                                    session.UserAgent,
-                                   HttpContext.Current.Request.AcceptTypes[0]);
+                                   getBestAcceptType(HttpContext.Current.Request.AcceptTypes));
 
 
             Framework.Utilities.DebugLogging.Log("{REST.aspx.cs} ProcessRequest() redirect=" + resolve.Redirect.ToString() + " to=>" + resolve.ResponseURL);

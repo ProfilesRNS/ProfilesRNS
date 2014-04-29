@@ -75,6 +75,7 @@
     <Reference Include="System.Web.Services" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="503.html" />
     <Content Include="About\AboutUSCProfiles.aspx" />
     <Content Include="About\CloseBrowser.aspx" />
     <Content Include="About\FAQ.aspx" />
@@ -87,7 +88,6 @@
     <Content Include="About\ForDevelopers.aspx" />
     <Content Include="About\GadgetLibrary.aspx" />
     <Content Include="About\Help.aspx" />
-    <Content Include="About\HowProfilesWorks.aspx" />
     <Content Include="About\Images\arrows.gif" />
     <Content Include="About\Images\cloud.png" />
     <Content Include="About\Images\comment.gif" />
@@ -133,9 +133,6 @@
     <Content Include="About\PresentationXML\Help.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="About\PresentationXML\HowProfilesWorks.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="About\PresentationXML\NewFeatures.xml" />
     <Content Include="ActiveNetwork\CSS\UCSF.css" />
     <Content Include="ActiveNetwork\JavaScript\UCSF.js" />
@@ -157,6 +154,7 @@
     <Content Include="Edit\Images\icons_red_BlueRow.gif" />
     <Content Include="Edit\Images\Icons_upSort.gif" />
     <Content Include="Edit\Images\Icon_add_item.gif" />
+    <Content Include="ORNG\Images\orng-asterisk.png" />
     <Content Include="Edit\Images\sophcat-boat.jpg" />
     <Content Include="Edit\JavaScript\UCSF.js" />
     <Content Include="Edit\Modules\CustomEditListProperty\CustomEditListProperty.ascx" />
@@ -191,9 +189,10 @@
     <Content Include="ORNG\Images\orng.gif" />
     <Content Include="ORNG\Images\orng.png" />
     <Content Include="ORNG\Images\waiting.gif" />
+    <Content Include="ORNG\JavaScript\jsonld\jsonld.js" />
     <Content Include="ORNG\JavaScript\orng.min.js" />
     <Content Include="ORNG\JavaScript\prettyprint.js" />
-    <Content Include="ORNG\JavaScript\jsonld-helper.js" />
+    <Content Include="ORNG\JavaScript\jsonldParser.js" />
     <Content Include="ORNG\JavaScript\UCSF.js" />
     <Content Include="ORNG\JSONLD\Default.aspx" />
     <Content Include="ORNG\CSS\gadgets.css" />
@@ -285,13 +284,6 @@
     </Compile>
     <Compile Include="About\Help.aspx.designer.cs">
       <DependentUpon>Help.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="About\HowProfilesWorks.aspx.cs">
-      <DependentUpon>HowProfilesWorks.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="About\HowProfilesWorks.aspx.designer.cs">
-      <DependentUpon>HowProfilesWorks.aspx</DependentUpon>
     </Compile>
     <Compile Include="About\Modules\About\About.ascx.cs">
       <DependentUpon>About.ascx</DependentUpon>
@@ -466,7 +458,9 @@
     <Compile Include="ORNG\Utilities\GadgetSpec.cs" />
     <Compile Include="ORNG\Utilities\GadgetViewRequirements.cs" />
     <Compile Include="ORNG\Utilities\OpenSocialManager.cs" />
-    <Compile Include="ORNG\Utilities\ORNGCallbackResponder.cs" />
+    <Compile Include="ORNG\Utilities\ORNGRPCService.cs" />
+    <Compile Include="ORNG\Utilities\ORNGSettings.cs" />
+    <Compile Include="ORNG\Utilities\PeopleListRPCService.cs" />
     <Compile Include="ORNG\Utilities\PreparedGadget.cs" />
     <Compile Include="ORNG\Utilities\SocketConnectionPool.cs" />
     <Compile Include="ProfilesDisplay.aspx.cs">

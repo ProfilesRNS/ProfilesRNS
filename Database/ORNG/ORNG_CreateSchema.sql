@@ -26,6 +26,7 @@ CREATE TABLE [ORNG.].[Apps](
 	[PersonFilterID] [int] NULL,
 	[RequiresRegistration] [bit] NOT NULL,
 	[UnavailableMessage] [text] NULL,
+	[OAuthSecret] [nvarchar](255) NULL,
 	[Enabled] [bit] NOT NULL,
  CONSTRAINT [PK__app] PRIMARY KEY CLUSTERED 
 (
@@ -444,9 +445,9 @@ GO
 
 CREATE PROCEDURE [ORNG.].[AddAppToOntology](@AppID INT, 
 										   @EditView nvarchar(100) = 'home',
-										   @EditOptParams nvarchar(255) = '{}', --'{''gadget_class'':''ORNGToggleGadget'', ''start_closed'':0, ''hideShow'':1, ''closed_width'':700}',
+										   @EditOptParams nvarchar(255) = '{''hide_titlebar'':1}', --'{''gadget_class'':''ORNGToggleGadget'', ''start_closed'':0, ''hideShow'':1, ''closed_width'':700}',
 										   @ProfileView nvarchar(100) = 'profile',
-										   @ProfileOptParams nvarchar(255) = '{}',
+										   @ProfileOptParams nvarchar(255) = '{''hide_titlebar'':1}',
 										   @SessionID UNIQUEIDENTIFIER=NULL, 
 										   @Error BIT=NULL OUTPUT, 
 										   @NodeID BIGINT=NULL OUTPUT)
@@ -767,3 +768,24 @@ END
 GO
 
 
+/****** Object:  View [ORNG.].[vwPerson]    Script Date: 04/27/2014 08:09:47 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE view [ORNG.].[vwPerson]
+as
+SELECT n.nodeId
+      ,par.[Value] + '/' + na.[UrlName] profileURL, p.IsActive
+  FROM [Framework.].Parameter par JOIN
+  [Profile.Data].[Person] p ON  par.[ParameterID] = 'basePath'
+	LEFT JOIN [UCSF.].[NameAdditions] na on na.internalusername = p.internalusername
+	LEFT JOIN [RDF.Stage].internalnodemap n on n.internalid = p.personId
+	and n.[class] = 'http://xmlns.com/foaf/0.1/Person' 
+
+
+
+
+GO

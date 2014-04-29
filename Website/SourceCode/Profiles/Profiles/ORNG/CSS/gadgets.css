@@ -36,6 +36,7 @@
 {
   width: 100%;
   border: none;
+  overflow: hidden;
 }
 
 .gadgets-gadget-title-bar {
@@ -75,15 +76,6 @@
   padding-left: 6px;
 }
 
-.gadgets-gadget-user-prefs-dialog {
-  background-color: #e5ecf9;
-}
-
-.gadgets-gadget-user-prefs-dialog-action-bar {
-  text-align: center;
-  padding-bottom: 4px;
-}
-
 .gadgets-gadget-title-button img {
   border: 2px solid #4F5CC7;
   border: none;           
@@ -107,29 +99,6 @@
 .gadgets-messages {
 	
 }
-
-.gadgets-gadget-hideshow {
-  display: inline-block;
-  width: 100px;
-  font-weight: bold;
-/*  float: right;
-  padding-right: 6px;
-  text-align: center; */
-  font-size: 12px;
-}
-
-.gadgets-gadget-status {
-  display: inline-block;
-  width: 150px;
-  font-weight: bold;
-  padding-left: 200px;
-/*  float: right;
-  padding-right: 6px;
-  text-align: center; */
-  font-size: 12px;
-}
-* html .gadgets-gadget-status { margin-top: -18px; padding-right: 30px; } /* fudge line break for IE6 */
-*+html .gadgets-gadget-status { margin-top: -18px; padding-right: 30px; } /* fudge line break for IE7 */
 
 /* list tool fix ticket #135 */
 * html #ctl00_ctl00_left_pnlOpenSocialTools { height: 130px; }

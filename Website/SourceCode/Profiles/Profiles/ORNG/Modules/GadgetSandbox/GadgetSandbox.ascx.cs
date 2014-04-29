@@ -58,7 +58,7 @@ namespace Profiles.ORNG.Modules.GadgetSandbox
         public GadgetSandbox(XmlDocument pagedata, List<ModuleParams> moduleparams, XmlNamespaceManager pagenamespaces)
         {
            sm = new Profiles.Framework.Utilities.SessionManagement();
-           sandboxPassword = ConfigurationManager.AppSettings["ORNG.SandboxPassword"].ToString().Trim();
+           sandboxPassword = ORNGSettings.getSettings().SandboxPassword;
            if (sandboxPassword != null && sandboxPassword.Length > 0)
            {
                LoadAssets();

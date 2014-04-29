@@ -70,10 +70,15 @@ namespace Profiles.Profile.Modules.CustomViewPersonGeneralInfo
             // OpenSocial.  Allows gadget developers to show test gadgets if you have them installed
             string uri = this.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/@rdf:about", base.Namespaces).Value;
             OpenSocialManager om = OpenSocialManager.GetOpenSocialManager(uri, Page);
-            if (om.IsVisible() && om.HasGadgetsAttachingTo("gadgets-test"))
+            if (om.IsVisible()) 
             {
                 litGadget.Visible = true;
-                litGadget.Text = "<div id='gadgets-test' class='gadgets-gadget-parent'></div>";
+                string sandboxDivs = "";
+                foreach (PreparedGadget gadget in om.GetSandboxGadgets())
+                {
+                    sandboxDivs += "<div id='" + gadget.GetChromeId() + "' class='gadgets-gadget-parent'></div>";
+                }
+                litGadget.Text = sandboxDivs;
                 om.LoadAssets();
             }
 

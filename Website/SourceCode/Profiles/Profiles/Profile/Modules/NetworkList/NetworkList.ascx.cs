@@ -22,6 +22,7 @@ using System.Xml.Xsl;
 using Profiles.Framework.Utilities;
 
 using Profiles.Profile.Utilities;
+using Profiles.ORNG.Utilities;
 
 namespace Profiles.Framework.Modules.NetworkList
 {
@@ -190,6 +191,8 @@ namespace Profiles.Framework.Modules.NetworkList
                                 itemxpath = CustomParse.Parse(itemurltext, networknode, base.Namespaces)
                             };
 
+                List<string> orngCallbackItems = new List<string>();
+
                 foreach (var i in items)
                 {
                     //foreach (XmlNode networknode in base.BaseData.SelectNodes(networklistnode, base.Namespaces))
@@ -199,6 +202,8 @@ namespace Profiles.Framework.Modules.NetworkList
 
                     if (itemurl != string.Empty)
                     {
+                        orngCallbackItems.Add(i.itemurl);
+
                         documentdata.Append(" ItemURL=\"");
                         documentdata.Append(i.itemurl);
                         documentdata.Append("\"");
@@ -239,8 +244,8 @@ namespace Profiles.Framework.Modules.NetworkList
                     documentdata.Append(i.item);
                     documentdata.Append("</Item>");
                 }
+                new ORNGNetworkListRPCService(Page, orngCallbackItems);
             }
-
 
             documentdata.Append("</ListView>");
             document.LoadXml(documentdata.ToString().Replace("&", "&amp;"));
@@ -279,6 +284,35 @@ namespace Profiles.Framework.Modules.NetworkList
         public double Weight { get; set; }
         public String About { get; set; }
         public string Rank { get; set; }
+    }
+
+    // OpenSocial 
+    public class ORNGNetworkListRPCService : PeopleListRPCService
+    {
+        List<string> orngCallbackItems;
+
+        public ORNGNetworkListRPCService(Page page, List<string> orngCallbackItems)
+            : base(null, page, false)
+        {
+            this.orngCallbackItems = orngCallbackItems;
+        }
+
+        public override string getPeopleListMetadata()
+        {
+            if (orngCallbackItems.Count == 1)
+            {
+                return "" + orngCallbackItems.Count + " profile";
+            }
+            else
+            {
+                return "" + orngCallbackItems.Count + " profiles";
+            }
+        }
+
+        public override List<string> getPeople()
+        {
+            return orngCallbackItems;
+        }
     }
 
 }
