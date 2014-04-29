@@ -1,5 +1,3 @@
-USE [profiles_prod]
-GO
 
 /****** Object:  StoredProcedure [RDF.].[GetStoreTriple]    Script Date: 04/07/2014 20:45:08 ******/
 SET ANSI_NULLS ON
