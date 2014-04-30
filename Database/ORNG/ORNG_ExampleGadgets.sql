@@ -1,10 +1,10 @@
-INSERT [ORNG.].[Apps] VALUES(10,'RDF Test','http://stage-profiles.ucsf.edu/apps_200/RDFTest.xml',0, 0, NULL,0);
-INSERT [ORNG.].[Apps] VALUES(101,'Featured Presentations','http://stage-profiles.ucsf.edu/apps_200/SlideShare.xml',0, 0, NULL,1);
-INSERT [ORNG.].[Apps] VALUES(102,'Faculty Mentoring','http://stage-profiles.ucsf.edu/apps_200/Mentor.xml',0, 0, NULL,0);
-INSERT [ORNG.].[Apps] VALUES(103,'Websites','http://stage-profiles.ucsf.edu/apps_200/Links.xml',0, 0, NULL,1);
-INSERT [ORNG.].[Apps] VALUES(104,'Profile List Tool','http://stage-profiles.ucsf.edu/apps_200/ProfileListTool.xml',0, 0, NULL,1);
-INSERT [ORNG.].[Apps] VALUES(112,'Twitter','http://stage-profiles.ucsf.edu/apps_200/Twitter.xml',0, 0, NULL,1);
-INSERT [ORNG.].[Apps] VALUES(114,'Featured Videos','http://stage-profiles.ucsf.edu/apps_200/YouTube.xml', 0, 0, NULL,1);
+INSERT [ORNG.].[Apps] VALUES(10,'RDF Test','http://stage-profiles.ucsf.edu/apps/RDFTest.xml',0, 0, NULL, NULL,0);
+INSERT [ORNG.].[Apps] VALUES(101,'Featured Presentations','http://stage-profiles.ucsf.edu/apps/SlideShare.xml',0, 0, NULL, NULL,1);
+INSERT [ORNG.].[Apps] VALUES(102,'Faculty Mentoring','http://stage-profiles.ucsf.edu/apps/Mentor.xml',0, 0, NULL, NULL,0);
+INSERT [ORNG.].[Apps] VALUES(103,'Websites','http://stage-profiles.ucsf.edu/apps/Links.xml',0, 0, NULL, NULL,1);
+INSERT [ORNG.].[Apps] VALUES(104,'Profile List Tool','http://stage-profiles.ucsf.edu/apps/ProfileListTool.xml',0, 0, NULL, NULL,1);
+INSERT [ORNG.].[Apps] VALUES(112,'Twitter','http://stage-profiles.ucsf.edu/apps/Twitter.xml',0, 0, NULL, NULL,1);
+INSERT [ORNG.].[Apps] VALUES(114,'Featured Videos','http://stage-profiles.ucsf.edu/apps/YouTube.xml', 0, 0, NULL, NULL,1);
 
 INSERT [ORNG.].[AppViews] VALUES(10,'edit/default.aspx',NULL,'gadgets-test','Public',1, NULL);
 INSERT [ORNG.].[AppViews] VALUES(10,'profile/display.aspx',NULL,'gadgets-test','Public',1, NULL);
