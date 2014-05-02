@@ -121,7 +121,7 @@ namespace Profiles.ORNG.Utilities
 
         public bool RequiresRegistration()
         {
-            return gadgetSpec.RequiresRegitration();
+            return gadgetSpec.RequiresRegistration();
         }
 
         public bool IsSandboxGadget()

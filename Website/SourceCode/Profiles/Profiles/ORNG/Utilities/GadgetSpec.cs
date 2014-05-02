@@ -179,7 +179,7 @@ namespace Profiles.ORNG.Utilities
             return unavailableMessage;
         }
 
-        public bool RequiresRegitration()
+        public bool RequiresRegistration()
         {
             return unavailableMessage != null;
         }

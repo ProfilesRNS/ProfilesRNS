@@ -85,7 +85,7 @@ namespace Profiles.Edit.Modules.EditPropertyList
                     if (node.SelectSingleNode("@URI").Value.StartsWith(Profiles.ORNG.Utilities.OpenSocialManager.ORNG_ONTOLOGY_PREFIX))
                     {
                         GadgetSpec spec = OpenSocialManager.GetGadgetByPropertyURI(node.SelectSingleNode("@URI").Value);
-                        if (spec != null && spec.RequiresRegitration() && !orngData.IsRegistered(this.Subject, spec.GetAppId()))
+                        if (spec != null && spec.RequiresRegistration() && !orngData.IsRegistered(this.Subject, spec.GetAppId()))
                         {
                             singlesi.Add(new SecurityItem(node.ParentNode.SelectSingleNode("@Label").Value, node.SelectSingleNode("@Label").Value,
                                 node.SelectSingleNode("@URI").Value,

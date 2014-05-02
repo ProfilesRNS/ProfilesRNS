@@ -65,34 +65,28 @@
  </td>
  </tr>
  <tr>
-  <td colspan="3" align="center" style="padding:15px 0;border-bottom: 1px solid #CCC;"> 
+  <td colspan="3" align="center" style="padding:15px 0;"> 
 <!--
     <a href="http://www.slideshare.net/scctsi/usc-health-sciences-researcher-profiles-tour">
       <img src="images/TourProfiles-3D.png" alt="Tour Profiles" />
     </a>
 -->
     <h2>Watch this short introduction video!</h2>
-    <iframe width="560" height="315" src="//www.youtube.com/embed/ibQr7y1342I" vq="hd720" frameborder="0"></iframe>
+    <iframe width="560" height="315" src="//www.youtube.com/embed/q79jUx2Ofi4" frameborder="0"></iframe>
   </td>
  </tr>
+</table>
+<table style="border-top: 1px solid #CCC;border-bottom: 1px solid #CCC;margin-right:15px;">
  <tr>
-  <td colspan="3" align="center" style="padding:5px 0;"> </td> 
- </tr>
- <tr>
-  <td style="padding: 20px 10px 0;  color:#777; text-align: center">    
-     <!--<div class="tour" style="width: 115px;margin: 30px 0 0 50px;font-size:130%;font-weight: normal;"></div>-->
-       <span style="font-size: 130%;">Tour Profiles</span>  <br /><br />
-       <p style="color:#000;padding-top:21px"><img src="images/ppt.jpg" alt="PPT Coming Soon" style="vertical-align:middle" /> Coming Soon</p>
+  <td style="padding: 20px 10px 10px 90px; font-size: 130%; white-space: nowrap;
+    background: transparent url(images/help.gif) no-repeat 90px 13px; vertical-align: top">
+    <span style="color:#777;padding-left: 40px; ">Help</span>
+    <ul class="square" style="margin-left: 0;margin-top:30px;">
+      <li><a href="faq.aspx">Frequently Asked Questions</a></li>
+      <li><a href="mailto:profiles@sc-ctsi.org">Contact us</a></li>
+    </ul>
   </td>
-  <td style="padding: 20px; text-align: center; color:#777; border-left: 1px solid #CCC; 
-    border-right: 1px solid #CCC;">
-    <div style="display: inline-block; font-size: 80px;  padding-right: 15px;">
-      ?</div>
-    <div style="display: inline-block; font-size: 130%; text-align: left">
-      Frequently<br />Asked<br />Questions</div><br /><br />
-      <a href="../About/faq.aspx">View the FAQ</a>
-  </td>
-  <td style="padding: 20px 10px 0;  color:#777; text-align: center">
+  <td style="padding: 20px 40px 10px; color:#777; text-align: center">
      <span style="font-size: 130%;">USC Profiles Updates</span> <br /><br />
 
 <a class="twitter-timeline"  href="https://twitter.com/USCProfiles"  data-widget-id="407943177664860160" data-chrome="nofooter noborders noheader" data-tweet-limit="1" data-link-color="#4D8BA9">Updates by @USCProfiles</a>
@@ -103,9 +97,6 @@
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
   </td>
  </tr>
- <tr>
-  <td colspan="3" align="center" style="padding:5px 0;border-bottom: 1px solid #CCC;"> </td> 
- </tr>
 </table>
 
 <h3 style="padding-top:20px">Acknowledgements</h3>
@@ -115,7 +106,8 @@
 
 <p>Profiles Research Networking Software is available as an <a href="http://connects.catalyst.harvard.edu/Profiles/about/default.aspx?tab=open" target="_blank">open source platform</a> for institutions seeking a web-based means of facilitating collaboration among their academic researchers. </p>  
 
-<p>Some data on this site is syndicated from <a href="https://search.knodeinc.com/" target="_blank">KNODE Inc.</a></p>      
+<p>Some data on this site is syndicated from <a href="https://search.knodeinc.com/" target="_blank">KNODE Inc.</a></p>    
+
           </Param>
         </ParamList>
       </Module>

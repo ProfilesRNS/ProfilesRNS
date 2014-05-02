@@ -92,7 +92,7 @@
   <li>The data that is automatically included in a person’s profile is currently available on other public websites, specifically the USC Directory and PubMed. 
   <ul>
   <li>Contact information is obtained from the USC GDS System, which also feeds the central USC Directory. This information is updated daily.</li>
-  <li>Publications are derived from the MEDLINE/PubMed citation database. These are retrieved monthly.</li>
+  <li>Publications are derived from the MEDLINE/PubMed citation database. These are retrieved weekly.</li>
   </ul></li>
   <li>Overview and other personalized data is entered by the profile owner or a designated proxy. </li>
 </ul>
@@ -118,8 +118,8 @@
 
 <h3 id="update">How frequently are the data in USC Profiles updated?</h3>
 <ul>
-  <li>Changes made to your directory information via your HR representative, such as names, degrees, and contact information, are automatically updated once a week.</li>
-  <li>Publications from PubMed are updated monthly.</li>
+  <li>Publications are derived from the MEDLINE/PubMed citation database. These are retrieved weekly.</li>
+  <li>Changes made to your directory information via your HR representative, such as names, degrees, and contact information, are automatically updated daily.</li>
   <li>Changes made to a profile manually will be reflected within minutes.</li>
 </ul>
 
