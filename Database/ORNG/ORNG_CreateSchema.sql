@@ -593,7 +593,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE [ORNG.].[AddAppToPerson]
+ALTER PROCEDURE [ORNG.].[AddAppToPerson]
 @SubjectID BIGINT=NULL, @SubjectURI nvarchar(255)=NULL, @AppID INT, @SessionID UNIQUEIDENTIFIER=NULL, @Error BIT=NULL OUTPUT, @NodeID BIGINT=NULL OUTPUT
 AS
 BEGIN
@@ -690,7 +690,8 @@ BEGIN
 									@Error = @Error OUTPUT
 		
 		-- wire in the filter to both the import and live tables
-		SELECT @PERSON_FILTER_ID = (SELECT PersonFilterID FROM Apps WHERE AppID = @AppID)
+		SELECT @PERSON_FILTER_ID = (SELECT PersonFilterID FROM Apps WHERE AppID = @AppID AND PersonFilterID NOT IN (
+				SELECT personFilterId FROM [Profile.Data].[Person.FilterRelationship] WHERE PersonID = @PersonID))
 		IF (@PERSON_FILTER_ID IS NOT NULL) 
 			BEGIN
 				INSERT [Profile.Import].[PersonFilterFlag]

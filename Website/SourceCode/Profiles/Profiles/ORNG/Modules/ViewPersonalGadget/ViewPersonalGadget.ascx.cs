@@ -57,8 +57,6 @@ namespace Profiles.ORNG.Modules.Gadgets
             }
             om = OpenSocialManager.GetOpenSocialManager(uri, Page);
             gadget = om.AddGadget(Convert.ToInt32(base.GetModuleParamString("AppId")), base.GetModuleParamString("View"), base.GetModuleParamString("OptParams"));
-            // for some reason doing this in DrawProfilesModule (remove that???) fails!
-            new ORNGProfileRPCService(Page, this.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/foaf:firstName", base.Namespaces).InnerText, uri);  
         }
 
         private void DrawProfilesModule()
@@ -71,29 +69,6 @@ namespace Profiles.ORNG.Modules.Gadgets
             }
         }
 
-    }
-
-    public class ORNGProfileRPCService : PeopleListRPCService
-    {
-        string name;
-        List<string> people = new List<string>();
-
-        public ORNGProfileRPCService(Page page, string name, string uri)
-            : base(null, page, false)
-        {
-            this.name = name;
-            this.people.Add(uri);
-        }
-
-        public override string getPeopleListMetadata()
-        {
-            return name;
-        }
-
-        public override List<string> getPeople()
-        {
-            return people;
-        }
     }
 
 }
