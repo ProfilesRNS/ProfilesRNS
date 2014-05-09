@@ -107,12 +107,12 @@
             + "<p class='linkAd'>"
             + "<a href='" + _rootDomain + "/login/default.aspx?method=login&amp;edit=true'>Add web links <br />to your profile</a></p>"
             + "</div></li>";
-    var chattergroup = "<li class='chatter'><a href='' class='chatterlink'>"
+    var chattergroup = "<li class='chatter'><a href='" + _rootDomain + "/login/default.aspx?method=login' class='chatterlink'>"
             + "<div class='badge'><p style='text-align:center'>"
             + "<img src='" + _rootDomain + "/framework/images/chatter-group.png' width='130' height='95'/></p>"
             + "<p><strong>Login</strong> to create a "
             + "UCSF Chatter group right from UCSF Profiles!</p></div></a></li>";
-    var chatterfollow = "<li class='chatter'><a href='' class='chatterlink'>"
+    var chatterfollow = "<li class='chatter'><a href='" + _rootDomain + "/login/default.aspx?method=login' class='chatterlink'>"
             + "<div class='badge'><p style='text-align:center'>"
             + "<img src='" + _rootDomain + "/framework/images/chatter-follow.png' width='130' height='95'/></p>"
             + "<p><strong>Login</strong> and follow people on UCSF Chatter! "
@@ -126,7 +126,7 @@
         var badge = "<ul id='badge'>" + chattergroup + chatterfollow + "</ul>";
         $(badge).insertAfter('.profilesContentPassive');
         $(".badge").css('width', '192px');
-        var login = $('#ctl00_ContentActive_rptActive_ctl01_ctl00_panelMenu li:last-child a').attr('href');
+        var login = $('#signinlink').attr('href');
         $('.chatterlink').attr('href', login);
         $("#badge li").hide();
         randomtip();
@@ -135,7 +135,7 @@
     if ($('.nonavbar').length && !$('#FSSiteDescription').length) {
         var badge = "<ul id='badge'>" + chattergroup + chatterfollow + mentor + links + videointro + "</ul>";
         $(badge).insertAfter('.profilesContentPassive');
-        var login = $('#ctl00_ContentActive_rptActive_ctl00_ctl00_panelMenu li:last-child a').attr('href');
+        var login = $('#signinlink').attr('href');
         $('.chatterlink').attr('href', login);
         $("#badge li").hide();
         randomtip();

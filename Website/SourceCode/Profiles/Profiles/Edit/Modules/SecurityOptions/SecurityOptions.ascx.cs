@@ -134,7 +134,7 @@ namespace Profiles.Edit.Modules.SecurityOptions
                     data.AddPersonalGadget(this.Subject, this.PredicateURI);
                 }
             }
-            else if (!"0".Equals(securitygroup))
+            if (!"0".Equals(securitygroup))
             {
                 Edit.Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
                 data.UpdateSecuritySetting(this.Subject, data.GetStoreNode(this.PredicateURI), Convert.ToInt32(securitygroup));
