@@ -29,4 +29,17 @@ UPDATE [RDF.].Triple SET ViewSecurityGroup = -1 where Predicate = @propertyNode;
 
 select * from [RDF.].Triple where Predicate = 14891924 and Subject = 368113;
 
-exec [RDF.].GetDataRDF 368113
+exec [RDF.].GetDataRDF 368113;
+
+-- to unregister everyone.
+-- run and execute the result  
+select 'exec [ORNG.].[RegisterAppPerson] @Subject = ' + CAST(nodeid as varchar) + ', @appId = 116, @visibility = ''Nobody'';' FROM
+[ORNG.].appregistry where appid = 116;
+
+delete from  [ORNG.].appregistry where appid = 116;
+
+SELECT PersonFilterID FROM [ORNG.].[Apps] WHERE appId = 116;
+DELETE FROM [Profile.Data].[Person.FilterRelationship] WHERE personFilterId = (SELECT PersonFilterID FROM [ORNG.].[Apps] WHERE appId = 116);
+
+select *  from [ORNG.].appregistry where appid = 116;
+SELECT * FROM [Profile.Data].[Person.FilterRelationship] WHERE personFilterId = (SELECT PersonFilterID FROM [ORNG.].[Apps] WHERE appId = 116);

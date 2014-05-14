@@ -810,3 +810,43 @@ BEGIN
 END
 
 GO
+
+CREATE PROCEDURE [ORNG.].[RegisterAppPerson](@Subject BIGINT = NULL, @uri nvarchar(255) = NULL, @appId INT, @visibility nvarchar(50))
+As
+BEGIN
+	SET NOCOUNT ON
+		BEGIN TRAN		
+			DECLARE @NodeID bigint
+			DECLARE @PERSON_FILTER_ID INT
+			DECLARE @PERSON_ID INT
+			
+			-- Make this better
+			IF (@Subject IS NOT NULL) 
+				SET @NodeID = @Subject
+			ELSE				
+				SELECT @NodeID = [RDF.].[fnURI2NodeID](@uri)
+				
+			SELECT @PERSON_FILTER_ID = (SELECT PersonFilterID FROM [ORNG.].[Apps] WHERE appId = @appId)
+			SELECT @PERSON_ID = cast(InternalID as INT) from [RDF.Stage].InternalNodeMap where
+				NodeID = @NodeID
+
+			IF ((SELECT COUNT(*) FROM AppRegistry WHERE nodeId= @nodeId AND appId = @appId) = 0)
+				INSERT [ORNG.].[AppRegistry](nodeId, appid, [visibility]) values (@NodeID, @appId, @visibility)
+			ELSE 
+				UPDATE [ORNG.].[AppRegistry] set [visibility] = @visibility where nodeId = @NodeID and appId = @appId 
+
+			IF (@visibility = 'Nobody') 
+				EXEC [ORNG.].RemoveAppFromPerson @SubjectID = @NodeID, @appId = @appId
+			ELSE						
+				EXEC [ORNG.].AddAppToPerson @SubjectID = @NodeID, @appId = @appId
+				
+			-- this happens in AddAppToPerson								
+			--IF (@PERSON_FILTER_ID IS NOT NULL) 
+			--	BEGIN
+			--		IF (@visibility = 'Public') 
+			--			INSERT [Profile.Data].[Person.FilterRelationship](PersonID, personFilterId) values (@PERSON_ID, @PERSON_FILTER_ID)
+			--		ELSE						
+			--			DELETE FROM [Profile.Data].[Person.FilterRelationship] WHERE PersonID = @PERSON_ID AND personFilterId = @PERSON_FILTER_ID
+			--	END
+		COMMIT
+END
