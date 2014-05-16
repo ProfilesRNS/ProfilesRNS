@@ -133,7 +133,7 @@
                 </div>
               </td>
               <td>
-                <a class="listTableLink"  href="Javascript:document.location = '{$whyLink}';">
+                  <a class="listTableLink"  href="Javascript:window.location.assign('{$whyLink}');">
                   Why?
                 </a>
               </td>
