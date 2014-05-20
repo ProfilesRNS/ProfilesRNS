@@ -25,7 +25,7 @@ using Profiles.Framework.Utilities;
 
 namespace Profiles.About
 {
-    public partial class AboutUCSFProfiles : System.Web.UI.Page
+    public partial class AboutProfiles : System.Web.UI.Page
     {
         Profiles.Framework.Template masterpage;
 

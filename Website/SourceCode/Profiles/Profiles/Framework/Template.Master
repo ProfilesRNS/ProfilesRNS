@@ -118,7 +118,7 @@
          <div class="content">
            <ul class="menu">
               <li class="item-home"><asp:HyperLink ID="navResearch" runat="server" Text="Search" NavigateUrl="~/"></asp:HyperLink></li>
-              <li id="about"><a href="<%=GetURLDomain()%>/about/AboutUCSFProfiles.aspx">About</a></li>
+              <li id="about"><a href="<%=GetURLDomain()%>/about/AboutProfiles.aspx">About</a></li>
               <li id="data"><a href="<%=GetURLDomain()%>/about/ForDevelopers.aspx">Use our Data</a></li>
               <li id="contact"><a href="<%=GetURLDomain()%>/about/Help.aspx">Help / Contact Us</a></li>                     </ul>
          </div>
