@@ -79,8 +79,8 @@
 <table style="border-top: 1px solid #CCC;border-bottom: 1px solid #CCC;margin-right:15px;">
  <tr>
   <td style="padding: 20px 10px 10px 90px; font-size: 130%; white-space: nowrap;
-    background: transparent url(images/help.gif) no-repeat 90px 13px; vertical-align: top">
-    <span style="color:#777;padding-left: 40px; ">Help</span>
+    background: transparent url(images/help.gif) no-repeat 140px 13px; vertical-align: top">
+    <span style="color:#777;padding-left: 85px; ">Help</span>
     <ul class="square" style="margin-left: 0;margin-top:30px;">
       <li><a href="faq.aspx">Frequently Asked Questions</a></li>
       <li><a href="mailto:profiles@sc-ctsi.org">Contact us</a></li>

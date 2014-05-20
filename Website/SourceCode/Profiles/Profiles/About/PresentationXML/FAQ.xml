@@ -80,11 +80,13 @@
 
 <h3 id="why">Why should I login to USC Profiles?</h3>
 <ul>
+<!--
   <li>Many USC Profiles features are available only if you're logged-in. These include:
   <ul>
   <li>Export a list of an individual's publications.</li>
   </ul></li>
-  <li>In addition, you can edit your profile and manage your designated proxies only if you're logged in.</li>
+-->
+  <li>You can edit your profile and manage your designated proxies only if you're logged in.</li>
 </ul>
 
 <h3 id="datasources">What are the sources of data for USC Profiles?</h3> 
