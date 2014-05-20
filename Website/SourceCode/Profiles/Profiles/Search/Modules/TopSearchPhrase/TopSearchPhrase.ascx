@@ -18,7 +18,7 @@
     </div>
 </div>
 
-<div class="tour"><a href="<%=GetURLDomain()%>/about/AboutUSCProfiles.aspx"><img src="<%=GetURLDomain()%>/Framework/Images/icon_squareArrow.gif" /> Tour Profiles </a></div>
+<div class="tour"><a href="<%=GetURLDomain()%>/about/AboutProfiles.aspx"><img src="<%=GetURLDomain()%>/Framework/Images/icon_squareArrow.gif" /> Tour Profiles </a></div>
 
 <p style="margin: 0; padding: 20px 0 6px"><strong>USC Profiles Updates</strong></p>
 <div style="margin-left: -6px;">

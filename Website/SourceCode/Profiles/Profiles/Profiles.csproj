@@ -76,7 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="503.html" />
-    <Content Include="About\AboutUSCProfiles.aspx" />
+    <Content Include="About\AboutProfiles.aspx" />
     <Content Include="About\CloseBrowser.aspx" />
     <Content Include="About\FAQ.aspx" />
     <Content Include="About\expeditionaryaquili.aspx" />
@@ -120,7 +120,7 @@
     <Content Include="About\Images\video.JPG" />
     <Content Include="About\JavaScript\UCSF.js" />
     <Content Include="About\NewFeatures.aspx" />
-    <Content Include="About\PresentationXML\AboutUSCProfiles.xml">
+    <Content Include="About\PresentationXML\AboutProfiles.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="About\PresentationXML\CloseBrowser.xml" />
@@ -229,12 +229,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="About\AboutUSCProfiles.aspx.cs">
-      <DependentUpon>AboutUSCProfiles.aspx</DependentUpon>
+    <Compile Include="About\AboutProfiles.aspx.cs">
+      <DependentUpon>AboutProfiles.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="About\AboutUSCProfiles.aspx.designer.cs">
-      <DependentUpon>AboutUSCProfiles.aspx</DependentUpon>
+    <Compile Include="About\AboutProfiles.aspx.designer.cs">
+      <DependentUpon>AboutProfiles.aspx</DependentUpon>
     </Compile>
     <Compile Include="About\CloseBrowser.aspx.cs">
       <DependentUpon>CloseBrowser.aspx</DependentUpon>

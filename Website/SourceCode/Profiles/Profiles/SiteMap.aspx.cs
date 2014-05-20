@@ -27,7 +27,7 @@ namespace Profiles
                                         "xsi:schemaLocation=\"http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd\">" + Environment.NewLine +
                                         "<url><loc>" + Root.Domain + "</loc></url>" + Environment.NewLine +
                                         "<url><loc>" + Root.Domain + "/About</loc></url>" + Environment.NewLine +
-                                    "<url><loc>" + Root.Domain + "/About/AboutUSCProfiles.aspx</loc></url>" + Environment.NewLine +
+                                    "<url><loc>" + Root.Domain + "/About/AboutProfiles.aspx</loc></url>" + Environment.NewLine +
                                         "<url><loc>" + Root.Domain + "/About/ForDevelopers.aspx</loc></url>" + Environment.NewLine +
                                         "<url><loc>" + Root.Domain + "/About/GadgetLibrary.aspx</loc></url>" + Environment.NewLine +
                                         "<url><loc>" + Root.Domain + "/About/Help.aspx</loc></url>" + Environment.NewLine +
@@ -48,7 +48,7 @@ namespace Profiles
             {
                 Response.Write("<a href='" + Root.Domain + "'>" + Root.Domain + "</a>" + Environment.NewLine +
                                "<a href='" + Root.Domain + "/About" + "'>" + Root.Domain + "/About" + "</a>" + Environment.NewLine +
-                               "<a href='" + Root.Domain + "/About/AboutUSCProfiles.aspx" + "'>" + Root.Domain + "/About/AboutUSCProfiles.aspx" + "</a>" + Environment.NewLine +
+                               "<a href='" + Root.Domain + "/About/AboutProfiles.aspx" + "'>" + Root.Domain + "/About/AboutProfiles.aspx" + "</a>" + Environment.NewLine +
                                "<a href='" + Root.Domain + "/About/ForDevelopers.aspx" + "'>" + Root.Domain + "/About/ForDevelopers.aspx" + "</a>" + Environment.NewLine +
                                "<a href='" + Root.Domain + "/About/GadgetLibrary.aspx" + "'>" + Root.Domain + "/About/GadgetLibrary.aspx" + "</a>" + Environment.NewLine +
                                "<a href='" + Root.Domain + "/About/Help.aspx" + "'>" + Root.Domain + "/About/Help.aspx" + "</a>" + Environment.NewLine +
