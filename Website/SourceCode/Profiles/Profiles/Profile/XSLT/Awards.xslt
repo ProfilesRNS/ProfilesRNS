@@ -10,11 +10,14 @@
               <xsl:variable name="awardUri" select="@rdf:resource"/>              
               <tr>
                 <td stlye="white-space:nowrap;" width="100px">                  
-                  <xsl:value-of select="/rdf:RDF[1]/rdf:Description[@rdf:about=$awardUri]/prns:startDate"/> -               
+                  <xsl:value-of select="/rdf:RDF[1]/rdf:Description[@rdf:about=$awardUri]/prns:startDate"/>
+                  <xsl:if test="/rdf:RDF[1]/rdf:Description[@rdf:about=$awardUri]/prns:endDate"> - </xsl:if>
                   <xsl:value-of select="/rdf:RDF[1]/rdf:Description[@rdf:about=$awardUri]/prns:endDate"/>
                 </td>
                 <td>
                   <xsl:value-of select="/rdf:RDF[1]/rdf:Description[@rdf:about=$awardUri]/rdfs:label"/>
+                  <xsl:if test="/rdf:RDF[1]/rdf:Description[@rdf:about=$awardUri]/prns:awardConferredBy">, </xsl:if>
+                  <xsl:value-of select="/rdf:RDF[1]/rdf:Description[@rdf:about=$awardUri]/prns:awardConferredBy"/>
                 </td>              
               </tr>
             </xsl:for-each>
