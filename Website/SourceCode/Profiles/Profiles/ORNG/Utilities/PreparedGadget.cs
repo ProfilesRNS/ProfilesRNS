@@ -178,7 +178,10 @@ namespace Profiles.ORNG.Utilities
                 }
                 finally
                 {
-                    sockets.PutSocket(s);
+                    if (s != null)
+                    {
+                        sockets.PutSocket(s);
+                    }
                 }
             }
             return page.TrimEnd();
