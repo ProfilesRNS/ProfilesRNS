@@ -15,8 +15,8 @@ BEGIN
  
 	EXAMPLE:
  
-	exec [Framework.].uspChangeBaseURI	@oldBaseURI = 'http://connects.catalyst.harvard.edu/profiles/profile/',
-										@newBaseURI = 'http://dev.connects.catalyst.harvard.edu/profiles/profile/'
+	exec [Framework.].[ChangeBaseURI]	@oldBaseURI = 'http://connects.catalyst.harvard.edu/profiles/profile/',
+						@newBaseURI = 'http://dev.connects.catalyst.harvard.edu/profiles/profile/'
  
 	*/
  
