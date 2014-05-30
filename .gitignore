@@ -1,4 +1,7 @@
 
+/Release/*.zip
+/Release/ProfilesRNS
+
 *.DS_Store
 *.suo
 *.csproj.user
