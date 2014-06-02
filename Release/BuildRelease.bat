@@ -13,7 +13,7 @@ REM  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDER (PRESIDENT AND FELLOWS OF
 REM  
 REM  
 
-set Version=v2.5_RC0
+set Version=%1
 set OFFICE_PATH=c:\Program Files\Microsoft Office\Office15
 set pdfCreatorPath=C:\ProgramData\PDFCreator
 set RootPath=%~dp0
@@ -54,7 +54,6 @@ REM It should be configured to save all files in the c:\ProgramData\PDFCreator f
 REM This will waste a lot of paper if a physical printer is configured as the default
 REM 
 REM 
-goto skipdocs
 
 call "%OFFICE_PATH%\WINWORD.EXE" ..\ProfilesRNS_ReadMeFirst.docx /q /n /mFilePrintDefault /mFileCloseOrExit
 call "%OFFICE_PATH%\WINWORD.EXE" ..\Documentation\ProfilesRNS_APIGuide.doc /q /n /mFilePrintDefault /mFileCloseOrExit
@@ -82,7 +81,6 @@ move "%pdfCreatorPath%\Microsoft Word - ProfilesRNS_ArchitectureGuide.pdf" Profi
 move "%pdfCreatorPath%\Microsoft Word - ProfilesRNS_InstallGuide.pdf" ProfilesRNS\Documentation\ProfilesRNS_InstallGuide_%Version%.pdf
 move "%pdfCreatorPath%\Microsoft Word - ProfilesRNS_ReadMeFirst.pdf" ProfilesRNS\ProfilesRNS_ReadMeFirst.pdf
 move "%pdfCreatorPath%\Microsoft Word - ProfilesRNS_ReleaseNotes.pdf" ProfilesRNS\Documentation\ProfilesRNS_ReleaseNotes_%Version%.pdf
-:skipdocs
 
 echo d | xcopy /s ..\Documentation\API_Examples ProfilesRNS\Documentation\API_Examples
 echo d | xcopy /s ..\Documentation\SQL_Examples ProfilesRNS\Documentation\SQL_Examples
@@ -124,7 +122,6 @@ popd
 
 copy ..\Database\ProfilesRNS_CreateSchema.sql ProfilesRNS\Database\ProfilesRNS_CreateSchema.sql
 
-:start
 call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild "..\Website\SourceCode\Profiles\Profiles\Profiles.csproj" "/p:Platform=AnyCPU;Configuration=Release;CopyDestination=..\..\..\..\Release\ProfilesRNS\Website\SourceCode\Profiles\Profiles" /t:CopySource
 
 
