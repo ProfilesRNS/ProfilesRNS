@@ -112,6 +112,26 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+    <Target Name="PublishToFileSystem" DependsOnTargets="PipelinePreDeployCopyAllFilesToOneFolder">
+    <Error Condition="'$(PublishDestination)'==''" Text="The PublishDestination property must be set to the intended publishing destination." />
+    <MakeDir Condition="!Exists($(PublishDestination))" Directories="$(PublishDestination)" />
+    <ItemGroup>
+      <PublishFiles Include="$(_PackageTempDir)\**\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(PublishFiles)" DestinationFiles="@(PublishFiles->'$(PublishDestination)\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="True" />
+  </Target>
+  <Target Name="CopySource">
+    <Error Condition="'$(CopyDestination)'==''" Text="The CopyDestination property must be set to the intended copying destination." />
+    <MakeDir Condition="!Exists($(CopyDestination))" Directories="$(CopyDestination)" />
+    <Copy SourceFiles="@(Content)" DestinationFiles="@(Content->'$(CopyDestination)\%(RelativeDir)%(Filename)%(Extension)')" SkipUnchangedFiles="True" />
+    <Copy SourceFiles="@(Compile)" DestinationFiles="@(Compile->'$(CopyDestination)\%(RelativeDir)%(Filename)%(Extension)')" SkipUnchangedFiles="True" />
+    <Copy SourceFiles="@(None)" DestinationFiles="@(None->'$(CopyDestination)\%(RelativeDir)%(Filename)%(Extension)')" SkipUnchangedFiles="True" />
+    <ItemGroup>
+      <ProjFiles Include="ProfilesSearchAPI.csproj" />
+      <ProjFiles Include="bin\Microsoft.ServiceModel.Web.dll" />
+    </ItemGroup>
+    <Copy SourceFiles="@(ProjFiles)" DestinationFiles="@(ProjFiles->'$(CopyDestination)\%(RelativeDir)%(Filename)%(Extension)')" SkipUnchangedFiles="True" />
+  </Target>
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">

@@ -124,4 +124,19 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+        <Target Name="CopySource">
+    <Error Condition="'$(CopyDestination)'==''" Text="The CopyDestination property must be set to the intended copying destination." />
+    <MakeDir Condition="!Exists($(CopyDestination))" Directories="$(CopyDestination)" />
+	<Copy SourceFiles="@(Content)" DestinationFiles="@(Content->'$(CopyDestination)\%(RelativeDir)%(Filename)%(Extension)')" SkipUnchangedFiles="True" />
+	<Copy SourceFiles="@(Compile)" DestinationFiles="@(Compile->'$(CopyDestination)\%(RelativeDir)%(Filename)%(Extension)')" SkipUnchangedFiles="True" />
+	<Copy SourceFiles="@(None)" DestinationFiles="@(None->'$(CopyDestination)\%(RelativeDir)%(Filename)%(Extension)')" SkipUnchangedFiles="True" />
+	<ItemGroup>
+        <ProjFiles Include="SemWeb.csproj" />
+		<ProjFiles Include="bin\IKVM.GNU.Classpath.dll" />
+		<ProjFiles Include="bin\IKVM.Runtime.dll" />
+		<ProjFiles Include="bin\Mono.GetOptions.dll" />
+		<ProjFiles Include="bin\sparql-core.dll" />
+    </ItemGroup>
+	<Copy SourceFiles="@(ProjFiles)" DestinationFiles="@(ProjFiles->'$(CopyDestination)\%(RelativeDir)%(Filename)%(Extension)')" SkipUnchangedFiles="True" />
+</Target>
 </Project>
