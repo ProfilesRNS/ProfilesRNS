@@ -71,7 +71,13 @@
 /Website/SourceCode/SemWeb/src/bin/SemWeb.pdb
 /Website/SourceCode/SemWeb/src/bin/SemWeb.Sparql.dll
 /Website/SourceCode/SemWeb/src/bin/SemWeb.Sparql.pdb
-/Website/SourceCode/ProfilesSPARQLAPI/bin/*
+/Website/SourceCode/ProfilesSPARQLAPI/bin/IKVM.GNU.Classpath.dll
+/Website/SourceCode/ProfilesSPARQLAPI/bin/IKVM.Runtime.dll
+/Website/SourceCode/ProfilesSPARQLAPI/bin/ProfilesSPARQLAPI.dll
+/Website/SourceCode/ProfilesSPARQLAPI/bin/ProfilesSPARQLAPI.pdb
+/Website/SourceCode/ProfilesSPARQLAPI/bin/SemWeb.dll
+/Website/SourceCode/ProfilesSPARQLAPI/bin/SemWeb.pdb
+/Website/SourceCode/ProfilesSPARQLAPI/bin/sparql-core.dll
 /Website/SourceCode/ProfilesSPARQLAPI/obj/*
 /Website/SourceCode/ProfilesBetaAPI/Connects.Profiles.Service/ProfilesDebuggingLog.txt
 UpgradeLog.XML
