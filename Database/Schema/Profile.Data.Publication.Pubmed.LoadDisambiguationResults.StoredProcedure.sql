@@ -21,6 +21,8 @@ insert into [Profile.Data].[Publication.Person.Include](pubid,PersonID,pmid,mpid
 select PubID, PersonID, PMID, MPID from 
 	[Profile.Data].[Publication.Person.Add]
 	where PubID not in (select PubID from [Profile.Data].[Publication.Person.Include])
+	and (pmid is null or PMID in (select pmid from [Profile.Data].[Publication.PubMed.General]))
+	and (mpid is null or MPID in (select mpid from [Profile.Data].[Publication.MyPub.General]))
 		
 --Move in new pubs
 INSERT INTO [Profile.Data].[Publication.Person.Include]
