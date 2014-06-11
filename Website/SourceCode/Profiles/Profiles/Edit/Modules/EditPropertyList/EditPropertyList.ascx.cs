@@ -117,7 +117,6 @@ namespace Profiles.Edit.Modules.EditPropertyList
                 si.Add(singlesi);
             }
 
-            gli.Add(new GenericListItem("Hidden" , "This feature is not visible on your Profile page."));
             foreach (XmlNode securityitem in this.SecurityGroups.SelectNodes("SecurityGroupList/SecurityGroup"))
             {
                 this.Dropdown.Add(new GenericListItem(securityitem.SelectSingleNode("@Label").Value,
