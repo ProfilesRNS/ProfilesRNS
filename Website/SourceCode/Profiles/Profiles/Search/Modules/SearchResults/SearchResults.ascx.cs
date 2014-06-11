@@ -78,7 +78,7 @@ namespace Profiles.Search.Modules.SearchResults
             string institutionallexcept = string.Empty;
             string departmentallexcept = string.Empty;
             string divisionallexcept = string.Empty;
-            string exactphrase = string.Empty;
+            string exactphrase = "false"; // UCSF default value to allow old Mini Search to work
 
 
             string searchtype = "";
@@ -110,7 +110,7 @@ namespace Profiles.Search.Modules.SearchResults
             if (String.IsNullOrEmpty(Request.QueryString["searchfor"])==false)
             {
                 searchfor = Request.QueryString["searchfor"];
-                exactphrase = Request.QueryString["exactphrase"];
+                //exactphrase = Request.QueryString["exactphrase"];  This is causing a bug. We test and set this if present later in this block anyway
             }
             else if(String.IsNullOrEmpty(Request.Form["txtSearchFor"])==false)
             {
@@ -292,13 +292,13 @@ namespace Profiles.Search.Modules.SearchResults
             {
 
                 totalcount = data.GetTotalSearchConnections(this.SearchData, base.Namespaces);
-                
+
                 if (page < 0)
                 {
                     page = 1;
                 }
 
-         
+
                 totalpages = Math.DivRem(totalcount, Convert.ToInt64(perpage), out totalpageremainder);
 
                 if (totalpageremainder > 0) { totalpages = totalpages + 1; }
@@ -311,13 +311,13 @@ namespace Profiles.Search.Modules.SearchResults
                 if (startrecord < 0)
                     startrecord = 1;
 
-                if(searchrequest.Trim() != string.Empty)
-                searchrequest = data.EncryptRequest(searchrequest);
+                if (searchrequest.Trim() != string.Empty)
+                    searchrequest = data.EncryptRequest(searchrequest);
 
                 List<GenericListItem> g = new List<GenericListItem>();
                 g = data.GetListOfFilters();
 
-                if (otherfilters.IsNullOrEmpty() && base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/vivo:overview/SearchOptions/MatchOptions/SearchFiltersList/SearchFilter[@Property='http://profiles.catalyst.harvard.edu/ontology/prns#hasPersonFilter']", base.Namespaces) !=null)
+                if (otherfilters.IsNullOrEmpty() && base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/vivo:overview/SearchOptions/MatchOptions/SearchFiltersList/SearchFilter[@Property='http://profiles.catalyst.harvard.edu/ontology/prns#hasPersonFilter']", base.Namespaces) != null)
                 {
                     string s = string.Empty;
 
@@ -330,16 +330,14 @@ namespace Profiles.Search.Modules.SearchResults
 
                 switch (searchtype.ToLower())
                 {
-                    case "everything":                       
-                            xmlsearchrequest = data.SearchRequest(searchfor,exactphrase, classgroupuri, classuri, perpage.ToString(), (startrecord - 1).ToString());
+                    case "everything":
+                        xmlsearchrequest = data.SearchRequest(searchfor, exactphrase, classgroupuri, classuri, perpage.ToString(), (startrecord - 1).ToString());
                         break;
 
-                    default:                       
-                            xmlsearchrequest = data.SearchRequest(searchfor, exactphrase, fname, lname, institution, institutionallexcept, department, departmentallexcept, division, divisionallexcept,  "http://xmlns.com/foaf/0.1/Person", perpage.ToString(), (startrecord - 1).ToString(), sort, sortdirection, otherfilters, "",ref searchrequest);                    
+                    default:
+                        xmlsearchrequest = data.SearchRequest(searchfor, exactphrase, fname, lname, institution, institutionallexcept, department, departmentallexcept, division, divisionallexcept,  "http://xmlns.com/foaf/0.1/Person", perpage.ToString(), (startrecord - 1).ToString(), sort, sortdirection, otherfilters, "",ref searchrequest);                    
                         break;
                 }
-
-                new Responder(Page, xmlsearchrequest); 
                 
                 this.SearchData = data.Search(xmlsearchrequest, false);
                 this.SearchRequest = data.EncryptRequest(xmlsearchrequest.OuterXml);
@@ -347,10 +345,21 @@ namespace Profiles.Search.Modules.SearchResults
                 base.MasterPage.RDFData = this.SearchData;
                 base.MasterPage.RDFNamespaces = this.Namespaces;
 
+                // only shows these if we are not doing an everything search, or we are looking at people in the everything search
+                if (!"everything".Equals(searchtype.ToLower()) || "http://profiles.catalyst.harvard.edu/ontology/prns#ClassGroupPeople".Equals(classgroupuri))
+                {
+                    new ORNGSearchRPCService(Page, this.SearchData, xmlsearchrequest, this.Namespaces);
+                }
+            }
+            catch (DisallowedSearchException se)
+            {
+                litEverythingResults.Text = se.Message;
+                return;
             }
             catch (Exception ex)
             {
                 ex = ex;
+                DebugLogging.Log("ERROR" + ex.Message);
                 //for now just flip it back to the defaults. This is if someone keys some funky divide by zero stuff in the URL
                 // to try and break the system.
                 startrecord = 1;
@@ -448,34 +457,83 @@ namespace Profiles.Search.Modules.SearchResults
 
         private string SearchRequest { get; set; }
 
-        public class Responder : ORNGCallbackResponder
+        // OpenSocial 
+        public class ORNGSearchRPCService : PeopleListRPCService
         {
-            XmlDocument searchRequest;
+            private static int searchLimit;
 
-            public Responder(Page page, XmlDocument searchRequest) : base(null, page, false, ORNGCallbackResponder.JSON_PERSONID_REQ)
+            static ORNGSearchRPCService()
             {
-                this.searchRequest = searchRequest;
+                // should make this able to take a Dictionary of things
+                searchLimit = ORNGSettings.getSettings().SearchLimit;
             }
 
-            public override string getCallbackResponse()
+            XmlDocument searchData;
+            XmlDocument searchRequest;
+            XmlNamespaceManager namespaceManager;
+
+            public ORNGSearchRPCService(Page page, XmlDocument searchData, XmlDocument searchRequest, XmlNamespaceManager namespaceManager)
+                : base(null, page, false)
+            {
+                this.searchData = searchData;
+                this.searchRequest = searchRequest;
+                this.namespaceManager = namespaceManager;
+            }
+
+            public override string getPeopleListMetadata()
             {
                 try
                 {
-                    searchRequest.SelectSingleNode("/SearchOptions/OutputOptions/Offset").InnerText = "0";
-                    searchRequest.SelectSingleNode("/SearchOptions/OutputOptions/Limit").InnerText = "500";
-                    XmlDocument searchData = new Profiles.Search.Utilities.DataIO().Search(searchRequest, false, false);
-
-                    DebugLogging.Log("SeachCallbackResponse :" + searchRequest.ToString());
-
-                    List<string> peopleURIs = new List<string>();
-                    XmlNodeList people = searchData.GetElementsByTagName("rdf:object");
-                    for (int i = 0; i < people.Count; i++)
+                    XmlNode node = searchData.SelectSingleNode("rdf:RDF/rdf:Description/prns:numberOfConnections", namespaceManager);
+                    Int32 resultSize = Convert.ToInt32(node.InnerText);
+                    if (resultSize == 1)
                     {
-                        peopleURIs.Add(people[i].Attributes["rdf:resource"].Value);
+                        return "" + resultSize + " profile";
+                    }
+                    else if (resultSize <= searchLimit)
+                    {
+                        return "" + resultSize + " profiles";
+                    }
+                    else
+                    {
+                        return "top " + searchLimit + " profiles";
+                    }
+                }
+                catch (Exception e)
+                {
+                    DebugLogging.Log(e.Message);
+                }
+                return "Error reading results";
+            }
+
+            public override List<string> getPeople()
+            {
+                try
+                {
+                    List<string> peopleURIs = new List<string>();
+                    int offSet = 0;
+                    Boolean hasMorePeople = true;
+                    while (peopleURIs.Count < searchLimit && hasMorePeople)
+                    {
+                        searchRequest.SelectSingleNode("/SearchOptions/OutputOptions/Offset").InnerText = "" + offSet;
+                        searchRequest.SelectSingleNode("/SearchOptions/OutputOptions/Limit").InnerText = "" + searchLimit;
+                        XmlDocument searchData = new Profiles.Search.Utilities.DataIO().Search(searchRequest, false, false);
+
+                        DebugLogging.Log("SeachCallbackResponse :" + searchRequest.ToString());
+
+                        XmlNodeList people = searchData.GetElementsByTagName("rdf:object");
+                        for (int i = 0; i < people.Count; i++)
+                        {
+                            peopleURIs.Add(people[i].Attributes["rdf:resource"].Value);
+                        }
+                        // increase offset by amount found
+                        XmlNode node = searchData.SelectSingleNode("rdf:RDF/rdf:Description/prns:numberOfConnections", namespaceManager);
+                        offSet += people.Count;
+                        hasMorePeople = Convert.ToInt32(node.InnerText) > peopleURIs.Count;
                     }
                     if (peopleURIs.Count > 0)
                     {
-                        return BuildJSONPersonIds(peopleURIs, "" + peopleURIs.Count + " people found");
+                        return peopleURIs;
                     }
                 }
                 catch (Exception e)

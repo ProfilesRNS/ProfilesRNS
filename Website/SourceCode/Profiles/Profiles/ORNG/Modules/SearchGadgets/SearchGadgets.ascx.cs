@@ -41,7 +41,7 @@ namespace Profiles.ORNG.Modules.Gadgets
         public SearchGadgets(XmlDocument pagedata, List<ModuleParams> moduleparams, XmlNamespaceManager pagenamespaces)
             : base(pagedata, moduleparams, pagenamespaces)
         {
-            om = OpenSocialManager.GetOpenSocialManager(null, Page, false, true);
+            om = OpenSocialManager.GetOpenSocialManager(null, Page);
         }
 
         public string GetKeyword()
@@ -84,8 +84,8 @@ namespace Profiles.ORNG.Modules.Gadgets
 
         protected void DrawProfilesModule()
         {
-            om.LoadAssets();
             pnlOpenSocial.Visible = true;
+            om.LoadAssets();
         }
 
     }

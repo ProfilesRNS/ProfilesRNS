@@ -22,9 +22,11 @@
 .gadgets-gadget-chrome {
   float: left;
   margin: 4px 8px 4px 0;
-  border: 1px solid #7aa5d6;
-  border: 1px solid #CCC; 
   overflow-x: hidden\9;    /* right border sometimes doesn't show up in IE */
+}
+.profilesPageColumnLeft .gadgets-gadget-chrome,
+.profilesContentPassive .gadgets-gadget-chrome {
+  border: 1px solid #CCC; 
 }
 .profilesPageColumnLeft .gadgets-gadget-chrome { 
   margin-left: 12px;
@@ -59,7 +61,7 @@
 }
 .EditBody .gadgets-gadget-title a {
   color: #0088CC !important;
-} 
+}
 .EditBody .gadgets-gadget-title a:hover {
   color: #005580 !important;
 }

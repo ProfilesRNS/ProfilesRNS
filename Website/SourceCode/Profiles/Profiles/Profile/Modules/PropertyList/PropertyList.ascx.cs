@@ -20,7 +20,6 @@ using System.Xml;
 using System.Xml.Xsl;
 using Profiles.Framework.Utilities;
 using Profiles.Profile.Utilities;
-using Profiles.ORNG.Utilities;
 
 
 namespace Profiles.Profile.Modules.PropertyList
@@ -68,9 +67,6 @@ namespace Profiles.Profile.Modules.PropertyList
                 XmlNode node = this.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/@rdf:about", base.Namespaces);
                 uri = node != null ? node.Value : null;
             }
-            new Responder(uri, Page);
-            bool gadgetsShown = false;
-
             foreach (XmlNode propertygroup in this.PropertyListXML.SelectNodes("PropertyList/PropertyGroup"))
             {                
 
@@ -79,16 +75,9 @@ namespace Profiles.Profile.Modules.PropertyList
 
                     if ((propertygroup.SelectNodes("Property/Network/Connection").Count > 0 && propertygroup.SelectNodes("Property[@CustomDisplay='false']").Count > 0) || propertygroup.SelectNodes("Property/CustomModule").Count > 0)
                     {
-                        // ORNG 
-                        if (propertygroup.SelectSingleNode("@URI").Value == "http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupBibliographic")
-                        {
-                            html.Append("<div id='gadgets-view' class='gadgets-gadget-parent'></div>");
-                            gadgetsShown = true;
-                        }
-              
                         html.Append("<div class='PropertyGroup' style='cursor:pointer;' onclick=\"javascript:toggleBlock('propertygroup','" + propertygroup.SelectSingleNode("@URI").Value + "');\"><br>");
-                        html.Append("<a style='text-decoration:none' href=\"javascript:toggleBlock('propertygroup','" + propertygroup.SelectSingleNode("@URI").Value + "\"> <img id=\"propertygroup" + propertygroup.SelectSingleNode("@URI").Value + "\" src='" + Root.Domain + "/Profile/Modules/PropertyList/images/minusSign.gif' style='border: none; text-decoration: none !important' border='0' /></a>&nbsp;"); //add image and onclick here.
-                        html.Append("<input  type='hidden' id=\"imgon" + propertygroup.SelectSingleNode("@URI").Value + "\" value='" + Root.Domain + "/Profile/Modules/PropertyList/images/minusSign.gif' />");
+                        html.Append("<a style='text-decoration:none' href=\"javascript:toggleBlock('propertygroup','" + propertygroup.SelectSingleNode("@URI").Value + "\"> <img id=\"propertygroup" + propertygroup.SelectSingleNode("@URI").Value + "\" src='" + Root.Domain + "/Profile/Modules/PropertyList/images/minusSign.gif' style='border: none; text-decoration: none !important' border='0' width='9' height='9'/></a>&nbsp;"); //add image and onclick here.
+                        html.Append("<input  type='hidden' id=\"imgon" + propertygroup.SelectSingleNode("@URI").Value + "\" value='" + Root.Domain + "/Profile/Modules/PropertyList/images/minusSign.gif' width='9'/>");
                         html.Append("<input type='hidden' id=\"imgoff" + propertygroup.SelectSingleNode("@URI").Value + "\" value='" + Root.Domain + "/Profile/Modules/PropertyList/images/plusSign.gif'/>");
                         
                         html.Append(propertygroup.SelectSingleNode("@Label").Value);
@@ -104,11 +93,11 @@ namespace Profiles.Profile.Modules.PropertyList
                                 {
                                     hasitems = false;
 
-                                    itembuffer.Append("<input type='hidden' id=\"imgon" + propertyitem.SelectSingleNode("@URI").Value + "\" value='" + Root.Domain + "/Profile/Modules/PropertyList/images/minusSign.gif' />");
+                                    itembuffer.Append("<input type='hidden' id=\"imgon" + propertyitem.SelectSingleNode("@URI").Value + "\" value='" + Root.Domain + "/Profile/Modules/PropertyList/images/minusSign.gif' width='9' height='9'/>");
                                     itembuffer.Append("<input type='hidden' id=\"imgoff" + propertyitem.SelectSingleNode("@URI").Value + "\" value='" + Root.Domain + "/Profile/Modules/PropertyList/images/plusSign.gif'/>");
                                     itembuffer.Append("<div>");
                                     itembuffer.Append("<div class='PropertyItemHeader' style='cursor:pointer;'  onclick=\"javascript:toggleBlock('propertyitem','" + propertyitem.SelectSingleNode("@URI").Value + "');\">");
-                                    itembuffer.Append("<a  style='border: none; text-decoration: none !important' href=\"javascript:toggleBlock('propertyitem','" + propertyitem.SelectSingleNode("@URI").Value + "\"> <img id=\"propertyitem" + propertyitem.SelectSingleNode("@URI").Value + "\" src='" + Root.Domain + "/Profile/Modules/PropertyList/images/minusSign.gif' border='0'  /></a>&nbsp;"); //add image and onclick here.
+                                    itembuffer.Append("<a  style='border: none; text-decoration: none !important' href=\"javascript:toggleBlock('propertyitem','" + propertyitem.SelectSingleNode("@URI").Value + "\"> <img id=\"propertyitem" + propertyitem.SelectSingleNode("@URI").Value + "\" src='" + Root.Domain + "/Profile/Modules/PropertyList/images/minusSign.gif' border='0' width='9' height='9' /></a>&nbsp;"); //add image and onclick here.
                                     itembuffer.Append(propertyitem.SelectSingleNode("@Label").Value);
                                     itembuffer.Append("</div>");
                                     itembuffer.Append("<div class='PropertyGroupData'>");
@@ -140,11 +129,11 @@ namespace Profiles.Profile.Modules.PropertyList
                                 }
                                 else if (propertyitem.SelectSingleNode("@CustomDisplay").Value == "true" && propertyitem.SelectNodes("CustomModule").Count > 0)
                                 {
-                                    itembuffer.Append("<input type='hidden' id=\"imgon" + propertyitem.SelectSingleNode("@URI").Value + "\" value='" + Root.Domain + "/Profile/Modules/PropertyList/images/minusSign.gif' />");
+                                    itembuffer.Append("<input type='hidden' id=\"imgon" + propertyitem.SelectSingleNode("@URI").Value + "\" value='" + Root.Domain + "/Profile/Modules/PropertyList/images/minusSign.gif' width='9' height='9' />");
                                     itembuffer.Append("<input type='hidden' id=\"imgoff" + propertyitem.SelectSingleNode("@URI").Value + "\" value='" + Root.Domain + "/Profile/Modules/PropertyList/images/plusSign.gif'/>");
                                     itembuffer.Append("<div>");
                                     itembuffer.Append("<div class='PropertyItemHeader' style='cursor:pointer;' onclick=\"javascript:toggleBlock('propertyitem','" + propertyitem.SelectSingleNode("@URI").Value + "');\">");
-                                    itembuffer.Append("<a href=\"javascript:toggleBlock('propertyitem','" + propertyitem.SelectSingleNode("@URI").Value + "\"> <img id=\"propertyitem" + propertyitem.SelectSingleNode("@URI").Value + "\" src='" + Root.Domain + "/Profile/Modules/PropertyList/images/minusSign.gif' style='border: none; text-decoration: none !important' border='0' /></a>&nbsp;"); //add image and onclick here.
+                                    itembuffer.Append("<a href=\"javascript:toggleBlock('propertyitem','" + propertyitem.SelectSingleNode("@URI").Value + "\"> <img id=\"propertyitem" + propertyitem.SelectSingleNode("@URI").Value + "\" src='" + Root.Domain + "/Profile/Modules/PropertyList/images/minusSign.gif' style='border: none; text-decoration: none !important' border='0' width='9' height='9' /></a>&nbsp;"); //add image and onclick here.
                                     itembuffer.Append(propertyitem.SelectSingleNode("@Label").Value);
                                     itembuffer.Append("</div>");
                                     itembuffer.Append("<div class='PropertyGroupData'>");
@@ -171,13 +160,6 @@ namespace Profiles.Profile.Modules.PropertyList
 
                         } //End of property item loop
 
-                        // ORNG hack
-                        if (propertygroup.SelectSingleNode("@URI").Value == "http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupBibliographic")
-                        {
-                            html.Append("<div id='gadgets-view-bottom' class='gadgets-gadget-parent'></div>");
-                        }
-
-
                         html.Append("</div>");
 
                     }
@@ -185,14 +167,6 @@ namespace Profiles.Profile.Modules.PropertyList
 
 
             }//End of property group loop
-
-            // ORNG gadget 
-            if (!gadgetsShown)
-            {
-                html.Append("<div id='gadgets-view' class='gadgets-gadget-parent'></div>");
-                html.Append("<div id='gadgets-view-bottom' class='gadgets-gadget-parent'></div>");
-                gadgetsShown = true;
-            }
 
             litPropertyList.Text = html.ToString();
 
@@ -202,20 +176,6 @@ namespace Profiles.Profile.Modules.PropertyList
         private List<Module> Modules { get; set; }
         private XmlDocument PropertyListXML { get; set; }
 
-        public class Responder : ORNGCallbackResponder
-        {
-            string uri;
-
-            public Responder(string uri, Page page) : base(uri, page, false, ORNGCallbackResponder.JSON_PERSONID_REQ)
-            {
-                this.uri = uri;
-            }
-
-            public override string getCallbackResponse()
-            {
-                return BuildJSONPersonIds(uri, "one person");
-            }
-        }
     }
 
 }

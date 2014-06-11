@@ -24,6 +24,7 @@
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -75,10 +76,13 @@
     <Reference Include="System.Web.Services" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DirectService.aspx" />
+    <Content Include="Edit\Modules\CustomEditListProperty\CustomEditListProperty.ascx" />
     <Content Include="Global.asax" />
     <Content Include="ORNG\Images\waiting.gif" />
+    <Content Include="ORNG\JavaScript\jsonldParser.js" />
+    <Content Include="ORNG\JavaScript\jsonld\jsonld.js" />
     <Content Include="ORNG\JavaScript\prettyprint.js" />
-    <Content Include="ORNG\JavaScript\jsonld-helper.js" />
     <Content Include="ORNG\JSONLD\Default.aspx" />
     <Content Include="ORNG\CSS\gadgets.css" />
     <Content Include="ORNG\Default.aspx" />
@@ -89,12 +93,15 @@
     <Content Include="ORNG\Images\icon_squareDownArrow.gif" />
     <Content Include="ORNG\JavaScript\orng.js" />
     <Content Include="ORNG\JSONLD\Test.htm" />
+    <Content Include="ORNG\Modules\EditPersonalGadget\EditPersonalGadget.ascx" />
     <Content Include="ORNG\Modules\GadgetSandbox\GadgetSandbox.ascx" />
     <Content Include="ORNG\Modules\Gadgets\Gadgets.ascx" />
     <Content Include="ORNG\Modules\ModuleCatalogue.xml" />
     <Content Include="ORNG\Modules\SearchGadgets\SearchGadgets.ascx" />
+    <Content Include="ORNG\Modules\ViewPersonalGadget\ViewPersonalGadget.ascx" />
     <Content Include="ORNG\PresentationXML\GadgetDetailsPresentation.xml" />
     <Content Include="ORNG\PresentationXML\SandboxFormPresentation.xml" />
+    <Content Include="Profile\Modules\CustomViewListProperty\CustomViewListProperty.ascx" />
     <Content Include="RobotsTxt.aspx" />
     <Content Include="SiteMap.aspx" />
     <Content Include="Web.config">
@@ -137,6 +144,21 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DirectService.aspx.cs">
+      <DependentUpon>DirectService.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DirectService.aspx.designer.cs">
+      <DependentUpon>DirectService.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Edit\Modules\CustomEditListProperty\CustomEditListProperty.ascx.cs">
+      <DependentUpon>CustomEditListProperty.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Edit\Modules\CustomEditListProperty\CustomEditListProperty.ascx.designer.cs">
+      <DependentUpon>CustomEditListProperty.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Edit\Utilities\LiteralListState.cs" />
     <Compile Include="Framework\Modules\MainMenu\History.ascx.cs">
       <DependentUpon>History.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -188,6 +210,13 @@
     <Compile Include="ORNG\GadgetDetails.aspx.designer.cs">
       <DependentUpon>GadgetDetails.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ORNG\Modules\EditPersonalGadget\EditPersonalGadget.ascx.cs">
+      <DependentUpon>EditPersonalGadget.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORNG\Modules\EditPersonalGadget\EditPersonalGadget.ascx.designer.cs">
+      <DependentUpon>EditPersonalGadget.ascx</DependentUpon>
+    </Compile>
     <Compile Include="ORNG\Modules\GadgetSandbox\GadgetSandbox.ascx.cs">
       <DependentUpon>GadgetSandbox.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -209,11 +238,20 @@
     <Compile Include="ORNG\Modules\SearchGadgets\SearchGadgets.ascx.designer.cs">
       <DependentUpon>SearchGadgets.ascx</DependentUpon>
     </Compile>
+    <Compile Include="ORNG\Modules\ViewPersonalGadget\ViewPersonalGadget.ascx.cs">
+      <DependentUpon>ViewPersonalGadget.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORNG\Modules\ViewPersonalGadget\ViewPersonalGadget.ascx.designer.cs">
+      <DependentUpon>ViewPersonalGadget.ascx</DependentUpon>
+    </Compile>
     <Compile Include="ORNG\Utilities\DataIO.cs" />
     <Compile Include="ORNG\Utilities\GadgetSpec.cs" />
     <Compile Include="ORNG\Utilities\GadgetViewRequirements.cs" />
     <Compile Include="ORNG\Utilities\OpenSocialManager.cs" />
-    <Compile Include="ORNG\Utilities\ORNGCallbackResponder.cs" />
+    <Compile Include="ORNG\Utilities\ORNGRPCService.cs" />
+    <Compile Include="ORNG\Utilities\ORNGSettings.cs" />
+    <Compile Include="ORNG\Utilities\PeopleListRPCService.cs" />
     <Compile Include="ORNG\Utilities\PreparedGadget.cs" />
     <Compile Include="ORNG\Utilities\SocketConnectionPool.cs" />
     <Compile Include="ProfilesDisplay.aspx.cs">
@@ -253,6 +291,13 @@
     </Compile>
     <Compile Include="Profile\Modules\CustomViewConceptSimilarMesh\CustomViewConceptSimilarMesh.ascx.designer.cs">
       <DependentUpon>CustomViewConceptSimilarMesh.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\Modules\CustomViewListProperty\CustomViewListProperty.ascx.cs">
+      <DependentUpon>CustomViewListProperty.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profile\Modules\CustomViewListProperty\CustomViewListProperty.ascx.designer.cs">
+      <DependentUpon>CustomViewListProperty.ascx</DependentUpon>
     </Compile>
     <Compile Include="Profile\Modules\HRFooter\HRFooter.ascx.cs">
       <DependentUpon>HRFooter.ascx</DependentUpon>
@@ -671,6 +716,7 @@
       <DependentUpon>SearchOptions.ascx</DependentUpon>
     </Compile>
     <Compile Include="Search\Utilities\CacheWrapper.cs" />
+    <Compile Include="Search\Utilities\DisallowedSearchException.cs" />
     <Compile Include="Search\Utilities\SearchDropDowns.cs" />
     <Compile Include="SiteMap.aspx.cs">
       <DependentUpon>SiteMap.aspx</DependentUpon>

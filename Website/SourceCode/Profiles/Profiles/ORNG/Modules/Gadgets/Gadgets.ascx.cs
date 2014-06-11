@@ -32,30 +32,36 @@ namespace Profiles.ORNG.Modules.Gadgets
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (om.IsVisible())
-            {
-                DrawProfilesModule();
-            }
+            DrawProfilesModule();
         }
 
         public Gadgets() { }
         public Gadgets(XmlDocument pagedata, List<ModuleParams> moduleparams, XmlNamespaceManager pagenamespaces)
             : base(pagedata, moduleparams, pagenamespaces)
         {
-            string uri = null;
+            string uri = "";// null;
             // code to convert from numeric node ID to URI
             if (base.Namespaces.HasNamespace("rdf"))
             {
                 XmlNode node = this.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/@rdf:about", base.Namespaces);
                 uri = node != null ? node.Value : null;
+                // we know the structure of the URI and need to take advantage of that
+                if (uri != null && uri.StartsWith(Root.Domain + "/profile/")) 
+                {
+                    string suffix = uri.Substring((Root.Domain + "/profile/").Length);
+                    uri = Root.Domain + "/profile/" + suffix.Split('/')[0];
+                }
             }
-            om = OpenSocialManager.GetOpenSocialManager(uri, Page, false, true);
+            om = OpenSocialManager.GetOpenSocialManager(uri, Page);
         }
 
         protected void DrawProfilesModule()
         {
-            om.LoadAssets();
-            litGadget.Text = base.GetModuleParamXml("HTML").InnerXml;
+            if (om.IsVisible())
+            {
+                litGadget.Text = base.GetModuleParamXml("HTML").InnerXml;
+                om.LoadAssets();
+            }
         }
 
     }

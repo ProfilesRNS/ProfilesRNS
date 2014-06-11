@@ -28,7 +28,6 @@ using Profiles.Profile.Utilities;
 using Profiles.Edit.Utilities;
 using Profiles.ORNG.Utilities;
 
-
 namespace Profiles.Edit.Modules.EditPropertyList
 {
     public partial class EditPropertyList : BaseModule
@@ -43,9 +42,8 @@ namespace Profiles.Edit.Modules.EditPropertyList
             : base(pagedata, moduleparams, pagenamespaces)
         {
             imgLock.ImageUrl = Root.Domain + "/edit/images/icons_lock.gif";
-
-
         }
+
         private void DrawProfilesModule()
         {
             List<GenericListItem> gli = new List<GenericListItem>();
@@ -63,6 +61,7 @@ namespace Profiles.Edit.Modules.EditPropertyList
 
             litBackLink.Text = "<b>Edit Menu</b>";
 
+            Profiles.ORNG.Utilities.DataIO orngData = new Profiles.ORNG.Utilities.DataIO();
 
             foreach (XmlNode group in this.PropertyList.SelectNodes("//PropertyList/PropertyGroup"))
             {
@@ -82,18 +81,43 @@ namespace Profiles.Edit.Modules.EditPropertyList
                         canedit = true;
                     }
 
+                    // treat ORNG items as "special", because they may not be available and they may be turned off
+                    if (node.SelectSingleNode("@URI").Value.StartsWith(Profiles.ORNG.Utilities.OpenSocialManager.ORNG_ONTOLOGY_PREFIX))
+                    {
+                        GadgetSpec spec = OpenSocialManager.GetGadgetByPropertyURI(node.SelectSingleNode("@URI").Value);
+                        if (spec != null && spec.RequiresRegitration() && !orngData.IsRegistered(this.Subject, spec.GetAppId()))
+                        {
+                            singlesi.Add(new SecurityItem(node.ParentNode.SelectSingleNode("@Label").Value, node.SelectSingleNode("@Label").Value,
+                                node.SelectSingleNode("@URI").Value,
+                                Convert.ToInt32(node.SelectSingleNode("@NumberOfConnections").Value),
+                                Convert.ToInt32(node.SelectSingleNode("@ViewSecurityGroup").Value),
+                                "Unavailable",
+                                node.SelectSingleNode("@ObjectType").Value, canedit));
+                            continue;
+                        }
+                        else if (spec != null && "0".Equals(node.SelectSingleNode("@NumberOfConnections").Value)) 
+                        {
+                            singlesi.Add(new SecurityItem(node.ParentNode.SelectSingleNode("@Label").Value, node.SelectSingleNode("@Label").Value,
+                                node.SelectSingleNode("@URI").Value,
+                                Convert.ToInt32(node.SelectSingleNode("@NumberOfConnections").Value),
+                                Convert.ToInt32(node.SelectSingleNode("@ViewSecurityGroup").Value),
+                                "Hidden",
+                                node.SelectSingleNode("@ObjectType").Value, canedit));
+                            continue;
+                        }
+                    }
+
                     singlesi.Add(new SecurityItem(node.ParentNode.SelectSingleNode("@Label").Value, node.SelectSingleNode("@Label").Value,
                         node.SelectSingleNode("@URI").Value,
                         Convert.ToInt32(node.SelectSingleNode("@NumberOfConnections").Value),
                         Convert.ToInt32(node.SelectSingleNode("@ViewSecurityGroup").Value),
                         this.SecurityGroups.SelectSingleNode("SecurityGroupList/SecurityGroup[@ID='" + node.SelectSingleNode("@ViewSecurityGroup").Value + "']/@Label").Value,
                         node.SelectSingleNode("@ObjectType").Value, canedit));
-
-
                 }
                 si.Add(singlesi);
             }
 
+            gli.Add(new GenericListItem("Hidden" , "This feature is not visible on your Profile page."));
             foreach (XmlNode securityitem in this.SecurityGroups.SelectNodes("SecurityGroupList/SecurityGroup"))
             {
                 this.Dropdown.Add(new GenericListItem(securityitem.SelectSingleNode("@Label").Value,
@@ -101,22 +125,29 @@ namespace Profiles.Edit.Modules.EditPropertyList
 
                 gli.Add(new GenericListItem(securityitem.SelectSingleNode("@Label").Value, securityitem.SelectSingleNode("@Description").Value));
             }
+            gli.Add(new GenericListItem("Unavailable", "This feature depends on automatically collected data that we do not have for your Profile."));
 
             repPropertyGroups.DataSource = si;
             repPropertyGroups.DataBind();
 
             BuildSecurityKey(gli);
 
-            // Profiles OpenSocial Extension by UCSF
+            // OpenSocial.  Allows gadget developers to show test gadgets if you have them installed
             string uri = this.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/@rdf:about", base.Namespaces).Value;
-            OpenSocialManager om = OpenSocialManager.GetOpenSocialManager(uri, Page, true, true);
-            if (om.IsVisible())
+            OpenSocialManager om = OpenSocialManager.GetOpenSocialManager(uri, Page, true);
+            if (om.IsVisible()) 
             {
+                litGadget.Visible = true;
+                string sandboxDivs = "";
+                foreach (PreparedGadget gadget in om.GetSandboxGadgets())
+                {
+                    sandboxDivs += "<div id='" + gadget.GetChromeId() + "' class='gadgets-gadget-parent'></div>";
+                }
+                litGadget.Text = sandboxDivs;
                 om.LoadAssets();
-                pnlOpenSocial.Visible = true;
-                new Responder(uri, Page);
             }
         }
+
         protected void repPropertyGroups_OnItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             if (e.Item.ItemType == ListItemType.AlternatingItem || e.Item.ItemType == ListItemType.Item)
@@ -163,6 +194,10 @@ namespace Profiles.Edit.Modules.EditPropertyList
 
                 //ddl.Attributes.Add("onchange", "JavaScript:showstatus()");
                 hf.Value = si.ItemURI;
+                if (si.ItemURI.StartsWith(Profiles.ORNG.Utilities.OpenSocialManager.ORNG_ONTOLOGY_PREFIX))
+                {
+                    ((Control)e.Row.FindControl("imgOrng")).Visible = true ;
+                }
 
                 if (e.Row.RowState == DataControlRowState.Alternate)
                 {
@@ -270,9 +305,27 @@ namespace Profiles.Edit.Modules.EditPropertyList
 
         private void UpdateSecuritySetting(string securitygroup)
         {
-            Edit.Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
-            data.UpdateSecuritySetting(this.Subject, data.GetStoreNode(this.PredicateURI), Convert.ToInt32(securitygroup));
+            // maybe be able to make this more general purpose
+            if (this.PredicateURI.StartsWith(Profiles.ORNG.Utilities.OpenSocialManager.ORNG_ONTOLOGY_PREFIX))
+            {
+                Profiles.ORNG.Utilities.DataIO data = new Profiles.ORNG.Utilities.DataIO();
+                if ("0".Equals(securitygroup))
+                {
+                    data.RemovePersonalGadget(this.Subject, this.PredicateURI);
+                }
+                else
+                {
+                    data.AddPersonalGadget(this.Subject, this.PredicateURI);
+                }
+            }
+            else if (!"0".Equals(securitygroup))
+            {
+                Edit.Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
+                data.UpdateSecuritySetting(this.Subject, data.GetStoreNode(this.PredicateURI), Convert.ToInt32(securitygroup));
+            }
+            //Framework.Utilities.Cache.AlterDependency(this.Subject.ToString());
         }
+
         private Int64 Subject { get; set; }
         private string PredicateURI { get; set; }
 
@@ -280,21 +333,6 @@ namespace Profiles.Edit.Modules.EditPropertyList
         private XmlDocument PropertyList { get; set; }
         private XmlDocument SecurityGroups { get; set; }
         private List<GenericListItem> Dropdown { get; set; }
-
-        public class Responder : ORNGCallbackResponder
-        {
-            public Responder(string uri, Page page)
-                : base(uri, page, true, ORNGCallbackResponder.CLEAR_OWNER_CACHE_REQ)
-            {
-            }
-
-            public override string getCallbackResponse()
-            {
-                GetOpenSocialManager().ClearOwnerCache();
-                return "Success";
-            }
-        }
-
     }
 
     public class SecurityItem

@@ -3,3 +3,6 @@ We include the precompiled version of the ORNG server (based on Shindig) for you
 If you want to build this for scratch, you are welcome to do so.  You will need Java and a Maven installed to perform the build.
 
 The source code can be found at https://github.com/CTSIatUCSF/shindigorng. 
+
+Note that the use of fuseki and the fuseki-shindigorng.ttl is optional, but configuring fuseki as a cache for shindigorng can speed up some
+gadgets dramatically.
