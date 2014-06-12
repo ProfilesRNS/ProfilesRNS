@@ -10,3 +10,6 @@
         </td>
     </tr>
 </table>
+<div id="toc"><ul></ul><div style="clear:both;"></div></div>
+<!-- for testing -->
+<asp:Literal runat="server" ID="litGadget" Visible="false"/>
