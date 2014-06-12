@@ -13,6 +13,7 @@ using System.Xml.Xsl;
 
 using Profiles.Framework.Utilities;
 using Profiles.Profile.Utilities;
+using Profiles.ORNG.Utilities;
 
 namespace Profiles.Profile.Modules.CustomViewPersonGeneralInfo
 {
@@ -66,9 +67,47 @@ namespace Profiles.Profile.Modules.CustomViewPersonGeneralInfo
                 imgPhoto.Visible = false;
             }
 
-
-
+            // OpenSocial.  Allows gadget developers to show test gadgets if you have them installed
+            string uri = this.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/@rdf:about", base.Namespaces).Value;
+            OpenSocialManager om = OpenSocialManager.GetOpenSocialManager(uri, Page);
+            if (om.IsVisible()) 
+            {
+                litGadget.Visible = true;
+                string sandboxDivs = "";
+                foreach (PreparedGadget gadget in om.GetSandboxGadgets())
+                {
+                    sandboxDivs += "<div id='" + gadget.GetChromeId() + "' class='gadgets-gadget-parent'></div>";
+                }
+                litGadget.Text = sandboxDivs;
+                om.LoadAssets();
+                // Add this just in case it is needed.
+                new ORNGProfileRPCService(Page, this.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/foaf:firstName", base.Namespaces).InnerText, uri);
+            }
         }
 
     }
+
+    public class ORNGProfileRPCService : PeopleListRPCService
+    {
+        string name;
+        List<string> people = new List<string>();
+
+        public ORNGProfileRPCService(Page page, string name, string uri)
+            : base(null, page, false)
+        {
+            this.name = name;
+            this.people.Add(uri);
+        }
+
+        public override string getPeopleListMetadata()
+        {
+            return name;
+        }
+
+        public override List<string> getPeople()
+        {
+            return people;
+        }
+    }
+
 }
