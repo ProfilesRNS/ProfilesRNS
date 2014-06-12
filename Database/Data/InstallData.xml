@@ -23439,7 +23439,7 @@
                   <Param Name="ItemURLText">{{{rdf:Description/rdfs:label}}}</Param>
                   <Param Name="ItemText" />
                   <Param Name="ItemURL">{{{rdf:Description/@rdf:about}}}</Param>
-                  <Param Name="MoreURL">/search/default.aspx?searchtype=people&amp;searchfor={{{rdf:RDF/rdf:Description/rdfs:label}}}&amp;classuri=http://xmlns.com/foaf/0.1/Person&amp;erpage=15&amp;offset=0&amp;exactPhrase=true </Param>
+                  <Param Name="MoreURL">/search/default.aspx?searchtype=people&amp;searchfor={{{rdf:RDF/rdf:Description/rdfs:label}}}&amp;classuri=http://xmlns.com/foaf/0.1/Person&amp;erpage=15&amp;offset=0&amp;exactPhrase=true</Param>
                   <Param Name="MoreText">See all people</Param>
                 </ParamList>
               </Module>

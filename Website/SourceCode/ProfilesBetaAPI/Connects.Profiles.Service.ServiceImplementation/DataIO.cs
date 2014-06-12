@@ -862,10 +862,10 @@ namespace Connects.Profiles.Service.ServiceImplementation
                     {
                         returnxml.Append("<PersonID>" + this.GetPersonID(currentnode).ToString() + "</PersonID>");
                     }
-                    //else
-                    //{
-                    //    returnxml.Append("<PersonID>" + RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + uri + "']/catalyst:eCommonsLogin", namespaces).InnerText + "</PersonID>");
-                    //}
+                    else
+                    {
+                        returnxml.Append("<PersonID>" + RDF.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + uri + "']", namespaces).InnerText + "</PersonID>");
+                    }
 
 
                     persondata = this.GetPersonData(this.GetPersonID(currentnode));
