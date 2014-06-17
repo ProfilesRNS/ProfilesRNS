@@ -1,6 +1,6 @@
 INSERT [ORNG.].[Apps] VALUES(10,'RDF Test','http://stage-profiles.ucsf.edu/apps/RDFTest.xml',NULL, 0, NULL, NULL, 0);
 INSERT [ORNG.].[Apps] VALUES(101,'Featured Presentations','http://stage-profiles.ucsf.edu/apps/SlideShare.xml',NULL, 0, NULL, NULL, 1);
-INSERT [ORNG.].[Apps] VALUES(102,'Faculty Mentoring','http://stage-profiles.ucsf.edu/apps/Mentor.xml',NULL, 0, NULL, NULL, 0);
+--INSERT [ORNG.].[Apps] VALUES(102,'Faculty Mentoring','http://stage-profiles.ucsf.edu/apps/Mentor.xml',NULL, 0, NULL, NULL, 0);
 INSERT [ORNG.].[Apps] VALUES(103,'Websites','http://stage-profiles.ucsf.edu/apps/Links.xml',NULL, 0, NULL, NULL, 1);
 INSERT [ORNG.].[Apps] VALUES(104,'Profile List Tool','http://stage-profiles.ucsf.edu/apps/ProfileListTool.xml',NULL, 0, NULL, NULL, 1);
 INSERT [ORNG.].[Apps] VALUES(112,'Twitter','http://stage-profiles.ucsf.edu/apps/Twitter.xml',NULL, 0, NULL, NULL, 1);
@@ -22,7 +22,7 @@ INSERT [ORNG.].[AppViews] VALUES(104,'orng/gadgetdetails.aspx','canvas','gadgets
 
 
 exec [ORNG.].[AddAppToOntology] 101;
-exec [ORNG.].[AddAppToOntology] 102;
+--exec [ORNG.].[AddAppToOntology] 102;
 exec [ORNG.].[AddAppToOntology] 103;
 exec [ORNG.].[AddAppToOntology] 112;
 exec [ORNG.].[AddAppToOntology] 114;
