@@ -371,48 +371,55 @@
     </Row>
     <Row>
       <JobID>48</JobID>
+      <JobGroup>7</JobGroup>
+      <Step>14</Step>
+      <IsActive>1</IsActive>
+      <Script>EXEC [User.Session].[DeleteOldSessionRDF]</Script>
+    </Row>
+    <Row>
+      <JobID>49</JobID>
       <JobGroup>8</JobGroup>
       <Step>1</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Profile.Cache].[Person.UpdateSimilarPerson]</Script>
     </Row>
     <Row>
-      <JobID>49</JobID>
+      <JobID>50</JobID>
       <JobGroup>8</JobGroup>
       <Step>2</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Profile.Cache].[Concept.Mesh.UpdateSimilarConcept]</Script>
     </Row>
     <Row>
-      <JobID>50</JobID>
+      <JobID>51</JobID>
       <JobGroup>9</JobGroup>
       <Step>1</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Profile.Cache].[SNA.Coauthor.UpdateDistance]</Script>
     </Row>
     <Row>
-      <JobID>51</JobID>
+      <JobID>52</JobID>
       <JobGroup>9</JobGroup>
       <Step>2</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Profile.Cache].[SNA.Coauthor.UpdateReach]</Script>
     </Row>
     <Row>
-      <JobID>52</JobID>
+      <JobID>53</JobID>
       <JobGroup>9</JobGroup>
       <Step>3</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Profile.Cache].[SNA.Coauthor.UpdateBetweenness]</Script>
     </Row>
     <Row>
-      <JobID>53</JobID>
+      <JobID>54</JobID>
       <JobGroup>9</JobGroup>
       <Step>4</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Profile.Cache].[SNA.Coauthor.UpdateSummary]</Script>
     </Row>
     <Row>
-      <JobID>54</JobID>
+      <JobID>55</JobID>
       <JobGroup>10</JobGroup>
       <Step>1</Step>
       <IsActive>1</IsActive>

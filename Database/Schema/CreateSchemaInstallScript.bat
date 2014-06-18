@@ -381,6 +381,7 @@ type Profile.Module.NetworkAuthorshipTimeline.Person.GetData.StoredProcedure.sql
 type Profile.Data.Person.AddPhoto.StoredProcedure.sql
 type Search..ParseSearchString.StoredProcedure.sql
 type User.Session.CreateSession.StoredProcedure.sql
+type User.Session.DeleteOldSessionRDF.StoredProcedure.sql
 type Edit.Module.CustomEditAwardOrHonor.StoreItem.StoredProcedure.sql
 type Ontology..CleanUp.StoredProcedure.sql
 type Profile.Import.Beta.LoadData.StoredProcedure.sql
