@@ -48,9 +48,6 @@ BEGIN
  
 				insert into [Profile.Data].[Publication.Person.Add](pubid,PersonID,pmid,mpid)
 					values (@pubid,@UserID,@pmid,@mpid)
-					
-				insert into [Profile.Data].[Publication.PubMed.Disambiguation] (PersonID, PMID)
-					values (@UserID, @pmid)
  
 				EXEC  [Profile.Data].[Publication.Pubmed.AddOneAuthorPosition] @PersonID = @UserID, @pmid = @pmid
  

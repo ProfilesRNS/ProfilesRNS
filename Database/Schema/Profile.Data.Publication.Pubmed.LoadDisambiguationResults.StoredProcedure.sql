@@ -18,11 +18,14 @@ DELETE FROM [Profile.Data].[Publication.Person.Include]
 
 -- Add Added Pubs
 insert into [Profile.Data].[Publication.Person.Include](pubid,PersonID,pmid,mpid)
-select PubID, PersonID, PMID, MPID from 
-	[Profile.Data].[Publication.Person.Add]
-	where PubID not in (select PubID from [Profile.Data].[Publication.Person.Include])
-	and (pmid is null or PMID in (select pmid from [Profile.Data].[Publication.PubMed.General]))
-	and (mpid is null or MPID in (select mpid from [Profile.Data].[Publication.MyPub.General]))
+select a.PubID, a.PersonID, a.PMID, a.MPID from [Profile.Data].[Publication.Person.Add] a
+	left join [Profile.Data].[Publication.Person.Include] i
+	on a.PersonID = i.PersonID
+	and isnull(a.PMID, -1) = isnull(i.PMID, -1)
+	and isnull(a.mpid, '') = isnull(i.mpid, '')
+	where i.personid is null
+	and (a.pmid is null or a.PMID in (select pmid from [Profile.Data].[Publication.PubMed.General]))
+	and (a.mpid is null or a.MPID in (select mpid from [Profile.Data].[Publication.MyPub.General]))
 		
 --Move in new pubs
 INSERT INTO [Profile.Data].[Publication.Person.Include]
