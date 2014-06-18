@@ -33,104 +33,112 @@ BEGIN
 				AND p.ParameterID = 'baseURI'
 	END
 
- 
+
+	-- Create a SessionID
     DECLARE @SessionID UNIQUEIDENTIFIER
- BEGIN TRY 
-	BEGIN TRANSACTION
+	SELECT @SessionID = NEWID()
  
-		-- Create a SessionID
-		SELECT @SessionID = NEWID()
- 
-		-- Create the Session table record
-		INSERT INTO [User.Session].Session
-			(	SessionID,
-				CreateDate,
-				LastUsedDate,
-				LoginDate,
-				LogoutDate,
-				RequestIP,
-				UserID,
-				UserNode,
-				PersonID,
-				UserAgent,
-				IsBot
-			)
-            SELECT  @SessionID ,
-                    GETDATE() ,
-                    GETDATE() ,
-                    CASE WHEN @UserID IS NULL THEN NULL
-                         ELSE GETDATE()
-                    END ,
-                    NULL ,
-                    @RequestIP ,
-                    @UserID ,
-					(SELECT NodeID FROM [User.Account].[User] WHERE UserID = @UserID AND @UserID IS NOT NULL),
-                    @PersonID,
-                    @UserAgent,
-                    0
+	-- Create the Session table record
+	INSERT INTO [User.Session].Session
+		(	SessionID,
+			CreateDate,
+			LastUsedDate,
+			LoginDate,
+			LogoutDate,
+			RequestIP,
+			UserID,
+			UserNode,
+			PersonID,
+			UserAgent,
+			IsBot
+		)
+        SELECT  @SessionID ,
+                GETDATE() ,
+                GETDATE() ,
+                CASE WHEN @UserID IS NULL THEN NULL
+                        ELSE GETDATE()
+                END ,
+                NULL ,
+                @RequestIP ,
+                @UserID ,
+				(SELECT NodeID FROM [User.Account].[User] WHERE UserID = @UserID AND @UserID IS NOT NULL),
+                @PersonID,
+                @UserAgent,
+                0
                     
-        -- Check if bot
-        IF @UserAgent IS NOT NULL AND EXISTS (SELECT * FROM [User.Session].[Bot] WHERE @UserAgent LIKE UserAgent)
-			UPDATE [User.Session].Session
-				SET IsBot = 1
-				WHERE SessionID = @SessionID
+    -- Check if bot
+	DECLARE @IsBot BIT
+	SELECT @IsBot = 0
+	SELECT @IsBot = 1
+		WHERE @UserAgent IS NOT NULL AND EXISTS (SELECT * FROM [User.Session].[Bot] WHERE @UserAgent LIKE UserAgent)
+	If (@IsBot = 1)
+		UPDATE [User.Session].Session
+			SET IsBot = 1
+			WHERE SessionID = @SessionID
 
-		-- Create a node
-		DECLARE @Error INT
+	-- Create a node if not a bot
+	If (@IsBot = 0)
+	BEGIN
+
+		-- Get the BaseURI
+		DECLARE @baseURI NVARCHAR(400)
+		SELECT @baseURI = Value FROM [Framework.].Parameter WHERE ParameterID = 'baseURI'
+
+		-- Create the Node
 		DECLARE @NodeID BIGINT
-		EXEC [RDF.].[GetStoreNode]	@DefaultURI = 1,
-									@SessionID = @SessionID,
-									@ViewSecurityGroup = 0,
-									@EditSecurityGroup = -50,
-									@Error = @Error OUTPUT,
-									@NodeID = @NodeID OUTPUT
+		INSERT INTO [RDF.].[Node] (ViewSecurityGroup, EditSecurityGroup, Value, ObjectType, ValueHash)
+			SELECT IDENT_CURRENT('[RDF.].[Node]'), -50, @baseURI+CAST(IDENT_CURRENT('[RDF.].[Node]') as varchar(50)), 0,
+				[RDF.].fnValueHash(null,null,@baseURI+CAST(IDENT_CURRENT('[RDF.].[Node]') as nvarchar(50)))
+		SELECT @NodeID = @@IDENTITY
 
-		-- If no error...
-		IF (@Error = 0) AND (@NodeID IS NOT NULL)
+
+		-- Confirm the node values are correct
+		IF EXISTS (
+			SELECT *
+			FROM [RDF.].[Node]
+			WHERE NodeID = @NodeID
+				AND (
+					Value <> @baseURI+cast(@NodeID as nvarchar(50))
+					OR ValueHash <> [RDF.].fnValueHash(null,null,@baseURI+cast(@NodeID as nvarchar(50)))
+					OR ViewSecurityGroup <> @NodeID
+				)
+			)
+
+		BEGIN
+			UPDATE [RDF.].[Node]
+				SET Value = @baseURI+cast(@NodeID as nvarchar(50)),
+					ValueHash = [RDF.].fnValueHash(null,null,@baseURI+cast(@NodeID as nvarchar(50))),
+					ViewSecurityGroup = @NodeID
+				WHERE NodeID = @NodeID
+		END
+ 
+		-- Add properties to the node
+		DECLARE @Error INT
+		DECLARE @TypeID BIGINT
+		DECLARE @SessionClass BIGINT
+		DECLARE @TripleID BIGINT
+		SELECT	@TypeID = [RDF.].fnURI2NodeID('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
+				@SessionClass = [RDF.].fnURI2NodeID('http://profiles.catalyst.harvard.edu/ontology/prns#Session')
+		EXEC [RDF.].[GetStoreTriple]	@SubjectID = @NodeID,
+										@PredicateID = @TypeID,
+										@ObjectID = @SessionClass,
+										@ViewSecurityGroup = @NodeID,
+										@Weight = 1,
+										@SortOrder = 1,
+										@SessionID = @SessionID,
+										@Error = @Error OUTPUT,
+										@TripleID = @TripleID OUTPUT
+
+		-- If no error, then assign the NodeID to the session
+		IF (@Error = 0)
 		BEGIN
 			-- Update the Session record with the NodeID
 			UPDATE [User.Session].Session
 				SET NodeID = @NodeID
 				WHERE SessionID = @SessionID
-
-			-- Update the ViewSecurityGroup of the session node
-			UPDATE [RDF.].Node
-				SET ViewSecurityGroup = @NodeID
-				WHERE NodeID = @NodeID
- 
-			-- Add properties to the node
-			DECLARE @TypeID BIGINT
-			DECLARE @SessionClass BIGINT
-			DECLARE @TripleID BIGINT
-			SELECT	@TypeID = [RDF.].fnURI2NodeID('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
-					@SessionClass = [RDF.].fnURI2NodeID('http://profiles.catalyst.harvard.edu/ontology/prns#Session')
-			EXEC [RDF.].[GetStoreTriple]	@SubjectID = @NodeID,
-											@PredicateID = @TypeID,
-											@ObjectID = @SessionClass,
-											@ViewSecurityGroup = @NodeID,
-											@Weight = 1,
-											@SortOrder = 1,
-											@SessionID = @SessionID,
-											@Error = @Error OUTPUT,
-											@TripleID = @TripleID OUTPUT
 		END
+	END
 
-	COMMIT TRANSACTION
-	END TRY
-	BEGIN CATCH
-		DECLARE @ErrMsg nvarchar(4000), @ErrSeverity int
-		--Check success
-		IF @@TRANCOUNT > 0  ROLLBACK
- 
-		-- Raise an error with the details of the exception
-		SELECT @ErrMsg =  ERROR_MESSAGE(),
-					 @ErrSeverity = ERROR_SEVERITY()
- 
-		RAISERROR(@ErrMsg, @ErrSeverity, 1)
-			 
-	END CATCH		
-
- 
     SELECT *
 		FROM [User.Session].[Session]
 		WHERE SessionID = @SessionID AND @SessionID IS NOT NULL
