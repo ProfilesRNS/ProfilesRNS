@@ -2,7 +2,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [RDF.].[GetDataRDF]
+ALTER PROCEDURE [RDF.].[GetDataRDF]
 	@subject BIGINT=NULL,
 	@predicate BIGINT=NULL,
 	@object BIGINT=NULL,
@@ -72,6 +72,9 @@ BEGIN
 
 	declare @labelID bigint
 	select @labelID = [RDF.].fnURI2NodeID('http://www.w3.org/2000/01/rdf-schema#label')	
+
+	declare @validURI bit
+	select @validURI = 1
 
 	--*******************************************************************************************
 	--*******************************************************************************************
@@ -173,6 +176,40 @@ BEGIN
 
 	--*******************************************************************************************
 	--*******************************************************************************************
+	-- Check if user has access to the URI
+	--*******************************************************************************************
+	--*******************************************************************************************
+
+	if @subject is not null
+		select @validURI = 0
+			where not exists (
+				select *
+				from [RDF.].Node
+				where NodeID = @subject
+					and ( (ViewSecurityGroup BETWEEN @SecurityGroupID AND -1) OR (ViewSecurityGroup > 0 AND @HasSpecialViewAccess = 1) OR (ViewSecurityGroup IN (SELECT * FROM #SecurityGroupNodes)) )
+			)
+
+	if @predicate is not null
+		select @validURI = 0
+			where not exists (
+				select *
+				from [RDF.].Node
+				where NodeID = @predicate and ObjectType = 0
+					and ( (ViewSecurityGroup BETWEEN @SecurityGroupID AND -1) OR (ViewSecurityGroup > 0 AND @HasSpecialViewAccess = 1) OR (ViewSecurityGroup IN (SELECT * FROM #SecurityGroupNodes)) )
+			)
+
+	if @object is not null
+		select @validURI = 0
+			where not exists (
+				select *
+				from [RDF.].Node
+				where NodeID = @object and ObjectType = 0
+					and ( (ViewSecurityGroup BETWEEN @SecurityGroupID AND -1) OR (ViewSecurityGroup > 0 AND @HasSpecialViewAccess = 1) OR (ViewSecurityGroup IN (SELECT * FROM #SecurityGroupNodes)) )
+			)
+
+
+	--*******************************************************************************************
+	--*******************************************************************************************
 	-- Get subject information when it is a literal
 	--*******************************************************************************************
 	--*******************************************************************************************
@@ -249,6 +286,11 @@ BEGIN
 				and ((s.ViewSecurityGroup BETWEEN @SecurityGroupID AND -1) OR (s.ViewSecurityGroup > 0 AND @HasSpecialViewAccess = 1) OR (s.ViewSecurityGroup IN (SELECT * FROM #SecurityGroupNodes)))
 				and ((p.ViewSecurityGroup BETWEEN @SecurityGroupID AND -1) OR (p.ViewSecurityGroup > 0 AND @HasSpecialViewAccess = 1) OR (p.ViewSecurityGroup IN (SELECT * FROM #SecurityGroupNodes)))
 				and ((o.ViewSecurityGroup BETWEEN @SecurityGroupID AND -1) OR (o.ViewSecurityGroup > 0 AND @HasSpecialViewAccess = 1) OR (o.ViewSecurityGroup IN (SELECT * FROM #SecurityGroupNodes)))
+
+	-- Make sure there are connections
+	if (@subject is not null) and (@predicate is not null)
+		select @validURI = 0
+		where not exists (select * from #connections)
 
 	---------------------------------------------------------------------------------------------
 	-- Network [seed with network statistics and connections]
@@ -626,7 +668,7 @@ BEGIN
 			for xml path(''), type
 		).value('(./text())[1]','nvarchar(max)')
 	-- default description if none exists
-	if @description IS NULL
+	if (@description IS NULL) OR (@validURI = 0)
 		select @description = '<rdf:Description rdf:about="' + @firstURI + '"'
 			+IsNull(' xml:lang="'+@dataStrLanguage+'"','')
 			+IsNull(' rdf:datatype="'+@dataStrDataType+'"','')
@@ -660,4 +702,5 @@ BEGIN
 	*/
 		
 END
+
 GO

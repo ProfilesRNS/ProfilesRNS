@@ -23,7 +23,7 @@ BEGIN
     SET @i=0 SET @j=0
     WHILE @i<=255--127--255
     	BEGIN
-    	SET @j=(@j+ ASCII(SUBSTRING(@s,@i+1,1))+ASCII(SUBSTRING(@k,@i+1,1)))% 128--256
+    	SET @j=(@j+ ASCII(SUBSTRING(@s,@i+1,1))+ASCII(SUBSTRING(@k,@i+1,1)))% 256 --256
     	SET @tmp1=SUBSTRING(@s,@i+1,1)
     	SET @tmp2=SUBSTRING(@s,@j+1,1)
     	SET @s=STUFF(@s,@i+1,1,@tmp2)
