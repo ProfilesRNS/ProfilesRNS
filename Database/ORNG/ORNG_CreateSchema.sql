@@ -24,8 +24,6 @@ CREATE TABLE [ORNG.].[Apps](
 	[Name] [nvarchar](255) NOT NULL,
 	[Url] [nvarchar](255) NULL,
 	[PersonFilterID] [int] NULL,
-	[RequiresRegistration] [bit] NOT NULL,
-	[UnavailableMessage] [text] NULL,
 	[OAuthSecret] [nvarchar](255) NULL,
 	[Enabled] [bit] NOT NULL,
  CONSTRAINT [PK__app] PRIMARY KEY CLUSTERED 
@@ -63,31 +61,6 @@ REFERENCES [ORNG.].[Apps] ([AppID])
 GO
 
 ALTER TABLE [ORNG.].[AppViews] CHECK CONSTRAINT [FK_orng_app_views_apps]
-GO
-
-/****** Object:  Table [ORNG.].[AppRegistry]    Script Date: 05/17/2013 13:23:49 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE TABLE [ORNG.].[AppRegistry](
-	[NodeID] [bigint] NOT NULL,
-	[AppID] [int] NOT NULL,
-	[CreatedDT] [datetime] NULL
-) ON [PRIMARY]
-
-GO
-
-ALTER TABLE [ORNG.].[AppRegistry] ADD  CONSTRAINT [DF_orng_app_registry_createdDT]  DEFAULT (getdate()) FOR [CreatedDT]
-GO
-
-/****** Object:  Index [IX_AppRegistry_nodeid]    Script Date: 05/17/2013 13:26:51 ******/
-CREATE CLUSTERED INDEX [IX_AppRegistry_nodeid] ON [ORNG.].[AppRegistry] 
-(
-	[NodeID] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 GO
 
 /****** Object:  Table [ORNG.].[AppData]    Script Date: 05/17/2013 13:24:06 ******/
@@ -195,31 +168,6 @@ GO
 --	Create Stored Procedures
 --
 ---------------------------------------------------------------------------------------------------------------------
-/****** Object:  StoredProcedure [ORNG.].[ReadRegistry]    Script Date: 07/22/2013 11:10:29 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE PROCEDURE  [ORNG.].[IsRegistered](@Subject BIGINT = NULL, @Uri nvarchar(255) = NULL, @AppID INT)
-AS
-BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
-	SET NOCOUNT ON;
-	DECLARE @nodeid bigint
-	
-	IF (@Subject IS NOT NULL) 
-		SET @nodeId = @Subject
-	ELSE		
-		SELECT @nodeid = [RDF.].[fnURI2NodeID](@Uri);
-
-	SELECT * from [ORNG.].AppRegistry where AppID=@AppID AND NodeID = @NodeID 
-END
-
-GO
-
 /****** Object:  StoredProcedure [ORNG.].[ReadAppData]    Script Date: 06/25/2013 13:38:21 ******/
 SET ANSI_NULLS ON
 GO
@@ -593,7 +541,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-ALTER PROCEDURE [ORNG.].[AddAppToPerson]
+CREATE PROCEDURE [ORNG.].[AddAppToPerson]
 @SubjectID BIGINT=NULL, @SubjectURI nvarchar(255)=NULL, @AppID INT, @SessionID UNIQUEIDENTIFIER=NULL, @Error BIT=NULL OUTPUT, @NodeID BIGINT=NULL OUTPUT
 AS
 BEGIN
@@ -704,7 +652,45 @@ END
 
 GO
 
-/****** Object:  StoredProcedure [ORNG.].[RemoveAppFromPerson]    Script Date: 10/11/2013 09:48:30 ******/
+/****** Object:  StoredProcedure [ORNG.].[GetAppInstance]    Script Date: 06/19/2014 09:37:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [ORNG.].[GetAppInstance]
+@SubjectID BIGINT=NULL, @SubjectURI nvarchar(255)=NULL, @AppID INT, @SessionID UNIQUEIDENTIFIER=NULL, @ApplicationInstanceNodeID BIGINT=NULL OUTPUT,
+@Error BIT=NULL OUTPUT
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+	DECLARE @ApplicationNodeID BIGINT
+	DECLARE @PersonID INT	
+
+	IF (@SubjectID IS NULL)
+		SET @SubjectID = [RDF.].fnURI2NodeID(@SubjectURI)
+	
+	-- get the person id
+	SELECT @PersonID = cast(InternalID as INT) FROM [RDF.Stage].[InternalNodeMap]
+		WHERE [NodeID] = @SubjectID AND Class = 'http://xmlns.com/foaf/0.1/Person'
+		
+	--get the ApplicationInstance nodeid
+	SELECT @ApplicationInstanceNodeID = [NodeID] FROM [RDF.STage].InternalNodeMap 
+		WHERE Class = 'http://orng.info/ontology/orng#ApplicationInstance' AND 
+		InternalID = CAST(@PersonID as varchar) + '-' + CAST(@AppID as varchar)
+		
+	IF (@ApplicationInstanceNodeID IS NOT NULL)
+		SELECT [Value] + CAST(@ApplicationInstanceNodeID as VARCHAR) FROM [Framework.].[Parameter] WHERE ParameterID = 'baseURI'
+	ELSE
+		SELECT NULL		
+END
+
+GO
+
+/****** Object:  StoredProcedure [ORNG.].[DeleteAppInstance]    Script Date: 10/11/2013 09:48:30 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -712,15 +698,15 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE PROCEDURE [ORNG.].[RemoveAppFromPerson]
-@SubjectID BIGINT=NULL, @SubjectURI nvarchar(255)=NULL, @AppID INT, @SessionID UNIQUEIDENTIFIER=NULL, @Error BIT=NULL OUTPUT
+@SubjectID BIGINT=NULL, @SubjectURI nvarchar(255)=NULL, @AppID INT, @DeleteType tinyint = 1, @SessionID UNIQUEIDENTIFIER=NULL, @Error BIT=NULL OUTPUT
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
-	DECLARE @ApplicationNodeID BIGINT
-	DECLARE @TripleID BIGINT
+	DECLARE @ApplicationInstanceNodeID BIGINT
 	DECLARE @PersonID INT	
+	DECLARE @TripleID BIGINT
 	DECLARE @PERSON_FILTER_ID INT
 	DECLARE @InternalUserName nvarchar(50)
 	DECLARE @PersonFilter nvarchar(50)
@@ -728,20 +714,16 @@ BEGIN
 	IF (@SubjectID IS NULL)
 		SET @SubjectID = [RDF.].fnURI2NodeID(@SubjectURI)
 	
-	--get the Application node, next find all ApplicationInstance SUBJECTS that have a Prediate 
-	SELECT @ApplicationNodeID = t.[Subject] FROM [RDF.].Triple t Join
-		[RDF.].Node n ON t.[Object] = n.nodeid WHERE t.Predicate IN (
-			SELECT _PropertyNode FROM [Ontology.].[ClassProperty] WHERE
-				Class = 'http://orng.info/ontology/orng#Application' and 
-				Property = 'http://orng.info/ontology/orng#applicationId') 
-		AND n.Value = CAST(@AppID as VARCHAR)	
-			
+	EXEC [ORNG.].[GetAppInstance] @SubjectID = @SubjectID, 
+							 @AppID = @AppID, 
+							 @SessionID = @SessionID, 
+							 @ApplicationInstanceNodeID = @ApplicationInstanceNodeID OUTPUT,
+							 @Error = @Error OUTPUT							 
+							 
 	-- there is only ONE link from the person to the application object, so grab it	
 	SELECT @TripleID = [TripleID] FROM [RDF.].Triple 
 		WHERE [Subject] = @SubjectID
-		AND [Object] IN (SELECT [Subject] FROM [RDF.].Triple 
-		WHERE [Predicate] = [RDF.].fnURI2NodeID('http://orng.info/ontology/orng#applicationInstanceOfApplication')
-		AND [Object] = @ApplicationNodeID)
+		AND [Object] = @ApplicationInstanceNodeID
 		
 	-- now delete it
 	BEGIN TRAN
@@ -750,6 +732,14 @@ BEGIN
 								 @SessionID = @SessionID, 
 								 @Error = @Error
 
+		IF (@DeleteType = 0) -- true delete, remove the now orphaned application instance
+		BEGIN
+			EXEC [RDF.].DeleteNode @NodeID = @ApplicationInstanceNodeID, 
+							   @DeleteType = @DeleteType,
+							   @SessionID = @SessionID, 
+							   @Error = @Error OUTPUT
+		END							   
+							   
 		-- remove any filters
 		SELECT @PERSON_FILTER_ID = (SELECT PersonFilterID FROM Apps WHERE AppID = @AppID)
 		IF (@PERSON_FILTER_ID IS NOT NULL) 
@@ -767,7 +757,6 @@ BEGIN
 END
 
 GO
-
 
 /****** Object:  View [ORNG.].[vwPerson]    Script Date: 04/27/2014 08:09:47 ******/
 SET ANSI_NULLS ON

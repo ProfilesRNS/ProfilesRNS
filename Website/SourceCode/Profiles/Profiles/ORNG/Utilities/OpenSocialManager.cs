@@ -29,8 +29,6 @@ namespace Profiles.ORNG.Utilities
         public static string PUBLIC = "Public";
         public static string USERS = "Users";
         public static string PRIVATE = "Private";
-        public static string IS_REGISTERED = "IsRegistered";
-        public static string REGISTRY_DEFINED = "RegistryDefined";
         public static string NOBODY = "Nobody";
 
         private static string ORNG_MANAGER = "ORNG_MANAGER";
@@ -404,8 +402,7 @@ namespace Profiles.ORNG.Utilities
                 {
                     while (dr.Read())
                     {
-                        GadgetSpec spec = new GadgetSpec(Convert.ToInt32(dr[0]), dr[1].ToString(), dr[2].ToString(), 
-                            dr[3].ToString(), Convert.ToBoolean(dr[4]));
+                        GadgetSpec spec = new GadgetSpec(Convert.ToInt32(dr[0]), dr[1].ToString(), dr[2].ToString(), Convert.ToBoolean(dr[3]));
                         dbApps.Add(spec.GetFileName(), spec);
                     }
                 }

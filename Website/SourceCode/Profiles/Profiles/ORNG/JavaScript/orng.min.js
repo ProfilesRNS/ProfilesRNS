@@ -121,16 +121,15 @@ my.init = function () {
     // this allows us to grab the metadata
     var gadgetURLs = [];
     for (var i = 0; i < my.gadgets.length; i++) {
-        gadgetURLs[i] = my.gadgets[i].url;
+        if (gadgetURLs.indexOf(my.gadgets[i].url) == -1) {
+            gadgetURLs.push(my.gadgets[i].url);
+        }
     }
 
     // draw these things out now
     OrngContainer.preloadGadgets(gadgetURLs, function (result) {
-        for (var gadgetURL in result) {
-            if (!result[gadgetURL].error) {
-                var ndx = gadgetURLs.indexOf(gadgetURL);
-                window.buildGadget(result, my.gadgets[ndx], ndx);
-            }
+        for (var i = 0; i < my.gadgets.length; i++) {
+            window.buildGadget(result, my.gadgets[i]);
         }
     });
 };
@@ -157,7 +156,7 @@ my.removeGadgets = function (gadgetsToRemove) {
     }
 };
 
-//create a gadget with navigation tool bar header enabling gadget collapse, expand, remove, navigate to view actions.
+//create a gadget based on metadata
 window.buildGadget = function (result, myGadget) {
     result = result || {};
     //    var element = window.getNewGadgetElement(result, gadgetURL);

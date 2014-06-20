@@ -75,7 +75,10 @@ namespace Profiles.Framework.Modules.MainMenu
                 menulist.Append("<li>" + sm.Session().ShortDisplayName + "</li>");
             }
             
-            menulist.Append("<li><a href='" + Root.Domain + "/login/default.aspx?method=login&edit=true'>Edit My Profile</a></li>");
+            if (sm.Session().NodeID > 0)
+            {
+                menulist.Append("<li><a href='" + Root.Domain + "/login/default.aspx?method=login&edit=true'>Edit My Profile</a></li>");
+            }
 
 
             if (base.MasterPage.CanEdit)
@@ -83,8 +86,10 @@ namespace Profiles.Framework.Modules.MainMenu
                 menulist.Append("<li><a href='" + Root.Domain + "/edit/" + subject.ToString() + "'>Edit This Profile</a></li>");
             }
 
-            if (sm.Session().UserID > 0)
+            if (sm.Session().NodeID > 0)
+            {
                 menulist.Append("<li><a href='" + Root.Domain + "/proxy/default.aspx?subject=" + sm.Session().NodeID.ToString() + "'>Manage Proxies</a></li>");
+            }
 
             if (base.BaseData.SelectSingleNode(".").OuterXml != string.Empty && !Root.AbsolutePath.ToLower().Contains("/search"))
             {

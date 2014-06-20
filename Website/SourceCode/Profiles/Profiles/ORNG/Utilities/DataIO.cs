@@ -31,16 +31,9 @@ namespace Profiles.ORNG.Utilities
             return sqldr;
         }
 
-        public SqlDataReader GetRegisteredApps(string uri)
-        {
-            string sql = "select AppID from [ORNG.].[AppRegistry] where NodeID = " + uri.Substring(uri.LastIndexOf('/') + 1);
-            SqlDataReader sqldr = this.GetSQLDataReader("ProfilesDB", sql, CommandType.Text, CommandBehavior.CloseConnection, null);
-            return sqldr;
-        }
-
         public SqlDataReader GetGadgets()
         {
-            string sql = "select AppID, Name, Url, UnavailableMessage, Enabled from [ORNG.].[Apps]";
+            string sql = "select AppID, Name, Url, Enabled from [ORNG.].[Apps]";
             SqlDataReader sqldr = this.GetSQLDataReader("ProfilesDB", sql, CommandType.Text, CommandBehavior.CloseConnection, null);
             return sqldr;
         }
@@ -58,32 +51,6 @@ namespace Profiles.ORNG.Utilities
             return -1;
         }
 
-        // the ones below should change
-        public bool IsRegistered(string uri, int appId)
-        {
-            SqlParameter[] param = new SqlParameter[2];
-
-            param[0] = new SqlParameter("@Uri", uri);
-            param[1] = new SqlParameter("@AppID", appId);
-
-            using (SqlDataReader dbreader = GetSQLDataReader(GetDBCommand("", "[ORNG.].[IsRegistered]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param)))
-            {
-                return dbreader.Read();
-            }
-        }
-
-        public bool IsRegistered(long Subject, int appId)
-        {
-            SqlParameter[] param = new SqlParameter[2];
-
-            param[0] = new SqlParameter("@Subject", Subject);
-            param[1] = new SqlParameter("@AppID", appId);
-
-            using (SqlDataReader dbreader = GetSQLDataReader(GetDBCommand("", "[ORNG.].[IsRegistered]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param)))
-            {
-                return dbreader.Read();
-            }
-        }
 
         public void AddPersonalGadget(long Subject, string propertyURI)
         {
