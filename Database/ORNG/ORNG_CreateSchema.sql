@@ -659,7 +659,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-ALTER PROCEDURE [ORNG.].[GetAppInstance]
+CREATE PROCEDURE [ORNG.].[GetAppInstance]
 @SubjectID BIGINT=NULL, @SubjectURI nvarchar(255)=NULL, @AppID INT, @SessionID UNIQUEIDENTIFIER=NULL, @ApplicationInstanceNodeID BIGINT=NULL OUTPUT,
 @Error BIT=NULL OUTPUT
 AS
@@ -690,7 +690,7 @@ END
 
 GO
 
-/****** Object:  StoredProcedure [ORNG.].[DeleteAppInstance]    Script Date: 10/11/2013 09:48:30 ******/
+/****** Object:  StoredProcedure [ORNG.].[RemoveAppFromPerson]    Script Date: 10/11/2013 09:48:30 ******/
 SET ANSI_NULLS ON
 GO
 
