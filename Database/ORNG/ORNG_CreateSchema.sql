@@ -758,6 +758,36 @@ END
 
 GO
 
+/****** Object:  StoredProcedure [ORNG.].[HasApp]    Script Date: 06/25/2014 11:36:04 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [ORNG.].[HasApp]
+@AppID INT, @SessionID UNIQUEIDENTIFIER=NULL, @Error BIT=NULL OUTPUT
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+	DECLARE @Name nvarchar(255)
+	DECLARE @Predicate BIGINT
+
+	-- this must match the logic in AddAppToOntology!!!!
+	SELECT @Name = REPLACE(RTRIM(RIGHT(url, CHARINDEX('/', REVERSE(url)) - 1)), '.xml', '')
+		FROM [ORNG.].[Apps] WHERE appId = @appId 
+  
+	SELECT @Predicate = _PropertyNode FROM [Ontology.].ClassProperty 
+		WHERE Property = 'http://orng.info/ontology/orng#has' + @Name
+		
+	SELECT [Subject] FROM [RDF.].Triple where Predicate = @Predicate
+END
+
+
+GO
+
 /****** Object:  View [ORNG.].[vwPerson]    Script Date: 04/27/2014 08:09:47 ******/
 SET ANSI_NULLS ON
 GO

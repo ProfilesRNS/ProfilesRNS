@@ -13,4 +13,6 @@ UCSF_CreateSchema.sql
 If doing ORNG.Grant then
 we need to add rows to DataMap for grants!!  
 
+http://blogs.msdn.com/b/varunm/archive/2013/06/18/bind-multiple-sites-on-same-ip-address-and-port-in-ssl.aspx
+
 
