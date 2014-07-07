@@ -2,18 +2,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
-
-
-
-
-
-
-
-
-
-
-ALTER PROCEDURE [Search.].[ParseSearchString]
+CREATE PROCEDURE [Search.].[ParseSearchString]
 	@SearchString VARCHAR(500) = NULL,
 	@NumberOfPhrases INT = 0 OUTPUT,
 	@CombinedSearchString VARCHAR(8000) = '' OUTPUT,
