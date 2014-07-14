@@ -550,7 +550,123 @@ SELECT  R.x.value('ClassPropertyID[1]','varchar(max)'),
           ) t
   CROSS APPLY x.nodes('//Row') AS R ( x )
   
+ ---------------------------------------------------------------
+-- [ORCID.]
+---------------------------------------------------------------
   
+	TRUNCATE TABLE [ORCID.].[REF_Permission]
+	INSERT INTO [ORCID.].[REF_Permission]
+		(
+			[PermissionScope],
+			[PermissionDescription],
+			[MethodAndRequest],
+			[SuccessMessage],
+			[FailedMessage]
+		)
+   SELECT	R.x.value('PermissionScope[1]','varchar(max)'),
+			R.x.value('PermissionDescription[1]','varchar(max)'),
+			R.x.value('MethodAndRequest[1]','varchar(max)'),
+			R.x.value('SuccessMessage[1]','varchar(max)'),
+			R.x.value('FailedMessage[1]','varchar(max)')
+	 FROM    (SELECT
+                      @x.query
+                      ('Import[1]/Table[@Name=''[ORCID.].[REF_Permission]'']')
+                      x
+          ) t
+  CROSS APPLY x.nodes('//Row') AS R ( x )
+
+
+  	TRUNCATE TABLE [ORCID.].[REF_PersonStatusType]
+	INSERT INTO [ORCID.].[REF_PersonStatusType]
+		(
+			[StatusDescription]
+		)
+   SELECT	R.x.value('StatusDescription[1]','varchar(max)')
+	 FROM    (SELECT
+                      @x.query
+                      ('Import[1]/Table[@Name=''[ORCID.].[REF_PersonStatusType]'']')
+                      x
+          ) t
+  CROSS APPLY x.nodes('//Row') AS R ( x )
+
+
+  	TRUNCATE TABLE [ORCID.].[REF_RecordStatus]
+	INSERT INTO [ORCID.].[REF_RecordStatus]
+		(
+			[RecordStatusID],
+			[StatusDescription]
+		)
+   SELECT	R.x.value('RecordStatusID[1]','varchar(max)'),
+			R.x.value('StatusDescription[1]','varchar(max)')
+	 FROM    (SELECT
+                      @x.query
+                      ('Import[1]/Table[@Name=''[ORCID.].[REF_RecordStatus]'']')
+                      x
+          ) t
+  CROSS APPLY x.nodes('//Row') AS R ( x )
+
+
+    TRUNCATE TABLE [ORCID.].[REF_Decision]
+	INSERT INTO [ORCID.].[REF_Decision]
+		(
+			[DecisionDescription],
+			[DecisionDescriptionLong]
+		)
+   SELECT	R.x.value('DecisionDescription[1]','varchar(max)'),
+			R.x.value('DecisionDescriptionLong[1]','varchar(max)')
+	 FROM    (SELECT
+                      @x.query
+                      ('Import[1]/Table[@Name=''[ORCID.].[REF_Decision]'']')
+                      x
+          ) t
+  CROSS APPLY x.nodes('//Row') AS R ( x )
+
+    TRUNCATE TABLE [ORCID.].[REF_WorkExternalType]
+	INSERT INTO [ORCID.].[REF_WorkExternalType]
+		(
+			[WorkExternalType],
+			[WorkExternalDescription]
+		)
+   SELECT	R.x.value('WorkExternalType[1]','varchar(max)'),
+			R.x.value('WorkExternalDescription[1]','varchar(max)')
+	 FROM    (SELECT
+                      @x.query
+                      ('Import[1]/Table[@Name=''[ORCID.].[REF_WorkExternalType]'']')
+                      x
+          ) t
+  CROSS APPLY x.nodes('//Row') AS R ( x )
+
+
+    TRUNCATE TABLE [ORCID.].[RecordLevelAuditType]
+	INSERT INTO [ORCID.].[RecordLevelAuditType]
+		(
+			[AuditType]
+		)
+   SELECT	R.x.value('AuditType[1]','varchar(max)')
+	 FROM    (SELECT
+                      @x.query
+                      ('Import[1]/Table[@Name=''[ORCID.].[RecordLevelAuditType]'']')
+                      x
+          ) t
+  CROSS APPLY x.nodes('//Row') AS R ( x )
+
+
+
+      TRUNCATE TABLE [ORCID.].[DefaultORCIDDecisionIDMapping]
+	INSERT INTO [ORCID.].[DefaultORCIDDecisionIDMapping]
+		(
+			[SecurityGroupID],
+			[DefaultORCIDDecisionID]
+		)
+   SELECT	R.x.value('SecurityGroupID[1]','varchar(max)'),
+			R.x.value('DefaultORCIDDecisionID[1]','varchar(max)')
+	 FROM    (SELECT
+                      @x.query
+                      ('Import[1]/Table[@Name=''[ORCID.].[DefaultORCIDDecisionIDMapping]'']')
+                      x
+          ) t
+  CROSS APPLY x.nodes('//Row') AS R ( x )
+
   -- Use to generate select lists for new tables
   -- SELECT   'R.x.value(''' + c.name +  '[1]'',' + '''varchar(max)'')'+ ',' ,* 
   -- FROM sys.columns c 
@@ -559,4 +675,3 @@ SELECT  R.x.value('ClassPropertyID[1]','varchar(max)'),
   -- AND T.NAME<>'sysname'ORDER BY c.column_id
 	 
 END
-GO

@@ -320,7 +320,82 @@ BEGIN
 				  					for xml path('Row'), type
 							) 'Table'  
 						for xml path(''), type
+					),
+					--------------------------------------------------------
+					-- [ORCID.]
+					--------------------------------------------------------
+					(
+						select '[ORCID.].[REF_Permission]' 'Table/@Name',
+						(
+							SELECT	PermissionScope 'PermissionScope', 
+									PermissionDescription 'PermissionDescription', 
+									MethodAndRequest 'MethodAndRequest',
+									SuccessMessage 'SuccessMessage',
+									FailedMessage 'FailedMessage'
+								from [ORCID.].[REF_Permission]
+									for xml path('Row'), type
+						) 'Table'  
+						for xml path(''), type
+					),
+					(
+						select '[ORCID.].[REF_PersonStatusType]' 'Table/@Name',
+						(
+							SELECT	StatusDescription 'StatusDescription'
+								from [ORCID.].[REF_PersonStatusType]
+									for xml path('Row'), type
+						) 'Table'  
+						for xml path(''), type
+					),
+					(
+						select '[ORCID.].[REF_WorkExternalType]' 'Table/@Name',
+						(
+							SELECT	WorkExternalType 'WorkExternalType',
+									WorkExternalDescription 'WorkExternalDescription'
+								from [ORCID.].[REF_WorkExternalType]
+									for xml path('Row'), type
+						) 'Table'  
+						for xml path(''), type
+					),
+					(
+						select '[ORCID.].[REF_RecordStatus]' 'Table/@Name',
+						(
+							SELECT	RecordStatusID 'RecordStatusID',
+									StatusDescription, 'StatusDescription'
+								from [ORCID.].[REF_RecordStatus]
+									for xml path('Row'), type
+						) 'Table'  
+						for xml path(''), type
+					),
+					(
+						select '[ORCID.].[REF_Decision]' 'Table/@Name',
+						(
+							SELECT	DecisionDescription 'DecisionDescription',
+									DecisionDescriptionLong 'DecisionDescriptionLong'
+								from [ORCID.].[REF_Decision]
+									for xml path('Row'), type
+						) 'Table'  
+						for xml path(''), type
+					),
+					(
+						select '[ORCID.].[RecordLevelAuditType]' 'Table/@Name',
+						(
+							SELECT	AuditType 'AuditType'
+								from [ORCID.].[RecordLevelAuditType]
+									for xml path('Row'), type
+						) 'Table'  
+						for xml path(''), type
+					),
+					(
+						select '[ORCID.].[DefaultORCIDDecisionIDMapping]' 'Table/@Name',
+						(
+							SELECT	SecurityGroupID 'SecurityGroupID',
+									DefaultORCIDDecisionID 'DefaultORCIDDecisionID'
+								from [ORCID.].[DefaultORCIDDecisionIDMapping]
+									for xml path('Row'), type
+						) 'Table'  
+						for xml path(''), type
 					)	
+
 				for xml path(''), type
 			) 'Import'
 		for xml path(''), type
@@ -336,4 +411,3 @@ BEGIN
    --WHERE object_id IN (SELECT object_id FROM sys.tables WHERE name = 'Publication.MyPub.Category')  
 
 END
-GO
