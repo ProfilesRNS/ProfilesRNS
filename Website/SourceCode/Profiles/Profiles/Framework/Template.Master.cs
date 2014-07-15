@@ -101,7 +101,7 @@ namespace Profiles.Framework
 
 
             }
-            catch (NotFiniteNumberException ex)
+            catch (Exception ex)
             {
 
                 Framework.Utilities.DebugLogging.Log(ex.Message + " ++ " + ex.StackTrace);
