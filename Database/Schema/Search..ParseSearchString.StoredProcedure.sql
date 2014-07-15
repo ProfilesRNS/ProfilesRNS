@@ -6,9 +6,6 @@ CREATE PROCEDURE [Search.].[ParseSearchString]
 	@SearchString VARCHAR(500) = NULL,
 	@NumberOfPhrases INT = 0 OUTPUT,
 	@CombinedSearchString VARCHAR(8000) = '' OUTPUT,
-	@SearchString1 VARCHAR(8000) = NULL OUTPUT,
-	@SearchString2 VARCHAR(8000) = NULL OUTPUT,
-	@SearchString3 VARCHAR(8000) = NULL OUTPUT,
 	@SearchPhraseXML XML = NULL OUTPUT,
 	@SearchPhraseFormsXML XML = NULL OUTPUT,
 	@ProcessTime INT = 0 OUTPUT
@@ -99,8 +96,8 @@ BEGIN
 	select @NumberOfPhrases = (select max(PhraseID) from @PhraseList)
 	select @SearchStringNormalized = substring(@SearchStringNormalized,2,len(@SearchStringNormalized)-3)
 
+
 	-- Create a combined string for fulltext search
-	/*
 	select @CombinedSearchString = 
 			(case when @NumberOfPhrases = 0 then ''
 				when @NumberOfPhrases = 1 then
@@ -108,23 +105,11 @@ BEGIN
 				else
 					'"'+@SearchStringNormalized+'"'
 					+ ' OR '
-					--+ '(' + replace(@SearchStringNormalized,' ',' NEAR ') + ')'
-					+ '(' + substring(cast((select ' NEAR '+Phrase from @PhraseList order by PhraseID for xml path(''), type) as varchar(max)),7,999999) + ')'
+					+ '(' + replace(@SearchStringNormalized,' ',' NEAR ') + ')'
 					+ ' OR '
 					+ '(' + substring(cast((select ' AND ('+Forms+')' from @PhraseList order by PhraseID for xml path(''), type) as varchar(max)),6,999999) + ')'
 				end)
-	*/
-	if @NumberOfPhrases = 0
-		select @SearchString1 = NULL, @SearchString2 = NULL, @SearchString3 = NULL
-	if @NumberOfPhrases = 1
-		select	@SearchString1 = '"'+@SearchStringNormalized+'"', 
-				@SearchString2 = (select Forms from @PhraseList),
-				@SearchString3 = NULL
-	if @NumberOfPhrases > 1
-		select	@SearchString1 = '"'+@SearchStringNormalized+'"', 
-				@SearchString2 = '(' + substring(cast((select ' NEAR "'+Phrase+'"' from @PhraseList order by PhraseID for xml path(''), type) as varchar(max)),7,999999) + ')',
-				@SearchString3 = '(' + substring(cast((select ' AND ('+Forms+')' from @PhraseList order by PhraseID for xml path(''), type) as varchar(max)),6,999999) + ')'
-	select @CombinedSearchString = IsNull(@SearchString1,'') + IsNull(' OR '+@SearchString2,'') + IsNull(' OR '+@SearchString3,'')
+				
 	
 	-- Create an XML message listing the parsed phrases
 	select @SearchPhraseXML =		(select
@@ -150,5 +135,4 @@ BEGIN
 	select @ProcessTime = datediff(ms,@d,GetDate())
 
 END
-
 GO
