@@ -65,8 +65,9 @@ this website.
             <div style='border: solid 1px #ccc; margin-bottom: 2px; width: 100%'>
                 <asp:Literal runat="server" ID="litSecurityKey"></asp:Literal>
             </div>
+            <%--
      </td>
     </tr>
 </table>
-
+--%>
 <asp:Literal runat="server" ID="litGadget" Visible="false"/>
