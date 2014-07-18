@@ -104,6 +104,11 @@ my.init = function () {
             url = addParameterToURL(url, "appId", appId);
         }
 
+        // add ownerId if available. This is probably not the best way to do this, but it works
+        if (rpc.a[2]) {
+            url = addParameterToURL(url, "owner", encodeURIComponent(rpc.a[2]));
+        }
+
         if (opt_params) {
             var paramStr = gadgets.json.stringify(opt_params);
             if (paramStr.length > 0) {
