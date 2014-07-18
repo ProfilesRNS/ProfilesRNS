@@ -52,6 +52,10 @@ namespace Profiles.ORNG.Modules.Gadgets
                     uri = Root.Domain + "/profile/" + suffix.Split('/')[0];
                 }
             }
+			else if ("True".Equals(base.GetModuleParamString("AllowSetOwnerFromRequest")))
+            {
+                uri = Page.Request["owner"];
+            }
             om = OpenSocialManager.GetOpenSocialManager(uri, Page);
         }
 
