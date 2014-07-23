@@ -1,0 +1,11 @@
+﻿DECLARE @PersonID INT = 1
+
+delete from PersonWorkIdentifier where PersonWorkIdentifier.PersonWorkID in (select PersonWorkID from [dbo].[PersonWork] where PersonID = @PersonID)
+
+delete from [dbo].[PersonWork] where PersonID = @PersonID
+
+delete from [dbo].[PersonURL] where PersonID = @PersonID
+
+delete from [dbo].[PersonToken] where PersonID = @PersonID
+
+delete from [dbo].[PersonMessage] where PersonID = @PersonID

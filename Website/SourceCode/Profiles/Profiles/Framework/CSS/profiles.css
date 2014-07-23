@@ -23,14 +23,24 @@ form
 }
 
 .actionbuttons input
-{	
-	margin:0px 2px;
+{
+	margin: 0px 2px;
 }
 
 /********************************************/
 /* Customize this part                      */
 /********************************************/
 
+.Searchlink
+{
+	display: block;
+	text-decoration: none;
+	color: #000000;
+}
+.Searchlink.selected:hover
+{
+	color: #ffffff;
+}
 
 .PropertyGroup
 {
@@ -74,10 +84,10 @@ form
 	border-bottom: 4px solid #B23F45;
 }
 
-.activeSectionDetails 
+.activeSectionDetails
 {
-    font-size: 11px;
-    margin-left: 2px;
+	font-size: 11px;
+	margin-left: 2px;
 }
 
 
@@ -126,7 +136,7 @@ form
 }
 .profiles .profilesPageColumnRightTop
 {
-	background-color: #000000;  /* is this really needed here? */
+	background-color: #000000; /* is this really needed here? */
 	background-image: url('../Images/passive_top.gif');
 	width: 777px;
 	height: 12px;
@@ -148,8 +158,7 @@ form
 	height: 18px;
 	overflow: hidden;
 	padding: 0px;
-	margin: 0px;
-	/* nudge border up and to left */
+	margin: 0px; /* nudge border up and to left */
 	margin-left: -1px;
 	margin-top: -2px;
 }
@@ -249,15 +258,13 @@ form
 {
 	width: 174px;
 	margin-left: 1px;
-	
 }
 .profiles .profilesContentActive .activeSectionHead
 {
 	background-color: #EEEBE5;
 	padding: 1px 8px;
 	font-weight: bold;
-	height:100%;
-	
+	height: 100%;
 }
 .profiles .profilesContentActive .activeSectionBody
 {
@@ -477,18 +484,10 @@ form
 	color: #333;
 	margin: 4px 0 2px 0;
 	display: none;
-	
 }
 .profiles .profilesContentPassive .passiveSectionBody
 {
-	overflow: hidden;
-	/* the following may or may not be needed */
-	/* white-space: pre; /* CSS 2.0 */
-	/* white-space: pre-wrap; /* CSS 2.1 */
-	/* white-space: pre-line; /* CSS 3.0 */
-	/* white-space: -pre-wrap; /* Opera 4-6 */
-	/* white-space: -o-pre-wrap; /* Opera 7 */
-	/* white-space: -moz-pre-wrap; /* Mozilla */
+	overflow: hidden; /* the following may or may not be needed */ /* white-space: pre; /* CSS 2.0 */ /* white-space: pre-wrap; /* CSS 2.1 */ /* white-space: pre-line; /* CSS 3.0 */ /* white-space: -pre-wrap; /* Opera 4-6 */ /* white-space: -o-pre-wrap; /* Opera 7 */ /* white-space: -moz-pre-wrap; /* Mozilla */
 }
 .profiles .profilesContentPassive .passiveSectionBody ul
 {
@@ -601,8 +600,9 @@ form
 
 .listTable
 {
-	margin: 0px;	
+	margin: 0px;
 }
+
 .listTable table
 {
 	border-collapse: collapse;
@@ -642,7 +642,7 @@ form
 }
 .listTable td div
 {
-	/*white-space: nowrap; Removed as long text forces table width to be larger than intended. */ 
+	/*white-space: nowrap; Removed as long text forces table width to be larger than intended. */
 	overflow: hidden;
 }
 .listTable .alignLeft
@@ -670,10 +670,17 @@ form
 {
 	color: #FFF;
 }
+.listTable .overRow .listTableLink a
+{
+	text-decoration: none;
+}
 .listTable .listTableLinkOver
 {
 	background-color: #36C;
+	text-decoration: none;
 }
+
+
 
 .listTablePagination
 {
@@ -682,8 +689,7 @@ form
 	border-left: solid 1px #999;
 	border-right: solid 1px #999;
 	border-bottom: solid 1px #999;
-	padding: 6px;
-	/* Align with results table */
+	padding: 6px; /* Align with results table */
 	width: 588px;
 }
 .listTablePagination table
@@ -805,14 +811,14 @@ form
 	padding: 0px 0px;
 }
 .connectionLine
-{	
+{
 	background-image: url('../Images/connection_center.gif');
 	height: 5px;
 	overflow: hidden;
 	padding: 0px;
 }
 .connectionLine div
-{	
+{
 	height: 5px;
 	overflow: hidden;
 }
@@ -871,7 +877,7 @@ form
 	font-family: arial,sans-serif;
 	padding-left: 5px;
 }
-.oddRow td, .evenRow td 
+.oddRow td, .evenRow td
 {
 	border-color: #808080;
 }
@@ -900,13 +906,13 @@ form
 
 .colItemCnt, .colSecurity
 {
-    text-align:center;
-    width: 124px;
+	text-align: center;
+	width: 124px;
 }
 
-table tbody .height25 
+table tbody .height25
 {
-    height: 25px;  
+	height: 25px;
 }
 
 .editDisplayRow
@@ -982,7 +988,7 @@ table tbody .height25
 
 .textBoxDate
 {
-    vertical-align: top;
+	vertical-align: top;
 	width: 75px;
 	margin-right: 3px;
 }
@@ -1017,7 +1023,8 @@ table tbody .height25
 /********************************************/
 /* Link tabs								*/
 /********************************************/
-.anchor-tab {
+.anchor-tab
+{
 	margin: 10px 0 4px 0;
 	color: #666;
 }
@@ -1033,7 +1040,7 @@ table tbody .height25
 	cursor: default;
 }
 .anchor-tab a.selected:hover, .anchor-tab a.disabled:hover
-{	
+{
 	text-decoration: none;
 }
 .anchor-tab a

@@ -1,0 +1,20 @@
+﻿<Presentation PresentationClass="orcid">
+  <PageOptions Columns="2"/>
+  <PageBackLinkName></PageBackLinkName>
+  <PageBackLinkURL></PageBackLinkURL>
+  <PageSubTitle></PageSubTitle>
+  <PageDescription></PageDescription>
+  <PanelList>
+    <Panel type="header"  />
+    <Panel type="page" />
+    <Panel Type="active">
+      <Module ID="MiniSearch"  />
+      <Module ID="MainMenu">
+      </Module>
+    </Panel>
+    <Panel Type="main" />
+    <Panel type="footer" />
+  </PanelList>
+</Presentation>
+
+

@@ -1,0 +1,48 @@
+﻿/*
+formatted at http://www.lonniebest.com/FormatCSS/ 
+using Alphabetize Style Rules
+*/
+@media screen  	
+{
+	.announcement { color: red; font-size: larger; }
+	.counter { color: #000000; width: 400px; }
+	.countererror { color: red; width: 400px; }
+	.multiline { height: 100px; width: 500px; }
+	.multilinesmall { height: 128px; width: 320px; }
+	.orcidsymbol { position: relative; top: 8px; }
+	div.bumc { font-size: larger; }
+	div.hidden { display: none; visibility: hidden; }
+	div.show { display: block; visibility: visible; }
+	div.directions { background-color: #eaeaea; margin-bottom: 5px; }
+	fieldset.bumc { border: thin solid green !important; padding: 15px; }
+	fieldset.bumc legend { color: green !important; }
+	span.superscript { color: red; font-size: 80%; position: relative; top: -0.5em; }
+	span.uierror, td.uierror, th.uierror
+    {
+        color: #FF0000; font-weight: bold;
+    }
+	span.uimessage
+    {
+        color: #000080; font-weight: bold;
+    }
+	
+	table.footnotes { border: none; margin-top: 20px; }
+	table.footnotes td { border: none; }
+	tr.hidden { display: none; visibility: hidden; }
+	tr.show { display: table-row; visibility: visible; }
+	
+	table { border-collapse: collapse; }
+    table.data tr td, table.data tbody tr td { border: solid thin #d6d6d6; padding: 0px 5px 0px 5px; text-align: left; vertical-align: top; }
+    table.data tr th, table.data thead tr th { background-color: #f4faff; border: solid thin #d6d6d6; padding: 0px 5px 0px 5px; text-align: left; vertical-align: bottom; }
+    table.data tr th.center, table.data thead tr th.center { vertical-align: middle !important; }
+    table.data tr.alt { background-color: #fbfbff; text-align: left; vertical-align: top; }
+    table.data tr.header { background-color: #f4faff; font-weight: bolder; text-align: left; vertical-align: bottom; }
+    table.data tr.item { text-align: left; vertical-align: top; }
+    div.section { margin-right: 10px; }
+    div.section div.header
+    {
+        background-color: #E0E0E0;
+        padding: 4px 4px 4px 4px;
+    }
+    div.clear { clear: both; }
+}

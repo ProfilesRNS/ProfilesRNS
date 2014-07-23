@@ -73,7 +73,7 @@ function doListTableRowOver(x) {
     //x.className = 'overRow';
     x.style.backgroundColor = '#5A719C';
     x.style.color = '#FFF';
-    x.style.cursor = 'pointer';    
+    x.style.cursor = 'default';    
     for (var i = 0; i < x.childNodes.length; i++) {
     	if (x.childNodes[i].childNodes.length > 0) {
     		if (x.childNodes[i].children[0] != undefined)

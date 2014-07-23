@@ -1,0 +1,174 @@
+﻿CREATE PROCEDURE [RDF.].[GetPublications]
+	@Subject BIGINT -- = 147559
+AS
+BEGIN
+
+	DECLARE @AuthorInAuthorship BIGINT -- = 94
+	SELECT @AuthorInAuthorship = [RDF.].fnURI2NodeID('http://vivoweb.org/ontology/core#authorInAuthorship') 
+
+	DECLARE @LinkedInformationResource BIGINT -- = 1535
+	SELECT @LinkedInformationResource = [RDF.].fnURI2NodeID('http://vivoweb.org/ontology/core#linkedInformationResource') 
+
+	DECLARE @InformationResourceReference BIGINT -- = 381
+	SELECT @InformationResourceReference = [RDF.].fnURI2NodeID('http://profiles.catalyst.harvard.edu/ontology/prns#informationResourceReference') 
+
+	SELECT TOP (100) PERCENT 
+		Triple_1.TripleID, 
+		[RDF.].Triple.SortOrder, 
+		[RDF.].Triple.ViewSecurityGroup, 
+		[RDF.].Node.Value
+	FROM            
+		[RDF.].Triple 
+		INNER JOIN [RDF.].Triple AS Triple_1 ON [RDF.].Triple.Object = Triple_1.Subject 
+		INNER JOIN [RDF.].Triple AS Triple_2 ON Triple_1.Object = Triple_2.Subject 
+		INNER JOIN [RDF.].Node ON Triple_2.Object = [RDF.].Node.NodeID
+	WHERE        
+		([RDF.].Triple.Subject = @Subject) 
+		AND ([RDF.].Triple.Predicate = @AuthorInAuthorship) 
+		AND (Triple_1.Predicate = @LinkedInformationResource) 
+		AND  (Triple_2.Predicate = @InformationResourceReference)
+	ORDER BY 
+		[RDF.].Triple.SortOrder
+
+END
+
+GO
+
+CREATE PROCEDURE [RDF.].[GetNarrative]
+	@Subject BIGINT -- = 147559
+AS
+BEGIN
+
+	SELECT TOP (200) 
+		[RDF.Security].[Group].DefaultORCIDDecisionID, 
+		ObjectValue AS Overview
+	FROM            
+		[RDF.].vwTripleValue LEFT JOIN [RDF.Security].[Group] ON [RDF.].vwTripleValue.ViewSecurityGroup = [RDF.Security].[Group].SecurityGroupID
+	WHERE        
+		(Subject = @Subject) 
+		AND (PredicateValue = N'http://vivoweb.org/ontology/core#overview')
+
+END
+
+GO
+
+CREATE PROCEDURE [ORNG].[GetWebsites]
+	@NodeID BIGINT
+AS
+BEGIN
+
+	DECLARE @AppID INT 
+	SET @AppID = 0
+
+	SELECT @AppID = appId FROM [ORNG].Apps WHERE (name = N'Websites')
+
+	SELECT 
+		nodeId, 
+		appId, 
+		keyname, 
+		value, 
+		createdDT, 
+		updatedDT 
+	FROM 
+		[ORNG].AppData 
+	WHERE
+		[ORNG].AppData.nodeId = @NodeID
+		AND [ORNG].AppData.appId = @AppID
+
+END		
+
+
+GO
+
+CREATE PROCEDURE [Profile.Data].[PeopleWithoutAnORCID]
+ 
+AS
+ 
+    SELECT TOP 100 PERCENT
+        [Profile.Data].[Person].[PersonID]
+        , [Profile.Data].[Person].[UserID]
+        , [Profile.Data].[Person].[EmailAddr]
+        , [Profile.Data].[Person].[FacultyRankID]
+        , [Profile.Data].[Person].[InternalUsername]
+		, [Profile.Data].[Person.FacultyRank].FacultyRank
+		, [Profile.Data].[Person].LastName + ', ' + [Profile.Data].[Person].FirstName AS DisplayName
+		, [Profile.Data].[Organization.Institution].InstitutionName
+		, [Profile.Data].[Organization.Department].DepartmentName
+		, [Profile.Data].[Organization.Division].DivisionName
+		, OP.ORCID
+    FROM
+        [Profile.Data].[Person]
+		LEFT JOIN [Profile.Data].[Person.FacultyRank] ON [Profile.Data].[Person].FacultyRankID = [Profile.Data].[Person.FacultyRank].FacultyRankID
+		LEFT JOIN ORCID.Person OP ON [Profile.Data].[Person].InternalUsername = OP.InternalUsername
+		INNER JOIN  [Profile.Data].[Person.Affiliation] 
+			ON 
+				[Profile.Data].[Person].PersonID = [Profile.Data].[Person.Affiliation].PersonID
+				AND [Profile.Data].[Person.Affiliation].IsPrimary = 1
+		LEFT JOIN   [Profile.Data].[Organization.Institution] ON [Profile.Data].[Person.Affiliation].InstitutionID = [Profile.Data].[Organization.Institution].InstitutionID
+		LEFT JOIN   [Profile.Data].[Organization.Department] ON [Profile.Data].[Person.Affiliation].DepartmentID = [Profile.Data].[Organization.Department].DepartmentID
+		LEFT JOIN   [Profile.Data].[Organization.Division] ON [Profile.Data].[Person.Affiliation].DivisionID = [Profile.Data].[Organization.Division].DivisionID
+	WHERE 
+		NOT ([Profile.Data].[Person].EmailAddr IS NULL)
+		AND [Profile.Data].[Person].IsActive = 1
+		AND [Profile.Data].[Person].Visible = 1
+		AND OP.ORCID IS NULL
+	ORDER BY
+		[Profile.Data].[Organization.Institution].InstitutionName
+		, [Profile.Data].[Organization.Department].DepartmentName
+		, [Profile.Data].[Organization.Division].DivisionName
+		, [Profile.Data].[Person].LastName 
+		, [Profile.Data].[Person].FirstName
+
+GO
+
+
+GO
+
+CREATE PROCEDURE [Profile.Data].[PeopleWithoutAnORCIDByName]
+
+	@PartialName VARCHAR(100)
+ 
+AS
+ 
+    SELECT TOP 100 PERCENT
+        [Profile.Data].[Person].[PersonID]
+        , [Profile.Data].[Person].[UserID]
+        , [Profile.Data].[Person].[EmailAddr]
+        , [Profile.Data].[Person].[FacultyRankID]
+        , [Profile.Data].[Person].[InternalUsername]
+		, [Profile.Data].[Person.FacultyRank].FacultyRank
+		, [Profile.Data].[Person].LastName + ', ' + [Profile.Data].[Person].FirstName AS DisplayName
+		, [Profile.Data].[Organization.Institution].InstitutionName
+		, [Profile.Data].[Organization.Department].DepartmentName
+		, [Profile.Data].[Organization.Division].DivisionName
+		, OP.ORCID
+    FROM
+        [Profile.Data].[Person]
+		LEFT JOIN [Profile.Data].[Person.FacultyRank] ON [Profile.Data].[Person].FacultyRankID = [Profile.Data].[Person.FacultyRank].FacultyRankID
+		LEFT JOIN ORCID.Person OP ON [Profile.Data].[Person].InternalUsername = OP.InternalUsername
+		INNER JOIN  [Profile.Data].[Person.Affiliation] 
+			ON 
+				[Profile.Data].[Person].PersonID = [Profile.Data].[Person.Affiliation].PersonID
+				AND [Profile.Data].[Person.Affiliation].IsPrimary = 1
+		LEFT JOIN   [Profile.Data].[Organization.Institution] ON [Profile.Data].[Person.Affiliation].InstitutionID = [Profile.Data].[Organization.Institution].InstitutionID
+		LEFT JOIN   [Profile.Data].[Organization.Department] ON [Profile.Data].[Person.Affiliation].DepartmentID = [Profile.Data].[Organization.Department].DepartmentID
+		LEFT JOIN   [Profile.Data].[Organization.Division] ON [Profile.Data].[Person.Affiliation].DivisionID = [Profile.Data].[Organization.Division].DivisionID
+	WHERE 
+		NOT ([Profile.Data].[Person].EmailAddr IS NULL)
+		AND [Profile.Data].[Person].IsActive = 1
+		AND [Profile.Data].[Person].Visible = 1
+		AND OP.ORCID IS NULL
+		AND 
+			(
+				[Profile.Data].[Person].LastName + ', ' + [Profile.Data].[Person].FirstName  like '%' + @PartialName + '%'
+				OR [Profile.Data].[Person].FirstName + ' ' + [Profile.Data].[Person].LastName  like '%' + @PartialName + '%'
+			)
+	ORDER BY
+		[Profile.Data].[Organization.Institution].InstitutionName
+		, [Profile.Data].[Organization.Department].DepartmentName
+		, [Profile.Data].[Organization.Division].DivisionName
+		, [Profile.Data].[Person].LastName 
+		, [Profile.Data].[Person].FirstName
+
+
+GO

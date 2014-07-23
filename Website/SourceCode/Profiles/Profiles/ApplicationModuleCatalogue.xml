@@ -25,6 +25,7 @@ For details, see: LICENSE.txt
   <Application ApplicaitonPath="About" ModulePath="Modules" Enabled="true"/>
   <Application ApplicaitonPath="Login" ModulePath="Modules" Enabled="true"/>
   <Application ApplicaitonPath="ORNG" ModulePath="Modules" Enabled="true"/>
+  <Application ApplicaitonPath="ORCID" ModulePath="Modules" Enabled="true"/>
 </ApplicationList>
 
 

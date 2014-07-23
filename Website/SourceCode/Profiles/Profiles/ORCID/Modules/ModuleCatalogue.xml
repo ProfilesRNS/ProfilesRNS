@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+
+Copyright (c) 2008-2012 by the President and Fellows of Harvard College. All rights reserved.
+Profiles Research Networking Software was developed under the supervision of Griffin M Weber, MD, PhD.,
+and Harvard Catalyst: The Harvard Clinical and Translational Science Center, with support from the
+National Center for Research Resources and Harvard University.
+
+
+Code licensed under a BSD License.
+For details, see: LICENSE.txt
+-->
+<ModuleList>
+  <Module ModulePath="Modules" NameSpace="CreateBatch" FileName="CreateBatch.ascx" Enabled="true" />
+  <Module ModulePath="Modules" NameSpace="CreateMyORCID" FileName="CreateMyORCID.ascx" Enabled="true" />
+  <Module ModulePath="Modules" NameSpace="CreationConfrimation" FileName="CreationConfrimation.ascx" Enabled="true" />
+  <Module ModulePath="Modules" NameSpace="Default" FileName="Default.ascx" Enabled="true" />
+  <Module ModulePath="Modules" NameSpace="ProcessReadLimitedAuthCode" FileName="ProcessReadLimitedAuthCode.ascx" Enabled="true" />
+  <Module ModulePath="Modules" NameSpace="ProvideORCID" FileName="ProvideORCID.ascx" Enabled="true" />
+  <Module ModulePath="Modules" NameSpace="ProvideORCIDConfirmation" FileName="ProvideORCIDConfirmation.ascx" Enabled="true" />
+  <Module ModulePath="Modules" NameSpace="UpdateSecurityGroupDefaultDecisions" FileName="UpdateSecurityGroupDefaultDecisions.ascx" Enabled="true" />
+  <Module ModulePath="Modules" NameSpace="UploadInfoToORCID" FileName="UploadInfoToORCID.ascx" Enabled="true" />
+  <Module ModulePath="Modules" NameSpace="CustomEditORCID" FileName="CustomEditORCID.ascx" Enabled="true" />
+</ModuleList>
+
+

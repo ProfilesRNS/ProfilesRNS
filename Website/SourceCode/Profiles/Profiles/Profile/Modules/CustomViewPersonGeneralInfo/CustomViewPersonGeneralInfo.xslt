@@ -3,6 +3,12 @@
   <xsl:param name="email"/>
   <xsl:param name="root"/>
   <xsl:param name="imgguid"/>
+  <xsl:param name="orcid"/>
+  <xsl:param name="orcidurl"/>
+  <xsl:param name="orcidinfosite"/>
+  <xsl:param name="orcidimage"/>
+  <xsl:param name="orcidimageguid"/>
+
   <xsl:template match="/">
     <div class="content_two_columns">
       <table>
@@ -22,6 +28,7 @@
       </table>
     </div>
   </xsl:template>
+
   <!--=============Template for displaying Name table============-->
   <xsl:template name="Name">
     <xsl:if test="rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:personInPrimaryPosition/@rdf:resource]/prns:isPrimaryPosition !=''">
@@ -128,6 +135,24 @@
           </xsl:when>
         </xsl:choose>
       </xsl:otherwise>
+    </xsl:choose>
+    <xsl:choose>
+      <xsl:when test="$orcid!=''">
+        <tr>
+          <th>
+            ORCID
+            <img id="{$orcidimageguid}" src="{$orcidimage}" alt="ORCID Icon" style="vertical-align:text-bottom"></img>
+          </th>
+          <td>
+            <a href="{$orcidurl}" target="_blank">
+              <xsl:value-of select="$orcid "/>
+            </a>
+            <xsl:text disable-output-escaping="yes">&#160;</xsl:text><a style="border: none;" href="{$orcidinfosite}" target='_blank'>
+              <img style='border-style: none' src="{$root}/Framework/Images/info.png"  border='0'/>
+            </a>
+          </td>
+        </tr>
+      </xsl:when>
     </xsl:choose>
   </xsl:template>
 </xsl:stylesheet>

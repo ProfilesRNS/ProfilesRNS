@@ -1,0 +1,650 @@
+﻿/*
+
+DROP TABLE [ORCID].PersonAffiliation
+DROP TABLE [ORCID].PersonOthername
+DROP TABLE [ORCID].PersonURL
+DROP TABLE [ORCID].PersonWorkIdentifier
+DROP TABLE [ORCID].PersonWork
+DROP TABLE [ORCID].PersonAlternateEmail
+DROP TABLE [ORCID].PersonToken
+DROP TABLE [ORCID].PersonMessage
+DROP TABLE [ORCID].Person
+DROP TABLE [ORCID].[REF_AffiliationType]
+DROP TABLE [ORCID].REF_PersonStatusType
+DROP TABLE [ORCID].REF_RecordStatus
+DROP TABLE [ORCID].REF_Decision
+DROP TABLE [ORCID].REF_Permission
+DROP TABLE [ORCID].REF_WorkExternalType
+DROP TABLE [ORCID].ErrorLog
+DROP TABLE [ORCID].FieldLevelAuditTrail
+DROP TABLE [ORCID].RecordLevelAuditTrail
+DROP TABLE [ORCID].RecordLevelAuditType
+
+*/
+
+CREATE TABLE [ORCID].REF_Permission (
+	[PermissionID] [tinyint] IDENTITY(1,1) NOT NULL,
+	[PermissionScope] [varchar](100) NOT NULL,
+	[PermissionDescription] [varchar](500) NOT NULL,
+	[MethodAndRequest] [varchar](100) NULL,
+	[SuccessMessage] [varchar](1000) NULL,
+	[FailedMessage] [varchar](1000) NULL,
+ CONSTRAINT [PK_REF_Permission] PRIMARY KEY CLUSTERED 
+(
+	[PermissionID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+CREATE UNIQUE INDEX IX_REF_Permission_PermissionScope ON [ORCID].REF_Permission(PermissionScope);
+
+INSERT INTO [ORCID].REF_Permission (PermissionScope, PermissionDescription, MethodAndRequest) VALUES ('/orcid-profile/create', 'Add an ORICD Record', 'orcid-profile')
+INSERT INTO [ORCID].REF_Permission (PermissionScope, PermissionDescription, MethodAndRequest, SuccessMessage, FailedMessage) VALUES ('/orcid-bio/update', 'Update ORCID bio data', 'orcid-bio', 'Your biographical information was successfully transfered to ORCID', 'Your biographical information were NOT successfully transfered to ORCID')
+INSERT INTO [ORCID].REF_Permission (PermissionScope, PermissionDescription, MethodAndRequest, SuccessMessage, FailedMessage) VALUES ('/orcid-works/create', 'Add works', 'orcid-works', 'Your publication(s) were successfully transfered to ORCID', 'Your publication(s) were NOT successfully transfered to ORCID')
+INSERT INTO [ORCID].REF_Permission (PermissionScope, PermissionDescription, MethodAndRequest, SuccessMessage) VALUES ('/orcid-profile/read-limited', 'Read Entire Record', 'orcid-profile', 'You have successfully given Boston University permission to read your ORCID record')
+INSERT INTO [ORCID].REF_Permission (PermissionScope, PermissionDescription, MethodAndRequest) VALUES ('/orcid-bio/read-limited', 'Read Bio', 'orcid-bio')
+INSERT INTO [ORCID].REF_Permission (PermissionScope, PermissionDescription, MethodAndRequest) VALUES ('/orcid-works/read-limited', 'Read Research Activities', 'orcid-works')
+INSERT INTO [ORCID].REF_Permission (PermissionScope, PermissionDescription, MethodAndRequest) VALUES ('/orcid-bio/external-identifiers/create', 'Add an External Identifier', 'orcid-bio/external-identifiers')
+INSERT INTO [ORCID].REF_Permission (PermissionScope, PermissionDescription, MethodAndRequest) VALUES ('/authenticate', 'Authenticate using ORCID credentials', NULL)
+INSERT INTO [ORCID].REF_Permission (PermissionScope, PermissionDescription, MethodAndRequest, SuccessMessage, FailedMessage) VALUES ('/affiliations/create', 'Add affiliation', 'orcid-affiliations', 'Your affiliation(s) were successfully transfered to ORCID', 'Your affiliation(s) were NOT successfully transfered to ORCID')
+INSERT INTO [ORCID].REF_Permission (PermissionScope, PermissionDescription, MethodAndRequest, SuccessMessage, FailedMessage) VALUES ('/affiliations/update', 'Update affiliation', 'orcid-affiliations', 'Your affiliation(s) were successfully transfered to ORCID', 'Your affiliation(s) were NOT successfully transfered to ORCID')
+INSERT INTO [ORCID].REF_Permission (PermissionScope, PermissionDescription, MethodAndRequest) VALUES ('/read-public', 'Read Public Info', '*')
+
+ 
+
+
+--INSERT INTO [ORCID].REF_Permission (PermissionScope, PermissionDescription, MethodAndRequest) VALUES ('/orcid-works/update', 'Update Research Activities', 'orcid-works')
+--INSERT INTO [ORCID].REF_Permission (PermissionScope, PermissionDescription, MethodAndRequest) VALUES ('/read-public', 'Read Public Info', '*')
+--INSERT INTO [ORCID].REF_Permission (PermissionScope, PermissionDescription, MethodAndRequest) VALUES ('/orcid-grants/read-limited', 'Read Grants', 'orcid-grants')
+--INSERT INTO [ORCID].REF_Permission (PermissionScope, PermissionDescription, MethodAndRequest) VALUES ('/orcid-grants/update', 'Update Grants', 'orcid-grants')
+--INSERT INTO [ORCID].REF_Permission (PermissionScope, PermissionDescription, MethodAndRequest) VALUES ('/orcid-patents/read-limited', 'Read Patents', 'orcid-patents')
+--INSERT INTO [ORCID].REF_Permission (PermissionScope, PermissionDescription, MethodAndRequest) VALUES ('/orcid-patents/update', 'Update Patents', 'orcid-patents')
+
+CREATE TABLE [ORCID].REF_PersonStatusType
+(
+	PersonStatusTypeID TINYINT IDENTITY(1,1) NOT NULL,
+	StatusDescription VARCHAR(75) NOT NULL,
+	CONSTRAINT [PK_REF_PersonStatusType] PRIMARY KEY CLUSTERED ([PersonStatusTypeID] ASC)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+INSERT INTO [ORCID].REF_PersonStatusType (StatusDescription) VALUES ('Opt-Out')
+INSERT INTO [ORCID].REF_PersonStatusType (StatusDescription) VALUES ('Opt-In: Push Profiles Data')
+INSERT INTO [ORCID].REF_PersonStatusType (StatusDescription) VALUES ('Opt-In: Do Not Push Profiles Data')
+INSERT INTO [ORCID].REF_PersonStatusType (StatusDescription) VALUES ('Awaiting Response')
+INSERT INTO [ORCID].REF_PersonStatusType (StatusDescription) VALUES ('ORCID Created')
+INSERT INTO [ORCID].REF_PersonStatusType (StatusDescription) VALUES ('ORCID Provided')
+INSERT INTO [ORCID].REF_PersonStatusType (StatusDescription) VALUES ('Batch Push Failed')
+INSERT INTO [ORCID].REF_PersonStatusType (StatusDescription) VALUES ('Unknown')
+INSERT INTO [ORCID].REF_PersonStatusType (StatusDescription) VALUES ('User Push Failed')
+
+--CREATE TABLE REF_PrivacyType
+--(
+--	PrivacyTypeID TINYINT IDENTITY(1,1) NOT NULL,
+--	PrivacyType VARCHAR(75) NOT NULL,
+--	CONSTRAINT [PK_REF_PrivacyType] PRIMARY KEY CLUSTERED ([PrivacyTypeID] ASC)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+--) ON [PRIMARY]
+
+
+--INSERT INTO REF_PrivacyType (PrivacyType) VALUES ('Public')
+--INSERT INTO REF_PrivacyType (PrivacyType) VALUES ('Limited')
+--INSERT INTO REF_PrivacyType (PrivacyType) VALUES ('Private')
+
+CREATE TABLE [ORCID].REF_RecordStatus
+(
+	RecordStatusID TINYINT NOT NULL,
+	StatusDescription VARCHAR(150) NOT NULL,
+	CONSTRAINT [PK_REF_RecordStatus] PRIMARY KEY CLUSTERED ([RecordStatusID] ASC)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+INSERT INTO [ORCID].REF_RecordStatus (RecordStatusID, StatusDescription) VALUES (1, 'Success')
+INSERT INTO [ORCID].REF_RecordStatus (RecordStatusID, StatusDescription) VALUES (2, 'Failed')
+INSERT INTO [ORCID].REF_RecordStatus (RecordStatusID, StatusDescription) VALUES (3, 'Exclude')
+INSERT INTO [ORCID].REF_RecordStatus (RecordStatusID, StatusDescription) VALUES (4, 'Add')
+INSERT INTO [ORCID].REF_RecordStatus (RecordStatusID, StatusDescription) VALUES (6, 'Waiting to be sent to ORCID')
+INSERT INTO [ORCID].REF_RecordStatus (RecordStatusID, StatusDescription) VALUES (7, 'Waiting for ORCID User for approval')
+INSERT INTO [ORCID].REF_RecordStatus (RecordStatusID, StatusDescription) VALUES (8, 'Inserting PubMed Publications in to ORCID Work Table')
+INSERT INTO [ORCID].REF_RecordStatus (RecordStatusID, StatusDescription) VALUES (9, 'Created BIO Update ORCID Message')
+INSERT INTO [ORCID].REF_RecordStatus (RecordStatusID, StatusDescription) VALUES (10, 'Denied Access')
+INSERT INTO [ORCID].REF_RecordStatus (RecordStatusID, StatusDescription) VALUES (11, 'ORCID User Denied')
+
+CREATE TABLE [ORCID].REF_Decision
+(
+	DecisionID TINYINT IDENTITY(1,1) NOT NULL,
+	DecisionDescription VARCHAR(150) NOT NULL,
+	DecisionDescriptionLong VARCHAR(500) NOT NULL,
+	CONSTRAINT [PK_REF_Decision] PRIMARY KEY CLUSTERED ([DecisionID] ASC)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+INSERT INTO [ORCID].REF_Decision (DecisionDescription, DecisionDescriptionLong) VALUES ('Public', 'Push Record with public visibility')
+INSERT INTO [ORCID].REF_Decision (DecisionDescription, DecisionDescriptionLong) VALUES ('Limited', 'Push Record with limited visibility')
+INSERT INTO [ORCID].REF_Decision (DecisionDescription, DecisionDescriptionLong) VALUES ('Private', 'Push Record with private visibility')
+INSERT INTO [ORCID].REF_Decision (DecisionDescription, DecisionDescriptionLong) VALUES ('Exclude', 'Do not push this record')
+INSERT INTO [ORCID].REF_Decision (DecisionDescription, DecisionDescriptionLong) VALUES ('Include', 'Include this record')
+INSERT INTO [ORCID].REF_Decision (DecisionDescription, DecisionDescriptionLong) VALUES ('Unable To Push', 'Data can''t be pushed')
+
+CREATE TABLE [ORCID].REF_WorkExternalType (
+	[WorkExternalTypeID] [tinyint] IDENTITY(1,1) NOT NULL,
+	[WorkExternalType] [varchar](50) NOT NULL,
+	[WorkExternalDescription] [varchar](100) NOT NULL,
+ CONSTRAINT [PK_REF_WorkExternalType] PRIMARY KEY CLUSTERED 
+(
+	[WorkExternalTypeID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+CREATE UNIQUE INDEX IX_REF_WorkExternalType_WorkExternalType ON [ORCID].REF_WorkExternalType(WorkExternalType);
+
+INSERT INTO [ORCID].REF_WorkExternalType (WorkExternalType, WorkExternalDescription) VALUES ('arxiv', 'ArXiv.')
+INSERT INTO [ORCID].REF_WorkExternalType (WorkExternalType, WorkExternalDescription) VALUES ('asin', 'Amazon Standard Identification Number.')
+INSERT INTO [ORCID].REF_WorkExternalType (WorkExternalType, WorkExternalDescription) VALUES ('bibcode', 'Bibcode; used by a number of astronomical data systems; example: 1924MNRAS..84..308E.')
+INSERT INTO [ORCID].REF_WorkExternalType (WorkExternalType, WorkExternalDescription) VALUES ('doi', 'Digital object identifier; example: 10.1038/news070508-7.')
+INSERT INTO [ORCID].REF_WorkExternalType (WorkExternalType, WorkExternalDescription) VALUES ('eid', 'Identifier used by Scopus.')
+INSERT INTO [ORCID].REF_WorkExternalType (WorkExternalType, WorkExternalDescription) VALUES ('Id', 'A unique identifier, used where none of the specialized identifiers are applicable.')
+INSERT INTO [ORCID].REF_WorkExternalType (WorkExternalType, WorkExternalDescription) VALUES ('isbn', 'International Standard Book Number such as 978-0812695939.')
+INSERT INTO [ORCID].REF_WorkExternalType (WorkExternalType, WorkExternalDescription) VALUES ('issn', 'International Standard Serial Number.')
+INSERT INTO [ORCID].REF_WorkExternalType (WorkExternalType, WorkExternalDescription) VALUES ('jfm', 'Jahrbuch über die Fortschritte der Mathematik.')
+INSERT INTO [ORCID].REF_WorkExternalType (WorkExternalType, WorkExternalDescription) VALUES ('jstor', 'JSTOR abstract')
+INSERT INTO [ORCID].REF_WorkExternalType (WorkExternalType, WorkExternalDescription) VALUES ('lccn', 'Library of Congress Control Number.')
+INSERT INTO [ORCID].REF_WorkExternalType (WorkExternalType, WorkExternalDescription) VALUES ('mr', 'Mathematical Reviews.')
+INSERT INTO [ORCID].REF_WorkExternalType (WorkExternalType, WorkExternalDescription) VALUES ('oclc', 'Online Computer Library Center.')
+INSERT INTO [ORCID].REF_WorkExternalType (WorkExternalType, WorkExternalDescription) VALUES ('ol', 'Open Library')
+INSERT INTO [ORCID].REF_WorkExternalType (WorkExternalType, WorkExternalDescription) VALUES ('osti', 'Office of Scientific and Technical Information.')
+INSERT INTO [ORCID].REF_WorkExternalType (WorkExternalType, WorkExternalDescription) VALUES ('pmc', 'PubMed Central article number for full-text free repository of an article.')
+INSERT INTO [ORCID].REF_WorkExternalType (WorkExternalType, WorkExternalDescription) VALUES ('pmid', 'PubMed Unique Identifier.')
+INSERT INTO [ORCID].REF_WorkExternalType (WorkExternalType, WorkExternalDescription) VALUES ('rfc', 'Request for Comments.')
+INSERT INTO [ORCID].REF_WorkExternalType (WorkExternalType, WorkExternalDescription) VALUES ('ssrn', 'Social Science Research Network.')
+INSERT INTO [ORCID].REF_WorkExternalType (WorkExternalType, WorkExternalDescription) VALUES ('zbl', 'Zentralblatt MATH.')
+
+
+CREATE TABLE [ORCID].Person
+(
+	PersonID INT IDENTITY(1,1) NOT NULL,
+	InternalUsername NVARCHAR(100) NOT NULL,
+	PersonStatusTypeID TINYINT NOT NULL,
+	CreateUnlessOptOut BIT NOT NULL,
+	ORCID VARCHAR(50) NULL,
+	ORCIDRecorded SMALLDATETIME NULL,
+	FirstName NVARCHAR(150) NULL,
+	LastName NVARCHAR(150) NULL,
+	PublishedName NVARCHAR(500) NULL,
+	EmailDecisionID TINYINT NULL,
+	EmailAddress VARCHAR(300) NULL,
+	AlternateEmailDecisionID TINYINT NULL,
+	AgreementAcknowledged BIT NULL,
+	Biography VARCHAR(5000) NULL,
+	BiographyDecisionID TINYINT NULL,
+--	URLDecisionID TINYINT NULL,
+	CONSTRAINT [PK_Person] PRIMARY KEY CLUSTERED ([PersonID] ASC)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+CREATE UNIQUE INDEX IX_Person_InternalUsername ON [ORCID].Person(InternalUsername); 
+CREATE INDEX IX_Person_PersonStatusTypeID ON [ORCID].Person(PersonStatusTypeID); 
+CREATE INDEX IX_Person_CreateUnlessOptOut ON [ORCID].Person(CreateUnlessOptOut); 
+CREATE INDEX IX_Person_ORCID ON [ORCID].Person(ORCID); 
+ALTER TABLE [ORCID].Person ADD CONSTRAINT fk_Person_personstatustypeid FOREIGN KEY(PersonStatusTypeID)REFERENCES [ORCID].REF_PersonStatusType(PersonStatusTypeID)
+ALTER TABLE [ORCID].Person ADD CONSTRAINT fk_Person_EmailDecisionID FOREIGN KEY(EmailDecisionID)REFERENCES [ORCID].REF_Decision(DecisionID)
+ALTER TABLE [ORCID].Person ADD CONSTRAINT fk_Person_AlternateEmailDecisionID FOREIGN KEY(AlternateEmailDecisionID)REFERENCES [ORCID].REF_Decision(DecisionID)
+ALTER TABLE [ORCID].Person ADD CONSTRAINT fk_Person_BiographyDecisionID FOREIGN KEY(BiographyDecisionID)REFERENCES [ORCID].REF_Decision(DecisionID)
+--ALTER TABLE [ORCID].Person ADD CONSTRAINT fk_Person_URLDecisionID FOREIGN KEY(URLDecisionID)REFERENCES [ORCID].REF_Decision(DecisionID)
+
+CREATE TABLE [ORCID].PersonAlternateEmail 
+(
+	PersonAlternateEmailID INT IDENTITY(1,1) NOT NULL,
+	PersonID INT NOT NULL,
+	EmailAddress VARCHAR(200) NOT NULL,
+	PersonMessageID INT NULL,
+	CONSTRAINT [PK_PersonAlternateEmail] PRIMARY KEY CLUSTERED ([PersonAlternateEmailID] ASC)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+
+CREATE INDEX IX_PersonAlternateEmail_PersonID ON [ORCID].PersonAlternateEmail(PersonID); 
+CREATE INDEX IX_PersonAlternateEmail_PersonMessageID ON [ORCID].PersonAlternateEmail(PersonMessageID); 
+ALTER TABLE [ORCID].PersonAlternateEmail ADD CONSTRAINT fk_PersonAlternateEmail_Personid FOREIGN KEY(PersonID)REFERENCES [ORCID].Person(PersonID)
+
+
+CREATE TABLE [ORCID].[PersonToken](
+	[PersonTokenID] int identity(1,1) not null,
+	[PersonID] [int] NOT NULL,
+	[PermissionID] [tinyint] NOT NULL,
+	[AccessToken] [varchar](50) NOT NULL,
+	[TokenExpiration] [smalldatetime] NOT NULL,
+	[RefreshToken] [varchar](50) NULL,
+ CONSTRAINT [PK_PersonToken] PRIMARY KEY CLUSTERED 
+(
+	[PersonTokenID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [ORCID].[PersonToken]  WITH CHECK ADD  CONSTRAINT [FK_PersonToken_Permissions] FOREIGN KEY([PermissionID])
+REFERENCES [ORCID].[REF_Permission] ([PermissionID])
+GO
+
+ALTER TABLE [ORCID].[PersonToken] CHECK CONSTRAINT [FK_PersonToken_Permissions]
+GO
+
+ALTER TABLE [ORCID].[PersonToken]  WITH CHECK ADD  CONSTRAINT [FK_PersonToken_Person] FOREIGN KEY([PersonID])
+REFERENCES [ORCID].[Person] ([PersonID])
+GO
+
+ALTER TABLE [ORCID].[PersonToken] CHECK CONSTRAINT [FK_PersonToken_Person]
+
+CREATE UNIQUE INDEX IX_PersonToken_PersonIDPermissionID ON [ORCID].PersonToken(PersonID, PermissionID); 
+CREATE INDEX IX_PersonToken_PersonID ON [ORCID].PersonToken(PersonID); 
+CREATE INDEX IX_PersonToken_PermissionID ON [ORCID].PersonToken(PermissionID); 
+
+CREATE TABLE [ORCID].ErrorLog 
+(
+	ErrorLogID INT IDENTITY(1,1) NOT NULL,
+	InternalUsername NVARCHAR(11) NULL,
+	Exception TEXT NOT NULL,
+	OccurredOn SMALLDATETIME NOT NULL,
+	Processed BIT DEFAULT (0) NOT NULL,
+	CONSTRAINT [PK_ErrorLog] PRIMARY KEY CLUSTERED ([ErrorLogID] ASC)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+CREATE TABLE [ORCID].[PersonMessage](
+	[PersonMessageID] [int] IDENTITY(1,1) NOT NULL,
+	[PersonID] [int] NOT NULL,
+	[XML_Sent] [varchar](max) NULL,
+	[XML_Response] [varchar](max) NULL,
+	[ErrorMessage] [varchar](1000) NULL,
+	[HttpResponseCode] [varchar](50) NULL,
+	[MessagePostSuccess] [bit] NULL,
+	[RecordStatusID] [tinyint] NULL,
+	[PermissionID] [tinyint] NULL,
+	[RequestURL] [varchar](1000) NULL,
+	[HeaderPost] [varchar](1000) NULL,
+	[UserMessage] [varchar](2000) NULL,
+	[PostDate] [SMALLDATETIME] NULL,
+ CONSTRAINT [PK_PersonMessage] PRIMARY KEY CLUSTERED 
+(
+	[PersonMessageID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+CREATE INDEX IX_PersonMessage_PersonID ON [ORCID].PersonMessage(PersonID); 
+CREATE INDEX IX_PersonMessage_PersonIDRecordStatus ON [ORCID].PersonMessage(PersonID, RecordStatusID); 
+CREATE INDEX IX_PersonMessage_PersonIDAndRecordStatusIDAndPermissionID ON [ORCID].PersonMessage(PersonID, RecordStatusID, PermissionID); 
+
+ALTER TABLE [ORCID].[PersonMessage]  WITH CHECK ADD  CONSTRAINT [FK_PersonMessage_REF_Permission] FOREIGN KEY([PermissionID])
+REFERENCES [ORCID].[REF_Permission] ([PermissionID])
+GO
+
+ALTER TABLE [ORCID].[PersonMessage] CHECK CONSTRAINT [FK_PersonMessage_REF_Permission]
+GO
+
+ALTER TABLE [ORCID].[PersonMessage]  WITH CHECK ADD  CONSTRAINT [FK_PersonMessage_Person] FOREIGN KEY([PersonID])
+REFERENCES [ORCID].[Person] ([PersonID])
+GO
+
+ALTER TABLE [ORCID].[PersonMessage] CHECK CONSTRAINT [FK_PersonMessage_Person]
+
+ALTER TABLE [ORCID].[PersonMessage]  WITH CHECK ADD  CONSTRAINT [FK_PersonMessage_RecordStatusID] FOREIGN KEY([RecordStatusID])
+REFERENCES [ORCID].[REF_RecordStatus] ([RecordStatusID])
+
+GO
+
+ALTER TABLE [ORCID].[PersonMessage] CHECK CONSTRAINT [FK_PersonMessage_RecordStatusID]
+
+ALTER TABLE [ORCID].PersonAlternateEmail ADD CONSTRAINT fk_PersonAlternateEmail_PersonMessageid FOREIGN KEY(PersonMessageID)REFERENCES [ORCID].PersonMessage(PersonMessageID)
+
+GO
+
+CREATE TABLE [ORCID].[PersonWork](
+	[PersonWorkID] [int] IDENTITY(1,1) NOT NULL,
+	[PersonID] [int] NOT NULL,
+	[PersonMessageID] INT NULL,
+	[DecisionID] TINYINT NOT NULL,
+	[WorkTitle] VARCHAR(MAX) NOT NULL,
+	[ShortDescription] VARCHAR(MAX) NULL,
+	[WorkCitation] VARCHAR(MAX) NULL,
+	[WorkType] VARCHAR(500) NULL,
+	[URL] VARCHAR(1000) NULL,
+	[SubTitle] VARCHAR(MAX) NULL,
+	[WorkCitationType] VARCHAR(500) NULL,
+	[PubDate] SMALLDATETIME NULL,
+	[PublicationMediaType] VARCHAR(500) NULL,
+	[PubID] NVARCHAR(50) NOT NULL,
+ CONSTRAINT [PK_PersonWork] PRIMARY KEY CLUSTERED 
+(
+	[PersonWorkID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+CREATE INDEX IX_PersonWork_PersonID ON [ORCID].PersonWork(PersonID); 
+CREATE INDEX IX_PersonWork_PersonMessageID ON [ORCID].PersonWork(PersonMessageID); 
+CREATE INDEX IX_PersonWork_DecisionID ON [ORCID].PersonWork(DecisionID); 
+CREATE UNIQUE INDEX IX_PersonWork_PersonIDAndPubID ON [ORCID].PersonWork(PersonID, PubID); 
+
+ALTER TABLE [ORCID].[PersonWork]  WITH CHECK ADD  CONSTRAINT [FK_PersonWork_REF_Decision] FOREIGN KEY([DecisionID])
+REFERENCES [ORCID].[REF_Decision] ([DecisionID])
+
+ALTER TABLE [ORCID].[PersonWork] CHECK CONSTRAINT [FK_PersonWork_REF_Decision]
+
+GO
+
+ALTER TABLE [ORCID].[PersonWork]  WITH CHECK ADD  CONSTRAINT [FK_PersonWork_Person] FOREIGN KEY([PersonID])
+REFERENCES [ORCID].[Person] ([PersonID])
+
+ALTER TABLE [ORCID].[PersonWork] CHECK CONSTRAINT [FK_PersonWork_Person]
+
+ALTER TABLE [ORCID].[PersonWork]  WITH CHECK ADD  CONSTRAINT [FK_PersonWork_PersonMessage] FOREIGN KEY([PersonMessageID])
+REFERENCES [ORCID].[PersonMessage] ([PersonMessageID])
+
+ALTER TABLE [ORCID].[PersonWork] CHECK CONSTRAINT [FK_PersonWork_PersonMessage]
+
+GO
+
+CREATE TABLE [ORCID].[PersonWorkIdentifier](
+	[PersonWorkIdentifierID] [int] IDENTITY(1,1) NOT NULL,
+	[PersonWorkID] [int] NOT NULL,
+	[WorkExternalTypeID] TINYINT NOT NULL,
+	[Identifier] VARCHAR(250) NOT NULL,
+ CONSTRAINT [PK_PersonWorkIdentifier] PRIMARY KEY CLUSTERED 
+(
+	[PersonWorkIdentifierID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] 
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+CREATE UNIQUE INDEX IX_PersonWorkIdentifier_WorkTypeID ON [ORCID].PersonWorkIdentifier(PersonWorkID, WorkExternalTypeID, Identifier); 
+CREATE INDEX IX_PersonWorkIdentifier_PersonWorkID ON [ORCID].PersonWorkIdentifier(PersonWorkID); 
+CREATE INDEX IX_PersonWorkIdentifier_WorkExternalTypeID ON [ORCID].PersonWorkIdentifier(WorkExternalTypeID); 
+
+ALTER TABLE [ORCID].[PersonWorkIdentifier]  WITH CHECK ADD  CONSTRAINT [FK_PersonWorkIdentifier_PersonWork] FOREIGN KEY([PersonWorkID])
+REFERENCES [ORCID].[PersonWork] ([PersonWorkID])
+
+ALTER TABLE [ORCID].[PersonWorkIdentifier] CHECK CONSTRAINT [FK_PersonWorkIdentifier_PersonWork]
+
+ALTER TABLE [ORCID].[PersonWorkIdentifier]  WITH CHECK ADD  CONSTRAINT [FK_PersonWorkIdentifier_WorkExternalTypeID] FOREIGN KEY([WorkExternalTypeID])
+REFERENCES [ORCID].[REF_WorkExternalType] ([WorkExternalTypeID])
+
+ALTER TABLE [ORCID].[PersonWorkIdentifier] CHECK CONSTRAINT [FK_PersonWorkIdentifier_WorkExternalTypeID]
+
+GO
+
+CREATE TABLE [ORCID].[PersonURL](
+	[PersonURLID] [int] IDENTITY(1,1) NOT NULL,
+	[PersonID] [int] NOT NULL,
+	[PersonMessageID] [int] NULL,
+--	[ORCID_Xml_ID] [int] NULL,
+	[URLName] VARCHAR(500) NULL,
+	[URL] VARCHAR(2000) NOT NULL,
+	[DecisionID] TINYINT NOT NULL,
+--	[IsIgnore] BIT NULL,
+ CONSTRAINT [PK_PersonURL] PRIMARY KEY CLUSTERED 
+(
+	[PersonURLID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] 
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+CREATE UNIQUE INDEX IX_PersonURL_PersonIDURL ON [ORCID].PersonURL(PersonID, URL); 
+CREATE INDEX IX_PersonURL_PersonID ON [ORCID].PersonURL(PersonID); 
+CREATE INDEX IX_PersonURL_PersonMessageID ON [ORCID].PersonURL(PersonMessageID); 
+
+ALTER TABLE [ORCID].[PersonURL]  WITH CHECK ADD  CONSTRAINT [FK_Person_PersonURL] FOREIGN KEY([PersonID])
+REFERENCES [ORCID].[Person] ([PersonID])
+ALTER TABLE [ORCID].[PersonURL] CHECK CONSTRAINT [FK_Person_PersonURL]
+
+ALTER TABLE [ORCID].[PersonURL]  WITH CHECK ADD  CONSTRAINT [FK_PersonMessage_PersonURL] FOREIGN KEY([PersonMessageID])
+REFERENCES [ORCID].[PersonMessage] ([PersonMessageID])
+ALTER TABLE [ORCID].[PersonURL] CHECK CONSTRAINT [FK_PersonMessage_PersonURL]
+
+ALTER TABLE [ORCID].[PersonURL]  WITH CHECK ADD  CONSTRAINT [FK_REFDecision_PersonURL] FOREIGN KEY([DecisionID])
+REFERENCES [ORCID].[REF_Decision] ([DecisionID])
+ALTER TABLE [ORCID].[PersonURL] CHECK CONSTRAINT [FK_REFDecision_PersonURL]
+
+GO
+
+CREATE TABLE [ORCID].[FieldLevelAuditTrail](
+	[FieldLevelAuditTrailID] [bigint] IDENTITY(1,1) NOT NULL,
+	[RecordLevelAuditTrailID] [bigint] NOT NULL,
+	[MetaFieldID] [int] NOT NULL,
+	[ValueBefore] [varchar](50) NULL,
+	[ValueAfter] [varchar](50) NULL,
+ CONSTRAINT [PK_FieldLevelAuditTrail] PRIMARY KEY CLUSTERED 
+(
+	[FieldLevelAuditTrailID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [ORCID].[RecordLevelAuditTrail]    Script Date: 10/25/2013 12:48:46 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [ORCID].[RecordLevelAuditTrail](
+	[RecordLevelAuditTrailID] [bigint] IDENTITY(1,1) NOT NULL,
+	[MetaTableID] [int] NOT NULL,
+	[RowIdentifier] [bigint] NOT NULL,
+	[RecordLevelAuditTypeID] [tinyint] NOT NULL,
+	[CreatedDate] [smalldatetime] NOT NULL,
+	[CreatedBy] [varchar](10) NOT NULL,
+ CONSTRAINT [PK_RecordLevelAuditTrail] PRIMARY KEY CLUSTERED 
+(
+	[RecordLevelAuditTrailID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [ORCID].[RecordLevelAuditType]    Script Date: 10/25/2013 12:48:46 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING OFF
+GO
+CREATE TABLE [ORCID].[RecordLevelAuditType](
+	[RecordLevelAuditTypeID] [tinyint] IDENTITY(1,1) NOT NULL,
+	[AuditType] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_RecordLevelAuditType] PRIMARY KEY CLUSTERED 
+(
+	[RecordLevelAuditTypeID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+INSERT INTO [ORCID].[RecordLevelAuditType] (AuditType) (SELECT 'Added')
+INSERT INTO [ORCID].[RecordLevelAuditType] (AuditType) (SELECT 'Double Entered')
+INSERT INTO [ORCID].[RecordLevelAuditType] (AuditType) (SELECT 'Edited')
+INSERT INTO [ORCID].[RecordLevelAuditType] (AuditType) (SELECT 'Deleted')
+INSERT INTO [ORCID].[RecordLevelAuditType] (AuditType) (SELECT 'Viewed')
+
+
+GO
+SET ANSI_PADDING OFF
+GO
+ALTER TABLE [ORCID].[RecordLevelAuditTrail] ADD  CONSTRAINT [DF_RecordLevelAuditTrail_CreatedDate]  DEFAULT (getdate()) FOR [CreatedDate]
+GO
+ALTER TABLE [ORCID].[FieldLevelAuditTrail]  WITH CHECK ADD  CONSTRAINT [FK_FieldLevelAuditTrail_RecordLevelAuditTrail] FOREIGN KEY([RecordLevelAuditTrailID])
+REFERENCES [ORCID].[RecordLevelAuditTrail] ([RecordLevelAuditTrailID])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [ORCID].[FieldLevelAuditTrail] CHECK CONSTRAINT [FK_FieldLevelAuditTrail_RecordLevelAuditTrail]
+GO
+ALTER TABLE [ORCID].[RecordLevelAuditTrail]  WITH CHECK ADD  CONSTRAINT [FK_RecordLevelAuditTrail_RecordLevelAuditType] FOREIGN KEY([RecordLevelAuditTypeID])
+REFERENCES [ORCID].[RecordLevelAuditType] ([RecordLevelAuditTypeID])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [ORCID].[RecordLevelAuditTrail] CHECK CONSTRAINT [FK_RecordLevelAuditTrail_RecordLevelAuditType]
+GO
+
+CREATE TABLE [ORCID].[PersonOthername](
+	[PersonOthernameID] [int] IDENTITY(1,1) NOT NULL,
+	[PersonID] [int] NOT NULL,
+	[OtherName] [nvarchar](500) NULL,
+	[PersonMessageID] [int] NULL,
+ CONSTRAINT [PK_PersonOthername] PRIMARY KEY CLUSTERED 
+(
+	[PersonOthernameID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [ORCID].[PersonOthername]  WITH CHECK ADD  CONSTRAINT [fk_PersonOthername_Personid] FOREIGN KEY([PersonID])
+REFERENCES [ORCID].[Person] ([PersonID])
+GO
+
+ALTER TABLE [ORCID].[PersonOthername] CHECK CONSTRAINT [fk_PersonOthername_Personid]
+GO
+
+ALTER TABLE [ORCID].[PersonOthername]  WITH CHECK ADD  CONSTRAINT [fk_PersonOthername_PersonMessageid] FOREIGN KEY([PersonMessageID])
+REFERENCES [ORCID].[PersonMessage] ([PersonMessageID])
+GO
+
+ALTER TABLE [ORCID].[PersonOthername] CHECK CONSTRAINT [fk_PersonOthername_PersonMessageid]
+GO
+
+
+ALTER TABLE [RDF.Security].[Group] ADD DefaultORCIDDecisionID TINYINT NULL 
+CONSTRAINT RDFSecurityGroup_DefaultORCIDDecisionID_DEF DEFAULT 2 -- 2 implies Limited IN ORCID, i.e. only trusted institutions can view the data.
+
+UPDATE [RDF.Security].[Group] SET DefaultORCIDDecisionID = 3 WHERE SecurityGroupID IN (0)
+UPDATE [RDF.Security].[Group] SET DefaultORCIDDecisionID = 2 WHERE SecurityGroupID IN (-50, -40, -30, -20)
+UPDATE [RDF.Security].[Group] SET DefaultORCIDDecisionID = 1 WHERE SecurityGroupID IN (-1, -10)
+
+GO
+
+-- Addtions 20140108
+
+GO
+
+CREATE TABLE [ORCID].[REF_AffiliationType](
+	[AffiliationTypeID] [tinyint] NOT NULL,
+	[AffiliationType] [VARCHAR](50) NOT NULL,
+ CONSTRAINT [PK_REF_AffiliationType] PRIMARY KEY CLUSTERED 
+(
+	[AffiliationTypeID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+INSERT INTO [ORCID].[REF_AffiliationType] ([AffiliationTypeID],	[AffiliationType]) (SELECT 1, 'education')
+INSERT INTO [ORCID].[REF_AffiliationType] ([AffiliationTypeID],	[AffiliationType]) (SELECT 2, 'employment')
+
+GO
+
+CREATE TABLE [ORCID].[PersonAffiliation](
+	[PersonAffiliationID] [int] IDENTITY(1,1) NOT NULL,
+	[ProfilesID] [int] NOT NULL,
+	[AffiliationTypeID] TINYINT NOT NULL,
+	[PersonID] [int] NOT NULL,
+	[PersonMessageID] INT NULL,
+	[DecisionID] TINYINT NOT NULL,
+	[DepartmentName] VARCHAR(4000) NULL,
+	[RoleTitle] VARCHAR(200) NULL,
+	[StartDate] SMALLDATETIME NULL,
+	[EndDate] SMALLDATETIME NULL,
+	[OrganizationName] VARCHAR(4000) NOT NULL,
+	[OrganizationCity] VARCHAR(4000) NULL,
+	[OrganizationRegion] VARCHAR(2) NULL,
+	[OrganizationCountry] VARCHAR(2) NULL,
+	[DisambiguationID] VARCHAR(500) NULL,
+	[DisambiguationSource] VARCHAR(500) NULL,
+CONSTRAINT [PK_PersonAffiliation] PRIMARY KEY CLUSTERED 
+(
+	[PersonAffiliationID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] 
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+CREATE INDEX IX_PersonAffiliation_PersonID ON [ORCID].PersonAffiliation(PersonID); 
+CREATE INDEX IX_PersonAffiliation_PersonMessageID ON [ORCID].PersonAffiliation(PersonMessageID); 
+CREATE INDEX IX_PersonAffiliation_DecisionID ON [ORCID].PersonAffiliation(DecisionID); 
+CREATE UNIQUE INDEX IX_PersonAffiliation_ProfilesIDAndAffiliationTypeID ON [ORCID].PersonAffiliation([ProfilesID], [AffiliationTypeID]); 
+
+ALTER TABLE [ORCID].[PersonAffiliation]  WITH CHECK ADD  CONSTRAINT [FK_PersonAffiliation_REF_Decision] FOREIGN KEY([DecisionID])
+REFERENCES [ORCID].[REF_Decision] ([DecisionID])
+
+ALTER TABLE [ORCID].[PersonAffiliation] CHECK CONSTRAINT [FK_PersonAffiliation_REF_Decision]
+
+GO
+
+ALTER TABLE [ORCID].[PersonAffiliation]  WITH CHECK ADD  CONSTRAINT [FK_PersonAffiliation_Person] FOREIGN KEY([PersonID])
+REFERENCES [ORCID].[Person] ([PersonID])
+
+ALTER TABLE [ORCID].[PersonAffiliation] CHECK CONSTRAINT [FK_PersonAffiliation_Person]
+
+ALTER TABLE [ORCID].[PersonAffiliation]  WITH CHECK ADD  CONSTRAINT [FK_PersonAffiliation_PersonMessage] FOREIGN KEY([PersonMessageID])
+REFERENCES [ORCID].[PersonMessage] ([PersonMessageID])
+
+ALTER TABLE [ORCID].[PersonAffiliation] CHECK CONSTRAINT [FK_PersonAffiliation_PersonMessage]
+
+GO
+
+ALTER TABLE [Profile.Data].[Organization.Institution] ADD City VARCHAR(500) NULL
+ALTER TABLE [Profile.Data].[Organization.Institution] ADD State VARCHAR(2) NULL
+ALTER TABLE [Profile.Data].[Organization.Institution] ADD Country VARCHAR(2) NULL
+ALTER TABLE [Profile.Data].[Organization.Institution] ADD RingGoldID VARCHAR(100) NULL
+
+GO
+
+CREATE PROCEDURE [Profile.Module].[CustomViewAffiliationsListForORCID]
+	@ProfileDataPersonID bigint = NULL
+AS
+BEGIN
+
+SELECT        TOP (100) PERCENT NULL AS PersonAffiliationID, [Profile.Data].[Person.Affiliation].PersonAffiliationID AS ProfilesID, 2 AS AffiliationTypeID, 
+                         NULL AS PersonID, NULL AS PersonMessageID, NULL AS DecisionID, [Profile.Data].[Organization.Department].DepartmentName, 
+                         [Profile.Data].[Person.Affiliation].Title AS RoleTitle, NULL AS StartDate, NULL AS EndDate, 
+                         [Profile.Data].[Organization.Institution].InstitutionName AS OrganizationName, [Profile.Data].[Organization.Institution].City, 
+                         [Profile.Data].[Organization.Institution].State, [Profile.Data].[Organization.Institution].Country, [Profile.Data].[Organization.Institution].RingGoldID AS DisambiguationID, 
+                         'RINGGOLD' AS DisambiguationSource, [Profile.Data].[Person.Affiliation].SortOrder
+FROM            [Profile.Data].Person INNER JOIN
+                         [Profile.Data].[Person.Affiliation] ON [Profile.Data].Person.PersonID = [Profile.Data].[Person.Affiliation].PersonID INNER JOIN
+                         [Profile.Data].[Organization.Institution] ON [Profile.Data].[Person.Affiliation].InstitutionID = [Profile.Data].[Organization.Institution].InstitutionID LEFT OUTER JOIN
+                         [Profile.Data].[Organization.Division] ON [Profile.Data].[Person.Affiliation].DivisionID = [Profile.Data].[Organization.Division].DivisionID LEFT OUTER JOIN
+                         [Profile.Data].[Organization.Department] ON [Profile.Data].[Person.Affiliation].DepartmentID = [Profile.Data].[Organization.Department].DepartmentID
+WHERE        ([Profile.Data].Person.PersonID = @ProfileDataPersonID)
+ORDER BY [Profile.Data].[Person.Affiliation].SortOrder
+
+END
+
+GO
+
+CREATE UNIQUE INDEX IX_ProfileDataPerson_InternalUsername ON [Profile.Data].Person(InternalUsername); 
+
+GO 
+
+
