@@ -5,15 +5,28 @@ NOTE THAT WE minimize this via http://closure-compiler.appspot.com/home and save
 
 */
 
-// This allows us to use Google Analytics when present, but not throw errors when not.
-var _gaq = _gaq || {};
-
-// create dummy function if necessary so google analytics does not break for institutions who do not use it
-if (typeof _gaq.push != 'function') {
-    _gaq.push = function (data) { };
+// IE8 Fix
+if (!Array.prototype.indexOf) {
+    Array.prototype.indexOf = function (obj, start) {
+        for (var i = (start || 0), j = this.length; i < j; i++) {
+            if (this[i] === obj) {
+                return i;
+            }
+        }
+        return -1;
+    };
 }
 
+if (typeof String.prototype.trim !== 'function') {
+    String.prototype.trim = function () {
+        return this.replace(/^\s+|\s+$/g, '');
+    };
+};
+// IE8 END
+
 var OrngContainer = OrngContainer || {};
+
+my.orngRPCEndpoint = _rootDomain + "/ORNG/Default.aspx/CallORNGRPC";
 
 my.init = function () {
 
@@ -35,93 +48,9 @@ my.init = function () {
     // 2. Define the functions for the OrngContainer object
     // Need to pull these from values supplied in the dialog
     OrngContainer.init = function () {
-
-        //Create my new managed hub
-        OrngContainer.managedHub = new OpenAjax.hub.ManagedHub({
-            onSubscribe: function (topic, container) {
-                log(container.getClientID() + " subscribes to this topic '" + topic + "'");
-                return true; // return false to reject the request.
-            },
-            onUnsubscribe: function (topic, container) {
-                log(container.getClientID() + " unsubscribes from this topic '" + topic + "'");
-                return true;
-            },
-            onPublish: function (topic, data, pcont, scont) {
-                return OrngContainer.onPublish(topic, data, pcont, scont);
-            }
-        });
-        //  initialize managed hub for the Container
-        gadgets.pubsub2router.init({
-            hub: OrngContainer.managedHub
-        });
-
-        OrngContainer.rpcRegister('orng_container_rpc', OrngContainer.callORNGRPC);
-        OrngContainer.rpcRegister('orng_hide_show', window.hideOrShowGadget);
+        OrngContainer.rpcRegister('orng_hideShow', window.hideOrShowGadget);
         OrngContainer.rpcRegister('requestNavigateTo', OrngContainer.doProfilesNavigation);
         OrngContainer.rpcRegister('set_title', OrngContainer.setTitleHandler);
-
-        try {
-
-            // Connect to the ManagedHub
-            OrngContainer.inlineClient =
-          new OpenAjax.hub.InlineContainer(OrngContainer.managedHub, 'container',
-        {
-            Container: {
-                onSecurityAlert: function (source, alertType) { /* Handle client-side security alerts */ },
-                onConnect: function (container) { /* Called when client connects */ },
-                onDisconnect: function (container) { /* Called when client connects */ }
-            }
-        });
-            //connect to the inline client
-            OrngContainer.inlineClient.connect();
-
-        } catch (e) {
-            // TODO: error handling should be consistent with other OS gadget initialization error handling
-            alert('ERROR creating or connecting InlineClient in OrngContainer.managedHub [' + e.message + ']');
-        }
-    };
-
-    OrngContainer.onPublish = function (topic, data, pcont, scont) {
-        log(pcont.getClientID() + " publishes '" + data + "' to topic '" + topic + "' subscribed by " + scont.getClientID());
-        // track with google analytics
-        // figure this one out
-        var sender = {};
-        if (topic == 'status') {
-            // message should be of the form 'COLOR:Message Content'
-            var statusId = document.getElementById(sender + '_status');
-            if (statusId) {
-                var messageSplit = message.split(':');
-                if (messageSplit.length == 2) {
-                    statusId.style.color = messageSplit[0];
-                    statusId.innerHTML = messageSplit[1];
-                }
-                else {
-                    statusId.innerHTML = message;
-                }
-            }
-        }
-        else if (topic == 'analytics') {
-            // publish to google analytics
-            // message should be JSON encoding object with required action and optional label and value 
-            // as documented here: http://code.google.com/apis/analytics/docs/tracking/eventTrackerGuide.html
-            // note that event category will be set to the gadget label automatically by this code
-            // Note: message will be already converted to an object 
-            if (data.hasOwnProperty('value')) {
-                _gaq.push(['_trackEvent', my.gadgets[moduleId].label, data.action, data.label, data.value]);
-            }
-            else if (data.hasOwnProperty('label')) {
-                _gaq.push(['_trackEvent', my.gadgets[moduleId].label, data.action, data.label]);
-            }
-            else {
-                _gaq.push(['_trackEvent', my.gadgets[moduleId].label, data.action]);
-            }
-        }
-        else if (topic == 'profile') {
-            _gaq.push(['_trackEvent', my.gadgets[moduleId].label, 'go_to_profile', data]);
-            document.location.href = '/' + location.pathname.split('/')[1] + '/display/n' + data;
-        }
-        return true;
-        // return false to reject the request.
     };
 
     // create an array to help access our myGadget info. This seems like it should not be necessary given the data in gadgetSite
@@ -160,24 +89,6 @@ my.init = function () {
         }
     };
 
-    OrngContainer.callORNGRPC = function (rpc, channel, opt_params) {
-        // send an ajax command to the server letting them know we need data
-        // since this is directly into Profiles and has nothing to do with Shindig, we just use jquery
-        var data = { "guid": my.guid, "request": channel };
-
-        $.ajax({
-            type: "POST",
-            url: _rootDomain + "/ORNG/Default.aspx/CallORNGRPC",
-            data: gadgets.json.stringify(data),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            async: true,
-            success: function (msg) {
-                rpc.callback(msg.d);
-            }
-        });
-    };
-
     OrngContainer.doProfilesNavigation = function (rpc, view, opt_params) {
         var urlTemplate = gadgets.config.get('views')[view].urlTemplate;
         var url = urlTemplate;
@@ -191,6 +102,11 @@ my.init = function () {
         if (urlTemplate.indexOf('ORNG') == 0) {
             var appId = OrngContainer.gadgetsByGadgetSiteId[rpc.gs.getId()].appId;
             url = addParameterToURL(url, "appId", appId);
+        }
+
+        // add ownerId if available. This is probably not the best way to do this, but it works
+        if (rpc.a[2]) {
+            url = addParameterToURL(url, "owner", encodeURIComponent(rpc.a[2]));
         }
 
         if (opt_params) {
@@ -210,16 +126,15 @@ my.init = function () {
     // this allows us to grab the metadata
     var gadgetURLs = [];
     for (var i = 0; i < my.gadgets.length; i++) {
-        gadgetURLs[i] = my.gadgets[i].url;
+        if (gadgetURLs.indexOf(my.gadgets[i].url) == -1) {
+            gadgetURLs.push(my.gadgets[i].url);
+        }
     }
 
     // draw these things out now
     OrngContainer.preloadGadgets(gadgetURLs, function (result) {
-        for (var gadgetURL in result) {
-            if (!result[gadgetURL].error) {
-                var ndx = gadgetURLs.indexOf(gadgetURL);
-                window.buildGadget(result, my.gadgets[ndx], ndx);
-            }
+        for (var i = 0; i < my.gadgets.length; i++) {
+            window.buildGadget(result, my.gadgets[i]);
         }
     });
 };
@@ -246,7 +161,7 @@ my.removeGadgets = function (gadgetsToRemove) {
     }
 };
 
-//create a gadget with navigation tool bar header enabling gadget collapse, expand, remove, navigate to view actions.
+//create a gadget based on metadata
 window.buildGadget = function (result, myGadget) {
     result = result || {};
     //    var element = window.getNewGadgetElement(result, gadgetURL);
@@ -310,7 +225,6 @@ window.hideOrShowGadget = function (rpc, hideOrShow, opt_params) {
     }
 };
 
-//display the pubsub 2 event details
 function log(message) {
     if (my.debug == 1) {
         try {
@@ -340,5 +254,5 @@ function removeParameterFromURL(url, parameter) {
 };
 
 function addParameterToURL(url, parameter, value) {
-    return url + ((url.slice(-1) !== "?" && url.slice(-1) !== "&") ? "&" : "") + parameter + "=" + value; 
+    return url + ((url.slice(-1) !== "?" && url.slice(-1) !== "&") ? "&" : "") + parameter + "=" + value;
 };

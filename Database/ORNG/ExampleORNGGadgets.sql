@@ -1,16 +1,16 @@
-INSERT [ORNG.].[Apps] VALUES(10,'RDF Test','http://stage-profiles.ucsf.edu/apps/RDFTest.xml',NULL, 0, NULL, NULL, 0);
-INSERT [ORNG.].[Apps] VALUES(101,'Featured Presentations','http://stage-profiles.ucsf.edu/apps/SlideShare.xml',NULL, 0, NULL, NULL, 1);
---INSERT [ORNG.].[Apps] VALUES(102,'Faculty Mentoring','http://stage-profiles.ucsf.edu/apps/Mentor.xml',NULL, 0, NULL, NULL, 0);
-INSERT [ORNG.].[Apps] VALUES(103,'Websites','http://stage-profiles.ucsf.edu/apps/Links.xml',NULL, 0, NULL, NULL, 1);
-INSERT [ORNG.].[Apps] VALUES(104,'Profile List Tool','http://stage-profiles.ucsf.edu/apps/ProfileListTool.xml',NULL, 0, NULL, NULL, 1);
-INSERT [ORNG.].[Apps] VALUES(112,'Twitter','http://stage-profiles.ucsf.edu/apps/Twitter.xml',NULL, 0, NULL, NULL, 1);
-INSERT [ORNG.].[Apps] VALUES(114,'Featured Videos','http://stage-profiles.ucsf.edu/apps/YouTube.xml',NULL, 0, NULL, NULL, 1);
+INSERT [ORNG.].[Apps] VALUES(10,'RDF Test','http://profiles.ucsf.edu/apps_2.1/RDFTest.xml',NULL, 0, NULL, NULL, 0);
+INSERT [ORNG.].[Apps] VALUES(101,'Featured Presentations','http://profiles.ucsf.edu/apps_2.1/SlideShare.xml',NULL, 0, NULL, NULL, 1);
+--INSERT [ORNG.].[Apps] VALUES(102,'Faculty Mentoring','http://profiles.ucsf.edu/apps_2.1/Mentor.xml',NULL, 0, NULL, NULL, 0);
+INSERT [ORNG.].[Apps] VALUES(103,'Websites','http://profiles.ucsf.edu/apps_2.1/Links.xml',NULL, 0, NULL, NULL, 1);
+--INSERT [ORNG.].[Apps] VALUES(104,'Profile List Tool','http://profiles.ucsf.edu/apps_2.1/ProfileListTool.xml',NULL, 0, NULL, NULL, 1);
+INSERT [ORNG.].[Apps] VALUES(112,'Twitter','http://profiles.ucsf.edu/apps_2.1/Twitter.xml',NULL, 0, NULL, NULL, 1);
+INSERT [ORNG.].[Apps] VALUES(114,'Featured Videos','http://profiles.ucsf.edu/apps_2.1/YouTube.xml',NULL, 0, NULL, NULL, 1);
 
 INSERT [ORNG.].[AppViews] VALUES(10,'edit/default.aspx',NULL,'gadgets-test','Public',1, NULL);
 INSERT [ORNG.].[AppViews] VALUES(10,'profile/display.aspx',NULL,'gadgets-test','Public',1, NULL);
-INSERT [ORNG.].[AppViews] VALUES(104,'search/default.aspx','small','gadgets-tools','Users',1, '{''gadget_class'':''ORNGTitleBarGadget''}');
-INSERT [ORNG.].[AppViews] VALUES(104,'profile/display.aspx','small','gadgets-tools','Users',1, '{''gadget_class'':''ORNGTitleBarGadget''}');
-INSERT [ORNG.].[AppViews] VALUES(104,'orng/gadgetdetails.aspx','canvas','gadgets-detail','Users',1, '{''gadget_class'':''ORNGTitleBarGadget''}');
+--INSERT [ORNG.].[AppViews] VALUES(104,'search/default.aspx','small','gadgets-tools','Users',1, '{''gadget_class'':''ORNGTitleBarGadget''}');
+--INSERT [ORNG.].[AppViews] VALUES(104,'profile/display.aspx','small','gadgets-tools','Users',1, '{''gadget_class'':''ORNGTitleBarGadget''}');
+--INSERT [ORNG.].[AppViews] VALUES(104,'orng/gadgetdetails.aspx','canvas','gadgets-detail','Users',1, '{''gadget_class'':''ORNGTitleBarGadget''}');
 
 -- We have two types of gadgets
 -- The most basic types are "tool gadgets".  These are controled by the AppViews table and are configured
