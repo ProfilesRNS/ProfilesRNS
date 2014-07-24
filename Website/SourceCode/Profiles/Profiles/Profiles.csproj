@@ -57,6 +57,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -79,6 +80,40 @@
     <Content Include="DirectService.aspx" />
     <Content Include="Edit\Modules\CustomEditListProperty\CustomEditListProperty.ascx" />
     <Content Include="Global.asax" />
+    <Content Include="ORCID\CreateBatch.aspx" />
+    <Content Include="ORCID\CreateMyORCID.aspx" />
+    <Content Include="ORCID\CreationConfirmation.aspx" />
+    <Content Include="ORCID\CSS\ORCID.css" />
+    <Content Include="ORCID\Default.aspx" />
+    <Content Include="ORCID\JavaScript\orcid.js" />
+    <Content Include="ORCID\Modules\CreateBatch\CreateBatch.ascx" />
+    <Content Include="ORCID\Modules\CreateMyORCID\CreateMyORCID.ascx" />
+    <Content Include="ORCID\Modules\CreationConfirmation\CreationConfirmation.ascx" />
+    <Content Include="ORCID\Modules\CustomEditORCID\CustomEditORCID.ascx" />
+    <Content Include="ORCID\Modules\Default\Default.ascx" />
+    <Content Include="ORCID\Modules\ModuleCatalogue.xml" />
+    <Content Include="ORCID\Modules\ProcessReadLimitedAuthCode\ProcessReadLimitedAuthCode.ascx" />
+    <Content Include="ORCID\Modules\ProvideORCIDConfirmation\ProvideORCIDConfirmation.ascx" />
+    <Content Include="ORCID\Modules\ProvideORCID\ProvideORCID.ascx" />
+    <Content Include="ORCID\Modules\UpdateSecurityGroupDefaultDecisions\UpdateSecurityGroupDefaultDecisions.ascx" />
+    <Content Include="ORCID\Modules\UploadInfoToORCID\UploadInfoToORCID.ascx" />
+    <Content Include="ORCID\PresentationXML\CreateBatchPresentation.xml" />
+    <Content Include="ORCID\PresentationXML\CreateMyORCIDPresentation.xml" />
+    <Content Include="ORCID\PresentationXML\CreationConfirmationPresentation.xml" />
+    <Content Include="ORCID\PresentationXML\DefaultPresentation.xml" />
+    <Content Include="ORCID\PresentationXML\ProcessReadLimitedAuthCodePresentation.xml" />
+    <Content Include="ORCID\PresentationXML\ProvideORCIDConfirmationPresentation.xml" />
+    <Content Include="ORCID\PresentationXML\ProvideORCIDPresentation.xml" />
+    <Content Include="ORCID\PresentationXML\UpdateSecurityGroupDefaultDecisionsPresentation.xml" />
+    <Content Include="ORCID\PresentationXML\UploadInfoToORCIDPresentation.xml" />
+    <Content Include="ORCID\ProcessReadLimitedAuthCode.aspx" />
+    <Content Include="ORCID\ProvideORCID.aspx" />
+    <Content Include="ORCID\ProvideORCIDConfirmation.aspx" />
+    <Content Include="ORCID\UpdateSecurityGroupDefaultDecisions.aspx" />
+    <Content Include="ORCID\UploadInfoToORCID.aspx" />
+    <Content Include="ORCID\Utilities\ProfilesRNSDLL\DAL\SQLFiles\ClearTestDataFromProduction.txt" />
+    <Content Include="ORCID\Utilities\ProfilesRNSDLL\DAL\SQLFiles\CreateStoredProcedures.txt" />
+    <Content Include="ORCID\Utilities\ProfilesRNSDLL\DAL\SQLFiles\CreateTablesScript.txt" />
     <Content Include="ORNG\Images\orng-asterisk.png" />
     <Content Include="ORNG\Images\orng.gif" />
     <Content Include="ORNG\Images\waiting.gif" />
@@ -198,6 +233,359 @@
     <Compile Include="Login\Modules\Login\Login.ascx.designer.cs">
       <DependentUpon>Login.ascx</DependentUpon>
     </Compile>
+    <Compile Include="ORCID\CreateBatch.aspx.cs">
+      <DependentUpon>CreateBatch.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORCID\CreateBatch.aspx.designer.cs">
+      <DependentUpon>CreateBatch.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ORCID\CreateMyORCID.aspx.cs">
+      <DependentUpon>CreateMyORCID.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORCID\CreateMyORCID.aspx.designer.cs">
+      <DependentUpon>CreateMyORCID.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ORCID\CreationConfirmation.aspx.cs">
+      <DependentUpon>CreationConfirmation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORCID\CreationConfirmation.aspx.designer.cs">
+      <DependentUpon>CreationConfirmation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ORCID\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORCID\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ORCID\Modules\CreateBatch\CreateBatch.ascx.cs">
+      <DependentUpon>CreateBatch.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORCID\Modules\CreateBatch\CreateBatch.ascx.designer.cs">
+      <DependentUpon>CreateBatch.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ORCID\Modules\CreateMyORCID\CreateMyORCID.ascx.cs">
+      <DependentUpon>CreateMyORCID.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORCID\Modules\CreateMyORCID\CreateMyORCID.ascx.designer.cs">
+      <DependentUpon>CreateMyORCID.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ORCID\Modules\CreationConfirmation\CreationConfirmation.ascx.cs">
+      <DependentUpon>CreationConfirmation.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORCID\Modules\CreationConfirmation\CreationConfirmation.ascx.designer.cs">
+      <DependentUpon>CreationConfirmation.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ORCID\Modules\CustomEditORCID\CustomEditORCID.ascx.cs">
+      <DependentUpon>CustomEditORCID.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORCID\Modules\CustomEditORCID\CustomEditORCID.ascx.designer.cs">
+      <DependentUpon>CustomEditORCID.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ORCID\Modules\Default\Default.ascx.cs">
+      <DependentUpon>Default.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORCID\Modules\Default\Default.ascx.designer.cs">
+      <DependentUpon>Default.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ORCID\Modules\ORCIDBaseModule.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORCID\Modules\ProcessReadLimitedAuthCode\ProcessReadLimitedAuthCode.ascx.cs">
+      <DependentUpon>ProcessReadLimitedAuthCode.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORCID\Modules\ProcessReadLimitedAuthCode\ProcessReadLimitedAuthCode.ascx.designer.cs">
+      <DependentUpon>ProcessReadLimitedAuthCode.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ORCID\Modules\ProvideORCIDConfirmation\ProvideORCIDConfirmation.ascx.cs">
+      <DependentUpon>ProvideORCIDConfirmation.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORCID\Modules\ProvideORCIDConfirmation\ProvideORCIDConfirmation.ascx.designer.cs">
+      <DependentUpon>ProvideORCIDConfirmation.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ORCID\Modules\ProvideORCID\ProvideORCID.ascx.cs">
+      <DependentUpon>ProvideORCID.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORCID\Modules\ProvideORCID\ProvideORCID.ascx.designer.cs">
+      <DependentUpon>ProvideORCID.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ORCID\Modules\UpdateSecurityGroupDefaultDecisions\UpdateSecurityGroupDefaultDecisions.ascx.cs">
+      <DependentUpon>UpdateSecurityGroupDefaultDecisions.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORCID\Modules\UpdateSecurityGroupDefaultDecisions\UpdateSecurityGroupDefaultDecisions.ascx.designer.cs">
+      <DependentUpon>UpdateSecurityGroupDefaultDecisions.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ORCID\Modules\UploadInfoToORCID\UploadInfoToORCID.ascx.cs">
+      <DependentUpon>UploadInfoToORCID.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORCID\Modules\UploadInfoToORCID\UploadInfoToORCID.ascx.designer.cs">
+      <DependentUpon>UploadInfoToORCID.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ORCID\ProcessReadLimitedAuthCode.aspx.cs">
+      <DependentUpon>ProcessReadLimitedAuthCode.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORCID\ProcessReadLimitedAuthCode.aspx.designer.cs">
+      <DependentUpon>ProcessReadLimitedAuthCode.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ORCID\ProvideORCID.aspx.cs">
+      <DependentUpon>ProvideORCID.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORCID\ProvideORCID.aspx.designer.cs">
+      <DependentUpon>ProvideORCID.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ORCID\ProvideORCIDConfirmation.aspx.cs">
+      <DependentUpon>ProvideORCIDConfirmation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORCID\ProvideORCIDConfirmation.aspx.designer.cs">
+      <DependentUpon>ProvideORCIDConfirmation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ORCID\UpdateSecurityGroupDefaultDecisions.aspx.cs">
+      <DependentUpon>UpdateSecurityGroupDefaultDecisions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORCID\UpdateSecurityGroupDefaultDecisions.aspx.designer.cs">
+      <DependentUpon>UpdateSecurityGroupDefaultDecisions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ORCID\UploadInfoToORCID.aspx.cs">
+      <DependentUpon>UploadInfoToORCID.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORCID\UploadInfoToORCID.aspx.designer.cs">
+      <DependentUpon>UploadInfoToORCID.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ORCID\Utilities\config.cs" />
+    <Compile Include="ORCID\Utilities\DataIO.cs" />
+    <Compile Include="ORCID\Utilities\ORCIDPublication.cs" />
+    <Compile Include="ORCID\Utilities\ProfileData.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BLL\ORCID\DOI.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BLL\ORCID\ErrorLog.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BLL\ORCID\Interfaces\IORCID.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BLL\ORCID\Interfaces\IPersonMessage.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BLL\ORCID\OAuth.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BLL\ORCID\ORCID.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BLL\ORCID\ORCIDCommon.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BLL\ORCID\Person.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BLL\ORCID\PersonAffiliation.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BLL\ORCID\PersonAlternateEmail.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BLL\ORCID\PersonMessage.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BLL\ORCID\PersonOthername.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BLL\ORCID\PersonToken.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BLL\ORCID\PersonURL.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BLL\ORCID\PersonWork.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BLL\ORCID\PersonWorkIdentifier.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BLL\ORCID\REFDecision.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BLL\ORCID\REFPermission.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BLL\ORNG\AppData.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BLL\ORNG\AppRegistry.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BLL\ORNG\Apps.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BLL\Profile.Data\OrganizationDepartment.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BLL\Profile.Data\OrganizationDivision.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BLL\Profile.Data\OrganizationInstitution.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BLL\Profile.Data\Person.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BLL\Profile.Data\PersonFacultyRank.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BLL\RDF.Security\Group.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BLL\RDF\Triple.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BO\Config.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BO\ORCID\APIUserAccessToken.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BO\ORCID\Narrative.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BO\ORCID\Person.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BO\ORCID\PersonAffiliation.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BO\ORCID\PersonToken.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BO\ORCID\PersonWork.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\BO\ProfilesRNSBaseClassBO.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\DAL\DALGeneric.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\DAL\ORCID\PersonAffiliation.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\DAL\ORCID\PersonURL.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\DAL\ORCID\PersonWork.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\DAL\ORCID\PersonWorkIdentifier.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\DAL\ORNG\AppData.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\DAL\Profile.Data\Person.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\DAL\RDF\Triple.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\DevelopmentBase\AppUser.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\DevelopmentBase\BaseClassBO.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\DevelopmentBase\BOBase.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\DevelopmentBase\BO\ExceptionSafeToDisplay.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\DevelopmentBase\BO\IBaseClassBO.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\DevelopmentBase\Common.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\DevelopmentBase\DALBase.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\DevelopmentBase\DALBOReader.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\DevelopmentBase\DALTemplate.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\DevelopmentBase\EnumDataSourceItem.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\DevelopmentBase\Factory.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\DevelopmentBase\Helpers\Date.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\DevelopmentBase\Helpers\QueryString.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\DevelopmentBase\Helpers\StringMethods.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\DevelopmentBase\Helpers\WebPageContent.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\DevelopmentBase\RegEx\GeneralValidation.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\DevelopmentBase\UICommon.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BLL\ORCID\ErrorLog.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BLL\ORCID\FieldLevelAuditTrail.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BLL\ORCID\Person.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BLL\ORCID\PersonAffiliation.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BLL\ORCID\PersonAlternateEmail.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BLL\ORCID\PersonMessage.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BLL\ORCID\PersonOthername.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BLL\ORCID\PersonToken.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BLL\ORCID\PersonURL.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BLL\ORCID\PersonWork.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BLL\ORCID\PersonWorkIdentifier.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BLL\ORCID\RecordLevelAuditTrail.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BLL\ORCID\RecordLevelAuditType.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BLL\ORCID\REFDecision.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BLL\ORCID\REFPermission.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BLL\ORNG\AppData.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BLL\ORNG\AppRegistry.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BLL\ORNG\Apps.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BLL\Profile.Data\OrganizationDepartment.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BLL\Profile.Data\OrganizationDivision.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BLL\Profile.Data\OrganizationInstitution.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BLL\Profile.Data\Person.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BLL\Profile.Data\PersonFacultyRank.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BLL\RDF.Security\Group.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BLL\RDF\Node.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BLL\RDF\Triple.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\ORCID\IErrorLog.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\ORCID\IFieldLevelAuditTrail.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\ORCID\IPerson.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\ORCID\IPersonAffiliation.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\ORCID\IPersonAlternateEmail.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\ORCID\IPersonMessage.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\ORCID\IPersonOthername.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\ORCID\IPersonToken.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\ORCID\IPersonURL.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\ORCID\IPersonWork.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\ORCID\IPersonWorkIdentifier.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\ORCID\IRecordLevelAuditTrail.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\ORCID\IRecordLevelAuditType.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\ORCID\IREFAffiliationType.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\ORCID\IREFDecision.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\ORCID\IREFPermission.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\ORCID\IREFPersonStatusType.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\ORCID\IREFRecordStatus.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\ORCID\IREFWorkExternalType.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\ORNG\IAppData.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\ORNG\IAppRegistry.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\ORNG\IApps.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\Profile.Data\IOrganizationDepartment.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\Profile.Data\IOrganizationDivision.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\Profile.Data\IOrganizationInstitution.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\Profile.Data\IPerson.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\Profile.Data\IPersonFacultyRank.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\Profile.Import\IFreetextKeywords.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\Profile.Import\INIHAwards.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\RDF.Security\IGroup.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\RDF\INode.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Interfaces\RDF\ITriple.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\ORCID\ErrorLog.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\ORCID\FieldLevelAuditTrail.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\ORCID\Person.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\ORCID\PersonAffiliation.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\ORCID\PersonAlternateEmail.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\ORCID\PersonMessage.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\ORCID\PersonOthername.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\ORCID\PersonToken.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\ORCID\PersonURL.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\ORCID\PersonWork.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\ORCID\PersonWorkIdentifier.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\ORCID\RecordLevelAuditTrail.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\ORCID\RecordLevelAuditType.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\ORCID\REFAffiliationType.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\ORCID\REFDecision.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\ORCID\REFPermission.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\ORCID\REFPersonStatusType.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\ORCID\REFRecordStatus.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\ORCID\REFWorkExternalType.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\ORNG\AppData.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\ORNG\AppRegistry.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\ORNG\Apps.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\Profile.Data\OrganizationDepartment.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\Profile.Data\OrganizationDivision.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\Profile.Data\OrganizationInstitution.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\Profile.Data\Person.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\Profile.Data\PersonFacultyRank.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\Profile.Import\FreetextKeywords.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\Profile.Import\NIHAwards.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\RDF.Security\Group.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\RDF\Node.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Meta\RDF\Triple.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\ORCID\ErrorLog.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\ORCID\FieldLevelAuditTrail.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\ORCID\Person.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\ORCID\PersonAffiliation.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\ORCID\PersonAlternateEmail.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\ORCID\PersonMessage.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\ORCID\PersonOthername.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\ORCID\PersonToken.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\ORCID\PersonURL.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\ORCID\PersonWork.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\ORCID\PersonWorkIdentifier.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\ORCID\RecordLevelAuditTrail.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\ORCID\RecordLevelAuditType.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\ORCID\REFAffiliationType.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\ORCID\REFDecision.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\ORCID\REFPermission.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\ORCID\REFPersonStatusType.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\ORCID\REFRecordStatus.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\ORCID\REFWorkExternalType.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\ORNG\AppData.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\ORNG\AppRegistry.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\ORNG\Apps.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Profile.Data\OrganizationDepartment.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Profile.Data\OrganizationDivision.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Profile.Data\OrganizationInstitution.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Profile.Data\Person.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Profile.Data\PersonFacultyRank.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Profile.Import\FreetextKeywords.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\Profile.Import\NIHAwards.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\RDF.Security\Group.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\RDF\Node.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\BO\RDF\Triple.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\DAL\ORCID\ErrorLog.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\DAL\ORCID\FieldLevelAuditTrail.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\DAL\ORCID\Person.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\DAL\ORCID\PersonAffiliation.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\DAL\ORCID\PersonAlternateEmail.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\DAL\ORCID\PersonMessage.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\DAL\ORCID\PersonOthername.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\DAL\ORCID\PersonToken.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\DAL\ORCID\PersonURL.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\DAL\ORCID\PersonWork.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\DAL\ORCID\PersonWorkIdentifier.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\DAL\ORCID\RecordLevelAuditTrail.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\DAL\ORCID\RecordLevelAuditType.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\DAL\ORCID\REFDecision.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\DAL\ORCID\REFPermission.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\DAL\ORNG\AppData.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\DAL\ORNG\AppRegistry.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\DAL\ORNG\Apps.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\DAL\Profile.Data\OrganizationDepartment.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\DAL\Profile.Data\OrganizationDivision.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\DAL\Profile.Data\OrganizationInstitution.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\DAL\Profile.Data\Person.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\DAL\Profile.Data\PersonFacultyRank.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\DAL\Profile.Import\FreetextKeywords.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\DAL\Profile.Import\NIHAwards.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\DAL\RDF.Security\Group.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\DAL\RDF\Node.cs" />
+    <Compile Include="ORCID\Utilities\ProfilesRNSDLL\_CG\DAL\RDF\Triple.cs" />
     <Compile Include="ORNG\JSONLD\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1068,6 +1456,7 @@
     <Content Include="Framework\Modules\ApplyXSLT\ApplyXSLT.ascx" />
     <Content Include="Framework\Template.Master" />
     <Content Include="Profile\Modules\CustomViewPersonGeneralInfo\EmailHandler.ashx" />
+    <None Include="ORCID\ORCIDPrivacySettingsandProfiles.pdf" />
     <None Include="Profile\Modules\NetworkCluster\scriptaculous\CHANGELOG" />
     <None Include="Profile\Modules\NetworkCluster\scriptaculous\MIT-LICENSE" />
     <None Include="Profile\Modules\NetworkCluster\scriptaculous\README.rdoc" />
@@ -1090,6 +1479,7 @@
     <Folder Include="ActiveNetwork\Utilities\" />
     <Folder Include="App_Data\" />
     <Folder Include="Login\Modules\App_LocalResources\" />
+    <Folder Include="ORCID\XSLT\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
