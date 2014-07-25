@@ -16426,7 +16426,7 @@
       <IncludeDescription>0</IncludeDescription>
       <IncludeNetwork>0</IncludeNetwork>
       <SearchWeight>5.000000000000000e-001</SearchWeight>
-      <CustomDisplay>0</CustomDisplay>
+      <CustomDisplay>1</CustomDisplay>
       <CustomEdit>1</CustomEdit>
       <ViewSecurityGroup>-1</ViewSecurityGroup>
       <EditSecurityGroup>-20</EditSecurityGroup>
