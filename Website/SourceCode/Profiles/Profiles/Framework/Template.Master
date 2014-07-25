@@ -132,12 +132,13 @@
 																		<asp:Literal runat="server" ID="litTabs"></asp:Literal>
 																	</div>
 																	<div class="panelMain">
-																		<asp:ContentPlaceHolder ID="ContentMain" runat="server">
+
 																			<asp:Repeater runat="server" ID="rptMain" OnItemDataBound="DrawModule">
 																				<ItemTemplate>
 																					<asp:PlaceHolder ID="phMain" runat="server"></asp:PlaceHolder>
 																				</ItemTemplate>
 																			</asp:Repeater>
+                                                                            <asp:ContentPlaceHolder ID="ContentMain" runat="server">
 																		</asp:ContentPlaceHolder>
 																	</div>
 																</div>
