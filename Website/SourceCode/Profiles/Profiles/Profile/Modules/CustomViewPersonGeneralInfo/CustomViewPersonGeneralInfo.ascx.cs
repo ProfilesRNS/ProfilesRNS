@@ -61,11 +61,14 @@ namespace Profiles.Profile.Modules.CustomViewPersonGeneralInfo
             Profiles.ORCID.Utilities.ProfilesRNSDLL.BO.ORCID.Person orcidPerson = new Profiles.ORCID.Utilities.ProfilesRNSDLL.BLL.ORCID.Person().GetByInternalUsername(internalUsername);
             if (orcidPerson.Exists && !orcidPerson.ORCIDIsNull)
             {
-                args.AddParam("orcid", "", orcidPerson.ORCID);
-                args.AddParam("orcidurl", "", Profiles.ORCID.Utilities.config.ORCID_URL + "/" + orcidPerson.ORCID);
-                args.AddParam("orcidinfosite", "", Profiles.ORCID.Utilities.config.InfoSite);
-                args.AddParam("orcidimage", "", Root.Domain + "/Framework/Images/orcid_16x16(1).gif");
-                args.AddParam("orcidimageguid", "", Guid.NewGuid().ToString());
+                if (base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[1]/vivo:orcidId", base.Namespaces) != null) // Only show ORCID if security settings allow it
+                {
+                    args.AddParam("orcid", "", orcidPerson.ORCID);
+                    args.AddParam("orcidurl", "", Profiles.ORCID.Utilities.config.ORCID_URL + "/" + orcidPerson.ORCID);
+                    args.AddParam("orcidinfosite", "", Profiles.ORCID.Utilities.config.InfoSite);
+                    args.AddParam("orcidimage", "", Root.Domain + "/Framework/Images/orcid_16x16(1).gif");
+                    args.AddParam("orcidimageguid", "", Guid.NewGuid().ToString());
+                }
             }
             else if (Profiles.ORCID.Utilities.config.ShowNoORCIDMessage && Profiles.ORCID.Utilities.config.Enabled)
             {
