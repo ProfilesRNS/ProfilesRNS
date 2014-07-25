@@ -67,6 +67,7 @@ namespace Profiles.ORCID.Modules.CreationConfirmation
         }
         protected void DrawProfilesModule()
         {
+            imgOrcid.Src = Root.Domain + "/Framework/Images/orcid_16x16(1).gif";
             Profiles.ORCID.Utilities.ProfilesRNSDLL.BO.ORCID.Person person = GetPerson();
             if (person.Exists && !person.ORCIDIsNull && !person.ORCID.Equals(string.Empty))
             {

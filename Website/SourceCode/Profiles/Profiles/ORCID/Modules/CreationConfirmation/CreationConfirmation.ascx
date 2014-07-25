@@ -11,7 +11,7 @@
 </p>
 <p>
     <span id="spanYourORCID" runat="server">Your public ORCID record can be viewed at:
-        <img src="/Framework/Images/orcid_16x16(1).gif" class="orcidsymbol" alt="ORCID Symbol" />
+        <img src="/Framework/Images/orcid_16x16(1).gif" class="orcidsymbol" alt="ORCID Symbol" id="imgOrcid" runat="server"/>
         <asp:HyperLink ID="hlORCIDUrl" NavigateUrl="~/ORCID/UploadInfoToORCID.aspx" runat="server">Transfer biographical information & publications to ORCID</asp:HyperLink>
     </span>
     <p>
