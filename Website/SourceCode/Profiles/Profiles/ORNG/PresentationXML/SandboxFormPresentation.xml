@@ -9,11 +9,6 @@
   <PanelList>
     <Panel type="header"  />
     <Panel type="page" />
-    <Panel Type="active">
-      <Module ID="MiniSearch"  />
-      <Module ID="DefaultMenu">
-      </Module>
-    </Panel>
     <Panel Name="" Alias="" Type="main" TabType="default" TabSort="0" >
       <Module ID="GadgetSandbox" >
       </Module>
