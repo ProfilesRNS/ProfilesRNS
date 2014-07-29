@@ -7,13 +7,13 @@ namespace Profiles.ORCID.Utilities.ProfilesRNSDLL.BO.ORCID
 {
     public class Config
     {
-        public static string PathToProfiles 
+/*        public static string PathToProfiles 
         {
             get
             {
                 return ProfilesRNSDLL.DevelopmentBase.Common.GetConfig("ORCID.PathToProfiles");
             }
-        }
+        }*/
         public static string ClientID 
         {
             get

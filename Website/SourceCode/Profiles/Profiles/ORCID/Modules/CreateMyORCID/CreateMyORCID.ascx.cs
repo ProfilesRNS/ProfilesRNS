@@ -137,7 +137,9 @@ namespace Profiles.ORCID.Modules.CreateMyORCID
                 {
                     Edit.Utilities.DataIO data = new Edit.Utilities.DataIO();
                     data.AddLiteral(subjectID, data.GetStoreNode("http://vivoweb.org/ontology/core#orcidId"), data.GetStoreNode(bo.ORCID));
-                    Response.Redirect("~/ORCID/CreationConfirmation.aspx?UserORCID=" + bo.ORCID, false);
+
+                    bool isProxy = Profiles.ORCID.Utilities.DataIO.getNodeIdFromInternalUserName(LoggedInInternalUsername) != subjectID;
+                    Response.Redirect("~/ORCID/CreationConfirmation.aspx?UserORCID=" + bo.ORCID + "&Proxy="+isProxy, false);
                     return;
                 }
                 else

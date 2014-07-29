@@ -67,14 +67,36 @@ namespace Profiles.ORCID.Modules.CreationConfirmation
         }
         protected void DrawProfilesModule()
         {
-            imgOrcid.Src = Root.Domain + "/Framework/Images/orcid_16x16(1).gif";
-            Profiles.ORCID.Utilities.ProfilesRNSDLL.BO.ORCID.Person person = GetPerson();
-            if (person.Exists && !person.ORCIDIsNull && !person.ORCID.Equals(string.Empty))
+            bool proxy = false;
+            if (Request.Params["Proxy"] != null)
             {
-                hlORCIDUrl.Text = person.ORCIDUrl;
-                hlORCIDUrl.NavigateUrl = person.ORCIDUrl;
-                hlORCIDUrl.Target = "_blank";
-                spanYourORCID.Visible = true;
+                proxy = Convert.ToBoolean(Request.Params["Proxy"]);
+            }
+            
+            if (proxy)
+            {
+                pnlUserText.Visible = false;
+                pnlProxyText.Visible = true;
+                imgORCIDProxy.Src = Root.Domain + "/Framework/Images/orcid_16x16(1).gif";
+                string userORCID = Request.Params["UserORCID"];
+
+                hlORCIDUrlProxy.Text = Profiles.ORCID.Utilities.config.ORCID_URL + "/" + userORCID;
+                hlORCIDUrlProxy.NavigateUrl = Profiles.ORCID.Utilities.config.ORCID_URL + "/" + userORCID;
+                hlORCIDUrlProxy.Target = "_blank";
+            }
+            else
+            {
+                pnlUserText.Visible = true;
+                pnlProxyText.Visible = false;
+                imgOrcid.Src = Root.Domain + "/Framework/Images/orcid_16x16(1).gif";
+                Profiles.ORCID.Utilities.ProfilesRNSDLL.BO.ORCID.Person person = GetPerson();
+                if (person.Exists && !person.ORCIDIsNull && !person.ORCID.Equals(string.Empty))
+                {
+                    hlORCIDUrl.Text = person.ORCIDUrl;
+                    hlORCIDUrl.NavigateUrl = person.ORCIDUrl;
+                    hlORCIDUrl.Target = "_blank";
+                    spanYourORCID.Visible = true;
+                }
             }
         }
     }

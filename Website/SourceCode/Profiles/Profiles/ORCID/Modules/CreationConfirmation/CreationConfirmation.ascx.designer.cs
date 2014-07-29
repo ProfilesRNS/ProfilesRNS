@@ -22,6 +22,15 @@ namespace Profiles.ORCID.Modules.CreationConfirmation {
         protected global::System.Web.UI.WebControls.Label lblErrors;
         
         /// <summary>
+        /// pnlUserText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlUserText;
+        
+        /// <summary>
         /// spanYourORCID control.
         /// </summary>
         /// <remarks>
@@ -47,5 +56,32 @@ namespace Profiles.ORCID.Modules.CreationConfirmation {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlORCIDUrl;
+        
+        /// <summary>
+        /// pnlProxyText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlProxyText;
+        
+        /// <summary>
+        /// imgORCIDProxy control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage imgORCIDProxy;
+        
+        /// <summary>
+        /// hlORCIDUrlProxy control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink hlORCIDUrlProxy;
     }
 }

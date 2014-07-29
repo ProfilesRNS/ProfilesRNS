@@ -9,6 +9,6 @@
 <p id="pHasProfile" runat="server" visible="false">
     Please <a href="UploadInfoToORCID.aspx">click here</a> if you would like to upload
     data from your
-    <asp:HyperLink ID="hlProfile" runat="server" Text="BU Profile" Target="_blank" />
+    <asp:HyperLink ID="hlProfile" runat="server" Text="Profile" Target="_blank" />
     to ORCID.
 </p>

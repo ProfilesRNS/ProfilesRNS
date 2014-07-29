@@ -8,13 +8,13 @@ namespace Profiles.ORCID.Utilities
 {
     public class config
     {
-        public static string PathToProfiles
+  /*      public static string PathToProfiles
         {
             get
             {
                 return ConfigurationManager.AppSettings["ORCID.PathToProfiles"];
             }
-        }
+        }*/
         public static string ClientID
         {
             get
