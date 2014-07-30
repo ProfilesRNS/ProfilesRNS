@@ -158,6 +158,9 @@ namespace Profiles.ORCID.Modules.CreateBatch
 
                                     if (new Profiles.ORCID.Utilities.ProfilesRNSDLL.BLL.ORCID.Person().CreateNewORCID(bo, LoggedInInternalUsername, Profiles.ORCID.Utilities.ProfilesRNSDLL.BO.ORCID.REFPersonStatusType.REFPersonStatusTypes.User_Push_Failed))
                                     {
+                                        Edit.Utilities.DataIO dataio = new Edit.Utilities.DataIO();
+                                        long subjectID = Profiles.ORCID.Utilities.DataIO.getNodeIdFromPersonID(int.Parse(lblPersonID.Text));
+                                        dataio.AddLiteral(subjectID, dataio.GetStoreNode("http://vivoweb.org/ontology/core#orcidId"), dataio.GetStoreNode(bo.ORCID));
                                         lblMessages.Text = "Success";
                                     }
                                     else

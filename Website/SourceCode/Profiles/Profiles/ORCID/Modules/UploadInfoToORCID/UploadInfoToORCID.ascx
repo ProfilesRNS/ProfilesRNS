@@ -82,7 +82,7 @@
                     <span class="uierror">Note:</span>
                     <asp:Label ID="AffiliationsMessageWhenORCIDExists" runat="server" Text="The list below will not include any positions that you have already pushed via this site. " />.
                     Only positions that have a title, city, state, and country can be sent to ORCID.
-                    For more information on privacy settings <a href='ORCIDPrivacySettingsandProfiles.pdf'
+                    For more information on privacy settings <a href='<%=RootDomain()%>/ORCID/ORCIDPrivacySettingsandProfiles.pdf'
                         target='_blank'>click here </a>(opens in new window).
                 </div>
                 <asp:Repeater runat="server" ID="rptPersonAffiliations">
@@ -191,7 +191,7 @@
                     but not for individual websites. The default privacy for your URLs section will
                     be public unless you change it. For particular websites you have the option of including
                     or excluding them from being sent to ORCID. For more information on privacy settings
-                    <a href='ORCIDPrivacySettingsandProfiles.pdf' target='_blank'>click here </a>(opens
+                    <a href='<%=RootDomain()%>/ORCID/ORCIDPrivacySettingsandProfiles.pdf' target='_blank'>click here </a>(opens
                     in new window).
                 </div>
                 <asp:Repeater runat="server" ID="rptPersonURLs">
@@ -279,7 +279,7 @@
                 <div style="padding: 5px">
                     <span class="uierror">Note:</span>
                     <asp:Label ID="PublicationMessageWhenORCIDExists" runat="server" Text="The list below will not include any publications that you have already pushed via this site. " />
-                    For more information on privacy settings <a href='ORCIDPrivacySettingsandProfiles.pdf'
+                    For more information on privacy settings <a href='<%=RootDomain()%>/ORCID/ORCIDPrivacySettingsandProfiles.pdf'
                         target='_blank'>click here </a>(opens in new window). 
                 </div>
                 <asp:Repeater ID="rptPublications" runat="server" OnItemDataBound="rptPublications_ItemDataBound">

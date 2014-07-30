@@ -122,5 +122,31 @@ namespace Profiles.ORCID.Utilities
             }
             return 0;
         }
+
+        public static long getNodeIdFromPersonID(int personID)
+        {
+            SessionManagement sm = new SessionManagement();
+
+            string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+            SqlConnection dbconnection = new SqlConnection(connstr);
+            SqlCommand dbcommand = new SqlCommand("select nodeID from [RDF.Stage].[InternalNodeMap] where Class = 'http://xmlns.com/foaf/0.1/Person' and internalID = " + personID);
+
+            SqlDataReader dbreader;
+            dbconnection.Open();
+            dbcommand.CommandType = CommandType.Text;
+            dbcommand.CommandTimeout = GetCommandTimeout();
+            dbcommand.Connection = dbconnection;
+            dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
+
+            while (dbreader.Read())
+            {
+                ORCIDPublication pub = new ORCIDPublication();
+                if (dbreader["NodeID"] != null)
+                {
+                    return Convert.ToInt64(dbreader["NodeID"]);
+                }
+            }
+            return 0;
+        }
     }
 }
