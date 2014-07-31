@@ -43,9 +43,10 @@ namespace Profiles.Login.Modules.ShibLogin
                 else if (Request.QueryString["method"].ToString() == "shibboleth")
                 {
                     // added by Eric
-                    // first check that they logged in from our IDP
+                    // If they specify an Idp, then check that they logged in from the configured IDP
                     bool authenticated = false;
-                    if (ConfigurationManager.AppSettings["Shibboleth.ShibIdentityProvider"].ToString().Equals(Request.Headers.Get("ShibIdentityProvider").ToString(), StringComparison.InvariantCultureIgnoreCase))
+                    if (ConfigurationManager.AppSettings["Shibboleth.ShibIdentityProvider"] == null ||
+                        ConfigurationManager.AppSettings["Shibboleth.ShibIdentityProvider"].ToString().Equals(Request.Headers.Get("ShibIdentityProvider").ToString(), StringComparison.InvariantCultureIgnoreCase))
                     {
                         String userName = Request.Headers.Get(ConfigurationManager.AppSettings["Shibboleth.InternalUserNameHeader"].ToString()); //"025693078";
                         if (userName != null && userName.Trim().Length > 0)
