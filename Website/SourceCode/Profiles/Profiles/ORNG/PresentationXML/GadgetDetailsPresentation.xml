@@ -7,11 +7,6 @@
   <PanelList>
     <Panel type="header"  />
     <Panel type="page" />
-    <Panel Type="active">
-      <Module ID="MiniSearch"  />
-      <Module ID="MainMenu">
-      </Module>
-    </Panel>
     <Panel Name="" Alias="" Type="main" TabType="default" TabSort="0" >
       <Module ID="Gadgets" >
         <ParamList>
@@ -23,6 +18,7 @@
             </div>
             <div id="gadgets-detail" class="gadgets-gadget-parent"></div>
           </Param>
+          <Param Name="AllowSetOwnerFromRequest">True</Param>
         </ParamList>
       </Module>
     </Panel>

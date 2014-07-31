@@ -99,11 +99,6 @@ namespace Profiles.ORNG.Modules.Gadgets
                 pnlSecurityOptions.Visible = false;
                 litGadget.Text = "This feature is currently turned off on your system";
             }
-            else if (gadget.RequiresRegistration() && !data.IsRegistered(uri, appId))
-            {
-                pnlSecurityOptions.Visible = false;
-                litGadget.Text = gadget.GetUnavailableMessage();
-            }
             else 
             {
                 litGadget.Text = "<div id='" + gadget.GetChromeId() + "' class='gadgets-gadget-parent'></div>";

@@ -43,18 +43,30 @@ namespace Profiles.Login.Modules.ShibLogin
                 else if (Request.QueryString["method"].ToString() == "shibboleth")
                 {
                     // added by Eric
-                    String userName = Request.Headers.Get(ConfigurationManager.AppSettings["Shibboleth.InternalUserNameHeader"].ToString()); //"025693078";
-                    if (userName != null && userName.Trim().Length > 0)
+                    // first check that they logged in from our IDP
+                    bool authenticated = false;
+                    if (ConfigurationManager.AppSettings["Shibboleth.ShibIdentityProvider"].ToString().Equals(Request.Headers.Get("ShibIdentityProvider").ToString(), StringComparison.InvariantCultureIgnoreCase))
                     {
-                        Profiles.Login.Utilities.DataIO data = new Profiles.Login.Utilities.DataIO();
-                        Profiles.Login.Utilities.User user = new Profiles.Login.Utilities.User();
-
-                        user.UserName = userName;
-                        user.Password = userName;
-                        if (data.UserLogin(ref user))
+                        String userName = Request.Headers.Get(ConfigurationManager.AppSettings["Shibboleth.InternalUserNameHeader"].ToString()); //"025693078";
+                        if (userName != null && userName.Trim().Length > 0)
                         {
-                            RedirectAuthenticatedUser();
+                            Profiles.Login.Utilities.DataIO data = new Profiles.Login.Utilities.DataIO();
+                            Profiles.Login.Utilities.User user = new Profiles.Login.Utilities.User();
+
+                            user.UserName = userName;
+                            user.Password = userName;
+                            if (data.UserLogin(ref user))
+                            {
+                                authenticated = true;
+                                RedirectAuthenticatedUser();
+                            }
                         }
+                    }
+                    if (!authenticated)
+                    {
+                        // try and just put their name in the session.
+                        sm.Session().ShortDisplayName = Request.Headers.Get("ShibdisplayName");
+                        RedirectAuthenticatedUser();
                     }
                 }
                 else if (Request.QueryString["method"].ToString() == "login")

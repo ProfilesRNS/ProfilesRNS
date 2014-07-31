@@ -81,21 +81,11 @@ namespace Profiles.Edit.Modules.EditPropertyList
                         canedit = true;
                     }
 
-                    // treat ORNG items as "special", because they may not be available and they may be turned off
+                    // treat ORNG items as "special", because they can be turned off
                     if (node.SelectSingleNode("@URI").Value.StartsWith(Profiles.ORNG.Utilities.OpenSocialManager.ORNG_ONTOLOGY_PREFIX))
                     {
                         GadgetSpec spec = OpenSocialManager.GetGadgetByPropertyURI(node.SelectSingleNode("@URI").Value);
-                        if (spec != null && spec.RequiresRegistration() && !orngData.IsRegistered(this.Subject, spec.GetAppId()))
-                        {
-                            singlesi.Add(new SecurityItem(node.ParentNode.SelectSingleNode("@Label").Value, node.SelectSingleNode("@Label").Value,
-                                node.SelectSingleNode("@URI").Value,
-                                Convert.ToInt32(node.SelectSingleNode("@NumberOfConnections").Value),
-                                Convert.ToInt32(node.SelectSingleNode("@ViewSecurityGroup").Value),
-                                "Unavailable",
-                                node.SelectSingleNode("@ObjectType").Value, canedit));
-                            continue;
-                        }
-                        else if (spec != null && "0".Equals(node.SelectSingleNode("@NumberOfConnections").Value)) 
+                        if (spec != null && "0".Equals(node.SelectSingleNode("@NumberOfConnections").Value)) 
                         {
                             singlesi.Add(new SecurityItem(node.ParentNode.SelectSingleNode("@Label").Value, node.SelectSingleNode("@Label").Value,
                                 node.SelectSingleNode("@URI").Value,
@@ -125,7 +115,6 @@ namespace Profiles.Edit.Modules.EditPropertyList
 
                 gli.Add(new GenericListItem(securityitem.SelectSingleNode("@Label").Value, securityitem.SelectSingleNode("@Description").Value));
             }
-            gli.Add(new GenericListItem("Unavailable", "This feature depends on automatically collected data that we do not have for your Profile."));
 
             repPropertyGroups.DataSource = si;
             repPropertyGroups.DataBind();

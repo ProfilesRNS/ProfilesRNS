@@ -114,16 +114,6 @@ namespace Profiles.ORNG.Utilities
             return gadgetSpec.GetGadgetURL();
         }
 
-        public string GetUnavailableMessage()
-        {
-            return gadgetSpec.GetUnavailableMessage();
-        }
-
-        public bool RequiresRegistration()
-        {
-            return gadgetSpec.RequiresRegistration();
-        }
-
         public bool IsSandboxGadget()
         {
             return gadgetSpec.IsSandboxGadget();

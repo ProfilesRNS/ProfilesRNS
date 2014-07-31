@@ -9,10 +9,6 @@
   <PanelList>
     <Panel type="header"  />
     <Panel type="page" />
-    <Panel Type="active">
-      <Module ID="MiniSearch"  />
-      <Module ID="MainMenu"  />      
-    </Panel>
     <Panel Type="main">
       <Module ID="About">        
       </Module>
