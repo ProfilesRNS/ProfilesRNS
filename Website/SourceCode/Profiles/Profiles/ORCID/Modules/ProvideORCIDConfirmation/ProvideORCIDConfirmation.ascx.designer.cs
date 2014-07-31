@@ -40,6 +40,15 @@ namespace Profiles.ORCID.Modules.ProvideORCIDConfirmation {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pHasProfile;
         
         /// <summary>
+        /// hlEdit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink hlEdit;
+        
+        /// <summary>
         /// hlProfile control.
         /// </summary>
         /// <remarks>

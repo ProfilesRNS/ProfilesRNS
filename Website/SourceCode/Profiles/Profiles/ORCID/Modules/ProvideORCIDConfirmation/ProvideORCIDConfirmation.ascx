@@ -7,7 +7,7 @@
     Thank you, your ORCID has been associated with your user account.
 </p>
 <p id="pHasProfile" runat="server" visible="false">
-    Please <a href="UploadInfoToORCID.aspx">click here</a> if you would like to upload
+    Please <asp:HyperLink ID="hlEdit" runat="server" Text="click here" Target="_blank" /> if you would like to upload
     data from your
     <asp:HyperLink ID="hlProfile" runat="server" Text="Profile" Target="_blank" />
     to ORCID.
