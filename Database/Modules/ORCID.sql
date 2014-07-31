@@ -1,5 +1,5 @@
 update [Ontology.].ClassProperty
-	set IsDetail = 1,
+	set IsDetail = 0,
 		CustomDisplay = 1,
 		CustomEdit = 1,
 		EditSecurityGroup = -20,
