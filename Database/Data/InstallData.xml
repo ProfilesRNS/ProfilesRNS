@@ -16422,24 +16422,20 @@
       <ClassPropertyID>835</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://vivoweb.org/ontology/core#orcidId</Property>
-      <IsDetail>0</IsDetail>
+      <IsDetail>1</IsDetail>
       <IncludeDescription>0</IncludeDescription>
       <IncludeNetwork>0</IncludeNetwork>
       <SearchWeight>5.000000000000000e-001</SearchWeight>
-      <CustomDisplay>1</CustomDisplay>
-      <CustomEdit>1</CustomEdit>
+      <CustomDisplay>0</CustomDisplay>
+      <CustomEdit>0</CustomEdit>
       <ViewSecurityGroup>-1</ViewSecurityGroup>
-      <EditSecurityGroup>-20</EditSecurityGroup>
-      <EditPermissionsSecurityGroup>-20</EditPermissionsSecurityGroup>
-      <EditExistingSecurityGroup>-20</EditExistingSecurityGroup>
-      <EditAddNewSecurityGroup>20</EditAddNewSecurityGroup>
+      <EditSecurityGroup>-40</EditSecurityGroup>
+      <EditPermissionsSecurityGroup>-40</EditPermissionsSecurityGroup>
+      <EditExistingSecurityGroup>-40</EditExistingSecurityGroup>
+      <EditAddNewSecurityGroup>-40</EditAddNewSecurityGroup>
       <EditAddExistingSecurityGroup>-40</EditAddExistingSecurityGroup>
       <EditDeleteSecurityGroup>-40</EditDeleteSecurityGroup>
       <MinCardinality>0</MinCardinality>
-      <MaxCardinality>1</MaxCardinality>
-      <CustomEditModule>
-        <Module ID="CustomEditORCID" />
-      </CustomEditModule>
     </Row>
     <Row>
       <ClassPropertyID>836</ClassPropertyID>
