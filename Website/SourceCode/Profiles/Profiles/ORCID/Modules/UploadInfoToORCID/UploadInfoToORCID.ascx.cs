@@ -24,6 +24,39 @@ namespace Profiles.ORCID.Modules.UploadInfoToORCID
     public partial class UploadInfoToORCID : ORCIDBaseModule
     {
         Utilities.DataIO data;
+
+
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            Boolean b = divPublications.Visible;
+        }
+
+        protected void Page_Load(object sender, System.EventArgs e)
+        {
+            try
+            {
+                //                if (!IsPostBack)
+                //                {
+                DrawProfilesModule();
+                //                }
+            }
+            catch (Exception ex)
+            {
+                LogException(ex);
+            }
+        }
+        protected void DrawProfilesModule()
+        {
+            Utilities.ProfilesRNSDLL.BO.ORCID.Person orcidPerson = GetPersonWithDBData(Convert.ToInt32(Request.QueryString["subject"]));
+            LoadURLs(orcidPerson);
+            LoadBIO(orcidPerson);
+            LoadAffiliations(orcidPerson);
+            LoadPublications(orcidPerson);
+
+
+        }
+        
+        
         public override Label Errors
         {
             get
@@ -82,30 +115,8 @@ namespace Profiles.ORCID.Modules.UploadInfoToORCID
             RDFTriple = rdftriple;
         }
 
-        protected void DrawProfilesModule()
-        {
-            Utilities.ProfilesRNSDLL.BO.ORCID.Person orcidPerson = GetPersonWithDBData(Convert.ToInt32(Request.QueryString["subject"]));
-            LoadURLs(orcidPerson);
-            LoadBIO(orcidPerson);
-            LoadAffiliations(orcidPerson);
-            LoadPublications(orcidPerson);
-                       
- 
-        }
-        protected void Page_Load(object sender, System.EventArgs e)
-        {
-            try
-            {
-//                if (!IsPostBack)
-//                {
-                    DrawProfilesModule();
-//                }
-            }
-            catch (Exception ex)
-            {
-                LogException(ex);
-            }
-        }
+    
+        
         protected void rptPublications_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             if (e.Item.ItemType == ListItemType.AlternatingItem || e.Item.ItemType == ListItemType.Item)
@@ -117,7 +128,8 @@ namespace Profiles.ORCID.Modules.UploadInfoToORCID
 
         private void GetBioFromThePage(Utilities.ProfilesRNSDLL.BO.ORCID.Person person)
         {
-            if (divResearchExpertiseAndProfessionalInterests.Visible)
+            //if (divResearchExpertiseAndProfessionalInterests.Visible)
+            if (!this.txtResearchExpertiseAndProfessionalInterests.Text.Equals(""))
             {
                 person.BiographyDecisionID = int.Parse(ddlResearchExpertiseAndProfessionalInterestsVis.SelectedValue);
                 if (person.BiographyDecisionID == (int)Utilities.ProfilesRNSDLL.BO.ORCID.REFDecision.REFDecisions.Public)
@@ -126,8 +138,7 @@ namespace Profiles.ORCID.Modules.UploadInfoToORCID
                 }
                 person.PushBiographyToORCID = true;
             }
-            if (divWebsites.Visible)
-            {
+            
                 if (rptPersonURLs.Items.Count > 0)
                 {
                     Label lblWebPageTitle = null;
@@ -153,11 +164,11 @@ namespace Profiles.ORCID.Modules.UploadInfoToORCID
                         }
                     }
                 }
-            }
+            
         }
         private void GetWorksFromThePage(Utilities.ProfilesRNSDLL.BO.ORCID.Person person)
         {
-            if (divPublications.Visible)
+            if (rptPublications.Items.Count > 0)
             {
                 int counter = 0;
                 const string WORK_TYPE = "journal-article";
@@ -265,7 +276,7 @@ namespace Profiles.ORCID.Modules.UploadInfoToORCID
         }
         private void GetAffiliationsFromThePage(Utilities.ProfilesRNSDLL.BO.ORCID.Person person)
         {
-            if (divAffiliations.Visible)
+            if (rptPersonAffiliations.Items.Count > 0)
             {
                 int counter = 0;
                 foreach (RepeaterItem ri in rptPersonAffiliations.Items)
@@ -309,15 +320,30 @@ namespace Profiles.ORCID.Modules.UploadInfoToORCID
         private int publicationsVisibility = (int)Utilities.ProfilesRNSDLL.BO.ORCID.REFDecision.REFDecisions.Public;
         private void LoadPublications(Utilities.ProfilesRNSDLL.BO.ORCID.Person person)
         {
+            int defaultid = 0;
             List<Utilities.ProfilesRNSDLL.BO.ORCID.PersonWork> pubs = person.Works;
-            divPublications.Visible = pubs.Count > 0;
+            
+            if (pubs.Count > 0)
+                divPublications.Visible = true;
+            else
+                divPublications.Visible = false;
+
             if (pubs.Count > 0)
             {
                 publicationsVisibility = pubs[0].DecisionID;
                 this.PublicationMessageWhenORCIDExists.Visible = !GetPerson().ORCIDIsNull;
                 rptPublications.DataSource = pubs;
                 rptPublications.DataBind();
+                defaultid = pubs[0].DecisionID;
+
             }
+
+            if (defaultid > 0) { defaultid -= 1; }
+
+            selPrivacy.Items[defaultid].Selected = true;
+
+
+
         }
         private void LoadAffiliations(Utilities.ProfilesRNSDLL.BO.ORCID.Person orcidPerson)
         {

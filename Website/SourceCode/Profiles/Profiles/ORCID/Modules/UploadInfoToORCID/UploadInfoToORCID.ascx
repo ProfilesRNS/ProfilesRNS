@@ -264,8 +264,8 @@
                     <img alt="min" id="imgPublicationstrPublications" src="<%=RootDomain()%>/Profile/Modules/PropertyList/images/plusSign.gif"
                         onclick="javascript:toggleBlock('imgPublications','trPublications');" />
                     Publications <span style="float: right">
-                            <select id="selPrivacy">
-                                <option value="1" selected="selected">Public</option>
+                            <select id="selPrivacy" runat="server">
+                                <option value="1">Public</option>
                                 <option value="2">Limited</option>
                                 <option value="3">Private</option>
                                 <option value="4">Exclude</option>
@@ -366,7 +366,7 @@
     
 
     $(document).ready(function () {
-        $('#selPrivacy').change(
+        $("select[id*=selPrivacy]").change(
         function () {
             
             $("select[id*=ddlPubVis]").val(this.value);
@@ -374,6 +374,28 @@
       );
 
     });
+
+    $(document).ready(function () {
+        jQuery('.myClickDisabledElm').bind('click', function (e) {
+            toggleBlock('imgPublications', 'trPublications');
+
+            var e = document.getElementById('trPublications');
+            if (e.style.display == 'block') {
+                e.style.display = 'none';
+            }
+
+            var object = document.getElementById('imgPublicationstrPublications');
+
+            if (object.src == document.getElementById("imgon" + 'trPublications').value) {
+
+                object.src = document.getElementById("imgoff" + 'trPublications').value;
+            }
+
+            ShowStatus();
+        })
+
+    });
+
 
 
     

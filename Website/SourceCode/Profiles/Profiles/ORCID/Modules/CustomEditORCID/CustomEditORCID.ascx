@@ -29,7 +29,7 @@
                         <asp:Panel runat="server" ID="pnlAddORCID">
                             <asp:ImageButton runat="server" ImageUrl="~/Framework/Images/icon_squareArrow.gif"
                                 ID="imbCreateMyORCID" OnClick="imbCreateMyORCID_OnClick" />&nbsp; 
-                            <asp:LinkButton runat="server" ID="lbCreateMyORCID" OnClick="imbCreateMyORCID_OnClick"
+                            <asp:LinkButton runat="server"  ID="lbCreateMyORCID" OnClick="imbCreateMyORCID_OnClick"
                                 Text="Create ORCID"></asp:LinkButton>    
                              <br />
                             <asp:Panel runat="server" ID="pnlCreateMyORCID" Visible="false" Style="background-color: #F0F4F6; margin-bottom: 5px; border: solid 1px #999;">
@@ -52,14 +52,14 @@
                              <br />
                             <asp:Panel runat="server" ID="pnlUploadToORCID" Visible="false" Style="background-color: #F0F4F6; margin-bottom: 5px; border: solid 1px #999;">
                                 <div Style="margin-bottom: 5px; margin-left: 5px; margin-right: 5px; margin-top: 5px;">
-                                    <asp:Button ID="Button1" runat="server" OnClick="btnSubmitToORCID_Click" Text="Submit to ORCID Profile"
+                                    <asp:Button ID="Button1"  CssClass='myClickDisabledElm' runat="server" OnClick="btnSubmitToORCID_Click" Text="Submit to ORCID Profile"
                                         Width="189px" />
                                     <br />
                                     <br />
                                     <asp:Label ID="lblErrorsUpload" runat="server" EnableViewState="false" CssClass="uierror" />
                                     <uc3:UploadInfoToORCID ID="UploadInfoToORCID1" runat="server" />
                                     <br />
-                                    <asp:Button ID="btnSubmitToORCID" runat="server" OnClick="btnSubmitToORCID_Click"
+                                    <asp:Button ID="btnSubmitToORCID"  CssClass='myClickDisabledElm' runat="server" OnClick="btnSubmitToORCID_Click"
                                         Text="Submit to ORCID Profile" Width="189px" />
                                 </div> 
                             </asp:Panel>   
@@ -112,3 +112,20 @@
             </tr>
         </table>
 </asp:Panel>
+
+
+<script type="text/javascript">
+
+
+
+    $(document).ready(function () {
+        jQuery('.myClickDisabledElm').bind('click', function (e) {            
+                        ShowStatus();            
+        })
+
+    });
+
+
+    
+</script>
+

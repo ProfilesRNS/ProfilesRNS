@@ -223,6 +223,8 @@ namespace Profiles.ORCID.Modules.CustomEditORCID
                 Profiles.ORCID.Utilities.ProfilesRNSDLL.BO.ORCID.Person person = UploadInfoToORCID1.GetPersonWithPageData();
                 Profiles.ORCID.Utilities.ProfilesRNSDLL.BLL.ORCID.PersonMessage personMessageBLL = new Profiles.ORCID.Utilities.ProfilesRNSDLL.BLL.ORCID.PersonMessage();
                 personMessageBLL.CreateUploadMessages(person, LoggedInInternalUsername);
+                Response.Redirect("~/ORCID/default.aspx");
+                return;
             }
             catch (Exception ex)
             {

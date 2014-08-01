@@ -2,9 +2,6 @@
 <asp:Label ID="lblErrors" runat="server" EnableViewState="false" CssClass="uierror" />
 <h3>
     Profiles &harr; ORCID Synchronization</h3>
-<p>
-    <asp:HyperLink ID="HyperLink2" NavigateUrl="/ORCID/UploadInfoToORCID.aspx" runat="server">Transfer biographical information & publications to ORCID</asp:HyperLink>
-</p>
 <div runat="server" id="divMessages">
     <asp:Repeater ID="rptMessages" runat="server">
         <HeaderTemplate>

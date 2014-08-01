@@ -3,7 +3,8 @@
 <%@ Register Src="~/ORCID/Modules/UploadInfoToORCID/UploadInfoToORCID.ascx" TagName="UploadInfoToORCID"
     TagPrefix="uc1" %>
 <asp:Label ID="lblErrors" runat="server" EnableViewState="false" CssClass="uierror" />
-<div id="divEntryForm" runat="server" Style="margin-bottom: 5px; margin-left: 5px; margin-right: 5px;">
+<div id="divEntryForm" runat="server" style="margin-bottom: 5px;
+    margin-left: 5px; margin-right: 5px;">
     <h3>
         Please complete the form below to create your ORCID.
     </h3>
@@ -147,29 +148,29 @@
         <br />
         <table>
             <tr>
-                <td style="vertical-align: top;"><asp:CheckBox ID="chkUploadInfoNow" runat="server" AutoPostBack="true" OnCheckedChanged="chkUploadInfoNow_CheckedChanged"
-                Checked="true" /></td>
+                <td style="vertical-align: top;">
+                    <asp:CheckBox ID="chkUploadInfoNow" runat="server" AutoPostBack="true" OnCheckedChanged="chkUploadInfoNow_CheckedChanged"
+                        Checked="true" />
+                </td>
                 <td>
-                       Upload Profiles data to ORCID (uncheck this box to create an ORCID iD without uploading any optional data).
+                    Upload Profiles data to ORCID (uncheck this box to create an ORCID iD without uploading
+                    any optional data).
                 </td>
             </tr>
         </table>
         <p>
-         
-            
         </p>
         <uc1:UploadInfoToORCID ID="UploadInfoToORCID1" runat="server" Visible="true" />
-        
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-            <ContentTemplate>
+            <ContentTemplate>               
                 <asp:Label ID="lblErrorsCreate" runat="server" EnableViewState="false" CssClass="uierror" />
                 <p id="pAcknowledge" runat="server">
                     <asp:CheckBox ID="chkIAgree" runat="server" AutoPostBack="true" OnCheckedChanged="chkIAgree_CheckedChanged" />
                     I acknowledge that I have read and agree with the
                     <asp:HyperLink ID="hlORCIDAckAndConsent" runat="server" Target="_blank"></asp:HyperLink>.
                 </p>
-                <asp:Button ID="btnNewORCID" runat="server" OnClick="btnNewORCID_Click" Text="Create ORCID"
-                    Enabled="false" />
+                <asp:Button ID="btnNewORCID" CssClass="myClickDisabledElm" runat="server" OnClick="btnNewORCID_Click"
+                    Text="Create ORCID" Enabled="false" />
             </ContentTemplate>
             <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="btnNewORCID" EventName="Click" />
@@ -177,3 +178,18 @@
         </asp:UpdatePanel>
     </div>
 </div>
+<script type="text/javascript">
+
+
+
+    $(document).ready(function () {
+        jQuery('.myClickDisabledElm').bind('click', function (e) {
+
+                 ShowStatus();  
+        })
+
+    });
+
+
+    
+</script>
