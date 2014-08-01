@@ -27052,14 +27052,14 @@
     <Row>
       <PermissionScope>/affiliations/create</PermissionScope>
       <PermissionDescription>Add affiliation</PermissionDescription>
-      <MethodAndRequest>orcid-affiliations</MethodAndRequest>
+      <MethodAndRequest>affiliations</MethodAndRequest>
       <SuccessMessage>Your affiliation(s) were successfully transfered to ORCID</SuccessMessage>
       <FailedMessage>Your affiliation(s) were NOT successfully transfered to ORCID</FailedMessage>
     </Row>
     <Row>
       <PermissionScope>/affiliations/update</PermissionScope>
       <PermissionDescription>Update affiliation</PermissionDescription>
-      <MethodAndRequest>orcid-affiliations</MethodAndRequest>
+      <MethodAndRequest>affiliations</MethodAndRequest>
       <SuccessMessage>Your affiliation(s) were successfully transfered to ORCID</SuccessMessage>
       <FailedMessage>Your affiliation(s) were NOT successfully transfered to ORCID</FailedMessage>
     </Row>
