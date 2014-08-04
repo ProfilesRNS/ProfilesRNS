@@ -554,7 +554,6 @@ SELECT  R.x.value('ClassPropertyID[1]','varchar(max)'),
 -- [ORCID.]
 ---------------------------------------------------------------
   
-	TRUNCATE TABLE [ORCID.].[REF_Permission]
 	INSERT INTO [ORCID.].[REF_Permission]
 		(
 			[PermissionScope],
@@ -576,7 +575,6 @@ SELECT  R.x.value('ClassPropertyID[1]','varchar(max)'),
   CROSS APPLY x.nodes('//Row') AS R ( x )
 
 
-  	TRUNCATE TABLE [ORCID.].[REF_PersonStatusType]
 	INSERT INTO [ORCID.].[REF_PersonStatusType]
 		(
 			[StatusDescription]
@@ -590,7 +588,6 @@ SELECT  R.x.value('ClassPropertyID[1]','varchar(max)'),
   CROSS APPLY x.nodes('//Row') AS R ( x )
 
 
-  	TRUNCATE TABLE [ORCID.].[REF_RecordStatus]
 	INSERT INTO [ORCID.].[REF_RecordStatus]
 		(
 			[RecordStatusID],
@@ -606,7 +603,6 @@ SELECT  R.x.value('ClassPropertyID[1]','varchar(max)'),
   CROSS APPLY x.nodes('//Row') AS R ( x )
 
 
-    TRUNCATE TABLE [ORCID.].[REF_Decision]
 	INSERT INTO [ORCID.].[REF_Decision]
 		(
 			[DecisionDescription],
@@ -621,7 +617,6 @@ SELECT  R.x.value('ClassPropertyID[1]','varchar(max)'),
           ) t
   CROSS APPLY x.nodes('//Row') AS R ( x )
 
-    TRUNCATE TABLE [ORCID.].[REF_WorkExternalType]
 	INSERT INTO [ORCID.].[REF_WorkExternalType]
 		(
 			[WorkExternalType],
@@ -637,7 +632,6 @@ SELECT  R.x.value('ClassPropertyID[1]','varchar(max)'),
   CROSS APPLY x.nodes('//Row') AS R ( x )
 
 
-    TRUNCATE TABLE [ORCID.].[RecordLevelAuditType]
 	INSERT INTO [ORCID.].[RecordLevelAuditType]
 		(
 			[AuditType]
@@ -652,7 +646,6 @@ SELECT  R.x.value('ClassPropertyID[1]','varchar(max)'),
 
 
 
-      TRUNCATE TABLE [ORCID.].[DefaultORCIDDecisionIDMapping]
 	INSERT INTO [ORCID.].[DefaultORCIDDecisionIDMapping]
 		(
 			[SecurityGroupID],
