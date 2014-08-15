@@ -316,7 +316,7 @@
     </xsl:choose>
   </xsl:template>
   <xsl:template name="threeColumn">
-    <td onclick="javascript:GoTo('{rdf:object/@rdf:resource}')" class="alignLeft">
+    <td  class="alignLeft">
       <xsl:choose>
         <xsl:when test="rdfs:label != ''">
           <xsl:value-of select="rdfs:label"/>
@@ -328,11 +328,13 @@
         </xsl:otherwise>
       </xsl:choose>
     </td>
-    <td onclick="javascript:GoTo('{rdf:object/@rdf:resource}')">
-      <xsl:value-of select="vivo:overview"/>
+    <td>
+      <a href="{rdf:object/@rdf:resource}">
+        <xsl:value-of select="vivo:overview"/>
+      </a>
     </td>
     <td>
-      <a class="listTableLink"   href="Javascript:WhyLink('{rdf:object/@rdf:resource}');">
+      <a class="listTableLink"  href="{$root}/search/default.aspx?searchtype=whyeverything&amp;nodeuri={rdf:object/@rdf:resource}&amp;searchfor={$searchfor}&amp;exactphrase={$exactphrase}&amp;perpage={$perpage}&amp;page={$page}&amp;totalpages={$totalpages}&amp;searchrequest={$searchrequest}">
         Why?
       </a>
     </td>

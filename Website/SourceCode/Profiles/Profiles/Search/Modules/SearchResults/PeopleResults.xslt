@@ -326,6 +326,18 @@
                                   <xsl:with-param name="doc" select="$document"></xsl:with-param>
                                   <xsl:with-param name="nodeURI" select="$nodeURI"></xsl:with-param>
                                   <xsl:with-param name="weight" select ="$weight"></xsl:with-param>
+                                  <xsl:with-param name="searchfor" select ="$searchfor"></xsl:with-param>
+                                  <xsl:with-param name="exactphrase" select ="$exactphrase"></xsl:with-param>
+                                  <xsl:with-param name="perpage" select ="$perpage"></xsl:with-param>
+                                  <xsl:with-param name="offset" select ="$offset"></xsl:with-param>
+                                  <xsl:with-param name="page" select ="$page"></xsl:with-param>
+                                  <xsl:with-param name="totalpages" select ="$totalpages"></xsl:with-param>
+                                  <xsl:with-param name="searchrequest" select ="$searchrequest"></xsl:with-param>
+                                  <xsl:with-param name="sortby" select ="$currentsort"></xsl:with-param>
+                                  <xsl:with-param name="sortdirection" select ="$currentsortdirection"></xsl:with-param>
+                                  <xsl:with-param name="showcolumns" select ="$showcolumns"></xsl:with-param>
+                                  <xsl:with-param name="root" select ="$root"></xsl:with-param>
+
                                 </xsl:call-template>
                               </xsl:when>
                               <xsl:otherwise>
@@ -346,7 +358,7 @@
             </td>
           </tr>
         </table>
-        
+
         <div class="listTablePagination" style="float: left; margin-left: 1px;">
           <table>
             <tbody>
@@ -437,6 +449,7 @@
         <xsl:text>No matching results.</xsl:text>
       </xsl:otherwise>
     </xsl:choose>
+
     <script language="JavaScript">
 
 
@@ -464,7 +477,7 @@
 
       function changePage(e) {
       if (e.keyCode == 13) {
-      ChangePage();      
+      ChangePage();
       }
       return false;
       }
@@ -528,13 +541,13 @@
       if(document.getElementById("selSort").value==''){
       sortby = document.getElementById("txtCurrentSort").value;
       }else{
-      sortby = document.getElementById("selSort").value;   
+      sortby = document.getElementById("selSort").value;
 
       if(sortby.indexOf("_")!=-1){
       var mySplitResult = sortby.split("_");
       sortby = mySplitResult[0];
       }
-      
+
       }
 
       sortdirection = document.getElementById("txtCurrentSortDirection").value;
@@ -656,13 +669,6 @@
       GetPageData();
       page = totalpages;
       NavToPage();
-      }
-
-      function WhyLink(uri){
-
-      GetPageData();
-      window.location = root + '/search/default.aspx?searchtype=whypeople<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>nodeuri=' + uri + '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>searchfor=' + searchfor + '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>exactphrase=' + exactphrase + '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>perpage=' + perpage + '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>offset=' + offset + '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>page=' + page + '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>totalpages=' + totalpages + '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>searchrequest=' + searchrequest +  '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>sortby=' + sortby+ '<xsl:text disable-output-escaping="yes"><![CDATA[&]]></xsl:text>sortdirection=' + sortdirection;
-
       }
 
       function ShowDetails(nodeURI,obj){
@@ -847,24 +853,24 @@
 
 
 
-    <td class="alignLeft" style="width:200px" onclick="javascript:GoTo('{$nodeURI}')">
-      <xsl:value-of select="prns:fullName"/>
-     
+    <td class="alignLeft" style="width:200px">
+      <a class="listTableLink" href="{$nodeURI}">
+        <xsl:value-of select="prns:fullName"/>
+      </a>
     </td>
 
     <xsl:if test="$institution='true'">
-      
-      <td class="alignLeft" style="width:250px" onclick="javascript:GoTo('{$nodeURI}')">
+
+      <td class="alignLeft" style="width:250px">
         <xsl:value-of select ="$doc/rdf:Description[@rdf:about=$institutionlabel]"/>
-
-  
-
       </td>
     </xsl:if>
 
     <xsl:if test="$department='true'">
       <td class="alignLeft" style="width:250px">
+
         <xsl:value-of select ="$doc/rdf:Description[@rdf:about=$doc/rdf:Description[@rdf:about=$positon]/prns:positionInDepartment/@rdf:resource]/rdfs:label"/>
+
       </td>
     </xsl:if>
 
@@ -873,11 +879,15 @@
       <td class="alignLeft" style="width:250px;">
         <xsl:choose>
           <xsl:when test ="$doc/rdf:Description[@rdf:about=$doc/rdf:Description[@rdf:about=$nodeURI]/prns:hasFacultyRank/@rdf:resource]/rdfs:label!=''">
+
             <xsl:value-of select ="$doc/rdf:Description[@rdf:about=$doc/rdf:Description[@rdf:about=$nodeURI]/prns:hasFacultyRank/@rdf:resource]/rdfs:label"/>
+
           </xsl:when>
           <xsl:otherwise>
             <center>
+
               --
+
             </center>
           </xsl:otherwise>
         </xsl:choose>
@@ -892,21 +902,34 @@
     <xsl:param name="doc"></xsl:param>
     <xsl:param name="nodeURI"></xsl:param>
     <xsl:param name="weight"></xsl:param>
+    <xsl:param name="searchfor"></xsl:param>
+    <xsl:param name="exactphrase"></xsl:param>
+    <xsl:param name="perpage"></xsl:param>
+    <xsl:param name="offset"></xsl:param>
+    <xsl:param name="page"></xsl:param>
+    <xsl:param name="totalpages"></xsl:param>
+    <xsl:param name="searchrequest"></xsl:param>
+    <xsl:param name="sortby"></xsl:param>
+    <xsl:param name="sortdirection"></xsl:param>
+    <xsl:param name="showcolumns"></xsl:param>
+    <xsl:param name="root"></xsl:param>
+
+
     <xsl:variable name="positon" select="prns:personInPrimaryPosition/@rdf:resource"></xsl:variable>
     <xsl:variable name="bpositon" select="$doc/rdf:Description[@rdf:about=$positon]/vivo:positionInOrganization/@rdf:resource"></xsl:variable>
 
     <xsl:variable name="institutionlabel" select="$doc/rdf:Description[@rdf:about=$positon]/vivo:positionInOrganization/@rdf:resource"></xsl:variable>
-    <td class="alignLeft" style="width:200px" onclick="javascript:GoTo('{$nodeURI}')">
-
-      <xsl:value-of select="prns:fullName"/>
+    <td class="alignLeft" style="width:200px">
+      <a class="listTableLink" href="{$nodeURI}">
+        <xsl:value-of select="prns:fullName"/>
+      </a>
 
     </td>
     <xsl:if test="$institution='true'">
-      <td class="alignLeft" style="width:250px" onclick="javascript:GoTo('{$nodeURI}')">
+      <td class="alignLeft" style="width:250px">
 
         <xsl:value-of select ="$doc/rdf:Description[@rdf:about=$institutionlabel]"/>
 
-        
       </td>
     </xsl:if>
     <xsl:if test="$department='true'">
@@ -922,11 +945,15 @@
       <td class="alignLeft" style="width:250px">
         <xsl:choose>
           <xsl:when test ="$doc/rdf:Description[@rdf:about=$doc/rdf:Description[@rdf:about=$nodeURI]/prns:hasFacultyRank/@rdf:resource]/rdfs:label!=''">
+
             <xsl:value-of select ="$doc/rdf:Description[@rdf:about=$doc/rdf:Description[@rdf:about=$nodeURI]/prns:hasFacultyRank/@rdf:resource]/rdfs:label"/>
+
           </xsl:when>
           <xsl:otherwise>
             <center>
+
               --
+
             </center>
           </xsl:otherwise>
         </xsl:choose>
@@ -936,7 +963,7 @@
 
 
     <td valign="middle" style="width:100px" >
-      <a class="listTableLink"  href="Javascript:WhyLink('{$nodeURI}');">
+      <a class="listTableLink"  href="{$root}/search/default.aspx?searchtype=whypeople&amp;nodeuri={$nodeURI}&amp;searchfor={$searchfor}&amp;exactphrase={$exactphrase}&amp;perpage={$perpage}&amp;offset={$offset}&amp;page={$page}&amp;totalpages={$totalpages}&amp;searchrequest={$searchrequest}&amp;sortby={$sortby}&amp;sortdirection={$sortdirection}&amp;showcolumns={$showcolumns}">
         Why?
       </a>
 
