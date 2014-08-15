@@ -35,5 +35,6 @@ For details, see: LICENSE.txt
   <Module ModulePath="Modules" NameSpace="CustomViewConceptMeshInfo" FileName="CustomViewConceptMeshInfo.ascx" Enabled="true"/>  
   <Module ModulePath="Modules" NameSpace="HRFooter" FileName="HRFooter.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="CustomViewListProperty" FileName="CustomViewListProperty.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="CustomViewEagleI" FileName="CustomViewEagleI.ascx" Enabled="true"/>
 </ModuleList>
 
