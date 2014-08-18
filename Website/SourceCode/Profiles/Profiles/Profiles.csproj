@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DirectService.aspx" />
+    <Content Include="Edit\Modules\CustomEditEagleI\CustomEditEagleI.ascx" />
     <Content Include="Edit\Modules\CustomEditListProperty\CustomEditListProperty.ascx" />
     <Content Include="Framework\Images\orcid_16x16%281%29.gif" />
     <Content Include="Framework\Images\Orcid_Logo_rgb.png" />
@@ -142,6 +143,8 @@
     <Content Include="ORNG\Modules\ViewPersonalGadget\ViewPersonalGadget.ascx" />
     <Content Include="ORNG\PresentationXML\GadgetDetailsPresentation.xml" />
     <Content Include="ORNG\PresentationXML\SandboxFormPresentation.xml" />
+    <Content Include="Profile\Modules\CustomViewEagleI\CustomViewEagleI.ascx" />
+    <Content Include="Profile\Modules\CustomViewEagleI\Images\logo.gif" />
     <Content Include="Profile\Modules\CustomViewListProperty\CustomViewListProperty.ascx" />
     <Content Include="RobotsTxt.aspx" />
     <Content Include="SiteMap.aspx" />
@@ -191,6 +194,12 @@
     </Compile>
     <Compile Include="DirectService.aspx.designer.cs">
       <DependentUpon>DirectService.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Edit\Modules\CustomEditEagleI\CustomEditEagleI.ascx.cs">
+      <DependentUpon>CustomEditEagleI.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Edit\Modules\CustomEditEagleI\CustomEditEagleI.ascx.designer.cs">
+      <DependentUpon>CustomEditEagleI.ascx</DependentUpon>
     </Compile>
     <Compile Include="Edit\Modules\CustomEditListProperty\CustomEditListProperty.ascx.cs">
       <DependentUpon>CustomEditListProperty.ascx</DependentUpon>
@@ -685,6 +694,12 @@
     </Compile>
     <Compile Include="Profile\Modules\CustomViewConceptSimilarMesh\CustomViewConceptSimilarMesh.ascx.designer.cs">
       <DependentUpon>CustomViewConceptSimilarMesh.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\Modules\CustomViewEagleI\CustomViewEagleI.ascx.cs">
+      <DependentUpon>CustomViewEagleI.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\Modules\CustomViewEagleI\CustomViewEagleI.ascx.designer.cs">
+      <DependentUpon>CustomViewEagleI.ascx</DependentUpon>
     </Compile>
     <Compile Include="Profile\Modules\CustomViewListProperty\CustomViewListProperty.ascx.cs">
       <DependentUpon>CustomViewListProperty.ascx</DependentUpon>
