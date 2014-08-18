@@ -136,7 +136,7 @@ BEGIN
 					select (case when len(m.Value)>500 then left(m.Value,497)+'...' else m.Value end) Label, 
 						n.NodeID, n.value URI, c.ClassName ClassName, x.[Rank]*0.001 ConnectionWeight,
 						row_number() over (partition by n.NodeID order by c.TreeDepth desc) k
-					from Containstable ([RDF.].Node, value, @CombinedSearchString) x
+					from Containstable ([RDF.].[vwLiteral], value, @CombinedSearchString) x
 						inner join [RDF.].Node m -- text node
 							on x.[Key] = m.NodeID
 								and ((m.ViewSecurityGroup BETWEEN @SecurityGroupID AND -1) OR (m.ViewSecurityGroup > 0 AND @HasSpecialViewAccess = 1) OR (m.ViewSecurityGroup IN (SELECT * FROM #SecurityGroupNodes)))

@@ -209,6 +209,7 @@ type ORCID..PersonToken.Table.sql
 type ORCID..PersonURL.Table.sql
 type ORCID..PersonWork.Table.sql
 type ORCID..PersonWorkIdentifier.Table.sql
+type RDF.SemWeb.Hash2Base64.Table.sql
 
 type RDF..fnTripleHash.UserDefinedFunction.sql
 type Utility.Application.fnText2Bool.UserDefinedFunction.sql
@@ -279,6 +280,7 @@ type Ontology..vwMissingPropertyGroupProperty.View.sql
 type Ontology..vwMissingClassProperty.View.sql
 type ORNG..vwAppPersonData.View.sql
 type ORNG..vwPerson.View.sql
+type RDF..vwLiteral.View.sql
 
 type PresentationXML.SqlAssembly.sql
 
@@ -552,3 +554,4 @@ type ORCID..GetNarrative.StoredProcedure.sql
 type ORCID..GetPublications.StoredProcedure.sql
 type ORCID..PeopleWithoutAnORCID.StoredProcedure.sql
 type ORCID..PeopleWithoutAnORCIDByName.StoredProcedure.sql
+type RDF.SemWeb.UpdateHash2Base64.StoredProcedure.sql
