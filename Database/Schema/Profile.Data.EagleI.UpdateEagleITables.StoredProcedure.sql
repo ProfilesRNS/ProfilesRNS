@@ -2,7 +2,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER PROCEDURE [Profile.Data].[EagleI.UpdateEagleITables]
+CREATE PROCEDURE [Profile.Data].[EagleI.UpdateEagleITables]
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
