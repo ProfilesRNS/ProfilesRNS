@@ -307,6 +307,47 @@ namespace Profiles.Framework.Utilities
         }
 
 
+        public List<string> GetEagleI(Int64 subject)
+        {
+
+
+            List<string> html = new List<string>();
+
+            try
+            {
+
+
+                string connstr = this.GetConnectionString();
+                SqlConnection dbconnection = new SqlConnection(connstr);
+
+                dbconnection.Open();
+
+                SqlCommand dbcommand = new SqlCommand();
+                dbcommand.CommandType = CommandType.Text;
+                dbcommand.CommandText = "Select * from [Catalyst.].[EagleI] with(nolock) where nodeid = " + subject.ToString();
+                dbcommand.CommandTimeout = base.GetCommandTimeout();
+
+                dbcommand.Connection = dbconnection;
+                using (SqlDataReader dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection))
+                {
+                    while (dbreader.Read())
+                        html.Add(dbreader["HTML"].ToString());
+
+                    if (!dbreader.IsClosed)
+                        dbreader.Close();
+                }
+
+
+
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return html;
+
+        }
 
 
 
