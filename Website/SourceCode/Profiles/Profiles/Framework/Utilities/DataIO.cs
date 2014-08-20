@@ -317,15 +317,15 @@ namespace Profiles.Framework.Utilities
             {
 
 
-                string connstr = this.GetConnectionString();
+                string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
                 SqlConnection dbconnection = new SqlConnection(connstr);
 
                 dbconnection.Open();
 
                 SqlCommand dbcommand = new SqlCommand();
                 dbcommand.CommandType = CommandType.Text;
-                dbcommand.CommandText = "Select * from [Catalyst.].[EagleI] with(nolock) where nodeid = " + subject.ToString();
-                dbcommand.CommandTimeout = base.GetCommandTimeout();
+                dbcommand.CommandText = "Select * from [Profile.Data].[EagleI.HTML] with(nolock) where nodeid = " + subject.ToString();
+                dbcommand.CommandTimeout = this.GetCommandTimeout();
 
                 dbcommand.Connection = dbconnection;
                 using (SqlDataReader dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection))

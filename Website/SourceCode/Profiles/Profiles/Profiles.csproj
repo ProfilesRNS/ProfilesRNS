@@ -197,6 +197,7 @@
     </Compile>
     <Compile Include="Edit\Modules\CustomEditEagleI\CustomEditEagleI.ascx.cs">
       <DependentUpon>CustomEditEagleI.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Edit\Modules\CustomEditEagleI\CustomEditEagleI.ascx.designer.cs">
       <DependentUpon>CustomEditEagleI.ascx</DependentUpon>
@@ -697,6 +698,7 @@
     </Compile>
     <Compile Include="Profile\Modules\CustomViewEagleI\CustomViewEagleI.ascx.cs">
       <DependentUpon>CustomViewEagleI.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Profile\Modules\CustomViewEagleI\CustomViewEagleI.ascx.designer.cs">
       <DependentUpon>CustomViewEagleI.ascx</DependentUpon>
