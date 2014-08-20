@@ -59,7 +59,7 @@
       <JobGroup>1</JobGroup>
       <Step>3</Step>
       <IsActive>1</IsActive>
-      <Script>UPDATE [Ontology.Import].OWL SET Graph = 3 WHERE name = 'PRNS_2.5.1'</Script>
+      <Script>UPDATE [Ontology.Import].OWL SET Graph = 3 WHERE name = 'PRNS_1.1'</Script>
     </Row>
     <Row>
       <JobID>4</JobID>
@@ -80,7 +80,7 @@
       <JobGroup>1</JobGroup>
       <Step>6</Step>
       <IsActive>1</IsActive>
-      <Script>EXEC [Ontology.Import].[ConvertOWL2Triple] @OWL = 'PRNS_2.5.1'</Script>
+      <Script>EXEC [Ontology.Import].[ConvertOWL2Triple] @OWL = 'PRNS_1.1'</Script>
     </Row>
     <Row>
       <JobID>7</JobID>
