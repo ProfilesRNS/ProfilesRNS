@@ -18789,7 +18789,7 @@
       <Graph>1</Graph>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://profiles.catalyst.harvard.edu/ontology/prns#hasEagleIData</Property>
-      <MapTable>(select distinct PersonID from [Profile.Data].[EagleI.ImportXML]) t</MapTable>
+      <MapTable>(select distinct PersonID from [Profile.Data].[EagleI.HTML]) t</MapTable>
       <sInternalType>Person</sInternalType>
       <sInternalID>PersonID</sInternalID>
       <oValue>'true'</oValue>
