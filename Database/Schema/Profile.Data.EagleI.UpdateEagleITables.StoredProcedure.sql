@@ -9,7 +9,7 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
-	select right(ProfilesURI,charindex('/',reverse(ProfilesURI))-1) PersonID, *
+	select right(ProfilesURI,charindex('/',reverse(ProfilesURI))-1) NodeID, *
 		into #e
 		from (
 			select
@@ -20,12 +20,12 @@ BEGIN
 		) t
 
 
-	select e.*, m.NodeID
+	select e.*, m.InternalID as PersonID
 		into #EagleI
 		from #e e
 			inner join [RDF.Stage].[InternalNodeMap] m
-			on e.PersonID = m.InternalID and m.Class = 'http://xmlns.com/foaf/0.1/Person' and m.InternalType = 'Person'
-		where e.PersonID is not null and IsNumeric(e.PersonID) = 1
+			on e.NodeID = m.NodeID and m.Class = 'http://xmlns.com/foaf/0.1/Person' and m.InternalType = 'Person'
+		where e.NodeID is not null and IsNumeric(e.NodeID) = 1
 
 	truncate table [Profile.Data].[EagleI.HTML]
 
