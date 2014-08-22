@@ -10,6 +10,7 @@ using System.Globalization;
 using System.Text;
 using System.Xml;
 using System.Xml.Xsl;
+using System.Configuration;
 
 using Profiles.Framework.Utilities;
 using Profiles.Profile.Utilities;
@@ -36,9 +37,11 @@ namespace Profiles.Profile.Modules
             Utilities.DataIO dataIO = new Profiles.Profile.Utilities.DataIO();
             StringBuilder html = new StringBuilder();
             List<string> reader = dataIO.GetEagleI(base.RDFTriple.Subject);
+            string eagleIEmail = ConfigurationManager.AppSettings["EAGLEI.EmailAddress"];
 
             litHead.Text = "<table><tr><td><table style='width:480px;font-weight:bold;color:#888;padding:5px 0px;'>" +
-                "<tr><td valign='top' xstyle='width:90%'>This researcher has shared information about their research resources <br/>in the eagle-i Network.  To update or add resource records, contact <br/><a href='mailto:eagle-i@hms.harvard.edu'>eagle-i@hms.harvard.edu</a>.</td>" +
+                "<tr><td valign='top' xstyle='width:90%'>This researcher has shared information about their research resources <br/>in the eagle-i Network.  To update or add resource records, contact <br/>" +
+                "<a href='mailto:" + eagleIEmail + "'>" + eagleIEmail + "</a>.</td>" +
                 "</tr></table></td><td align='center' valign='middle'><img src='" + Root.Domain + "/profile/modules/CustomViewEagleI/Images/logo.gif'/></td></tr></table>";
                 
 

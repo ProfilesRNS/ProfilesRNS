@@ -23,6 +23,7 @@ using System.Globalization;
 using System.Text;
 using System.Xml;
 using System.Xml.Xsl;
+using System.Configuration;
 
 using Profiles.Framework.Utilities;
 using Profiles.Profile.Utilities;
@@ -84,8 +85,16 @@ namespace Profiles.Edit.Modules.CustomEditEagleI
             Profiles.Profile.Utilities.DataIO dataIO = new Profiles.Profile.Utilities.DataIO();
             StringBuilder html = new StringBuilder();
             List<string> reader = dataIO.GetEagleI(this.SubjectID);
+            string eagleIEmail = ConfigurationManager.AppSettings["EAGLEI.EmailAddress"];
+            string eagleIInstitution = ConfigurationManager.AppSettings["EAGLEI.InstitutionName"];
 
-            html.Append("<div class='mentor-completed'>Information in the research resource module is provided automatically from the Harvard University repository of the eagle-i Network. To update information or list your resources in eagle-i, please contact <a href='mailto:eagle-i@hms.harvard.edu'>eagle-i@hms.harvard.edu</a>. For more information about the eagle-i research resource network, visit <a href='http://www.eagle-i.net'>www.eagle-i.net</a>.</div><br>");
+            html.Append("<div class='mentor-completed'>Information in the research resource module is provided automatically from the ");
+            html.Append(eagleIInstitution);
+            html.Append(" repository of the eagle-i Network. To update information or list your resources in eagle-i, please contact <a href='mailto:");
+            html.Append(eagleIEmail);
+            html.Append("'>");
+            html.Append(eagleIEmail);
+            html.Append("</a>. For more information about the eagle-i research resource network, visit <a href='http://www.eagle-i.net'>www.eagle-i.net</a>.</div><br>");
 
 
             if (reader.Count == 0)
