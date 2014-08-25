@@ -206,220 +206,258 @@
       <JobGroup>3</JobGroup>
       <Step>2</Step>
       <IsActive>1</IsActive>
-      <Script>EXEC [RDF.Stage].[LoadAliases]</Script>
+
+      <Script>EXEC [RDF.SemWeb].[UpdateHash2Base64]</Script>
     </Row>
     <Row>
       <JobID>25</JobID>
       <JobGroup>3</JobGroup>
       <Step>3</Step>
       <IsActive>1</IsActive>
-      <Script>EXEC [Ontology.].[UpdateCounts]</Script>
+
+      <Script>EXEC [RDF.Stage].[LoadAliases]</Script>
     </Row>
     <Row>
       <JobID>26</JobID>
       <JobGroup>3</JobGroup>
       <Step>4</Step>
       <IsActive>1</IsActive>
-      <Script>EXEC [Search.Cache].[Public.UpdateCache]</Script>
+
+      <Script>EXEC [Ontology.].[UpdateCounts]</Script>
     </Row>
     <Row>
       <JobID>27</JobID>
       <JobGroup>3</JobGroup>
       <Step>5</Step>
       <IsActive>1</IsActive>
-      <Script>EXEC [Search.Cache].[Private.UpdateCache]</Script>
+
+      <Script>EXEC [Search.Cache].[Public.UpdateCache]</Script>
     </Row>
     <Row>
       <JobID>28</JobID>
+      <JobGroup>3</JobGroup>
+      <Step>6</Step>
+      <IsActive>1</IsActive>
+      <Script>EXEC [Search.Cache].[Private.UpdateCache]</Script>
+    </Row>
+    <Row>
+      <JobID>29</JobID>
       <JobGroup>4</JobGroup>
       <Step>2</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Profile.Import].[LoadProfilesData] </Script>
     </Row>
     <Row>
-      <JobID>29</JobID>
+
+      <JobID>30</JobID>
       <JobGroup>4</JobGroup>
       <Step>3</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Framework.].[RunJobGroup] @JobGroup = 7</Script>
     </Row>
     <Row>
-      <JobID>30</JobID>
+
+      <JobID>31</JobID>
       <JobGroup>4</JobGroup>
       <Step>4</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Framework.].[RunJobGroup] @JobGroup = 3</Script>
     </Row>
     <Row>
-      <JobID>31</JobID>
+
+      <JobID>32</JobID>
       <JobGroup>5</JobGroup>
       <Step>1</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Framework.].[RunJobGroup] @JobGroup = 8</Script>
     </Row>
     <Row>
-      <JobID>32</JobID>
+
+      <JobID>33</JobID>
       <JobGroup>5</JobGroup>
       <Step>2</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Framework.].[RunJobGroup] @JobGroup = 3</Script>
     </Row>
     <Row>
-      <JobID>33</JobID>
+
+      <JobID>34</JobID>
       <JobGroup>6</JobGroup>
       <Step>1</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Framework.].[RunJobGroup] @JobGroup = 9</Script>
     </Row>
     <Row>
-      <JobID>34</JobID>
+
+      <JobID>35</JobID>
       <JobGroup>6</JobGroup>
       <Step>2</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Framework.].[RunJobGroup] @JobGroup = 3</Script>
     </Row>
     <Row>
-      <JobID>35</JobID>
+
+      <JobID>36</JobID>
       <JobGroup>7</JobGroup>
       <Step>1</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Profile.Cache].[Person.UpdatePerson]</Script>
     </Row>
     <Row>
-      <JobID>36</JobID>
+
+      <JobID>37</JobID>
       <JobGroup>7</JobGroup>
       <Step>2</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Profile.Cache].[Person.UpdateAffiliation]</Script>
     </Row>
     <Row>
-      <JobID>37</JobID>
+
+      <JobID>38</JobID>
       <JobGroup>7</JobGroup>
       <Step>3</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Profile.Cache].[Person.UpdatePhysicalNeighbor]</Script>
     </Row>
     <Row>
-      <JobID>38</JobID>
+
+      <JobID>39</JobID>
       <JobGroup>7</JobGroup>
       <Step>4</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Profile.Cache].[Publication.PubMed.UpdateAuthorPosition]</Script>
     </Row>
     <Row>
-      <JobID>39</JobID>
+
+      <JobID>40</JobID>
       <JobGroup>7</JobGroup>
       <Step>5</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Profile.Data].[Publication.Entity.UpdateEntity]</Script>
     </Row>
     <Row>
-      <JobID>40</JobID>
+
+      <JobID>41</JobID>
       <JobGroup>7</JobGroup>
       <Step>6</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Profile.Cache].[SNA.Coauthor.UpdateCoauthor]</Script>
     </Row>
     <Row>
-      <JobID>41</JobID>
+
+      <JobID>42</JobID>
       <JobGroup>7</JobGroup>
       <Step>7</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Profile.Cache].[Concept.Mesh.UpdateCountTree]</Script>
     </Row>
     <Row>
-      <JobID>42</JobID>
+
+      <JobID>43</JobID>
       <JobGroup>7</JobGroup>
       <Step>8</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Profile.Cache].[Concept.Mesh.UpdatePersonPublication]</Script>
     </Row>
     <Row>
-      <JobID>43</JobID>
+
+      <JobID>44</JobID>
       <JobGroup>7</JobGroup>
       <Step>9</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Profile.Cache].[Concept.Mesh.UpdatePerson]</Script>
     </Row>
     <Row>
-      <JobID>44</JobID>
+
+      <JobID>45</JobID>
       <JobGroup>7</JobGroup>
       <Step>10</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Profile.Cache].[Concept.Mesh.UpdateWord2Mesh]</Script>
     </Row>
     <Row>
-      <JobID>45</JobID>
+
+      <JobID>46</JobID>
       <JobGroup>7</JobGroup>
       <Step>11</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Profile.Cache].[Concept.Mesh.UpdateJournal]</Script>
     </Row>
     <Row>
-      <JobID>46</JobID>
+
+      <JobID>47</JobID>
       <JobGroup>7</JobGroup>
       <Step>12</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Profile.Cache].[SNA.Coauthor.UpdateSummary]</Script>
     </Row>
     <Row>
-      <JobID>47</JobID>
+
+      <JobID>48</JobID>
       <JobGroup>7</JobGroup>
       <Step>13</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Search.Cache].[History.UpdateTopSearchPhrase]</Script>
     </Row>
     <Row>
-      <JobID>48</JobID>
+
+      <JobID>49</JobID>
       <JobGroup>7</JobGroup>
       <Step>14</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [User.Session].[DeleteOldSessionRDF]</Script>
     </Row>
     <Row>
-      <JobID>49</JobID>
+
+      <JobID>50</JobID>
       <JobGroup>8</JobGroup>
       <Step>1</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Profile.Cache].[Person.UpdateSimilarPerson]</Script>
     </Row>
     <Row>
-      <JobID>50</JobID>
+
+      <JobID>51</JobID>
       <JobGroup>8</JobGroup>
       <Step>2</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Profile.Cache].[Concept.Mesh.UpdateSimilarConcept]</Script>
     </Row>
     <Row>
-      <JobID>51</JobID>
+
+      <JobID>52</JobID>
       <JobGroup>9</JobGroup>
       <Step>1</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Profile.Cache].[SNA.Coauthor.UpdateDistance]</Script>
     </Row>
     <Row>
-      <JobID>52</JobID>
+
+      <JobID>53</JobID>
       <JobGroup>9</JobGroup>
       <Step>2</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Profile.Cache].[SNA.Coauthor.UpdateReach]</Script>
     </Row>
     <Row>
-      <JobID>53</JobID>
+
+      <JobID>54</JobID>
       <JobGroup>9</JobGroup>
       <Step>3</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Profile.Cache].[SNA.Coauthor.UpdateBetweenness]</Script>
     </Row>
     <Row>
-      <JobID>54</JobID>
+
+      <JobID>55</JobID>
       <JobGroup>9</JobGroup>
       <Step>4</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Profile.Cache].[SNA.Coauthor.UpdateSummary]</Script>
     </Row>
     <Row>
-      <JobID>55</JobID>
+
+      <JobID>56</JobID>
       <JobGroup>10</JobGroup>
       <Step>1</Step>
       <IsActive>1</IsActive>
