@@ -150,6 +150,7 @@
     <Content Include="Edit\Images\icons_red_BlueRow.gif" />
     <Content Include="Edit\Images\Icons_upSort.gif" />
     <Content Include="Edit\Images\Icon_add_item.gif" />
+    <Content Include="Edit\Modules\CustomEditEducationalTraining\CustomEditEducationalTraining.ascx" />
     <Content Include="favicon.ico" />
     <Content Include="ORNG\Images\orng-asterisk.png" />
     <Content Include="Edit\Images\sophcat-boat.jpg" />
@@ -345,6 +346,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Edit\Modules\CustomEditEducationalTraining\CustomEditEducationalTraining.ascx.cs">
+      <DependentUpon>CustomEditEducationalTraining.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Edit\Modules\CustomEditEducationalTraining\CustomEditEducationalTraining.ascx.designer.cs">
+      <DependentUpon>CustomEditEducationalTraining.ascx</DependentUpon>
     </Compile>
     <Compile Include="Edit\Modules\CustomEditListProperty\CustomEditListProperty.ascx.cs">
       <DependentUpon>CustomEditListProperty.ascx</DependentUpon>
