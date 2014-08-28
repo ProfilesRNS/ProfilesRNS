@@ -12,7 +12,7 @@
         </asp:UpdateProgress>
         <asp:HiddenField ID="hiddenSubjectID" runat="server" />
         
-        <table id="tblEditAwardsHonors" width="100%">
+        <table id="tblEditEducationalTraining" width="100%">
             <tr>
                 <td>
                     <asp:Literal runat="server" ID="litBackLink"></asp:Literal>
@@ -25,46 +25,45 @@
                             <security:Options runat="server" ID="securityOptions"></security:Options>
                         </asp:Panel>
                         <br />
-                        <asp:Panel runat="server" ID="pnlEditAwards">
+                        <asp:Panel runat="server" ID="pnlEditEducation">
                             <asp:ImageButton runat="server" ID="imbAddArror" ImageUrl="../../../Framework/Images/icon_squareArrow.gif"
-                                OnClick="btnEditAwards_OnClick" />&nbsp;
-                            <asp:LinkButton ID="btnEditAwards" runat="server" OnClick="btnEditAwards_OnClick"
-                                CssClass="profileHypLinks">Add award(s)</asp:LinkButton>
+                                OnClick="btnEditEducation_OnClick" />&nbsp;
+                            <asp:LinkButton ID="btnEditEducation" runat="server" OnClick="btnEditEducation_OnClick"
+                                CssClass="profileHypLinks">Add Education and Training</asp:LinkButton>
                         </asp:Panel>
                     </div>
                 </td>
             </tr>
             <tr>
                 <td>                   
-                    <asp:Repeater ID="RptrEditAwards" runat="server" Visible="false">
+                    <asp:Repeater ID="RptrEditEducation" runat="server" Visible="false">
                         <ItemTemplate>
-                            <asp:Label ID="lblEditAwards" runat="server" Text='<%#Eval("AwardsHonors").ToString() %>' />
+                            <asp:Label ID="lblEditEducation" runat="server" Text='<%#Eval("EducationalTraining").ToString() %>' />
                             <br />
                         </ItemTemplate>
                     </asp:Repeater>
-                    <asp:Panel ID="pnlInsertAward" runat="server" Style="background-color: #EEE; margin-bottom: 5px;
+                    <asp:Panel ID="pnlInsertEducationalTraining" runat="server" Style="background-color: #EEE; margin-bottom: 5px;
                         border: solid 1px #ccc;" Visible="false" >
                         <table border="0" cellspacing="2" cellpadding="4">
                             <tr>
                                 <td colspan="3">
                                     <div style="padding-top: 5px;">
-                                        Enter the year(s), name and institution.
-                                    </div>
-                                    <div style="padding-top: 3px;">
-                                        For Award Year(s), enter both fields only if awarded for consecutive years.
+                                        Enter the year completed, the name of the degree or training credential earned, the school or department and the institution that granted it. e.g. 1992; MD; School of Medicine;  Cambridge. 
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <b>Award Year(s)</b><br />
-                                    <asp:TextBox ID="txtStartYear" runat="server" MaxLength="4" Width="60px" TabIndex="1"></asp:TextBox>
-                                    &nbsp;<b>-</b>&nbsp;
+                                    <b>Year</b><br />
                                     <asp:TextBox ID="txtEndYear" runat="server" MaxLength="4" Width="60px" TabIndex="2"></asp:TextBox>
                                 </td>
                                 <td>
-                                    <b>Name (required)</b><br />
-                                    <asp:TextBox ID="txtAwardName" runat="server" MaxLength="100" TabIndex="3" Width="220px"></asp:TextBox>
+                                    <b>Degree/Credential</b><br />
+                                    <asp:TextBox ID="txtEducationalTrainingDegree" runat="server" MaxLength="100" TabIndex="3" Width="220px"></asp:TextBox>
+                                </td>
+                                <td>
+                                    <b>School or Department</b><br />
+                                    <asp:TextBox ID="txtEducationalTrainingSchool" runat="server" MaxLength="100" TabIndex="3" Width="220px"></asp:TextBox>
                                 </td>
                                 <td>
                                     <b>Institution</b><br />
@@ -74,10 +73,10 @@
                             <tr>
                                 <td colspan="3">
                                     <div style="padding-bottom: 5px; text-align: left;">
-                                        <asp:LinkButton ID="btnInsertAward" runat="server" CausesValidation="False" OnClick="btnInsert_OnClick"
+                                        <asp:LinkButton ID="btnInsertEducationalTraining" runat="server" CausesValidation="False" OnClick="btnInsert_OnClick"
                                             Text="Save and add another" TabIndex="5"></asp:LinkButton>
                                         &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;
-                                        <asp:LinkButton ID="btnInsertAward2" runat="server" CausesValidation="False" OnClick="btnInsertClose_OnClick"
+                                        <asp:LinkButton ID="btnInsertEducationalTraining2" runat="server" CausesValidation="False" OnClick="btnInsertClose_OnClick"
                                             Text="Save and Close" TabIndex="6"></asp:LinkButton>
                                         &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;
                                         <asp:LinkButton ID="btnInsertCancel" runat="server" CausesValidation="False" OnClick="btnInsertCancel_OnClick"
@@ -88,27 +87,16 @@
                         </table>
                     </asp:Panel>
                     <div>
-                        <asp:GridView ID="GridViewAwards" runat="server" AutoGenerateColumns="False" CellPadding="4"
+                        <asp:GridView ID="GridViewEducation" runat="server" AutoGenerateColumns="False" CellPadding="4"
                             DataKeyNames="SubjectURI,Predicate, Object" GridLines="Both"
-                            OnRowCancelingEdit="GridViewAwards_RowCancelingEdit" OnRowDataBound="GridViewAwards_RowDataBound"
-                            OnRowDeleting="GridViewAwards_RowDeleting" OnRowEditing="GridViewAwards_RowEditing"
-                            OnRowUpdated="GridViewAwards_RowUpdated" OnRowUpdating="GridViewAwards_RowUpdating"
+                            OnRowCancelingEdit="GridViewEducation_RowCancelingEdit" OnRowDataBound="GridViewEducation_RowDataBound"
+                            OnRowDeleting="GridViewEducation_RowDeleting" OnRowEditing="GridViewEducation_RowEditing"
+                            OnRowUpdated="GridViewEducation_RowUpdated" OnRowUpdating="GridViewEducation_RowUpdating"
                             Width="100%">
                             <HeaderStyle CssClass="topRow" BorderStyle="Solid" BorderWidth="1px" />
                             <RowStyle BorderStyle="Solid" BorderWidth="1px" />
                             <Columns>
-                                <asp:TemplateField HeaderText="Year&nbsp;of Award">
-                                    <EditItemTemplate>
-                                        <asp:TextBox ID="txtYr1" runat="server" MaxLength="4" Text='<%# Bind("StartDate") %>'></asp:TextBox>
-                                    </EditItemTemplate>
-                                    <ItemTemplate>
-                                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("StartDate") %>'></asp:Label>
-                                    </ItemTemplate>
-                                    <ControlStyle Width="35px" />
-                                    <HeaderStyle HorizontalAlign="Center" />
-                                    <ItemStyle HorizontalAlign="Center" />
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Thru Year">
+                                <asp:TemplateField HeaderText="Year&nbsp;of Educational Training">
                                     <EditItemTemplate>
                                         <asp:TextBox ID="txtYr2" runat="server" MaxLength="4" Text='<%# Bind("EndDate") %>'></asp:TextBox>
                                     </EditItemTemplate>
@@ -119,22 +107,31 @@
                                     <HeaderStyle HorizontalAlign="Center" />
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Name">
+                                <asp:TemplateField HeaderText="Degree/Credential">
                                     <EditItemTemplate>
-                                        <asp:TextBox ID="txtAwardName" runat="server" MaxLength="100" Text='<%# Bind("Name") %>'></asp:TextBox>
+                                        <asp:TextBox ID="txtEducationalTrainingDegree" runat="server" MaxLength="100" Text='<%# Bind("Degree") %>'></asp:TextBox>
                                     </EditItemTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
+                                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("Degree") %>'></asp:Label>
+                                    </ItemTemplate>
+                                    <ItemStyle Wrap="true" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="School or Department">
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="txtEducationalTrainingSchool" runat="server" MaxLength="100" Text='<%# Bind("School") %>'></asp:TextBox>
+                                    </EditItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label4" runat="server" Text='<%# Bind("School") %>'></asp:Label>
                                     </ItemTemplate>
                                     <ItemStyle Wrap="true" />
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Institution">
                                     <EditItemTemplate>
-                                        <asp:TextBox ID="txtAwardInst" runat="server" MaxLength="100" Text='<%# Bind("Institution") %>'></asp:TextBox>
+                                        <asp:TextBox ID="txtEducationalTrainingInst" runat="server" MaxLength="100" Text='<%# Bind("Institution") %>'></asp:TextBox>
                                         <asp:HiddenField runat="server" ID="hdURI" />
                                     </EditItemTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label4" runat="server" Text='<%# Bind("Institution") %>'></asp:Label>
+                                        <asp:Label ID="Label5" runat="server" Text='<%# Bind("Institution") %>'></asp:Label>
                                         <asp:HiddenField runat="server" ID="hdURI" />
                                     </ItemTemplate>
                                     <ItemStyle Wrap="true" />
@@ -186,7 +183,7 @@
                             </Columns>
                         </asp:GridView>                        
                     </div>
-                    <i><asp:Label runat="server" ID="lblNoAwards" Text="No awards have been added." Visible ="false"></asp:Label></i>
+                    <i><asp:Label runat="server" ID="lblNoEducation" Text="No education or training has been added." Visible ="false"></asp:Label></i>
                 </td>
             </tr>
         </table>

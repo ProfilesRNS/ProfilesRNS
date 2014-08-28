@@ -212,6 +212,7 @@
     <Content Include="Profile\JavaScript\UCSF.js" />
     <Content Include="Profile\Modules\CustomViewExternalCoauthors\CustomViewExternalCoauthors.ascx" />
     <Content Include="Profile\Modules\CustomViewListProperty\CustomViewListProperty.ascx" />
+    <Content Include="Profile\XSLT\EducationalTraining.xslt" />
     <Content Include="RobotsTxt.aspx" />
     <Content Include="Search\CSS\UCSF.css" />
     <Content Include="Search\Images\icon_squareArrow.gif" />
@@ -361,6 +362,7 @@
     <Compile Include="Edit\Modules\CustomEditListProperty\CustomEditListProperty.ascx.designer.cs">
       <DependentUpon>CustomEditListProperty.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Edit\Utilities\EducationalTrainingState.cs" />
     <Compile Include="Edit\Utilities\LiteralListState.cs" />
     <Compile Include="Framework\Modules\MainMenu\History.ascx.cs">
       <DependentUpon>History.ascx</DependentUpon>

@@ -37,10 +37,10 @@ namespace Profiles.Edit.Modules.CustomEditEducationalTraining
         Edit.Utilities.DataIO data;
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.FillAwardGrid(false);
+            this.FillEducationalTrainingGrid(false);
             
             if (!IsPostBack)
-                Session["pnlInsertAward.Visible"] = null;
+                Session["pnlInsertEducationalTraining.Visible"] = null;
         }
 
         public CustomEditEducationalTraining() : base() { }
@@ -78,7 +78,7 @@ namespace Profiles.Edit.Modules.CustomEditEducationalTraining
 
             if (Request.QueryString["new"] != null && Session["new"] != null)
             {
-                Session["pnlInsertAward.Visible"] = null;
+                Session["pnlInsertEducationalTraining.Visible"] = null;
                 Session["new"] = null;
 
                 if (Session["newclose"] != null)
@@ -89,7 +89,7 @@ namespace Profiles.Edit.Modules.CustomEditEducationalTraining
                 }
                 else
                 {
-                    btnEditAwards_OnClick(this, new EventArgs());
+                    btnEditEducation_OnClick(this, new EventArgs());
                 }
 
             }
@@ -98,7 +98,7 @@ namespace Profiles.Edit.Modules.CustomEditEducationalTraining
 
         }
 
-        #region Awards
+        #region Education
 
         private void SecurityDisplayed(object sender, EventArgs e)
         {
@@ -106,48 +106,48 @@ namespace Profiles.Edit.Modules.CustomEditEducationalTraining
             
             if (Session["pnlSecurityOptions.Visible"] == null)
             {
-                pnlEditAwards.Visible = true;
+                pnlEditEducation.Visible = true;
                 
             }
             else
             {
-                pnlEditAwards.Visible = false;
+                pnlEditEducation.Visible = false;
                 
             }
         }
 
-        protected void btnEditAwards_OnClick(object sender, EventArgs e)
+        protected void btnEditEducation_OnClick(object sender, EventArgs e)
         {
-            if (Session["pnlInsertAward.Visible"] == null)
+            if (Session["pnlInsertEducationalTraining.Visible"] == null)
             {
                 btnInsertCancel_OnClick(sender, e);
                 pnlSecurityOptions.Visible = false;
-                pnlInsertAward.Visible = true;
+                pnlInsertEducationalTraining.Visible = true;
                 imbAddArror.ImageUrl = "~/Framework/Images/icon_squareDownArrow.gif";
-                Session["pnlInsertAward.Visible"] = true;
+                Session["pnlInsertEducationalTraining.Visible"] = true;
             }
             else
             {
-                Session["pnlInsertAward.Visible"] = null;
+                Session["pnlInsertEducationalTraining.Visible"] = null;
                 pnlSecurityOptions.Visible = true;
-                pnlInsertAward.Visible = false;
+                pnlInsertEducationalTraining.Visible = false;
                 imbAddArror.ImageUrl = "~/Framework/Images/icon_squareArrow.gif";
 
             }
             upnlEditSection.Update();
         }
 
-        protected void GridViewAwards_RowDataBound(object sender, GridViewRowEventArgs e)
+        protected void GridViewEducation_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            TextBox txtYr1 = null;
             TextBox txtYr2 = null;
-            TextBox txtAwardName = null;
-            TextBox txtAwardInst = null;
+            TextBox txtEducationalTrainingDegree = null;
+            TextBox txtEducationalTrainingSchool = null;
+            TextBox txtEducationalTrainingInst = null;
             ImageButton lnkEdit = null;
             ImageButton lnkDelete = null;
             HiddenField hdURI = null;
 
-            AwardState awardstate = null;
+            EducationalTrainingState educationalTrainingState = null;
 
             try
             {
@@ -158,113 +158,113 @@ namespace Profiles.Edit.Modules.CustomEditEducationalTraining
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
 
-                txtYr1 = (TextBox)e.Row.Cells[0].FindControl("txtYr1");
                 txtYr2 = (TextBox)e.Row.Cells[1].FindControl("txtYr2");
-                txtAwardName = (TextBox)e.Row.Cells[2].FindControl("txtAwardName");
-                txtAwardInst = (TextBox)e.Row.Cells[3].FindControl("txtAwardInst");
+                txtEducationalTrainingDegree = (TextBox)e.Row.Cells[2].FindControl("txtEducationalTrainingDegree");
+                txtEducationalTrainingSchool = (TextBox)e.Row.Cells[2].FindControl("txtEducationalTrainingSchool");
+                txtEducationalTrainingInst = (TextBox)e.Row.Cells[3].FindControl("txtEducationalTrainingInst");
                 hdURI = (HiddenField)e.Row.Cells[3].FindControl("hdURI");
 
                 lnkEdit = (ImageButton)e.Row.Cells[4].FindControl("lnkEdit");
                 lnkDelete = (ImageButton)e.Row.Cells[4].FindControl("lnkDelete");
 
-                awardstate = (AwardState)e.Row.DataItem;
-                hdURI.Value = awardstate.SubjectURI;
+                educationalTrainingState = (EducationalTrainingState)e.Row.DataItem;
+                hdURI.Value = educationalTrainingState.SubjectURI;
 
-                if (awardstate.EditDelete == false)
+                if (educationalTrainingState.EditDelete == false)
                     lnkDelete.Visible = false;
 
-                if (awardstate.EditExisting == false)
+                if (educationalTrainingState.EditExisting == false)
                     lnkEdit.Visible = false;
 
             }
 
             if (e.Row.RowType == DataControlRowType.DataRow && (e.Row.RowState & DataControlRowState.Edit) == DataControlRowState.Edit)
             {
-                txtYr1.Text = Server.HtmlDecode((string)txtYr1.Text);
                 txtYr2.Text = Server.HtmlDecode((string)txtYr2.Text);
-                txtAwardName.Text = Server.HtmlDecode((string)txtAwardName.Text);
-                txtAwardInst.Text = Server.HtmlDecode((string)txtAwardInst.Text);
+                txtEducationalTrainingDegree.Text = Server.HtmlDecode((string)txtEducationalTrainingDegree.Text);
+                txtEducationalTrainingSchool.Text = Server.HtmlDecode((string)txtEducationalTrainingSchool.Text);
+                txtEducationalTrainingInst.Text = Server.HtmlDecode((string)txtEducationalTrainingInst.Text);
             }
 
         }
 
-        protected void GridViewAwards_RowEditing(object sender, GridViewEditEventArgs e)
+        protected void GridViewEducation_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            GridViewAwards.EditIndex = e.NewEditIndex;
-            this.FillAwardGrid(false);
+            GridViewEducation.EditIndex = e.NewEditIndex;
+            this.FillEducationalTrainingGrid(false);
 
             upnlEditSection.Update();
         }
 
-        protected void GridViewAwards_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        protected void GridViewEducation_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
 
-            TextBox txtYr1 = (TextBox)GridViewAwards.Rows[e.RowIndex].FindControl("txtYr1");
-            TextBox txtYr2 = (TextBox)GridViewAwards.Rows[e.RowIndex].FindControl("txtYr2");
-            TextBox txtAwardName = (TextBox)GridViewAwards.Rows[e.RowIndex].FindControl("txtAwardName");
-            TextBox txtAwardInst = (TextBox)GridViewAwards.Rows[e.RowIndex].FindControl("txtAwardInst");
-            HiddenField hdURI = (HiddenField)GridViewAwards.Rows[e.RowIndex].FindControl("hdURI");
+            TextBox txtYr2 = (TextBox)GridViewEducation.Rows[e.RowIndex].FindControl("txtYr2");
+            TextBox txtEducationalTrainingDegree = (TextBox)GridViewEducation.Rows[e.RowIndex].FindControl("txtEducationalTrainingDegree");
+            TextBox txtEducationalTrainingSchool = (TextBox)GridViewEducation.Rows[e.RowIndex].FindControl("txtEducationalTrainingSchool");
+            TextBox txtEducationalTrainingInst = (TextBox)GridViewEducation.Rows[e.RowIndex].FindControl("txtEducationalTrainingInst");
+            HiddenField hdURI = (HiddenField)GridViewEducation.Rows[e.RowIndex].FindControl("hdURI");
 
 
-            data.UpdateAward(hdURI.Value, txtAwardName.Text, txtAwardInst.Text, txtYr1.Text, txtYr2.Text);
-            GridViewAwards.EditIndex = -1;
-            Session["pnlInsertAward.Visible"] = null;
-            this.FillAwardGrid(true);
+            data.UpdateEducationalTraining(hdURI.Value, txtEducationalTrainingDegree.Text, txtEducationalTrainingInst.Text, txtEducationalTrainingSchool.Text, txtYr2.Text);
+            GridViewEducation.EditIndex = -1;
+            Session["pnlInsertEducationalTraining.Visible"] = null;
+            this.FillEducationalTrainingGrid(true);
             upnlEditSection.Update();
         }
 
-        protected void GridViewAwards_RowUpdated(object sender, GridViewUpdatedEventArgs e)
+        protected void GridViewEducation_RowUpdated(object sender, GridViewUpdatedEventArgs e)
         {
-            this.FillAwardGrid(false);
+            this.FillEducationalTrainingGrid(false);
             upnlEditSection.Update();
         }
 
-        protected void GridViewAwards_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        protected void GridViewEducation_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
-            GridViewAwards.EditIndex = -1;
+            GridViewEducation.EditIndex = -1;
 
-            this.FillAwardGrid(false);
+            this.FillEducationalTrainingGrid(false);
             upnlEditSection.Update();
         }
 
-        protected void GridViewAwards_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        protected void GridViewEducation_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
 
-            Int64 predicate = Convert.ToInt64(GridViewAwards.DataKeys[e.RowIndex].Values[1].ToString());
-            Int64 _object = Convert.ToInt64(GridViewAwards.DataKeys[e.RowIndex].Values[2].ToString());
+            Int64 predicate = Convert.ToInt64(GridViewEducation.DataKeys[e.RowIndex].Values[1].ToString());
+            Int64 _object = Convert.ToInt64(GridViewEducation.DataKeys[e.RowIndex].Values[2].ToString());
 
             data.DeleteTriple(this.SubjectID, predicate, _object);
-            this.FillAwardGrid(true);
+            this.FillEducationalTrainingGrid(true);
 
             upnlEditSection.Update();
         }
 
         protected void btnInsertCancel_OnClick(object sender, EventArgs e)
         {
-            Session["pnlInsertAward.Visible"] = null;
-            txtStartYear.Text = "";
+            Session["pnlInsertEducationalTraining.Visible"] = null;
             txtEndYear.Text = "";
             txtInstitution.Text = "";
-            txtAwardName.Text = "";
-            pnlInsertAward.Visible = false;
+            txtEducationalTrainingDegree.Text = "";
+            txtEducationalTrainingSchool.Text = "";
+            pnlInsertEducationalTraining.Visible = false;
             upnlEditSection.Update();
         }
 
         protected void btnInsert_OnClick(object sender, EventArgs e)
         {
-            if (txtStartYear.Text != "" || txtEndYear.Text != "" || txtInstitution.Text != "" || txtAwardName.Text != "")
+            if (txtEndYear.Text != "" || txtInstitution.Text != "" || txtEducationalTrainingDegree.Text != "" || txtEducationalTrainingSchool.Text != "")
             {
-                data.AddAward(this.SubjectID, txtAwardName.Text, txtInstitution.Text, txtStartYear.Text, txtEndYear.Text, this.PropertyListXML);
+                data.AddEducationalTraining(this.SubjectID, txtEducationalTrainingDegree.Text, txtInstitution.Text, txtEducationalTrainingSchool.Text, txtEndYear.Text, this.PropertyListXML);
 
 
-                txtStartYear.Text = "";
                 txtEndYear.Text = "";
                 txtInstitution.Text = "";
-                txtAwardName.Text = "";
-                Session["pnlInsertAward.Visible"] = null;
-                btnEditAwards_OnClick(sender, e);
-                this.FillAwardGrid(true);
-                if (GridViewAwards.Rows.Count == 1)
+                txtEducationalTrainingDegree.Text = "";
+                txtEducationalTrainingSchool.Text = "";
+                Session["pnlInsertEducationalTraining.Visible"] = null;
+                btnEditEducation_OnClick(sender, e);
+                this.FillEducationalTrainingGrid(true);
+                if (GridViewEducation.Rows.Count == 1)
                 {
                     Session["new"] = true;
                     //stupid update panel bug we cant figure out.
@@ -272,7 +272,7 @@ namespace Profiles.Edit.Modules.CustomEditEducationalTraining
                 }
                 else
                 {
-                    this.FillAwardGrid(true);
+                    this.FillEducationalTrainingGrid(true);
                     upnlEditSection.Update();
                 }
 
@@ -282,15 +282,15 @@ namespace Profiles.Edit.Modules.CustomEditEducationalTraining
 
         protected void btnInsertClose_OnClick(object sender, EventArgs e)
         {
-            if (txtStartYear.Text != "" || txtEndYear.Text != "" || txtInstitution.Text != "" || txtAwardName.Text != "")
+            if (txtEndYear.Text != "" || txtInstitution.Text != "" || txtEducationalTrainingDegree.Text != "" || txtEducationalTrainingSchool.Text != "")
             {
-                Session["pnlInsertAward.Visible"] = null;
-                data.AddAward(this.SubjectID, txtAwardName.Text, txtInstitution.Text, txtStartYear.Text, txtEndYear.Text, this.PropertyListXML);
+                Session["pnlInsertEducationalTraining.Visible"] = null;
+                data.AddEducationalTraining(this.SubjectID, txtEducationalTrainingDegree.Text, txtInstitution.Text, txtEducationalTrainingSchool.Text, txtEndYear.Text, this.PropertyListXML);
 
-                this.FillAwardGrid(true);
+                this.FillEducationalTrainingGrid(true);
 
 
-                if (GridViewAwards.Rows.Count == 1)
+                if (GridViewEducation.Rows.Count == 1)
                 {
                     Session["new"] = true;
                     Session["newclose"] = true;
@@ -313,13 +313,13 @@ namespace Profiles.Edit.Modules.CustomEditEducationalTraining
 
             GridViewRow row = ((ImageButton)sender).Parent.Parent as GridViewRow;
 
-            GridViewAwards.EditIndex = -1;
-            Int64 predicate = Convert.ToInt64(GridViewAwards.DataKeys[row.RowIndex].Values[1].ToString());
-            Int64 _object = Convert.ToInt64(GridViewAwards.DataKeys[row.RowIndex].Values[2].ToString());
+            GridViewEducation.EditIndex = -1;
+            Int64 predicate = Convert.ToInt64(GridViewEducation.DataKeys[row.RowIndex].Values[1].ToString());
+            Int64 _object = Convert.ToInt64(GridViewEducation.DataKeys[row.RowIndex].Values[2].ToString());
 
             data.MoveTripleDown(this.SubjectID, predicate, _object);
 
-            this.FillAwardGrid(true);
+            this.FillEducationalTrainingGrid(true);
 
             upnlEditSection.Update();
 
@@ -328,24 +328,24 @@ namespace Profiles.Edit.Modules.CustomEditEducationalTraining
         protected void ibDown_Click(object sender, EventArgs e)
         {
             GridViewRow row = ((ImageButton)sender).Parent.Parent as GridViewRow;
-            GridViewAwards.EditIndex = -1;
+            GridViewEducation.EditIndex = -1;
 
-            Int64 predicate = Convert.ToInt64(GridViewAwards.DataKeys[row.RowIndex].Values[1].ToString());
-            Int64 _object = Convert.ToInt64(GridViewAwards.DataKeys[row.RowIndex].Values[2].ToString());
+            Int64 predicate = Convert.ToInt64(GridViewEducation.DataKeys[row.RowIndex].Values[1].ToString());
+            Int64 _object = Convert.ToInt64(GridViewEducation.DataKeys[row.RowIndex].Values[2].ToString());
 
             data.MoveTripleUp(this.SubjectID, predicate, _object);
 
-            this.FillAwardGrid(true);
+            this.FillEducationalTrainingGrid(true);
 
             upnlEditSection.Update();
 
         }
-        protected void FillAwardGrid(bool refresh)
+        protected void FillEducationalTrainingGrid(bool refresh)
         {
             if (refresh)
                 base.GetNetworkProfile(this.SubjectID, this.PredicateID);
 
-            List<AwardState> awardstate = new List<AwardState>();
+            List<EducationalTrainingState> educationalTrainingState = new List<EducationalTrainingState>();
 
             Int64 predicate = 0;
 
@@ -353,9 +353,9 @@ namespace Profiles.Edit.Modules.CustomEditEducationalTraining
 
             Int64 oldobjectid = 0;
 
-            string oldstartdatevalue = string.Empty;
+            string oldschoolvalue = string.Empty;
             string oldenddatevalue = string.Empty;
-            string oldawardorhonorvalue = string.Empty;
+            string olddegreevalue = string.Empty;
             string oldinstitutionvalue = string.Empty;
 
             string predicateuri = string.Empty;
@@ -379,7 +379,7 @@ namespace Profiles.Edit.Modules.CustomEditEducationalTraining
                 editdelete = true;
 
             if (!editaddnew)
-                btnEditAwards.Visible = false;
+                btnEditEducation.Visible = false;
 
             this.SubjectID = Convert.ToInt64(base.GetRawQueryStringItem("subject"));
             predicate = Convert.ToInt64(data.GetStoreNode(Server.UrlDecode(base.GetRawQueryStringItem("predicateuri")).Replace("!", "#")));
@@ -391,44 +391,44 @@ namespace Profiles.Edit.Modules.CustomEditEducationalTraining
                 awarduri = base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + property.InnerText + "']/rdf:object/@rdf:resource", base.Namespaces).Value;
                 oldobjectid = data.GetStoreNode(awarduri);
 
-                if (base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + awarduri + "']/prns:startDate", base.Namespaces) != null)
-                    oldstartdatevalue = base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + awarduri + "']/prns:startDate", base.Namespaces).InnerText;
+                if (base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + awarduri + "']/vivo:departmentOrSchool", base.Namespaces) != null)
+                    oldschoolvalue = base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + awarduri + "']/vivo:departmentOrSchool", base.Namespaces).InnerText;
                 else
-                    oldstartdatevalue = string.Empty;
+                    oldschoolvalue = string.Empty;
 
                 if (base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + awarduri + "']/prns:endDate", base.Namespaces) != null)
                     oldenddatevalue = base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + awarduri + "']/prns:endDate", base.Namespaces).InnerText;
                 else
                     oldenddatevalue = string.Empty;
 
-                if (base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + awarduri + "']/rdfs:label", base.Namespaces) != null)
-                    oldawardorhonorvalue = base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + awarduri + "']/rdfs:label", base.Namespaces).InnerText;
+                if (base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + awarduri + "']/vivo:degreeEarned", base.Namespaces) != null)
+                    olddegreevalue = base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + awarduri + "']/vivo:degreeEarned", base.Namespaces).InnerText;
                 else
-                    oldawardorhonorvalue = string.Empty;
+                    olddegreevalue = string.Empty;
 
-                if (base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + awarduri + "']/prns:awardConferredBy", base.Namespaces) != null)
-                    oldinstitutionvalue = base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + awarduri + "']/prns:awardConferredBy", base.Namespaces).InnerText;
+                if (base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + awarduri + "']/vivo:trainingAtOrganization", base.Namespaces) != null)
+                    oldinstitutionvalue = base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + awarduri + "']/vivo:trainingAtOrganization", base.Namespaces).InnerText;
                 else
                     oldinstitutionvalue = string.Empty;
 
-                awardstate.Add(new AwardState(awarduri, predicate, oldobjectid, oldstartdatevalue, oldenddatevalue,
-                    oldinstitutionvalue, oldawardorhonorvalue, editexisting, editdelete));
+                educationalTrainingState.Add(new EducationalTrainingState(awarduri, predicate, oldobjectid, oldschoolvalue, oldenddatevalue,
+                    oldinstitutionvalue, olddegreevalue, editexisting, editdelete));
 
             }
 
 
-            if (awardstate.Count > 0)
+            if (educationalTrainingState.Count > 0)
             {
 
 
-                GridViewAwards.DataSource = awardstate;
-                GridViewAwards.DataBind();
+                GridViewEducation.DataSource = educationalTrainingState;
+                GridViewEducation.DataBind();
             }
             else
             {
 
-                lblNoAwards.Visible = true;
-                GridViewAwards.Visible = false;
+                lblNoEducation.Visible = true;
+                GridViewEducation.Visible = false;
 
             }
 

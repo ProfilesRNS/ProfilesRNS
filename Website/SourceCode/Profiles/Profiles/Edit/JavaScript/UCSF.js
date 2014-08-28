@@ -12,6 +12,7 @@
   $("#profile-components table tr td:contains('Awards')").addClass('emphasize');
   $("#profile-components table tr td:contains('Overview')").addClass('emphasize');
   $("#profile-components table tr td:contains('Interests')").addClass('emphasize');
+  $("#profile-components table tr td:contains('Education')").addClass('emphasize');
   $("#cls").hide();
 
 

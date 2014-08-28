@@ -1039,6 +1039,180 @@ namespace Profiles.Edit.Utilities
 
         }
 
+        #region EducationalTraining
+
+        public bool AddEducationalTraining(Int64 subjectid, string degree, string institution,
+                    string school, string enddate, XmlDocument PropertyListXML)
+        {
+            string label = degree + " " + institution;
+            ActivityLog(PropertyListXML, GetPersonID(subjectid), label, institution);
+            bool error = false;
+            try
+            {
+
+                EducationalTrainingRequest eatr = new EducationalTrainingRequest();
+                eatr.EducationalTrainingForID = new StoreNodeParam();
+                eatr.EducationalTrainingForID.Value = subjectid;
+                eatr.EducationalTrainingForID.ParamOrdinal = 0;
+
+                eatr.Label = new StoreNodeParam();
+                eatr.Label.Value = label;
+                eatr.Label.ParamOrdinal = 1;
+
+                eatr.Degree = new StoreNodeParam();
+                eatr.Degree.Value = degree;
+                eatr.Degree.ParamOrdinal = 2;
+
+                eatr.Institution = new StoreNodeParam();
+                eatr.Institution.Value = institution;
+                eatr.Institution.ParamOrdinal = 3;
+
+                eatr.School = new StoreNodeParam();
+                eatr.School.Value = school;
+                eatr.School.ParamOrdinal = 4;
+
+                eatr.EndDate = new StoreNodeParam();
+                eatr.EndDate.Value = enddate;
+                eatr.EndDate.ParamOrdinal = 5;
+
+                error = this.StoreEducationalTrainingReceipt(eatr);
+
+            }
+            catch (Exception e)
+            {
+                Framework.Utilities.DebugLogging.Log(e.Message + e.StackTrace);
+                throw new Exception(e.Message);
+            }
+
+            return error;
+
+        }
+
+        public bool UpdateEducationalTraining(string subjecturi, string degree, string institution,
+                    string school, string enddate)
+        {
+            bool error = false;
+            try
+            {
+                string label = degree + " " + institution;
+
+                EducationalTrainingRequest eatr = new EducationalTrainingRequest();
+                eatr.ExistingEducationalTrainingURI = new StoreNodeParam();
+                eatr.ExistingEducationalTrainingURI.Value = subjecturi;
+                eatr.ExistingEducationalTrainingURI.ParamOrdinal = 0;
+
+                eatr.Label = new StoreNodeParam();
+                eatr.Label.Value = label;
+                eatr.Label.ParamOrdinal = 1;
+
+                eatr.Degree = new StoreNodeParam();
+                eatr.Degree.Value = degree;
+                eatr.Degree.ParamOrdinal = 2;
+
+                eatr.Institution = new StoreNodeParam();
+                eatr.Institution.Value = institution;
+                eatr.Institution.ParamOrdinal = 3;
+
+                eatr.School = new StoreNodeParam();
+                eatr.School.Value = school;
+                eatr.School.ParamOrdinal = 4;
+
+                eatr.EndDate = new StoreNodeParam();
+                eatr.EndDate.Value = enddate;
+                eatr.EndDate.ParamOrdinal = 5;
+
+                eatr.EducationalTrainingForID = new StoreNodeParam();
+                eatr.EducationalTrainingForID.Value = this.GetStoreNode(subjecturi).ToString();
+                eatr.EducationalTrainingForID.ParamOrdinal = 6;
+                error = this.StoreEducationalTrainingReceipt(eatr);
+
+            }
+            catch (Exception e)
+            {
+                Framework.Utilities.DebugLogging.Log(e.Message + e.StackTrace);
+                throw new Exception(e.Message);
+            }
+
+            return error;
+
+
+        }
+
+        private bool StoreEducationalTrainingReceipt(EducationalTrainingRequest eatr)
+        {
+
+            SessionManagement sm = new SessionManagement();
+            string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+
+            SqlConnection dbconnection = new SqlConnection(connstr);
+
+            SqlParameter[] param = new SqlParameter[eatr.Length];
+
+            bool error = false;
+
+            try
+            {
+                dbconnection.Open();
+
+                if (eatr.ExistingEducationalTrainingURI != null)
+                    param[eatr.ExistingEducationalTrainingURI.ParamOrdinal] = new SqlParameter("@ExistingEducationalTrainingURI", eatr.ExistingEducationalTrainingURI.Value);
+
+                if (eatr.EducationalTrainingForID != null)
+                    param[eatr.EducationalTrainingForID.ParamOrdinal] = new SqlParameter("@educationalTrainingForID", Convert.ToInt64(eatr.EducationalTrainingForID.Value));
+
+                if (eatr.Label != null)
+                    param[eatr.Label.ParamOrdinal] = new SqlParameter("@label", eatr.Label.Value.ToString());
+
+                if (eatr.Degree != null)
+                    param[eatr.Degree.ParamOrdinal] = new SqlParameter("@degree", eatr.Degree.Value.ToString());
+
+                if (eatr.Institution != null)
+                    param[eatr.Institution.ParamOrdinal] = new SqlParameter("@institution", eatr.Institution.Value.ToString());
+
+                if (eatr.School != null)
+                    param[eatr.School.ParamOrdinal] = new SqlParameter("@school", eatr.School.Value.ToString());
+
+                if (eatr.EndDate != null)
+                    param[eatr.EndDate.ParamOrdinal] = new SqlParameter("@endDate", eatr.EndDate.Value.ToString());
+
+
+                param[eatr.Length - 3] = new SqlParameter("@sessionID", sm.Session().SessionID);
+
+                param[eatr.Length - 2] = new SqlParameter("@error", null);
+                param[eatr.Length - 2].DbType = DbType.Boolean;
+                param[eatr.Length - 2].Direction = ParameterDirection.Output;
+
+                param[eatr.Length - 1] = new SqlParameter("@nodeid", null);
+                param[eatr.Length - 1].DbType = DbType.Int64;
+                param[eatr.Length - 1].Direction = ParameterDirection.Output;
+
+                // TODO
+                SqlCommand comm = GetDBCommand(ref dbconnection, "[Edit.Module].[CustomEditEducationalTraining.StoreItem]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param);
+                //For Output Parameters you need to pass a connection object to the framework so you can close it before reading the output params value.
+                ExecuteSQLDataCommand(comm);
+
+
+                comm.Connection.Close();
+
+                if (dbconnection.State != ConnectionState.Closed)
+                    dbconnection.Close();
+
+                error = Convert.ToBoolean(param[eatr.Length - 2].Value);
+
+                Framework.Utilities.Cache.AlterDependency(eatr.EducationalTrainingForID.Value.ToString());
+            }
+            catch (Exception e)
+            {
+                Framework.Utilities.DebugLogging.Log(e.Message + e.StackTrace);
+                throw new Exception(e.Message);
+            }
+
+            return error;
+
+        }
+
+        #endregion
+
         private Int64 GetNodeId(StoreNodeRequest snr)
         {
             System.Web.HttpBrowserCapabilities browser = HttpContext.Current.Request.Browser;
@@ -1484,6 +1658,58 @@ namespace Profiles.Edit.Utilities
                         length++;
 
                     if (StartDate != null)
+                        length++;
+
+                    //then add SessionID, Error and NodeID params for the array creation
+                    length = length + 3;
+
+
+                    return length;
+
+                }
+            }
+
+
+        }
+
+        private class EducationalTrainingRequest
+        {
+            public EducationalTrainingRequest() { }
+
+            public StoreNodeParam ExistingEducationalTrainingURI { get; set; }
+            public StoreNodeParam EducationalTrainingForID { get; set; }
+            public StoreNodeParam Label { get; set; }
+            public StoreNodeParam Degree { get; set; }
+            public StoreNodeParam School { get; set; }
+            public StoreNodeParam Institution { get; set; }
+            public StoreNodeParam EndDate { get; set; }
+
+
+            public int Length
+            {
+                get
+                {
+                    int length = 0;
+
+                    if (ExistingEducationalTrainingURI != null)
+                        length++;
+
+                    if (EducationalTrainingForID != null)
+                        length++;
+
+                    if (Label != null)
+                        length++;
+
+                    if (Degree != null)
+                        length++;
+
+                    if (School != null)
+                        length++;
+
+                    if (Institution != null)
+                        length++;
+
+                    if (EndDate != null)
                         length++;
 
                     //then add SessionID, Error and NodeID params for the array creation

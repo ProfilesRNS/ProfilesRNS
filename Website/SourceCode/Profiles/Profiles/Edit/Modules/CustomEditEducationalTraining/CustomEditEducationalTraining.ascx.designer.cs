@@ -67,13 +67,13 @@ namespace Profiles.Edit.Modules.CustomEditEducationalTraining {
         protected global::Profiles.Edit.Modules.SecurityOptions.SecurityOptions securityOptions;
         
         /// <summary>
-        /// pnlEditAwards control.
+        /// pnlEditEducation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlEditAwards;
+        protected global::System.Web.UI.WebControls.Panel pnlEditEducation;
         
         /// <summary>
         /// imbAddArror control.
@@ -85,40 +85,31 @@ namespace Profiles.Edit.Modules.CustomEditEducationalTraining {
         protected global::System.Web.UI.WebControls.ImageButton imbAddArror;
         
         /// <summary>
-        /// btnEditAwards control.
+        /// btnEditEducation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnEditAwards;
+        protected global::System.Web.UI.WebControls.LinkButton btnEditEducation;
         
         /// <summary>
-        /// RptrEditAwards control.
+        /// RptrEditEducation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater RptrEditAwards;
+        protected global::System.Web.UI.WebControls.Repeater RptrEditEducation;
         
         /// <summary>
-        /// pnlInsertAward control.
+        /// pnlInsertEducationalTraining control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlInsertAward;
-        
-        /// <summary>
-        /// txtStartYear control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtStartYear;
+        protected global::System.Web.UI.WebControls.Panel pnlInsertEducationalTraining;
         
         /// <summary>
         /// txtEndYear control.
@@ -130,13 +121,22 @@ namespace Profiles.Edit.Modules.CustomEditEducationalTraining {
         protected global::System.Web.UI.WebControls.TextBox txtEndYear;
         
         /// <summary>
-        /// txtAwardName control.
+        /// txtEducationalTrainingDegree control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAwardName;
+        protected global::System.Web.UI.WebControls.TextBox txtEducationalTrainingDegree;
+        
+        /// <summary>
+        /// txtEducationalTrainingSchool control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEducationalTrainingSchool;
         
         /// <summary>
         /// txtInstitution control.
@@ -148,22 +148,22 @@ namespace Profiles.Edit.Modules.CustomEditEducationalTraining {
         protected global::System.Web.UI.WebControls.TextBox txtInstitution;
         
         /// <summary>
-        /// btnInsertAward control.
+        /// btnInsertEducationalTraining control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnInsertAward;
+        protected global::System.Web.UI.WebControls.LinkButton btnInsertEducationalTraining;
         
         /// <summary>
-        /// btnInsertAward2 control.
+        /// btnInsertEducationalTraining2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnInsertAward2;
+        protected global::System.Web.UI.WebControls.LinkButton btnInsertEducationalTraining2;
         
         /// <summary>
         /// btnInsertCancel control.
@@ -175,21 +175,21 @@ namespace Profiles.Edit.Modules.CustomEditEducationalTraining {
         protected global::System.Web.UI.WebControls.LinkButton btnInsertCancel;
         
         /// <summary>
-        /// GridViewAwards control.
+        /// GridViewEducation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewAwards;
+        protected global::System.Web.UI.WebControls.GridView GridViewEducation;
         
         /// <summary>
-        /// lblNoAwards control.
+        /// lblNoEducation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNoAwards;
+        protected global::System.Web.UI.WebControls.Label lblNoEducation;
     }
 }
