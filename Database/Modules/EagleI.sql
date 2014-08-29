@@ -9,7 +9,7 @@ INSERT [Ontology.].[ClassProperty]
 	[CustomEditModule], [_ClassNode], [_NetworkPropertyNode], 
 	[_PropertyNode], [_TagName], [_PropertyLabel], 
 	[_ObjectType], [_NumberOfNodes], [_NumberOfTriples]) 
-	VALUES (858, N'http://xmlns.com/foaf/0.1/Person', NULL, 
+	VALUES (1000, N'http://xmlns.com/foaf/0.1/Person', NULL, 
 	N'http://profiles.catalyst.harvard.edu/ontology/prns#hasEagleIData', 1, 
 	NULL, 0, 0, 
 	0.5, 1, 1, 
@@ -31,3 +31,4 @@ INSERT [Ontology.].[PropertyGroupProperty]
 	0)
 
 EXEC [Ontology.].[UpdateDerivedFields]
+Exec [Ontology.].[CleanUp] @action='UpdateIDs'
