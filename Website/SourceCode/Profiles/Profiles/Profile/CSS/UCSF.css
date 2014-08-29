@@ -4,7 +4,7 @@
 .profiles .profilesContentPassive { width: 192px; padding: 4px 20px 0 0; }
 img#ctl00_ContentMain_rptMain_ctl00_ctl00_imgPhoto { width: 150px; }
 .PropertyGroupItem { margin: 0 0 10px; border: none; }
-.PropertyItemHeader { color: #CA7C29; font-size: 16px; background-color: #FFF; clear:left;
+.PropertyItemHeader { color: #CA7C29; font-size: 16px; background-color: #FFF; clear:both;
   border-top: 1px solid #EEE; padding: 6px 0 0 !important; margin: 15px 0 0; }
 .PropertyItemHeader a { display: none; }
 #toc { min-height: 27px; margin: 30px 0; background-color: #EEE; border: none; width: 680px\9; padding-bottom: 4px\9; }
@@ -15,7 +15,6 @@ img#ctl00_ContentMain_rptMain_ctl00_ctl00_imgPhoto { width: 150px; }
 .PropertyGroupData { padding-bottom: 0; }
 .PropertyGroupData div { padding: 0 !important; }
 .profiles .profilesContentMain .sectionHeader { padding-top: 6px;  text-decoration: none; }
-.awardsList:after { content:""; display:block; height: 15px; }
 .profiles .profilesContentMain .awardsList td:first-child { white-space: normal !important; }
 .profiles .profilesContentMain .publications li { border: none; padding-top: 0; }
 #ctl00_lblHTMLBlockLineBreaks { display: block; padding-bottom: 20px; }
@@ -44,6 +43,9 @@ img#ctl00_ContentMain_rptMain_ctl00_ctl00_imgPhoto { width: 150px; }
 }
 
 
+.education .atog { margin-bottom: 15px; }
+.education td { padding-right: 5px; vertical-align: top; }
+.education td:first-child { min-width: 300px; }
 .awardsList table { width: 680px; }
 .atog { color: #CA7C29; background-color: #FFF; white-space: nowrap; float: right; }
 .atog:hover { text-decoration: underline; cursor: pointer; }

@@ -48,14 +48,14 @@
                             <tr>
                                 <td colspan="3">
                                     <div style="padding-top: 5px;">
-                                        Enter the year completed, the name of the degree or training credential earned, the school or department and the institution that granted it. e.g. 1992; MD; School of Medicine;  Cambridge. 
+                                        Enter the institution, the name of the degree or training credential earned, the school or department and year completed, <br />e.g. Cambridge; MD; School of Medicine; 1992. 
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <b>Year</b><br />
-                                    <asp:TextBox ID="txtEndYear" runat="server" MaxLength="4" Width="60px" TabIndex="2"></asp:TextBox>
+                                    <b>Institution</b><br />
+                                    <asp:TextBox ID="txtInstitution" runat="server" MaxLength="100" TabIndex="4" Width="220px"></asp:TextBox>
                                 </td>
                                 <td>
                                     <b>Degree/Credential</b><br />
@@ -66,8 +66,8 @@
                                     <asp:TextBox ID="txtEducationalTrainingSchool" runat="server" MaxLength="100" TabIndex="3" Width="220px"></asp:TextBox>
                                 </td>
                                 <td>
-                                    <b>Institution</b><br />
-                                    <asp:TextBox ID="txtInstitution" runat="server" MaxLength="100" TabIndex="4" Width="220px"></asp:TextBox>
+                                    <b>Year</b><br />
+                                    <asp:TextBox ID="txtEndYear" runat="server" MaxLength="4" Width="60px" TabIndex="2"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -96,16 +96,16 @@
                             <HeaderStyle CssClass="topRow" BorderStyle="Solid" BorderWidth="1px" />
                             <RowStyle BorderStyle="Solid" BorderWidth="1px" />
                             <Columns>
-                                <asp:TemplateField HeaderText="Year&nbsp;of Educational Training">
+                                <asp:TemplateField HeaderText="Institution">
                                     <EditItemTemplate>
-                                        <asp:TextBox ID="txtYr2" runat="server" MaxLength="4" Text='<%# Bind("EndDate") %>'></asp:TextBox>
+                                        <asp:TextBox ID="txtEducationalTrainingInst" runat="server" MaxLength="100" Text='<%# Bind("Institution") %>'></asp:TextBox>
+                                        <asp:HiddenField runat="server" ID="hdURI" />
                                     </EditItemTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("EndDate") %>'></asp:Label>
+                                        <asp:Label ID="Label5" runat="server" Text='<%# Bind("Institution") %>'></asp:Label>
+                                        <asp:HiddenField runat="server" ID="hdURI" />
                                     </ItemTemplate>
-                                    <ControlStyle Width="35px" />
-                                    <HeaderStyle HorizontalAlign="Center" />
-                                    <ItemStyle HorizontalAlign="Center" />
+                                    <ItemStyle Wrap="true" />
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Degree/Credential">
                                     <EditItemTemplate>
@@ -125,16 +125,16 @@
                                     </ItemTemplate>
                                     <ItemStyle Wrap="true" />
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Institution">
+                                <asp:TemplateField HeaderText="Year">
                                     <EditItemTemplate>
-                                        <asp:TextBox ID="txtEducationalTrainingInst" runat="server" MaxLength="100" Text='<%# Bind("Institution") %>'></asp:TextBox>
-                                        <asp:HiddenField runat="server" ID="hdURI" />
+                                        <asp:TextBox ID="txtYr2" runat="server" MaxLength="4" Text='<%# Bind("EndDate") %>'></asp:TextBox>
                                     </EditItemTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label5" runat="server" Text='<%# Bind("Institution") %>'></asp:Label>
-                                        <asp:HiddenField runat="server" ID="hdURI" />
+                                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("EndDate") %>'></asp:Label>
                                     </ItemTemplate>
-                                    <ItemStyle Wrap="true" />
+                                    <ControlStyle Width="35px" />
+                                    <HeaderStyle HorizontalAlign="Center" />
+                                    <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
                                 <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="100px" HeaderText="Action"
                                     ShowHeader="False">

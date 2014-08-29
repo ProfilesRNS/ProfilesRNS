@@ -23,6 +23,7 @@ textarea#ctl00_ContentMain_rptMain_ctl00_ctl00_ctl00_GridViewProperty_ctl02_txtL
 #helpText { display: inline-block; padding-left: 200px; }
 #editmenu .rdf { display: none; }
 .edittable td, #tblEditAwardsHonors table td,
+#ctl00_ContentMain_rptMain_ctl00_ctl00_ctl00_GridViewEducation td,
 #ctl00_ContentMain_rptMain_ctl00_ctl00_ctl00_securityOptions_grdSecurityGroups td { border: 1px solid #CCC; }
 .actionbuttons td { border: none !important; }
 .orng { display: inline-block;margin: 20px 0 0 70px; text-indent: -18px; width: 420px; }
