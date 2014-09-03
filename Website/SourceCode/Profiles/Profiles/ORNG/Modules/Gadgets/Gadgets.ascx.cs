@@ -63,7 +63,19 @@ namespace Profiles.ORNG.Modules.Gadgets
         {
             if (om.IsVisible())
             {
-                litGadget.Text = base.GetModuleParamXml("HTML").InnerXml;
+                if (base.GetModuleParamString("GadgetDiv") != null)
+                {
+                    String txt = "<div id=\"" + base.GetModuleParamString("GadgetDiv") + "\"";//class="gadgets-gadget-network-parent" />
+                    if (base.GetModuleParamString("GadgetClass") != null)
+                    {
+                        txt += " class=\"" + base.GetModuleParamString("GadgetClass") + "\"";
+                    }
+                    litGadget.Text = txt + "></div>";
+                }
+                else
+                {
+                    litGadget.Text = base.GetModuleParamXml("HTML").InnerXml;
+                }
                 om.LoadAssets();
             }
         }
