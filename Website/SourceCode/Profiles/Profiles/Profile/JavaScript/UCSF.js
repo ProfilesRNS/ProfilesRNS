@@ -59,6 +59,25 @@
     });
   }
 
+    //Education expand/collapse
+    if ($('.education') && $('.education tr').length > 4) {
+        $('.education tr:gt(3)').hide();
+        $("<div class='atog' id='moreeduc'><span> <strong>...</strong> Show more</span> <img src='" + _rootDomain + "/Framework/Images/expandRound.gif' alt='+' style='vertical-align:top'  width='28' height='17'/></div>").appendTo('.education');
+        $("<div class='atog' id='lesseduc' style='display:none'><span>Show less</span> <img src='" + _rootDomain + "/Framework/Images/collapseRound.gif' alt='-' style='vertical-align:top' width='28' height='17'/></div>").appendTo('.education');
+    }
+  if ($('#moreeduc') && $('#moreeduc').length) {
+    $('#moreeduc').click(function () {
+        $('.education tr:gt(3)').toggle();
+        $('#moreeduc').hide();
+        $('#lesseduc').show();
+    });
+ 
+    $('#lesseduc').click(function () {
+        $('.education tr:gt(3)').toggle();
+        $('#moreeduc').show();
+        $('#lesseduc').hide();
+    });
+  }
 
     //Overview expand/collapse
   if ($('.basicInfo') && $('.basicInfo').length) {

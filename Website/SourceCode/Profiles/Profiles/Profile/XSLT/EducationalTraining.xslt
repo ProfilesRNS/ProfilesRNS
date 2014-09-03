@@ -3,23 +3,39 @@
   <xsl:template match="/">
     <xsl:if test="rdf:RDF/rdf:Description[1]/vivo:educationalTraining">
      
-      <div class="awardsList">
+      <div class="education">
         <table>
+          <thead>
+              <tr>
+                <th>
+                  Institution
+                </th>
+                <th>
+                  Degree
+                </th>
+                <th>
+                  School or Department
+                </th>
+                <th>
+                  Year
+                </th>
+              </tr>
+          </thead>
           <tbody>
             <xsl:for-each select="rdf:RDF/rdf:Description[1]/vivo:educationalTraining">
               <xsl:variable name="educationalTrainingUri" select="@rdf:resource"/>              
               <tr>
-                <td>
-                  <xsl:value-of select="/rdf:RDF[1]/rdf:Description[@rdf:about=$educationalTrainingUri]/prns:endDate"/>
+                <td stlye="min-width:300px">
+                  <xsl:value-of select="/rdf:RDF[1]/rdf:Description[@rdf:about=$educationalTrainingUri]/vivo:trainingAtOrganization"/>
                 </td>
                 <td>
                   <xsl:value-of select="/rdf:RDF[1]/rdf:Description[@rdf:about=$educationalTrainingUri]/vivo:degreeEarned"/>
                 </td>
-                <td stlye="white-space:nowrap;">
-                  <xsl:value-of select="/rdf:RDF[1]/rdf:Description[@rdf:about=$educationalTrainingUri]/vivo:trainingAtOrganization"/>
-                </td>
                 <td>
                   <xsl:value-of select="/rdf:RDF[1]/rdf:Description[@rdf:about=$educationalTrainingUri]/vivo:departmentOrSchool"/>
+                </td>
+                <td>
+                  <xsl:value-of select="/rdf:RDF[1]/rdf:Description[@rdf:about=$educationalTrainingUri]/prns:endDate"/>
                 </td>
               </tr>
             </xsl:for-each>
