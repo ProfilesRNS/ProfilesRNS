@@ -328,9 +328,9 @@ h2.badge-top  { padding: 12px 0 14px 4px; margin: -68px 0 0 60px; width: 70px; f
 .counter { background-color: #849696; color: #FFF; padding: 1px 2px 1px 5px; margin-right: 4px;
   letter-spacing: 3px; font-family: 'Courier New', Courier, monospace; font-weight:bold; }
 
-.thumbnail { display: inline-block; height: 15px; width: 15px; overflow: hidden; 
+.thumbnail { display: inline-block; height: 15px; width: 18px; overflow: hidden; 
   position: relative; margin: 2px 4px -2px 0; }
-.thumbnail img { position: absolute; left: 2px; }
+.thumbnail img { position: absolute; left: 2px; height: auto !important; }
 
 /* Back to top */
 #backtotop {  
