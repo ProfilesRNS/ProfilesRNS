@@ -394,8 +394,41 @@ BEGIN
 									for xml path('Row'), type
 						) 'Table'  
 						for xml path(''), type
-					)	
-
+					),
+					--------------------------------------------------------
+					-- [ORNG.]
+					--------------------------------------------------------					
+					(
+						select '[ORNG.].[Apps]' 'Table/@Name',
+						(
+							SELECT	AppID 'AppID',
+									Name 'Name',
+									Url 'URL',
+									PersonFilterID 'PersonFilterID',
+									RequiresRegistration 'RequiresRegistration',
+									UnavailableMessage 'UnavailableMessage',
+									OAuthSecret 'OAuthSecret',
+									[Enabled] 'Enabled'
+								from [ORNG.].[Apps]
+									for xml path('Row'), type
+						) 'Table'  
+						for xml path(''), type
+					),
+					(
+						select '[ORNG.].[AppViews]' 'Table/@Name',
+						(
+							SELECT	[AppID] 'AppID',
+									[Page] 'Page',
+									[View] 'View',
+									[ChromeID] 'ChromeID',
+									[Visibility] 'Visibility',
+									[DisplayOrder] 'DisplayOrder',
+									[OptParams] 'OptParams'
+								from [ORNG.].[AppViews]
+									for xml path('Row'), type
+						) 'Table'  
+						for xml path(''), type
+					)					
 				for xml path(''), type
 			) 'Import'
 		for xml path(''), type

@@ -108,101 +108,143 @@
       <JobGroup>1</JobGroup>
       <Step>10</Step>
       <IsActive>1</IsActive>
-      <Script>EXEC [Ontology.].[UpdateDerivedFields]</Script>
+
+      <Script>EXEC [ORNG.].[AddAppToOntology] 101</Script>
     </Row>
     <Row>
       <JobID>11</JobID>
       <JobGroup>1</JobGroup>
       <Step>11</Step>
       <IsActive>1</IsActive>
-      <Script>EXEC [Profile.Data].[Concept.Mesh.ParseMeshXML]</Script>
+
+      <Script>EXEC [ORNG.].[AddAppToOntology] 103</Script>
     </Row>
     <Row>
       <JobID>12</JobID>
       <JobGroup>1</JobGroup>
       <Step>12</Step>
       <IsActive>1</IsActive>
-      <Script>EXEC [Profile.Cache].[Concept.Mesh.UpdateTreeTop]</Script>
+
+      <Script>EXEC [ORNG.].[AddAppToOntology] 112</Script>
     </Row>
     <Row>
       <JobID>13</JobID>
       <JobGroup>1</JobGroup>
       <Step>13</Step>
       <IsActive>1</IsActive>
-      <Script>EXEC [Utility.NLP].[UpdateThesaurus]</Script>
+
+      <Script>EXEC [ORNG.].[AddAppToOntology] 114</Script>
     </Row>
     <Row>
       <JobID>14</JobID>
+      <JobGroup>1</JobGroup>
+      <Step>14</Step>
+      <IsActive>1</IsActive>
+      <Script>EXEC [Ontology.].[UpdateDerivedFields]</Script>
+    </Row>
+    <Row>
+      <JobID>15</JobID>
+      <JobGroup>1</JobGroup>
+      <Step>15</Step>
+      <IsActive>1</IsActive>
+      <Script>EXEC [Profile.Data].[Concept.Mesh.ParseMeshXML]</Script>
+    </Row>
+    <Row>
+      <JobID>16</JobID>
+      <JobGroup>1</JobGroup>
+      <Step>16</Step>
+      <IsActive>1</IsActive>
+      <Script>EXEC [Profile.Cache].[Concept.Mesh.UpdateTreeTop]</Script>
+    </Row>
+    <Row>
+      <JobID>17</JobID>
+      <JobGroup>1</JobGroup>
+      <Step>17</Step>
+      <IsActive>1</IsActive>
+      <Script>EXEC [Utility.NLP].[UpdateThesaurus]</Script>
+    </Row>
+    <Row>
+      <JobID>18</JobID>
       <JobGroup>2</JobGroup>
       <Step>1</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Framework.].[RunJobGroup] @JobGroup = 7</Script>
     </Row>
     <Row>
-      <JobID>15</JobID>
+
+      <JobID>19</JobID>
       <JobGroup>2</JobGroup>
       <Step>2</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Framework.].[RunJobGroup] @JobGroup = 8</Script>
     </Row>
     <Row>
-      <JobID>16</JobID>
+
+      <JobID>20</JobID>
       <JobGroup>2</JobGroup>
       <Step>3</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Framework.].[RunJobGroup] @JobGroup = 9</Script>
     </Row>
     <Row>
-      <JobID>17</JobID>
+
+      <JobID>21</JobID>
       <JobGroup>2</JobGroup>
       <Step>4</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [RDF.Stage].[ProcessDataMap] @AutoFeedOnly = 0</Script>
     </Row>
     <Row>
-      <JobID>18</JobID>
+
+      <JobID>22</JobID>
       <JobGroup>2</JobGroup>
       <Step>5</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Profile.Import].[Beta.SetDisplayPreferences]</Script>
     </Row>
     <Row>
-      <JobID>19</JobID>
+
+      <JobID>23</JobID>
       <JobGroup>2</JobGroup>
       <Step>6</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [RDF.Stage].[LoadAliases]</Script>
     </Row>
     <Row>
-      <JobID>20</JobID>
+
+      <JobID>24</JobID>
       <JobGroup>2</JobGroup>
       <Step>7</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Ontology.].[UpdateCounts]</Script>
     </Row>
     <Row>
-      <JobID>21</JobID>
+
+      <JobID>25</JobID>
       <JobGroup>2</JobGroup>
       <Step>8</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Search.Cache].[Public.UpdateCache]</Script>
     </Row>
     <Row>
-      <JobID>22</JobID>
+
+      <JobID>26</JobID>
       <JobGroup>2</JobGroup>
       <Step>9</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Search.Cache].[Private.UpdateCache]</Script>
     </Row>
     <Row>
-      <JobID>23</JobID>
+
+      <JobID>27</JobID>
       <JobGroup>3</JobGroup>
       <Step>1</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [RDF.Stage].[ProcessDataMap]</Script>
     </Row>
     <Row>
-      <JobID>24</JobID>
+
+      <JobID>28</JobID>
       <JobGroup>3</JobGroup>
       <Step>2</Step>
       <IsActive>1</IsActive>
@@ -210,7 +252,8 @@
       <Script>EXEC [RDF.SemWeb].[UpdateHash2Base64]</Script>
     </Row>
     <Row>
-      <JobID>25</JobID>
+
+      <JobID>29</JobID>
       <JobGroup>3</JobGroup>
       <Step>3</Step>
       <IsActive>1</IsActive>
@@ -218,7 +261,8 @@
       <Script>EXEC [RDF.Stage].[LoadAliases]</Script>
     </Row>
     <Row>
-      <JobID>26</JobID>
+
+      <JobID>30</JobID>
       <JobGroup>3</JobGroup>
       <Step>4</Step>
       <IsActive>1</IsActive>
@@ -226,7 +270,8 @@
       <Script>EXEC [Ontology.].[UpdateCounts]</Script>
     </Row>
     <Row>
-      <JobID>27</JobID>
+
+      <JobID>31</JobID>
       <JobGroup>3</JobGroup>
       <Step>5</Step>
       <IsActive>1</IsActive>
@@ -234,14 +279,16 @@
       <Script>EXEC [Search.Cache].[Public.UpdateCache]</Script>
     </Row>
     <Row>
-      <JobID>28</JobID>
+
+      <JobID>32</JobID>
       <JobGroup>3</JobGroup>
       <Step>6</Step>
       <IsActive>1</IsActive>
       <Script>EXEC [Search.Cache].[Private.UpdateCache]</Script>
     </Row>
     <Row>
-      <JobID>29</JobID>
+
+      <JobID>33</JobID>
       <JobGroup>4</JobGroup>
       <Step>2</Step>
       <IsActive>1</IsActive>
@@ -249,7 +296,8 @@
     </Row>
     <Row>
 
-      <JobID>30</JobID>
+
+      <JobID>34</JobID>
       <JobGroup>4</JobGroup>
       <Step>3</Step>
       <IsActive>1</IsActive>
@@ -257,7 +305,8 @@
     </Row>
     <Row>
 
-      <JobID>31</JobID>
+
+      <JobID>35</JobID>
       <JobGroup>4</JobGroup>
       <Step>4</Step>
       <IsActive>1</IsActive>
@@ -265,7 +314,8 @@
     </Row>
     <Row>
 
-      <JobID>32</JobID>
+
+      <JobID>36</JobID>
       <JobGroup>5</JobGroup>
       <Step>1</Step>
       <IsActive>1</IsActive>
@@ -273,7 +323,8 @@
     </Row>
     <Row>
 
-      <JobID>33</JobID>
+
+      <JobID>37</JobID>
       <JobGroup>5</JobGroup>
       <Step>2</Step>
       <IsActive>1</IsActive>
@@ -281,7 +332,8 @@
     </Row>
     <Row>
 
-      <JobID>34</JobID>
+
+      <JobID>38</JobID>
       <JobGroup>6</JobGroup>
       <Step>1</Step>
       <IsActive>1</IsActive>
@@ -289,7 +341,8 @@
     </Row>
     <Row>
 
-      <JobID>35</JobID>
+
+      <JobID>39</JobID>
       <JobGroup>6</JobGroup>
       <Step>2</Step>
       <IsActive>1</IsActive>
@@ -297,7 +350,8 @@
     </Row>
     <Row>
 
-      <JobID>36</JobID>
+
+      <JobID>40</JobID>
       <JobGroup>7</JobGroup>
       <Step>1</Step>
       <IsActive>1</IsActive>
@@ -305,7 +359,8 @@
     </Row>
     <Row>
 
-      <JobID>37</JobID>
+
+      <JobID>41</JobID>
       <JobGroup>7</JobGroup>
       <Step>2</Step>
       <IsActive>1</IsActive>
@@ -313,7 +368,8 @@
     </Row>
     <Row>
 
-      <JobID>38</JobID>
+
+      <JobID>42</JobID>
       <JobGroup>7</JobGroup>
       <Step>3</Step>
       <IsActive>1</IsActive>
@@ -321,7 +377,8 @@
     </Row>
     <Row>
 
-      <JobID>39</JobID>
+
+      <JobID>43</JobID>
       <JobGroup>7</JobGroup>
       <Step>4</Step>
       <IsActive>1</IsActive>
@@ -329,7 +386,8 @@
     </Row>
     <Row>
 
-      <JobID>40</JobID>
+
+      <JobID>44</JobID>
       <JobGroup>7</JobGroup>
       <Step>5</Step>
       <IsActive>1</IsActive>
@@ -337,7 +395,8 @@
     </Row>
     <Row>
 
-      <JobID>41</JobID>
+
+      <JobID>45</JobID>
       <JobGroup>7</JobGroup>
       <Step>6</Step>
       <IsActive>1</IsActive>
@@ -345,7 +404,8 @@
     </Row>
     <Row>
 
-      <JobID>42</JobID>
+
+      <JobID>46</JobID>
       <JobGroup>7</JobGroup>
       <Step>7</Step>
       <IsActive>1</IsActive>
@@ -353,7 +413,8 @@
     </Row>
     <Row>
 
-      <JobID>43</JobID>
+
+      <JobID>47</JobID>
       <JobGroup>7</JobGroup>
       <Step>8</Step>
       <IsActive>1</IsActive>
@@ -361,7 +422,8 @@
     </Row>
     <Row>
 
-      <JobID>44</JobID>
+
+      <JobID>48</JobID>
       <JobGroup>7</JobGroup>
       <Step>9</Step>
       <IsActive>1</IsActive>
@@ -369,7 +431,8 @@
     </Row>
     <Row>
 
-      <JobID>45</JobID>
+
+      <JobID>49</JobID>
       <JobGroup>7</JobGroup>
       <Step>10</Step>
       <IsActive>1</IsActive>
@@ -377,7 +440,8 @@
     </Row>
     <Row>
 
-      <JobID>46</JobID>
+
+      <JobID>50</JobID>
       <JobGroup>7</JobGroup>
       <Step>11</Step>
       <IsActive>1</IsActive>
@@ -385,7 +449,8 @@
     </Row>
     <Row>
 
-      <JobID>47</JobID>
+
+      <JobID>51</JobID>
       <JobGroup>7</JobGroup>
       <Step>12</Step>
       <IsActive>1</IsActive>
@@ -393,7 +458,8 @@
     </Row>
     <Row>
 
-      <JobID>48</JobID>
+
+      <JobID>52</JobID>
       <JobGroup>7</JobGroup>
       <Step>13</Step>
       <IsActive>1</IsActive>
@@ -401,7 +467,8 @@
     </Row>
     <Row>
 
-      <JobID>49</JobID>
+
+      <JobID>53</JobID>
       <JobGroup>7</JobGroup>
       <Step>14</Step>
       <IsActive>1</IsActive>
@@ -409,7 +476,8 @@
     </Row>
     <Row>
 
-      <JobID>50</JobID>
+
+      <JobID>54</JobID>
       <JobGroup>8</JobGroup>
       <Step>1</Step>
       <IsActive>1</IsActive>
@@ -417,7 +485,8 @@
     </Row>
     <Row>
 
-      <JobID>51</JobID>
+
+      <JobID>55</JobID>
       <JobGroup>8</JobGroup>
       <Step>2</Step>
       <IsActive>1</IsActive>
@@ -425,7 +494,8 @@
     </Row>
     <Row>
 
-      <JobID>52</JobID>
+
+      <JobID>56</JobID>
       <JobGroup>9</JobGroup>
       <Step>1</Step>
       <IsActive>1</IsActive>
@@ -433,7 +503,8 @@
     </Row>
     <Row>
 
-      <JobID>53</JobID>
+
+      <JobID>57</JobID>
       <JobGroup>9</JobGroup>
       <Step>2</Step>
       <IsActive>1</IsActive>
@@ -441,7 +512,8 @@
     </Row>
     <Row>
 
-      <JobID>54</JobID>
+
+      <JobID>58</JobID>
       <JobGroup>9</JobGroup>
       <Step>3</Step>
       <IsActive>1</IsActive>
@@ -449,7 +521,8 @@
     </Row>
     <Row>
 
-      <JobID>55</JobID>
+
+      <JobID>59</JobID>
       <JobGroup>9</JobGroup>
       <Step>4</Step>
       <IsActive>1</IsActive>
@@ -457,7 +530,8 @@
     </Row>
     <Row>
 
-      <JobID>56</JobID>
+
+      <JobID>60</JobID>
       <JobGroup>10</JobGroup>
       <Step>1</Step>
       <IsActive>1</IsActive>
@@ -16053,6 +16127,31 @@
     <Row>
       <ClassPropertyID>814</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
+      <Property>http://profiles.catalyst.harvard.edu/ontology/prns#hasEagleIData</Property>
+      <IsDetail>1</IsDetail>
+      <IncludeDescription>0</IncludeDescription>
+      <IncludeNetwork>0</IncludeNetwork>
+      <SearchWeight>5.000000000000000e-001</SearchWeight>
+      <CustomDisplay>1</CustomDisplay>
+      <CustomEdit>1</CustomEdit>
+      <ViewSecurityGroup>-1</ViewSecurityGroup>
+      <EditSecurityGroup>-50</EditSecurityGroup>
+      <EditPermissionsSecurityGroup>-50</EditPermissionsSecurityGroup>
+      <EditExistingSecurityGroup>-50</EditExistingSecurityGroup>
+      <EditAddNewSecurityGroup>-50</EditAddNewSecurityGroup>
+      <EditAddExistingSecurityGroup>-50</EditAddExistingSecurityGroup>
+      <EditDeleteSecurityGroup>-50</EditDeleteSecurityGroup>
+      <MinCardinality>0</MinCardinality>
+      <CustomDisplayModule>
+        <Module ID="CustomViewEagleI" />
+      </CustomDisplayModule>
+      <CustomEditModule>
+        <Module ID="CustomEditEagleI" />
+      </CustomEditModule>
+    </Row>
+    <Row>
+      <ClassPropertyID>815</ClassPropertyID>
+      <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://profiles.catalyst.harvard.edu/ontology/prns#physicalNeighborOf</Property>
       <IsDetail>1</IsDetail>
       <Limit>5</Limit>
@@ -16071,7 +16170,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>815</ClassPropertyID>
+
+      <ClassPropertyID>816</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://purl.org/ontology/bibo/prefixName</Property>
       <IsDetail>1</IsDetail>
@@ -16090,7 +16190,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>816</ClassPropertyID>
+
+      <ClassPropertyID>817</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://purl.org/ontology/bibo/suffixName</Property>
       <IsDetail>1</IsDetail>
@@ -16109,7 +16210,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>817</ClassPropertyID>
+
+      <ClassPropertyID>818</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://vivoweb.org/ontology/core#adviseeIn</Property>
       <IsDetail>1</IsDetail>
@@ -16128,7 +16230,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>818</ClassPropertyID>
+
+      <ClassPropertyID>819</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://vivoweb.org/ontology/core#advisorIn</Property>
       <IsDetail>1</IsDetail>
@@ -16147,7 +16250,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>819</ClassPropertyID>
+
+      <ClassPropertyID>820</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://vivoweb.org/ontology/core#awardOrHonor</Property>
       <IsDetail>1</IsDetail>
@@ -16169,7 +16273,8 @@
       </CustomEditModule>
     </Row>
     <Row>
-      <ClassPropertyID>820</ClassPropertyID>
+
+      <ClassPropertyID>821</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://vivoweb.org/ontology/core#currentlyHeadOf</Property>
       <IsDetail>1</IsDetail>
@@ -16188,7 +16293,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>821</ClassPropertyID>
+
+      <ClassPropertyID>822</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://vivoweb.org/ontology/core#editorOf</Property>
       <IsDetail>1</IsDetail>
@@ -16207,7 +16313,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>822</ClassPropertyID>
+
+      <ClassPropertyID>823</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://vivoweb.org/ontology/core#educationalTraining</Property>
       <IsDetail>1</IsDetail>
@@ -16226,7 +16333,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>823</ClassPropertyID>
+
+      <ClassPropertyID>824</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://vivoweb.org/ontology/core#eRACommonsId</Property>
       <IsDetail>1</IsDetail>
@@ -16245,7 +16353,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>824</ClassPropertyID>
+
+      <ClassPropertyID>825</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://vivoweb.org/ontology/core#hasCo-PrincipalInvestigatorRole</Property>
       <IsDetail>1</IsDetail>
@@ -16264,7 +16373,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>825</ClassPropertyID>
+
+      <ClassPropertyID>826</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://vivoweb.org/ontology/core#hasCredential</Property>
       <IsDetail>1</IsDetail>
@@ -16283,7 +16393,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>826</ClassPropertyID>
+
+      <ClassPropertyID>827</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://vivoweb.org/ontology/core#hasEditorRole</Property>
       <IsDetail>1</IsDetail>
@@ -16302,7 +16413,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>827</ClassPropertyID>
+
+      <ClassPropertyID>828</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://vivoweb.org/ontology/core#hasInvestigatorRole</Property>
       <IsDetail>1</IsDetail>
@@ -16321,7 +16433,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>828</ClassPropertyID>
+
+      <ClassPropertyID>829</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://vivoweb.org/ontology/core#hasPrincipalInvestigatorRole</Property>
       <IsDetail>1</IsDetail>
@@ -16340,7 +16453,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>829</ClassPropertyID>
+
+      <ClassPropertyID>830</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://vivoweb.org/ontology/core#hasResearcherRole</Property>
       <IsDetail>1</IsDetail>
@@ -16359,7 +16473,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>830</ClassPropertyID>
+
+      <ClassPropertyID>831</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://vivoweb.org/ontology/core#hasReviewerRole</Property>
       <IsDetail>1</IsDetail>
@@ -16378,7 +16493,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>831</ClassPropertyID>
+
+      <ClassPropertyID>832</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://vivoweb.org/ontology/core#hasServiceProviderRole</Property>
       <IsDetail>1</IsDetail>
@@ -16397,7 +16513,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>832</ClassPropertyID>
+
+      <ClassPropertyID>833</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://vivoweb.org/ontology/core#hasTeacherRole</Property>
       <IsDetail>1</IsDetail>
@@ -16416,7 +16533,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>833</ClassPropertyID>
+
+      <ClassPropertyID>834</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://vivoweb.org/ontology/core#mailingAddress</Property>
       <IsDetail>1</IsDetail>
@@ -16438,7 +16556,8 @@
       </CustomEditModule>
     </Row>
     <Row>
-      <ClassPropertyID>834</ClassPropertyID>
+
+      <ClassPropertyID>835</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://vivoweb.org/ontology/core#middleName</Property>
       <IsDetail>1</IsDetail>
@@ -16457,7 +16576,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>835</ClassPropertyID>
+
+      <ClassPropertyID>836</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://vivoweb.org/ontology/core#orcidId</Property>
       <IsDetail>1</IsDetail>
@@ -16476,7 +16596,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>836</ClassPropertyID>
+
+      <ClassPropertyID>837</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://vivoweb.org/ontology/core#outreachOverview</Property>
       <IsDetail>1</IsDetail>
@@ -16495,7 +16616,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>837</ClassPropertyID>
+
+      <ClassPropertyID>838</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://vivoweb.org/ontology/core#overview</Property>
       <IsDetail>1</IsDetail>
@@ -16515,7 +16637,8 @@
       <MaxCardinality>1</MaxCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>838</ClassPropertyID>
+
+      <ClassPropertyID>839</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://vivoweb.org/ontology/core#personInPosition</Property>
       <IsDetail>1</IsDetail>
@@ -16534,7 +16657,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>839</ClassPropertyID>
+
+      <ClassPropertyID>840</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://vivoweb.org/ontology/core#researcherId</Property>
       <IsDetail>1</IsDetail>
@@ -16553,7 +16677,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>840</ClassPropertyID>
+
+      <ClassPropertyID>841</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://vivoweb.org/ontology/core#researchOverview</Property>
       <IsDetail>1</IsDetail>
@@ -16572,7 +16697,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>841</ClassPropertyID>
+
+      <ClassPropertyID>842</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://vivoweb.org/ontology/core#scopusId</Property>
       <IsDetail>1</IsDetail>
@@ -16591,7 +16717,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>842</ClassPropertyID>
+
+      <ClassPropertyID>843</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://vivoweb.org/ontology/core#teachingOverview</Property>
       <IsDetail>1</IsDetail>
@@ -16610,7 +16737,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>843</ClassPropertyID>
+
+      <ClassPropertyID>844</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://profiles.catalyst.harvard.edu/ontology/prns#coAuthorOf</Property>
       <IsDetail>1</IsDetail>
@@ -16630,7 +16758,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>844</ClassPropertyID>
+
+      <ClassPropertyID>845</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://profiles.catalyst.harvard.edu/ontology/prns#similarTo</Property>
       <IsDetail>1</IsDetail>
@@ -16650,7 +16779,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>845</ClassPropertyID>
+
+      <ClassPropertyID>846</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://vivoweb.org/ontology/core#authorInAuthorship</Property>
       <IsDetail>1</IsDetail>
@@ -16675,7 +16805,8 @@
       </CustomEditModule>
     </Row>
     <Row>
-      <ClassPropertyID>846</ClassPropertyID>
+
+      <ClassPropertyID>847</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://vivoweb.org/ontology/core#hasResearchArea</Property>
       <IsDetail>1</IsDetail>
@@ -16695,7 +16826,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>847</ClassPropertyID>
+
+      <ClassPropertyID>848</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <NetworkProperty>http://profiles.catalyst.harvard.edu/ontology/prns#coAuthorOf</NetworkProperty>
       <Property>http://profiles.catalyst.harvard.edu/ontology/prns#endDate</Property>
@@ -16715,7 +16847,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>848</ClassPropertyID>
+
+      <ClassPropertyID>849</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <NetworkProperty>http://profiles.catalyst.harvard.edu/ontology/prns#coAuthorOf</NetworkProperty>
       <Property>http://profiles.catalyst.harvard.edu/ontology/prns#numberOfPublications</Property>
@@ -16735,7 +16868,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>849</ClassPropertyID>
+
+      <ClassPropertyID>850</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <NetworkProperty>http://profiles.catalyst.harvard.edu/ontology/prns#coAuthorOf</NetworkProperty>
       <Property>http://profiles.catalyst.harvard.edu/ontology/prns#startDate</Property>
@@ -16755,7 +16889,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>850</ClassPropertyID>
+
+      <ClassPropertyID>851</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <NetworkProperty>http://profiles.catalyst.harvard.edu/ontology/prns#coAuthorOf</NetworkProperty>
       <Property>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</Property>
@@ -16775,7 +16910,8 @@
       <MinCardinality>1</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>851</ClassPropertyID>
+
+      <ClassPropertyID>852</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <NetworkProperty>http://profiles.catalyst.harvard.edu/ontology/prns#similarTo</NetworkProperty>
       <Property>http://profiles.catalyst.harvard.edu/ontology/prns#isAlsoCoAuthor</Property>
@@ -16795,7 +16931,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>852</ClassPropertyID>
+
+      <ClassPropertyID>853</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <NetworkProperty>http://profiles.catalyst.harvard.edu/ontology/prns#similarTo</NetworkProperty>
       <Property>http://profiles.catalyst.harvard.edu/ontology/prns#numberOfSubjectAreas</Property>
@@ -16815,7 +16952,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>853</ClassPropertyID>
+
+      <ClassPropertyID>854</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <NetworkProperty>http://profiles.catalyst.harvard.edu/ontology/prns#similarTo</NetworkProperty>
       <Property>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</Property>
@@ -16835,7 +16973,8 @@
       <MinCardinality>1</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>854</ClassPropertyID>
+
+      <ClassPropertyID>855</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <NetworkProperty>http://vivoweb.org/ontology/core#hasResearchArea</NetworkProperty>
       <Property>http://profiles.catalyst.harvard.edu/ontology/prns#endDate</Property>
@@ -16855,7 +16994,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>855</ClassPropertyID>
+
+      <ClassPropertyID>856</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <NetworkProperty>http://vivoweb.org/ontology/core#hasResearchArea</NetworkProperty>
       <Property>http://profiles.catalyst.harvard.edu/ontology/prns#numberOfPublications</Property>
@@ -16875,7 +17015,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>856</ClassPropertyID>
+
+      <ClassPropertyID>857</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <NetworkProperty>http://vivoweb.org/ontology/core#hasResearchArea</NetworkProperty>
       <Property>http://profiles.catalyst.harvard.edu/ontology/prns#startDate</Property>
@@ -16895,7 +17036,8 @@
       <MinCardinality>0</MinCardinality>
     </Row>
     <Row>
-      <ClassPropertyID>857</ClassPropertyID>
+
+      <ClassPropertyID>858</ClassPropertyID>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <NetworkProperty>http://vivoweb.org/ontology/core#hasResearchArea</NetworkProperty>
       <Property>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</Property>
@@ -20067,6 +20209,16 @@
       <_PropertyNode>394</_PropertyNode>
       <_TagName>prns:hasConnectionDetails</_TagName>
       <_PropertyLabel>has connection details</_PropertyLabel>
+    </Row>
+    <Row>
+      <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupResearch</PropertyGroupURI>
+      <PropertyURI>http://profiles.catalyst.harvard.edu/ontology/prns#hasEagleIData</PropertyURI>
+      <SortOrder>9</SortOrder>
+      <_PropertyGroupNode>496</_PropertyGroupNode>
+      <_PropertyNode>396</_PropertyNode>
+      <_TagName>prns:hasEagleIData</_TagName>
+      <_PropertyLabel>research resources</_PropertyLabel>
+      <_NumberOfNodes>0</_NumberOfNodes>
     </Row>
     <Row>
       <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupOverview</PropertyGroupURI>
@@ -27497,6 +27649,59 @@
     <Row>
       <SecurityGroupID>0</SecurityGroupID>
       <DefaultORCIDDecisionID>3</DefaultORCIDDecisionID>
+    </Row>
+  </Table>
+  <Table Name="[ORNG.].[Apps]">
+    <Row>
+      <AppID>10</AppID>
+      <Name>RDF Test</Name>
+      <URL>http://profiles.ucsf.edu/apps_2.1/RDFTest.xml</URL>
+      <RequiresRegistration>0</RequiresRegistration>
+      <Enabled>0</Enabled>
+    </Row>
+    <Row>
+      <AppID>101</AppID>
+      <Name>Featured Presentations</Name>
+      <URL>http://profiles.ucsf.edu/apps_2.1/SlideShare.xml</URL>
+      <RequiresRegistration>0</RequiresRegistration>
+      <Enabled>0</Enabled>
+    </Row>
+    <Row>
+      <AppID>103</AppID>
+      <Name>Websites</Name>
+      <URL>http://profiles.ucsf.edu/apps_2.1/Links.xml</URL>
+      <RequiresRegistration>0</RequiresRegistration>
+      <Enabled>0</Enabled>
+    </Row>
+    <Row>
+      <AppID>112</AppID>
+      <Name>Twitter</Name>
+      <URL>http://profiles.ucsf.edu/apps_2.1/Twitter.xml</URL>
+      <RequiresRegistration>0</RequiresRegistration>
+      <Enabled>0</Enabled>
+    </Row>
+    <Row>
+      <AppID>114</AppID>
+      <Name>Featured Videos</Name>
+      <URL>http://profiles.ucsf.edu/apps_2.1/YouTube.xml</URL>
+      <RequiresRegistration>0</RequiresRegistration>
+      <Enabled>0</Enabled>
+    </Row>
+  </Table>
+  <Table Name="[ORNG.].[AppViews]">
+    <Row>
+      <AppID>10</AppID>
+      <Page>edit/default.aspx</Page>
+      <ChromeID>gadgets-test</ChromeID>
+      <Visibility>Public</Visibility>
+      <DisplayOrder>1</DisplayOrder>
+    </Row>
+    <Row>
+      <AppID>10</AppID>
+      <Page>profile/display.aspx</Page>
+      <ChromeID>gadgets-test</ChromeID>
+      <Visibility>Public</Visibility>
+      <DisplayOrder>1</DisplayOrder>
     </Row>
   </Table>
 </Import>

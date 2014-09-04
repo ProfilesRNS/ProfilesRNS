@@ -660,6 +660,59 @@ SELECT  R.x.value('ClassPropertyID[1]','varchar(max)'),
           ) t
   CROSS APPLY x.nodes('//Row') AS R ( x )
 
+   ---------------------------------------------------------------
+-- [ORNG.]
+---------------------------------------------------------------
+	INSERT INTO [ORNG.].[Apps]
+		(
+			[AppID],
+			[Name],
+			[Url],
+			[PersonFilterID],
+			[RequiresRegistration],
+			[UnavailableMessage],
+			[OAuthSecret],
+			[Enabled]
+		)
+   SELECT	R.x.value('AppID[1]','varchar(max)'),
+			R.x.value('Name[1]','varchar(max)'),
+			R.x.value('Url[1]','varchar(max)'),
+			R.x.value('PersonFilterID[1]','varchar(max)'),
+			R.x.value('RequiresRegistration[1]','varchar(max)'),
+			R.x.value('UnavailableMessage[1]','varchar(max)'),
+			R.x.value('OAuthSecret[1]','varchar(max)'),
+			R.x.value('Enabled[1]','varchar(max)')
+	 FROM    (SELECT
+                      @x.query
+                      ('Import[1]/Table[@Name=''[ORNG.].[Apps]'']')
+                      x
+          ) t
+  CROSS APPLY x.nodes('//Row') AS R ( x )
+
+  	INSERT INTO [ORNG.].[AppViews]
+		(
+			[AppID],
+			[Page],
+			[View],
+			[ChromeID],
+			[Visibility],
+			[DisplayOrder],
+			[OptParams]
+		)
+   SELECT	R.x.value('AppID[1]','varchar(max)'),
+			R.x.value('Page[1]','varchar(max)'),
+			R.x.value('View[1]','varchar(max)'),
+			R.x.value('ChromeID[1]','varchar(max)'),
+			R.x.value('Visibility[1]','varchar(max)'),
+			R.x.value('DisplayOrder[1]','varchar(max)'),
+			R.x.value('OptParams[1]','varchar(max)')
+	 FROM    (SELECT
+                      @x.query
+                      ('Import[1]/Table[@Name=''[ORNG.].[AppViews]'']')
+                      x
+          ) t
+  CROSS APPLY x.nodes('//Row') AS R ( x )
+  
   -- Use to generate select lists for new tables
   -- SELECT   'R.x.value(''' + c.name +  '[1]'',' + '''varchar(max)'')'+ ',' ,* 
   -- FROM sys.columns c 
