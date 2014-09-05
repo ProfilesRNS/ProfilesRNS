@@ -676,7 +676,7 @@ SELECT  R.x.value('ClassPropertyID[1]','varchar(max)'),
 		)
    SELECT	R.x.value('AppID[1]','varchar(max)'),
 			R.x.value('Name[1]','varchar(max)'),
-			R.x.value('Url[1]','varchar(max)'),
+			R.x.value('URL[1]','varchar(max)'),
 			R.x.value('PersonFilterID[1]','varchar(max)'),
 			R.x.value('RequiresRegistration[1]','varchar(max)'),
 			R.x.value('UnavailableMessage[1]','varchar(max)'),
