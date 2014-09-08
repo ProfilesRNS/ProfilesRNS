@@ -298,3 +298,135 @@ and Object is null
 EXEC [Ontology.].[UpdateDerivedFields]
 EXEC [Ontology.].[UpdateCounts]
 EXEC [Framework.].[RunJobGroup] @JobGroup = 3
+
+create table #tmpAppData
+(
+	[NodeID] [bigint] NOT NULL,
+	[AppID] [int] NOT NULL,
+	[Keyname] [nvarchar](255) NOT NULL,
+	[Value] [nvarchar](4000) NULL,
+	[CreatedDT] [datetime] NULL,
+	[UpdatedDT] [datetime] NULL
+)
+
+
+declare @nodeID bigint
+declare @appID int
+declare @keyName nvarchar(255)
+declare @Value nvarchar(4000)
+declare @CreatedDT datetime
+declare @UpdatedDT datetime
+declare @linksCount int
+DECLARE db_cursor CURSOR FOR  
+SELECT nodeID, appId, keyName, value, CreatedDT, UpdatedDT
+FROM [ORNG.].AppData
+
+
+OPEN db_cursor   
+FETCH NEXT FROM db_cursor INTO @nodeId, @appID, @keyName, @value, @CreatedDT, @UpdatedDT
+
+WHILE @@FETCH_STATUS = 0   
+BEGIN   
+	if(@appID = 103)
+	Begin
+	    DECLARE @start INT, @end INT 
+		SELECT @start = CHARINDEX('{', @value)
+		select @end = CHARINDEX('},{', @value)
+		select @linksCount = 0
+		WHILE @start < LEN(@value) + 1 BEGIN 
+		    IF @end = 0  
+			    SET @end = LEN(@value) - 1
+       
+			INSERT INTO #tmpAppData (NodeID, AppID, Keyname, Value, CreatedDT, UpdatedDT)
+			VALUES(@NodeId, @appID, 'link_' + cast(@linksCount as nvarchar(10)), SUBSTRING(@value, @start, @end + 1 - @start), @createdDT, @updatedDT) 
+			SET @start = @end + 2 
+			SET @end = CHARINDEX('},{', @value, @start)
+			SET @linksCount = @linksCount + 1
+		END
+		if @linksCount<>0
+		begin
+			INSERT INTO #tmpAppData (NodeID, AppID, Keyname, Value, CreatedDT, UpdatedDT)
+			values( @nodeID, @appID, 'links_count', @linksCount, @CreatedDT, @UpdatedDT)
+		End
+        
+	End
+	else
+	Begin
+		INSERT INTO #tmpAppData (NodeID, AppID, Keyname, Value, CreatedDT, UpdatedDT)
+		values( @nodeID, @appID, @keyName, @value, @CreatedDT, @UpdatedDT)
+	End
+    
+	FETCH NEXT FROM db_cursor INTO @nodeId, @appID, @keyName, @value, @CreatedDT, @UpdatedDT     
+END   
+
+CLOSE db_cursor   
+DEALLOCATE db_cursor
+
+delete from [ORNG.].AppData where keyname like 'links'
+insert into [ORNG.].AppData select * From #tmpAppData where keyname like 'link%'
+update [ORNG.].AppData set value = replace(replace(value, '"link_name"', '"name"'), '"link_url"', '"url"') where appid = 103
+drop table #tmpAppData
+
+
+GO
+
+update [orng.].Apps set URL = 'http://profiles.ucsf.edu/apps_2.1/RDFTest.xml' where url = 'http://stage-profiles.ucsf.edu/apps_200/RDFTest.xml'
+update [orng.].Apps set URL = 'http://profiles.ucsf.edu/apps_2.1/SlideShare.xml' where url = 'http://stage-profiles.ucsf.edu/apps_200/SlideShare.xml'
+update [orng.].Apps set URL = 'http://profiles.ucsf.edu/apps_2.1/Links.xml' where url = 'http://stage-profiles.ucsf.edu/apps_200/Links.xml'
+update [orng.].Apps set URL = 'http://profiles.ucsf.edu/apps_2.1/Twitter.xml' where url = 'http://stage-profiles.ucsf.edu/apps_200/Twitter.xml'
+update [orng.].Apps set URL = 'http://profiles.ucsf.edu/apps_2.1/YouTube.xml' where url = 'http://stage-profiles.ucsf.edu/apps_200/YouTube.xml'
+update [ORNG.].Apps set Enabled = 0 where AppID = 104
+
+exec [ORNG.].[AddAppToOntology] 101;
+--exec [ORNG.].[AddAppToOntology] 102;
+exec [ORNG.].[AddAppToOntology] 103;
+exec [ORNG.].[AddAppToOntology] 112;
+exec [ORNG.].[AddAppToOntology] 114;
+--exec [ORNG.].[AddAppToOntology] @appId = 116,@EditView = 'default', @ProfileView = 'default';
+
+EXEC [Ontology.].[UpdateDerivedFields];
+
+declare @nodeID as bigint
+declare @appID as int
+declare @visibility as nvarchar(50) 
+declare @createdNodeID as bigint
+declare @viewSecurityGroup as int
+declare @gadgetURI as nvarchar(255)
+declare @error bit
+DECLARE db_cursor2 CURSOR FOR  
+SELECT distinct d.nodeID, d.appid, isnull(visibility, 'Private') as visibility
+From [orng.].AppData d left outer join
+[ORNG.].AppRegistry r
+on d.nodeId = r.nodeID and d.appID = r.appID
+
+OPEN db_cursor2   
+FETCH NEXT FROM db_cursor2 INTO @nodeId, @appID, @visibility
+
+WHILE @@FETCH_STATUS = 0   
+BEGIN   
+	exec [ORNG.].[AddAppToPerson] @subjectID = @nodeID, @appID = @appID, @error = @error, @NodeID = @createdNodeID
+	--@SubjectID BIGINT=NULL, @SubjectURI nvarchar(255)=NULL, @AppID INT, @SessionID UNIQUEIDENTIFIER=NULL, @Error BIT=NULL OUTPUT, @NodeID BIGINT=NULL OUTPUT
+	if @visibility = 'Private' set @viewSecurityGroup = -40
+	if @visibility = 'Public' set @viewSecurityGroup = -1
+	if @appID = 101 set @gadgetURI = 'http://orng.info/ontology/orng#hasSlideShare'
+	if @appID = 103 set @gadgetURI = 'http://orng.info/ontology/orng#hasLinks'
+	if @appID = 112 set @gadgetURI = 'http://orng.info/ontology/orng#hasTwitter'
+	if @appID = 114 set @gadgetURI = 'http://orng.info/ontology/orng#hasYouTube'
+	Exec [RDF.].[SetNodePropertySecurity] @nodeID =	@nodeID, @propertyURI = @gadgetURI, @viewSecurityGroup = @viewSecurityGroup
+	
+	FETCH NEXT FROM db_cursor2 INTO @nodeId, @appID, @visibility    
+END   
+
+CLOSE db_cursor2   
+DEALLOCATE db_cursor2
+
+GO
+PRINT N'Altering [ORNG.].[AppRegistry]...';
+
+
+GO
+ALTER TABLE [ORNG.].[AppRegistry] DROP COLUMN [visibility];
+
+
+
+GO
