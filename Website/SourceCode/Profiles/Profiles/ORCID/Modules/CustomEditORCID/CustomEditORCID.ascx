@@ -94,7 +94,7 @@
                         <asp:Panel runat="server" ID="pnlORCIDProxy"> 
                         <h2>Proxy Functionality</h2>
                             <!--ORCID does not support proxy functionality, creating an ORCID and uploading data to ORCID must be performed by the user,-->
-                            ORCID does not support proxy functionality. As a proxy you may initialize an account for a researcher. 
+                            At the time of release, ORCID did not support proxy functionality. As a proxy you may initialize an account for a researcher. 
                             When you click "Create ORCID" an email will be sent to the researcher inviting them to claim their ORCID. <br />
                             Once they follow the link in the email, they will be required to enter a password and agree to the ORCID terms and conditions.
                             An ORCID will then be created for them using the details entered on this page. <br /><br />
