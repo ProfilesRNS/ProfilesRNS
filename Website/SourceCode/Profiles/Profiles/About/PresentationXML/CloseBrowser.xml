@@ -19,8 +19,8 @@
 </style>
 
 <div style="border: 1px solid #CCC; padding:5px 15px; width: 590px">
-<h2 style="font-size: 16px; line-height: 22px">For added security, it's best to completely <em>close the web browser</em> (e.g., Internet Explorer, Firefox, Safari, Chrome, etc.) that you used to login to UCSF Profiles. </h2>
-<h3>Closing the browser will help to ensure that no one else can access your MyAccess-enabled accounts from this computer. </h3>
+<h2 style="font-size: 16px; line-height: 22px">For added security, it's best to completely <em>close the web browser</em> (e.g., Internet Explorer, Firefox, Safari, Chrome, etc.) that you used to sign in. </h2>
+<h3>Closing the browser will help to ensure that no one else can access your single sign on-enabled accounts from this computer. </h3>
 </div>
         
           </Param>
