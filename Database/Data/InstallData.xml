@@ -16134,7 +16134,7 @@
       <SearchWeight>5.000000000000000e-001</SearchWeight>
       <CustomDisplay>1</CustomDisplay>
       <CustomEdit>1</CustomEdit>
-      <ViewSecurityGroup>-1</ViewSecurityGroup>
+      <ViewSecurityGroup>-50</ViewSecurityGroup>
       <EditSecurityGroup>-50</EditSecurityGroup>
       <EditPermissionsSecurityGroup>-50</EditPermissionsSecurityGroup>
       <EditExistingSecurityGroup>-50</EditExistingSecurityGroup>
