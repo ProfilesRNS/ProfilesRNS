@@ -381,7 +381,6 @@ type Profile.Data.Publication.DeleteAllPublications.StoredProcedure.sql
 type Profile.Data.Publication.Entity.UpdateEntityOnePerson.StoredProcedure.sql
 type Profile.Data.Publication.Entity.UpdateEntity.StoredProcedure.sql
 type Profile.Cache.Person.UpdatePerson.StoredProcedure.sql
-type Profile.Data.Publication.GetPersonSharedPublicationsKeyword.StoredProcedure.sql
 type Profile.Data.Publication.GetPersonPublications3.StoredProcedure.sql
 type Profile.Data.Publication.GetPersonPublications2.StoredProcedure.sql
 type Profile.Data.Publication.MyPub.UpdatePublication.StoredProcedure.sql
