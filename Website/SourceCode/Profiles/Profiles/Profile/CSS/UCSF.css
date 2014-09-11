@@ -24,7 +24,8 @@ img#ctl00_ContentMain_rptMain_ctl00_ctl00_imgPhoto { width: 150px; }
 #meshDetails .label { vertical-align: top; padding-right: 10px; }
 .keywordTimelineLabels { width: 220px; }
 .profiles .profilesContentPassive .passiveSectionBodyDetails a { font-weight: bold; }
-
+.profiles .profilesContentMain.alumni { background: url("../Images/ucsf_alumni_blue.jpg") no-repeat scroll right top transparent; }
+.profiles .profilesContentMain.alumni .pageTitle h2 { padding-right: 80px; }
 
 /* show & hide */
 .box { position: relative; height: auto; width: 680px; }

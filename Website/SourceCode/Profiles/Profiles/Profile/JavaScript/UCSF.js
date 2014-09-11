@@ -79,6 +79,21 @@
     });
   }
 
+    //Education badge
+    if ($('.education') && $('.education').length) {
+	$('.education table tr td:first-child').each(function(){
+      		var alma = $(this).text();
+		if (alma == 'University of California, San Francisco' ||
+		    alma == 'University of California San Francisco' ||
+		    alma == 'University of California at San Francisco' ||
+		    alma == 'University of California in San Francisco' ||
+		    alma == 'UC, San Francisco' ||
+		    alma == 'UC San Francisco' ||
+		    alma == 'UCSF') 
+		  $('.profilesContentMain').addClass('alumni');
+	});
+    }
+
     //Overview expand/collapse
   if ($('.basicInfo') && $('.basicInfo').length) {
     $('.PropertyItemHeader:contains("Overview")').next('.PropertyGroupData').attr("id","narrative");
