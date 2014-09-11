@@ -1,65 +1,68 @@
-﻿<rdf:RDF xmlns:orng="http://orng.info/ontology/orng#" xmlns:vitro="http://vitro.mannlib.cornell.edu/ns/vitro/public#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:swvs="http://www.w3.org/2003/06/sw-vocab-status/ns#" xmlns:skco="http://www.w3.org/2004/02/skos/core#" xmlns:owl2="http://www.w3.org/2006/12/owl2-xml#" xmlns:skos="http://www.w3.org/2008/05/skos#" xmlns:foaf="http://xmlns.com/foaf/0.1/">
-  <rdf:Description rdf:about="http://orng.info/ontology/orng#ClassGroupORNGApplications">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
-    <rdfs:label rdf:resource="ORNG Applications" />
-  </rdf:Description>
+﻿<rdf:RDF xmlns:geo="http://aims.fao.org/aos/geopolitical.owl#" xmlns:afn="http://jena.hpl.hp.com/ARQ/function#" xmlns:orng="http://orng.info/ontology/orng#" xmlns:prns="http://profiles.catalyst.harvard.edu/ontology/prns#" xmlns:obo="http://purl.obolibrary.org/obo/" xmlns:dcelem="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:event="http://purl.org/NET/c4dm/event.owl#" xmlns:bibo="http://purl.org/ontology/bibo/" xmlns:vann="http://purl.org/vocab/vann/" xmlns:vitro07="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#" xmlns:vitro="http://vitro.mannlib.cornell.edu/ns/vitro/public#" xmlns:vivo="http://vivoweb.org/ontology/core#" xmlns:pvs="http://vivoweb.org/ontology/provenance-support#" xmlns:scirr="http://vivoweb.org/ontology/scientific-research-resource#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:swvs="http://www.w3.org/2003/06/sw-vocab-status/ns#" xmlns:skco="http://www.w3.org/2004/02/skos/core#" xmlns:owl2="http://www.w3.org/2006/12/owl2-xml#" xmlns:skos="http://www.w3.org/2008/05/skos#" xmlns:foaf="http://xmlns.com/foaf/0.1/">
   <rdf:Description rdf:about="http://orng.info/ontology/orng#Application">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
     <rdfs:label rdf:resource="ORNG Application" />
   </rdf:Description>
   <rdf:Description rdf:about="http://orng.info/ontology/orng#applicationId">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:domain rdf:resource="http://orng.info/ontology/orng#Application" />
     <rdfs:label rdf:resource="ORNG Application Id" />
-    <rdfs:domain rdf:resource="http://orng.info/ontology/orng#Application" />
-    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
-      The AppId of the ORNG Application
-    </vitro:descriptionAnnot>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://orng.info/ontology/orng#applicationURL">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
-    <rdfs:label rdf:resource="ORNG Application URL" />
-    <rdfs:domain rdf:resource="http://orng.info/ontology/orng#Application" />
-    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
-      The URL for the ORNG Application
-    </vitro:descriptionAnnot>
+    <vitro:descriptionAnnot rdf:resource="       The AppId of the ORNG Application     " />
   </rdf:Description>
   <rdf:Description rdf:about="http://orng.info/ontology/orng#ApplicationInstance">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
     <rdfs:label rdf:resource="ORNG Application Instance" />
   </rdf:Description>
-  <rdf:Description rdf:about="http://orng.info/ontology/orng#applicationInstanceOfApplication">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
-    <rdfs:label rdf:resource="ORNG Application Instance of Application" />
-    <rdfs:domain rdf:resource="http://orng.info/ontology/orng#ApplicationInstance" />
-  </rdf:Description>
-  <rdf:Description rdf:about="http://orng.info/ontology/orng#applicationInstanceForPerson">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
-    <rdfs:label rdf:resource="ORNG Application Instance for Person" />
-    <rdfs:domain rdf:resource="http://orng.info/ontology/orng#ApplicationInstance" />
-  </rdf:Description>
-  <!-- We instead create a uniuqe relastionship for every registered application 
-  <rdf:Description rdf:about="http://orng.info/ontology/orng#hasApplicationInstance">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
-    <rdfs:label rdf:resource="has ORNG Application Instance" />
-    <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Person" />
-  </rdf:Description>
-  -->
   <rdf:Description rdf:about="http://orng.info/ontology/orng#ApplicationInstanceData">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
     <rdfs:label rdf:resource="ORNG Application Instance Data" />
   </rdf:Description>
   <rdf:Description rdf:about="http://orng.info/ontology/orng#applicationInstanceDataValue">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
-    <rdfs:label rdf:resource="ORNG Application Instance Data value" />
     <rdfs:domain rdf:resource="http://orng.info/ontology/orng#ApplicationData" />
-    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
-      The value for the application data
-    </vitro:descriptionAnnot>
+    <rdfs:label rdf:resource="ORNG Application Instance Data value" />
+    <vitro:descriptionAnnot rdf:resource="       The value for the application data     " />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://orng.info/ontology/orng#applicationInstanceForPerson">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:domain rdf:resource="http://orng.info/ontology/orng#ApplicationInstance" />
+    <rdfs:label rdf:resource="ORNG Application Instance for Person" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://orng.info/ontology/orng#applicationInstanceOfApplication">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:domain rdf:resource="http://orng.info/ontology/orng#ApplicationInstance" />
+    <rdfs:label rdf:resource="ORNG Application Instance of Application" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://orng.info/ontology/orng#applicationURL">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:domain rdf:resource="http://orng.info/ontology/orng#Application" />
+    <rdfs:label rdf:resource="ORNG Application URL" />
+    <vitro:descriptionAnnot rdf:resource="       The URL for the ORNG Application     " />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://orng.info/ontology/orng#ClassGroupORNGApplications">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="ORNG Applications" />
   </rdf:Description>
   <rdf:Description rdf:about="http://orng.info/ontology/orng#hasApplicationInstanceData">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
-    <rdfs:label rdf:resource="has ORNG Application Instance Data" />
     <rdfs:domain rdf:resource="http://orng.info/ontology/orng#ApplicationInstance" />
+    <rdfs:label rdf:resource="has ORNG Application Instance Data" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://orng.info/ontology/orng#hasLinks">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="Websites" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://orng.info/ontology/orng#hasSlideShare">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="Featured Presentations" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://orng.info/ontology/orng#hasTwitter">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="Twitter" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://orng.info/ontology/orng#hasYouTube">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="Featured Videos" />
   </rdf:Description>
   <rdf:Description rdf:about="http://orng.info/ontology/orng#PropertyGroupORNGApplications">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
