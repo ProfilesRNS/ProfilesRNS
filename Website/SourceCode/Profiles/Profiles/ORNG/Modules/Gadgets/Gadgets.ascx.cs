@@ -63,10 +63,10 @@ namespace Profiles.ORNG.Modules.Gadgets
         {
             if (om.IsVisible())
             {
-                if (base.GetModuleParamString("GadgetDiv") != null)
+                if (!string.Empty.Equals(base.GetModuleParamString("GadgetDiv")))
                 {
                     String txt = "<div id=\"" + base.GetModuleParamString("GadgetDiv") + "\"";//class="gadgets-gadget-network-parent" />
-                    if (base.GetModuleParamString("GadgetClass") != null)
+                    if (!string.Empty.Equals(base.GetModuleParamString("GadgetClass")))
                     {
                         txt += " class=\"" + base.GetModuleParamString("GadgetClass") + "\"";
                     }

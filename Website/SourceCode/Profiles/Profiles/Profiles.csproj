@@ -1168,7 +1168,9 @@
     <Content Include="Profile\CSS\display.css" />
     <Content Include="Profile\CSS\NetworkBrowser.css" />
     <Content Include="Profile\Display.aspx" />
-    <Content Include="Profile\Modules\NetworkMap\config.xml" />
+    <Content Include="Profile\Modules\NetworkMap\config.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Profile\Modules\NetworkMap\NetworkMap.ascx" />
     <Content Include="Profile\Modules\ModuleCatalogue.xml" />
     <Content Include="Profile\Modules\NetworkRadial\crossdomain.xml" />
