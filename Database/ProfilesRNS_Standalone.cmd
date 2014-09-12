@@ -1,7 +1,7 @@
 @echo off
 REM
 REM
-REM  Copyright (c) 2008-2013 by the President and Fellows of Harvard College. All rights reserved.  Profiles Research Networking Software was developed under the supervision of Griffin M Weber, MD, PhD., and Harvard Catalyst: The Harvard Clinical and Translational Science Center, with support from the National Center for Research Resources and Harvard University.
+REM  Copyright (c) 2008-2014 by the President and Fellows of Harvard College. All rights reserved.  Profiles Research Networking Software was developed under the supervision of Griffin M Weber, MD, PhD., and Harvard Catalyst: The Harvard Clinical and Translational Science Center, with support from the National Center for Research Resources and Harvard University.
 REM
 REM  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 REM      * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
