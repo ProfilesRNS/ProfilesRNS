@@ -15890,12 +15890,12 @@
       <CustomDisplay>1</CustomDisplay>
       <CustomEdit>1</CustomEdit>
       <ViewSecurityGroup>-50</ViewSecurityGroup>
-      <EditSecurityGroup>-20</EditSecurityGroup>
-      <EditPermissionsSecurityGroup>-20</EditPermissionsSecurityGroup>
-      <EditExistingSecurityGroup>-20</EditExistingSecurityGroup>
-      <EditAddNewSecurityGroup>-20</EditAddNewSecurityGroup>
-      <EditAddExistingSecurityGroup>-20</EditAddExistingSecurityGroup>
-      <EditDeleteSecurityGroup>-20</EditDeleteSecurityGroup>
+      <EditSecurityGroup>-50</EditSecurityGroup>
+      <EditPermissionsSecurityGroup>-50</EditPermissionsSecurityGroup>
+      <EditExistingSecurityGroup>-50</EditExistingSecurityGroup>
+      <EditAddNewSecurityGroup>-50</EditAddNewSecurityGroup>
+      <EditAddExistingSecurityGroup>-50</EditAddExistingSecurityGroup>
+      <EditDeleteSecurityGroup>-50</EditDeleteSecurityGroup>
       <MinCardinality>0</MinCardinality>
       <CustomDisplayModule>
         <Module ID="ViewPersonalGadget">
@@ -15929,12 +15929,12 @@
       <CustomDisplay>1</CustomDisplay>
       <CustomEdit>1</CustomEdit>
       <ViewSecurityGroup>-50</ViewSecurityGroup>
-      <EditSecurityGroup>-20</EditSecurityGroup>
-      <EditPermissionsSecurityGroup>-20</EditPermissionsSecurityGroup>
-      <EditExistingSecurityGroup>-20</EditExistingSecurityGroup>
-      <EditAddNewSecurityGroup>-20</EditAddNewSecurityGroup>
-      <EditAddExistingSecurityGroup>-20</EditAddExistingSecurityGroup>
-      <EditDeleteSecurityGroup>-20</EditDeleteSecurityGroup>
+      <EditSecurityGroup>-50</EditSecurityGroup>
+      <EditPermissionsSecurityGroup>-50</EditPermissionsSecurityGroup>
+      <EditExistingSecurityGroup>-50</EditExistingSecurityGroup>
+      <EditAddNewSecurityGroup>-50</EditAddNewSecurityGroup>
+      <EditAddExistingSecurityGroup>-50</EditAddExistingSecurityGroup>
+      <EditDeleteSecurityGroup>-50</EditDeleteSecurityGroup>
       <MinCardinality>0</MinCardinality>
       <CustomDisplayModule>
         <Module ID="ViewPersonalGadget">
@@ -15968,12 +15968,12 @@
       <CustomDisplay>1</CustomDisplay>
       <CustomEdit>1</CustomEdit>
       <ViewSecurityGroup>-50</ViewSecurityGroup>
-      <EditSecurityGroup>-20</EditSecurityGroup>
-      <EditPermissionsSecurityGroup>-20</EditPermissionsSecurityGroup>
-      <EditExistingSecurityGroup>-20</EditExistingSecurityGroup>
-      <EditAddNewSecurityGroup>-20</EditAddNewSecurityGroup>
-      <EditAddExistingSecurityGroup>-20</EditAddExistingSecurityGroup>
-      <EditDeleteSecurityGroup>-20</EditDeleteSecurityGroup>
+      <EditSecurityGroup>-50</EditSecurityGroup>
+      <EditPermissionsSecurityGroup>-50</EditPermissionsSecurityGroup>
+      <EditExistingSecurityGroup>-50</EditExistingSecurityGroup>
+      <EditAddNewSecurityGroup>-50</EditAddNewSecurityGroup>
+      <EditAddExistingSecurityGroup>-50</EditAddExistingSecurityGroup>
+      <EditDeleteSecurityGroup>-50</EditDeleteSecurityGroup>
       <MinCardinality>0</MinCardinality>
       <CustomDisplayModule>
         <Module ID="ViewPersonalGadget">
@@ -16007,12 +16007,12 @@
       <CustomDisplay>1</CustomDisplay>
       <CustomEdit>1</CustomEdit>
       <ViewSecurityGroup>-50</ViewSecurityGroup>
-      <EditSecurityGroup>-20</EditSecurityGroup>
-      <EditPermissionsSecurityGroup>-20</EditPermissionsSecurityGroup>
-      <EditExistingSecurityGroup>-20</EditExistingSecurityGroup>
-      <EditAddNewSecurityGroup>-20</EditAddNewSecurityGroup>
-      <EditAddExistingSecurityGroup>-20</EditAddExistingSecurityGroup>
-      <EditDeleteSecurityGroup>-20</EditDeleteSecurityGroup>
+      <EditSecurityGroup>-50</EditSecurityGroup>
+      <EditPermissionsSecurityGroup>-50</EditPermissionsSecurityGroup>
+      <EditExistingSecurityGroup>-50</EditExistingSecurityGroup>
+      <EditAddNewSecurityGroup>-50</EditAddNewSecurityGroup>
+      <EditAddExistingSecurityGroup>-50</EditAddExistingSecurityGroup>
+      <EditDeleteSecurityGroup>-50</EditDeleteSecurityGroup>
       <MinCardinality>0</MinCardinality>
       <CustomDisplayModule>
         <Module ID="ViewPersonalGadget">
