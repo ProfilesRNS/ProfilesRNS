@@ -99,7 +99,7 @@ rem call C:\Windows\Microsoft.NET\Framework64\v3.5\MSBuild.exe ProfilesRNSBetaAP
 call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild "..\Website\SourceCode\Profiles\Profiles\Profiles.csproj" "/p:Platform=AnyCPU;Configuration=Release;PublishDestination=..\..\..\..\Release\ProfilesRNS\Website\Binary\Profiles" /t:PublishToFileSystem
 call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild "..\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service\Connects.Profiles.Service.csproj" "/p:Platform=AnyCPU;Configuration=Release;PublishDestination=..\..\..\..\Release\ProfilesRNS\Website\Binary\ProfilesBetaAPI" /t:PublishToFileSystem
 call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild "..\Website\SourceCode\ProfilesSearchAPI\ProfilesSearchAPI.csproj" "/p:Platform=AnyCPU;Configuration=Release;PublishDestination=..\..\..\Release\ProfilesRNS\Website\Binary\ProfilesSearchAPI" /t:PublishToFileSystem
-copy ..Website\SourceCode\SemWeb\src\bin\sparql-core.dll ..\Website\SourceCode\ProfilesSPARQLAPI\bin\
+copy ..\Website\SourceCode\SemWeb\src\bin\sparql-core.dll ..\Website\SourceCode\ProfilesSPARQLAPI\bin\
 call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild "..\Website\SourceCode\ProfilesSPARQLAPI\ProfilesSPARQLAPI.csproj" "/p:Platform=AnyCPU;Configuration=Release;PublishDestination=..\..\..\Release\ProfilesRNS\Website\Binary\ProfilesSPARQLAPI" /t:PublishToFileSystem
 
 
