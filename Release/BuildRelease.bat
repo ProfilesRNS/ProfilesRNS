@@ -37,6 +37,7 @@ mkdir ProfilesRNS\Website\SourceCode\Profiles
 mkdir ProfilesRNS\Website\SourceCode\Profiles\Profiles
 mkdir ProfilesRNS\Website\SourceCode\ProfilesBetaAPI
 mkdir ProfilesRNS\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service
+mkdir ProfilesRNS\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service\bin
 mkdir ProfilesRNS\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service.DataContracts
 mkdir ProfilesRNS\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service.ServiceContracts
 mkdir ProfilesRNS\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service.ServiceImplementation
@@ -125,7 +126,7 @@ copy ..\Database\ProfilesRNS_CreateSchema.sql ProfilesRNS\Database\ProfilesRNS_C
 call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild "..\Website\SourceCode\Profiles\Profiles\Profiles.csproj" "/p:Platform=AnyCPU;Configuration=Release;CopyDestination=..\..\..\..\Release\ProfilesRNS\Website\SourceCode\Profiles\Profiles" /t:CopySource
 
 call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild "..\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service\Connects.Profiles.Service.csproj" "/p:Platform=AnyCPU;Configuration=Release;CopyDestination=..\..\..\..\Release\ProfilesRNS\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service" /t:CopySource
-copy "..\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service\bin\microsoft.ServiceModel.Web.dll" "..\..\..\..\Release\ProfilesRNS\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service\bin\microsoft.ServiceModel.Web.dll"
+copy "..\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service\bin\microsoft.ServiceModel.Web.dll" "ProfilesRNS\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service\bin\microsoft.ServiceModel.Web.dll"
 call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild "..\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service.DataContracts\Connects.Profiles.Service.DataContracts.csproj" "/p:Platform=AnyCPU;Configuration=Release;CopyDestination=..\..\..\..\Release\ProfilesRNS\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service.DataContracts" /t:CopySource
 call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild "..\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service.ServiceContracts\Connects.Profiles.Service.ServiceContracts.csproj" "/p:Platform=AnyCPU;Configuration=Release;CopyDestination=..\..\..\..\Release\ProfilesRNS\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service.ServiceContracts" /t:CopySource
 call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild "..\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service.ServiceImplementation\Connects.Profiles.Service.ServiceImplementation.csproj" "/p:Platform=AnyCPU;Configuration=Release;CopyDestination=..\..\..\..\Release\ProfilesRNS\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service.ServiceImplementation" /t:CopySource
