@@ -45,7 +45,7 @@ img#ctl00_ContentMain_rptMain_ctl00_ctl00_imgPhoto { width: 150px; }
 
 
 .education .atog { margin-bottom: 15px; }
-.education th { text-align: left; }
+.education th { text-align: left; padding: 0 15px 0 0; }
 .education td { padding-right: 5px; vertical-align: top; }
 .education td:first-child { min-width: 300px; }
 .awardsList table { width: 680px; }
