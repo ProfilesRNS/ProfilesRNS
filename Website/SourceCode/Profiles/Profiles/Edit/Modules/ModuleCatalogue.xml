@@ -16,6 +16,7 @@ For details, see: LICENSE.txt
   <Module ModulePath="Modules" NameSpace="EditPropertyContainer" FileName="EditPropertyContainer.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="EditDataTypeProperty" FileName="EditDataTypeProperty.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="CustomEditAwardOrHonor" FileName="CustomEditAwardOrHonor.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="CustomEditEducationalTraining" FileName="CustomEditEducationalTraining.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="CustomEditAuthorInAuthorship" FileName="CustomEditAuthorInAuthorship.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="EditVisibilityOnly" FileName="EditVisibilityOnly.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="CustomEditMainImage" FileName="CustomEditMainImage.ascx" Enabled="true"/>

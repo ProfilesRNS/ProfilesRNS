@@ -104,3 +104,14 @@
 * html #ctl00_ctl00_left_pnlOpenSocialTools { height: 130px; }
 *+html #ctl00_ctl00_left_pnlOpenSocialTools { height: 130px; }
 * html #ctl00_ctl00_left_pnlOpenSocialTools { margin-left: -8px; }
+
+/* chromeless sidebar gadget */
+.gadgets-gadget-network-parent { border-bottom: 1px solid #CCC !important; }
+.gadgets-gadget-network-parent .gadgets-gadget-title-bar { 
+  background-color: #FFF;
+  padding: 0;
+  font-weight: bold;
+  margin-top: 8px; 
+}
+.gadgets-gadget-network-parent .gadgets-gadget-title-bar:hover { background-color: #FFF; } 
+.gadgets-gadget-network-parent .gadgets-gadget-content { padding: 0; }

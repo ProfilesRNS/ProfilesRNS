@@ -154,6 +154,7 @@
     <Content Include="Edit\Images\icons_red_BlueRow.gif" />
     <Content Include="Edit\Images\Icons_upSort.gif" />
     <Content Include="Edit\Images\Icon_add_item.gif" />
+    <Content Include="Edit\Modules\CustomEditEducationalTraining\CustomEditEducationalTraining.ascx" />
     <Content Include="favicon.ico" />
     <Content Include="ORNG\Images\orng-asterisk.png" />
     <Content Include="Edit\Images\sophcat-boat.jpg" />
@@ -218,6 +219,7 @@
     <Content Include="Profile\JavaScript\UCSF.js" />
     <Content Include="Profile\Modules\CustomViewExternalCoauthors\CustomViewExternalCoauthors.ascx" />
     <Content Include="Profile\Modules\CustomViewListProperty\CustomViewListProperty.ascx" />
+    <Content Include="Profile\XSLT\EducationalTraining.xslt" />
     <Content Include="RobotsTxt.aspx" />
     <Content Include="Search\CSS\UCSF.css" />
     <Content Include="Search\Images\icon_squareArrow.gif" />
@@ -353,6 +355,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Edit\Modules\CustomEditEducationalTraining\CustomEditEducationalTraining.ascx.cs">
+      <DependentUpon>CustomEditEducationalTraining.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Edit\Modules\CustomEditEducationalTraining\CustomEditEducationalTraining.ascx.designer.cs">
+      <DependentUpon>CustomEditEducationalTraining.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Edit\Modules\CustomEditListProperty\CustomEditListProperty.ascx.cs">
       <DependentUpon>CustomEditListProperty.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -360,6 +369,7 @@
     <Compile Include="Edit\Modules\CustomEditListProperty\CustomEditListProperty.ascx.designer.cs">
       <DependentUpon>CustomEditListProperty.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Edit\Utilities\EducationalTrainingState.cs" />
     <Compile Include="Edit\Utilities\LiteralListState.cs" />
     <Compile Include="Framework\Modules\MainMenu\History.ascx.cs">
       <DependentUpon>History.ascx</DependentUpon>
@@ -1165,7 +1175,9 @@
     <Content Include="Profile\CSS\display.css" />
     <Content Include="Profile\CSS\NetworkBrowser.css" />
     <Content Include="Profile\Display.aspx" />
-    <Content Include="Profile\Modules\NetworkMap\config.xml" />
+    <Content Include="Profile\Modules\NetworkMap\config.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Profile\Modules\NetworkMap\NetworkMap.ascx" />
     <Content Include="Profile\Modules\ModuleCatalogue.xml" />
     <Content Include="Profile\Modules\NetworkRadial\crossdomain.xml" />
