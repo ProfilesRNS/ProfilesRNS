@@ -41,8 +41,7 @@ BEGIN
 					(
 						select	'[Framework.].[Job]' 'Table/@Name',
 								(
-									select	JobID 'JobID',
-											JobGroup 'JobGroup',
+									select	JobGroup 'JobGroup',
 											Step 'Step',
 											IsActive 'IsActive',
 											Script 'Script'
@@ -91,8 +90,7 @@ BEGIN
 					(
 						select	'[Ontology.].[ClassProperty]' 'Table/@Name',
 								(
-									select	ClassPropertyID 'ClassPropertyID',
-											Class 'Class',
+									select	Class 'Class',
 											NetworkProperty 'NetworkProperty',
 											Property 'Property',
 											IsDetail 'IsDetail',
@@ -122,8 +120,7 @@ BEGIN
 						select	'[Ontology.].[DataMap]' 'Table/@Name',
 						
 								(
-									select  DataMapID 'DataMapID',
-											DataMapGroup 'DataMapGroup',
+									select  DataMapGroup 'DataMapGroup',
 											IsAutoFeed 'IsAutoFeed',
 											Graph 'Graph',
 											Class 'Class',
@@ -149,10 +146,7 @@ BEGIN
 											Weight 'Weight',
 											OrderBy 'OrderBy',
 											ViewSecurityGroup 'ViewSecurityGroup',
-											EditSecurityGroup 'EditSecurityGroup',
-											_ClassNode '_ClassNode',
-											_NetworkPropertyNode '_NetworkPropertyNode',
-											_PropertyNode '_PropertyNode'
+											EditSecurityGroup 'EditSecurityGroup'
 									from [Ontology.].[DataMap]
 									for xml path('Row'), type
 								) 'Table'
@@ -173,9 +167,7 @@ BEGIN
 								(
 									select	PropertyGroupURI 'PropertyGroupURI',
 											SortOrder 'SortOrder',
-											_PropertyGroupLabel '_PropertyGroupLabel',
-											_PropertyGroupNode '_PropertyGroupNode',
-											_NumberOfNodes '_NumberOfNodes'
+											_PropertyGroupLabel '_PropertyGroupLabel'
 									from [Ontology.].[PropertyGroup]
 									for xml path('Row'), type
 								) 'Table'
@@ -189,11 +181,8 @@ BEGIN
 											SortOrder 'SortOrder',
 											CustomDisplayModule 'CustomDisplayModule',
 											CustomEditModule 'CustomEditModule',
-											_PropertyGroupNode '_PropertyGroupNode',
-											_PropertyNode '_PropertyNode',
 											_TagName '_TagName',
-											_PropertyLabel '_PropertyLabel',
-											_NumberOfNodes '_NumberOfNodes'
+											_PropertyLabel '_PropertyLabel'
 									from [Ontology.].[PropertyGroupProperty]
 									for xml path('Row'), type
 								) 'Table'
@@ -205,8 +194,7 @@ BEGIN
 					(
 						select	'[Ontology.Presentation].[XML]' 'Table/@Name',
 								(
-									select	PresentationID 'PresentationID', 
-											type 'type',
+									select	type 'type',
 											subject 'subject',
 											predicate 'predicate',
 											object 'object',

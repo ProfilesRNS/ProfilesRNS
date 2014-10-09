@@ -103,7 +103,7 @@ INSERT INTO [Framework.].Job
           IsActive,
           Script
         ) 
-SELECT	R.x.value('JobID[1]','varchar(max)'),
+SELECT	Row_Number() OVER (ORDER BY (SELECT 1)),
 		R.x.value('JobGroup[1]','varchar(max)'),
 		R.x.value('Step[1]','varchar(max)'),
 		R.x.value('IsActive[1]','varchar(max)'),
@@ -196,7 +196,7 @@ INSERT INTO [Ontology.].ClassProperty
           CustomDisplayModule,
           CustomEditModule
         )
-SELECT  R.x.value('ClassPropertyID[1]','varchar(max)'),
+SELECT  Row_Number() OVER (ORDER BY (SELECT 1)),
 		R.x.value('Class[1]','varchar(max)'),
 		R.x.value('NetworkProperty[1]','varchar(max)'),
 		R.x.value('Property[1]','varchar(max)'),
@@ -256,12 +256,9 @@ SELECT  R.x.value('ClassPropertyID[1]','varchar(max)'),
             Weight ,
             OrderBy ,
             ViewSecurityGroup ,
-            EditSecurityGroup ,
-            [_ClassNode] ,
-            [_NetworkPropertyNode] ,
-            [_PropertyNode]
+            EditSecurityGroup
           )
-  SELECT    R.x.value('DataMapID[1]','varchar(max)'),
+  SELECT    Row_Number() OVER (ORDER BY (SELECT 1)),
 			R.x.value('DataMapGroup[1]','varchar(max)'),
 			R.x.value('IsAutoFeed[1]','varchar(max)'),
 			R.x.value('Graph[1]','varchar(max)'),
@@ -288,10 +285,7 @@ SELECT  R.x.value('ClassPropertyID[1]','varchar(max)'),
 			R.x.value('Weight[1]','varchar(max)'),
 			R.x.value('OrderBy[1]','varchar(max)'),
 			R.x.value('ViewSecurityGroup[1]','varchar(max)'),
-			R.x.value('EditSecurityGroup[1]','varchar(max)'),
-			R.x.value('_ClassNode[1]','varchar(max)'),
-			R.x.value('_NetworkPropertyNode[1]','varchar(max)'),
-			R.x.value('_PropertyNode[1]','varchar(max)')
+			R.x.value('EditSecurityGroup[1]','varchar(max)')
   FROM    ( SELECT
                       @x.query
                       ('Import[1]/Table[@Name=''[Ontology.].[DataMap]'']')
@@ -320,15 +314,11 @@ SELECT  R.x.value('ClassPropertyID[1]','varchar(max)'),
    INSERT INTO [Ontology.].PropertyGroup
            ( PropertyGroupURI ,
              SortOrder ,
-             [_PropertyGroupLabel] ,
-             [_PropertyGroupNode] ,
-             [_NumberOfNodes]
+             [_PropertyGroupLabel]
            ) 
 	SELECT	R.x.value('PropertyGroupURI[1]','varchar(max)'),
 			R.x.value('SortOrder[1]','varchar(max)'),
-			R.x.value('_PropertyGroupLabel[1]','varchar(max)'), 
-			R.x.value('_PropertyGroupNode[1]','varchar(max)'),
-			R.x.value('_NumberOfNodes[1]','varchar(max)')
+			R.x.value('_PropertyGroupLabel[1]','varchar(max)')
 	 FROM    ( SELECT
                       @x.query
                       ('Import[1]/Table[@Name=''[Ontology.].[PropertyGroup]'']')
@@ -344,22 +334,16 @@ SELECT  R.x.value('ClassPropertyID[1]','varchar(max)'),
 	          SortOrder ,
 	          CustomDisplayModule ,
 	          CustomEditModule ,
-	          [_PropertyGroupNode] ,
-	          [_PropertyNode] ,
 	          [_TagName] ,
-	          [_PropertyLabel] ,
-	          [_NumberOfNodes]
+	          [_PropertyLabel]
 	        ) 
 	SELECT	R.x.value('PropertyGroupURI[1]','varchar(max)'),
 			R.x.value('PropertyURI[1]','varchar(max)'),
 			R.x.value('SortOrder[1]','varchar(max)'),
 			(case when CAST(R.x.query('CustomDisplayModule[1]/*') AS NVARCHAR(MAX))<>'' then R.x.query('CustomDisplayModule[1]/*') else NULL end),
 			(case when CAST(R.x.query('CustomEditModule[1]/*') AS NVARCHAR(MAX))<>'' then R.x.query('CustomEditModule[1]/*') else NULL end),
-			R.x.value('_PropertyGroupNode[1]','varchar(max)'),
-			R.x.value('_PropertyNode[1]','varchar(max)'),
 			R.x.value('_TagName[1]','varchar(max)'),
-			R.x.value('_PropertyLabel[1]','varchar(max)'),
-			R.x.value('_NumberOfNodes[1]','varchar(max)')
+			R.x.value('_PropertyLabel[1]','varchar(max)')
 	 FROM    ( SELECT
                       @x.query
                       ('Import[1]/Table[@Name=''[Ontology.].[PropertyGroupProperty]'']')

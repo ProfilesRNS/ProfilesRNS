@@ -97,6 +97,13 @@ BEGIN
 				and ((x.Predicate is null and y.Predicate is null) or (x.Predicate = y.Predicate))
 				and ((x.Object is null and y.Object is null) or (x.Object = y.Object))	
 
+		update x 
+			set x.JobID = y.k 
+			from [Framework.].Job x, (
+				select *, ROW_NUMBER() over (order by JobGroup, Step) k 
+					from [Framework.].Job
+			) y
+			where x.JobGroup = y.JobGroup and x.Step = y.Step
 	end
 
 	-------------------------------------------------------------
