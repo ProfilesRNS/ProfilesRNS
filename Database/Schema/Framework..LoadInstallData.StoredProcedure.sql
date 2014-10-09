@@ -369,7 +369,7 @@ SELECT  Row_Number() OVER (ORDER BY (SELECT 1)),
            _PredicateNode ,
            _ObjectNode
          )       
-  SELECT  R.x.value('PresentationID[1]', 'varchar(max)') ,
+  SELECT  Row_Number() OVER (ORDER BY (SELECT 1)),
 		  R.x.value('type[1]', 'varchar(max)') ,
           R.x.value('subject[1]', 'varchar(max)'),
           R.x.value('predicate[1]', 'varchar(max)'),
