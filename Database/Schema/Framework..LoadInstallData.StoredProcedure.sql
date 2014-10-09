@@ -705,3 +705,4 @@ SELECT  Row_Number() OVER (ORDER BY (SELECT 1)),
   -- AND T.NAME<>'sysname'ORDER BY c.column_id
 	 
 END
+GO

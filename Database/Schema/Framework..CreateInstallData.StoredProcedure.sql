@@ -432,3 +432,4 @@ BEGIN
    --WHERE object_id IN (SELECT object_id FROM sys.tables WHERE name = 'Publication.MyPub.Category')  
 
 END
+GO
