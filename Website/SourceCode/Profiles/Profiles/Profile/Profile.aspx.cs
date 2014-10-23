@@ -71,7 +71,7 @@ namespace Profiles.Profile
 
             Response.Clear();
             Response.ContentType = "application/rdf+xml";
-            Response.Charset = "charset=UTF-8";
+            Response.Charset = "UTF-8";
             Response.StatusCode = Convert.ToInt16("200");
 
             // Tell the bots that this is slow moving data, add an exires at some random date up to 30 days out
