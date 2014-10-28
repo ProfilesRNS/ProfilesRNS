@@ -40,18 +40,21 @@ namespace Profiles.Profile.Modules.CustomViewPersonGeneralInfo
 
             Utilities.DataIO data = new Profiles.Profile.Utilities.DataIO();
             string email = string.Empty;
-            string imageemailurl = string.Empty;
+            //string imageemailurl = string.Empty;
+            string emailPlainText = string.Empty;
             if (this.BaseData.SelectSingleNode("rdf:RDF[1]/rdf:Description[1]/prns:emailEncrypted", this.Namespaces) != null &&
                 this.BaseData.SelectSingleNode("rdf:RDF[1]/rdf:Description[1]/vivo:email", this.Namespaces) == null)
             {
                 email = this.BaseData.SelectSingleNode("rdf:RDF[1]/rdf:Description[1]/prns:emailEncrypted", this.Namespaces).InnerText;
-                imageemailurl = string.Format(Root.Domain + "/profile/modules/CustomViewPersonGeneralInfo/" + "EmailHandler.ashx?msg={0}", HttpUtility.UrlEncode(email));
+                //imageemailurl = string.Format(Root.Domain + "/profile/modules/CustomViewPersonGeneralInfo/" + "EmailHandler.ashx?msg={0}", HttpUtility.UrlEncode(email));
+                emailPlainText = getEmailPlainText(email);
             }
             
             args.AddParam("root", "", Root.Domain);
             if (email != string.Empty)
             {
-                args.AddParam("email", "", imageemailurl);
+                //args.AddParam("email", "", imageemailurl);
+                args.AddParam("email", "", emailPlainText);
             }
             args.AddParam("imgguid", "", Guid.NewGuid().ToString());
 
@@ -83,6 +86,21 @@ namespace Profiles.Profile.Modules.CustomViewPersonGeneralInfo
                 // Add this just in case it is needed.
                 new ORNGProfileRPCService(Page, this.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/foaf:firstName", base.Namespaces).InnerText, uri);
             }
+        }
+
+        // UCSF
+        private string getEmailPlainText(String emailEncrypted)
+        {
+            Utilities.DataIO data = new Profiles.Profile.Utilities.DataIO();
+            SqlDataReader reader;
+
+            SqlCommand cmd = new SqlCommand("SELECT [Utility.Application].[fnDecryptBase64RC4] ( '" + emailEncrypted + "',   (Select [value] from [Framework.].parameter with(nolock) where ParameterID = 'RC4EncryptionKey'))");
+            reader = data.GetSQLDataReader(cmd);
+            reader.Read();
+
+            string emailPlain = reader[0].ToString();
+            reader.Close();
+            return emailPlain;
         }
 
     }
