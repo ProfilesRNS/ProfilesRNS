@@ -27,10 +27,7 @@ image { border: none; }
 @media screen and (-webkit-min-device-pixel-ratio:0) {
  .profiles .profilesContentPassive { margin-top: -5px; }
 }
-/* Safari only override */
-::i-block-chrome,.profiles .profilesContentPassive  {
- margin-top: 19px;
-}}
+
 
 
 input#chkExactphrase, input#institutionallexcept, input#departmentallexcept, .except input { display: none; }
