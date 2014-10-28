@@ -113,7 +113,7 @@
           <th>Email</th>
           <td>
             <!--img id="{$imgguid}" src="{$email}&amp;rnd={$imgguid}"></img-->
-            <a href="mailto:{$email}" itemprop="email">{$email}</a>
+            <a href="mailto:{$email}" itemprop="email"><xsl:value-of select="$email"/></a>
           </td>
         </tr>
       </xsl:when>
