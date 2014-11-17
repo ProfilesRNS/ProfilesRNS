@@ -101,7 +101,7 @@ namespace Profiles.Framework.Modules.MainMenu
 
                         file = file.Substring(0, file.Length - 1);
 
-                        menulist.Append("<li><a href=\"" + uri + "/" + file + ".rdf\" target=\"_blank\">" + "Export RDF" + "</a>&nbsp;<a style='border: none;' href='" + Root.Domain + "/about/default.aspx?tab=data'><img style='border-style: none' src='" + Root.Domain + "/Framework/Images/info.png'  border='0'></a></li>");
+                        menulist.Append("<li><a href=\"" + uri + "/" + file + ".rdf\" target=\"_blank\">" + "Export RDF" + "</a>&nbsp;<a style='border: none;' href='" + Root.Domain + "/about/default.aspx?tab=data'><img style='border-style: none' src='" + Root.Domain + "/Framework/Images/info.png'  border='0' alt='Help with RDF'></a></li>");
 
                         if (base.MasterPage != null)
                         {
