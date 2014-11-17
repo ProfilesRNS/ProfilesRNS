@@ -41,17 +41,21 @@ namespace Profiles.Profile.Modules.CustomViewPersonGeneralInfo
             Utilities.DataIO data = new Profiles.Profile.Utilities.DataIO();
             string email = string.Empty;
             string imageemailurl = string.Empty;
+            string audioemailurl = string.Empty;
             if (this.BaseData.SelectSingleNode("rdf:RDF[1]/rdf:Description[1]/prns:emailEncrypted", this.Namespaces) != null &&
                 this.BaseData.SelectSingleNode("rdf:RDF[1]/rdf:Description[1]/vivo:email", this.Namespaces) == null)
             {
                 email = this.BaseData.SelectSingleNode("rdf:RDF[1]/rdf:Description[1]/prns:emailEncrypted", this.Namespaces).InnerText;
                 imageemailurl = string.Format(Root.Domain + "/profile/modules/CustomViewPersonGeneralInfo/" + "EmailHandler.ashx?msg={0}", HttpUtility.UrlEncode(email));
+                audioemailurl = string.Format(Root.Domain + "/profile/modules/CustomViewPersonGeneralInfo/" + "EmailAudioHandler.ashx?msg={0}", HttpUtility.UrlEncode(email));
             }
             
             args.AddParam("root", "", Root.Domain);
             if (email != string.Empty)
             {
                 args.AddParam("email", "", imageemailurl);
+                args.AddParam("emailAudio", "", audioemailurl);
+                args.AddParam("emailAudioImg", "", Root.Domain + "/Framework/Images/listen.jpg");
             }
             args.AddParam("imgguid", "", Guid.NewGuid().ToString());
 
