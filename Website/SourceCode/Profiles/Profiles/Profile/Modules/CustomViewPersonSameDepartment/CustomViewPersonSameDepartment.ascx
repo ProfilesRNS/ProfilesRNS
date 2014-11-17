@@ -5,7 +5,7 @@
         <div class="passiveSectionHead">
             <div style="white-space: nowrap; display: inline">
                 Same Department <a href="JavaScript:toggleVisibility('sdDescript');">
-                    <asp:Image runat="server" ID="imgQuestion" />
+                    <asp:Image runat="server" ID="imgQuestion" AlternateText="Expand Description" />
                 </a>
             </div>
             <div id="sdDescript" class="passiveSectionHeadDescription" style="display: none;">

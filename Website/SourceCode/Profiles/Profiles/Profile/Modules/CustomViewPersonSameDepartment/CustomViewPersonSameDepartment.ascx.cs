@@ -83,7 +83,7 @@ namespace Profiles.Profile.Modules.CustomViewPersonSameDepartment
             {
                 Literal litFooter = (Literal)e.Item.FindControl("litFooter");
                 litFooter.Text = "<a href='" + Root.Domain + "/search/default.aspx?searchtype=people&searchfor=&SearchRequest=" + this.SearchRequest + "'>" +
-              "<img style='margin-right:2px;position:relative;top:1px;border:0'  src='" + Root.Domain + "/Framework/Images/icon_squareArrow.gif'></img>Search Department</a>";
+              "<img alt=' ' style='margin-right:2px;position:relative;top:1px;border:0'  src='" + Root.Domain + "/Framework/Images/icon_squareArrow.gif'></img>Search Department</a>";
 
             }
 
