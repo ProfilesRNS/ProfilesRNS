@@ -9,7 +9,7 @@
         <xsl:text> </xsl:text>
         <xsl:if test="@Description">
           <a href="JavaScript:toggleVisibility('{@ID}');">
-            <img alt="" src="{$root}/Framework/Images/info.png"/>
+            <img alt="Expand Description" src="{$root}/Framework/Images/info.png"/>
           </a>
         </xsl:if>
       </div>
@@ -32,7 +32,7 @@
     <xsl:if test ="@MoreURL!=''">
       <div class="passiveSectionBodyDetails">
         <a href="{@MoreURL}">
-          <img style="margin-right:2px;position:relative;top:1px;border:0"  src="{$root}/Framework/Images/icon_squareArrow.gif" />
+          <img alt=" " style="margin-right:2px;position:relative;top:1px;border:10"  src="{$root}/Framework/Images/icon_squareArrow.gif"  />
           <xsl:value-of select="@MoreText"/>
         </a>
       </div>

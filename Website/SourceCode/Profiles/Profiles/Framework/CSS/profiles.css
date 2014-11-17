@@ -611,7 +611,7 @@ form
 }
 .listTable tr
 {
-	cursor: pointer;
+	cursor: default;
 }
 .listTable th
 {

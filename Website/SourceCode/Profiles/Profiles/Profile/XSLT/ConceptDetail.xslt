@@ -52,9 +52,6 @@
       window.location = '/profile/'+uri;
       }
 
-      function doURL(x){
-      if (!hasClickedListTable) { document.location = x;}
-      }
 </xsl:text>
     </script>
     Concepts are listed by decreasing relevance which is based on many factors, including how many publications the person wrote about that topic, how long ago those publications were written, and how many publications other people have written on that same topic.
@@ -107,9 +104,9 @@
                 </xsl:otherwise>
               </xsl:choose>
               <td style="text-align: left;" class="alignLeft">
-                <div>
+                <a class="listTableLink" href="{$objectResource}">
                   <xsl:value-of select="/rdf:RDF/rdf:Description[@rdf:about=$objectResource]/rdfs:label"/>
-                </div>
+                </a>
               </td>
               <td>
                 <div >
