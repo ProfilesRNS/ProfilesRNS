@@ -121,11 +121,25 @@ BEGIN
 			set @c = 'FB8072,B3DE69,80B1D3'
 			set @gc = '//chart.googleapis.com/chart?chs=595x100&chf=bg,s,ffffff|c,s,ffffff&chxt=x,y&chxl=0:' + @h + '|1:' + @v + '&cht=bvs&chd=t:' + @d + '&chdl=First+Author|Middle or Unkown|Last+Author&chco='+@c+'&chbh=10'
 		end
+/*
+		declare @asText varchar(max)
+		set @asText = '<table id="timelineTable"><tr><th>Year</th><th>Publications</th></tr>'
+		select @asText = @asText + '<tr><td>' + cast(y as varchar(50)) + '</td><td>' + cast(t as varchar(50)) + '</td></tr>'
+			from @y
+			where t > 0
+			order by y 
+		select @asText = @asText + '</table>'
+		*/
+			declare @alt varchar(max)
+		select @alt = 'Bar chart showing ' + cast(sum(t) as varchar(50))+ ' publications over ' + cast(count(*) as varchar(50)) + ' distinct years, with a maximum of ' + cast(@x as varchar(50)) + ' publications in ' from @y where t > 0
+		select @alt = @alt + cast(y as varchar(50)) + ' and '
+			from @y
+			where t = @x
+			order by y 
+		select @alt = left(@alt, len(@alt) - 4)
 
-		select @gc gc --, @w w
 
-		--select * from @y order by y
-
+		select @gc gc, @alt alt --, @w w
 	end
 
 END

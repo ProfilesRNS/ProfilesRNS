@@ -57,6 +57,7 @@ namespace Profiles.Profile.Modules
 				while(reader.Read())
 				{
 					timelineBar.Src = reader["gc"].ToString();
+                    timelineBar.Alt = reader["alt"].ToString();
 				}
 				reader.Close();                          
            }

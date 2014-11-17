@@ -105,7 +105,16 @@ BEGIN
 		--set @gc = '//chart.googleapis.com/chart?chs=595x100&chf=bg,s,ffffff|c,s,ffffff&chxt=x,y&chxl=0:' + @h + '|1:' + @v + '&cht=bvs&chd=t:' + @d + '&chdl=First+Author|Middle or Unkown|Last+Author&chco='+@c+'&chbh=10'
 		set @gc = '//chart.googleapis.com/chart?chs=595x100&chf=bg,s,ffffff|c,s,ffffff&chxt=x,y&chxl=0:' + @h + '|1:' + @v + '&cht=bvs&chd=t:' + @d + '&chdl=Major+Topic|Minor+Topic&chco='+@c+'&chbh=10'
 
-		select @gc gc --, @w w
+
+		declare @alt varchar(max)
+		select @alt = 'Bar chart showing ' + cast(sum(A + B) as varchar(50))+ ' publications over ' + cast(count(*) as varchar(50)) + ' distinct years, with a maximum of ' + cast(@x as varchar(50)) + ' publications in ' from @y where A + B > 0
+		select @alt = @alt + cast(y as varchar(50)) + ' and '
+			from @y
+			where A + B = @x
+			order by y 
+		select @alt = left(@alt, len(@alt) - 4)
+
+		select @gc gc, @alt alt --, @w w
 
 		--select * from @y order by y
 
