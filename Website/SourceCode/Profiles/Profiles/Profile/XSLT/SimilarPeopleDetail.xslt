@@ -49,9 +49,6 @@
           hasClickedListTable = true;
           }
         
-        function doURL(x){
-        if (!hasClickedListTable) { document.location = x;}
-       }
 </xsl:text>
       </script>
       
@@ -61,7 +58,7 @@
         <table id="thetable1">
           <tbody>
             <tr>
-              <th class="alignLeft" style="width: 120px;">Name</th>
+              <th class="alignLeft" style="width: 238px;">Name</th>
               <th style="width: 110px;">
                 Also Co-Authors
               </th>
@@ -96,9 +93,9 @@
                   </xsl:otherwise>
                 </xsl:choose>
                 <td style="text-align: left;" class="alignLeft">
-                  <div style="width: 238px;">
+                  <a class="listTableLink" href="{$objectResource}">
                     <xsl:value-of select="/rdf:RDF/rdf:Description[@rdf:about=$objectResource]/prns:fullName"/>
-                  </div>
+                  </a>
                 </td>
                 <td>
                   <div style="width: 98px;">
