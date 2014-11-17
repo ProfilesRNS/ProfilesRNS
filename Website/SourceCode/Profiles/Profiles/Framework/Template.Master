@@ -61,7 +61,7 @@
     
 	<div id='page-container'>
     <div class="institutionHeader">
-        <img src="<%=GetURLDomain()%>/Framework/Images/banner.jpg" />
+        <img src="<%=GetURLDomain()%>/Framework/Images/banner.jpg" alt="" />
     </div>	    
 		<div class="profiles">
 			<center>

@@ -220,15 +220,6 @@ namespace Profiles.Framework {
         protected global::System.Web.UI.WebControls.Literal litTabs;
         
         /// <summary>
-        /// ContentMain control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentMain;
-        
-        /// <summary>
         /// rptMain control.
         /// </summary>
         /// <remarks>
@@ -236,6 +227,15 @@ namespace Profiles.Framework {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptMain;
+        
+        /// <summary>
+        /// ContentMain control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentMain;
         
         /// <summary>
         /// tdProfilesMainColumnRight control.

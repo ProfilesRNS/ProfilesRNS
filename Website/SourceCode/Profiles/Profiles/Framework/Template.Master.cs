@@ -373,7 +373,7 @@ namespace Profiles.Framework
                 {
                     buffer = "<span itemprop=\"name\">" + buffer + "</span>";
                 }
-                litPageTitle.Text = "<h2><a><img class=\"pageIcon\" src=\"" + Root.Domain + "/Framework/Images/icon_" + PresentationClass + ".gif\"/></a>" + buffer + "</h2>";
+                litPageTitle.Text = "<h2><a><img class=\"pageIcon\" src=\"" + Root.Domain + "/Framework/Images/icon_" + PresentationClass + ".gif\" alt=\"\"/></a>" + buffer + "</h2>";
             }
 
             // PageSubTitle
@@ -404,7 +404,7 @@ namespace Profiles.Framework
                 else
                     url = PageBackLinkURL;
 
-                litBackLink.Text = "<img src=\"" + Root.Domain + "/Framework/Images/icon_squareArrow.gif\" class=\"pageBackLinkIcon\" />&nbsp;<a href=\"" + url + "\">" + PageBackLinkName + "</a>";
+                litBackLink.Text = "<img src=\"" + Root.Domain + "/Framework/Images/icon_squareArrow.gif\" class=\"pageBackLinkIcon\" alt=\"\" />&nbsp;<a href=\"" + url + "\">" + PageBackLinkName + "</a>";
 
             }
 
