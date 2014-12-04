@@ -20,7 +20,7 @@ this website.
             <AlternatingRowStyle CssClass="evenRow" />
             <Columns>
                 <asp:BoundField HeaderStyle-CssClass="padding" ItemStyle-CssClass="padding" HeaderStyle-HorizontalAlign="Left"
-                    ItemStyle-HorizontalAlign="Left" DataField="item" HeaderText="Item" />
+                    ItemStyle-HorizontalAlign="Left" DataField="EditLink" HeaderText="Item" HtmlEncode="false" />
                 <asp:TemplateField HeaderStyle-HorizontalAlign="Center"
                     HeaderText="Items" >
                     <ItemTemplate>

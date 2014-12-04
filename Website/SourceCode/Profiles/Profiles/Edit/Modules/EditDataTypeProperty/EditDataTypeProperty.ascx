@@ -32,10 +32,11 @@
                     <div style="padding: 10px 0px;">
                         <security:Options runat="server" ID="securityOptions"></security:Options>
                         <br />
-                        <asp:ImageButton runat="server" ID="imbAddArror" ImageUrl="../../../Framework/Images/icon_squareArrow.gif"
-                            OnClick="btnEditProperty_OnClick" />&nbsp;
                         <asp:LinkButton ID="btnEditProperty" runat="server" CommandArgument="Show" OnClick="btnEditProperty_OnClick"
-                            CssClass="profileHypLinks">Add Property</asp:LinkButton>
+                            CssClass="profileHypLinks">
+                            <asp:Image runat="server" ID="imbAddArror" AlternateText=" " ImageUrl="~/Framework/Images/icon_squareArrow.gif"/>&nbsp;
+                            <asp:Literal runat="server" ID="litEditProperty">Add Property</asp:Literal>                           
+                        </asp:LinkButton>
                     </div>
                 </td>
             </tr>
@@ -53,20 +54,19 @@
                         <table border="0" cellspacing="2" cellpadding="4">
                             <tr>
                                 <td>
-                                    <asp:TextBox ID="txtLabel" runat="server" Rows="5" Width="500px" TextMode="MultiLine"
-                                        TabIndex="1"></asp:TextBox>
+                                    <asp:TextBox ID="txtLabel" runat="server" Rows="5" Width="500px" TextMode="MultiLine"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="3">
                                     <div style="padding-bottom: 5px; text-align: left;">
                                         <asp:LinkButton ID="btnInsertProperty" runat="server" CausesValidation="False" OnClick="btnInsert_OnClick"
-                                            Text="Save and add another&nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;" TabIndex="5"></asp:LinkButton>                                        
+                                            Text="Save and add another&nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;" ></asp:LinkButton>                                        
                                         <asp:LinkButton ID="btnInsertProperty2" runat="server" CausesValidation="False" OnClick="btnInsertClose_OnClick"
-                                            Text="Save and Close" TabIndex="6"></asp:LinkButton>
+                                            Text="Save and Close" ></asp:LinkButton>
                                         &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;
                                         <asp:LinkButton ID="btnInsertCancel" runat="server" CausesValidation="False" OnClick="btnInsertCancel_OnClick"
-                                            Text="Close" TabIndex="7"></asp:LinkButton>
+                                            Text="Close" ></asp:LinkButton>
                                     </div>
                                 </td>
                             </tr>

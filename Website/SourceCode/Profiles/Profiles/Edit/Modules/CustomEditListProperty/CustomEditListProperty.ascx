@@ -52,18 +52,17 @@
                         <table border="0" cellspacing="2" cellpadding="4">
                             <tr>
                                 <td>
-                                    <asp:TextBox ID="txtLabel" runat="server" Rows="5" Width="500px" TextMode="MultiLine"
-                                        TabIndex="1"></asp:TextBox>
+                                    <asp:TextBox ID="txtLabel" runat="server" Rows="5" Width="500px" TextMode="MultiLine"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="3">
                                     <div style="padding-bottom: 5px; text-align: left;">
                                         <asp:LinkButton ID="btnInsertProperty" runat="server" CausesValidation="False" OnClick="btnInsertClose_OnClick"
-                                            Text="Save and Close" TabIndex="6"></asp:LinkButton>
+                                            Text="Save and Close" ></asp:LinkButton>
                                         &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;
                                         <asp:LinkButton ID="btnInsertCancel" runat="server" CausesValidation="False" OnClick="btnInsertCancel_OnClick"
-                                            Text="Close" TabIndex="7"></asp:LinkButton>
+                                            Text="Close" ></asp:LinkButton>
                                     </div>
                                 </td>
                             </tr>

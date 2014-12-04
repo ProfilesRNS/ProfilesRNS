@@ -62,7 +62,7 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
 
             litBackLink.Text = "<a href='" + Root.Domain + "/edit/" + this.SubjectID + "'>Edit Menu</a> &gt; <b>" + PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@Label").Value + "</b>";
 
-            btnEditProperty.Text = "Add " + PropertyLabel;
+            litEditProperty.Text = "Add " + PropertyLabel;
 
             this.PropertyListXML = propdata.GetPropertyList(this.BaseData, base.PresentationXML, predicateuri, false, true, false);
             this.MaxCardinality = this.PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@MaxCardinality").Value;

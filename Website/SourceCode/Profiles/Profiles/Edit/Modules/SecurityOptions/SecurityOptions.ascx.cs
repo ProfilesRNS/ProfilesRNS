@@ -75,7 +75,7 @@ namespace Profiles.Edit.Modules.SecurityOptions
                 if (si.PrivacyCode == this.PrivacyCode)
                 {
                     rb.Checked = true;
-                    lbSecurityOptions.Text = "Edit Visibility (" + si.Label + ")";
+                    litVisibility.Text = "(" + si.Label + ")";
                 }
                 else
                 {
@@ -84,6 +84,19 @@ namespace Profiles.Edit.Modules.SecurityOptions
             }
         }
         protected void imbSecurityOptions_OnClick(object sender, EventArgs e)
+        {
+            if (Request.Form["enterkey"] != "")
+            {
+                Session["pnlSecurityOptions.Visible"] = true;
+            }
+
+            ToggleDisplay();
+
+            if (BubbleClick != null)
+                BubbleClick(this, e);
+        }
+
+        private void ToggleDisplay()
         {
             if (Session["pnlSecurityOptions.Visible"] == null)
             {
@@ -97,10 +110,8 @@ namespace Profiles.Edit.Modules.SecurityOptions
                 imbSecurityOptions.ImageUrl = "~/Framework/Images/icon_squareArrow.gif";
                 Session["pnlSecurityOptions.Visible"] = null;
             }
-
-            if (BubbleClick != null)
-                BubbleClick(this, e);
         }
+
         protected void rdoSecurityOption_OnCheckedChanged(object sender, EventArgs e)
         {
             Session["pnlSecurityOptions.Visible"] = null;
@@ -115,7 +126,7 @@ namespace Profiles.Edit.Modules.SecurityOptions
             RadioButton rb = (RadioButton)sender;
             GridViewRow row = (GridViewRow)rb.NamingContainer;  
             ((RadioButton)row.FindControl("rdoSecurityOption")).Checked = true;
-            lbSecurityOptions.Text = "Edit Visibility (" + row.Cells[1].Text + ")";
+            litVisibility.Text = "(" + row.Cells[1].Text + ")";
             UpdateSecuritySetting(((HiddenField)row.Cells[0].FindControl("hdnPrivacyCode")).Value);
         }
 

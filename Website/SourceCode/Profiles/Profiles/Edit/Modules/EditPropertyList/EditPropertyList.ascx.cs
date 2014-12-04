@@ -81,6 +81,19 @@ namespace Profiles.Edit.Modules.EditPropertyList
                         canedit = true;
                     }
 
+                    string objecttype = string.Empty;
+                    switch (node.SelectSingleNode("@ObjectType").Value)
+                    {
+                        case "1":
+                            objecttype = "Literal";
+                            break;
+                        case "0":
+                            objecttype = "Entity";
+                            break;
+                    }
+
+                    string editlink = "<a class=listTableLink href=\"" + Root.Domain + "/edit/default.aspx?subject=" + this.Subject.ToString() + "&predicateuri=" + node.SelectSingleNode("@URI").Value.Replace("#", "!") + "&module=DisplayItemToEdit&ObjectType=" + objecttype + "\" >" + node.SelectSingleNode("@Label").Value + "</a>";
+
                     // treat ORNG items as "special", because they may not be available and they may be turned off
                     if (node.SelectSingleNode("@URI").Value.StartsWith(Profiles.ORNG.Utilities.OpenSocialManager.ORNG_ONTOLOGY_PREFIX))
                     {
@@ -92,7 +105,7 @@ namespace Profiles.Edit.Modules.EditPropertyList
                                 Convert.ToInt32(node.SelectSingleNode("@NumberOfConnections").Value),
                                 Convert.ToInt32(node.SelectSingleNode("@ViewSecurityGroup").Value),
                                 "Unavailable",
-                                node.SelectSingleNode("@ObjectType").Value, canedit));
+                                node.SelectSingleNode("@ObjectType").Value, canedit, editlink));
                             continue;
                         }
                         else if (spec != null && "0".Equals(node.SelectSingleNode("@NumberOfConnections").Value)) 
@@ -102,7 +115,7 @@ namespace Profiles.Edit.Modules.EditPropertyList
                                 Convert.ToInt32(node.SelectSingleNode("@NumberOfConnections").Value),
                                 Convert.ToInt32(node.SelectSingleNode("@ViewSecurityGroup").Value),
                                 "Hidden",
-                                node.SelectSingleNode("@ObjectType").Value, canedit));
+                                node.SelectSingleNode("@ObjectType").Value, canedit, editlink));
                             continue;
                         }
                     }
@@ -112,7 +125,7 @@ namespace Profiles.Edit.Modules.EditPropertyList
                         Convert.ToInt32(node.SelectSingleNode("@NumberOfConnections").Value),
                         Convert.ToInt32(node.SelectSingleNode("@ViewSecurityGroup").Value),
                         this.SecurityGroups.SelectSingleNode("SecurityGroupList/SecurityGroup[@ID='" + node.SelectSingleNode("@ViewSecurityGroup").Value + "']/@Label").Value,
-                        node.SelectSingleNode("@ObjectType").Value, canedit));
+                        node.SelectSingleNode("@ObjectType").Value, canedit, editlink));
                 }
                 si.Add(singlesi);
             }
@@ -221,7 +234,7 @@ namespace Profiles.Edit.Modules.EditPropertyList
                         objecttype = "Literal";
                         break;
                     case "0":
-                        objecttype = "Entity";                       
+                        objecttype = "Entity";
                         break;
                 }
 
@@ -336,7 +349,7 @@ namespace Profiles.Edit.Modules.EditPropertyList
 
     public class SecurityItem
     {
-        public SecurityItem(string itemlabel, string item, string itemuri, int itemcount, int privacycode, string privacylevel, string objecttype, bool canedit)
+        public SecurityItem(string itemlabel, string item, string itemuri, int itemcount, int privacycode, string privacylevel, string objecttype, bool canedit, string editLink)
         {
             
             this.ItemLabel = itemlabel;
@@ -347,6 +360,7 @@ namespace Profiles.Edit.Modules.EditPropertyList
             this.ObjectType = objecttype;
             this.CanEdit = canedit;
             this.PrivacyLevel = privacylevel;
+            this.EditLink = editLink;
 
         }
         public string ItemLabel { get; set; }
@@ -357,5 +371,6 @@ namespace Profiles.Edit.Modules.EditPropertyList
         public string PrivacyLevel { get; set; }
         public string ObjectType { get; set; }
         public bool CanEdit { get; set; }
+        public string EditLink { get; set; }
     }
 }

@@ -21,15 +21,26 @@
                     $(this).attr(':checked');
                 });
             }
+
+
+            if (document.getElementById("<%= pnlSecurityOptions.ClientID %>")) {
+                if (e.which == 13) {
+                    document.getElementById("enterkey").value = 'true';
+                    e.target.checked = true;
+                    e.preventDefault();
+                    __doPostBack('<%= lbSecurityOptions.ClientID  %>', '')
+                }
+            }
+
         });
 
     });
 </script>
-
-<asp:ImageButton runat="server" ImageUrl="~/Framework/Images/icon_squareArrow.gif"
-    ID="imbSecurityOptions" OnClick="imbSecurityOptions_OnClick" />&nbsp;
-<asp:LinkButton runat="server" ID="lbSecurityOptions" OnClick="imbSecurityOptions_OnClick"
-    Text="Edit Visibility"></asp:LinkButton>    
+<input type='hidden' id='enterkey' value='' name='enterkey' />
+<asp:LinkButton runat="server" ID="lbSecurityOptions" OnClick="imbSecurityOptions_OnClick">
+    <asp:Image runat="server" ID="imbSecurityOptions" AlternateText=" " ImageUrl="~/Framework/Images/icon_squareArrow.gif"/>&nbsp;Edit Visibility
+    <asp:Literal runat="server" ID="litVisibility"></asp:Literal>
+</asp:LinkButton> 
     <br />
 <asp:Panel runat="server" ID="pnlSecurityOptions" CssClass="editPage" Visible="false">
 <br />

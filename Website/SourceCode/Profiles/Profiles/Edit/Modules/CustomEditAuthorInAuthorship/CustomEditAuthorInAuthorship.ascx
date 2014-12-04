@@ -6,18 +6,29 @@
 <script type="text/javascript">
     var checkBoxSelector = '#<%=grdPubMedSearchResults.ClientID%> input[id*="chkPubMed"]:checkbox';
 
-    $(document).ready(function() {
-        $('#btnCheckAll').live('click', function() {
+    $(document).ready(function () {
+        $('#btnCheckAll').live('click', function () {
             $(checkBoxSelector).attr('checked', true);
         });
 
-        $('#btnUncheckAll').live('click', function() {
+        $('#btnUncheckAll').live('click', function () {
             $(checkBoxSelector).attr('checked', false);
         });
+
+        $('#btnCheckAll').live('keypress', function (e) {
+            if (e.keyCode == 13) {
+                $(checkBoxSelector).attr('checked', true);
+            };
+        });
+
+        $('#btnUncheckAll').live('keypress', function (e) {
+            if (e.keyCode == 13) {
+                $(checkBoxSelector).attr('checked', false);
+            };
+        });
+
     });
 
-
-    
 </script>
 
 <asp:UpdatePanel ID="upnlEditSection" runat="server" UpdateMode="Conditional" RenderMode="Inline">
@@ -52,33 +63,25 @@
                         </asp:PlaceHolder>
                         <asp:PlaceHolder ID="phAddPubMed" runat="server">
                             <div style="padding-bottom: 10px;">
-                                <asp:ImageButton ID="btnImgAddPubMed" runat="server" ImageUrl="~/Framework/Images/icon_squareArrow.gif"
-                                    OnClick="btnAddPubMed_OnClick" />&nbsp;
-                                <asp:LinkButton ID="btnAddPubMed" runat="server" OnClick="btnAddPubMed_OnClick" CssClass="profileHypLinks">Add PubMed</asp:LinkButton>
+                                <asp:LinkButton ID="btnAddPubMed" runat="server" OnClick="btnAddPubMed_OnClick" CssClass="profileHypLinks"><asp:Image runat="server" ID="btnImgAddPubMed" AlternateText=" " ImageUrl="~/Framework/Images/icon_squareArrow.gif"/>&nbsp;Add PubMed</asp:LinkButton>
                                 &nbsp;(Search PubMed and add multiple articles.)
                             </div>
                         </asp:PlaceHolder>
                         <asp:PlaceHolder ID="phAddPub" runat="server">
                             <div style="padding-bottom: 10px;">
-                                <asp:ImageButton ID="btnImgAddPub" runat="server" ImageUrl="~/Framework/Images/icon_squareArrow.gif"
-                                    OnClick="btnAddPub_OnClick" />&nbsp;
-                                <asp:LinkButton ID="btnAddPub" runat="server" OnClick="btnAddPub_OnClick" CssClass="profileHypLinks">Add by ID</asp:LinkButton>
+                                <asp:LinkButton ID="btnAddPub" runat="server" OnClick="btnAddPub_OnClick" CssClass="profileHypLinks"><asp:Image runat="server" ID="btnImgAddPub" AlternateText=" " ImageUrl="~/Framework/Images/icon_squareArrow.gif"/>&nbsp;Add by ID</asp:LinkButton>
                                 &nbsp;(Add one or more articles using codes, e.g., PubMed ID.)
                             </div>
                         </asp:PlaceHolder>
                         <asp:PlaceHolder ID="phAddCustom" runat="server">
                             <div style="padding-bottom: 10px;">
-                                <asp:ImageButton ID="btnImgAddCustom" runat="server" ImageUrl="~/Framework/Images/icon_squareArrow.gif"
-                                    OnClick="btnAddCustom_OnClick" />&nbsp;
-                                <asp:LinkButton ID="btnAddCustom" runat="server" OnClick="btnAddCustom_OnClick" CssClass="profileHypLinks">Add Custom</asp:LinkButton>
+                                <asp:LinkButton ID="btnAddCustom" runat="server" OnClick="btnAddCustom_OnClick" CssClass="profileHypLinks"><asp:Image runat="server" ID="btnImgAddCustom" AlternateText=" " ImageUrl="~/Framework/Images/icon_squareArrow.gif"/>&nbsp;Add Custom</asp:LinkButton>
                                 &nbsp;(Enter your own publication using an online form.)
                             </div>
                         </asp:PlaceHolder>
                         <asp:PlaceHolder ID="phDeletePub" runat="server">
                             <div style="padding-bottom: 10px;">
-                                <asp:ImageButton ID="btnImgDeletePub" runat="server" ImageUrl="~/Framework/Images/icon_squareArrow.gif"
-                                    OnClick="btnDeletePub_OnClick" />&nbsp;
-                                <asp:LinkButton ID="btnDeletePub" runat="server" OnClick="btnDeletePub_OnClick" CssClass="profileHypLinks">Delete</asp:LinkButton>
+                                <asp:LinkButton ID="btnDeletePub" runat="server" OnClick="btnDeletePub_OnClick" CssClass="profileHypLinks"><asp:Image runat="server" ID="btnImgDeletePub" AlternateText=" " ImageUrl="~/Framework/Images/icon_squareArrow.gif"/>&nbsp;Delete</asp:LinkButton>
                                 &nbsp;(Remove multiple publications from your profile.)
                             </div>
                         </asp:PlaceHolder>
@@ -106,11 +109,11 @@
                                 <tr>
                                     <td colspan="2">
                                         <div style="padding: 10px 0px;">
-                                            <asp:ImageButton ID="lnkUpdate" TabIndex="5" runat="server" ImageUrl="~/Edit/Images/button_save.gif"
-                                                CausesValidation="False" Text="Save" OnClick="btnSavePub_OnClick"></asp:ImageButton>
+                                            <asp:ImageButton ID="lnkUpdate" runat="server" ImageUrl="~/Edit/Images/button_save.gif"
+                                                CausesValidation="False" Text="Save" AlternateText="Save" OnClick="btnSavePub_OnClick"></asp:ImageButton>
                                             &nbsp;
                                             <asp:ImageButton ID="lnkCancel" runat="server" OnClick="btnDonePub_OnClick" ImageUrl="~/Edit/Images/button_cancel.gif"
-                                                CausesValidation="False" Text="Close"></asp:ImageButton>
+                                                CausesValidation="False" Text="Cancel" AlternateText="Cancel"></asp:ImageButton>
                                         </div>
                                     </td>
                                 </tr>
@@ -170,13 +173,13 @@
                                 </div>
                                 <div style="padding: 10px 0px;">
                                     <asp:LinkButton ID="btnPubMedSearch" runat="server" CausesValidation="False" OnClick="btnPubMedSearch_OnClick"
-                                        Text="Search" TabIndex="5"></asp:LinkButton>
+                                        Text="Search"></asp:LinkButton>
                                     &nbsp;&nbsp;|&nbsp;&nbsp;
                                     <asp:LinkButton ID="btnPubMedReset" runat="server" CausesValidation="False" OnClick="btnPubMedReset_OnClick"
-                                        Text="Reset" TabIndex="6"></asp:LinkButton>
+                                        Text="Reset"></asp:LinkButton>
                                     &nbsp;&nbsp;|&nbsp;&nbsp;
                                     <asp:LinkButton ID="btnPubMedClose" runat="server" CausesValidation="False" OnClick="btnPubMedClose_OnClick"
-                                        Text="Close" TabIndex="6"></asp:LinkButton>
+                                        Text="Close"></asp:LinkButton>
                                 </div>
                             </div>
                         </asp:Panel>
@@ -187,7 +190,7 @@
                             <div style="padding: 5px;">
                                 <div>
                                     <div style="width: 25px; float: left;">
-                                        <asp:Image ID="Image1" runat="server" ImageUrl="~/Framework/Images/icon_alert.gif" />
+                                        <asp:Image ID="Image1" runat="server" ImageUrl="~/Framework/Images/icon_alert.gif" alt=""/>
                                     </div>
                                     <div style="margin-left: 25px;">
                                         Check the articles that are yours in the list below, and then click the Add Selected
@@ -199,8 +202,8 @@
                                 </div>
                                 <asp:Panel runat="server" ID="pnlAddAll">
                                     <div style="padding: 10px 0px 5px 5px; background-color: #E2E6E8;">
-                                        <b>Select:</b>&nbsp;&nbsp; <a style="cursor: pointer" id="btnCheckAll">All</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-                                        <a style="cursor: pointer" id="btnUncheckAll">None</a>
+                                        <b>Select:</b>&nbsp;&nbsp; <a tabindex="0" style="cursor: pointer" id="btnCheckAll">All</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+                                        <a tabindex="0" style="cursor: pointer" id="btnUncheckAll">None</a>
                                     </div>
                                 </asp:Panel>
                                 <div>
@@ -230,12 +233,12 @@
                                             <td>
                                                 <asp:ImageButton ID="lnkUpdatePubMed" OnClick="btnPubMedAddSelected_OnClick" runat="server"
                                                     ImageUrl="~/Edit/Images/button_save.gif" CausesValidation="False" CommandName="Update"
-                                                    Text="Add Selected"></asp:ImageButton>
+                                                    Text="Add Selected" AlternateText="Add Selected"></asp:ImageButton>
                                             </td>
                                             <td>
                                                 <asp:ImageButton ID="lnkCancelPubMed" runat="server" ImageUrl="~/Edit/Images/button_cancel.gif"
                                                     CausesValidation="False" CommandName="Cancel" OnClick="btnPubMedClose_OnClick"
-                                                    Text="Cancel"></asp:ImageButton>
+                                                    Text="Cancel" AlternateText="Cancel"></asp:ImageButton>
                                             </td>
                                         </tr>
                                     </table>
@@ -271,7 +274,7 @@
                                 </div>
                                 <div style="padding: 15px 0px 5px 0px;">
                                     <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/Edit/Images/button_cancel.gif"
-                                        OnClick="btnPubMedFinished_OnClick" CausesValidation="False" Text="Close"></asp:ImageButton>
+                                        OnClick="btnPubMedFinished_OnClick" CausesValidation="False" Text="Cancel" AlternateText="Cancel"></asp:ImageButton>
                                 </div>
                                 <asp:PlaceHolder Visible="false" ID="phMain" runat="server">
                                     <hr />
@@ -300,9 +303,9 @@
                                     </div>
                                     <div class="pubSubSpacer">
                                         <div style="float: left; padding-right: 20px;">
-                                            <asp:Label ID="Label9" runat="server" Text="Date" CssClass="pubSubHeader"></asp:Label><br />
+                                            <asp:Label ID="Label9" runat="server" Text="Date (MM/DD/YYYY)" CssClass="pubSubHeader"></asp:Label><br />
                                             <asp:TextBox ID="txtPubMedPublicationDate" runat="server" MaxLength="10" CssClass="textBoxDate"></asp:TextBox>
-                                            <asp:ImageButton ID="btnCalendar" runat="server" ImageUrl="~/Edit/Images/cal.gif" />
+                                            <asp:ImageButton ID="btnCalendar" runat="server" ImageUrl="~/Edit/Images/cal.gif" AlternateText="Calendar picker" />
                                             <asp:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="txtPubMedPublicationDate"
                                                 PopupButtonID="btnCalendar">
                                             </asp:CalendarExtender>
@@ -499,7 +502,7 @@
                                                                 CausesValidation="False" CommandName="Select" Text="Edit" Visible="false"></asp:ImageButton>
                                                         </td>
                                                         <td>
-                                                            <asp:ImageButton ID="lnkDelete" runat="server" ImageUrl="~/Edit/Images/icon_delete.gif"
+                                                            <asp:ImageButton ID="lnkDelete" runat="server" ImageUrl="~/Edit/Images/icon_delete.gif" 
                                                                 CausesValidation="False" OnClick="deleteOne_Onclick" CommandName="Delete" Text="X"
                                                                 OnClientClick="Javascript:return confirm('Are you sure you want to delete this citation?');">
                                                             </asp:ImageButton>

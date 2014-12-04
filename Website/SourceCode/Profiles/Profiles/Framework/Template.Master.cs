@@ -373,7 +373,7 @@ namespace Profiles.Framework
                 {
                     buffer = "<span itemprop=\"name\">" + buffer + "</span>";
                 }
-                litPageTitle.Text = "<h2><a><img class=\"pageIcon\" src=\"" + Root.Domain + "/Framework/Images/icon_" + PresentationClass + ".gif\" alt=\"\"/></a>" + buffer + "</h2>";
+                litPageTitle.Text = "<h2><img class=\"pageIcon\" src=\"" + Root.Domain + "/Framework/Images/icon_" + PresentationClass + ".gif\" alt=\"\"/>" + buffer + "</h2>";
             }
 
             // PageSubTitle

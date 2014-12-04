@@ -28,10 +28,8 @@
                         </asp:Panel>
                         <br />
                         <asp:Panel runat="server" ID="pnlEditAwards">
-                            <asp:ImageButton runat="server" ID="imbAddArror" ImageUrl="../../../Framework/Images/icon_squareArrow.gif"
-                                OnClick="btnEditAwards_OnClick" />&nbsp;
-                            <asp:LinkButton ID="btnEditAwards" runat="server" OnClick="btnEditAwards_OnClick"
-                                CssClass="profileHypLinks">Add award(s)</asp:LinkButton>
+                            <asp:LinkButton ID="btnEditAwards" runat="server" OnClick="btnEditAwards_OnClick" 
+                                CssClass="profileHypLinks"><asp:Image runat="server" ID="imbAddArror" AlternateText=" " ImageUrl="~/Framework/Images/icon_squareArrow.gif"/>&nbsp;Add award(s)</asp:LinkButton>
                         </asp:Panel>
                     </div>
                 </td>
@@ -60,30 +58,30 @@
                             <tr>
                                 <td>
                                     <b>Award Year(s)</b><br />
-                                    <asp:TextBox ID="txtStartYear" runat="server" MaxLength="4" Width="60px" TabIndex="1"></asp:TextBox>
+                                    <asp:TextBox ID="txtStartYear" runat="server" MaxLength="4" Width="60px"></asp:TextBox>
                                     &nbsp;<b>-</b>&nbsp;
-                                    <asp:TextBox ID="txtEndYear" runat="server" MaxLength="4" Width="60px" TabIndex="2"></asp:TextBox>
+                                    <asp:TextBox ID="txtEndYear" runat="server" MaxLength="4" Width="60px"></asp:TextBox>
                                 </td>
                                 <td>
                                     <b>Name (required)</b><br />
-                                    <asp:TextBox ID="txtAwardName" runat="server" MaxLength="100" TabIndex="3" Width="220px"></asp:TextBox>
+                                    <asp:TextBox ID="txtAwardName" runat="server" MaxLength="100" Width="220px"></asp:TextBox>
                                 </td>
                                 <td>
                                     <b>Institution</b><br />
-                                    <asp:TextBox ID="txtInstitution" runat="server" MaxLength="100" TabIndex="4" Width="220px"></asp:TextBox>
+                                    <asp:TextBox ID="txtInstitution" runat="server" MaxLength="100" Width="220px"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="3">
                                     <div style="padding-bottom: 5px; text-align: left;">
                                         <asp:LinkButton ID="btnInsertAward" runat="server" CausesValidation="False" OnClick="btnInsert_OnClick"
-                                            Text="Save and add another" TabIndex="5"></asp:LinkButton>
+                                            Text="Save and add another" ></asp:LinkButton>
                                         &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;
                                         <asp:LinkButton ID="btnInsertAward2" runat="server" CausesValidation="False" OnClick="btnInsertClose_OnClick"
-                                            Text="Save and Close" TabIndex="6"></asp:LinkButton>
+                                            Text="Save and Close" ></asp:LinkButton>
                                         &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;
                                         <asp:LinkButton ID="btnInsertCancel" runat="server" CausesValidation="False" OnClick="btnInsertCancel_OnClick"
-                                            Text="Close" TabIndex="7"></asp:LinkButton>
+                                            Text="Close"></asp:LinkButton>
                                     </div>
                                 </td>
                             </tr>
