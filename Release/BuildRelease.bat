@@ -71,17 +71,17 @@ call "%OFFICE_PATH%\WINWORD.EXE" ..\Documentation\ORNG\ORNG_TroubleShootingGuide
 call "%OFFICE_PATH%\POWERPNT.EXE" /p ..\Documentation\ORNG\ORNGArchitecturalDiagram.pptx
 timeout 10
 
-move "%pdfCreatorPath%\Microsoft PowerPoint - ORNGArchitecturalDiagram.pdf" ProfilesRNS\Documentation\ORNG\ORNGArchitecturalDiagram_%Version%.pdf
-move "%pdfCreatorPath%\Microsoft PowerPoint - ProfilesRNS_DataFlowDiagram.pdf" ProfilesRNS\Documentation\ProfilesRNS_DataFlowDiagram_%Version%.pdf
-move "%pdfCreatorPath%\Microsoft PowerPoint - ProfilesRNS_OntologyDiagram.pdf" ProfilesRNS\Documentation\ProfilesRNS_OntologyDiagram_%Version%.pdf
-move "%pdfCreatorPath%\Microsoft Word - ORNG_GadgetDevelopment.pdf" ProfilesRNS\Documentation\ORNG\ORNG_GadgetDevelopment_%Version%.pdf
-move "%pdfCreatorPath%\Microsoft Word - ORNG_InstallationGuide.pdf" ProfilesRNS\Documentation\ORNG\ORNG_InstallationGuide_%Version%.pdf
-move "%pdfCreatorPath%\Microsoft Word - ORNG_TroubleShootingGuide.pdf" ProfilesRNS\Documentation\ORNG\ORNG_TroubleShootingGuide_%Version%.pdf
-move "%pdfCreatorPath%\Microsoft Word - ProfilesRNS_APIGuide.pdf" ProfilesRNS\Documentation\ProfilesRNS_APIGuide_%Version%.pdf
-move "%pdfCreatorPath%\Microsoft Word - ProfilesRNS_ArchitectureGuide.pdf" ProfilesRNS\Documentation\ProfilesRNS_ArchitectureGuide_%Version%.pdf
-move "%pdfCreatorPath%\Microsoft Word - ProfilesRNS_InstallGuide.pdf" ProfilesRNS\Documentation\ProfilesRNS_InstallGuide_%Version%.pdf
-move "%pdfCreatorPath%\Microsoft Word - ProfilesRNS_ReadMeFirst.pdf" ProfilesRNS\ProfilesRNS_ReadMeFirst.pdf
-move "%pdfCreatorPath%\Microsoft Word - ProfilesRNS_ReleaseNotes.pdf" ProfilesRNS\Documentation\ProfilesRNS_ReleaseNotes_%Version%.pdf
+move "%pdfCreatorPath%\ORNGArchitecturalDiagram.pdf" ProfilesRNS\Documentation\ORNG\ORNGArchitecturalDiagram_%Version%.pdf
+move "%pdfCreatorPath%\ProfilesRNS_DataFlowDiagram.pdf" ProfilesRNS\Documentation\ProfilesRNS_DataFlowDiagram_%Version%.pdf
+move "%pdfCreatorPath%\ProfilesRNS_OntologyDiagram.pdf" ProfilesRNS\Documentation\ProfilesRNS_OntologyDiagram_%Version%.pdf
+move "%pdfCreatorPath%\ORNG_GadgetDevelopment.pdf" ProfilesRNS\Documentation\ORNG\ORNG_GadgetDevelopment_%Version%.pdf
+move "%pdfCreatorPath%\ORNG_InstallationGuide.pdf" ProfilesRNS\Documentation\ORNG\ORNG_InstallationGuide_%Version%.pdf
+move "%pdfCreatorPath%\ORNG_TroubleShootingGuide.pdf" ProfilesRNS\Documentation\ORNG\ORNG_TroubleShootingGuide_%Version%.pdf
+move "%pdfCreatorPath%\ProfilesRNS_APIGuide.pdf" ProfilesRNS\Documentation\ProfilesRNS_APIGuide_%Version%.pdf
+move "%pdfCreatorPath%\ProfilesRNS_ArchitectureGuide.pdf" ProfilesRNS\Documentation\ProfilesRNS_ArchitectureGuide_%Version%.pdf
+move "%pdfCreatorPath%\ProfilesRNS_InstallGuide.pdf" ProfilesRNS\Documentation\ProfilesRNS_InstallGuide_%Version%.pdf
+move "%pdfCreatorPath%\ProfilesRNS_ReadMeFirst.pdf" ProfilesRNS\ProfilesRNS_ReadMeFirst.pdf
+move "%pdfCreatorPath%\ProfilesRNS_ReleaseNotes.pdf" ProfilesRNS\Documentation\ProfilesRNS_ReleaseNotes_%Version%.pdf
 
 echo d | xcopy /s ..\Documentation\API_Examples ProfilesRNS\Documentation\API_Examples
 echo d | xcopy /s ..\Documentation\SQL_Examples ProfilesRNS\Documentation\SQL_Examples
