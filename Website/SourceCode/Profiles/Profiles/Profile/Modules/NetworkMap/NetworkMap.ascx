@@ -50,7 +50,7 @@
         <b>Zoom</b>:&nbsp;&nbsp;
         <asp:DataList ID="dlGoogleMapLinks" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow">
             <ItemTemplate>
-                <a style="cursor: pointer" id="lnkMapLink" runat="server" onclick='<%# "JavaScript:zoomMap(" + Eval("ZoomLevel") + "," + Eval("Latitude") + "," + Eval("Longitude") + "); "%>'>
+                <a style="cursor: pointer" id="lnkMapLink" runat="server" onkeypress='<%# "if (event.keyCode == 13) JavaScript:zoomMap(" + Eval("ZoomLevel") + "," + Eval("Latitude") + "," + Eval("Longitude") + "); "%>' onclick='<%# "JavaScript:zoomMap(" + Eval("ZoomLevel") + "," + Eval("Latitude") + "," + Eval("Longitude") + "); "%>' tabindex="0">
                     <asp:Label ID="lblMapLink" runat="server" Text='<%#Eval("Label")%>'></asp:Label></a>
             </ItemTemplate>
             <SeparatorTemplate>

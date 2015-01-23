@@ -73,7 +73,7 @@
               <xsl:variable name="objectResource" select="./rdf:object/@rdf:resource"/>
 			  <xsl:variable name="connectionDetail" select="./prns:hasConnectionDetails/@rdf:resource"/>
 			  <xsl:variable name="isCoAuthor" select="/rdf:RDF/rdf:Description[@rdf:about=$connectionDetail]/prns:isAlsoCoAuthor"/>
-              <tr  onclick="doURL('{$objectResource}')" test="{$connectionDetail}" onmouseover="doListTableRowOver(this)">
+              <tr  onclick="doURL('{$objectResource}')" onkeypress="if (event.keyCode == 13) doURL('{$objectResource}')" test="{$connectionDetail}" onmouseover="doListTableRowOver(this)" onfocus="doListTableRowOver(this)">
                 <xsl:choose>
                   <xsl:when test="position() mod 2 = 0">
                     <xsl:attribute name="class">
@@ -82,6 +82,10 @@
                     <xsl:attribute name="onmouseout">
                       <xsl:value-of  select="'doListTableRowOut(this,0)'"/>
                     </xsl:attribute>
+                    <xsl:attribute name="onblur">
+                      <xsl:value-of  select="'doListTableRowOut(this,0)'"/>
+                    </xsl:attribute>
+                    <xsl:attribute name="tabindex">0</xsl:attribute>
                   </xsl:when>
                   <xsl:otherwise>
                     <xsl:attribute name="class">
@@ -90,6 +94,10 @@
                     <xsl:attribute name="onmouseout">
                       <xsl:value-of  select="'doListTableRowOut(this,1)'"/>
                     </xsl:attribute>
+                    <xsl:attribute name="onblur">
+                      <xsl:value-of  select="'doListTableRowOut(this,1)'"/>
+                    </xsl:attribute>
+                    <xsl:attribute name="tabindex">0</xsl:attribute>
                   </xsl:otherwise>
                 </xsl:choose>
                 <td style="text-align: left;" class="alignLeft">
@@ -112,7 +120,7 @@
                     <xsl:value-of select="substring(/rdf:RDF/rdf:Description[@rdf:about=$connectionResource]/prns:connectionWeight,1,5)"/>
                   
                 </td>
-                <td onclick="doListTableCellClick(this);document.location = '{@rdf:about}';" onmouseout="doListTableCellOut(this);" onmouseover="doListTableCellOver(this);">
+                <td onclick="doListTableCellClick(this);document.location = '{@rdf:about}';" onkeypress="if (event.keyCode == 13) document.location = '{@rdf:about}';" onmouseout="doListTableCellOut(this);" onmouseover="doListTableCellOver(this);" onblur="doListTableCellOut(this);" onfocus="doListTableCellOver(this);" tabindex="0">
                   <div class="listTableLink" style="width: 38px; color: rgb(51, 102, 204);">Why?</div>
                 </td>
               </tr>

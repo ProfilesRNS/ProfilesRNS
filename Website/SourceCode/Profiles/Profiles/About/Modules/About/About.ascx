@@ -18,7 +18,7 @@
                         As you navigate through the website, you will see three types of pages:
                     </p>
                     <p>
-                        <asp:Image runat="server" ID="imgProfilesIcon"></asp:Image>
+                        <asp:Image runat="server" ID="imgProfilesIcon" alt=""></asp:Image>
                         <u>Profile Pages</u>
                         <div style="padding-left: 15px">
                             Each person has a Profile Page that includes his or her name, titles, affiliations,
@@ -43,7 +43,7 @@
                     </ul>
                     <br />
                     <p>
-                        <asp:Image runat="server" ID="imgNetworkIcon" />
+                        <asp:Image runat="server" ID="imgNetworkIcon" alt=""/>
                         <u>Network Pages</u><br />
                         <div style="padding-left: 15px">
                             Network Pages show all the people in a particular Passive or Active Network. Networks
@@ -53,7 +53,7 @@
                             visualization tools.</div>
                     </p>
                     <p>
-                        <asp:Image runat="server" ID="imgConnectionIcon" />
+                        <asp:Image runat="server" ID="imgConnectionIcon" alt=""/>
                         <u>Connection Pages</u><br />
                         <div style="padding-left: 15px">
                             Certain Network Pages will include a "Why?" link. These will take you to a Connection
@@ -76,7 +76,7 @@
                     </p>
                     <p>
                         <div align="center">
-                            <asp:Image runat="server" ID="imgVis" />
+                            <asp:Image runat="server" ID="imgVis" alt="visualization thumnails"/>
                         </div>
                     </p>
                     <h3>

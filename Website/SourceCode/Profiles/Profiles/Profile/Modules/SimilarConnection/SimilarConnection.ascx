@@ -18,9 +18,9 @@
 						<td>&nbsp;</td>
 					</tr>
 					<tr>
-						<td class="connectionLine"><img src="<%= this.GetRootDomain() %>/Framework/Images/connection_left.gif"></td>
+						<td class="connectionLine"><img src="<%= this.GetRootDomain() %>/Framework/Images/connection_left.gif" alt=""></td>
 						<td class="connectionLine"><div>&nbsp;</div></td>
-						<td class="connectionLine"><img src="<%= this.GetRootDomain() %>/Framework/Images/connection_right.gif"></td>
+						<td class="connectionLine"><img src="<%= this.GetRootDomain() %>/Framework/Images/connection_right.gif" alt=""></td>
 					</tr>
 					<tr>
 						<td>&nbsp;</td>
@@ -67,14 +67,14 @@
 				int even_odd_flag = (cnt % 2 == 0) ? 0 : 1;
 				cnt++;
 			%>				
-			<tr class="<%= even_odd %>" onmouseover="doListTableRowOver(this);" onmouseout="doListTableRowOut(this,<%= even_odd_flag %>);" onclick="doGoMesh('<%= concept.ConceptProfile %>');">
+			<tr class="<%= even_odd %>" onmouseover="doListTableRowOver(this);" onfocus="doListTableRowOver(this);" onmouseout="doListTableRowOut(this,<%= even_odd_flag %>);" onblur="doListTableRowOut(this,<%= even_odd_flag %>);" onclick="doGoMesh('<%= concept.ConceptProfile %>');" onkeypress="if (event.keyCode == 13) doGoMesh('<%= concept.ConceptProfile %>');" tabindex="0">
 				<td class="alignLeft" style="text-align:left;">
 					<div style="width:353px;"><%= concept.MeshTerm %></div>
 				</td>
-				<td onmouseover="doListTableCellOver(this);" onmouseout="doListTableCellOut(this);" onclick="doListTableCellClick(this);doGoPersonMesh('<%= concept.Subject.ConceptConnectionURI %>');">
+				<td onmouseover="doListTableCellOver(this);" onfocus="doListTableCellOver(this);" onmouseout="doListTableCellOut(this);" onblur="doListTableCellOut(this);" onclick="doListTableCellClick(this);doGoPersonMesh('<%= concept.Subject.ConceptConnectionURI %>');" onkeypress="if (event.keyCode == 13) doGoPersonMesh('<%= concept.Subject.ConceptConnectionURI %>');" tabindex="0">
 					<div style="width: 68px; color: rgb(51, 102, 204);" class="listTableLink"><%= String.Format("{0:0.000}", concept.Subject.KeywordWeight) %></div>
 				</td>
-				<td onmouseover="doListTableCellOver(this);" onmouseout="doListTableCellOut(this);" onclick="doListTableCellClick(this);doGoPersonMesh('<%= concept.Object.ConceptConnectionURI %>');">
+				<td onmouseover="doListTableCellOver(this);" onfocus="doListTableCellOver(this);" onmouseout="doListTableCellOut(this);" onblur="doListTableCellOut(this);" onclick="doListTableCellClick(this);doGoPersonMesh('<%= concept.Object.ConceptConnectionURI %>');" onkeypress="if (event.keyCode == 13) doGoPersonMesh('<%= concept.Object.ConceptConnectionURI %>');" tabindex="0">
 					<div class='listTableLink' style="width: 68px; color: rgb(51, 102, 204); "><%= String.Format("{0:0.000}", concept.Object.KeywordWeight) %></div>
 				</td>
 				<td><div style="width:68px;"><%= String.Format("{0:0.000}", concept.OverallWeight) %></div></td>

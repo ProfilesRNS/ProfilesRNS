@@ -44,10 +44,10 @@ Search or browse for people, publications, concepts, and other items in Profiles
                                         Keywords
                                     </th>
                                     <td colspan="2" class="fieldOptions">
-                                        <asp:TextBox EnableViewState="false" runat="server" ID="searchfor" CssClass="inputText" />
+                                        <asp:TextBox EnableViewState="false" runat="server" ID="searchfor" CssClass="inputText" title="Keywords" />
                                     </td>
                                     <td style="padding-right:50px">
-                                        <asp:CheckBox runat="server" ID="chkExactPhrase"/>Search for exact phrase
+                                        <asp:CheckBox runat="server" ID="chkExactPhrase" text="&nbsp;Search for exact phrase"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -56,7 +56,7 @@ Search or browse for people, publications, concepts, and other items in Profiles
                                     <td style="text-decoration: none" colspan="2">
                                         <div style="float: left; display: inline">
                                             <a href="JavaScript:submitEverythingSearch();">
-                                                <img src="images/search.jpg" style="border: 0px; position: relative; top: 9px;" />
+                                                <img src="images/search.jpg" alt="submit search" style="border: 0px; position: relative; top: 9px;" />
                                             </a>
                                         </div>
                                     </td>

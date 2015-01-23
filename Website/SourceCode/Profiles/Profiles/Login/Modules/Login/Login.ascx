@@ -32,7 +32,7 @@
                                         <b>Username</b>
                                     </td>
                                     <td>
-                                        <asp:TextBox runat="server" ID="txtUserName" value="" MaxLength="25" Width="250"></asp:TextBox>
+                                        <asp:TextBox runat="server" ID="txtUserName" value="" MaxLength="25" Width="250" title="Username" ></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
@@ -41,7 +41,7 @@
                                     </td>
                                     <td>
                                         <asp:TextBox runat="server" ID="txtPassword" value="" TextMode="Password" MaxLength="25"
-                                            Width="250"></asp:TextBox>
+                                            Width="250" title="Password"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
@@ -49,7 +49,7 @@
                                        
                                     </td>
                                     <td> <asp:ImageButton ImageUrl="~/login/images/loginButton.jpg" runat="server" ID="cmdSubmit"
-                                            Text="Login" OnClick="cmdSubmit_Click" />
+                                            Text="Login" OnClick="cmdSubmit_Click" alternatetext="Login"/>
                                     </td>
                                 </tr>
                                 <tr>

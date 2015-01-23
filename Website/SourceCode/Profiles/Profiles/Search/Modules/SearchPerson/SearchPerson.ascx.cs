@@ -227,6 +227,7 @@ namespace Profiles.Search.Modules.SearchPerson
             ddl.ID = "ddlChkList";
             ListItem lstItem = new ListItem();
             ddl.Items.Insert(0, lstItem);
+            ddl.Attributes.Add("title", "faculty type");
             ddl.Width = new Unit(250);
             ddl.Height = new Unit(20);
             ddl.Attributes.Add("onmousedown", "showdivonClick()");

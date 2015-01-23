@@ -72,13 +72,16 @@
             <xsl:variable name="objectResource" select="./rdf:object/@rdf:resource"/>
             <xsl:variable name="detailsResource" select="./prns:hasConnectionDetails/@rdf:resource"/>
             <xsl:variable name="whyLink" select="./@rdf:about"/>
-            <tr  onmouseover="doListTableRowOver(this)">
+            <tr  onmouseover="doListTableRowOver(this)" onfocus="doListTableRowOver(this)" tabindex="0">
               <xsl:choose>
                 <xsl:when test="position() mod 2 = 0">
                   <xsl:attribute name="class">
                     <xsl:value-of select="'evenRow'"/>
                   </xsl:attribute>
                   <xsl:attribute name="onmouseout">
+                    <xsl:value-of  select="'doListTableRowOut(this,0)'"/>
+                  </xsl:attribute>
+                  <xsl:attribute name="onblur">
                     <xsl:value-of  select="'doListTableRowOut(this,0)'"/>
                   </xsl:attribute>
                 </xsl:when>
@@ -88,7 +91,10 @@
                   </xsl:attribute>
                   <xsl:attribute name="onmouseout">
                     <xsl:value-of  select="'doListTableRowOut(this,1)'"/>
-                  </xsl:attribute> 
+                  </xsl:attribute>
+                  <xsl:attribute name="onblur">
+                    <xsl:value-of  select="'doListTableRowOut(this,1)'"/>
+                  </xsl:attribute>
                 </xsl:otherwise>
               </xsl:choose>
               <td style="text-align: left;" class="alignLeft">

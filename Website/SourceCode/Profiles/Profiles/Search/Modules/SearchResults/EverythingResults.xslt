@@ -91,11 +91,17 @@
                             <xsl:attribute name="class">oddRow</xsl:attribute>
                             <xsl:attribute name="onmouseout">doListTableRowOut(this,1)</xsl:attribute>
                             <xsl:attribute name="onmouseover">doListTableRowOver(this)</xsl:attribute>
+                            <xsl:attribute name="onblur">doListTableRowOut(this,1)</xsl:attribute>
+                            <xsl:attribute name="onfocus">doListTableRowOver(this)</xsl:attribute>
+                            <xsl:attribute name="tabindex">0</xsl:attribute>
                           </xsl:when>
                           <xsl:otherwise>
                             <xsl:attribute name="class">evenRow</xsl:attribute>
                             <xsl:attribute name="onmouseout">doListTableRowOut(this,0)</xsl:attribute>
                             <xsl:attribute name="onmouseover">doListTableRowOver(this)</xsl:attribute>
+                            <xsl:attribute name="onblur">doListTableRowOut(this,0)</xsl:attribute>
+                            <xsl:attribute name="onfocus">doListTableRowOver(this)</xsl:attribute>
+                            <xsl:attribute name="tabindex">0</xsl:attribute>
                           </xsl:otherwise>
                         </xsl:choose>
                         <xsl:call-template name="threeColumn"/>
@@ -111,11 +117,17 @@
                             <xsl:attribute name="class">oddRow</xsl:attribute>
                             <xsl:attribute name="onmouseout">doListTableRowOut(this,1)</xsl:attribute>
                             <xsl:attribute name="onmouseover">doListTableRowOver(this)</xsl:attribute>
+                            <xsl:attribute name="onblur">doListTableRowOut(this,1)</xsl:attribute>
+                            <xsl:attribute name="onfocus">doListTableRowOver(this)</xsl:attribute>
+                            <xsl:attribute name="tabindex">0</xsl:attribute>
                           </xsl:when>
                           <xsl:otherwise>
                             <xsl:attribute name="class">evenRow</xsl:attribute>
                             <xsl:attribute name="onmouseout">doListTableRowOut(this,0)</xsl:attribute>
                             <xsl:attribute name="onmouseover">doListTableRowOver(this)</xsl:attribute>
+                            <xsl:attribute name="onblur">doListTableRowOut(this,0)</xsl:attribute>
+                            <xsl:attribute name="onfocus">doListTableRowOver(this)</xsl:attribute>
+                            <xsl:attribute name="tabindex">0</xsl:attribute>
                           </xsl:otherwise>
                         </xsl:choose>
                         <xsl:call-template name="threeColumn"/>
@@ -229,7 +241,7 @@
             <tbody>
               <tr>
                 <td>
-                  Per Page&#160;<select id="ddlPerPage" onchange="javascript:ChangePerPage()">
+                  Per Page&#160;<select id="ddlPerPage" onchange="javascript:ChangePerPage()" title="results per page">
                     <xsl:choose>
                       <xsl:when test="$perpage='15'">
                         <option value="15" selected="true">15</option>
@@ -265,42 +277,42 @@
                   </select>
                 </td>
                 <td>
-                  &#160;&#160;Page&#160;<input size="1" type="textbox" value="{$page}" id="txtPageNumber" onchange="ChangePage()"/>&#160;of&#160;<xsl:value-of select="$totalpages"/>
+                  &#160;&#160;Page&#160;<input size="1" type="textbox" value="{$page}" id="txtPageNumber" onchange="ChangePage()" title="goto page"/>&#160;of&#160;<xsl:value-of select="$totalpages"/>
                 </td>
                 <td>
                   <xsl:choose>
                     <xsl:when test="$page&lt;$totalpages">
                       <a href="JavaScript:GotoLastPage();" class="listTablePaginationFL listTablePaginationA">
-                        <img src="{$root}/framework/images/arrow_last.gif" border="0"/>
+                        <img src="{$root}/framework/images/arrow_last.gif" border="0" alt="last"/>
                       </a>
                       <a href="javascript:GotoNextPage();" class="listTablePaginationPN listTablePaginationN listTablePaginationA">
-                        Next<img src="{$root}/framework/images/arrow_next.gif" border="0"/>
+                        Next<img src="{$root}/framework/images/arrow_next.gif" border="0" alt="next"/>
                       </a>
                     </xsl:when>
                     <xsl:otherwise>
                       <div class="listTablePaginationFL">
-                        <img src="{$root}/framework/images/arrow_last_d.gif" border="0"/>
+                        <img src="{$root}/framework/images/arrow_last_d.gif" border="0" alt=""/>
                       </div>
                       <div class="listTablePaginationPN listTablePaginationN">
-                        Next<img src="{$root}/framework/images/arrow_next_d.gif" border="0"/>
+                        Next<img src="{$root}/framework/images/arrow_next_d.gif" border="0" alt=""/>
                       </div>
                     </xsl:otherwise>
                   </xsl:choose>
                   <xsl:choose>
                     <xsl:when test="$page&gt;1">
                       <a href="JavaScript:GotoPreviousPage();" class="listTablePaginationPN listTablePaginationP listTablePaginationA">
-                        <img src="{$root}/framework/images/arrow_prev.gif" border="0"/>Prev
+                        <img src="{$root}/framework/images/arrow_prev.gif" border="0" alt="previous"/>Prev
                       </a>
                       <a href="JavaScript:GotoFirstPage();" class="listTablePaginationFL listTablePaginationA">
-                        <img src="{$root}/framework/images/arrow_first.gif" border="0"/>
+                        <img src="{$root}/framework/images/arrow_first.gif" border="0" alt="first"/>
                       </a>
                     </xsl:when>
                     <xsl:otherwise>
                       <div class="listTablePaginationPN listTablePaginationP">
-                        <img src="{$root}/framework/images/arrow_prev_d.gif" border="0"/>Prev
+                        <img src="{$root}/framework/images/arrow_prev_d.gif" border="0" alt=""/>Prev
                       </div>
                       <div class="listTablePaginationFL">
-                        <img src="{$root}/framework/images/arrow_first_d.gif" border="0"/>
+                        <img src="{$root}/framework/images/arrow_first_d.gif" border="0" alt=""/>
                       </div>
                     </xsl:otherwise>
                   </xsl:choose>

@@ -9,7 +9,7 @@
 <div class="PropertyGroupItem">
 	<div class="PropertyItemHeader">
 		<a href="javascript:toggleBlock('propertyitem','meshInfo')"> 
-			<img id="plusImage" runat='server' style="border: none; text-decoration: none !important" border="0" /></a>
+			<img id="plusImage" runat='server' style="border: none; text-decoration: none !important" border="0" alt="expand / collapse"/></a>
 			MeSH information
 	</div>
 	<div class="PropertyGroupData">

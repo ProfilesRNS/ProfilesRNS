@@ -13,7 +13,7 @@
 <div id='<%= "divCTC_" + ClientID %>' class="comboTreeCheck" onmouseover="overCTC(this)"
     onmouseout="outCTC(this);">
     <div class="comboTreeCheckBox">
-        <asp:ImageButton ID="ibExpand" runat="server" />
+        <asp:ImageButton ID="ibExpand" runat="server" AlternateText=" " />
     </div>
     <div id="divMasterContent">
         <asp:Repeater ID="rMasters">

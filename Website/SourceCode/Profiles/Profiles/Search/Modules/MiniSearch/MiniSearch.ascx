@@ -59,7 +59,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <input type="text" name="txtKeyword" id="txtKeyword" style="width: 150px" />
+                            <input type="text" name="txtKeyword" id="txtKeyword" title="keyword" style="width: 150px" />
                         </td>
                     </tr>
                     <tr>
@@ -69,7 +69,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <input type="text" name="txtLname" id="txtLname" style="width: 150px" />
+                            <input type="text" name="txtLname" id="txtLname" title="last name" style="width: 150px" />
                         </td>
                     </tr>
                     <tr runat="server" id="trInstitution">

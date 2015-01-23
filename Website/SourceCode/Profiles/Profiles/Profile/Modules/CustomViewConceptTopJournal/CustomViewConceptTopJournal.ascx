@@ -3,7 +3,7 @@
 <div class="passiveSectionHead">
     <div id='sectionTitle' runat='server' style="white-space: nowrap; display: inline">
         <%= this.GetModuleParamString("InfoCaption") %> <a href="JavaScript:toggleVisibility('topJournal');">
-            <asp:Image runat="server" ID="imgQuestion" />
+            <asp:Image runat="server" ID="imgQuestion" alt="expand description"/>
         </a>
     </div>
     <div id="topJournal" class="passiveSectionHeadDescription" style="display: none;">

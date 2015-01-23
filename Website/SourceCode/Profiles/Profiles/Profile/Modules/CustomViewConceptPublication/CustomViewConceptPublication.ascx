@@ -3,7 +3,7 @@
 <div class="PropertyGroupItem"  style='margin-bottom: 10px;'>
 	<div class="PropertyItemHeader">
 		<a href="javascript:toggleBlock('propertyitem','conceptPub')"> 
-			<img id='plusImage' runat='server' style="border: none; text-decoration: none !important" border="0" /></a>
+			<img id='plusImage' runat='server' style="border: none; text-decoration: none !important" border="0" alt="expand / collapse" /></a>
 			publications
 	</div>
 	<div class="PropertyGroupData">

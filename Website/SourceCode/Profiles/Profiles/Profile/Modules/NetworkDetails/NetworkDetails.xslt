@@ -90,7 +90,7 @@
             <xsl:for-each select="DetailTable/Row[@type='data'] ">
               <xsl:choose>
                 <xsl:when test="position() mod 2 = 0">
-                  <tr class="evenRow" onmouseover="doListTableRowOver(this)" onmouseout="doListTableRowOut(this,0)" >
+                  <tr class="evenRow" onmouseover="doListTableRowOver(this)" onmouseout="doListTableRowOut(this,0)" onfocus="doListTableRowOver(this)" onblur="doListTableRowOut(this,0)" tabindex="0">
                     <xsl:for-each select="Column">
                       <xsl:choose>
                         <xsl:when test=".!='Why?'">
@@ -109,7 +109,7 @@
 
                         </xsl:when>
                         <xsl:otherwise>
-                          <td onclick="doWhyClick('{@url}')" onmouseout="doListTableCellOut(this)" onmouseover="doListTableCellOver(this)">
+                          <td onclick="doWhyClick('{@url}')" onkeypress="if (event.keyCode == 13) doWhyClick('{@url}')" onmouseout="doListTableCellOut(this)" onmouseover="doListTableCellOver(this)" onfocus="doListTableCellOver(this)" onblur="doListTableCellOut(this)" tabindex="0">
                             <div class="listTableLink" style="width: 38px;">
                               <xsl:value-of select="."/>
                             </div>
@@ -121,7 +121,7 @@
                   </tr>
                 </xsl:when>
                 <xsl:otherwise>
-                  <tr class="oddRow"  onmouseover="doListTableRowOver(this)" onmouseout="doListTableRowOut(this,1)" >
+                  <tr class="oddRow"  onmouseover="doListTableRowOver(this)" onmouseout="doListTableRowOut(this,1)" onfocus="doListTableRowOver(this)" onblur="doListTableRowOut(this,1)" tabindex="0">
                     <xsl:for-each select="Column">
                       <xsl:choose>
                         <xsl:when test=".!='Why?'">
@@ -139,7 +139,7 @@
                           </xsl:choose>
                         </xsl:when>
                         <xsl:otherwise>
-                          <td onclick="doWhyClick('{@url}')" onmouseout="doListTableCellOut(this)" onmouseover="doListTableCellOver(this)">
+                          <td onclick="doWhyClick('{@url}')" onkeypress="if (event.keyCode == 13) doWhyClick('{@url}')" onmouseout="doListTableCellOut(this)" onmouseover="doListTableCellOver(this)" onfocus="doListTableCellOver(this)" onblur="doListTableCellOut(this)" tabindex="0">
                             <div class="listTableLink" style="width: 38px;">
                               <xsl:value-of select="."/>
                             </div>

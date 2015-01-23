@@ -130,9 +130,8 @@
                                             Keywords
                                         </th>
                                         <td colspan="2" class="fieldOptions">
-                                            <asp:TextBox runat="server" ID="txtSearchFor" CssClass="inputText"></asp:TextBox>
-                                            <asp:CheckBox runat="server" ID="chkExactphrase" />
-                                            Search for exact phrase
+                                            <asp:TextBox runat="server" ID="txtSearchFor" CssClass="inputText" title="Keywords"></asp:TextBox>
+                                            <asp:CheckBox runat="server" ID="chkExactphrase" text="&nbsp;Search for exact phrase" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -169,7 +168,7 @@
                                         Last Name
                                     </th>
                                     <td colspan="2">
-                                        <asp:TextBox runat="server" ID="txtLname" CssClass="inputText"></asp:TextBox>
+                                        <asp:TextBox runat="server" ID="txtLname" CssClass="inputText"  title="Last Name"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
@@ -177,7 +176,7 @@
                                         First Name
                                     </th>
                                     <td colspan="2">
-                                        <asp:TextBox runat="server" ID="txtFname" CssClass="inputText"></asp:TextBox>
+                                        <asp:TextBox runat="server" ID="txtFname" CssClass="inputText" title="First Name"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr runat="server" id="trInstitution">
@@ -186,8 +185,7 @@
                                     </th>
                                     <td colspan="2">
                                         <asp:Literal runat="server" ID="litInstitution"></asp:Literal>
-                                        <asp:CheckBox runat="server" ID="institutionallexcept" />
-                                        All <b>except</b> the one selected
+                                        <asp:CheckBox runat="server" ID="institutionallexcept" text="&nbsp;All <b>except</b> the one selected" />
                                     </td>
                                 </tr>
                                 <tr runat="server" id="trDepartment">
@@ -196,8 +194,7 @@
                                     </th>
                                     <td colspan="2">
                                         <asp:Literal runat="server" ID="litDepartment"></asp:Literal>
-                                        <asp:CheckBox runat="server" ID="departmentallexcept" />
-                                        All <b>except</b> the one selected
+                                        <asp:CheckBox runat="server" ID="departmentallexcept" label="except department" text="&nbsp;All <b>except</b> the one selected" />
                                     </td>
                                 </tr>
                                 <tr runat="server" id="trDivision">
@@ -206,8 +203,7 @@
                                     </th>
                                     <td colspan="2">
                                         <asp:Literal runat="server" ID="litDivision"></asp:Literal>
-                                        <asp:CheckBox runat="server" id="divisionallexcept" />
-                                        All <b>except</b> the one selected
+                                        <asp:CheckBox runat="server" id="divisionallexcept" text="&nbsp;All <b>except</b> the one selected" />
                                     </td>
                                 </tr>
                                 <tr runat="server" id="trFacultyType">
@@ -238,7 +234,7 @@
                                     </th>
                                     <td colspan='2'>
                                         <input type="hidden" id="hiddenToggle" value="off" />
-                                        <select id="selOtherOptions" style="width: 249px; height: 20px">
+                                        <select id="selOtherOptions" style="width: 249px; height: 20px" title="other options">
                                             <option value=""></option>
                                         </select>
                                         <table>
@@ -257,8 +253,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>
-                                    </th>
+                                    <td>
+                                    </td>
                                     <td colspan="2">
                                         <div style="float: left; display: inline">
                                             <a href="JavaScript:search();">
