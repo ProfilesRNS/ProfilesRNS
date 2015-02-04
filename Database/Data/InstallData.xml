@@ -25085,7 +25085,14 @@
       <SortOrder>46</SortOrder>
       <IsActive>1</IsActive>
     </Row>
-  </Table>
+    <Row>
+      <SiteID>47</SiteID>
+      <BootstrapURL>http://profiles.cdrewu.edu/profiles/Direct/Direct.xml</BootstrapURL>
+      <SiteName>Charles R Drew University of Medicine and Science</SiteName>
+      <QueryURL>http://profiles.cdrewu.edu/profiles/DIRECT/Modules/DirectSearch/DirectService.aspx?Request=IncomingCount&SearchPhrase=</QueryURL>
+      <SortOrder>47</SortOrder>
+      <IsActive>1</IsActive>
+    </Row>  </Table>
   <Table Name="[Profile.Data].[Publication.Type]">
     <Row>
       <pubidtype_id>pmid</pubidtype_id>
