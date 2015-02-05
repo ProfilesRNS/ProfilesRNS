@@ -25089,7 +25089,7 @@
       <SiteID>47</SiteID>
       <BootstrapURL>http://profiles.cdrewu.edu/profiles/Direct/Direct.xml</BootstrapURL>
       <SiteName>Charles R Drew University of Medicine and Science</SiteName>
-      <QueryURL>http://profiles.cdrewu.edu/profiles/DIRECT/Modules/DirectSearch/DirectService.aspx?Request=IncomingCount&SearchPhrase=</QueryURL>
+      <QueryURL>http://profiles.cdrewu.edu/profiles/DIRECT/Modules/DirectSearch/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
       <SortOrder>47</SortOrder>
       <IsActive>1</IsActive>
     </Row>  </Table>
