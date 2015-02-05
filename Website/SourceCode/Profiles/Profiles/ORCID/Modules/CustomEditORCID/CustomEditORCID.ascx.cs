@@ -94,15 +94,13 @@ namespace Profiles.ORCID.Modules.CustomEditORCID
             string orcidInfoSite = Profiles.ORCID.Utilities.config.InfoSite;
             if (!string.IsNullOrEmpty(orcidInfoSite))
             {
-                orcidHelpLink = "&nbsp;<a style='border: none;' href='" + orcidInfoSite + "' target='_blank'><img style='border-style: none' src='" + Root.Domain + "/Framework/Images/info.png'  border='0'></a>";
+                orcidHelpLink = "&nbsp;<a style='border: none;' href='" + orcidInfoSite + "' target='_blank'>click here.</a>";
+                litOrcidInfolink.Text = "For more info about ORCID" + orcidHelpLink;
             }
             //litCreateProvideORCID.Text = "<img src='" + Root.Domain + "/framework/images/icon_squareArrow.gif' border='0'/>&nbsp;<a href='" + Root.Domain + "/ORCID/CreateMyORCID.aspx'>Create My ORCID</a>" + orcidHelpLink + "<br><img src='" + Root.Domain + "/framework/images/icon_squareArrow.gif' border='0'/>&nbsp;<a href='" + Root.Domain + "/ORCID/ProvideORCID.aspx'>Provide My ORCID</a>" + orcidHelpLink;
             //litUploatInfoToORCID.Text = "<img src='" + Root.Domain + "/framework/images/icon_squareArrow.gif' border='0'/>&nbsp;<a href='" + Root.Domain + "/ORCID/UploadInfoToORCID.aspx'>Upload Info To ORCID</a>";
             string loggedInInternalUsername = new Profiles.ORCID.Utilities.DataIO().GetInternalUserID();
             //Profiles.ORCID.Utilities.ProfilesRNSDLL.BO.ORCID.Person person = new Profiles.ORCID.Utilities.ProfilesRNSDLL.BLL.ORCID.Person().GetByInternalUsername(loggedInInternalUsername);
-
-            lbCreateMyORCID.Text = "Create ORCID" + orcidHelpLink;
-            lbProvideMyORCID.Text = "Provide My ORCID" + orcidHelpLink;
 
             String orcid = null;
             try { orcid = base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/vivo:orcidId", base.Namespaces).InnerText; }

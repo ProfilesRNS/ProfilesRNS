@@ -54,7 +54,7 @@
                         <table border="0" cellspacing="2" cellpadding="4">
                             <tr>
                                 <td>
-                                    <asp:TextBox ID="txtLabel" runat="server" Rows="5" Width="500px" TextMode="MultiLine"></asp:TextBox>
+                                    <asp:TextBox ID="txtLabel" runat="server" Rows="5" Width="500px" TextMode="MultiLine" title="Enter Text"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -84,7 +84,7 @@
                                 <asp:TemplateField HeaderText="">
                                     <EditItemTemplate>
                                         <asp:TextBox ID="txtLabel" Rows="5" runat="server" TextMode="MultiLine" Width="500px"
-                                            Text='<%# Bind("Literal") %>'></asp:TextBox>
+                                            Text='<%# Bind("Literal") %>' title="edit text"></asp:TextBox>
                                         <asp:HiddenField ID="hdLabel" runat="server" Value='<%# Bind("Literal") %>'></asp:HiddenField>
                                     </EditItemTemplate>
                                     <ItemTemplate>
@@ -101,11 +101,11 @@
                                             <tr>
                                                 <td>
                                                     <asp:ImageButton ID="lnkUpdate" runat="server" ImageUrl="~/Edit/Images/button_save.gif"
-                                                        CausesValidation="True" CommandName="Update" Text="Update"></asp:ImageButton>
+                                                        CausesValidation="True" CommandName="Update" Text="Update" AlternateText="Update"></asp:ImageButton>
                                                 </td>
                                                 <td>
                                                     <asp:ImageButton ID="lnkCancel" runat="server" ImageUrl="~/Edit/Images/button_cancel.gif"
-                                                        CausesValidation="False" CommandName="Cancel" Text="Cancel"></asp:ImageButton>
+                                                        CausesValidation="False" CommandName="Cancel" Text="Cancel" AlternateText="Cancel"></asp:ImageButton>
                                                 </td>
                                             </tr>
                                         </table>
@@ -118,20 +118,20 @@
                                                 <tr>
                                                     <td>
                                                         <asp:ImageButton OnClick="ibUp_Click" runat="server" CommandArgument="up" CommandName="action"
-                                                            ID="ibUp" ImageUrl="~/Edit/Images/icon_up.gif" />
+                                                            ID="ibUp" ImageUrl="~/Edit/Images/icon_up.gif" AlternateText="move up"/>
                                                     </td>
                                                     <td>
                                                         <asp:ImageButton runat="server" OnClick="ibDown_Click" ID="ibDown" CommandArgument="down"
-                                                            CommandName="action" ImageUrl="~/Edit/Images/icon_down.gif" />
+                                                            CommandName="action" ImageUrl="~/Edit/Images/icon_down.gif" AlternateText="move down" />
                                                     </td>
                                                     <td>
                                                         <asp:ImageButton ID="lnkEdit" runat="server" ImageUrl="~/Edit/Images/icon_edit.gif"
-                                                            CausesValidation="False" CommandName="Edit" Text="Edit"></asp:ImageButton>
+                                                            CausesValidation="False" CommandName="Edit" Text="Edit" AlternateText="Edit"></asp:ImageButton>
                                                     </td>
                                                     <td>
                                                         <asp:ImageButton ID="lnkDelete" runat="server" ImageUrl="~/Edit/Images/icon_delete.gif"
                                                             CausesValidation="False" CommandName="Delete" OnClientClick="Javascript:return confirm('Are you sure you want to delete this entry?');"
-                                                            Text="X"></asp:ImageButton>
+                                                            Text="X" AlternateText="delete"></asp:ImageButton>
                                                     </td>
                                                 </tr>
                                             </table>

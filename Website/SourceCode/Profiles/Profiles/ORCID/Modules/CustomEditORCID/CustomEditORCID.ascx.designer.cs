@@ -67,15 +67,6 @@ namespace Profiles.ORCID.Modules.CustomEditORCID {
         protected global::System.Web.UI.WebControls.Panel pnlAddORCID;
         
         /// <summary>
-        /// imbCreateMyORCID control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imbCreateMyORCID;
-        
-        /// <summary>
         /// lbCreateMyORCID control.
         /// </summary>
         /// <remarks>
@@ -83,6 +74,15 @@ namespace Profiles.ORCID.Modules.CustomEditORCID {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbCreateMyORCID;
+        
+        /// <summary>
+        /// imbCreateMyORCID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imbCreateMyORCID;
         
         /// <summary>
         /// pnlCreateMyORCID control.
@@ -94,15 +94,6 @@ namespace Profiles.ORCID.Modules.CustomEditORCID {
         protected global::System.Web.UI.WebControls.Panel pnlCreateMyORCID;
         
         /// <summary>
-        /// imbProvideMyORCID control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imbProvideMyORCID;
-        
-        /// <summary>
         /// lbProvideMyORCID control.
         /// </summary>
         /// <remarks>
@@ -110,6 +101,15 @@ namespace Profiles.ORCID.Modules.CustomEditORCID {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbProvideMyORCID;
+        
+        /// <summary>
+        /// imbProvideMyORCID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imbProvideMyORCID;
         
         /// <summary>
         /// pnlProvideMyORCID control.
@@ -227,6 +227,15 @@ namespace Profiles.ORCID.Modules.CustomEditORCID {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlORCIDText;
+        
+        /// <summary>
+        /// litOrcidInfolink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litOrcidInfolink;
         
         /// <summary>
         /// pnlORCIDProxy control.

@@ -21,7 +21,7 @@
                     *
                 </td>
                 <td>
-                    First Name
+                    <asp:Label ID="Label5" runat="server" AssociatedControlID="txtFirstName">First Name</asp:Label>
                 </td>
                 <td>
                     <asp:TextBox ID="txtFirstName" runat="server" Width="166px" MaxLength="150" />
@@ -40,7 +40,7 @@
                     *
                 </td>
                 <td>
-                    Last Name
+                    <asp:Label ID="Label4" runat="server" AssociatedControlID="txtLastName">Last Name</asp:Label>
                 </td>
                 <td>
                     <asp:TextBox ID="txtLastName" runat="server" Width="165px" MaxLength="150" />
@@ -56,7 +56,7 @@
                 <td>
                 </td>
                 <td class="nowrap">
-                    Published Name:
+                    <asp:Label ID="Label3" runat="server" AssociatedControlID="txtPublishedName">Published Name</asp:Label>:
                 </td>
                 <td class="style8">
                     <asp:TextBox ID="txtPublishedName" runat="server" Width="165px" />
@@ -73,7 +73,7 @@
                 <td>
                 </td>
                 <td class="nowrap">
-                    Other Names:
+                    <asp:Label ID="Label2" runat="server" AssociatedControlID="txtOtherNames">Other Names</asp:Label>:
                 </td>
                 <td class="style8">
                     <asp:TextBox ID="txtOtherNames" runat="server" TextMode="MultiLine" CssClass="multilinesmall"
@@ -101,10 +101,10 @@
                     *
                 </td>
                 <td>
-                    Primary Email
+                    <asp:Label ID="Label1" runat="server" AssociatedControlID="txtEmailAddress">Primary Email</asp:Label>
                 </td>
                 <td>
-                    <asp:DropDownList ID="ddlEmailDecisionID" runat="server" Width="75px">
+                    <asp:DropDownList ID="ddlEmailDecisionID" runat="server" Width="75px" title="privacy">
                         <asp:ListItem Value="2" Selected="True">Public</asp:ListItem>
                         <asp:ListItem Value="3">Limited</asp:ListItem>
                         <asp:ListItem Value="5">Private</asp:ListItem>
@@ -123,10 +123,10 @@
                 <td>
                 </td>
                 <td>
-                    Alternate Email(s)
+                    <asp:Label runat="server" AssociatedControlID="txtAlternateEmail">Alternate Email(s)</asp:Label>
                 </td>
                 <td>
-                    <asp:DropDownList ID="ddlAlternateEmailDecisionID" runat="server" Width="75px">
+                    <asp:DropDownList ID="ddlAlternateEmailDecisionID" runat="server" Width="75px" title="Privacy">
                         <asp:ListItem Value="1" Selected="True">Public</asp:ListItem>
                         <asp:ListItem Value="2">Limited</asp:ListItem>
                         <asp:ListItem Value="3">Private</asp:ListItem>
@@ -153,8 +153,10 @@
                         Checked="true" />
                 </td>
                 <td>
-                    Upload Profiles data to ORCID (uncheck this box to create an ORCID iD without uploading
-                    any optional data).
+                    <asp:label runat="server" AssociatedControlID="chkUploadInfoNow">
+                        Upload Profiles data to ORCID (uncheck this box to create an ORCID iD without uploading
+                        any optional data).
+                    </asp:label>
                 </td>
             </tr>
         </table>

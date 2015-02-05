@@ -10,8 +10,8 @@
     Code licensed under a BSD License. 
     For details, see: LICENSE.txt 
  --%>
-<div id='<%= "divCTC_" + ClientID %>' class="comboTreeCheck" onmouseover="overCTC(this)"
-    onmouseout="outCTC(this);">
+<div id='<%= "divCTC_" + ClientID %>' class="comboTreeCheck" onmouseover="overCTC(this)" onfocus="overCTC(this)"
+    onmouseout="outCTC(this);" onblur="outCTC(this);" tabindex="0">
     <div class="comboTreeCheckBox">
         <asp:ImageButton ID="ibExpand" runat="server" AlternateText=" " />
     </div>

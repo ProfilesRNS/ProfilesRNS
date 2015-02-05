@@ -56,8 +56,13 @@
                     <asp:HiddenField runat="server" ID="hdnPrivacyCode" />
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:BoundField  HeaderStyle-HorizontalAlign="Center" HeaderText="Privacy" HeaderStyle-CssClass="padding" ItemStyle-CssClass="padding" 
-                ItemStyle-HorizontalAlign="Left" DataField="Label" ItemStyle-Width="100px" />
+                            <asp:TemplateField  HeaderStyle-HorizontalAlign="Center" HeaderText="Privacy" HeaderStyle-CssClass="padding" ItemStyle-CssClass="padding" 
+                ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px" >
+                 <ItemTemplate>
+                    <asp:Literal runat="server" ID="rdoSecurityOptionLabel" ></asp:Literal>
+                    <asp:HiddenField runat="server" ID="hdnLabel" />
+                </ItemTemplate>               
+                </asp:TemplateField>
             <asp:BoundField HeaderStyle-HorizontalAlign="Center" HeaderText="Description" ItemStyle-HorizontalAlign="left" DataField="Description" ItemStyle-Width="500px" />
         </Columns>
     </asp:GridView>

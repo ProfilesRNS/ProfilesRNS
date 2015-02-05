@@ -211,22 +211,6 @@ namespace Profiles.Edit.Modules.EditPropertyList
                     ((Control)e.Row.FindControl("imgOrng")).Visible = true ;
                 }
 
-                if (e.Row.RowState == DataControlRowState.Alternate)
-                {
-                    e.Row.Attributes.Add("onmouseover", "doListTableRowOver(this);");
-                    e.Row.Attributes.Add("onmouseout", "doListTableRowOut(this,0);");
-                    e.Row.Attributes.Add("class", "evenRow");
-                    blankimage.ImageUrl = Root.Domain + "/edit/images/icons_blankAlt.gif";
-                    blankimage.Attributes.Add("style", "opacity:0.0;filter:alpha(opacity=0);");
-                }
-                else
-                {
-                    e.Row.Attributes.Add("onmouseover", "doListTableRowOver(this);");
-                    e.Row.Attributes.Add("onmouseout", "doListTableRowOut(this,1);");
-                    e.Row.Attributes.Add("class", "oddRow");
-                    blankimage.ImageUrl = Root.Domain + "/edit/images/icons_blankAlt.gif";
-                    blankimage.Attributes.Add("style", "opacity:0.0;filter:alpha(opacity=0);");
-                }
 
                 switch (si.ObjectType)
                 {
@@ -240,9 +224,33 @@ namespace Profiles.Edit.Modules.EditPropertyList
 
                 string editlink = "javascript:GoTo('" + Root.Domain + "/edit/default.aspx?subject=" + this.Subject.ToString() + "&predicateuri=" + hf.Value.Replace("#", "!") + "&module=DisplayItemToEdit&ObjectType=" + objecttype + "')";
 
+                if (e.Row.RowState == DataControlRowState.Alternate)
+                {
+                    e.Row.Attributes.Add("onmouseover", "doListTableRowOver(this);");
+                    e.Row.Attributes.Add("onmouseout", "doListTableRowOut(this,0);");
+                    e.Row.Attributes.Add("onfocus", "doListTableRowOver(this);");
+                    e.Row.Attributes.Add("onblur", "doListTableRowOut(this,0);");
+                    e.Row.Attributes.Add("tabindex", "0");
+                    e.Row.Attributes.Add("class", "evenRow");
+                    e.Row.Attributes.Add("onclick", editlink);
+                    e.Row.Attributes.Add("onkeypress", "if (event.keyCode == 13) " + editlink);
+                    blankimage.ImageUrl = Root.Domain + "/edit/images/icons_blankAlt.gif";
+                    blankimage.Attributes.Add("style", "opacity:0.0;filter:alpha(opacity=0);");
+                }
+                else
+                {
+                    e.Row.Attributes.Add("onmouseover", "doListTableRowOver(this);");
+                    e.Row.Attributes.Add("onmouseout", "doListTableRowOut(this,1);");
+                    e.Row.Attributes.Add("onfocus", "doListTableRowOver(this);");
+                    e.Row.Attributes.Add("onblur", "doListTableRowOut(this,1);");
+                    e.Row.Attributes.Add("tabindex", "0");
+                    e.Row.Attributes.Add("class", "oddRow");
+                    e.Row.Attributes.Add("onclick", editlink);
+                    e.Row.Attributes.Add("onkeypress", "if (event.keyCode == 13) " + editlink);
+                    blankimage.ImageUrl = Root.Domain + "/edit/images/icons_blankAlt.gif";
+                    blankimage.Attributes.Add("style", "opacity:0.0;filter:alpha(opacity=0);");
+                }
 
-                e.Row.Cells[0].Attributes.Add("onclick", editlink);
-                e.Row.Cells[1].Attributes.Add("onclick", editlink);
                 e.Row.Cells[1].CssClass = "colItemCnt";
                 e.Row.Cells[2].CssClass = "colSecurity";
 

@@ -67,10 +67,14 @@ namespace Profiles.Edit.Modules.SecurityOptions
                 RadioButton rb = (RadioButton)e.Row.FindControl("rdoSecurityOption");
                 HiddenField hf = (HiddenField)e.Row.FindControl("hdnPrivacyCode");
                 RadioButton rdoSecurityOption = (RadioButton)e.Row.FindControl("rdoSecurityOption");
+                Literal l = (Literal) e.Row.FindControl("rdoSecurityOptionLabel");
+                HiddenField hl = (HiddenField)e.Row.FindControl("hdnLabel");
 
                 rdoSecurityOption.GroupName = "SecurityOption";
 
                 hf.Value = si.PrivacyCode.ToString();
+                l.Text = "<label for=\"" + rb.UniqueID.Replace("$", "_") + "\">" + si.Label + "</label>";
+                hl.Value = si.Label;
 
                 if (si.PrivacyCode == this.PrivacyCode)
                 {
@@ -126,7 +130,8 @@ namespace Profiles.Edit.Modules.SecurityOptions
             RadioButton rb = (RadioButton)sender;
             GridViewRow row = (GridViewRow)rb.NamingContainer;  
             ((RadioButton)row.FindControl("rdoSecurityOption")).Checked = true;
-            litVisibility.Text = "(" + row.Cells[1].Text + ")";
+
+            litVisibility.Text = "(" + ((HiddenField)row.Cells[0].FindControl("hdnLabel")).Value + ")";
             UpdateSecuritySetting(((HiddenField)row.Cells[0].FindControl("hdnPrivacyCode")).Value);
         }
 

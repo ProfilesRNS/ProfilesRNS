@@ -276,7 +276,7 @@
     }
 // -->
 </SCRIPT>
-
+<asp:Panel runat="server" ID="pnlRadialGraph" Visible="true">
 <div>
 	<div class="clusterWarning">
 		Please note that this visualization requires a fast computer and video card. It might cause web browsers on slower machines to become unresponsive.
@@ -322,6 +322,16 @@
 		</div>
 	</div>
 </div>
+    <br />
+    To see the data from this visualization as text, <asp:LinkButton ID="btnShowText" runat="server" OnClick="btnShowText_OnClick" CssClass="profileHypLinks">click here.</asp:LinkButton>
+        
+    </asp:Panel>
+    <asp:Panel runat="server" ID="pnlDataText" Visible="false">
+        <asp:Literal runat="server" ID="litNetworkText"></asp:Literal> 
+        <br />
+        To return to the cluster graph, <asp:LinkButton ID="btnHideText" runat="server" OnClick="btnHideText_OnClick" CssClass="profileHypLinks">click here.</asp:LinkButton>                       
+    </asp:Panel>
+
 <script type="text/javascript">
 	// Use jQuery instead of $ to avoid conflicts
 	jQuery(function() {

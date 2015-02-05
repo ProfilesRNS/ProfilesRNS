@@ -27,18 +27,12 @@
 
 
                         <asp:Panel runat="server" ID="pnlAddORCID">
-                            <asp:ImageButton runat="server" ImageUrl="~/Framework/Images/icon_squareArrow.gif"
-                                ID="imbCreateMyORCID" OnClick="imbCreateMyORCID_OnClick" />&nbsp; 
-                            <asp:LinkButton runat="server"  ID="lbCreateMyORCID" OnClick="imbCreateMyORCID_OnClick"
-                                Text="Create ORCID"></asp:LinkButton>    
+                            <asp:LinkButton runat="server"  ID="lbCreateMyORCID" OnClick="imbCreateMyORCID_OnClick"><asp:Image runat="server" ID="imbCreateMyORCID" AlternateText=" " ImageUrl="~/Framework/Images/icon_squareArrow.gif"/>&nbsp;Create ORCID</asp:LinkButton>    
                              <br />
                             <asp:Panel runat="server" ID="pnlCreateMyORCID" Visible="false" Style="background-color: #F0F4F6; margin-bottom: 5px; border: solid 1px #999;">
                                 <uc1:CreateMyORCID ID="CreateMyORCID1" runat="server"/>
                             </asp:Panel>
-                            <asp:ImageButton runat="server" ImageUrl="~/Framework/Images/icon_squareArrow.gif"
-                                ID="imbProvideMyORCID" OnClick="imbProvideMyORCID_OnClick" />&nbsp;
-                            <asp:LinkButton runat="server" ID="lbProvideMyORCID" OnClick="imbProvideMyORCID_OnClick"
-                                Text="Provide My ORCID"></asp:LinkButton>    
+                            <asp:LinkButton runat="server" ID="lbProvideMyORCID" OnClick="imbProvideMyORCID_OnClick"><asp:Image runat="server" ID="imbProvideMyORCID" AlternateText=" " ImageUrl="~/Framework/Images/icon_squareArrow.gif"/>&nbsp;Provide My ORCID</asp:LinkButton>    
                              <br />
                             <asp:Panel runat="server" ID="pnlProvideMyORCID" Visible="false" Style="background-color: #F0F4F6; margin-bottom: 5px; border: solid 1px #999;">
                                 <uc2:ProvideORCID ID="ProvideORCID1" runat="server" />
@@ -90,6 +84,7 @@
                                 ORCID records hold non-sensitive information such as name, email, organization,
                                 and activities such as publication, grants, patents and other scholarly works. ORCID
                                 provides tools for individuals to manage data privacy.</p>
+                                <asp:Literal runat="server" ID="litOrcidInfolink"></asp:Literal>
                         </asp:Panel>
                         <asp:Panel runat="server" ID="pnlORCIDProxy"> 
                         <h2>Proxy Functionality</h2>

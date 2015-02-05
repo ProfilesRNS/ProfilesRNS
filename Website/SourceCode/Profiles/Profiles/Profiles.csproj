@@ -147,6 +147,7 @@
     <Content Include="Profile\Modules\CustomViewEagleI\CustomViewEagleI.ascx" />
     <Content Include="Profile\Modules\CustomViewEagleI\Images\logo.gif" />
     <Content Include="Profile\Modules\CustomViewListProperty\CustomViewListProperty.ascx" />
+    <Content Include="Profile\XSLT\NetworkTable.xslt" />
     <Content Include="RobotsTxt.aspx" />
     <Content Include="SiteMap.aspx" />
     <Content Include="Web.config">

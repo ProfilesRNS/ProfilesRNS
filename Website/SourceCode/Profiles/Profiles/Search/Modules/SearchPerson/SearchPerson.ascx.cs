@@ -230,10 +230,12 @@ namespace Profiles.Search.Modules.SearchPerson
             ddl.Attributes.Add("title", "faculty type");
             ddl.Width = new Unit(250);
             ddl.Height = new Unit(20);
-            ddl.Attributes.Add("onmousedown", "showdivonClick()");
+            ddl.Attributes.Add("onclick", "showdivonClick()");
+            ddl.Attributes.Add("onkeypress", "showdivonClick()");
             CheckBoxList chkBxLst = new CheckBoxList();
             chkBxLst.ID = "chkLstItem";
             chkBxLst.Attributes.Add("onmouseover", "showdiv()");
+            chkBxLst.Attributes.Add("onfocus", "if ( event.keyCode == 13) showdiv()");
             List<GenericListItem> dtListItem = data.GetFacultyRanks();
             int rowNo = dtListItem.Count;
             string lstValue = string.Empty;

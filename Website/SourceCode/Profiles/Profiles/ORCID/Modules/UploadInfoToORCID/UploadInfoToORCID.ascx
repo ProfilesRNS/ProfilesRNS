@@ -10,7 +10,7 @@
                 <input type='hidden' id='imgofftrOverview' value='<%=RootDomain()%>/Profile/Modules/PropertyList/images/plusSign.gif' />
                 <div class='PropertyItemHeader' style='cursor: pointer;'>
                     <img alt="min" id="imgOverviewtrOverview" src="<%=RootDomain()%>/Profile/Modules/PropertyList/images/plusSign.gif"
-                        onclick="javascript:toggleBlock('imgOverview','trOverview');" />
+                        onclick="javascript:toggleBlock('imgOverview','trOverview');" onkeypress="if (event.keyCode == 13) javascript:toggleBlock('imgOverview','trOverview');" tabIndex="0" />
                     Biography 
                 </div>
             </td>
@@ -30,11 +30,11 @@
                 <table border="0" class="data">
                     <tr style="border-top: 1px">
                         <th>
-                            Overview
+                            <asp:Label ID="Label5" runat="server" AssociatedControlID="txtResearchExpertiseAndProfessionalInterests">Overview</asp:Label>Overview
                         </th>
                         <th>
                             <asp:DropDownList ID="ddlResearchExpertiseAndProfessionalInterestsVis" runat="server"
-                                class="visibility">
+                                class="visibility" title="visibilty">
                                 <asp:ListItem Value="1">Public</asp:ListItem>
                                 <asp:ListItem Value="4">Exclude</asp:ListItem>
                             </asp:DropDownList>
@@ -71,7 +71,7 @@
                 <input type='hidden' id='imgofftrAffiliations' value='<%=RootDomain()%>/Profile/Modules/PropertyList/images/plusSign.gif' />
                 <div class='PropertyItemHeader'>
                     <img alt="min" id="imgAffiliationstrAffiliations" src="<%=RootDomain()%>/Profile/Modules/PropertyList/images/plusSign.gif"
-                        onclick="javascript:toggleBlock('imgAffiliations','trAffiliations');" />
+                        onclick="javascript:toggleBlock('imgAffiliations','trAffiliations');" onkeypress="if (event.keyCode == 13) javascript:toggleBlock('imgAffiliations','trAffiliations');" tabIndex="0"/>
                     ORCID Affiliations (Employment and Education)
                 </div>
             </td>
@@ -123,7 +123,7 @@
                                 <asp:Label ID="lblDisambiguationSource" runat="server" Visible="false" Text='<%# Eval("DisambiguationSource")%>' />
                             </td>
                             <td>
-                                <asp:DropDownList ID="ddlEmpVis" runat="server" class="visibility">
+                                <asp:DropDownList ID="ddlEmpVis" runat="server" class="visibility" title="Privacy">
                                     <asp:ListItem Value="1">Public</asp:ListItem>
                                     <asp:ListItem Value="2">Limited</asp:ListItem>
                                     <asp:ListItem Value="3">Private</asp:ListItem>
@@ -179,7 +179,7 @@
                 <input type='hidden' id='imgofftrWebsites' value='<%=RootDomain()%>/Profile/Modules/PropertyList/images/plusSign.gif' />
                 <div class='PropertyItemHeader'>
                     <img alt="min" id="imgWebsitestrWebsites" src="<%=RootDomain()%>/Profile/Modules/PropertyList/images/plusSign.gif"
-                        onclick="javascript:toggleBlock('imgWebsites','trWebsites');" />
+                        onclick="javascript:toggleBlock('imgWebsites','trWebsites');" onkeypress="if (event.keyCode == 13) javascript:toggleBlock('imgWebsites','trWebsites');" tabIndex="0"/>
                     Web Sites
                 </div>
             </td>
@@ -221,7 +221,7 @@
                                     runat="server" Target="_blank" />
                             </td>
                             <td>
-                                <asp:DropDownList ID="ddlPushType" runat="server" class="visibility">
+                                <asp:DropDownList ID="ddlPushType" runat="server" class="visibility" title="Visibility">
                                     <asp:ListItem Value="5">Include</asp:ListItem>
                                     <asp:ListItem Value="4">Exclude</asp:ListItem>
                                 </asp:DropDownList>
@@ -238,7 +238,7 @@
                                     runat="server" Target="_blank" />
                             </td>
                             <td>
-                                <asp:DropDownList ID="ddlPushType" runat="server" class="visibility">
+                                <asp:DropDownList ID="ddlPushType" runat="server" class="visibility" title="Visibility">
                                     <asp:ListItem Value="5">Include</asp:ListItem>
                                     <asp:ListItem Value="4">Exclude</asp:ListItem>
                                 </asp:DropDownList>
@@ -262,9 +262,9 @@
                 <input type='hidden' id='imgofftrPublications' value='<%=RootDomain()%>/Profile/Modules/PropertyList/images/plusSign.gif' />
                 <div class='PropertyItemHeader'>
                     <img alt="min" id="imgPublicationstrPublications" src="<%=RootDomain()%>/Profile/Modules/PropertyList/images/plusSign.gif"
-                        onclick="javascript:toggleBlock('imgPublications','trPublications');" />
+                        onclick="javascript:toggleBlock('imgPublications','trPublications');" onkeypress="if (event.keyCode == 13) javascript:toggleBlock('imgPublications','trPublications');" tabIndex="0"/>
                     Publications <span style="float: right">
-                            <select id="selPrivacy" runat="server">
+                            <select id="selPrivacy" runat="server" title="Privacy">
                                 <option value="1">Public</option>
                                 <option value="2">Limited</option>
                                 <option value="3">Private</option>
@@ -294,6 +294,7 @@
                                         Publication
                                     </th>
                                     <th>
+                                        Visibility
                                     </th>
                                 </tr>
                             </thead>
@@ -317,7 +318,7 @@
                                 <asp:Label ID="lblDOI" runat="server" Text='<%# Eval("DOI") %>' />
                             </td>
                             <td>
-                                <asp:DropDownList ID="ddlPubVis" runat="server" class="visibility">
+                                <asp:DropDownList ID="ddlPubVis" runat="server" class="visibility" title="Privacy">
                                     <asp:ListItem Value="1">Public</asp:ListItem>
                                     <asp:ListItem Value="2">Limited</asp:ListItem>
                                     <asp:ListItem Value="3">Private</asp:ListItem>
@@ -344,7 +345,7 @@
                                 <asp:Label ID="lblDOI" runat="server" Text='<%# Eval("DOI") %>' />
                             </td>
                             <td>
-                                <asp:DropDownList ID="ddlPubVis" runat="server" class="visibility">
+                                <asp:DropDownList ID="ddlPubVis" runat="server" class="visibility" title="Visibility">
                                     <asp:ListItem Value="1">Public</asp:ListItem>
                                     <asp:ListItem Value="2">Limited</asp:ListItem>
                                     <asp:ListItem Value="3">Private</asp:ListItem>

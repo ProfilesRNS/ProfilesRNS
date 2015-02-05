@@ -279,7 +279,9 @@
 
 
 <%--<div style="position: absolute; z-index: 999;">--%>
+<asp:Panel runat="server" ID="pnlRadialGraph" Visible="true">
 <div>
+
     <div style="width: 600px; font-size: 12px; line-height: 16px; border-bottom: 1px dotted #999;
         padding-bottom: 12px; margin-bottom: 6px;">
         This radial graph shows the co-authors (inner ring) and top co-authors of co-authors
@@ -369,5 +371,15 @@
                 color: #666;">Alt-click</span> a name to view that person's full profile. <span style="font-weight: bold;
                 color: #666;">Shift-click</span> a name to highlight the mutual co-authorships of that person's co-authors.
     </div>
+    <br />
+    To see the data from this visualization as text, <asp:LinkButton ID="btnShowText" runat="server" OnClick="btnShowText_OnClick" CssClass="profileHypLinks">click here.</asp:LinkButton>
+        
 </div>
+    </asp:Panel>
+    <asp:Panel runat="server" ID="pnlDataText" Visible="false">
+        <asp:Literal runat="server" ID="litNetworkText"></asp:Literal> 
+        <br />
+        To return to the radial graph, <asp:LinkButton ID="btnHideText" runat="server" OnClick="btnHideText_OnClick" CssClass="profileHypLinks">click here.</asp:LinkButton>                       
+    </asp:Panel>
+
 
