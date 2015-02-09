@@ -36,8 +36,9 @@
 
     
 </script>
-
 <div>
+    <asp:Panel runat="server" ID="pnlData" Visible="true">
+
     <div>
         <span style="color: #C00; font-weight: bold;">Red markers</span> indicate the co-authors.
         <asp:Label ID="lblPerson" runat="server"></asp:Label><br />
@@ -60,7 +61,14 @@
     <div id="map_canvas" style="width: 590px; height: 500px; border: 1px solid #999;
         text-align: center;">
     </div>
-
+        <br />
+    To see the data from this visualization as text, <asp:LinkButton ID="btnShowText" runat="server" OnClick="btnShowText_OnClick" CssClass="profileHypLinks">click here.</asp:LinkButton>
+     </asp:Panel>   
+    <asp:Panel runat="server" ID="pnlDataText" Visible="false">
+        <asp:Literal runat="server" ID="litNetworkText"></asp:Literal> 
+        <br />
+        To return to the map, <asp:LinkButton ID="btnHideText" runat="server" OnClick="btnHideText_OnClick" CssClass="profileHypLinks">click here.</asp:LinkButton>                       
+    </asp:Panel>
     <script type="text/javascript">
 
     

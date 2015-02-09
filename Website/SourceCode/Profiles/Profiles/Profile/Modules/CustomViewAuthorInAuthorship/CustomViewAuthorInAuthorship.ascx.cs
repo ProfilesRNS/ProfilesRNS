@@ -58,6 +58,7 @@ namespace Profiles.Profile.Modules
 				{
 					timelineBar.Src = reader["gc"].ToString();
                     timelineBar.Alt = reader["alt"].ToString();
+                    litTimelineTable.Text = reader["asText"].ToString();
 				}
 				reader.Close();                          
            }
@@ -105,7 +106,5 @@ namespace Profiles.Profile.Modules
 
 
         }
-
-
     }
 }

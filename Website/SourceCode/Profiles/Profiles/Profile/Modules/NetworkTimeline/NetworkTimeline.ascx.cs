@@ -192,6 +192,10 @@ namespace Profiles.Profile.Modules.NetworkTimeline
 				timelineDetails.InnerHtml = sb.ToString();
 
                 string altText = "";
+                StringBuilder tableText = new StringBuilder();
+                tableText.AppendLine("<div class=\"listTable\" style=\"margin-top: 12px, margin-bottom:8px \"><table>");
+                tableText.AppendLine("<tr><th>Name</th><th>Number of Publications</th><th>First Publication Year</th><th>Most Recent Publication Year</th><th>Average Publication Date</th></tr>");
+
                 switch (timelineType)
                 {
                     case "CoAuthor":
@@ -210,9 +214,9 @@ namespace Profiles.Profile.Modules.NetworkTimeline
                                 string month = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(AvgMonth + 1);
                                 altText = altText + l + ", " + dataView[i]["PublicationCount"].ToString() + " publications between " + dataView[i]["FirstPublicationYear"].ToString() +
                                     " and " + dataView[i]["LastPublicationYear"].ToString() + ", average publication date " + month + " " + AvgYear + ". ";
+                                tableText.AppendLine("<tr><td><a href=\"" + dataView[i]["ObjectURI"].ToString() + "\">" + l + "</a></td><td>" + dataView[i]["PublicationCount"].ToString() + "</td><td>" + dataView[i]["FirstPublicationYear"].ToString() + "</td><td>" + dataView[i]["LastPublicationYear"].ToString() + "</td><td>" + month + " " + AvgYear + "</td></tr>");
                             }
                         }
-                        timelineImage.Alt = altText;
                         break;
                     case "Concept":
                         for (i = 0; i < dataView.Count; i++)
@@ -230,11 +234,15 @@ namespace Profiles.Profile.Modules.NetworkTimeline
                                 string month = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(AvgMonth + 1);
                                 altText = altText + l + ", " + dataView[i]["NumPubsThis"].ToString() + " publications between " + dataView[i]["FirstPublicationYear"].ToString() +
                                     " and " + dataView[i]["LastPublicationYear"].ToString() + ", average publication date " + month + " " + AvgYear + ". ";
+                                tableText.AppendLine("<tr><td><a href=\"" + dataView[i]["ObjectURI"].ToString() + "\">" + l + "</a></td><td>" + dataView[i]["NumPubsThis"].ToString() + "</td><td>" + dataView[i]["FirstPublicationYear"].ToString() + "</td><td>" + dataView[i]["LastPublicationYear"].ToString() + "</td><td>" + month + " " + AvgYear + "</td></tr>");
+
                             }
                         }
-                        timelineImage.Alt = altText;
                         break;
                 }
+                tableText.AppendLine("</table></div>");
+                timelineImage.Alt = altText;
+                litNetworkText.Text = tableText.ToString();
 			}
 
 
@@ -243,6 +251,18 @@ namespace Profiles.Profile.Modules.NetworkTimeline
                 timelineImage.Visible = false;
 
 		 }
+
+         protected void btnShowText_OnClick(object sender, EventArgs e)
+         {
+             pnlDataText.Visible = true;
+             pnlData.Visible = false;
+         }
+
+         protected void btnHideText_OnClick(object sender, EventArgs e)
+         {
+             pnlDataText.Visible = false;
+             pnlData.Visible = true;
+         }
 
 		 public string InfoCaption { get; set; }
 	}

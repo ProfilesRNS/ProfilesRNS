@@ -27,7 +27,12 @@
 				<div style='padding-right: 3px;'><%= this.GetModuleParamString("TimelineCaption").Replace("@ConceptName", this.ConceptName) %></div>
 				<div id="publicationTimelineGraph">
 					<img id='timeline' runat='server' border='0'/>
+                    <div style="text-align:left">To see the data from this visualization as text, <a id="divShowTimelineTable" tabindex="0">click here.</a></div>
 				</div>
+                <div id="divTimelineTable" class="listTable" style="display:none;margin-top:12px;margin-bottom:8px;">
+		            <asp:Literal runat="server" ID="litTimelineTable"></asp:Literal>
+                    To return to the timeline, <a id="dirReturnToTimeline" tabindex="0">click here.</a>
+                </div>
 			</div>	
 			
 			<% if (ShowOtherPub) {%>
@@ -77,6 +82,28 @@
 				$(target).fadeIn("fast");
 			}
 		});
-	});
+    });
+
+    $(function () {
+        $("#divShowTimelineTable").bind("click", function () {
+
+            $("#divTimelineTable").show();
+            $("#publicationTimelineGraph").hide();
+        });
+
+        $("#divShowTimelineTable").bind("keypress", function () {
+
+            $("#divTimelineTable").show();
+            $("#publicationTimelineGraph").hide();
+        });
+    });
+
+    $(function () {
+        $("#dirReturnToTimeline").bind("click", function () {
+
+            $("#divTimelineTable").hide();
+            $("#publicationTimelineGraph").show();
+        });
+    });
 </script>
        

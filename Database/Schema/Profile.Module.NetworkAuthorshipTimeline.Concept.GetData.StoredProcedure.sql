@@ -106,6 +106,14 @@ BEGIN
 		set @gc = '//chart.googleapis.com/chart?chs=595x100&chf=bg,s,ffffff|c,s,ffffff&chxt=x,y&chxl=0:' + @h + '|1:' + @v + '&cht=bvs&chd=t:' + @d + '&chdl=Major+Topic|Minor+Topic&chco='+@c+'&chbh=10'
 
 
+		declare @asText varchar(max)
+		set @asText = '<table style="width:592px"><tr><th>Year</th><th>Major Topic</th><th>Minor Topic</th><th>Total</th></tr>'
+		select @asText = @asText + '<tr><td>' + cast(y as varchar(50)) + '</td><td>' + cast(A as varchar(50)) + '</td><td>' + cast(B as varchar(50)) + '</td><td>' + cast(A + B as varchar(50)) + '</td></tr>'
+			from @y
+			where A + B > 0
+			order by y 
+		select @asText = @asText + '</table>'
+
 		declare @alt varchar(max)
 		select @alt = 'Bar chart showing ' + cast(sum(A + B) as varchar(50))+ ' publications over ' + cast(count(*) as varchar(50)) + ' distinct years, with a maximum of ' + cast(@x as varchar(50)) + ' publications in ' from @y where A + B > 0
 		select @alt = @alt + cast(y as varchar(50)) + ' and '
@@ -114,7 +122,7 @@ BEGIN
 			order by y 
 		select @alt = left(@alt, len(@alt) - 4)
 
-		select @gc gc, @alt alt --, @w w
+		select @gc gc, @alt alt, @asText asText --, @w w
 
 		--select * from @y order by y
 

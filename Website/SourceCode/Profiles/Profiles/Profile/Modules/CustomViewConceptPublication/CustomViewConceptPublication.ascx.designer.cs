@@ -31,6 +31,15 @@ namespace Profiles.Profile.Modules {
         protected global::System.Web.UI.HtmlControls.HtmlImage timeline;
         
         /// <summary>
+        /// litTimelineTable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litTimelineTable;
+        
+        /// <summary>
         /// cited control.
         /// </summary>
         /// <remarks>

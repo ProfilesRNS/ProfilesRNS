@@ -68,11 +68,11 @@ namespace Profiles.Profile.Modules.NetworkMap
             }
 
 
-            
 
-
-            litGoogleCode.Text =  gmh.MapPlotPeople(base.RDFTriple.Subject, reader, reader2);
-
+            string googleCode, tableText;
+            gmh.MapPlotPeople(base.RDFTriple.Subject, reader, reader2, out googleCode, out tableText);
+            litGoogleCode.Text = googleCode;
+            litNetworkText.Text = tableText;
 
 
             if (!reader.IsClosed)
@@ -84,6 +84,19 @@ namespace Profiles.Profile.Modules.NetworkMap
 
         }
 
+
+        protected void btnShowText_OnClick(object sender, EventArgs e)
+        {
+            pnlDataText.Visible = true;
+            pnlData.Visible = false;
+        }
+
+        protected void btnHideText_OnClick(object sender, EventArgs e)
+        {
+            pnlDataText.Visible = false;
+            pnlData.Visible = true;
+        }
+
         /// <summary>
         /// Summary description for GoogleMapHelper
         /// </summary>
@@ -91,8 +104,9 @@ namespace Profiles.Profile.Modules.NetworkMap
         {
             public GoogleMapHelper() { }
 
-            public string MapPlotPeople(Int64 personId, SqlDataReader reader, SqlDataReader reader2)
+            public void MapPlotPeople(Int64 personId, SqlDataReader reader, SqlDataReader reader2, out string googleCode, out string tableText)
             {
+                tableText = null;
                 var htmlBuilder = new StringBuilder();
 
                 htmlBuilder.AppendLine("<script type=\"text/javascript\">");
@@ -120,11 +134,11 @@ namespace Profiles.Profile.Modules.NetworkMap
                     htmlBuilder.AppendLine(String.Format(" ProfilesRNS.currentPage.data.mapCenter = new google.maps.LatLng({0},{1},{2});", cLat, cLong, sLevel));
                     //htmlBuilder.AppendLine(String.Format(" ProfilesRNS.currentPage.data.mapZoom = {0};", sLevel));
 
-
                     if (personId != 0)
                     {
-
-                        WriteGMapLocations(GenerateGMapLocations(reader), htmlBuilder);
+                        Dictionary<string, GoogleMapLocation> gMapLocation = GenerateGMapLocations(reader);
+                        WriteGMapLocations(gMapLocation, htmlBuilder);
+                        tableText = writeTableLocations(gMapLocation);
 
                         var locArrayIndex = 0;
                         htmlBuilder.AppendLine("ProfilesRNS.currentPage.data.network = [");
@@ -153,7 +167,24 @@ namespace Profiles.Profile.Modules.NetworkMap
 
                 htmlBuilder.AppendLine("</script>");
 
-                return htmlBuilder.ToString();
+                googleCode = htmlBuilder.ToString();
+            }
+
+            private static string writeTableLocations(Dictionary<string, GoogleMapLocation> locationsDict)
+            {
+                StringBuilder sb = new StringBuilder();
+                if (locationsDict == null) throw new ArgumentNullException("locationsDict");
+
+                sb.AppendLine("<div class=\"listTable\" style=\"margin-top: 12px, margin-bottom:8px \"><table>");
+                sb.AppendLine("<tr><th>Name(s)</th><th>Address</th><th>Latitude</th><th>Longitude</th></tr>");
+
+                foreach (var location in locationsDict.Values)
+                {
+                    var html = GenerateLocHtml(location);
+                    sb.AppendLine("<tr><td>" + location.PersonsAtagString + "</td><td>" + location.Address.Replace("\\'", "'") + "</td><td>" + location.Latitude + "</td><td>" + location.Longitude + "</td></tr>");
+                }
+                sb.AppendLine("</table></div>");
+                return sb.ToString();
             }
 
             private static void WriteGMapLocations(Dictionary<string, GoogleMapLocation> locationsDict, StringBuilder value)

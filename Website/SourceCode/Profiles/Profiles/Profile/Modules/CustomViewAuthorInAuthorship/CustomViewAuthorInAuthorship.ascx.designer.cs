@@ -31,6 +31,15 @@ namespace Profiles.Profile.Modules {
         protected global::System.Web.UI.WebControls.Repeater rpPublication;
         
         /// <summary>
+        /// pnlData control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlData;
+        
+        /// <summary>
         /// timelineBar control.
         /// </summary>
         /// <remarks>
@@ -38,6 +47,33 @@ namespace Profiles.Profile.Modules {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlImage timelineBar;
+        
+        /// <summary>
+        /// pnlDataText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlDataText;
+        
+        /// <summary>
+        /// litTimelineTable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litTimelineTable;
+        
+        /// <summary>
+        /// btnHideText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnHideText;
         
         /// <summary>
         /// supportText control.

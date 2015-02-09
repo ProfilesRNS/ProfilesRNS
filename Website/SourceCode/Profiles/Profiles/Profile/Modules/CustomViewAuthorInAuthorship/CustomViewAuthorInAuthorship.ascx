@@ -36,7 +36,14 @@
 		This graph shows the total number of publications by year, by first, middle/unknown, or last author.
 		<div id="publicationTimelineGraph">
 			<img id='timelineBar' runat='server' border='0'/>
+            <div style="text-align:left">To see the data from this visualization as text, <a id="divShowTimelineTable" tabindex="0">click here.</a></div>
 		</div>
+
+        <div id="divTimelineTable" class="listTable" style="display:none;margin-top:12px;margin-bottom:8px;">
+		    <asp:Literal runat="server" ID="litTimelineTable"></asp:Literal>
+            To return to the timeline, <a id="dirReturnToTimeline" tabindex="0">click here.</a>
+        </div>
+             
 	</div>	
 </div>
 
@@ -56,6 +63,28 @@
                 // Show hide;
                 $("div.publicationList .toggle-vis:visible").hide().siblings().fadeIn("fast");
             }
+        });
+    });
+
+    $(function () {
+        $("#divShowTimelineTable").bind("click", function () {
+
+            $("#divTimelineTable").show();
+            $("#publicationTimelineGraph").hide();
+        });
+
+        $("#divShowTimelineTable").bind("keypress", function () {
+
+            $("#divTimelineTable").show();
+            $("#publicationTimelineGraph").hide();
+        });
+    });
+
+    $(function () {
+        $("#dirReturnToTimeline").bind("click", function () {
+
+            $("#divTimelineTable").hide();
+            $("#publicationTimelineGraph").show();
         });
     });
 </script>
