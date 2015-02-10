@@ -208,15 +208,22 @@ namespace Profiles.DIRECT.Modules.DirectSearch
             sb.Append(" onMouseOver=\"doListTableRowOver(this);");
             if (tempRowMouseOver != "")
                 sb.Append(tempRowMouseOver);
-
             sb.Append("\"");
+            sb.Append(" onFocus=\"doListTableRowOver(this)\"");
+
             sb.Append(" onMouseOut=\"doListTableRowOut(this," + tempRowOdd + ");");
             if (tempRowMouseOut != "")
                 sb.Append(tempRowMouseOut);
-
             sb.Append("\"");
+            sb.Append(" onBlur=\"doListTableRowOut(this," + tempRowOdd + ");\"");
+                        
+            sb.Append("tabindex=\"0\"");
+
             if (tempRowClick != "")
+            {
                 sb.Append(" onClick=\"" + tempRowClick + "\"");
+                sb.Append(" onkeypress=\"if(event.keyCode == 13)" + tempRowClick + "\"");
+            }
 
             sb.Append(">");
             string StyleStr = "", ClassName = "";

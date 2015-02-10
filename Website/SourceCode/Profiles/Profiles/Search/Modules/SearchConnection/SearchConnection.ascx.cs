@@ -131,6 +131,9 @@ namespace Profiles.Search.Modules
                 {
                     e.Row.Attributes.Add("onmouseover", "doListTableRowOver(this);");
                     e.Row.Attributes.Add("onmouseout", "doListTableRowOut(this,0);");
+                    e.Row.Attributes.Add("onfocus", "doListTableRowOver(this);");
+                    e.Row.Attributes.Add("onblur", "doListTableRowOut(this,0);");
+                    e.Row.Attributes.Add("tabindex", "0");
                     e.Row.Attributes.Add("class", "evenRow");
 
                 }
@@ -138,6 +141,9 @@ namespace Profiles.Search.Modules
                 {
                     e.Row.Attributes.Add("onmouseover", "doListTableRowOver(this);");
                     e.Row.Attributes.Add("onmouseout", "doListTableRowOut(this,1);");
+                    e.Row.Attributes.Add("onfocus", "doListTableRowOver(this);");
+                    e.Row.Attributes.Add("onblur", "doListTableRowOut(this,1);");
+                    e.Row.Attributes.Add("tabindex", "0");
                     e.Row.Attributes.Add("class", "oddRow");
                 }
 
@@ -167,6 +173,9 @@ namespace Profiles.Search.Modules
                 {
                     e.Row.Attributes.Add("onmouseover", "doListTableRowOver(this);");
                     e.Row.Attributes.Add("onmouseout", "doListTableRowOut(this,0);");
+                    e.Row.Attributes.Add("onfocus", "doListTableRowOver(this);");
+                    e.Row.Attributes.Add("onblur", "doListTableRowOut(this,0);");
+                    e.Row.Attributes.Add("tabindex", "0");
                     e.Row.Attributes.Add("class", "evenRow");
 
                 }
@@ -174,6 +183,9 @@ namespace Profiles.Search.Modules
                 {
                     e.Row.Attributes.Add("onmouseover", "doListTableRowOver(this);");
                     e.Row.Attributes.Add("onmouseout", "doListTableRowOut(this,1);");
+                    e.Row.Attributes.Add("onfocus", "doListTableRowOver(this);");
+                    e.Row.Attributes.Add("onblur", "doListTableRowOut(this,1);");
+                    e.Row.Attributes.Add("tabindex", "0");
                     e.Row.Attributes.Add("class", "oddRow");
                 }
                 //e.Row.Attributes.Add("onclick", "document.location.href='" + dc.URI + "'");

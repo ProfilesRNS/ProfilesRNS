@@ -47,7 +47,7 @@ remove that person as your proxy.
                 </asp:TemplateField>
                 <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderText="Delete">
                     <ItemTemplate>
-                        <asp:ImageButton OnClick="lnkDelete_OnClick" ID="lnkDelete" runat="server" ImageUrl="~/Edit/Images/icon_delete.gif"
+                        <asp:ImageButton OnClick="lnkDelete_OnClick" ID="lnkDelete" runat="server" ImageUrl="~/Edit/Images/icon_delete.gif" AlternateText="delete"
                             OnClientClick="Javascript:return confirm('Are you sure you want to delete this entry?');"
                             Text="X"></asp:ImageButton>
                     </ItemTemplate>
@@ -60,7 +60,7 @@ remove that person as your proxy.
         <table>
             <tr>
                 <td valign="middle">
-                    <asp:Image runat="server" ID="imgAdd" OnClick="lnkAddProxy_OnClick" />&nbsp;
+                    <asp:Image runat="server" ID="imgAdd" alt=" "/>&nbsp;
                 </td>
                 <td style="padding-bottom: 4px" valign="middle">                    
                     <asp:Literal runat="server" ID='lnkAddProxyTmp' Text = "Add A Proxy"></asp:Literal>

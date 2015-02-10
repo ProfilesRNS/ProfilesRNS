@@ -79,7 +79,7 @@ own proxies.
                         <table border="0" cellspacing="0" cellpadding="0" class="searchForm">
                             <tr>
                                 <th>
-                                    Last Name
+                                    <asp:Label runat="server" AssociatedControlID="txtLastName">Last Name</asp:Label>
                                 </th>
                                 <td>
                                     <asp:TextBox ID="txtLastName" runat="server" Width="250px" />
@@ -87,7 +87,7 @@ own proxies.
                             </tr>
                             <tr>
                                 <th>
-                                    First Name
+                                    <asp:Label ID="Label1" runat="server" AssociatedControlID="txtFirstName">First Name</asp:Label>
                                 </th>
                                 <td>
                                     <asp:TextBox ID="txtFirstName" runat="server" Width="250px" />
@@ -95,7 +95,7 @@ own proxies.
                             </tr>
                             <tr>
                                 <th style="text-align: right;">
-                                    Institution
+                                    <asp:Label ID="Label2" runat="server" AssociatedControlID="drpInstitution">Institution</asp:Label>
                                 </th>
                                 <td>
                                     <asp:DropDownList ID="drpInstitution" runat="server" Width="255px" AutoPostBack="false" />
@@ -103,7 +103,7 @@ own proxies.
                             </tr>
                             <tr>
                                 <th>
-                                    Department
+                                    <asp:Label ID="Label3" runat="server" AssociatedControlID="drpDepartment">Department</asp:Label>
                                 </th>
                                 <td>
                                     <asp:DropDownList ID="drpDepartment" runat="server" Width="255px" AutoPostBack="false" />

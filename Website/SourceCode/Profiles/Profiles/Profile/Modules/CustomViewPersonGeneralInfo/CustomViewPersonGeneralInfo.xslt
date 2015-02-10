@@ -153,7 +153,7 @@
               <xsl:value-of select="$orcid "/>
             </a>
             <xsl:text disable-output-escaping="yes">&#160;</xsl:text><a style="border: none;" href="{$orcidinfosite}" target='_blank'>
-              <img style='border-style: none' src="{$root}/Framework/Images/info.png"  border='0'/>
+              <img style='border-style: none' src="{$root}/Framework/Images/info.png"  border='0' alt='Additional info'/>
             </a>
           </td>
         </tr>

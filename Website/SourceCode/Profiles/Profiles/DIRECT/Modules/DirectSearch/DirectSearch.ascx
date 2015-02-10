@@ -173,7 +173,7 @@ function NoEnter(){
                         </th>
                         <td  class="fieldMain">
                             <input type='text' name="SearchPhrase" id="FSSearchPhrase" value="<%Response.Write(GetSearchPhrase()); %>"
-                                class="inputText" />
+                                class="inputText" title="keywords"/>
                         </td>
                         <td class="fieldOptions">
                             <input type='button' value="Search" name="btnsearch" id="btnsearch" class="inputButton"
@@ -198,7 +198,7 @@ function NoEnter(){
             </div>
             <%Response.Write(DrawMyTable()); %>
             <iframe name="FSAJAXFrame" id="FSAJAXFrame" src="<%Response.Write(DirectServiceURL());%>?request=outgoingcount&blank=y&r=rnd"
-                frameborder="0" scrolling="no" style="width: 0px; height: 0px;" />
+                frameborder="0" scrolling="no" style="width: 0px; height: 0px;" title="Preview"/>
             </iframe> 
         </div>
     </div>
