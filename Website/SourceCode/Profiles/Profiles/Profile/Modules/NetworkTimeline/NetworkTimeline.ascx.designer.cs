@@ -13,15 +13,6 @@ namespace Profiles.Profile.Modules.NetworkTimeline {
     public partial class NetworkTimeline {
         
         /// <summary>
-        /// pnlData control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlData;
-        
-        /// <summary>
         /// timelineImage control.
         /// </summary>
         /// <remarks>
@@ -40,24 +31,6 @@ namespace Profiles.Profile.Modules.NetworkTimeline {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl timelineDetails;
         
         /// <summary>
-        /// btnShowText control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnShowText;
-        
-        /// <summary>
-        /// pnlDataText control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlDataText;
-        
-        /// <summary>
         /// litNetworkText control.
         /// </summary>
         /// <remarks>
@@ -65,14 +38,5 @@ namespace Profiles.Profile.Modules.NetworkTimeline {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litNetworkText;
-        
-        /// <summary>
-        /// btnHideText control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnHideText;
     }
 }

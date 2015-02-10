@@ -252,18 +252,6 @@ namespace Profiles.Profile.Modules.NetworkTimeline
 
 		 }
 
-         protected void btnShowText_OnClick(object sender, EventArgs e)
-         {
-             pnlDataText.Visible = true;
-             pnlData.Visible = false;
-         }
-
-         protected void btnHideText_OnClick(object sender, EventArgs e)
-         {
-             pnlDataText.Visible = false;
-             pnlData.Visible = true;
-         }
-
 		 public string InfoCaption { get; set; }
 	}
 }

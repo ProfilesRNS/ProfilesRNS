@@ -22,15 +22,6 @@ namespace Profiles.Profile.Modules.NetworkMap {
         protected global::System.Web.UI.WebControls.Literal litGoogleCode;
         
         /// <summary>
-        /// pnlData control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlData;
-        
-        /// <summary>
         /// lblPerson control.
         /// </summary>
         /// <remarks>
@@ -49,24 +40,6 @@ namespace Profiles.Profile.Modules.NetworkMap {
         protected global::System.Web.UI.WebControls.DataList dlGoogleMapLinks;
         
         /// <summary>
-        /// btnShowText control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnShowText;
-        
-        /// <summary>
-        /// pnlDataText control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlDataText;
-        
-        /// <summary>
         /// litNetworkText control.
         /// </summary>
         /// <remarks>
@@ -74,14 +47,5 @@ namespace Profiles.Profile.Modules.NetworkMap {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litNetworkText;
-        
-        /// <summary>
-        /// btnHideText control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnHideText;
     }
 }

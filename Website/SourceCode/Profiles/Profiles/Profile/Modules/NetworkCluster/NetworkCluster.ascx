@@ -276,7 +276,7 @@
     }
 // -->
 </SCRIPT>
-<asp:Panel runat="server" ID="pnlRadialGraph" Visible="true">
+<div id="divClusterGraph">
 <div>
 	<div class="clusterWarning">
 		Please note that this visualization requires a fast computer and video card. It might cause web browsers on slower machines to become unresponsive.
@@ -323,14 +323,14 @@
 	</div>
 </div>
     <br />
-    To see the data from this visualization as text, <asp:LinkButton ID="btnShowText" runat="server" OnClick="btnShowText_OnClick" CssClass="profileHypLinks">click here.</asp:LinkButton>
+    To see the data from this visualization as text, <a id="divShowTimelineTable" tabindex="0">click here.</a>
         
-    </asp:Panel>
-    <asp:Panel runat="server" ID="pnlDataText" Visible="false">
+    </div>
+    <div id="divDataText" style="display:none;margin-top:12px;margin-bottom:8px;">
         <asp:Literal runat="server" ID="litNetworkText"></asp:Literal> 
         <br />
-        To return to the cluster graph, <asp:LinkButton ID="btnHideText" runat="server" OnClick="btnHideText_OnClick" CssClass="profileHypLinks">click here.</asp:LinkButton>                       
-    </asp:Panel>
+        To return to the cluster graph, <a id="dirReturnToTimeline" tabindex="0">click here.</a>                       
+    </div>
 
 <script type="text/javascript">
 	// Use jQuery instead of $ to avoid conflicts
@@ -339,5 +339,26 @@
 			jQuery('div.clusterWarning').hide().siblings('div').show();			
 			loadClusterView();
 		});
-	});
+});
+
+jQuery(function () {
+    jQuery("#divShowTimelineTable").bind("click", function () {
+
+        jQuery("#divDataText").show();
+        jQuery("#divClusterGraph").hide();
+    });
+
+    jQuery("#divShowTimelineTable").bind("keypress", function () {
+
+        jQuery("#divDataText").show();
+        jQuery("#divClusterGraph").hide();
+    });
+});
+
+jQuery(function () {
+    jQuery("#dirReturnToTimeline").bind("click", function () {
+        jQuery("#divDataText").hide();
+        jQuery("#divClusterGraph").show();
+    });
+});
 </script>

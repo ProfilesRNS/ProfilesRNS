@@ -90,42 +90,17 @@ namespace Profiles.Profile.Modules.NetworkRadial
                 "}";
             Page.Header.Controls.Add(script);
 
-        }
-
-
-        protected void btnShowText_OnClick(object sender, EventArgs e)
-        {
             Profiles.Profile.Utilities.DataIO data = new Profiles.Profile.Utilities.DataIO();
 
-            //          Profiles.Framework.Utilities.RDFTriple request = new RDFTriple(Convert.ToInt32(Request.QueryString["p"]));
             RDFTriple request = new RDFTriple(Convert.ToInt64(Request.QueryString["subject"]));
             XmlDocument x = data.GetProfileNetworkForBrowser(request);
-            /*XmlNodeList xNetworkPeople = x.GetElementsByTagName("NetworkPerson");
-            foreach (XmlNode xn in xNetworkPeople)
-            {
-                string firstname = xn.Attributes[""].ToString();
-            }*/
-
             System.Xml.Xsl.XsltArgumentList args = new System.Xml.Xsl.XsltArgumentList();
             args.AddParam("root", "", Root.Domain);
-
-            DateTime d = DateTime.Now;
-
-            //Framework.Utilities.DebugLogging.Log("{ApplyXSLT Start} " + base.GetModuleParamString("XSLTPath"));
-
 
             System.Xml.Xsl.XslCompiledTransform xslt = new System.Xml.Xsl.XslCompiledTransform();
 
             litNetworkText.Text = Profiles.Framework.Utilities.XslHelper.TransformInMemory(Server.MapPath("~/profile/XSLT/NetworkTable.xslt"), args, x.InnerXml);
 
-            pnlDataText.Visible = true;
-            pnlRadialGraph.Visible = false;
-        }
-
-        protected void btnHideText_OnClick(object sender, EventArgs e)
-        {
-            pnlDataText.Visible = false;
-            pnlRadialGraph.Visible = true;
         }
     }
 }

@@ -37,38 +37,38 @@
     
 </script>
 <div>
-    <asp:Panel runat="server" ID="pnlData" Visible="true">
+    <div id="divData">
 
-    <div>
-        <span style="color: #C00; font-weight: bold;">Red markers</span> indicate the co-authors.
-        <asp:Label ID="lblPerson" runat="server"></asp:Label><br />
-        <span style="color: #00C; font-weight: bold;">Blue lines</span> connect people who
-        have published papers together.</div>
-    <div style="background-color: #999; width: 590px; height: 1px; overflow: hidden;
-        margin: 5px 0px;">
-    </div>
-    <div style="margin-bottom: 5px;">
-        <b>Zoom</b>:&nbsp;&nbsp;
-        <asp:DataList ID="dlGoogleMapLinks" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow">
-            <ItemTemplate>
-                <a style="cursor: pointer" id="lnkMapLink" runat="server" onkeypress='<%# "if (event.keyCode == 13) JavaScript:zoomMap(" + Eval("ZoomLevel") + "," + Eval("Latitude") + "," + Eval("Longitude") + "); "%>' onclick='<%# "JavaScript:zoomMap(" + Eval("ZoomLevel") + "," + Eval("Latitude") + "," + Eval("Longitude") + "); "%>' tabindex="0">
-                    <asp:Label ID="lblMapLink" runat="server" Text='<%#Eval("Label")%>'></asp:Label></a>
-            </ItemTemplate>
-            <SeparatorTemplate>
-                &nbsp;|&nbsp;</SeparatorTemplate>
-        </asp:DataList>
-    </div>
-    <div id="map_canvas" style="width: 590px; height: 500px; border: 1px solid #999;
-        text-align: center;">
-    </div>
-        <br />
-    To see the data from this visualization as text, <asp:LinkButton ID="btnShowText" runat="server" OnClick="btnShowText_OnClick" CssClass="profileHypLinks">click here.</asp:LinkButton>
-     </asp:Panel>   
-    <asp:Panel runat="server" ID="pnlDataText" Visible="false">
+        <div>
+            <span style="color: #C00; font-weight: bold;">Red markers</span> indicate the co-authors.
+            <asp:Label ID="lblPerson" runat="server"></asp:Label><br />
+            <span style="color: #00C; font-weight: bold;">Blue lines</span> connect people who
+            have published papers together.</div>
+        <div style="background-color: #999; width: 590px; height: 1px; overflow: hidden;
+            margin: 5px 0px;">
+        </div>
+        <div style="margin-bottom: 5px;">
+            <b>Zoom</b>:&nbsp;&nbsp;
+            <asp:DataList ID="dlGoogleMapLinks" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow">
+                <ItemTemplate>
+                    <a style="cursor: pointer" id="lnkMapLink" runat="server" onkeypress='<%# "if (event.keyCode == 13) JavaScript:zoomMap(" + Eval("ZoomLevel") + "," + Eval("Latitude") + "," + Eval("Longitude") + "); "%>' onclick='<%# "JavaScript:zoomMap(" + Eval("ZoomLevel") + "," + Eval("Latitude") + "," + Eval("Longitude") + "); "%>' tabindex="0">
+                        <asp:Label ID="lblMapLink" runat="server" Text='<%#Eval("Label")%>'></asp:Label></a>
+                </ItemTemplate>
+                <SeparatorTemplate>
+                    &nbsp;|&nbsp;</SeparatorTemplate>
+            </asp:DataList>
+        </div>
+        <div id="map_canvas" style="width: 590px; height: 500px; border: 1px solid #999;
+            text-align: center;">
+        </div>
+            <br />
+        To see the data from this visualization as text, <a id="divShowTimelineTable" tabindex="0">click here.</a>
+     </div>   
+    <div id="divDataText" style="display:none;margin-top:12px;margin-bottom:8px;">
         <asp:Literal runat="server" ID="litNetworkText"></asp:Literal> 
         <br />
-        To return to the map, <asp:LinkButton ID="btnHideText" runat="server" OnClick="btnHideText_OnClick" CssClass="profileHypLinks">click here.</asp:LinkButton>                       
-    </asp:Panel>
+        To return to the map,  <a id="dirReturnToTimeline" tabindex="0">click here.</a>                      
+    </div>
     <script type="text/javascript">
 
     
@@ -159,9 +159,28 @@
         ProfilesRNS.currentPage.InitPage();
         });
 
-    
-    
-    
+
+
+        jQuery(function () {
+            jQuery("#divShowTimelineTable").bind("click", function () {
+
+                jQuery("#divDataText").show();
+                jQuery("#divData").hide();
+            });
+
+            jQuery("#divShowTimelineTable").bind("keypress", function () {
+
+                jQuery("#divDataText").show();
+                jQuery("#divData").hide();
+            });
+        });
+
+        jQuery(function () {
+            jQuery("#dirReturnToTimeline").bind("click", function () {
+                jQuery("#divDataText").hide();
+                jQuery("#divData").show();
+            });
+        });
     
     
     
