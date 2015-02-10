@@ -81,6 +81,7 @@
     <Content Include="DirectService.aspx" />
     <Content Include="Edit\Modules\CustomEditEagleI\CustomEditEagleI.ascx" />
     <Content Include="Edit\Modules\CustomEditListProperty\CustomEditListProperty.ascx" />
+    <Content Include="Framework\Images\listen.jpg" />
     <Content Include="Framework\Images\orcid_16x16%281%29.gif" />
     <Content Include="Framework\Images\Orcid_Logo_rgb.png" />
     <Content Include="Framework\Images\Orcid_symbol_rgb.png" />
