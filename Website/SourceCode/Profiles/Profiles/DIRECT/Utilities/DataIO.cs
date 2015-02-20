@@ -40,16 +40,16 @@ namespace Profiles.DIRECT.Utilities
 
 
                 HttpWebRequest request = null;
-                request = (HttpWebRequest)WebRequest.Create(Root.Domain + "/search/default.aspx?searchtype=people&searchfor=" + searchfor);
+                request = (HttpWebRequest)WebRequest.Create(Root.Domain + "/search/default.aspx?searchtype=people&searchfor=" + searchfor + "&exactPhrase=false");
                 request.Method = "POST";
 
                 request.ContentType = "application/x-www-form-urlencoded";
-                request.ContentLength = (Root.Domain + "/search/default.aspx?searchtype=people&searchfor=" + searchfor).Length;
+                request.ContentLength = (Root.Domain + "/search/default.aspx?searchtype=people&searchfor=" + searchfor + "&exactPhrase=false").Length;
 
                 using (Stream writeStream = request.GetRequestStream())
                 {
                     UTF8Encoding encoding = new UTF8Encoding();
-                    byte[] bytes = encoding.GetBytes(Root.Domain + "/search/default.aspx?searchtype=people&searchfor=" + searchfor);
+                    byte[] bytes = encoding.GetBytes(Root.Domain + "/search/default.aspx?searchtype=people&searchfor=" + searchfor + "&exactPhrase=false");
                     writeStream.Write(bytes, 0, bytes.Length);
                 }
 
