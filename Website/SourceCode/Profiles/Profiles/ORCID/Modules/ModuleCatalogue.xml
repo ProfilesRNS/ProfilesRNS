@@ -21,6 +21,7 @@ For details, see: LICENSE.txt
   <Module ModulePath="Modules" NameSpace="UpdateSecurityGroupDefaultDecisions" FileName="UpdateSecurityGroupDefaultDecisions.ascx" Enabled="true" />
   <Module ModulePath="Modules" NameSpace="UploadInfoToORCID" FileName="UploadInfoToORCID.ascx" Enabled="true" />
   <Module ModulePath="Modules" NameSpace="CustomEditORCID" FileName="CustomEditORCID.ascx" Enabled="true" />
+  <Module ModulePath="Modules" NameSpace="CustomEditBasicORCID" FileName="CustomEditBasicORCID.ascx" Enabled="true" />
 </ModuleList>
 
 

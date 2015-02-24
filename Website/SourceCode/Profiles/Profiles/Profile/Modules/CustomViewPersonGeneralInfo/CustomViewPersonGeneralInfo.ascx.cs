@@ -60,29 +60,30 @@ namespace Profiles.Profile.Modules.CustomViewPersonGeneralInfo
             args.AddParam("imgguid", "", Guid.NewGuid().ToString());
 
 
-            // Check for an ORCID
-            string internalUsername = new Profiles.ORCID.Utilities.ProfilesRNSDLL.BLL.Profile.Data.Person().GetInternalUsername(Convert.ToInt64(Request.QueryString["Subject"]));
-            Profiles.ORCID.Utilities.ProfilesRNSDLL.BO.ORCID.Person orcidPerson = new Profiles.ORCID.Utilities.ProfilesRNSDLL.BLL.ORCID.Person().GetByInternalUsername(internalUsername);
-            if (orcidPerson.Exists && !orcidPerson.ORCIDIsNull)
+
+            if (base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[1]/vivo:orcidId", base.Namespaces) != null) // Only show ORCID if security settings allow it
             {
-                if (base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[1]/vivo:orcidId", base.Namespaces) != null) // Only show ORCID if security settings allow it
-                {
-                    args.AddParam("orcid", "", orcidPerson.ORCID);
-                    args.AddParam("orcidurl", "", Profiles.ORCID.Utilities.config.ORCID_URL + "/" + orcidPerson.ORCID);
-                    args.AddParam("orcidinfosite", "", Profiles.ORCID.Utilities.config.InfoSite);
-                    args.AddParam("orcidimage", "", Root.Domain + "/Framework/Images/orcid_16x16(1).gif");
-                    args.AddParam("orcidimageguid", "", Guid.NewGuid().ToString());
-                }
-            }
-            else if (Profiles.ORCID.Utilities.config.ShowNoORCIDMessage && Profiles.ORCID.Utilities.config.Enabled)
-            {
-                //args.AddParam("orcid", "", "No ORCID id has been created for this user");
-                args.AddParam("orcid", "", "Login to create your ORCID iD");
+                args.AddParam("orcid", "", base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[1]/vivo:orcidId", base.Namespaces).InnerText);
+                args.AddParam("orcidurl", "", Profiles.ORCID.Utilities.config.ORCID_URL + "/" + base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[1]/vivo:orcidId", base.Namespaces).InnerText);
                 args.AddParam("orcidinfosite", "", Profiles.ORCID.Utilities.config.InfoSite);
-                string qs = HttpUtility.UrlEncode("predicateuri=http%3a%2f%2fvivoweb.org%2fontology%2fcore!orcidId&module=DisplayItemToEdit&ObjectType=Literal");
-                args.AddParam("orcidurl", "", Root.Domain + "/login/default.aspx?method=login&edit=true&editparams=" + qs);
                 args.AddParam("orcidimage", "", Root.Domain + "/Framework/Images/orcid_16x16(1).gif");
                 args.AddParam("orcidimageguid", "", Guid.NewGuid().ToString());
+            }
+            if (Profiles.ORCID.Utilities.config.ShowNoORCIDMessage && Profiles.ORCID.Utilities.config.Enabled)
+            {
+                    // Check for an ORCID
+                string internalUsername = new Profiles.ORCID.Utilities.ProfilesRNSDLL.BLL.Profile.Data.Person().GetInternalUsername(Convert.ToInt64(Request.QueryString["Subject"]));
+                Profiles.ORCID.Utilities.ProfilesRNSDLL.BO.ORCID.Person orcidPerson = new Profiles.ORCID.Utilities.ProfilesRNSDLL.BLL.ORCID.Person().GetByInternalUsername(internalUsername);
+                if (!orcidPerson.Exists || orcidPerson.ORCIDIsNull)
+                {
+                    //args.AddParam("orcid", "", "No ORCID id has been created for this user");
+                    args.AddParam("orcid", "", "Login to create your ORCID iD");
+                    args.AddParam("orcidinfosite", "", Profiles.ORCID.Utilities.config.InfoSite);
+                    string qs = HttpUtility.UrlEncode("predicateuri=http%3a%2f%2fvivoweb.org%2fontology%2fcore!orcidId&module=DisplayItemToEdit&ObjectType=Literal");
+                    args.AddParam("orcidurl", "", Root.Domain + "/login/default.aspx?method=login&edit=true&editparams=" + qs);
+                    args.AddParam("orcidimage", "", Root.Domain + "/Framework/Images/orcid_16x16(1).gif");
+                    args.AddParam("orcidimageguid", "", Guid.NewGuid().ToString());
+        }
             }
             litPersonalInfo.Text = XslHelper.TransformInMemory(Server.MapPath("~/Profile/Modules/CustomViewPersonGeneralInfo/CustomViewPersonGeneralInfo.xslt"), args, base.BaseData.OuterXml);
 
