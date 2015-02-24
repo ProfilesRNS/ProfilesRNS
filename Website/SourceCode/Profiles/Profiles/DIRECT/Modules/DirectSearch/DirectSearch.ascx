@@ -119,7 +119,7 @@ function NoEnter(){
 		for (var i=0; i<fsObject.length; i++) {
 			fsObject[i].ResultPopType = 'Please wait while this institution processes the request.';
 			fsObject[i].ResultDetailsURL = '';
-			document.getElementById('SITE_STATUS_'+fsObject[i].SiteID).childNodes[0].innerHTML = '<img src="<%Response.Write(DirectWaitingImageURL());%>" border="0" style="position:relative;top:-2px;" />';
+			document.getElementById('SITE_STATUS_'+fsObject[i].SiteID).childNodes[0].innerHTML = '<img src="<%Response.Write(DirectWaitingImageURL());%>" alt="Loading" border="0" style="position:relative;top:-2px;" />';
 		}	
 	
 	    try{
