@@ -95,6 +95,7 @@
     <Content Include="ORCID\Modules\CreateBatch\CreateBatch.ascx" />
     <Content Include="ORCID\Modules\CreateMyORCID\CreateMyORCID.ascx" />
     <Content Include="ORCID\Modules\CreationConfirmation\CreationConfirmation.ascx" />
+    <Content Include="ORCID\Modules\CustomEditBasicORCID\CustomEditBasicORCID.ascx" />
     <Content Include="ORCID\Modules\CustomEditORCID\CustomEditORCID.ascx" />
     <Content Include="ORCID\Modules\Default\Default.ascx" />
     <Content Include="ORCID\Modules\ModuleCatalogue.xml" />
@@ -297,6 +298,13 @@
     </Compile>
     <Compile Include="ORCID\Modules\CreationConfirmation\CreationConfirmation.ascx.designer.cs">
       <DependentUpon>CreationConfirmation.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ORCID\Modules\CustomEditBasicORCID\CustomEditBasicORCID.ascx.cs">
+      <DependentUpon>CustomEditBasicORCID.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ORCID\Modules\CustomEditBasicORCID\CustomEditBasicORCID.ascx.designer.cs">
+      <DependentUpon>CustomEditBasicORCID.ascx</DependentUpon>
     </Compile>
     <Compile Include="ORCID\Modules\CustomEditORCID\CustomEditORCID.ascx.cs">
       <DependentUpon>CustomEditORCID.ascx</DependentUpon>
