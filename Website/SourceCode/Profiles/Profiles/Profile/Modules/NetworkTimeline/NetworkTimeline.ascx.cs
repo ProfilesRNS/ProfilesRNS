@@ -214,7 +214,7 @@ namespace Profiles.Profile.Modules.NetworkTimeline
                                 string month = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(AvgMonth + 1);
                                 altText = altText + l + ", " + dataView[i]["PublicationCount"].ToString() + " publications between " + dataView[i]["FirstPublicationYear"].ToString() +
                                     " and " + dataView[i]["LastPublicationYear"].ToString() + ", average publication date " + month + " " + AvgYear + ". ";
-                                tableText.AppendLine("<tr><td><a href=\"" + dataView[i]["ObjectURI"].ToString() + "\">" + l + "</a></td><td>" + dataView[i]["PublicationCount"].ToString() + "</td><td>" + dataView[i]["FirstPublicationYear"].ToString() + "</td><td>" + dataView[i]["LastPublicationYear"].ToString() + "</td><td>" + month + " " + AvgYear + "</td></tr>");
+                                tableText.AppendLine("<tr><td style=\"text-align:left\"><a href=\"" + dataView[i]["ObjectURI"].ToString() + "\">" + l + "</a></td><td>" + dataView[i]["PublicationCount"].ToString() + "</td><td>" + dataView[i]["FirstPublicationYear"].ToString() + "</td><td>" + dataView[i]["LastPublicationYear"].ToString() + "</td><td style=\"text-align:left\">" + month + " " + AvgYear + "</td></tr>");
                             }
                         }
                         break;
@@ -234,7 +234,7 @@ namespace Profiles.Profile.Modules.NetworkTimeline
                                 string month = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(AvgMonth + 1);
                                 altText = altText + l + ", " + dataView[i]["NumPubsThis"].ToString() + " publications between " + dataView[i]["FirstPublicationYear"].ToString() +
                                     " and " + dataView[i]["LastPublicationYear"].ToString() + ", average publication date " + month + " " + AvgYear + ". ";
-                                tableText.AppendLine("<tr><td><a href=\"" + dataView[i]["ObjectURI"].ToString() + "\">" + l + "</a></td><td>" + dataView[i]["NumPubsThis"].ToString() + "</td><td>" + dataView[i]["FirstPublicationYear"].ToString() + "</td><td>" + dataView[i]["LastPublicationYear"].ToString() + "</td><td>" + month + " " + AvgYear + "</td></tr>");
+                                tableText.AppendLine("<tr><td style=\"text-align:left\"><a href=\"" + dataView[i]["ObjectURI"].ToString() + "\">" + l + "</a></td><td>" + dataView[i]["NumPubsThis"].ToString() + "</td><td>" + dataView[i]["FirstPublicationYear"].ToString() + "</td><td>" + dataView[i]["LastPublicationYear"].ToString() + "</td><td style=\"text-align:left\">" + month + " " + AvgYear + "</td></tr>");
 
                             }
                         }

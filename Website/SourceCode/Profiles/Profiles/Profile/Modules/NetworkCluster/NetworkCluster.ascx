@@ -348,10 +348,11 @@ jQuery(function () {
         jQuery("#divClusterGraph").hide();
     });
 
-    jQuery("#divShowTimelineTable").bind("keypress", function () {
-
-        jQuery("#divDataText").show();
-        jQuery("#divClusterGraph").hide();
+    jQuery("#divShowTimelineTable").bind("keypress", function (e) {
+        if (e.keyCode == 13) {
+            jQuery("#divDataText").show();
+            jQuery("#divClusterGraph").hide();
+        }
     });
 });
 
@@ -359,6 +360,13 @@ jQuery(function () {
     jQuery("#dirReturnToTimeline").bind("click", function () {
         jQuery("#divDataText").hide();
         jQuery("#divClusterGraph").show();
+    });
+
+    jQuery("#dirReturnToTimeline").bind("keypress", function (e) {
+        if (e.keyCode == 13) {
+            jQuery("#divDataText").hide();
+            jQuery("#divClusterGraph").show();
+        }
     });
 });
 </script>

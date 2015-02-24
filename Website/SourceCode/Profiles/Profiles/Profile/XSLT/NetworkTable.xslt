@@ -37,7 +37,7 @@
           <xsl:variable name="nodeId" select="@id"/>
           <xsl:variable name="uri" select="@uri"/>
           <tr>
-            <td>
+            <td style="text-align:left">
               <a href="{$uri}">
                 <xsl:value-of select="@fn"/>&#160;<xsl:value-of select="@ln"/>
               </a>
@@ -82,7 +82,7 @@
           <xsl:variable name="nodeId" select="@id"/>
           <xsl:variable name="uri" select="@uri"/>
           <tr>
-            <td>
+            <td style="text-align:left">
               <a href="{$uri}">
                 <xsl:value-of select="@fn"/>&#160;<xsl:value-of select="@ln"/>
               </a>

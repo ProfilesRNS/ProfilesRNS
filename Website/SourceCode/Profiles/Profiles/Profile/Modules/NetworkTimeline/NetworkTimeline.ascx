@@ -31,10 +31,11 @@
             jQuery("#divData").hide();
         });
 
-        jQuery("#divShowTimelineTable").bind("keypress", function () {
-
-            jQuery("#pnlDataText").show();
-            jQuery("#divData").hide();
+        jQuery("#divShowTimelineTable").bind("keypress", function (e) {
+            if (e.keyCode == 13) {
+                jQuery("#pnlDataText").show();
+                jQuery("#divData").hide();
+            }
         });
     });
 
@@ -42,6 +43,13 @@
         jQuery("#dirReturnToTimeline").bind("click", function () {
             jQuery("#pnlDataText").hide();
             jQuery("#divData").show();
+        });
+
+        jQuery("#dirReturnToTimeline").bind("keypress", function (e) {
+            if (e.keyCode == 13) {
+                jQuery("#pnlDataText").hide();
+                jQuery("#divData").show();
+            }
         });
     });
 </script>

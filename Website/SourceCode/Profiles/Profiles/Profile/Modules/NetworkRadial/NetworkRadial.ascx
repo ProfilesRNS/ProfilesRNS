@@ -392,10 +392,11 @@
             jQuery("#divRadialGraph").hide();
         });
 
-        jQuery("#divShowTimelineTable").bind("keypress", function () {
-
-            jQuery("#divTimelineTable").show();
-            jQuery("#divRadialGraph").hide();
+        jQuery("#divShowTimelineTable").bind("keypress", function (e) {
+            if (e.keyCode == 13) {
+                jQuery("#divTimelineTable").show();
+                jQuery("#divRadialGraph").hide();
+            }
         });
     });
 
@@ -403,6 +404,13 @@
         jQuery("#dirReturnToTimeline").bind("click", function () {
             jQuery("#divTimelineTable").hide();
             jQuery("#divRadialGraph").show();
+        });
+
+        jQuery("#dirReturnToTimeline").bind("keypress", function (e) {
+            if (e.keyCode == 13) {
+                jQuery("#divTimelineTable").hide();
+                jQuery("#divRadialGraph").show();
+            }
         });
     });
 </script>

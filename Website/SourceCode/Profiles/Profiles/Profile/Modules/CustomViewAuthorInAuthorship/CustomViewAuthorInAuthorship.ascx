@@ -7,9 +7,9 @@
 		Faculty can <asp:Literal runat='server' ID='loginLiteral'></asp:Literal> to make corrections and additions.
 	</div>
 	<div class="anchor-tab">
-		<a class='selected'>List All</a> 
+		<a class='selected' tabindex="0">List All</a> 
 		&nbsp; | &nbsp; 
-		<a>Timeline</a>
+		<a tabindex="0">Timeline</a>
 	</div>
 	<asp:Repeater ID="rpPublication" runat="server" OnItemDataBound="rpPublication_OnDataBound">
 		<HeaderTemplate>			
@@ -52,16 +52,28 @@
 </div>
 
 <script type="text/javascript">
-    $(function() {
+    $(function () {
         $("div.publicationList li:first").attr("class", "first");
 
-        $(".publicationList .anchor-tab a").bind("click", function() {
+        $(".publicationList .anchor-tab a").bind("click", function () {
             var $this = $(this);
             if ($this.get(0).className != "selected") {
                 // Toggle link classes
                 $this.toggleClass("selected").siblings("a").toggleClass("selected");
                 // Show hide;
                 $("div.publicationList .toggle-vis:visible").hide().siblings().fadeIn("fast");
+            }
+        });
+
+        $(".publicationList .anchor-tab a").bind("keypress", function (e) {
+            if (e.keyCode == 13) {
+                var $this = $(this);
+                if ($this.get(0).className != "selected") {
+                    // Toggle link classes
+                    $this.toggleClass("selected").siblings("a").toggleClass("selected");
+                    // Show hide;
+                    $("div.publicationList .toggle-vis:visible").hide().siblings().fadeIn("fast");
+                }
             }
         });
     });
@@ -73,10 +85,11 @@
             $("#publicationTimelineGraph").hide();
         });
 
-        $("#divShowTimelineTable").bind("keypress", function () {
-
-            $("#divTimelineTable").show();
-            $("#publicationTimelineGraph").hide();
+        jQuery("#divShowTimelineTable").bind("keypress", function (e) {
+            if (e.keyCode == 13) {
+                $("#divTimelineTable").show();
+                $("#publicationTimelineGraph").hide();
+            }
         });
     });
 
@@ -85,6 +98,13 @@
 
             $("#divTimelineTable").hide();
             $("#publicationTimelineGraph").show();
+        });
+
+        jQuery("#dirReturnToTimeline").bind("keypress", function (e) {
+            if (e.keyCode == 13) {
+                $("#divTimelineTable").hide();
+                $("#publicationTimelineGraph").show();
+            }
         });
     });
 </script>
