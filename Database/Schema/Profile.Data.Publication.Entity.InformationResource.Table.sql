@@ -7,6 +7,7 @@ GO
 CREATE TABLE [Profile.Data].[Publication.Entity.InformationResource](
 	[EntityID] [int] IDENTITY(1,1) NOT NULL,
 	[PMID] [int] NULL,
+	[PMCID] [nvarchar](55) NULL,
 	[MPID] [nvarchar](50) NULL,
 	[EntityName] [varchar](4000) NULL,
 	[EntityDate] [datetime] NULL,

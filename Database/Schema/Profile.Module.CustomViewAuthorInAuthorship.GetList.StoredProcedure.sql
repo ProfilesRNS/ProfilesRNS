@@ -22,7 +22,7 @@ BEGIN
 
 	select i.NodeID, p.EntityID, i.Value rdf_about, p.EntityName rdfs_label, 
 		p.Reference prns_informationResourceReference, p.EntityDate prns_publicationDate,
-		year(p.EntityDate) prns_year, p.pmid bibo_pmid, p.mpid prns_mpid
+		year(p.EntityDate) prns_year, p.pmid bibo_pmid, p.pmcid vivo_pmcid, p.mpid prns_mpid, p.URL vivo_webpage
 	from [RDF.].[Triple] t
 		inner join [RDF.].[Node] a
 			on t.subject = @NodeID and t.predicate = @AuthorInAuthorship

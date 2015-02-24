@@ -48,7 +48,8 @@ BEGIN
 							ArticleDay = nref.value('Article[1]/ArticleDate[1]/Day[1]','varchar(max)') ,
 							Affiliation=nref.value('Article[1]/Affiliation[1]','varchar(max)') ,
 							AuthorListCompleteYN = nref.value('Article[1]/AuthorList[1]/@CompleteYN[1]','varchar(max)') ,
-							GrantListCompleteYN=nref.value('Article[1]/GrantList[1]/@CompleteYN[1]','varchar(max)') 
+							GrantListCompleteYN=nref.value('Article[1]/GrantList[1]/@CompleteYN[1]','varchar(max)'),
+							PMCID=nref.value('(OtherID[@Source="NLM"])[1]','varchar(max)')
 				FROM  [Profile.Data].[Publication.PubMed.General]  g
 				JOIN  [Profile.Data].[Publication.PubMed.AllXML] a ON a.pmid = g.pmid
 					 CROSS APPLY  x.nodes('//MedlineCitation[1]') as R(nref)
@@ -59,7 +60,7 @@ BEGIN
 		BEGIN 
 		
 			--*** general ***
-			insert into [Profile.Data].[Publication.PubMed.General] (pmid, Owner, Status, PubModel, Volume, Issue, MedlineDate, JournalYear, JournalMonth, JournalDay, JournalTitle, ISOAbbreviation, MedlineTA, ArticleTitle, MedlinePgn, AbstractText, ArticleDateType, ArticleYear, ArticleMonth, ArticleDay, Affiliation, AuthorListCompleteYN, GrantListCompleteYN)
+			insert into [Profile.Data].[Publication.PubMed.General] (pmid, Owner, Status, PubModel, Volume, Issue, MedlineDate, JournalYear, JournalMonth, JournalDay, JournalTitle, ISOAbbreviation, MedlineTA, ArticleTitle, MedlinePgn, AbstractText, ArticleDateType, ArticleYear, ArticleMonth, ArticleDay, Affiliation, AuthorListCompleteYN, GrantListCompleteYN,PMCID)
 				select pmid, 
 					nref.value('@Owner[1]','varchar(max)') Owner,
 					nref.value('@Status[1]','varchar(max)') Status,
@@ -82,7 +83,8 @@ BEGIN
 					nref.value('Article[1]/ArticleDate[1]/Day[1]','varchar(max)') ArticleDay,
 					nref.value('Article[1]/Affiliation[1]','varchar(max)') Affiliation,
 					nref.value('Article[1]/AuthorList[1]/@CompleteYN[1]','varchar(max)') AuthorListCompleteYN,
-					nref.value('Article[1]/GrantList[1]/@CompleteYN[1]','varchar(max)') GrantListCompleteYN
+					nref.value('Article[1]/GrantList[1]/@CompleteYN[1]','varchar(max)') GrantListCompleteYN,
+					nref.value('(OtherID[@Source="NLM"])[1]','varchar(max)')
 				from [Profile.Data].[Publication.PubMed.AllXML] cross apply x.nodes('//MedlineCitation[1]') as R(nref)
 				where pmid = @pmid
 	END

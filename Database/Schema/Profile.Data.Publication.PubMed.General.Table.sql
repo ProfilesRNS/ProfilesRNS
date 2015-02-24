@@ -6,6 +6,7 @@ SET ANSI_PADDING ON
 GO
 CREATE TABLE [Profile.Data].[Publication.PubMed.General](
 	[PMID] [int] NOT NULL,
+	[PMCID] [nvarchar](55) NULL,
 	[Owner] [varchar](50) NULL,
 	[Status] [varchar](50) NULL,
 	[PubModel] [varchar](50) NULL,

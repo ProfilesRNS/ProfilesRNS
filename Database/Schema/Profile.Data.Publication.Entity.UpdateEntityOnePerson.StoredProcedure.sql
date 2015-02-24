@@ -26,6 +26,7 @@ BEGIN
 	(
 		PMID INT NULL ,
 		MPID NVARCHAR(50) NULL ,
+		PMCID NVARCHAR(55) NULL,
 		EntityDate DATETIME NULL ,
 		Reference VARCHAR(MAX) NULL ,
 		Source VARCHAR(25) NULL ,
@@ -36,6 +37,7 @@ BEGIN
 	-- Add PMIDs to the publications temp table
 	INSERT  INTO #Publications
             ( PMID ,
+			  PMCID,
               EntityDate ,
               Reference ,
               Source ,
@@ -44,6 +46,7 @@ BEGIN
             )
             SELECT -- Get Pub Med pubs
                     PG.PMID ,
+					PG.PMCID,
                     EntityDate = PG.PubDate,
                     Reference = REPLACE([Profile.Cache].[fnPublication.Pubmed.General2Reference](PG.PMID,
                                                               PG.ArticleDay,
@@ -197,6 +200,7 @@ BEGIN
 	-- Insert new publications
 	INSERT INTO [Profile.Data].[Publication.Entity.InformationResource] (
 			PMID,
+			PMCID,
 			MPID,
 			EntityName,
 			EntityDate,
@@ -206,6 +210,7 @@ BEGIN
 			IsActive
 		)
 		SELECT 	PMID,
+				PMCID,
 				MPID,
 				Title,
 				EntityDate,
