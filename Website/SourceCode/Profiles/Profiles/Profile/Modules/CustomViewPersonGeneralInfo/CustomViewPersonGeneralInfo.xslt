@@ -120,9 +120,9 @@
           <th>Email</th>
           <td>
             <img id="{$imgguid}" src="{$email}&amp;rnd={$imgguid}" alt=""></img>
-            <a href="{$emailAudio}&amp;rnd={$imgguid}">
+            <!--<a href="{$emailAudio}&amp;rnd={$imgguid}">
               <img src="{$emailAudioImg}" alt="Listen to email address" />
-            </a>
+            </a>-->
           </td>
         </tr>
       </xsl:when>
