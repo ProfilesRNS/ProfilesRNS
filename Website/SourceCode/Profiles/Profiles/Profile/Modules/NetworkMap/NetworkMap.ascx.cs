@@ -169,7 +169,7 @@ namespace Profiles.Profile.Modules.NetworkMap
                 foreach (var location in locationsDict.Values)
                 {
                     var html = GenerateLocHtml(location);
-                    sb.AppendLine("<tr><td>" + location.PersonsAtagString + "</td><td>" + location.Address.Replace("\\'", "'") + "</td><td>" + location.Latitude + "</td><td>" + location.Longitude + "</td></tr>");
+                    sb.AppendLine("<tr><td style=\"text-align:left\">" + location.PersonsAtagString + "</td><td style=\"text-align:left\">" + location.Address.Replace("\\'", "'") + "</td><td>" + location.Latitude + "</td><td>" + location.Longitude + "</td></tr>");
                 }
                 sb.AppendLine("</table></div>");
                 return sb.ToString();
