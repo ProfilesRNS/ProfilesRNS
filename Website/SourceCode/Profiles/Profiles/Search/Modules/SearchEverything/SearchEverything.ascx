@@ -4,8 +4,12 @@
 <script type="text/javascript">
 
     function submitEverythingSearch() {
-        
-        document.location = "default.aspx?searchtype=everything&searchfor=" + document.getElementById("<%=searchfor.ClientID%>").value + "&exactphrase=" + document.getElementById("<%=chkExactPhrase.ClientID%>").checked;
+        if (document.getElementById("<%=searchfor.ClientID%>").value.length > 1) {
+            document.location = "default.aspx?searchtype=everything&searchfor=" + document.getElementById("<%=searchfor.ClientID%>").value + "&exactphrase=" + document.getElementById("<%=chkExactPhrase.ClientID%>").checked;
+        }
+        else {
+            alert("Search is too broad");
+        }
     }
     function runScript(e) {
         $(document).keypress(function(e) {
