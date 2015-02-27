@@ -69,7 +69,7 @@ namespace Profiles.Profile.Modules.CustomViewPersonGeneralInfo
                 args.AddParam("orcidimage", "", Root.Domain + "/Framework/Images/orcid_16x16(1).gif");
                 args.AddParam("orcidimageguid", "", Guid.NewGuid().ToString());
             }
-            if (Profiles.ORCID.Utilities.config.ShowNoORCIDMessage && Profiles.ORCID.Utilities.config.Enabled)
+            else if (Profiles.ORCID.Utilities.config.ShowNoORCIDMessage && Profiles.ORCID.Utilities.config.Enabled)
             {
                     // Check for an ORCID
                 string internalUsername = new Profiles.ORCID.Utilities.ProfilesRNSDLL.BLL.Profile.Data.Person().GetInternalUsername(Convert.ToInt64(Request.QueryString["Subject"]));
