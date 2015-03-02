@@ -10,6 +10,7 @@
   <xsl:param name="orcidinfosite"/>
   <xsl:param name="orcidimage"/>
   <xsl:param name="orcidimageguid"/>
+  <xsl:param name="nodeid"/>
 
   <xsl:template match="/">
     <div class="content_two_columns">
@@ -159,5 +160,12 @@
         </tr>
       </xsl:when>
     </xsl:choose>
+    <tr>
+      <th>vCard</th>
+      <td>
+        <a href="{$root}/profile/modules/CustomViewPersonGeneralInfo/vcard.aspx?subject={$nodeid}" style="text-decoration:none;color:#000000;"
+           onmouseover="this.style.textDecoration='underline';this.style.color='#3366CC';"  onmouseout="this.style.textDecoration='none';this.style.color='#000000';">Download vCard</a>
+      </td>
+    </tr>
   </xsl:template>
 </xsl:stylesheet>

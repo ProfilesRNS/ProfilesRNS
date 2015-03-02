@@ -83,8 +83,9 @@ namespace Profiles.Profile.Modules.CustomViewPersonGeneralInfo
                     args.AddParam("orcidurl", "", Root.Domain + "/login/default.aspx?method=login&edit=true&editparams=" + qs);
                     args.AddParam("orcidimage", "", Root.Domain + "/Framework/Images/orcid_16x16(1).gif");
                     args.AddParam("orcidimageguid", "", Guid.NewGuid().ToString());
-        }
+                   }
             }
+            args.AddParam("nodeid", "", Request.QueryString["Subject"]);
             litPersonalInfo.Text = XslHelper.TransformInMemory(Server.MapPath("~/Profile/Modules/CustomViewPersonGeneralInfo/CustomViewPersonGeneralInfo.xslt"), args, base.BaseData.OuterXml);
 
             if (base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[1]/prns:mainImage/@rdf:resource", base.Namespaces) != null)

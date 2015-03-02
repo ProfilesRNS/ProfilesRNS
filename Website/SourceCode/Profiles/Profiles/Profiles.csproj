@@ -149,6 +149,7 @@
     <Content Include="Profile\Modules\CustomViewEagleI\CustomViewEagleI.ascx" />
     <Content Include="Profile\Modules\CustomViewEagleI\Images\logo.gif" />
     <Content Include="Profile\Modules\CustomViewListProperty\CustomViewListProperty.ascx" />
+    <Content Include="Profile\Modules\CustomViewPersonGeneralInfo\vcard.aspx" />
     <Content Include="Profile\XSLT\NetworkTable.xslt" />
     <Content Include="RobotsTxt.aspx" />
     <Content Include="SiteMap.aspx" />
@@ -724,6 +725,13 @@
     <Compile Include="Profile\Modules\CustomViewPersonGeneralInfo\EmailAudioHandler.ashx.cs">
       <DependentUpon>EmailAudioHandler.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Profile\Modules\CustomViewPersonGeneralInfo\vcard.aspx.cs">
+      <DependentUpon>vcard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profile\Modules\CustomViewPersonGeneralInfo\vcard.aspx.designer.cs">
+      <DependentUpon>vcard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Profile\Modules\HRFooter\HRFooter.ascx.cs">
       <DependentUpon>HRFooter.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1052,6 +1060,7 @@
     <Compile Include="Profile\Utilities\ProfileData.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Profile\Utilities\VcardPerson.cs" />
     <Compile Include="Proxy\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
