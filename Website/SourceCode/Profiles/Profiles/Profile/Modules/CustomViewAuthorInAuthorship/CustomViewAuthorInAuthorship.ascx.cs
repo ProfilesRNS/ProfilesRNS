@@ -97,6 +97,10 @@ namespace Profiles.Profile.Modules
                             lblPubTxt = lblPubTxt + "; PMCID: " + pub.vivo_pmcid;
                             litViewIn.Text = litViewIn.Text + "<br>View in: <a href='//www.ncbi.nlm.nih.gov/pmc/articles/" + pub.vivo_pmcid + "' target='_blank'>PubMed Central</a>";
                         }
+                        else if (pub.vivo_pmcid.Contains("NIHMS"))
+                        {
+                            lblPubTxt = lblPubTxt + "; NIHMSID: " + pub.vivo_pmcid;
+                        }
                     }
                     lblPubTxt = lblPubTxt + ".";
                 }
