@@ -81,7 +81,10 @@ namespace Profiles.Profile.Modules.CustomViewInformationResource
                 pnlAuthors.Visible = false;
             }
 
-            litPublication.Text = "<a href=\"http://www.ncbi.nlm.nih.gov/pubmed/" + base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/bibo:pmid", base.Namespaces).InnerText + "\"target=\"_blank\">PubMed</a>";
+            if (base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/bibo:pmid", base.Namespaces) != null)
+            {
+                litPublication.Text = "<a href=\"http://www.ncbi.nlm.nih.gov/pubmed/" + base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/bibo:pmid", base.Namespaces).InnerText + "\"target=\"_blank\">PubMed</a>";
+            }
 
             litinformationResourceReference.Text = base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/prns:informationResourceReference", base.Namespaces).InnerText;
 
