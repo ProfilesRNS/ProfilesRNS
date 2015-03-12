@@ -46,7 +46,9 @@ BEGIN
 							ArticleYear = nref.value('Article[1]/ArticleDate[1]/Year[1]','varchar(max)') ,
 							ArticleMonth = nref.value('Article[1]/ArticleDate[1]/Month[1]','varchar(max)') ,
 							ArticleDay = nref.value('Article[1]/ArticleDate[1]/Day[1]','varchar(max)') ,
-							Affiliation=nref.value('Article[1]/Affiliation[1]','varchar(max)') ,
+							Affiliation = COALESCE(nref.value('Article[1]/AuthorList[1]/Author[1]/AffiliationInfo[1]/Affiliation[1]','varchar(max)'),
+								nref.value('Article[1]/AuthorList[1]/Author[1]/Affiliation[1]','varchar(max)'),
+								nref.value('Article[1]/Affiliation[1]','varchar(max)')) ,
 							AuthorListCompleteYN = nref.value('Article[1]/AuthorList[1]/@CompleteYN[1]','varchar(max)') ,
 							GrantListCompleteYN=nref.value('Article[1]/GrantList[1]/@CompleteYN[1]','varchar(max)'),
 							PMCID=nref.value('(OtherID[@Source="NLM"])[1]','varchar(max)')
@@ -81,7 +83,9 @@ BEGIN
 					nref.value('Article[1]/ArticleDate[1]/Year[1]','varchar(max)') ArticleYear,
 					nref.value('Article[1]/ArticleDate[1]/Month[1]','varchar(max)') ArticleMonth,
 					nref.value('Article[1]/ArticleDate[1]/Day[1]','varchar(max)') ArticleDay,
-					nref.value('Article[1]/Affiliation[1]','varchar(max)') Affiliation,
+					Affiliation = COALESCE(nref.value('Article[1]/AuthorList[1]/Author[1]/AffiliationInfo[1]/Affiliation[1]','varchar(max)'),
+						nref.value('Article[1]/AuthorList[1]/Author[1]/Affiliation[1]','varchar(max)'),
+						nref.value('Article[1]/Affiliation[1]','varchar(max)')) ,
 					nref.value('Article[1]/AuthorList[1]/@CompleteYN[1]','varchar(max)') AuthorListCompleteYN,
 					nref.value('Article[1]/GrantList[1]/@CompleteYN[1]','varchar(max)') GrantListCompleteYN,
 					nref.value('(OtherID[@Source="NLM"])[1]','varchar(max)')
@@ -99,7 +103,8 @@ BEGIN
 			nref.value('ForeName[1]','varchar(max)') ForeName,
 			nref.value('Suffix[1]','varchar(max)') Suffix,
 			nref.value('Initials[1]','varchar(max)') Initials,
-			nref.value('Affiliation[1]','varchar(max)') Affiliation
+			COALESCE(nref.value('AffiliationInfo[1]/Affiliation[1]','varchar(max)'),
+				nref.value('Affiliation[1]','varchar(max)')) Affiliation
 		from [Profile.Data].[Publication.PubMed.AllXML] cross apply x.nodes('//AuthorList/Author') as R(nref)
 		where pmid = @pmid
 		
@@ -112,7 +117,8 @@ BEGIN
 			nref.value('ForeName[1]','varchar(max)') ForeName,
 			nref.value('Suffix[1]','varchar(max)') Suffix,
 			nref.value('Initials[1]','varchar(max)') Initials,
-			nref.value('Affiliation[1]','varchar(max)') Affiliation
+			COALESCE(nref.value('AffiliationInfo[1]/Affiliation[1]','varchar(max)'),
+				nref.value('Affiliation[1]','varchar(max)')) Affiliation
 		from [Profile.Data].[Publication.PubMed.AllXML] cross apply x.nodes('//InvestigatorList/Investigator') as R(nref)
 		where pmid = @pmid
 		
