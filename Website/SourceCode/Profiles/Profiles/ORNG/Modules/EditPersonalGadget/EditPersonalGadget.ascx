@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="EditPersonalGadget.ascx.cs" Inherits="Profiles.ORNG.Modules.Gadgets.EditPersonalGadget" %>
 <%@ Register TagName="Options" TagPrefix="security" Src="~/Edit/Modules/SecurityOptions/SecurityOptions.ascx" %>
-<asp:UpdatePanel ID="upnlEditSection" runat="server">
+<asp:UpdatePanel ID="upnlEditSection" runat="server" UpdateMode="Conditional">
     <ContentTemplate>
         <asp:UpdateProgress ID="updateProgress" runat="server">
             <ProgressTemplate>
@@ -24,7 +24,21 @@
                         <asp:Panel runat="server" ID="pnlSecurityOptions">
                             <security:Options runat="server" ID="securityOptions"></security:Options>
                         </asp:Panel>
+                        <br />
+                        <asp:LinkButton ID="btnAddORNGApplication" runat="server" CommandArgument="Show" OnClick="btnAddORNGApplication_OnClick"
+                            CssClass="profileHypLinks" Visible="false">
+                            <asp:Image runat="server" ID="imbAddArror" AlternateText=" " ImageUrl="~/Framework/Images/icon_squareArrow.gif"/>&nbsp;
+                            <asp:Literal runat="server" ID="litAddORNGApplicationProperty">Add ORNG Application</asp:Literal>                           
+                        </asp:LinkButton>
                     </div>
+                </td>
+            </tr>
+            <tr align="right">
+                <td>
+                    <asp:ImageButton ID="lnkDelete" runat="server" ImageUrl="~/Edit/Images/icon_delete.gif" 
+                        CausesValidation="False" OnClick="deleteOne_Onclick" CommandName="Delete" Text="X" AlternateText="delete" Visible="false"
+                        OnClientClick="Javascript:return confirm('Are you sure you want to remove this ORNG Application from your profile page?');">
+                    </asp:ImageButton>
                 </td>
             </tr>
         </table>

@@ -94,32 +94,6 @@ namespace Profiles.Edit.Modules.EditPropertyList
 
                     string editlink = "<a class=listTableLink href=\"" + Root.Domain + "/edit/default.aspx?subject=" + this.Subject.ToString() + "&predicateuri=" + node.SelectSingleNode("@URI").Value.Replace("#", "!") + "&module=DisplayItemToEdit&ObjectType=" + objecttype + "\" >" + node.SelectSingleNode("@Label").Value + "</a>";
 
-                    // treat ORNG items as "special", because they may not be available and they may be turned off
-                    if (node.SelectSingleNode("@URI").Value.StartsWith(Profiles.ORNG.Utilities.OpenSocialManager.ORNG_ONTOLOGY_PREFIX))
-                    {
-                        GadgetSpec spec = OpenSocialManager.GetGadgetByPropertyURI(node.SelectSingleNode("@URI").Value);
-                        if (spec != null && spec.RequiresRegitration() && !orngData.IsRegistered(this.Subject, spec.GetAppId()))
-                        {
-                            singlesi.Add(new SecurityItem(node.ParentNode.SelectSingleNode("@Label").Value, node.SelectSingleNode("@Label").Value,
-                                node.SelectSingleNode("@URI").Value,
-                                Convert.ToInt32(node.SelectSingleNode("@NumberOfConnections").Value),
-                                Convert.ToInt32(node.SelectSingleNode("@ViewSecurityGroup").Value),
-                                "Unavailable",
-                                node.SelectSingleNode("@ObjectType").Value, canedit, editlink));
-                            continue;
-                        }
-                        else if (spec != null && "0".Equals(node.SelectSingleNode("@NumberOfConnections").Value)) 
-                        {
-                            singlesi.Add(new SecurityItem(node.ParentNode.SelectSingleNode("@Label").Value, node.SelectSingleNode("@Label").Value,
-                                node.SelectSingleNode("@URI").Value,
-                                Convert.ToInt32(node.SelectSingleNode("@NumberOfConnections").Value),
-                                Convert.ToInt32(node.SelectSingleNode("@ViewSecurityGroup").Value),
-                                "Hidden",
-                                node.SelectSingleNode("@ObjectType").Value, canedit, editlink));
-                            continue;
-                        }
-                    }
-
                     singlesi.Add(new SecurityItem(node.ParentNode.SelectSingleNode("@Label").Value, node.SelectSingleNode("@Label").Value,
                         node.SelectSingleNode("@URI").Value,
                         Convert.ToInt32(node.SelectSingleNode("@NumberOfConnections").Value),
@@ -130,6 +104,7 @@ namespace Profiles.Edit.Modules.EditPropertyList
                 si.Add(singlesi);
             }
 
+            string uri = this.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/@rdf:about", base.Namespaces).Value;
             foreach (XmlNode securityitem in this.SecurityGroups.SelectNodes("SecurityGroupList/SecurityGroup"))
             {
                 this.Dropdown.Add(new GenericListItem(securityitem.SelectSingleNode("@Label").Value,
@@ -137,27 +112,11 @@ namespace Profiles.Edit.Modules.EditPropertyList
 
                 gli.Add(new GenericListItem(securityitem.SelectSingleNode("@Label").Value, securityitem.SelectSingleNode("@Description").Value));
             }
-            gli.Add(new GenericListItem("Unavailable", "This feature depends on automatically collected data that we do not have for your Profile."));
 
             repPropertyGroups.DataSource = si;
             repPropertyGroups.DataBind();
 
             BuildSecurityKey(gli);
-
-            // OpenSocial.  Allows gadget developers to show test gadgets if you have them installed
-            string uri = this.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/@rdf:about", base.Namespaces).Value;
-            OpenSocialManager om = OpenSocialManager.GetOpenSocialManager(uri, Page, true);
-            if (om.IsVisible()) 
-            {
-                litGadget.Visible = true;
-                string sandboxDivs = "";
-                foreach (PreparedGadget gadget in om.GetSandboxGadgets())
-                {
-                    sandboxDivs += "<div id='" + gadget.GetChromeId() + "' class='gadgets-gadget-parent'></div>";
-                }
-                litGadget.Text = sandboxDivs;
-                om.LoadAssets();
-            }
         }
 
         protected void repPropertyGroups_OnItemDataBound(object sender, RepeaterItemEventArgs e)

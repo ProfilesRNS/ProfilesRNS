@@ -25427,36 +25427,31 @@
     <Row>
       <AppID>10</AppID>
       <Name>RDF Test</Name>
-      <URL>http://profiles.ucsf.edu/apps_2.1/RDFTest.xml</URL>
-      <RequiresRegistration>0</RequiresRegistration>
+      <URL>http://profiles.ucsf.edu/apps_2.5/RDFTest.xml</URL>
       <Enabled>0</Enabled>
     </Row>
     <Row>
       <AppID>101</AppID>
       <Name>Featured Presentations</Name>
-      <URL>http://profiles.ucsf.edu/apps_2.1/SlideShare.xml</URL>
-      <RequiresRegistration>0</RequiresRegistration>
+      <URL>http://profiles.ucsf.edu/apps_2.5/SlideShare.xml</URL>
       <Enabled>0</Enabled>
     </Row>
     <Row>
       <AppID>103</AppID>
       <Name>Websites</Name>
-      <URL>http://profiles.ucsf.edu/apps_2.1/Links.xml</URL>
-      <RequiresRegistration>0</RequiresRegistration>
+      <URL>http://profiles.ucsf.edu/apps_2.5/Links.xml</URL>
       <Enabled>0</Enabled>
     </Row>
     <Row>
       <AppID>112</AppID>
       <Name>Twitter</Name>
-      <URL>http://profiles.ucsf.edu/apps_2.1/Twitter.xml</URL>
-      <RequiresRegistration>0</RequiresRegistration>
+      <URL>http://profiles.ucsf.edu/apps_2.5/Twitter.xml</URL>
       <Enabled>0</Enabled>
     </Row>
     <Row>
       <AppID>114</AppID>
       <Name>Featured Videos</Name>
-      <URL>http://profiles.ucsf.edu/apps_2.1/YouTube.xml</URL>
-      <RequiresRegistration>0</RequiresRegistration>
+      <URL>http://profiles.ucsf.edu/apps_2.5/YouTube.xml</URL>
       <Enabled>0</Enabled>
     </Row>
   </Table>

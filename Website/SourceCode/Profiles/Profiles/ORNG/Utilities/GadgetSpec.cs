@@ -17,19 +17,17 @@ namespace Profiles.ORNG.Utilities
         private string label;
         private string openSocialGadgetURL;
         private bool enabled;
-        private string unavailableMessage;
-        private bool fromSandbox = false;
+        private bool unrecognized = false;
         private Dictionary<string, GadgetViewRequirements> viewRequirements = new Dictionary<string, GadgetViewRequirements>();
 
         // these are loaded from the DB
-        public GadgetSpec(int appId, string label, string openSocialGadgetURL, string unavailableMessage, bool enabled)
+        public GadgetSpec(int appId, string label, string openSocialGadgetURL, bool enabled)
         {
             this.openSocialGadgetURL = openSocialGadgetURL;
             this.label = label;
             this.appId = appId;
             this.enabled = enabled;
-            this.fromSandbox = false;
-            this.unavailableMessage = String.IsNullOrEmpty(unavailableMessage) ? null : unavailableMessage;
+            this.unrecognized = false;
 
             // load view requirements
             Profiles.ORNG.Utilities.DataIO data = new Profiles.ORNG.Utilities.DataIO();
@@ -44,7 +42,7 @@ namespace Profiles.ORNG.Utilities
             }
         }
 
-        // this is for sandbox gadgets
+        // this is for unrecognized gadgets loaded through the sandbox
         public GadgetSpec(string openSocialGadgetURL)
         {
             this.openSocialGadgetURL = openSocialGadgetURL;
@@ -55,16 +53,15 @@ namespace Profiles.ORNG.Utilities
                 appId += (int)ce.Current;
             }
             this.enabled = true;
-            this.fromSandbox = true;
-            this.unavailableMessage = null;
+            this.unrecognized = true;
         }
 
-        internal void MergeWithSandboxGadget(GadgetSpec sandboxGadget)
+        internal void MergeWithUnrecognizedGadget(GadgetSpec unrecognizedGadget)
         {
             // basically just grab it's URL, but check some things first!
-            if (this.GetFileName() == sandboxGadget.GetFileName() && !this.fromSandbox && sandboxGadget.fromSandbox)
+            if (this.GetFileName() == unrecognizedGadget.GetFileName() && !this.unrecognized && unrecognizedGadget.unrecognized)
             {
-                this.openSocialGadgetURL = sandboxGadget.openSocialGadgetURL;
+                this.openSocialGadgetURL = unrecognizedGadget.openSocialGadgetURL;
                 this.enabled = true;
             }
             else
@@ -114,7 +111,7 @@ namespace Profiles.ORNG.Utilities
         {
             // if it is a sandbox gadget with no match in the db, always show it because
             // this means a developer is trying to test things
-            if (fromSandbox)
+            if (unrecognized)
             {
                 return true;
             }
@@ -137,51 +134,8 @@ namespace Profiles.ORNG.Utilities
                 {
                     show = true;
                 }
-                else if (OpenSocialManager.IS_REGISTERED.Equals(visibility) && IsRegistered(ownerUri) ) 
-                {
-                    show = true;
-                }
             }
             return show;
-        }
-
-        // OK to cache as long as dependency is working!
-        // think about this, as this is now only set manually via DB
-        public bool IsRegistered(string ownerUri)
-        {
-            if (ownerUri == null || ownerUri.Trim().Length == 0)
-            {
-                return false;
-            }
-
-            HashSet<int> registeredApps = (HashSet<int>)Framework.Utilities.Cache.FetchObject(REGISTERED_APPS_CACHE_PREFIX + ownerUri);
-            if (registeredApps == null)
-            {
-                registeredApps = new HashSet<int>();
-                Profiles.ORNG.Utilities.DataIO data = new Profiles.ORNG.Utilities.DataIO();
-
-                using (SqlDataReader dr = data.GetRegisteredApps(ownerUri))
-                {
-                    while (dr.Read())
-                    {
-                        registeredApps.Add(dr.GetInt32(0));
-                    }
-                }
-
-                Framework.Utilities.Cache.Set(REGISTERED_APPS_CACHE_PREFIX + ownerUri, registeredApps, OpenSocialManager.GetNodeID(ownerUri), null);
-            }
-
-            return registeredApps.Contains(GetAppId());
-        }
-
-        public string GetUnavailableMessage()
-        {
-            return unavailableMessage;
-        }
-
-        public bool RequiresRegitration()
-        {
-            return unavailableMessage != null;
         }
 
         public bool IsEnabled()
@@ -189,9 +143,9 @@ namespace Profiles.ORNG.Utilities
             return enabled;
         }
 
-        public bool IsSandboxGadget()
+        public bool Unrecognized()
         {
-            return fromSandbox;
+            return unrecognized;
         }
 
     }

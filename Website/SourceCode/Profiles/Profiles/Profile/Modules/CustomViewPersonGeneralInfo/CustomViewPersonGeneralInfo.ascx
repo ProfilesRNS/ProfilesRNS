@@ -11,5 +11,10 @@
     </tr>
 </table>
 <div id="toc"><ul></ul><div style="clear:both;"></div></div>
-<!-- for testing -->
-<asp:Literal runat="server" ID="litGadget" Visible="false"/>
+<!-- for testing ORNG gadgets -->
+<asp:Panel runat="server" ID="pnlSandboxGadgets" Visible="false">
+    <div class= "PropertyGroup">Unrecognized "Sandbox" Gadgets</div>
+    <div class="SupportText">Note that this section is only visible when you login in through the 
+        <asp:HyperLink ID="hlORNG" NavigateUrl="~/ORNG" runat="server">ORNG</asp:HyperLink> interface with new gadgets that you want to test. Gadgets will be rendered in "default" view</div><p></p>
+    <asp:Literal runat="server" ID="litSandboxGadgets" Visible="false"/>
+</asp:Panel>
