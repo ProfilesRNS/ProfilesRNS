@@ -9,7 +9,8 @@ CREATE PROCEDURE [User.Session].[UpdateSession]
 	@LogoutDate DATETIME=NULL,
 	@SessionPersonNodeID BIGINT = NULL OUTPUT,
 	@SessionPersonURI VARCHAR(400) = NULL OUTPUT,
-	@UserURI VARCHAR(400) = NULL OUTPUT
+	@UserURI VARCHAR(400) = NULL OUTPUT,
+	@SecurityGroupID BIGINT = NULL OUTPUT
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -57,5 +58,7 @@ BEGIN
 				AND p.ParameterID = 'baseURI'
 	END
 
+	-- Get the security group of the session
+	EXEC [RDF.Security].[GetSessionSecurityGroup] @SessionID = @SessionID, @SecurityGroupID = @SecurityGroupID OUTPUT
 END
 GO

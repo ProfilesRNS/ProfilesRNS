@@ -7,7 +7,8 @@ CREATE procedure [User.Session].[CreateSession]
     @UserAgent VARCHAR(500) = NULL,
     @UserID VARCHAR(200) = NULL,
 	@SessionPersonNodeID BIGINT = NULL OUTPUT,
-	@SessionPersonURI VARCHAR(400) = NULL OUTPUT
+	@SessionPersonURI VARCHAR(400) = NULL OUTPUT,
+	@SecurityGroupID BIGINT = NULL OUTPUT
 AS 
 BEGIN
  
@@ -139,7 +140,10 @@ BEGIN
 		END
 	END
 
-    SELECT *
+	-- Get the security group of the session
+	EXEC [RDF.Security].[GetSessionSecurityGroup] @SessionID = @SessionID, @SecurityGroupID = @SecurityGroupID OUTPUT
+
+    SELECT *, @SecurityGroupID SecurityGroupID
 		FROM [User.Session].[Session]
 		WHERE SessionID = @SessionID AND @SessionID IS NOT NULL
  

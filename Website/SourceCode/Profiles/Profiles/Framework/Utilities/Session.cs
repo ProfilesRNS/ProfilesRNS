@@ -47,10 +47,7 @@ namespace Profiles.Framework.Utilities
         public string PersonURI { get; set; }
         public string UserAgent { get; set; }
         public bool IsBot { get; set; }
-        public string GetSessionCacheKey()
-        {   // Treat all bots the same, and treat all anonymous users the same.  Logged in users get their globally unique SessionID
-            return IsBot ? "BOT" : (UserID == 0 ? "ANONYMOUS" : SessionID);
-        }
+		public Int64 ViewSecurityGroup { get; set; } 
         public string UserURI { get; set; } // added by UCSF for ORNG
     }
     public class SessionHistory

@@ -26,7 +26,7 @@ namespace Profiles.Framework.Utilities
 {
     static public class Cache
     {
-        static readonly string DEPENDENCY_PREFIX = "Dependency ";
+        static readonly string DEPENDENCY_PREFIX = "";
         private static double defaultTimeout = Convert.ToInt32(ConfigurationSettings.AppSettings["CACHE_EXPIRE"]);
         /// <summary>
         /// Used to Set objects in cache for a set timout lenght of time.

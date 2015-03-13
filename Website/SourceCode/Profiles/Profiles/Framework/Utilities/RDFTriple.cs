@@ -167,9 +167,19 @@ namespace Profiles.Framework.Utilities
                 if (ExpandRDFList == null)
                     ExpandRDFList = string.Empty;
 
-                return rtn + "|" + this.Session.GetSessionCacheKey() + "|" + this.Expand + "|" + this.ShowDetails + "|" + this.ExpandRDFList + "|" + this.Limit;
+                return rtn + "|" + GetCacheKey() + "|" + this.Expand + "|" + this.ShowDetails + "|" + this.ExpandRDFList + "|" + this.Limit;
 
             }
+        }
+        private string GetCacheKey()
+        {
+            string key = string.Empty;
+            if (this.Session.ViewSecurityGroup > -20 && this.Session.ViewSecurityGroup < 0)
+                key = "SecurityGroup:" + this.Session.ViewSecurityGroup.ToString();
+            else
+                key = this.Session.SessionID.ToString();
+
+            return key;
         }
         #endregion
     }
