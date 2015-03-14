@@ -32,9 +32,9 @@ BEGIN
 	    
 		IF @DeleteType = 0 -- True delete
 		BEGIN
-			EXEC [RDF.].[DeleteTriple] @DeleteType = @DeleteType, @SessionID = @SessionID, @Subject = @NodeID
-			EXEC [RDF.].[DeleteTriple] @DeleteType = @DeleteType, @SessionID = @SessionID, @Predicate = @NodeID
-			EXEC [RDF.].[DeleteTriple] @DeleteType = @DeleteType, @SessionID = @SessionID, @Object = @NodeID
+			EXEC [RDF.].[DeleteTriple] @DeleteType = @DeleteType, @SessionID = @SessionID, @SubjectID = @NodeID
+			EXEC [RDF.].[DeleteTriple] @DeleteType = @DeleteType, @SessionID = @SessionID, @PredicateID = @NodeID
+			EXEC [RDF.].[DeleteTriple] @DeleteType = @DeleteType, @SessionID = @SessionID, @ObjectID = @NodeID
 			DELETE
 				FROM [RDF.Stage].[InternalNodeMap]
 				WHERE NodeID = @NodeID
