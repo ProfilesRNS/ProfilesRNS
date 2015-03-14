@@ -653,8 +653,6 @@ SELECT  Row_Number() OVER (ORDER BY (SELECT 1)),
 			[Name],
 			[Url],
 			[PersonFilterID],
-			[RequiresRegistration],
-			[UnavailableMessage],
 			[OAuthSecret],
 			[Enabled]
 		)
@@ -662,8 +660,6 @@ SELECT  Row_Number() OVER (ORDER BY (SELECT 1)),
 			R.x.value('Name[1]','varchar(max)'),
 			R.x.value('URL[1]','varchar(max)'),
 			R.x.value('PersonFilterID[1]','varchar(max)'),
-			R.x.value('RequiresRegistration[1]','varchar(max)'),
-			R.x.value('UnavailableMessage[1]','varchar(max)'),
 			R.x.value('OAuthSecret[1]','varchar(max)'),
 			R.x.value('Enabled[1]','varchar(max)')
 	 FROM    (SELECT

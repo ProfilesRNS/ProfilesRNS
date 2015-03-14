@@ -393,8 +393,6 @@ BEGIN
 									Name 'Name',
 									Url 'URL',
 									PersonFilterID 'PersonFilterID',
-									RequiresRegistration 'RequiresRegistration',
-									UnavailableMessage 'UnavailableMessage',
 									OAuthSecret 'OAuthSecret',
 									[Enabled] 'Enabled'
 								from [ORNG.].[Apps]
