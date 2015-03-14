@@ -184,7 +184,6 @@ type Profile.Data.Publication.PubMed.Author2Person.Table.sql
 type Profile.Data.Publication.Person.Include.Table.sql
 type ORNG..Activity.Table.sql
 type ORNG..AppData.Table.sql
-type ORNG..AppRegistry.Table.sql
 type ORNG..Apps.Table.sql
 type ORNG..AppViews.Table.sql
 type ORNG..Messages.Table.sql
@@ -428,7 +427,6 @@ type ORNG..DeleteActivity.StoredProcedure.sql
 type ORNG..DeleteAppData.StoredProcedure.sql
 type ORNG..InsertActivity.StoredProcedure.sql
 type ORNG..InsertMessage.StoredProcedure.sql
-type ORNG..IsRegistered.StoredProcedure.sql
 type ORNG..ReadActivity.StoredProcedure.sql
 type ORNG..ReadAllActivities.StoredProcedure.sql
 type ORNG..ReadAppData.StoredProcedure.sql
