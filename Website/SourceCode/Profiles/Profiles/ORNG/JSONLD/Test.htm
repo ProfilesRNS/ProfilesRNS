@@ -4,6 +4,7 @@
     <title>JSON Test</title>
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.4.2.min.js" type="text/javascript"></script>
     <script src="../JavaScript/jsonldParser.js" type="text/javascript"></script>
+    <script src="../JavaScript/jsonld/jsonld.js" type="text/javascript"></script>
     <script src="../JavaScript/prettyprint.js" type="text/javascript"></script>
     <script type="text/javascript">
         function callJson() {
@@ -28,9 +29,15 @@
             }
             else {  // show the Javascript object by passing the data through jsonldParser.parse
                 $.getJSON(url, function (data) {
-                    var item = jsonldParser.parse(data.entry);
-                    var ppTable = prettyPrint(item);
-                    $('#result').html(ppTable);
+                    var options = {};
+                    options.base = data.entry.base;
+                    jsonld.expand(data.entry.jsonld, options, function (err, expanded) {
+                        var frame = JSON.parse('[{"@type": "http://xmlns.com/foaf/0.1/Person"}]');
+                        jsonld.frame(expanded, frame, function (err, framed) {
+                            var ppTable = prettyPrint(framed);
+                            $('#result').html(ppTable);
+                        });
+                    });
                 });
             }
         }

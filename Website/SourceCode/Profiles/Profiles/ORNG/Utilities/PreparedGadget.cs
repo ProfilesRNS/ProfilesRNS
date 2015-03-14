@@ -50,7 +50,7 @@ namespace Profiles.ORNG.Utilities
             else  // must be a sandbox gadget
             {
                 this.view = "";
-                this.chromeId = "gadgets-test-" + gadgetSpec.GetAppId();
+                this.chromeId = "gadgets-sandbox-" + gadgetSpec.GetAppId();
                 this.optParams = "{}";
             }
         }
@@ -114,19 +114,9 @@ namespace Profiles.ORNG.Utilities
             return gadgetSpec.GetGadgetURL();
         }
 
-        public string GetUnavailableMessage()
+        public bool Unrecognized()
         {
-            return gadgetSpec.GetUnavailableMessage();
-        }
-
-        public bool RequiresRegistration()
-        {
-            return gadgetSpec.RequiresRegitration();
-        }
-
-        public bool IsSandboxGadget()
-        {
-            return gadgetSpec.IsSandboxGadget();
+            return gadgetSpec.Unrecognized();
         }
 
         #region Socket Communications

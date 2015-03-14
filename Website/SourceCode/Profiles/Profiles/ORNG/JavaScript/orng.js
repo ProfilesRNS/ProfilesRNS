@@ -171,7 +171,7 @@ window.buildGadget = function (result, myGadget) {
     if (layoutRoot) {
         // create div that holds title and iframe content
         var chrome = document.createElement('div');
-        chrome.className = 'gadgets-gadget-chrome';
+        chrome.className = myGadget.opt_params.chrome_class || 'gadgets-gadget-chrome';
         chrome.setAttribute('id', 'gadgets-gadget-chrome-' + my.gadgets.indexOf(myGadget));
         var width = result[myGadget.url].views && result[myGadget.url].views[myGadget.view] ? result[myGadget.url].views[myGadget.view].preferredWidth : 0;
         var width = width || result[myGadget.url].modulePrefs.width;

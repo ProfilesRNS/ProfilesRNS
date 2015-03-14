@@ -70,4 +70,3 @@ this website.
     </tr>
 </table>
 --%>
-<asp:Literal runat="server" ID="litGadget" Visible="false"/>
