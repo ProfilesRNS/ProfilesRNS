@@ -33,12 +33,14 @@
                     </div>
                 </td>
             </tr>
-            <tr align="right">
+            <tr>
                 <td>
-                    <asp:ImageButton ID="lnkDelete" runat="server" ImageUrl="~/Edit/Images/icon_delete.gif" 
-                        CausesValidation="False" OnClick="deleteOne_Onclick" CommandName="Delete" Text="X" AlternateText="delete" Visible="false"
+                    <asp:LinkButton ID="lnkDelete" runat="server"
+                        CausesValidation="False" OnClick="deleteOne_Onclick" CommandName="Delete" AlternateText=" " Visible="false"
                         OnClientClick="Javascript:return confirm('Are you sure you want to remove this ORNG Application from your profile page?');">
-                    </asp:ImageButton>
+                            <asp:Image runat="server" ID="imgDelete" AlternateText=" " ImageUrl="~/Edit/Images/icon_delete.gif"/>&nbsp;
+                            <asp:Literal runat="server" ID="litDeleteORNGApplicationProperty">Delete ORNG Application</asp:Literal>       
+                    </asp:LinkButton>
                 </td>
             </tr>
         </table>

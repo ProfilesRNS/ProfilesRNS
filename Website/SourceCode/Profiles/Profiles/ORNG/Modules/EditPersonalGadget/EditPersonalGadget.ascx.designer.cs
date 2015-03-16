@@ -100,7 +100,25 @@ namespace Profiles.ORNG.Modules.Gadgets {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton lnkDelete;
+        protected global::System.Web.UI.WebControls.LinkButton lnkDelete;
+        
+        /// <summary>
+        /// imgDelete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgDelete;
+        
+        /// <summary>
+        /// litDeleteORNGApplicationProperty control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litDeleteORNGApplicationProperty;
         
         /// <summary>
         /// litGadget control.

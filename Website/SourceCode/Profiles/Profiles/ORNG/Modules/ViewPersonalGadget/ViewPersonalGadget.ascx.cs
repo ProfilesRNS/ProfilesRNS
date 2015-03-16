@@ -64,8 +64,7 @@ namespace Profiles.ORNG.Modules.Gadgets
             // UCSF OpenSocial items
             if (gadget != null && om.IsVisible())
             {
-                //litGadget.Text = "<table><tr><td><div id='" + gadget.GetChromeId() + "' class='gadgets-gadget-parent'></div></td></tr></table>";
-                litGadget.Text = "<div id='" + gadget.GetChromeId() + "' class='gadgets-gadget-parent'></div>";
+                litGadget.Text = "<table><tr><td><div id='" + gadget.GetChromeId() + "' class='gadgets-gadget-parent'></div></td></tr></table>";
                 om.LoadAssets();
             }
         }

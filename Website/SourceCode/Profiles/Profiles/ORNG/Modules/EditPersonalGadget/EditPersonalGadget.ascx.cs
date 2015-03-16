@@ -115,6 +115,7 @@ namespace Profiles.ORNG.Modules.Gadgets
             if (hasGadget)
             {
                 btnAddORNGApplication.Visible = false;
+                litDeleteORNGApplicationProperty.Text = "Delete " + gadget.GetLabel();
                 lnkDelete.Visible = true;
             }
             else
