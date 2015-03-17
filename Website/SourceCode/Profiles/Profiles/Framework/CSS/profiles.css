@@ -1048,3 +1048,6 @@ table tbody .height25
 	color: #36C;
 	cursor: pointer;
 }
+
+
+.imageUploaderField input{width:100%}

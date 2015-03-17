@@ -59,7 +59,7 @@
         <br />
         <label for="ctl00_rptMain_ctl00_ctl00_ctl00_AsyncFileUpload1_ctl02">Select custom photo for upload</label>
             <cc1:AsyncFileUpload ID="AsyncFileUpload1" runat="server" OnUploadedComplete="ProcessUpload"
-                OnClientUploadComplete="showUploadConfirmation" ThrobberID="spanUploading" />
+                OnClientUploadComplete="showUploadConfirmation" ThrobberID="spanUploading"  CssClass="imageUploaderField" />
             <span id="spanUploading" runat="server">Uploading...</span>
             <br />
         </div>
