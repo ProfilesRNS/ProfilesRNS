@@ -101,7 +101,7 @@ namespace Profiles.ORNG.Utilities
 
             param[0] = new SqlParameter("@SubjectURI", uri);
             param[1] = new SqlParameter("@AppID", appId);
-            param[2] = new SqlParameter("@DeleteType", "0");
+            param[2] = new SqlParameter("@DeleteType", "1");
 
             using (SqlCommand comm = GetDBCommand("", "[ORNG.].[RemoveAppFromPerson]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param))
             {
@@ -115,7 +115,7 @@ namespace Profiles.ORNG.Utilities
 
             param[0] = new SqlParameter("@SubjectID", Subject);
             param[1] = new SqlParameter("@AppID", appId);
-            param[2] = new SqlParameter("@DeleteType", "0");
+            param[2] = new SqlParameter("@DeleteType", "1");
 
             using (SqlCommand comm = GetDBCommand("", "[ORNG.].[RemoveAppFromPerson]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param))
             {

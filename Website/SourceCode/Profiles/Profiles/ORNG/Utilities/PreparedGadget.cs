@@ -49,7 +49,7 @@ namespace Profiles.ORNG.Utilities
             }
             else  // must be a sandbox gadget
             {
-                this.view = "";
+                this.view = "sandbox";
                 this.chromeId = "gadgets-sandbox-" + gadgetSpec.GetAppId();
                 this.optParams = "{}";
             }

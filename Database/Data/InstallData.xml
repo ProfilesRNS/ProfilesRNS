@@ -25425,33 +25425,27 @@
   </Table>
   <Table Name="[ORNG.].[Apps]">
     <Row>
-      <AppID>10</AppID>
-      <Name>RDF Test</Name>
-      <URL>http://profiles.ucsf.edu/apps_2.5/RDFTest.xml</URL>
-      <Enabled>0</Enabled>
-    </Row>
-    <Row>
       <AppID>101</AppID>
       <Name>Featured Presentations</Name>
-      <URL>http://profiles.ucsf.edu/apps_2.5/SlideShare.xml</URL>
+      <URL>http://profiles.ucsf.edu/apps_2.6/SlideShare.xml</URL>
       <Enabled>0</Enabled>
     </Row>
     <Row>
       <AppID>103</AppID>
       <Name>Websites</Name>
-      <URL>http://profiles.ucsf.edu/apps_2.5/Links.xml</URL>
+      <URL>http://profiles.ucsf.edu/apps_2.6/Links.xml</URL>
       <Enabled>0</Enabled>
     </Row>
     <Row>
       <AppID>112</AppID>
       <Name>Twitter</Name>
-      <URL>http://profiles.ucsf.edu/apps_2.5/Twitter.xml</URL>
+      <URL>http://profiles.ucsf.edu/apps_2.6/Twitter.xml</URL>
       <Enabled>0</Enabled>
     </Row>
     <Row>
       <AppID>114</AppID>
       <Name>Featured Videos</Name>
-      <URL>http://profiles.ucsf.edu/apps_2.5/YouTube.xml</URL>
+      <URL>http://profiles.ucsf.edu/apps_2.6/YouTube.xml</URL>
       <Enabled>0</Enabled>
     </Row>
   </Table>
