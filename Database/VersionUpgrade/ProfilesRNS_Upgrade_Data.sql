@@ -35,11 +35,11 @@ update s set SortOrder = newSortOrder from [Direct.].Sites s join newSortOrders 
 
 
 -- Update ORNG App URLs.
-update [ORNG.].[Apps] set  URL = 'http://profiles.ucsf.edu/apps_2.5/Links.xml', Enabled =  1 where AppID= 103 and  Name= 'Websites'
-update [ORNG.].[Apps] set  URL = 'http://profiles.ucsf.edu/apps_2.5/RDFTest.xml' where AppID= 10 and  Name= 'RDF Test'
-update [ORNG.].[Apps] set  URL = 'http://profiles.ucsf.edu/apps_2.5/SlideShare.xml', Enabled =  1 where AppID= 101 and  Name= 'Featured Presentations'
-update [ORNG.].[Apps] set  URL = 'http://profiles.ucsf.edu/apps_2.5/Twitter.xml', Enabled =  1 where AppID= 112 and  Name= 'Twitter'
-update [ORNG.].[Apps] set  URL = 'http://profiles.ucsf.edu/apps_2.5/YouTube.xml', Enabled =  1 where AppID= 114 and  Name= 'Featured Videos'
+update [ORNG.].[Apps] set  URL = 'http://profiles.ucsf.edu/apps_2.6/Links.xml', Enabled =  1 where AppID= 103 and  Name= 'Websites'
+update [ORNG.].[Apps] set  URL = 'http://profiles.ucsf.edu/apps_2.6/RDFTest.xml' where AppID= 10 and  Name= 'RDF Test'
+update [ORNG.].[Apps] set  URL = 'http://profiles.ucsf.edu/apps_2.6/SlideShare.xml', Enabled =  1 where AppID= 101 and  Name= 'Featured Presentations'
+update [ORNG.].[Apps] set  URL = 'http://profiles.ucsf.edu/apps_2.6/Twitter.xml', Enabled =  1 where AppID= 112 and  Name= 'Twitter'
+update [ORNG.].[Apps] set  URL = 'http://profiles.ucsf.edu/apps_2.6/YouTube.xml', Enabled =  1 where AppID= 114 and  Name= 'Featured Videos'
 
 --*****************************************************************************************
 --*****************************************************************************************
