@@ -25450,19 +25450,5 @@
     </Row>
   </Table>
   <Table Name="[ORNG.].[AppViews]">
-    <Row>
-      <AppID>10</AppID>
-      <Page>edit/default.aspx</Page>
-      <ChromeID>gadgets-test</ChromeID>
-      <Visibility>Public</Visibility>
-      <DisplayOrder>1</DisplayOrder>
-    </Row>
-    <Row>
-      <AppID>10</AppID>
-      <Page>profile/display.aspx</Page>
-      <ChromeID>gadgets-test</ChromeID>
-      <Visibility>Public</Visibility>
-      <DisplayOrder>1</DisplayOrder>
-    </Row>
   </Table>
 </Import>
