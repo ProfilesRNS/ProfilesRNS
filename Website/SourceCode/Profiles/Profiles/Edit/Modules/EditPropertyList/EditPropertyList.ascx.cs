@@ -61,8 +61,6 @@ namespace Profiles.Edit.Modules.EditPropertyList
 
             litBackLink.Text = "<b>Edit Menu</b>";
 
-            Profiles.ORNG.Utilities.DataIO orngData = new Profiles.ORNG.Utilities.DataIO();
-
             foreach (XmlNode group in this.PropertyList.SelectNodes("//PropertyList/PropertyGroup"))
             {
                 singlesi = new List<SecurityItem>();
