@@ -21602,7 +21602,7 @@
             <Panel Type="main" TabSort="0" TabType="Default">
               <Module ID="CustomViewConceptPublication">
                 <ParamList>
-                  <Param Name="TimelineCaption">This graph shows the total number of publications written about "@ConceptName" by people in Harvard Catalyst Profiles by year, and whether "@ConceptName" was a major or minor topic of these publication. &lt;!--In all years combined, a total of [[[TODO:PUBLICATION COUNT]]] publications were written by people in Profiles.--&gt;</Param>
+                  <Param Name="TimelineCaption">This graph shows the total number of publications written about "@ConceptName" by people in Profiles by year, and whether "@ConceptName" was a major or minor topic of these publications. &lt;!--In all years combined, a total of [[[TODO:PUBLICATION COUNT]]] publications were written by people in Profiles.--&gt;</Param>
                   <Param Name="CitedCaption">Below are the publications written about "@ConceptName" that have been cited the most by articles in Pubmed Central.</Param>
                   <Param Name="NewestCaption">Below are the most recent publications written about "@ConceptName" by people in Profiles.</Param>
                   <Param Name="OldestCaption">Below are the earliest publications written about "@ConceptName" by people in Profiles.</Param>
