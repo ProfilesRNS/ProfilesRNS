@@ -272,58 +272,62 @@ namespace Profiles.ORCID.Utilities.ProfilesRNSDLL.BLL.ORCID
                 {
                     foreach (BO.ORCID.PersonWork personWork in person.WorksToPush)
                     {
-                        msg += "<orcid-work visibility=\"" + personWork.Decision.ToLower() + "\">";
+                        if (personWork.Identifiers != null && personWork.Identifiers.Count != 0)
                         {
-                            msg += "<work-title>";
+                            msg += "<orcid-work visibility=\"" + personWork.Decision.ToLower() + "\">";
                             {
-                                msg += "<title>" + System.Web.HttpContext.Current.Server.HtmlEncode(personWork.WorkTitle) + "</title>";
-                                //msg += "<subtitle>" + personWork.WorkTitle + "</subtitle>";
-                            }
-                            msg += "</work-title>";
-                            //msg += "<short-description>" + personWork.ShortDescription + "</short-description>";
-                            if (!personWork.WorkCitationIsNull)
-                            {
-                                msg += "<work-citation>";
-                                msg += "  <work-citation-type>formatted-unspecified</work-citation-type>";
-                                msg += "  <citation>" + System.Web.HttpContext.Current.Server.HtmlEncode(personWork.WorkCitation) + "</citation>";
-                                msg += "</work-citation>";
-                            }
-                            msg += "<work-type>" + System.Web.HttpContext.Current.Server.HtmlEncode(personWork.WorkType) + "</work-type>";
-                            msg += "<publication-date>";
-                            {
-                                if (!personWork.PubDateIsNull)
+                                msg += "<work-title>";
                                 {
-                                    msg += "<year>" + personWork.PubDate.Year.ToString() + "</year>";
-                                    msg += "<month>" + personWork.PubDate.ToString("MM") + "</month>";
-                                    msg += "<day>" + personWork.PubDate.ToString("dd") + "</day>";
+                                    msg += "<title>" + System.Web.HttpContext.Current.Server.HtmlEncode(personWork.WorkTitle) + "</title>";
+                                    //msg += "<subtitle>" + personWork.WorkTitle + "</subtitle>";
                                 }
-                            }
-                            msg += "</publication-date>";
-
-                            msg += "<work-external-identifiers>";
-                            {
-                                foreach (BO.ORCID.PersonWorkIdentifier personWorkIdentifier in personWork.Identifiers)
+                                msg += "</work-title>";
+                                //msg += "<short-description>" + personWork.ShortDescription + "</short-description>";
+                                if (!personWork.WorkCitationIsNull)
                                 {
-                                    msg += "<work-external-identifier>";
+                                    msg += "<work-citation>";
+                                    msg += "  <work-citation-type>formatted-unspecified</work-citation-type>";
+                                    msg += "  <citation>" + System.Web.HttpContext.Current.Server.HtmlEncode(personWork.WorkCitation) + "</citation>";
+                                    msg += "</work-citation>";
+                                }
+                                msg += "<work-type>" + System.Web.HttpContext.Current.Server.HtmlEncode(personWork.WorkType) + "</work-type>";
+                                msg += "<publication-date>";
+                                {
+                                    if (!personWork.PubDateIsNull)
                                     {
-                                        msg += "<work-external-identifier-type>" + personWorkIdentifier.WorkExternalType + "</work-external-identifier-type>";
-                                        msg += "<work-external-identifier-id>" + System.Web.HttpContext.Current.Server.HtmlEncode(personWorkIdentifier.Identifier) + "</work-external-identifier-id>";
+                                        msg += "<year>" + personWork.PubDate.Year.ToString() + "</year>";
+                                        msg += "<month>" + personWork.PubDate.ToString("MM") + "</month>";
+                                        msg += "<day>" + personWork.PubDate.ToString("dd") + "</day>";
                                     }
-                                    msg += "</work-external-identifier>";
                                 }
+                                msg += "</publication-date>";
+
+                                msg += "<work-external-identifiers>";
+                                {
+                                    foreach (BO.ORCID.PersonWorkIdentifier personWorkIdentifier in personWork.Identifiers)
+                                    {
+                                        msg += "<work-external-identifier>";
+                                        {
+                                            msg += "<work-external-identifier-type>" + personWorkIdentifier.WorkExternalType + "</work-external-identifier-type>";
+                                            msg += "<work-external-identifier-id>" + System.Web.HttpContext.Current.Server.HtmlEncode(personWorkIdentifier.Identifier) + "</work-external-identifier-id>";
+                                        }
+                                        msg += "</work-external-identifier>";
+                                    }
+                                }
+                                msg += "</work-external-identifiers>";
+                                //<work-contributors>
+                                //  <contributor>
+                                //    <credit-name>LastName, FirstName</credit-name>
+                                //    <contributor-attributes>
+                                //      <contributor-sequence>first</contributor-sequence>
+                                //      <contributor-role>author</contributor-role>
+                                //    </contributor-attributes>
+                                //  </contributor>
+                                //</work-contributors>
                             }
-                            msg += "</work-external-identifiers>";
-                            //<work-contributors>
-                            //  <contributor>
-                            //    <credit-name>LastName, FirstName</credit-name>
-                            //    <contributor-attributes>
-                            //      <contributor-sequence>first</contributor-sequence>
-                            //      <contributor-role>author</contributor-role>
-                            //    </contributor-attributes>
-                            //  </contributor>
-                            //</work-contributors>
+                            msg += "</orcid-work>";
                         }
-                        msg += "</orcid-work>";
+
                     }
                 }
                 msg += "</orcid-works>";

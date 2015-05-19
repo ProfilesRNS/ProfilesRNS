@@ -107,7 +107,7 @@ namespace Profiles.ORCID.Utilities.ProfilesRNSDLL.BLL.ORCID
             bo.PermissionID = permissionID;
             bo.TokenExpiration = DateTime.Now.AddSeconds(Convert.ToInt32(items["expires_in"]));
             bo.AccessToken = items["access_token"].ToString();
-            bo.RefreshToken = items["refresh_token"].ToString();
+            //bo.RefreshToken = items["refresh_token"].ToString();
             return bo;
         }
     }

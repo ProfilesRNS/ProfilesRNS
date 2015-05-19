@@ -43,7 +43,7 @@ namespace Profiles.ORCID.Utilities.ProfilesRNSDLL.BLL.ORCID
                 {
                     pub.PubID = dr["EntityID"].ToString();
                 }
-                if (!dr.IsNull("bibo_pmid") && dr["bibo_pmid"].ToString().Trim().Equals(string.Empty))
+                if (!dr.IsNull("bibo_pmid") && !dr["bibo_pmid"].ToString().Trim().Equals(string.Empty))
                 {
                     pub.PMID = int.Parse(dr["bibo_pmid"].ToString());
                     pub.DOI = ProfilesRNSDLL.BLL.ORCID.DOI.Get(pub.PMID.ToString());
