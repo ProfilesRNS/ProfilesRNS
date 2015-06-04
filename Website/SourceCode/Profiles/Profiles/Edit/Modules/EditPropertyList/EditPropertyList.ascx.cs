@@ -59,7 +59,7 @@ namespace Profiles.Edit.Modules.EditPropertyList
             this.SecurityGroups = new XmlDocument();
             this.SecurityGroups.LoadXml(base.PresentationXML.DocumentElement.LastChild.OuterXml);
 
-            litBackLink.Text = "<b>Edit Menu</b>";
+            litBackLink.Text = "<h2>Edit Menu</h2>";
 
             Profiles.ORNG.Utilities.DataIO orngData = new Profiles.ORNG.Utilities.DataIO();
 

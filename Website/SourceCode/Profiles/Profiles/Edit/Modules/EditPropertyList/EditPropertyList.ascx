@@ -1,8 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="EditPropertyList.ascx.cs"
     Inherits="Profiles.Edit.Modules.EditPropertyList.EditPropertyList" %>
 <asp:Literal runat="server" ID="litBackLink"></asp:Literal>
-<br />
-<br />
+
 Below are the types of content that can be included on this profile. Locked items
 <asp:Image runat="server" ID="imgLock" alt=""/>
 can be viewed but not edited. Information in the Address section of your profile,
@@ -46,27 +45,8 @@ this website.
     </ItemTemplate>
 </asp:Repeater>
 <div style="display:block">
-<%--
-<table width='100%'>
-    <tr>
-        <td>
---%>            <table width="100%">
-                <tr>
-                    <td>
-                        <h2>Privacy Levels</h2>
-                    </td>
-                    <td align="right">
-                        <%-- <b>Set All</b>&nbsp;
-                            <asp:DropDownList runat="server" ID="ddlSetAll" AutoPostBack="true" OnSelectedIndexChanged="ddlSetAll_IndexChanged">
-                            </asp:DropDownList>--%>
-                    </td>
-                </tr>
-            </table>
-            <div style='border: solid 1px #ccc; margin-bottom: 2px; width: 100%'>
-                <asp:Literal runat="server" ID="litSecurityKey"></asp:Literal>
-            </div>
-            <%--
-     </td>
-    </tr>
-</table>
---%>
+    <h2>Privacy Levels</h2>
+    <div style='border: solid 1px #ccc; margin-bottom: 2px; width: 100%'>
+        <asp:Literal runat="server" ID="litSecurityKey"></asp:Literal>
+    </div>
+</div>
