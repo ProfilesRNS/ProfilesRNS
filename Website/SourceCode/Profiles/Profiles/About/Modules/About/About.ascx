@@ -269,8 +269,8 @@
         <h3>
             What does the process entail?</h3>
         <p>
-            There are benefits to having Boston University initiate your ORCID record creation,
-            or reporting an existing ORCID, as it paves the way for data exchange between BU
+            There are benefits to having Profiles initiate your ORCID record creation,
+            or reporting an existing ORCID, as it paves the way for data exchange between Profiles
             and ORCID on behalf of each scholar.</p>
         <p>
             When Profiles initiates the process, we will upload your name and email address to
@@ -285,7 +285,7 @@
         <p>
             ORCID will send you an email to claim your record. During the claim process they
             will suggest you set the default privacy setting for new works to be “public.” Data
-            labeled as either “public” or “limited” will be accessible by BU. You may be asked
+            labeled as either “public” or “limited” will be accessible by your institution. You may be asked
             to allow your institution to be a Trusted Party (gain access to “limited” data), as a final step
             after claiming your ORCID record. If you do not claim your record within 10 days,
             it will become publicly visible. You can still claim the record at any time, and
