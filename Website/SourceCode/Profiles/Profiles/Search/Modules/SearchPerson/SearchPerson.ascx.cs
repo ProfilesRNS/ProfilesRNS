@@ -79,11 +79,13 @@ namespace Profiles.Search.Modules.SearchPerson
                 {
                     trDivision.Visible = false;
                 }
-
+                if (Convert.ToBoolean(ConfigurationSettings.AppSettings["ShowOtherOptions"]) == false)
+                {
+                    trOtherOptions.Visible = false;
+                }
 
             }
-
-            
+    
             BuildFacultyType();
             BuildFilters();
         }
@@ -141,7 +143,7 @@ namespace Profiles.Search.Modules.SearchPerson
 
                 foreach (XmlNode x in SearchRequest.SelectNodes("SearchOptions/MatchOptions/SearchFiltersList/SearchFilter"))
                 {
-                    if (x.SelectSingleNode("@Property").Value == "http://profiles.catalyst.harvard.edu/ontology/prns#personInPrimaryPosition" && x.SelectSingleNode("@Property2").Value == "http://vivoweb.org/ontology/core#positionInOrganization")
+                    if (x.SelectSingleNode("@Property").Value == "http://vivoweb.org/ontology/core#personInPosition" && x.SelectSingleNode("@Property2").Value == "http://vivoweb.org/ontology/core#positionInOrganization")
                     {
 
 
@@ -154,7 +156,7 @@ namespace Profiles.Search.Modules.SearchPerson
                             institutionallexcept.Checked = false;
                     }
 
-                    if (x.SelectSingleNode("@Property").Value == "http://profiles.catalyst.harvard.edu/ontology/prns#personInPrimaryPosition" && x.SelectSingleNode("@Property2").Value == "http://profiles.catalyst.harvard.edu/ontology/prns#positionInDepartment")
+                    if (x.SelectSingleNode("@Property").Value == "http://vivoweb.org/ontology/core#personInPosition" && x.SelectSingleNode("@Property2").Value == "http://profiles.catalyst.harvard.edu/ontology/prns#positionInDepartment")
                     {
                         litDepartment.Text = SearcDropDowns.BuildDropdown("department", "249", x.InnerText);
                         departmentdropdown = true;
@@ -166,7 +168,7 @@ namespace Profiles.Search.Modules.SearchPerson
                     }
 
 
-                    if (x.SelectSingleNode("@Property").Value == "http://profiles.catalyst.harvard.edu/ontology/prns#personInPrimaryPosition" && x.SelectSingleNode("@Property2").Value == "http://profiles.catalyst.harvard.edu/ontology/prns#positionInDivision")
+                    if (x.SelectSingleNode("@Property").Value == "http://vivoweb.org/ontology/core#personInPosition" && x.SelectSingleNode("@Property2").Value == "http://profiles.catalyst.harvard.edu/ontology/prns#positionInDivision")
                     {
                         litDivision.Text = SearcDropDowns.BuildDropdown("division", "249", x.InnerText);
                         divisiondropdown = true;

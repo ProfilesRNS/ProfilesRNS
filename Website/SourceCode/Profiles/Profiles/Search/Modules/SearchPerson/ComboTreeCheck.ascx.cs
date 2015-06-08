@@ -223,8 +223,11 @@ namespace Profiles.Search.Modules.SearchPerson
                 ibExpand.OnClientClick = string.Format("ShowMainContent('{0}'); return false;", ClientID);
 
             }
-            
-            ScriptManager.RegisterStartupScript(this, GetType(), "updateOnStart" + ClientID, String.Format("UpadateAllCTC('{0}', true);", ClientID), true);
+
+            if (Convert.ToBoolean(System.Configuration.ConfigurationSettings.AppSettings["ShowOtherOptions"]) == true)
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "updateOnStart" + ClientID, String.Format("UpadateAllCTC('{0}', true);", ClientID), true);
+            }
 
             if (!script.IsNullOrEmpty())
                 ScriptManager.RegisterStartupScript(this, GetType(), "runOnStaret" + ClientID, script, true);

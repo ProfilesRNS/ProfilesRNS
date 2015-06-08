@@ -239,7 +239,7 @@
                                         <asp:HiddenField ID="hidURIs" runat="server" />
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr  runat="server" id="trOtherOptions">
                                     <th>
                                         Other Options
                                     </th>
