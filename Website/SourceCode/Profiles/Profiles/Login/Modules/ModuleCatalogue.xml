@@ -12,5 +12,6 @@ For details, see: LICENSE.txt
 -->
 <ModuleList>
   <Module ModulePath="Modules" NameSpace="Login" FileName="Login.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="ADLogin" FileName="ADLogin.ascx" Enabled="true"/>
 </ModuleList>
 
