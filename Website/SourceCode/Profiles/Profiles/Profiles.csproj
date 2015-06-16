@@ -56,6 +56,7 @@
     <Reference Include="System.Data.DataSetExtensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel">
@@ -86,6 +87,8 @@
     <Content Include="Framework\Images\Orcid_Logo_rgb.png" />
     <Content Include="Framework\Images\Orcid_symbol_rgb.png" />
     <Content Include="Global.asax" />
+    <Content Include="Login\Modules\ADLogin\ADLogin.ascx" />
+    <Content Include="Login\PresentationXML\ADLoginFormPresentation.xml" />
     <Content Include="ORCID\CreateBatch.aspx" />
     <Content Include="ORCID\CreateMyORCID.aspx" />
     <Content Include="ORCID\CreationConfirmation.aspx" />
@@ -243,6 +246,13 @@
     </Compile>
     <Compile Include="History\Modules\HistoryList\HistoryList.ascx.designer.cs">
       <DependentUpon>HistoryList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Login\Modules\ADLogin\ADLogin.ascx.cs">
+      <DependentUpon>ADLogin.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login\Modules\ADLogin\ADLogin.ascx.designer.cs">
+      <DependentUpon>ADLogin.ascx</DependentUpon>
     </Compile>
     <Compile Include="Login\Modules\Login\Login.ascx.cs">
       <DependentUpon>Login.ascx</DependentUpon>
