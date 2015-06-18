@@ -182,7 +182,7 @@ namespace Profiles.DIRECT.Modules.DirectSearch
                     ResultCount = result.SelectSingleNode("rdf:RDF/rdf:Description/prns:numberOfConnections", namespaces).InnerText;
 
                     if (ProfilesURL.Substring(ProfilesURL.Length - 1) != "/") { ProfilesURL += "/"; }
-                    Response.Redirect(ProfilesURL + "search/default.aspx?searchtype=people&classuri=http://xmlns.com/foaf/0.1/Person&searchfor=" + q);
+                    Response.Redirect(ProfilesURL + "search/default.aspx?searchtype=people&classuri=http://xmlns.com/foaf/0.1/Person&searchfor=" + q + "&exactPhrase=false");
 
 
 
