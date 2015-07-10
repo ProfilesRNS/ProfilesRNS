@@ -9,12 +9,16 @@ BEGIN TRY
 BEGIN TRAN
  
 -- Remove orphaned pubs
+DECLARE @deletedPMIDTable TABLE (PersonID int, PMID int)
 DELETE FROM [Profile.Data].[Publication.Person.Include]
+OUTPUT deleted.PersonID, deleted.PMID into @deletedPMIDTable
 	  WHERE NOT EXISTS (SELECT *
 						  FROM [Profile.Data].[Publication.PubMed.Disambiguation] p
 						 WHERE p.personid = [Profile.Data].[Publication.Person.Include].personid
 						   AND p.pmid = [Profile.Data].[Publication.Person.Include].pmid)
 		AND mpid IS NULL
+INSERT INTO [Framework.].[Log.Activity] (userId, personId, methodName, property, privacyCode, param1, param2) 
+SELECT 0, PersonID, '[Profile.Data].[Publication.Pubmed.LoadDisambiguationResults]', null, null, 'Delete PMID', PMID FROM @deletedPMIDTable
 
 -- Add Added Pubs
 insert into [Profile.Data].[Publication.Person.Include](pubid,PersonID,pmid,mpid)
@@ -28,7 +32,9 @@ select a.PubID, a.PersonID, a.PMID, a.MPID from [Profile.Data].[Publication.Pers
 	and (a.mpid is null or a.MPID in (select mpid from [Profile.Data].[Publication.MyPub.General]))
 		
 --Move in new pubs
+DECLARE @addedPMIDTable TABLE (PersonID int, PMID int)
 INSERT INTO [Profile.Data].[Publication.Person.Include]
+OUTPUT inserted.PersonID, inserted.PMID into @addedPMIDTable
 SELECT	 NEWID(),
 		 personid,
 		 pmid,
@@ -39,6 +45,8 @@ SELECT	 NEWID(),
 					WHERE p.personid = d.personid
 					  AND p.pmid = d.pmid)
   AND EXISTS (SELECT 1 FROM [Profile.Data].[Publication.PubMed.General] g where g.pmid = d.pmid)					  
+ INSERT INTO [Framework.].[Log.Activity] (userId, personId, methodName, property, privacyCode, param1, param2) 
+SELECT 0, PersonID, '[Profile.Data].[Publication.Pubmed.LoadDisambiguationResults]', null, null, 'Add PMID', PMID FROM @addedPMIDTable	  
  
 COMMIT
 	END TRY

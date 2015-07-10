@@ -91,15 +91,25 @@ AS
                                              FROM   [Profile.Data].[Organization.Division] b
                                              WHERE  b.divisionname = a.divisionname )
 
-						-- Flag deleted people
-            UPDATE  [Profile.Data].Person
+
+
+					-- Flag deleted people
+			DECLARE @deletedPersonIDTable TABLE (PersonID int)
+            
+			UPDATE  [Profile.Data].Person
             SET     ISactive = 0
+			OUTPUT inserted.PersonID into @deletedPersonIDTable
             WHERE   internalusername NOT IN (
                     SELECT  internalusername
-                    FROM    [Profile.Import].Person )
+                    FROM    [Profile.Import].Person where isactive = 1)
+			
+			INSERT INTO [Framework.].[Log.Activity] (userId, personId, methodName, property, privacyCode, param1, param2) 
+			SELECT 0, PersonID, '[Profile.Import].[LoadProfilesData]', null, null, 'Person Delete', null FROM @deletedPersonIDTable
 
 					-- Update person/user records where data has changed. 
-            UPDATE  p
+			DECLARE @updatedPersonIDTable TABLE (PersonID int)
+            
+			UPDATE  p
             SET     p.firstname = lp.firstname ,
                     p.lastname = lp.lastname ,
                     p.middlename = lp.middlename ,
@@ -120,6 +130,7 @@ AS
                     p.AddressString = lp.AddressString ,
                     p.isactive = lp.isactive ,
                     p.visible = lp.isvisible
+					OUTPUT inserted.PersonID into @updatedPersonIDTable
             FROM    [Profile.Data].Person p
                     JOIN [Profile.Import].Person lp ON lp.internalusername = p.internalusername
                                                        AND ( ISNULL(lp.firstname,
@@ -183,6 +194,9 @@ AS
                                                               '') <> ISNULL(p.visible,
                                                               '')
                                                            ) 
+
+			INSERT INTO [Framework.].[Log.Activity] (userId, personId, methodName, property, privacyCode, param1, param2) 
+			SELECT 0, PersonID, '[Profile.Import].[LoadProfilesData]', null, null, 'Person Update', null FROM @updatedPersonIDTable
 						-- Update changed user info
             UPDATE  u
             SET     u.firstname = up.firstname ,
@@ -383,8 +397,10 @@ AS
                                          WHERE  a.facultyrank = p.facultyrank )
 
 					-- person
+			DECLARE @newPersonIDTable TABLE (personID INT)	
             IF @use_internalusername_as_pkey = 0 
-                BEGIN				
+                BEGIN
+								
                     INSERT  INTO [Profile.Data].Person
                             ( UserID ,
                               FirstName ,
@@ -414,6 +430,7 @@ AS
                               Visible
 						        
                             )
+							OUTPUT inserted.PersonID into @newPersonIDTable
                             SELECT  UserID ,
                                     ISNULL(p.FirstName, '') ,
                                     ISNULL(p.LastName, '') ,
@@ -453,10 +470,11 @@ AS
                                     JOIN [User.Account].[User] u ON u.internalusername = p.internalusername
                             WHERE   NOT EXISTS ( SELECT *
                                                  FROM   [Profile.Data].Person b
-                                                 WHERE  b.internalusername = p.internalusername )   
+                                                 WHERE  b.internalusername = p.internalusername )	   
                 END
             ELSE 
                 BEGIN
+						
                     SET IDENTITY_INSERT [Profile.Data].Person ON
                     INSERT  INTO [Profile.Data].Person
                             ( personid ,
@@ -485,6 +503,7 @@ AS
                               Visible
 						        
                             )
+							OUTPUT inserted.PersonID into @newPersonIDTable
                             SELECT  p.internalusername ,
                                     userid ,
                                     ISNULL(p.FirstName, '') ,
@@ -527,6 +546,8 @@ AS
 
                 END
 
+			INSERT INTO [Framework.].[Log.Activity] (userId, personId, methodName, property, privacyCode, param1, param2) 
+			SELECT 0, PersonID, '[Profile.Import].[LoadProfilesData]', null, null, 'Person Insert', null FROM @newPersonIDTable
 						-- add personid to user
             UPDATE  u
             SET     u.personid = p.personid

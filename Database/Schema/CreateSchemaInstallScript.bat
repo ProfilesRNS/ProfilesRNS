@@ -211,6 +211,7 @@ type ORCID..PersonWorkIdentifier.Table.sql
 type RDF.SemWeb.Hash2Base64.Table.sql
 type Profile.Data.EagleI.ImportXML.Table.sql
 type Profile.Data.EagleI.HTML.Table.sql
+type Framework..Log.Activity.Table.sql
 
 type RDF..fnTripleHash.UserDefinedFunction.sql
 type Utility.Application.fnText2Bool.UserDefinedFunction.sql
@@ -555,3 +556,4 @@ type ORCID..PeopleWithoutAnORCID.StoredProcedure.sql
 type ORCID..PeopleWithoutAnORCIDByName.StoredProcedure.sql
 type RDF.SemWeb.UpdateHash2Base64.StoredProcedure.sql
 type Profile.Data.EagleI.UpdateEagleITables.StoredProcedure.sql
+type Framework..Log.AddActivity.StoredProcedure.sql
