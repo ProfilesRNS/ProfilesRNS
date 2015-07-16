@@ -171,7 +171,7 @@ namespace Profiles.Edit.Modules.CustomEditListProperty
             {
                 if (item.Trim().Length > 0)
                 {
-                    data.AddLiteral(this.SubjectID, this.PredicateID, data.GetStoreNode(item.Trim()));
+                    data.AddLiteral(this.SubjectID, this.PredicateID, data.GetStoreNode(item.Trim()), this.PropertyListXML);
                 }
             }
 
@@ -223,7 +223,7 @@ namespace Profiles.Edit.Modules.CustomEditListProperty
                 {
                     if (item.Trim().Length > 0)
                     {
-                        data.AddLiteral(this.SubjectID, this.PredicateID, data.GetStoreNode(item.Trim()));
+                        data.AddLiteral(this.SubjectID, this.PredicateID, data.GetStoreNode(item.Trim()), this.PropertyListXML);
                     }
                 }
                 this.FillPropertyGrid(true);

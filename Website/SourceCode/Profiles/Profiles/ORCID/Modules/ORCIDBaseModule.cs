@@ -34,7 +34,9 @@ namespace Profiles.ORCID.Modules
         { data = new Profiles.ORCID.Utilities.DataIO(); }
         public ORCIDBaseModule(XmlDocument pagedata, List<ModuleParams> moduleparams, XmlNamespaceManager pagenamespaces)
             : base(pagedata, moduleparams, pagenamespaces)
-        { data = new Profiles.ORCID.Utilities.DataIO(); }
+        { data = new Profiles.ORCID.Utilities.DataIO();
+            this.PropertyListXML = (new Profiles.Profile.Utilities.DataIO()).GetPropertyList(this.BaseData, base.PresentationXML, "", true, true, false);
+        }
         public string LoggedInInternalUsername
         {
             get
@@ -175,5 +177,6 @@ namespace Profiles.ORCID.Modules
         private Utilities.ProfilesRNSDLL.BLL.ORCID.REFPermission _REFPermissionBLL = null;
         private Utilities.ProfilesRNSDLL.BLL.ORCID.ORCID _ORCIDBLL = null;
         private Utilities.ProfilesRNSDLL.BLL.ORCID.Person _PersonBLL = null;
+        public XmlDocument PropertyListXML { get; set; }
     }
 }

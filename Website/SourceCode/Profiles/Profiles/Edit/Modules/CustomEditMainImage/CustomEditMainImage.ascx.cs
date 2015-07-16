@@ -127,14 +127,13 @@ namespace Profiles.Edit.Modules.CustomEditMainImage
             byte[] imageBytes = new byte[AsyncFileUpload1.PostedFile.InputStream.Length + 1];
             AsyncFileUpload1.PostedFile.InputStream.Read(imageBytes, 0, imageBytes.Length);
 
-            data.SaveImage(data.GetPersonID(this.SubjectID), imageBytes);
+            data.SaveImage(this.SubjectID, imageBytes, this.PropertyListXML);
             base.GetSubjectProfile();
             this.PropertyListXML = propdata.GetPropertyList(this.BaseData, base.PresentationXML, this.PredicateURI, false, true, false);
             this.DrawProfilesModule();
 
             InitLinks();
             pnlUpload.Visible = false;
-            this.KillCache();
             upnlEditSection.Update();
 
         }
@@ -174,10 +173,6 @@ namespace Profiles.Edit.Modules.CustomEditMainImage
             upnlEditSection.Update();
         }
 
-        private void KillCache()
-        {
-            Framework.Utilities.Cache.AlterDependency(this.SubjectID.ToString());
-        }
         private Int64 SubjectID { get; set; }
         private XmlDocument XMLData { get; set; }
         private XmlDocument PropertyListXML { get; set; }

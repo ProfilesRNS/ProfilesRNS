@@ -78,7 +78,6 @@ namespace Profiles.Login.Modules.Login
 
                 if (data.UserLogin(ref user))
                 {
-                    Framework.Utilities.Cache.AlterDependency(sm.Session().SessionID);
                     if (Request.QueryString["edit"] == "true")
                         if (Request.QueryString["editparams"] == null)
                             Response.Redirect(Root.Domain + "/edit/" + sm.Session().NodeID);

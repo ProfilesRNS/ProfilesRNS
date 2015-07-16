@@ -177,9 +177,9 @@ namespace Profiles.Edit.Utilities
 
         }
 
-        public void AddPublication(int userid, int pmid)
+        public void AddPublication(int personID, long subjectID, int pmid, XmlDocument PropertyListXML)
         {
-
+            ActivityLog(PropertyListXML, subjectID, "PMID", "" + pmid);
             SessionManagement sm = new SessionManagement();
             string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
 
@@ -191,7 +191,7 @@ namespace Profiles.Edit.Utilities
             {
                 dbconnection.Open();
 
-                param[0] = new SqlParameter("@userid", userid);
+                param[0] = new SqlParameter("@userid", personID);
 
                 param[1] = new SqlParameter("@pmid", pmid);
 
@@ -212,8 +212,9 @@ namespace Profiles.Edit.Utilities
 
         }
 
-        public void DeletePublications(int personid, bool deletePMID, bool deleteMPID)
+        public void DeletePublications(int personid, long subjectid, bool deletePMID, bool deleteMPID)
         {
+            EditActivityLog(subjectid, "http://vivoweb.org/ontology/core#authorInAuthorship", null, deletePMID ? "deletePMID = true" : "deletePMID = false", deleteMPID ? "deleteMPID = true" : "deleteMPID = false");
             string skey = string.Empty;
             string sparam = string.Empty;
 
@@ -255,8 +256,9 @@ namespace Profiles.Edit.Utilities
 
         }
 
-        public void DeleteOnePublication(int personid, string pubid)
+        public void DeleteOnePublication(int personid, long subjectID, string pubid, XmlDocument PropertyListXML)
         {
+            ActivityLog(PropertyListXML, subjectID, "PubID", pubid);
             string skey = string.Empty;
             string sparam = string.Empty;
 
@@ -297,8 +299,9 @@ namespace Profiles.Edit.Utilities
 
         }
 
-        public void EditCustomPublication(Hashtable parameters)
+        public void EditCustomPublication(Hashtable parameters, long subjectID, XmlDocument PropertyListXML)
         {
+            ActivityLog(PropertyListXML, subjectID, "MPID", parameters["@mpid"].ToString());
             string skey = string.Empty;
             string sparam = string.Empty;
 
@@ -340,8 +343,9 @@ namespace Profiles.Edit.Utilities
 
         }
 
-        public void AddCustomPublication(Hashtable parameters, int personid)
+        public void AddCustomPublication(Hashtable parameters, int personid, long subjectID, XmlDocument PropertyListXML)
         {
+            ActivityLog(PropertyListXML, subjectID, parameters["@HMS_PUB_CATEGORY"].ToString(), parameters["@PUB_TITLE"].ToString());
             string skey = string.Empty;
             string sparam = string.Empty;
 
@@ -494,8 +498,9 @@ namespace Profiles.Edit.Utilities
 
 
 
-        public bool SaveImage(Int32 personid, byte[] image)
+        public bool SaveImage(long subjectID, byte[] image, XmlDocument PropertyListXML)
         {
+            ActivityLog(PropertyListXML, subjectID);
             SessionManagement sm = new SessionManagement();
             string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
 
@@ -514,7 +519,7 @@ namespace Profiles.Edit.Utilities
                 using (SqlCommand cmd = new SqlCommand("exec [Profile.Data].[Person.AddPhoto] @Personid,@Photo", dbconnection))
                 {
                     // Replace 8000, below, with the correct size of the field
-                    cmd.Parameters.Add("@Personid", SqlDbType.Int).Value = personid;
+                    cmd.Parameters.Add("@Personid", SqlDbType.Int).Value = GetPersonID(subjectID);
                     cmd.Parameters.Add("@Photo", SqlDbType.VarBinary).Value = image;
                     cmd.ExecuteNonQuery();
                     cmd.Connection.Close();
@@ -723,9 +728,9 @@ namespace Profiles.Edit.Utilities
             return Convert.ToInt64(param[4].Value.ToString());
 
         }
-        public bool AddLiteral(Int64 subjectid, Int64 predicateid, Int64 objectid)
+        public bool AddLiteral(Int64 subjectid, Int64 predicateid, Int64 objectid, XmlDocument PropertyListXML)
         {
-
+            ActivityLog(PropertyListXML, subjectid);
             bool error = false;
             try
             {
@@ -758,7 +763,7 @@ namespace Profiles.Edit.Utilities
 
         public bool MoveTripleUp(Int64 subjectid, Int64 predicateid, Int64 objectid)
         {
-
+            EditActivityLog(subjectid, predicateid, null);
             bool error = false;
             try
             {
@@ -796,7 +801,7 @@ namespace Profiles.Edit.Utilities
 
         public bool MoveTripleDown(Int64 subjectid, Int64 predicateid, Int64 objectid)
         {
-
+            EditActivityLog(subjectid, predicateid, null);
 
             bool error = false;
             try
@@ -831,8 +836,9 @@ namespace Profiles.Edit.Utilities
 
         }
 
-        public bool UpdateLiteral(Int64 subjectid, Int64 predicateid, Int64 oldobjectid, Int64 newobjectid)
+        public bool UpdateLiteral(Int64 subjectid, Int64 predicateid, Int64 oldobjectid, Int64 newobjectid, XmlDocument PropertyListXML)
         {
+            ActivityLog(PropertyListXML, subjectid);
             SessionManagement sm = new SessionManagement();
 
             bool error = false;
@@ -872,8 +878,9 @@ namespace Profiles.Edit.Utilities
         }
 
         public bool AddAward(Int64 subjectid, string label, string institution,
-                    string startdate, string enddate)
+                    string startdate, string enddate, XmlDocument PropertyListXML)
         {
+            ActivityLog(PropertyListXML, subjectid, label, institution);
             bool error = false;
             try
             {
@@ -915,6 +922,7 @@ namespace Profiles.Edit.Utilities
         public bool UpdateAward(string subjecturi, string label, string institution,
                     string startdate, string enddate)
         {
+            //ActivityLog(PropertyListXML, subjectid, label, institution);
             bool error = false;
             try
             {
@@ -1014,8 +1022,6 @@ namespace Profiles.Edit.Utilities
                     dbconnection.Close();
 
                 error = Convert.ToBoolean(param[sarr.Length - 2].Value);
-
-                Framework.Utilities.Cache.AlterDependency(sarr.AwardOrHonorForID.Value.ToString());
             }
             catch (Exception e)
             {
@@ -1157,6 +1163,7 @@ namespace Profiles.Edit.Utilities
 
         public bool UpdateSecuritySetting(Int64 subjectid, Int64 predicateid, int securitygroup)
         {
+            EditActivityLog(subjectid, GetProperty(predicateid), "" + securitygroup);
 
             string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
             SqlConnection dbconnection = new SqlConnection(connstr);
@@ -1184,9 +1191,6 @@ namespace Profiles.Edit.Utilities
                 comm.Connection.Close();
                 if (dbconnection.State != ConnectionState.Closed)
                     dbconnection.Close();
-
-                Framework.Utilities.Cache.AlterDependency(subjectid.ToString());
-
             }
             catch (Exception e)
             {
@@ -1486,5 +1490,26 @@ namespace Profiles.Edit.Utilities
         }
         #endregion
 
+        #region ActivityLog
+
+        protected void ActivityLog(XmlDocument PropertyListXML, long subjectID)
+        {
+            ActivityLog(PropertyListXML, subjectID, null, null);
+        }
+
+        protected void ActivityLog(XmlDocument PropertyListXML, long subjectID, string param1, string param2)
+        {
+            string property = null;
+            string privacyCode = null;
+            if (PropertyListXML != null)
+            {
+                if (PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@URI") != null)
+                    property = PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@URI").Value;
+                if (PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@ViewSecurityGroup") != null)
+                    privacyCode = PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@ViewSecurityGroup").Value;
+            }
+            EditActivityLog(subjectID, property, privacyCode, param1, param2);
+        }
+        #endregion
     }
 }

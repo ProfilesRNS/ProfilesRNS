@@ -68,7 +68,7 @@ namespace Profiles.ORCID.Modules.ProvideORCIDConfirmation
                     }
                     Int64 subjectID = new Profiles.ORCID.Utilities.ProfilesRNSDLL.BLL.Profile.Data.Person().GetNodeId(person.InternalUsername);
                     Edit.Utilities.DataIO data = new Edit.Utilities.DataIO();
-                    data.AddLiteral(subjectID, data.GetStoreNode("http://vivoweb.org/ontology/core#orcidId"), data.GetStoreNode(person.ORCID));
+                    data.AddLiteral(subjectID, data.GetStoreNode("http://vivoweb.org/ontology/core#orcidId"), data.GetStoreNode(person.ORCID), this.PropertyListXML);
                     pHasProfile.Visible = !subjectID.Equals(0);
                     hlProfile.NavigateUrl = "~/display/" + subjectID.ToString();
                     hlEdit.NavigateUrl = Root.Domain + "/edit/default.aspx?subject=" + subjectID.ToString() + "&predicateuri=http://vivoweb.org/ontology/core!orcidId&module=DisplayItemToEdit&ObjectType=Literal";

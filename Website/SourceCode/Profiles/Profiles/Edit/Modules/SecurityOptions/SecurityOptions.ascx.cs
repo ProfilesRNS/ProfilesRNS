@@ -134,7 +134,6 @@ namespace Profiles.Edit.Modules.SecurityOptions
         {
             Edit.Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
             data.UpdateSecuritySetting(this.Subject, data.GetStoreNode(this.PredicateURI), Convert.ToInt32(securitygroup));
-            Framework.Utilities.Cache.AlterDependency(this.Subject.ToString());
         }
 
         public XmlDataDocument SecurityGroups { get; set; }

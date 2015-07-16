@@ -79,7 +79,7 @@ namespace Profiles.Login.Utilities
                     sm.Session().LoginDate = DateTime.Now;
                     Session session = sm.Session();
                     SessionUpdate(ref session);
-
+                    SessionActivityLog();
                 }
 
             }

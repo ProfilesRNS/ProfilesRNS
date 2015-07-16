@@ -160,7 +160,7 @@ namespace Profiles.ORCID.Modules.CreateBatch
                                     {
                                         Edit.Utilities.DataIO dataio = new Edit.Utilities.DataIO();
                                         long subjectID = Profiles.ORCID.Utilities.DataIO.getNodeIdFromPersonID(int.Parse(lblPersonID.Text));
-                                        dataio.AddLiteral(subjectID, dataio.GetStoreNode("http://vivoweb.org/ontology/core#orcidId"), dataio.GetStoreNode(bo.ORCID));
+                                        dataio.AddLiteral(subjectID, dataio.GetStoreNode("http://vivoweb.org/ontology/core#orcidId"), dataio.GetStoreNode(bo.ORCID), this.PropertyListXML);
                                         lblMessages.Text = "Success";
                                     }
                                     else
