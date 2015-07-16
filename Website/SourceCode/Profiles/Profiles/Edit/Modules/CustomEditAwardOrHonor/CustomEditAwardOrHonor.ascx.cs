@@ -206,7 +206,7 @@ namespace Profiles.Edit.Modules.CustomEditAwardOrHonor
             HiddenField hdURI = (HiddenField)GridViewAwards.Rows[e.RowIndex].FindControl("hdURI");
 
 
-            data.UpdateAward(hdURI.Value, txtAwardName.Text, txtAwardInst.Text, txtYr1.Text, txtYr2.Text);
+            data.UpdateAward(hdURI.Value, txtAwardName.Text, txtAwardInst.Text, txtYr1.Text, txtYr2.Text, this.PropertyListXML);
             GridViewAwards.EditIndex = -1;
             Session["pnlInsertAward.Visible"] = null;
             this.FillAwardGrid(true);

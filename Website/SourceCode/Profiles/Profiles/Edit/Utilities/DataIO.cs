@@ -920,9 +920,10 @@ namespace Profiles.Edit.Utilities
         }
 
         public bool UpdateAward(string subjecturi, string label, string institution,
-                    string startdate, string enddate)
+                    string startdate, string enddate, XmlDocument PropertyListXML)
         {
-            //ActivityLog(PropertyListXML, subjectid, label, institution);
+            long subjectid = this.GetStoreNode(subjecturi);
+            ActivityLog(PropertyListXML, subjectid, label, institution);
             bool error = false;
             try
             {
@@ -949,7 +950,7 @@ namespace Profiles.Edit.Utilities
                 sarr.EndDate.ParamOrdinal = 4;
 
                 sarr.AwardOrHonorForID = new StoreAwardReceiptParam();
-                sarr.AwardOrHonorForID.Value = this.GetStoreNode(subjecturi).ToString();
+                sarr.AwardOrHonorForID.Value = subjectid.ToString();
                 sarr.AwardOrHonorForID.ParamOrdinal = 5;
                 error = this.StoreAwardReceipt(sarr);
 
