@@ -58,8 +58,8 @@
 /Website/SourceCode/ProfilesBetaAPI/Profiles.Common/bin/Release
 /Website/SourceCode/ProfilesBetaAPI/Profiles.Common/obj/Debug
 /Website/SourceCode/ProfilesBetaAPI/Profiles.Common/obj/Release
-/Website/SourceCode/ProfilesSearchAPI/ProfilesSearchAPI/bin/*
-/Website/SourceCode/ProfilesSearchAPI/ProfilesSearchAPI/obj/*
+/Website/SourceCode/ProfilesSearchAPI/bin/*
+/Website/SourceCode/ProfilesSearchAPI/obj/*
 /Website/SourceCode/ProfilesSPARQLAPI/ProfilesSPARQLAPI/bin/*
 /Website/SourceCode/ProfilesSPARQLAPI/ProfilesSPARQLAPI/obj/*
 /Website/SourceCode/SemWeb/bin
