@@ -128,6 +128,7 @@
     <Content Include="ORCID\Utilities\ProfilesRNSDLL\DAL\SQLFiles\CreateTablesScript.txt" />
     <Content Include="ORNG\Images\orng-asterisk.png" />
     <Content Include="ORNG\Images\orng.gif" />
+    <Content Include="ORNG\Images\Search.png" />
     <Content Include="ORNG\Images\waiting.gif" />
     <Content Include="ORNG\JavaScript\jsonldParser.js" />
     <Content Include="ORNG\JavaScript\jsonld\jsonld.js" />

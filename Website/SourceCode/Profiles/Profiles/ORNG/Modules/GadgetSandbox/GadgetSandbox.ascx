@@ -45,6 +45,16 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td>
+                                        <b>Find new gadgets here:</b>
+                                    </td>
+                                    <td class="srchNewGadgets">
+                                        <asp:TextBox runat="server" ID="txtNewGadgetsLocation" Text="http://profiles.ucsf.edu/apps_2.6/" MaxLength="75"
+                                            Width="250"></asp:TextBox>
+                                        <asp:ImageButton ImageUrl="~/ORNG/Images/Search.png" runat="server" ID="cmdSearch" Width="20" ImageAlign="AbsMiddle"                                            Text="Search" OnClick="cmdSearch_Click" />
+                                    </td>
+                                </tr>
+                                <tr>
                                     <th>
                                         Gadgets</p>
                                         One Per Line
@@ -67,7 +77,7 @@
                                     <td>
                                        
                                     </td>
-                                    <td> <asp:ImageButton ImageUrl="~/login/images/loginButton.jpg" runat="server" ID="cmdSubmit"
+                                    <td> <asp:ImageButton ImageUrl="~/Login/images/loginButton.jpg" runat="server" ID="cmdSubmit"
                                             Text="Login" OnClick="cmdSubmit_Click" />
                                     </td>
                                 </tr>

@@ -80,7 +80,7 @@ namespace Profiles.ORNG.Utilities
             return GetGadgetFileNameFromURL(GetGadgetURL());
         }
 
-        private string GetGadgetFileNameFromURL(string url)
+        public static string GetGadgetFileNameFromURL(string url)
         {
             string[] urlbits = url.ToString().Split('/');
             return urlbits[urlbits.Length - 1].Split('.')[0];

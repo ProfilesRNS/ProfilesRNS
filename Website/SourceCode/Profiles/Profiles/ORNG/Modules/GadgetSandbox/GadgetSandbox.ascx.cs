@@ -19,6 +19,8 @@ using System.Web.UI.WebControls;
 using System.Xml;
 using System.Web.UI.HtmlControls;
 using System.Configuration;
+using System.IO;
+using System.Net;
 
 using Profiles.Login.Utilities;
 using Profiles.Framework.Utilities;
@@ -63,6 +65,50 @@ namespace Profiles.ORNG.Modules.GadgetSandbox
            {
                LoadAssets();
            }
+        }
+
+        protected void cmdSearch_Click(object sender, EventArgs e)
+        {
+            // get the list that we already have
+            String[] existingGadgetURLs = txtGadgetURLS.Text.Split(Environment.NewLine.ToCharArray());
+            List<String> existingFileNames = new List<String>();
+            foreach (String url in existingGadgetURLs)
+            {
+                existingFileNames.Add(GadgetSpec.GetGadgetFileNameFromURL(url));
+            }
+
+            try
+            {
+                // don't include any that we already have, based on file name
+                HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create(txtNewGadgetsLocation.Text);
+                Uri newGadgetsUri = new Uri(txtNewGadgetsLocation.Text);
+                using (StreamReader sr = new StreamReader(myReq.GetResponse().GetResponseStream()))
+                {
+                    bool newGadgetsFound = false;
+                    String[] newGadgetHtmlCunks = sr.ReadToEnd().Split(new string[] { "<A HREF=\"" }, StringSplitOptions.None);
+                    foreach (String newGadgetHtmlChunk in newGadgetHtmlCunks)
+                    {
+                        if (!newGadgetHtmlChunk.Contains("\">"))
+                        {
+                            continue;
+                        }
+                        String linkName = newGadgetHtmlChunk.Substring(0, newGadgetHtmlChunk.IndexOf("\">"));
+                        if (linkName.EndsWith(".xml") && !existingFileNames.Contains(GadgetSpec.GetGadgetFileNameFromURL(linkName)))
+                        {
+                            txtGadgetURLS.Text += newGadgetsUri.Scheme + "://" + newGadgetsUri.Host + HttpUtility.UrlDecode(linkName) + Environment.NewLine;
+                            newGadgetsFound = true;
+                        }
+                    }
+                    if (!newGadgetsFound)
+                    {
+                        lblError.Text = "No new gadgets found at " + txtNewGadgetsLocation.Text;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = "Unable to read " + txtNewGadgetsLocation.Text;
+            }
         }
 
         protected void cmdSubmit_Click(object sender, EventArgs e)
