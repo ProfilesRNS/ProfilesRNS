@@ -88,7 +88,9 @@
     <Content Include="Framework\Images\Orcid_symbol_rgb.png" />
     <Content Include="Global.asax" />
     <Content Include="Login\Modules\ADLogin\ADLogin.ascx" />
+    <Content Include="Login\Modules\ShibLogin\ShibLogin.ascx" />
     <Content Include="Login\PresentationXML\ADLoginFormPresentation.xml" />
+    <Content Include="Login\PresentationXML\ShibbolethLoginPresentation.xml" />
     <Content Include="ORCID\CreateBatch.aspx" />
     <Content Include="ORCID\CreateMyORCID.aspx" />
     <Content Include="ORCID\CreationConfirmation.aspx" />
@@ -260,6 +262,13 @@
     </Compile>
     <Compile Include="Login\Modules\Login\Login.ascx.designer.cs">
       <DependentUpon>Login.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Login\Modules\ShibLogin\ShibLogin.ascx.cs">
+      <DependentUpon>ShibLogin.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login\Modules\ShibLogin\ShibLogin.ascx.designer.cs">
+      <DependentUpon>ShibLogin.ascx</DependentUpon>
     </Compile>
     <Compile Include="ORCID\CreateBatch.aspx.cs">
       <DependentUpon>CreateBatch.aspx</DependentUpon>
