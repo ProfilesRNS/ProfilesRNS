@@ -94,28 +94,6 @@ BEGIN
 					[RDF.].fnValueHash(null,null,@baseURI+CAST(IDENT_CURRENT('[RDF.].[Node]') as nvarchar(50)))
 		SELECT @NodeID = nodeId from @NodeIDTable
 
-
-
-		-- Confirm the node values are correct
-		IF EXISTS (
-			SELECT *
-			FROM [RDF.].[Node]
-			WHERE NodeID = @NodeID
-				AND (
-					Value <> @baseURI+cast(@NodeID as nvarchar(50))
-					OR ValueHash <> [RDF.].fnValueHash(null,null,@baseURI+cast(@NodeID as nvarchar(50)))
-					OR ViewSecurityGroup <> @NodeID
-				)
-			)
-
-		BEGIN
-			UPDATE [RDF.].[Node]
-				SET Value = @baseURI+cast(@NodeID as nvarchar(50)),
-					ValueHash = [RDF.].fnValueHash(null,null,@baseURI+cast(@NodeID as nvarchar(50))),
-					ViewSecurityGroup = @NodeID
-				WHERE NodeID = @NodeID
-		END
- 
 		-- Add properties to the node
 		DECLARE @Error INT
 		DECLARE @TypeID BIGINT
