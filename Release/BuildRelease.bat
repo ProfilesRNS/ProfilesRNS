@@ -122,6 +122,7 @@ call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild "..\Website\SourceC
 echo d | xcopy /s ..\Database\Data ProfilesRNS\Database\Data
 echo d | xcopy /s ..\Database\SQL2008 ProfilesRNS\Database\SQL2008
 echo d | xcopy /s ..\Database\SQL2012 ProfilesRNS\Database\SQL2012
+echo d | xcopy /s ..\Database\SQL2014 ProfilesRNS\Database\SQL2014
 echo d | xcopy /s ..\Database\VersionUpgrade ProfilesRNS\Database\VersionUpgrade
 copy ..\Database\ProfilesRNS_CreateAccount.sql ProfilesRNS\Database\ProfilesRNS_CreateAccount.sql
 copy ..\Database\ProfilesRNS_CreateDatabase.sql ProfilesRNS\Database\ProfilesRNS_CreateDatabase.sql
