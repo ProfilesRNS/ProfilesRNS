@@ -65,16 +65,19 @@ namespace Profiles
 
         private string getBestAcceptType(String[] acceptTypes) {
             // If we find a known one, grab it.  Otherwise just go for the first one.
-            foreach (string acceptType in acceptTypes) 
+            if (acceptTypes != null)
             {
-                // remove the suff after a ; if present
-                string baseType = acceptType.Split(';')[0];
-                if (knownAcceptTypes.Contains(baseType))
+                foreach (string acceptType in acceptTypes)
                 {
-                    return baseType;
+                    // remove the suff after a ; if present
+                    string baseType = acceptType.Split(';')[0];
+                    if (knownAcceptTypes.Contains(baseType))
+                    {
+                        return baseType;
+                    }
                 }
             }
-            return acceptTypes[0];
+            return knownAcceptTypes[0];
         }
 
         //***************************************************************************************************************************************
