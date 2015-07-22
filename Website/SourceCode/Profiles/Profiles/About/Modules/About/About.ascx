@@ -269,18 +269,18 @@
         <h3>
             What does the process entail?</h3>
         <p>
-            There are benefits to having Profiles initiate your ORCID record creation,
-            or reporting an existing ORCID, as it paves the way for data exchange between Profiles
+            There are benefits to having Profiles RNS initiate your ORCID record creation,
+            or reporting an existing ORCID, as it paves the way for data exchange between Profiles RNS
             and ORCID on behalf of each scholar.</p>
         <p>
-            When Profiles initiates the process, we will upload your name and email address to
+            When Profiles RNS initiates the process, we will upload your name and email address to
             create your ORCID record. Your email will be set as “public” within ORCID, unless
             you are hidden in your instituion directory, in which case you will be set to “limited” (for
             more on ORCID privacy settings, see the <a target="_blank" href="http://support.orcid.org/knowledgebase/articles/124518-orcid-privacy-settings"
                 title="ORCID Privacy Settings">ORCID Privacy Settings</a>). You always have
             the ability to change these settings – the ORCID record is controlled by you, not
-            your institution. Individuals who are in Profiles will be asked if they want
-            to push select information from Profiles to ORCID at the time the ORCID record
+            your institution. Individuals who are in Profiles RNS will be asked if they want
+            to push select information from Profiles RNS to ORCID at the time the ORCID record
             is created.</p>
         <p>
             ORCID will send you an email to claim your record. During the claim process they
@@ -291,7 +291,7 @@
             it will become publicly visible. You can still claim the record at any time, and
             we encourage you to do so.</p>
         <p>
-            For those not in Profiles, or with no publication records showing in Profiles,
+            For those not in Profiles RNS, or with no publication records showing in Profiles RNS,
             you can opt to add works using alternative means, such as the ORCID to Scopus integration.
             This option is available even if you have never used Scopus before. To use this,
             once logged into ORCID, choose &#8220;Update works,&#8221; then &#8220;Also see
