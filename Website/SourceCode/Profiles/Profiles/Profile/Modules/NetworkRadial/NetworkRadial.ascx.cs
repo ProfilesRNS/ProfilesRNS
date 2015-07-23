@@ -99,6 +99,9 @@ namespace Profiles.Profile.Modules.NetworkRadial
 
             System.Xml.Xsl.XslCompiledTransform xslt = new System.Xml.Xsl.XslCompiledTransform();
 
+            lblProfileName.Text = x.SelectSingleNode("LocalNetwork/NetworkPeople/NetworkPerson[@d='0']").Attributes["fn"].Value + " " +
+                x.SelectSingleNode("LocalNetwork/NetworkPeople/NetworkPerson[@d='0']").Attributes["ln"].Value;
+
             litNetworkText.Text = Profiles.Framework.Utilities.XslHelper.TransformInMemory(Server.MapPath("~/profile/XSLT/NetworkTable.xslt"), args, x.InnerXml);
 
         }
