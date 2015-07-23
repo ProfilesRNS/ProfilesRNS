@@ -120,6 +120,10 @@ call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild "..\Website\SourceC
 
 
 echo d | xcopy /s ..\Database\Data ProfilesRNS\Database\Data
+pushd ProfilesRNS\Database\Data
+call zip e MeSH.xml.zip -y
+del MeSH.xml.zip
+popd
 echo d | xcopy /s ..\Database\SQL2008 ProfilesRNS\Database\SQL2008
 echo d | xcopy /s ..\Database\SQL2012 ProfilesRNS\Database\SQL2012
 echo d | xcopy /s ..\Database\SQL2014 ProfilesRNS\Database\SQL2014
