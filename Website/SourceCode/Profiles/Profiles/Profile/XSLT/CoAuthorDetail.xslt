@@ -56,12 +56,12 @@
           <tr>
             <th class="alignLeft" style="width: 200px;">Name</th>            
             <th style="width: 110px;">
-              Most recent<br/>co-publication
+              Most Recent<br/>Co-Publication
             </th>
             <th style="width: 115px;">
-              Number of<br/>co-publications
+              Number of<br/>Co-Publications
             </th>
-            <th style="width: 138px">Co-author score</th>
+            <th style="width: 138px">Co-Author Score</th>
             <th style="width: 38px;">
               Why?
             </th>

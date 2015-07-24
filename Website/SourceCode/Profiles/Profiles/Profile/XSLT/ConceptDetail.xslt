@@ -63,16 +63,16 @@
           <tr>
             <th class="alignLeft" style="width:250px;">Name</th>
             <th style="width: 110px;">
-              Number of publications
+              Number of Publications
             </th>
             <th style="width: 115px;">
-              Most recent publication
+              Most Recent Publication
             </th>
             <th style="width: 80px;">
-              Publications by all authors
+              Publications by All Authors
             </th>
             <th style="text-align: center;">
-              Concept score
+              Concept Score
             </th>
             <th style="width: 38px;">
               Why?
