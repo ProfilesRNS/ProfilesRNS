@@ -84,6 +84,7 @@
           <th>Person 2</th>
           <th>Number of Co-Publications</th>
           <th>Most Recent Co-Publication</th>
+          <td></td>
         </tr>
         <xsl:for-each select="LocalNetwork/NetworkCoAuthors/NetworkCoAuthor">
           <xsl:variable name="lid1" select="@lid1"/>
@@ -91,10 +92,10 @@
           <xsl:variable name="n" select="@n"/>
           <xsl:variable name="y2" select="@y2"/>
           <tr>
-            <td>
+            <td style="text-align:left">
               <xsl:value-of select="/LocalNetwork/NetworkPeople/NetworkPerson[@lid=$lid1]/@fn"/>&#160;<xsl:value-of select="/LocalNetwork/NetworkPeople/NetworkPerson[@lid=$lid1]/@ln"/>
             </td>
-            <td>
+            <td style="text-align:left">
               <xsl:value-of select="/LocalNetwork/NetworkPeople/NetworkPerson[@lid=$lid2]/@fn"/>&#160;<xsl:value-of select="/LocalNetwork/NetworkPeople/NetworkPerson[@lid=$lid2]/@ln"/>
             </td>
             <td>
