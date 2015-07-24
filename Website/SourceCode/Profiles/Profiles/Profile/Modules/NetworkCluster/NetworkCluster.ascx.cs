@@ -34,6 +34,7 @@ namespace Profiles.Profile.Modules.NetworkCluster
             lblProfileName.Text = 
 				this.BaseData.SelectSingleNode("//rdf:RDF/rdf:Description[@rdf:about= ../rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:firstName", this.Namespaces).InnerText + " " +
 				this.BaseData.SelectSingleNode("//rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:lastName", this.Namespaces).InnerText;
+            lblProfileName1.Text = lblProfileName.Text;
         }
         protected void InitAssets()
         {

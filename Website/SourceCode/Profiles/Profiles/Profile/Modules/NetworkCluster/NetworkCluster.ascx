@@ -327,6 +327,16 @@
         
     </div>
     <div id="divDataText" style="display:none;margin-top:12px;margin-bottom:8px;">
+		<div style="width: 600px; font-size: 12px; line-height: 16px; border-bottom: 1px dotted #999;
+			padding-bottom: 12px; margin-bottom: 6px;">
+			This cluster graph shows the co-authors (green circles) and top co-authors of co-authors (blue circles) of <span style="font-weight: bold; color: #666;">
+				<asp:Label ID="lblProfileName1" runat="server"></asp:Label></span> (red circle). 
+			The size of a circle is proportional to the number of publications that author has. The thickness of a line connecting two authors' names 
+			is proportional to the number of publications that they share. Options for customizing this network view are listed below the graph.
+                    <br /><br />
+        To return to the cluster graph, <a id="dirReturnToTimeline1" tabindex="0">click here.</a>   
+		</div>
+
         <asp:Literal runat="server" ID="litNetworkText"></asp:Literal> 
         <br />
         To return to the cluster graph, <a id="dirReturnToTimeline" tabindex="0">click here.</a>                       
@@ -363,6 +373,18 @@ jQuery(function () {
     });
 
     jQuery("#dirReturnToTimeline").bind("keypress", function (e) {
+        if (e.keyCode == 13) {
+            jQuery("#divDataText").hide();
+            jQuery("#divClusterGraph").show();
+        }
+    });
+
+    jQuery("#dirReturnToTimeline1").bind("click", function () {
+        jQuery("#divDataText").hide();
+        jQuery("#divClusterGraph").show();
+    });
+
+    jQuery("#dirReturnToTimeline1").bind("keypress", function (e) {
         if (e.keyCode == 13) {
             jQuery("#divDataText").hide();
             jQuery("#divClusterGraph").show();
