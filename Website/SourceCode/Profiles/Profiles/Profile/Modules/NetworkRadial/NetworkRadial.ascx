@@ -281,11 +281,10 @@
 
 
 <%--<div style="position: absolute; z-index: 999;">--%>
-<div id="divRadialGraph">
+
     <div>
 
-        <div style="width: 600px; font-size: 12px; line-height: 16px; border-bottom: 1px dotted #999;
-            padding-bottom: 12px; margin-bottom: 6px;">
+
             This radial graph shows the co-authors (inner ring) and top co-authors of co-authors
             (outer ring) of <span style="font-weight: bold; color: #666;">
                 <asp:Label ID="lblProfileName" runat="server"></asp:Label></span>. The size
@@ -293,7 +292,11 @@
             that he or she has. The thickness of a line connecting two authors' names is proportional
             to the number of publications that they share. Options for customizing this network
             view are listed below the graph.
-        </div>
+    </div>
+<div id="divRadialGraph">
+        <div style="width: 600px; font-size: 12px; line-height: 16px; border-bottom: 1px dotted #999;
+            padding-bottom: 12px; margin-bottom: 6px;"></div>
+    <div>
         <div style="margin-top: 8px; font-weight: bold; color: #BD2F3C; border-bottom: none;
             width: 600px; height: 20px; text-align: center;">
             <div id="person_name">
@@ -379,6 +382,9 @@
     </div>
 </div>
     <div id="divTimelineTable" class="listTable" style="display:none;margin-top:12px;margin-bottom:8px;">
+            To return to the radial graph, <a id="dirReturnToTimeline1" tabindex="0">click here.</a>   
+                    <div style="width: 600px; font-size: 12px; line-height: 16px; border-bottom: 1px dotted #999;
+            padding-bottom: 12px; margin-bottom: 6px;"></div>
             <asp:Literal runat="server" ID="litNetworkText"></asp:Literal> 
             <br />
             To return to the radial graph, <a id="dirReturnToTimeline" tabindex="0">click here.</a>                      
@@ -407,6 +413,18 @@
         });
 
         jQuery("#dirReturnToTimeline").bind("keypress", function (e) {
+            if (e.keyCode == 13) {
+                jQuery("#divTimelineTable").hide();
+                jQuery("#divRadialGraph").show();
+            }
+        });
+
+        jQuery("#dirReturnToTimeline1").bind("click", function () {
+            jQuery("#divTimelineTable").hide();
+            jQuery("#divRadialGraph").show();
+        });
+
+        jQuery("#dirReturnToTimeline1").bind("keypress", function (e) {
             if (e.keyCode == 13) {
                 jQuery("#divTimelineTable").hide();
                 jQuery("#divRadialGraph").show();

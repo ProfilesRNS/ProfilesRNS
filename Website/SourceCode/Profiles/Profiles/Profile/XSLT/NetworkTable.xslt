@@ -22,16 +22,8 @@
       <table>
         <tr>
           <th>Name</th>
-          <th>Publications</th>
-          <th>
-            Publications Co-Authored with <xsl:value-of select="$subjectName"/>
-          </th>
-          <th>
-            Connections to <xsl:value-of select="$subjectName"/>'s Co-Authors
-          </th>
-          <th>
-            Connections to <xsl:value-of select="$subjectName"/>'s Network
-          </th>
+          <th>Total Publications</th>
+          <th>Co-Authored Publications</th>
         </tr>
         <xsl:for-each select="LocalNetwork/NetworkPeople/NetworkPerson[@d='1']">
           <xsl:variable name="nodeId" select="@id"/>
@@ -53,12 +45,6 @@
                 <xsl:value-of select="/LocalNetwork/NetworkCoAuthors/NetworkCoAuthor[@id2=$subjectID and @id1=$nodeId]/@n"   />
               </xsl:if>
             </td>
-            <td>
-              <xsl:value-of select="count(/LocalNetwork/NetworkCoAuthors/NetworkCoAuthor[@id1=$nodeId and contains( $onehop, concat( '-', @id2, '-' ) )]) + count(/LocalNetwork/NetworkCoAuthors/NetworkCoAuthor[@id2=$nodeId and contains( $onehop, concat( '-', @id1, '-' ) )])"/>
-            </td>
-            <td>
-              <xsl:value-of select="count(/LocalNetwork/NetworkCoAuthors/NetworkCoAuthor[@id1=$nodeId]) + count(/LocalNetwork/NetworkCoAuthors/NetworkCoAuthor[@id2=$nodeId])"   />
-            </td>
           </tr>
         </xsl:for-each>
       </table>
@@ -70,13 +56,7 @@
       <table>
         <tr>
           <th>Name</th>
-          <th>Total Publication</th>
-          <th>
-            Connections to <xsl:value-of select="$subjectName"/>'s Co-Authors
-          </th>
-          <th>
-            Connections to <xsl:value-of select="$subjectName"/>'s Network
-          </th>
+          <th>Total Publications</th>
         </tr>
         <xsl:for-each select="LocalNetwork/NetworkPeople/NetworkPerson[@d='2']">
           <xsl:variable name="nodeId" select="@id"/>
@@ -90,12 +70,39 @@
             <td>
               <xsl:value-of select="@pubs"/>
             </td>
+          </tr>
+        </xsl:for-each>
+      </table>
+    </div>
+    <br/>
+    <br/>
+    <h2>Connections</h2>
+    <div class="listTable" style="margin-top: 12px, margin-bottom:8px ">
+      <table>
+        <tr>
+          <th>Person 1</th>
+          <th>Person 2</th>
+          <th>Number of Co-Publications</th>
+          <th>Most Recent Co-Publication</th>
+        </tr>
+        <xsl:for-each select="LocalNetwork/NetworkCoAuthors/NetworkCoAuthor">
+          <xsl:variable name="lid1" select="@lid1"/>
+          <xsl:variable name="lid2" select="@lid2"/>
+          <xsl:variable name="n" select="@n"/>
+          <xsl:variable name="y2" select="@y2"/>
+          <tr>
             <td>
-              <xsl:value-of select="count(/LocalNetwork/NetworkCoAuthors/NetworkCoAuthor[@id1=$nodeId and contains( $onehop, concat( '-', @id2, '-' ) )]) + count(/LocalNetwork/NetworkCoAuthors/NetworkCoAuthor[@id2=$nodeId and contains( $onehop, concat( '-', @id1, '-' ) )])"/>
+              <xsl:value-of select="/LocalNetwork/NetworkPeople/NetworkPerson[@lid=$lid1]/@fn"/>&#160;<xsl:value-of select="/LocalNetwork/NetworkPeople/NetworkPerson[@lid=$lid1]/@ln"/>
             </td>
             <td>
-              <xsl:value-of select="count(/LocalNetwork/NetworkCoAuthors/NetworkCoAuthor[@id1=$nodeId]) + count(/LocalNetwork/NetworkCoAuthors/NetworkCoAuthor[@id2=$nodeId])"   />
+              <xsl:value-of select="/LocalNetwork/NetworkPeople/NetworkPerson[@lid=$lid2]/@fn"/>&#160;<xsl:value-of select="/LocalNetwork/NetworkPeople/NetworkPerson[@lid=$lid2]/@ln"/>
             </td>
+            <td>
+              <xsl:value-of select="@n"/>
+            </td>
+            <td>
+              <xsl:value-of select="@y2"/>
+            </td>          
           </tr>
         </xsl:for-each>
       </table>
