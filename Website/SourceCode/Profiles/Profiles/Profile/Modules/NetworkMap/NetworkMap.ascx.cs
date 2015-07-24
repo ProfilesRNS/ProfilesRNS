@@ -14,6 +14,7 @@ using System.Web.UI.HtmlControls;
 
 using Profiles.Framework.Utilities;
 using Profiles.Profile.Utilities;
+using System.Text.RegularExpressions;
 
 namespace Profiles.Profile.Modules.NetworkMap
 {
@@ -164,12 +165,22 @@ namespace Profiles.Profile.Modules.NetworkMap
                 if (locationsDict == null) throw new ArgumentNullException("locationsDict");
 
                 sb.AppendLine("<div class=\"listTable\" style=\"margin-top: 12px, margin-bottom:8px \"><table>");
-                sb.AppendLine("<tr><th>Name(s)</th><th>Address</th><th>Latitude</th><th>Longitude</th></tr>");
+                sb.AppendLine("<tr><th>Address</th><th>Latitude</th><th>Longitude</th><th>Name(s)</th</tr>");
 
                 foreach (var location in locationsDict.Values)
                 {
-                    var html = GenerateLocHtml(location);
-                    sb.AppendLine("<tr><td style=\"text-align:left\">" + location.PersonsAtagString + "</td><td style=\"text-align:left\">" + location.Address.Replace("\\'", "'") + "</td><td>" + location.Latitude + "</td><td>" + location.Longitude + "</td></tr>");
+
+                    int rowspan = Regex.Matches(location.PersonsAtagString, "<br>").Count;
+                    if (rowspan > 1)
+                    {
+                        sb.AppendLine("<tr><td style=\"text-align:left\" rowspan=\"" + rowspan + "\">" + location.Address.Replace("\\'", "'") + "</td><td rowspan=\"" + rowspan + "\">" + location.Latitude + "</td><td rowspan=\"" + rowspan + "\">" + location.Longitude + 
+                            "</td><td style=\"text-align:left\">" + location.PersonsAtagString.Substring(0, location.PersonsAtagString.Length - 4).Replace("<br>", "</td></tr><tr><td style=\"text-align:left\">") + "</td></tr>");
+                    }
+                    else
+                    {
+                        var html = GenerateLocHtml(location);
+                        sb.AppendLine("<tr><td style=\"text-align:left\">" + location.Address.Replace("\\'", "'") + "</td><td>" + location.Latitude + "</td><td>" + location.Longitude + "</td><td style=\"text-align:left\">" + location.PersonsAtagString + "</td></tr>");
+                    }
                 }
                 sb.AppendLine("</table></div>");
                 return sb.ToString();

@@ -65,6 +65,7 @@
         To see the data from this visualization as text, <a id="divShowTimelineTable" tabindex="0">click here.</a>
      </div>   
     <div id="divDataText" style="display:none;margin-top:12px;margin-bottom:8px;">
+        To return to the map,  <a id="dirReturnToTimelineTop" tabindex="0">click here.</a> <br /><br />
         <asp:Literal runat="server" ID="litNetworkText"></asp:Literal> 
         <br />
         To return to the map,  <a id="dirReturnToTimeline" tabindex="0">click here.</a>                      
@@ -181,10 +182,14 @@
                 jQuery("#divData").show();
             });
         });
-    
-    
-    
-                
+
+        jQuery(function () {
+            jQuery("#dirReturnToTimelineTop").bind("click", function () {
+                jQuery("#divDataText").hide();
+                jQuery("#divData").show();
+            });
+        });
+               
     </script>
 
 </div>
