@@ -98,7 +98,7 @@ namespace Profiles.Profile.Modules
                             string pmcid = pub.vivo_pmcid;
                             int len = pmcid.IndexOf(' ');
                             if (len != -1) pmcid = pmcid.Substring(0, len);
-                            litViewIn.Text = litViewIn.Text + "<br>View in: <a href='//www.ncbi.nlm.nih.gov/pmc/articles/" + pmcid + "' target='_blank'>PubMed Central</a>";
+                            litViewIn.Text = litViewIn.Text + ", <a href='//www.ncbi.nlm.nih.gov/pmc/articles/" + pmcid + "' target='_blank'>PubMed Central</a>";
                         }
                         else if (pub.vivo_pmcid.Contains("NIHMS"))
                         {
