@@ -117,7 +117,10 @@ call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild "..\Website\SourceC
 copy ..\Website\SourceCode\SemWeb\src\bin\sparql-core.dll ..\Website\SourceCode\ProfilesSPARQLAPI\bin\
 call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild "..\Website\SourceCode\ProfilesSPARQLAPI\ProfilesSPARQLAPI.csproj" "/p:Platform=AnyCPU;Configuration=Release;PublishDestination=..\..\..\Release\ProfilesRNS\Website\Binary\ProfilesSPARQLAPI" /t:PublishToFileSystem
 
-
+copy ..\Website\SourceCode\Profiles\Profiles\web.config ..\..\..\..\Release\ProfilesRNS\Website\Binary\Profiles\web.config
+copy ..\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service\web.config ..\..\..\..\Release\ProfilesRNS\Website\Binary\ProfilesBetaAPI\web.config
+copy ..\Website\SourceCode\ProfilesSearchAPI\web.config ..\..\..\..\Release\ProfilesRNS\Website\Binary\ProfilesSearchAPI\web.config
+copy ..\Website\SourceCode\ProfilesSPARQLAPI\web.config ..\..\..\..\Release\ProfilesRNS\Website\Binary\ProfilesSPARQLAPI\web.config
 
 echo d | xcopy /s ..\Database\Data ProfilesRNS\Database\Data
 pushd ProfilesRNS\Database\Data
