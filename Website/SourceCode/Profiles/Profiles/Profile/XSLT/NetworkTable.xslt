@@ -15,18 +15,22 @@
         <xsl:text>-</xsl:text>
       </xsl:for-each>
     </xsl:variable>
-    <h2>
+    <br/>
+    <br/>
+    <b>
       Co-Authors
-    </h2>
+    </b>
+    <br/><br/>
     <div class="listTable" style="margin-top: 12px, margin-bottom:8px ">
       <table>
         <tr>
           <th>Name</th>
           <th>Total Publications</th>
           <th>Co-Authored Publications</th>
-          <th>Weight</th>
+          <!--<th>Weight</th>-->
         </tr>
         <xsl:for-each select="LocalNetwork/NetworkPeople/NetworkPerson[@d='1']">
+          <xsl:sort select="@w2" data-type="number" order="descending"/>
           <xsl:variable name="nodeId" select="@id"/>
           <xsl:variable name="uri" select="@uri"/>
           <xsl:variable name="w2" select="@w2"/>
@@ -46,7 +50,7 @@
 
             <td style="text-align:left">
               <a href="{$uri}">
-                <xsl:value-of select="@fn"/>&#160;<xsl:value-of select="@ln"/>
+                <xsl:value-of select="@ln"/>,&#160;<xsl:value-of select="@fn"/>
               </a>
             </td>
             <td>
@@ -60,24 +64,27 @@
                 <xsl:value-of select="/LocalNetwork/NetworkCoAuthors/NetworkCoAuthor[@id2=$subjectID and @id1=$nodeId]/@n"   />
               </xsl:if>
             </td>
-            <td>
+            <!--<td>
               <xsl:value-of select="@w2"/>
-            </td>
+            </td>-->
           </tr>
         </xsl:for-each>
       </table>
     </div>
     <br/>
     <br/>
-    <h2>Co-Authors of Co-Authors</h2>
+    <b>Co-Authors of Co-Authors</b>
+    <br/>
+    <br/>
     <div class="listTable" style="margin-top: 12px, margin-bottom:8px ">
       <table>
         <tr>
           <th>Name</th>
           <th>Total Publications</th>
-          <th>Weight</th>
+          <!--<th>Weight</th>-->
         </tr>
         <xsl:for-each select="LocalNetwork/NetworkPeople/NetworkPerson[@d='2']">
+          <xsl:sort select="@w2" data-type="number" order="descending"/>
           <xsl:variable name="nodeId" select="@id"/>
           <xsl:variable name="uri" select="@uri"/>
           <xsl:variable name="w2" select="@w2"/>
@@ -96,22 +103,24 @@
              </xsl:choose>
               <td style="text-align:left">
               <a href="{$uri}">
-                <xsl:value-of select="@fn"/>&#160;<xsl:value-of select="@ln"/>
+                <xsl:value-of select="@ln"/>,&#160;<xsl:value-of select="@fn"/>
               </a>
             </td>
             <td>
               <xsl:value-of select="@pubs"/>
             </td>
-            <td>
+            <!--<td>
               <xsl:value-of select="@w2"/>
-            </td>
+            </td>-->
           </tr>
         </xsl:for-each>
       </table>
     </div>
     <br/>
     <br/>
-    <h2>Co-Author Connections</h2>
+    <b>Co-Author Connections</b>
+    <br/>
+    <br/>
     <div class="listTable" style="margin-top: 12px, margin-bottom:8px ">
       <table>
         <tr>
@@ -119,9 +128,10 @@
           <th>Person 2</th>
           <th>Number of Co-Publications</th>
           <th>Most Recent Co-Publication</th>
-          <th>Weight</th>
+          <!--<th>Weight</th>-->
         </tr>
         <xsl:for-each select="LocalNetwork/NetworkCoAuthors/NetworkCoAuthor">
+          <xsl:sort select="@n" data-type="number" order="descending"/>
           <xsl:variable name="lid1" select="@lid1"/>
           <xsl:variable name="uri1" select="@uri1"/>
           <xsl:variable name="lid2" select="@lid2"/>
@@ -161,9 +171,9 @@
             <td>
               <xsl:value-of select="@y2"/>
             </td>
-            <td>
+            <!--<td>
               <xsl:value-of select="@w"/>
-            </td>
+            </td>-->
           </tr>
         </xsl:for-each>
       </table>
