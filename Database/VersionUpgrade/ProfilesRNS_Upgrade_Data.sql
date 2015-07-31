@@ -2,45 +2,83 @@
 
 Run this script on:
 
-	Profiles RNS Version 2.0.0
+	Profiles RNS Version 2.6.0
 
 to update its data to:
 
-	Profiles RNS Version 2.5.1
+	Profiles RNS Version 2.7.0
 
 *** You are recommended to back up your database before running this script!
-
-*** This script will delete any customizations made to [Framework.].Job
-*** If you added additional steps to [Framework.].Job you will need to manually merge these changes.
-
-*** This script will make changes to OpenSocial application URLs, to hit versions compatible with the latest version of ShindigOrng, If you are hosting the OpenSocial xml locally, you will need to update this XML.
 
 *** You should review each step of this script to ensure that it will not overwrite any customizations you have made to ProfilesRNS.
 
 *** Make sure you run the ProfilesRNS_Upgrade_Schema.sql file before running this file.
-
-*** Modify lines 25, 26, and 27, replace $(ProfilesRNSRootPath)\Data with the location that contains the various XML files that came with Profiles RNS 2.5.1 (not an older version of that file). These file has to be on the database server, not your local machine.
  
 */
 
--- Insert new sites into [Direct.].Sites
-insert into [Direct.].[Sites] ( SiteID,SiteName, IsActive, BootstrapURL, QueryURL, SortOrder) 
-select max(SiteID) + 1, 'Charles R Drew University of Medicine and Science', 1, 'http://profiles.cdrewu.edu/profiles/Direct/Direct.xml', 'http://profiles.cdrewu.edu/profiles/DIRECT/Modules/DirectSearch/DirectService.aspx?Request=IncomingCount&SearchPhrase=', max(SortOrder) + 1 from [Direct.].[Sites]
-
--- Alphabetize the sort direct sites sort order 
-;with newSortOrders as(
-        select SiteID, ROW_NUMBER() over (order by SiteName) as NewSortOrder  from [Direct.].[Sites]
-)
-update s set SortOrder = newSortOrder from [Direct.].Sites s join newSortOrders n on s.SiteID = n.SiteID
-
-
--- Update ORNG App URLs.
-update [ORNG.].[Apps] set  URL = 'http://profiles.ucsf.edu/apps_2.6/Links.xml', Enabled =  1 where AppID= 103 and  Name= 'Websites'
-update [ORNG.].[Apps] set  URL = 'http://profiles.ucsf.edu/apps_2.6/RDFTest.xml' where AppID= 10 and  Name= 'RDF Test'
-update [ORNG.].[Apps] set  URL = 'http://profiles.ucsf.edu/apps_2.6/SlideShare.xml', Enabled =  1 where AppID= 101 and  Name= 'Featured Presentations'
-update [ORNG.].[Apps] set  URL = 'http://profiles.ucsf.edu/apps_2.6/Twitter.xml', Enabled =  1 where AppID= 112 and  Name= 'Twitter'
-update [ORNG.].[Apps] set  URL = 'http://profiles.ucsf.edu/apps_2.6/YouTube.xml', Enabled =  1 where AppID= 114 and  Name= 'Featured Videos'
-
+update [Ontology.Presentation].[XML] set  PresentationXML =  
+        '<Presentation PresentationClass="profile">
+          <PageOptions Columns="3" />
+          <WindowName>{{{rdf:RDF[1]/rdf:Description[1]/rdfs:label[1]}}}</WindowName>
+          <PageColumns>3</PageColumns>
+          <PageTitle>{{{rdf:RDF[1]/rdf:Description[1]/rdfs:label[1]}}}</PageTitle>
+          <PageBackLinkName />
+          <PageBackLinkURL />
+          <PageSubTitle />
+          <PageDescription />
+          <PanelTabType>Fixed</PanelTabType>
+          <PanelList>
+            <Panel Type="active">
+              <Module ID="MiniSearch" />
+              <Module ID="MainMenu" />
+            </Panel>
+            <Panel Type="main" TabSort="0" TabType="Default">
+              <Module ID="CustomViewConceptMeshInfo">
+                <ParamList />
+              </Module>
+            </Panel>
+            <Panel Type="main" TabSort="0" TabType="Default">
+              <Module ID="CustomViewConceptPublication">
+                <ParamList>
+                  <Param Name="TimelineCaption">This graph shows the total number of publications written about "@ConceptName" by people in this website by year, and whether "@ConceptName" was a major or minor topic of these publications. &lt;!--In all years combined, a total of [[[TODO:PUBLICATION COUNT]]] publications were written by people in Profiles.--&gt;</Param>
+                  <Param Name="CitedCaption">Below are the publications written about "@ConceptName" that have been cited the most by articles in Pubmed Central.</Param>
+                  <Param Name="NewestCaption">Below are the most recent publications written about "@ConceptName" by people in Profiles.</Param>
+                  <Param Name="OldestCaption">Below are the earliest publications written about "@ConceptName" by people in Profiles.</Param>
+                </ParamList>
+              </Module>
+            </Panel>
+            <Panel Type="passive">
+              <Module ID="PassiveList">
+                <ParamList>
+                  <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
+                  <Param Name="InfoCaption">People</Param>
+                  <Param Name="Description">People who have written about this concept.</Param>
+                  <Param Name="MaxDisplay">5</Param>
+                  <Param Name="ListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:researchAreaOf/@rdf:resource]</Param>
+                  <Param Name="ItemURLText">{{{rdf:Description/rdfs:label}}}</Param>
+                  <Param Name="ItemText" />
+                  <Param Name="ItemURL">{{{rdf:Description/@rdf:about}}}</Param>
+                  <Param Name="MoreURL">/search/default.aspx?searchtype=people&amp;searchfor={{{rdf:RDF/rdf:Description/rdfs:label}}}&amp;classuri=http://xmlns.com/foaf/0.1/Person&amp;erpage=15&amp;offset=0&amp;exactPhrase=true</Param>
+                  <Param Name="MoreText">See all people</Param>
+                </ParamList>
+              </Module>
+              <Module ID="CustomViewConceptSimilarMesh">
+                <ParamList>
+                  <Param Name="InfoCaption">Similar Concepts</Param>
+                  <Param Name="Description">People who have written about this concept.</Param>
+                </ParamList>
+              </Module>
+              <Module ID="CustomViewConceptTopJournal">
+                <ParamList>
+                  <Param Name="InfoCaption">Top Journals</Param>
+                  <Param Name="Description">Top journals in which articles about this concept have been published.</Param>
+                </ParamList>
+              </Module>
+            </Panel>
+          </PanelList>
+        </Presentation>'
+		 where Type= 'P' and  Subject= 'http://www.w3.org/2004/02/skos/core#Concept' and  Predicate is null and  Object is null
+		 
 --*****************************************************************************************
 --*****************************************************************************************
 --*****************************************************************************************
