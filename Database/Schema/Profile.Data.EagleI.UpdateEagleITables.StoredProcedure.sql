@@ -33,3 +33,4 @@ BEGIN
 		select NodeID, PersonID, EagleIURI, HTML from #EagleI
 
 END
+GO
