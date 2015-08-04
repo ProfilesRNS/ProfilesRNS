@@ -2,7 +2,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [User.Account].[ExternalAuthenticate] (
+CREATE PROCEDURE [User.Account].[AuthenticateExternal] (
 	@UserName NVARCHAR(50),
 	@UserID INT = NULL OUTPUT,
 	@PersonID INT = NULL OUTPUT

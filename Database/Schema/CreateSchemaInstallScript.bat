@@ -314,7 +314,7 @@ type Profile.Data.Publication.DoesPublicationExist.StoredProcedure.sql
 type Profile.Data.Publication.Pubmed.AddDisambiguationLog.StoredProcedure.sql
 type Profile.Data.Publication.Pubmed.AddPMIDs.StoredProcedure.sql
 type User.Account.Authenticate.StoredProcedure.sql
-type User.Account.ExternalAuthenticate.StoredProcedure.sql
+type User.Account.AuthenticateExternal.StoredProcedure.sql
 type Profile.Data.Concept.Mesh.ParseMeshXML.StoredProcedure.sql
 type Profile.Data.Concept.Mesh.GetSimilarMesh.StoredProcedure.sql
 type Profile.Data.Concept.Mesh.GetJournals.StoredProcedure.sql

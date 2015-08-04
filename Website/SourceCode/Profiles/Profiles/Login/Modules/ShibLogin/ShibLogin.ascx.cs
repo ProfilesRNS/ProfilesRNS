@@ -55,7 +55,7 @@ namespace Profiles.Login.Modules.ShibLogin
                             Profiles.Login.Utilities.User user = new Profiles.Login.Utilities.User();
 
                             user.UserName = userName;
-                            if (data.ExternalUserLogin(ref user))
+                            if (data.UserLoginExternal(ref user))
                             {
                                 authenticated = true;
                                 RedirectAuthenticatedUser();

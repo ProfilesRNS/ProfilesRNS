@@ -99,7 +99,7 @@ namespace Profiles.Login.Modules.ADLogin
                     // validate the credentials
                     if (pc.ValidateCredentials(user.UserName, user.Password))
                     {
-                        if (data.ExternalUserLogin(ref user))
+                        if (data.UserLoginExternal(ref user))
                         {
                             if (Request.QueryString["edit"] == "true")
                                 Response.Redirect(Root.Domain + "/edit/" + sm.Session().NodeID.ToString());

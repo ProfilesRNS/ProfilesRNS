@@ -94,7 +94,7 @@ namespace Profiles.Login.Utilities
         }
 
 
-        public bool ExternalUserLogin(ref User user)
+        public bool UserLoginExternal(ref User user)
         {
             bool loginsuccess = false;
 
@@ -121,7 +121,7 @@ namespace Profiles.Login.Utilities
 
 
                 //For Output Parameters you need to pass a connection object to the framework so you can close it before reading the output params value.
-                ExecuteSQLDataCommand(GetDBCommand(ref dbconnection, "[User.Account].[ExternalAuthenticate]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param));
+                ExecuteSQLDataCommand(GetDBCommand(ref dbconnection, "[User.Account].[AuthenticateExternal]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param));
 
                 dbconnection.Close();
                 try
