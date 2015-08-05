@@ -130,9 +130,9 @@ popd
 echo d | xcopy /s ..\Database\SQL2008 ProfilesRNS\Database\SQL2008
 echo d | xcopy /s ..\Database\SQL2012 ProfilesRNS\Database\SQL2012
 echo d | xcopy /s ..\Database\SQL2014 ProfilesRNS\Database\SQL2014
-echo d | xcopy /s ..\Database\VersionUpgrade ProfilesRNS\Database\VersionUpgrade_2.0.0_2.5.1
-echo d | xcopy /s ..\Database\VersionUpgrade ProfilesRNS\Database\VersionUpgrade_2.5.1_2.6.0
-echo d | xcopy /s ..\Database\VersionUpgrade ProfilesRNS\Database\VersionUpgrade_2.6.0_2.7.0
+echo d | xcopy /s ..\Database\VersionUpgrade_2.0.0_2.5.1
+echo d | xcopy /s ..\Database\VersionUpgrade_2.5.1_2.6.0
+echo d | xcopy /s ..\Database\VersionUpgrade_2.6.0_2.7.0
 copy ..\Database\ProfilesRNS_CreateAccount.sql ProfilesRNS\Database\ProfilesRNS_CreateAccount.sql
 copy ..\Database\ProfilesRNS_CreateDatabase.sql ProfilesRNS\Database\ProfilesRNS_CreateDatabase.sql
 copy ..\Database\ProfilesRNS_DataLoad_Part1.sql ProfilesRNS\Database\ProfilesRNS_DataLoad_Part1.sql
