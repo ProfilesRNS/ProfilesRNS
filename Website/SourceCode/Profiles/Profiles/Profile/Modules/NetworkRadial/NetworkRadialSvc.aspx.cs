@@ -16,9 +16,10 @@ namespace Profiles.Profile.Modules.NetworkRadial
         {            
             Profiles.Profile.Utilities.DataIO data = new Profiles.Profile.Utilities.DataIO();
 
-            Profiles.Framework.Utilities.RDFTriple request = new RDFTriple(Convert.ToInt32(Request.QueryString["p"]));            
-
-            Response.Write(data.GetProfileNetworkForBrowser(request).InnerXml);            
+            Profiles.Framework.Utilities.RDFTriple request = new RDFTriple(Convert.ToInt32(Request.QueryString["p"]));
+            Response.ContentType = "application/json; charset=utf-8";
+            Response.AppendHeader("Access-Control-Allow-Origin", "*");
+            Response.Write(data.GetProfileNetworkForBrowser(request));              
         }
     }
 }

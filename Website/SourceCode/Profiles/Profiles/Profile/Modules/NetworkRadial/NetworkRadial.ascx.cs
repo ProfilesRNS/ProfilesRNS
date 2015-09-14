@@ -40,6 +40,14 @@ namespace Profiles.Profile.Modules.NetworkRadial
             NetworkBrowsercss.Attributes["media"] = "all";
             Page.Header.Controls.Add(NetworkBrowsercss);
 
+            System.Web.UI.HtmlControls.HtmlLink vizcss = new System.Web.UI.HtmlControls.HtmlLink();
+            vizcss.Href = Root.Domain + "/Profile/CSS/viz.css";
+            vizcss.Attributes["rel"] = "stylesheet";
+            vizcss.Attributes["type"] = "text/css";
+            vizcss.Attributes["media"] = "all";
+            Page.Header.Controls.Add(vizcss);
+
+
             HtmlGenericControl jsscript1 = new HtmlGenericControl("script");
             jsscript1.Attributes.Add("type", "text/javascript");
             jsscript1.Attributes.Add("src", Root.Domain + "/Profile/Modules/NetworkRadial/scriptaculous/lib/prototype.js");
@@ -52,48 +60,39 @@ namespace Profiles.Profile.Modules.NetworkRadial
 
             HtmlGenericControl jsscript3 = new HtmlGenericControl("script");
             jsscript3.Attributes.Add("type", "text/javascript");
-            jsscript3.Attributes.Add("src", Root.Domain + "/Profile/Modules/NetworkRadial/javascript/networkBrowserClass.js");
+            jsscript3.Attributes.Add("src", Root.Domain + "/Profile/Modules/NetworkRadial/javascript/layout_balanced.js");
             Page.Header.Controls.Add(jsscript3);
 
-            divSwfScript.InnerHtml = "<script language=\"JavaScript\" type=\"text/javascript\"> " +
-               "AC_FL_RunContent(" +
-               "'codebase', '//download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0'," +
-               "'width', '600'," +
-               "'height', '600'," +
-               "'src', '" + Root.Domain + "/profile/Modules/NetworkRadial/network_browser.swf'," +
-               "'movie', '" + Root.Domain + "/profile/Modules/NetworkRadial/network_browser'," +
-               "'quality', 'high'," +
-               "'pluginspage', '//www.adobe.com/go/getflashplayer'," +
-               "'align', 'middle'," +
-               "'play', 'true'," +
-               "'loop', 'true'," +
-               "'scale', 'showall'," +
-               "'wmode', 'transparent'," +
-               "'devicefont', 'false'," +
-               "'id', 'network_browserFLASH'," +
-               "'bgcolor', '#ffffff'," +
-               "'name', 'network_browserFLASH'," +
-               "'menu', 'true'," +
-               "'allowFullScreen', 'false'," +
-               "'allowScriptAccess', 'always'," +
-               "'salign', ''" +
-               "); //end AC code" +
-           "</script>";
+            HtmlGenericControl jsscript4 = new HtmlGenericControl("script");
+            jsscript4.Attributes.Add("type", "text/javascript");
+            jsscript4.Attributes.Add("src", Root.Domain + "/Profile/Modules/NetworkRadial/javascript/sliders.js");
+            Page.Header.Controls.Add(jsscript4);
 
-			
-            HtmlGenericControl script = new HtmlGenericControl("script");
-            script.Attributes.Add("type", "text/javascript");
-            script.InnerHtml = "window.onload = function() {" +
-				" network_browser._cfg.profile_network_path = '/"+Request.QueryString["Predicate"].ToString()+"/radial'; " +
-                " network_browser.Init('" + Root.Domain + "/profile/modules/NetworkRadial/NetworkRadialSvc.aspx?p='); " +
-                " network_browser.loadNetwork('" + Request.QueryString["Subject"].ToString() + "'); " +
-                "}";
-            Page.Header.Controls.Add(script);
+            HtmlGenericControl jsscript5 = new HtmlGenericControl("script");
+            jsscript5.Attributes.Add("type", "text/javascript");
+            jsscript5.Attributes.Add("src", Root.Domain + "/Profile/Modules/NetworkRadial/javascript/viz.js");
+            Page.Header.Controls.Add(jsscript5);
+
+            HtmlGenericControl jsscript6 = new HtmlGenericControl("script");
+            jsscript6.Attributes.Add("type", "text/javascript");
+            jsscript6.Attributes.Add("src", "//cdnjs.cloudflare.com/ajax/libs/d3/3.4.13/d3.min.js");
+            Page.Header.Controls.Add(jsscript6);
 
             Profiles.Profile.Utilities.DataIO data = new Profiles.Profile.Utilities.DataIO();
+            int personID = data.GetPersonId(Int64.Parse(Request.QueryString["Subject"].ToString()));
+            HtmlGenericControl script = new HtmlGenericControl("script");
+            script.Attributes.Add("type", "text/javascript");
+            script.InnerHtml = "jQuery(document).ready(function() {" +
+                " radial_viz = new RadialGraph_Visualization(jQuery('#radial_view')[0], {radius: 100});" +
+                //" radial_viz.loadNetwork('" + Root.Domain + "/profile/modules/NetworkRadial/NetworkRadialSvc.aspx?p=" + Request.QueryString["Subject"].ToString() + "', '" + Request.QueryString["Subject"].ToString() + "'); " +
+                " radial_viz.loadNetwork('" + Root.Domain + "/profile/modules/NetworkRadial/NetworkRadialSvc.aspx?p=" + Request.QueryString["Subject"].ToString() + "', '" + personID + "'); " +
+                "});";
+            Page.Header.Controls.Add(script);
+
+            //Profiles.Profile.Utilities.DataIO data = new Profiles.Profile.Utilities.DataIO();
 
             RDFTriple request = new RDFTriple(Convert.ToInt64(Request.QueryString["subject"]));
-            XmlDocument x = data.GetProfileNetworkForBrowser(request);
+            XmlDocument x = data.GetProfileNetworkForBrowserXML(request);
             System.Xml.Xsl.XsltArgumentList args = new System.Xml.Xsl.XsltArgumentList();
             args.AddParam("root", "", Root.Domain);
 

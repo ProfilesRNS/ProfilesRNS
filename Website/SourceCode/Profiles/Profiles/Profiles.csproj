@@ -152,10 +152,15 @@
     <Content Include="ORNG\Modules\ViewPersonalGadget\ViewPersonalGadget.ascx" />
     <Content Include="ORNG\PresentationXML\GadgetDetailsPresentation.xml" />
     <Content Include="ORNG\PresentationXML\SandboxFormPresentation.xml" />
+    <Content Include="Profile\CSS\viz.css" />
     <Content Include="Profile\Modules\CustomViewEagleI\CustomViewEagleI.ascx" />
     <Content Include="Profile\Modules\CustomViewEagleI\Images\logo.gif" />
     <Content Include="Profile\Modules\CustomViewListProperty\CustomViewListProperty.ascx" />
     <Content Include="Profile\Modules\CustomViewPersonGeneralInfo\vcard.aspx" />
+    <Content Include="Profile\Modules\NetworkCluster\JavaScript\networkClusterLayoutEngine.js" />
+    <Content Include="Profile\Modules\NetworkRadial\JavaScript\layout_balanced.js" />
+    <Content Include="Profile\Modules\NetworkRadial\JavaScript\sliders.js" />
+    <Content Include="Profile\Modules\NetworkRadial\JavaScript\viz.js" />
     <Content Include="Profile\XSLT\NetworkTable.xslt" />
     <Content Include="RobotsTxt.aspx" />
     <Content Include="SiteMap.aspx" />
@@ -1412,7 +1417,6 @@
     <Content Include="Profile\Modules\NetworkRadial\crossdomain.xml" />
     <Content Include="Profile\Modules\NetworkRadial\Images\yui-loading.gif" />
     <Content Include="Profile\Modules\NetworkRadial\NetworkRadial.ascx" />
-    <Content Include="Profile\Modules\NetworkRadial\JavaScript\networkBrowserClass.js" />
     <Content Include="Profile\Modules\NetworkRadial\NetworkRadialSvc.aspx" />
     <Content Include="Profile\Modules\NetworkRadial\network_browser.swf" />
     <Content Include="Profile\Modules\NetworkRadial\scriptaculous\lib\prototype.js" />

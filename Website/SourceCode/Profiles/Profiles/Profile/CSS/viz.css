@@ -1,0 +1,86 @@
+/*  
+ 
+    Copyright (c) 2008-2015 by the President and Fellows of Harvard College. All rights reserved.  
+    Profiles Research Networking Software was developed under the supervision of Griffin M Weber, MD, PhD.,
+    and Harvard Catalyst: The Harvard Clinical and Translational Science Center, with support from the 
+    National Center for Research Resources and Harvard University.
+
+
+    Code licensed under a BSD License. 
+    For details, see: LICENSE.txt 
+  
+*/
+
+g.radialVizNode rect {
+	display:none;
+	text-anchor:middle;
+	fill:#8AA9E6;
+	stroke-width:1;
+	stroke:#000;
+	cursor:pointer;
+}
+g.radialVizNode circle {
+	fill:#AC1B30;
+	stroke:#AC1B30;
+	stroke-width:1;
+	fill-opacity:0.5;
+	cursor:pointer;
+}
+g.radialVizNode text {
+	fill:#000;
+	font-weight:normal;
+	font-family:arial;
+	font-size: 11px;
+	text-anchor:middle; 
+	cursor:pointer;
+}
+
+
+g.radialVizNode.focus text { 
+	font-weight:bold;
+	fill:#FFFFFF;
+}
+g.radialVizNode.hover text  { 
+	font-weight:bold;
+	font-family:arial, sans-serif;
+	text-anchor:middle;
+	cursor:pointer;
+}
+g.radialVizNode.central text  { 
+	font-weight:bold;
+}
+g.radialVizNode.focus circle, g.hover circle {
+	stroke-width: 3px;
+}
+g.radialVizNode.hover rect {
+	display: inline;
+}
+g.radialVizNode.focus rect {
+	display: inline;
+	fill:#3366CC;
+}
+
+
+				
+line.radialVizEdge {
+	stroke: #D2AB6D;
+	stroke-opacity: 0.5;
+}
+line.radialVizEdge.focus, line.radialVizEdge.hover { 
+	stroke: #668CD9;
+}
+
+
+
+line.radialVizEdge.filtered {
+	stroke-opacity: 0.05;
+}
+line.radialVizEdge.hover.filtered, line.radialVizEdge.focus.filtered {
+	opacity: 0.3;
+}
+g.radialVizNode.filtered {
+	opacity: 0.1;
+}
+g.radialVizNode.hover.filtered, g.radialVizNode.focus.filtered {
+	opacity: 0.5;
+}
