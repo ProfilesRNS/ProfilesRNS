@@ -4,7 +4,7 @@
     <asp:Literal runat="server" ID="litinformationResourceReference"></asp:Literal>
 </div>
 <br />
-<div class="viewIn">
+<div class="viewIn" runat="server" id="divViewIn">
     <span class="viewInLabel">View in: </span>
     <asp:Literal runat="server" ID="litPublication"></asp:Literal>
 </div>
@@ -30,7 +30,7 @@
             </div>
         </div>
     </div>
-    <br></br>
+    <br/>
 </asp:Panel>
 <asp:Panel runat="server" ID="pnlAuthors" Visible="true">
 <div class="PropertyGroupItem" style="margin-bottom: 10px;">

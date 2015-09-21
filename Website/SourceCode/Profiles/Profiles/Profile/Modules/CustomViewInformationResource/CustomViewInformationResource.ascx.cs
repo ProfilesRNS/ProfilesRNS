@@ -37,13 +37,13 @@ namespace Profiles.Profile.Modules.CustomViewInformationResource
 
             List<GenericListItem> subjectareas = new List<GenericListItem>();
             List<GenericListItem> authors = new List<GenericListItem>();
-            
+
             foreach (XmlNode x in base.BaseData.SelectNodes("rdf:RDF/rdf:Description/vivo:hasSubjectArea/@rdf:resource", base.Namespaces))
             {
-                subjectareas.Add(new GenericListItem(base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + x.Value + "']/rdfs:label",base.Namespaces).InnerText, x.Value ));
+                subjectareas.Add(new GenericListItem(base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + x.Value + "']/rdfs:label", base.Namespaces).InnerText, x.Value));
             }
 
-            subjectareas.Sort(delegate( GenericListItem p1, GenericListItem p2)
+            subjectareas.Sort(delegate(GenericListItem p1, GenericListItem p2)
             {
                 return p1.Text.CompareTo(p2.Text);
             });
@@ -81,14 +81,16 @@ namespace Profiles.Profile.Modules.CustomViewInformationResource
                 pnlAuthors.Visible = false;
             }
 
+
             if (base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/bibo:pmid", base.Namespaces) != null)
-            {
                 litPublication.Text = "<a href=\"http://www.ncbi.nlm.nih.gov/pubmed/" + base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/bibo:pmid", base.Namespaces).InnerText + "\"target=\"_blank\">PubMed</a>";
-            }
+            else
+                divViewIn.Visible = false;
+
 
             litinformationResourceReference.Text = base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/prns:informationResourceReference", base.Namespaces).InnerText;
 
-           
+
 
 
         }
@@ -137,5 +139,5 @@ namespace Profiles.Profile.Modules.CustomViewInformationResource
 
     }
 
-    
+
 }

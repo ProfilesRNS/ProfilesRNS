@@ -22,6 +22,15 @@ namespace Profiles.Profile.Modules.CustomViewInformationResource {
         protected global::System.Web.UI.WebControls.Literal litinformationResourceReference;
         
         /// <summary>
+        /// divViewIn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divViewIn;
+        
+        /// <summary>
         /// litPublication control.
         /// </summary>
         /// <remarks>
