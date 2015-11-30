@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Xml;
 using System.Configuration;
 using System.Web;
@@ -473,11 +474,8 @@ namespace Profiles.Framework.Utilities
 
         public void AddSQLParameters(SqlCommand sqlcmd, SqlParameter[] sqlParam)
         {
-            for (int i = 0; i < sqlParam.GetLength(0); i++)
-            {
-                sqlcmd.Parameters.Add(sqlParam[i]);
-                sqlcmd.Parameters[i].Direction = sqlParam[i].Direction;                
-            }
+	        foreach (SqlParameter sqlParameter in sqlParam.Where(s => s != null))
+		        sqlcmd.Parameters.Add(sqlParameter);
         }
 
         public SqlDataReader GetSQLDataReader(SqlCommand sqlcmd)
@@ -665,7 +663,7 @@ namespace Profiles.Framework.Utilities
 
             if (session.LogoutDate > DateTime.Now.AddDays(-5))
             {
-                param[6] = new SqlParameter("@LogoutDate", session.LogoutDate.ToString());
+                param[6] = new SqlParameter("@LogoutDate", session.LogoutDate);
             }
 
             dbcommand.Connection = dbconnection;
