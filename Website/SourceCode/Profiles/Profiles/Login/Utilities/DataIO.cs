@@ -105,7 +105,7 @@ namespace Profiles.Login.Utilities
 
                 SqlConnection dbconnection = new SqlConnection(connstr);
 
-                SqlParameter[] param = new SqlParameter[4];
+                SqlParameter[] param = new SqlParameter[3];
 
                 dbconnection.Open();
 
@@ -126,10 +126,10 @@ namespace Profiles.Login.Utilities
                 dbconnection.Close();
                 try
                 {
-                    user.UserID = Convert.ToInt32(param[2].Value.ToString());
+                    user.UserID = Convert.ToInt32(param[1].Value.ToString());
 
-                    if (param[3].Value != DBNull.Value)
-                        user.PersonID = Convert.ToInt32(param[3].Value.ToString());
+                    if (param[2].Value != DBNull.Value)
+                        user.PersonID = Convert.ToInt32(param[2].Value.ToString());
                 }
                 catch { }
                 if (user.UserID != 0)
