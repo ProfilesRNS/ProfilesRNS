@@ -13,66 +13,42 @@
 
 
 #clusterGraphInfo {
-
 	overflow:hidden;
-
 	text-align:center;
-
 	font-family:sans-serif;
-
 	font-size:13px;
-
 	font-weight:bold;
-
 	color:#900;
-
 	border-top:1px dotted #000;
-
 	padding-top:5px;
-
 	margin-top:15px;
-
 }
 
 
 #clusterGraph {
-
 	height:500px;
-
 	overflow:hidden;
-
 	border-bottom:1px dotted #000;
-
 	margin-bottom:15px;
-
 }
 
 
 .node {
   stroke:#000;
-
   stroke-width:0.5px;
-
 }
 
 
 .link {
-
-  stroke:#999;
-
-  stroke-opacity:.6;
-
+  stroke:#BBB;
+  stroke-opacity:0.45;
 }
 
 
 .gnode {
-
 	cursor:move;
-
 	font-family:sans-serif;
-
 	font-size:10px;
-
 }
 
 

@@ -1,19 +1,10 @@
-/*  
- 
-Copyright (c) 2008-2015 by the President and Fellows of Harvard College. All rights reserved.  
-Profiles Research Networking Software was developed under the supervision of Griffin M Weber, MD, PhD.,
-and Harvard Catalyst: The Harvard Clinical and Translational Science Center, with support from the 
-National Center for Research Resources and Harvard University.
+/*
+	HTML5/d3-Based Network Visualizer  
+	(C)opyright 2015, Harvard Medical School
+	All Rights Reserved.
 
-
-Code licensed under a BSD License. 
-For details, see: LICENSE.txt 
-  
-HTML5/d3-Based Network Visualizer  
-
-Author(s): Nick Benik
-
-*/
+	Author(s): Nick Benik
+ */
 function RadialGraph_Visualization(svg_reference, config) {
 		var that = this;
 		var nid = 0;
@@ -35,6 +26,10 @@ function RadialGraph_Visualization(svg_reference, config) {
 			hover_active: true,
 			nodes: [],
 			edges: [],
+			circles: {
+				svgGroupEl: undefined,
+				anipos: []
+			},
 			adjmtx: {},
 			ranges: {
 				nodes: {},
@@ -54,7 +49,9 @@ function RadialGraph_Visualization(svg_reference, config) {
 		d3.select(this.svg.ref).on({
 //			mousemove: mouseMaster,
 			mouseenter: mouseMaster,
-			mouseover: mouseMaster
+			mouseover: mouseMaster,
+			click: mouseMaster,
+			dblclick: mouseMaster
 		});
 };
 // ----------------------------------------------------------------------------
@@ -116,103 +113,6 @@ RadialGraph_Visualization.prototype.loadNetwork = function(url, id) {
 //		d3.text(url, this.loadedNetworkXML.bind(this));
 };
 // ----------------------------------------------------------------------------
-RadialGraph_Visualization.prototype.loadedNetworkXML = function(error, retTxt) {
-    // EXECUTE THIS USING d3.text() CALL!!! 
-    // this allows us to assume the headers are mismatched to the MIME type
-
-    if (typeof retTxt === "undefined") {
-        alert("No data was retured from the site or your browser has incorrect security settings.");
-        return true;
-    }
-
-    // load the text into an XML document (thanking IE as usual)
-    if (window.DOMParser) {
-        var xml = (new window.DOMParser()).parseFromString(retTxt, "text/xml");
-    } else if (typeof window.ActiveXObject != "undefined" && new window.ActiveXObject("Microsoft.XMLDOM")) {
-        var xml = new window.ActiveXObject("Microsoft.XMLDOM");
-        xml.async = "false";
-        xml.loadXML(retTxt);
-    } else {
-        var xml = null;
-    }
-
-    // clear previous data/visual elements
-    this.clearNetwork();
-
-    // processes nodes
-    this.data.nodes = {};
-    var nl = xml.getElementsByTagName('NetworkPerson');
-    var l = nl.length;
-    for (var i = 0; i < l; i++) {
-        var nid = nl[i].getAttribute('id');
-        this.data.nodes[nid] = {
-            "nid": nid,
-            "id": nid,
-            "lid": nl[i].getAttribute('lid'),
-            "uri": nl[i].getAttribute('uri'),
-            "fn": nl[i].getAttribute('fn'),
-            "ln": nl[i].getAttribute('ln'),
-            "pubs": nl[i].getAttribute('pubs') * 1,
-            "w2": nl[i].getAttribute('w2') * 1,
-            "d": nl[i].getAttribute('d')
-        };
-        this.data.nodes[nid].label = this.data.nodes[nid]['ln'] + " " + this.data.nodes[nid]['fn'].substr(0, 1);
-        this.data.nodes[nid].x = 0;
-        this.data.nodes[nid].y = 0;
-        this.data.nodes[nid].polar = { "new": [0, 0] };
-    }
-
-    // processes the edges and build adjacency matrix
-    this.data.edges = [];
-    this.data.adjmtx = {};
-    var nl = xml.getElementsByTagName('NetworkCoAuthor');
-    var l = nl.length;
-    for (var i = 0; i < l; i++) {
-        this.data.edges[i] = {
-            "id1": nl[i].getAttribute('id1'),
-            "id2": nl[i].getAttribute('id2'),
-            "lid1": nl[i].getAttribute('lid1'),
-            "lid2": nl[i].getAttribute('lid2'),
-            "uri1": nl[i].getAttribute('uri1'),
-            "uri2": nl[i].getAttribute('uri2'),
-            "n": nl[i].getAttribute('n') * 1,
-            "w": nl[i].getAttribute('w') * 1,
-            "yr1": nl[i].getAttribute('y1') * 1,
-            "yr2": nl[i].getAttribute('y2') * 1
-        };
-        var temp = this.data.edges[i];
-        // we populate matrix using sub-objects (O^n) and later convert to sub-arrays
-        if (typeof this.data.adjmtx[temp.id1] === 'undefined') { this.data.adjmtx[temp.id1] = {}; }
-        this.data.adjmtx[temp.id1][temp.id2] = true;
-        if (typeof this.data.adjmtx[temp.id2] === 'undefined') { this.data.adjmtx[temp.id2] = {}; }
-        this.data.adjmtx[temp.id2][temp.id1] = true;
-    }
-
-    // convert adjacency matrix from sub-objects to sub-arrays
-    var keylist = d3.keys(this.data.adjmtx);
-    var l = keylist.length;
-    for (var i = 0; i < l; i++) {
-        this.data.adjmtx[keylist[i]] = d3.keys(this.data.adjmtx[keylist[i]]);
-    }
-
-    // Calculate the ranges needed for later use
-    this.getDataRange('NODE', 'pubs', true);
-    this.getDataRange('EDGE', 'w', true);
-    this.getDataRange('EDGE', 'yr2', true);
-    this.getDataRange('EDGE', 'n', true);
-
-
-    // generate the visual elements
-    this._generateEdges();
-    this._generateNodes();
-    this.centerOn(this.data.center_id, false);
-    d3.select('#node' + this.data.center_id).classed({ 'central': true });
-    this.svg.ref.style.visibility = 'visible';
-
-    // connect the filter sliders
-    this._connectSliders();
-};
-// ----------------------------------------------------------------------------
 RadialGraph_Visualization.prototype.loadedNetwork = function(error, json) {
 	this.clearNetwork();
 
@@ -222,9 +122,13 @@ RadialGraph_Visualization.prototype.loadedNetwork = function(error, json) {
 	for (var i=0; i<l; i++) {
 		var node = json.NetworkPeople[i];
 		node.nid = this.nid_func(node);
-		node.label = node.fn + " " + node.ln;
-		node.x = 0;
-		node.y = 0;
+		node.label = node.ln + " " + node.fn.substr(0,1);
+		node.xy = {
+			x: 0,
+			y: 0
+		};
+//		node.x = 0;
+//		node.y = 0;
 		node.polar = {"new": [0,0]}; // in the form of [theta,radius]
 		this.data.nodes[node.nid] = node;
 	}
@@ -237,6 +141,12 @@ RadialGraph_Visualization.prototype.loadedNetwork = function(error, json) {
 		var temp = json.NetworkCoAuthors[i];
 		delete temp.source;
 		delete temp.target;
+		temp.xy = {
+			x1: 0,
+			y1: 0,
+			x2: 0,
+			y2: 0
+		};
 		this.data.edges[i] = temp;
 		
 		// we populate matrix using sub-objects (O^n) and later convert to sub-arrays
@@ -251,25 +161,28 @@ RadialGraph_Visualization.prototype.loadedNetwork = function(error, json) {
 	for (var i=0; i<l; i++) {
 		this.data.adjmtx[keylist[i]] = d3.keys(this.data.adjmtx[keylist[i]]);
 	}
-
-        // Calculate the ranges needed for later use
+	
+	// Calculate the ranges needed for later use
 	this.getDataRange('NODE', 'pubs', true);
 	this.getDataRange('EDGE', 'w', true);
 	this.getDataRange('EDGE', 'y2', true);
 	this.getDataRange('EDGE', 'n', true);
         
-        // generate the visual elements        this._generateEdges();
-        this._generateNodes();
-        this.centerOn(this.data.center_id, false);
-        d3.select('#node' + this.data.center_id).classed({ 'central': true });
-        this.svg.ref.style.visibility = 'visible';
+    // generate the visual elements
+    this._generateEdges();
+	this._generateCircles(false);
+	this._generateNodes();
+	this.centerOn(this.data.center_id, false);
+	d3.select('#node' + this.data.center_id).classed({ 'central': true });
+	this.svg.ref.style.visibility = 'visible';
 
-        // connect the filter sliders
-        this._connectSliders();
-    };
+	// connect the filter sliders
+	this._connectSliders();
+};
 // ----------------------------------------------------------------------------
 RadialGraph_Visualization.prototype._connectSliders = function() {
 	network_sliders.Init(this);
+    watchdog.cancel();
 };
 // ----------------------------------------------------------------------------
 RadialGraph_Visualization.prototype.centerOn = function (nodeID, animate) {
@@ -278,10 +191,11 @@ RadialGraph_Visualization.prototype.centerOn = function (nodeID, animate) {
     layout_eng.plot(nodeID);
 
     // recalculate the hop radius based on the max hop distance
-    this.config.radius = ((this.svg.width / 2) * 0.90) / layout_eng.getMaxHops();
+	this.data.circles.maxHops = layout_eng.getMaxHops();
+    this.config.radius = ((this.svg.width / 2) * 0.75) / this.data.circles.maxHops;
 
     var polars = layout_eng.getLocationsPolar(this.config.radius);
-
+			
     // copy the new layout to the nodes
     var keylist = d3.keys(polars);
     var l = keylist.length;
@@ -294,6 +208,40 @@ RadialGraph_Visualization.prototype.centerOn = function (nodeID, animate) {
         } 
     }
 
+	// extract the hop rings' information
+	var ringO = {};
+	var ringN = {};
+	var keylist = d3.keys(this.data.nodes);
+	// loop through list and extract the ring distances
+	var l = keylist.length;
+	for (var i=0; i<l; i++) {
+		ringN[this.data.nodes[keylist[i]].polar.new[1]] = true;
+		ringO[this.data.nodes[keylist[i]].polar.old[1]] = true;	
+	}
+	// delete the center node coordinate
+	delete ringN[0];
+	delete ringO[0];
+	// twizzling out sorted values
+	ringN = d3.keys(ringN);
+	ringO = d3.keys(ringO);
+	var func_sortInt = function(a,b) { return (parseInt(a) > parseInt(b)); };
+	ringN.sort(func_sortInt);
+	ringO.sort(func_sortInt);
+	if (ringN.length != ringO.length) {
+		if (ringN.length < ringO.length) {
+			var i = ringN;
+			var l = ringO;
+			ringN.unshift("0");
+		} else {
+			var i = ringO;
+			var l = ringN;
+		}
+		while (i.length < l.length) { i.unshift("0"); }
+	}
+	// output is circles.anipos[circleNum][0|1] where 0 = new positions & 1 = old positions
+	this.data.circles.anipos = d3.zip(ringN, ringO);
+	this._generateCircles(animate);
+	
     // update the global center node identifier
     this.data.center_id = nodeID;
 
@@ -305,17 +253,17 @@ RadialGraph_Visualization.prototype.centerOn = function (nodeID, animate) {
         var a = (d.polar['new'][0] * Math.PI / 180);
         var x = Math.floor(r * Math.cos(a));
         var y = Math.floor(-r * Math.sin(a));
-        d.x = offset_x + x;
-        d.y = offset_y + y;
+        d.xy.x = offset_x + x;
+        d.xy.y = offset_y + y;
     }).bind(this);
     // (...see above)
     var func_UpdateEdges = (function (d) {
         var node = this.data.nodes[d.id1];
-        d.x1 = node.x;
-        d.y1 = node.y;
+        d.xy.x1 = node.xy.x;
+        d.xy.y1 = node.xy.y;
         var node = this.data.nodes[d.id2];
-        d.x2 = node.x;
-        d.y2 = node.y;
+        d.xy.x2 = node.xy.x;
+        d.xy.y2 = node.xy.y;
     }).bind(this);
 
 
@@ -334,39 +282,52 @@ RadialGraph_Visualization.prototype.centerOn = function (nodeID, animate) {
             return function (t) {
                 var r = i2(t);
                 var a = (i1(t) * Math.PI / 180);
-                d.x = cx + Math.floor(r * Math.cos(a));
-                d.y = cy + Math.floor(-r * Math.sin(a));
+                d.xy.x = cx + Math.floor(r * Math.cos(a));
+                d.xy.y = cy + Math.floor(-r * Math.sin(a));
                 if (i == node_cnt - 1) {
                     // once all the nodes have been updated for this frame
-                    // we need to also update all the edges
+                    // we need to also update all the edges and the circles
                     d3.selectAll(".radialVizEdge")
 						.each(func_UpdateEdges)
-						.attr("x1", function (d) { return d.x1; })
-						.attr("y1", function (d) { return d.y1; })
-						.attr("x2", function (d) { return d.x2; })
-						.attr("y2", function (d) { return d.y2; });
+						.attr("x1", function (d) { return d.xy.x1; })
+						.attr("y1", function (d) { return d.xy.y1; })
+						.attr("x2", function (d) { return d.xy.x2; })
+						.attr("y2", function (d) { return d.xy.y2; });
                 }
-                return "translate(" + d.x + "," + d.y + ")";
+                return "translate(" + d.xy.x + "," + d.xy.y + ")";
             };
         };
 
+		// animate the circles
         d3.select(this.svg.ref).selectAll(".radialVizNode")
 			.transition()
 				.duration(1500)
 				.attrTween("transform", func_animateNodes.bind(this));
+		
+        d3.select(this.svg.ref).selectAll(".radialVizCircles circle")
+			.transition()
+				.duration(1500)
+				.attrTween("r", function(d,i,j) {
+					return d3.interpolateRound(parseInt(d[1]), parseInt(d[0]));
+				});
+				
+        d3.select(this.svg.ref).selectAll(".radialVizCircles circle").style({visibility: "visible"});
+
     } else {
+		
+		
         // place the nodes [NO ANIMATION]
         var nodes = d3.select(this.svg.ref).selectAll(".radialVizNode")
 			.each(func_UpdateXY)
-			.attr("transform", function (d, i) { return "translate(" + d.x + "," + d.y + ")"; });
+			.attr("transform", function (d, i) { return "translate(" + d.xy.x + "," + d.xy.y + ")"; });
 
         // move the edges
         var edges = d3.select(this.svg.ref).selectAll(".radialVizEdge")
 			.each(func_UpdateEdges)
-			.attr("x1", function (d) { return d.x1; })
-			.attr("y1", function (d) { return d.y1; })
-			.attr("x2", function (d) { return d.x2; })
-			.attr("y2", function (d) { return d.y2; });
+			.attr("x1", function (d) { return d.xy.x1; })
+			.attr("y1", function (d) { return d.xy.y1; })
+			.attr("x2", function (d) { return d.xy.x2; })
+			.attr("y2", function (d) { return d.xy.y2; });
     }
 };
 // ----------------------------------------------------------------------------
@@ -392,7 +353,6 @@ RadialGraph_Visualization.prototype._highlighter = function(type, element) {
 			// highlight node under mouse
 			d3.select(element).classed({hover:false, focus:true});
 
-
 			// nodes
 			var targets = d3.selectAll('.radialVizNode')[0]
 				.filter(function(n) { return (this.indexOf(String(n.__data__.nid)) > -1); }, this.data.adjmtx[d.nid]);
@@ -410,7 +370,7 @@ RadialGraph_Visualization.prototype._highlighter = function(type, element) {
 					this.parentNode.appendChild(this);
 				});
 			element.parentNode.appendChild(element);
-			this.data.hover_active = true;
+			this.data.hover_active = true;				
 			break;
 		case "EDGE":
 			var d = element.__data__;
@@ -442,6 +402,8 @@ RadialGraph_Visualization.prototype._handleMouseEvents = function() {
 	var ev = d3.event;
 	var el = ev.target;
 	var action = ev.type;
+	var el_type = 'BACKGROUND';
+	var signal = [];
 
 	// classes and/or tags to look for
 	var classes = ["radialVizNode", "radialVizEdge"];
@@ -454,16 +416,17 @@ RadialGraph_Visualization.prototype._handleMouseEvents = function() {
 		for (var i=0; i<classes.length; i++) {
 			if (d3.select(el).classed(classes[i])) {
 				// found it!
-				action = action + "_" + classes[i];
+				if (classes[i] == 'radialVizNode') { el_type = 'NODE'; }
+				if (classes[i] == 'radialVizEdge') { el_type = 'EDGE'; }
 				done = true;
 				break;
 			}
 		}
+		// check current element tag name		
 		if (!done) {
-			// check current element tag name
-			if (tags.indexOf(el.tagName) != -1) {
+			if (tags.indexOf(el.tagName) != -1) {				
 				// found it!
-				action = action + "_" + el.tagName;
+				el_type = 'BACKGROUND';
 				done = true;
 				break;
 			}
@@ -477,10 +440,14 @@ RadialGraph_Visualization.prototype._handleMouseEvents = function() {
 			}
 		}
 	} while (!done);
-
+	
 	// el now contains an element we are interested in or null if not.
-
 	if (el === null) {
+		// fire an OUT command for the last element that had focus
+		if (this.data.hover_el_type === null) {
+			// fire mouse out event for the last element type we were over
+			action = "OUT";
+		}
 		// unhighlight all elements and exit
 		d3.select(this.svg.ref).selectAll('.hover').classed({hover:false});
 		$('graph_info').textContent = '';
@@ -489,13 +456,35 @@ RadialGraph_Visualization.prototype._handleMouseEvents = function() {
 		return;
 	}
 
-	// collapse action codes (simplifies x-browser fixes)
+	// extract the modifier keys SHIFT_ALT_CTRL
 	switch (action) {
-		case 'mouseenter_svg':
-			action = "mouseover_svg";
+		case "mouseover":
+		case "mouseenter":
+			action = "IN";
+			signal.push(action);
 			break;
+		case "mouseout":
+			action = "OUT";
+			signal.push(action);
+			break;
+		case "click":
+			action = "CLICK";
+			if (ev.shiftKey === true) { signal.push("SHIFT"); }
+			if (ev.altKey === true) { signal.push("ALT"); }
+			if (ev.ctrlKey === true) { signal.push("CTRL"); }
+			signal.push(action);
+			// unhighlight browser selection
+			try {
+				window.getSelection().empty();
+			} catch(e) {}
+			break;
+//		default:
+//			alert(action);
 	}
 
+	// create the final event signal string
+	signal.unshift(el_type);
+	action = signal.join("_");
 
 	// determine if it's a redundent event on the same node or edge
 	if (this.data.hover_el === el && this.data.hover_evt == action) { return; }
@@ -504,63 +493,91 @@ RadialGraph_Visualization.prototype._handleMouseEvents = function() {
 	this.data.hover_el = el;
 	this.data.hover_evt = action;
 	
-
-	// process according to the event type
-	switch (action) {
-		case "mouseover_svg":
-			this._highlighter("NONE", null);
-			break;
-		case "mouseover_radialVizNode":
-			this._highlighter("NONE", null);
-			this._highlighter("NODE", el);
-			break;
-		case "mouseover_radialVizEdge":
-			this._highlighter("NONE", null);
-			this._highlighter("EDGE", el);
-			break;
-	}
-}
-// ----------------------------------------------------------------------------
-RadialGraph_Visualization.prototype._generateNodes = function() {
-	
 	var func_Recenter = (function(d) {
 		if (d.nid != this.data.center_id) {
 			// node has been clicked that is not the center node
 			this.centerOn(d.nid, true);
 		}
 	}).bind(this);
+	var func_noSelect = function() {
+		try { window.getSelection().empty(); } catch(e) {}
+	};
+	
+	
+	// process according to the event type
+	var dataObject = el.__data__;
+	switch (action) {
+		case "BACKGROUND_IN":
+			this._highlighter("NONE", null);
+			break;
+		case "NODE_IN":
+			this._highlighter("NONE", null);
+			this._highlighter("NODE", el);
+			break;
+		case "EDGE_IN":
+			this._highlighter("NONE", null);
+			this._highlighter("EDGE", el);
+			break;
+		case "NODE_CLICK":
+			func_noSelect();
+			func_Recenter(dataObject);
+			break;
+		case "NODE_SHIFT_CLICK":
+			func_noSelect();
+			var targets = d3.selectAll('.radialVizEdge')[0].filter(function(n){ return this.indexOf(String(n.__data__.id1)) != -1 && this.indexOf(String(n.__data__.id2)) != -1}, this.data.adjmtx[dataObject.nid]);
+			d3.selectAll(targets)
+				.classed({hover:true})
+				.each(function(el) { this.parentNode.appendChild(this) });
+			break;
+		case "NODE_CTRL_CLICK":
+			func_noSelect();
+			func_Recenter(dataObject);
+			window.open(dataObject.uri + "/network/coauthors/radial", "_self");
+			break;
+		case "NODE_ALT_CLICK":
+			func_noSelect();
+			func_Recenter(dataObject);
+			window.open(dataObject.uri, "_self");
+			break;
+	}
+}
 
+// ----------------------------------------------------------------------------
+RadialGraph_Visualization.prototype._generateCircles = function(animate) {
+	var t = d3.select(this.svg.ref).select(".radialVizCircles");
+	if (t[0][0] === null) {
+		var circleGrp = d3.select(this.svg.ref).append("svg:g")
+			.classed("radialVizCircles", true)
+			.style({visibility: "hidden"});
+		return true;
+	} else {
+		var circleGrp = d3.select(t[0][0]);
+	}
+		
+	var circles = circleGrp.selectAll('circle').data(this.data.circles.anipos);
+	circles.enter()
+		.append("circle")
+		.attr("transform",(function(d, i) { return "translate("+this.svg.center_x+","+this.svg.center_y+")"; }).bind(this));
+	
+	if (animate === true) {
+		circles.attr('r', function(d) {return String(d[1]);});
+	} else {
+		circles.attr('r', function(d) {return String(d[0]);})
+			.style({visibility: "visible"});
+	}
+	circles.exit().remove();
+}
 
+// ----------------------------------------------------------------------------
+RadialGraph_Visualization.prototype._generateNodes = function() {
+	
 	var data = d3.values(this.data.nodes);
 	var nodes = d3.select(this.svg.ref).selectAll(".radialVizNode")
 		.data(data)
 		.enter().append("svg:g")
 			.attr("class", "radialVizNode")
 			.attr("id", function(d) { return "node"+d.nid; })
-			.attr("transform",function(d,i) { return "translate("+(14*i)+","+(12*i)+")"; })
-			.on("click", (function(d) {
-				// handle alt and shift click functionality
-				var evt = d3.event;
-				if (evt.altKey) {
-					console.warn('alt-click');
-					return true;
-				}
-				if (evt.ctrlKey) {
-					console.warn('ctrl-click');
-					return true;
-				}
-				if (evt.shiftKey) {
-					var targets = d3.selectAll('.radialVizEdge')[0].filter(function(n){ return this.indexOf(n.__data__.id1) != -1 && this.indexOf(n.__data__.id2) != -1}, this.data.adjmtx[d.nid]);
-					d3.selectAll(targets)
-						.classed({hover:true})
-						.each(function(el) { this.parentNode.appendChild(this) });
-					try {
-						window.getSelection().empty();
-					} catch(e) {}
-					return true;
-				}
-				func_Recenter(d);
-			}).bind(this));
+			.attr("transform",function(d,i) { return "translate("+(14*i)+","+(12*i)+")"; });
 			
 	nodes.append("circle")
 		.attr("r", (function (d) {
@@ -641,7 +658,10 @@ RadialGraph_Visualization.prototype.getDataRange = function(obj_name, attrib_nam
 	return ret;
 };
 // ----------------------------------------------------------------------------
-RadialGraph_Visualization.prototype.configCallback = function(callback_ref) {};
+RadialGraph_Visualization.prototype.configCallback = function(callback_ref) {
+		console.debug(typeof callback_ref);
+		this.callback_func = callback_ref;
+};
 RadialGraph_Visualization.prototype.configSetting = function(settingName, settingValue) {};
 RadialGraph_Visualization.prototype.plot = function(center_nid) {};
 RadialGraph_Visualization.prototype.defineID = function(function_def) { this.nid_func = function_def.bind(this); };
