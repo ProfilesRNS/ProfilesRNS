@@ -157,7 +157,39 @@
     <Content Include="Profile\Modules\CustomViewEagleI\Images\logo.gif" />
     <Content Include="Profile\Modules\CustomViewListProperty\CustomViewListProperty.ascx" />
     <Content Include="Profile\Modules\CustomViewPersonGeneralInfo\vcard.aspx" />
+    <Content Include="Profile\Modules\NetworkClusterFlash\crossdomain.xml" />
+    <Content Include="Profile\Modules\NetworkClusterFlash\Default.aspx" />
+    <Content Include="Profile\Modules\NetworkClusterFlash\Images\yui-loading.gif" />
+    <Content Include="Profile\Modules\NetworkClusterFlash\JavaScript\networkBrowserClass.js" />
+    <Content Include="Profile\Modules\NetworkClusterFlash\NetworkCluster.ascx" />
+    <Content Include="Profile\Modules\NetworkClusterFlash\NetworkClusterSvc.aspx" />
+    <Content Include="Profile\Modules\NetworkClusterFlash\network_browser_force.swf" />
+    <Content Include="Profile\Modules\NetworkClusterFlash\scriptaculous\lib\prototype.js" />
+    <Content Include="Profile\Modules\NetworkClusterFlash\scriptaculous\src\builder.js" />
+    <Content Include="Profile\Modules\NetworkClusterFlash\scriptaculous\src\controls.js" />
+    <Content Include="Profile\Modules\NetworkClusterFlash\scriptaculous\src\dragdrop.js" />
+    <Content Include="Profile\Modules\NetworkClusterFlash\scriptaculous\src\effects.js" />
+    <Content Include="Profile\Modules\NetworkClusterFlash\scriptaculous\src\scriptaculous.js" />
+    <Content Include="Profile\Modules\NetworkClusterFlash\scriptaculous\src\slider.js" />
+    <Content Include="Profile\Modules\NetworkClusterFlash\scriptaculous\src\sound.js" />
+    <Content Include="Profile\Modules\NetworkClusterFlash\scriptaculous\src\unittest.js" />
     <Content Include="Profile\Modules\NetworkCluster\JavaScript\networkClusterLayoutEngine.js" />
+    <Content Include="Profile\Modules\NetworkRadialFlash\crossdomain.xml" />
+    <Content Include="Profile\Modules\NetworkRadialFlash\Default.aspx" />
+    <Content Include="Profile\Modules\NetworkRadialFlash\Images\yui-loading.gif" />
+    <Content Include="Profile\Modules\NetworkRadialFlash\JavaScript\networkBrowserClass.js" />
+    <Content Include="Profile\Modules\NetworkRadialFlash\NetworkRadial.ascx" />
+    <Content Include="Profile\Modules\NetworkRadialFlash\NetworkRadialSvc.aspx" />
+    <Content Include="Profile\Modules\NetworkRadialFlash\network_browser.swf" />
+    <Content Include="Profile\Modules\NetworkRadialFlash\scriptaculous\lib\prototype.js" />
+    <Content Include="Profile\Modules\NetworkRadialFlash\scriptaculous\src\builder.js" />
+    <Content Include="Profile\Modules\NetworkRadialFlash\scriptaculous\src\controls.js" />
+    <Content Include="Profile\Modules\NetworkRadialFlash\scriptaculous\src\dragdrop.js" />
+    <Content Include="Profile\Modules\NetworkRadialFlash\scriptaculous\src\effects.js" />
+    <Content Include="Profile\Modules\NetworkRadialFlash\scriptaculous\src\scriptaculous.js" />
+    <Content Include="Profile\Modules\NetworkRadialFlash\scriptaculous\src\slider.js" />
+    <Content Include="Profile\Modules\NetworkRadialFlash\scriptaculous\src\sound.js" />
+    <Content Include="Profile\Modules\NetworkRadialFlash\scriptaculous\src\unittest.js" />
     <Content Include="Profile\Modules\NetworkRadial\JavaScript\layout_balanced.js" />
     <Content Include="Profile\Modules\NetworkRadial\JavaScript\sliders.js" />
     <Content Include="Profile\Modules\NetworkRadial\JavaScript\viz.js" />
@@ -764,6 +796,30 @@
     <Compile Include="Profile\Modules\HRFooter\HRFooter.ascx.designer.cs">
       <DependentUpon>HRFooter.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Profile\Modules\NetworkClusterFlash\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\Modules\NetworkClusterFlash\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\Modules\NetworkClusterFlash\NetworkCluster.ascx.cs">
+      <DependentUpon>NetworkCluster.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\Modules\NetworkClusterFlash\NetworkCluster.ascx.designer.cs">
+      <DependentUpon>NetworkCluster.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\Modules\NetworkClusterFlash\NetworkClusterSvc.aspx.cs">
+      <DependentUpon>NetworkClusterSvc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\Modules\NetworkClusterFlash\NetworkClusterSvc.aspx.designer.cs">
+      <DependentUpon>NetworkClusterSvc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\Modules\NetworkClusterFlash\NetworkClusterTemplate.Master.cs">
+      <DependentUpon>NetworkClusterTemplate.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\Modules\NetworkClusterFlash\NetworkClusterTemplate.Master.designer.cs">
+      <DependentUpon>NetworkClusterTemplate.Master</DependentUpon>
+    </Compile>
     <Compile Include="Profile\Modules\NetworkCluster\NetworkClusterSvc.aspx.cs">
       <DependentUpon>NetworkClusterSvc.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -777,6 +833,30 @@
     </Compile>
     <Compile Include="Profile\Modules\NetworkCluster\NetworkCluster.ascx.designer.cs">
       <DependentUpon>NetworkCluster.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\Modules\NetworkRadialFlash\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\Modules\NetworkRadialFlash\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\Modules\NetworkRadialFlash\NetworkRadial.ascx.cs">
+      <DependentUpon>NetworkRadial.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\Modules\NetworkRadialFlash\NetworkRadial.ascx.designer.cs">
+      <DependentUpon>NetworkRadial.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\Modules\NetworkRadialFlash\NetworkRadialSvc.aspx.cs">
+      <DependentUpon>NetworkRadialSvc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\Modules\NetworkRadialFlash\NetworkRadialSvc.aspx.designer.cs">
+      <DependentUpon>NetworkRadialSvc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\Modules\NetworkRadialFlash\NetworkRadialTemplate.Master.cs">
+      <DependentUpon>NetworkRadialTemplate.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\Modules\NetworkRadialFlash\NetworkRadialTemplate.Master.designer.cs">
+      <DependentUpon>NetworkRadialTemplate.Master</DependentUpon>
     </Compile>
     <Compile Include="Profile\Modules\NetworkTimeline\NetworkTimeline.ascx.cs">
       <DependentUpon>NetworkTimeline.ascx</DependentUpon>
@@ -1531,9 +1611,17 @@
     <Content Include="Profile\Modules\CustomViewPersonGeneralInfo\EmailHandler.ashx" />
     <None Include="ORCID\ORCIDPrivacySettingsandProfiles.pdf" />
     <Content Include="Profile\Modules\CustomViewPersonGeneralInfo\EmailAudioHandler.ashx" />
+    <Content Include="Profile\Modules\NetworkClusterFlash\NetworkClusterTemplate.Master" />
+    <None Include="Profile\Modules\NetworkClusterFlash\scriptaculous\CHANGELOG" />
+    <None Include="Profile\Modules\NetworkClusterFlash\scriptaculous\MIT-LICENSE" />
+    <None Include="Profile\Modules\NetworkClusterFlash\scriptaculous\README.rdoc" />
     <None Include="Profile\Modules\NetworkCluster\scriptaculous\CHANGELOG" />
     <None Include="Profile\Modules\NetworkCluster\scriptaculous\MIT-LICENSE" />
     <None Include="Profile\Modules\NetworkCluster\scriptaculous\README.rdoc" />
+    <Content Include="Profile\Modules\NetworkRadialFlash\NetworkRadialTemplate.Master" />
+    <None Include="Profile\Modules\NetworkRadialFlash\scriptaculous\CHANGELOG" />
+    <None Include="Profile\Modules\NetworkRadialFlash\scriptaculous\MIT-LICENSE" />
+    <None Include="Profile\Modules\NetworkRadialFlash\scriptaculous\README.rdoc" />
     <None Include="Profile\Modules\NetworkRadial\scriptaculous\CHANGELOG" />
     <None Include="Profile\Modules\NetworkRadial\scriptaculous\MIT-LICENSE" />
     <None Include="Profile\Modules\NetworkRadial\scriptaculous\README.rdoc" />
