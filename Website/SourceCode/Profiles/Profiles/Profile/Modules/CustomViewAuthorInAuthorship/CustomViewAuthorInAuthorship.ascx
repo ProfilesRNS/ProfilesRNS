@@ -17,7 +17,7 @@
 				<ol>
 		</HeaderTemplate>
 		<ItemTemplate>			
-				<li>
+				<li runat="server" id="liPublication">
 					<div>
 						<asp:Label runat="server" ID="lblPublication"></asp:Label>
 					</div>
@@ -107,4 +107,16 @@
             }
         });
     });
+
+    setTimeout(function () {
+        $("#publicationListAll li[data-pmid] div.viewIn").each(function () {
+            var pmid = $(this).parent().attr('data-pmid');
+            if (pmid && pmid[0]) {
+                $(this).append(
+                " <span class='altmetric-embed' data-badge-popover='bottom' data-badge-type='4' data-hide-no-mentions='true' data-pmid='" +
+                pmid + "'></span>")
+            }
+        });
+        $.getScript('//d1bxh8uas1mnw7.cloudfront.net/assets/embed.js');
+    }, 7000);
 </script>
