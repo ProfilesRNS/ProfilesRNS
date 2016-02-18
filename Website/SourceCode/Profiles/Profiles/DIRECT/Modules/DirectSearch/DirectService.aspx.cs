@@ -36,7 +36,6 @@ namespace Profiles.DIRECT.Modules.DirectSearch
         {
             oDataIO = new DIRECT.Utilities.DataIO();
 
-            Profiles.DIRECT.Utilities.DataIO searchDataIO;
             Profiles.Search.Utilities.DataIO profileDataIO;
 
             string DirectServiceURL = Root.Domain + "/DIRECT/Modules/DirectSearch/directservice.aspx";// Request.Url.AbsoluteUri.Replace("&", "&amp;");
@@ -194,6 +193,7 @@ namespace Profiles.DIRECT.Modules.DirectSearch
                     Utilities.DataIO data = new Profiles.DIRECT.Utilities.DataIO();
 
                     string searchphrase = Request["SearchPhrase"].Trim();
+                    
                     Response.Write(data.Search(searchphrase));
 
                     break;
@@ -496,7 +496,7 @@ namespace Profiles.DIRECT.Modules.DirectSearch
                 sql = "update  [Direct.].LogOutgoing set ResponseTime = datediff(ms,SentDate,GetDate()), "
                     + " ResponseState = 4, "
                     + " ResponseStatus = 200, " //+ HttpContext.Current.Response.StatusCode.ToString() + ", "
-                    + " ResultText = " + cs(ResultText) + ", "
+                    + " ResultText = " + cs(ResultText.Substring(0,ResultText.Length > 3000 ? 3000 : ResultText.Length)) + ", "
                     + " ResultCount = " + cs(ResultCount) + ", "
                     + " ResultDetailsURL = " + cs(ResultDetailsURL)
                     + " where FSID = " + cs(site.FSID);
@@ -517,7 +517,15 @@ namespace Profiles.DIRECT.Modules.DirectSearch
                     Conn.Close();
 
                 site.JavaScript = "<script language=\"javascript\" type=\"text/javascript\">parent.siteResult(" + site.SiteID + ",0," + ch(ResultCount) + "," + ch(ResultDetailsURL) + "," + ch(ResultPopulationType) + "," + ch(ResultPreviewURL) + ",'" + site.FSID + "');</script>" + Environment.NewLine;
+                try
+                {
                 site.Context.Response.Write(site.JavaScript);
+                }
+                catch (Exception ex)
+                {
+                    //do nothing
+
+                }
                 try
                 {
                     site.Context.Response.Flush();

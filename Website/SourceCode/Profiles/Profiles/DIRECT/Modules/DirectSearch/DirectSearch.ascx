@@ -173,11 +173,11 @@ function NoEnter(){
                         </th>
                         <td  class="fieldMain">
                             <input type='text' name="SearchPhrase" id="FSSearchPhrase" value="<%Response.Write(GetSearchPhrase()); %>"
-                                class="inputText" title="keywords"/>
+                                class="inputText" title="Search Phrase" />
                         </td>
                         <td class="fieldOptions">
                             <input type='button' value="Search" name="btnsearch" id="btnsearch" class="inputButton"
-                                onclick="JavaScript:doDirectSearch();" />
+                                onclick="JavaScript:doDirectSearch();" title="Search" />
                         </td>
                     </tr>
                 </table>
