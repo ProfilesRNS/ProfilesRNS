@@ -52,24 +52,22 @@ namespace Profiles.ActiveNetwork.Modules.MyNetwork
 
         private void DrawProfilesModule()
         {
-            SqlDataReader reader;
             Framework.Utilities.DataIO data = new Profiles.Framework.Utilities.DataIO();
             List<NetworkItem> ni = new List<NetworkItem>();
             List<NetworkItem> nibinder;
 
-            reader = data.GetActiveNetwork(0, true);
-
-
-            while (reader.Read())
+            using (SqlDataReader reader = data.GetActiveNetwork(0, true))
             {
-                ni.Add(new NetworkItem(reader["URI"].ToString(),
-                    reader["Name"].ToString(),
-                    Convert.ToInt64(reader["NodeID"]),
-                    reader["RelationshipType"].ToString(),
-                    reader["RelationshipName"].ToString()));
+                while (reader.Read())
+                {
+                    ni.Add(new NetworkItem(reader["URI"].ToString(),
+                        reader["Name"].ToString(),
+                        Convert.ToInt64(reader["NodeID"]),
+                        reader["RelationshipType"].ToString(),
+                        reader["RelationshipName"].ToString()));
+                }
+
             }
-
-
 
 
             nibinder = this.GetItems("Collaborator", ni);

@@ -15,7 +15,7 @@
                     <asp:TemplateField ItemStyle-HorizontalAlign="Right">
                         <ItemTemplate>
                             <asp:ImageButton runat="server" ID="ibRemove" ImageUrl="~/Framework/Images/delete.png"
-                                OnClick="ibRemove_OnClick" />
+                                OnClick="ibRemove_OnClick" AlternateText="Remove" />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
@@ -35,7 +35,7 @@
                     <asp:TemplateField ItemStyle-HorizontalAlign="Right">
                         <ItemTemplate>
                             <asp:ImageButton runat="server" ID="ibRemove" ImageUrl="~/Framework/Images/delete.png"
-                                OnClick="ibRemove_OnClick" />
+                                OnClick="ibRemove_OnClick" AlternateText="Delete"/>
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
@@ -55,7 +55,7 @@
                     <asp:TemplateField ItemStyle-HorizontalAlign="Right">
                         <ItemTemplate>
                             <asp:ImageButton runat="server" ID="ibRemove" ImageUrl="~/Framework/Images/delete.png"
-                                OnClick="ibRemove_OnClick" />
+                                OnClick="ibRemove_OnClick" AlternateText="Remove"/>
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
@@ -79,7 +79,7 @@
                     <asp:TemplateField ItemStyle-HorizontalAlign="Right">
                         <ItemTemplate>
                             <asp:ImageButton runat="server" ID="ibRemove" ImageUrl="~/Framework/Images/delete.png"
-                                OnClick="ibRemove_OnClick" />
+                                OnClick="ibRemove_OnClick" AlternateText="Remove" />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
@@ -99,7 +99,7 @@
                     <asp:TemplateField ItemStyle-HorizontalAlign="Right">
                         <ItemTemplate>
                             <asp:ImageButton runat="server" ID="ibRemove" ImageUrl="~/Framework/Images/delete.png"
-                                OnClick="ibRemove_OnClick" />
+                                OnClick="ibRemove_OnClick" AlternateText="Remove" />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
