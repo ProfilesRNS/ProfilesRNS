@@ -124,7 +124,8 @@ copy ..\Website\SourceCode\ProfilesSPARQLAPI\web.config ..\..\..\..\Release\Prof
 
 echo d | xcopy /s ..\Database\Data ProfilesRNS\Database\Data
 pushd ProfilesRNS\Database\Data
-call zip e MeSH.xml.zip -y
+del MeSH.xml
+call %zip% e MeSH.xml.zip -y
 del MeSH.xml.zip
 popd
 echo d | xcopy /s ..\Database\SQL2008 ProfilesRNS\Database\SQL2008
