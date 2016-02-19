@@ -174,6 +174,7 @@
     <Content Include="Profile\Modules\NetworkClusterFlash\scriptaculous\src\sound.js" />
     <Content Include="Profile\Modules\NetworkClusterFlash\scriptaculous\src\unittest.js" />
     <Content Include="Profile\Modules\NetworkCluster\JavaScript\networkClusterLayoutEngine.js" />
+    <Content Include="Profile\Modules\NetworkCluster\JavaScript\watchdog.js" />
     <Content Include="Profile\Modules\NetworkRadialFlash\crossdomain.xml" />
     <Content Include="Profile\Modules\NetworkRadialFlash\Default.aspx" />
     <Content Include="Profile\Modules\NetworkRadialFlash\Images\yui-loading.gif" />
@@ -191,8 +192,10 @@
     <Content Include="Profile\Modules\NetworkRadialFlash\scriptaculous\src\sound.js" />
     <Content Include="Profile\Modules\NetworkRadialFlash\scriptaculous\src\unittest.js" />
     <Content Include="Profile\Modules\NetworkRadial\JavaScript\layout_balanced.js" />
+    <Content Include="Profile\Modules\NetworkRadial\JavaScript\networkBrowserClass.js" />
     <Content Include="Profile\Modules\NetworkRadial\JavaScript\sliders.js" />
     <Content Include="Profile\Modules\NetworkRadial\JavaScript\viz.js" />
+    <Content Include="Profile\Modules\NetworkRadial\JavaScript\watchdog.js" />
     <Content Include="Profile\XSLT\NetworkTable.xslt" />
     <Content Include="RobotsTxt.aspx" />
     <Content Include="SiteMap.aspx" />
@@ -798,24 +801,28 @@
     </Compile>
     <Compile Include="Profile\Modules\NetworkClusterFlash\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Profile\Modules\NetworkClusterFlash\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Profile\Modules\NetworkClusterFlash\NetworkCluster.ascx.cs">
       <DependentUpon>NetworkCluster.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Profile\Modules\NetworkClusterFlash\NetworkCluster.ascx.designer.cs">
       <DependentUpon>NetworkCluster.ascx</DependentUpon>
     </Compile>
     <Compile Include="Profile\Modules\NetworkClusterFlash\NetworkClusterSvc.aspx.cs">
       <DependentUpon>NetworkClusterSvc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Profile\Modules\NetworkClusterFlash\NetworkClusterSvc.aspx.designer.cs">
       <DependentUpon>NetworkClusterSvc.aspx</DependentUpon>
     </Compile>
     <Compile Include="Profile\Modules\NetworkClusterFlash\NetworkClusterTemplate.Master.cs">
       <DependentUpon>NetworkClusterTemplate.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Profile\Modules\NetworkClusterFlash\NetworkClusterTemplate.Master.designer.cs">
       <DependentUpon>NetworkClusterTemplate.Master</DependentUpon>
@@ -836,24 +843,28 @@
     </Compile>
     <Compile Include="Profile\Modules\NetworkRadialFlash\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Profile\Modules\NetworkRadialFlash\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Profile\Modules\NetworkRadialFlash\NetworkRadial.ascx.cs">
       <DependentUpon>NetworkRadial.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Profile\Modules\NetworkRadialFlash\NetworkRadial.ascx.designer.cs">
       <DependentUpon>NetworkRadial.ascx</DependentUpon>
     </Compile>
     <Compile Include="Profile\Modules\NetworkRadialFlash\NetworkRadialSvc.aspx.cs">
       <DependentUpon>NetworkRadialSvc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Profile\Modules\NetworkRadialFlash\NetworkRadialSvc.aspx.designer.cs">
       <DependentUpon>NetworkRadialSvc.aspx</DependentUpon>
     </Compile>
     <Compile Include="Profile\Modules\NetworkRadialFlash\NetworkRadialTemplate.Master.cs">
       <DependentUpon>NetworkRadialTemplate.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Profile\Modules\NetworkRadialFlash\NetworkRadialTemplate.Master.designer.cs">
       <DependentUpon>NetworkRadialTemplate.Master</DependentUpon>
