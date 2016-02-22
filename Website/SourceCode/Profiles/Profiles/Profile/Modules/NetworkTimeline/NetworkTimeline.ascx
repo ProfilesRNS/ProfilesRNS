@@ -14,13 +14,13 @@
     </div>
     <div style="clear:both;">
     <br/>
-    To see the data from this visualization as text, <a id="divShowTimelineTable" tabindex="0">click here.</a>
+    To see the data from this visualization as text, <a id="divShowTimelineTable" tabindex="0" class="jQueryLink">click here.</a>
     </div>
 </div>   
 <div id="pnlDataText" style="display:none;margin-top:12px;margin-bottom:8px;">
     <asp:Literal runat="server" ID="litNetworkText"></asp:Literal> 
     <br/>
-    To return to the timeline, <a id="dirReturnToTimeline" tabindex="0">click here.</a>                       
+    To return to the timeline, <a id="dirReturnToTimeline" tabindex="0" class="jQueryLink">click here.</a>                       
 </div>
 
 <script type="text/javascript">

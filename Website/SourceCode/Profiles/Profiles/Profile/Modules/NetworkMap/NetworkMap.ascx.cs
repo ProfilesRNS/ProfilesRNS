@@ -174,7 +174,7 @@ namespace Profiles.Profile.Modules.NetworkMap
                     if (rowspan > 1)
                     {
                         sb.AppendLine("<tr class=\"" + (evenRow ? "evenRow" : "oddRow") + "\"><td style=\"text-align:left\" rowspan=\"" + rowspan + "\">" + location.Address.Replace("\\'", "'") + "</td><td rowspan=\"" + rowspan + "\">" + location.Latitude + "</td><td rowspan=\"" + rowspan + "\">" + location.Longitude + 
-                            "</td><td style=\"text-align:left\">" + location.PersonsAtagString.Substring(0, location.PersonsAtagString.Length - 4).Replace("<br>", "</td></tr><tr><td style=\"text-align:left\">") + "</td></tr>");
+                            "</td><td style=\"text-align:left\">" + location.PersonsAtagString.Substring(0, location.PersonsAtagString.Length - 4).Replace("<br>", "</td></tr><tr class=\"" + (evenRow ? "evenRow" : "oddRow") + "\"><td style=\"text-align:left\">") + "</td></tr>");
                     }
                     else
                     {
