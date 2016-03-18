@@ -34,7 +34,7 @@ namespace Profiles
 
             Response.Write("</urlset>");
             Response.ContentType = "application/xml";
-            Response.Charset = "charset=UTF-8";
+            Response.Charset = "UTF-8";
             Response.End();
         }
 
