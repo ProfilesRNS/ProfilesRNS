@@ -31,8 +31,8 @@
 <body id="bodyMaster" runat="server">
 <form runat="server" id="form1" enctype="multipart/form-data" method="post">
 
-    <div id="divStatus" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 999999; display:none;">
-        <div style="width: 400px; border: solid #666 1px; padding: 5px; position: relative; left: 50%; margin-left: -200px; top: 40%; background-color: #FFFFFF;">
+    <div id="divStatus">
+        <div class="loader">
           <img alt="Loading..." src="<%=GetURLDomain()%>/Edit/Images/loader.gif" />
         </div>
     </div>
@@ -61,10 +61,12 @@
     
 	<div id='page-container'>
     <div class="institutionHeader">
-        <img src="<%=GetURLDomain()%>/Framework/Images/banner.jpg" alt="" />
-    </div>	    
+     <%--  Changed top banner to PNG so transparent logos can be supported--%>
+        <img src="<%=GetURLDomain()%>/Framework/Images/banner.png" alt="Header Logo" />
+    </div>
+<%--        The center html tag below is now obsolete. Its styling has been replicated in profiles css
+        <center>	    --%>
 		<div class="profiles">
-			<center>
 				<div class="profilesHeader" runat="server" id="divProfilesHeader">
 					<div class="panelHeader">
 						<asp:ContentPlaceHolder ID="ContentHeader" runat="server">
@@ -108,7 +110,8 @@
 												</div>
 											</div>
 											<div class="profilesPageColumnRightCenter" runat="server" id="divPageColumnRightCenter">
-												<table id="tblTableBody" runat="server" style="border-left: 1px solid #CCC; border-right: 1px solid #CCC;">
+											<%-- Removed below inline styles as they made no discernible improvement--%>
+												<table id="tblTableBody" runat="server">
 													<tbody>
 														<tr id="trbody">
 															<td class="profilesMainColumnLeft" runat="server" id="divProfilesMainColumnLeft">
@@ -162,12 +165,13 @@
 											</div>
 										</td>
 									</tr>
-									<tr>
+									<%-- This row only exists to add a border to the bottom of the main app. No longer needed.--%>
+                                    <%--  <tr>
 										<td colspan="2">
 											<div class="profilesPageColumnRightBottom" runat="server" id="divProfilesPageColumnRightBottom">
 											</div>
 										</td>
-									</tr>
+									</tr>--%>
 								</table>
 							</td>
 						</tr>
@@ -182,7 +186,6 @@
 						</asp:Repeater>
 					</asp:ContentPlaceHolder>
 				</div>
-			</center>
 		</div>
 	    
 		

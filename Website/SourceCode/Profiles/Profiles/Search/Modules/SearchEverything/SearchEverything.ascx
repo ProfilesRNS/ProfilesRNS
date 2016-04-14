@@ -34,14 +34,16 @@ Search or browse for people, publications, concepts, and other items in Profiles
             <table width="100%">
                 <tr>
                     <td colspan='3'>
-                        <div style="font-size: 18px; color: #b23f45; font-weight: bold; margin-bottom: 3px;">
+                        <%-- Replaced inline styles with class below --%>
+                        <div class="headings">
                             Search by keywords
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="3">
-                        <div class="searchSection" style="margin-bottom: 15px;">
+                        <%-- Inline "margin-bottom:15px;" has been removed as it wasnt making a big enough improvement --%>
+                        <div class="searchSection">
                             <table width="100%" class='searchForm' onkeypress="JavaScript:runScript(event);">
                                 <tr>
                                     <th>
@@ -50,17 +52,19 @@ Search or browse for people, publications, concepts, and other items in Profiles
                                     <td colspan="2" class="fieldOptions">
                                         <asp:TextBox EnableViewState="false" runat="server" ID="searchfor" CssClass="inputText" title="Keywords" />
                                     </td>
-                                    <td style="padding-right:50px">
+                                    <%-- Inline style="padding-right:50px" removed due to lacklustre effect on style  --%>
+                                    <td>
                                         <asp:CheckBox runat="server" ID="chkExactPhrase" text="&nbsp;Search for exact phrase"/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>
                                     </th>
-                                    <td style="text-decoration: none" colspan="2">
-                                        <div style="float: left; display: inline">
-                                            <a href="JavaScript:submitEverythingSearch();">
-                                                <img src="images/search.jpg" alt="submit search" style="border: 0px; position: relative; top: 9px;" />
+                                    <td colspan="2">
+                                        <div class="search-button-container">
+                                            <a href="JavaScript:submitEverythingSearch();" class="search-button">
+                                                <%--<img src="images/search.jpg" alt="submit search" style="border: 0px; position: relative; top: 9px;" />--%>
+                                                Search
                                             </a>
                                         </div>
                                     </td>
