@@ -41,3 +41,9 @@ img.gwt-Image
 	position: relative;
 	vertical-align: middle;
 }
+/*Fixing new buttons for IE8*/
+.profiles a.search-button 
+{
+	background: #b23f45;
+	padding: 0 8px 5px 8px; 
+}

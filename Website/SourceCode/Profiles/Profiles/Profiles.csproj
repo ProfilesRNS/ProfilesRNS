@@ -1465,12 +1465,14 @@
     <Content Include="Framework\CSS\jquery-ui-1.8.13.custom.css" />
     <Content Include="Framework\CSS\ui.dropdownchecklist.themeroller.css" />
     <Content Include="Framework\Images\banner.jpg" />
+    <Content Include="Framework\Images\banner.png" />
     <Content Include="Framework\Images\connection_left.gif" />
     <Content Include="Framework\Images\connection_right.gif" />
     <Content Include="Framework\Images\icon_alert.gif" />
     <Content Include="Framework\Images\icon_squareDownArrow.gif" />
     <Content Include="Framework\Images\passive_back1.gif" />
     <Content Include="Framework\Images\passive_backtile.gif" />
+    <Content Include="Framework\Images\search.png" />
     <Content Include="Framework\Images\two_coloumn_bottom.gif" />
     <Content Include="Framework\JavaScript\jquery-1.6.1.min.js" />
     <Content Include="Framework\JavaScript\jquery-ui-1.8.13.custom.min.js" />
