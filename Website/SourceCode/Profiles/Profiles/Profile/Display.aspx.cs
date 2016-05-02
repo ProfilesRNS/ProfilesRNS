@@ -43,8 +43,8 @@ namespace Profiles.Profile
             XmlNode x = this.PresentationXML.SelectSingleNode("Presentation[1]/ExpandRDFList[1]");
 
             if (x != null)
-                base.RDFTriple.ExpandRDFList = x.OuterXml;
-            
+                base.RDFTriple.ExpandRDFList = x.InnerXml;
+
             if (base.RDFTriple.Subject != 0 && base.RDFTriple.Predicate != 0 && base.RDFTriple.Object == 0)
                 base.RDFTriple.Limit = "1";
 
