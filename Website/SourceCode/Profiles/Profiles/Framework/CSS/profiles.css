@@ -146,7 +146,7 @@ form
 	margin-top: 15px;
 	text-align: center;
 /*these two styles have been added to replace the now obsolete html 'center' attribute from Template.Master.*/
-	margin: 30px auto;
+	margin: 15px auto;
 	max-width: 967px;
 }
 .profiles .profilesHeader
@@ -305,9 +305,9 @@ form
 	background-color: #B23F45;
 	/*background-image: url('../Images/active_top.gif');*/
 	/*width: 180px;*/
-	height: 16px;
+	height: 12px;
 	overflow: hidden;
-   	border-radius: 16px 16px 0 0;
+   	border-radius: 12px 12px 0 0;
 	box-shadow: 3px 3px 10px 0px #ccc;
 }
 .profiles .profilesContentActive .activeContainerCenter
@@ -323,9 +323,9 @@ form
 	background-color: #B23F45;
 	/*background-image: url('../Images/active_bottom.gif');*/
 	/*width: 180px;*/
-	height: 20px;
+	height: 12px;
 	overflow: hidden;
-	border-radius: 0 0 20px 20px;
+	border-radius: 0 0 12px 12px;
 	box-shadow: 3px 3px 10px 0px #ccc;
 }
 .profiles .profilesContentActive .activeSection
