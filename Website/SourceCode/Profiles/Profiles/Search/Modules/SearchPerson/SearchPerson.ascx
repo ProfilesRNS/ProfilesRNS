@@ -115,13 +115,14 @@
 
 <asp:HiddenField ID="hdnSearch" runat="server" Value="hdnSearch"></asp:HiddenField>
 <div class="content_container">
-    <div class="tabContainer" style="margin-top: 0px;">
+    <div class="tabContainer">
         <div class="searchForm">
             <table onkeypress="JavaScript:runScript(event);" width="100%">
                 <tbody align="left">
                     <tr>
                         <td colspan='3'>
-                            <div style="font-size: 18px; color: #b23f45; font-weight: bold; margin-bottom: 3px;">
+                            <%-- New class to replace inline heading styles --%>
+                            <div class="headings">
                                 Find people by keyword</div>
                         </td>
                     </tr>
@@ -143,10 +144,13 @@
                                         <tr>
                                             <th>
                                             </th>
-                                            <td style="text-decoration: none" colspan="2">
-                                                <div style="float: left; display: inline">
-                                                    <a href="JavaScript:search();">
-                                                        <img src="<%=GetURLDomain()%>/Search/Images/search.jpg" style="border: 0;" alt="Search" />
+                                            <td colspan="2">
+                                                <div class="search-button-container">
+                                                    <%--Inline styles on this is no longer needed as the button is now all CSS--%>
+                                                    <a href="JavaScript:search();" class="search-button">
+                                                    <%--    No longer need a search button as an image--%>
+                                                        <%--<img src="<%=GetURLDomain()%>/Search/Images/search.jpg" style="border: 0;" alt="Search" />--%>
+                                                        Search
                                                     </a>
                                                 </div>
                                             </td>
@@ -160,7 +164,7 @@
             <table width="100%">
                 <tr>
                     <td colspan='3'>
-                        <div style="font-size: 18px; color: #b23f45; font-weight: bold; margin-bottom: 3px;">
+                        <div class="headings">
                             Find people by name/organization</div>
                     </td>
                 </tr>
@@ -221,8 +225,8 @@
                                     <th>
                                         Faculty Type
                                     </th>
-                                    <td style="padding:0" colspan="2">
-                                        <table cellpadding="0" style="padding:0">
+                                    <td class="pan" colspan="2">
+                                        <table cellpadding="0">
                                             <tr>
                                                 <td>
                                                     <asp:PlaceHolder ID="phDDLCHK" runat="server"></asp:PlaceHolder>
@@ -251,10 +255,7 @@
                                         <table>
                                             <tr>
                                                 <td>
-                                                    <div id="divOtherOptions" style="position: absolute; margin-top: -2px; margin-left: -2px;
-                                                        width: 255px; border-right: solid 1px #000000; border-bottom: solid 1px #000000;
-                                                        border-left: solid 1px gray; padding-left: 3px; height: 150; width: 243px; overflow: auto;
-                                                        background-color: #ffffff;">
+                                                    <div id="divOtherOptions">
                                                         <br />
                                                         <uc1:ComboTreeCheck ID="ctcFirst" runat="server" Width="255px" />
                                                     </div>
@@ -271,9 +272,10 @@
                                     <td>
                                     </td>
                                     <td colspan="2">
-                                        <div style="float: left; display: inline">
-                                            <a href="JavaScript:search();">
-                                                <img src="<%=GetURLDomain()%>/Search/Images/search.jpg" style="border: 0;" alt="Search" />
+                                        <div class="search-button-container"><%--Inline styles on this is no longer needed as the button is now all CSS--%>
+                                            <a href="JavaScript:search();" class="search-button">
+                                                <%--<img src="<%=GetURLDomain()%>/Search/Images/search.jpg" style="border: 0;" alt="Search" />--%>
+                                                Search
                                             </a>
                                         </div>
                                     </td>

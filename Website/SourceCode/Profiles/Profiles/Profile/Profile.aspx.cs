@@ -38,36 +38,37 @@ namespace Profiles.Profile
 
             Framework.Utilities.RDFTriple request = base.RDFTriple;
 
-            //The system default is True and True for showdetails and expand, but if its an external page call to this page, 
+                       //The system default is True and True for showdetails and expand, but if its an external page call to this page, 
             //then its set to false for expand.           
             if (HttpContext.Current.Request.Headers["Expand"] != null)
-            {
-                request.Expand = Convert.ToBoolean(HttpContext.Current.Request.Headers["Expand"].ToString());
-            }
-            else if (HttpContext.Current.Request["Expand"] != null)
-            {
-                request.Expand = Convert.ToBoolean(HttpContext.Current.Request["Expand"].ToString());
-            }
-            else 
-            {
-                request.Expand = false;
-            }
-
+                this.RDFTriple.Expand = Convert.ToBoolean(HttpContext.Current.Request.Headers["Expand"].ToString());
+            else
+                this.RDFTriple.Expand = true;
 
             if (HttpContext.Current.Request.Headers["ShowDetails"] != null)
-            {
-                request.ShowDetails = Convert.ToBoolean(HttpContext.Current.Request.Headers["ShowDetails"].ToString());
-            }
-            else if (HttpContext.Current.Request["ShowDetails"] != null)
-            {
-                request.ShowDetails = Convert.ToBoolean(HttpContext.Current.Request["ShowDetails"].ToString());
-            }
+                this.RDFTriple.ShowDetails = Convert.ToBoolean(HttpContext.Current.Request.Headers["ShowDetails"].ToString());
             else
-            {
-                request.ShowDetails = true;
-            }            
+                this.RDFTriple.ShowDetails = true;
+
+            if (HttpContext.Current.Request.Headers["Offset"] != null)
+                this.RDFTriple.Offset = HttpContext.Current.Request.Headers["Offset"].ToString();
+
+            if (HttpContext.Current.Request.Headers["Limit"] != null)
+                this.RDFTriple.Limit = HttpContext.Current.Request.Headers["Limit"].ToString();
+
+            if (HttpContext.Current.Request.Headers["ExpandRDFListXML"] != null)
+                this.RDFTriple.ExpandRDFList = HttpContext.Current.Request.Headers["ExpandRDFListXML"].ToString();
+
+            if (HttpContext.Current.Request.Headers["SessionID"] != null)
+                this.RDFTriple.Session.SessionID = HttpContext.Current.Request.Headers["SessionID"].ToString();
+
+
+            if (HttpContext.Current.Request.Headers["UserAgent"] != null)
+                this.RDFTriple.Session.UserAgent = HttpContext.Current.Request.Headers["UserAgent"].ToString();
+
 
             base.LoadRDFData();
+
 
             Response.Clear();
             Response.ContentType = "application/rdf+xml";

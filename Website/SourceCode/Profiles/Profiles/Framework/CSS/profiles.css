@@ -1,13 +1,13 @@
 /*  
  
-    Copyright (c) 2008-2012 by the President and Fellows of Harvard College. All rights reserved.  
-    Profiles Research Networking Software was developed under the supervision of Griffin M Weber, MD, PhD.,
-    and Harvard Catalyst: The Harvard Clinical and Translational Science Center, with support from the 
-    National Center for Research Resources and Harvard University.
+	Copyright (c) 2008-2012 by the President and Fellows of Harvard College. All rights reserved.  
+	Profiles Research Networking Software was developed under the supervision of Griffin M Weber, MD, PhD.,
+	and Harvard Catalyst: The Harvard Clinical and Translational Science Center, with support from the 
+	National Center for Research Resources and Harvard University.
 
 
-    Code licensed under a BSD License. 
-    For details, see: LICENSE.txt 
+	Code licensed under a BSD License. 
+	For details, see: LICENSE.txt 
   
 */
 
@@ -15,6 +15,8 @@ body
 {
 	padding: 0px;
 	margin: 0px;
+	/*Adding in font declaration on body so it can be removed from inline styles'*/
+	font-family: Helvetica, Arial, sans-serif;
 }
 form
 {
@@ -26,7 +28,30 @@ form
 {
 	margin: 0px 2px;
 }
-
+/***************************************************/
+/*Loading gif inline styling from Template.Master*/
+/**************************************************/
+#divStatus 
+{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 999999;
+	display: none;
+}
+#divStatus .loader 
+{
+	width: 400px;
+	border: 1px solid #666;
+	padding: 5px;
+	position: relative;
+	left: 50%;
+	margin-left: -200px;
+	top: 40%;
+	background-color: #FFFFFF;
+}
 /********************************************/
 /* Customize this part                      */
 /********************************************/
@@ -44,7 +69,6 @@ form
 
 .PropertyGroup
 {
-	font-family: Arial;
 	font-weight: bold;
 	font-size: 15px;
 	color: #993333;
@@ -54,7 +78,6 @@ form
 {
 	background-color: #EEEBE5;
 	color: #666;
-	font-family: Arial;
 	font-size: 14px;
 	height: 24px;
 	font-weight: bold;
@@ -66,7 +89,6 @@ form
 {
 	border-left: solid 1px #ccc;
 	border-right: solid 1px #ccc;
-	font-family: Arial;
 	border-bottom: solid 1px #ccc;
 	border-top: solid 1px #ccc;
 }
@@ -89,8 +111,32 @@ form
 	font-size: 11px;
 	margin-left: 2px;
 }
-
-
+/********************************************/
+/* New Search button - edit the colours to match your branding*/
+/********************************************/
+/*Dont touch this container as it provides spacing on top of CSS search button*/
+.profiles .search-button-container 
+{ 
+	margin-top: 10px;
+}
+.profiles a.search-button 
+{
+	background-color: #B23F45;
+	color: #ffffff;
+	background-image: url(../images/search.png);
+	background-repeat: no-repeat;
+	background-position: 5% 50%;
+	background-size: 18px;
+	padding: 5px 15px 5px 28px;
+	font-size: 16px;
+	border-radius: 5px;
+	border: 2px solid #b23f45;
+}
+.profiles a.search-button:hover 
+{
+	text-decoration: none;
+	box-shadow: 0 0 2px 2px #b23f45;
+}
 /********************************************/
 /* Profiles Shell Layout                    */
 /********************************************/
@@ -99,6 +145,9 @@ form
 {
 	margin-top: 15px;
 	text-align: center;
+/*these two styles have been added to replace the now obsolete html 'center' attribute from Template.Master.*/
+	margin: 30px auto;
+	max-width: 967px;
 }
 .profiles .profilesHeader
 {
@@ -115,35 +164,46 @@ form
 	width: 967px;
 	text-align: left;
 }
+/*Replacing inline styles for the form headings in the main app*/
+.profiles .profilesPage .headings 
+{
+	font-size: 18px; 
+	color: #b23f45; 
+	font-weight: bold; 
+	margin-bottom: 3px;
+}
 .profiles .profilesPage table
 {
-	/*border-bottom: none;*/
 	border-collapse: collapse;
 }
 .profiles .profilesPageColumnLeft
 {
 	width: 190px;
 	vertical-align: top;
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0 20px 0 0;
 }
 .profiles .profilesPageColumnRight
 {
 	width: 777px;
 	vertical-align: top;
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 }
-.profiles .profilesPageColumnRightTop
+.profiles .profilesPageColumnRightTop 
 {
-	background-color: #000000; /* is this really needed here? */
-	background-image: url('../Images/passive_top.gif');
-	width: 777px;
+	background-color: #000000;
+	/*The below was used to add soft corners and box shadow to the app container - now replicated with CSS in profilesPageColumnRightCenter*/
+	/*background-image: url('../Images/passive_top.gif');*/
+	/*width: 777px; No longer needed*/
 	height: 12px;
 	overflow: hidden;
-	padding: 0px;
-	margin: 0px;
+	padding: 0;
+	margin: 0;
+	-ms-border-radius: 10px 10px 0px 0px;
+	border-radius: 10px 10px 0 0;
 }
+
 .profiles .profilesPageColumnRightTopLine
 {
 	border-right: 1px solid #FFF;
@@ -153,20 +213,27 @@ form
 }
 .profiles .profilesPageColumnRightBottom
 {
-	background-image: url('../Images/passive_bottom.gif');
+	/*background-image: url('../Images/passive_bottom.gif');*/
 	width: 777px;
 	height: 18px;
 	overflow: hidden;
 	padding: 0px;
-	margin: 0px; /* nudge border up and to left */
+	margin: 0; /* nudge border up and to left */
 	margin-left: -1px;
 	margin-top: -2px;
 }
-.profiles .profilesPageColumnRightCenter
+.profiles .profilesPageColumnRightCenter 
 {
 	width: 777px;
 	vertical-align: top;
-	background: background-image: url('../Images/passive_back.gif') repeat;
+	/*More unneeded background images now replicated in CSS below*/
+	/*background-image: url('../Images/passive_back.gif') repeat;*/
+	border-width: 0px 1px 1px 1px;
+	border-style: solid;
+	border-color: #cccccc;
+	-ms-border-radius: 0px 0px 10px 10px;
+	border-radius: 0px 0px 10px 10px;
+	box-shadow: 4px 5px 15px 2px #cccccc;
 }
 
 .profiles .profilesPageColumnRightCenter table
@@ -179,7 +246,6 @@ form
 	vertical-align: top;
 	margin: 0px;
 	padding: 0px;
-	background: none;
 }
 .profilesMainColumnRight
 {
@@ -188,7 +254,10 @@ form
 	margin: 0px;
 	padding: 0px;
 	display: inline;
-	background: none;
+	/*These styles are replacing inline styles from Template.Master.cs*/
+	background-color: #f5f5f5;
+	border-left: 1px solid #c9c9c9;
+	border-radius: 0px 0px 10px 0px;
 }
 
 /********************************************/
@@ -198,7 +267,6 @@ form
 
 .profiles, .profiles td, .profiles th, .profiles textarea, .profiles select, .profiles h2, .profiles h3, .profiles h4, .profiles h5, .profiles h6, .profiles ul, .profiles ol
 {
-	font-family: arial, sans-serif;
 	font-size: 13px;
 	line-height: 16px;
 }
@@ -220,51 +288,61 @@ form
 /********************************************/
 /* Profiles Content Active                  */
 /********************************************/
-
+/* The proceeding left navigation styles have had all their width attributes removed to avoid future confusion*/
 .profiles .profilesContentActive
 {
-	width: 190px;
+	/*width: 190px;*/
 	padding: 0px;
-	margin: 0px 0px 0px 0px;
+	margin: 0px;
 }
 .profiles .profilesContentActive .activeContainer
 {
-	width: 188px;
+	/*width: 188px;*/
+	margin-bottom: 8px;
 }
 .profiles .profilesContentActive .activeContainerTop
 {
 	background-color: #B23F45;
-	background-image: url('../Images/active_top.gif');
-	width: 188px;
-	height: 12px;
+	/*background-image: url('../Images/active_top.gif');*/
+	/*width: 180px;*/
+	height: 16px;
 	overflow: hidden;
+   	border-radius: 16px 16px 0 0;
+	box-shadow: 3px 3px 10px 0px #ccc;
 }
 .profiles .profilesContentActive .activeContainerCenter
 {
 	background-color: #FFFFFF;
-	background-image: url('../Images/active_center.gif');
-	width: 188px;
+	/*background-image: url('../Images/active_center.gif');*/
+	/*width: 188px;*/
 	overflow: hidden;
+	box-shadow: 3px 3px 10px 0px #ccc;
 }
 .profiles .profilesContentActive .activeContainerBottom
 {
 	background-color: #B23F45;
-	background-image: url('../Images/active_bottom.gif');
-	width: 188px;
-	height: 26px;
+	/*background-image: url('../Images/active_bottom.gif');*/
+	/*width: 180px;*/
+	height: 20px;
 	overflow: hidden;
+	border-radius: 0 0 20px 20px;
+	box-shadow: 3px 3px 10px 0px #ccc;
 }
 .profiles .profilesContentActive .activeSection
 {
-	width: 174px;
-	margin-left: 1px;
+	/*width: 174px;*/
+	/*margin-left: 1px;*/
+	border: 1px solid #c9c9c9;
+	border-width: 0 1px 0 1px;
 }
 .profiles .profilesContentActive .activeSectionHead
 {
 	background-color: #EEEBE5;
-	padding: 1px 8px;
+	/*increased padding to improve look of Sectionhead*/
+	padding: 5px 8px;
 	font-weight: bold;
 	height: 100%;
+	font-size: 1.1em;
 }
 .profiles .profilesContentActive .activeSectionBody
 {
@@ -524,8 +602,6 @@ form
 /* Search                                   */
 /********************************************/
 
-
-
 .searchForm
 {
 	margin: 8px 0px;
@@ -572,7 +648,8 @@ form
 }
 .searchForm select
 {
-	width: 250px;
+	/*searchForm was misaligned by one pixel*/
+	width: 249px;
 }
 .searchForm .inputButton
 {
@@ -679,9 +756,6 @@ form
 	background-color: #36C;
 	text-decoration: none;
 }
-
-
-
 .listTablePagination
 {
 	background-color: #f7f3ef;
@@ -728,7 +802,6 @@ form
 	line-height: 15px;
 	color: #3f4a9d;
 }
-
 .listTablePaginationA img
 {
 	border-top-width: 0px;
@@ -874,7 +947,6 @@ form
 }
 .editPage table
 {
-	font-family: arial,sans-serif;
 	padding-left: 5px;
 }
 .oddRow td, .evenRow td
@@ -925,7 +997,6 @@ table tbody .height25
 }
 .editPageDiv
 {
-	font-family: arial,sans-serif;
 	border-left: solid 1px #ccc;
 	border-right: solid 1px #ccc;
 	border-bottom: solid 1px #ccc;
@@ -937,7 +1008,6 @@ table tbody .height25
 	background-color: #EEEBE5;
 	font-weight: bold;
 	color: #666;
-	font-family: Arial;
 	font-size: 13px;
 	height: 24px;
 	padding-left: 6px;
@@ -947,7 +1017,6 @@ table tbody .height25
 	background-color: #EEEBE5;
 	font-weight: bold;
 	color: #666;
-	font-family: Arial;
 	font-size: 13px;
 	height: 24px;
 	padding-left: 6px;
@@ -957,7 +1026,6 @@ table tbody .height25
 {
 	background-color: #EEEBE5;
 	color: #666;
-	font-family: Arial;
 	font-size: 13px;
 	height: 24px;
 	padding-left: 6px;
@@ -1048,6 +1116,6 @@ table tbody .height25
 	color: #36C;
 	cursor: pointer;
 }
-
-
-.imageUploaderField input{width:100%}
+.imageUploaderField input{
+	width:100%
+}

@@ -88,8 +88,9 @@ namespace Profiles.Framework
                     tdProfilesMainColumnRight.Visible = false;
                     divProfilesPageColumnRightTopLine.Visible = false;
                     divProfilesPage.Style.Remove("background-image");
-                    divProfilesPageColumnRightBottom.Style.Remove("background-image");
-                    divProfilesPageColumnRightBottom.Style.Add("background-image", Root.Domain + "/Framework/images/passive_bottom_alt.gif");
+                    //These two lines are adding inline styles to get the rounded border at bottom of left column. This has been replicated in CSS.
+                    //divProfilesPageColumnRightBottom.Style.Remove("background-image");
+                    //divProfilesPageColumnRightBottom.Style.Add("background-image", Root.Domain + "/Framework/images/passive_bottom_alt.gif");
                     divProfilesMainColumnLeft.Style.Remove("width");
                     divProfilesMainColumnLeft.Style.Add("width", "777px");
                     divProfilesContentMain.Style.Remove("width");
@@ -142,11 +143,12 @@ namespace Profiles.Framework
             rootDomainjs.InnerHtml = Environment.NewLine + "var _rootDomain = \"" + Root.Domain + "\";" + Environment.NewLine;
             Page.Header.Controls.Add(rootDomainjs);
 
-            if (this.GetStringFromPresentationXML("Presentation/PageOptions/@Columns") == "3")
-            {
-                divPageColumnRightCenter.Style["background-image"] = Root.Domain + "/Framework/Images/passive_back.gif";
-                divPageColumnRightCenter.Style["background-repeat"] = "repeat";
-            }
+            //The below statement was adding inline styles to the left side navigation. Not needed anymore.
+            //if (this.GetStringFromPresentationXML("Presentation/PageOptions/@Columns") == "3")
+            //{
+            //    divPageColumnRightCenter.Style["background-image"] = Root.Domain + "/Framework/Images/passive_back.gif";
+            //    divPageColumnRightCenter.Style["background-repeat"] = "repeat";
+            //}
 
 
             // IE Only css files
