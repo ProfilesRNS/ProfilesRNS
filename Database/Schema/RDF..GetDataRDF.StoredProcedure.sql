@@ -52,6 +52,14 @@ BEGIN
 
 	*/
 
+	--declare @debugLogID int
+	--insert into [RDF.].[GetDataRDF.DebugLog] (subject,predicate,object,offset,limit,showDetails,expand,SessionID,StartDate)
+	--	select @subject,@predicate,@object,@offset,@limit,@showDetails,@expand,@SessionID,GetDate()
+	--select @debugLogID = @@IDENTITY
+	--insert into [RDF.].[GetDataRDF.DebugLog.ExpandRDFListXML] (LogID, ExpandRDFListXML)
+	--	select @debugLogID, @ExpandRDFListXML
+
+	
 	declare @d datetime
 
 	declare @baseURI nvarchar(400)
@@ -694,6 +702,10 @@ BEGIN
 
 	if @returnXML = 1 and @returnXMLasStr = 1
 		select @x RDF
+
+	--update [RDF.].[GetDataRDF.DebugLog]
+	--	set DurationMS = DATEDIFF(ms,StartDate,GetDate())
+	--	where LogiD = @debugLogID
 
 	/*	
 		declare @d datetime
