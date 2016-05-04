@@ -104,14 +104,14 @@ namespace Profiles.Profile.Utilities
             Namespace rdfnamespaces = new Namespace();
             DataIO data = new DataIO();
 
-            if (HttpContext.Current.Request.Headers["Offset"] != null)
-                this.RDFTriple.Offset = HttpContext.Current.Request.Headers["Offset"];
+            //if (HttpContext.Current.Request.Headers["Offset"] != null)
+            //    this.RDFTriple.Offset = HttpContext.Current.Request.Headers["Offset"];
 
-            if (HttpContext.Current.Request.Headers["Limit"] != null)
-                this.RDFTriple.Limit = HttpContext.Current.Request.Headers["Limit"];
+            //if (HttpContext.Current.Request.Headers["Limit"] != null)
+            //    this.RDFTriple.Limit = HttpContext.Current.Request.Headers["Limit"];
 
-            if (HttpContext.Current.Request.Headers["ExpandRDFList"] != null)
-                this.RDFTriple.ExpandRDFList = HttpContext.Current.Request.Headers["ExpandRDFList"];
+            //if (HttpContext.Current.Request.Headers["ExpandRDFList"] != null)
+            //    this.RDFTriple.ExpandRDFList = HttpContext.Current.Request.Headers["ExpandRDFList"];
 
 
             xml = data.GetRDFData(this.RDFTriple);
