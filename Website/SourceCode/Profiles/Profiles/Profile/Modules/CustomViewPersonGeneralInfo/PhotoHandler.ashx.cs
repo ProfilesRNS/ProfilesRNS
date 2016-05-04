@@ -48,6 +48,8 @@ namespace Profiles.Profile.Modules.ProfileImage
                 Framework.Utilities.RDFTriple request = new Profiles.Framework.Utilities.RDFTriple(nodeid);
 
                 request.Expand = true;
+                request.ShowDetails = true;
+                request.ExpandRDFList = "<ExpandRDF Class=\"http://xmlns.com/foaf/0.1/Person\" Property=\"http://vivoweb.org/ontology/core#authorInAuthorship\" Limit=\"1\" />";
                 Framework.Utilities.Namespace xmlnamespace = new Profiles.Framework.Utilities.Namespace();
                 XmlDocument person ;
 
