@@ -21529,6 +21529,7 @@
             <Panel Type="main" TabSort="0" TabType="Default" Alias="list" Name="List">
               <Module ID="NetworkList">
                 <ParamList>
+				  <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
                   <Param Name="BulletType">disc</Param>
                   <Param Name="Columns">2</Param>
                   <Param Name="NetworkListNode">rdf:RDF/rdf:Description[@rdf:about= ../rdf:Description[1]/prns:hasConnection/@rdf:resource]</Param>
@@ -21765,6 +21766,7 @@
             <Panel Type="main" TabSort="0" TabType="Default" Alias="list" Name="List">
               <Module ID="NetworkList">
                 <ParamList>
+				  <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
                   <Param Name="BulletType">disc</Param>
                   <Param Name="Columns">2</Param>
                   <Param Name="NetworkListNode">rdf:RDF/rdf:Description[@rdf:about= ../rdf:Description[1]/prns:hasConnection/@rdf:resource]</Param>
@@ -21798,6 +21800,7 @@
             <Panel Type="main" TabSort="5" Alias="details" Name="Details">
               <Module ID="ApplyXSLT">
                 <ParamList>
+				  <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
                   <Param Name="XSLTPath">~/profile/XSLT/CoAuthorDetail.xslt</Param>
                 </ParamList>
               </Module>
@@ -21906,6 +21909,7 @@
               <Module ID="NetworkList">
                 <ParamList>
                   <Param Name="InfoCaption">The people in this list are ordered by decreasing similarity.     (<font color="red">*</font> These people are also co-authors.)</Param>
+				  <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
                   <Param Name="BulletType">disc</Param>
                   <Param Name="Columns">2</Param>
                   <Param Name="NetworkListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:hasConnection/@rdf:resource]</Param>
@@ -21926,6 +21930,7 @@
             <Panel Type="main" TabSort="3" Alias="details" Name="Details">
               <Module ID="ApplyXSLT">
                 <ParamList>
+				  <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
                   <Param Name="XSLTPath">~/profile/XSLT/SimilarPeopleDetail.xslt</Param>
                 </ParamList>
               </Module>
@@ -22072,6 +22077,7 @@
             <Panel Type="main" TabSort="3" Alias="details" Name="Details">
               <Module ID="ApplyXSLT">
                 <ParamList>
+				  <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
                   <Param Name="XSLTPath">~/profile/XSLT/ConceptDetail.xslt</Param>
                 </ParamList>
               </Module>
@@ -22442,6 +22448,7 @@
             <Panel Type="main">
               <Module ID="ApplyXSLT">
                 <ParamList>
+				  <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
                   <Param Name="XSLTPath">~/profile/XSLT/Award.xslt</Param>
                 </ParamList>
               </Module>
