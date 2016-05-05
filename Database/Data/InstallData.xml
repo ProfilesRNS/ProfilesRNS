@@ -19808,7 +19808,6 @@
       <CustomDisplayModule>
         <Module ID="ApplyXSLT">
           <ParamList>
-            <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
             <Param Name="XSLTPath">~/profile/XSLT/Awards.xslt</Param>
           </ParamList>
         </Module>
@@ -21530,7 +21529,6 @@
             <Panel Type="main" TabSort="0" TabType="Default" Alias="list" Name="List">
               <Module ID="NetworkList">
                 <ParamList>
-                  <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
                   <Param Name="BulletType">disc</Param>
                   <Param Name="Columns">2</Param>
                   <Param Name="NetworkListNode">rdf:RDF/rdf:Description[@rdf:about= ../rdf:Description[1]/prns:hasConnection/@rdf:resource]</Param>
@@ -21612,7 +21610,6 @@
             <Panel Type="passive">
               <Module ID="PassiveList">
                 <ParamList>
-                  <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
                   <Param Name="InfoCaption">People</Param>
                   <Param Name="Description">People who have written about this concept.</Param>
                   <Param Name="MaxDisplay">5</Param>
@@ -21664,7 +21661,6 @@
               <Module ID="CustomViewPersonGeneralInfo" />
               <Module ID="ApplyXSLT">
                 <ParamList>
-                  <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
                   <Param Name="XSLTPath">~/profile/XSLT/OtherPositions.xslt</Param>
                 </ParamList>
               </Module>
@@ -21683,10 +21679,6 @@
               </Module>
               <Module ID="PassiveList">
                 <ParamList>
-                  <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
-                  <Param Name="ExpandRDFList">
-                    <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#authorInAuthorship" Limit="1" />
-                  </Param>
                   <Param Name="InfoCaption">Concepts</Param>
                   <Param Name="Description">Derived automatically from this person's publications.</Param>
                   <Param Name="MaxDisplay">5</Param>
@@ -21773,7 +21765,6 @@
             <Panel Type="main" TabSort="0" TabType="Default" Alias="list" Name="List">
               <Module ID="NetworkList">
                 <ParamList>
-                  <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
                   <Param Name="BulletType">disc</Param>
                   <Param Name="Columns">2</Param>
                   <Param Name="NetworkListNode">rdf:RDF/rdf:Description[@rdf:about= ../rdf:Description[1]/prns:hasConnection/@rdf:resource]</Param>
@@ -21807,7 +21798,6 @@
             <Panel Type="main" TabSort="5" Alias="details" Name="Details">
               <Module ID="ApplyXSLT">
                 <ParamList>
-                  <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
                   <Param Name="XSLTPath">~/profile/XSLT/CoAuthorDetail.xslt</Param>
                 </ParamList>
               </Module>
@@ -21916,7 +21906,6 @@
               <Module ID="NetworkList">
                 <ParamList>
                   <Param Name="InfoCaption">The people in this list are ordered by decreasing similarity.     (<font color="red">*</font> These people are also co-authors.)</Param>
-                  <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
                   <Param Name="BulletType">disc</Param>
                   <Param Name="Columns">2</Param>
                   <Param Name="NetworkListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:hasConnection/@rdf:resource]</Param>
@@ -21937,7 +21926,6 @@
             <Panel Type="main" TabSort="3" Alias="details" Name="Details">
               <Module ID="ApplyXSLT">
                 <ParamList>
-                  <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
                   <Param Name="XSLTPath">~/profile/XSLT/SimilarPeopleDetail.xslt</Param>
                 </ParamList>
               </Module>
@@ -22065,7 +22053,6 @@
             <Panel Type="main" TabSort="1" Alias="categories" Name="Categories">
               <Module ID="NetworkCategories">
                 <ParamList>
-                  <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
                   <Param Name="InfoCaption">Concepts listed here are grouped according to their 'semantic' categories. Within each category, up to ten concepts are shown, in decreasing order of relevance.</Param>
                   <Param Name="NetworkListNode">rdf:RDF/rdf:Description[@rdf:about= //rdf:RDF/rdf:Description/prns:hasConnection/@rdf:resource]</Param>
                   <Param Name="CategoryPath">//prns:meshSemanticGroupName</Param>
@@ -22085,7 +22072,6 @@
             <Panel Type="main" TabSort="3" Alias="details" Name="Details">
               <Module ID="ApplyXSLT">
                 <ParamList>
-                  <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
                   <Param Name="XSLTPath">~/profile/XSLT/ConceptDetail.xslt</Param>
                 </ParamList>
               </Module>
@@ -22456,7 +22442,6 @@
             <Panel Type="main">
               <Module ID="ApplyXSLT">
                 <ParamList>
-                  <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
                   <Param Name="XSLTPath">~/profile/XSLT/Award.xslt</Param>
                 </ParamList>
               </Module>
