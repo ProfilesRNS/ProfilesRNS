@@ -86,11 +86,11 @@ namespace Profiles.Profile.Modules.NetworkRadial
             int personID = data.GetPersonId(Int64.Parse(Request.QueryString["Subject"].ToString()));
             HtmlGenericControl script = new HtmlGenericControl("script");
             script.Attributes.Add("type", "text/javascript");
-            script.InnerHtml = "jQuery(document).ready(function() {" +
+            script.InnerHtml = "jQuery(document).ready(function() {try{" +
                 " radial_viz = new RadialGraph_Visualization(jQuery('#radial_view')[0], {radius: 100});" +
                 //" radial_viz.loadNetwork('" + Root.Domain + "/profile/modules/NetworkRadial/NetworkRadialSvc.aspx?p=" + Request.QueryString["Subject"].ToString() + "', '" + Request.QueryString["Subject"].ToString() + "'); " +
                 " radial_viz.loadNetwork('" + Root.Domain + "/profile/modules/NetworkRadial/NetworkRadialSvc.aspx?p=" + Request.QueryString["Subject"].ToString() + "', '" + personID + "'); " +
-                "});";
+                "} catch(e){}});";
             Page.Header.Controls.Add(script);
 
             //Profiles.Profile.Utilities.DataIO data = new Profiles.Profile.Utilities.DataIO();
