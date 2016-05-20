@@ -28,7 +28,29 @@ BEGIN
 		FROM [Profile.Data].[Concept.Mesh.File] CROSS APPLY Data.nodes('//SemanticType') AS S(x)
 		WHERE Name = 'SemGroups.xml'
 
-	-- Extract items from MeSH2011.xml
+	-- Extract items from SemTypes.xml
+	INSERT INTO [Profile.Data].[Concept.Mesh.SemanticType.XML] (DescriptorUI, x)
+		SELECT
+				D.x.value('DescriptorUI[1]','varchar(100)'),
+				D.x.query('SemanticTypeList[1]') SemanticTypeName
+			FROM [Profile.Data].[Concept.Mesh.File] m 
+				CROSS APPLY Data.nodes('//DescriptorRecord') AS D(x)
+				WHERE Name = 'SemTypes.xml'
+
+	INSERT INTO [Profile.Data].[Concept.Mesh.SemanticType] (DescriptorUI, SemanticTypeUI, SemanticTypeName)
+		SELECT
+				DescriptorUI,
+				D.x.value('SemanticTypeUI[1]','varchar(10)') SemanticTypeUI,
+				D.x.value('SemanticTypeName[1]','varchar(50)') SemanticTypeName
+			FROM [Profile.Data].[Concept.Mesh.SemanticType.XML] m 
+				CROSS APPLY X.nodes('//SemanticType') AS D(x)
+		
+	INSERT INTO [Profile.Data].[Concept.Mesh.SemanticGroup] (DescriptorUI, SemanticGroupUI, SemanticGroupName)
+		SELECT DISTINCT t.DescriptorUI, g.SemanticGroupUI, g.SemanticGroupName
+			FROM [Profile.Data].[Concept.Mesh.SemanticGroupType] g, [Profile.Data].[Concept.Mesh.SemanticType] t
+			WHERE g.SemanticTypeUI = t.SemanticTypeUI
+
+		-- Extract items from MeSH2011.xml
 	INSERT INTO [Profile.Data].[Concept.Mesh.XML] (DescriptorUI, MeSH)
 		SELECT D.x.value('DescriptorUI[1]','varchar(10)'), D.x.query('.')
 			FROM [Profile.Data].[Concept.Mesh.File] CROSS APPLY Data.nodes('//DescriptorRecord') AS D(x)
@@ -76,19 +98,6 @@ BEGIN
 				T.x.value('@IsPermutedTermYN[1]','varchar(1)'),
 				T.x.value('@LexicalTag[1]','varchar(3)')
 			FROM #c C CROSS APPLY ConceptXML.nodes('//Term') AS T(x)
-
-	INSERT INTO [Profile.Data].[Concept.Mesh.SemanticType] (DescriptorUI, SemanticTypeUI, SemanticTypeName)
-		SELECT DISTINCT 
-				m.DescriptorUI,
-				S.x.value('SemanticTypeUI[1]','varchar(10)') SemanticTypeUI,
-				S.x.value('SemanticTypeName[1]','varchar(50)') SemanticTypeName
-			FROM [Profile.Data].[Concept.Mesh.XML] m 
-				CROSS APPLY MeSH.nodes('//SemanticType') AS S(x)
-
-	INSERT INTO [Profile.Data].[Concept.Mesh.SemanticGroup] (DescriptorUI, SemanticGroupUI, SemanticGroupName)
-		SELECT DISTINCT t.DescriptorUI, g.SemanticGroupUI, g.SemanticGroupName
-			FROM [Profile.Data].[Concept.Mesh.SemanticGroupType] g, [Profile.Data].[Concept.Mesh.SemanticType] t
-			WHERE g.SemanticTypeUI = t.SemanticTypeUI
 
 	INSERT INTO [Profile.Data].[Concept.Mesh.Tree] (DescriptorUI, TreeNumber)
 		SELECT	m.DescriptorUI,

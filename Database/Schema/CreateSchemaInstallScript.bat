@@ -93,6 +93,7 @@ type Profile.Cache.Concept.Mesh.Tree.Table.sql
 type Profile.Data.Concept.Mesh.Term.Table.sql
 type Profile.Cache.Concept.Mesh.SimilarConcept.Table.sql
 type Profile.Data.Concept.Mesh.SemanticType.Table.sql
+type Profile.Data.Concept.Mesh.SemanticType.XML.Table.sql
 type Profile.Data.Concept.Mesh.SemanticGroupType.Table.sql
 type Profile.Data.Concept.Mesh.SemanticGroup.Table.sql
 type Profile.Data.Concept.Mesh.Qualifier.Table.sql
