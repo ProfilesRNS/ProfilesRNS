@@ -180,6 +180,12 @@ BEGIN
 		FROM [Ontology.Presentation].[XML] o
 
 
+	-- Funding
+	UPDATE [Ontology.].[ClassProperty]
+		SET _PropertyLabel = 'research activities and funding' --'research activities'
+		WHERE Class='http://xmlns.com/foaf/0.1/Person' AND Property='http://vivoweb.org/ontology/core#hasResearcherRole' AND NetworkProperty IS NULL
+
+
 	-- select * from [Ontology.Import].[Triple]
 	-- select * from [Ontology.].ClassProperty
 	-- select * from [Ontology.].ClassGroup
