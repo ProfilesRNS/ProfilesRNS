@@ -14877,7 +14877,7 @@
     <Row>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://orng.info/ontology/orng#hasLinks</Property>
-      <IsDetail>0</IsDetail>
+      <IsDetail>1</IsDetail>
       <IncludeDescription>0</IncludeDescription>
       <IncludeNetwork>0</IncludeNetwork>
       <SearchWeight>0.000000000000000e+000</SearchWeight>
@@ -14915,7 +14915,7 @@
     <Row>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://orng.info/ontology/orng#hasSlideShare</Property>
-      <IsDetail>0</IsDetail>
+      <IsDetail>1</IsDetail>
       <IncludeDescription>0</IncludeDescription>
       <IncludeNetwork>0</IncludeNetwork>
       <SearchWeight>0.000000000000000e+000</SearchWeight>
@@ -14953,7 +14953,7 @@
     <Row>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://orng.info/ontology/orng#hasTwitter</Property>
-      <IsDetail>0</IsDetail>
+      <IsDetail>1</IsDetail>
       <IncludeDescription>0</IncludeDescription>
       <IncludeNetwork>0</IncludeNetwork>
       <SearchWeight>0.000000000000000e+000</SearchWeight>
@@ -14991,7 +14991,7 @@
     <Row>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://orng.info/ontology/orng#hasYouTube</Property>
-      <IsDetail>0</IsDetail>
+      <IsDetail>1</IsDetail>
       <IncludeDescription>0</IncludeDescription>
       <IncludeNetwork>0</IncludeNetwork>
       <SearchWeight>0.000000000000000e+000</SearchWeight>
