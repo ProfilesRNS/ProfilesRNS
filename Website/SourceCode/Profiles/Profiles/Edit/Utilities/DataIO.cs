@@ -1322,6 +1322,167 @@ namespace Profiles.Edit.Utilities
             return rawdata;
         }
 
+        #region FUNDING
+
+
+
+        public void AddUpdateFunding(FundingState fs)
+        {
+            string connstr = this.GetConnectionString();
+            SqlConnection dbconnection = new SqlConnection(connstr);
+
+            System.Text.StringBuilder sbSQL = new StringBuilder();
+
+            SqlParameter[] param = new SqlParameter[13];
+
+            if (fs.StartDate == "?")
+                fs.StartDate = string.Empty;
+
+            if (fs.EndDate == "?")
+                fs.EndDate = string.Empty;
+
+            try
+            {
+                dbconnection.Open();
+                param[0] = new SqlParameter("@FundingRoleID", fs.FundingRoleID);
+                param[1] = new SqlParameter("@PersonID", fs.PersonID);
+                param[2] = new SqlParameter("@FundingID", fs.FullFundingID); //this will use the full funding id but can be loaded with the core or fill depending on if its a sub grant or not.
+                param[3] = new SqlParameter("@FundingID2", fs.CoreProjectNum); //This will always be the core number
+                param[4] = new SqlParameter("@RoleLabel", fs.RoleLabel);
+                param[5] = new SqlParameter("@RoleDescription", fs.RoleDescription);
+                param[6] = new SqlParameter("@AgreementLabel", fs.AgreementLabel);
+                param[7] = new SqlParameter("@GrantAwardedBy", fs.GrantAwardedBy);
+                param[8] = new SqlParameter("@StartDate", fs.StartDate == "?" ? "" : fs.StartDate);
+                param[9] = new SqlParameter("@EndDate", fs.EndDate == "?" ? "" : fs.EndDate);
+                param[10] = new SqlParameter("@PrincipalInvestigatorName", fs.PrincipalInvestigatorName);
+                param[11] = new SqlParameter("@Abstract", fs.Abstract);
+                param[12] = new SqlParameter("@Source", fs.Source);
+
+                //For Output Parameters you need to pass a connection object to the framework so you can close it before reading the output params value.
+                ExecuteSQLDataCommand(GetDBCommand(dbconnection, "[Profile.Data].[Funding.AddUpdateFunding]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param));
+
+                dbconnection.Close();
+
+            }
+            catch (Exception e)
+            {
+                Framework.Utilities.DebugLogging.Log(e.Message + e.StackTrace);
+                throw new Exception(e.Message);
+            }
+
+        }
+
+        public void FundingUpdateOnePerson(FundingState fs)
+        {
+            try
+            {
+                this.ExecuteSQLDataCommand("[Profile.Data].[Funding.Entity.UpdateEntityOnePerson] 	@PersonID = " + fs.PersonID.ToString());
+
+                if (HttpContext.Current.Request.QueryString["subjectid"] != null)
+                {
+                    Framework.Utilities.Cache.AlterDependency(HttpContext.Current.Request.QueryString["subjectid"].ToString());
+
+
+                }
+
+            }
+            catch (Exception e)
+            {
+                Framework.Utilities.DebugLogging.Log(e.Message + e.StackTrace);
+                throw new Exception(e.Message);
+            }
+        }
+
+        public FundingState GetFundingItem(Guid FundingRoleID)
+        {
+            string connstr = this.GetConnectionString();
+            SqlConnection dbconnection = new SqlConnection(connstr);
+            dbconnection.Open();
+            System.Text.StringBuilder sbSQL = new StringBuilder();
+            FundingState fs = null;
+
+            sbSQL.AppendLine("[Profile.Data].[Funding.GetFundingItem] @FundingRoleID = '" + FundingRoleID.ToString() + "'");
+
+            using (SqlDataReader dr = GetSQLDataReader(GetDBCommand(dbconnection, sbSQL.ToString(), CommandType.Text, CommandBehavior.CloseConnection, null)))
+            {
+                while (dr.Read())
+                    fs = new FundingState
+                    {
+                        Abstract = dr["Abstract"].ToString(),
+                        AgreementLabel = dr["AgreementLabel"].ToString(),
+                        EndDate = String.Format("{0:M/d/yyyy}", Convert.ToDateTime(dr["EndDate"])),
+                        FundingID = dr["FundingID"].ToString(),
+                        Source = dr["Source"].ToString(),
+                        GrantAwardedBy = dr["GrantAwardedBy"].ToString(),
+                        FundingRoleID = new Guid(dr["FundingRoleID"].ToString()),
+                        FullFundingID = dr["FundingID"].ToString(),
+                        CoreProjectNum = dr["FundingID2"].ToString(),
+                        PersonID = Convert.ToInt32(dr["PersonID"]),
+                        PrincipalInvestigatorName = dr["PrincipalInvestigatorName"].ToString(),
+                        RoleDescription = dr["RoleDescription"].ToString(),
+                        RoleLabel = dr["RoleLabel"].ToString(),
+                        StartDate = String.Format("{0:M/d/yyyy}", Convert.ToDateTime(dr["StartDate"])),
+                    };
+
+                if (!dr.IsClosed)
+                    dr.Close();
+            }
+
+
+            return fs;
+
+        }
+        public List<FundingState> GetFunding(int PersonID)
+        {
+            string connstr = this.GetConnectionString();
+            SqlConnection dbconnection = new SqlConnection(connstr);
+            dbconnection.Open();
+            System.Text.StringBuilder sbSQL = new StringBuilder();
+            List<FundingState> fs = new List<FundingState>();
+
+            sbSQL.AppendLine("[Profile.Data].[Funding.GetPersonFunding] @personid = " + PersonID.ToString());
+
+            using (SqlDataReader dr = GetSQLDataReader(GetDBCommand(dbconnection, sbSQL.ToString(), CommandType.Text, CommandBehavior.CloseConnection, null)))
+            {
+                while (dr.Read())
+                    fs.Add(new FundingState
+                    {
+                        Abstract = dr["Abstract"].ToString(),
+                        AgreementLabel = dr["AgreementLabel"] == null ? "" : dr["AgreementLabel"].ToString(),
+                        EndDate = Convert.ToDateTime(dr["EndDate"]).ToString("MMM d, yyyy"),
+                        FundingID = dr["FundingID"].ToString(),
+                        Source = dr["Source"].ToString(),
+                        FullFundingID = dr["FundingID"].ToString(),
+                        CoreProjectNum = dr["FundingID2"].ToString(),
+                        GrantAwardedBy = dr["GrantAwardedBy"].ToString(),
+                        FundingRoleID = new Guid(dr["FundingRoleID"].ToString()),
+                        PersonID = Convert.ToInt32(dr["PersonID"]),
+                        PrincipalInvestigatorName = dr["PrincipalInvestigatorName"].ToString(),
+                        RoleDescription = dr["RoleDescription"].ToString(),
+                        RoleLabel = dr["RoleLabel"].ToString(),
+                        StartDate = Convert.ToDateTime(dr["StartDate"]).ToString("MMM d, yyyy"),
+
+                    });
+
+                if (!dr.IsClosed)
+                    dr.Close();
+            }
+
+
+            return fs;
+
+        }
+
+        public void DeleteFunding(Guid FundingRoleID, int personid)
+        {
+            System.Text.StringBuilder sbSQL = new StringBuilder();
+            sbSQL.Append("[Profile.Data].[Funding.DeleteFunding]   @FundingRoleID = '" + FundingRoleID.ToString() + "'");
+
+            ExecuteSQLDataCommand(sbSQL.ToString());
+
+        }
+
+        #endregion
 
 
 

@@ -82,6 +82,7 @@
     <Content Include="DirectService.aspx" />
     <Content Include="Edit\Modules\CustomEditEagleI\CustomEditEagleI.ascx" />
     <Content Include="Edit\Modules\CustomEditListProperty\CustomEditListProperty.ascx" />
+    <Content Include="Edit\Modules\CustomEditResearcherRole\CustomEditResearcherRole.ascx" />
     <Content Include="Framework\Images\listen.jpg" />
     <Content Include="Framework\Images\orcid_16x16%281%29.gif" />
     <Content Include="Framework\Images\Orcid_Logo_rgb.png" />
@@ -157,6 +158,7 @@
     <Content Include="Profile\Modules\CustomViewEagleI\Images\logo.gif" />
     <Content Include="Profile\Modules\CustomViewListProperty\CustomViewListProperty.ascx" />
     <Content Include="Profile\Modules\CustomViewPersonGeneralInfo\vcard.aspx" />
+    <Content Include="Profile\Modules\CustomViewResearcherRole\CustomViewResearcherRole.ascx" />
     <Content Include="Profile\Modules\NetworkClusterFlash\crossdomain.xml" />
     <Content Include="Profile\Modules\NetworkClusterFlash\Default.aspx" />
     <Content Include="Profile\Modules\NetworkClusterFlash\Images\yui-loading.gif" />
@@ -260,6 +262,14 @@
     <Compile Include="Edit\Modules\CustomEditListProperty\CustomEditListProperty.ascx.designer.cs">
       <DependentUpon>CustomEditListProperty.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Edit\Modules\CustomEditResearcherRole\CustomEditResearcherRole.ascx.cs">
+      <DependentUpon>CustomEditResearcherRole.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Edit\Modules\CustomEditResearcherRole\CustomEditResearcherRole.ascx.designer.cs">
+      <DependentUpon>CustomEditResearcherRole.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Edit\Utilities\FundingState.cs" />
     <Compile Include="Edit\Utilities\LiteralListState.cs" />
     <Compile Include="Framework\Modules\MainMenu\History.ascx.cs">
       <DependentUpon>History.ascx</DependentUpon>
@@ -791,6 +801,13 @@
     </Compile>
     <Compile Include="Profile\Modules\CustomViewPersonGeneralInfo\vcard.aspx.designer.cs">
       <DependentUpon>vcard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\Modules\CustomViewResearcherRole\CustomViewResearcherRole.ascx.cs">
+      <DependentUpon>CustomViewResearcherRole.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profile\Modules\CustomViewResearcherRole\CustomViewResearcherRole.ascx.designer.cs">
+      <DependentUpon>CustomViewResearcherRole.ascx</DependentUpon>
     </Compile>
     <Compile Include="Profile\Modules\HRFooter\HRFooter.ascx.cs">
       <DependentUpon>HRFooter.ascx</DependentUpon>
