@@ -505,6 +505,12 @@ namespace Profiles.Framework.Utilities
 
         }
 
+
+        public SqlDataReader GetSQLDataReader(String CmdText, CommandType CmdType, CommandBehavior CmdBehavior, SqlParameter[] sqlParam)
+        {
+            return GetSQLDataReader("ProfilesDB", CmdText, CmdType, CmdBehavior, sqlParam);
+        }
+
         public SqlDataReader GetSQLDataReader(string ConnectionString, String CmdText, CommandType CmdType, CommandBehavior CmdBehavior, SqlParameter[] sqlParam)
         {
 

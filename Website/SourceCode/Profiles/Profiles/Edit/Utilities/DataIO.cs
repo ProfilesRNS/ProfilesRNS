@@ -1484,7 +1484,50 @@ namespace Profiles.Edit.Utilities
 
         #endregion
 
+        #region "freetext keywords"
+        public string getAutoCompleteSuggestions(string text)
+        {
+            string retVal = "";
+            try
+            {
+                string sql = " select distinct top 10  TermName, c.Rawweight from [Profile.Data].[Concept.Mesh.Term] t " +
+                                "left join [Profile.Cache].[Concept.Mesh.Count] c " +
+                                " on t.DescriptorName = c.MeshHeader " +
+                                " where t.TermName like @text + '%'" +
+                                " order by c.RawWeight desc ";
 
+                SqlParameter[] p = new SqlParameter[1];
+                p[0] = new SqlParameter("@text", text);
+
+                using (SqlDataReader sqldr = this.GetSQLDataReader(sql, CommandType.Text, CommandBehavior.CloseConnection, p))
+                {
+                    bool first = true;
+                    while (sqldr.Read())
+                    {
+                        string str = sqldr["TermName"].ToString();
+                        if (first)
+                        {
+                            retVal = retVal + "{\"value\":\"" + str.Replace("\\", "\\\\").Replace("\"", "\\\"") + "\"}";
+                            first = false;
+                        }
+                        else retVal = retVal + ",{\"value\":\"" + str.Replace("\\", "\\\\").Replace("\"", "\\\"") + "\"}";
+                    }
+                    //Always close your readers
+                    if (!sqldr.IsClosed)
+                        sqldr.Close();
+
+                }
+            }
+            catch (Exception e)
+            {
+                Framework.Utilities.DebugLogging.Log(e.Message + " " + e.StackTrace);
+                throw new Exception(e.Message);
+            }
+            //this.GetSQLDataReader();
+            return "[" + retVal + "]";
+        }
+
+        #endregion
 
         #region "Request and Param classes for edit of a triple"
 

@@ -81,6 +81,8 @@
   <ItemGroup>
     <Content Include="DirectService.aspx" />
     <Content Include="Edit\Modules\CustomEditEagleI\CustomEditEagleI.ascx" />
+    <Content Include="Edit\Modules\CustomEditFreetextKeyword\CustomEditFreetextKeyword.ascx" />
+    <Content Include="Edit\Modules\CustomEditFreetextKeyword\keywordAutocomplete.aspx" />
     <Content Include="Edit\Modules\CustomEditListProperty\CustomEditListProperty.ascx" />
     <Content Include="Edit\Modules\CustomEditResearcherRole\CustomEditResearcherRole.ascx" />
     <Content Include="Framework\Images\listen.jpg" />
@@ -198,6 +200,7 @@
     <Content Include="Profile\Modules\NetworkRadial\JavaScript\sliders.js" />
     <Content Include="Profile\Modules\NetworkRadial\JavaScript\viz.js" />
     <Content Include="Profile\Modules\NetworkRadial\JavaScript\watchdog.js" />
+    <Content Include="Profile\XSLT\FreetextKeyword.xslt" />
     <Content Include="Profile\XSLT\NetworkTable.xslt" />
     <Content Include="RobotsTxt.aspx" />
     <Content Include="SiteMap.aspx" />
@@ -254,6 +257,18 @@
     </Compile>
     <Compile Include="Edit\Modules\CustomEditEagleI\CustomEditEagleI.ascx.designer.cs">
       <DependentUpon>CustomEditEagleI.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Edit\Modules\CustomEditFreetextKeyword\CustomEditFreetextKeyword.ascx.cs">
+      <DependentUpon>CustomEditFreetextKeyword.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Edit\Modules\CustomEditFreetextKeyword\CustomEditFreetextKeyword.ascx.designer.cs">
+      <DependentUpon>CustomEditFreetextKeyword.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Edit\Modules\CustomEditFreetextKeyword\keywordAutocomplete.aspx.cs">
+      <DependentUpon>keywordAutocomplete.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Edit\Modules\CustomEditFreetextKeyword\keywordAutocomplete.aspx.designer.cs">
+      <DependentUpon>keywordAutocomplete.aspx</DependentUpon>
     </Compile>
     <Compile Include="Edit\Modules\CustomEditListProperty\CustomEditListProperty.ascx.cs">
       <DependentUpon>CustomEditListProperty.ascx</DependentUpon>

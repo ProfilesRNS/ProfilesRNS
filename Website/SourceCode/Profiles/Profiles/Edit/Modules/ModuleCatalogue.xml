@@ -26,6 +26,6 @@ For details, see: LICENSE.txt
   <Module ModulePath="Modules" NameSpace="CustomEditMentoringCurrentStudentOpportunity" FileName="CustomEditMentoringCurrentStudentOpportunity.ascx" Enabled="true"/>-->
   <Module ModulePath="Modules" NameSpace="CustomEditListProperty" FileName="CustomEditListProperty.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="CustomEditEagleI" FileName="CustomEditEagleI.ascx" Enabled="true"/>
-  <Module ModulePath="Modules" NameSpace="CustomEditResearcherRole" FileName="CustomEditResearcherRole.ascx" Enabled="true"/> 
-
+  <Module ModulePath="Modules" NameSpace="CustomEditResearcherRole" FileName="CustomEditResearcherRole.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="CustomEditFreetextKeyword" FileName="CustomEditFreetextKeyword.ascx" Enabled="true"/>
 </ModuleList>
