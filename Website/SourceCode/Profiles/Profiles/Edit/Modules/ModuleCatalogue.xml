@@ -28,4 +28,5 @@ For details, see: LICENSE.txt
   <Module ModulePath="Modules" NameSpace="CustomEditEagleI" FileName="CustomEditEagleI.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="CustomEditResearcherRole" FileName="CustomEditResearcherRole.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="CustomEditFreetextKeyword" FileName="CustomEditFreetextKeyword.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="CustomEditEducationalTraining" FileName="CustomEditEducationalTraining.ascx" Enabled="true"/>
 </ModuleList>

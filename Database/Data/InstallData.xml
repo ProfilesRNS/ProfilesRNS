@@ -56,7 +56,7 @@
       <JobGroup>1</JobGroup>
       <Step>3</Step>
       <IsActive>1</IsActive>
-      <Script>UPDATE [Ontology.Import].OWL SET Graph = 3 WHERE name = 'PRNS_1.1'</Script>
+      <Script>UPDATE [Ontology.Import].OWL SET Graph = 3 WHERE name = 'PRNS_1.2'</Script>
     </Row>
     <Row>
       <JobGroup>1</JobGroup>
@@ -74,7 +74,7 @@
       <JobGroup>1</JobGroup>
       <Step>6</Step>
       <IsActive>1</IsActive>
-      <Script>EXEC [Ontology.Import].[ConvertOWL2Triple] @OWL = 'PRNS_1.1'</Script>
+      <Script>EXEC [Ontology.Import].[ConvertOWL2Triple] @OWL = 'PRNS_1.2'</Script>
     </Row>
     <Row>
       <JobGroup>1</JobGroup>
@@ -7207,7 +7207,7 @@
     <Row>
       <Class>http://vivoweb.org/ontology/core#EducationalTraining</Class>
       <Property>http://vivoweb.org/ontology/core#degreeEarned</Property>
-      <IsDetail>1</IsDetail>
+      <IsDetail>0</IsDetail>
       <IncludeDescription>1</IncludeDescription>
       <IncludeNetwork>0</IncludeNetwork>
       <SearchWeight>0.000000000000000e+000</SearchWeight>
@@ -7261,7 +7261,7 @@
     <Row>
       <Class>http://vivoweb.org/ontology/core#EducationalTraining</Class>
       <Property>http://vivoweb.org/ontology/core#majorField</Property>
-      <IsDetail>1</IsDetail>
+      <IsDetail>0</IsDetail>
       <IncludeDescription>0</IncludeDescription>
       <IncludeNetwork>0</IncludeNetwork>
       <SearchWeight>5.000000000000000e-001</SearchWeight>
@@ -15502,17 +15502,18 @@
       <IsDetail>1</IsDetail>
       <IncludeDescription>1</IncludeDescription>
       <IncludeNetwork>0</IncludeNetwork>
-      <SearchWeight>0.000000000000000e+000</SearchWeight>
-      <CustomDisplay>0</CustomDisplay>
-      <CustomEdit>0</CustomEdit>
+      <SearchWeight>0.100000000000000e+000</SearchWeight>
+      <CustomDisplay>1</CustomDisplay>
+      <CustomEdit>1</CustomEdit>
       <ViewSecurityGroup>-1</ViewSecurityGroup>
-      <EditSecurityGroup>-40</EditSecurityGroup>
-      <EditPermissionsSecurityGroup>-40</EditPermissionsSecurityGroup>
-      <EditExistingSecurityGroup>-40</EditExistingSecurityGroup>
-      <EditAddNewSecurityGroup>-40</EditAddNewSecurityGroup>
-      <EditAddExistingSecurityGroup>-40</EditAddExistingSecurityGroup>
-      <EditDeleteSecurityGroup>-40</EditDeleteSecurityGroup>
+      <EditSecurityGroup>-20</EditSecurityGroup>
+      <EditPermissionsSecurityGroup>-20</EditPermissionsSecurityGroup>
+      <EditExistingSecurityGroup>-20</EditExistingSecurityGroup>
+      <EditAddNewSecurityGroup>-20</EditAddNewSecurityGroup>
+      <EditAddExistingSecurityGroup>-20</EditAddExistingSecurityGroup>
+      <EditDeleteSecurityGroup>-20</EditDeleteSecurityGroup>
       <MinCardinality>0</MinCardinality>
+	  <CustomEditModule><Module ID="CustomEditEducationalTraining"/></CustomEditModule>
     </Row>
     <Row>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
@@ -16150,7 +16151,7 @@
       <EditDeleteSecurityGroup>-40</EditDeleteSecurityGroup>
       <MinCardinality>1</MinCardinality>
     </Row>
-	    <Row>
+	<Row>
       <Class>http://xmlns.com/foaf/0.1/Person</Class>
       <Property>http://vivoweb.org/ontology/core#freetextKeyword</Property>
       <IsDetail>1</IsDetail>
@@ -16170,6 +16171,42 @@
 	  <MaxCardinality>0</MaxCardinality>
 	  <CustomDisplayModule><Module ID="ApplyXSLT"><ParamList><Param Name="XSLTPath">~/profile/XSLT/FreetextKeyword.xslt</Param></ParamList></Module></CustomDisplayModule>
 	  <CustomEditModule><Module ID="CustomEditFreetextKeyword" /></CustomEditModule>
+    </Row>
+	<Row>
+      <Class>http://vivoweb.org/ontology/core#EducationalTraining</Class>
+      <Property>http://profiles.catalyst.harvard.edu/ontology/prns#trainingLocation</Property>
+      <IsDetail>0</IsDetail>
+      <IncludeDescription>0</IncludeDescription>
+      <IncludeNetwork>0</IncludeNetwork>
+      <SearchWeight>0.500000000000000e+000</SearchWeight>
+      <CustomDisplay>0</CustomDisplay>
+      <CustomEdit>0</CustomEdit>
+      <ViewSecurityGroup>-1</ViewSecurityGroup>
+      <EditSecurityGroup>-40</EditSecurityGroup>
+      <EditPermissionsSecurityGroup>-40</EditPermissionsSecurityGroup>
+      <EditExistingSecurityGroup>-40</EditExistingSecurityGroup>
+      <EditAddNewSecurityGroup>-40</EditAddNewSecurityGroup>
+      <EditAddExistingSecurityGroup>-40</EditAddExistingSecurityGroup>
+      <EditDeleteSecurityGroup>-40</EditDeleteSecurityGroup>
+      <MinCardinality>0</MinCardinality>
+    </Row>
+	<Row>
+      <Class>http://vivoweb.org/ontology/core#EducationalTraining</Class>
+      <Property>http://profiles.catalyst.harvard.edu/ontology/prns#trainingAtOrganization</Property>
+      <IsDetail>0</IsDetail>
+      <IncludeDescription>0</IncludeDescription>
+      <IncludeNetwork>0</IncludeNetwork>
+      <SearchWeight>0.500000000000000e+000</SearchWeight>
+      <CustomDisplay>0</CustomDisplay>
+      <CustomEdit>0</CustomEdit>
+      <ViewSecurityGroup>-1</ViewSecurityGroup>
+      <EditSecurityGroup>-40</EditSecurityGroup>
+      <EditPermissionsSecurityGroup>-40</EditPermissionsSecurityGroup>
+      <EditExistingSecurityGroup>-40</EditExistingSecurityGroup>
+      <EditAddNewSecurityGroup>-40</EditAddNewSecurityGroup>
+      <EditAddExistingSecurityGroup>-40</EditAddExistingSecurityGroup>
+      <EditDeleteSecurityGroup>-40</EditDeleteSecurityGroup>
+      <MinCardinality>0</MinCardinality>
     </Row>
   </Table>
   <Table Name="[Ontology.].[DataMap]">
@@ -20080,6 +20117,7 @@
       <SortOrder>1</SortOrder>
       <_TagName>vivo:educationalTraining</_TagName>
       <_PropertyLabel>education and training</_PropertyLabel>
+	  <CustomDisplayModule><Module ID="ApplyXSLT"><ParamList><Param Name="XSLTPath">~/profile/XSLT/EducationalTraining.xslt</Param></ParamList></Module></CustomDisplayModule>
     </Row>
     <Row>
       <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupOverview</PropertyGroupURI>
@@ -21501,6 +21539,20 @@
       <SortOrder>5</SortOrder>
       <_TagName>foaf:lastName</_TagName>
       <_PropertyLabel>last name</_PropertyLabel>
+    </Row>
+	<Row>
+      <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupAddress</PropertyGroupURI>
+      <PropertyURI>http://profiles.catalyst.harvard.edu/ontology/prns#trainingLocation</PropertyURI>
+      <SortOrder>26</SortOrder>
+      <_TagName>prns:trainingLocation</_TagName>
+      <_PropertyLabel>training location</_PropertyLabel>
+    </Row>
+	<Row>
+      <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupOverview</PropertyGroupURI>
+      <PropertyURI>http://profiles.catalyst.harvard.edu/ontology/prns#trainingAtOrganization</PropertyURI>
+      <SortOrder>224</SortOrder>
+      <_TagName>prns:trainingAtOrganization</_TagName>
+      <_PropertyLabel>educational organization</_PropertyLabel>
     </Row>
   </Table>
   <Table Name="[Ontology.Presentation].[XML]">

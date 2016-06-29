@@ -81,6 +81,7 @@
   <ItemGroup>
     <Content Include="DirectService.aspx" />
     <Content Include="Edit\Modules\CustomEditEagleI\CustomEditEagleI.ascx" />
+    <Content Include="Edit\Modules\CustomEditEducationalTraining\CustomEditEducationalTraining.ascx" />
     <Content Include="Edit\Modules\CustomEditFreetextKeyword\CustomEditFreetextKeyword.ascx" />
     <Content Include="Edit\Modules\CustomEditFreetextKeyword\keywordAutocomplete.aspx" />
     <Content Include="Edit\Modules\CustomEditListProperty\CustomEditListProperty.ascx" />
@@ -200,6 +201,7 @@
     <Content Include="Profile\Modules\NetworkRadial\JavaScript\sliders.js" />
     <Content Include="Profile\Modules\NetworkRadial\JavaScript\viz.js" />
     <Content Include="Profile\Modules\NetworkRadial\JavaScript\watchdog.js" />
+    <Content Include="Profile\XSLT\EducationalTraining.xslt" />
     <Content Include="Profile\XSLT\FreetextKeyword.xslt" />
     <Content Include="Profile\XSLT\NetworkTable.xslt" />
     <Content Include="RobotsTxt.aspx" />
@@ -258,14 +260,23 @@
     <Compile Include="Edit\Modules\CustomEditEagleI\CustomEditEagleI.ascx.designer.cs">
       <DependentUpon>CustomEditEagleI.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Edit\Modules\CustomEditEducationalTraining\CustomEditEducationalTraining.ascx.cs">
+      <DependentUpon>CustomEditEducationalTraining.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Edit\Modules\CustomEditEducationalTraining\CustomEditEducationalTraining.ascx.designer.cs">
+      <DependentUpon>CustomEditEducationalTraining.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Edit\Modules\CustomEditFreetextKeyword\CustomEditFreetextKeyword.ascx.cs">
       <DependentUpon>CustomEditFreetextKeyword.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Edit\Modules\CustomEditFreetextKeyword\CustomEditFreetextKeyword.ascx.designer.cs">
       <DependentUpon>CustomEditFreetextKeyword.ascx</DependentUpon>
     </Compile>
     <Compile Include="Edit\Modules\CustomEditFreetextKeyword\keywordAutocomplete.aspx.cs">
       <DependentUpon>keywordAutocomplete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Edit\Modules\CustomEditFreetextKeyword\keywordAutocomplete.aspx.designer.cs">
       <DependentUpon>keywordAutocomplete.aspx</DependentUpon>
@@ -284,6 +295,7 @@
     <Compile Include="Edit\Modules\CustomEditResearcherRole\CustomEditResearcherRole.ascx.designer.cs">
       <DependentUpon>CustomEditResearcherRole.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Edit\Utilities\EducationalTrainingState.cs" />
     <Compile Include="Edit\Utilities\FundingState.cs" />
     <Compile Include="Edit\Utilities\LiteralListState.cs" />
     <Compile Include="Framework\Modules\MainMenu\History.ascx.cs">
