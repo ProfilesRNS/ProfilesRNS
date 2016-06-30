@@ -95,6 +95,10 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
     <rdfs:label rdf:resource="full name" />
   </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#grantAwardedBy">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="grant awarded by" />
+  </rdf:Description>
   <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#hasAuthorList">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
     <rdfs:label rdf:resource="author list" />
@@ -262,6 +266,10 @@
   <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#predicateNode">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
     <rdfs:label rdf:resource="predicate node" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#principalInvestigatorName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="principal investigator name" />
   </rdf:Description>
   <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupAddress">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
