@@ -18751,7 +18751,7 @@
       <MapTable>[Profile.Data].[Funding.Agreement]</MapTable>
       <sInternalType>Grant</sInternalType>
       <sInternalID>FundingAgreementID</sInternalID>
-      <oValue>SponsorAwardID</oValue>
+      <oValue>FundingID</oValue>
       <oObjectType>1</oObjectType>
       <Weight>1</Weight>
       <ViewSecurityGroup>-1</ViewSecurityGroup>
