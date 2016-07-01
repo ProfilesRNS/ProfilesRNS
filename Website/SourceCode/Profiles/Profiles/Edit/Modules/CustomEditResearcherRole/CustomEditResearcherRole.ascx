@@ -343,7 +343,7 @@
                                             <div style="padding-bottom: 5px; text-align: left;">
                                                 <asp:LinkButton ID="btnInsertResearcherRole" runat="server" CausesValidation="False"
                                                     OnClick="btnInsert_OnClick" Text="Save and add another" TabIndex="10"></asp:LinkButton>
-                                                &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;
+                                                <asp:Literal runat="server" ID="lblInsertResearcherRolePipe">&nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;</asp:Literal>
                                                 <asp:LinkButton ID="btnInsertResearcherRole2" runat="server" CausesValidation="False"
                                                     OnClick="btnInsertClose_OnClick" Text="Save and close" TabIndex="11"></asp:LinkButton>
                                                 &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;

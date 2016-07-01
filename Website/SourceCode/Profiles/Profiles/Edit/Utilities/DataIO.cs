@@ -1328,6 +1328,7 @@ namespace Profiles.Edit.Utilities
 
         public void AddUpdateFunding(FundingState fs)
         {
+            if (!fs.hasData) return;
             string connstr = this.GetConnectionString();
             SqlConnection dbconnection = new SqlConnection(connstr);
 

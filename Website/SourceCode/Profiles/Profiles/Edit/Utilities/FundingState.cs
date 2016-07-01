@@ -54,8 +54,20 @@ namespace Profiles.Edit.Utilities
         public string SubProjectID { get; set; }
         public List<FundingState> SubFundingState { get; set; }
 
+        public bool hasData
+        {
+            get
+            {
+                return (!String.IsNullOrEmpty(FundingID) || !String.IsNullOrEmpty(CoreProjectNum)
+                    || !String.IsNullOrEmpty(FullFundingID) || !String.IsNullOrEmpty(RoleLabel)
+                    || !String.IsNullOrEmpty(RoleDescription) || !String.IsNullOrEmpty(AgreementLabel)
+                    || !String.IsNullOrEmpty(PrincipalInvestigatorName) || !String.IsNullOrEmpty(PIID)
+                    || !String.IsNullOrEmpty(Abstract) || !String.IsNullOrEmpty(SubProjectID)
+                    || !String.IsNullOrEmpty(SponsorAwardID) || !String.IsNullOrEmpty(GrantAwardedBy)
+                    || SubFundingState != null);
+            }
+        }
 
-       
     }
 
 

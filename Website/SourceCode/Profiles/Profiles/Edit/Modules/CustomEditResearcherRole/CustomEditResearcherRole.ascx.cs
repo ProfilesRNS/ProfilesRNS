@@ -161,10 +161,20 @@ namespace Profiles.Edit.Modules.CustomEditResearcherRole
                 SearchRequest.Project_Year = ddlProjectYear.SelectedValue;
             }
 
+            SearchRequest.Org_Name = txtOrganization.Text.Trim();
             SearchRequest.Project_Title = txtTitle.Text.Trim();
             Session["GRANTREQUEST"] = SearchRequest.StringRequest;
             grdGrantSearchResults.DataSource = LoadFunding(CallAPI());
             grdGrantSearchResults.DataBind();
+
+            btnImgAddGrant.ImageUrl = Root.Domain + "/Framework/images/icon_squareDownArrow.gif";
+            phAddCustom.Visible = false;
+            phDeleteGrant.Visible = false;
+            pnlAddGrantResults.Visible = false;
+            pnlAddCustomGrant.Visible = false;
+            phSecuritySettings.Visible = false;
+            Session["pnlAddGrant.Visible"] = true;
+
             pnlAddGrantResults.Visible = true;
             upnlEditSection.Update();
           
@@ -203,7 +213,14 @@ namespace Profiles.Edit.Modules.CustomEditResearcherRole
         protected void btnClear_OnClick(object sender, EventArgs e)
         {
             ResetGrantSearch();
+            btnImgAddGrant.ImageUrl = Root.Domain + "/Framework/images/icon_squareDownArrow.gif";
+            phAddCustom.Visible = false;
+            phDeleteGrant.Visible = false;
             pnlAddGrant.Visible = true;
+            pnlAddGrantResults.Visible = false;
+            pnlAddCustomGrant.Visible = false;
+            phSecuritySettings.Visible = false;
+            Session["pnlAddGrant.Visible"] = true;
             upnlEditSection.Update();
         }
 
@@ -638,8 +655,8 @@ namespace Profiles.Edit.Modules.CustomEditResearcherRole
                 lblFundingItem.Text += "<tr><td colspan='2'>" + fs.AgreementLabel + "</td></tr>";
                 lblFundingItem.Text += "<tr><td colspan='2'>" + fs.RoleDescription + "</td></tr>";
                 if (fs.RoleLabel != string.Empty)
-                    lblFundingItem.Text += "<tr><td colspan='2'>Role: " + fs.RoleLabel + "</td><tr></table>";
-
+                    lblFundingItem.Text += "<tr><td colspan='2'>Role: " + fs.RoleLabel + "</td><tr>";
+                lblFundingItem.Text += "</table>";
 
                 lnkEdit = (ImageButton)e.Row.FindControl("lnkEdit");
                 lnkEdit.CommandArgument = fundingstate.FundingRoleID.ToString();
@@ -824,6 +841,8 @@ namespace Profiles.Edit.Modules.CustomEditResearcherRole
 
             //btnAddCustom_OnClick(sender, e);                        
             pnlAddCustomGrant.Visible = true;
+            btnInsertResearcherRole.Visible = false;
+            lblInsertResearcherRolePipe.Visible = false;
 
             Session["pnlAddCustomGrant.Visible"] = true;
 
@@ -1173,7 +1192,7 @@ namespace Profiles.Edit.Modules.CustomEditResearcherRole
             public string Project_Year
             {
                 get { return "<Project_Year>" + _project_year + "</Project_Year>"; }
-                set { _org_name = value; this.Loaded = true; }
+                set { _project_year = value; this.Loaded = true; }
             }
 
             public string Org_Name
