@@ -209,7 +209,12 @@ BEGIN
 			e.Source = p.Source,
 			e.URL = p.URL,
 			e.EntityName = p.Title,
-			e.IsActive = 1
+			e.IsActive = 1,
+			e.PubYear = year(p.EntityDate),
+            e.YearWeight = (case when p.EntityDate is null then 0.5
+                when year(p.EntityDate) <= 1901 then 0.5
+                else power(cast(0.5 as float),cast(datediff(d,p.EntityDate,GetDate()) as float)/365.25/10)
+                end)
 		FROM #publications p, [Profile.Data].[Publication.Entity.InformationResource] e
 		WHERE p.EntityID = e.EntityID and p.EntityID is not null
 
