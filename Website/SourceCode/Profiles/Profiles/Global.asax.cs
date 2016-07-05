@@ -163,6 +163,18 @@ namespace Profiles
                 //get reference to the source of the exception chain
                 Exception ex = Server.GetLastError().GetBaseException();
 
+                // Catch errors that occur by design not true Application errors
+                // and handle them without logging as a system error.
+                if (ex.GetBaseException() is System.Web.HttpRequestValidationException)
+                {
+                    if (Server.GetLastError().GetBaseException() is System.Web.HttpRequestValidationException)
+                    {
+                        HttpContext.Current.Session.Add("GLOBAL_ERROR", "HttpRequestValidationException");
+                        Response.Redirect("~/Error/default.aspx", true);  
+                        return;
+                    }   
+                }
+
                 Framework.Utilities.DebugLogging.Log("You are in the Global.asax Application_Error event.  Something broke!");
                 Framework.Utilities.DebugLogging.Log(ex.Message);
                 Framework.Utilities.DebugLogging.Log(ex.Source.ToString());
@@ -174,32 +186,33 @@ namespace Profiles
                     return;
                 }
 
-               EventLog.WriteEntry("Profiles",
-                 "MESSAGE: " + ex.Message +
-                 "\nSOURCE: " + ex.Source +
-                 "\nFORM: " + Request.Form.ToString() +
-                 "\nQUERYSTRING: " + Request.QueryString.ToString() +
-                 "\nTARGETSITE: " + ex.TargetSite +
-                 "\nSTACKTRACE: " + ex.StackTrace,
-                 EventLogEntryType.Error);
-                    
-               HttpContext.Current.Session.Add("GLOBAL_ERROR", "MESSAGE: " + ex.Message +
+                try
+                {
+                    EventLog.WriteEntry("Profiles",
+                      "MESSAGE: " + ex.Message +
+                      "\nSOURCE: " + ex.Source +
+                      "\nFORM: " + Request.Form.ToString() +
+                      "\nQUERYSTRING: " + Request.QueryString.ToString() +
+                      "\nTARGETSITE: " + ex.TargetSite +
+                      "\nSTACKTRACE: " + ex.StackTrace,
+                      EventLogEntryType.Error);
+                }
+                catch (Exception f) { }
+
+                //After the error is written to the event log, a copy of the same message is loaded into a session variable and then
+                //displayed in the ErrorPage.aspx file.     
+                HttpContext.Current.Session.Add("GLOBAL_ERROR", "MESSAGE: " + ex.Message +
                   "\nSOURCE: " + ex.Source +
                   "\nFORM: " + Request.Form.ToString() +
                   "\nQUERYSTRING: " + Request.QueryString.ToString());
-
-
-               //After the error is written to the event log, a copy of the same message is loaded into a session variable and then
-               //displayed in the ErrorPage.aspx file.
-
-               Response.Redirect("~/Error/default.aspx",true);       
-             
+            
             }
             catch (Exception ex)
             {
                 Framework.Utilities.DebugLogging.Log(ex.Message + " ++ " + ex.StackTrace);
-            
+                
             }
+            Response.Redirect("~/Error/default.aspx", true);      
         }
     }
 

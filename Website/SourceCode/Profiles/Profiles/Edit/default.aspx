@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#"  
 MasterPageFile="~/Framework/Template.Master" 
 AutoEventWireup="true" CodeBehind="default.aspx.cs" 
-    Inherits="Profiles.Edit._default"  ValidateRequest="false"
+    Inherits="Profiles.Edit._default"  ValidateRequest="true"
  %>
  <%--
     Copyright (c) 2008-2012 by the President and Fellows of Harvard College. All rights reserved.  

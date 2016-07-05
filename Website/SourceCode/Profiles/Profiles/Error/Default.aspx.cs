@@ -34,9 +34,14 @@ namespace Profiles.Error
             masterpage.Tab = "";
             masterpage.RDFData = null;
             XmlDocument presentationxml = new XmlDocument();
-            presentationxml.LoadXml(System.IO.File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "/Error/PresentationXML/ErrorPresentation.xml"));
+            string global_error = "";
+            if (HttpContext.Current.Session["GLOBAL_ERROR"] != null)
+            {
+                global_error = HttpContext.Current.Session["GLOBAL_ERROR"].ToString();
+            }
+            if (global_error.Equals("HttpRequestValidationException")) presentationxml.LoadXml(System.IO.File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "/Error/PresentationXML/HttpRequestValidationExceptionPresentation.xml"));
+            else presentationxml.LoadXml(System.IO.File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "/Error/PresentationXML/ErrorPresentation.xml"));
             masterpage.PresentationXML = presentationxml;
-
         }
     }
 }
