@@ -11,6 +11,7 @@
   
 */
 using System;
+using System.Configuration;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -149,6 +150,22 @@ namespace Profiles.Framework
             //    divPageColumnRightCenter.Style["background-image"] = Root.Domain + "/Framework/Images/passive_back.gif";
             //    divPageColumnRightCenter.Style["background-repeat"] = "repeat";
             //}
+
+
+            if (ConfigurationManager.AppSettings["GoogleAnalytics.TrackingID"] != null && !ConfigurationManager.AppSettings["GoogleAnalytics.TrackingID"].ToString().Trim().IsNullOrEmpty())
+            {
+                HtmlGenericControl gaTrackingjs = new HtmlGenericControl("script");
+
+                string domain = ConfigurationManager.AppSettings["GoogleAnalytics.Domain"] != null ? ConfigurationManager.AppSettings["GoogleAnalytics.Domain"].ToString().Trim() : null;
+                string trackingID2 = ConfigurationManager.AppSettings["GoogleAnalytics.TrackingID2"] != null ? ConfigurationManager.AppSettings["GoogleAnalytics.TrackingID2"].ToString().Trim() : null;
+                string domain2 = ConfigurationManager.AppSettings["GoogleAnalytics.Domain2"] != null ? ConfigurationManager.AppSettings["GoogleAnalytics.Domain2"].ToString().Trim() : null;
+
+                gaTrackingjs.Attributes.Add("type", "text/javascript");
+                gaTrackingjs.InnerHtml = GetUniversalAnalyticsJavascipt(
+                        ConfigurationManager.AppSettings["GoogleAnalytics.TrackingID"].ToString().Trim(), domain, trackingID2, domain2);
+
+                Page.Header.Controls.Add(gaTrackingjs);
+            }
 
 
             // IE Only css files
@@ -515,6 +532,28 @@ namespace Profiles.Framework
         }
 
         #endregion
+
+        private string GetUniversalAnalyticsJavascipt(string trackingID, string domain, string trackingID2, string domain2)
+        {
+            domain = (domain == null) ? "auto" : domain;
+            domain2 = (domain2 == null) ? "auto" : domain2;
+            string createID2 = (trackingID2 != null) ? "ga('create', '" + trackingID2 + "', '" + domain2 + "', { 'name': 'b' });" + Environment.NewLine : "";
+            string sendID2 = (trackingID2 != null) ? "ga('b.send', 'pageview')" : "";
+
+            string scriptText = Environment.NewLine +
+                "(function (i, s, o, g, r, a, m) {" + Environment.NewLine +
+                "i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {" + Environment.NewLine +
+                "(i[r].q = i[r].q || []).push(arguments)" + Environment.NewLine +
+                "}, i[r].l = 1 * new Date(); a = s.createElement(o)," + Environment.NewLine +
+                "m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)" + Environment.NewLine +
+                "})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');" + Environment.NewLine +
+                "ga('create', '" + trackingID + "', '"+domain+"');" + Environment.NewLine +
+                createID2 +
+                "ga('send', 'pageview');" + Environment.NewLine +
+                sendID2;
+            return scriptText;
+        }
+
 
         public string GetURLDomain()
         {
