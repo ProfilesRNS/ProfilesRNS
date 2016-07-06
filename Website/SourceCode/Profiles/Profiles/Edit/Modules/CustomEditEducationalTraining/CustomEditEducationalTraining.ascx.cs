@@ -396,13 +396,13 @@ namespace Profiles.Edit.Modules.CustomEditEducationalTraining
                 awarduri = base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + property.InnerText + "']/rdf:object/@rdf:resource", base.Namespaces).Value;
                 oldobjectid = data.GetStoreNode(awarduri);
 
-                if (base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + awarduri + "']/prns:InstitutionName", base.Namespaces) != null)
-                    oldinstitutionvalue = base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + awarduri + "']/prns:InstitutionName", base.Namespaces).InnerText;
+                if (base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + awarduri + "']/prns:trainingAtOrganization", base.Namespaces) != null)
+                    oldinstitutionvalue = base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + awarduri + "']/prns:trainingAtOrganization", base.Namespaces).InnerText;
                 else
                     oldinstitutionvalue = string.Empty;
 
-                if (base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + awarduri + "']/prns:InstitutionLocation", base.Namespaces) != null)
-                    oldlocationvalue = base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + awarduri + "']/prns:InstitutionLocation", base.Namespaces).InnerText;
+                if (base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + awarduri + "']/prns:trainingLocation", base.Namespaces) != null)
+                    oldlocationvalue = base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about='" + awarduri + "']/prns:trainingLocation", base.Namespaces).InnerText;
                 else
                     oldlocationvalue = string.Empty;
 

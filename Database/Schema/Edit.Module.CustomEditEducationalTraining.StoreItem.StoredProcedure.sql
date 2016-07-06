@@ -79,11 +79,11 @@ BEGIN
 		SELECT @NodeID = @ExistingEducationalTrainingID
 		-- Delete any existing properties
 		EXEC [RDF.].DeleteTriple	@SubjectID = @NodeID,
-									@PredicateURI = 'http://profiles.catalyst.harvard.edu/ontology/prns#InstitutionName',
+									@PredicateURI = 'http://profiles.catalyst.harvard.edu/ontology/prns#trainingAtOrganization',
 									@SessionID = @SessionID,
 									@Error = @Error OUTPUT
 		EXEC [RDF.].DeleteTriple	@SubjectID = @NodeID,
-									@PredicateURI = 'http://profiles.catalyst.harvard.edu/ontology/prns#InstitutionLocation',
+									@PredicateURI = 'http://profiles.catalyst.harvard.edu/ontology/prns#trainingLocation',
 									@SessionID = @SessionID,
 									@Error = @Error OUTPUT
 		EXEC [RDF.].DeleteTriple	@SubjectID = @NodeID,
@@ -148,13 +148,13 @@ BEGIN
 	BEGIN
 		IF @institutionNodeID IS NOT NULL
 			EXEC [RDF.].GetStoreTriple	@SubjectID = @NodeID,
-										@PredicateURI = 'http://profiles.catalyst.harvard.edu/ontology/prns#InstitutionName',
+										@PredicateURI = 'http://profiles.catalyst.harvard.edu/ontology/prns#trainingAtOrganization',
 										@ObjectID = @institutionNodeID,
 										@SessionID = @SessionID,
 										@Error = @Error OUTPUT
 		IF @locationNodeID IS NOT NULL
 			EXEC [RDF.].GetStoreTriple	@SubjectID = @NodeID,
-										@PredicateURI = 'http://profiles.catalyst.harvard.edu/ontology/prns#InstitutionLocation',
+										@PredicateURI = 'http://profiles.catalyst.harvard.edu/ontology/prns#trainingLocation',
 										@ObjectID = @locationNodeID,
 										@SessionID = @SessionID,
 										@Error = @Error OUTPUT
