@@ -570,3 +570,4 @@ type Profile.Data.Funding.DeleteFunding.StoredProcedure.sql
 type Profile.Data.Funding.Entity.UpdateEntityOnePerson.StoredProcedure.sql
 type Profile.Data.Funding.GetFundingItem.StoredProcedure.sql
 type Profile.Data.Funding.GetPersonFunding.StoredProcedure.sql
+type Edit.Module.CustomEditEducationalTraining.StoreItem.StoredProcedure.sql
