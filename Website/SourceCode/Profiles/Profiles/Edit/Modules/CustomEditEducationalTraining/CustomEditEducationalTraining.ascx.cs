@@ -250,6 +250,8 @@ namespace Profiles.Edit.Modules.CustomEditEducationalTraining
             txtInstitution.Text = "";
             txtEducationalTrainingDegree.Text = "";
             txtEducationalTrainingSchool.Text = "";
+            txtLocation.Text = "";
+            txtFieldOfStudy.Text = "";
             pnlInsertEducationalTraining.Visible = false;
             upnlEditSection.Update();
         }
@@ -265,6 +267,8 @@ namespace Profiles.Edit.Modules.CustomEditEducationalTraining
                 txtInstitution.Text = "";
                 txtEducationalTrainingDegree.Text = "";
                 txtEducationalTrainingSchool.Text = "";
+                txtLocation.Text = "";
+                txtFieldOfStudy.Text = "";
                 Session["pnlInsertEducationalTraining.Visible"] = null;
                 btnEditEducation_OnClick(sender, e);
                 this.FillEducationalTrainingGrid(true);
