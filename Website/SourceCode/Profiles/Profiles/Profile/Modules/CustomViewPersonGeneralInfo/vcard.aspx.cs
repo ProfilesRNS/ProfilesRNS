@@ -71,7 +71,7 @@ namespace Profiles.Profile.Modules.CustomViewPersonGeneralInfo
 
             if (this.RDFData.SelectSingleNode("rdf:RDF/rdf:Description[1]/prns:mainImage/@rdf:resource", namespaces) != null)
             {
-                Stream stream = data.GetUserPhotoList(base.RDFTriple.Subject, false);
+                Stream stream = data.GetUserPhotoList(base.RDFTriple.Subject);
 
                 if (stream != null)
                 {

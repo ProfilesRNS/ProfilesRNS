@@ -36,12 +36,6 @@ namespace Profiles.Profile.Modules.ProfileImage
                 
                 // get the id for the image
                 Int64 nodeid = Convert.ToInt32(context.Request.QueryString["NodeID"]);
-                bool harvarddefault = false;
-
-                if (context.Request.QueryString["HarvardDefault"] != null)
-                {
-                    harvarddefault = true;
-                }
 
                 Utilities.DataIO data = new Profiles.Profile.Utilities.DataIO();
 
@@ -64,7 +58,7 @@ namespace Profiles.Profile.Modules.ProfileImage
                     context.Response.Cache.SetCacheability(HttpCacheability.Public);
                     context.Response.BufferOutput = false;
 
-                    Stream stream = data.GetUserPhotoList(nodeid,harvarddefault);
+                    Stream stream = data.GetUserPhotoList(nodeid);
 
                     const int buffersize = 1024 * 16;
                     byte[] buffer2 = new byte[buffersize];
