@@ -26,9 +26,9 @@
               <xsl:variable name="educationalTrainingUri" select="@rdf:resource"/>              
               <tr>
                 <td>
-                  <xsl:value-of select="/rdf:RDF[1]/rdf:Description[@rdf:about=$educationalTrainingUri]/prns:InstitutionName"/>
-                  <xsl:if test="/rdf:RDF[1]/rdf:Description[@rdf:about=$educationalTrainingUri]/prns:InstitutionName and /rdf:RDF[1]/rdf:Description[@rdf:about=$educationalTrainingUri]/prns:InstitutionLocation">, </xsl:if>
-                  <xsl:value-of select="/rdf:RDF[1]/rdf:Description[@rdf:about=$educationalTrainingUri]/prns:InstitutionLocation"/>
+                  <xsl:value-of select="/rdf:RDF[1]/rdf:Description[@rdf:about=$educationalTrainingUri]/prns:trainingAtOrganization"/>
+                  <xsl:if test="/rdf:RDF[1]/rdf:Description[@rdf:about=$educationalTrainingUri]/prns:trainingAtOrganization and /rdf:RDF[1]/rdf:Description[@rdf:about=$educationalTrainingUri]/prns:trainingLocation">, </xsl:if>
+                  <xsl:value-of select="/rdf:RDF[1]/rdf:Description[@rdf:about=$educationalTrainingUri]/prns:trainingLocation"/>
                 </td>
                 <td>
                   <xsl:value-of select="/rdf:RDF[1]/rdf:Description[@rdf:about=$educationalTrainingUri]/vivo:degreeEarned"/>
