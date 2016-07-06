@@ -276,7 +276,7 @@ namespace Profiles.Profile.Utilities
 
         #region "Profile Photo"
 
-        public System.IO.Stream GetUserPhotoList(Int64 NodeID, bool harvarddefault)
+        public System.IO.Stream GetUserPhotoList(Int64 NodeID)
         {
             Object result = null;
             Edit.Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
@@ -292,19 +292,10 @@ namespace Profiles.Profile.Utilities
                 dbconnection.Open();
 
                 SqlCommand dbcommand;
-                if (harvarddefault)
-                {
-                    dbcommand = new SqlCommand("select photo from [Catalyst.].[Person.Photo] where personid = " + data.GetPersonID(NodeID).ToString());
-                    dbcommand.CommandType = CommandType.Text;
-                    dbcommand.CommandTimeout = base.GetCommandTimeout();
-                }
-                else
-                {
-                    dbcommand = new SqlCommand("[Profile.Data].[Person.GetPhotos]");
-                    dbcommand.CommandType = CommandType.StoredProcedure;
-                    dbcommand.CommandTimeout = base.GetCommandTimeout();
-                    dbcommand.Parameters.Add(new SqlParameter("@NodeID", NodeID));
-                }
+                dbcommand = new SqlCommand("[Profile.Data].[Person.GetPhotos]");
+                dbcommand.CommandType = CommandType.StoredProcedure;
+                dbcommand.CommandTimeout = base.GetCommandTimeout();
+                dbcommand.Parameters.Add(new SqlParameter("@NodeID", NodeID));
                 dbcommand.Connection = dbconnection;
 
                 result = resize.ResizeImageFile((byte[])dbcommand.ExecuteScalar(), 150);
