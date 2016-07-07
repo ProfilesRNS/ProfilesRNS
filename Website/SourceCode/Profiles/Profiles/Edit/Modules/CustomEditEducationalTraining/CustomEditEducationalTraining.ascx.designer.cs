@@ -76,15 +76,6 @@ namespace Profiles.Edit.Modules.CustomEditEducationalTraining {
         protected global::System.Web.UI.WebControls.Panel pnlEditEducation;
         
         /// <summary>
-        /// imbAddArror control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imbAddArror;
-        
-        /// <summary>
         /// btnEditEducation control.
         /// </summary>
         /// <remarks>
@@ -92,6 +83,15 @@ namespace Profiles.Edit.Modules.CustomEditEducationalTraining {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnEditEducation;
+        
+        /// <summary>
+        /// imbAddArror control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imbAddArror;
         
         /// <summary>
         /// RptrEditEducation control.

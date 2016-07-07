@@ -26,10 +26,8 @@
                         </asp:Panel>
                         <br />
                         <asp:Panel runat="server" ID="pnlEditEducation">
-                            <asp:ImageButton runat="server" ID="imbAddArror" ImageUrl="../../../Framework/Images/icon_squareArrow.gif"
-                                OnClick="btnEditEducation_OnClick" />&nbsp;
                             <asp:LinkButton ID="btnEditEducation" runat="server" OnClick="btnEditEducation_OnClick"
-                                CssClass="profileHypLinks">Add Education and Training</asp:LinkButton>
+                                CssClass="profileHypLinks"><asp:Image runat="server" ID="imbAddArror" AlternateText=" " ImageUrl="~/Framework/Images/icon_squareArrow.gif"/>&nbsp;Add Education and Training</asp:LinkButton>
                         </asp:Panel>
                     </div>
                 </td>
@@ -130,7 +128,7 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Completion Date">
                                     <EditItemTemplate>
-                                        <asp:TextBox ID="txtYr2" runat="server" MaxLength="6" Text='<%# Bind("EndDate") %>'></asp:TextBox>
+                                        <asp:TextBox ID="txtYr2" runat="server" MaxLength="7" Text='<%# Bind("EndDate") %>'></asp:TextBox>
                                     </EditItemTemplate>
                                     <ItemTemplate>
                                         <asp:Label ID="Label2" runat="server" Text='<%# Bind("EndDate") %>'></asp:Label>
