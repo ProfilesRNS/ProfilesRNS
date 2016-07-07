@@ -1,0 +1,23 @@
+﻿<Presentation PresentationClass="profile">
+  <PageOptions Columns="2"/>
+  <WindowName>Error</WindowName> 
+  <PageTitle>Error</PageTitle>
+  <PageBackLinkName></PageBackLinkName>
+  <PageBackLinkURL></PageBackLinkURL>
+  <PageSubTitle></PageSubTitle>
+  <PageDescription>
+    Data entered into Profiles must not contain HTML formatting. Please re-enter your data as plain text.
+  </PageDescription>  
+  <PanelList>
+    <Panel type="header"  />
+    <Panel type="page" />
+    <Panel Type="active">
+      <Module ID="MainMenu">
+      </Module>
+    </Panel>
+    <Panel Type="main" />
+    <Panel Type="passive"/>
+    <Panel type="footer" />
+  </PanelList>
+</Presentation>
+
