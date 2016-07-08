@@ -426,6 +426,7 @@ namespace Profiles.Edit.Modules.CustomEditResearcherRole
                     {
                         FundingRoleID = result.FundingRoleID,
                         PersonID = this._personId,
+                        SubjectID = this.SubjectID,
                         FullFundingID = result.CoreProjectNum,
                         CoreProjectNum = result.CoreProjectNum,
                         RoleLabel = result.RoleLabel,
@@ -459,6 +460,7 @@ namespace Profiles.Edit.Modules.CustomEditResearcherRole
                         {
                             FundingRoleID = subresult.FundingRoleID,
                             PersonID = this._personId,
+                            SubjectID = this.SubjectID,
                             FullFundingID = subresult.FullFundingID,
                             CoreProjectNum = subresult.CoreProjectNum,
                             RoleLabel = subresult.RoleLabel,
@@ -744,6 +746,7 @@ namespace Profiles.Edit.Modules.CustomEditResearcherRole
             {
                 FundingRoleID = FundingRoleID,
                 PersonID = this._personId,
+                SubjectID = this.SubjectID,
                 FundingID = sponsorid,
                 FullFundingID = sponsorid,
                 RoleLabel = role,
@@ -898,7 +901,7 @@ namespace Profiles.Edit.Modules.CustomEditResearcherRole
             //string key = grdEditPublications.DataKeys[0].Value.ToString();
             Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
 
-            data.DeleteFunding(new Guid(key), data.GetPersonID(this.SubjectID));
+            data.DeleteFunding(new Guid(key), this.SubjectID);
             //after the batch is completed, call this method once,  same as publications.  All you need is the person ID.
             data.FundingUpdateOnePerson(new FundingState { PersonID = this._personId });
 
@@ -942,7 +945,7 @@ namespace Profiles.Edit.Modules.CustomEditResearcherRole
             FillResearchGrid(true);
             foreach (GridViewRow row in GridViewResearcherRole.Rows)
             {
-                data.DeleteFunding((Guid)GridViewResearcherRole.DataKeys[row.RowIndex]["FundingRoleID"], _personId);
+                data.DeleteFunding((Guid)GridViewResearcherRole.DataKeys[row.RowIndex]["FundingRoleID"], this.SubjectID);
             }
 
 
@@ -978,7 +981,7 @@ namespace Profiles.Edit.Modules.CustomEditResearcherRole
             {
 
                 if (row.Source == "NIH")
-                    data.DeleteFunding(row.FundingRoleID, _personId);
+                    data.DeleteFunding(row.FundingRoleID, this.SubjectID);
             }
 
             //after the batch is completed, call this method once,  same as publications.  All you need is the person ID.
@@ -997,7 +1000,7 @@ namespace Profiles.Edit.Modules.CustomEditResearcherRole
             {
 
                 if (row.Source != "NIH")
-                    data.DeleteFunding(row.FundingRoleID, _personId);
+                    data.DeleteFunding(row.FundingRoleID, this.SubjectID);
             }
 
             //after the batch is completed, call this method once,  same as publications.  All you need is the person ID.

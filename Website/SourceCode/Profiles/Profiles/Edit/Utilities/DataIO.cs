@@ -1363,7 +1363,9 @@ namespace Profiles.Edit.Utilities
                 ExecuteSQLDataCommand(GetDBCommand(dbconnection, "[Profile.Data].[Funding.AddUpdateFunding]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param));
 
                 dbconnection.Close();
-
+                
+                EditActivityLog(fs.SubjectID, "http://vivoweb.org/ontology/core#ResearcherRole", (string) null, fs.FundingRoleID.ToString(), (string) null);
+               
             }
             catch (Exception e)
             {
@@ -1474,13 +1476,13 @@ namespace Profiles.Edit.Utilities
 
         }
 
-        public void DeleteFunding(Guid FundingRoleID, int personid)
+        public void DeleteFunding(Guid FundingRoleID, long subjectID)
         {
             System.Text.StringBuilder sbSQL = new StringBuilder();
             sbSQL.Append("[Profile.Data].[Funding.DeleteFunding]   @FundingRoleID = '" + FundingRoleID.ToString() + "'");
 
             ExecuteSQLDataCommand(sbSQL.ToString());
-
+            EditActivityLog(subjectID, "http://vivoweb.org/ontology/core#ResearcherRole", (string)null, FundingRoleID.ToString(), (string)null);
         }
 
         #endregion

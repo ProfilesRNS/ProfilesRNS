@@ -12,6 +12,7 @@ namespace Profiles.Edit.Utilities
 
         public Guid FundingRoleID { get; set; }
         public int PersonID { get; set; }
+        public long SubjectID { get; set; }
         public string Source { get; set; }
         public string FundingID { get; set; }
         public string CoreProjectNum { get; set; }
