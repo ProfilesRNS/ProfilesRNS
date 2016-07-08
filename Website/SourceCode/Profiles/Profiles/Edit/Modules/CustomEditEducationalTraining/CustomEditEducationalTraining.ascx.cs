@@ -210,7 +210,7 @@ namespace Profiles.Edit.Modules.CustomEditEducationalTraining
             HiddenField hdURI = (HiddenField)GridViewEducation.Rows[e.RowIndex].FindControl("hdURI");
 
             //data.AddEducationalTraining(this.SubjectID, txtInstitution.Text, txtLocation.Text, txtEducationalTrainingDegree.Text, txtEndYear.Text, txtFieldOfStudy.Text, this.PropertyListXML);
-            data.UpdateEducationalTraining(hdURI.Value, txtEducationalTrainingInst.Text, txtEducationalTrainingLocation.Text, txtEducationalTrainingDegree.Text, txtYr2.Text, txtEducationalTrainingFieldOfStudy.Text);
+            data.UpdateEducationalTraining(hdURI.Value, this.SubjectID, txtEducationalTrainingInst.Text, txtEducationalTrainingLocation.Text, txtEducationalTrainingDegree.Text, txtYr2.Text, txtEducationalTrainingFieldOfStudy.Text);
             GridViewEducation.EditIndex = -1;
             Session["pnlInsertEducationalTraining.Visible"] = null;
             this.FillEducationalTrainingGrid(true);

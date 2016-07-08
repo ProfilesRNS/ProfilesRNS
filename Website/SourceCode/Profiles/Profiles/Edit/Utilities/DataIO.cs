@@ -1537,7 +1537,7 @@ namespace Profiles.Edit.Utilities
         public bool AddEducationalTraining(Int64 subjectid, string institution, string location,
                     string degree, string enddate, string fieldOfStudy, XmlDocument PropertyListXML)
         {
-            //ActivityLog(PropertyListXML, GetPersonID(subjectid), label, institution);
+            ActivityLog(PropertyListXML, subjectid, institution + ", " + location + ", ", degree + ", " + enddate + ", " + fieldOfStudy);
             bool error = false;
             try
             {
@@ -1580,17 +1580,19 @@ namespace Profiles.Edit.Utilities
 
         }
 
-        public bool UpdateEducationalTraining(string subjecturi, string institution, string location,
+        public bool UpdateEducationalTraining(string existingTrainingURI, long subjectID, string institution, string location,
                     string degree, string enddate, string fieldOfStudy)
         {
             bool error = false;
             try
             {
+                EditActivityLog(subjectID, "http://vivoweb.org/ontology/core#educationalTraining", null, institution + ", " + location + ", ", degree + ", " + enddate + ", " + fieldOfStudy);
+
                 string label = degree + " " + institution;
 
                 EducationalTrainingRequest eatr = new EducationalTrainingRequest();
                 eatr.ExistingEducationalTrainingURI = new StoreNodeParam();
-                eatr.ExistingEducationalTrainingURI.Value = subjecturi;
+                eatr.ExistingEducationalTrainingURI.Value = existingTrainingURI;
                 eatr.ExistingEducationalTrainingURI.ParamOrdinal = 0;
 
                 eatr.Institution = new StoreNodeParam();
@@ -1614,10 +1616,9 @@ namespace Profiles.Edit.Utilities
                 eatr.FieldOfStudy.ParamOrdinal = 5;
 
                 eatr.EducationalTrainingForID = new StoreNodeParam();
-                eatr.EducationalTrainingForID.Value = this.GetStoreNode(subjecturi).ToString();
+                eatr.EducationalTrainingForID.Value = this.GetStoreNode(existingTrainingURI).ToString();
                 eatr.EducationalTrainingForID.ParamOrdinal = 6;
                 error = this.StoreEducationalTrainingReceipt(eatr);
-
             }
             catch (Exception e)
             {
