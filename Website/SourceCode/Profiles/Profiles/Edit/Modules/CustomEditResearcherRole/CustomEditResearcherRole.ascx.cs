@@ -536,6 +536,8 @@ namespace Profiles.Edit.Modules.CustomEditResearcherRole
                             }
                         }
 
+                        result = result.ToLower() == "error" ? "" : result;
+
                         Framework.Utilities.Cache.SetWithTimeout(SearchRequest.StringRequest, result,54000 );
 
                         return result;
