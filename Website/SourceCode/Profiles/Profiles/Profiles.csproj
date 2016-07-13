@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DirectService.aspx" />
+    <Content Include="Edit\Images\img_arrow.png" />
     <Content Include="Edit\Modules\CustomEditEagleI\CustomEditEagleI.ascx" />
     <Content Include="Edit\Modules\CustomEditEducationalTraining\CustomEditEducationalTraining.ascx" />
     <Content Include="Edit\Modules\CustomEditFreetextKeyword\CustomEditFreetextKeyword.ascx" />
