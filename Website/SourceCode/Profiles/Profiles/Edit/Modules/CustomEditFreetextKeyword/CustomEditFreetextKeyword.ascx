@@ -61,7 +61,7 @@
                         <table border="0" cellspacing="2" cellpadding="4">
                             <tr>
                                 <td>
-                                    <asp:TextBox ID="txtLabel" runat="server" Rows="1" Width="300px" TextMode="SingleLine" onkeyup="updateDropdown(this)"></asp:TextBox>
+                                    <asp:TextBox ID="txtLabel" runat="server" Rows="1" Width="300px" TextMode="SingleLine" onfocus="updateDropdown(this)" onkeyup="updateDropdown(this)"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -90,7 +90,7 @@
                         <table border="0" cellspacing="2" cellpadding="4">
                             <tr>
                                 <td>
-                                    <asp:TextBox ID="txtLabelBulk" runat="server" Rows="5" Width="500px" TextMode="MultiLine" autocomplete="on" onkeyup="updateDropdown()"></asp:TextBox>
+                                    <asp:TextBox ID="txtLabelBulk" runat="server" Rows="5" Width="500px" TextMode="MultiLine"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -125,7 +125,7 @@
                             <Columns>
                                 <asp:TemplateField HeaderText="">
                                     <EditItemTemplate>
-                                        <asp:TextBox ID="txtLabelGrid" Rows="1" runat="server" TextMode="SingleLine" Width="300px"  onkeyup="updateDropdown(this)"
+                                        <asp:TextBox ID="txtLabelGrid" Rows="1" runat="server" TextMode="SingleLine" Width="300px" onfocus="updateDropdown(this)" onkeyup="updateDropdown(this)"
                                             Text='<%# Bind("Literal") %>'></asp:TextBox>     
                                     </EditItemTemplate>
                                     <ItemTemplate>
