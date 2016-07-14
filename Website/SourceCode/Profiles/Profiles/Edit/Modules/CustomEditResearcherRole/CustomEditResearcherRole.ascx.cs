@@ -597,11 +597,24 @@ namespace Profiles.Edit.Modules.CustomEditResearcherRole
         protected void btnUncheckAll_OnClick(object sender, EventArgs e)
         {
             this._clickedall = false;
+            phAddCustom.Visible = false;
+            phDeleteGrant.Visible = false;
+            phSecuritySettings.Visible = false;
+            btnImgAddGrant.ImageUrl = Root.Domain + "/Framework/images/icon_squareDownArrow.gif";
+            pnlAddGrantResults.Visible = true;
+
+            grdGrantSearchResults.DataSource = LoadFunding(CallAPI());
+            grdGrantSearchResults.DataBind();
+            pnlAddGrantResults.Visible = true;
+            upnlEditSection.Update();
         }
         protected void btnCheckAll_OnClick(object sender, EventArgs e)
         {
             this._clickedall = true;
-
+            phAddCustom.Visible = false;
+            phDeleteGrant.Visible = false;
+            phSecuritySettings.Visible = false;
+            btnImgAddGrant.ImageUrl = Root.Domain + "/Framework/images/icon_squareDownArrow.gif";
             pnlAddGrantResults.Visible = true;
 
             grdGrantSearchResults.DataSource = LoadFunding(CallAPI());
