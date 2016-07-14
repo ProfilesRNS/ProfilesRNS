@@ -109,10 +109,13 @@
                     <asp:Panel ID="pnlDeleteAll" runat="server" Style="background-color: #EEE;
                         margin-bottom: 5px; border: solid 1px #ccc;" 
                         Visible="false">
-                        <p class="edithelp">To delete a single keyword, click the X to the right of the keyword. To delete all keywords, click the link below. Note that you cannot undo this! 
-                        </p>
-                        <asp:LinkButton ID="btnDeleteAll" runat="server" CausesValidation="False" OnClick="btnDeleteAll_OnClick"
+                        <p class="edithelp">To delete a single keyword, click on the <b>Trash Can Icon</b> to the right of the keyword.</p>
+                        <p class="edithelp">To delete all keywords, click the <b>Delete All Keywords</b> link below.</p>
+                        <p class="edithelp">(Note: These actions cannot be undone)</p>
+                        <div style="padding: 0px 0px 6px 0px;">
+                            <asp:LinkButton ID="btnDeleteAll" runat="server" CausesValidation="False" OnClick="btnDeleteAll_OnClick"
                                             Text="Delete All Keywords" ></asp:LinkButton>
+                        </div>
                     </asp:Panel>
                     <div style="border-left: solid 1px #ccc;">
                         <asp:GridView ID="GridViewProperty" runat="server" AutoGenerateColumns="False" CellPadding="4"
