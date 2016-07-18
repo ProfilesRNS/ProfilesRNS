@@ -35,10 +35,10 @@ BEGIN
 		INSERT INTO @columns VALUES ('[Profile.Import].[Person] ','lastname','string',50,'Required')
 		INSERT INTO @columns VALUES ('[Profile.Import].[Person] ','displayname','string',255,'Required')
 		INSERT INTO @columns VALUES ('[Profile.Import].[Person] ','suffix','string',50,'Optional')
-		INSERT INTO @columns VALUES ('[Profile.Import].[Person] ','addressline1','string',55,'Optional')
-		INSERT INTO @columns VALUES ('[Profile.Import].[Person] ','addressline2','string',55,'Optional')
-		INSERT INTO @columns VALUES ('[Profile.Import].[Person] ','addressline3','string',55,'Optional')
-		INSERT INTO @columns VALUES ('[Profile.Import].[Person] ','addressline4','string',55,'Optional')
+		INSERT INTO @columns VALUES ('[Profile.Import].[Person] ','addressline1','string',255,'Optional')
+		INSERT INTO @columns VALUES ('[Profile.Import].[Person] ','addressline2','string',255,'Optional')
+		INSERT INTO @columns VALUES ('[Profile.Import].[Person] ','addressline3','string',255,'Optional')
+		INSERT INTO @columns VALUES ('[Profile.Import].[Person] ','addressline4','string',255,'Optional')
 		INSERT INTO @columns VALUES ('[Profile.Import].[Person] ','addressstring','string',1000,'Required')
 		INSERT INTO @columns VALUES ('[Profile.Import].[Person] ','city','string',100,'Not Used')
 		INSERT INTO @columns VALUES ('[Profile.Import].[Person] ','state','string',2,'Not Used')
@@ -145,6 +145,10 @@ BEGIN
 		INSERT INTO #Msg
 			SELECT 'ERROR: An internalusername is used more than once in [Profile.Import].[User].'
 				WHERE EXISTS (SELECT 1 FROM [Profile.Import].[User] GROUP BY internalusername HAVING COUNT(*)>1)
+				
+		INSERT INTO #Msg
+			SELECT 'ERROR: An internalusername is used in both [Profile.Import].[Person] and [Profile.Import].[User].'
+				WHERE EXISTS (SELECT 1 FROM [Profile.Import].[Person] p JOIN [Profile.Import].[User] u ON p.internalusername = u.internalusername)
 
 		-- Check that primaryaffiliation and affiliationsort are being used correctly
 
@@ -259,7 +263,7 @@ BEGIN
 		IF @@TRANCOUNT > 0  ROLLBACK
 
 		-- Raise an error with the details of the exception
-		SELECT @ErrMsg = '[usp_ValidateProfilesLoaderTables] Failed with : ' + ERROR_MESSAGE(),
+		SELECT @ErrMsg = '[Profile.Import].[ValidateProfilesImportTables] Failed with : ' + ERROR_MESSAGE(),
 					 @ErrSeverity = ERROR_SEVERITY()
 
 		RAISERROR(@ErrMsg, @ErrSeverity, 1)
