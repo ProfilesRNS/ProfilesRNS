@@ -84,7 +84,8 @@ namespace Profiles.Profile.Modules.CustomViewResearcherRole
                 date = string.Empty;
 
             sb.Append("<tr><td>");
-            sb.Append("<div><span style='float:left'>" + fs.FullFundingID + "</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + pi + "<span style='float:right'>" + date + "</span></div>");
+            if (!(fs.FullFundingID == string.Empty && pi == string.Empty && date == string.Empty))
+                sb.Append("<div><span style='float:left'>" + fs.FullFundingID + "</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + pi + "<span style='float:right'>" + date + "</span></div>");
 
             if (fs.GrantAwardedBy != string.Empty)
                 sb.Append(fs.GrantAwardedBy);
