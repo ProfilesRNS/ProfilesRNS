@@ -31,7 +31,7 @@ BEGIN
 		INNER JOIN [Profile.Data].[Funding.Agreement] a
 			ON r.FundingAgreementID = a.FundingAgreementID
 				AND r.PersonID = @PersonID
-	ORDER BY StartDate desc, EndDate desc, FundingID desc
+	ORDER BY StartDate, EndDate, FundingID
 
 END
 
