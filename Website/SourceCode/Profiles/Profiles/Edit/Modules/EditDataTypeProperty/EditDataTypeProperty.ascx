@@ -54,7 +54,7 @@
                         <table border="0" cellspacing="2" cellpadding="4">
                             <tr>
                                 <td>
-                                    <asp:TextBox ID="txtLabel" runat="server" Rows="5" Width="500px" TextMode="MultiLine" title="Enter Text"></asp:TextBox>
+                                    <asp:TextBox ID="txtInsertLabel" runat="server" Rows="5" Width="500px" TextMode="MultiLine" title="Enter Text"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>

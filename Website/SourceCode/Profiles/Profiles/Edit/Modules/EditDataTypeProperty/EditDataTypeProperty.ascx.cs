@@ -206,7 +206,7 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
 
         protected void btnInsertCancel_OnClick(object sender, EventArgs e)
         {
-            txtLabel.Text = "";
+            txtInsertLabel.Text = "";
             pnlInsertProperty.Visible = false;
             upnlEditSection.Update();
         }
@@ -215,10 +215,10 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
         {
             if (Session["pnlInsertProperty.Visible"] != null)
             {
-                data.AddLiteral(this.SubjectID, this.PredicateID, data.GetStoreNode(txtLabel.Text.Trim()), this.PropertyListXML);
+                data.AddLiteral(this.SubjectID, this.PredicateID, data.GetStoreNode(txtInsertLabel.Text.Trim()), this.PropertyListXML);
 
                 this.FillPropertyGrid(true);
-                txtLabel.Text = "";
+                txtInsertLabel.Text = "";
                 Session["pnlInsertProperty.Visible"] = null;
                 btnEditProperty_OnClick(sender, e);
                 upnlEditSection.Update();
@@ -229,7 +229,7 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
         {
             if (Session["pnlInsertProperty.Visible"] != null)
             {
-                data.AddLiteral(this.SubjectID, this.PredicateID, data.GetStoreNode(txtLabel.Text.Trim()), this.PropertyListXML);
+                data.AddLiteral(this.SubjectID, this.PredicateID, data.GetStoreNode(txtInsertLabel.Text.Trim()), this.PropertyListXML);
                 this.FillPropertyGrid(true);
                 Session["pnlInsertProperty.Visible"] = null;
                 btnInsertCancel_OnClick(sender, e);
