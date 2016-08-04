@@ -3,24 +3,8 @@
   <xsl:template match="/">
     <xsl:if test="rdf:RDF/rdf:Description[1]/vivo:educationalTraining">
      
-      <div class="listTable" style="margin-top:6px">
+      <div style="margin-top:6px">
         <table style="width:592px">
-          <thead>
-              <tr>
-                <th width="200px">
-                  Institution and Location
-                </th>
-                <th width="80px">
-                  Degree
-                </th>
-                <th width="120px">
-                  Completion Date
-                </th>
-                <th width="150px">
-                  Field of Study
-                </th>
-              </tr>
-          </thead>
           <tbody>
             <xsl:for-each select="rdf:RDF/rdf:Description[1]/vivo:educationalTraining">
               <xsl:variable name="educationalTrainingUri" select="@rdf:resource"/>              
