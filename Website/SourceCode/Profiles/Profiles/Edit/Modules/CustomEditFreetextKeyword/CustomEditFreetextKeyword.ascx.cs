@@ -161,7 +161,7 @@ namespace Profiles.Edit.Modules.CustomEditFreetextKeyword
             LiteralState literalstate = null;
             if (e.Row.RowType == DataControlRowType.Header)
             {
-                e.Row.Cells[0].Text = PropertyLabel;
+                e.Row.Cells[0].Text = "Keyword";
             }
 
             if (e.Row.RowType == DataControlRowType.DataRow)

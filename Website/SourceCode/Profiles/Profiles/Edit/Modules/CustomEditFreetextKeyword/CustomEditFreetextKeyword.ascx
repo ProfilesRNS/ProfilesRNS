@@ -37,7 +37,7 @@
                                 CssClass="profileHypLinks"><asp:Image runat="server" ID="imbAddArror" AlternateText=" " ImageUrl="../../../Framework/Images/icon_squareArrow.gif"/>&nbsp;Add Keyword(s)</asp:LinkButton>
                             <br /><br />
                         </asp:PlaceHolder>
-                        <asp:PlaceHolder ID="phDelAll" runat="server">
+                        <asp:PlaceHolder ID="phDelAll" runat="server" Visible="false">
                             <asp:LinkButton ID="btnDelAll" runat="server" OnClick="btnDelAll_OnClick" 
                                 CssClass="profileHypLinks"><asp:Image runat="server" ID="imbDelArrow" AlternateText=" " ImageUrl="../../../Framework/Images/icon_squareArrow.gif"/>&nbsp;Delete All Keyword(s)</asp:LinkButton>
                         </asp:PlaceHolder>
@@ -55,7 +55,7 @@
                     <asp:Panel ID="pnlInsertProperty" runat="server" Style="background-color: #EEE;
                         margin-bottom: 5px; border: solid 1px #ccc;" 
                         Visible="false">
-                        <p class="edithelp">Please enter your research, academic, and/or clinical interests as keywords. <br />Set the visibility to Public to display your Interests to others and make them searchable.
+                        <p class="edithelp">Please enter a word or phrase that describes your research, academic or clinical interests. <br />Set the visibility to Public to display your Interests to others and make them searchable.
                         <!--<br />To import a list of keywords <asp:LinkButton ID="btnBulkInsert" runat="server" CommandArgument="Show" OnClick="btnBulkInsert_OnClick" CssClass="profileHypLinks">click here</asp:LinkButton>.-->
                         </p>
                         <table border="0" cellspacing="2" cellpadding="4">
