@@ -85,7 +85,7 @@ namespace Profiles.Edit.Modules.CustomEditFreetextKeyword
             {
                 phSecurityOptions.Visible = true;
                 phEditProperty.Visible = true;
-                phDelAll.Visible = true;
+                //phDelAll.Visible = true;
                 btnInsertCancel_OnClick(sender, e);
                 imbAddArror.ImageUrl = "~/Framework/Images/icon_squareArrow.gif";
                 Session["pnlInsertProperty.Visible"] = null;
@@ -94,7 +94,7 @@ namespace Profiles.Edit.Modules.CustomEditFreetextKeyword
             {
                 phSecurityOptions.Visible = false;
                 phEditProperty.Visible = true;
-                phDelAll.Visible = false;
+                //phDelAll.Visible = false;
                 pnlInsertProperty.Visible = true;
                 imbAddArror.ImageUrl = "~/Framework/Images/icon_squareDownArrow.gif";
                 Session["pnlInsertProperty.Visible"] = true;
@@ -111,7 +111,7 @@ namespace Profiles.Edit.Modules.CustomEditFreetextKeyword
 
                 phSecurityOptions.Visible = true;
                 phEditProperty.Visible = true;
-                phDelAll.Visible = true;
+                //phDelAll.Visible = true;
                 pnlDeleteAll.Visible = false;
                 imbDelArrow.ImageUrl = "~/Framework/Images/icon_squareArrow.gif";
                 Session["pnlDeleteAll.Visible"] = null;
@@ -120,7 +120,7 @@ namespace Profiles.Edit.Modules.CustomEditFreetextKeyword
             {
                 phSecurityOptions.Visible = false;
                 phEditProperty.Visible = false;
-                phDelAll.Visible = true;
+                //phDelAll.Visible = true;
                 pnlDeleteAll.Visible = true;
                 imbDelArrow.ImageUrl = "~/Framework/Images/icon_squareDownArrow.gif";
                 Session["pnlDeleteAll.Visible"] = true;
@@ -308,7 +308,7 @@ namespace Profiles.Edit.Modules.CustomEditFreetextKeyword
             upnlEditSection.Update();
             phSecurityOptions.Visible = true;
             phEditProperty.Visible = true;
-            phDelAll.Visible = true;
+            //phDelAll.Visible = true;
             pnlDeleteAll.Visible = false;
             imbDelArrow.ImageUrl = "~/Framework/Images/icon_squareArrow.gif";
             Session["pnlDeleteAll.Visible"] = null;

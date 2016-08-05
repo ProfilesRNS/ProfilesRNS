@@ -35,7 +35,7 @@
                         <asp:PlaceHolder ID="phEditProperty" runat="server">
                             <asp:LinkButton ID="btnEditProperty" runat="server" OnClick="btnEditProperty_OnClick" 
                                 CssClass="profileHypLinks"><asp:Image runat="server" ID="imbAddArror" AlternateText=" " ImageUrl="../../../Framework/Images/icon_squareArrow.gif"/>&nbsp;Add Keyword(s)</asp:LinkButton>
-                            <br /><br />
+                            <br />
                         </asp:PlaceHolder>
                         <asp:PlaceHolder ID="phDelAll" runat="server" Visible="false">
                             <asp:LinkButton ID="btnDelAll" runat="server" OnClick="btnDelAll_OnClick" 
