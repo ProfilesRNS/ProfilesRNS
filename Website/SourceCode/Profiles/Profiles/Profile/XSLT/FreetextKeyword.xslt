@@ -3,7 +3,7 @@
   <xsl:param name="root" />
   <xsl:template match="/">
     <div>
-      <ul>
+      <ul style="list-style-type: none; padding-left: 10px;">
         <xsl:for-each select="rdf:RDF/rdf:Description[1]/vivo:freetextKeyword">
           <li>
             <xsl:variable name="t" select="."/>
