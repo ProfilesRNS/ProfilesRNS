@@ -32,8 +32,10 @@ EXEC [Framework.].[LoadXMLFile] @FilePath = '$(ProfilesRNSRootPath)\Data\PRNS_1.
 
 -- Import the Updated PRNS ontology into Profiles. This should not eliminate any customizations unless additional 
 -- classes have been added to the PRNS ontology
-UPDATE [Ontology.Import].OWL SET Graph = null WHERE name = 'PRNS_1.1'
-delete from [Ontology.Import].Triple where OWL = 'PRNS_1.1'
+DELETE FROM [Ontology.Import].OWL WHERE name = 'PRNS_1.0'
+DELETE FROM [Ontology.Import].Triple WHERE OWL = 'PRNS_1.0'
+DELETE FROM [Ontology.Import].OWL WHERE name = 'PRNS_1.1'
+DELETE FROM [Ontology.Import].Triple WHERE OWL = 'PRNS_1.1'
 UPDATE [Ontology.Import].OWL SET Graph = 3 WHERE name = 'PRNS_1.2'
 EXEC [Ontology.Import].[ConvertOWL2Triple] @OWL = 'PRNS_1.2'
 
