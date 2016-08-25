@@ -397,7 +397,7 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
         private void InsertPubMedIds(string value)
         {
 
-            string uri = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?retmax=1000&db=pubmed&retmode=xml&id=" + value;
+            string uri = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?retmax=1000&db=pubmed&retmode=xml&id=" + value;
 
             System.Xml.XmlDocument myXml = new System.Xml.XmlDocument();
             myXml.LoadXml(this.HttpPost(uri, "Catalyst", "text/plain"));
@@ -417,6 +417,8 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
                 data.AddPublication(_personId, _subject, Convert.ToInt32(pmid), this.PropertyListXML);
 
             }
+            data.UpdateEntityOnePerson(_personId);
+
             this.Counter = 0;
             Session["phAddPub.Visible"] = null;
             Session["pnlAddPubMed.Visible"] = null;
@@ -559,7 +561,7 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
 
             Hashtable MyParameters = new Hashtable();
 
-            string uri = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&usehistory=y&retmax=100&retmode=xml&term=" + value;
+            string uri = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&usehistory=y&retmax=100&retmode=xml&term=" + value;
             System.Xml.XmlDocument myXml = new System.Xml.XmlDocument();
             myXml.LoadXml(this.HttpPost(uri, "Catalyst", "text/plain"));
 
@@ -581,7 +583,7 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
             //string queryKey = MyGetXmlNodeValue(myXml, "QueryKey", "");
             //string webEnv = MyGetXmlNodeValue(myXml, "WebEnv", "");
 
-            uri = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?retmin=0&retmax=100&retmode=xml&db=Pubmed&query_key=" + queryKey + "&webenv=" + webEnv;
+            uri = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?retmin=0&retmax=100&retmode=xml&db=Pubmed&query_key=" + queryKey + "&webenv=" + webEnv;
             myXml.LoadXml(this.HttpPost(uri, "Catalyst", "text/plain"));
 
             string pubMedAuthors = "";
