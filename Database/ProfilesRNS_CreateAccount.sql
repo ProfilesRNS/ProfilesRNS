@@ -19,11 +19,7 @@ USE [ProfilesRNS]
 GO
 CREATE USER [App_Profiles10] FOR LOGIN [App_Profiles10] WITH DEFAULT_SCHEMA=[dbo]
 GO
-EXEC sp_change_users_login 'Auto_Fix', 'App_Profiles10', NULL, 'Password1234'
-GO
 EXEC sp_addrolemember N'db_datareader', N'App_Profiles10'
-GO
-EXEC master..sp_addsrvrolemember @loginame = N'App_Profiles10', @rolename = N'sysadmin'
 GO
 SET NOCOUNT ON
 DECLARE @user SYSNAME
@@ -52,3 +48,13 @@ WHILE exists (SELECT TOP 1 * FROM #storedprocedures  )
             EXEC (@SQL)
       END
 DROP TABLE #storedprocedures
+
+GRANT EXECUTE ON [Utility.Application].[fnDecryptBase64RC4] TO App_Profiles10
+GO
+GRANT EXECUTE ON [Utility.Application].[fnEncryptBase64RC4] TO App_Profiles10
+GO
+GRANT INSERT, UPDATE ON [Direct.].LogIncoming TO App_Profiles10
+GO
+GRANT INSERT, UPDATE ON [Direct.].LogOutgoing TO App_Profiles10
+GO
+
