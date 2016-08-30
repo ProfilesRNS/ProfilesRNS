@@ -54,7 +54,7 @@ namespace Profiles.Framework.Utilities
                 }
                 else
                 {
-                    HttpRuntime.Cache.Insert(hashkey, data, dependency, DateTime.Now.AddSeconds(defaultTimeout), System.Web.Caching.Cache.NoSlidingExpiration);
+                    HttpRuntime.Cache.Insert(hashkey, data, dependency, DateTime.Now.AddSeconds(cachetimeout), System.Web.Caching.Cache.NoSlidingExpiration);
                 }
             }
             catch (Exception e)
