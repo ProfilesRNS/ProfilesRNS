@@ -178,7 +178,7 @@ namespace Profiles.Proxy.Utilities
                 SqlCommand dbcommand = new SqlCommand();
                 dbcommand.CommandType = CommandType.Text;
 
-                dbcommand.CommandText = "select distinct institution,count(institution) as count from [User.Account].[User] where isnull(institution,'')<>'' and CanBeProxy = 1 group by institution order by institution";
+                dbcommand.CommandText = "select distinct institution,count(institution) as count from [User.Account].[User] where isnull(institution,'')<>'' and CanBeProxy = 1 and isActive = 1 group by institution order by institution";
                 dbcommand.CommandTimeout = base.GetCommandTimeout();                
           
                 dbcommand.Connection = dbconnection;
@@ -222,7 +222,7 @@ namespace Profiles.Proxy.Utilities
                 SqlCommand dbcommand = new SqlCommand();
                 dbcommand.CommandType = CommandType.Text;
 
-                dbcommand.CommandText = "select distinct department from [User.Account].[User] where isnull(department,'')<>'' and CanBeProxy = 1 order by department";
+                dbcommand.CommandText = "select distinct department from [User.Account].[User] where isnull(department,'')<>'' and CanBeProxy = 1 and isActive = 1 order by department";
                 dbcommand.CommandTimeout = base.GetCommandTimeout();                
           
                 dbcommand.Connection = dbconnection;
