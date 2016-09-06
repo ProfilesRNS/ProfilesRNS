@@ -153,3 +153,7 @@ UpgradeLog.XML
 /Website/SourceCode/Profiles/Profiles/bin
 /Website/SourceCode/ProfilesSPARQLAPI/bin
 /Website/SourceCode/Profiles/Profiles/Properties/PublishProfiles
+/Website/SourceCode/Profiles/UpgradeLog.htm
+/Website/SourceCode/ProfilesSPARQLAPI/Properties/PublishProfiles/ProfilesSparqlapi2.9.0dev.pubxml.user
+/Website/SourceCode/ProfilesSPARQLAPI/Properties/PublishProfiles/ProfilesSparqlapi2.9.0dev.pubxml
+/Website/SourceCode/Profiles/.vs/config/applicationhost.config
