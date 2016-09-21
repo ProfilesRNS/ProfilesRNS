@@ -820,9 +820,6 @@
     <Compile Include="Profile\Modules\CustomViewListProperty\CustomViewListProperty.ascx.designer.cs">
       <DependentUpon>CustomViewListProperty.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Profile\Modules\CustomViewPersonGeneralInfo\EmailAudioHandler.ashx.cs">
-      <DependentUpon>EmailAudioHandler.ashx</DependentUpon>
-    </Compile>
     <Compile Include="Profile\Modules\CustomViewPersonGeneralInfo\vcard.aspx.cs">
       <DependentUpon>vcard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1668,7 +1665,6 @@
     <Content Include="Framework\Template.Master" />
     <Content Include="Profile\Modules\CustomViewPersonGeneralInfo\EmailHandler.ashx" />
     <None Include="ORCID\ORCIDPrivacySettingsandProfiles.pdf" />
-    <Content Include="Profile\Modules\CustomViewPersonGeneralInfo\EmailAudioHandler.ashx" />
     <Content Include="Profile\Modules\NetworkClusterFlash\NetworkClusterTemplate.Master" />
     <None Include="Profile\Modules\NetworkClusterFlash\scriptaculous\CHANGELOG" />
     <None Include="Profile\Modules\NetworkClusterFlash\scriptaculous\MIT-LICENSE" />
