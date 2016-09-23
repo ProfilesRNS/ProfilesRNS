@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="PassiveHeader.ascx.cs"
     Inherits="Profiles.Profile.Modules.PassiveHeader.PassiveHeader" %>
-<div style="color: #b23f45; font-weight: bold; margin: 10px 0 5px 0; text-align: left:">
+<div style="color: #677ba9; font-weight: bold; margin: 10px 0 5px 0; text-align: left:">
     <asp:Literal runat="server" ID="litLname"></asp:Literal>'s Networks
 </div>
 <div style='font-size: 11px;'>

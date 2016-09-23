@@ -100,10 +100,10 @@ form
 }
 .institutionHeader
 {
-	background-color: #000;
+	background-color: #FFFFFF;
 	text-align: center;
 	padding: 4px 0px 4px 0px;
-	border-bottom: 4px solid #B23F45;
+	border-bottom: 4px solid #677ba9;
 }
 
 .activeSectionDetails
@@ -121,7 +121,7 @@ form
 }
 .profiles a.search-button 
 {
-	background-color: #B23F45;
+	background-color: #677ba9;
 	color: #ffffff;
 	background-image: url(../images/search.png);
 	background-repeat: no-repeat;
@@ -130,12 +130,12 @@ form
 	padding: 5px 15px 5px 28px;
 	font-size: 16px;
 	border-radius: 5px;
-	border: 2px solid #b23f45;
+	border: 2px solid #677ba9;
 }
 .profiles a.search-button:hover 
 {
 	text-decoration: none;
-	box-shadow: 0 0 2px 2px #b23f45;
+	box-shadow: 0 0 2px 2px #677ba9;
 }
 /********************************************/
 /* Profiles Shell Layout                    */
@@ -168,7 +168,7 @@ form
 .profiles .profilesPage .headings 
 {
 	font-size: 18px; 
-	color: #b23f45; 
+	color: #677ba9; 
 	font-weight: bold; 
 	margin-bottom: 3px;
 }
@@ -302,7 +302,7 @@ form
 }
 .profiles .profilesContentActive .activeContainerTop
 {
-	background-color: #B23F45;
+	background-color: #677ba9;
 	/*background-image: url('../Images/active_top.gif');*/
 	/*width: 180px;*/
 	height: 12px;
@@ -320,7 +320,7 @@ form
 }
 .profiles .profilesContentActive .activeContainerBottom
 {
-	background-color: #B23F45;
+	background-color: #677ba9;
 	/*background-image: url('../Images/active_bottom.gif');*/
 	/*width: 180px;*/
 	height: 12px;
@@ -391,7 +391,7 @@ form
 	display: block;
 	padding: 0px;
 	margin: 0px 0px 12px 0px;
-	color: #AC1B30;
+	color: #000 ;
 	font-size: 18px;
 	font-weight: normal;
 }
@@ -942,7 +942,7 @@ form
 /********************************************/
 .editPage h2
 {
-	color: #AC1B30;
+	color: #000 ;
 	font-size: 13px;
 }
 .editPage table
