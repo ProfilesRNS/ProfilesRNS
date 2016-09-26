@@ -25,7 +25,7 @@ BEGIN
 			INSERT INTO [Profile.Data].[Publication.PubMed.AllXML](pmid,X) VALUES(@pmid,CAST(@pubmedxml AS XML))		
 			
 			-- Parse Pub Med XML
-			EXEC [Profile.Data].[Publication.Pubmed.ParsePubMedXML] 	 @pmid		
+			--EXEC [Profile.Data].[Publication.Pubmed.ParsePubMedXML] 	 @pmid		
 		 
 		COMMIT
 	END TRY

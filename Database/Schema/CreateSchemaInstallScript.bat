@@ -114,6 +114,7 @@ type User.Account.Relationship.Table.sql
 type Profile.Data.Publication.Type.Table.sql
 type Profile.Data.Publication.Pubmed.Journal.Table.sql
 type Profile.Data.Publication.PubMed.General.Table.sql
+type Profile.Data.Publication.PubMed.General.Stage.Table.sql
 type Profile.Data.Publication.PubMed.DisambiguationAudit.Table.sql
 type Profile.Data.Publication.PubMed.DisambiguationAffiliation.Table.sql
 type Profile.Data.Publication.PubMed.Disambiguation.Table.sql
@@ -168,6 +169,7 @@ type Framework..RestPath.Table.sql
 type Ontology.Presentation.XML.Table.sql
 type User.Session.Session.Table.sql
 type Profile.Data.Publication.PubMed.Author.Table.sql
+type Profile.Data.Publication.PubMed.Author.Stage.Table.sql
 type Profile.Data.Publication.PubMed.PubType.Table.sql
 type Profile.Data.Publication.PubMed.Keyword.Table.sql
 type Profile.Data.Person.Photo.Table.sql
@@ -376,6 +378,7 @@ type RDF..SetNodePropertySecurity.StoredProcedure.sql
 type User.Account.Relationship.SetRelationship.StoredProcedure.sql
 type User.Account.Relationship.GetRelationship.StoredProcedure.sql
 type Profile.Data.Publication.Pubmed.ParsePubMedXML.StoredProcedure.sql
+type Profile.Data.Publication.Pubmed.ParseAllPubMedXML.StoredProcedure.sql
 type User.Session.UpdateSession.StoredProcedure.sql
 type Ontology..UpdateDerivedFields.StoredProcedure.sql
 type Ontology..UpdateCounts.StoredProcedure.sql
