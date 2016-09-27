@@ -181,6 +181,7 @@ type Profile.Data.Publication.MyPub.General.Table.sql
 type Profile.Data.Publication.PubMed.Databank.Table.sql
 type Profile.Data.Publication.PubMed.Chemical.Table.sql
 type Profile.Data.Publication.PubMed.Mesh.Table.sql
+type Profile.Data.Publication.PubMed.Mesh.Stage.Table.sql
 type Profile.Data.Publication.PubMed.Investigator.Table.sql
 type Profile.Data.Publication.PubMed.Grant.Table.sql
 type Profile.Data.Publication.PubMed.Author2Person.Table.sql

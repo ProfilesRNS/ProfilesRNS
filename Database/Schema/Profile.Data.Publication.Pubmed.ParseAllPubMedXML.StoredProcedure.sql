@@ -107,13 +107,107 @@ BEGIN
 	update [Profile.Data].[Publication.PubMed.General.Stage]
 		set authors = ''
 		where authors is null
+		
+		
+		
+	--*** mesh ***
+	truncate table [Profile.Data].[Publication.PubMed.Mesh.Stage]
+	insert into [Profile.Data].[Publication.PubMed.Mesh.Stage] (pmid, DescriptorName, QualifierName, MajorTopicYN)
+		select pmid, DescriptorName, IsNull(QualifierName,''), max(MajorTopicYN)
+		from (
+			select pmid, 
+				nref.value('@MajorTopicYN[1]','varchar(max)') MajorTopicYN, 
+				nref.value('.','varchar(max)') DescriptorName,
+				null QualifierName
+			from [Profile.Data].[Publication.PubMed.AllXML]
+				cross apply x.nodes('//MeshHeadingList/MeshHeading/DescriptorName') as R(nref)
+			where pmid in (select pmid from [Profile.Data].[Publication.PubMed.General.Stage])
+			union all
+			select pmid, 
+				nref.value('@MajorTopicYN[1]','varchar(max)') MajorTopicYN, 
+				nref.value('../DescriptorName[1]','varchar(max)') DescriptorName,
+				nref.value('.','varchar(max)') QualifierName
+			from [Profile.Data].[Publication.PubMed.AllXML]
+				cross apply x.nodes('//MeshHeadingList/MeshHeading/QualifierName') as R(nref)
+			where pmid in (select pmid from [Profile.Data].[Publication.PubMed.General.Stage])
+		) t where DescriptorName is not null
+		group by pmid, DescriptorName, QualifierName
 
-	delete from [Profile.Data].[Publication.PubMed.General] where pmid in (select pmid from [Profile.Data].[Publication.PubMed.General.Stage])
-	insert into [Profile.Data].[Publication.PubMed.General] select * from [Profile.Data].[Publication.PubMed.General.Stage]
+		
+	--******************************************************************
+	--******************************************************************
+	--*** Update General
+	--******************************************************************
+	--******************************************************************
+
+	update g
+		set 
+			g.pmid=a.pmid,
+			g.pmcid=a.pmcid,
+			g.Owner=a.Owner,
+			g.Status=a.Status,
+			g.PubModel=a.PubModel,
+			g.Volume=a.Volume,
+			g.Issue=a.Issue,
+			g.MedlineDate=a.MedlineDate,
+			g.JournalYear=a.JournalYear,
+			g.JournalMonth=a.JournalMonth,
+			g.JournalDay=a.JournalDay,
+			g.JournalTitle=a.JournalTitle,
+			g.ISOAbbreviation=a.ISOAbbreviation,
+			g.MedlineTA=a.MedlineTA,
+			g.ArticleTitle=a.ArticleTitle,
+			g.MedlinePgn=a.MedlinePgn,
+			g.AbstractText=a.AbstractText,
+			g.ArticleDateType=a.ArticleDateType,
+			g.ArticleYear=a.ArticleYear,
+			g.ArticleMonth=a.ArticleMonth,
+			g.ArticleDay=a.ArticleDay,
+			g.Affiliation=a.Affiliation,
+			g.AuthorListCompleteYN=a.AuthorListCompleteYN,
+			g.GrantListCompleteYN=a.GrantListCompleteYN,
+			g.PubDate = a.PubDate,
+			g.Authors = a.Authors
+		from [Profile.Data].[Publication.PubMed.General] (nolock) g
+			inner join [Profile.Data].[Publication.PubMed.General.Stage] a
+				on g.pmid = a.pmid
+				
+	insert into [Profile.Data].[Publication.PubMed.General] (pmid, pmcid, Owner, Status, PubModel, Volume, Issue, MedlineDate, JournalYear, JournalMonth, JournalDay, JournalTitle, ISOAbbreviation, MedlineTA, ArticleTitle, MedlinePgn, AbstractText, ArticleDateType, ArticleYear, ArticleMonth, ArticleDay, Affiliation, AuthorListCompleteYN, GrantListCompleteYN, PubDate, Authors)
+		select pmid, pmcid, Owner, Status, PubModel, Volume, Issue, MedlineDate, JournalYear, JournalMonth, JournalDay, JournalTitle, ISOAbbreviation, MedlineTA, ArticleTitle, MedlinePgn, AbstractText, ArticleDateType, ArticleYear, ArticleMonth, ArticleDay, Affiliation, AuthorListCompleteYN, GrantListCompleteYN, PubDate, Authors
+			from [Profile.Data].[Publication.PubMed.General.Stage]
+			where pmid not in (select pmid from [Profile.Data].[Publication.PubMed.General])
+	
+	
+	--******************************************************************
+	--******************************************************************
+	--*** Update Authors
+	--******************************************************************
+	--******************************************************************
+	
 	delete from [Profile.Data].[Publication.PubMed.Author] where pmid in (select pmid from [Profile.Data].[Publication.PubMed.Author.Stage])
-	insert into [Profile.Data].[Publication.PubMed.Author] select * from [Profile.Data].[Publication.PubMed.Author.Stage]
+	insert into [HCProfilesStgNew].[Profile.Data].[Publication.PubMed.Author] (pmid, ValidYN, LastName, FirstName, ForeName, Suffix, Initials, Affiliation)
+		select pmid, ValidYN, LastName, FirstName, ForeName, Suffix, Initials, Affiliation
+		from [Profile.Data].[Publication.PubMed.Author]
+		order by PmPubsAuthorID
+
+		
+	--******************************************************************
+	--******************************************************************
+	--*** Update MeSH
+	--******************************************************************
+	--******************************************************************
 
 
+	--*** mesh ***
+	delete from [Profile.Data].[Publication.PubMed.Mesh] where pmid in (select pmid from [Profile.Data].[Publication.PubMed.General.Stage])
+	--[16593 in 00:00:11]
+	insert into [Profile.Data].[Publication.PubMed.Mesh]
+		select * from [Profile.Data].[Publication.PubMed.Mesh.Stage]
+	--[86375 in 00:00:17]
+
+		
+		
+		
 	--*** investigators ***
 	insert into [Profile.Data].[Publication.PubMed.Investigator] (pmid, LastName, FirstName, ForeName, Suffix, Initials, Affiliation)
 		select pmid, 
@@ -198,29 +292,6 @@ BEGIN
 			where pmid in (select pmid from [Profile.Data].[Publication.PubMed.General.Stage])
 		) t where GrantID is not null
 		group by pmid, GrantID
-
-
-	--*** mesh ***
-	insert into [Profile.Data].[Publication.PubMed.Mesh] (pmid, DescriptorName, QualifierName, MajorTopicYN)
-		select pmid, DescriptorName, IsNull(QualifierName,''), max(MajorTopicYN)
-		from (
-			select pmid, 
-				nref.value('@MajorTopicYN[1]','varchar(max)') MajorTopicYN, 
-				nref.value('.','varchar(max)') DescriptorName,
-				null QualifierName
-			from [Profile.Data].[Publication.PubMed.AllXML]
-				cross apply x.nodes('//MeshHeadingList/MeshHeading/DescriptorName') as R(nref)
-			where pmid in (select pmid from [Profile.Data].[Publication.PubMed.General.Stage])
-			union all
-			select pmid, 
-				nref.value('@MajorTopicYN[1]','varchar(max)') MajorTopicYN, 
-				nref.value('../DescriptorName[1]','varchar(max)') DescriptorName,
-				nref.value('.','varchar(max)') QualifierName
-			from [Profile.Data].[Publication.PubMed.AllXML]
-				cross apply x.nodes('//MeshHeadingList/MeshHeading/QualifierName') as R(nref)
-			where pmid in (select pmid from [Profile.Data].[Publication.PubMed.General.Stage])
-		) t where DescriptorName is not null
-		group by pmid, DescriptorName, QualifierName
 
 
 	--******************************************************************
