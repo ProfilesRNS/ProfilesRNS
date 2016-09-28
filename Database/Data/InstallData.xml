@@ -18759,7 +18759,7 @@
       <Graph>1</Graph>
       <Class>http://vivoweb.org/ontology/core#Grant</Class>
       <Property>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</Property>
-      <MapTable>[Profile.Data].[Funding.Agreement] x CROSS APPLY (select ''http://vivoweb.org/ontology/core#Grant'' TypeValue union all select ''http://vivoweb.org/ontology/core#Agreement'') t</MapTable>
+      <MapTable>[Profile.Data].[Funding.Agreement] x CROSS APPLY (select 'http://vivoweb.org/ontology/core#Grant' TypeValue union all select 'http://vivoweb.org/ontology/core#Agreement') t</MapTable>
       <sInternalType>Grant</sInternalType>
       <sInternalID>FundingAgreementID</sInternalID>
       <oValue>TypeValue</oValue>
@@ -18869,7 +18869,7 @@
       <Graph>1</Graph>
       <Class>http://vivoweb.org/ontology/core#ResearcherRole</Class>
       <Property>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</Property>
-      <MapTable>[Profile.Data].[Funding.Role] x CROSS APPLY (select ''http://vivoweb.org/ontology/core#ResearcherRole'' TypeValue union all select ''http://vivoweb.org/ontology/core#Role'') t</MapTable>
+      <MapTable>[Profile.Data].[Funding.Role] x CROSS APPLY (select 'http://vivoweb.org/ontology/core#ResearcherRole' TypeValue union all select 'http://vivoweb.org/ontology/core#Role') t</MapTable>
       <sInternalType>ResearcherRole</sInternalType>
       <sInternalID>FundingRoleID</sInternalID>
       <oValue>TypeValue</oValue>
