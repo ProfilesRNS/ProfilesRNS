@@ -19,6 +19,8 @@
           </Param>
         </ParamList>
       </Module>
+      <Module ID="LatestUpdates">
+      </Module>
     </Panel>
     <Panel Name="Find People" Alias="people" Type="main" TabType="Default" TabSort="0">
       <Module ID="SearchPerson">

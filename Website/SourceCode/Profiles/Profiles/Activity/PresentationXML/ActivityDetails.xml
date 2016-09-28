@@ -1,0 +1,30 @@
+﻿<Presentation PresentationClass="network">
+  <PageOptions Columns="2"/>
+  <WindowName>Profiles Activity</WindowName>
+  <PageTitle>Profiles Activity</PageTitle>
+  <PageBackLinkName></PageBackLinkName>
+  <PageBackLinkURL></PageBackLinkURL>
+  <PageSubTitle></PageSubTitle>
+  <PageDescription>    
+  </PageDescription>
+  <PanelList>
+    <Panel type="header"  />
+    <Panel type="page" />
+    <Panel Type="active">
+      <Module ID="MiniSearch" />
+      <Module ID="MainMenu">
+      </Module>
+    </Panel>
+    <Panel Type="main" TabType="Default" TabSort="0">
+      <Module ID="ActivityHistory">
+        <ParamList>
+          <Param Name="Show">100</Param>
+          <Param Name="Scrolling">True</Param>
+          <Param Name="SeeMore">False</Param>
+        </ParamList>
+      </Module>
+    </Panel>    
+    <Panel type="footer" />
+  </PanelList>
+</Presentation>
+

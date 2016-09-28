@@ -79,6 +79,13 @@
     <Reference Include="System.Web.Services" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Activity\CSS\activity.css" />
+    <Content Include="Activity\Modules\ActivityHistory\ActivityDetails.aspx" />
+    <Content Include="Activity\Modules\ActivityHistory\ActivityHistory.ascx" />
+    <Content Include="Activity\Modules\LatestUpdates\LatestUpdates.ascx" />
+    <Content Include="Activity\Modules\ModuleCatalogue.xml" />
+    <Content Include="Activity\Modules\Statistics\Statistics.ascx" />
+    <Content Include="Activity\PresentationXML\ActivityDetails.xml" />
     <Content Include="DirectService.aspx" />
     <Content Include="Edit\Images\img_arrow.png" />
     <Content Include="Edit\Modules\CustomEditEagleI\CustomEditEagleI.ascx" />
@@ -240,6 +247,36 @@
     <Compile Include="ActiveNetwork\Modules\MyNetwork\MyNetwork.ascx.designer.cs">
       <DependentUpon>MyNetwork.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Activity\Modules\ActivityHistory\ActivityDetails.aspx.cs">
+      <DependentUpon>ActivityDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Activity\Modules\ActivityHistory\ActivityDetails.aspx.designer.cs">
+      <DependentUpon>ActivityDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Activity\Modules\ActivityHistory\ActivityHistory.ascx.cs">
+      <DependentUpon>ActivityHistory.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Activity\Modules\ActivityHistory\ActivityHistory.ascx.designer.cs">
+      <DependentUpon>ActivityHistory.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Activity\Modules\LatestUpdates\LatestUpdates.ascx.cs">
+      <DependentUpon>LatestUpdates.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Activity\Modules\LatestUpdates\LatestUpdates.ascx.designer.cs">
+      <DependentUpon>LatestUpdates.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Activity\Modules\Statistics\Statistics.ascx.cs">
+      <DependentUpon>Statistics.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Activity\Modules\Statistics\Statistics.ascx.designer.cs">
+      <DependentUpon>Statistics.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Activity\Utilities\Activity.cs" />
+    <Compile Include="Activity\Utilities\DataIO.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

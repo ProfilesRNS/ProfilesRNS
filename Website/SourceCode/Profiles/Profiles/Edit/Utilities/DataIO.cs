@@ -212,6 +212,7 @@ namespace Profiles.Edit.Utilities
 
         }
 
+
         public void DeletePublications(int personid, long subjectid, bool deletePMID, bool deleteMPID)
         {
             EditActivityLog(subjectid, "http://vivoweb.org/ontology/core#authorInAuthorship", null, deletePMID ? "deletePMID = true" : "deletePMID = false", deleteMPID ? "deleteMPID = true" : "deleteMPID = false");
@@ -555,6 +556,46 @@ namespace Profiles.Edit.Utilities
             {
                 targetW = targetSize;
                 targetH = (int)(original.Height * ((float)targetSize / (float)original.Width));
+            }
+            System.Drawing.Image imgPhoto = System.Drawing.Image.FromStream(new System.IO.MemoryStream(imageFile));
+            // Create a new blank canvas.  The resized image will be drawn on this canvas.
+            System.Drawing.Bitmap bmPhoto = new System.Drawing.Bitmap(targetW, targetH, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+            bmPhoto.SetResolution(72, 72);
+            System.Drawing.Graphics grPhoto = System.Drawing.Graphics.FromImage(bmPhoto);
+            grPhoto.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            grPhoto.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+            grPhoto.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+            grPhoto.DrawImage(imgPhoto, new System.Drawing.Rectangle(0, 0, targetW, targetH), 0, 0, original.Width, original.Height, System.Drawing.GraphicsUnit.Pixel);
+            // Save out to memory and then to a file.  We dispose of all objects to make sure the files don't stay locked.
+            System.IO.MemoryStream mm = new System.IO.MemoryStream();
+            bmPhoto.Save(mm, System.Drawing.Imaging.ImageFormat.Jpeg);
+            original.Dispose();
+            imgPhoto.Dispose();
+            bmPhoto.Dispose();
+            grPhoto.Dispose();
+            return mm.GetBuffer();
+        }
+
+        public byte[] ResizeImageFile(byte[] imageFile, int targetWidth, int targetHeight)
+        {
+            System.Drawing.Image original = System.Drawing.Image.FromStream(new System.IO.MemoryStream(imageFile));
+            int targetH, targetW;
+            // if it is too tall and tall and skinny
+            if (original.Height > targetHeight && ((float)original.Height / (float)original.Width) > ((float)targetHeight / (float)targetWidth))
+            {
+                targetH = targetHeight;
+                targetW = (int)(original.Width * ((float)targetHeight / (float)original.Height));
+            }
+            // if it is too wide
+            else if (original.Width > targetWidth)
+            {
+                targetW = targetWidth;
+                targetH = (int)(original.Height * ((float)targetWidth / (float)original.Width));
+            }
+            else // leave it as is
+            {
+                targetH = original.Height;
+                targetW = original.Width;
             }
             System.Drawing.Image imgPhoto = System.Drawing.Image.FromStream(new System.IO.MemoryStream(imageFile));
             // Create a new blank canvas.  The resized image will be drawn on this canvas.

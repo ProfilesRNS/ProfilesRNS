@@ -276,44 +276,32 @@ namespace Profiles.Profile.Utilities
 
         #region "Profile Photo"
 
-        public System.IO.Stream GetUserPhotoList(Int64 NodeID)
+        public System.IO.Stream GetUserPhotoList150x300(Int64 NodeID)
         {
             Object result = null;
-            Edit.Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
-            //Use the editor method to resize the photo to 150.
             Edit.Utilities.DataIO resize = new Profiles.Edit.Utilities.DataIO();
+            result = resize.ResizeImageFile(GetUserPhotoList(NodeID), 150, 300);
 
-            try
+            if (result == null)
             {
-                string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+                result = (byte[])System.Text.Encoding.ASCII.GetBytes("null");
+            }
+            return new System.IO.MemoryStream((byte[])result);
+        }
 
-
-                SqlConnection dbconnection = new SqlConnection(connstr);
+        public byte[] GetUserPhotoList(Int64 NodeID)
+        {
+            using (SqlConnection dbconnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString))
+            {
                 dbconnection.Open();
 
-                SqlCommand dbcommand;
-                dbcommand = new SqlCommand("[Profile.Data].[Person.GetPhotos]");
+                SqlCommand dbcommand = new SqlCommand("[Profile.Data].[Person.GetPhotos]");
                 dbcommand.CommandType = CommandType.StoredProcedure;
                 dbcommand.CommandTimeout = base.GetCommandTimeout();
                 dbcommand.Parameters.Add(new SqlParameter("@NodeID", NodeID));
                 dbcommand.Connection = dbconnection;
-
-                result = resize.ResizeImageFile((byte[])dbcommand.ExecuteScalar(), 150);
-
-                if (result == null)
-                {
-                    result = (byte[])System.Text.Encoding.ASCII.GetBytes("null");
-                }
-
-                dbconnection.Close();
-
+                return (byte[])dbcommand.ExecuteScalar();
             }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-
-            return new System.IO.MemoryStream((byte[])result);
         }
 
         #endregion
