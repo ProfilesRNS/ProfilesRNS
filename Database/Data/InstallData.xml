@@ -18663,34 +18663,6 @@
       <ViewSecurityGroup>-1</ViewSecurityGroup>
       <EditSecurityGroup>-40</EditSecurityGroup>
     </Row>
-	    <Row>
-      <DataMapGroup>1</DataMapGroup>
-      <IsAutoFeed>1</IsAutoFeed>
-      <Graph>1</Graph>
-      <Class>http://vivoweb.org/ontology/core#Agreement</Class>
-      <Property>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</Property>
-      <MapTable>[Profile.Data].[Funding.Agreement]</MapTable>
-      <sInternalType>Agreement</sInternalType>
-      <sInternalID>FundingAgreementID</sInternalID>
-      <oValue>'http://vivoweb.org/ontology/core#Agreement'</oValue>
-      <oObjectType>0</oObjectType>
-      <Weight>1</Weight>
-      <ViewSecurityGroup>-1</ViewSecurityGroup>
-      <EditSecurityGroup>-40</EditSecurityGroup>
-    </Row>
-    <Row>
-      <DataMapGroup>1</DataMapGroup>
-      <IsAutoFeed>1</IsAutoFeed>
-      <Graph>1</Graph>
-      <Class>http://vivoweb.org/ontology/core#Agreement</Class>
-      <MapTable>[Profile.Data].[Funding.Agreement]</MapTable>
-      <sInternalType>Agreement</sInternalType>
-      <sInternalID>FundingAgreementID</sInternalID>
-      <oObjectType>0</oObjectType>
-      <Weight>1</Weight>
-      <ViewSecurityGroup>-1</ViewSecurityGroup>
-      <EditSecurityGroup>-40</EditSecurityGroup>
-    </Row>
     <Row>
       <DataMapGroup>1</DataMapGroup>
       <IsAutoFeed>1</IsAutoFeed>
@@ -18787,10 +18759,11 @@
       <Graph>1</Graph>
       <Class>http://vivoweb.org/ontology/core#Grant</Class>
       <Property>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</Property>
-      <MapTable>[Profile.Data].[Funding.Agreement]</MapTable>
+      <MapTable>[Profile.Data].[Funding.Agreement] x CROSS APPLY (select ''http://vivoweb.org/ontology/core#Grant'' TypeValue union all select ''http://vivoweb.org/ontology/core#Agreement'') t</MapTable>
       <sInternalType>Grant</sInternalType>
       <sInternalID>FundingAgreementID</sInternalID>
-      <oValue>'http://vivoweb.org/ontology/core#Grant'</oValue>
+      <oValue>TypeValue</oValue>
+	  <OrderBy>TypeValue</OrderBy>
       <oObjectType>0</oObjectType>
       <Weight>1</Weight>
       <ViewSecurityGroup>-1</ViewSecurityGroup>
@@ -18896,10 +18869,11 @@
       <Graph>1</Graph>
       <Class>http://vivoweb.org/ontology/core#ResearcherRole</Class>
       <Property>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</Property>
-      <MapTable>[Profile.Data].[Funding.Role]</MapTable>
+      <MapTable>[Profile.Data].[Funding.Role] x CROSS APPLY (select ''http://vivoweb.org/ontology/core#ResearcherRole'' TypeValue union all select ''http://vivoweb.org/ontology/core#Role'') t</MapTable>
       <sInternalType>ResearcherRole</sInternalType>
       <sInternalID>FundingRoleID</sInternalID>
-      <oValue>'http://vivoweb.org/ontology/core#ResearcherRole'</oValue>
+      <oValue>TypeValue</oValue>
+	  <OrderBy>TypeValue</OrderBy>
       <oObjectType>0</oObjectType>
       <Weight>1</Weight>
       <ViewSecurityGroup>-1</ViewSecurityGroup>
@@ -18927,34 +18901,6 @@
       <Class>http://vivoweb.org/ontology/core#ResearcherRole</Class>
       <MapTable>[Profile.Data].[Funding.Role]</MapTable>
       <sInternalType>ResearcherRole</sInternalType>
-      <sInternalID>FundingRoleID</sInternalID>
-      <oObjectType>0</oObjectType>
-      <Weight>1</Weight>
-      <ViewSecurityGroup>-1</ViewSecurityGroup>
-      <EditSecurityGroup>-40</EditSecurityGroup>
-    </Row>
-    <Row>
-      <DataMapGroup>1</DataMapGroup>
-      <IsAutoFeed>1</IsAutoFeed>
-      <Graph>1</Graph>
-      <Class>http://vivoweb.org/ontology/core#Role</Class>
-      <Property>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</Property>
-      <MapTable>[Profile.Data].[Funding.Role]</MapTable>
-      <sInternalType>Role</sInternalType>
-      <sInternalID>FundingRoleID</sInternalID>
-      <oValue>'http://vivoweb.org/ontology/core#Role'</oValue>
-      <oObjectType>0</oObjectType>
-      <Weight>1</Weight>
-      <ViewSecurityGroup>-1</ViewSecurityGroup>
-      <EditSecurityGroup>-40</EditSecurityGroup>
-    </Row>
-    <Row>
-      <DataMapGroup>1</DataMapGroup>
-      <IsAutoFeed>1</IsAutoFeed>
-      <Graph>1</Graph>
-      <Class>http://vivoweb.org/ontology/core#Role</Class>
-      <MapTable>[Profile.Data].[Funding.Role]</MapTable>
-      <sInternalType>Role</sInternalType>
       <sInternalID>FundingRoleID</sInternalID>
       <oObjectType>0</oObjectType>
       <Weight>1</Weight>
