@@ -62,13 +62,13 @@ BEGIN
 	truncate table [Profile.Data].[Publication.PubMed.Author.Stage]
 	insert into [Profile.Data].[Publication.PubMed.Author.Stage] (pmid, ValidYN, LastName, FirstName, ForeName, Suffix, Initials, Affiliation)
 		select pmid, 
-			nref.value('@ValidYN','varchar(max)') ValidYN, 
-			nref.value('LastName[1]','varchar(max)') LastName, 
-			nref.value('FirstName[1]','varchar(max)') FirstName,
-			nref.value('ForeName[1]','varchar(max)') ForeName,
-			nref.value('Suffix[1]','varchar(max)') Suffix,
-			nref.value('Initials[1]','varchar(max)') Initials,
-			COALESCE(nref.value('AffiliationInfo[1]/Affiliation[1]','varchar(max)'),
+			nref.value('@ValidYN','varchar(1)') ValidYN, 
+			nref.value('LastName[1]','varchar(100)') LastName, 
+			nref.value('FirstName[1]','varchar(100)') FirstName,
+			nref.value('ForeName[1]','varchar(100)') ForeName,
+			nref.value('Suffix[1]','varchar(20)') Suffix,
+			nref.value('Initials[1]','varchar(20)') Initials,
+			COALESCE(nref.value('AffiliationInfo[1]/Affiliation[1]','varchar(1000)'),
 				nref.value('Affiliation[1]','varchar(max)')) Affiliation
 		from [Profile.Data].[Publication.PubMed.AllXML] cross apply x.nodes('//AuthorList/Author') as R(nref)
 		where pmid in (select pmid from [Profile.Data].[Publication.PubMed.General.Stage])
