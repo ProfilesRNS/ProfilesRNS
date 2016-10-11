@@ -215,6 +215,11 @@ namespace Profiles.Activity.Utilities
                         title = "made a section visible";
                         body = "made \"" + propertyLabel + "\"public";
                     }
+                    if (methodName.CompareTo("Profiles.Edit.Utilities.DataIO.AddUpdateFunding") == 0)
+                    {
+                        title = "added a research activity or funding";
+                        body = "added a research activity or funding";
+                    }
                     else if (methodName.IndexOf("Profiles.Edit.Utilities.DataIO.Add") == 0)
                     {
                         title = "added an item";
