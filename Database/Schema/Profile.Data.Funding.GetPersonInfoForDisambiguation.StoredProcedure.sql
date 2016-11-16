@@ -2,7 +2,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER procedure [Profile.Data].[Funding.GetPersonInfoForDisambiguation] 
+CREATE procedure [Profile.Data].[Funding.GetPersonInfoForDisambiguation] 
 AS
 BEGIN
 SET nocount  ON;

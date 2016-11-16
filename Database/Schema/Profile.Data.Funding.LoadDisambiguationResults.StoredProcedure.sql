@@ -2,7 +2,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER procedure [Profile.Data].[Funding.LoadDisambiguationResults] (@xml XML)
+CREATE procedure [Profile.Data].[Funding.LoadDisambiguationResults] (@xml XML)
 AS
 BEGIN
 	Truncate table [Profile.Data].[Funding.DisambiguationResults]
