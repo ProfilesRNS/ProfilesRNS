@@ -141,6 +141,7 @@ copy ..\Database\ProfilesRNS_CreateDatabase.sql ProfilesRNS\Database\ProfilesRNS
 copy ..\Database\ProfilesRNS_DataLoad_Part1.sql ProfilesRNS\Database\ProfilesRNS_DataLoad_Part1.sql
 copy ..\Database\ProfilesRNS_DataLoad_Part3.sql ProfilesRNS\Database\ProfilesRNS_DataLoad_Part3.sql
 copy ..\Database\ProfilesRNS_GeoCodeJob.sql ProfilesRNS\Database\ProfilesRNS_GeoCodeJob.sql
+copy ..\Database\ExporterDisambiguation_GetFunding.sql ProfilesRNS\Database\ExporterDisambiguation_GetFunding.sql
 
 del "%RootPath%\Database\ProfilesRNS_CreateSchema.sql"
 pushd "%RootPath%\Database\schema"
