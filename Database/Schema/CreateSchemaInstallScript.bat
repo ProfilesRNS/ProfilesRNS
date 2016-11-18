@@ -224,6 +224,7 @@ type Profile.Data.Funding.Add.Table.sql
 type Profile.Data.Funding.Delete.Table.sql
 type Profile.Data.Funding.DisambiguationOrganizationMapping.Table.sql
 type Profile.Data.Funding.DisambiguationResults.Table.sql
+type Profile.Data.Funding.DisambiguationAudit.Table.sql
 
 
 type RDF..fnTripleHash.UserDefinedFunction.sql
@@ -579,4 +580,5 @@ type Profile.Data.Funding.GetFundingItem.StoredProcedure.sql
 type Profile.Data.Funding.GetPersonFunding.StoredProcedure.sql
 type Profile.Data.Funding.GetPersonInfoForDisambiguation.StoredProcedure.sql
 type Profile.Data.Funding.LoadDisambiguationResults.StoredProcedure.sql
+type Profile.Data.Funding.AddDisambiguationLog.StoredProcedure.sql
 type Edit.Module.CustomEditEducationalTraining.StoreItem.StoredProcedure.sql
