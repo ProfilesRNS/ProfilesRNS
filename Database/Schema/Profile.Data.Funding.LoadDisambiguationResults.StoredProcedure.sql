@@ -140,6 +140,11 @@ BEGIN
 		SELECT FundingRoleID, PersonID, FundingAgreementID, RoleLabel, RoleDescription
 		FROM #Role
 
+		
+	INSERT INTO [Framework.].[Log.Activity] (userId, personId, methodName, property, privacyCode, param1, param2) 
+		SELECT 0, PersonID, '[Profile.Data].[Funding.LoadDisambiguationResults]', 'http://vivoweb.org/ontology/core#ResearcherRole', null, FundingRoleID, null 
+		FROM #Role
+	
 
 	--******************************************************************
 	--******************************************************************
