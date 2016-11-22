@@ -44,7 +44,7 @@ namespace Profiles.Activity.Modules.LatestUpdates
             //          <Param Name="Show">3</Param>
             //<Param Name="SeeMore">True</Param>
             
-            string showXmlContent = "<Param Name=\"Show\">3</Param>";
+            string showXmlContent = "<Param Name=\"Show\">2</Param>";
             XmlDocument showDoc = new XmlDocument();
             showDoc.LoadXml(showXmlContent);
             XmlNode showNode = showDoc.DocumentElement;

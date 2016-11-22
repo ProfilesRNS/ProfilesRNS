@@ -180,6 +180,7 @@ namespace Profiles.Activity.Utilities
                     string param1 = reader["param1"].ToString();
                     string param2 = reader["param2"].ToString();
                     string activityLogId = reader["activityLogId"].ToString();
+                    string property = reader["property"].ToString();
                     string propertyLabel = reader["propertyLabel"].ToString();
                     string personid = reader["personid"].ToString();
                     string nodeid = reader["nodeid"].ToString();
@@ -196,8 +197,17 @@ namespace Profiles.Activity.Utilities
                     {
                         url = "http://www.ncbi.nlm.nih.gov/pubmed/" + param2;
                         queryTitle = "SELECT JournalTitle FROM [Profile.Data].[Publication.PubMed.General] " +
-                        "WHERE PMID = cast(" + param2 + " as int)";
+                                        "WHERE PMID = cast(" + param2 + " as int)";
                         journalTitle = GetStringValue(queryTitle, "JournalTitle");
+                    }
+                    if (property == "http://vivoweb.org/ontology/core#ResearcherRole")
+                    {
+
+                        queryTitle = "select AgreementLabel from [Profile.Data].[Funding.Role] r " +
+                                        "join [Profile.Data].[Funding.Agreement] a " +
+                                        "on r.FundingAgreementID = a.FundingAgreementID " +
+                                        " and r.FundingRoleID = '" + param1 + "'";
+                        journalTitle = GetStringValue(queryTitle, "AgreementLabel");
                     }
                     if (methodName.CompareTo("Profiles.Edit.Utilities.DataIO.AddPublication") == 0)
                     {
@@ -218,7 +228,12 @@ namespace Profiles.Activity.Utilities
                     if (methodName.CompareTo("Profiles.Edit.Utilities.DataIO.AddUpdateFunding") == 0)
                     {
                         title = "added a research activity or funding";
-                        body = "added a research activity or funding";
+                        body = "added a research activity or funding: " + journalTitle;
+                    }
+                    if (methodName.CompareTo("[Profile.Data].[Funding.LoadDisambiguationResults]") == 0)
+                    {
+                        title = "has a new research activity or funding";
+                        body = "has a new research activity or funding: " + journalTitle;
                     }
                     else if (methodName.IndexOf("Profiles.Edit.Utilities.DataIO.Add") == 0)
                     {
