@@ -108,6 +108,7 @@ namespace Profiles.Search.Utilities
             XmlDocument searchxml = new XmlDocument();
 
             string isexclude = "0";
+            bool isSearchSecondaryNodes = ConfigurationManager.AppSettings["isSearchSecondaryNodes"] != null ? Convert.ToBoolean(ConfigurationManager.AppSettings["isSearchSecondaryNodes"]) : false;
 
             if (searchrequest != string.Empty)
                 xmlrequest.LoadXml(this.DecryptRequest(searchrequest));
@@ -181,7 +182,16 @@ namespace Profiles.Search.Utilities
                     if (institutionallexcept == "on")
                         isexclude = "1";
 
-                    search.Append("<SearchFilter IsExclude=\"" + isexclude + "\" Property=\"http://profiles.catalyst.harvard.edu/ontology/prns#personInPrimaryPosition\"  Property2=\"http://vivoweb.org/ontology/core#positionInOrganization\"  MatchType=\"Exact\">" + institution + "</SearchFilter>");
+                    //Allows for the user to search on primary vs. Secondary Institution. This is controlled through the isSearchSecondaryNodes appsetting. 
+                    if (!isSearchSecondaryNodes)
+                    {
+                        search.Append("<SearchFilter IsExclude=\"" + isexclude + "\" Property=\"http://profiles.catalyst.harvard.edu/ontology/prns#personInPrimaryPosition\"  Property2=\"http://vivoweb.org/ontology/core#positionInOrganization\"  MatchType=\"Exact\">" + institution + "</SearchFilter>");
+                    }
+                    else
+                    {
+                    search.Append("<SearchFilter IsExclude=\"" + isexclude + "\" Property=\"http://vivoweb.org/ontology/core#personInPosition\"  Property2=\"http://vivoweb.org/ontology/core#positionInOrganization\"  MatchType=\"Exact\">" + institution + "</SearchFilter>");
+                    }
+
                     isexclude = "0";
                 }
 
@@ -190,7 +200,16 @@ namespace Profiles.Search.Utilities
                     if (departmentallexcept == "on")
                         isexclude = "1";
 
-                    search.Append("<SearchFilter IsExclude=\"" + isexclude + "\"  Property=\"http://profiles.catalyst.harvard.edu/ontology/prns#personInPrimaryPosition\"  Property2=\"http://profiles.catalyst.harvard.edu/ontology/prns#positionInDepartment\"   MatchType=\"Exact\">" + department + "</SearchFilter>");
+                    //Allows for the user to search on primary vs. Secondary Department. This is controlled through the isSearchSecondaryNodes appsetting.
+                    if (!isSearchSecondaryNodes)
+                    {
+                        search.Append("<SearchFilter IsExclude=\"" + isexclude + "\"  Property=\"http://profiles.catalyst.harvard.edu/ontology/prns#personInPrimaryPosition\"  Property2=\"http://profiles.catalyst.harvard.edu/ontology/prns#positionInDepartment\"   MatchType=\"Exact\">" + department + "</SearchFilter>");
+                    }
+                    else
+                    {
+                    search.Append("<SearchFilter IsExclude=\"" + isexclude + "\"  Property=\"http://vivoweb.org/ontology/core#personInPosition\"  Property2=\"http://profiles.catalyst.harvard.edu/ontology/prns#positionInDepartment\"   MatchType=\"Exact\">" + department + "</SearchFilter>");
+                    }
+
                     isexclude = "0";
                 }
 
@@ -199,7 +218,16 @@ namespace Profiles.Search.Utilities
                     if (divisionallexcept == "on")
                         isexclude = "1";
 
-                    search.Append("<SearchFilter IsExclude=\"" + isexclude + "\"  Property=\"http://profiles.catalyst.harvard.edu/ontology/prns#personInPrimaryPosition\"  Property2=\"http://profiles.catalyst.harvard.edu/ontology/prns#positionInDivision\"   MatchType=\"Exact\">" + division + "</SearchFilter>");
+                    //Allows for the user to search on primary vs. Secondary Division. This is controlled through the isSearchSecondaryNodes appsetting.
+                    if (!isSearchSecondaryNodes)
+                    {
+                        search.Append("<SearchFilter IsExclude=\"" + isexclude + "\"  Property=\"http://profiles.catalyst.harvard.edu/ontology/prns#personInPrimaryPosition\"  Property2=\"http://profiles.catalyst.harvard.edu/ontology/prns#positionInDivision\"   MatchType=\"Exact\">" + division + "</SearchFilter>");
+                    }
+                    else
+                    {
+                    search.Append("<SearchFilter IsExclude=\"" + isexclude + "\"  Property=\"http://vivoweb.org/ontology/core#personInPosition\"  Property2=\"http://profiles.catalyst.harvard.edu/ontology/prns#positionInDivision\"   MatchType=\"Exact\">" + division + "</SearchFilter>");
+                    }
+
                     isexclude = "0";
                 }
 
