@@ -3,25 +3,31 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE procedure [Profile.Data].[Funding.GetPersonInfoForDisambiguation] 
+	@startRow INT = 0,
+	@nextRow INT OUTPUT
 AS
 BEGIN
 SET nocount  ON;
  
  
 	DECLARE  @search XML,
-				@batchID UNIQUEIDENTIFIER,
 				@batchcount INT,
-				@threshold FLOAT,
 				@baseURI NVARCHAR(max),
 				@orcidNodeID NVARCHAR(max)
+				@rows INT,
+				@batchSize INT
 
-	--SET Custom Threshold based on internal Institutional Logic, default is .98
-	SELECT @threshold = .98
-
-	SELECT @batchID=NEWID()
+				
+	SELECT @batchSize = 1000
 
 	SELECT @baseURI = [Value] FROM [Framework.].[Parameter] WHERE [ParameterID] = 'baseURI'
 	SELECT @orcidNodeID = NodeID from [RDF.].Node where Value = 'http://vivoweb.org/ontology/core#orcidId'
+	
+	SELECT personID, ROW_NUMBER() OVER (ORDER BY personID) AS rownum INTO #personIDs FROM [Profile.Data].Person 
+	WHERE IsActive = 1
+
+	SELECT @rows = count(*) FROM #personIDs
+	SELECT @nextRow = CASE WHEN @rows > @startRow + @batchSize THEN @startRow + @batchSize ELSE -1 END
 
 	SELECT (
 		select p2.personid as PersonID, 

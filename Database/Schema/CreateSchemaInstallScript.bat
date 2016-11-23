@@ -581,4 +581,5 @@ type Profile.Data.Funding.GetPersonFunding.StoredProcedure.sql
 type Profile.Data.Funding.GetPersonInfoForDisambiguation.StoredProcedure.sql
 type Profile.Data.Funding.LoadDisambiguationResults.StoredProcedure.sql
 type Profile.Data.Funding.AddDisambiguationLog.StoredProcedure.sql
+type Profile.Data.Funding.ParseDisambiguationXML.StoredProcedure.sql
 type Edit.Module.CustomEditEducationalTraining.StoreItem.StoredProcedure.sql
