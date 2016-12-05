@@ -13,7 +13,7 @@ SET nocount  ON;
 	DECLARE  @search XML,
 				@batchcount INT,
 				@baseURI NVARCHAR(max),
-				@orcidNodeID NVARCHAR(max)
+				@orcidNodeID NVARCHAR(max),
 				@rows INT,
 				@batchSize INT
 
