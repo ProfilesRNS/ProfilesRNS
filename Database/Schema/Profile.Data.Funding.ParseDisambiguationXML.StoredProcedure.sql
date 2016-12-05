@@ -3,6 +3,8 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE procedure [Profile.Data].[Funding.ParseDisambiguationXML]
+	@xml XMl,
+	@truncate INT = null
 AS
 BEGIN
 	IF @truncate = 1
