@@ -28,7 +28,6 @@ For details, see: LICENSE.txt
   <Module ModulePath="Modules" NameSpace="NetworkTimeline" FileName="NetworkTimeline.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="PassiveList" FileName="PassiveList.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="PassiveText" FileName="PassiveText.ascx" Enabled="true"/>
-  <Module ModulePath="Modules" NameSpace="NetworkDetails" FileName="NetworkDetails.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="ConceptConnection" FileName="ConceptConnection.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="CoAuthorConnection" FileName="CoAuthorConnection.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="SimilarConnection" FileName="SimilarConnection.ascx" Enabled="true"/>

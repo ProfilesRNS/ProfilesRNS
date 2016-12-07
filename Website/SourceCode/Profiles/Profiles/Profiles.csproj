@@ -1126,13 +1126,6 @@
     <Compile Include="Profile\Modules\ConceptConnection\ConceptConnection.ascx.designer.cs">
       <DependentUpon>ConceptConnection.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Profile\Modules\NetworkDetails\NetworkDetails.ascx.cs">
-      <DependentUpon>NetworkDetails.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Profile\Modules\NetworkDetails\NetworkDetails.ascx.designer.cs">
-      <DependentUpon>NetworkDetails.ascx</DependentUpon>
-    </Compile>
     <Compile Include="Profile\Modules\PassiveList\PassiveList.ascx.cs">
       <DependentUpon>PassiveList.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1559,10 +1552,6 @@
     <Content Include="Framework\JavaScript\ui.dropdownchecklist.js" />
     <Content Include="Framework\Modules\MainMenu\SetActiveNetworks.ascx" />
     <Content Include="Profile\Modules\NetworkList\SortIntermediate.xslt" />
-    <Content Include="Profile\Modules\NetworkDetails\NetworkDetails.ascx" />
-    <Content Include="Profile\Modules\NetworkDetails\NetworkDetails.xslt">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Profile\Modules\PassiveList\PassiveList.ascx" />
     <Content Include="Profile\Modules\PassiveList\PassiveList.xslt">
       <SubType>Designer</SubType>
