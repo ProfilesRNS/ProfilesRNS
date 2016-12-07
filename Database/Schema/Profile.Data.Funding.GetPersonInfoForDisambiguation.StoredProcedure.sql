@@ -40,13 +40,10 @@ SET nocount  ON;
 				FROM [Profile.Data].[Person.Affiliation] pa
 				WHERE pa.personid = p2.personid
 			FOR XML PATH(''),TYPE) AS "EmailList",
-		(SELECT Affiliation
-				FROM [Profile.Data].[Publication.PubMed.DisambiguationAffiliation]
-			FOR XML PATH(''),TYPE) AS "AffiliationList",
 		(SELECT distinct Organization as Org FROM [Profile.Data].[Funding.DisambiguationOrganizationMapping] m
 			JOIN [Profile.Data].[Person.Affiliation] pa
 			on m.InstitutionID = pa.InstitutionID 
-				or (m.InstitutionID is null and pa.IsPrimary = 1)
+				or m.InstitutionID is null
 			where pa.PersonID = p2.PersonID
 			FOR XML PATH(''),ROOT('OrgList'),TYPE),
 		(SELECT PMID
