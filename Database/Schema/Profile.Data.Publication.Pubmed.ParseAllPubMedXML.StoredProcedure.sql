@@ -185,7 +185,7 @@ BEGIN
 	--******************************************************************
 	
 	delete from [Profile.Data].[Publication.PubMed.Author] where pmid in (select pmid from [Profile.Data].[Publication.PubMed.Author.Stage])
-	insert into [HCProfilesStgNew].[Profile.Data].[Publication.PubMed.Author] (pmid, ValidYN, LastName, FirstName, ForeName, Suffix, Initials, Affiliation)
+	insert into [Profile.Data].[Publication.PubMed.Author] (pmid, ValidYN, LastName, FirstName, ForeName, Suffix, Initials, Affiliation)
 		select pmid, ValidYN, LastName, FirstName, ForeName, Suffix, Initials, Affiliation
 		from [Profile.Data].[Publication.PubMed.Author]
 		order by PmPubsAuthorID
