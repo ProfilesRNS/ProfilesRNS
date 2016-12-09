@@ -93,7 +93,10 @@ BEGIN
 				where pmid = @pmid
 	END
 
-
+	update [Profile.Data].[Publication.PubMed.General]
+	set MedlineDate = (case when right(MedlineDate,4) like '20__' then ltrim(rtrim(right(MedlineDate,4)+' '+left(MedlineDate,len(MedlineDate)-4))) else null end)
+	where MedlineDate is not null and MedlineDate not like '[0-9][0-9][0-9][0-9]%'
+	
 	--*** authors ***
 	insert into [Profile.Data].[Publication.PubMed.Author] (pmid, ValidYN, LastName, FirstName, ForeName, Suffix, Initials, Affiliation)
 		select pmid, 
