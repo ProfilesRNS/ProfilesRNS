@@ -55,6 +55,11 @@ BEGIN
 		where ParseDT is null and x is not null
 
 		update [Profile.Data].[Publication.PubMed.General.Stage]
+		set MedlineDate = (case when right(MedlineDate,4) like '20__' then ltrim(rtrim(right(MedlineDate,4)+' '+left(MedlineDate,len(MedlineDate)-4))) else null end)
+		where MedlineDate is not null and MedlineDate not like '[0-9][0-9][0-9][0-9]%'
+
+		
+		update [Profile.Data].[Publication.PubMed.General.Stage]
 		set PubDate = [Profile.Data].[fnPublication.Pubmed.GetPubDate](medlinedate,journalyear,journalmonth,journalday,articleyear,articlemonth,articleday)
 
 
@@ -209,6 +214,7 @@ BEGIN
 		
 		
 	--*** investigators ***
+	delete from [Profile.Data].[Publication.PubMed.Investigator] where pmid in (select pmid from [Profile.Data].[Publication.PubMed.General.Stage])
 	insert into [Profile.Data].[Publication.PubMed.Investigator] (pmid, LastName, FirstName, ForeName, Suffix, Initials, Affiliation)
 		select pmid, 
 			nref.value('LastName[1]','varchar(max)') LastName, 
@@ -223,6 +229,7 @@ BEGIN
 		
 
 	--*** pubtype ***
+	delete from [Profile.Data].[Publication.PubMed.PubType] where pmid in (select pmid from [Profile.Data].[Publication.PubMed.General.Stage])
 	insert into [Profile.Data].[Publication.PubMed.PubType] (pmid, PublicationType)
 		select * from (
 			select distinct pmid, nref.value('.','varchar(max)') PublicationType
@@ -233,6 +240,7 @@ BEGIN
 
 
 	--*** chemicals
+	delete from [Profile.Data].[Publication.PubMed.Chemical] where pmid in (select pmid from [Profile.Data].[Publication.PubMed.General.Stage])
 	insert into [Profile.Data].[Publication.PubMed.Chemical] (pmid, NameOfSubstance)
 		select * from (
 			select distinct pmid, nref.value('.','varchar(max)') NameOfSubstance
@@ -243,6 +251,7 @@ BEGIN
 
 
 	--*** databanks ***
+	delete from [Profile.Data].[Publication.PubMed.Databank] where pmid in (select pmid from [Profile.Data].[Publication.PubMed.General.Stage])
 	insert into [Profile.Data].[Publication.PubMed.Databank] (pmid, DataBankName)
 		select * from (
 			select distinct pmid, 
@@ -254,6 +263,7 @@ BEGIN
 
 
 	--*** accessions ***
+	delete from [Profile.Data].[Publication.PubMed.Accession] where pmid in (select pmid from [Profile.Data].[Publication.PubMed.General.Stage])
 	insert into [Profile.Data].[Publication.PubMed.Accession] (pmid, DataBankName, AccessionNumber)
 		select * from (
 			select distinct pmid, 
@@ -266,6 +276,7 @@ BEGIN
 
 
 	--*** keywords ***
+	delete from [Profile.Data].[Publication.PubMed.Keyword] where pmid in (select pmid from [Profile.Data].[Publication.PubMed.General.Stage])
 	insert into [Profile.Data].[Publication.PubMed.Keyword] (pmid, Keyword, MajorTopicYN)
 		select pmid, Keyword, max(MajorTopicYN)
 		from (
@@ -280,6 +291,7 @@ BEGIN
 
 
 	--*** grants ***
+	delete from [Profile.Data].[Publication.PubMed.Grant] where pmid in (select pmid from [Profile.Data].[Publication.PubMed.General.Stage])
 	insert into [Profile.Data].[Publication.PubMed.Grant] (pmid, GrantID, Acronym, Agency)
 		select pmid, GrantID, max(Acronym), max(Agency)
 		from (
