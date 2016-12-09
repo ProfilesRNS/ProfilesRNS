@@ -48,8 +48,16 @@
                                     <td>
                                        
                                     </td>
-                                    <td> <asp:ImageButton ImageUrl="~/login/images/loginButton.jpg" runat="server" ID="cmdSubmit"
-                                            Text="Login" OnClick="cmdSubmit_Click" alternatetext="Login"/>
+                                    <td> 
+                                        <asp:Button ID="cmdSubmit" runat="server" Text="Login" CssClass="login-button" OnClick="cmdSubmit_Click" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+
+                                    </td>
+                                    <td>
+                                        <a href="<%=GetURLDomain()%>/login/PasswordReset.aspx">Forgot Password?</a>
                                     </td>
                                 </tr>
                                 <tr>

@@ -14,5 +14,6 @@ For details, see: LICENSE.txt
   <Module ModulePath="Modules" NameSpace="Login" FileName="Login.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="ADLogin" FileName="ADLogin.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="ShibLogin" FileName="ShibLogin.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="PasswordReset" FileName="PasswordReset.ascx" Enabled="true"/>
 </ModuleList>
 

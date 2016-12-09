@@ -1161,3 +1161,53 @@ table tbody .height25
     position: absolute;
     width: 1px;
 }
+
+/********************************************/
+/* Password Reset Button - edit the colours to match your branding*/
+/********************************************/
+/*Dont touch this container as it provides spacing on top of CSS search button*/
+.passwordResetForm .reset-button-container 
+{ 
+	margin-top: 10px;
+}
+
+/* Password Reset Form CSS */
+.passwordResetForm input.reset-button 
+{
+	background-color: #ad2634;
+	color: #ffffff;
+	background-size: 18px;
+	padding: 5px 15px 5px 15px;
+	font-size: 16px;
+	border-radius: 5px;
+	border: 2px solid #ad2634;
+    display: inline-block;
+    cursor: pointer;
+}
+.passwordResetForm input.reset-button:hover 
+{
+	text-decoration: none;
+	box-shadow: 0 0 2px 2px #c03d42;
+    cursor: pointer;
+}
+
+
+/* Login Button CSS */
+.searchForm input.login-button 
+{
+	background-color: #ad2634;
+	color: #ffffff;
+	background-size: 18px;
+	padding: 5px 15px 5px 15px;
+	font-size: 16px;
+	border-radius: 5px;
+	border: 2px solid #ad2634;
+    display: inline-block;
+    cursor: pointer;
+}
+.searchForm input.login-button:hover 
+{
+	text-decoration: none;
+	box-shadow: 0 0 2px 2px #c03d42;
+    cursor: pointer;
+}
