@@ -43,6 +43,7 @@ BEGIN
 							MedlinePgn = nref.value('Article[1]/Pagination[1]/MedlinePgn[1]','varchar(max)') ,
 							AbstractText = nref.value('Article[1]/Abstract[1]/AbstractText[1]','varchar(max)') ,
 							ArticleDateType= nref.value('Article[1]/ArticleDate[1]/@DateType[1]','varchar(max)') ,
+							-- Updated on 19 Dec 2016 to handle incorrectly formatted dates
 							ArticleYear = NULLIF(nref.value('Article[1]/ArticleDate[1]/Year[1]','varchar(max)'),'') ,
 							ArticleMonth = NULLIF(nref.value('Article[1]/ArticleDate[1]/Month[1]','varchar(max)'),'') ,
 							ArticleDay = NULLIF(nref.value('Article[1]/ArticleDate[1]/Day[1]','varchar(max)'),'') ,
@@ -80,6 +81,7 @@ BEGIN
 					nref.value('Article[1]/Pagination[1]/MedlinePgn[1]','varchar(max)') MedlinePgn,
 					nref.value('Article[1]/Abstract[1]/AbstractText[1]','varchar(max)') AbstractText,
 					nref.value('Article[1]/ArticleDate[1]/@DateType[1]','varchar(max)') ArticleDateType,
+					-- Updated on 19 Dec 2016 to handle incorrectly formatted dates
 					NULLIF(nref.value('Article[1]/ArticleDate[1]/Year[1]','varchar(max)'),'') ArticleYear,
 					NULLIF(nref.value('Article[1]/ArticleDate[1]/Month[1]','varchar(max)'),'') ArticleMonth,
 					NULLIF(nref.value('Article[1]/ArticleDate[1]/Day[1]','varchar(max)'),'') ArticleDay,
@@ -93,6 +95,7 @@ BEGIN
 				where pmid = @pmid
 	END
 
+	-- Updated on 19 Dec 2016 to handle incorrectly formatted dates
 	update [Profile.Data].[Publication.PubMed.General]
 	set MedlineDate = (case when right(MedlineDate,4) like '20__' then ltrim(rtrim(right(MedlineDate,4)+' '+left(MedlineDate,len(MedlineDate)-4))) else null end)
 	where MedlineDate is not null and MedlineDate not like '[0-9][0-9][0-9][0-9]%'
