@@ -243,10 +243,7 @@ namespace Profiles.Edit.Utilities
                 if (dbconnection.State != ConnectionState.Closed)
                     dbconnection.Close();
 
-                if (deleteMPID)
-                    this.UpdateEntityOnePerson(personid);
-
-
+                this.UpdateEntityOnePerson(personid);
             }
             catch (Exception e)
             {
