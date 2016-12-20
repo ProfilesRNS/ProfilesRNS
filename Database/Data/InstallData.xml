@@ -16311,6 +16311,42 @@
       <EditDeleteSecurityGroup>-40</EditDeleteSecurityGroup>
       <MinCardinality>0</MinCardinality>
     </Row>
+		<Row>
+      <Class>http://vivoweb.org/ontology/core#Grant</Class>
+      <Property>http://profiles.catalyst.harvard.edu/ontology/prns#grantAwardedBy</Property>
+      <IsDetail>0</IsDetail>
+      <IncludeDescription>0</IncludeDescription>
+      <IncludeNetwork>0</IncludeNetwork>
+      <SearchWeight>0.5</SearchWeight>
+      <CustomDisplay>0</CustomDisplay>
+      <CustomEdit>0</CustomEdit>
+      <ViewSecurityGroup>-1</ViewSecurityGroup>
+      <EditSecurityGroup>-40</EditSecurityGroup>
+      <EditPermissionsSecurityGroup>-40</EditPermissionsSecurityGroup>
+      <EditExistingSecurityGroup>-40</EditExistingSecurityGroup>
+      <EditAddNewSecurityGroup>-40</EditAddNewSecurityGroup>
+      <EditAddExistingSecurityGroup>-40</EditAddExistingSecurityGroup>
+      <EditDeleteSecurityGroup>-40</EditDeleteSecurityGroup>
+      <MinCardinality>0</MinCardinality>
+    </Row>
+	<Row>
+      <Class>http://vivoweb.org/ontology/core#Grant</Class>
+      <Property>http://profiles.catalyst.harvard.edu/ontology/prns#principalInvestigatorName</Property>
+      <IsDetail>0</IsDetail>
+      <IncludeDescription>0</IncludeDescription>
+      <IncludeNetwork>0</IncludeNetwork>
+      <SearchWeight>0.5</SearchWeight>
+      <CustomDisplay>0</CustomDisplay>
+      <CustomEdit>0</CustomEdit>
+      <ViewSecurityGroup>-1</ViewSecurityGroup>
+      <EditSecurityGroup>-40</EditSecurityGroup>
+      <EditPermissionsSecurityGroup>-40</EditPermissionsSecurityGroup>
+      <EditExistingSecurityGroup>-40</EditExistingSecurityGroup>
+      <EditAddNewSecurityGroup>-40</EditAddNewSecurityGroup>
+      <EditAddExistingSecurityGroup>-40</EditAddExistingSecurityGroup>
+      <EditDeleteSecurityGroup>-40</EditDeleteSecurityGroup>
+      <MinCardinality>0</MinCardinality>
+    </Row>
     <Row>
       <Class>http://vivoweb.org/ontology/core#ResearcherRole</Class>
       <Property>http://vivoweb.org/ontology/core#description</Property>
@@ -18683,7 +18719,7 @@
       <IsAutoFeed>1</IsAutoFeed>
       <Graph>1</Graph>
       <Class>http://vivoweb.org/ontology/core#Grant</Class>
-      <Property>http://profiles.catalyst.harvard.edu/ontology/prns#grandAwardedBy</Property>
+      <Property>http://profiles.catalyst.harvard.edu/ontology/prns#grantAwardedBy</Property>
       <MapTable>[Profile.Data].[Funding.Agreement]</MapTable>
       <sInternalType>Grant</sInternalType>
       <sInternalID>FundingAgreementID</sInternalID>
