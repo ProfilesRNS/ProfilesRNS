@@ -98,10 +98,13 @@
     <Content Include="Global.asax" />
     <Content Include="Login\Images\password_reset_banner.png" />
     <Content Include="Login\Modules\ADLogin\ADLogin.ascx" />
+    <Content Include="Login\Modules\PasswordResetConfirm\PasswordResetConfirm.ascx" />
     <Content Include="Login\Modules\PasswordReset\PasswordReset.ascx" />
     <Content Include="Login\Modules\ShibLogin\ShibLogin.ascx" />
+    <Content Include="Login\PasswordResetConfirm.aspx" />
     <Content Include="Login\PasswordReset.aspx" />
     <Content Include="Login\PresentationXML\ADLoginFormPresentation.xml" />
+    <Content Include="Login\PresentationXML\PasswordResetConfirmPresentation.xml" />
     <Content Include="Login\PresentationXML\PasswordResetPresentation.xml" />
     <Content Include="Login\PresentationXML\ShibbolethLoginPresentation.xml" />
     <Content Include="Login\EmailTemplate\ResetEmailTemplate.html" />
@@ -351,6 +354,13 @@
     <Compile Include="Login\Modules\Login\Login.ascx.designer.cs">
       <DependentUpon>Login.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Login\Modules\PasswordResetConfirm\PasswordResetConfirm.ascx.cs">
+      <DependentUpon>PasswordResetConfirm.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login\Modules\PasswordResetConfirm\PasswordResetConfirm.ascx.designer.cs">
+      <DependentUpon>PasswordResetConfirm.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Login\Modules\PasswordReset\PasswordReset.ascx.cs">
       <DependentUpon>PasswordReset.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -365,6 +375,15 @@
     <Compile Include="Login\Modules\ShibLogin\ShibLogin.ascx.designer.cs">
       <DependentUpon>ShibLogin.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Login\Objects\PasswordResetRequest.cs" />
+    <Compile Include="Login\Objects\ResetEmail.cs" />
+    <Compile Include="Login\PasswordResetConfirm.aspx.cs">
+      <DependentUpon>PasswordResetConfirm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login\PasswordResetConfirm.aspx.designer.cs">
+      <DependentUpon>PasswordResetConfirm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login\PasswordReset.aspx.cs">
       <DependentUpon>PasswordReset.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -372,7 +391,7 @@
     <Compile Include="Login\PasswordReset.aspx.designer.cs">
       <DependentUpon>PasswordReset.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Login\Utilities\PasswordResetEmail.cs" />
+    <Compile Include="Login\Utilities\PasswordReset.cs" />
     <Compile Include="ORCID\CreateBatch.aspx.cs">
       <DependentUpon>CreateBatch.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1726,7 +1745,6 @@
     <Folder Include="ActiveNetwork\Utilities\" />
     <Folder Include="App_Data\" />
     <Folder Include="Login\Modules\App_LocalResources\" />
-    <Folder Include="Login\Modules\PasswordResetConfirm\" />
     <Folder Include="ORCID\XSLT\" />
   </ItemGroup>
   <ItemGroup>

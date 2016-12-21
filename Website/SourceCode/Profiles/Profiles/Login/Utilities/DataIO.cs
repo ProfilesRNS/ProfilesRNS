@@ -18,6 +18,9 @@ using System.Xml;
 using System.Configuration;
 
 using Profiles.Framework.Utilities;
+using System.Security.Cryptography;
+using System.Linq;
+using Profiles.Login.Objects;
 
 namespace Profiles.Login.Utilities
 {
@@ -151,6 +154,234 @@ namespace Profiles.Login.Utilities
             return loginsuccess;
         }
 
+        public bool CreatePasswordResetRequest(PasswordResetRequest passwordResetRequest)
+        {
+            bool createRequestSuccess = false;
+
+            try
+            {
+                SessionManagement sm = new SessionManagement();
+                string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+
+                SqlConnection dbconnection = new SqlConnection(connstr);
+
+                SqlParameter[] param = new SqlParameter[5];
+
+                dbconnection.Open();
+
+                /* Input Parameters */
+                param[0] = new SqlParameter("@EmailAddr", passwordResetRequest.EmailAddr);
+                param[1] = new SqlParameter("@ResetToken", passwordResetRequest.ResetToken);
+                param[2] = new SqlParameter("@RequestExpireDate", passwordResetRequest.RequestExpireDate); 
+                param[3] = new SqlParameter("@ResendRequestsRemaining", passwordResetRequest.ResendRequestsRemaining);
+
+                /* Output Parameters */
+                param[4] = new SqlParameter("@CreateRequestSuccess", null);
+                param[4].DbType = DbType.Int16;
+                param[4].Direction = ParameterDirection.Output;
+
+                /* For Output Parameters you need to pass a connection object to the framework so you can close it before reading the output params value. */
+                ExecuteSQLDataCommand(GetDBCommand(ref dbconnection, "[User.Account].[CreatePasswordResetRequest]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param));
+
+                dbconnection.Close();
+                int createRequestSuccessInt = Convert.ToInt32(param[4].Value.ToString());
+
+                createRequestSuccess = (createRequestSuccessInt == 1);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return createRequestSuccess;
+        }
+
+        public PasswordResetRequest GetPasswordResetRequest(string emailAddr)
+        {
+            PasswordResetRequest passwordResetRequest = null;
+
+            try
+            {
+                SessionManagement sm = new SessionManagement();
+                string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+
+                SqlConnection dbconnection = new SqlConnection(connstr);
+
+                SqlParameter[] param = new SqlParameter[7];
+
+                dbconnection.Open();
+
+                /* Input Parameters */
+                param[0] = new SqlParameter("@EmailAddr", emailAddr);
+
+                /* Output Parameters */
+                param[1] = new SqlParameter("@PasswordResetRequestID", null);
+                param[1].DbType = DbType.Int32;
+                param[1].Direction = ParameterDirection.Output;
+
+                param[2] = new SqlParameter("@ResetToken", null);
+                param[2].DbType = DbType.String;
+                param[2].Size = 255;
+                param[2].Direction = ParameterDirection.Output;
+
+                param[3] = new SqlParameter("@CreateDate", null);
+                param[3].DbType = DbType.DateTime;
+                param[3].Direction = ParameterDirection.Output;
+
+                param[4] = new SqlParameter("@RequestExpireDate", null);
+                param[4].DbType = DbType.DateTime;
+                param[4].Direction = ParameterDirection.Output;
+
+                param[5] = new SqlParameter("@ResendRequestsRemaining", null);
+                param[5].DbType = DbType.Int32;
+                param[5].Direction = ParameterDirection.Output;
+
+                param[6] = new SqlParameter("@ResetDate", null);
+                param[6].DbType = DbType.DateTime;
+                param[6].Direction = ParameterDirection.Output;
+
+                /* For Output Parameters you need to pass a connection object to the framework so you can close it before reading the output params value. */
+                ExecuteSQLDataCommand(GetDBCommand(ref dbconnection, "[User.Account].[GetPasswordResetRequest]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param));
+
+                dbconnection.Close();
+                if (param[1].Value != DBNull.Value)
+                {
+                    passwordResetRequest = new PasswordResetRequest(emailAddr);
+                    passwordResetRequest.PasswordResetRequestID = Convert.ToInt32(param[1].Value.ToString());
+                    passwordResetRequest.ResetToken = param[2].Value.ToString();
+                    passwordResetRequest.CreateDate = Convert.ToDateTime(param[3].Value.ToString());
+                    passwordResetRequest.RequestExpireDate = Convert.ToDateTime(param[4].Value.ToString());
+                    passwordResetRequest.ResendRequestsRemaining = Convert.ToInt32(param[5].Value.ToString());
+                    if (param[6].Value != DBNull.Value)
+                    {
+                        passwordResetRequest.ResetDate = Convert.ToDateTime(param[6].Value.ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return passwordResetRequest;
+        }
+
+        public bool UpdatePasswordResetRequest(string resetToken, DateTime resetDate)
+        {
+            bool updateSuccess = false;
+
+            try
+            {
+                SessionManagement sm = new SessionManagement();
+                string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+
+                SqlConnection dbconnection = new SqlConnection(connstr);
+
+                SqlParameter[] param = new SqlParameter[3];
+
+                dbconnection.Open();
+
+                /* Input Parameters */
+                param[0] = new SqlParameter("@ResetToken", resetToken);
+                param[1] = new SqlParameter("@ResetDate", resetDate);
+
+                /* Output Parameters */
+                param[2] = new SqlParameter("@ResetRequestSuccess", null);
+                param[2].DbType = DbType.Int16;
+                param[2].Direction = ParameterDirection.Output;
+
+                /* For Output Parameters you need to pass a connection object to the framework so you can close it before reading the output params value. */
+                ExecuteSQLDataCommand(GetDBCommand(ref dbconnection, "[User.Account].[UpdatePasswordResetRequestResetDate]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param));
+
+                dbconnection.Close();
+                int updateResetRequestResendsRemainingSuccessInt = Convert.ToInt32(param[3].Value.ToString());
+
+                updateSuccess = (updateResetRequestResendsRemainingSuccessInt == 1);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return updateSuccess;
+        }
+
+        public bool UpdatePasswordResetRequest(string resetToken, int resendRequestsRemaining)
+        {
+            bool updateSuccess = false;
+
+            try
+            {
+                SessionManagement sm = new SessionManagement();
+                string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+
+                SqlConnection dbconnection = new SqlConnection(connstr);
+
+                SqlParameter[] param = new SqlParameter[3];
+
+                dbconnection.Open();
+
+                /* Input Parameters */
+                param[0] = new SqlParameter("@ResetToken", resetToken);
+                param[1] = new SqlParameter("@ResendRequestsRemaining", resendRequestsRemaining);
+
+                /* Output Parameters */
+                param[2] = new SqlParameter("@ResetRequestSuccess", null);
+                param[2].DbType = DbType.Int16;
+                param[2].Direction = ParameterDirection.Output;
+
+                /* For Output Parameters you need to pass a connection object to the framework so you can close it before reading the output params value. */
+                ExecuteSQLDataCommand(GetDBCommand(ref dbconnection, "[User.Account].[UpdatePasswordResetRequestRequestsRemaining]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param));
+
+                dbconnection.Close();
+                int updateResetRequestResendsRemainingSuccessInt = Convert.ToInt32(param[2].Value.ToString());
+
+                updateSuccess = (updateResetRequestResendsRemainingSuccessInt == 1);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return updateSuccess;
+        }
+
+        public bool ResetPassword(string emailAddr, string resetToken, string newPassword)
+        {
+            bool resetSuccess = false;
+
+            try
+            {
+                SessionManagement sm = new SessionManagement();
+                string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+
+                SqlConnection dbconnection = new SqlConnection(connstr);
+
+                SqlParameter[] param = new SqlParameter[4];
+
+                dbconnection.Open();
+
+                /* Input Parameters */
+                param[0] = new SqlParameter("@EmailAddr", emailAddr);
+                param[1] = new SqlParameter("@ResetToken", resetToken);
+                param[2] = new SqlParameter("@NewPassword", newPassword);
+
+                /* Output Parameters */
+                param[3] = new SqlParameter("@ResetSuccess", null);
+                param[3].DbType = DbType.Int16;
+                param[3].Direction = ParameterDirection.Output;
+
+                /* For Output Parameters you need to pass a connection object to the framework so you can close it before reading the output params value. */
+                ExecuteSQLDataCommand(GetDBCommand(ref dbconnection, "[User.Account].[ResetPassword]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param));
+
+                dbconnection.Close();
+                int resetSuccessInt = Convert.ToInt32(param[3].Value.ToString());
+
+                resetSuccess = (resetSuccessInt == 1);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return resetSuccess;
+        }
+
         /// <summary>
         /// For User Authentication 
         /// </summary>
@@ -169,7 +400,6 @@ namespace Profiles.Login.Utilities
 
 
         #endregion
-
 
     }
 }

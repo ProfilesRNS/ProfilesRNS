@@ -1,5 +1,5 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="PasswordReset.ascx.cs" 
-    Inherits="Profiles.Login.Modules.PasswordReset.PasswordReset" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="PasswordResetConfirm.ascx.cs" 
+    Inherits="Profiles.Login.Modules.PasswordReset.PasswordResetConfirm" %>
 <%--
     Copyright (c) 2008-2012 by the President and Fellows of Harvard College. All rights reserved.  
     Profiles Research Networking Software was developed under the supervision of Griffin M Weber, MD, PhD.,
@@ -16,7 +16,7 @@
         </div>
     </div>
 </div>
-Enter your email address below and we will send you a link you can use to reset your password.<br /><br />
+Please enter and confirm your new password below.  Click submit to reset your password.<br /><br />
 <div class="content_container">
     <div class="tabContainer" style="margin-top: 0px;">
         <div class="passwordResetForm">
@@ -24,16 +24,25 @@ Enter your email address below and we will send you a link you can use to reset 
                 <tr>
                     <td colspan="3">
                         <div class="searchSection" style="text-align: center; margin: 0px auto;">
-                            <table class="searchForm" style="display: inline;">
+                            <table class="searchForm" style="display: inline;" border="0">
                                 <tr>
                                     <td colspan='3'>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <b>Email Address</b>
+                                        <b>Enter Password</b>
                                     </td>
                                     <td>
-                                        <asp:TextBox runat="server" ID="txtEmailAddress" value="" TextMode="SingleLine" MaxLength="254"
+                                        <asp:TextBox runat="server" ID="txtPassword" value="" TextMode="Password" MaxLength="254"
+                                            Width="250" title="EmailAddress"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Confirm Password</b>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" ID="txtPasswordConfirm" value="" TextMode="Password" MaxLength="254"
                                             Width="250" title="EmailAddress"></asp:TextBox>
                                     </td>
                                 </tr>
@@ -43,7 +52,7 @@ Enter your email address below and we will send you a link you can use to reset 
                                     </td>
                                     <td> 
                                         <div class="reset-button-container">
-                                            <asp:Button Text="Send Reset Email" id="cmdSendResetEmail" runat="server" OnClick="cmdSendResetEmail_Click" CssClass="reset-button"/>
+                                            <asp:Button Text="Submit" id="cmdSubmit" runat="server" OnClick="cmdSubmit_Click" CssClass="reset-button"/>
                                         </div>
                                     </td>
 
@@ -52,11 +61,6 @@ Enter your email address below and we will send you a link you can use to reset 
                                     <td colspan='2'>
                                         <div style="padding-top: 12px">
                                             <asp:Label runat="server" ID="lblError" ForeColor="Red" Font-Bold="true"></asp:Label>
-
-                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator" runat="server" ErrorMessage="Please Enter Valid Email Address" 
-                                            ControlToValidate="txtEmailAddress" CssClass="requiredFieldValidateStyle" ForeColor="Red" Font-Bold="true" 
-                                            ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*">
-                                            </asp:RegularExpressionValidator>
                                         </div>
                                     </td>
 

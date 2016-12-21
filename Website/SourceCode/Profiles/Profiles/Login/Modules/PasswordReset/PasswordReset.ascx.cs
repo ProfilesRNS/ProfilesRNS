@@ -10,6 +10,7 @@ using System.Configuration;
 
 using Profiles.Login.Utilities;
 using Profiles.Framework.Utilities;
+using Profiles.Login.Objects;
 
 namespace Profiles.Login.Modules.PasswordReset
 {
@@ -107,13 +108,56 @@ namespace Profiles.Login.Modules.PasswordReset
             string resetEmailText = txtEmailAddress.Text;
             if (!string.IsNullOrEmpty(resetEmailText))
             {
-                string emailAddress = txtEmailAddress.Text;
+                /* Get the email address the user entered. */
+                string emailAddress = txtEmailAddress.Text.Trim();
 
-                /* Generate the resetToken and add it to the database table */
-                string resetToken = Guid.NewGuid().ToString();
+                /* Create the password reset email object. */
+                Utilities.PasswordReset passwordResetEmail = new Utilities.PasswordReset();
 
-                PasswordResetEmail passwordResetEmail = new PasswordResetEmail(emailAddress, resetToken);
-                passwordResetEmail.Send();
+                /* Determine whether a reset request already exists. */
+                PasswordResetRequest passwordResetRequest = passwordResetEmail.GetPasswordResetRequest(emailAddress);
+
+                /* Create or use an existing request */
+                if (passwordResetRequest == null)
+                {
+                    /* No request exists so create a reset email object. */
+                    passwordResetRequest = passwordResetEmail.GeneratePasswordResetRequest(emailAddress);
+
+                    /* Create the reset row in the database. */
+                    if (passwordResetRequest != null)
+                    {
+                        /* Send the reset email to the user's email address. */
+                        bool sendSuccess = passwordResetEmail.Send(passwordResetRequest);
+
+                        if (sendSuccess)
+                        {
+                            this.lblError.Text = "A password reset email will be sent to the specified account.";
+                        }
+                        else
+                        {
+                            this.lblError.Text = "Unable to send reset request, please contact your administrator.";
+                        }
+                    }
+                    else
+                    {
+                        this.lblError.Text = "The email address entered has no account associated valid for reset.";
+                    }
+
+                }
+                else
+                {
+                    /* Resend the existing request. */
+                    bool resendSuccess = passwordResetEmail.Resend(passwordResetRequest);
+                    if (resendSuccess)
+                    {
+                        this.lblError.Text = "Existing reset request has been resent, if not received please check your spam folder.";
+                    }
+                    else
+                    {
+                        this.lblError.Text = "An existing reset request was found but could not be resent.  Please contact your administrator.";
+                    }
+                }
+
             }
         }
     }
