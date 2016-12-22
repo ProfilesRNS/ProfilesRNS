@@ -1,12 +1,10 @@
 ﻿using Profiles.Framework.Utilities;
 using Profiles.Login.Objects;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Net.Mail;
 using System.Security.Cryptography;
-using System.Web;
 
 namespace Profiles.Login.Utilities
 {
@@ -101,7 +99,7 @@ namespace Profiles.Login.Utilities
 
             try
             {
-                /* Generate random string to be used as a token */
+                /* Generate random string to be used as a token. */
                 passwordResetRequest.ResetToken = GetRandomString(255);
 
                 /* Set the expire time. */
@@ -110,7 +108,7 @@ namespace Profiles.Login.Utilities
                 /* Set the reset resent requests allowed to the starting value configured. */
                 passwordResetRequest.ResendRequestsRemaining = this.passwordResetResendRequestAllowed;
 
-                /* Create the actual request row in the database */
+                /* Create the actual request row in the database. */
                 DataIO data = new DataIO();
                 data.CreatePasswordResetRequest(passwordResetRequest);
             }
@@ -127,24 +125,12 @@ namespace Profiles.Login.Utilities
 
         public PasswordResetRequest GetPasswordResetRequest(string emailAddress)
         {
-            /* Make sure the account is valid for reset. */
             DataIO data = new DataIO();
 
             return data.GetPasswordResetRequest(emailAddress);
         }
-
-        public bool Resend(PasswordResetRequest passwordResetRequest)
-        {
-            /* Decrement the number of resends that can be performed. */
-            passwordResetRequest.ResendRequestsRemaining = passwordResetRequest.ResendRequestsRemaining - 1;
-
-            DataIO data = new DataIO();
-            data.UpdatePasswordResetRequest(passwordResetRequest.ResetToken, passwordResetRequest.ResendRequestsRemaining);
-
-            return Send(passwordResetRequest);
-        }
-
-        public bool Send(PasswordResetRequest passwordResetRequest)
+       
+        public bool SendResetEmail(PasswordResetRequest passwordResetRequest)
         {
             
             bool returnFlag = false;
@@ -177,7 +163,18 @@ namespace Profiles.Login.Utilities
             return returnFlag;
         }
 
+        public bool ResendResetEmail(PasswordResetRequest passwordResetRequest)
+        {
+            /* Decrement the number of resends that can be performed. */
+            passwordResetRequest.ResendRequestsRemaining = passwordResetRequest.ResendRequestsRemaining - 1;
 
+            /* Update the request record. */
+            DataIO data = new DataIO();
+            data.UpdatePasswordResetRequest(passwordResetRequest.ResetToken, passwordResetRequest.ResendRequestsRemaining);
+
+            /* Resend the email. */
+            return SendResetEmail(passwordResetRequest);
+        }
 
         /// <summary>
         /// Generate a random string used for password reset.  This is a bit innefficient because the crypto 

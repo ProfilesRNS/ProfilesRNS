@@ -16,13 +16,17 @@
         </div>
     </div>
 </div>
-Enter your email address below and we will send you a link you can use to reset your password.<br /><br />
+
 <div class="content_container">
     <div class="tabContainer" style="margin-top: 0px;">
         <div class="passwordResetForm">
             <table width="100%">
                 <tr>
                     <td colspan="3">
+                        
+                        <asp:Panel ID="PanelPasswordResetForm" runat="server" Visible="true">
+                        <br />
+                        Enter your email address below and we will send you a link you can use to reset your password.<br /><br />
                         <div class="searchSection" style="text-align: center; margin: 0px auto;">
                             <table class="searchForm" style="display: inline;">
                                 <tr>
@@ -63,6 +67,55 @@ Enter your email address below and we will send you a link you can use to reset 
                                 </tr>
                             </table>
                         </div>
+                        </asp:Panel>
+
+                        <!-- Email Sent Successfully -->
+                        <asp:Panel ID="PanelEmailSent" runat="server" Visible="false">
+                            <div class="searchSection" style="text-align: left; margin: 0px auto;">
+                                <br />
+                                <h2>Reset Request Sent</h2><br />
+                                A password reset request has been sent to email address <asp:Label ID="lblEmailAddressEmailSent" runat="server" Text="" CssClass="emailAddressResetSent"></asp:Label> and should arrive in the next few minutes.  
+                                <br /><br />
+                                If the email doesn't arrive in your inbox please check your spam folder.
+                                <br /><br />
+                            </div>
+                        </asp:Panel>
+
+                        <!-- Email Resent Successfully -->
+                        <asp:Panel ID="PanelEmailResent" runat="server" Visible="false">
+                            <div class="searchSection" style="text-align: left; margin: 0px auto;">
+                                <br />
+                                <h2>Reset Request Re-Sent</h2><br />
+                                A password reset request has been re-sent to email address: <asp:Label ID="lblEmailAddressEmailReSent" runat="server" Text="" CssClass="emailAddressResetSent"></asp:Label> and should arrive in the next few minutes.  
+                                <br /><br />
+                                If the email doesn't arrive in your inbox please check your spam folder.
+                                <br /><br />
+                            </div>
+                        </asp:Panel>
+
+                        <!-- Email Resent Resends Exceeded -->
+                        <asp:Panel ID="PanelEmailResentRetryExceeded" runat="server" Visible="false">
+                            <div class="searchSection" style="text-align: left; margin: 0px auto;">
+                                <br />
+                                <h2>Reset Request Already Sent</h2><br />
+                                A password reset request has already been sent to email address: <asp:Label ID="lblEmailAddressEmailReSentRetryExceeded" runat="server" Text="" CssClass="emailAddressResetSent"></asp:Label>.  
+                                <br /><br />
+                                If you can't find the email in your inbox please check your spam folder.
+                                <br /><br />
+                            </div>
+                        </asp:Panel>
+
+                        <!-- Email Send Failed -->
+                        <asp:Panel ID="PanelEmailSendFailed" runat="server" Visible="false">
+                            <div class="searchSection" style="text-align: left; margin: 0px auto;">
+                                <br />
+                                <h2>Reset Request Send Failed</h2><br />
+                                <div class="emailSendErrorText">
+                                    Unable to send password reset request, please contact your administrator.
+                                </div>
+                                <br /><br />
+                            </div>
+                        </asp:Panel>
                     </td>
                 </tr>
             </table>

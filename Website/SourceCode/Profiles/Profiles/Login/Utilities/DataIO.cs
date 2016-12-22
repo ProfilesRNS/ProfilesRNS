@@ -10,17 +10,12 @@
     For details, see: LICENSE.txt 
   
 */
+using Profiles.Framework.Utilities;
+using Profiles.Login.Objects;
 using System;
-using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Xml;
-using System.Configuration;
-
-using Profiles.Framework.Utilities;
-using System.Security.Cryptography;
-using System.Linq;
-using Profiles.Login.Objects;
 
 namespace Profiles.Login.Utilities
 {

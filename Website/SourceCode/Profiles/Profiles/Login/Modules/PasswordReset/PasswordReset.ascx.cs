@@ -1,16 +1,11 @@
-﻿using System;
+﻿using Profiles.Framework.Utilities;
+using Profiles.Login.Objects;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Xml;
-using System.Web.UI.HtmlControls;
-using System.Configuration;
-
-using Profiles.Login.Utilities;
-using Profiles.Framework.Utilities;
-using Profiles.Login.Objects;
 
 namespace Profiles.Login.Modules.PasswordReset
 {
@@ -21,19 +16,7 @@ namespace Profiles.Login.Modules.PasswordReset
         {
             if (!IsPostBack)
             {
-                /*
-                if (Request.QueryString["method"].ToString() == "login" && sm.Session().PersonID > 0)
-                {
-                    if (Request.QueryString["redirectto"] == null && Request.QueryString["edit"] == "true")
-                    {
-                        if (Request.QueryString["editparams"] == null)
-                            Response.Redirect(Root.Domain + "/edit/" + sm.Session().NodeID);
-                        else
-                            Response.Redirect(Root.Domain + "/edit/default.aspx?subject=" + sm.Session().NodeID + "&" + Request.QueryString["editparams"]);
-                    }
-                    else
-                        Response.Redirect(Request.QueryString["redirectto"].ToString());
-                } */
+
             } 
 
         }
@@ -43,44 +26,6 @@ namespace Profiles.Login.Modules.PasswordReset
         {
             sm = new Profiles.Framework.Utilities.SessionManagement();
             LoadAssets();
-        }
-
-        protected void cmdSubmit_Click(object sender, EventArgs e)
-        {
-
-
-            Profiles.Login.Utilities.DataIO data = new Profiles.Login.Utilities.DataIO();
-
-            if (false && Request.QueryString["method"].ToString() == "login")
-            {
-                Profiles.Login.Utilities.User user = new Profiles.Login.Utilities.User();
-                //user.UserName = txtUserName.Text.Trim();
-                //user.Password = txtPassword.Text.Trim();
-
-                if (data.UserLogin(ref user))
-                {
-                    if (Request.QueryString["edit"] == "true")
-                        if (Request.QueryString["editparams"] == null)
-                            Response.Redirect(Root.Domain + "/edit/" + sm.Session().NodeID);
-                        else
-                            Response.Redirect(Root.Domain + "/edit/default.aspx?subject=" + sm.Session().NodeID + "&" + Request.QueryString["editparams"]);
-                    else
-                        Response.Redirect(Request.QueryString["redirectto"].ToString());
-
-                }
-                else
-                {
-                    lblError.Text = "Login failed, please try again";
-                    //txtPassword.Text = "";
-                    //txtPassword.Focus();
-                }
-
-
-
-
-
-            }
-
         }
 
         private void LoadAssets()
@@ -105,60 +50,108 @@ namespace Profiles.Login.Modules.PasswordReset
 
         protected void cmdSendResetEmail_Click(object sender, EventArgs e)
         {
+            // Get the email address entered by the user.
             string resetEmailText = txtEmailAddress.Text;
             if (!string.IsNullOrEmpty(resetEmailText))
             {
-                /* Get the email address the user entered. */
-                string emailAddress = txtEmailAddress.Text.Trim();
+                HandleResetRequest(resetEmailText);
+            }
 
-                /* Create the password reset email object. */
-                Utilities.PasswordReset passwordResetEmail = new Utilities.PasswordReset();
+        }
 
-                /* Determine whether a reset request already exists. */
-                PasswordResetRequest passwordResetRequest = passwordResetEmail.GetPasswordResetRequest(emailAddress);
+        private void HandleResetRequest(string emailAddress)
+        {
+            /* Create the password reset email object. */
+            Utilities.PasswordReset passwordResetEmail = new Utilities.PasswordReset();
 
-                /* Create or use an existing request */
-                if (passwordResetRequest == null)
+            /* Get an existing password reset request record of there is one.   A valid request is one that was created in the last 24 hours and has not been used to reset the password. */
+            PasswordResetRequest passwordResetRequest = passwordResetEmail.GetPasswordResetRequest(emailAddress);
+
+            /* Create or use an existing request */
+            if (passwordResetRequest == null)
+            {
+                /* No request exists so create a reset email object. */
+                passwordResetRequest = passwordResetEmail.GeneratePasswordResetRequest(emailAddress);
+
+                /* Create the reset row in the database. */
+                if (passwordResetRequest != null)
                 {
-                    /* No request exists so create a reset email object. */
-                    passwordResetRequest = passwordResetEmail.GeneratePasswordResetRequest(emailAddress);
+                    /* Send the reset email to the user's email address. */
+                    bool sendSuccess = passwordResetEmail.SendResetEmail(passwordResetRequest);
 
-                    /* Create the reset row in the database. */
-                    if (passwordResetRequest != null)
+                    if (sendSuccess)
                     {
-                        /* Send the reset email to the user's email address. */
-                        bool sendSuccess = passwordResetEmail.Send(passwordResetRequest);
-
-                        if (sendSuccess)
-                        {
-                            this.lblError.Text = "A password reset email will be sent to the specified account.";
-                        }
-                        else
-                        {
-                            this.lblError.Text = "Unable to send reset request, please contact your administrator.";
-                        }
+                        showSentPanel(emailAddress);
                     }
                     else
                     {
-                        this.lblError.Text = "The email address entered has no account associated valid for reset.";
+                        showSendErrorPanel();
                     }
-
                 }
                 else
                 {
-                    /* Resend the existing request. */
-                    bool resendSuccess = passwordResetEmail.Resend(passwordResetRequest);
-                    if (resendSuccess)
-                    {
-                        this.lblError.Text = "Existing reset request has been resent, if not received please check your spam folder.";
-                    }
-                    else
-                    {
-                        this.lblError.Text = "An existing reset request was found but could not be resent.  Please contact your administrator.";
-                    }
+                    showSendErrorPanel();
                 }
 
             }
+            else
+            {
+                if (passwordResetRequest.ResendRequestsRemaining > 0)
+                {
+                    /* Resend the existing request. */
+                    bool resendSuccess = passwordResetEmail.ResendResetEmail(passwordResetRequest);
+                    if (resendSuccess)
+                    {
+                        showResentPanel(emailAddress);
+                    }
+                    else
+                    {
+                        showSendErrorPanel();
+                    }
+                }
+                else
+                {
+                    showResentRetryExceededPanel(emailAddress);
+                }
+            }
+        }
+
+        private void showSentPanel(string emailAddress)
+        {
+            this.lblEmailAddressEmailSent.Text = emailAddress;
+            this.PanelPasswordResetForm.Visible = false;
+            this.PanelEmailSent.Visible = true;
+            this.PanelEmailResent.Visible = false;
+            this.PanelEmailSendFailed.Visible = false;
+            this.PanelEmailResentRetryExceeded.Visible = false;
+        }
+
+        private void showResentPanel(string emailAddress)
+        {
+            this.lblEmailAddressEmailReSent.Text = emailAddress;
+            this.PanelPasswordResetForm.Visible = false;
+            this.PanelEmailSent.Visible = false;
+            this.PanelEmailResent.Visible = true;
+            this.PanelEmailSendFailed.Visible = false;
+            this.PanelEmailResentRetryExceeded.Visible = false;
+        }
+        private void showResentRetryExceededPanel(string emailAddress)
+        {
+            this.lblEmailAddressEmailReSentRetryExceeded.Text = emailAddress;
+            this.PanelPasswordResetForm.Visible = false;
+            this.PanelEmailSent.Visible = false;
+            this.PanelEmailResent.Visible = false;
+            this.PanelEmailSendFailed.Visible = false;
+            this.PanelEmailResentRetryExceeded.Visible = true;
+        }
+
+        private void showSendErrorPanel()
+        {
+            this.PanelPasswordResetForm.Visible = false;
+            this.PanelEmailSent.Visible = false;
+            this.PanelEmailResent.Visible = false;
+            this.PanelEmailSendFailed.Visible = true;
+            this.PanelEmailResentRetryExceeded.Visible = false;
         }
     }
 }

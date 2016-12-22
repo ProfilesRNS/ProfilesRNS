@@ -13,6 +13,15 @@ namespace Profiles.Login.Modules.PasswordReset {
     public partial class PasswordReset {
         
         /// <summary>
+        /// PanelPasswordResetForm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelPasswordResetForm;
+        
+        /// <summary>
         /// txtEmailAddress control.
         /// </summary>
         /// <remarks>
@@ -47,5 +56,68 @@ namespace Profiles.Login.Modules.PasswordReset {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator;
+        
+        /// <summary>
+        /// PanelEmailSent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelEmailSent;
+        
+        /// <summary>
+        /// lblEmailAddressEmailSent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEmailAddressEmailSent;
+        
+        /// <summary>
+        /// PanelEmailResent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelEmailResent;
+        
+        /// <summary>
+        /// lblEmailAddressEmailReSent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEmailAddressEmailReSent;
+        
+        /// <summary>
+        /// PanelEmailResentRetryExceeded control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelEmailResentRetryExceeded;
+        
+        /// <summary>
+        /// lblEmailAddressEmailReSentRetryExceeded control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEmailAddressEmailReSentRetryExceeded;
+        
+        /// <summary>
+        /// PanelEmailSendFailed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelEmailSendFailed;
     }
 }

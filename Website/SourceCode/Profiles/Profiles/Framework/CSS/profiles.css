@@ -1211,3 +1211,13 @@ table tbody .height25
 	box-shadow: 0 0 2px 2px #c03d42;
     cursor: pointer;
 }
+
+.emailAddressResetSent
+{
+    font-weight: bold;
+}
+
+.emailSendErrorText
+{
+    color: red;
+}

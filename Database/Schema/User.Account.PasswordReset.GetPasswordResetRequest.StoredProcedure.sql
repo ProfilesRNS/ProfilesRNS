@@ -25,10 +25,10 @@ BEGIN
 
 	BEGIN TRY	
 		
-		/* Get the reset request if there is one, it hasn't expired and hasn't been used yet. */
+		/* Get an existing reset request if there is one, it hasn't expired and hasn't been used yet. */
 		select @PasswordResetRequestID = PasswordResetRequestId, @ResetToken = ResetToken, @CreateDate = CreateDate, @RequestExpireDate = RequestExpireDate, 
 		@ResendRequestsRemaining = ResendRequestsRemaining, @ResetDate = ResetDate  from [User.Account].[PasswordResetRequest] where
-		EmailAddr = @EmailAddr and RequestExpireDate > GetDate() and ResetDate is null and ResendRequestsRemaining > 0
+		EmailAddr = @EmailAddr and RequestExpireDate > GetDate() and ResetDate is null 
 
 
 	END TRY
