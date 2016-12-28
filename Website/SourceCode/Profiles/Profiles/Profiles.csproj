@@ -391,7 +391,8 @@
     <Compile Include="Login\PasswordReset.aspx.designer.cs">
       <DependentUpon>PasswordReset.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Login\Utilities\PasswordReset.cs" />
+    <Compile Include="Login\Utilities\PasswordResetConst.cs" />
+    <Compile Include="Login\Utilities\PasswordResetHelper.cs" />
     <Compile Include="ORCID\CreateBatch.aspx.cs">
       <DependentUpon>CreateBatch.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -13,6 +13,15 @@ namespace Profiles.Login.Modules.PasswordReset {
     public partial class PasswordResetConfirm {
         
         /// <summary>
+        /// PanelPasswordResetConfirmForm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelPasswordResetConfirmForm;
+        
+        /// <summary>
         /// txtPassword control.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,42 @@ namespace Profiles.Login.Modules.PasswordReset {
         protected global::System.Web.UI.WebControls.Button cmdSubmit;
         
         /// <summary>
+        /// regexPasswordValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator regexPasswordValidator;
+        
+        /// <summary>
+        /// requiredFieldPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator requiredFieldPassword;
+        
+        /// <summary>
+        /// requiredFieldPasswordConfirm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator requiredFieldPasswordConfirm;
+        
+        /// <summary>
+        /// comparePasswordFields control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator comparePasswordFields;
+        
+        /// <summary>
         /// lblError control.
         /// </summary>
         /// <remarks>
@@ -47,5 +92,32 @@ namespace Profiles.Login.Modules.PasswordReset {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblError;
+        
+        /// <summary>
+        /// PanelPasswordResetSuccess control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelPasswordResetSuccess;
+        
+        /// <summary>
+        /// PanelPasswordResetFailed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelPasswordResetFailed;
+        
+        /// <summary>
+        /// PanelInvalidResetRequest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelInvalidResetRequest;
     }
 }

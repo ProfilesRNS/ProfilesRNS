@@ -190,7 +190,7 @@ namespace Profiles.Login.Utilities
             return createRequestSuccess;
         }
 
-        public PasswordResetRequest GetPasswordResetRequest(string emailAddr)
+        public PasswordResetRequest GetPasswordResetRequestByEmail(string emailAddr)
         {
             PasswordResetRequest passwordResetRequest = null;
 
@@ -235,14 +235,85 @@ namespace Profiles.Login.Utilities
                 param[6].Direction = ParameterDirection.Output;
 
                 /* For Output Parameters you need to pass a connection object to the framework so you can close it before reading the output params value. */
-                ExecuteSQLDataCommand(GetDBCommand(ref dbconnection, "[User.Account].[GetPasswordResetRequest]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param));
+                ExecuteSQLDataCommand(GetDBCommand(ref dbconnection, "[User.Account].[GetPasswordResetRequestByEmail]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param));
 
                 dbconnection.Close();
                 if (param[1].Value != DBNull.Value)
                 {
-                    passwordResetRequest = new PasswordResetRequest(emailAddr);
+                    passwordResetRequest = new PasswordResetRequest();
+                    passwordResetRequest.EmailAddr = emailAddr;
                     passwordResetRequest.PasswordResetRequestID = Convert.ToInt32(param[1].Value.ToString());
                     passwordResetRequest.ResetToken = param[2].Value.ToString();
+                    passwordResetRequest.CreateDate = Convert.ToDateTime(param[3].Value.ToString());
+                    passwordResetRequest.RequestExpireDate = Convert.ToDateTime(param[4].Value.ToString());
+                    passwordResetRequest.ResendRequestsRemaining = Convert.ToInt32(param[5].Value.ToString());
+                    if (param[6].Value != DBNull.Value)
+                    {
+                        passwordResetRequest.ResetDate = Convert.ToDateTime(param[6].Value.ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return passwordResetRequest;
+        }
+
+        public PasswordResetRequest GetPasswordResetRequestByToken(string resetToken)
+        {
+            PasswordResetRequest passwordResetRequest = null;
+
+            try
+            {
+                SessionManagement sm = new SessionManagement();
+                string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+
+                SqlConnection dbconnection = new SqlConnection(connstr);
+
+                SqlParameter[] param = new SqlParameter[7];
+
+                dbconnection.Open();
+
+                /* Input Parameters */
+                param[0] = new SqlParameter("@ResetToken", resetToken);
+
+                /* Output Parameters */
+                param[1] = new SqlParameter("@PasswordResetRequestID", null);
+                param[1].DbType = DbType.Int32;
+                param[1].Direction = ParameterDirection.Output;
+
+                param[2] = new SqlParameter("@EmailAddr", null);
+                param[2].DbType = DbType.String;
+                param[2].Size = 255;
+                param[2].Direction = ParameterDirection.Output;
+
+                param[3] = new SqlParameter("@CreateDate", null);
+                param[3].DbType = DbType.DateTime;
+                param[3].Direction = ParameterDirection.Output;
+
+                param[4] = new SqlParameter("@RequestExpireDate", null);
+                param[4].DbType = DbType.DateTime;
+                param[4].Direction = ParameterDirection.Output;
+
+                param[5] = new SqlParameter("@ResendRequestsRemaining", null);
+                param[5].DbType = DbType.Int32;
+                param[5].Direction = ParameterDirection.Output;
+
+                param[6] = new SqlParameter("@ResetDate", null);
+                param[6].DbType = DbType.DateTime;
+                param[6].Direction = ParameterDirection.Output;
+
+                /* For Output Parameters you need to pass a connection object to the framework so you can close it before reading the output params value. */
+                ExecuteSQLDataCommand(GetDBCommand(ref dbconnection, "[User.Account].[GetPasswordResetRequestByToken]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param));
+
+                dbconnection.Close();
+                if (param[1].Value != DBNull.Value)
+                {
+                    passwordResetRequest = new PasswordResetRequest();
+                    passwordResetRequest.ResetToken = resetToken;
+                    passwordResetRequest.PasswordResetRequestID = Convert.ToInt32(param[1].Value.ToString());
+                    passwordResetRequest.EmailAddr = param[2].Value.ToString();
                     passwordResetRequest.CreateDate = Convert.ToDateTime(param[3].Value.ToString());
                     passwordResetRequest.RequestExpireDate = Convert.ToDateTime(param[4].Value.ToString());
                     passwordResetRequest.ResendRequestsRemaining = Convert.ToInt32(param[5].Value.ToString());
@@ -337,7 +408,7 @@ namespace Profiles.Login.Utilities
             return updateSuccess;
         }
 
-        public bool ResetPassword(string emailAddr, string resetToken, string newPassword)
+        public bool ResetPassword(string resetToken, string newPassword)
         {
             bool resetSuccess = false;
 
@@ -348,25 +419,24 @@ namespace Profiles.Login.Utilities
 
                 SqlConnection dbconnection = new SqlConnection(connstr);
 
-                SqlParameter[] param = new SqlParameter[4];
+                SqlParameter[] param = new SqlParameter[3];
 
                 dbconnection.Open();
 
                 /* Input Parameters */
-                param[0] = new SqlParameter("@EmailAddr", emailAddr);
-                param[1] = new SqlParameter("@ResetToken", resetToken);
-                param[2] = new SqlParameter("@NewPassword", newPassword);
+                param[0] = new SqlParameter("@ResetToken", resetToken);
+                param[1] = new SqlParameter("@NewPassword", newPassword);
 
                 /* Output Parameters */
-                param[3] = new SqlParameter("@ResetSuccess", null);
-                param[3].DbType = DbType.Int16;
-                param[3].Direction = ParameterDirection.Output;
+                param[2] = new SqlParameter("@ResetSuccess", null);
+                param[2].DbType = DbType.Int16;
+                param[2].Direction = ParameterDirection.Output;
 
                 /* For Output Parameters you need to pass a connection object to the framework so you can close it before reading the output params value. */
                 ExecuteSQLDataCommand(GetDBCommand(ref dbconnection, "[User.Account].[ResetPassword]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param));
 
                 dbconnection.Close();
-                int resetSuccessInt = Convert.ToInt32(param[3].Value.ToString());
+                int resetSuccessInt = Convert.ToInt32(param[2].Value.ToString());
 
                 resetSuccess = (resetSuccessInt == 1);
             }

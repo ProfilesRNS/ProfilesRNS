@@ -58,9 +58,16 @@
                                             <asp:Label runat="server" ID="lblError" ForeColor="Red" Font-Bold="true"></asp:Label>
 
                                             <asp:RegularExpressionValidator ID="RegularExpressionValidator" runat="server" ErrorMessage="Please Enter Valid Email Address" 
-                                            ControlToValidate="txtEmailAddress" CssClass="requiredFieldValidateStyle" ForeColor="Red" Font-Bold="true" 
-                                            ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*">
+                                            ControlToValidate="txtEmailAddress" CssClass="requiredFieldValidateStyle" ForeColor="Red"  
+                                            ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"  Display="Dynamic">
                                             </asp:RegularExpressionValidator>
+
+                                            <asp:RequiredFieldValidator id="requiredFieldEmail" runat="server"
+                                              ControlToValidate="txtEmailAddress"
+                                              ErrorMessage="Email Address field is required."
+                                              ForeColor="Red" Display="Dynamic">
+                                            </asp:RequiredFieldValidator>
+
                                         </div>
                                     </td>
 
@@ -111,7 +118,8 @@
                                 <br />
                                 <h2>Reset Request Send Failed</h2><br />
                                 <div class="emailSendErrorText">
-                                    Unable to send password reset request, please contact your administrator.
+                                    Unable to send password reset request to the email specified.  The address entered may not be associated with a profiles account.  If you believe you are getting this 
+                                    message in error please contact your administrator.
                                 </div>
                                 <br /><br />
                             </div>

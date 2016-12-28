@@ -8,7 +8,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE [User.Account].[GetPasswordResetRequest] (
+CREATE PROCEDURE [User.Account].[GetPasswordResetRequestByEmail] (
 
 	@EmailAddr nvarchar(255),
 	@PasswordResetRequestID int OUTPUT,

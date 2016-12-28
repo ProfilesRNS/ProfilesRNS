@@ -8,17 +8,8 @@ using System.Security.Cryptography;
 
 namespace Profiles.Login.Utilities
 {
-    public class PasswordReset
+    public class PasswordResetHelper
     {
-        /* Constant strings for configuration setting names. */
-        private const string SMTP_HOST = "PasswordReset.SmtpHost";
-        private const string SMTP_PORT = "PasswordReset.SmtpPort";
-        private const string PASSWORD_RESET_FROM_ADDR = "PasswordReset.FromAddress";
-        private const string PASSWORD_RESET_FROM_NAME = "PasswordReset.FromName";
-        private const string PASSWORD_RESET_SUBJECT = "PasswordReset.Subject";
-        private const string PASSWORD_RESET_EXPIRE_TIME_HOURS = "PasswordReset.ExpireTime.Hours";
-        private const string PASSWORD_RESET_RESEND_REQUESTS_ALLOWED = "PasswordReset.ResendRequests.Allowed";
-
         /* Settings */
         private string fromAddressString;
         private string fromNameString;
@@ -36,18 +27,18 @@ namespace Profiles.Login.Utilities
         /// <summary>
         /// Constructor, throws if configuration is invalid or incomplete. 
         /// </summary>
-        public PasswordReset()
+        public PasswordResetHelper()
         {
             /* Get required email settings from config */
-            this.fromAddressString = ConfigurationManager.AppSettings[PASSWORD_RESET_FROM_ADDR];
-            this.fromNameString = ConfigurationManager.AppSettings[PASSWORD_RESET_FROM_NAME];
-            this.smtpHostString = ConfigurationManager.AppSettings[SMTP_HOST];
-            this.passwordResetSubjectString = ConfigurationManager.AppSettings[PASSWORD_RESET_SUBJECT];
-            this.passwordResetExpireTimeHoursString = ConfigurationManager.AppSettings[PASSWORD_RESET_EXPIRE_TIME_HOURS];
-            this.passwordResetResendRequestsAllowedString = ConfigurationManager.AppSettings[PASSWORD_RESET_RESEND_REQUESTS_ALLOWED];
+            this.fromAddressString = ConfigurationManager.AppSettings[PasswordResetConst.PASSWORD_RESET_FROM_ADDR_SETTING];
+            this.fromNameString = ConfigurationManager.AppSettings[PasswordResetConst.PASSWORD_RESET_FROM_NAME_SETTING];
+            this.smtpHostString = ConfigurationManager.AppSettings[PasswordResetConst.SMTP_HOST_SETTING];
+            this.passwordResetSubjectString = ConfigurationManager.AppSettings[PasswordResetConst.PASSWORD_RESET_SUBJECT_SETTING];
+            this.passwordResetExpireTimeHoursString = ConfigurationManager.AppSettings[PasswordResetConst.PASSWORD_RESET_EXPIRE_TIME_HOURS_SETTING];
+            this.passwordResetResendRequestsAllowedString = ConfigurationManager.AppSettings[PasswordResetConst.PASSWORD_RESET_RESEND_REQUESTS_ALLOWED_SETTING];
 
             /* Validate configuration, if invalid log error and throw. */
-            string smtpPortString = ConfigurationManager.AppSettings[SMTP_PORT];
+            string smtpPortString = ConfigurationManager.AppSettings[PasswordResetConst.SMTP_PORT_SETTING];
             if (string.IsNullOrEmpty(fromAddressString) || string.IsNullOrEmpty(fromNameString) ||
                 string.IsNullOrEmpty(smtpPortString) || string.IsNullOrEmpty(smtpHostString) || 
                 string.IsNullOrEmpty(passwordResetExpireTimeHoursString) || 
@@ -95,12 +86,12 @@ namespace Profiles.Login.Utilities
 
         public PasswordResetRequest GeneratePasswordResetRequest(string emailToAddress)
         {
-            PasswordResetRequest passwordResetRequest = new PasswordResetRequest(emailToAddress);
+            PasswordResetRequest passwordResetRequest = new PasswordResetRequest() { EmailAddr = emailToAddress };
 
             try
             {
                 /* Generate random string to be used as a token. */
-                passwordResetRequest.ResetToken = GetRandomString(255);
+                passwordResetRequest.ResetToken = GetRandomString(PasswordResetConst.RESET_TOKEN_LENGTH);
 
                 /* Set the expire time. */
                 passwordResetRequest.RequestExpireDate = DateTime.Now.AddHours(this.passwordResetExpireTimeHours);
@@ -110,7 +101,13 @@ namespace Profiles.Login.Utilities
 
                 /* Create the actual request row in the database. */
                 DataIO data = new DataIO();
-                data.CreatePasswordResetRequest(passwordResetRequest);
+                bool requestCreateSuccess = data.CreatePasswordResetRequest(passwordResetRequest);
+
+                /* Make sure request was successfully created, if not return a null reset object. */
+                if (!requestCreateSuccess)
+                {
+                    passwordResetRequest = null;
+                }
             }
             catch (Exception e)
             {
@@ -123,13 +120,20 @@ namespace Profiles.Login.Utilities
             return passwordResetRequest;
         }
 
-        public PasswordResetRequest GetPasswordResetRequest(string emailAddress)
+        public PasswordResetRequest GetPasswordResetRequestByEmail(string emailAddress)
         {
             DataIO data = new DataIO();
 
-            return data.GetPasswordResetRequest(emailAddress);
+            return data.GetPasswordResetRequestByEmail(emailAddress);
         }
-       
+
+        public PasswordResetRequest GetPasswordResetRequestByToken(string resetToken)
+        {
+            DataIO data = new DataIO();
+
+            return data.GetPasswordResetRequestByToken(resetToken);
+        }
+
         public bool SendResetEmail(PasswordResetRequest passwordResetRequest)
         {
             
@@ -174,6 +178,13 @@ namespace Profiles.Login.Utilities
 
             /* Resend the email. */
             return SendResetEmail(passwordResetRequest);
+        }
+
+        public bool ResetPassword(string resetToken, string newPassword)
+        {
+            DataIO data = new DataIO();
+            bool resetSuccessful = data.ResetPassword(resetToken, newPassword);
+            return resetSuccessful;
         }
 
         /// <summary>

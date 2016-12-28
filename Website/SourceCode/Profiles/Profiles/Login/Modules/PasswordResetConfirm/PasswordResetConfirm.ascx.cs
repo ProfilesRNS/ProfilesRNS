@@ -16,33 +16,47 @@ namespace Profiles.Login.Modules.PasswordReset
 {
     public partial class PasswordResetConfirm : System.Web.UI.UserControl
     {
+        private string PASSWORD_VALIDATION_EXPRESSION_SETTING = "PasswordReset.PasswordValidation.ValidationExpression";
+        private string PASSWORD_VALIDATION_ERROR_MESSAGE_SETTING = "PasswordReset.PasswordValidation.ErrorMessage";
+
         Framework.Utilities.SessionManagement sm;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                /* Get back the reset token from the querystring */
                 string resetToken = Request.QueryString["token"];
 
-                /* Look up the token in the database, verify that it exists */
-
-                /* If it doesn't exist throw an error */ 
-
-                /*
-                if (Request.QueryString["method"].ToString() == "login" && sm.Session().PersonID > 0)
+                if (!string.IsNullOrEmpty(resetToken) && resetToken.Length == PasswordResetConst.RESET_TOKEN_LENGTH)
                 {
-                    if (Request.QueryString["redirectto"] == null && Request.QueryString["edit"] == "true")
+                    /* Verify the request token is actually valid. */
+                    PasswordResetHelper passwordResetHelper = new PasswordResetHelper();
+                    PasswordResetRequest passwordResetRequest = passwordResetHelper.GetPasswordResetRequestByToken(resetToken);
+
+                    if (passwordResetRequest != null && passwordResetRequest.ResendRequestsRemaining > 0)
                     {
-                        if (Request.QueryString["editparams"] == null)
-                            Response.Redirect(Root.Domain + "/edit/" + sm.Session().NodeID);
-                        else
-                            Response.Redirect(Root.Domain + "/edit/default.aspx?subject=" + sm.Session().NodeID + "&" + Request.QueryString["editparams"]);
+                        /* Setup the validator as configured. */
+                        string passwordValidationExpression = ConfigurationManager.AppSettings[PASSWORD_VALIDATION_EXPRESSION_SETTING];
+                        string passwordValidationErrorMessage = ConfigurationManager.AppSettings[PASSWORD_VALIDATION_ERROR_MESSAGE_SETTING];
+                        if (!string.IsNullOrEmpty(passwordValidationExpression) && !string.IsNullOrEmpty(passwordValidationErrorMessage))
+                        {
+                            this.regexPasswordValidator.ValidationExpression = passwordValidationExpression;
+                            this.regexPasswordValidator.ErrorMessage = passwordValidationErrorMessage;
+                        }
+
+                        this.txtPassword.Focus();
                     }
                     else
-                        Response.Redirect(Request.QueryString["redirectto"].ToString());
-                } */
-            } 
-
+                    {
+                        /* Invalid or already used password reset link */
+                        InvalidResetRequest();
+                    }
+                }
+                else
+                {
+                    /* Invalid request, no token or invalid token length. */
+                    InvalidResetRequest();
+                }
+            }
         }
 
         public PasswordResetConfirm() { }
@@ -54,14 +68,20 @@ namespace Profiles.Login.Modules.PasswordReset
 
         protected void cmdSubmit_Click(object sender, EventArgs e)
         {
-            string password = txtPassword.Text;
-            string passwordConfirm = txtPasswordConfirm.Text;
-            if (!string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(passwordConfirm))
+            string resetToken = Request.QueryString["token"];
+            if (!string.IsNullOrEmpty(resetToken))
             {
+                PasswordResetHelper passwordResetHelper = new PasswordResetHelper();
+                bool resetSuccessful = passwordResetHelper.ResetPassword(resetToken, this.txtPassword.Text);
 
-                /* Make sure the email address exists in the database. */
-
-                /* */
+                if (resetSuccessful)
+                {
+                    ResetSuccessful();
+                }
+                else
+                {
+                    ResetFailed();
+                }
             }
         }
 
@@ -78,6 +98,30 @@ namespace Profiles.Login.Modules.PasswordReset
             Literal script = new Literal();
             script.Text = "<script>var _path = \"" + Root.Domain + "\";</script>";
             Page.Header.Controls.Add(script);
+        }
+
+        private void InvalidResetRequest()
+        {
+            this.PanelInvalidResetRequest.Visible = true;
+            this.PanelPasswordResetConfirmForm.Visible = false;
+            this.PanelPasswordResetFailed.Visible = false;
+            this.PanelPasswordResetSuccess.Visible = false;
+        }
+
+        private void ResetSuccessful()
+        {
+            this.PanelInvalidResetRequest.Visible = false;
+            this.PanelPasswordResetConfirmForm.Visible = false;
+            this.PanelPasswordResetFailed.Visible = false;
+            this.PanelPasswordResetSuccess.Visible = true;
+        }
+
+        private void ResetFailed()
+        {
+            this.PanelInvalidResetRequest.Visible = false;
+            this.PanelPasswordResetConfirmForm.Visible = false;
+            this.PanelPasswordResetFailed.Visible = true;
+            this.PanelPasswordResetSuccess.Visible = false;
         }
 
         public string GetURLDomain()

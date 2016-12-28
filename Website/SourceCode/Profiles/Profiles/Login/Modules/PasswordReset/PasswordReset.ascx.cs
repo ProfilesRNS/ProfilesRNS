@@ -16,7 +16,7 @@ namespace Profiles.Login.Modules.PasswordReset
         {
             if (!IsPostBack)
             {
-
+                txtEmailAddress.Focus();
             } 
 
         }
@@ -62,22 +62,22 @@ namespace Profiles.Login.Modules.PasswordReset
         private void HandleResetRequest(string emailAddress)
         {
             /* Create the password reset email object. */
-            Utilities.PasswordReset passwordResetEmail = new Utilities.PasswordReset();
+            Utilities.PasswordResetHelper passwordResetHelper = new Utilities.PasswordResetHelper();
 
             /* Get an existing password reset request record of there is one.   A valid request is one that was created in the last 24 hours and has not been used to reset the password. */
-            PasswordResetRequest passwordResetRequest = passwordResetEmail.GetPasswordResetRequest(emailAddress);
+            PasswordResetRequest passwordResetRequest = passwordResetHelper.GetPasswordResetRequestByEmail(emailAddress);
 
             /* Create or use an existing request */
             if (passwordResetRequest == null)
             {
                 /* No request exists so create a reset email object. */
-                passwordResetRequest = passwordResetEmail.GeneratePasswordResetRequest(emailAddress);
+                passwordResetRequest = passwordResetHelper.GeneratePasswordResetRequest(emailAddress);
 
                 /* Create the reset row in the database. */
                 if (passwordResetRequest != null)
                 {
                     /* Send the reset email to the user's email address. */
-                    bool sendSuccess = passwordResetEmail.SendResetEmail(passwordResetRequest);
+                    bool sendSuccess = passwordResetHelper.SendResetEmail(passwordResetRequest);
 
                     if (sendSuccess)
                     {
@@ -99,7 +99,7 @@ namespace Profiles.Login.Modules.PasswordReset
                 if (passwordResetRequest.ResendRequestsRemaining > 0)
                 {
                     /* Resend the existing request. */
-                    bool resendSuccess = passwordResetEmail.ResendResetEmail(passwordResetRequest);
+                    bool resendSuccess = passwordResetHelper.ResendResetEmail(passwordResetRequest);
                     if (resendSuccess)
                     {
                         showResentPanel(emailAddress);

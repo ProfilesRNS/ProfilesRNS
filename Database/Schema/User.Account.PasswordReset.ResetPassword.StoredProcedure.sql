@@ -10,7 +10,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE PROCEDURE [User.Account].[ResetPassword] (
-	@EmailAddr nvarchar(255),
+
 	@ResetToken nvarchar(255),
 	@NewPassword nvarchar(128),
 	@ResetSuccess bit = 0 OUTPUT
@@ -28,14 +28,24 @@ BEGIN
 		select @EmailAddressFromToken = EmailAddr from [User.Account].[PasswordResetRequest] where
 		ResetToken = @ResetToken and RequestExpireDate > GetDate() and ResetDate is null;
 
-		/* Make sure the email the user entered matches the address associated with the token. */
-		IF @EmailAddressFromToken = @EmailAddr
-		BEGIN
-			/* Update password on all accounts associated with this email address. */
-			UPDATE [User.Account].[User] SET Password = @NewPassword WHERE EmailAddr = @EmailAddressFromToken;
+		/* If there is an email address associated with the token reset the password for all accounts with that email and return 1.  Otherwise return 0. */
+		IF @EmailAddressFromToken IS NOT NULL
 
-			SET @ResetSuccess = 1;
-		END
+			BEGIN
+
+				/* Update password on all accounts associated with this email address. */
+				UPDATE [User.Account].[User] SET Password = @NewPassword WHERE EmailAddr = @EmailAddressFromToken;
+
+				/* Update the password reset request so it is marked with a reset date. */
+				UPDATE [User.Account].PasswordResetRequest set ResetDate = GETDATE(), ResendRequestsRemaining = 0 WHERE ResetToken = @ResetToken;
+
+				SET @ResetSuccess = 1;
+
+			END
+
+		ELSE
+			
+			SET @ResetSuccess = 0;
 
 
 	END TRY

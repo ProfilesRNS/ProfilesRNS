@@ -53,6 +53,10 @@ namespace Profiles.Login.Modules.Login
                     else
                         Response.Redirect(Request.QueryString["redirectto"].ToString());
                 }
+                else
+                {
+                    this.txtUserName.Focus();
+                }
             }
 
 

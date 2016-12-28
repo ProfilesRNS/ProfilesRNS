@@ -7,11 +7,6 @@ namespace Profiles.Login.Objects
 {
     public class PasswordResetRequest
     {
-        public PasswordResetRequest(string emailAddr)
-        {
-            this.EmailAddr = emailAddr;
-        }
-
         public int PasswordResetRequestID
         {
             get;

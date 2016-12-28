@@ -35,7 +35,7 @@ BEGIN
 
 		/* Don't allow another reset request if one has already been sent which has not yet expired. */
 		select @ResetRequestExists = CASE When COUNT(EmailAddr) > 0 then 1 else 0 end from [User.Account].[PasswordResetRequest] where
-		EmailAddr = @EmailAddr and RequestExpireDate > GetDate();
+		EmailAddr = @EmailAddr and RequestExpireDate > GetDate() and ResetDate is null;
 		
 		/* Only allow a new request if account can be reset and a valid request doesn't exist */
 		IF @AcctCanBeReset > 0 and @ResetRequestExists = 0
