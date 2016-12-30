@@ -22,6 +22,15 @@ namespace Profiles.Login.Modules.PasswordReset {
         protected global::System.Web.UI.WebControls.HiddenField formLoadTime;
         
         /// <summary>
+        /// PanelNoAccountFound control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelNoAccountFound;
+        
+        /// <summary>
         /// PanelPasswordResetForm control.
         /// </summary>
         /// <remarks>

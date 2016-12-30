@@ -32,7 +32,8 @@ namespace Profiles.Login.Modules.PasswordReset
                     PasswordResetHelper passwordResetHelper = new PasswordResetHelper();
                     PasswordResetRequest passwordResetRequest = passwordResetHelper.GetPasswordResetRequestByToken(resetToken);
 
-                    if (passwordResetRequest != null && passwordResetRequest.ResendRequestsRemaining > 0)
+                    /* Make sure the request is valid and hasn't been previously used for reset. */
+                    if (passwordResetRequest != null && passwordResetRequest.ResetDate == DateTime.MinValue)
                     {
                         /* Setup the validator as configured. */
                         string passwordValidationExpression = ConfigurationManager.AppSettings[PASSWORD_VALIDATION_EXPRESSION_SETTING];

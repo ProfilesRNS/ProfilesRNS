@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Profiles.Login.Objects
 {
-    public class SimpleMathEquasionAndAnswer
+    public class SimpleMathEquationAndAnswer
     {
         public string QuestionText
         {

@@ -15,19 +15,14 @@ namespace Profiles.Login.Modules.PasswordReset
         Framework.Utilities.SessionManagement sm;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (!IsPostBack || Session["SimpleMathQuestion"] == null)
             {
                 txtEmailAddress.Focus();
 
-                PasswordResetHelper passwordResetHelper = new PasswordResetHelper();
-                SimpleMathEquasionAndAnswer simpleMathEquasionAndAnswer = passwordResetHelper.GetRandomMathEquationAndAnswer();
-                /* Tried to hold these with viewstate but no matter what I tried it wouldn't work so using sessions. */
-                Session["SimpleMathAnswer"] = simpleMathEquasionAndAnswer.Answer;
-                Session["SimpleMathQuestion"] = simpleMathEquasionAndAnswer.QuestionText;
+                setSimpleMathQuestion();
             }
-            
-            this.lblSimpleMathQuestion.Text = Session["SimpleMathQuestion"].ToString();
 
+            this.lblSimpleMathQuestion.Text = Session["SimpleMathQuestion"].ToString();
         }
 
         public PasswordReset() { }
@@ -129,7 +124,7 @@ namespace Profiles.Login.Modules.PasswordReset
                 }
                 else
                 {
-                    showSendErrorPanel();
+                    showAccountNotFoundMessage();
                 }
 
             }
@@ -154,6 +149,17 @@ namespace Profiles.Login.Modules.PasswordReset
                 }
             }
         }
+        private void setSimpleMathQuestion()
+        {
+            PasswordResetHelper passwordResetHelper = new PasswordResetHelper();
+            SimpleMathEquationAndAnswer simpleMathEquationAndAnswer = passwordResetHelper.GetRandomMathEquationAndAnswer();
+
+            /* Tried to hold these with viewstate but no matter what I tried it wouldn't work so using sessions. */
+            Session["SimpleMathAnswer"] = simpleMathEquationAndAnswer.Answer;
+            Session["SimpleMathQuestion"] = simpleMathEquationAndAnswer.QuestionText;
+            this.lblSimpleMathQuestion.Text = simpleMathEquationAndAnswer.QuestionText;
+            this.txtSimpleMathAnswer.Text = string.Empty;
+        }
 
         private void showSentPanel(string emailAddress)
         {
@@ -163,6 +169,7 @@ namespace Profiles.Login.Modules.PasswordReset
             this.PanelEmailResent.Visible = false;
             this.PanelEmailSendFailed.Visible = false;
             this.PanelEmailResentRetryExceeded.Visible = false;
+            this.PanelNoAccountFound.Visible = false;
         }
 
         private void showResentPanel(string emailAddress)
@@ -173,6 +180,7 @@ namespace Profiles.Login.Modules.PasswordReset
             this.PanelEmailResent.Visible = true;
             this.PanelEmailSendFailed.Visible = false;
             this.PanelEmailResentRetryExceeded.Visible = false;
+            this.PanelNoAccountFound.Visible = false;
         }
         private void showResentRetryExceededPanel(string emailAddress)
         {
@@ -182,6 +190,7 @@ namespace Profiles.Login.Modules.PasswordReset
             this.PanelEmailResent.Visible = false;
             this.PanelEmailSendFailed.Visible = false;
             this.PanelEmailResentRetryExceeded.Visible = true;
+            this.PanelNoAccountFound.Visible = false;
         }
 
         private void showSendErrorPanel()
@@ -191,6 +200,19 @@ namespace Profiles.Login.Modules.PasswordReset
             this.PanelEmailResent.Visible = false;
             this.PanelEmailSendFailed.Visible = true;
             this.PanelEmailResentRetryExceeded.Visible = false;
+            this.PanelNoAccountFound.Visible = false;
         }
+
+        private void showAccountNotFoundMessage()
+        {
+            this.PanelPasswordResetForm.Visible = true;
+            this.PanelEmailSent.Visible = false;
+            this.PanelEmailResent.Visible = false;
+            this.PanelEmailSendFailed.Visible = false;
+            this.PanelEmailResentRetryExceeded.Visible = false;
+            this.PanelNoAccountFound.Visible = true;
+            setSimpleMathQuestion();
+        }
+
     }
 }

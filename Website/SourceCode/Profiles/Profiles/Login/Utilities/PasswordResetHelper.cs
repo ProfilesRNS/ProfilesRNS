@@ -295,25 +295,26 @@ namespace Profiles.Login.Utilities
             return returnString;
         }
 
-        public SimpleMathEquasionAndAnswer GetRandomMathEquationAndAnswer()
+        public SimpleMathEquationAndAnswer GetRandomMathEquationAndAnswer()
         {
-            SimpleMathEquasionAndAnswer simpleMathEquasionAndAnswer = new SimpleMathEquasionAndAnswer();
+            SimpleMathEquationAndAnswer simpleMathEquationAndAnswer = new SimpleMathEquationAndAnswer();
             Random random = new Random();
             int operator1 = random.Next(1, 9);
             int operator2 = random.Next(1, 9);
             int coinFlip = random.Next(0, 2);
 
+            /* Use simple coinflip for whether we do plus or minus, also make sure operator 1 is larger than 2 if doing subtraction. */
             if (coinFlip > 0 && operator1 >= operator2)
             {
-                simpleMathEquasionAndAnswer.QuestionText = string.Format("What is {0} minus {1}?", operator1, operator2);
-                simpleMathEquasionAndAnswer.Answer = operator1 - operator2;
+                simpleMathEquationAndAnswer.QuestionText = string.Format("What is {0} minus {1}?", operator1, operator2);
+                simpleMathEquationAndAnswer.Answer = operator1 - operator2;
             }
             else
             {
-                simpleMathEquasionAndAnswer.QuestionText = string.Format("What is {0} plus {1}?", operator1, operator2);
-                simpleMathEquasionAndAnswer.Answer = operator1 + operator2;
+                simpleMathEquationAndAnswer.QuestionText = string.Format("What is {0} plus {1}?", operator1, operator2);
+                simpleMathEquationAndAnswer.Answer = operator1 + operator2;
             }
-            return simpleMathEquasionAndAnswer;
+            return simpleMathEquationAndAnswer;
         }
     }
 }

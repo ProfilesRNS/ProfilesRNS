@@ -377,7 +377,7 @@
     </Compile>
     <Compile Include="Login\Objects\PasswordResetRequest.cs" />
     <Compile Include="Login\Objects\ResetEmail.cs" />
-    <Compile Include="Login\Objects\SimpleMathEquasionAndAnswer.cs" />
+    <Compile Include="Login\Objects\SimpleMathEquationAndAnswer.cs" />
     <Compile Include="Login\PasswordResetConfirm.aspx.cs">
       <DependentUpon>PasswordResetConfirm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

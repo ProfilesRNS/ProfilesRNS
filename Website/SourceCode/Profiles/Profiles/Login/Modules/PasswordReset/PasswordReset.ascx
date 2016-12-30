@@ -25,9 +25,18 @@
                 <tr>
                     <td colspan="3">
                         
+                        <asp:Panel ID="PanelNoAccountFound" runat="server" Visible="false">
+                            <div class="searchSection" style="text-align: left; margin: 0px auto;">
+                                <div class="emailSendErrorText">
+                                    Unable to send password reset request to the email specified.  The address entered may not be associated with a profiles account.  If you believe you are getting this 
+                                    message in error please contact your administrator.
+                                </div>
+                            </div>
+                        </asp:Panel>
+
                         <asp:Panel ID="PanelPasswordResetForm" runat="server" Visible="true">
                         <br />
-                        Enter your email address below and we will send you a link you can use to reset your password.<br /><br />
+                        Enter your email address associated with your profiles account below and we will send you a link you can use to reset your password.<br /><br />
                         <div class="searchSection" style="text-align: center; margin: 0px auto;">
                             <table class="searchForm" style="display: inline;">
                                 <tr>
