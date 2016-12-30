@@ -13,6 +13,15 @@ namespace Profiles.Login.Modules.PasswordReset {
     public partial class PasswordReset {
         
         /// <summary>
+        /// formLoadTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField formLoadTime;
+        
+        /// <summary>
         /// PanelPasswordResetForm control.
         /// </summary>
         /// <remarks>
@@ -29,6 +38,24 @@ namespace Profiles.Login.Modules.PasswordReset {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtEmailAddress;
+        
+        /// <summary>
+        /// lblSimpleMathQuestion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSimpleMathQuestion;
+        
+        /// <summary>
+        /// txtSimpleMathAnswer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSimpleMathAnswer;
         
         /// <summary>
         /// cmdSendResetEmail control.

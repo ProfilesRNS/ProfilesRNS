@@ -1,5 +1,6 @@
 ﻿using Profiles.Framework.Utilities;
 using Profiles.Login.Objects;
+using Profiles.Login.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Web.UI;
@@ -17,7 +18,15 @@ namespace Profiles.Login.Modules.PasswordReset
             if (!IsPostBack)
             {
                 txtEmailAddress.Focus();
-            } 
+
+                PasswordResetHelper passwordResetHelper = new PasswordResetHelper();
+                SimpleMathEquasionAndAnswer simpleMathEquasionAndAnswer = passwordResetHelper.GetRandomMathEquationAndAnswer();
+                /* Tried to hold these with viewstate but no matter what I tried it wouldn't work so using sessions. */
+                Session["SimpleMathAnswer"] = simpleMathEquasionAndAnswer.Answer;
+                Session["SimpleMathQuestion"] = simpleMathEquasionAndAnswer.QuestionText;
+            }
+            
+            this.lblSimpleMathQuestion.Text = Session["SimpleMathQuestion"].ToString();
 
         }
 
@@ -50,13 +59,42 @@ namespace Profiles.Login.Modules.PasswordReset
 
         protected void cmdSendResetEmail_Click(object sender, EventArgs e)
         {
-            // Get the email address entered by the user.
-            string resetEmailText = txtEmailAddress.Text;
-            if (!string.IsNullOrEmpty(resetEmailText))
+            if (simpleMathAnswerCorrect())
             {
-                HandleResetRequest(resetEmailText);
+                // Get the email address entered by the user.
+                string resetEmailText = txtEmailAddress.Text;
+                if (!string.IsNullOrEmpty(resetEmailText))
+                {
+                    HandleResetRequest(resetEmailText);
+                }
+            }
+            else
+            {
+                lblError.Text = "Please enter the correct answer to the simple math question.";
+                lblError.Visible = true;
+                this.txtSimpleMathAnswer.Text = string.Empty;
             }
 
+        }
+
+        private bool simpleMathAnswerCorrect()
+        {
+            bool simpleMathAnswerCorrect = false;
+            if (Session["SimpleMathAnswer"] != null)
+            {
+                int simpleMathAnswerServer = 0;
+                bool parseSuccess = int.TryParse(Session["SimpleMathAnswer"].ToString(), out simpleMathAnswerServer);
+                if (parseSuccess)
+                {
+                    int simpleMathAnswerUser = 0;
+                    parseSuccess = int.TryParse(this.txtSimpleMathAnswer.Text, out simpleMathAnswerUser);
+                    if (parseSuccess)
+                    {
+                        simpleMathAnswerCorrect = (simpleMathAnswerServer == simpleMathAnswerUser);
+                    }
+                }
+            }
+            return simpleMathAnswerCorrect;
         }
 
         private void HandleResetRequest(string emailAddress)
@@ -64,7 +102,8 @@ namespace Profiles.Login.Modules.PasswordReset
             /* Create the password reset email object. */
             Utilities.PasswordResetHelper passwordResetHelper = new Utilities.PasswordResetHelper();
 
-            /* Get an existing password reset request record of there is one.   A valid request is one that was created in the last 24 hours and has not been used to reset the password. */
+            /* Get an existing password reset request record of there is one.   A valid request is one that was created in the last 
+             * 24 hours and has not been used to reset the password. */
             PasswordResetRequest passwordResetRequest = passwordResetHelper.GetPasswordResetRequestByEmail(emailAddress);
 
             /* Create or use an existing request */

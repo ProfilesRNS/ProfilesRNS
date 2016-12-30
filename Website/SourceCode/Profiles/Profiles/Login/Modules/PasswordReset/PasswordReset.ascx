@@ -18,6 +18,7 @@
 </div>
 
 <div class="content_container">
+    <asp:HiddenField ID="formLoadTime" runat="server" />
     <div class="tabContainer" style="margin-top: 0px;">
         <div class="passwordResetForm">
             <table width="100%">
@@ -33,8 +34,8 @@
                                     <td colspan='3'>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        <b>Email Address</b>
+                                    <td style="text-align: right;">
+                                        <b>Email Address </b>
                                     </td>
                                     <td>
                                         <asp:TextBox runat="server" ID="txtEmailAddress" value="" TextMode="SingleLine" MaxLength="254"
@@ -42,8 +43,18 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td style="text-align: right;">
+                                        <b>
+                                            <asp:Label ID="lblSimpleMathQuestion" runat="server" Text="" ToolTip="Answer simple math question."></asp:Label>
+                                        </b>
+                                    </td>
                                     <td>
-                                       
+                                        <asp:TextBox runat="server" ID="txtSimpleMathAnswer" value="" TextMode="SingleLine" MaxLength="2" 
+                                            Width="50" title="Simple Math Answer"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
                                     </td>
                                     <td> 
                                         <div class="reset-button-container">

@@ -149,6 +149,15 @@ namespace Profiles.Login.Utilities
             return loginsuccess;
         }
 
+        #endregion
+
+        #region PASSWORD RESET
+
+        /// <summary>
+        /// Create a password reset request in the database using the reset request object passed. 
+        /// </summary>
+        /// <param name="passwordResetRequest">Password reset request object.</param>
+        /// <returns>True if successfully created, otherwise false.</returns>
         public bool CreatePasswordResetRequest(PasswordResetRequest passwordResetRequest)
         {
             bool createRequestSuccess = false;
@@ -190,6 +199,11 @@ namespace Profiles.Login.Utilities
             return createRequestSuccess;
         }
 
+        /// <summary>
+        /// Get password reset request object from the database using email address.
+        /// </summary>
+        /// <param name="emailAddr">Email address used to lookup the PasswordResetRequest.  </param>
+        /// <returns>PasswordResetRequest populated with data if found, returns a null object if not found. </returns>
         public PasswordResetRequest GetPasswordResetRequestByEmail(string emailAddr)
         {
             PasswordResetRequest passwordResetRequest = null;
@@ -260,6 +274,11 @@ namespace Profiles.Login.Utilities
             return passwordResetRequest;
         }
 
+        /// <summary>
+        /// Get password reset request object from the database using reset token.
+        /// </summary>
+        /// <param name="resetToken">Reset token used to lookup the PasswordResetRequest.  </param>
+        /// <returns>PasswordResetRequest populated with data if found.  Returns null if not found.
         public PasswordResetRequest GetPasswordResetRequestByToken(string resetToken)
         {
             PasswordResetRequest passwordResetRequest = null;
@@ -330,46 +349,13 @@ namespace Profiles.Login.Utilities
             return passwordResetRequest;
         }
 
-        public bool UpdatePasswordResetRequest(string resetToken, DateTime resetDate)
-        {
-            bool updateSuccess = false;
-
-            try
-            {
-                SessionManagement sm = new SessionManagement();
-                string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
-
-                SqlConnection dbconnection = new SqlConnection(connstr);
-
-                SqlParameter[] param = new SqlParameter[3];
-
-                dbconnection.Open();
-
-                /* Input Parameters */
-                param[0] = new SqlParameter("@ResetToken", resetToken);
-                param[1] = new SqlParameter("@ResetDate", resetDate);
-
-                /* Output Parameters */
-                param[2] = new SqlParameter("@ResetRequestSuccess", null);
-                param[2].DbType = DbType.Int16;
-                param[2].Direction = ParameterDirection.Output;
-
-                /* For Output Parameters you need to pass a connection object to the framework so you can close it before reading the output params value. */
-                ExecuteSQLDataCommand(GetDBCommand(ref dbconnection, "[User.Account].[UpdatePasswordResetRequestResetDate]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param));
-
-                dbconnection.Close();
-                int updateResetRequestResendsRemainingSuccessInt = Convert.ToInt32(param[3].Value.ToString());
-
-                updateSuccess = (updateResetRequestResendsRemainingSuccessInt == 1);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return updateSuccess;
-        }
-
-        public bool UpdatePasswordResetRequest(string resetToken, int resendRequestsRemaining)
+        /// <summary>
+        /// Update the reset requests remaining for the PasswordResetRequest.
+        /// </summary>
+        /// <param name="resetToken">Reset token used to lookup the PasswordResetRequest object.</param>
+        /// <param name="resendRequestsRemaining">Number of requests remaining to set for the request.</param>
+        /// <returns>True if record is successfully updated, otherwise returns false.</returns>
+        public bool UpdatePasswordResetRequestRequestsRemaining(string resetToken, int resendRequestsRemaining)
         {
             bool updateSuccess = false;
 
@@ -408,6 +394,13 @@ namespace Profiles.Login.Utilities
             return updateSuccess;
         }
 
+        /// <summary>
+        /// Reset the password using the request found associated to the reset token passed.  This method also sets the ResetDate for the PasswordResetRequest
+        /// so the request can not be used again.
+        /// </summary>
+        /// <param name="resetToken">Reset token used to lookup PasswordResetRequest.</param>
+        /// <param name="newPassword">New password to set for the account or accounts associated with the email tied to the PasswordResetRequest.</param>
+        /// <returns>True if password is successfully reset, otherwise returns false.</returns>
         public bool ResetPassword(string resetToken, string newPassword)
         {
             bool resetSuccess = false;
@@ -447,6 +440,8 @@ namespace Profiles.Login.Utilities
             return resetSuccess;
         }
 
+        #endregion
+
         /// <summary>
         /// For User Authentication 
         /// </summary>
@@ -463,8 +458,6 @@ namespace Profiles.Login.Utilities
 
 
 
-
-        #endregion
 
     }
 }

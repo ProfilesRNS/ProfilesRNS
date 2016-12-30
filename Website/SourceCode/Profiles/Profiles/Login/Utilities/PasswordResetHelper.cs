@@ -10,7 +10,7 @@ namespace Profiles.Login.Utilities
 {
     public class PasswordResetHelper
     {
-        /* Settings */
+        /* Variables to hold settings values. */
         private string fromAddressString;
         private string fromNameString;
         private string smtpHostString;
@@ -23,6 +23,9 @@ namespace Profiles.Login.Utilities
 
         /* Valid string used for creation of unique reset string. */
         private const string validRandomStringCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+
+        /* Data IO Object */
+        DataIO data;
 
         /// <summary>
         /// Constructor, throws if configuration is invalid or incomplete. 
@@ -40,8 +43,8 @@ namespace Profiles.Login.Utilities
             /* Validate configuration, if invalid log error and throw. */
             string smtpPortString = ConfigurationManager.AppSettings[PasswordResetConst.SMTP_PORT_SETTING];
             if (string.IsNullOrEmpty(fromAddressString) || string.IsNullOrEmpty(fromNameString) ||
-                string.IsNullOrEmpty(smtpPortString) || string.IsNullOrEmpty(smtpHostString) || 
-                string.IsNullOrEmpty(passwordResetExpireTimeHoursString) || 
+                string.IsNullOrEmpty(smtpPortString) || string.IsNullOrEmpty(smtpHostString) ||
+                string.IsNullOrEmpty(passwordResetExpireTimeHoursString) ||
                 string.IsNullOrEmpty(passwordResetResendRequestsAllowedString))
             {
                 /* Incomplete reset email configuration */
@@ -80,10 +83,16 @@ namespace Profiles.Login.Utilities
                     DebugLogging.Log(errorMessage);
                     throw new Exception(errorMessage);
                 }
+
+                data = new DataIO();
             }
         }
 
-
+        /// <summary>
+        /// Generate a password reset request using the email address passed. 
+        /// </summary>
+        /// <param name="emailToAddress">Email address associated with account for which we want to generate a reset request.</param>
+        /// <returns>Populated PasswordResetRequest object if creation is successful.  Otherwise, a null object is returned.</returns>
         public PasswordResetRequest GeneratePasswordResetRequest(string emailToAddress)
         {
             PasswordResetRequest passwordResetRequest = new PasswordResetRequest() { EmailAddr = emailToAddress };
@@ -100,7 +109,6 @@ namespace Profiles.Login.Utilities
                 passwordResetRequest.ResendRequestsRemaining = this.passwordResetResendRequestAllowed;
 
                 /* Create the actual request row in the database. */
-                DataIO data = new DataIO();
                 bool requestCreateSuccess = data.CreatePasswordResetRequest(passwordResetRequest);
 
                 /* Make sure request was successfully created, if not return a null reset object. */
@@ -120,23 +128,65 @@ namespace Profiles.Login.Utilities
             return passwordResetRequest;
         }
 
+        /// <summary>
+        /// Get the PasswordResetRequest object associated with the email address passed.  Request must be not 
+        /// expired or previously have been used to reset.
+        /// </summary>
+        /// <param name="emailAddress">Email address associated with the account to reset.</param>
+        /// <returns>Populated PasswordResetRequest object if successful, otherwise object returned will be null.</returns>
         public PasswordResetRequest GetPasswordResetRequestByEmail(string emailAddress)
         {
-            DataIO data = new DataIO();
+            PasswordResetRequest passwordResetRequest = null;
 
-            return data.GetPasswordResetRequestByEmail(emailAddress);
+            try
+            {
+                passwordResetRequest = data.GetPasswordResetRequestByEmail(emailAddress);
+            }
+            catch (Exception e)
+            {
+                passwordResetRequest = null;
+                string errorMessage = "Unable to retrieve password reset request.  Reset failed.";
+                DebugLogging.Log(errorMessage + e.Message + e.StackTrace);
+                throw new Exception(errorMessage);
+            }
+
+            return passwordResetRequest;
         }
 
+        /// <summary>
+        /// Get the PasswordResetRequest object associated with the reset token passed.  Request must be not 
+        /// expired or previously have been used to reset.
+        /// </summary>
+        /// <param name="resetToken">Reset token associated with the request.</param>
+        /// <returns>Populated PasswordResetRequest object if successful, otherwise object returned will be null.</returns>
         public PasswordResetRequest GetPasswordResetRequestByToken(string resetToken)
         {
-            DataIO data = new DataIO();
+            PasswordResetRequest passwordResetRequest = null;
 
-            return data.GetPasswordResetRequestByToken(resetToken);
+            try
+            {
+                passwordResetRequest = data.GetPasswordResetRequestByToken(resetToken);
+            }
+            catch (Exception e)
+            {
+                passwordResetRequest = null;
+                string errorMessage = "Unable to retrieve password reset request.  Reset failed.";
+                DebugLogging.Log(errorMessage + e.Message + e.StackTrace);
+                throw new Exception(errorMessage);
+            }
+
+            return passwordResetRequest;
         }
 
+        /// <summary>
+        /// Send a the email for password reset using the PasswordResetRequest object passed.
+        /// </summary>
+        /// <param name="passwordResetRequest">PasswordResetRequest object containing the email address, token and other information needed
+        /// to create the email.</param>
+        /// <returns>True if send is successful, otherwise returns False.</returns>
         public bool SendResetEmail(PasswordResetRequest passwordResetRequest)
         {
-            
+
             bool returnFlag = false;
             try
             {
@@ -167,23 +217,55 @@ namespace Profiles.Login.Utilities
             return returnFlag;
         }
 
+        /// <summary>
+        /// Resend the email for password reset using the PasswordResetRequest object passed.
+        /// </summary>
+        /// <param name="passwordResetRequest">PasswordResetRequest object containing the email address, token and other information needed
+        /// to create the email.</param>
+        /// <returns>True if send is successful, otherwise returns False.</returns>
         public bool ResendResetEmail(PasswordResetRequest passwordResetRequest)
         {
-            /* Decrement the number of resends that can be performed. */
-            passwordResetRequest.ResendRequestsRemaining = passwordResetRequest.ResendRequestsRemaining - 1;
+            bool resetSuccessful = false;
 
-            /* Update the request record. */
-            DataIO data = new DataIO();
-            data.UpdatePasswordResetRequest(passwordResetRequest.ResetToken, passwordResetRequest.ResendRequestsRemaining);
+            try
+            {
+                /* Decrement the number of resends that can be performed. */
+                passwordResetRequest.ResendRequestsRemaining = passwordResetRequest.ResendRequestsRemaining - 1;
 
-            /* Resend the email. */
-            return SendResetEmail(passwordResetRequest);
+                /* Update the request record. */
+                data.UpdatePasswordResetRequestRequestsRemaining(passwordResetRequest.ResetToken, passwordResetRequest.ResendRequestsRemaining);
+
+                /* Resend the email. */
+                resetSuccessful = SendResetEmail(passwordResetRequest);
+            }
+            catch (Exception e)
+            {
+                DebugLogging.Log(e.Message + e.StackTrace);
+                throw;
+            }
+
+            return resetSuccessful;
         }
 
+        /// <summary>
+        /// Reset the password using the PasswordReset entry associated with the token passed.  
+        /// </summary>
+        /// <param name="resetToken">Password reset token associated with the request to use for reset.</param>
+        /// <param name="newPassword">Password that will be used for all accounts associated with the email address in the 
+        /// reset request.</param>
+        /// <returns>True if send is successful, otherwise returns False.</returns>
         public bool ResetPassword(string resetToken, string newPassword)
         {
-            DataIO data = new DataIO();
-            bool resetSuccessful = data.ResetPassword(resetToken, newPassword);
+            bool resetSuccessful = false;
+            try
+            {
+                resetSuccessful = data.ResetPassword(resetToken, newPassword);
+            }
+            catch (Exception e)
+            {
+                DebugLogging.Log(e.Message + e.StackTrace);
+                throw;
+            }
             return resetSuccessful;
         }
 
@@ -211,6 +293,27 @@ namespace Profiles.Login.Utilities
                 }
             }
             return returnString;
+        }
+
+        public SimpleMathEquasionAndAnswer GetRandomMathEquationAndAnswer()
+        {
+            SimpleMathEquasionAndAnswer simpleMathEquasionAndAnswer = new SimpleMathEquasionAndAnswer();
+            Random random = new Random();
+            int operator1 = random.Next(1, 9);
+            int operator2 = random.Next(1, 9);
+            int coinFlip = random.Next(0, 2);
+
+            if (coinFlip > 0 && operator1 >= operator2)
+            {
+                simpleMathEquasionAndAnswer.QuestionText = string.Format("What is {0} minus {1}?", operator1, operator2);
+                simpleMathEquasionAndAnswer.Answer = operator1 - operator2;
+            }
+            else
+            {
+                simpleMathEquasionAndAnswer.QuestionText = string.Format("What is {0} plus {1}?", operator1, operator2);
+                simpleMathEquasionAndAnswer.Answer = operator1 + operator2;
+            }
+            return simpleMathEquasionAndAnswer;
         }
     }
 }
