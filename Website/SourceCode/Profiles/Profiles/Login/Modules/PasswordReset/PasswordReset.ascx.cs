@@ -60,7 +60,7 @@ namespace Profiles.Login.Modules.PasswordReset
                 string resetEmailText = txtEmailAddress.Text;
                 if (!string.IsNullOrEmpty(resetEmailText))
                 {
-                    HandleResetRequest(resetEmailText);
+                    handleResetRequest(resetEmailText);
                 }
             }
             else
@@ -92,7 +92,7 @@ namespace Profiles.Login.Modules.PasswordReset
             return simpleMathAnswerCorrect;
         }
 
-        private void HandleResetRequest(string emailAddress)
+        private void handleResetRequest(string emailAddress)
         {
             /* Create the password reset email object. */
             Utilities.PasswordResetHelper passwordResetHelper = new Utilities.PasswordResetHelper();

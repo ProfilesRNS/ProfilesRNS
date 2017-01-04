@@ -1,8 +1,3 @@
-USE [ProfilesRNS_Umass]
-
-GO
-
-
 SET ANSI_NULLS ON
 GO
 
