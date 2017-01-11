@@ -96,10 +96,18 @@
     <Content Include="Framework\Images\Orcid_Logo_rgb.png" />
     <Content Include="Framework\Images\Orcid_symbol_rgb.png" />
     <Content Include="Global.asax" />
+    <Content Include="Login\Images\password_reset_banner.png" />
     <Content Include="Login\Modules\ADLogin\ADLogin.ascx" />
+    <Content Include="Login\Modules\PasswordResetConfirm\PasswordResetConfirm.ascx" />
+    <Content Include="Login\Modules\PasswordReset\PasswordReset.ascx" />
     <Content Include="Login\Modules\ShibLogin\ShibLogin.ascx" />
+    <Content Include="Login\PasswordResetConfirm.aspx" />
+    <Content Include="Login\PasswordReset.aspx" />
     <Content Include="Login\PresentationXML\ADLoginFormPresentation.xml" />
+    <Content Include="Login\PresentationXML\PasswordResetConfirmPresentation.xml" />
+    <Content Include="Login\PresentationXML\PasswordResetPresentation.xml" />
     <Content Include="Login\PresentationXML\ShibbolethLoginPresentation.xml" />
+    <Content Include="Login\EmailTemplate\ResetEmailTemplate.html" />
     <Content Include="ORCID\CreateBatch.aspx" />
     <Content Include="ORCID\CreateMyORCID.aspx" />
     <Content Include="ORCID\CreationConfirmation.aspx" />
@@ -346,6 +354,20 @@
     <Compile Include="Login\Modules\Login\Login.ascx.designer.cs">
       <DependentUpon>Login.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Login\Modules\PasswordResetConfirm\PasswordResetConfirm.ascx.cs">
+      <DependentUpon>PasswordResetConfirm.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login\Modules\PasswordResetConfirm\PasswordResetConfirm.ascx.designer.cs">
+      <DependentUpon>PasswordResetConfirm.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Login\Modules\PasswordReset\PasswordReset.ascx.cs">
+      <DependentUpon>PasswordReset.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login\Modules\PasswordReset\PasswordReset.ascx.designer.cs">
+      <DependentUpon>PasswordReset.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Login\Modules\ShibLogin\ShibLogin.ascx.cs">
       <DependentUpon>ShibLogin.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -353,6 +375,25 @@
     <Compile Include="Login\Modules\ShibLogin\ShibLogin.ascx.designer.cs">
       <DependentUpon>ShibLogin.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Login\Objects\PasswordResetRequest.cs" />
+    <Compile Include="Login\Objects\ResetEmail.cs" />
+    <Compile Include="Login\Objects\SimpleMathEquationAndAnswer.cs" />
+    <Compile Include="Login\PasswordResetConfirm.aspx.cs">
+      <DependentUpon>PasswordResetConfirm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login\PasswordResetConfirm.aspx.designer.cs">
+      <DependentUpon>PasswordResetConfirm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login\PasswordReset.aspx.cs">
+      <DependentUpon>PasswordReset.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login\PasswordReset.aspx.designer.cs">
+      <DependentUpon>PasswordReset.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login\Utilities\PasswordResetConst.cs" />
+    <Compile Include="Login\Utilities\PasswordResetHelper.cs" />
     <Compile Include="ORCID\CreateBatch.aspx.cs">
       <DependentUpon>CreateBatch.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -826,6 +867,9 @@
     </Compile>
     <Compile Include="Profile\Modules\CustomViewPersonGeneralInfo\EmailAudioHandler.ashx.cs">
       <DependentUpon>EmailAudioHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\Modules\CustomViewPersonGeneralInfo\ImageHandler.ashx.cs">
+      <DependentUpon>ImageHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Profile\Modules\CustomViewPersonGeneralInfo\vcard.aspx.cs">
       <DependentUpon>vcard.aspx</DependentUpon>
@@ -1674,6 +1718,7 @@
     <None Include="ORCID\ORCIDPrivacySettingsandProfiles.pdf" />
     <Content Include="Profile\Modules\CustomViewPersonGeneralInfo\EmailAudioHandler.ashx" />
     <Content Include="Profile\Modules\NetworkClusterFlash\NetworkClusterTemplate.Master" />
+    <Content Include="Profile\Modules\CustomViewPersonGeneralInfo\ImageHandler.ashx" />
     <None Include="Profile\Modules\NetworkClusterFlash\scriptaculous\CHANGELOG" />
     <None Include="Profile\Modules\NetworkClusterFlash\scriptaculous\MIT-LICENSE" />
     <None Include="Profile\Modules\NetworkClusterFlash\scriptaculous\README.rdoc" />
@@ -1689,6 +1734,7 @@
     <None Include="Profile\Modules\NetworkRadial\scriptaculous\README.rdoc" />
     <Content Include="Profile\Modules\CustomViewPersonGeneralInfo\PhotoHandler.ashx" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
+    <None Include="Properties\PublishProfiles\Profiles.pubxml" />
     <None Include="Properties\PublishProfiles\Profiles2.9.0.pubxml" />
     <None Include="Properties\PublishProfiles\Profiles2.9.0_debug_stg.pubxml" />
     <None Include="Properties\Settings.settings">

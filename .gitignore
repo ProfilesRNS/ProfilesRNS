@@ -194,3 +194,4 @@ UpgradeLog.XML
 /Website/SourceCode/Profiles/packages/HtmlAgilityPack.1.4.9
 /Website/SourceCode/Profiles/packages/Newtonsoft.Json.8.0.3
 /Website/SourceCode/Profiles/packages/VDS.Common.1.6.4/VDS.Common.1.6.4.nupkg
+/Database/ProfilesRNS_CreateSchema.sql

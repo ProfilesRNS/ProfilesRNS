@@ -2,6 +2,53 @@
     Inherits="Profiles.Edit.Modules.EditDataTypeProperty.EditDataTypeProperty" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register TagName="Options" TagPrefix="security" Src="~/Edit/Modules/SecurityOptions/SecurityOptions.ascx" %>
+<script type="text/javascript">
+
+    /* Names of the links provided in the GridView */
+    var cancelLink = 'lnkCancel';
+    var editLink = 'lnkEdit';
+    
+    /* Add function that will fire after ajax request completes on the page */
+    $(document).ready(function() {
+
+        Sys.WebForms.PageRequestManager.getInstance().add_endRequest(endRequestHandler);
+
+    });
+
+        function endRequestHandler(sender, args) {
+
+            /* Edit Clicked */
+            if (sender._postBackSettings.sourceElement.id.endsWith(editLink))
+            {
+                /* Remove any existing instances of the editor */
+                tinymce.EditorManager.remove('textarea');
+
+                /* Give the removal just a fraction of a second to run before we re-init the editor */
+                setTimeout(function () {
+
+                    tinymce.init({
+                        selector: 'textarea'
+                    }); 
+
+                }, 10); 
+
+                //console.log("User Clicked Edit");
+
+            }
+
+            /* Cancel clicked */
+            if (sender._postBackSettings.sourceElement.id.endsWith(cancelLink)) {
+                //console.log("User Clicked Cancel");
+            }
+        }
+
+        function beforePostback()
+        {
+            tinymce.triggerSave();
+        }
+    </script>
+
+
 <table width="100%">
     <tr>
         <td align="left" style="padding-right: 12px">
@@ -54,7 +101,7 @@
                         <table border="0" cellspacing="2" cellpadding="4">
                             <tr>
                                 <td>
-                                    <asp:TextBox ID="txtInsertLabel" runat="server" Rows="5" Width="500px" TextMode="MultiLine" title="Enter Text"></asp:TextBox>
+                                    <asp:TextBox ID="txtInsertLabel" runat="server" Rows="5" Width="500px" TextMode="MultiLine" title="Enter Text" ></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -147,3 +194,5 @@
         </table>
     </ContentTemplate>
 </asp:UpdatePanel>
+
+

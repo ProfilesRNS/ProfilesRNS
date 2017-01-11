@@ -316,6 +316,59 @@ namespace Profiles.Profile.Utilities
             return new System.IO.MemoryStream((byte[])result);
         }
 
+
+        //Added in for Narrative images
+        public System.IO.Stream GetUserImageList(Int64 NodeID, bool harvarddefault, int photoNum)
+        {
+            Object result = null;
+            Edit.Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
+            //Use the editor method to resize the photo to 150.
+            Edit.Utilities.DataIO resize = new Profiles.Edit.Utilities.DataIO();
+
+            try
+            {
+                string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+
+
+                SqlConnection dbconnection = new SqlConnection(connstr);
+                dbconnection.Open();
+
+                SqlCommand dbcommand;
+                if (harvarddefault)
+                {
+                    dbcommand = new SqlCommand("select photo from [Catalyst.].[Person.Image] where personid = " + data.GetPersonID(NodeID).ToString());
+                    dbcommand.CommandType = CommandType.Text;
+                    dbcommand.CommandTimeout = base.GetCommandTimeout();
+                }
+                else
+                {
+                    dbcommand = new SqlCommand("[Profile.Data].[Person.GetImages]");
+                    dbcommand.CommandType = CommandType.StoredProcedure;
+                    dbcommand.CommandTimeout = base.GetCommandTimeout();
+                    dbcommand.Parameters.Add(new SqlParameter("@NodeID", NodeID));
+                    dbcommand.Parameters.Add(new SqlParameter("@photoNum", photoNum));
+                }
+                dbcommand.Connection = dbconnection;
+
+                //result = resize.ResizeImageFile((byte[])dbcommand.ExecuteScalar(), 150, 300);
+                result = (byte[])dbcommand.ExecuteScalar();
+
+                if (result == null)
+                {
+                    result = (byte[])System.Text.Encoding.ASCII.GetBytes("null");
+                }
+
+                dbconnection.Close();
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return new System.IO.MemoryStream((byte[])result);
+        }
+
         #endregion
 
         #region "CustomViewPersonSameDepartment"

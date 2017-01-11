@@ -53,6 +53,10 @@ namespace Profiles.Login.Modules.Login
                     else
                         Response.Redirect(Request.QueryString["redirectto"].ToString());
                 }
+                else
+                {
+                    this.txtUserName.Focus();
+                }
             }
 
 
@@ -120,7 +124,9 @@ namespace Profiles.Login.Modules.Login
 
 
         }
-
-
+        public string GetURLDomain()
+        {
+            return Root.Domain;
+        }
     }
 }
