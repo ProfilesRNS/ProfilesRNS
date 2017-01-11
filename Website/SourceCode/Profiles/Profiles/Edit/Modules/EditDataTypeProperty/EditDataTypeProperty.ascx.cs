@@ -23,6 +23,7 @@ using Profiles.Framework.Utilities;
 using Profiles.Profile.Utilities;
 using System.Globalization;
 using Profiles.Edit.Utilities;
+using System.Web.UI.HtmlControls;
 
 namespace Profiles.Edit.Modules.EditDataTypeProperty
 {
@@ -38,6 +39,19 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
             {
                 Session["pnlInsertProperty.Visible"] = null;
             }
+
+            /* Add TinyMCE Editor */
+            HtmlGenericControl jsscript = new HtmlGenericControl("script");
+            jsscript.Attributes.Add("type", "text/javascript");
+            jsscript.Attributes.Add("src", Root.Domain + "/Framework/JavaScript/tinymce/tinymce.min.js");
+            Page.Header.Controls.Add(jsscript);
+
+            /* Add client side before postback code to save the editor contents on submit.  */
+            if (!ScriptManager.GetCurrent(Page).IsInAsyncPostBack)
+            {
+                ScriptManager.RegisterOnSubmitStatement(this, this.GetType(), "beforePostback", "beforePostback()");
+            } 
+
 
         }
 
