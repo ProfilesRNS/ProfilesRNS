@@ -571,3 +571,9 @@ type Profile.Data.Funding.Entity.UpdateEntityOnePerson.StoredProcedure.sql
 type Profile.Data.Funding.GetFundingItem.StoredProcedure.sql
 type Profile.Data.Funding.GetPersonFunding.StoredProcedure.sql
 type Edit.Module.CustomEditEducationalTraining.StoreItem.StoredProcedure.sql
+type User.Account.PasswordResetRequest.Table.sql
+type User.Account.PasswordReset.GetPasswordResetRequestByToken.StoredProcedure.sql
+type User.Account.PasswordReset.GetPasswordResetRequestByEmail.StoredProcedure.sql
+type User.Account.PasswordReset.CreatePasswordResetRequest.StoredProcedure.sql
+type User.Account.PasswordReset.ResetPassword.StoredProcedure.sql
+type User.Account.PasswordReset.UpdatePasswordResetRequestRequestsRemaining.StoredProcedure.sql
