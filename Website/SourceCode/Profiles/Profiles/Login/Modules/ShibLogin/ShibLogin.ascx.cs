@@ -48,7 +48,9 @@ namespace Profiles.Login.Modules.ShibLogin
                     if (ConfigurationManager.AppSettings["Shibboleth.ShibIdentityProvider"] == null ||
                         ConfigurationManager.AppSettings["Shibboleth.ShibIdentityProvider"].ToString().Equals(Request.Headers.Get("ShibIdentityProvider").ToString(), StringComparison.InvariantCultureIgnoreCase))
                     {
-                        String userName = Request.Headers.Get(ConfigurationManager.AppSettings["Shibboleth.UserNameHeader"].ToString()); //"025693078";
+                        //String userName = Request.Headers.Get(ConfigurationManager.AppSettings["Shibboleth.UserNameHeader"].ToString()); //"025693078";
+                        String userName = Request[ConfigurationManager.AppSettings["Shibboleth.UserNameHeader"]].ToString(); //"025693078";
+
                         if (userName != null && userName.Trim().Length > 0)
                         {
                             Profiles.Login.Utilities.DataIO data = new Profiles.Login.Utilities.DataIO();
@@ -64,6 +66,7 @@ namespace Profiles.Login.Modules.ShibLogin
                     }
                     if (!authenticated)
                     {
+                        Framework.Utilities.DebugLogging.Log("Ketan - notauthenticated");
                         // try and just put their name in the session.
                         //sm.Session().ShortDisplayName = Request.Headers.Get("ShibdisplayName");
                         RedirectAuthenticatedUser();
@@ -78,14 +81,46 @@ namespace Profiles.Login.Modules.ShibLogin
                     {
                         RedirectAuthenticatedUser();
                     }
-                    else
+                    else if (!String.IsNullOrEmpty(Request[ConfigurationManager.AppSettings["Shibboleth.SessionID"].ToString()].ToString()))
+
+
+                    {
+                        bool authenticated = false;
+
+                        String userName = Request[ConfigurationManager.AppSettings["Shibboleth.UserNameHeader"]].ToString(); //"025693078";
+                        if (userName != null && userName.Trim().Length > 0)
+                        {
+                            Framework.Utilities.DebugLogging.Log("Ketan - username " + userName);
+                            Profiles.Login.Utilities.DataIO data = new Profiles.Login.Utilities.DataIO();
+                            Profiles.Login.Utilities.User user = new Profiles.Login.Utilities.User();
+
+                            user.UserName = userName;
+                            if (data.UserLoginExternal(ref user))
+                            {
+                                Framework.Utilities.DebugLogging.Log("Ketan - data.userloginexternal " + userName);
+                                authenticated = true;
+                                RedirectAuthenticatedUser();
+                            }
+                        }
+
+
+
+
+
+
+
+
+                        }
+
+                        else
                     {
                         string redirect = Root.Domain + "/login/default.aspx?method=shibboleth";
                         if (Request.QueryString["redirectto"] == null && Request.QueryString["edit"] == "true")
                             redirect += "&edit=true";
+                        
                         else
                             redirect += "&redirectto=" + Request.QueryString["redirectto"].ToString();
-
+                            redirect += "&target=" + Request.QueryString["redirectto"].ToString();
                         Response.Redirect(ConfigurationManager.AppSettings["Shibboleth.LoginURL"].ToString().Trim() +
                             HttpUtility.UrlEncode(redirect));
                     }
@@ -98,32 +133,46 @@ namespace Profiles.Login.Modules.ShibLogin
 
         private void RedirectAuthenticatedUser()
         {
+
+            Framework.Utilities.DebugLogging.Log("Ketan - redirectto " + Request.QueryString["redirectto"]);
+            Framework.Utilities.DebugLogging.Log("Ketan - edit " + Request.QueryString["edit"]);
+
             if (Request.QueryString["redirectto"] == null && Request.QueryString["edit"] == "true")
             {
+                Framework.Utilities.DebugLogging.Log("Ketan - redirecauser 1 ");
                 Response.Redirect(Root.Domain + "/edit/" + sm.Session().NodeID);
             }
             else if (Request.QueryString["redirectto"] != null)
+
             {
                 if ("mypage".Equals(Request.QueryString["redirectto"].ToLower())) 
                 {
+                    Framework.Utilities.DebugLogging.Log("Ketan - redirecauser 2 ");
                     Response.Redirect(Root.Domain + "/profile/" + sm.Session().NodeID);
                 }
                 else if ("myproxies".Equals(Request.QueryString["redirectto"].ToLower()))
                 {
+                    Framework.Utilities.DebugLogging.Log("Ketan - redirecauser 3 ");
                     Response.Redirect(Root.Domain + "/proxy/default.aspx?subject=" + sm.Session().NodeID);
                 }
                 else 
                 {
+                    Framework.Utilities.DebugLogging.Log("Ketan - redirecauser 4 ");
                     Response.Redirect(Request.QueryString["redirectto"].ToString());
                 }
             }
+            Framework.Utilities.DebugLogging.Log("Ketan - redirecauser 5 ");
             Response.Redirect(Root.Domain);
         }
 
         public ShibLogin() { }
         public ShibLogin(XmlDocument pagedata, List<ModuleParams> moduleparams, XmlNamespaceManager pagenamespaces)
         {
+            Framework.Utilities.DebugLogging.Log("Ketan - session management 1");
+            Framework.Utilities.DebugLogging.Log("Ketan - session management 1" + HttpContext.Current.Session["PROFILES_SESSION"].ToString());
             sm = new Profiles.Framework.Utilities.SessionManagement();
+            Framework.Utilities.DebugLogging.Log("Ketan - session management 2" + sm.ToString());
+            Framework.Utilities.DebugLogging.Log("Ketan - session management 2" + HttpContext.Current.Session["PROFILES_SESSION"].ToString());
         }
 
     }

@@ -1736,6 +1736,7 @@
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Properties\PublishProfiles\Profiles.pubxml" />
     <None Include="Properties\PublishProfiles\Profiles2.9.0.pubxml" />
+    <None Include="Properties\PublishProfiles\Profiles2.9.0_debug_stg.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

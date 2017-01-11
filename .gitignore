@@ -188,4 +188,10 @@ UpgradeLog.XML
 /Documentation/._SCriptMap-rdf_0.tiff
 /Documentation/._ProfilesRNS_InstallGuide.docx
 /Documentation/~$ofilesRNS_InstallGuide.docx
+/Documentation
+/Website/SourceCode/Profiles/packages/VDS.Common.1.6.4/lib
+/Website/SourceCode/Profiles/Profiles
+/Website/SourceCode/Profiles/packages/HtmlAgilityPack.1.4.9
+/Website/SourceCode/Profiles/packages/Newtonsoft.Json.8.0.3
+/Website/SourceCode/Profiles/packages/VDS.Common.1.6.4/VDS.Common.1.6.4.nupkg
 /Database/ProfilesRNS_CreateSchema.sql
