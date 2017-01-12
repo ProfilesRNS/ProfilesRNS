@@ -24,6 +24,7 @@ using Profiles.Profile.Utilities;
 using System.Globalization;
 using Profiles.Edit.Utilities;
 using System.Web.UI.HtmlControls;
+using System.Configuration;
 
 namespace Profiles.Edit.Modules.EditDataTypeProperty
 {
@@ -31,6 +32,8 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
     {
         Edit.Utilities.DataIO data;
         Profiles.Profile.Utilities.DataIO propdata;
+
+        private const string RICHTEXTEDITOR_EDITHTMLSOURCE_ENABLE_SETTING = "RichTextEditor.EditHTMLSource.Enable";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -368,6 +371,42 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
 
         }
         #endregion
+
+        /// <summary>
+        /// Gets the rich text editor toolbar options that are enabled / disabled through configuration.  
+        /// </summary>
+        /// <returns>Text to append to the toolbar setting in the tinymce editor.</returns>
+        public string getHTMLEditorConfigurableToolbarOptions()
+        {
+            /* Determine whether the code view in the editor should be enabled or disabled. */
+            string richTextEditHtmlSourceEnable = ConfigurationManager.AppSettings[RICHTEXTEDITOR_EDITHTMLSOURCE_ENABLE_SETTING];
+            if (!string.IsNullOrEmpty(richTextEditHtmlSourceEnable) && richTextEditHtmlSourceEnable.ToLower().Equals("true"))
+            {
+                return " | code";
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
+        /// <summary>
+        /// Get the rich text edtior plugins that are enabled / disabled through configuration.
+        /// </summary>
+        /// <returns>Text to append to the plugins setting in the tinymce editor.</returns>
+        public string getHTMLEditorConfigurablePluginsOptions()
+        {
+            /* Determine whether the code plugin should be enabled or disabled.  */
+            string richTextEditHtmlSourceEnable = ConfigurationManager.AppSettings[RICHTEXTEDITOR_EDITHTMLSOURCE_ENABLE_SETTING];
+            if (!string.IsNullOrEmpty(richTextEditHtmlSourceEnable) && richTextEditHtmlSourceEnable.ToLower().Equals("true"))
+            {
+                return " code";
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
 
         private Int64 SubjectID { get; set; }
         private Int64 PredicateID { get; set; }

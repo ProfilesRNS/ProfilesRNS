@@ -7,6 +7,7 @@
     /* Names of the links provided in the GridView */
     var cancelLink = 'lnkCancel';
     var editLink = 'lnkEdit';
+    var editProperty = 'btnEditProperty';
     
     /* Add function that will fire after ajax request completes on the page */
     $(document).ready(function() {
@@ -15,38 +16,55 @@
 
     });
 
-        function endRequestHandler(sender, args) {
+    function endRequestHandler(sender, args) {
 
-            /* Edit Clicked */
-            if (sender._postBackSettings.sourceElement.id.endsWith(editLink))
-            {
-                /* Remove any existing instances of the editor */
-                tinymce.EditorManager.remove('textarea');
-
-                /* Give the removal just a fraction of a second to run before we re-init the editor */
-                setTimeout(function () {
-
-                    tinymce.init({
-                        selector: 'textarea'
-                    }); 
-
-                }, 10); 
-
-                //console.log("User Clicked Edit");
-
-            }
-
-            /* Cancel clicked */
-            if (sender._postBackSettings.sourceElement.id.endsWith(cancelLink)) {
-                //console.log("User Clicked Cancel");
-            }
-        }
-
-        function beforePostback()
+        /* Edit Button on row clicked */
+        if ( sender._postBackSettings.sourceElement.id.endsWith(editLink) )
         {
-            tinymce.triggerSave();
+            initEditor();
+
         }
-    </script>
+
+        /* Initial Add */
+        if ( sender._postBackSettings.sourceElement.id.endsWith(editProperty) ) {
+
+            initEditor();
+        }
+
+        /* Cancel clicked */
+        if (sender._postBackSettings.sourceElement.id.endsWith(cancelLink)) {
+            //console.log("User Clicked Cancel");
+        }
+    }
+
+    function initEditor()
+    {
+        /* Remove any existing instances of the editor */
+        tinymce.EditorManager.remove('textarea');
+
+        /* Give the removal just a fraction of a second to run before we re-init the editor */
+        setTimeout(function () {
+
+            tinymce.init({
+                selector: 'textarea',
+                menubar: '',
+                plugins: 'paste lists<%= getHTMLEditorConfigurablePluginsOptions() %>',
+                toolbar: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | indent outdent | bullist numlist<%= getHTMLEditorConfigurableToolbarOptions() %>',
+                paste_word_valid_elements: "b,strong,i,em,h1,h2,h3,p,ol,ul,li",
+                paste_retain_style_properties: "color font-size", 
+                width: 630,
+                height: 400
+            });
+
+        }, 10);
+    }
+
+    function beforePostback()
+    {
+        tinymce.triggerSave();
+    }
+
+</script>
 
 
 <table width="100%">
@@ -88,7 +106,7 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="3">                  
+                <td colspan="3">
                     <asp:Repeater ID="RptrEditProperty" runat="server" Visible="false">
                         <ItemTemplate>
                             <asp:Label ID="lblEditProperty" runat="server" Text='<%#Eval("Label").ToString() %>' />
@@ -100,8 +118,8 @@
                         Visible="false">
                         <table border="0" cellspacing="2" cellpadding="4">
                             <tr>
-                                <td>
-                                    <asp:TextBox ID="txtInsertLabel" runat="server" Rows="5" Width="500px" TextMode="MultiLine" title="Enter Text" ></asp:TextBox>
+                                <td width="750">
+                                    <asp:TextBox ID="txtInsertLabel" runat="server" Rows="5" Width="700px" TextMode="MultiLine" title="Enter Text" ></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -141,7 +159,7 @@
                                     <HeaderStyle HorizontalAlign="Left" />
                                     <ItemStyle HorizontalAlign="Left" />
                                 </asp:TemplateField>
-                                  <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="100px" HeaderText="Action"
+                                  <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="100px" HeaderText="Action" ItemStyle-VerticalAlign="Top"
                                     ShowHeader="False">
                                     <EditItemTemplate>
                                         <table class="actionbuttons">
