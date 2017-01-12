@@ -47,6 +47,11 @@
 
             tinymce.init({
                 selector: 'textarea',
+                menubar: '',
+                plugins: 'paste lists<%= getHTMLEditorConfigurablePluginsOptions() %>',
+                toolbar: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | indent outdent | bullist numlist<%= getHTMLEditorConfigurableToolbarOptions() %>',
+                paste_word_valid_elements: "b,strong,i,em,h1,h2,h3,p,ol,ul,li",
+                paste_retain_style_properties: "color font-size", 
                 width: 630,
                 height: 400
             });
@@ -101,7 +106,7 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="3">                  
+                <td colspan="3">
                     <asp:Repeater ID="RptrEditProperty" runat="server" Visible="false">
                         <ItemTemplate>
                             <asp:Label ID="lblEditProperty" runat="server" Text='<%#Eval("Label").ToString() %>' />

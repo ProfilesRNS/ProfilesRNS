@@ -24,6 +24,7 @@ using Profiles.Profile.Utilities;
 using System.Globalization;
 using Profiles.Edit.Utilities;
 using System.Web.UI.HtmlControls;
+using System.Configuration;
 
 namespace Profiles.Edit.Modules.EditDataTypeProperty
 {
@@ -368,6 +369,34 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
 
         }
         #endregion
+
+        private const string RICHTEXTEDITOR_EDITHTMLSOURCE_ENABLE_SETTING = "RichTextEditor.EditHTMLSource.Enable";
+
+        public string getHTMLEditorConfigurableToolbarOptions()
+        {
+            string richTextEditHtmlSourceEnable = ConfigurationManager.AppSettings[RICHTEXTEDITOR_EDITHTMLSOURCE_ENABLE_SETTING];
+            if (!string.IsNullOrEmpty(richTextEditHtmlSourceEnable) && richTextEditHtmlSourceEnable.ToLower().Equals("true"))
+            {
+                return " | code";
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
+        public string getHTMLEditorConfigurablePluginsOptions()
+        {
+            string richTextEditHtmlSourceEnable = ConfigurationManager.AppSettings[RICHTEXTEDITOR_EDITHTMLSOURCE_ENABLE_SETTING];
+            if (!string.IsNullOrEmpty(richTextEditHtmlSourceEnable) && richTextEditHtmlSourceEnable.ToLower().Equals("true"))
+            {
+                return " code";
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
 
         private Int64 SubjectID { get; set; }
         private Int64 PredicateID { get; set; }
