@@ -33,6 +33,8 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
         Edit.Utilities.DataIO data;
         Profiles.Profile.Utilities.DataIO propdata;
 
+        private const string RICHTEXTEDITOR_EDITHTMLSOURCE_ENABLE_SETTING = "RichTextEditor.EditHTMLSource.Enable";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             this.FillPropertyGrid(false);
@@ -370,10 +372,13 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
         }
         #endregion
 
-        private const string RICHTEXTEDITOR_EDITHTMLSOURCE_ENABLE_SETTING = "RichTextEditor.EditHTMLSource.Enable";
-
+        /// <summary>
+        /// Gets the rich text editor toolbar options that are enabled / disabled through configuration.  
+        /// </summary>
+        /// <returns>Text to append to the toolbar setting in the tinymce editor.</returns>
         public string getHTMLEditorConfigurableToolbarOptions()
         {
+            /* Determine whether the code view in the editor should be enabled or disabled. */
             string richTextEditHtmlSourceEnable = ConfigurationManager.AppSettings[RICHTEXTEDITOR_EDITHTMLSOURCE_ENABLE_SETTING];
             if (!string.IsNullOrEmpty(richTextEditHtmlSourceEnable) && richTextEditHtmlSourceEnable.ToLower().Equals("true"))
             {
@@ -385,8 +390,13 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
             }
         }
 
+        /// <summary>
+        /// Get the rich text edtior plugins that are enabled / disabled through configuration.
+        /// </summary>
+        /// <returns>Text to append to the plugins setting in the tinymce editor.</returns>
         public string getHTMLEditorConfigurablePluginsOptions()
         {
+            /* Determine whether the code plugin should be enabled or disabled.  */
             string richTextEditHtmlSourceEnable = ConfigurationManager.AppSettings[RICHTEXTEDITOR_EDITHTMLSOURCE_ENABLE_SETTING];
             if (!string.IsNullOrEmpty(richTextEditHtmlSourceEnable) && richTextEditHtmlSourceEnable.ToLower().Equals("true"))
             {
