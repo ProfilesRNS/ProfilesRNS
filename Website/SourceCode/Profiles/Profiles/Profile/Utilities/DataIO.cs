@@ -329,36 +329,26 @@ namespace Profiles.Profile.Utilities
             {
                 string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
 
-
-                SqlConnection dbconnection = new SqlConnection(connstr);
-                dbconnection.Open();
-
-                SqlCommand dbcommand;
-                if (harvarddefault)
+                using (SqlConnection dbconnection = new SqlConnection(connstr))
                 {
-                    dbcommand = new SqlCommand("select photo from [Catalyst.].[Person.Image] where personid = " + data.GetPersonID(NodeID).ToString());
-                    dbcommand.CommandType = CommandType.Text;
-                    dbcommand.CommandTimeout = base.GetCommandTimeout();
-                }
-                else
-                {
+                    dbconnection.Open();
+
+                    SqlCommand dbcommand;
                     dbcommand = new SqlCommand("[Profile.Data].[Person.GetImages]");
                     dbcommand.CommandType = CommandType.StoredProcedure;
                     dbcommand.CommandTimeout = base.GetCommandTimeout();
                     dbcommand.Parameters.Add(new SqlParameter("@NodeID", NodeID));
                     dbcommand.Parameters.Add(new SqlParameter("@photoNum", photoNum));
+                    dbcommand.Connection = dbconnection;
+                    
+                    result = (byte[])dbcommand.ExecuteScalar();
+
+                    if (result == null)
+                    {
+                        result = (byte[])System.Text.Encoding.ASCII.GetBytes("null");
+                    }
+
                 }
-                dbcommand.Connection = dbconnection;
-
-                //result = resize.ResizeImageFile((byte[])dbcommand.ExecuteScalar(), 150, 300);
-                result = (byte[])dbcommand.ExecuteScalar();
-
-                if (result == null)
-                {
-                    result = (byte[])System.Text.Encoding.ASCII.GetBytes("null");
-                }
-
-                dbconnection.Close();
 
             }
             catch (Exception e)

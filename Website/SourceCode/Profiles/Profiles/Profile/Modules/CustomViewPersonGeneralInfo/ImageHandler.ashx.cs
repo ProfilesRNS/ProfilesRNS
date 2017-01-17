@@ -60,31 +60,21 @@ namespace Profiles.Profile.Modules.ProfileImage
                 person = data.GetRDFData(request);
                 XmlNamespaceManager namespaces =  xmlnamespace.LoadNamespaces(person);
 
-  //              if (person.SelectSingleNode("rdf:RDF/rdf:Description[1]/prns:mainImage/@rdf:resource", namespaces) != null)
-  //              {
+                //Set up the response settings
+                context.Response.ContentType = "image/jpeg";
+                context.Response.Cache.SetCacheability(HttpCacheability.Public);
+                context.Response.BufferOutput = false;
 
-                    //Set up the response settings
-                    context.Response.ContentType = "image/jpeg";
-                    context.Response.Cache.SetCacheability(HttpCacheability.Public);
-                    context.Response.BufferOutput = false;
+                Stream stream = data.GetUserImageList(nodeid,harvarddefault, photoNum);
 
-                    Stream stream = data.GetUserImageList(nodeid,harvarddefault, photoNum);
-
-                    const int buffersize = 1024 * 16;
-                    byte[] buffer2 = new byte[buffersize];
-                    int count = stream.Read(buffer2, 0, buffersize);
-                    while (count > 0)
-                    {
-                        context.Response.OutputStream.Write(buffer2, 0, count);
-                        count = stream.Read(buffer2, 0, buffersize);
-                    }
-
-//                }
- //               else
-  //              {
-
-//                    context.Response.Write("No Image Found");
-//                }
+                const int buffersize = 1024 * 16;
+                byte[] buffer2 = new byte[buffersize];
+                int count = stream.Read(buffer2, 0, buffersize);
+                while (count > 0)
+                {
+                    context.Response.OutputStream.Write(buffer2, 0, count);
+                    count = stream.Read(buffer2, 0, buffersize);
+                }
             }
         }
 
