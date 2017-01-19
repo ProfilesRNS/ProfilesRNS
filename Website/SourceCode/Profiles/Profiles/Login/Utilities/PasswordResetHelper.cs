@@ -14,11 +14,13 @@ namespace Profiles.Login.Utilities
         private string fromAddressString;
         private string fromNameString;
         private string smtpHostString;
+        private string smtpUserNameString;
+        private string smtpPasswordString;
         private string passwordResetSubjectString;
         private int smtpPort = 0;
-        private string passwordResetExpireTimeHoursString = string.Empty;
+        private string passwordResetExpireTimeHoursString;
         private int passwordResetExpireTimeHours = 0;
-        private string passwordResetResendRequestsAllowedString = string.Empty;
+        private string passwordResetResendRequestsAllowedString;
         private int passwordResetResendRequestAllowed = 0;
 
         /* Valid string used for creation of unique reset string. */
@@ -35,20 +37,23 @@ namespace Profiles.Login.Utilities
             /* Get required email settings from config */
             this.fromAddressString = ConfigurationManager.AppSettings[PasswordResetConst.PASSWORD_RESET_FROM_ADDR_SETTING];
             this.fromNameString = ConfigurationManager.AppSettings[PasswordResetConst.PASSWORD_RESET_FROM_NAME_SETTING];
+            string smtpPortString = ConfigurationManager.AppSettings[PasswordResetConst.SMTP_PORT_SETTING];
             this.smtpHostString = ConfigurationManager.AppSettings[PasswordResetConst.SMTP_HOST_SETTING];
+            this.smtpUserNameString = ConfigurationManager.AppSettings[PasswordResetConst.SMTP_USERNAME_SETTING];
+            this.smtpPasswordString = ConfigurationManager.AppSettings[PasswordResetConst.SMTP_PASSWORD_SETTING];
             this.passwordResetSubjectString = ConfigurationManager.AppSettings[PasswordResetConst.PASSWORD_RESET_SUBJECT_SETTING];
             this.passwordResetExpireTimeHoursString = ConfigurationManager.AppSettings[PasswordResetConst.PASSWORD_RESET_EXPIRE_TIME_HOURS_SETTING];
-            this.passwordResetResendRequestsAllowedString = ConfigurationManager.AppSettings[PasswordResetConst.PASSWORD_RESET_RESEND_REQUESTS_ALLOWED_SETTING];
+            this.passwordResetResendRequestsAllowedString = ConfigurationManager.AppSettings[PasswordResetConst.PASSWORD_RESET_RESEND_REQUESTS_ALLOWED_SETTING];        
+            
 
             /* Validate configuration, if invalid log error and throw. */
-            string smtpPortString = ConfigurationManager.AppSettings[PasswordResetConst.SMTP_PORT_SETTING];
             if (string.IsNullOrEmpty(fromAddressString) || string.IsNullOrEmpty(fromNameString) ||
-                string.IsNullOrEmpty(smtpPortString) || string.IsNullOrEmpty(smtpHostString) ||
-                string.IsNullOrEmpty(passwordResetExpireTimeHoursString) ||
+                string.IsNullOrEmpty(smtpPortString) || string.IsNullOrEmpty(smtpHostString) || 
+                string.IsNullOrEmpty(passwordResetSubjectString) || string.IsNullOrEmpty(passwordResetExpireTimeHoursString) ||
                 string.IsNullOrEmpty(passwordResetResendRequestsAllowedString))
             {
                 /* Incomplete reset email configuration */
-                string errorMessage = "PasswordReset.FromAddress,  PasswordReset.FromName, PasswordReset.SmtpPort, PasswordReset.SmtpHost, PasswordReset.ExpireTime.Hours, and PasswordReset.ResendRequests.Allowed must be configured.  Email send failed.";
+                string errorMessage = "PasswordReset.FromAddress, PasswordReset.FromName, PasswordReset.SmtpPort, PasswordReset.SmtpHost, PasswordReset.Subject, PasswordReset.ExpireTime.Hours, and PasswordReset.ResendRequests.Allowed must be configured.  Email send failed.";
                 DebugLogging.Log(errorMessage);
                 throw new Exception(errorMessage);
             }
@@ -59,7 +64,7 @@ namespace Profiles.Login.Utilities
                 if (!parseSmtpPortSuccess)
                 {
                     /* SMTP Port invalid, not convertible to int. */
-                    string errorMessage = "Invalid smtp port configured [" + smtpPortString + "].  Email send failed.";
+                    string errorMessage = "Invalid smtp port configured [" + smtpPortString + "].  Valid PasswordReset.SmtpPort required. Email send failed.";
                     DebugLogging.Log(errorMessage);
                     throw new Exception(errorMessage);
                 }
@@ -200,7 +205,7 @@ namespace Profiles.Login.Utilities
                 MailAddress toMailAddress = new MailAddress(passwordResetRequest.EmailAddr);
                 SmtpClient client = new SmtpClient(smtpHostString);
                 client.Port = smtpPort;
-                client.Credentials = new System.Net.NetworkCredential("", "");
+                client.Credentials = new System.Net.NetworkCredential(this.smtpUserNameString, this.smtpPasswordString);
                 MailMessage mailMessage = new MailMessage(fromMailAddress, toMailAddress);
                 mailMessage.Subject = passwordResetSubjectString;
                 mailMessage.Body = emailBody;
