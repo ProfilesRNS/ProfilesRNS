@@ -97,7 +97,7 @@ AS
 			UPDATE  [Profile.Data].Person
             SET     ISactive = 0
 			OUTPUT inserted.PersonID into @deletedPersonIDTable
-            WHERE   internalusername NOT IN (
+            WHERE  IsActive <> 0 AND internalusername NOT IN (
                     SELECT  internalusername
                     FROM    [Profile.Import].Person where isactive = 1)
 			
