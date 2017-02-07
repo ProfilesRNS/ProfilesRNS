@@ -185,7 +185,9 @@
     <Content Include="Login\PresentationXML\ADLoginFormPresentation.xml" />
     <Content Include="Login\PresentationXML\PasswordResetConfirmPresentation.xml" />
     <Content Include="Login\PresentationXML\PasswordResetPresentation.xml" />
-    <Content Include="Login\PresentationXML\ShibbolethLoginPresentation.xml" />
+    <Content Include="Login\PresentationXML\ShibbolethLoginPresentation.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Login\EmailTemplate\ResetEmailTemplate.html" />
     <Content Include="ORCID\CreateBatch.aspx" />
     <Content Include="ORCID\CreateMyORCID.aspx" />
@@ -1823,6 +1825,7 @@
     <None Include="Properties\PublishProfiles\Profiles.pubxml" />
     <None Include="Properties\PublishProfiles\Profiles2.9.0.pubxml" />
     <None Include="Properties\PublishProfiles\Profiles2.9.0_debug_stg.pubxml" />
+    <None Include="Properties\PublishProfiles\profileswebprd.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -10,3 +10,39 @@
     Code licensed under a BSD License. 
     For details, see: LICENSE.txt 
  --%>
+<div class="content_container">
+    <div class="tabContainer" style="margin-top: 0px;">
+        <div class="searchForm">
+        </div>
+    </div>
+</div>
+<div class="content_container">
+    <div class="tabContainer" style="margin-top: 0px;">
+        <div class="searchForm">
+            <table width="100%">
+                <tr>
+                    <td colspan="3">
+                        <div class="searchSection" style="text-align: center; margin: 0px auto;">
+                            <table class="searchForm" style="display: inline;">
+                               
+                                <tr>
+                                    <td>
+                                        <b>Single Sign on using Shibboleth </b>
+                                    </td>
+                                 
+                                </tr>
+                                
+                                <tr>
+                                    
+                                    <td >
+                                        <asp:Label runat="server" ID="lblError" ForeColor="Red" Font-Bold="true"></asp:Label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
