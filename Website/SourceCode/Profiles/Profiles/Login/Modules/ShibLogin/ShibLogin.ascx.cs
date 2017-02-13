@@ -27,62 +27,80 @@ namespace Profiles.Login.Modules.ShibLogin
 {
     public partial class ShibLogin : System.Web.UI.UserControl
     {
-        Framework.Utilities.SessionManagement sm;
+        /* Login Method Constants */
+        private const string METHOD_LOGOUT = "logout";
+        private const string METHOD_SHIBBOLETH = "shibboleth";
+        private const string METHOD_LOGIN = "login";
+
+        /* App Settings Constants */
+        private const string APP_SETTING_SHIB_IDENTITY_PROVIDER = "Shibboleth.ShibIdentityProvider";
+        private const string APP_SETTING_SHIB_USERNAME_HEADER = "Shibboleth.UserNameHeader";
+        private const string APP_SETTING_SHIB_SESSION_ID = "Shibboleth.SessionID";
+
+
+        SessionManagement sm;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+                string methodQueryStringValue = Request.QueryString["method"].ToString();
 
-                if (Request.QueryString["method"].ToString() == "logout")
+                if (methodQueryStringValue == METHOD_LOGOUT)
                 {
+                    string loggingPrefix = "Shibboleth - Method Logout";
+                    DebugLogging.Log(loggingPrefix + " - Starting");
 
                     sm.SessionLogout();
                     sm.SessionDestroy();
 
                     //added by kp to logout from shibboleth
                     LogoutFromShibboleth();
-
-
-                   
                 }
-                else if (Request.QueryString["method"].ToString() == "shibboleth")
+                else if (methodQueryStringValue == METHOD_SHIBBOLETH)
                 {
+                    string loggingPrefix = "Shibboleth - Method Shibboleth - ";
+                    DebugLogging.Log(loggingPrefix + "Starting");
+
                     // added by Eric
                     // If they specify an Idp, then check that they logged in from the configured IDP
                     bool authenticated = false;
-                    if (ConfigurationManager.AppSettings["Shibboleth.ShibIdentityProvider"] == null ||
-                        ConfigurationManager.AppSettings["Shibboleth.ShibIdentityProvider"].ToString().Equals(Request.Headers.Get("ShibIdentityProvider").ToString(), StringComparison.InvariantCultureIgnoreCase))
+
+                    string shibIdentityProviderAppSettingValue = ConfigurationManager.AppSettings[APP_SETTING_SHIB_IDENTITY_PROVIDER];
+                    string shibUsernameHeaderAppSettingValue = ConfigurationManager.AppSettings[APP_SETTING_SHIB_USERNAME_HEADER].ToString();
+
+                    if (shibIdentityProviderAppSettingValue == null ||
+                        shibIdentityProviderAppSettingValue.ToString().Equals(Request.Headers.Get("ShibIdentityProvider").ToString(), StringComparison.InvariantCultureIgnoreCase))
                     {
 
-                        Framework.Utilities.DebugLogging.Log("Shiboleth - autheticated check header " + Request.Headers.Get(ConfigurationManager.AppSettings["Shibboleth.UserNameHeader"].ToString()));
-                        Framework.Utilities.DebugLogging.Log("Shibboleth - autheticated check request " + Request[ConfigurationManager.AppSettings["Shibboleth.UserNameHeader"]].ToString());
+                        DebugLogging.Log(loggingPrefix + "Authenticated check header " + Request.Headers.Get(shibUsernameHeaderAppSettingValue));
+                        DebugLogging.Log(loggingPrefix + "Authenticated check request " + Request[shibUsernameHeaderAppSettingValue]);
                         //String userName = Request.Headers.Get(ConfigurationManager.AppSettings["Shibboleth.UserNameHeader"].ToString()); //"025693078";
-                        String userName = Request[ConfigurationManager.AppSettings["Shibboleth.UserNameHeader"]].ToString(); //"025693078";
+                        String userName = Request[shibUsernameHeaderAppSettingValue].ToString(); //"025693078";
 
-                        if (userName != null && userName.Trim().Length > 0)
+                        if (!string.IsNullOrEmpty(userName))
                         {
-                            Profiles.Login.Utilities.DataIO data = new Profiles.Login.Utilities.DataIO();
-                            Profiles.Login.Utilities.User user = new Profiles.Login.Utilities.User();
+                            Utilities.DataIO data = new Utilities.DataIO();
+                            User user = new User();
 
                             user.UserName = userName;
+                            DebugLogging.Log(loggingPrefix + "Calling - data.UserLoginExternal with userName: " + userName);
                             if (data.UserLoginExternal(ref user))
                             {
+                                DebugLogging.Log(loggingPrefix + "Authenticated with profile access " + Request[shibUsernameHeaderAppSettingValue].ToString());
                                 authenticated = true;
                                 RedirectAuthenticatedUser();
                             }
                             else
                             {
-                                Framework.Utilities.DebugLogging.Log("Shibboleth - authenticated no profile access " + Request[ConfigurationManager.AppSettings["Shibboleth.UserNameHeader"]].ToString());
-
+                                DebugLogging.Log(loggingPrefix + "Authenticated no profile access " + Request[shibUsernameHeaderAppSettingValue].ToString());
                                 authenticated = false;
                                 LogoutFromShibboleth();
-                                
                             }
                         }
                     }
                     if (!authenticated)
                     {
-                        Framework.Utilities.DebugLogging.Log("Shibboleth - notauthenticated");
+                        DebugLogging.Log(loggingPrefix + "Not Authenticated");
                         // try and just put their name in the session.
                         //sm.Session().ShortDisplayName = Request.Headers.Get("ShibdisplayName");
                         LogoutFromShibboleth();
@@ -90,41 +108,54 @@ namespace Profiles.Login.Modules.ShibLogin
                         RedirectAuthenticatedUser();
                     }
                 }
-                else if (Request.QueryString["method"].ToString() == "login")
+                else if (methodQueryStringValue == METHOD_LOGIN)
                 {
+                    string loggingPrefix = "Shibboleth - Method Login - ";
+                    DebugLogging.Log(loggingPrefix + "Starting");
+
                     // see if they already have a login session, if so don't send them to shibboleth
-                    Profiles.Framework.Utilities.SessionManagement sm = new Profiles.Framework.Utilities.SessionManagement();
+                    SessionManagement sm = new SessionManagement();
                     String viewerId = sm.Session().PersonURI;
                     if (viewerId != null && viewerId.Trim().Length > 0)
                     {
+                        DebugLogging.Log(loggingPrefix + "PersonURI Found - already authenticated.  Redirecting.");
                         RedirectAuthenticatedUser();
                     }
+
+                    /* Original Line - Request[ConfigurationManager.AppSettings["Shibboleth.SessionID"]] != null && 
+                    !String.IsNullOrEmpty(Request[ConfigurationManager.AppSettings["Shibboleth.SessionID"].ToString()].ToString()) */
+
                     //added by KP
                     //duplicated shibboleth login code . code was not working as it is in our environment had to modify so login links changed to logout and added extra information to check session id
-                    else if (Request[ConfigurationManager.AppSettings["Shibboleth.SessionID"]] != null && !String.IsNullOrEmpty(Request[ConfigurationManager.AppSettings["Shibboleth.SessionID"].ToString()].ToString()))
-
-
+                    else if (ConfigurationManager.AppSettings[APP_SETTING_SHIB_SESSION_ID] != null && !String.IsNullOrEmpty(Request[ConfigurationManager.AppSettings[APP_SETTING_SHIB_SESSION_ID].ToString()].ToString()))
                     {
+                        DebugLogging.Log(loggingPrefix + "SessionID Exists: " + " - Re-Authenticating");
+
                         bool authenticated = false;
 
-                        String userName = Request[ConfigurationManager.AppSettings["Shibboleth.UserNameHeader"]].ToString(); //"025693078";
+                        String userName = Request[ConfigurationManager.AppSettings[APP_SETTING_SHIB_USERNAME_HEADER]].ToString(); //"025693078";
                         if (userName != null && userName.Trim().Length > 0)
                         {
-                            Framework.Utilities.DebugLogging.Log("login - username " + userName);
-                            Profiles.Login.Utilities.DataIO data = new Profiles.Login.Utilities.DataIO();
-                            Profiles.Login.Utilities.User user = new Profiles.Login.Utilities.User();
+                            DebugLogging.Log(loggingPrefix + "login - username " + userName);
+                            Utilities.DataIO data = new Utilities.DataIO();
+                            User user = new User();
 
                             user.UserName = userName;
+                            DebugLogging.Log(loggingPrefix + "Calling - data.UserLoginExternal with userName: " + userName);
                             if (data.UserLoginExternal(ref user))
                             {
-                                Framework.Utilities.DebugLogging.Log("login - data.userloginexternal " + userName);
+                                DebugLogging.Log(loggingPrefix + "Authenticated with profile access " + userName);
                                 authenticated = true;
                                 RedirectAuthenticatedUser();
+                            }
+                            else
+                            {
+                                DebugLogging.Log(loggingPrefix + "Authenticated no profile access with userName: " + userName);
                             }
                         }
                         if (!authenticated)
                         {
-                            Framework.Utilities.DebugLogging.Log("login - notauthenticated");
+                            DebugLogging.Log(loggingPrefix + " Not Authenticated");
 
                             //Logout from shibboleth 
                             LogoutFromShibboleth();
@@ -132,18 +163,11 @@ namespace Profiles.Login.Modules.ShibLogin
                             //sm.Session().ShortDisplayName = Request.Headers.Get("ShibdisplayName");
                             RedirectAuthenticatedUser();
                         }
-
-
-
-
-
-
-
-
                     }
-
                     else
                     {
+                        DebugLogging.Log(loggingPrefix + " - Redirect");
+
                         string redirect = Root.Domain + "/login/default.aspx?method=shibboleth";
                         if (Request.QueryString["redirectto"] == null && Request.QueryString["edit"] == "true")
                             redirect += "&edit=true";
@@ -157,13 +181,12 @@ namespace Profiles.Login.Modules.ShibLogin
                 }
 
             }
-
-
         }
-
 
         private void LogoutFromShibboleth()
         {
+            string loggingPrefix = "Shibboleth - Function LogoutFromShibboleth - ";
+            DebugLogging.Log(loggingPrefix + " Starting.");
 
             if (ConfigurationManager.AppSettings["Shibboleth.LogoutURL"] != null)
             {
@@ -171,49 +194,41 @@ namespace Profiles.Login.Modules.ShibLogin
                 var shibbolethlogout = ConfigurationManager.AppSettings["Shibboleth.LogoutURL"].ToString().Trim();
 
 
-                Framework.Utilities.DebugLogging.Log("Shiboleth - logout  " + shibbolethlogout + HttpUtility.UrlEncode(redirect));
+                DebugLogging.Log(loggingPrefix + "- logouturl  " + shibbolethlogout + HttpUtility.UrlEncode(redirect));
 
-                Response.Redirect(shibbolethlogout + HttpUtility.UrlEncode( redirect));
-
-
-
+                Response.Redirect(shibbolethlogout + HttpUtility.UrlEncode(redirect));
             }
             else
             {
                 Response.Redirect(Request.QueryString["redirectto"].ToString());
             }
-            lblError.Text = "You currently donot have active faculty account. ";
-
-
+            lblError.Text = "You currently don't have active faculty account. ";
         }
 
         private void RedirectAuthenticatedUser()
         {
+            string loggingPrefix = "Shibboleth - Function RedirectAuthenticatedUser - ";
+            DebugLogging.Log(loggingPrefix + " Starting.");
 
-            Framework.Utilities.DebugLogging.Log("redirectto " + Request.QueryString["redirectto"]);
-            Framework.Utilities.DebugLogging.Log("editlink " + Request.QueryString["edit"]);
+            DebugLogging.Log(loggingPrefix + "redirectto " + Request.QueryString["redirectto"]);
+            DebugLogging.Log(loggingPrefix + "editlink " + Request.QueryString["edit"]);
 
             if (Request.QueryString["redirectto"] == null && Request.QueryString["edit"] == "true")
             {
-                
                 Response.Redirect(Root.Domain + "/edit/" + sm.Session().NodeID);
             }
             else if (Request.QueryString["redirectto"] != null)
-
             {
                 if ("mypage".Equals(Request.QueryString["redirectto"].ToLower())) 
                 {
-                
                     Response.Redirect(Root.Domain + "/profile/" + sm.Session().NodeID);
                 }
                 else if ("myproxies".Equals(Request.QueryString["redirectto"].ToLower()))
                 {
-                
                     Response.Redirect(Root.Domain + "/proxy/default.aspx?subject=" + sm.Session().NodeID);
                 }
                 else 
                 {
-                
                     Response.Redirect(Request.QueryString["redirectto"].ToString());
                 }
             }
@@ -224,7 +239,10 @@ namespace Profiles.Login.Modules.ShibLogin
         public ShibLogin() { }
         public ShibLogin(XmlDocument pagedata, List<ModuleParams> moduleparams, XmlNamespaceManager pagenamespaces)
         {
-            sm = new Profiles.Framework.Utilities.SessionManagement();
+            string loggingPrefix = "Shibboleth - Function ShibLogin (Constructor) - ";
+            DebugLogging.Log(loggingPrefix + " Starting.");
+
+            sm = new SessionManagement();
             
         }
 
