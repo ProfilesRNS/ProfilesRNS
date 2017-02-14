@@ -48,8 +48,9 @@
             tinymce.init({
                 selector: 'textarea',
                 menubar: '',
-                plugins: 'paste lists<%= getHTMLEditorConfigurablePluginsOptions() %>',
-                toolbar: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | indent outdent | bullist numlist<%= getHTMLEditorConfigurableToolbarOptions() %>',
+                plugins: 'paste lists link image print preview table media<%= getHTMLEditorConfigurablePluginsOptions() %>',
+                toolbar1: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | indent outdent | bullist numlist',
+                toolbar2: 'link image media | print preview | table<%= getHTMLEditorConfigurableToolbarOptions() %>',
                 paste_word_valid_elements: "b,strong,i,em,h1,h2,h3,p,ol,ul,li",
                 paste_retain_style_properties: "color font-size", 
                 width: 630,

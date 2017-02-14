@@ -1,15 +1,24 @@
 ﻿<Presentation PresentationClass="profile">
+  <PageOptions Columns="2"/>
   <WindowName>Shibboleth Login</WindowName>
   <PageTitle>Shibboleth Login</PageTitle>
   <PageBackLinkName></PageBackLinkName>
   <PageBackLinkURL></PageBackLinkURL>
   <PageSubTitle></PageSubTitle>
-  <PageDescription>Performs redirects to shibboleth IDP</PageDescription>
+  <PageDescription></PageDescription>
   <PanelList>
+    <Panel type="header"  />
+    <Panel type="page" />
+    <Panel Type="active">
+      <Module ID="MiniSearch"  />
+      <Module ID="MainMenu">
+      </Module>
+    </Panel>
     <Panel Name="" Alias="" Type="main" TabType="default" TabSort="0" >
       <Module ID="ShibLogin" >
       </Module>
     </Panel>
+    <Panel type="footer" />
   </PanelList>
 </Presentation>
 

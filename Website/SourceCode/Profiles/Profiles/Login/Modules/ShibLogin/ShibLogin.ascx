@@ -22,23 +22,34 @@
             <table width="100%">
                 <tr>
                     <td colspan="3">
-                        <div class="searchSection" style="text-align: center; margin: 0px auto;">
-                            <table class="searchForm" style="display: inline;">
-                               
+                        <div class="aboutText" style="text-align: center; margin: 0px auto;">
+
+                            <table style="display: inline;" border="0">
                                 <tr>
                                     <td>
-                                        <b>Single Sign on using Shibboleth </b>
+                                        <br />
+                                        Profiles uses integrated authentication using your UMass login and password.  Click below to proceed 
+                                        to the sign in page. If you have no profiles account an error message will be shown when you return
+                                        to this page. 
                                     </td>
-                                 
                                 </tr>
-                                
+                                 <tr>
+                                    <td> 
+                                        <br />
+                                    </td>
+                                </tr>
                                 <tr>
-                                    
+                                    <td> 
+                                        <asp:Button ID="cmdProceedToLogin" runat="server" Text="Proceed To Login" CssClass="login-button" OnClick="cmdProceedToLogin_Click" />
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td >
                                         <asp:Label runat="server" ID="lblError" ForeColor="Red" Font-Bold="true"></asp:Label>
                                     </td>
                                 </tr>
                             </table>
+
                         </div>
                     </td>
                 </tr>

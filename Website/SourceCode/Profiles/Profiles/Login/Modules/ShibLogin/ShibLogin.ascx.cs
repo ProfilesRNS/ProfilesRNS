@@ -68,6 +68,8 @@ namespace Profiles.Login.Modules.ShibLogin
                     string shibIdentityProviderAppSettingValue = ConfigurationManager.AppSettings[APP_SETTING_SHIB_IDENTITY_PROVIDER];
                     string shibUsernameHeaderAppSettingValue = ConfigurationManager.AppSettings[APP_SETTING_SHIB_USERNAME_HEADER].ToString();
 
+                    DebugLogging.Log(loggingPrefix + "ShibIdentityProvider from Request.Headers.Get:  " + Request.Headers.Get("ShibIdentityProvider"));
+
                     if (shibIdentityProviderAppSettingValue == null ||
                         shibIdentityProviderAppSettingValue.ToString().Equals(Request.Headers.Get("ShibIdentityProvider").ToString(), StringComparison.InvariantCultureIgnoreCase))
                     {
@@ -104,12 +106,14 @@ namespace Profiles.Login.Modules.ShibLogin
                         // try and just put their name in the session.
                         //sm.Session().ShortDisplayName = Request.Headers.Get("ShibdisplayName");
                         LogoutFromShibboleth();
-                       
+
                         RedirectAuthenticatedUser();
                     }
                 }
                 else if (methodQueryStringValue == METHOD_LOGIN)
                 {
+                    string shibSessionIDrAppSettingValue = ConfigurationManager.AppSettings[APP_SETTING_SHIB_SESSION_ID];
+
                     string loggingPrefix = "Shibboleth - Method Login - ";
                     DebugLogging.Log(loggingPrefix + "Starting");
 
@@ -121,13 +125,9 @@ namespace Profiles.Login.Modules.ShibLogin
                         DebugLogging.Log(loggingPrefix + "PersonURI Found - already authenticated.  Redirecting.");
                         RedirectAuthenticatedUser();
                     }
-
-                    /* Original Line - Request[ConfigurationManager.AppSettings["Shibboleth.SessionID"]] != null && 
-                    !String.IsNullOrEmpty(Request[ConfigurationManager.AppSettings["Shibboleth.SessionID"].ToString()].ToString()) */
-
                     //added by KP
                     //duplicated shibboleth login code . code was not working as it is in our environment had to modify so login links changed to logout and added extra information to check session id
-                    else if (ConfigurationManager.AppSettings[APP_SETTING_SHIB_SESSION_ID] != null && !String.IsNullOrEmpty(Request[ConfigurationManager.AppSettings[APP_SETTING_SHIB_SESSION_ID].ToString()].ToString()))
+                    else if (shibSessionIDrAppSettingValue != null && Request[shibSessionIDrAppSettingValue.ToString()] != null && !String.IsNullOrEmpty(Request[shibSessionIDrAppSettingValue.ToString()].ToString()))
                     {
                         DebugLogging.Log(loggingPrefix + "SessionID Exists: " + " - Re-Authenticating");
 
@@ -171,10 +171,10 @@ namespace Profiles.Login.Modules.ShibLogin
                         string redirect = Root.Domain + "/login/default.aspx?method=shibboleth";
                         if (Request.QueryString["redirectto"] == null && Request.QueryString["edit"] == "true")
                             redirect += "&edit=true";
-                        
+
                         else
                             redirect += "&redirectto=" + Request.QueryString["redirectto"].ToString();
-                            redirect += "&return=" + Request.QueryString["redirectto"].ToString();
+                        redirect += "&return=" + Request.QueryString["redirectto"].ToString();
                         Response.Redirect(ConfigurationManager.AppSettings["Shibboleth.LoginURL"].ToString().Trim() +
                             HttpUtility.UrlEncode(redirect));
                     }
@@ -219,7 +219,7 @@ namespace Profiles.Login.Modules.ShibLogin
             }
             else if (Request.QueryString["redirectto"] != null)
             {
-                if ("mypage".Equals(Request.QueryString["redirectto"].ToLower())) 
+                if ("mypage".Equals(Request.QueryString["redirectto"].ToLower()))
                 {
                     Response.Redirect(Root.Domain + "/profile/" + sm.Session().NodeID);
                 }
@@ -227,12 +227,12 @@ namespace Profiles.Login.Modules.ShibLogin
                 {
                     Response.Redirect(Root.Domain + "/proxy/default.aspx?subject=" + sm.Session().NodeID);
                 }
-                else 
+                else
                 {
                     Response.Redirect(Request.QueryString["redirectto"].ToString());
                 }
             }
-            
+
             Response.Redirect(Root.Domain);
         }
 
@@ -243,8 +243,12 @@ namespace Profiles.Login.Modules.ShibLogin
             DebugLogging.Log(loggingPrefix + " Starting.");
 
             sm = new SessionManagement();
-            
+
         }
 
+        protected void cmdProceedToLogin_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
