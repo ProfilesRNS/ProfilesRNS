@@ -92,6 +92,7 @@ SET nocount  ON;
 				AND p2.IsActive = 1 
 		LEFT JOIN [RDF.Stage].[InternalNodeMap] i
 			ON [InternalType] = 'Person' AND [Class] = 'http://xmlns.com/foaf/0.1/Person' AND [InternalID] = CAST(p2.personid AS VARCHAR(50))
+			JOIN #personIDs p3 on p2.personID = p3.personID AND p3.rownum > @startRow and (@nextRow = -1 OR p3.rownum <= @nextRow)
 	  for xml path('Person'), root('FindFunding'), type) as X
 END
 
