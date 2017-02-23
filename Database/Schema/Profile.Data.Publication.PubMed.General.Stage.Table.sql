@@ -26,7 +26,7 @@ CREATE TABLE [Profile.Data].[Publication.PubMed.General.Stage](
 	[ArticleYear] [varchar](10) NULL,
 	[ArticleMonth] [varchar](10) NULL,
 	[ArticleDay] [varchar](10) NULL,
-	[Affiliation] [varchar](4000) NULL,
+	[Affiliation] [varchar](8000) NULL,
 	[AuthorListCompleteYN] [varchar](1) NULL,
 	[GrantListCompleteYN] [varchar](1) NULL,
 	[PubDate] [datetime] NULL,

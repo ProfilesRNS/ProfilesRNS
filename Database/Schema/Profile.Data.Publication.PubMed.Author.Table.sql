@@ -13,7 +13,7 @@ CREATE TABLE [Profile.Data].[Publication.PubMed.Author](
 	[ForeName] [varchar](100) NULL,
 	[Suffix] [varchar](20) NULL,
 	[Initials] [varchar](20) NULL,
-	[Affiliation] [varchar](4000) NULL,
+	[Affiliation] [varchar](8000) NULL,
  CONSTRAINT [PK__pm_pubs_authors__17F790F9] PRIMARY KEY CLUSTERED 
 (
 	[PmPubsAuthorID] ASC
