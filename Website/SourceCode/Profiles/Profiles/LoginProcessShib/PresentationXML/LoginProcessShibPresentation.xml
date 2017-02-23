@@ -15,7 +15,7 @@
       </Module>
     </Panel>
     <Panel Name="" Alias="" Type="main" TabType="default" TabSort="0" >
-      <Module ID="ShibLogin" >
+      <Module ID="LoginProcessShib" >
       </Module>
     </Panel>
     <Panel type="footer" />

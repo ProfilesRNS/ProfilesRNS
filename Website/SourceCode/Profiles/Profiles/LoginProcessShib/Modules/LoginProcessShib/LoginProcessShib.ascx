@@ -1,5 +1,5 @@
-﻿<%@ Control Language="C#" EnableViewState="true" AutoEventWireup="true" CodeBehind="ShibLogin.ascx.cs"
-    Inherits="Profiles.Login.Modules.ShibLogin.ShibLogin" %>
+﻿<%@ Control Language="C#" EnableViewState="true" AutoEventWireup="true" CodeBehind="LoginProcessShib.ascx.cs"
+    Inherits="Profiles.LoginProcessShib.Modules.LoginProcessShib" %>
 <%--
     Copyright (c) 2008-2012 by the President and Fellows of Harvard College. All rights reserved.  
     Profiles Research Networking Software was developed under the supervision of Griffin M Weber, MD, PhD.,
@@ -28,16 +28,11 @@
                                 <tr>
                                     <td>
                                         <br />
-                                        <asp:Panel ID="panelLoginInfo" runat="server" Visible="true">
-                                            Profiles uses integrated authentication using your UMass login and password.  Click below to proceed 
-                                            to the sign in page. If you have no profiles account an error message will be shown when you return
-                                            to this page. 
+                                        <asp:Panel ID="panelLoginSuccessful" runat="server" Visible="false">
+                                            You have been successfully logged into Profiles.  Click the button below to proceed to the search page.
                                         </asp:Panel>
-                                        <asp:Panel ID="panelLoggedOut" runat="server" Visible="false">
-                                            You have been successfully logged out of profiles.  Click the button below to proceed to the search page.
-                                        </asp:Panel>
-                                        <asp:Panel ID="panelAlreadyLoggedIn" runat="server" Visible="false">
-                                            You already have an active profiles session.  Click the button below to proceed to the search page.
+                                        <asp:Panel ID="panelLoginFailed" runat="server" Visible="false">
+                                            Login to profiles failed.  You don't have a profiles account.  Please contact the profiles Administrator.  
                                         </asp:Panel>
                                     </td>
                                 </tr>
@@ -48,8 +43,7 @@
                                 </tr>
                                 <tr>
                                     <td> 
-                                        <asp:Button ID="cmdProceedToLogin" runat="server" Text="Proceed To Login" CssClass="login-button" OnClick="cmdProceedToLogin_Click" />
-                                        <asp:Button ID="cmdProceedToSearch" runat="server" Text="Proceed To Search" CssClass="login-button" visible="false" OnClick="cmdProceedToSearch_Click" />
+                                        <asp:Button ID="cmdProceedToSearch" runat="server" Text="Proceed To Search" CssClass="login-button" OnClick="cmdProceedToSearch_Click" visible="false" />
                                     </td>
                                 </tr>
                                 <tr>

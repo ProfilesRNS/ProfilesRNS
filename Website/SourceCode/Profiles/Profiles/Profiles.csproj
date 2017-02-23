@@ -175,6 +175,12 @@
     <Content Include="Framework\JavaScript\tinymce\themes\modern\theme.min.js" />
     <Content Include="Framework\JavaScript\tinymce\tinymce.min.js" />
     <Content Include="Global.asax" />
+    <Content Include="LoginProcessShib\Default.aspx" />
+    <Content Include="LoginProcessShib\Modules\ModuleCatalogue.xml" />
+    <Content Include="LoginProcessShib\Modules\LoginProcessShib\LoginProcessShib.ascx" />
+    <Content Include="LoginProcessShib\PresentationXML\LoginProcessShibPresentation.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Login\Images\password_reset_banner.png" />
     <Content Include="Login\Modules\ADLogin\ADLogin.ascx" />
     <Content Include="Login\Modules\PasswordResetConfirm\PasswordResetConfirm.ascx" />
@@ -421,6 +427,20 @@
     <Compile Include="History\Modules\HistoryList\HistoryList.ascx.designer.cs">
       <DependentUpon>HistoryList.ascx</DependentUpon>
     </Compile>
+    <Compile Include="LoginProcessShib\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoginProcessShib\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoginProcessShib\Modules\LoginProcessShib\LoginProcessShib.ascx.cs">
+      <DependentUpon>LoginProcessShib.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoginProcessShib\Modules\LoginProcessShib\LoginProcessShib.ascx.designer.cs">
+      <DependentUpon>LoginProcessShib.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Login\Modules\ADLogin\ADLogin.ascx.cs">
       <DependentUpon>ADLogin.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -458,6 +478,8 @@
     </Compile>
     <Compile Include="Login\Objects\PasswordResetRequest.cs" />
     <Compile Include="Login\Objects\ResetEmail.cs" />
+    <Compile Include="Login\Objects\ShibAppSettings.cs" />
+    <Compile Include="Login\Objects\ShibUtil.cs" />
     <Compile Include="Login\Objects\SimpleMathEquationAndAnswer.cs" />
     <Compile Include="Login\PasswordResetConfirm.aspx.cs">
       <DependentUpon>PasswordResetConfirm.aspx</DependentUpon>

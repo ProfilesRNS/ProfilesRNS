@@ -7,46 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Profiles.Login.Modules.ShibLogin {
+namespace Profiles.LoginProcessShib.Modules {
     
     
-    public partial class ShibLogin {
+    public partial class LoginProcessShib {
         
         /// <summary>
-        /// panelLoginInfo control.
+        /// panelLoginSuccessful control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelLoginInfo;
+        protected global::System.Web.UI.WebControls.Panel panelLoginSuccessful;
         
         /// <summary>
-        /// panelLoggedOut control.
+        /// panelLoginFailed control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelLoggedOut;
-        
-        /// <summary>
-        /// panelAlreadyLoggedIn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelAlreadyLoggedIn;
-        
-        /// <summary>
-        /// cmdProceedToLogin control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button cmdProceedToLogin;
+        protected global::System.Web.UI.WebControls.Panel panelLoginFailed;
         
         /// <summary>
         /// cmdProceedToSearch control.
