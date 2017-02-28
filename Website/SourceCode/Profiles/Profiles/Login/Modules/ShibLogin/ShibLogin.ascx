@@ -29,9 +29,10 @@
                                     <td>
                                         <br />
                                         <asp:Panel ID="panelLoginInfo" runat="server" Visible="true">
-                                            Profiles uses integrated authentication using your UMass login and password.  Click below to proceed 
-                                            to the sign in page. If you have no profiles account an error message will be shown when you return
-                                            to this page. 
+                                            Profiles requires a campus network username and password for login.  If you have no profiles account an error message 
+                                            will be shown when you return to this page.  If you have trouble logging in please contact the helpdesk at 508-856-8643 or via 
+                                        email at <a href="mailto: UMWHelpdesk@umassmed.edu">UMWHelpdesk@umassmed.edu</a>.  Click below to proceed 
+                                            to the sign in page.
                                         </asp:Panel>
                                         <asp:Panel ID="panelLoggedOut" runat="server" Visible="false">
                                             You have been successfully logged out of profiles.  Click the button below to proceed to the search page.
@@ -53,7 +54,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td >
+                                    <td>
+                                        <br />
                                         <asp:Label runat="server" ID="lblError" ForeColor="Red" Font-Bold="true"></asp:Label>
                                     </td>
                                 </tr>

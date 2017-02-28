@@ -32,7 +32,7 @@
                                             You have been successfully logged into Profiles.  Click the button below to proceed to the search page.
                                         </asp:Panel>
                                         <asp:Panel ID="panelLoginFailed" runat="server" Visible="false">
-                                            Login to profiles failed.  You don't have a profiles account.  Please contact the profiles Administrator.  
+                                            Login to profiles failed.  You don't have a profiles account.  Please contact your campus administrator.  
                                         </asp:Panel>
                                     </td>
                                 </tr>
