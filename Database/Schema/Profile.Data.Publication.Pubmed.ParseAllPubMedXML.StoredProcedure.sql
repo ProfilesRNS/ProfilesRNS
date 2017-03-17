@@ -192,7 +192,7 @@ BEGIN
 	delete from [Profile.Data].[Publication.PubMed.Author] where pmid in (select pmid from [Profile.Data].[Publication.PubMed.Author.Stage])
 	insert into [Profile.Data].[Publication.PubMed.Author] (pmid, ValidYN, LastName, FirstName, ForeName, Suffix, Initials, Affiliation)
 		select pmid, ValidYN, LastName, FirstName, ForeName, Suffix, Initials, Affiliation
-		from [Profile.Data].[Publication.PubMed.Author]
+		from [Profile.Data].[Publication.PubMed.Author.Stage]
 		order by PmPubsAuthorID
 
 		
