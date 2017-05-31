@@ -346,7 +346,7 @@ BEGIN
 					p.ObjectType,
 					1
 				from networkStats n, networkProperties p, subjectLabel l
-		-- Limit the number of connections if the subject is not a person
+		-- Limit the number of connections if the subject is not a person or a group
 		select @limit = 10
 			where (@limit is null) 
 				and not exists (
@@ -354,7 +354,7 @@ BEGIN
 					from [rdf.].[triple]
 					where subject = @subject
 						and predicate = [RDF.].fnURI2NodeID('http://www.w3.org/1999/02/22-rdf-syntax-ns#type')
-						and object = [RDF.].fnURI2NodeID('http://xmlns.com/foaf/0.1/Person')
+						and object in ( [RDF.].fnURI2NodeID('http://xmlns.com/foaf/0.1/Person') , [RDF.].fnURI2NodeID('http://xmlns.com/foaf/0.1/Group') )
 				)
 		-- Remove connections not within offset-limit window
 		delete from #connections

@@ -90,7 +90,31 @@ BEGIN
 					AND m.InternalType = 'User'
 					AND m.InternalID = CAST(u.UserID AS VARCHAR(50))
 					AND m.NodeID IN (@Subject, n.ViewSecurityGroup, n.EditSecurityGroup)
-					
+	-- Get Group Administrator NodesIDs
+	UNION
+	SELECT g.GroupNodeID SecurityGroupNode
+		FROM [User.Session].Session s
+			INNER JOIN [Profile.Data].[Group.Admin] x
+				ON	s.SessionID = @SessionID
+					AND s.UserID IS NOT NULL
+					AND @Subject IS NOT NULL
+					AND x.UserID = s.UserID
+			INNER JOIN [Profile.Data].[vwGroup.General] g
+				ON g.ViewSecurityGroup <> 0
+				AND g.GroupNodeID = @Subject
+	-- Get Group Manager NodeIDs
+	UNION
+	SELECT g.GroupNodeID SecurityGroupNode
+		FROM [User.Session].Session s
+			INNER JOIN [Profile.Data].[Group.Manager] x
+				ON	s.SessionID = @SessionID
+					AND s.UserID IS NOT NULL
+					AND @Subject IS NOT NULL
+					AND x.UserID = s.UserID
+			INNER JOIN [Profile.Data].[vwGroup.General] g
+				ON g.ViewSecurityGroup <> 0
+				AND g.GroupID = x.GroupID
+				AND g.GroupNodeID = @Subject					
 	/*
 	SELECT m.NodeID SecurityGroupNode
 		FROM [User.Session].Session s

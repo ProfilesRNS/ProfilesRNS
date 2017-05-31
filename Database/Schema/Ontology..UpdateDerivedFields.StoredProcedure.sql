@@ -185,6 +185,23 @@ BEGIN
 		SET _PropertyLabel = 'research activities and funding' --'research activities'
 		WHERE Class='http://xmlns.com/foaf/0.1/Person' AND Property='http://vivoweb.org/ontology/core#hasResearcherRole' AND NetworkProperty IS NULL
 
+	-- Groups
+	UPDATE [Ontology.].[ClassProperty]
+		SET _PropertyLabel = 'members' --'research activities'
+		WHERE Class='http://xmlns.com/foaf/0.1/Group' AND Property='http://vivoweb.org/ontology/core#contributingRole' AND NetworkProperty IS NULL
+
+	UPDATE [Ontology.].[ClassProperty]
+		SET _PropertyLabel = 'groups' --'research activities'
+		WHERE Class='http://xmlns.com/foaf/0.1/Person' AND Property='http://vivoweb.org/ontology/core#hasMemberRole' AND NetworkProperty IS NULL
+
+	UPDATE [Ontology.].[ClassProperty]
+		SET _PropertyLabel = 'groups' --'research activities'
+		WHERE Class='http://xmlns.com/foaf/0.1/Agent' AND Property='http://vivoweb.org/ontology/core#hasMemberRole' AND NetworkProperty IS NULL
+
+	UPDATE [Ontology.].[ClassProperty]
+		SET _PropertyLabel = 'selected publications' --'research activities'
+		WHERE Class='http://xmlns.com/foaf/0.1/Group' AND Property='http://profiles.catalyst.harvard.edu/ontology/prns#associatedInformationResource' AND NetworkProperty IS NULL
+
 
 	-- select * from [Ontology.Import].[Triple]
 	-- select * from [Ontology.].ClassProperty
