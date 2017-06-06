@@ -305,8 +305,8 @@ type Ontology..vwMissingClassProperty.View.sql
 type ORNG..vwAppPersonData.View.sql
 type ORNG..vwPerson.View.sql
 type RDF..vwLiteral.View.sql
-type Profile.Data.vwGroup.GeneralWithDeleted.View.sql
 type Profile.Data.vwGroup.General.View.sql
+type Profile.Data.vwGroup.GeneralWithDeleted.View.sql
 type Profile.Data.vwGroup.Manager.View.sql
 type Profile.Data.vwGroup.Member.View.sql
 type Profile.Data.vwGroup.Photo.View.sql
@@ -615,5 +615,5 @@ type Profile.Data.Publication.GetGroupMemberPublications.StoredProcedure.sql
 type Profile.Data.Publication.Group.Pubmed.AddPublication.StoredProcedure.sql
 type Profile.Module.CustomViewAuthorInAuthorship.GetGroupList.StoredProcedure.sql
 type Profile.Module.NetworkAuthorshipTimeline.Group.GetData.StoredProcedure.sql
-type Profile.Module.NetworkCluster.GetGroup.StoredProcedure.sql
+type Profile.Module.NetworkRadial.Group.GetCoauthors.StoredProcedure.sql
 type Profile.Module.NetworkMap.GetGroup.StoredProcedure.sql
