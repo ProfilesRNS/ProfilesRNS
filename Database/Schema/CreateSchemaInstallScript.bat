@@ -305,8 +305,8 @@ type Ontology..vwMissingClassProperty.View.sql
 type ORNG..vwAppPersonData.View.sql
 type ORNG..vwPerson.View.sql
 type RDF..vwLiteral.View.sql
-type Profile.Data.vwGroup.General.View.sql
 type Profile.Data.vwGroup.GeneralWithDeleted.View.sql
+type Profile.Data.vwGroup.General.View.sql
 type Profile.Data.vwGroup.Manager.View.sql
 type Profile.Data.vwGroup.Member.View.sql
 type Profile.Data.vwGroup.Photo.View.sql
