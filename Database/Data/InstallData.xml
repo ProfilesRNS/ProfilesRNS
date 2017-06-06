@@ -14736,7 +14736,7 @@
       <IncludeDescription>0</IncludeDescription>
       <IncludeNetwork>0</IncludeNetwork>
       <SearchWeight>0.000000000000000e+000</SearchWeight>
-      <CustomDisplay>0</CustomDisplay>
+      <CustomDisplay>1</CustomDisplay>
       <CustomEdit>1</CustomEdit>
       <ViewSecurityGroup>-1</ViewSecurityGroup>
       <EditSecurityGroup>-20</EditSecurityGroup>
@@ -18159,7 +18159,7 @@
       <sInternalType>MemberRole</sInternalType>
       <sInternalID>MemberRoleID</sInternalID>
       <oValue>Title</oValue>
-      <oObjectType>0</oObjectType>
+      <oObjectType>1</oObjectType>
       <Weight>1</Weight>
       <ViewSecurityGroup>-1</ViewSecurityGroup>
       <EditSecurityGroup>-40</EditSecurityGroup>
@@ -18609,23 +18609,7 @@
       <sInternalType>Group</sInternalType>
       <sInternalID>GroupID</sInternalID>
       <oValue>GroupName</oValue>
-      <oObjectType>0</oObjectType>
-      <Weight>1</Weight>
-      <ViewSecurityGroup>-1</ViewSecurityGroup>
-      <EditSecurityGroup>-40</EditSecurityGroup>
-    </Row>
-    <Row>
-      <DataMapGroup>1</DataMapGroup>
-      <IsAutoFeed>1</IsAutoFeed>
-      <Graph>1</Graph>
-      <Class>http://xmlns.com/foaf/0.1/Group</Class>
-      <Property>http://profiles.catalyst.harvard.edu/ontology/prns#hasGroupSettings</Property>
-      <MapTable>[Profile.Data].[vwGroup.General]</MapTable>
-      <sInternalType>Group</sInternalType>
-      <sInternalID>GroupID</sInternalID>
-      <oValue>'true'</oValue>
-      <oDataType>http://www.w3.org/2001/XMLSchema#boolean</oDataType>
-      <oObjectType>0</oObjectType>
+      <oObjectType>1</oObjectType>
       <Weight>1</Weight>
       <ViewSecurityGroup>-1</ViewSecurityGroup>
       <EditSecurityGroup>-40</EditSecurityGroup>
