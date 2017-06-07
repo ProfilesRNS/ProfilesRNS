@@ -88,10 +88,14 @@
     <Content Include="Activity\PresentationXML\ActivityDetails.xml" />
     <Content Include="DirectService.aspx" />
     <Content Include="Edit\Images\img_arrow.png" />
+    <Content Include="Edit\Modules\CustomEditAssociatedInformationResource\CustomEditAssociatedInformationResource.ascx" />
     <Content Include="Edit\Modules\CustomEditEagleI\CustomEditEagleI.ascx" />
     <Content Include="Edit\Modules\CustomEditEducationalTraining\CustomEditEducationalTraining.ascx" />
     <Content Include="Edit\Modules\CustomEditFreetextKeyword\CustomEditFreetextKeyword.ascx" />
     <Content Include="Edit\Modules\CustomEditFreetextKeyword\keywordAutocomplete.aspx" />
+    <Content Include="Edit\Modules\CustomEditGroupMemberOf\CustomEditGroupMemberOf.ascx" />
+    <Content Include="Edit\Modules\CustomEditGroupMember\CustomEditGroupMember.ascx" />
+    <Content Include="Edit\Modules\CustomEditGroupSettings\CustomEditGroupSettings.ascx" />
     <Content Include="Edit\Modules\CustomEditListProperty\CustomEditListProperty.ascx" />
     <Content Include="Edit\Modules\CustomEditResearcherRole\CustomEditResearcherRole.ascx" />
     <Content Include="Framework\Images\listen.jpg" />
@@ -99,6 +103,12 @@
     <Content Include="Framework\Images\Orcid_Logo_rgb.png" />
     <Content Include="Framework\Images\Orcid_symbol_rgb.png" />
     <Content Include="Global.asax" />
+    <Content Include="GroupAdmin\CSS\GroupAdmin.css" />
+    <Content Include="GroupAdmin\Default.aspx" />
+    <Content Include="GroupAdmin\Modules\GroupAdmin\GroupAdmin.ascx" />
+    <Content Include="GroupAdmin\Modules\ModuleCatalogue.xml" />
+    <Content Include="GroupAdmin\PresentationXML\GroupAdminAuthFailedPresentation.xml" />
+    <Content Include="GroupAdmin\PresentationXML\GroupAdminPresentation.xml" />
     <Content Include="Login\Modules\ADLogin\ADLogin.ascx" />
     <Content Include="Login\Modules\ShibLogin\ShibLogin.ascx" />
     <Content Include="Login\PresentationXML\ADLoginFormPresentation.xml" />
@@ -168,6 +178,7 @@
     <Content Include="Profile\Images\default_img.png" />
     <Content Include="Profile\Modules\CustomViewEagleI\CustomViewEagleI.ascx" />
     <Content Include="Profile\Modules\CustomViewEagleI\Images\logo.gif" />
+    <Content Include="Profile\Modules\CustomViewGroupGeneralInfo\CustomViewGroupGeneralInfo.ascx" />
     <Content Include="Profile\Modules\CustomViewListProperty\CustomViewListProperty.ascx" />
     <Content Include="Profile\Modules\CustomViewPersonGeneralInfo\vcard.aspx" />
     <Content Include="Profile\Modules\CustomViewResearcherRole\CustomViewResearcherRole.ascx" />
@@ -187,6 +198,23 @@
     <Content Include="Profile\Modules\NetworkClusterFlash\scriptaculous\src\slider.js" />
     <Content Include="Profile\Modules\NetworkClusterFlash\scriptaculous\src\sound.js" />
     <Content Include="Profile\Modules\NetworkClusterFlash\scriptaculous\src\unittest.js" />
+    <Content Include="Profile\Modules\NetworkClusterGroup\crossdomain.xml" />
+    <Content Include="Profile\Modules\NetworkClusterGroup\Images\yui-loading.gif" />
+    <Content Include="Profile\Modules\NetworkClusterGroup\JavaScript\networkBrowserClass.js" />
+    <Content Include="Profile\Modules\NetworkClusterGroup\JavaScript\networkClusterLayoutEngine.js" />
+    <Content Include="Profile\Modules\NetworkClusterGroup\JavaScript\watchdog.js" />
+    <Content Include="Profile\Modules\NetworkClusterGroup\NetworkClusterGroup.ascx" />
+    <Content Include="Profile\Modules\NetworkClusterGroup\NetworkClusterGroupSvc.aspx" />
+    <Content Include="Profile\Modules\NetworkClusterGroup\network_browser_force.swf" />
+    <Content Include="Profile\Modules\NetworkClusterGroup\scriptaculous\lib\prototype.js" />
+    <Content Include="Profile\Modules\NetworkClusterGroup\scriptaculous\src\builder.js" />
+    <Content Include="Profile\Modules\NetworkClusterGroup\scriptaculous\src\controls.js" />
+    <Content Include="Profile\Modules\NetworkClusterGroup\scriptaculous\src\dragdrop.js" />
+    <Content Include="Profile\Modules\NetworkClusterGroup\scriptaculous\src\effects.js" />
+    <Content Include="Profile\Modules\NetworkClusterGroup\scriptaculous\src\scriptaculous.js" />
+    <Content Include="Profile\Modules\NetworkClusterGroup\scriptaculous\src\slider.js" />
+    <Content Include="Profile\Modules\NetworkClusterGroup\scriptaculous\src\sound.js" />
+    <Content Include="Profile\Modules\NetworkClusterGroup\scriptaculous\src\unittest.js" />
     <Content Include="Profile\Modules\NetworkCluster\JavaScript\networkClusterLayoutEngine.js" />
     <Content Include="Profile\Modules\NetworkCluster\JavaScript\watchdog.js" />
     <Content Include="Profile\Modules\NetworkRadialFlash\crossdomain.xml" />
@@ -210,8 +238,20 @@
     <Content Include="Profile\Modules\NetworkRadial\JavaScript\sliders.js" />
     <Content Include="Profile\Modules\NetworkRadial\JavaScript\viz.js" />
     <Content Include="Profile\Modules\NetworkRadial\JavaScript\watchdog.js" />
+    <Content Include="Profile\XSLT\ContributingRole.xslt">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Profile\XSLT\ContributingRoleDetails.xslt">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Profile\XSLT\ContributingRoleRoles.xslt">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Profile\XSLT\EducationalTraining.xslt" />
     <Content Include="Profile\XSLT\FreetextKeyword.xslt" />
+    <Content Include="Profile\XSLT\MemberRoleOf.xslt">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Profile\XSLT\NetworkTable.xslt" />
     <Content Include="RobotsTxt.aspx" />
     <Content Include="SiteMap.aspx" />
@@ -292,6 +332,13 @@
     <Compile Include="DirectService.aspx.designer.cs">
       <DependentUpon>DirectService.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Edit\Modules\CustomEditAssociatedInformationResource\CustomEditAssociatedInformationResource.ascx.cs">
+      <DependentUpon>CustomEditAssociatedInformationResource.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Edit\Modules\CustomEditAssociatedInformationResource\CustomEditAssociatedInformationResource.ascx.designer.cs">
+      <DependentUpon>CustomEditAssociatedInformationResource.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Edit\Modules\CustomEditEagleI\CustomEditEagleI.ascx.cs">
       <DependentUpon>CustomEditEagleI.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -320,6 +367,27 @@
     <Compile Include="Edit\Modules\CustomEditFreetextKeyword\keywordAutocomplete.aspx.designer.cs">
       <DependentUpon>keywordAutocomplete.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Edit\Modules\CustomEditGroupMemberOf\CustomEditGroupMemberOf.ascx.cs">
+      <DependentUpon>CustomEditGroupMemberOf.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Edit\Modules\CustomEditGroupMemberOf\CustomEditGroupMemberOf.ascx.designer.cs">
+      <DependentUpon>CustomEditGroupMemberOf.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Edit\Modules\CustomEditGroupMember\CustomEditGroupMember.ascx.cs">
+      <DependentUpon>CustomEditGroupMember.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Edit\Modules\CustomEditGroupMember\CustomEditGroupMember.ascx.designer.cs">
+      <DependentUpon>CustomEditGroupMember.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Edit\Modules\CustomEditGroupSettings\CustomEditGroupSettings.ascx.cs">
+      <DependentUpon>CustomEditGroupSettings.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Edit\Modules\CustomEditGroupSettings\CustomEditGroupSettings.ascx.designer.cs">
+      <DependentUpon>CustomEditGroupSettings.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Edit\Modules\CustomEditListProperty\CustomEditListProperty.ascx.cs">
       <DependentUpon>CustomEditListProperty.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -336,6 +404,7 @@
     </Compile>
     <Compile Include="Edit\Utilities\EducationalTrainingState.cs" />
     <Compile Include="Edit\Utilities\FundingState.cs" />
+    <Compile Include="Edit\Utilities\GroupMemberState.cs" />
     <Compile Include="Edit\Utilities\LiteralListState.cs" />
     <Compile Include="Framework\Modules\MainMenu\History.ascx.cs">
       <DependentUpon>History.ascx</DependentUpon>
@@ -345,6 +414,21 @@
       <DependentUpon>History.ascx</DependentUpon>
     </Compile>
     <Compile Include="Framework\Utilities\UserHistory.cs" />
+    <Compile Include="GroupAdmin\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GroupAdmin\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GroupAdmin\Modules\GroupAdmin\GroupAdmin.ascx.cs">
+      <DependentUpon>GroupAdmin.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GroupAdmin\Modules\GroupAdmin\GroupAdmin.ascx.designer.cs">
+      <DependentUpon>GroupAdmin.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="GroupAdmin\Utilities\DataIO.cs" />
     <Compile Include="History\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -851,6 +935,13 @@
     <Compile Include="Profile\Modules\CustomViewEagleI\CustomViewEagleI.ascx.designer.cs">
       <DependentUpon>CustomViewEagleI.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Profile\Modules\CustomViewGroupGeneralInfo\CustomViewGroupGeneralInfo.ascx.cs">
+      <DependentUpon>CustomViewGroupGeneralInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profile\Modules\CustomViewGroupGeneralInfo\CustomViewGroupGeneralInfo.ascx.designer.cs">
+      <DependentUpon>CustomViewGroupGeneralInfo.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Profile\Modules\CustomViewListProperty\CustomViewListProperty.ascx.cs">
       <DependentUpon>CustomViewListProperty.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -906,6 +997,20 @@
     </Compile>
     <Compile Include="Profile\Modules\NetworkClusterFlash\NetworkClusterTemplate.Master.designer.cs">
       <DependentUpon>NetworkClusterTemplate.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\Modules\NetworkClusterGroup\NetworkClusterGroup.ascx.cs">
+      <DependentUpon>NetworkClusterGroup.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profile\Modules\NetworkClusterGroup\NetworkClusterGroup.ascx.designer.cs">
+      <DependentUpon>NetworkClusterGroup.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\Modules\NetworkClusterGroup\NetworkClusterGroupSvc.aspx.cs">
+      <DependentUpon>NetworkClusterGroupSvc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profile\Modules\NetworkClusterGroup\NetworkClusterGroupSvc.aspx.designer.cs">
+      <DependentUpon>NetworkClusterGroupSvc.aspx</DependentUpon>
     </Compile>
     <Compile Include="Profile\Modules\NetworkCluster\NetworkClusterSvc.aspx.cs">
       <DependentUpon>NetworkClusterSvc.aspx</DependentUpon>
@@ -1696,6 +1801,9 @@
     <None Include="Profile\Modules\NetworkClusterFlash\scriptaculous\CHANGELOG" />
     <None Include="Profile\Modules\NetworkClusterFlash\scriptaculous\MIT-LICENSE" />
     <None Include="Profile\Modules\NetworkClusterFlash\scriptaculous\README.rdoc" />
+    <None Include="Profile\Modules\NetworkClusterGroup\scriptaculous\CHANGELOG" />
+    <None Include="Profile\Modules\NetworkClusterGroup\scriptaculous\MIT-LICENSE" />
+    <None Include="Profile\Modules\NetworkClusterGroup\scriptaculous\README.rdoc" />
     <None Include="Profile\Modules\NetworkCluster\scriptaculous\CHANGELOG" />
     <None Include="Profile\Modules\NetworkCluster\scriptaculous\MIT-LICENSE" />
     <None Include="Profile\Modules\NetworkCluster\scriptaculous\README.rdoc" />

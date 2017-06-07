@@ -101,7 +101,8 @@ namespace Profiles.Profile.Modules.PassiveList
                     {
                         documentdata.Append(" ItemURL=\"" + i.itemurl);
                         documentdata.Append("\"");
-                        documentdata.Append(" ItemURLText=\"" + i.itemurltext);
+                        if (!i.itemurltext.Equals("")) documentdata.Append(" ItemURLText=\"" + i.itemurltext);
+                        else documentdata.Append(" ItemURLText=\"" + CustomParse.Parse("{{{//rdf:Description[@rdf:about='"+ i.itemurl + "']/rdfs:label}}}", this.BaseData, this.Namespaces));
                         documentdata.Append("\"");
                     }
                     documentdata.Append(">");

@@ -90,7 +90,8 @@ namespace Profiles.Profile.Modules.ProfileImage
                     byte[] rawimage = null;
                     if (person.SelectSingleNode("rdf:RDF/rdf:Description[1]/prns:mainImage/@rdf:resource", namespaces) != null)
                     {
-                        rawimage = data.GetUserPhotoList(nodeid);
+                        if (person.SelectSingleNode("rdf:RDF/rdf:Description[1]/rdf:type[@rdf:resource='http://xmlns.com/foaf/0.1/Person']", namespaces) != null) rawimage = data.GetUserPhotoList(nodeid);
+                        if (person.SelectSingleNode("rdf:RDF/rdf:Description[1]/rdf:type[@rdf:resource='http://xmlns.com/foaf/0.1/Group']", namespaces) != null) rawimage = data.GetGroupPhotoList(nodeid);
                     }
                     else if (thumbnail)
                     {

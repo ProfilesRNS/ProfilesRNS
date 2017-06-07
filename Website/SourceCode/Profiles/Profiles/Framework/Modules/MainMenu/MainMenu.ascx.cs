@@ -78,6 +78,13 @@ namespace Profiles.Framework.Modules.MainMenu
             if (sm.Session().UserID > 0)
                 menulist.Append("<li><a href='" + Root.Domain + "/proxy/default.aspx?subject=" + sm.Session().NodeID.ToString() + "'>Manage Proxies</a></li>");
 
+            if (sm.Session().UserID > 0)
+            {
+                if(data.IsGroupAdmin(sm.Session().UserID))
+                menulist.Append("<li><a href='" + Root.Domain + "/groupAdmin/default.aspx'>Manage Groups</a></li>");
+            }
+
+
             if (base.BaseData.SelectSingleNode(".").OuterXml != string.Empty && !Root.AbsolutePath.ToLower().Contains("/search"))
             {
                 if (base.BaseData.SelectSingleNode("//rdf:RDF/rdf:Description/@rdf:about", base.Namespaces) != null && !Root.AbsolutePath.ToLower().Contains("proxy"))

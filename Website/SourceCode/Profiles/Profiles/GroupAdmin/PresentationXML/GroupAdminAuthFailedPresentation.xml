@@ -1,0 +1,35 @@
+﻿<Presentation PresentationClass="profile">
+  <PageOptions Columns="2"/>
+  <WindowName>Group Administration</WindowName>
+  <PageTitle>Group Administration</PageTitle>
+  <PageBackLinkName></PageBackLinkName>
+  <PageBackLinkURL></PageBackLinkURL>
+  <PageSubTitle></PageSubTitle>
+  <PageDescription></PageDescription>
+  <PanelList>
+    <Panel Type="header"  />
+    <Panel Type="page" />
+    <Panel Type="active">
+      <Module ID="MiniSearch"  />
+      <Module ID="MainMenu">
+      </Module>
+    </Panel>
+    <Panel Type="main" >
+      <Module ID="HTMLBlock">
+        <ParamList>
+          <Param ID="HTML">
+            <table style="margin:auto">
+              <tr>
+                <td>
+                  <b>You are not authorized to perform group administration.</b>
+                </td>
+              </tr>
+            </table>
+          </Param>
+        </ParamList>
+      </Module>
+    </Panel>
+    <Panel Type="footer" />
+  </PanelList>
+</Presentation>
+

@@ -133,7 +133,15 @@ namespace Profiles.Edit.Modules.SecurityOptions
         private void UpdateSecuritySetting(string securitygroup)
         {
             Edit.Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
-            data.UpdateSecuritySetting(this.Subject, data.GetStoreNode(this.PredicateURI), Convert.ToInt32(securitygroup));
+            if(this.PredicateURI.Equals("http://profiles.catalyst.harvard.edu/ontology/prns#hasGroupSettings"))
+            {
+                data.UpdateGroupSecurity(this.Subject, Convert.ToInt32(securitygroup));
+            }
+            else 
+            { 
+                
+                data.UpdateSecuritySetting(this.Subject, data.GetStoreNode(this.PredicateURI), Convert.ToInt32(securitygroup)); 
+            }
         }
 
         public XmlDataDocument SecurityGroups { get; set; }

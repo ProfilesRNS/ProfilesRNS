@@ -13,6 +13,7 @@ For details, see: LICENSE.txt
 <ModuleList>
   <Module ModulePath="Modules" NameSpace="NetworkRadial" FileName="NetworkRadial.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="NetworkCluster" FileName="NetworkCluster.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="NetworkClusterGroup" FileName="NetworkClusterGroup.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="NetworkMap" FileName="NetworkMap.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="CustomViewPersonGeneralInfo" FileName="CustomViewPersonGeneralInfo.ascx" Enabled="true"/>    
   <Module ModulePath="Modules" NameSpace="PropertyList" FileName="PropertyList.ascx" Enabled="true"/>
@@ -36,5 +37,6 @@ For details, see: LICENSE.txt
   <Module ModulePath="Modules" NameSpace="CustomViewListProperty" FileName="CustomViewListProperty.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="CustomViewEagleI" FileName="CustomViewEagleI.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="CustomViewResearcherRole" FileName="CustomViewResearcherRole.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="CustomViewGroupGeneralInfo" FileName="CustomViewGroupGeneralInfo.ascx" Enabled="true"/>
 </ModuleList>
 

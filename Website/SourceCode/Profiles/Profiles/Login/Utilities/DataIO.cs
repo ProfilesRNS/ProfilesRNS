@@ -77,6 +77,7 @@ namespace Profiles.Login.Utilities
                     sm.Session().UserID = user.UserID;
                     sm.Session().PersonID = user.PersonID;
                     sm.Session().LoginDate = DateTime.Now;
+                    sm.Session().ViewSecurityGroup = -20;
                     Session session = sm.Session();
                     SessionUpdate(ref session);
                     SessionActivityLog();
@@ -138,6 +139,7 @@ namespace Profiles.Login.Utilities
                     sm.Session().UserID = user.UserID;
                     sm.Session().PersonID = user.PersonID;
                     sm.Session().LoginDate = DateTime.Now;
+                    sm.Session().ViewSecurityGroup = -20;
                     Session session = sm.Session();
                     SessionUpdate(ref session);
                     SessionActivityLog();

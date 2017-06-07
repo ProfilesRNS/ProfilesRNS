@@ -35,6 +35,7 @@ namespace Profiles.Edit.Modules.CustomEditMainImage
     {
         Profiles.Profile.Utilities.DataIO propdata;
 
+
         protected void Page_Load(object sender, EventArgs e)
         {            
 
@@ -126,8 +127,13 @@ namespace Profiles.Edit.Modules.CustomEditMainImage
 
             byte[] imageBytes = new byte[AsyncFileUpload1.PostedFile.InputStream.Length + 1];
             AsyncFileUpload1.PostedFile.InputStream.Read(imageBytes, 0, imageBytes.Length);
+            Framework.Utilities.Namespace xmlnamespace = new Profiles.Framework.Utilities.Namespace();
+            XmlNamespaceManager namespaces = xmlnamespace.LoadNamespaces(BaseData);
+            if (BaseData.SelectSingleNode("rdf:RDF/rdf:Description[1]/rdf:type[@rdf:resource='http://xmlns.com/foaf/0.1/Person']", namespaces) != null)
+                data.SaveImage(this.SubjectID, imageBytes, this.PropertyListXML);
+            if (BaseData.SelectSingleNode("rdf:RDF/rdf:Description[1]/rdf:type[@rdf:resource='http://xmlns.com/foaf/0.1/Group']", namespaces) != null)
+                data.SaveGroupImage(this.SubjectID, imageBytes, this.PropertyListXML);
 
-            data.SaveImage(this.SubjectID, imageBytes, this.PropertyListXML);
             base.GetSubjectProfile();
             this.PropertyListXML = propdata.GetPropertyList(this.BaseData, base.PresentationXML, this.PredicateURI, false, true, false);
             this.DrawProfilesModule();

@@ -68,7 +68,11 @@ namespace Profiles.Profile.Modules.NetworkMap
                 reader2 = data.GetGMapUserSimilarPeople(base.RDFTriple.Subject, true, session.Session().SessionID);
             }
 
-
+            if (base.GetModuleParamString("MapType") == "Group")
+            {
+                reader = data.GetGMapUserGroup(base.RDFTriple.Subject, 0, session.Session().SessionID);
+                reader2 = data.GetGMapUserGroup(base.RDFTriple.Subject, 1, session.Session().SessionID);
+            }
 
             string googleCode, tableText;
             gmh.MapPlotPeople(base.RDFTriple.Subject, reader, reader2, out googleCode, out tableText);
