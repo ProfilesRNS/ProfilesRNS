@@ -891,7 +891,7 @@ namespace Profiles.Profile.Utilities
                 {
                     string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
                     SqlConnection dbconnection = new SqlConnection(connstr);
-                    SqlCommand dbcommand = new SqlCommand("[Profile.Module].[NetworkCluster.GetGroup]");
+                    SqlCommand dbcommand = new SqlCommand("[Profile.Module].[NetworkRadial.Group.GetCoAuthors]");
 
                     SqlDataReader dbreader;
                     dbconnection.Open();
