@@ -61,6 +61,12 @@
                                 <security:Options runat="server" ID="securityOptions"></security:Options>
                             </div>
                         </asp:PlaceHolder>
+                        <asp:PlaceHolder ID="phAddMemberPubs" runat="server">
+                            <div style="padding-bottom: 10px;">
+                                <asp:LinkButton ID="btnAddMemberPub" runat="server" OnClick="btnAddMemberPub_OnClick" CssClass="profileHypLinks"><asp:Image runat="server" ID="btnImgAddMemberPub" AlternateText=" " ImageUrl="~/Framework/Images/icon_squareArrow.gif"/>&nbsp;Add Member Publication</asp:LinkButton>
+                                &nbsp;(Add one or more articles authored by members of this group.)
+                            </div>
+                        </asp:PlaceHolder>
                         <asp:PlaceHolder ID="phAddPubMed" runat="server">
                             <div style="padding-bottom: 10px;">
                                 <asp:LinkButton ID="btnAddPubMed" runat="server" OnClick="btnAddPubMed_OnClick" CssClass="profileHypLinks"><asp:Image runat="server" ID="btnImgAddPubMed" AlternateText=" " ImageUrl="~/Framework/Images/icon_squareArrow.gif"/>&nbsp;Add PubMed</asp:LinkButton>
@@ -208,7 +214,7 @@
                                 </asp:Panel>
                                 <div>
                                     <asp:GridView EnableViewState="true" ID="grdPubMedSearchResults" runat="server" GridLines="None"
-                                        EmptyDataText="No PubMed Publications Found." DataKeyNames="pmid" AutoGenerateColumns="false"
+                                        EmptyDataText="No PubMed Publications Found." DataKeyNames="pmid, mpid" AutoGenerateColumns="false"
                                         AllowPaging="false" PageSize="10" OnRowDataBound="grdPubMedSearchResults_RowDataBound"
                                         OnPageIndexChanging="grdPubMedSearchResults_PageIndexChanging" CellPadding="4">
                                         <PagerSettings Position="TopAndBottom" LastPageText="&gt;&gt;" FirstPageText="&lt;&lt;"

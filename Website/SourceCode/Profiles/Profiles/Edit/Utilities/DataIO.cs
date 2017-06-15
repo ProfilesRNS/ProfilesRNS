@@ -165,6 +165,47 @@ namespace Profiles.Edit.Utilities
             }
         }
 
+
+        public void UpdateEntityOneGroup(int personid)
+        {
+            SessionManagement sm = new SessionManagement();
+            string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+
+            SqlConnection dbconnection = new SqlConnection(connstr);
+
+            SqlParameter[] param = new SqlParameter[1];
+
+            try
+            {
+                dbconnection.Open();
+
+                param[0] = new SqlParameter("@GroupID", personid);
+                SqlCommand comm = GetDBCommand(ref dbconnection, "[Profile.Data].[Publication.Entity.UpdateEntityOneGroup]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param);
+
+                //For Output Parameters you need to pass a connection object to the framework so you can close it before reading the output params value.
+                ExecuteSQLDataCommand(comm);
+
+                comm.Connection.Close();
+
+                if (dbconnection.State != ConnectionState.Closed)
+                    dbconnection.Close();
+
+                if (HttpContext.Current.Request.QueryString["subjectid"] != null)
+                {
+                    Framework.Utilities.Cache.AlterDependency(HttpContext.Current.Request.QueryString["subjectid"].ToString());
+
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                Framework.Utilities.DebugLogging.Log(e.Message + e.StackTrace);
+                throw new Exception(e.Message);
+            }
+        }
+
+
         public void AddPublication(string mpid, string pubmedxml)
         {
 
@@ -313,6 +354,48 @@ namespace Profiles.Edit.Utilities
 
         }
 
+
+        public void DeleteGroupPublications(int groupid, long subjectid, bool deletePMID, bool deleteMPID)
+        {
+            EditActivityLog(subjectid, "http://profiles.catalyst.harvard.edu/ontology/prns#associatedInformationResource", null, deletePMID ? "deletePMID = true" : "deletePMID = false", deleteMPID ? "deleteMPID = true" : "deleteMPID = false");
+            string skey = string.Empty;
+            string sparam = string.Empty;
+
+            try
+            {
+                SessionManagement sm = new SessionManagement();
+                string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+
+                SqlConnection dbconnection = new SqlConnection(connstr);
+
+                SqlCommand comm = new SqlCommand();
+
+                comm.Parameters.Add(new SqlParameter("GroupID", groupid));
+                comm.Parameters.Add(new SqlParameter("deletePMID", deletePMID));
+
+                comm.Parameters.Add(new SqlParameter("deleteMPID", deleteMPID));
+                comm.Connection = dbconnection;
+                comm.Connection.Open();
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.CommandText = "[Profile.Data].[Publication.Group.DeleteAllPublications]";
+                comm.ExecuteScalar();
+
+                comm.Connection.Close();
+
+                if (dbconnection.State != ConnectionState.Closed)
+                    dbconnection.Close();
+
+                this.UpdateEntityOneGroup(groupid);
+            }
+            catch (Exception e)
+            {
+                Framework.Utilities.DebugLogging.Log(e.Message + e.StackTrace);
+                throw new Exception(e.Message);
+            }
+
+
+        }
+
         public void DeleteOnePublication(int personid, long subjectID, string pubid, XmlDocument PropertyListXML)
         {
             ActivityLog(PropertyListXML, subjectID, "PubID", pubid);
@@ -344,6 +427,93 @@ namespace Profiles.Edit.Utilities
                     dbconnection.Close();
 
                 this.UpdateEntityOnePerson(personid);
+
+
+            }
+            catch (Exception e)
+            {
+                Framework.Utilities.DebugLogging.Log(e.Message + e.StackTrace);
+                throw new Exception(e.Message);
+            }
+
+
+        }
+
+
+        public void DeleteOneGroupPublication(int groupid, long subjectID, string pubid, XmlDocument PropertyListXML)
+        {
+            ActivityLog(PropertyListXML, subjectID, "PubID", pubid);
+            string skey = string.Empty;
+            string sparam = string.Empty;
+
+            try
+            {
+                SessionManagement sm = new SessionManagement();
+                string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+
+                SqlConnection dbconnection = new SqlConnection(connstr);
+
+                SqlCommand comm = new SqlCommand();
+
+                comm.Parameters.Add(new SqlParameter("GroupID", groupid));
+                comm.Parameters.Add(new SqlParameter("PubID", pubid));
+
+
+                comm.Connection = dbconnection;
+                comm.Connection.Open();
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.CommandText = "[Profile.Data].[Publication.Group.DeleteOnePublication]";
+                comm.ExecuteScalar();
+
+                comm.Connection.Close();
+
+                if (dbconnection.State != ConnectionState.Closed)
+                    dbconnection.Close();
+
+                this.UpdateEntityOneGroup(groupid);
+
+
+            }
+            catch (Exception e)
+            {
+                Framework.Utilities.DebugLogging.Log(e.Message + e.StackTrace);
+                throw new Exception(e.Message);
+            }
+
+
+        }
+
+        public void copyCustomPubForGroup(int groupid, long subjectID, string mpid, XmlDocument PropertyListXML)
+        {
+            ActivityLog(PropertyListXML, subjectID, "PubID", mpid);
+            string skey = string.Empty;
+            string sparam = string.Empty;
+
+            try
+            {
+                SessionManagement sm = new SessionManagement();
+                string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+
+                SqlConnection dbconnection = new SqlConnection(connstr);
+
+                SqlCommand comm = new SqlCommand();
+
+                comm.Parameters.Add(new SqlParameter("GroupID", groupid));
+                comm.Parameters.Add(new SqlParameter("MPID", mpid));
+
+
+                comm.Connection = dbconnection;
+                comm.Connection.Open();
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.CommandText = "[Profile.Data].[Publication.Group.MyPub.CopyExistingPublication]";
+                comm.ExecuteScalar();
+
+                comm.Connection.Close();
+
+                if (dbconnection.State != ConnectionState.Closed)
+                    dbconnection.Close();
+
+                this.UpdateEntityOneGroup(groupid);
 
 
             }
@@ -450,6 +620,58 @@ namespace Profiles.Edit.Utilities
 
         }
 
+
+        public void AddCustomGroupPublication(Hashtable parameters, int groupid, long subjectID, XmlDocument PropertyListXML)
+        {
+            ActivityLog(PropertyListXML, subjectID, parameters["@HMS_PUB_CATEGORY"].ToString(), parameters["@PUB_TITLE"].ToString());
+            string skey = string.Empty;
+            string sparam = string.Empty;
+
+            try
+            {
+                SessionManagement sm = new SessionManagement();
+                string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+
+                SqlConnection dbconnection = new SqlConnection(connstr);
+
+                SqlCommand comm = new SqlCommand();
+
+                string s = string.Empty;
+
+                foreach (object key in parameters.Keys)
+                {
+                    skey = (string)key;
+                    sparam = (string)parameters[skey].ToString();
+                    comm.Parameters.Add(new SqlParameter(skey, sparam));
+
+                    s = s + skey + "='" + sparam + "'";
+
+                }
+
+                comm.Connection = dbconnection;
+                comm.Connection.Open();
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.CommandText = "[Profile.Data].[Publication.Group.MyPub.AddPublication]";
+                comm.ExecuteScalar();
+
+                comm.Connection.Close();
+
+                if (dbconnection.State != ConnectionState.Closed)
+                    dbconnection.Close();
+
+                this.UpdateEntityOneGroup(groupid);
+
+            }
+            catch (Exception e)
+            {
+                Framework.Utilities.DebugLogging.Log(e.Message + e.StackTrace);
+                throw new Exception(e.Message);
+            }
+
+
+        }
+
+
         public List<PublicationState> GetPubs(int personid)
         {
 
@@ -525,6 +747,82 @@ namespace Profiles.Edit.Utilities
 
 
         }
+
+
+        public List<PublicationState> GetGroupMemberPubs(int groupid)
+        {
+
+            SessionManagement sm = new SessionManagement();
+            string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+
+            SqlConnection dbconnection = new SqlConnection(connstr);
+            SqlDataReader reader;
+
+            SqlParameter[] param = null;
+            List<PublicationState> pubs = new List<PublicationState>();
+            string rownum = string.Empty;
+            string reference = string.Empty;
+            Int32 pmid = 0;
+            string mpid = string.Empty;
+            string category = string.Empty;
+            string url = string.Empty;
+            string pubdate = string.Empty;
+            string frompubmed = string.Empty;
+
+
+
+            try
+            {
+
+                dbconnection.Open();
+
+                //For Output Parameters you need to pass a connection object to the framework so you can close it before reading the output params value.
+                reader = GetDBCommand(dbconnection, "exec [Profile.Data].[Publication.GetGroupMemberPublications] " + groupid.ToString(), CommandType.Text, CommandBehavior.CloseConnection, param).ExecuteReader();
+
+
+                while (reader.Read())
+                {
+                    rownum = reader["rownum"].ToString();
+                    reference = reader["reference"].ToString();
+                    if (reader["pmid"] != DBNull.Value)
+                        pmid = Convert.ToInt32(reader["pmid"].ToString());
+
+                    if (reader["MPid"] != DBNull.Value)
+                        mpid = reader["mpid"].ToString();
+
+                    if (reader["category"] != DBNull.Value)
+                        category = reader["category"].ToString();
+
+                    url = reader["url"].ToString();
+                    pubdate = reader["pubdate"].ToString();
+                    frompubmed = reader["frompubmed"].ToString();
+
+                    pubs.Add(new PublicationState(rownum,
+                        reference,
+                        pmid,
+                        mpid,
+                        category,
+                        url,
+                        Convert.ToDateTime(pubdate),
+                       Convert.ToBoolean(frompubmed)));
+                }
+
+                if (!reader.IsClosed)
+                    reader.Close();
+
+                if (dbconnection.State != ConnectionState.Closed)
+                    dbconnection.Close();
+
+            }
+            catch (Exception e)
+            {
+                Framework.Utilities.DebugLogging.Log(e.Message + e.StackTrace);
+                throw new Exception(e.Message);
+            }
+
+            return pubs;
+        }
+
 
         public SqlDataReader GetCustomPub(string mpid)
         {
