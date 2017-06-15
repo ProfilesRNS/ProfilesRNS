@@ -310,6 +310,7 @@ type Profile.Data.vwGroup.General.View.sql
 type Profile.Data.vwGroup.Manager.View.sql
 type Profile.Data.vwGroup.Member.View.sql
 type Profile.Data.vwGroup.Photo.View.sql
+type Profile.Data.vwGroup.Publication.Entity.AssociatedInformationResource.View.sql
 
 type PresentationXML.SqlAssembly.sql
 
@@ -617,3 +618,8 @@ type Profile.Module.CustomViewAuthorInAuthorship.GetGroupList.StoredProcedure.sq
 type Profile.Module.NetworkAuthorshipTimeline.Group.GetData.StoredProcedure.sql
 type Profile.Module.NetworkRadial.Group.GetCoauthors.StoredProcedure.sql
 type Profile.Module.NetworkMap.GetGroup.StoredProcedure.sql
+type Profile.Data.Publication.Entity.UpdateEntityOneGroup.StoredProcedure.sql
+type Profile.Data.Publication.Group.DeleteAllPublications.StoredProcedure.sql
+type Profile.Data.Publication.Group.DeleteOnePublication.StoredProcedure.sql
+type Profile.Data.Publication.Group.MyPub.AddPublication.StoredProcedure.sql
+type Profile.Data.Publication.Group.MyPub.CopyExistingPublication.StoredProcedure.sql
