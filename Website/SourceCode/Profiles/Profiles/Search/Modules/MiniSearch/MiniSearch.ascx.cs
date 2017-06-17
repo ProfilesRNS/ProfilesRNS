@@ -49,7 +49,7 @@ namespace Profiles.Search.Modules.MiniSearch
             //Profiles.Search.Utilities.DataIO dropdowns = new Profiles.Search.Utilities.DataIO();
             if (Convert.ToBoolean(ConfigurationSettings.AppSettings["ShowInstitutions"]) == true)
             {
-                litInstitution.Text = SearcDropDowns.BuildDropdown("institution","150","");
+                litInstitution.Text = SearchDropDowns.BuildDropdown("institution","150","");
             }
             else
             {

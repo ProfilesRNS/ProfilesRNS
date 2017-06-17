@@ -55,7 +55,7 @@ namespace Profiles.Search.Modules.SearchPerson
                 //Profiles.Search.Utilities.DataIO dropdowns = new Profiles.Search.Utilities.DataIO();
                 if (Convert.ToBoolean(ConfigurationSettings.AppSettings["ShowInstitutions"]) == true)
                 {
-                    litInstitution.Text = SearcDropDowns.BuildDropdown("institution", "249", "");
+                    litInstitution.Text = SearchDropDowns.BuildDropdown("institution", "249", "");
                 }
                 else
                 {
@@ -64,7 +64,7 @@ namespace Profiles.Search.Modules.SearchPerson
 
                 if (Convert.ToBoolean(ConfigurationSettings.AppSettings["ShowDepartments"]) == true)
                 {
-                    litDepartment.Text = SearcDropDowns.BuildDropdown("department", "249", "");
+                    litDepartment.Text = SearchDropDowns.BuildDropdown("department", "249", "");
                 }
                 else
                 {
@@ -73,7 +73,7 @@ namespace Profiles.Search.Modules.SearchPerson
 
                 if (Convert.ToBoolean(ConfigurationSettings.AppSettings["ShowDivisions"]) == true)
                 {
-                    litDivision.Text = SearcDropDowns.BuildDropdown("division", "249", "");
+                    litDivision.Text = SearchDropDowns.BuildDropdown("division", "249", "");
                 }
                 else
                 {
@@ -147,7 +147,7 @@ namespace Profiles.Search.Modules.SearchPerson
                     {
 
 
-                        litInstitution.Text = SearcDropDowns.BuildDropdown("institution", "249", x.InnerText);
+                        litInstitution.Text = SearchDropDowns.BuildDropdown("institution", "249", x.InnerText);
                         institutiondropdown = true;
 
                         if (x.SelectSingleNode("@IsExclude").Value == "1")
@@ -158,7 +158,7 @@ namespace Profiles.Search.Modules.SearchPerson
 
                     if (x.SelectSingleNode("@Property").Value == "http://vivoweb.org/ontology/core#personInPosition" && x.SelectSingleNode("@Property2").Value == "http://profiles.catalyst.harvard.edu/ontology/prns#positionInDepartment")
                     {
-                        litDepartment.Text = SearcDropDowns.BuildDropdown("department", "249", x.InnerText);
+                        litDepartment.Text = SearchDropDowns.BuildDropdown("department", "249", x.InnerText);
                         departmentdropdown = true;
 
                         if (x.SelectSingleNode("@IsExclude").Value == "1")
@@ -170,7 +170,7 @@ namespace Profiles.Search.Modules.SearchPerson
 
                     if (x.SelectSingleNode("@Property").Value == "http://vivoweb.org/ontology/core#personInPosition" && x.SelectSingleNode("@Property2").Value == "http://profiles.catalyst.harvard.edu/ontology/prns#positionInDivision")
                     {
-                        litDivision.Text = SearcDropDowns.BuildDropdown("division", "249", x.InnerText);
+                        litDivision.Text = SearchDropDowns.BuildDropdown("division", "249", x.InnerText);
                         divisiondropdown = true;
 
                         if (x.SelectSingleNode("@IsExclude").Value == "1")
@@ -201,13 +201,13 @@ namespace Profiles.Search.Modules.SearchPerson
             }
 
             if (!institutiondropdown)
-                litInstitution.Text = SearcDropDowns.BuildDropdown("institution", "249", "");
+                litInstitution.Text = SearchDropDowns.BuildDropdown("institution", "249", "");
 
             if (!departmentdropdown)
-                litDepartment.Text = SearcDropDowns.BuildDropdown("department", "249", "");
+                litDepartment.Text = SearchDropDowns.BuildDropdown("department", "249", "");
 
             if (!divisiondropdown)
-                litDivision.Text = SearcDropDowns.BuildDropdown("division", "249", "");
+                litDivision.Text = SearchDropDowns.BuildDropdown("division", "249", "");
 
 
 

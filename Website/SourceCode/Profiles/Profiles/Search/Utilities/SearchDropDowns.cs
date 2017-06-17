@@ -7,7 +7,7 @@ using Profiles.Framework.Utilities;
 
 namespace Profiles.Search.Utilities
 {
-    public static class SearcDropDowns
+    public static class SearchDropDowns
     {
 
 
