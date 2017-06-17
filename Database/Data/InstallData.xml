@@ -19473,6 +19473,24 @@
       <ViewSecurityGroup>-1</ViewSecurityGroup>
       <EditSecurityGroup>-40</EditSecurityGroup>
     </Row>
+    <Row>
+      <DataMapGroup>1</DataMapGroup>
+      <IsAutoFeed>1</IsAutoFeed>
+      <Graph>1</Graph>
+      <Class>http://xmlns.com/foaf/0.1/Group</Class>
+      <Property>http://profiles.catalyst.harvard.edu/ontology/prns#associatedInformationResource</Property>
+      <MapTable>[Profile.Data].[vwGroup.Publication.Entity.AssociatedInformationResource]</MapTable>
+      <sInternalType>Group</sInternalType>
+      <sInternalID>GroupID</sInternalID>
+      <oClass>http://vivoweb.org/ontology/core#InformationResource</oClass>
+      <oInternalType>InformationResource</oInternalType>
+      <oInternalID>EntityID</oInternalID>
+      <oObjectType>0</oObjectType>
+      <Weight>1</Weight>
+      <OrderBy>EntityDate desc</OrderBy>
+      <ViewSecurityGroup>-1</ViewSecurityGroup>
+      <EditSecurityGroup>-20</EditSecurityGroup>
+    </Row>
   </Table>
   <Table Name="[Ontology.].[Namespace]">
     <Row>
