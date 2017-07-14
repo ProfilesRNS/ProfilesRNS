@@ -56,8 +56,7 @@ REM It should be configured to save all files in the c:\ProgramData\PDFCreator f
 REM This will waste a lot of paper if a physical printer is configured as the default
 REM 
 REM 
-if %GeneratePDFs% equ true
-(
+if %GeneratePDFs% equ true (
 	call "%OFFICE_PATH%\WINWORD.EXE" ..\ProfilesRNS_ReadMeFirst.docx /q /n /mFilePrintDefault /mFileCloseOrExit
 	call "%OFFICE_PATH%\WINWORD.EXE" ..\Documentation\ProfilesRNS_APIGuide.doc /q /n /mFilePrintDefault /mFileCloseOrExit
 	call "%OFFICE_PATH%\WINWORD.EXE" ..\Documentation\ProfilesRNS_ArchitectureGuide.docx /q /n /mFilePrintDefault /mFileCloseOrExit
@@ -86,8 +85,7 @@ if %GeneratePDFs% equ true
 		move "%pdfCreatorPath%\ProfilesRNS_ReadMeFirst.pdf" ProfilesRNS\ProfilesRNS_ReadMeFirst.pdf
 		move "%pdfCreatorPath%\ProfilesRNS_ReleaseNotes.pdf" ProfilesRNS\Documentation\ProfilesRNS_ReleaseNotes_%Version%.pdf
 	)
-)
-else (
+) else (
 	copy ..\Documentation\ORNG\ORNGArchitecturalDiagram.pptx ProfilesRNS\Documentation\ORNG\ORNGArchitecturalDiagram_%Version%.pptx
 	copy ..\Documentation\ProfilesRNS_DataFlowDiagram.pptx ProfilesRNS\Documentation\ProfilesRNS_DataFlowDiagram_%Version%.pptx
 	copy ..\Documentation\ProfilesRNS_OntologyDiagram.pptx ProfilesRNS\Documentation\ProfilesRNS_OntologyDiagram_%Version%.pptx
