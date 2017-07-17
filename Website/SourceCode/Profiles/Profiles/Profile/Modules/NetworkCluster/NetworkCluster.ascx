@@ -70,7 +70,7 @@
     To return to the cluster graph, <a id="dirReturnToTimeline" tabindex="0" class="jQueryLink">click here.</a>                       
 </div>
 <div id="divFlashGraph" style="display:none; position: relative;" class="clusterView">
-    <iframe id="iFrameFlashGraph" runat="server" width="610px" height="700px" frameborder="0" style="overflow:hidden;" ></iframe>
+    <asp:HtmlIframe><iframe id="iFrameFlashGraph" runat="server" width="610px" height="700px" frameborder="0" style="overflow:hidden;" ></iframe></asp:HtmlIframe>
         <br />
     To return to the HTML5 visulization, <a id="divReturnToHTML5" tabindex="0" class="jQueryLink">click here.</a>                    
 </div>

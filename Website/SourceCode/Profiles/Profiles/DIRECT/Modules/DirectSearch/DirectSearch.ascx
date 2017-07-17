@@ -65,10 +65,8 @@ function NoEnter(){
 		var el2 = el1.childNodes[0];
 		if ((ResultError == 0)&&(ResultCount!='')) {
 			el2.innerHTML = ResultCount;
-			var el3 = document.createElement("div");
+			var el3 = document.createElement("div");			
 			
-			//el3.innerHTML = '<div id="SITE_PREVIEW_'+SiteID+'" style="display:none;" ><div style="border:none;"><IFRAME src="'+ResultPrevURL+'" style="width:600px;height:300px;border:0px;" frameborder="0" /></div></div>';
-			//document.getElementById('sitePreview').appendChild(el3);
 		} else {
 			ResultPopType = 'No results were returned by this institution.';
 			el2.innerHTML = '0';
@@ -197,9 +195,9 @@ function NoEnter(){
                 the right and a preview/summary of the matching people at the bottom of this page.
             </div>
             <%Response.Write(DrawMyTable()); %>
-            <iframe name="FSAJAXFrame" id="FSAJAXFrame" src="<%Response.Write(DirectServiceURL());%>?request=outgoingcount&blank=y&r=rnd"
+           <asp:HtmlIframe> <iframe name="FSAJAXFrame" id="FSAJAXFrame" src="<%Response.Write(DirectServiceURL());%>?request=outgoingcount&blank=y&r=rnd"
                 frameborder="0" scrolling="no" style="width: 0px; height: 0px;" title="Preview"/>
-            </iframe> 
+            </iframe> </asp:HtmlIframe>
         </div>
     </div>
 

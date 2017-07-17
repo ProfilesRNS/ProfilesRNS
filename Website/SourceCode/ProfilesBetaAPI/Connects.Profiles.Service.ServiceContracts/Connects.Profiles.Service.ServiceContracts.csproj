@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Connects.Profiles.Service.ServiceContracts</RootNamespace>
     <AssemblyName>Connects.Profiles.Service.ServiceContracts</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>
     </SccProjectName>
@@ -24,6 +24,7 @@
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,6 +34,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -41,6 +43,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -74,10 +77,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Profiles.Common\Connects.Profiles.Common.csproj">
-      <Project>{72ABCD78-6907-4F63-8C59-392C9F3CE506}</Project>
-      <Name>Connects.Profiles.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Connects.Profiles.Service.DataContracts\Connects.Profiles.Service.DataContracts.csproj">
       <Project>{4E11DE8F-C111-44E4-8AF8-B66EDEC9152D}</Project>
       <Name>Connects.Profiles.Service.DataContracts</Name>
@@ -91,15 +90,15 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-      <Target Name="CopySource">
+  <Target Name="CopySource">
     <Error Condition="'$(CopyDestination)'==''" Text="The CopyDestination property must be set to the intended copying destination." />
     <MakeDir Condition="!Exists($(CopyDestination))" Directories="$(CopyDestination)" />
-	<Copy SourceFiles="@(Content)" DestinationFiles="@(Content->'$(CopyDestination)\%(RelativeDir)%(Filename)%(Extension)')" SkipUnchangedFiles="True" />
-	<Copy SourceFiles="@(Compile)" DestinationFiles="@(Compile->'$(CopyDestination)\%(RelativeDir)%(Filename)%(Extension)')" SkipUnchangedFiles="True" />
-	<Copy SourceFiles="@(None)" DestinationFiles="@(None->'$(CopyDestination)\%(RelativeDir)%(Filename)%(Extension)')" SkipUnchangedFiles="True" />
-	<ItemGroup>
-        <ProjFiles Include="Connects.Profiles.Service.ServiceContracts.csproj" />
+    <Copy SourceFiles="@(Content)" DestinationFiles="@(Content->'$(CopyDestination)\%(RelativeDir)%(Filename)%(Extension)')" SkipUnchangedFiles="True" />
+    <Copy SourceFiles="@(Compile)" DestinationFiles="@(Compile->'$(CopyDestination)\%(RelativeDir)%(Filename)%(Extension)')" SkipUnchangedFiles="True" />
+    <Copy SourceFiles="@(None)" DestinationFiles="@(None->'$(CopyDestination)\%(RelativeDir)%(Filename)%(Extension)')" SkipUnchangedFiles="True" />
+    <ItemGroup>
+      <ProjFiles Include="Connects.Profiles.Service.ServiceContracts.csproj" />
     </ItemGroup>
-	<Copy SourceFiles="@(ProjFiles)" DestinationFiles="@(ProjFiles->'$(CopyDestination)\%(RelativeDir)%(Filename)%(Extension)')" SkipUnchangedFiles="True" />
-</Target>
+    <Copy SourceFiles="@(ProjFiles)" DestinationFiles="@(ProjFiles->'$(CopyDestination)\%(RelativeDir)%(Filename)%(Extension)')" SkipUnchangedFiles="True" />
+  </Target>
 </Project>

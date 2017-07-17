@@ -18,7 +18,8 @@
       <Module ID="HTMLBlock">
         <ParamList>
           <Param ID="HTML">
-            <iframe  id="iLogout" src="https://login.pin1.harvard.edu/pin/logout"   frameborder="0" marginheight="0" marginwidth="0" scrolling="no" height="0" width="0" onload="JavaScrit:document.location='[[[Root]]]/search'"></iframe>
+            <asp:HtmlIframe><iframe  id="iLogout" src="https://login.pin1.harvard.edu/pin/logout"   frameborder="0" marginheight="0" marginwidth="0" scrolling="no" height="0" width="0" onload="JavaScrit:document.location='[[[Root]]]/search'"></iframe>
+              </asp:HtmlIframe>
             <table style="margin:auto">
               <tr>
                 <td>

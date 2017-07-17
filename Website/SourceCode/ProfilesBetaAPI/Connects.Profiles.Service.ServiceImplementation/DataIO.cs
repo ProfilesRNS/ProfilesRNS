@@ -18,7 +18,6 @@ using System.Xml;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using Connects.Profiles.Common;
 
 
 namespace Connects.Profiles.Service.ServiceImplementation
