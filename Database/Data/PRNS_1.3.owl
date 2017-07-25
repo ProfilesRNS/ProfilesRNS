@@ -501,7 +501,7 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupSettings">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
-    <rdfs:label rdf:resource="Settings" />
+    <rdfs:label rdf:resource="Options" />
   </rdf:Description>
   <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupIntroduction">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
@@ -514,9 +514,5 @@
   <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#aboutUs">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
     <rdfs:label rdf:resource="about us" />
-  </rdf:Description>
-  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#contactUs">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
-    <rdfs:label rdf:resource="contact us" />
   </rdf:Description>
 </rdf:RDF>
