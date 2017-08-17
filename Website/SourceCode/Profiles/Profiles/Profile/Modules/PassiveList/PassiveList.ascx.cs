@@ -80,8 +80,44 @@ namespace Profiles.Profile.Modules.PassiveList
             documentdata.Append(">");
             documentdata.Append("<ItemList>");
 
-
+            string path = base.GetModuleParamString("ListNode");
+            //path = path.Substring(path.LastIndexOf("@rdf:about=") + 12);
+            //path = path.Substring(0, path.Length - 1);
             try
+            {
+                XmlNodeList items = this.BaseData.SelectNodes(path, this.Namespaces);
+                int remainingItems = Convert.ToInt16(base.GetModuleParamString("MaxDisplay"));
+                foreach (XmlNode i in items)
+                {
+                    if (remainingItems == 0) break;
+                    remainingItems--;
+
+                    XmlNode networknode = this.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[@rdf:about=\"" + i.Value + "\"]", this.Namespaces);
+
+                    string itemurl = CustomParse.Parse(base.GetModuleParamString("ItemURL"), networknode, this.Namespaces);
+                    string itemurltext = CustomParse.Parse(base.GetModuleParamString("ItemURLText"), networknode, this.Namespaces);
+                    string item = CustomParse.Parse(base.GetModuleParamString("ItemText"), networknode, this.Namespaces);
+
+                    networkexists = true;
+
+                    documentdata.Append("<Item");
+
+                    if (base.GetModuleParamString("ItemURL") != string.Empty)
+                    {
+                        documentdata.Append(" ItemURL=\"" + itemurl);
+                        documentdata.Append("\"");
+                        if (!itemurltext.Equals("")) documentdata.Append(" ItemURLText=\"" + itemurltext);
+                        else documentdata.Append(" ItemURLText=\"" + CustomParse.Parse("{{{//rdf:Description[@rdf:about='" + itemurl + "']/rdfs:label}}}", this.BaseData, this.Namespaces));
+                        documentdata.Append("\"");
+                    }
+                    documentdata.Append(">");
+                    documentdata.Append(item);
+                    documentdata.Append("</Item>");
+                }
+            }
+            catch (Exception ex) { Framework.Utilities.DebugLogging.Log(ex.Message + " ++ " + ex.StackTrace); }
+/*
+           try
             {
                 var items = from XmlNode networknode in this.BaseData.SelectNodes(base.GetModuleParamString("ListNode") + "[position() < " + Math.BigMul((Convert.ToInt16(base.GetModuleParamString("MaxDisplay")) + 1), 1).ToString() + "]", this.Namespaces)                                                        
                             select new
@@ -112,7 +148,7 @@ namespace Profiles.Profile.Modules.PassiveList
 
             }
             catch (Exception ex) { Framework.Utilities.DebugLogging.Log(ex.Message + " ++ " + ex.StackTrace); }
-
+*/
             documentdata.Append("</ItemList>");
             documentdata.Append("</PassiveList>");
 

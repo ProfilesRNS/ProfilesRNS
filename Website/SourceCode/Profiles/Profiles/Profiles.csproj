@@ -206,19 +206,9 @@
     <Content Include="Profile\Modules\NetworkClusterGroup\Images\yui-loading.gif" />
     <Content Include="Profile\Modules\NetworkClusterGroup\JavaScript\networkBrowserClass.js" />
     <Content Include="Profile\Modules\NetworkClusterGroup\JavaScript\networkClusterLayoutEngine.js" />
-    <Content Include="Profile\Modules\NetworkClusterGroup\JavaScript\watchdog.js" />
     <Content Include="Profile\Modules\NetworkClusterGroup\NetworkClusterGroup.ascx" />
     <Content Include="Profile\Modules\NetworkClusterGroup\NetworkClusterGroupSvc.aspx" />
     <Content Include="Profile\Modules\NetworkClusterGroup\network_browser_force.swf" />
-    <Content Include="Profile\Modules\NetworkClusterGroup\scriptaculous\lib\prototype.js" />
-    <Content Include="Profile\Modules\NetworkClusterGroup\scriptaculous\src\builder.js" />
-    <Content Include="Profile\Modules\NetworkClusterGroup\scriptaculous\src\controls.js" />
-    <Content Include="Profile\Modules\NetworkClusterGroup\scriptaculous\src\dragdrop.js" />
-    <Content Include="Profile\Modules\NetworkClusterGroup\scriptaculous\src\effects.js" />
-    <Content Include="Profile\Modules\NetworkClusterGroup\scriptaculous\src\scriptaculous.js" />
-    <Content Include="Profile\Modules\NetworkClusterGroup\scriptaculous\src\slider.js" />
-    <Content Include="Profile\Modules\NetworkClusterGroup\scriptaculous\src\sound.js" />
-    <Content Include="Profile\Modules\NetworkClusterGroup\scriptaculous\src\unittest.js" />
     <Content Include="Profile\Modules\NetworkCluster\JavaScript\networkClusterLayoutEngine.js" />
     <Content Include="Profile\Modules\NetworkCluster\JavaScript\watchdog.js" />
     <Content Include="Profile\Modules\NetworkRadialFlash\crossdomain.xml" />
@@ -257,6 +247,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Profile\XSLT\NetworkTable.xslt" />
+    <Content Include="Profile\XSLT\NetworkTableGroup.xslt" />
     <Content Include="RobotsTxt.aspx" />
     <Content Include="SiteMap.aspx" />
     <Content Include="Web.config">
@@ -946,6 +937,7 @@
     <Compile Include="Profile\Modules\CustomViewGroupGeneralInfo\CustomViewGroupGeneralInfo.ascx.designer.cs">
       <DependentUpon>CustomViewGroupGeneralInfo.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Profile\Modules\CustomViewGroupGeneralInfo\GroupCompositePhotoHandler.cs" />
     <Compile Include="Profile\Modules\CustomViewListProperty\CustomViewListProperty.ascx.cs">
       <DependentUpon>CustomViewListProperty.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1802,12 +1794,10 @@
     <Content Include="Profile\Modules\CustomViewPersonGeneralInfo\EmailHandler.ashx" />
     <None Include="ORCID\ORCIDPrivacySettingsandProfiles.pdf" />
     <Content Include="Profile\Modules\NetworkClusterFlash\NetworkClusterTemplate.Master" />
+    <Content Include="Profile\Modules\CustomViewGroupGeneralInfo\GroupCompositePhotoHandler.ashx" />
     <None Include="Profile\Modules\NetworkClusterFlash\scriptaculous\CHANGELOG" />
     <None Include="Profile\Modules\NetworkClusterFlash\scriptaculous\MIT-LICENSE" />
     <None Include="Profile\Modules\NetworkClusterFlash\scriptaculous\README.rdoc" />
-    <None Include="Profile\Modules\NetworkClusterGroup\scriptaculous\CHANGELOG" />
-    <None Include="Profile\Modules\NetworkClusterGroup\scriptaculous\MIT-LICENSE" />
-    <None Include="Profile\Modules\NetworkClusterGroup\scriptaculous\README.rdoc" />
     <None Include="Profile\Modules\NetworkCluster\scriptaculous\CHANGELOG" />
     <None Include="Profile\Modules\NetworkCluster\scriptaculous\MIT-LICENSE" />
     <None Include="Profile\Modules\NetworkCluster\scriptaculous\README.rdoc" />
@@ -1819,6 +1809,7 @@
     <None Include="Profile\Modules\NetworkRadial\scriptaculous\MIT-LICENSE" />
     <None Include="Profile\Modules\NetworkRadial\scriptaculous\README.rdoc" />
     <Content Include="Profile\Modules\CustomViewPersonGeneralInfo\PhotoHandler.ashx" />
+    <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

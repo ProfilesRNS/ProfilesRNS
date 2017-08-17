@@ -60,7 +60,7 @@ network_browser = {
                 window.open(dataObject.uri, "_self");
                 break;
             case "NODE_CTRL_CLICK":
-                window.open(dataObject.uri + "/network/coauthors/cluster", "_self");
+                //window.open(dataObject.uri + "/network/coauthors/cluster", "_self");
                 break;
             case "NODE_CLICK":
             case "NODE_SHIFT_CLICK":

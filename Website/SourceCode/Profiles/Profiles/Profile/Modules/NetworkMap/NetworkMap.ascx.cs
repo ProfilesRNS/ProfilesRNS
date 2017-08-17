@@ -70,6 +70,7 @@ namespace Profiles.Profile.Modules.NetworkMap
 
             if (base.GetModuleParamString("MapType") == "Group")
             {
+                litCoauthorGroup.Text = "group members";
                 reader = data.GetGMapUserGroup(base.RDFTriple.Subject, 0, session.Session().SessionID);
                 reader2 = data.GetGMapUserGroup(base.RDFTriple.Subject, 1, session.Session().SessionID);
             }

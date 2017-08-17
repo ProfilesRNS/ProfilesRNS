@@ -64,9 +64,11 @@ BEGIN
 						AND n.NodeID = @Subject AND n.EditSecurityGroup = m.NodeID 
 			), b AS (
 				SELECT 2 x, n.EditSecurityGroup SecurityGroupID, 'Owner' Label, 'Only ' + IsNull(Max(o.Value),'') + ' and special authorized users who manage this website.' Description
-					FROM [RDF.].Node n, [RDF.].Triple t, [RDF.].Node o
+					FROM [RDF.].Node n, [RDF.].Triple t, [RDF.].Node o, [RDF.Stage].[InternalNodeMap] m
 					WHERE n.NodeID = @Subject AND n.EditSecurityGroup > 0
 						AND n.EditSecurityGroup NOT IN (SELECT SecurityGroupID FROM a)
+						AND n.NodeID = m.NodeID
+						AND m.Class = 'http://xmlns.com/foaf/0.1/Person'
 						AND t.Subject = n.NodeID 
 						AND t.Predicate = [RDF.].fnURI2NodeID('http://www.w3.org/2000/01/rdf-schema#label') 
 						AND t.Object = o.NodeID
@@ -75,17 +77,24 @@ BEGIN
 						AND ( (o.ViewSecurityGroup BETWEEN @SecurityGroupID AND -1) OR (o.ViewSecurityGroup > 0 AND @HasSpecialViewAccess = 1) OR (o.ViewSecurityGroup IN (SELECT * FROM #SecurityGroupNodes)) )
 					GROUP BY n.EditSecurityGroup
 			), c AS (
-				SELECT 3 x, SecurityGroupID, Label, Description
+				SELECT 3 x, n.EditSecurityGroup SecurityGroupID, 'Owner' Label, 'Only managers of this profile and special authorized users who manage this website.' Description
+					FROM [RDF.].Node n
+					WHERE n.NodeID = @Subject AND n.EditSecurityGroup > 0
+						AND n.EditSecurityGroup NOT IN (SELECT SecurityGroupID FROM a UNION SELECT SecurityGroupID FROM b)
+					GROUP BY n.EditSecurityGroup
+			), d AS (
+				SELECT 4 x, SecurityGroupID, Label, Description
 					FROM [RDF.Security].[Group]
 					WHERE SecurityGroupID between @SecurityGroupID and -1
 				UNION ALL SELECT * FROM a
 				UNION ALL SELECT * FROM b
+				UNION ALL SELECT * FROM c
 			)
 			SELECT @SecurityGroupListXML = (
 				SELECT	SecurityGroupID "@ID",
 						Label "@Label",
 						Description "@Description"
-					FROM c
+					FROM d
 					ORDER BY x, SecurityGroupID
 					FOR XML PATH('SecurityGroup'), TYPE
 			)

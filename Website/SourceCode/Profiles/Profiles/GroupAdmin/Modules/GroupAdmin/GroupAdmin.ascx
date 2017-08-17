@@ -79,7 +79,6 @@
         </table>
     </div>
 </asp:Panel>
-<br />
 <asp:PlaceHolder ID="phDeletedGroups" runat="server">
     <div style="padding-bottom: 10px;">
         <asp:LinkButton ID="btnDeletedGroups" runat="server" OnClick="btnDeletedGroups_OnClick" CssClass="profileHypLinks"><asp:Image runat="server" ID="btnImgDeletedGroups" AlternateText=" " ImageUrl="~/Framework/Images/icon_squareArrow.gif"/>&nbsp;Deleted Groups</asp:LinkButton>
@@ -101,12 +100,12 @@
                         <asp:Label ID="lblGroupName" runat="server" Text='<%# Bind("GroupName") %>'></asp:Label>
                     </ItemTemplate>
                   </asp:TemplateField>
-                  <asp:TemplateField HeaderText="Visibility">
+                  <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderText="Visibility">
                     <ItemTemplate>
                         <asp:Label ID="lblVisibility" runat="server" Text='<%# Bind("ViewSecurityGroupName") %>'></asp:Label>
                     </ItemTemplate>
                   </asp:TemplateField>
-                  <asp:TemplateField HeaderText="End Date">
+                  <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderText="End Date">
                     <ItemTemplate>
                         <asp:Label ID="lblEndDate" runat="server" Text='<%# Bind("EndDate") %>'></asp:Label>
                     </ItemTemplate>
@@ -122,7 +121,6 @@
             </Columns>
         </asp:GridView>
 </asp:Panel>
-<br />
 <asp:UpdatePanel ID="upnlEditSection" runat="server" UpdateMode="Conditional">
     <ContentTemplate>
         <asp:GridView Width="100%" ID="gvGroups" EmptyDataText="None" AutoGenerateColumns="false"
@@ -145,7 +143,7 @@
                             NavigateUrl='<%# Bind("GroupURI") %>'></asp:HyperLink>
                     </ItemTemplate>
                   </asp:TemplateField>
-                  <asp:TemplateField HeaderText="Visibility">
+                  <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderText="Visibility">
                     <EditItemTemplate>
                      <!--<asp:DropDownList id="ddEditVisibility" runat="server"
                          AutoPostBack="False" SelectedValue='<%# Eval("ViewSecurityGroupName") %>' >
@@ -169,7 +167,7 @@
                         <asp:Label ID="lblVisibility" runat="server" Text='<%# Bind("ViewSecurityGroupName") %>'></asp:Label>
                     </ItemTemplate>
                   </asp:TemplateField>
-                  <asp:TemplateField HeaderText="End Date">
+                  <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderText="End Date">
                     <EditItemTemplate>
                         <asp:TextBox ID="txtEndDate" runat="server" MaxLength="50" Text='<%# Bind("EndDate") %>' title="End Date"></asp:TextBox>
                         <asp:ImageButton ID="btnCalendar" runat="server" ImageUrl="~/Edit/Images/cal.gif" AlternateText="Calendar picker" />

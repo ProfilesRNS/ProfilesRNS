@@ -30,10 +30,6 @@ namespace Profiles.Profile.Modules.NetworkClusterGroup
         {
             if (Request.QueryString["Subject"] != null)
                 InitAssets();
-
-            lblProfileName.Text = this.BaseData.SelectSingleNode("//rdf:RDF/rdf:Description[@rdf:about= ../rdf:Description[1]/rdf:subject/@rdf:resource]/rdfs:label", this.Namespaces).InnerText;
-
-            lblProfileName1.Text = lblProfileName.Text;
         }
         protected void InitAssets()
         {
@@ -61,12 +57,12 @@ namespace Profiles.Profile.Modules.NetworkClusterGroup
 
             HtmlGenericControl jsscript3 = new HtmlGenericControl("script");
             jsscript3.Attributes.Add("type", "text/javascript");
-            jsscript3.Attributes.Add("src", Root.Domain + "/Profile/Modules/NetworkCluster/JavaScript/networkBrowserClass.js");
+            jsscript3.Attributes.Add("src", Root.Domain + "/Profile/Modules/NetworkClusterGroup/JavaScript/networkBrowserClass.js");
             Page.Header.Controls.Add(jsscript3);
 
             HtmlGenericControl jsscript4 = new HtmlGenericControl("script");
             jsscript4.Attributes.Add("type", "text/javascript");
-            jsscript4.Attributes.Add("src", Root.Domain + "/Profile/Modules/NetworkCluster/JavaScript/networkClusterLayoutEngine.js");
+            jsscript4.Attributes.Add("src", Root.Domain + "/Profile/Modules/NetworkClusterGroup/JavaScript/networkClusterLayoutEngine.js");
             Page.Header.Controls.Add(jsscript4);
 
             HtmlGenericControl jsscript5 = new HtmlGenericControl("script");
@@ -91,7 +87,7 @@ namespace Profiles.Profile.Modules.NetworkClusterGroup
             args.AddParam("root", "", Root.Domain);
             DateTime d = DateTime.Now;
             System.Xml.Xsl.XslCompiledTransform xslt = new System.Xml.Xsl.XslCompiledTransform();
-            litNetworkText.Text = Profiles.Framework.Utilities.XslHelper.TransformInMemory(Server.MapPath("~/profile/XSLT/NetworkTable.xslt"), args, x.InnerXml);
+            litNetworkText.Text = Profiles.Framework.Utilities.XslHelper.TransformInMemory(Server.MapPath("~/profile/XSLT/NetworkTableGroup.xslt"), args, x.InnerXml);
 
 
         }

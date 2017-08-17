@@ -5,16 +5,16 @@
     <div class="passiveSectionBody">
       <xsl:for-each select="//rdf:RDF/rdf:Description/prns:hasConnection">
       </xsl:for-each>
-      <ul>
+      <ul  class="prns-details-list">
         <xsl:for-each select="//rdf:RDF/rdf:Description[rdf:type/@rdf:resource='http://vivoweb.org/ontology/core#Role']/rdfs:label[not(. = ../following-sibling::rdf:Description/rdfs:label)]">
           <xsl:sort select="text()" data-type="text" order="ascending"/>
           <xsl:variable name="roleName" select="text()"></xsl:variable>
           <li>
-          <b>
-            <xsl:value-of select="$roleName"/>
-          </b>
+            <span class="prns-text-large">
+              <xsl:value-of select="$roleName"/>
+            </span>
 
-            <ul>
+            <ul  class="prns-details-inner-list">
             <xsl:for-each select="//rdf:RDF/rdf:Description[rdf:type/@rdf:resource='http://vivoweb.org/ontology/core#Role']/vivo:memberRoleOf[../rdfs:label/text()=$roleName]">
               <xsl:variable name="personResource" select="@rdf:resource"></xsl:variable>
               <li>

@@ -11,7 +11,7 @@
 					</xsl:when>
 				</xsl:choose>
       <div class="passiveSectionBody">
-      <ul>
+      <ul class="prns-details-list">
         <xsl:for-each select="//rdf:RDF/rdf:Description/vivo:hasMemberRole">
           <xsl:variable name="resource" select="@rdf:resource"></xsl:variable>
           <xsl:for-each select="//rdf:RDF/rdf:Description[@rdf:about=$resource]/vivo:roleContributesTo">

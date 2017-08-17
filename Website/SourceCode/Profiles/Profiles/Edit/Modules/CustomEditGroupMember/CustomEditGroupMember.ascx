@@ -171,7 +171,6 @@
                 </Columns>
             </asp:GridView><br />
                                 <asp:LinkButton ID="Button1" runat="server" CausesValidation="False" OnClick="gvSearchResults_RowAdd" Text="Add Selected"/>
-                                &nbsp;&nbsp;<asp:LinkButton ID="btnSearchReset2" runat="server" Text="Reset" OnClick="btnSearchReset_Click" />
                                 &nbsp;&nbsp;<asp:LinkButton ID="btnSearchCancel2" runat="server" Text="Cancel" OnClick="btnAddGroupMembers_OnClick" />
 </div>
 

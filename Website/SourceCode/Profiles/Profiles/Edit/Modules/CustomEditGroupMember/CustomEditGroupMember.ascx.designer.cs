@@ -202,15 +202,6 @@ namespace Profiles.Edit.Modules.CustomEditGroupMember {
         protected global::System.Web.UI.WebControls.LinkButton Button1;
         
         /// <summary>
-        /// btnSearchReset2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnSearchReset2;
-        
-        /// <summary>
         /// btnSearchCancel2 control.
         /// </summary>
         /// <remarks>
