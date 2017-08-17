@@ -14961,6 +14961,25 @@
     </Row>
     <Row>
       <Class>http://xmlns.com/foaf/0.1/Group</Class>
+      <Property>http://profiles.catalyst.harvard.edu/ontology/prns#aboutUs</Property>
+      <IsDetail>1</IsDetail>
+      <IncludeDescription>0</IncludeDescription>
+      <IncludeNetwork>0</IncludeNetwork>
+      <SearchWeight>5.000000000000000e-001</SearchWeight>
+      <CustomDisplay>0</CustomDisplay>
+      <CustomEdit>0</CustomEdit>
+      <ViewSecurityGroup>-1</ViewSecurityGroup>
+      <EditSecurityGroup>-20</EditSecurityGroup>
+      <EditPermissionsSecurityGroup>-20</EditPermissionsSecurityGroup>
+      <EditExistingSecurityGroup>-20</EditExistingSecurityGroup>
+      <EditAddNewSecurityGroup>-20</EditAddNewSecurityGroup>
+      <EditAddExistingSecurityGroup>-40</EditAddExistingSecurityGroup>
+      <EditDeleteSecurityGroup>-20</EditDeleteSecurityGroup>
+      <MinCardinality>0</MinCardinality>
+      <MaxCardinality>1</MaxCardinality>
+    </Row>
+    <Row>
+      <Class>http://xmlns.com/foaf/0.1/Group</Class>
       <Property>http://profiles.catalyst.harvard.edu/ontology/prns#hasGroupManager</Property>
       <IsDetail>1</IsDetail>
       <IncludeDescription>1</IncludeDescription>
@@ -14979,6 +14998,44 @@
       <CustomEditModule>
         <Module ID="CustomEditGroupMember" />
       </CustomEditModule>
+    </Row>
+    <Row>
+      <Class>http://xmlns.com/foaf/0.1/Group</Class>
+      <Property>http://profiles.catalyst.harvard.edu/ontology/prns#welcome</Property>
+      <IsDetail>1</IsDetail>
+      <IncludeDescription>0</IncludeDescription>
+      <IncludeNetwork>0</IncludeNetwork>
+      <SearchWeight>5.000000000000000e-001</SearchWeight>
+      <CustomDisplay>0</CustomDisplay>
+      <CustomEdit>0</CustomEdit>
+      <ViewSecurityGroup>-1</ViewSecurityGroup>
+      <EditSecurityGroup>-20</EditSecurityGroup>
+      <EditPermissionsSecurityGroup>-20</EditPermissionsSecurityGroup>
+      <EditExistingSecurityGroup>-20</EditExistingSecurityGroup>
+      <EditAddNewSecurityGroup>-20</EditAddNewSecurityGroup>
+      <EditAddExistingSecurityGroup>-40</EditAddExistingSecurityGroup>
+      <EditDeleteSecurityGroup>-20</EditDeleteSecurityGroup>
+      <MinCardinality>0</MinCardinality>
+      <MaxCardinality>1</MaxCardinality>
+    </Row>
+    <Row>
+      <Class>http://xmlns.com/foaf/0.1/Group</Class>
+      <Property>http://vivoweb.org/ontology/core#contactInformation</Property>
+      <IsDetail>1</IsDetail>
+      <IncludeDescription>0</IncludeDescription>
+      <IncludeNetwork>0</IncludeNetwork>
+      <SearchWeight>0.000000000000000e+000</SearchWeight>
+      <CustomDisplay>0</CustomDisplay>
+      <CustomEdit>0</CustomEdit>
+      <ViewSecurityGroup>-1</ViewSecurityGroup>
+      <EditSecurityGroup>-20</EditSecurityGroup>
+      <EditPermissionsSecurityGroup>-20</EditPermissionsSecurityGroup>
+      <EditExistingSecurityGroup>-20</EditExistingSecurityGroup>
+      <EditAddNewSecurityGroup>-20</EditAddNewSecurityGroup>
+      <EditAddExistingSecurityGroup>-40</EditAddExistingSecurityGroup>
+      <EditDeleteSecurityGroup>-20</EditDeleteSecurityGroup>
+      <MinCardinality>0</MinCardinality>
+      <MaxCardinality>1</MaxCardinality>
     </Row>
     <Row>
       <Class>http://xmlns.com/foaf/0.1/Group</Class>
@@ -18645,8 +18702,27 @@
       <oInternalID>MemberRoleID</oInternalID>
       <oObjectType>0</oObjectType>
       <Weight>1</Weight>
+      <OrderBy>SortOrder</OrderBy>
       <ViewSecurityGroup>-1</ViewSecurityGroup>
       <EditSecurityGroup>-40</EditSecurityGroup>
+    </Row>
+    <Row>
+      <DataMapGroup>1</DataMapGroup>
+      <IsAutoFeed>1</IsAutoFeed>
+      <Graph>1</Graph>
+      <Class>http://xmlns.com/foaf/0.1/Group</Class>
+      <Property>http://profiles.catalyst.harvard.edu/ontology/prns#associatedInformationResource</Property>
+      <MapTable>[Profile.Data].[vwGroup.Publication.Entity.AssociatedInformationResource]</MapTable>
+      <sInternalType>Group</sInternalType>
+      <sInternalID>GroupID</sInternalID>
+      <oClass>http://vivoweb.org/ontology/core#InformationResource</oClass>
+      <oInternalType>InformationResource</oInternalType>
+      <oInternalID>EntityID</oInternalID>
+      <oObjectType>0</oObjectType>
+      <Weight>1</Weight>
+      <OrderBy>EntityDate desc</OrderBy>
+      <ViewSecurityGroup>-1</ViewSecurityGroup>
+      <EditSecurityGroup>-20</EditSecurityGroup>
     </Row>
     <Row>
       <DataMapGroup>1</DataMapGroup>
@@ -19473,24 +19549,6 @@
       <ViewSecurityGroup>-1</ViewSecurityGroup>
       <EditSecurityGroup>-40</EditSecurityGroup>
     </Row>
-    <Row>
-      <DataMapGroup>1</DataMapGroup>
-      <IsAutoFeed>1</IsAutoFeed>
-      <Graph>1</Graph>
-      <Class>http://xmlns.com/foaf/0.1/Group</Class>
-      <Property>http://profiles.catalyst.harvard.edu/ontology/prns#associatedInformationResource</Property>
-      <MapTable>[Profile.Data].[vwGroup.Publication.Entity.AssociatedInformationResource]</MapTable>
-      <sInternalType>Group</sInternalType>
-      <sInternalID>GroupID</sInternalID>
-      <oClass>http://vivoweb.org/ontology/core#InformationResource</oClass>
-      <oInternalType>InformationResource</oInternalType>
-      <oInternalID>EntityID</oInternalID>
-      <oObjectType>0</oObjectType>
-      <Weight>1</Weight>
-      <OrderBy>EntityDate desc</OrderBy>
-      <ViewSecurityGroup>-1</ViewSecurityGroup>
-      <EditSecurityGroup>-20</EditSecurityGroup>
-    </Row>
   </Table>
   <Table Name="[Ontology.].[Namespace]">
     <Row>
@@ -19593,7 +19651,7 @@
   <Table Name="[Ontology.].[PropertyGroup]">
     <Row>
       <PropertyGroupURI>http://orng.info/ontology/orng#PropertyGroupORNGApplications</PropertyGroupURI>
-      <SortOrder>4</SortOrder>
+      <SortOrder>5</SortOrder>
       <_PropertyGroupLabel>ORNG Applications</_PropertyGroupLabel>
     </Row>
     <Row>
@@ -19603,82 +19661,87 @@
     </Row>
     <Row>
       <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupAffiliation</PropertyGroupURI>
-      <SortOrder>3</SortOrder>
+      <SortOrder>4</SortOrder>
       <_PropertyGroupLabel>Affiliation</_PropertyGroupLabel>
     </Row>
     <Row>
       <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupBibliographic</PropertyGroupURI>
-      <SortOrder>14</SortOrder>
+      <SortOrder>15</SortOrder>
       <_PropertyGroupLabel>Bibliographic</_PropertyGroupLabel>
     </Row>
     <Row>
       <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupBibliographiconline</PropertyGroupURI>
-      <SortOrder>15</SortOrder>
+      <SortOrder>16</SortOrder>
       <_PropertyGroupLabel>Bibliographiconline</_PropertyGroupLabel>
     </Row>
     <Row>
       <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupBibmapping</PropertyGroupURI>
-      <SortOrder>17</SortOrder>
+      <SortOrder>18</SortOrder>
       <_PropertyGroupLabel>Bibmapping</_PropertyGroupLabel>
     </Row>
     <Row>
       <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupBibobscure</PropertyGroupURI>
-      <SortOrder>16</SortOrder>
+      <SortOrder>17</SortOrder>
       <_PropertyGroupLabel>Bibobscure</_PropertyGroupLabel>
     </Row>
     <Row>
       <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupBiography</PropertyGroupURI>
-      <SortOrder>7</SortOrder>
+      <SortOrder>8</SortOrder>
       <_PropertyGroupLabel>Biography</_PropertyGroupLabel>
     </Row>
     <Row>
       <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupIdentifiers</PropertyGroupURI>
-      <SortOrder>18</SortOrder>
+      <SortOrder>19</SortOrder>
       <_PropertyGroupLabel>Identifiers</_PropertyGroupLabel>
     </Row>
     <Row>
+      <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupIntroduction</PropertyGroupURI>
+      <SortOrder>3</SortOrder>
+      <_PropertyGroupLabel>Introduction</_PropertyGroupLabel>
+    </Row>
+    <Row>
       <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupLinks</PropertyGroupURI>
-      <SortOrder>5</SortOrder>
+      <SortOrder>6</SortOrder>
       <_PropertyGroupLabel>Links</_PropertyGroupLabel>
     </Row>
     <Row>
       <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupLocation</PropertyGroupURI>
-      <SortOrder>6</SortOrder>
+      <SortOrder>7</SortOrder>
       <_PropertyGroupLabel>Location</_PropertyGroupLabel>
     </Row>
     <Row>
       <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupMapping</PropertyGroupURI>
-      <SortOrder>19</SortOrder>
+      <SortOrder>20</SortOrder>
       <_PropertyGroupLabel>Mapping</_PropertyGroupLabel>
     </Row>
     <Row>
       <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupOutreach</PropertyGroupURI>
-      <SortOrder>13</SortOrder>
+      <SortOrder>14</SortOrder>
       <_PropertyGroupLabel>Outreach</_PropertyGroupLabel>
     </Row>
     <Row>
       <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupOverview</PropertyGroupURI>
-      <SortOrder>8</SortOrder>
+      <SortOrder>9</SortOrder>
       <_PropertyGroupLabel>Overview</_PropertyGroupLabel>
     </Row>
     <Row>
       <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupResearch</PropertyGroupURI>
-      <SortOrder>12</SortOrder>
+      <SortOrder>13</SortOrder>
       <_PropertyGroupLabel>Research</_PropertyGroupLabel>
     </Row>
     <Row>
       <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupSettings</PropertyGroupURI>
       <SortOrder>1</SortOrder>
-      <_PropertyGroupLabel>Settings</_PropertyGroupLabel>
+      <_PropertyGroupLabel>Options</_PropertyGroupLabel>
     </Row>
     <Row>
       <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupTeaching</PropertyGroupURI>
-      <SortOrder>11</SortOrder>
+      <SortOrder>12</SortOrder>
       <_PropertyGroupLabel>Teaching</_PropertyGroupLabel>
     </Row>
     <Row>
       <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupTime</PropertyGroupURI>
-      <SortOrder>10</SortOrder>
+      <SortOrder>11</SortOrder>
       <_PropertyGroupLabel>Time</_PropertyGroupLabel>
     </Row>
   </Table>
@@ -19773,6 +19836,13 @@
       <SortOrder>10</SortOrder>
       <_TagName>orng:hasYouTube</_TagName>
       <_PropertyLabel>Featured Videos</_PropertyLabel>
+    </Row>
+    <Row>
+      <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupIntroduction</PropertyGroupURI>
+      <PropertyURI>http://profiles.catalyst.harvard.edu/ontology/prns#aboutUs</PropertyURI>
+      <SortOrder>2</SortOrder>
+      <_TagName>prns:aboutUs</_TagName>
+      <_PropertyLabel>about us</_PropertyLabel>
     </Row>
     <Row>
       <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupBibliographic</PropertyGroupURI>
@@ -20200,6 +20270,13 @@
       <SortOrder>118</SortOrder>
       <_TagName>prns:uniquenessWeight</_TagName>
       <_PropertyLabel>uniqueness weight</_PropertyLabel>
+    </Row>
+    <Row>
+      <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupIntroduction</PropertyGroupURI>
+      <PropertyURI>http://profiles.catalyst.harvard.edu/ontology/prns#welcome</PropertyURI>
+      <SortOrder>1</SortOrder>
+      <_TagName>prns:welcome</_TagName>
+      <_PropertyLabel>welcome</_PropertyLabel>
     </Row>
     <Row>
       <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupTime</PropertyGroupURI>
@@ -20916,9 +20993,9 @@
       <_PropertyLabel>concept for</_PropertyLabel>
     </Row>
     <Row>
-      <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupOverview</PropertyGroupURI>
+      <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupIntroduction</PropertyGroupURI>
       <PropertyURI>http://vivoweb.org/ontology/core#contactInformation</PropertyURI>
-      <SortOrder>55</SortOrder>
+      <SortOrder>3</SortOrder>
       <_TagName>vivo:contactInformation</_TagName>
       <_PropertyLabel>contact information</_PropertyLabel>
     </Row>
@@ -22686,7 +22763,7 @@
                   <Param Name="InfoCaption">People</Param>
                   <Param Name="Description">People who have written about this concept.</Param>
                   <Param Name="MaxDisplay">5</Param>
-                  <Param Name="ListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:researchAreaOf/@rdf:resource]</Param>
+                  <Param Name="ListNode">/rdf:RDF[1]/rdf:Description[1]/vivo:researchAreaOf/@rdf:resource</Param>
                   <Param Name="ItemURLText">{{{rdf:Description/rdfs:label}}}</Param>
                   <Param Name="ItemText" />
                   <Param Name="ItemURL">{{{rdf:Description/@rdf:about}}}</Param>
@@ -22755,7 +22832,7 @@
                   <Param Name="InfoCaption">Concepts</Param>
                   <Param Name="Description">Derived automatically from this person's publications.</Param>
                   <Param Name="MaxDisplay">5</Param>
-                  <Param Name="ListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:hasResearchArea/@rdf:resource]</Param>
+                  <Param Name="ListNode">/rdf:RDF[1]/rdf:Description[1]/vivo:hasResearchArea/@rdf:resource</Param>
                   <Param Name="ItemURLText">{{{rdf:Description/rdfs:label}}}</Param>
                   <Param Name="ItemText" />
                   <Param Name="ItemURL">{{{rdf:Description/@rdf:about}}}</Param>
@@ -22768,7 +22845,7 @@
                   <Param Name="InfoCaption">Co-Authors</Param>
                   <Param Name="MaxDisplay">5</Param>
                   <Param Name="Description">People in Profiles who have published with this person.</Param>
-                  <Param Name="ListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:coAuthorOf/@rdf:resource]</Param>
+                  <Param Name="ListNode">/rdf:RDF[1]/rdf:Description[1]/prns:coAuthorOf/@rdf:resource</Param>
                   <Param Name="ItemURLText">{{{rdf:Description/rdfs:label}}}</Param>
                   <Param Name="ItemURL">{{{rdf:Description/@rdf:about}}}</Param>
                   <Param Name="MoreURL">{{{rdf:RDF/rdf:Description[rdf:predicate/@rdf:resource="http://profiles.catalyst.harvard.edu/ontology/prns#coAuthorOf"][@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:hasNetwork/@rdf:resource]/@rdf:about}}}</Param>
@@ -22780,7 +22857,7 @@
                   <Param Name="InfoCaption">Similar People</Param>
                   <Param Name="Description">People who share similar concepts with this person.</Param>
                   <Param Name="MaxDisplay">11</Param>
-                  <Param Name="ListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:similarTo/@rdf:resource]</Param>
+                  <Param Name="ListNode">/rdf:RDF[1]/rdf:Description[1]/prns:similarTo/@rdf:resource</Param>
                   <Param Name="ItemURLText">{{{rdf:Description/rdfs:label}}}</Param>
                   <Param Name="ItemText" />
                   <Param Name="ItemURL">{{{rdf:Description/@rdf:about}}}</Param>
@@ -22801,7 +22878,7 @@
                   <Param Name="InfoCaption">Physical Neighbors</Param>
                   <Param Name="Description">People whose addresses are nearby this person.</Param>
                   <Param Name="MaxDisplay">11</Param>
-                  <Param Name="ListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:physicalNeighborOf/@rdf:resource]</Param>
+                  <Param Name="ListNode">@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:physicalNeighborOf/@rdf:resource</Param>
                   <Param Name="ItemURLText">{{{rdf:Description/rdfs:label}}}</Param>
                   <Param Name="ItemText" />
                   <Param Name="ItemURL">{{{rdf:Description/@rdf:about}}}</Param>
@@ -22898,7 +22975,7 @@
                   <Param Name="InfoCaption">Concepts</Param>
                   <Param Name="Description">Derived automatically from this person's publications.</Param>
                   <Param Name="MaxDisplay">5</Param>
-                  <Param Name="ListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:hasResearchArea/@rdf:resource]</Param>
+                  <Param Name="ListNode">/rdf:RDF[1]/rdf:Description[1]/vivo:hasResearchArea/@rdf:resource</Param>
                   <Param Name="ItemURLText">{{{rdf:Description/rdfs:label}}}</Param>
                   <Param Name="ItemText" />
                   <Param Name="ItemURL">{{{rdf:Description/@rdf:about}}}</Param>
@@ -22916,7 +22993,7 @@
                   <Param Name="InfoCaption">Co-Authors</Param>
                   <Param Name="MaxDisplay">5</Param>
                   <Param Name="Description">People in Profiles who have published with this person.</Param>
-                  <Param Name="ListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:coAuthorOf/@rdf:resource]</Param>
+                  <Param Name="ListNode">/rdf:RDF[1]/rdf:Description[1]/prns:coAuthorOf/@rdf:resource</Param>
                   <Param Name="ItemURLText">{{{rdf:Description/rdfs:label}}}</Param>
                   <Param Name="ItemURL">{{{rdf:Description/@rdf:about}}}</Param>
                   <Param Name="MoreURL">{{{rdf:RDF/rdf:Description[rdf:predicate/@rdf:resource="http://profiles.catalyst.harvard.edu/ontology/prns#coAuthorOf"][@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:hasNetwork/@rdf:resource]/@rdf:about}}}</Param>
@@ -22933,7 +23010,7 @@
                   <Param Name="InfoCaption">Similar People</Param>
                   <Param Name="Description">People who share similar concepts with this person.</Param>
                   <Param Name="MaxDisplay">11</Param>
-                  <Param Name="ListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:similarTo/@rdf:resource]</Param>
+                  <Param Name="ListNode">/rdf:RDF[1]/rdf:Description[1]/prns:similarTo/@rdf:resource</Param>
                   <Param Name="ItemURLText">{{{rdf:Description/rdfs:label}}}</Param>
                   <Param Name="ItemText" />
                   <Param Name="ItemURL">{{{rdf:Description/@rdf:about}}}</Param>
@@ -22952,7 +23029,7 @@
                   <Param Name="InfoCaption">Physical Neighbors</Param>
                   <Param Name="Description">People whose addresses are nearby this person.</Param>
                   <Param Name="MaxDisplay">11</Param>
-                  <Param Name="ListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:physicalNeighborOf/@rdf:resource]</Param>
+                  <Param Name="ListNode">/rdf:RDF[1]/rdf:Description[1]/prns:physicalNeighborOf/@rdf:resource</Param>
                   <Param Name="ItemURLText">{{{rdf:Description/rdfs:label}}}</Param>
                   <Param Name="ItemText" />
                   <Param Name="ItemURL">{{{rdf:Description/@rdf:about}}}</Param>
@@ -22990,7 +23067,7 @@
                   <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
                   <Param Name="BulletType">disc</Param>
                   <Param Name="Columns">2</Param>
-                  <Param Name="NetworkListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:hasConnection/@rdf:resource]</Param>
+                  <Param Name="NetworkListNode">/rdf:RDF[1]/rdf:Description[1]/prns:hasConnection/@rdf:resource</Param>
                   <Param Name="ItemURLText">{{{rdf:Description/rdf:object/@rdf:resource}}}</Param>
                   <Param Name="ItemText" />
                   <Param Name="ItemURL">{{{rdf:Description/rdf:object/@rdf:resource}}}</Param>
@@ -23033,7 +23110,7 @@
                   <Param Name="InfoCaption">Concepts</Param>
                   <Param Name="Description">Derived automatically from this person's publications.</Param>
                   <Param Name="MaxDisplay">5</Param>
-                  <Param Name="ListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:hasResearchArea/@rdf:resource]</Param>
+                  <Param Name="ListNode">/rdf:RDF[1]/rdf:Description[1]/vivo:hasResearchArea/@rdf:resource</Param>
                   <Param Name="ItemURLText">{{{rdf:Description/rdfs:label}}}</Param>
                   <Param Name="ItemText" />
                   <Param Name="ItemURL">{{{rdf:Description/@rdf:about}}}</Param>
@@ -23051,7 +23128,7 @@
                   <Param Name="InfoCaption">Co-Authors</Param>
                   <Param Name="MaxDisplay">5</Param>
                   <Param Name="Description">People in Profiles who have published with this person.</Param>
-                  <Param Name="ListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:coAuthorOf/@rdf:resource]</Param>
+                  <Param Name="ListNode">/rdf:RDF[1]/rdf:Description[1]/prns:coAuthorOf/@rdf:resource</Param>
                   <Param Name="ItemURLText">{{{rdf:Description/rdfs:label}}}</Param>
                   <Param Name="ItemURL">{{{rdf:Description/@rdf:about}}}</Param>
                   <Param Name="MoreURL">{{{rdf:RDF/rdf:Description[rdf:predicate/@rdf:resource="http://profiles.catalyst.harvard.edu/ontology/prns#coAuthorOf"][@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:hasNetwork/@rdf:resource]/@rdf:about}}}</Param>
@@ -23068,7 +23145,7 @@
                   <Param Name="InfoCaption">Similar People</Param>
                   <Param Name="Description">People who share similar concepts with this person.</Param>
                   <Param Name="MaxDisplay">11</Param>
-                  <Param Name="ListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:similarTo/@rdf:resource]</Param>
+                  <Param Name="ListNode">/rdf:RDF[1]/rdf:Description[1]/prns:similarTo/@rdf:resource</Param>
                   <Param Name="ItemURLText">{{{rdf:Description/rdfs:label}}}</Param>
                   <Param Name="ItemText" />
                   <Param Name="ItemURL">{{{rdf:Description/@rdf:about}}}</Param>
@@ -23087,7 +23164,7 @@
                   <Param Name="InfoCaption">Physical Neighbors</Param>
                   <Param Name="Description">People whose addresses are nearby this person.</Param>
                   <Param Name="MaxDisplay">11</Param>
-                  <Param Name="ListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:physicalNeighborOf/@rdf:resource]</Param>
+                  <Param Name="ListNode">/rdf:RDF[1]/rdf:Description[1]/prns:physicalNeighborOf/@rdf:resource</Param>
                   <Param Name="ItemURLText">{{{rdf:Description/rdfs:label}}}</Param>
                   <Param Name="ItemText" />
                   <Param Name="ItemURL">{{{rdf:Description/@rdf:about}}}</Param>
@@ -23177,7 +23254,7 @@
                   <Param Name="InfoCaption">Concepts</Param>
                   <Param Name="Description">Derived automatically from this person's publications.</Param>
                   <Param Name="MaxDisplay">5</Param>
-                  <Param Name="ListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:hasResearchArea/@rdf:resource]</Param>
+                  <Param Name="ListNode">/rdf:RDF[1]/rdf:Description[1]/vivo:hasResearchArea/@rdf:resource</Param>
                   <Param Name="ItemURLText">{{{rdf:Description/rdfs:label}}}</Param>
                   <Param Name="ItemText" />
                   <Param Name="ItemURL">{{{rdf:Description/@rdf:about}}}</Param>
@@ -23195,7 +23272,7 @@
                   <Param Name="InfoCaption">Co-Authors</Param>
                   <Param Name="MaxDisplay">5</Param>
                   <Param Name="Description">People in Profiles who have published with this person.</Param>
-                  <Param Name="ListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:coAuthorOf/@rdf:resource]</Param>
+                  <Param Name="ListNode">/rdf:RDF[1]/rdf:Description[1]/prns:coAuthorOf/@rdf:resource</Param>
                   <Param Name="ItemURLText">{{{rdf:Description/rdfs:label}}}</Param>
                   <Param Name="ItemURL">{{{rdf:Description/@rdf:about}}}</Param>
                   <Param Name="MoreURL">{{{rdf:RDF/rdf:Description[rdf:predicate/@rdf:resource="http://profiles.catalyst.harvard.edu/ontology/prns#coAuthorOf"][@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:hasNetwork/@rdf:resource]/@rdf:about}}}</Param>
@@ -23212,7 +23289,7 @@
                   <Param Name="InfoCaption">Similar People</Param>
                   <Param Name="Description">People who share similar concepts with this person.</Param>
                   <Param Name="MaxDisplay">11</Param>
-                  <Param Name="ListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:similarTo/@rdf:resource]</Param>
+                  <Param Name="ListNode">/rdf:RDF[1]/rdf:Description[1]/prns:similarTo/@rdf:resource</Param>
                   <Param Name="ItemURLText">{{{rdf:Description/rdfs:label}}}</Param>
                   <Param Name="ItemText" />
                   <Param Name="ItemURL">{{{rdf:Description/@rdf:about}}}</Param>
@@ -23231,7 +23308,7 @@
                   <Param Name="InfoCaption">Physical Neighbors</Param>
                   <Param Name="Description">People whose addresses are nearby this person.</Param>
                   <Param Name="MaxDisplay">11</Param>
-                  <Param Name="ListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:physicalNeighborOf/@rdf:resource]</Param>
+                  <Param Name="ListNode">/rdf:RDF[1]/rdf:Description[1]/prns:physicalNeighborOf/@rdf:resource</Param>
                   <Param Name="ItemURLText">{{{rdf:Description/rdfs:label}}}</Param>
                   <Param Name="ItemText" />
                   <Param Name="ItemURL">{{{rdf:Description/@rdf:about}}}</Param>
@@ -23575,7 +23652,7 @@
                   <Param Name="InfoCaption">Group Members</Param>
                   <Param Name="Description">Members of this Group.</Param>
                   <Param Name="MaxDisplay">20</Param>
-                  <Param Name="ListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:contributingRole/@rdf:resource]</Param>
+                  <Param Name="ListNode">/rdf:RDF[1]/rdf:Description[1]/vivo:contributingRole/@rdf:resource</Param>
                   <Param Name="ItemURLText">{{{rdf:Description/vivo:memberRoleOf[1]/@rdfs:label}}}</Param>
                   <Param Name="ItemText" />
                   <Param Name="ItemURL">{{{rdf:Description/vivo:memberRoleOf[1]/@rdf:resource}}}</Param>
@@ -23608,19 +23685,19 @@
               <Module ID="MiniSearch" />
               <Module ID="MainMenu" />
             </Panel>
-            <Panel Type="main" TabSort="1" Alias="list" Name="List">
-              <Module ID="ApplyXSLT">
-                <ParamList>
-                  <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
-                  <Param Name="XSLTPath">~/profile/XSLT/ContributingRole.xslt</Param>
-                </ParamList>
-              </Module>
-            </Panel>
-            <Panel Type="main" TabSort="2" TabType="Default" Alias="details" Name="Details">
+            <Panel Type="main" TabSort="1" TabType="Default" Alias="byname" Name="By Name">
               <Module ID="ApplyXSLT">
                 <ParamList>
                   <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
                   <Param Name="XSLTPath">~/profile/XSLT/ContributingRoleDetails.xslt</Param>
+                </ParamList>
+              </Module>
+            </Panel>
+            <Panel Type="main" TabSort="2" Alias="byrole" Name="By Role">
+              <Module ID="ApplyXSLT">
+                <ParamList>
+                  <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
+                  <Param Name="XSLTPath">~/profile/XSLT/ContributingRoleRoles.xslt</Param>
                 </ParamList>
               </Module>
             </Panel>
@@ -23631,16 +23708,8 @@
                 </ParamList>
               </Module>
             </Panel>
-            <Panel Type="main" TabSort="4" Alias="cluster" Name="Cluster">
+            <Panel Type="main" TabSort="4" Alias="coauthors" Name="Co-Authors">
               <Module ID="NetworkClusterGroup" />
-            </Panel>
-            <Panel Type="main" TabSort="5" Alias="roles" Name="Roles">
-              <Module ID="ApplyXSLT">
-                <ParamList>
-                  <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
-                  <Param Name="XSLTPath">~/profile/XSLT/ContributingRoleRoles.xslt</Param>
-                </ParamList>
-              </Module>
             </Panel>
           </PanelList>
         </Presentation>
