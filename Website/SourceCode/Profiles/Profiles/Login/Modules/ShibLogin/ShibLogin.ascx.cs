@@ -60,9 +60,21 @@ namespace Profiles.Login.Modules.ShibLogin
                     {
                         logoutFromProfilesAndShibboleth();
                     }
-                    else if (methodQueryStringValue == METHOD_LOGIN)
+                    else if (methodQueryStringValue == METHOD_LOGIN && sm.Session().PersonID > 0)
                     {
-                        
+                        if (Request.QueryString["redirectto"] == null && Request.QueryString["edit"] == "true")
+                        {
+                            if (Request.QueryString["editparams"] == null)
+                            {
+                                Response.Redirect(Root.Domain + "/edit/" + sm.Session().NodeID);
+                            }
+                            else
+                            {
+                                Response.Redirect(Root.Domain + "/edit/default.aspx?subject=" + sm.Session().NodeID + "&" + Request.QueryString["editparams"]);
+                            }
+                        }
+                        else
+                            Response.Redirect(Request.QueryString["redirectto"].ToString());
                     }
                     else if (methodQueryStringValue == METHOD_SHIB_LOGOUT_SUCCESS)
                     {
