@@ -83,6 +83,11 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ProfileDetailsError\CSS\ProfileDetailsError.css" />
+    <Content Include="ProfileDetailsError\Default.aspx" />
+    <Content Include="ProfileDetailsError\Modules\ProfileDetailsError\ProfileDetailsError.ascx" />
+    <Content Include="ProfileDetailsError\Modules\ModuleCatalogue.xml" />
+    <Content Include="ProfileDetailsError\PresentationXML\ProfileDetailsErrorPresentation.xml" />
     <Content Include="DirectService.aspx" />
     <Content Include="Edit\Images\img_arrow.png" />
     <Content Include="Edit\Modules\CustomEditEagleI\CustomEditEagleI.ascx" />
@@ -311,6 +316,20 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ProfileDetailsError\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProfileDetailsError\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProfileDetailsError\Modules\ProfileDetailsError\ProfileDetailsError.ascx.cs">
+      <DependentUpon>ProfileDetailsError.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProfileDetailsError\Modules\ProfileDetailsError\ProfileDetailsError.ascx.designer.cs">
+      <DependentUpon>ProfileDetailsError.ascx</DependentUpon>
+    </Compile>
     <Compile Include="About\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
