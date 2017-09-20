@@ -93,10 +93,7 @@ namespace Profiles.DIRECT.Modules.DirectSearch
 
                     string q = Request["SearchPhrase"].Trim();
                     // Enter log record
-                    sql = "insert into [Direct.].LogIncoming(Details,ReceivedDate,RequestIP,QueryString) " +
-                         " values (0,GetDate()," + cs(Request.ServerVariables["REMOTE_ADDR"]) + "," + cs(q) + ")";
-
-                    oDataIO.ExecuteSQLDataCommand(sql);
+                    oDataIO.AddLogIncoming(1, cs(Request.ServerVariables["REMOTE_ADDR"]), cs(q));
 
                     // Execute query
                     string x = "<SearchOptions>" +
@@ -142,11 +139,7 @@ namespace Profiles.DIRECT.Modules.DirectSearch
                     q = Request["SearchPhrase"].Trim();
 
                     // Enter log record
-                    sql = "insert into [Direct.].LogIncoming(Details,ReceivedDate,RequestIP,QueryString) ";
-                    sql += " values (1,GetDate()," + cs(Request.ServerVariables["REMOTE_ADDR"]) + "," +
-                            cs(q) + ")";
-
-                    oDataIO.ExecuteSQLDataCommand(sql);
+                    oDataIO.AddLogIncoming(1, cs(Request.ServerVariables["REMOTE_ADDR"]), cs(q));
 
                     // Execute query                    
 
@@ -252,11 +245,9 @@ namespace Profiles.DIRECT.Modules.DirectSearch
 
                         if (!ListOfThreads[loop].Site.IsDone)
                         {
-                            sql = "update [Direct.].LogOutgoing set ResponseTime = datediff(ms,SentDate,GetDate()), "
-                                    + " ResponseState = " + 1
-                                    + " where FSID = " + cs(ListOfThreads[loop].Site.FSID);
+                            DIRECT.Utilities.DataIO data2 = new DIRECT.Utilities.DataIO();
+                            data2.UpdateLogOutgoing(cs(ListOfThreads[loop].Site.FSID), 1);
 
-                            oDataIO.ExecuteSQLDataCommand(sql);
                             Response.Write("<script>parent.siteResult(" + ListOfThreads[loop].Site.SiteID + ",1,0,'','','','');</script>");
                             ListOfThreads.Remove(ListOfThreads[loop]);
                         }
@@ -289,8 +280,7 @@ namespace Profiles.DIRECT.Modules.DirectSearch
                     if ((FSID != "") && (SiteId != "") && (ResultDetailsURL != ""))
                     {
                         // Enter log record
-                        oDataIO.ExecuteSQLDataCommand("insert into [Direct.].LogOutgoing(FSID,SiteID,Details,SentDate) "
-                            + " values ('" + FSID + "'," + SiteId + ",1,GetDate())");
+                        oDataIO.AddLogOutgoing(FSID, Convert.ToInt32(SiteId), 1);
 
                         Response.Redirect(ResultDetailsURL);
 
@@ -399,34 +389,14 @@ namespace Profiles.DIRECT.Modules.DirectSearch
             int iResult = 0;
             this.Site = site;
 
-
-            oDataIO = new DataIO();
-            SqlConnection Conn = new SqlConnection();
-            Conn = oDataIO.GetDBConnection("ProfilesDB");
-            sqlCmd = new SqlCommand();
-            sqlCmd.Connection = Conn;
-
-
             site.IsDone = false;
             _request = WebRequest.Create(site.URL);
 
             // Enter log record
-            sql = "insert into [Direct.].LogOutgoing(FSID,SiteID,Details,SentDate,QueryString) "
-                 + " values ('" + site.FSID.ToString() + "'," + site.SiteID.ToString() + ",0,GetDate()," + cs(site.SearchPhrase) + ")";
-            sqlCmd.CommandText = sql;
-            sqlCmd.CommandType = System.Data.CommandType.Text;
-            iResult = sqlCmd.ExecuteNonQuery();
-
-            if (sqlCmd.Connection.State == System.Data.ConnectionState.Open)
-                sqlCmd.Connection.Close();
+            DIRECT.Utilities.DataIO data = new DIRECT.Utilities.DataIO();
+            data.AddLogOutgoing(site.FSID, site.SiteID, 0);
 
             _request.BeginGetResponse(new AsyncCallback(EndProcessRequest), site);
-
-
-
-
-
-
         }
 
         public void EndProcessRequest(IAsyncResult result)
@@ -436,13 +406,6 @@ namespace Profiles.DIRECT.Modules.DirectSearch
             XmlElement ResultXML;
             XmlDocument outgoingcount;
             WebResponse response = null;
-
-            SqlConnection Conn = new SqlConnection();
-            Conn = oDataIO.GetDBConnection("ProfilesDB");
-
-            sqlCmd = new SqlCommand();
-            sqlCmd.Connection = Conn;
-
 
 
             try
@@ -493,28 +456,13 @@ namespace Profiles.DIRECT.Modules.DirectSearch
                 {
                     ResultText = resultdata;
                 }
-                sql = "update  [Direct.].LogOutgoing set ResponseTime = datediff(ms,SentDate,GetDate()), "
-                    + " ResponseState = 4, "
-                    + " ResponseStatus = 200, " //+ HttpContext.Current.Response.StatusCode.ToString() + ", "
-                    + " ResultText = " + cs(ResultText.Substring(0,ResultText.Length > 3000 ? 3000 : ResultText.Length)) + ", "
-                    + " ResultCount = " + cs(ResultCount) + ", "
-                    + " ResultDetailsURL = " + cs(ResultDetailsURL)
-                    + " where FSID = " + cs(site.FSID);
-                sqlCmd.CommandText = sql;
-                sqlCmd.CommandType = System.Data.CommandType.Text;
 
-                try
-                {
-                    int iResult = sqlCmd.ExecuteNonQuery();
-                }
-                catch (Exception ex)
-                {
-                    //do nothing
+                DIRECT.Utilities.DataIO data = new DIRECT.Utilities.DataIO();
+                data.UpdateLogOutgoing(site.FSID, 4, 200, cs(ResultText.Substring(0, ResultText.Length > 3000 ? 3000 : ResultText.Length)), cs(ResultCount), cs(ResultDetailsURL));
 
-                }
 
-                if (Conn.State == System.Data.ConnectionState.Open)
-                    Conn.Close();
+                //if (Conn.State == System.Data.ConnectionState.Open)
+                //    Conn.Close();
 
                 site.JavaScript = "<script language=\"javascript\" type=\"text/javascript\">parent.siteResult(" + site.SiteID + ",0," + ch(ResultCount) + "," + ch(ResultDetailsURL) + "," + ch(ResultPopulationType) + "," + ch(ResultPreviewURL) + ",'" + site.FSID + "');</script>" + Environment.NewLine;
                 try

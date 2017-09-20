@@ -623,3 +623,6 @@ type Profile.Data.Publication.Group.DeleteAllPublications.StoredProcedure.sql
 type Profile.Data.Publication.Group.DeleteOnePublication.StoredProcedure.sql
 type Profile.Data.Publication.Group.MyPub.AddPublication.StoredProcedure.sql
 type Profile.Data.Publication.Group.MyPub.CopyExistingPublication.StoredProcedure.sql
+type Direct.Framework.UpdateLogOutgoing.StoredProcedure.sql
+type Direct.Framework.AddLogOutgoing.StoredProcedure.sql
+type Direct.Framework.AddLogIncoming.StoredProcedure.sql
