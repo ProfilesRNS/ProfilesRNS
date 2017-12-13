@@ -28,7 +28,6 @@ using Profiles.Profile.Utilities;
 using Profiles.Edit.Utilities;
 
 
-
 namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
 {
     public partial class CustomEditAssociatedInformationResource : BaseModule
@@ -37,6 +36,7 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
         #region Local Variables
         public int _personId = 0;
         public Int64 _subject = 0;
+        private bool syncUserPubs = false;
 
         public string _predicateuri = string.Empty;
         Profiles.Profile.Utilities.DataIO propdata;
@@ -83,30 +83,268 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
 
         }
 
+        protected void menuBtn_OnClick(object sender, EventArgs e)
+        {
+            string buttonID = ((Control)sender).ID;
+
+            if (Session["pnl.Visible"] != null &&
+                !(
+                    buttonID.Equals("btnGroupMemberFiltersReset") ||
+                    buttonID.Equals("btnGroupMemberFiltersApply")
+                )
+               )
+            {
+                reset();
+                return;
+            }
+
+
+            if (buttonID.Equals("btnAddPub")) {
+                pnlAddPubById.Visible = true;
+                phAddPub.Visible = true;
+                Session["pnl.Visible"] = true;
+                btnImgAddPub.ImageUrl = Root.Domain + "/Framework/images/icon_squareDownArrow.gif";
+            }
+            else {
+                pnlAddPubById.Visible = false;
+                phAddPub.Visible = false;
+            }
+
+
+            if (buttonID.Equals("btnAddCustom")) {
+                pnlAddCustomPubMed.Visible = true;
+                phAddCustom.Visible = true;
+                Session["pnl.Visible"] = true;
+                btnImgAddCustom.ImageUrl = Root.Domain + "/Framework/images/icon_squareDownArrow.gif";
+            }
+            else {
+                pnlAddCustomPubMed.Visible = false;
+                phAddCustom.Visible = false;
+            }
+
+
+            if (buttonID.Equals("btnDeletePub")) {
+                pnlDeletePubMed.Visible = true;
+                phDeletePub.Visible = true;
+                Session["pnl.Visible"] = true;
+                btnImgDeletePub.ImageUrl = Root.Domain + "/Framework/images/icon_squareDownArrow.gif";
+            }
+            else {
+                pnlDeletePubMed.Visible = false;
+                phDeletePub.Visible = false;
+            }
+
+
+            if (buttonID.Equals("btnAddPubMed") || buttonID.Equals("btnPubMedById")) {
+                phAddPubMed.Visible = true;
+                phAddMemberPubs.Visible = false;
+                pnlAddPubMed.Visible = true;
+                pnlGroupMemberFilters.Visible = false;
+                Session["pnl.Visible"] = true;
+                btnImgAddPubMed.ImageUrl = Root.Domain + "/Framework/images/icon_squareDownArrow.gif";
+            }
+            else if (buttonID.Equals("btnAddMemberPub") || buttonID.Equals("btnGroupMemberFiltersReset") || buttonID.Equals("btnGroupMemberFiltersApply")) {
+                if (buttonID.Equals("btnGroupMemberFiltersApply"))
+                {
+                    int startDate, endDate;
+                    try { startDate = Convert.ToInt32(txtGroupMemberFiltersStartDate.Text); } catch (Exception ex) { startDate = 0; }
+                    try { endDate = Convert.ToInt32(txtGroupMemberFiltersEndDate.Text); } catch (Exception ex) { endDate = 10000; }
+                    string selectedRows = Request.Form[this.hidList.UniqueID];
+                    string personIDs = "";
+
+                    if (!selectedRows.Equals(""))
+                    {
+                        string[] selectedRowStringArray = selectedRows.Split(',');
+
+                        Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
+                        System.Data.SqlClient.SqlDataReader sqldr = data.GetGroupMembers(_subject);
+                        personIDs = "<PersonIDs>";
+                        int i = 0;
+                        int j = 0;
+                        int nextIndex = Convert.ToInt32(selectedRowStringArray[j]);
+                        while (sqldr.Read())
+                        {
+                            if(i == nextIndex)
+                            {
+                                personIDs += "<PersonID>" + sqldr["PersonID"].ToString() + "</PersonID>";
+                                j++;
+                                if (j == selectedRowStringArray.Length - 1) break;
+                                nextIndex = Convert.ToInt32(selectedRowStringArray[j]);
+                            }
+                            i++;
+                        }
+
+                        personIDs = personIDs + "</PersonIDs>";
+
+                        //Always close your readers
+                        if (!sqldr.IsClosed)
+                            sqldr.Close();
+                    }
+                    showMemberPublications(startDate, endDate, personIDs);
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "getSelectedItem('', '', '', '')", true);
+                }
+                else
+                {
+                    txtGroupMemberFiltersStartDate.Text = "";
+                    txtGroupMemberFiltersEndDate.Text = "";
+                    showMemberPublications(0, 10000, "");
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "uncheckAllPeople()", true);
+                }
+                pnlAddPubMedResults.Visible = true;
+                phAddPubMed.Visible = false;
+                phAddMemberPubs.Visible = true;
+                pnlGroupMemberFilters.Visible = true;
+                Session["pnl.Visible"] = true;
+                
+                btnImgAddMemberPub.ImageUrl = Root.Domain + "/Framework/images/icon_squareDownArrow.gif";
+            }
+            else {
+                pnlAddPubMedResults.Visible = false;
+                phAddMemberPubs.Visible = false;
+                phAddPubMed.Visible = false;
+            }
+
+
+            if (buttonID.Equals("btnSyncMemberPubs") && !syncUserPubs) {
+                pnlSyncMemberPubs.Visible = true;
+                phSyncMemberPubs.Visible = true;
+                Session["pnl.Visible"] = true;
+                btnImgSyncMemberPubs.ImageUrl = Root.Domain + "/Framework/images/icon_squareDownArrow.gif";
+            }
+            else if (buttonID.Equals("btnSyncMemberPubs") && syncUserPubs)
+            {
+                //pnlUnsyncMemberPubs.Visible = true;
+                phSyncMemberPubs.Visible = true;
+                Session["pnl.Visible"] = true;
+                btnImgSyncMemberPubs.ImageUrl = Root.Domain + "/Framework/images/icon_squareDownArrow.gif";
+            }
+            else {
+                pnlSyncMemberPubs.Visible = false;
+                //pnlUnsyncMemberPubs.Visible = false;
+                phSyncMemberPubs.Visible = false;
+            }
+
+
+            if (buttonID.Equals("securityOptions"))
+            {
+                phSecuritySettings.Visible = true;
+            }
+            else
+            {
+                phSecuritySettings.Visible = false;
+            }
+
+            upnlEditSection.Update();
+        }
+
+        private void reset()
+        {
+            phSecuritySettings.Visible = true;
+            phSyncMemberPubs.Visible = true;
+            phAddMemberPubs.Visible = true;
+            phAddPubMed.Visible = true;
+            phAddPub.Visible = true;
+            phAddCustom.Visible = true;
+            phDeletePub.Visible = true;
+
+            //Hide all panels
+            pnlSyncMemberPubs.Visible = false;
+            //pnlUnsyncMemberPubs.Visible = false;
+            pnlAddPubById.Visible = false;
+            pnlAddPubMed.Visible = false;
+            pnlAddPubMedResults.Visible = false;
+            pnlAddCustomPubMed.Visible = false;
+            pnlDeletePubMed.Visible = false;
+            pnlGroupMemberFilters.Visible = false;
+
+            Session["pnl.Visible"] = null;
+
+            btnImgAddPub.ImageUrl = Root.Domain + "/Framework/images/icon_squareArrow.gif";
+            btnImgSyncMemberPubs.ImageUrl = Root.Domain + "/Framework/images/icon_squareArrow.gif";
+            btnImgAddMemberPub.ImageUrl = Root.Domain + "/Framework/images/icon_squareArrow.gif";
+            btnImgAddPubMed.ImageUrl = Root.Domain + "/Framework/images/icon_squareArrow.gif";
+            btnImgAddPub.ImageUrl = Root.Domain + "/Framework/images/icon_squareArrow.gif";
+            btnImgAddCustom.ImageUrl = Root.Domain + "/Framework/images/icon_squareArrow.gif";
+            btnImgDeletePub.ImageUrl = Root.Domain + "/Framework/images/icon_squareArrow.gif";
+
+            Edit.Utilities.DataIO data = new Edit.Utilities.DataIO();
+            if (data.GetGroupPublicationOption(_personId)) litSyncMemberPubs.Text = "(<b>On</b> / Off)";
+            else litSyncMemberPubs.Text = "(On / <b>Off</b>)";
+
+            txtPubId.Text = "";
+            txtSearchAffiliation.Text = "";
+            txtSearchAuthor.Text = "";
+            txtSearchKeyword.Text = "";
+            txtPubMedQuery.Text = "";
+            rdoPubMedQuery.Checked = false;
+            rdoPubMedKeyword.Checked = true;
+            lblPubMedResultsHeader.Text = "";
+            ClearPubMedCustom();
+
+            upnlEditSection.Update();
+        }
+
+        protected  void reset(object sender, EventArgs e)
+        {
+            reset();
+        }
+
+
         private void SecurityDisplayed(object sender, EventArgs e)
         {
 
 
             if (Session["pnlSecurityOptions.Visible"] == null)
             {
-
-                phAddPubMed.Visible = true;
-                phAddPub.Visible = true;
-                phAddCustom.Visible = true;
-                phDeletePub.Visible = true;
-                phAddMemberPubs.Visible = true;
+                reset();
             }
             else
             {
-                phAddPubMed.Visible = false;
-                phAddPub.Visible = false;
-                phAddCustom.Visible = false;
-                phDeletePub.Visible = false;
-                phAddMemberPubs.Visible = false;
+                menuBtn_OnClick(sender, e);
             }
         }
 
         #endregion
+
+        protected void grdSyncMemberPubs_OnDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                GroupPublicationOptionItem gpi = (GroupPublicationOptionItem)e.Row.DataItem;
+                RadioButton rb = (RadioButton)e.Row.FindControl("rdoGroupPublicationOption");
+                HiddenField hf = (HiddenField)e.Row.FindControl("hdnGroupPublicationOption");
+                Literal l = (Literal)e.Row.FindControl("litGroupPublicationOption");
+                rb.GroupName = "SecurityOption";
+
+                hf.Value = gpi.Code.ToString();
+                l.Text = gpi.Label;
+
+                Edit.Utilities.DataIO data = new Edit.Utilities.DataIO();
+                int groupPublicationOption = 0;
+                if (data.GetGroupPublicationOption(_personId)) groupPublicationOption = 1;
+                if (groupPublicationOption == gpi.Code) rb.Checked = true;
+                else rb.Checked = false;
+            }
+        }
+
+        protected void rdoGroupPublicationOption_OnCheckedChanged(object sender, EventArgs e)
+        {
+            //Clear the existing selected row 
+            foreach (GridViewRow oldrow in grdSyncMemberPubs.Rows)
+            {
+                ((RadioButton)oldrow.FindControl("rdoGroupPublicationOption")).Checked = false;
+            }
+
+            //Set the new selected row
+            RadioButton rb = (RadioButton)sender;
+            GridViewRow row = (GridViewRow)rb.NamingContainer;
+            ((RadioButton)row.FindControl("rdoGroupPublicationOption")).Checked = true;
+
+            int o = Convert.ToInt32(((HiddenField)row.Cells[0].FindControl("hdnGroupPublicationOption")).Value);
+            Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
+            data.SetGroupPublicationOption(_personId, o);
+            reset();
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -122,11 +360,7 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
             }
             else
             {
-                Session["phAddPub.Visible"] = null;
-                Session["pnlAddPubMed.Visible"] = null;
-                Session["pnlAddCustomPubMed.Visible"] = null;
-                Session["pnlDeletePubMed.Visible"] = null;
-                Session["btnAddMemberPub.Visible"] = null;
+                Session["pnl.Visible"] = null;
             }
 
 
@@ -146,9 +380,96 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
 
             Edit.Utilities.DataIO data;
             data = new Edit.Utilities.DataIO();
+
             string predicateuri = Request.QueryString["predicateuri"].Replace("!", "#");
             this.PropertyListXML = propdata.GetPropertyList(this.BaseData, base.PresentationXML, predicateuri, false, true, false);
             litBackLink.Text = "<a href='" + Root.Domain + "/edit/" + _subject + "'>Edit Menu</a>" + " &gt; <b>" + PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@Label").Value + "</b>";
+            if (data.GetGroupPublicationOption(_personId)) litSyncMemberPubs.Text = "(<b>On</b> / Off)";
+            else litSyncMemberPubs.Text = "(On / <b>Off</b>)";
+
+            List<GroupPublicationOptionItem> gpi = new List<GroupPublicationOptionItem>();
+
+            gpi.Add(new GroupPublicationOptionItem("On", "All member publications added to this group and updated automatically.", 1));
+            gpi.Add(new GroupPublicationOptionItem("Off", "Only publications manually added to this group will be listed.", 0));
+
+            grdSyncMemberPubs.DataSource = gpi;
+            grdSyncMemberPubs.DataBind();
+
+            BuildPersonFilterList();
+        }
+
+        private void BuildPersonFilterList()
+        {
+            Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
+
+            DropDownList ddl = new DropDownList();
+            ddl.ID = "ddlChkList";
+            ListItem lstItem = new ListItem();
+            ddl.Items.Insert(0, lstItem);
+            ddl.Attributes.Add("title", "Display Name");
+            ddl.Width = new Unit(250);
+            ddl.Height = new Unit(20);
+            ddl.Attributes.Add("onclick", "showdivonClick()");
+            ddl.Attributes.Add("onkeypress", "showdivonClick()");
+            CheckBoxList chkBxLst = new CheckBoxList();
+            chkBxLst.ID = "chkLstItem";
+            chkBxLst.Attributes.Add("onmouseover", "showdiv()");
+            chkBxLst.Attributes.Add("onfocus", "if ( event.keyCode == 13) showdiv()");
+            System.Data.SqlClient.SqlDataReader sqldr = data.GetGroupMembers(_subject);
+            List<GenericListItem> dtListItem = new List<GenericListItem>();
+            while (sqldr.Read())
+                dtListItem.Add(new GenericListItem(sqldr["DisplayName"].ToString(), sqldr["UserID"].ToString()));
+
+            //Always close your readers
+            if (!sqldr.IsClosed)
+                sqldr.Close();
+
+
+
+            int rowNo = dtListItem.Count;
+            string lstValue = string.Empty;
+            string lstID = string.Empty;
+            string javascript = string.Empty;
+
+
+            litGroupMemberScript.Text = "<script>";
+            for (int i = 0; i < rowNo; i++)
+            {
+                lstValue = dtListItem[i].Text;
+                lstID = dtListItem[i].Value;
+                lstItem = new ListItem("<a href=\"javascript:void(0)\" id=\"alst\" style=\"text-decoration:none;color:Black; \" onclick=\"getSelectedItem(' " + lstValue + "','" + i + "','" + lstID + "','anchor');\">" + lstValue + "</a>", lstID);
+                lstItem.Attributes.Add("onclick", "getSelectedItem('" + lstValue + "','" + i + "','" + lstID + "','listItem');");
+
+                //if (SearchRequest != null && !lstID.IsNullOrEmpty())
+                //{
+                //    if (SearchRequest.OuterXml.Contains(lstID))
+                //    {
+                        javascript += " javascript:getSelectedItem('" + lstValue + "','" + i + "','" + lstID + "','anchor');";
+                //    }
+                //}
+
+                chkBxLst.Items.Add(lstItem);
+            }
+
+
+            litGroupMemberScript.Text += javascript + "</script>";
+
+
+
+            System.Web.UI.HtmlControls.HtmlGenericControl div = new System.Web.UI.HtmlControls.HtmlGenericControl("div");
+            div.ID = "divChkList";
+            div.Controls.Add(chkBxLst);
+            div.Style.Add("background-color", "#ffffff");
+            div.Style.Add("position", "absolute");
+            div.Style.Add("fload", "left");
+            div.Style.Add("border", "black 1px solid");
+            div.Style.Add("width", "249px");
+            div.Style.Add("height", "180px");
+            div.Style.Add("overflow", "AUTO");
+            div.Style.Add("display", "none");
+            div.Style.Add("padding-top", "25px");
+            phDDLCHK.Controls.Add(ddl);
+            phDDLList.Controls.Add(div);
 
         }
 
@@ -159,7 +480,7 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
 
             if (e.AffectedRows == 0)
             {
-                lblNoItems.Text = "<i>No publications have been added.</i>";
+                lblNoItems.Text = "<i>No publications have been manually added.</i>";
                 lblNoItems.Visible = true;
                 grdEditPublications.Visible = false;
             }
@@ -305,44 +626,7 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
 
         #region Add PubMed By ID
 
-        protected void btnAddPub_OnClick(object sender, EventArgs e)
-        {
-            if (Session["phAddPub.Visible"] == null)
-            {
-                btnImgAddPub.ImageUrl = Root.Domain + "/Framework/images/icon_squareDownArrow.gif";
 
-                phAddCustom.Visible = false;
-                phAddPubMed.Visible = false;
-                phDeletePub.Visible = false;
-                pnlAddPubById.Visible = true;
-                pnlAddPubMed.Visible = false;
-                phAddMemberPubs.Visible = false;
-                phSecuritySettings.Visible = false;
-                pnlAddPubMedResults.Visible = false;
-                pnlAddCustomPubMed.Visible = false;
-                Session["phAddPub.Visible"] = true;
-            }
-            else
-            {
-                Session["phAddPub.Visible"] = null;
-                btnDonePub_OnClick(sender, e);
-            }
-            upnlEditSection.Update();
-        }
-
-        protected void btnDonePub_OnClick(object sender, EventArgs e)
-        {
-            phAddCustom.Visible = true;
-            phAddPubMed.Visible = true;
-            phDeletePub.Visible = true;
-            phAddMemberPubs.Visible = true;
-            phSecuritySettings.Visible = true;
-            txtPubId.Text = "";
-            pnlAddPubById.Visible = false;
-            btnImgAddPub.ImageUrl = Root.Domain + "/Framework/images/icon_squareArrow.gif";
-            Session["phAddPub.Visible"] = null;
-            upnlEditSection.Update();
-        }
 
         protected void btnSavePub_OnClick(object sender, EventArgs e)
         {
@@ -396,6 +680,7 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
             }
         }
 
+
         //Inserts comma seperated string of PubMed Ids into the db
         private void InsertPubMedIds(string value)
         {
@@ -423,12 +708,7 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
             data.UpdateEntityOneGroup(_personId);
 
             this.Counter = 0;
-            Session["phAddPub.Visible"] = null;
-            Session["pnlAddPubMed.Visible"] = null;
-            Session["pnlAddCustomPubMed.Visible"] = null;
-            Session["pnlDeletePubMed.Visible"] = null;
-            Session["btnAddMemberPub.Visible"] = null;
-
+            Session["pnl.Visible"] = null;
         }
 
         #endregion
@@ -436,58 +716,7 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
         #region Add PubMed By Search
 
 
-        protected void btnAddPubMed_OnClick(object sender, EventArgs e)
-        {
-            if (Session["pnlAddPubMed.Visible"] == null)
-            {
-                btnImgAddPubMed.ImageUrl = Root.Domain + "/Framework/images/icon_squareDownArrow.gif";
-                phAddCustom.Visible = false;
-                phAddPub.Visible = false;
-                phDeletePub.Visible = false;
-                pnlAddPubMed.Visible = true;
-                pnlAddPubById.Visible = false;
-                phAddMemberPubs.Visible = false;
-                pnlAddPubMedResults.Visible = false;
-                pnlAddCustomPubMed.Visible = false;
-                phSecuritySettings.Visible = false;
-                Session["pnlAddPubMed.Visible"] = true;
-            }
-            else
-            {
-                btnPubMedClose_OnClick(sender, e);
-                Session["pnlAddPubMed.Visible"] = null;
-            }
-
-            upnlEditSection.Update();
-        }
-
-
-        protected void btnAddMemberPub_OnClick(object sender, EventArgs e)
-        {
-            if (Session["btnAddMemberPub.Visible"] == null)
-            {
-                btnImgAddMemberPub.ImageUrl = Root.Domain + "/Framework/images/icon_squareDownArrow.gif";
-                phAddCustom.Visible = false;
-                phAddPub.Visible = false;
-                phDeletePub.Visible = false;
-                pnlAddPubMed.Visible = false;
-                pnlAddPubById.Visible = false;
-                phAddPubMed.Visible = false;
-                pnlAddCustomPubMed.Visible = false;
-                phSecuritySettings.Visible = false;
-                pnlAddPubMedResults.Visible = true;
-                showMemberPublications();
-                Session["btnAddMemberPub.Visible"] = true;
-            }
-            else
-            {
-                btnPubMedClose_OnClick(sender, e);
-                Session["btnAddMemberPub.Visible"] = null;
-            }
-
-            upnlEditSection.Update();
-        }
-
+ 
         private void ResetPubMedSearch()
         {
             txtSearchAffiliation.Text = "";
@@ -500,28 +729,9 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
             grdPubMedSearchResults.DataBind();
             lblPubMedResultsHeader.Text = "";
             pnlAddPubMedResults.Visible = false;
-            Session["phAddPub.Visible"] = null;
-            Session["pnlAddPubMed.Visible"] = null;
-            Session["pnlAddCustomPubMed.Visible"] = null;
-            Session["pnlDeletePubMed.Visible"] = null;
-            Session["btnAddMemberPub.Visible"] = null;
+            Session["pnl.Visible"] = null;
         }
 
-        protected void btnPubMedClose_OnClick(object sender, EventArgs e)
-        {
-            ResetPubMedSearch();
-            pnlAddPubMed.Visible = false;
-            phAddCustom.Visible = true;
-            phAddPub.Visible = true;
-            phDeletePub.Visible = true;
-            phSecuritySettings.Visible = true;
-            btnImgAddPubMed.ImageUrl = Root.Domain + "/Framework/images/icon_squareArrow.gif";
-            phAddMemberPubs.Visible = true;
-            Session["btnAddMemberPub.Visible"] = null;
-            btnImgAddMemberPub.ImageUrl = Root.Domain + "/Framework/images/icon_squareArrow.gif";
-
-            upnlEditSection.Update();
-        }
 
         protected void btnPubMedReset_OnClick(object sender, EventArgs e)
         {
@@ -530,11 +740,11 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
         }
 
 
-        protected void showMemberPublications()
+        protected void showMemberPublications(int startDate, int endDate, string personIDs)
         {
             Edit.Utilities.DataIO data;
             data = new Edit.Utilities.DataIO();
-            List<PublicationState> memberPubs = data.GetGroupMemberPubs(_personId);
+            List<PublicationState> memberPubs = data.GetGroupMemberPubs(_personId, startDate, endDate, personIDs);
 
             PubMedResults.Tables.Clear();
             PubMedResults.Tables.Add("Results");
@@ -774,11 +984,7 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
             phSecuritySettings.Visible = true;
             btnImgAddMemberPub.ImageUrl = Root.Domain + "/Framework/images/icon_squareArrow.gif";
             btnImgAddPubMed.ImageUrl = Root.Domain + "/Framework/images/icon_squareArrow.gif";
-            Session["phAddPub.Visible"] = null;
-            Session["pnlAddPubMed.Visible"] = null;
-            Session["pnlAddCustomPubMed.Visible"] = null;
-            Session["pnlDeletePubMed.Visible"] = null;
-            Session["btnAddMemberPub.Visible"] = null;
+            Session["pnl.Visible"] = null;
             PubMedResults = null;
             upnlEditSection.Update();
         }
@@ -810,31 +1016,6 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
 
         #region Add PubMed Custom
 
-        protected void btnAddCustom_OnClick(object sender, EventArgs e)
-        {
-            if (Session["pnlAddCustomPubMed.Visible"] == null)
-            {
-                btnImgAddCustom.ImageUrl = Root.Domain + "/Framework/images/icon_squareDownArrow.gif";
-                grdEditPublications.SelectedIndex = -1;
-                phAddPub.Visible = false;
-                phAddPubMed.Visible = false;
-                phDeletePub.Visible = false;
-                phAddMemberPubs.Visible = false;
-                pnlAddCustomPubMed.Visible = true;
-                drpPublicationType.Enabled = true;
-                phMain.Visible = false;
-                phSecuritySettings.Visible = false;
-                ClearPubMedCustom();
-                Session["pnlAddCustomPubMed.Visible"] = true;
-            }
-            else
-            {
-
-                btnPubMedFinished_OnClick(sender, e);
-            }
-
-            upnlEditSection.Update();
-        }
 
         private void ClearPubMedCustom()
         {
@@ -999,7 +1180,7 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
             drpPublicationType.Enabled = true;
             phMain.Visible = false;
 
-            Session["pnlAddCustomPubMed.Visible"] = true;
+            Session["pnl.Visible"] = true;
 
             if (drpPublicationType.SelectedIndex < 1)
             {
@@ -1081,64 +1262,19 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
                 pnlAddCustomPubMed.Visible = false;
                 btnImgAddCustom.ImageUrl = Root.Domain + "/Framework/images/icon_squareArrow.gif";
             }
-            Session["pnlAddCustomPubMed.Visible"] = null;
-            upnlEditSection.Update();
-        }
-
-        protected void btnPubMedFinished_OnClick(object sender, EventArgs e)
-        {
-            phAddPub.Visible = true;
-            phAddPubMed.Visible = true;
-            phDeletePub.Visible = true;
-            phAddMemberPubs.Visible = true;
-            phSecuritySettings.Visible = true;
-            ClearPubMedCustom();
-            drpPublicationType.SelectedIndex = -1;
-            grdEditPublications.SelectedIndex = -1;
-            phMain.Visible = false;
-            pnlAddCustomPubMed.Visible = false;
-            btnImgAddCustom.ImageUrl = Root.Domain + "/Framework/images/icon_squareArrow.gif";
-            Session["pnlAddCustomPubMed.Visible"] = null;
+            Session["pnl.Visible"] = null;
             upnlEditSection.Update();
         }
 
         protected void btnPubMedById_Click(object sender, EventArgs e)
         {
-            btnPubMedFinished_OnClick(sender, e);
-            btnAddPubMed_OnClick(sender, e);
-
-            upnlEditSection.Update();
+            reset();
+            menuBtn_OnClick(sender, e);
         }
 
         #endregion
 
         #region DeletePubMed
-
-        protected void btnDeletePub_OnClick(object sender, EventArgs e)
-        {
-            if (Session["pnlDeletePubMed.Visible"] == null)
-            {
-                btnImgDeletePub.ImageUrl = Root.Domain + "/Framework/images/icon_squareDownArrow.gif";
-                phAddCustom.Visible = false;
-                phAddPubMed.Visible = false;
-                phAddMemberPubs.Visible = false;
-                phAddPub.Visible = false;
-                pnlDeletePubMed.Visible = true;
-                pnlAddPubById.Visible = false;
-                pnlAddPubMed.Visible = false;
-                pnlAddPubMedResults.Visible = false;
-                pnlAddCustomPubMed.Visible = false;
-                phSecuritySettings.Visible = false;
-                Session["pnlDeletePubMed.Visible"] = true;
-            }
-            else
-            {
-                Session["pnlDeletePubMed.Visible"] = null;
-                btnDeletePubMedClose_OnClick(sender, e);
-
-            }
-            upnlEditSection.Update();
-        }
 
         protected void btnDeletePubMedOnly_OnClick(object sender, EventArgs e)
         {
@@ -1196,18 +1332,6 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
             grdEditPublications.DataBind();
             upnlEditSection.Update();
         }
-        protected void btnDeletePubMedClose_OnClick(object sender, EventArgs e)
-        {
-            phAddPubMed.Visible = true;
-            phAddCustom.Visible = true;
-            phAddPub.Visible = true;
-            phAddMemberPubs.Visible = true;
-            phDeletePub.Visible = true;
-            phSecuritySettings.Visible = true;
-            pnlDeletePubMed.Visible = false;
-            btnImgDeletePub.ImageUrl = Root.Domain + "/Framework/images/icon_squareArrow.gif";
-            upnlEditSection.Update();
-        }
 
         #endregion
 
@@ -1258,5 +1382,19 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
 
         private Int16 Counter { get; set; }
 
+
+        public class GroupPublicationOptionItem
+        {
+            public GroupPublicationOptionItem(string label, string description, int code)
+            {
+                this.Label = label;
+                this.Description = description;
+                this.Code = code;
+            }
+
+            public string Label { get; set; }
+            public string Description { get; set; }
+            public int Code { get; set; }
+        }
     }
 }

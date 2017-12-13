@@ -38,7 +38,7 @@ namespace Profiles.Profile.Modules.CustomViewGroupGeneralInfo
             if (base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description[1]/prns:mainImage/@rdf:resource", base.Namespaces) != null)
             {
                 string imageurl = base.BaseData.SelectSingleNode("//rdf:RDF/rdf:Description[1]/prns:mainImage/@rdf:resource", base.Namespaces).Value;
-                imgPhoto.ImageUrl = imageurl + "&cachekey=" + Guid.NewGuid().ToString();
+                imgPhoto.ImageUrl = imageurl + "&cachekey=" + Guid.NewGuid().ToString() + "&width=500";
             }
             else
             {

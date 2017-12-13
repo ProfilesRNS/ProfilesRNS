@@ -29,6 +29,115 @@
 
     });
 
+    function showdiv() {
+        var divChkList = $('[id$=divChkList]').attr('id');
+        var chkListItem = $('[id$=chkLstItem_0]').attr('id');
+        document.getElementById(divChkList).style.display = "block";
+
+        document.getElementById(chkListItem).focus()
+    }
+
+    function showdivonClick() {
+        var objDLL = $('[id$=divChkList]').attr('id');// document.getElementById("divChkList");
+
+        if (document.getElementById(objDLL).style.display == "block")
+            document.getElementById(objDLL).style.display = "none";
+        else
+            document.getElementById(objDLL).style.display = "block";
+    }
+
+    function uncheckAllPeople() {
+       var arr = document.getElementById($('[id$=chkLstItem]').attr('id')).getElementsByTagName('input');
+        
+        for (i = 0; i < arr.length; i++) {
+            checkbox = arr[i];
+            checkbox.checked = false;
+       //     if (i == lstNo) {
+       //         if (ctrlType == 'anchor') {
+                        //checkbox.checked = false;
+       //         }
+        }
+    }
+
+    function getSelectedItem(lstValue, lstNo, lstID, ctrlType) {
+
+
+        var noItemChecked = 0;
+        var ddlChkList = document.getElementById($('[id$=ddlChkList]').attr('id'));
+        var selectedItems = "";
+        var selectedIDs = "";
+        var arr = document.getElementById($('[id$=chkLstItem]').attr('id')).getElementsByTagName('input');
+        var arrlbl = document.getElementById($('[id$=chkLstItem]').attr('id')).getElementsByTagName('label');
+        var objLstId = document.getElementById($('[id$=hidList]').attr('id')); //document.getElementById('hidList');
+
+        for (i = 0; i < arr.length; i++) {
+            checkbox = arr[i];
+            if (i == lstNo) {
+                if (ctrlType == 'anchor') {
+                    if (!checkbox.checked) {
+                        checkbox.checked = true;
+                    }
+                    else {
+                        checkbox.checked = false;
+                    }
+                }
+            }
+
+            if (checkbox.checked) {
+
+                var buffer;
+                if (arrlbl[i].innerText == undefined)
+                    buffer = arrlbl[i].textContent;
+                else
+                    buffer = arrlbl[i].innerText;
+
+                if (selectedItems == "") {
+
+                    selectedItems = buffer;
+                    
+                }
+                else {
+                    selectedItems = selectedItems + "," + buffer;
+                }
+                selectedIDs = selectedIDs + i + ",";
+                noItemChecked = noItemChecked + 1;
+            }
+        }
+
+        ddlChkList.title = selectedItems;
+
+        if (noItemChecked != "0")
+            ddlChkList.options[ddlChkList.selectedIndex].text = selectedItems;
+        else
+            ddlChkList.options[ddlChkList.selectedIndex].text = "";
+
+        var hidList = document.getElementById($('[id$=hidList]').attr('id'));
+        //hidList.value = ddlChkList.options[ddlChkList.selectedIndex].text;
+        hidList.value = selectedIDs;
+
+
+    }
+
+    document.onclick = check;
+    function check(e) {
+        var target = (e && e.target) || (event && event.srcElement);
+        var obj = document.getElementById($('[id$=divChkList]').attr('id'));
+        var obj1 = document.getElementById($('[id$=ddlChkList]').attr('id'));
+        if (target.id != "alst" && !target.id.match($('[id$=chkLstItem]').attr('id'))) {
+            if (!(target == obj || target == obj1)) {
+                //obj.style.display = 'none'
+            }
+            else if (target == obj || target == obj1) {
+                if (obj.style.display == 'block') {
+                    obj.style.display = 'block';
+                }
+                else {
+                    obj.style.display = 'none';
+                    document.getElementById($('[id$=ddlChkList]').attr('id')).blur();
+                }
+            }
+        }
+    }
 </script>
 
 <asp:UpdatePanel ID="upnlEditSection" runat="server" UpdateMode="Conditional" RenderMode="Inline">
@@ -61,40 +170,65 @@
                                 <security:Options runat="server" ID="securityOptions"></security:Options>
                             </div>
                         </asp:PlaceHolder>
+                        <asp:PlaceHolder ID="phSyncMemberPubs" runat="server">
+                            <div style="padding-bottom: 10px;">
+                                <asp:LinkButton ID="btnSyncMemberPubs" runat="server" OnClick="menuBtn_OnClick" CssClass="profileHypLinks"><asp:Image runat="server" ID="btnImgSyncMemberPubs" AlternateText=" " ImageUrl="~/Framework/Images/icon_squareArrow.gif"/>&nbsp;Automatically Add Member Publications</asp:LinkButton>
+                                &nbsp;<asp:Literal ID="litSyncMemberPubs" runat="server">(On / Off)</asp:Literal>
+                            </div>
+                        </asp:PlaceHolder>
                         <asp:PlaceHolder ID="phAddMemberPubs" runat="server">
                             <div style="padding-bottom: 10px;">
-                                <asp:LinkButton ID="btnAddMemberPub" runat="server" OnClick="btnAddMemberPub_OnClick" CssClass="profileHypLinks"><asp:Image runat="server" ID="btnImgAddMemberPub" AlternateText=" " ImageUrl="~/Framework/Images/icon_squareArrow.gif"/>&nbsp;Add Member Publication</asp:LinkButton>
-                                &nbsp;(Add one or more articles authored by members of this group.)
+                                <asp:LinkButton ID="btnAddMemberPub" runat="server" OnClick="menuBtn_OnClick" CssClass="profileHypLinks"><asp:Image runat="server" ID="btnImgAddMemberPub" AlternateText=" " ImageUrl="~/Framework/Images/icon_squareArrow.gif"/>&nbsp;Manually Add Member Publications</asp:LinkButton>
+                                &nbsp;(Manually add one or more articles authored by members of this group.)
                             </div>
                         </asp:PlaceHolder>
                         <asp:PlaceHolder ID="phAddPubMed" runat="server">
                             <div style="padding-bottom: 10px;">
-                                <asp:LinkButton ID="btnAddPubMed" runat="server" OnClick="btnAddPubMed_OnClick" CssClass="profileHypLinks"><asp:Image runat="server" ID="btnImgAddPubMed" AlternateText=" " ImageUrl="~/Framework/Images/icon_squareArrow.gif"/>&nbsp;Add PubMed</asp:LinkButton>
+                                <asp:LinkButton ID="btnAddPubMed" runat="server" OnClick="menuBtn_OnClick" CssClass="profileHypLinks"><asp:Image runat="server" ID="btnImgAddPubMed" AlternateText=" " ImageUrl="~/Framework/Images/icon_squareArrow.gif"/>&nbsp;Manually Add PubMed Articles</asp:LinkButton>
                                 &nbsp;(Search PubMed and add multiple articles.)
                             </div>
                         </asp:PlaceHolder>
                         <asp:PlaceHolder ID="phAddPub" runat="server">
                             <div style="padding-bottom: 10px;">
-                                <asp:LinkButton ID="btnAddPub" runat="server" OnClick="btnAddPub_OnClick" CssClass="profileHypLinks"><asp:Image runat="server" ID="btnImgAddPub" AlternateText=" " ImageUrl="~/Framework/Images/icon_squareArrow.gif"/>&nbsp;Add by ID</asp:LinkButton>
+                                <asp:LinkButton ID="btnAddPub" runat="server" OnClick="menuBtn_OnClick" CssClass="profileHypLinks"><asp:Image runat="server" ID="btnImgAddPub" AlternateText=" " ImageUrl="~/Framework/Images/icon_squareArrow.gif"/>&nbsp;Manually Add Publications by ID</asp:LinkButton>
                                 &nbsp;(Add one or more articles using codes, e.g., PubMed ID.)
                             </div>
                         </asp:PlaceHolder>
                         <asp:PlaceHolder ID="phAddCustom" runat="server">
                             <div style="padding-bottom: 10px;">
-                                <asp:LinkButton ID="btnAddCustom" runat="server" OnClick="btnAddCustom_OnClick" CssClass="profileHypLinks"><asp:Image runat="server" ID="btnImgAddCustom" AlternateText=" " ImageUrl="~/Framework/Images/icon_squareArrow.gif"/>&nbsp;Add Custom</asp:LinkButton>
-                                &nbsp;(Enter your own publication using an online form.)
+                                <asp:LinkButton ID="btnAddCustom" runat="server" OnClick="menuBtn_OnClick" CssClass="profileHypLinks"><asp:Image runat="server" ID="btnImgAddCustom" AlternateText=" " ImageUrl="~/Framework/Images/icon_squareArrow.gif"/>&nbsp;Manually Add Custom Publications</asp:LinkButton>
+                                &nbsp;(Enter publication details using an online form.)
                             </div>
                         </asp:PlaceHolder>
                         <asp:PlaceHolder ID="phDeletePub" runat="server">
                             <div style="padding-bottom: 10px;">
-                                <asp:LinkButton ID="btnDeletePub" runat="server" OnClick="btnDeletePub_OnClick" CssClass="profileHypLinks"><asp:Image runat="server" ID="btnImgDeletePub" AlternateText=" " ImageUrl="~/Framework/Images/icon_squareArrow.gif"/>&nbsp;Delete</asp:LinkButton>
-                                &nbsp;(Remove multiple publications from your profile.)
+                                <asp:LinkButton ID="btnDeletePub" runat="server" OnClick="menuBtn_OnClick" CssClass="profileHypLinks"><asp:Image runat="server" ID="btnImgDeletePub" AlternateText=" " ImageUrl="~/Framework/Images/icon_squareArrow.gif"/>&nbsp;Delete</asp:LinkButton>
+                                &nbsp;(Remove manually added publications from this profile.)
                             </div>
                         </asp:PlaceHolder>
                     </td>
                 </tr>
                 <tr>
                     <td>
+                        <%--Start Sync Member Publications--%>
+                        <asp:Panel ID="pnlSyncMemberPubs" runat="server" Style="margin-bottom: 15px;" Visible="false">
+                            <asp:GridView  CellSpacing="-1" runat="server" ID="grdSyncMemberPubs" AutoGenerateColumns="false"
+                                OnRowDataBound="grdSyncMemberPubs_OnDataBound" Width="100%">
+                                <HeaderStyle BorderStyle="None" CssClass="EditMenuTopRow" />
+                                <RowStyle BorderColor="#ccc" Width="1px" VerticalAlign="Middle" />
+                                <AlternatingRowStyle CssClass="evenRow" />
+                                <Columns>
+                                    <asp:TemplateField HeaderStyle-HorizontalAlign="Center"  ItemStyle-HorizontalAlign="Center" HeaderText="Select"  ItemStyle-Width="150px">
+                                        <ItemTemplate>
+                                            <asp:RadioButton runat="server" ID="rdoGroupPublicationOption" GroupName="GroupPublicationOption" AutoPostBack="true" OnCheckedChanged="rdoGroupPublicationOption_OnCheckedChanged" />
+                                            <asp:Literal runat="server" ID="litGroupPublicationOption"></asp:Literal>
+                                            <asp:HiddenField runat="server" ID="hdnGroupPublicationOption" />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:BoundField HeaderStyle-HorizontalAlign="Center"  ItemStyle-HorizontalAlign="left" DataField="Description" HeaderText="Description" ItemStyle-Width="500px" />
+                                </Columns>
+                            </asp:GridView>
+                        </asp:Panel>
                         <%--Start Add By Id--%>
                         <asp:Panel ID="pnlAddPubById" runat="server" Style="background-color: #F0F4F6; margin-bottom: 5px;
                             border: solid 1px #999;" Visible="false">
@@ -118,7 +252,7 @@
                                             <asp:ImageButton ID="lnkUpdate" runat="server" ImageUrl="~/Edit/Images/button_save.gif"
                                                 CausesValidation="False" Text="Save" AlternateText="Save" OnClick="btnSavePub_OnClick"></asp:ImageButton>
                                             &nbsp;
-                                            <asp:ImageButton ID="lnkCancel" runat="server" OnClick="btnDonePub_OnClick" ImageUrl="~/Edit/Images/button_cancel.gif"
+                                            <asp:ImageButton ID="lnkCancel" runat="server" OnClick="reset" ImageUrl="~/Edit/Images/button_cancel.gif"
                                                 CausesValidation="False" Text="Cancel" AlternateText="Cancel"></asp:ImageButton>
                                         </div>
                                     </td>
@@ -184,12 +318,67 @@
                                     <asp:LinkButton ID="btnPubMedReset" runat="server" CausesValidation="False" OnClick="btnPubMedReset_OnClick"
                                         Text="Reset"></asp:LinkButton>
                                     &nbsp;&nbsp;|&nbsp;&nbsp;
-                                    <asp:LinkButton ID="btnPubMedClose" runat="server" CausesValidation="False" OnClick="btnPubMedClose_OnClick"
+                                    <asp:LinkButton ID="btnPubMedClose" runat="server" CausesValidation="False" OnClick="reset"
                                         Text="Close"></asp:LinkButton>
                                 </div>
                             </div>
                         </asp:Panel>
                         <%--End Add By Search--%>
+                        <%--Start Group Member Filters--%>
+                        <asp:Panel ID="pnlGroupMemberFilters" runat="server" Style="background-color: #F0F4F6;
+                            margin-bottom: 5px; border: solid 1px #999;" Visible="false">
+                            <div style="padding: 5px;">
+                                <div>
+                                    <div style="width: 25px; float: left;">
+                                        <asp:Image ID="Image2" runat="server" ImageUrl="~/Framework/Images/icon_alert.gif" alt=" "/>
+                                    </div>
+                                    <div style="margin-left: 25px; padding-bottom: 5px;">
+                                        Filter displayed publications.
+                                    </div>
+                                </div>
+                                <div style="padding-bottom: 10px;">
+                                    <div style="width: 75px; float: left; text-align: right; padding-right: 10px; padding-top: 3px;">
+                                        <asp:Label ID="lblGroupMemberFiltersDate" runat="server" AssociatedControlID="txtGroupMemberFiltersStartDate"><b>Date:</b></asp:Label>
+                                    </div>
+                                    <asp:TextBox ID="txtGroupMemberFiltersStartDate" runat="server" CssClass="textBoxDate" MaxLength="4"></asp:TextBox>
+                                    <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" FilterType="Numbers" TargetControlID="txtGroupMemberFiltersStartDate" />&nbsp;&nbsp;-&nbsp;&nbsp;
+                                    <asp:TextBox ID="txtGroupMemberFiltersEndDate" runat="server" CssClass="textBoxDate"></asp:TextBox>
+                                    <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" FilterType="Numbers" TargetControlID="txtGroupMemberFiltersEndDate" />
+                                </div>
+                                <div style="padding-bottom: 10px;">
+                                    <div style="width: 75px; float: left; text-align: right; padding-right: 10px; padding-top: 3px;">
+                                        <asp:Label ID="Label21" runat="server" AssociatedControlID="txtGroupMemberFiltersStartDate"><b>Author:</b></asp:Label>
+                                    </div>
+                                    <table cellpadding="0">
+                                        <tr>
+                                            <td>
+                                                <asp:PlaceHolder ID="phDDLCHK" runat="server"></asp:PlaceHolder>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:PlaceHolder ID="phDDLList" runat="server"></asp:PlaceHolder>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <asp:Label ID="lblSelectedItem" runat="server"></asp:Label>
+                                    <asp:HiddenField ID="hidList" runat="server" />
+                                    <asp:HiddenField ID="hidURIs" runat="server" />
+                                    <asp:Literal runat="server" ID="litGroupMemberScript"></asp:Literal>
+                                </div>
+                                <div style="padding: 10px 0px;">
+                                    <asp:LinkButton ID="btnGroupMemberFiltersApply" runat="server" CausesValidation="False" OnClick="menuBtn_OnClick"
+                                        Text="Apply"></asp:LinkButton>
+                                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <asp:LinkButton ID="btnGroupMemberFiltersReset" runat="server" CausesValidation="False" OnClick="menuBtn_OnClick"
+                                        Text="Reset"></asp:LinkButton>
+                                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <asp:LinkButton ID="btnGroupMemberFiltersClose" runat="server" CausesValidation="False" OnClick="reset"
+                                        Text="Close"></asp:LinkButton>
+                                </div>
+                            </div>
+                        </asp:Panel>
+                        <%--End Group Member Filters--%>
                         <%--Start Search Results--%>
                         <asp:Panel ID="pnlAddPubMedResults" runat="server" Style="background-color: #F0F4F6;
                             margin-bottom: 5px; border: solid 1px #999;" Visible="false">
@@ -243,7 +432,7 @@
                                             </td>
                                             <td>
                                                 <asp:ImageButton ID="lnkCancelPubMed" runat="server" ImageUrl="~/Edit/Images/button_cancel.gif"
-                                                    CausesValidation="False" CommandName="Cancel" OnClick="btnPubMedClose_OnClick"
+                                                    CausesValidation="False" CommandName="Cancel" OnClick="reset"
                                                     Text="Cancel" AlternateText="Cancel"></asp:ImageButton>
                                             </td>
                                         </tr>
@@ -280,7 +469,7 @@
                                 </div>
                                 <div style="padding: 15px 0px 5px 0px;">
                                     <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/Edit/Images/button_cancel.gif"
-                                        OnClick="btnPubMedFinished_OnClick" CausesValidation="False" Text="Cancel" AlternateText="Cancel"></asp:ImageButton>
+                                        OnClick="reset" CausesValidation="False" Text="Cancel" AlternateText="Cancel"></asp:ImageButton>
                                 </div>
                                 <asp:PlaceHolder Visible="false" ID="phMain" runat="server">
                                     <hr />
@@ -447,7 +636,7 @@
                                         <asp:LinkButton ID="btnPubMedSaveCustom" runat="server" CausesValidation="False"
                                             OnClick="btnPubMedSaveCustom_OnClick" Text="Save and close"></asp:LinkButton>
                                         &nbsp;&nbsp;|&nbsp;&nbsp;
-                                        <asp:LinkButton ID="lnkCancelCustom" runat="server" OnClick="btnPubMedFinished_OnClick"
+                                        <asp:LinkButton ID="lnkCancelCustom" runat="server" OnClick="reset"
                                             CausesValidation="False" CommandName="Cancel" Text="Cancel"></asp:LinkButton>
                                     </div>
                                 </asp:PlaceHolder>
@@ -474,11 +663,17 @@
                                         Text="Delete all citations" OnClientClick="Javascript:return confirm('Are you sure you want to delete all citations?');"></asp:LinkButton>
                                     &nbsp;&nbsp;|&nbsp;&nbsp;
                                     <asp:LinkButton ID="btnDeletePubMedClose" runat="server" CausesValidation="False"
-                                        OnClick="btnDeletePubMedClose_OnClick" Text="Close"></asp:LinkButton>
+                                        OnClick="reset" Text="Close"></asp:LinkButton>
                                 </div>
                             </div>
                         </asp:Panel>
                         <%--End Delete Publications--%>
+                        <div style="padding-bottom: 5px;">
+                        <asp:Literal runat="server">
+                            <b>Publications Manually Added to this Group</b>&nbsp;(Automatic publications are not listed here.)<br />
+
+                        </asp:Literal>
+                            </div>
                         <%--Start Publications List--%>
                         <div style="padding-left: 0px;">
                             <asp:GridView BorderStyle="Solid" ID="grdEditPublications" runat="server" AutoGenerateColumns="False"

@@ -71,8 +71,12 @@ BEGIN
             FROM    [Profile.Data].[Publication.PubMed.General] PG
 			WHERE	PG.PMID IN (
 						SELECT PMID 
-						FROM [Profile.Data].[Publication.Person.Include]
-						WHERE PMID IS NOT NULL )
+							FROM [Profile.Data].[Publication.Person.Include]
+							WHERE PMID IS NOT NULL
+						UNION
+						SELECT PMID 
+							FROM [Profile.Data].[Publication.Group.Include]
+							WHERE PMID IS NOT NULL)
  
 	-- Add MPIDs to the publications temp table
 	INSERT  INTO #Publications

@@ -749,7 +749,7 @@ namespace Profiles.Edit.Utilities
         }
 
 
-        public List<PublicationState> GetGroupMemberPubs(int groupid)
+        public List<PublicationState> GetGroupMemberPubs(int groupid, int startDate, int endDate, string personIDs)
         {
 
             SessionManagement sm = new SessionManagement();
@@ -757,8 +757,9 @@ namespace Profiles.Edit.Utilities
 
             SqlConnection dbconnection = new SqlConnection(connstr);
             SqlDataReader reader;
-
-            SqlParameter[] param = null;
+            int paramsLength = 3;
+            if (!personIDs.Equals("")) paramsLength++;
+            SqlParameter[] param = new SqlParameter[paramsLength];
             List<PublicationState> pubs = new List<PublicationState>();
             string rownum = string.Empty;
             string reference = string.Empty;
@@ -776,8 +777,13 @@ namespace Profiles.Edit.Utilities
 
                 dbconnection.Open();
 
+                param[0] = new SqlParameter("@GroupID", groupid);
+                param[1] = new SqlParameter("@StartDate", startDate);
+                param[2] = new SqlParameter("@EndDate", endDate);
+                if (!personIDs.Equals("")) param[3] = new SqlParameter("@PersonIDs", personIDs);
+
                 //For Output Parameters you need to pass a connection object to the framework so you can close it before reading the output params value.
-                reader = GetDBCommand(dbconnection, "exec [Profile.Data].[Publication.GetGroupMemberPublications] " + groupid.ToString(), CommandType.Text, CommandBehavior.CloseConnection, param).ExecuteReader();
+                reader = GetDBCommand(dbconnection, "[Profile.Data].[Publication.GetGroupMemberPublications]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param).ExecuteReader();
 
 
                 while (reader.Read())
@@ -851,7 +857,71 @@ namespace Profiles.Edit.Utilities
 
         }
 
+        public bool GetGroupPublicationOption(int groupID)
+        {
+            SessionManagement sm = new SessionManagement();
+            string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
 
+            SqlConnection dbconnection = new SqlConnection(connstr);
+            SqlDataReader reader;
+
+            SqlParameter[] param = null;
+
+            bool retVal = false;
+
+            try
+            {
+                dbconnection.Open();
+
+                //For Output Parameters you need to pass a connection object to the framework so you can close it before reading the output params value.
+                reader = GetDBCommand(dbconnection, "exec [Profile.Data].[Publication.GetGroupOption]  @GroupId=" + groupID, CommandType.Text, CommandBehavior.CloseConnection, param).ExecuteReader();
+                if (reader != null)
+                {
+                    if (reader.Read())
+                    {
+                        retVal = true;
+                    }
+                    reader.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                Framework.Utilities.DebugLogging.Log(e.Message + e.StackTrace);
+                throw new Exception(e.Message);
+            }
+
+            return retVal;
+        }
+
+
+        public void SetGroupPublicationOption(int groupID, int val)
+        {
+            SqlCommand comm = new SqlCommand();
+            try
+            {
+                string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+                SqlConnection dbconnection = new SqlConnection(connstr);
+
+                dbconnection.Open();
+
+                SqlCommand dbcommand = new SqlCommand();
+                dbcommand.CommandType = CommandType.StoredProcedure;
+
+                dbcommand.CommandText = "[Profile.Data].[Publication.SetGroupOption]";
+                dbcommand.CommandTimeout = base.GetCommandTimeout();
+
+                dbcommand.Parameters.Add(new SqlParameter("@GroupID", groupID));
+                dbcommand.Parameters.Add(new SqlParameter("@IncludeMemberPublications", val));
+
+                dbcommand.Connection = dbconnection;
+                dbcommand.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         public bool SaveImage(long subjectID, byte[] image, XmlDocument PropertyListXML)
         {
@@ -903,33 +973,13 @@ namespace Profiles.Edit.Utilities
             ActivityLog(PropertyListXML, subjectID);
             SessionManagement sm = new SessionManagement();
 
-
-            image = this.ResizeImageFile(image, 150);
+            System.Drawing.Image original = System.Drawing.Image.FromStream(new System.IO.MemoryStream(image));
+            if(original.Height > 500 || original.Width > 500) image = this.ResizeImageFile(image, 500);
 
 
             SqlCommand comm = new SqlCommand();
             try
             {
-/*                dbconnection.Open();
-                comm.Connection = dbconnection;
-                comm.CommandType = CommandType.Text;
-
-                //Save this chestnut for when we edit 
-                using (SqlCommand cmd = new SqlCommand("exec [Profile.Data].[Group.AddPhoto] @GroupNodeID,@Photo", dbconnection))
-                {
-                    // Replace 8000, below, with the correct size of the field
-                    cmd.Parameters.Add("@GroupNodeID", SqlDbType.BigInt).Value = subjectID;
-                    cmd.Parameters.Add("@Photo", SqlDbType.VarBinary).Value = image;
-                    cmd.ExecuteNonQuery();
-                    cmd.Connection.Close();
-                }
-
-                comm.Connection.Close();
-
-                if (dbconnection.State != ConnectionState.Closed)
-                    dbconnection.Close();
-
-                */
                 string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
                 SqlConnection dbconnection = new SqlConnection(connstr);
 
