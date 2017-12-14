@@ -626,3 +626,5 @@ type Profile.Data.Publication.Group.MyPub.CopyExistingPublication.StoredProcedur
 type Direct.Framework.UpdateLogOutgoing.StoredProcedure.sql
 type Direct.Framework.AddLogOutgoing.StoredProcedure.sql
 type Direct.Framework.AddLogIncoming.StoredProcedure.sql
+type Profile.Data.Publication.GetGroupOption.StoredProcedure.sql
+type Profile.Data.Publication.SetGroupOption.StoredProcedure.sql
