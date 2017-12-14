@@ -604,6 +604,7 @@ type Profile.Data.Group.DeleteRestoreGroup.StoredProcedure.sql
 type Profile.Data.Group.GetGroup.StoredProcedure.sql
 type Profile.Data.Group.GetGroups.StoredProcedure.sql
 type Profile.Data.Group.GetPhotos.StoredProcedure.sql
+type Profile.Data.Group.UpdateSecurityMembership.StoredProcedure.sql
 type Profile.Data.Group.Manager.AddManager.StoredProcedure.sql
 type Profile.Data.Group.Manager.DeleteManager.StoredProcedure.sql
 type Profile.Data.Group.Manager.GetManagers.StoredProcedure.sql
@@ -611,7 +612,6 @@ type Profile.Data.Group.Member.AddUpdateMember.StoredProcedure.sql
 type Profile.Data.Group.Member.DeleteMember.StoredProcedure.sql
 type Profile.Data.Group.Member.GetMembers.StoredProcedure.sql
 type Profile.Data.Group.Member.Search.StoredProcedure.sql
-type Profile.Data.Group.UpdateSecurityMembership.StoredProcedure.sql
 type Profile.Data.Publication.GetGroupMemberPublications.StoredProcedure.sql
 type Profile.Data.Publication.Group.Pubmed.AddPublication.StoredProcedure.sql
 type Profile.Module.CustomViewAuthorInAuthorship.GetGroupList.StoredProcedure.sql
