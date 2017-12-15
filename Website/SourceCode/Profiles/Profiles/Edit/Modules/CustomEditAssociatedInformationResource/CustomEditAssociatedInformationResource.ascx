@@ -329,21 +329,25 @@
                             margin-bottom: 5px; border: solid 1px #999;" Visible="false">
                             <div style="padding: 5px;">
                                 <div>
-                                    <div style="width: 25px; float: left;">
-                                        <asp:Image ID="Image2" runat="server" ImageUrl="~/Framework/Images/icon_alert.gif" alt=" "/>
-                                    </div>
-                                    <div style="margin-left: 25px; padding-bottom: 5px;">
-                                        Filter displayed publications.
+                                    <div style="padding-bottom: 5px;">
+                                        <b>Filter Member Publications</b>
                                     </div>
                                 </div>
                                 <div style="padding-bottom: 10px;">
                                     <div style="width: 75px; float: left; text-align: right; padding-right: 10px; padding-top: 3px;">
                                         <asp:Label ID="lblGroupMemberFiltersDate" runat="server" AssociatedControlID="txtGroupMemberFiltersStartDate"><b>Date:</b></asp:Label>
                                     </div>
-                                    <asp:TextBox ID="txtGroupMemberFiltersStartDate" runat="server" CssClass="textBoxDate" MaxLength="4"></asp:TextBox>
-                                    <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" FilterType="Numbers" TargetControlID="txtGroupMemberFiltersStartDate" />&nbsp;&nbsp;-&nbsp;&nbsp;
+                                    <asp:TextBox ID="txtGroupMemberFiltersStartDate" runat="server" CssClass="textBoxDate" MaxLength="10"></asp:TextBox>
+                                    <asp:ImageButton ID="btnGroupMemberFiltersStartCalendar" runat="server" ImageUrl="~/Edit/Images/cal.gif" AlternateText="Calendar picker" />
+                                    <asp:CalendarExtender ID="calExtGroupMemberFiltersStart" runat="server" TargetControlID="txtGroupMemberFiltersStartDate"
+                                        PopupButtonID="btnGroupMemberFiltersStartCalendar">
+                                    </asp:CalendarExtender>
+                                    &nbsp;&nbsp;<sup>-</sup>&nbsp;&nbsp;
                                     <asp:TextBox ID="txtGroupMemberFiltersEndDate" runat="server" CssClass="textBoxDate"></asp:TextBox>
-                                    <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" FilterType="Numbers" TargetControlID="txtGroupMemberFiltersEndDate" />
+                                    <asp:ImageButton ID="btnGroupMemberFiltersEndCalendar" runat="server" ImageUrl="~/Edit/Images/cal.gif" AlternateText="Calendar picker" />
+                                    <asp:CalendarExtender ID="calExtGroupMemberFiltersEnd" runat="server" TargetControlID="txtGroupMemberFiltersEndDate"
+                                        PopupButtonID="btnGroupMemberFiltersEndCalendar">
+                                    </asp:CalendarExtender>
                                 </div>
                                 <div style="padding-bottom: 10px;">
                                     <div style="width: 75px; float: left; text-align: right; padding-right: 10px; padding-top: 3px;">

@@ -472,15 +472,6 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource {
         protected global::System.Web.UI.WebControls.Panel pnlGroupMemberFilters;
         
         /// <summary>
-        /// Image2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image2;
-        
-        /// <summary>
         /// lblGroupMemberFiltersDate control.
         /// </summary>
         /// <remarks>
@@ -508,6 +499,24 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource {
         protected global::AjaxControlToolkit.FilteredTextBoxExtender FilteredTextBoxExtender1;
         
         /// <summary>
+        /// btnGroupMemberFiltersStartCalendar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton btnGroupMemberFiltersStartCalendar;
+        
+        /// <summary>
+        /// calExtGroupMemberFiltersStart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender calExtGroupMemberFiltersStart;
+        
+        /// <summary>
         /// txtGroupMemberFiltersEndDate control.
         /// </summary>
         /// <remarks>
@@ -524,6 +533,24 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AjaxControlToolkit.FilteredTextBoxExtender FilteredTextBoxExtender2;
+        
+        /// <summary>
+        /// btnGroupMemberFiltersEndCalendar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton btnGroupMemberFiltersEndCalendar;
+        
+        /// <summary>
+        /// calExtGroupMemberFiltersEnd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender calExtGroupMemberFiltersEnd;
         
         /// <summary>
         /// Label21 control.

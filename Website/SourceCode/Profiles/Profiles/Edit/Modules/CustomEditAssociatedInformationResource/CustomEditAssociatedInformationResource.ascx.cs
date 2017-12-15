@@ -146,9 +146,14 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
             else if (buttonID.Equals("btnAddMemberPub") || buttonID.Equals("btnGroupMemberFiltersReset") || buttonID.Equals("btnGroupMemberFiltersApply")) {
                 if (buttonID.Equals("btnGroupMemberFiltersApply"))
                 {
-                    int startDate, endDate;
-                    try { startDate = Convert.ToInt32(txtGroupMemberFiltersStartDate.Text); } catch (Exception ex) { startDate = 0; }
-                    try { endDate = Convert.ToInt32(txtGroupMemberFiltersEndDate.Text); } catch (Exception ex) { endDate = 10000; }
+                    DateTime startDate;
+                    DateTime.TryParse(txtGroupMemberFiltersStartDate.Text, out startDate);
+                    if (startDate < new DateTime(1800, 1, 1)) startDate = new DateTime(1800, 1, 1);
+                    DateTime endDate;
+                    DateTime.TryParse(txtGroupMemberFiltersEndDate.Text, out endDate);
+                    if (endDate.Equals(new DateTime(1, 1, 1))) endDate = new DateTime(2200, 1, 1);
+                    else if (endDate < new DateTime(1800, 1, 1)) endDate = new DateTime(1800, 1, 1);
+
                     string selectedRows = Request.Form[this.hidList.UniqueID];
                     string personIDs = "";
 
@@ -187,7 +192,7 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
                 {
                     txtGroupMemberFiltersStartDate.Text = "";
                     txtGroupMemberFiltersEndDate.Text = "";
-                    showMemberPublications(0, 10000, "");
+                    showMemberPublications(new DateTime(1800, 01, 01), new DateTime(2500, 01, 01), "");
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "uncheckAllPeople()", true);
                 }
                 pnlAddPubMedResults.Visible = true;
@@ -740,7 +745,7 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
         }
 
 
-        protected void showMemberPublications(int startDate, int endDate, string personIDs)
+        protected void showMemberPublications(DateTime startDate, DateTime endDate, string personIDs)
         {
             Edit.Utilities.DataIO data;
             data = new Edit.Utilities.DataIO();

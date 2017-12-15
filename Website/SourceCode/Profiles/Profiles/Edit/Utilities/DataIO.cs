@@ -749,7 +749,7 @@ namespace Profiles.Edit.Utilities
         }
 
 
-        public List<PublicationState> GetGroupMemberPubs(int groupid, int startDate, int endDate, string personIDs)
+        public List<PublicationState> GetGroupMemberPubs(int groupid, DateTime startDate, DateTime endDate, string personIDs)
         {
 
             SessionManagement sm = new SessionManagement();
@@ -757,7 +757,9 @@ namespace Profiles.Edit.Utilities
 
             SqlConnection dbconnection = new SqlConnection(connstr);
             SqlDataReader reader;
-            int paramsLength = 3;
+            int paramsLength = 1;
+            if (startDate != null) paramsLength++;
+            if (endDate != null) paramsLength++;
             if (!personIDs.Equals("")) paramsLength++;
             SqlParameter[] param = new SqlParameter[paramsLength];
             List<PublicationState> pubs = new List<PublicationState>();
@@ -776,11 +778,11 @@ namespace Profiles.Edit.Utilities
             {
 
                 dbconnection.Open();
-
-                param[0] = new SqlParameter("@GroupID", groupid);
-                param[1] = new SqlParameter("@StartDate", startDate);
-                param[2] = new SqlParameter("@EndDate", endDate);
-                if (!personIDs.Equals("")) param[3] = new SqlParameter("@PersonIDs", personIDs);
+                int i = 0;
+                param[i] = new SqlParameter("@GroupID", groupid);
+                if (startDate != null) { i++; param[i] = new SqlParameter("@StartDate", startDate); }
+                if (endDate != null) { i++; param[i] = new SqlParameter("@EndDate", endDate); }
+                if (!personIDs.Equals("")) { i++; param[3] = new SqlParameter("@PersonIDs", personIDs); }
 
                 //For Output Parameters you need to pass a connection object to the framework so you can close it before reading the output params value.
                 reader = GetDBCommand(dbconnection, "[Profile.Data].[Publication.GetGroupMemberPublications]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param).ExecuteReader();
