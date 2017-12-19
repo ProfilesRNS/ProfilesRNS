@@ -296,9 +296,9 @@ BEGIN
 		select pmid, GrantID, max(Acronym), max(Agency)
 		from (
 			select pmid, 
-				nref.value('GrantID[1]','varchar(max)') GrantID, 
-				nref.value('Acronym[1]','varchar(max)') Acronym,
-				nref.value('Agency[1]','varchar(max)') Agency
+				nref.value('GrantID[1]','varchar(50)') GrantID, 
+				nref.value('Acronym[1]','varchar(50)') Acronym,
+				nref.value('Agency[1]','varchar(1000)') Agency
 			from [Profile.Data].[Publication.PubMed.AllXML]
 				cross apply x.nodes('//GrantList/Grant') as R(nref)
 			where pmid in (select pmid from [Profile.Data].[Publication.PubMed.General.Stage])
