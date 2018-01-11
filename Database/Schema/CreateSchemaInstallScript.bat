@@ -312,7 +312,7 @@ type Profile.Data.vwGroup.Member.View.sql
 type Profile.Data.vwGroup.Photo.View.sql
 type Profile.Data.vwGroup.Publication.Entity.AssociatedInformationResource.View.sql
 
-type PresentationXML.SqlAssembly.sql
+rem type PresentationXML.SqlAssembly.sql
 
 type Framework..LoadXMLFile.StoredProcedure.sql
 type Framework..LICENCE.StoredProcedure.sql
