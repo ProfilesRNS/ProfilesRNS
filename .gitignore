@@ -1,6 +1,8 @@
 
 /Release/*.zip
 /Release/ProfilesRNS
+/Release/ConvertToPDF/bin
+/Release/ConvertToPDF/obj
 
 *.DS_Store
 *.suo

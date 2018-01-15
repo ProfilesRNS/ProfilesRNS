@@ -1,4 +1,5 @@
 @echo off
+SETLOCAL EnableDelayedExpansion
 
 REM
 REM
@@ -14,8 +15,6 @@ REM
 REM  
 
 set Version=%1
-set GeneratePDFs=%2
-set OFFICE_PATH=c:\Program Files\Microsoft Office\Office15
 set pdfCreatorPath=C:\ProgramData\PDFCreator
 set RootPath=%~dp0
 set RootPath=%RootPath:\Release\=\%
@@ -51,41 +50,16 @@ mkdir ProfilesRNS\Website\SourceCode\SemWeb\src
 
 REM 
 REM 
-REM This assumes that you have PDFCreator set up as your default printer
-REM It should be configured to save all files in the c:\ProgramData\PDFCreator folder without asking for input
-REM This will waste a lot of paper if a physical printer is configured as the default
+REM Office interop won't work headlessly, so we just copy the word files when running from jenkins
 REM 
 REM 
-if %GeneratePDFs% equ true (
-	call "%OFFICE_PATH%\WINWORD.EXE" ..\ProfilesRNS_ReadMeFirst.docx /q /n /mFilePrintDefault /mFileCloseOrExit
-	call "%OFFICE_PATH%\WINWORD.EXE" ..\Documentation\ProfilesRNS_APIGuide.doc /q /n /mFilePrintDefault /mFileCloseOrExit
-	call "%OFFICE_PATH%\WINWORD.EXE" ..\Documentation\ProfilesRNS_ArchitectureGuide.docx /q /n /mFilePrintDefault /mFileCloseOrExit
-	call "%OFFICE_PATH%\WINWORD.EXE" ..\Documentation\ProfilesRNS_InstallGuide.docx /q /n /mFilePrintDefault /mFileCloseOrExit
-	call "%OFFICE_PATH%\WINWORD.EXE" ..\Documentation\ProfilesRNS_ReleaseNotes.docx /q /n /mFilePrintDefault /mFileCloseOrExit
-
-	call "%OFFICE_PATH%\POWERPNT.EXE" /p ..\Documentation\ProfilesRNS_DataFlowDiagram.pptx
-	call "%OFFICE_PATH%\POWERPNT.EXE" /p ..\Documentation\ProfilesRNS_OntologyDiagram.pptx
-
-	call "%OFFICE_PATH%\WINWORD.EXE" ..\Documentation\ORNG\ORNG_GadgetDevelopment.docx /q /n /mFilePrintDefault /mFileCloseOrExit
-	call "%OFFICE_PATH%\WINWORD.EXE" ..\Documentation\ORNG\ORNG_InstallationGuide.docx /q /n /mFilePrintDefault /mFileCloseOrExit
-	call "%OFFICE_PATH%\WINWORD.EXE" ..\Documentation\ORNG\ORNG_TroubleShootingGuide.docx /q /n /mFilePrintDefault /mFileCloseOrExit
-	call "%OFFICE_PATH%\POWERPNT.EXE" /p ..\Documentation\ORNG\ORNGArchitecturalDiagram.pptx
-	timeout 10
-	
-	if exist "%pdfCreatorPath%\ProfilesRNS_InstallGuide.pdf" (
-		move "%pdfCreatorPath%\ORNGArchitecturalDiagram.pdf" ProfilesRNS\Documentation\ORNG\ORNGArchitecturalDiagram_%Version%.pdf
-		move "%pdfCreatorPath%\ProfilesRNS_DataFlowDiagram.pdf" ProfilesRNS\Documentation\ProfilesRNS_DataFlowDiagram_%Version%.pdf
-		move "%pdfCreatorPath%\ProfilesRNS_OntologyDiagram.pdf" ProfilesRNS\Documentation\ProfilesRNS_OntologyDiagram_%Version%.pdf
-		move "%pdfCreatorPath%\ORNG_GadgetDevelopment.pdf" ProfilesRNS\Documentation\ORNG\ORNG_GadgetDevelopment_%Version%.pdf
-		move "%pdfCreatorPath%\ORNG_InstallationGuide.pdf" ProfilesRNS\Documentation\ORNG\ORNG_InstallationGuide_%Version%.pdf
-		move "%pdfCreatorPath%\ORNG_TroubleShootingGuide.pdf" ProfilesRNS\Documentation\ORNG\ORNG_TroubleShootingGuide_%Version%.pdf
-		move "%pdfCreatorPath%\ProfilesRNS_APIGuide.pdf" ProfilesRNS\Documentation\ProfilesRNS_APIGuide_%Version%.pdf
-		move "%pdfCreatorPath%\ProfilesRNS_ArchitectureGuide.pdf" ProfilesRNS\Documentation\ProfilesRNS_ArchitectureGuide_%Version%.pdf
-		move "%pdfCreatorPath%\ProfilesRNS_InstallGuide.pdf" ProfilesRNS\Documentation\ProfilesRNS_InstallGuide_%Version%.pdf
-		move "%pdfCreatorPath%\ProfilesRNS_ReadMeFirst.pdf" ProfilesRNS\ProfilesRNS_ReadMeFirst.pdf
-		move "%pdfCreatorPath%\ProfilesRNS_ReleaseNotes.pdf" ProfilesRNS\Documentation\ProfilesRNS_ReleaseNotes_%Version%.pdf
-	)
-) else (
+call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild ConvertToPDF\ConvertToPDF.csproj "/p:Platform=AnyCPU;Configuration=Release"
+call ConvertToPDF\bin\Release\ConvertToPDF.exe
+if !errorlevel! equ 1 (
+	Echo An error occured while building the release.
+	exit /b 1
+)
+if !errorlevel! equ 2 (
 	copy ..\Documentation\ORNG\ORNGArchitecturalDiagram.pptx ProfilesRNS\Documentation\ORNG\ORNGArchitecturalDiagram_%Version%.pptx
 	copy ..\Documentation\ProfilesRNS_DataFlowDiagram.pptx ProfilesRNS\Documentation\ProfilesRNS_DataFlowDiagram_%Version%.pptx
 	copy ..\Documentation\ProfilesRNS_OntologyDiagram.pptx ProfilesRNS\Documentation\ProfilesRNS_OntologyDiagram_%Version%.pptx
@@ -98,6 +72,7 @@ if %GeneratePDFs% equ true (
 	copy ..\ProfilesRNS_ReadMeFirst.docx ProfilesRNS\ProfilesRNS_ReadMeFirst.docx
 	copy ..\Documentation\ProfilesRNS_ReleaseNotes.docx ProfilesRNS\Documentation\ProfilesRNS_ReleaseNotes_%Version%.docx
 )
+
 
 echo d | xcopy /s ..\Documentation\API_Examples ProfilesRNS\Documentation\API_Examples
 echo d | xcopy /s ..\Documentation\SQL_Examples ProfilesRNS\Documentation\SQL_Examples
