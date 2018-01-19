@@ -23067,7 +23067,7 @@
                   <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
                   <Param Name="BulletType">disc</Param>
                   <Param Name="Columns">2</Param>
-                  <Param Name="NetworkListNode">/rdf:RDF[1]/rdf:Description[1]/prns:hasConnection/@rdf:resource</Param>
+                  <Param Name="NetworkListNode">rdf:RDF/rdf:Description[@rdf:about= ../rdf:Description[1]/prns:hasConnection/@rdf:resource]</Param>
                   <Param Name="ItemURLText">{{{rdf:Description/rdf:object/@rdf:resource}}}</Param>
                   <Param Name="ItemText" />
                   <Param Name="ItemURL">{{{rdf:Description/rdf:object/@rdf:resource}}}</Param>
