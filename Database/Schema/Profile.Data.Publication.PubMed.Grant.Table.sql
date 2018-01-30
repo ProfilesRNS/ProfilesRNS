@@ -6,7 +6,7 @@ SET ANSI_PADDING ON
 GO
 CREATE TABLE [Profile.Data].[Publication.PubMed.Grant](
 	[PMID] [int] NOT NULL,
-	[GrantID] [varchar](50) NOT NULL,
+	[GrantID] [varchar](100) NOT NULL,
 	[Acronym] [varchar](50) NULL,
 	[Agency] [varchar](1000) NULL,
  CONSTRAINT [PK_pm_pubs_grants] PRIMARY KEY CLUSTERED 
