@@ -296,7 +296,7 @@ BEGIN
 		select pmid, GrantID, max(Acronym), max(Agency)
 		from (
 			select pmid, 
-				nref.value('GrantID[1]','varchar(50)') GrantID, 
+				nref.value('GrantID[1]','varchar(100)') GrantID, 
 				nref.value('Acronym[1]','varchar(50)') Acronym,
 				nref.value('Agency[1]','varchar(1000)') Agency
 			from [Profile.Data].[Publication.PubMed.AllXML]
