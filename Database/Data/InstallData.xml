@@ -341,6 +341,12 @@
       <Script>EXEC [User.Session].[DeleteOldSessionRDF]</Script>
     </Row>
     <Row>
+      <JobGroup>7</JobGroup>
+      <Step>15</Step>
+      <IsActive>1</IsActive>
+      <Script>UPDATE [Profile.Data].[Group.General] SET ViewSecurityGroup = 0 WHERE EndDate &lt; GETDATE()</Script>
+    </Row>
+    <Row>
       <JobGroup>8</JobGroup>
       <Step>1</Step>
       <IsActive>1</IsActive>
