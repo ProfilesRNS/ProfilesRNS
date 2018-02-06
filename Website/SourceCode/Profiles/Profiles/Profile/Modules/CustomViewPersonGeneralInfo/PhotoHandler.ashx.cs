@@ -41,7 +41,7 @@ namespace Profiles.Profile.Modules.ProfileImage
             Utilities.DataIO data = new Profiles.Profile.Utilities.DataIO();
             // Set up the response settings
             context.Response.ContentType = "image/jpeg";
-            context.Response.Cache.SetCacheability(HttpCacheability.Public);
+            context.Response.Cache.SetCacheability(HttpCacheability.NoCache);
             context.Response.BufferOutput = false;
             
             Int64 nodeid = -1;
