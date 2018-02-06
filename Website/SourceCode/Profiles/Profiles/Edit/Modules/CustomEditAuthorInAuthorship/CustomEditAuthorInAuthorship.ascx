@@ -145,14 +145,14 @@
                                         <div style="width: 75px; float: left; text-align: right; padding-right: 10px; padding-top: 3px;">
                                             <asp:Label ID="Label5" runat="server" AssociatedControlID="txtSearchAffiliation"><b>Affiliation</b></asp:Label>
                                         </div>
-                                        <asp:TextBox ID="txtSearchAffiliation" runat="server" CssClass="textBoxBig"></asp:TextBox>&nbsp;&nbsp;<span
+                                        <asp:TextBox ID="txtSearchAffiliation" runat="server" CssClass="textBoxBig" onkeydown = "return (event.keyCode!=13);"></asp:TextBox>&nbsp;&nbsp;<span
                                             style="color: #999;">Optional</span>
                                     </div>
                                     <div>
                                         <div style="width: 75px; float: left; text-align: right; padding-right: 10px; padding-top: 3px;">
                                             <asp:Label ID="Label6" runat="server" AssociatedControlID="txtSearchKeyword"><b>Keyword</b></asp:Label>
                                         </div>
-                                        <asp:TextBox ID="txtSearchKeyword" runat="server" CssClass="textBoxBig"></asp:TextBox>&nbsp;&nbsp;<span
+                                        <asp:TextBox ID="txtSearchKeyword" runat="server" CssClass="textBoxBig" onkeydown = "return (event.keyCode!=13);"></asp:TextBox>&nbsp;&nbsp;<span
                                             style="color: #999;">Optional</span>
                                     </div>
                                 </div>
@@ -165,11 +165,11 @@
                                         <div style="width: 75px; float: left; text-align: right; padding-right: 10px; padding-top: 3px;">
                                             <asp:Label ID="Label17" runat="server" AssociatedControlID="txtPubMedQuery"><b>Query</b></asp:Label>
                                         </div>
-                                        <asp:TextBox ID="txtPubMedQuery" runat="server" Style="width: 400px;"></asp:TextBox>
+                                        <asp:TextBox ID="txtPubMedQuery" runat="server" Style="width: 400px;" onkeydown = "return (event.keyCode!=13);"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div style="padding-top: 10px;">
-                                    <asp:CheckBox ID="chkPubMedExclude" runat="server" Checked="true" Text="Exclude articles already added to my profile." />
+                                    <asp:CheckBox ID="chkPubMedExclude" runat="server" Checked="true" Text="Exclude articles already added to my profile." onkeydown = "return (event.keyCode!=13);" />
                                 </div>
                                 <div style="padding: 10px 0px;">
                                     <asp:LinkButton ID="btnPubMedSearch" runat="server" CausesValidation="False" OnClick="btnPubMedSearch_OnClick"
