@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -23,7 +23,8 @@
     </SccAuxPath>
     <SccProvider>
     </SccProvider>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,6 +34,7 @@
     <DefineConstants>TRACE;DEBUG;DOTNET2</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>3</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -41,6 +43,7 @@
     <DefineConstants>TRACE;DOTNET2</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
@@ -124,19 +127,19 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-        <Target Name="CopySource">
+  <Target Name="CopySource">
     <Error Condition="'$(CopyDestination)'==''" Text="The CopyDestination property must be set to the intended copying destination." />
     <MakeDir Condition="!Exists($(CopyDestination))" Directories="$(CopyDestination)" />
-	<Copy SourceFiles="@(Content)" DestinationFiles="@(Content->'$(CopyDestination)\%(RelativeDir)%(Filename)%(Extension)')" SkipUnchangedFiles="True" />
-	<Copy SourceFiles="@(Compile)" DestinationFiles="@(Compile->'$(CopyDestination)\%(RelativeDir)%(Filename)%(Extension)')" SkipUnchangedFiles="True" />
-	<Copy SourceFiles="@(None)" DestinationFiles="@(None->'$(CopyDestination)\%(RelativeDir)%(Filename)%(Extension)')" SkipUnchangedFiles="True" />
-	<ItemGroup>
-        <ProjFiles Include="SemWeb.csproj" />
-		<ProjFiles Include="bin\IKVM.GNU.Classpath.dll" />
-		<ProjFiles Include="bin\IKVM.Runtime.dll" />
-		<ProjFiles Include="bin\Mono.GetOptions.dll" />
-		<ProjFiles Include="bin\sparql-core.dll" />
+    <Copy SourceFiles="@(Content)" DestinationFiles="@(Content->'$(CopyDestination)\%(RelativeDir)%(Filename)%(Extension)')" SkipUnchangedFiles="True" />
+    <Copy SourceFiles="@(Compile)" DestinationFiles="@(Compile->'$(CopyDestination)\%(RelativeDir)%(Filename)%(Extension)')" SkipUnchangedFiles="True" />
+    <Copy SourceFiles="@(None)" DestinationFiles="@(None->'$(CopyDestination)\%(RelativeDir)%(Filename)%(Extension)')" SkipUnchangedFiles="True" />
+    <ItemGroup>
+      <ProjFiles Include="SemWeb.csproj" />
+      <ProjFiles Include="bin\IKVM.GNU.Classpath.dll" />
+      <ProjFiles Include="bin\IKVM.Runtime.dll" />
+      <ProjFiles Include="bin\Mono.GetOptions.dll" />
+      <ProjFiles Include="bin\sparql-core.dll" />
     </ItemGroup>
-	<Copy SourceFiles="@(ProjFiles)" DestinationFiles="@(ProjFiles->'$(CopyDestination)\%(RelativeDir)%(Filename)%(Extension)')" SkipUnchangedFiles="True" />
-</Target>
+    <Copy SourceFiles="@(ProjFiles)" DestinationFiles="@(ProjFiles->'$(CopyDestination)\%(RelativeDir)%(Filename)%(Extension)')" SkipUnchangedFiles="True" />
+  </Target>
 </Project>
