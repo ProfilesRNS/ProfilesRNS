@@ -222,7 +222,7 @@ namespace Profiles.Activity.Utilities
                     else if (methodName.CompareTo("Profiles.Edit.Utilities.DataIO.UpdateSecuritySetting") == 0)
                     {
                         title = "made a section visible";
-                        body = "made \"" + propertyLabel + "\"public";
+                        body = "made \"" + propertyLabel + "\" public";
                     }
                     else if (methodName.CompareTo("Profiles.Edit.Utilities.DataIO.AddUpdateFunding") == 0)
                     {
@@ -282,25 +282,28 @@ namespace Profiles.Activity.Utilities
                     // best to skip them for now
                     if (!String.IsNullOrEmpty(title) /*&& UCSFIDSet.ByNodeId[Convert.ToInt64(nodeid)] != null*/)
                     {
-
-                        Activity act = new Activity
+                        try
                         {
-                            Id = Convert.ToInt64(activityLogId),
-                            Message = body,
-                            LinkUrl = url,
-                            Title = title,
-                            CreatedDT = Convert.ToDateTime(reader["CreatedDT"]),
-                            CreatedById = activityLogId,
-                            Profile = new Profile
+                            Activity act = new Activity
                             {
-                                Name = firstname + " " + lastname, 
-                                PersonId = Convert.ToInt32(personid),
-                                NodeID = Convert.ToInt64(nodeid),
-                                URL = Root.Domain + "/profile/" + nodeid,
-                                Thumbnail = Root.Domain + "/profile/Modules/CustomViewPersonGeneralInfo/PhotoHandler.ashx?NodeID="+ nodeid + "&Thumbnail=True&Width=45"
-                            }
-                        };
-                        activities.Add(act.Id, act);
+                                Id = Convert.ToInt64(activityLogId),
+                                Message = body,
+                                LinkUrl = url,
+                                Title = title,
+                                CreatedDT = Convert.ToDateTime(reader["CreatedDT"]),
+                                CreatedById = activityLogId,
+                                Profile = new Profile
+                                {
+                                    Name = firstname + " " + lastname,
+                                    PersonId = Convert.ToInt32(personid),
+                                    NodeID = Convert.ToInt64(nodeid),
+                                    URL = Root.Domain + "/profile/" + nodeid,
+                                    Thumbnail = Root.Domain + "/profile/Modules/CustomViewPersonGeneralInfo/PhotoHandler.ashx?NodeID=" + nodeid + "&Thumbnail=True&Width=45"
+                                }
+                            };
+                            activities.Add(act.Id, act);
+                        }
+                        catch (Exception e) { }
                     }
                 }
             }
