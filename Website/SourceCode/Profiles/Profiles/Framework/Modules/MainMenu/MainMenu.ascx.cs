@@ -66,8 +66,9 @@ namespace Profiles.Framework.Modules.MainMenu
 
             if (sm.Session().NodeID > 0)
                 menulist.Append("<li><a href='" + sm.Session().PersonURI + "'>View My Profile</a></li>");
-            
-            menulist.Append("<li><a href='" + Root.Domain + "/login/default.aspx?method=login&edit=true'>Edit My Profile</a></li>");
+
+            if (sm.Session().UserID == 0 || sm.Session().NodeID > 0)
+                menulist.Append("<li><a href='" + Root.Domain + "/login/default.aspx?method=login&edit=true'>Edit My Profile</a></li>");
 
 
             if (base.MasterPage.CanEdit)
