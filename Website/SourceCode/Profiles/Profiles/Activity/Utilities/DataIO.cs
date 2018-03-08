@@ -216,6 +216,7 @@ namespace Profiles.Activity.Utilities
                     else if (methodName.CompareTo("Profiles.Edit.Utilities.DataIO.AddCustomPublication") == 0)
                     {
                         title = "added a custom publication";
+                        if (param2.Length > 100) param2 = param2.Substring(0, 100) + "...";
                         body = "added \"" + param1 + "\" into " + propertyLabel +
                             " section : " + param2;
                     }
