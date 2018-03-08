@@ -24,7 +24,7 @@ BEGIN
 			WHERE UserID = @UserID
 
 	-- Get the NodeID and URI of the PersonID
-	IF @PersonID IS NOT NULL
+	IF EXISTS (SELECT 1 FROM [Profile.Data].Person WHERE PersonID = @PersonID AND IsActive = 1)
 	BEGIN
 		SELECT @SessionPersonNodeID = m.NodeID, @SessionPersonURI = p.Value + CAST(m.NodeID AS VARCHAR(50))
 			FROM [RDF.Stage].InternalNodeMap m, [Framework.].[Parameter] p
