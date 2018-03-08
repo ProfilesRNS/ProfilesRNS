@@ -42,7 +42,7 @@ BEGIN
 			) t
 			group by y
 		) t on n.n = t.y
-		where n.n between 1980 and year(getdate())
+		where n.n between year(getdate())-30 and year(getdate())
 
 	declare @x int
 
