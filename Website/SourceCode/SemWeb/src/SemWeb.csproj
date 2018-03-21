@@ -133,7 +133,6 @@
       <ProjFiles Include="SemWeb.csproj" />
       <ProjFiles Include="bin\IKVM.GNU.Classpath.dll" />
       <ProjFiles Include="bin\IKVM.Runtime.dll" />
-      <ProjFiles Include="bin\Mono.GetOptions.dll" />
       <ProjFiles Include="bin\sparql-core.dll" />
     </ItemGroup>
     <Copy SourceFiles="@(ProjFiles)" DestinationFiles="@(ProjFiles->'$(CopyDestination)\%(RelativeDir)%(Filename)%(Extension)')" SkipUnchangedFiles="True" />
