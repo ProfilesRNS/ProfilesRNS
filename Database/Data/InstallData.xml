@@ -14714,7 +14714,7 @@
     <Row>
       <Class>http://xmlns.com/foaf/0.1/Group</Class>
       <Property>http://profiles.catalyst.harvard.edu/ontology/prns#associatedInformationResource</Property>
-      <IsDetail>0</IsDetail>
+      <IsDetail>1</IsDetail>
       <IncludeDescription>0</IncludeDescription>
       <IncludeNetwork>0</IncludeNetwork>
       <SearchWeight>5.000000000000000e-001</SearchWeight>
@@ -23668,6 +23668,9 @@
               </Module>
             </Panel>
           </PanelList>
+		  <ExpandRDFList>
+			<ExpandRDF Class="http://xmlns.com/foaf/0.1/Group" Property="http://profiles.catalyst.harvard.edu/ontology/prns#associatedInformationResource" Limit="1" />
+          </ExpandRDFList>
         </Presentation>
       </presentationXML>
     </Row>
