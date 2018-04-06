@@ -112,13 +112,22 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty {
         protected global::System.Web.UI.WebControls.Panel pnlInsertProperty;
         
         /// <summary>
-        /// txtInsertLabel control.
+        /// insertPropertyDiv control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtInsertLabel;
+        protected global::System.Web.UI.WebControls.Panel insertPropertyDiv;
+        
+        /// <summary>
+        /// insertNewContentHidden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField insertNewContentHidden;
         
         /// <summary>
         /// btnInsertProperty control.

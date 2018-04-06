@@ -120,19 +120,11 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
 
         protected void GridViewProperty_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            TextBox txtLabel = null;
+            var literalstate = (LiteralState)e.Row.DataItem;
+            var ibUp = (ImageButton)e.Row.FindControl("ibUp");
+            var ibDown = (ImageButton)e.Row.FindControl("ibDown");
+            var lblLabel = (Label)e.Row.FindControl("lblLabel");
 
-            ImageButton lnkEdit = null;
-            ImageButton lnkDelete = null;
-            
-            //  System.Web.UI.WebControls.Panel pnlMovePanel = null;
-            LiteralState ls = (LiteralState)e.Row.DataItem;
-            ImageButton ibUp = (ImageButton)e.Row.FindControl("ibUp");
-            ImageButton ibDown = (ImageButton)e.Row.FindControl("ibDown");
-            Label lblLabel = (Label)e.Row.FindControl("lblLabel");
-            
-
-            LiteralState literalstate = null;
             if (e.Row.RowType == DataControlRowType.Header)
             {
                 e.Row.Cells[0].Text = PropertyLabel;
@@ -140,39 +132,32 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
 
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                lnkEdit = (ImageButton)e.Row.Cells[1].FindControl("lnkEdit");
-                lnkDelete = (ImageButton)e.Row.Cells[1].FindControl("lnkDelete");
-                // pnlMovePanel = (System.Web.UI.WebControls.Panel)e.Row.Cells[2].FindControl("pnlMovePanel");
-
-
-                literalstate = (LiteralState)e.Row.DataItem;
+                var lnkEdit = (ImageButton)e.Row.Cells[1].FindControl("lnkEdit");
+                var lnkDelete = (ImageButton)e.Row.Cells[1].FindControl("lnkDelete");
 
                 if (literalstate.EditDelete == false)
                     lnkDelete.Visible = false;
                 if (literalstate.EditExisting == false)
                 {
                     lnkEdit.Visible = false;
-                    //     pnlMovePanel.Visible = false;
                 }
                 else
                 {
                     if (ibUp != null)
-                        ibUp.CommandArgument = ls.Subject.ToString();
+                        ibUp.CommandArgument = literalstate.Subject.ToString();
                 }
 
                 if (lnkDelete != null)
                     lnkDelete.OnClientClick = "Javascript:return confirm('Are you sure you want to delete this " + PropertyLabel + "?');";
 
                 if(lblLabel!=null)
-                lblLabel.Text = literalstate.Literal.Replace("\n", "<br/>");
-                
-
+                lblLabel.Text = literalstate.Literal.Replace("\n", "");
             }
 
             if (e.Row.RowType == DataControlRowType.DataRow && (e.Row.RowState & DataControlRowState.Edit) == DataControlRowState.Edit)
             {
-                txtLabel = (TextBox)e.Row.Cells[0].FindControl("txtLabel");
-                txtLabel.Text = literalstate.Literal.Trim();
+                var editableLiteral = (Literal)e.Row.Cells[0].FindControl("editableLiteral");
+                editableLiteral.Text = literalstate.Literal.Trim();
             }
         }
 
@@ -186,10 +171,10 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
         protected void GridViewProperty_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
 
-            HiddenField hdLabel = (HiddenField)GridViewProperty.Rows[e.RowIndex].FindControl("hdLabel");
-            TextBox txtLabel = (TextBox)GridViewProperty.Rows[e.RowIndex].FindControl("txtLabel");
+            var oldContent = (HiddenField)GridViewProperty.Rows[e.RowIndex].FindControl("oldContentHidden");
+            var newContent = (HiddenField)GridViewProperty.Rows[e.RowIndex].FindControl("editNewContentHidden"); 
 
-            data.UpdateLiteral(this.SubjectID, this.PredicateID, data.GetStoreNode(hdLabel.Value), data.GetStoreNode(txtLabel.Text.Trim()), this.PropertyListXML);
+            data.UpdateLiteral(this.SubjectID, this.PredicateID, data.GetStoreNode(oldContent.Value), data.GetStoreNode(newContent.Value.Replace("\n", "").Trim()), this.PropertyListXML);
             GridViewProperty.EditIndex = -1;
             this.FillPropertyGrid(true);
             upnlEditSection.Update();
@@ -223,7 +208,7 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
 
         protected void btnInsertCancel_OnClick(object sender, EventArgs e)
         {
-            txtInsertLabel.Text = "";
+            insertNewContentHidden.Value = string.Empty;
             pnlInsertProperty.Visible = false;
             upnlEditSection.Update();
         }
@@ -232,10 +217,10 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
         {
             if (Session["pnlInsertProperty.Visible"] != null)
             {
-                data.AddLiteral(this.SubjectID, this.PredicateID, data.GetStoreNode(txtInsertLabel.Text.Trim()), this.PropertyListXML);
+                data.AddLiteral(this.SubjectID, this.PredicateID, data.GetStoreNode(insertNewContentHidden.Value.Replace("\n", "").Trim()), this.PropertyListXML);
 
                 this.FillPropertyGrid(true);
-                txtInsertLabel.Text = "";
+                pnlInsertProperty.Visible = false;
                 Session["pnlInsertProperty.Visible"] = null;
                 btnEditProperty_OnClick(sender, e);
                 upnlEditSection.Update();
@@ -246,7 +231,7 @@ namespace Profiles.Edit.Modules.EditDataTypeProperty
         {
             if (Session["pnlInsertProperty.Visible"] != null)
             {
-                data.AddLiteral(this.SubjectID, this.PredicateID, data.GetStoreNode(txtInsertLabel.Text.Trim()), this.PropertyListXML);
+                data.AddLiteral(this.SubjectID, this.PredicateID, data.GetStoreNode(insertNewContentHidden.Value.Replace("\n", "").Trim()), this.PropertyListXML);
                 this.FillPropertyGrid(true);
                 Session["pnlInsertProperty.Visible"] = null;
                 btnInsertCancel_OnClick(sender, e);

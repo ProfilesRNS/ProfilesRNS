@@ -1045,6 +1045,12 @@ table tbody .height25
 	height: 24px;
 }
 
+.editableHtmlContainer{
+    background-color: white;
+    width: 578px;
+    min-height: 400px;
+}
+
 
 /*PubMed Styles*/
 

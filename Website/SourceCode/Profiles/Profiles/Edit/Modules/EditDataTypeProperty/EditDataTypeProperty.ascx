@@ -11,9 +11,7 @@
     
     /* Add function that will fire after ajax request completes on the page */
     $(document).ready(function() {
-
         Sys.WebForms.PageRequestManager.getInstance().add_endRequest(endRequestHandler);
-
     });
 
     function endRequestHandler(sender, args) {
@@ -22,41 +20,48 @@
         if ( sender._postBackSettings.sourceElement.id.endsWith(editLink) )
         {
             initEditor();
-
         }
 
         /* Initial Add */
         if ( sender._postBackSettings.sourceElement.id.endsWith(editProperty) ) {
-
             initEditor();
         }
 
         /* Cancel clicked */
         if (sender._postBackSettings.sourceElement.id.endsWith(cancelLink)) {
-            //console.log("User Clicked Cancel");
         }
     }
 
     function initEditor()
     {
         /* Remove any existing instances of the editor */
-        tinymce.EditorManager.remove('textarea');
+        tinymce.EditorManager.remove('div.editableHtmlContainer');
 
         /* Give the removal just a fraction of a second to run before we re-init the editor */
         setTimeout(function () {
-
             tinymce.init({
-                selector: 'textarea',
-                menubar: '',
+                selector: 'div.editableHtmlContainer',
+                inline: true,
+                menubar: false,
+                fixed_toolbar_container: '.tinymceToolbar',
                 plugins: 'paste lists link image print preview table media<%= getHTMLEditorConfigurablePluginsOptions() %>',
                 toolbar1: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | indent outdent | bullist numlist',
                 toolbar2: 'link image media | print preview | table<%= getHTMLEditorConfigurableToolbarOptions() %>',
                 paste_word_valid_elements: "b,strong,i,em,h1,h2,h3,p,ol,ul,li",
                 paste_retain_style_properties: "color font-size", 
-                width: 630,
-                height: 400
+                content_css: '/Framework/CSS/profiles.css',
+                init_instance_callback: function (editor) {
+                    //Set focus on editor so toolbar appears
+                    editor.fire('focus');
+                },
+                setup: function (editor) {
+                    //Store content in hidden input for update and stop blur to keep toolbar appearing
+                    editor.on('blur', function (e) {
+                        $('[id*=NewContentHidden]').val(editor.getContent());
+                        return false;
+                    });
+                }
             });
-
         }, 10);
     }
 
@@ -120,7 +125,9 @@
                         <table border="0" cellspacing="2" cellpadding="4">
                             <tr>
                                 <td width="750">
-                                    <asp:TextBox ID="txtInsertLabel" runat="server" Rows="5" Width="700px" TextMode="MultiLine" title="Enter Text" ></asp:TextBox>
+                                    <div class="tinymceToolbar"></div>
+                                    <asp:Panel ID="insertPropertyDiv" runat="server" CssClass="editableHtmlContainer"></asp:Panel>
+                                    <asp:HiddenField ID="insertNewContentHidden" runat="server"></asp:HiddenField>
                                 </td>
                             </tr>
                             <tr>
@@ -149,9 +156,12 @@
                             <Columns>
                                 <asp:TemplateField HeaderText="">
                                     <EditItemTemplate>
-                                        <asp:TextBox ID="txtLabel" Rows="5" runat="server" TextMode="MultiLine" Width="500px"
-                                            Text='<%# Bind("Literal") %>' title="edit text"></asp:TextBox>
-                                        <asp:HiddenField ID="hdLabel" runat="server" Value='<%# Bind("Literal") %>'></asp:HiddenField>
+                                        <div class="tinymceToolbar"></div>
+                                        <asp:Panel ID="editableDiv" runat="server" CssClass="editableHtmlContainer">
+                                            <asp:Literal ID="editableLiteral" runat="server" Text='<%# Bind("Literal") %>'></asp:Literal>
+                                        </asp:Panel>
+                                        <asp:HiddenField ID="editNewContentHidden" runat="server"></asp:HiddenField>
+                                        <asp:HiddenField ID="oldContentHidden" runat="server" Value='<%# Bind("Literal") %>'></asp:HiddenField>
                                     </EditItemTemplate>
                                     <ItemTemplate>
                                         <asp:Label ID="lblLabel" runat="server"></asp:Label>
