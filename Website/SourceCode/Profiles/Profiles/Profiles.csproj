@@ -83,6 +83,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Framework\JavaScript\tinymce\themes\mobile\theme.min.js" />
     <Content Include="ProfileDetailsError\CSS\ProfileDetailsError.css" />
     <Content Include="ProfileDetailsError\Default.aspx" />
     <Content Include="ProfileDetailsError\Modules\ProfileDetailsError\ProfileDetailsError.ascx" />
@@ -133,9 +134,6 @@
     <Content Include="Framework\JavaScript\tinymce\plugins\emoticons\img\smiley-wink.gif" />
     <Content Include="Framework\JavaScript\tinymce\plugins\emoticons\img\smiley-yell.gif" />
     <Content Include="Framework\JavaScript\tinymce\plugins\emoticons\plugin.min.js" />
-    <Content Include="Framework\JavaScript\tinymce\plugins\example\dialog.html" />
-    <Content Include="Framework\JavaScript\tinymce\plugins\example\plugin.min.js" />
-    <Content Include="Framework\JavaScript\tinymce\plugins\example_dependency\plugin.min.js" />
     <Content Include="Framework\JavaScript\tinymce\plugins\fullpage\plugin.min.js" />
     <Content Include="Framework\JavaScript\tinymce\plugins\fullscreen\plugin.min.js" />
     <Content Include="Framework\JavaScript\tinymce\plugins\hr\plugin.min.js" />
@@ -174,7 +172,6 @@
     <Content Include="Framework\JavaScript\tinymce\skins\lightgray\img\loader.gif" />
     <Content Include="Framework\JavaScript\tinymce\skins\lightgray\img\object.gif" />
     <Content Include="Framework\JavaScript\tinymce\skins\lightgray\img\trans.gif" />
-    <Content Include="Framework\JavaScript\tinymce\skins\lightgray\skin.ie7.min.css" />
     <Content Include="Framework\JavaScript\tinymce\skins\lightgray\skin.min.css" />
     <Content Include="Framework\JavaScript\tinymce\themes\inlite\theme.min.js" />
     <Content Include="Framework\JavaScript\tinymce\themes\modern\theme.min.js" />
@@ -1844,6 +1841,7 @@
     <Content Include="Framework\JavaScript\tinymce\skins\lightgray\fonts\tinymce.eot" />
     <Content Include="Framework\JavaScript\tinymce\skins\lightgray\fonts\tinymce.ttf" />
     <Content Include="Framework\JavaScript\tinymce\skins\lightgray\fonts\tinymce.woff" />
+    <Content Include="Framework\JavaScript\tinymce\skins\lightgray\fonts\tinymce-mobile.woff" />
     <None Include="ORCID\ORCIDPrivacySettingsandProfiles.pdf" />
     <Content Include="Profile\Modules\CustomViewPersonGeneralInfo\EmailAudioHandler.ashx" />
     <Content Include="Profile\Modules\NetworkClusterFlash\NetworkClusterTemplate.Master" />
@@ -1862,6 +1860,7 @@
     <None Include="Profile\Modules\NetworkRadial\scriptaculous\MIT-LICENSE" />
     <None Include="Profile\Modules\NetworkRadial\scriptaculous\README.rdoc" />
     <Content Include="Profile\Modules\CustomViewPersonGeneralInfo\PhotoHandler.ashx" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Properties\PublishProfiles\Profiles.pubxml" />
     <None Include="Properties\PublishProfiles\Profiles2.9.0.pubxml" />
