@@ -195,3 +195,4 @@ UpgradeLog.XML
 /Website/SourceCode/Profiles/packages/Newtonsoft.Json.8.0.3
 /Website/SourceCode/Profiles/packages/VDS.Common.1.6.4/VDS.Common.1.6.4.nupkg
 /Database/ProfilesRNS_CreateSchema.sql
+/Website/SourceCode/Profiles/.vs/Profiles/v15/Server/sqlite3
