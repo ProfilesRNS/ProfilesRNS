@@ -458,7 +458,7 @@ namespace Profiles.DIRECT.Modules.DirectSearch
                 }
 
                 DIRECT.Utilities.DataIO data = new DIRECT.Utilities.DataIO();
-                data.UpdateLogOutgoing(site.FSID, 4, 200, cs(ResultText.Substring(0, ResultText.Length > 3000 ? 3000 : ResultText.Length)), cs(ResultCount), cs(ResultDetailsURL));
+                data.UpdateLogOutgoing(site.FSID, 4, 200, ResultText.Substring(0, ResultText.Length > 3000 ? 3000 : ResultText.Length), ResultCount, ResultDetailsURL);
 
 
                 //if (Conn.State == System.Data.ConnectionState.Open)
@@ -493,18 +493,6 @@ namespace Profiles.DIRECT.Modules.DirectSearch
 
 
         #region <Methods/>
-
-        private string cs(string temp)
-        {
-            if (temp == null)
-            {
-                return "";
-            }
-            else
-            {
-                return "'" + temp.Replace("'", "''") + "'";
-            }
-        }
 
         string cx(string temp)
         {
