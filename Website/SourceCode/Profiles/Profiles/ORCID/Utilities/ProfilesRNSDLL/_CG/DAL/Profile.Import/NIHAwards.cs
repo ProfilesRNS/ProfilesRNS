@@ -1,15 +1,8 @@
-using System; 
-using System.Collections.Generic; 
-using System.Data; 
-using System.Data.Common; 
-using System.Linq; 
-using System.Text;
-using System.Reflection;
-using System.Diagnostics;
-using Profiles.ORCID;
+using System.Collections.Generic;
+using System.Data.Common;
 
 namespace Profiles.ORCID.Utilities.ProfilesRNSDLL.DAL.Profile.Import
-{ 
+{
     public partial class NIHAwards : DALGeneric<Profiles.ORCID.Utilities.ProfilesRNSDLL.BO.Profile.Import.NIHAwards>
     { 
      

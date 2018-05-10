@@ -1,11 +1,6 @@
-using System; 
-using System.Collections.Generic; 
-using System.Text; 
-using System.Runtime.Serialization; 
-using System.ComponentModel; 
- 
+
 namespace Profiles.ORCID.Utilities.ProfilesRNSDLL.BO.RDF.Security
-{ 
+{
     public partial class Group
     { 
         public override int TableId { get { return 3657;} }

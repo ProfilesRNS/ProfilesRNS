@@ -1,24 +1,18 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.ServiceModel.Web;
-using System.Text;
 using System.Xml.Serialization;
 
 namespace Search
 {
 
     /// <remarks/>
-	/// [DataContract(Namespace = "", Name = "query-request")]
-	//[System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.4927")]
-	//[System.SerializableAttribute()]
-	//[System.Diagnostics.DebuggerStepThroughAttribute()]
-	//[System.ComponentModel.DesignerCategoryAttribute("code")]
-	//[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.w3.org/2007/SPARQL/protocol-types#")]
-	//[System.Xml.Serialization.XmlRootAttribute(ElementName = "query-request", Namespace = "http://www.w3.org/2007/SPARQL/protocol-types#", IsNullable = false)]		
-	[Serializable]
+    /// [DataContract(Namespace = "", Name = "query-request")]
+    //[System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.4927")]
+    //[System.SerializableAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.ComponentModel.DesignerCategoryAttribute("code")]
+    //[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.w3.org/2007/SPARQL/protocol-types#")]
+    //[System.Xml.Serialization.XmlRootAttribute(ElementName = "query-request", Namespace = "http://www.w3.org/2007/SPARQL/protocol-types#", IsNullable = false)]		
+    [Serializable]
 	[XmlType(TypeName="query-request", Namespace="http://www.w3.org/2007/SPARQL/protocol-types#")]
     public partial class queryrequest : object, System.ComponentModel.INotifyPropertyChanged
     {

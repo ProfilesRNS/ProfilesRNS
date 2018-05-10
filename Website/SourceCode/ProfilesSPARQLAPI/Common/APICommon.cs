@@ -11,16 +11,7 @@
   
 */
 using System;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.IO;
-using System.Xml;
-using System.Text;
-using System.Configuration;
-
-using SemWeb;
-using SemWeb.Query;
 
 namespace Search
 {

@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Xml;
 using Profiles.Framework.Utilities;
-using Profiles.Profile.Utilities;
 
 namespace Profiles.Profile.Modules.CustomViewResearcherRole
 {

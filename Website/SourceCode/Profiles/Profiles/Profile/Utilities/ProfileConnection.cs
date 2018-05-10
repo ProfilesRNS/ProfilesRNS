@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using Profiles.Framework.Utilities;
-using System.Xml;
 
 namespace Profiles.Profile.Utilities
 {
-	public interface IProfileConnection
+    public interface IProfileConnection
 	{
 		SinglePredicate Subject { get; set; }
 		SinglePredicate Object { get; set; }

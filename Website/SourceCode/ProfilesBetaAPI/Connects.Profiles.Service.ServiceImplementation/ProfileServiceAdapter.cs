@@ -12,16 +12,10 @@
 */
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Activation;
-using Connects; //.Profiles.Service.DataContracts;
 //using Connects.Profiles.Utility;
 using System.Xml;
-
-
-using System.Diagnostics;
-using System.Web.Security;
 
 namespace Connects.Profiles.Service.ServiceImplementation
 {

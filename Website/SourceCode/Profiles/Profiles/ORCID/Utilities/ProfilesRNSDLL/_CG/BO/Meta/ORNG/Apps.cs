@@ -1,11 +1,6 @@
-using System; 
-using System.Collections.Generic; 
-using System.Text; 
-using System.Runtime.Serialization; 
-using System.ComponentModel; 
- 
+
 namespace Profiles.ORCID.Utilities.ProfilesRNSDLL.BO.ORNG
-{ 
+{
     public partial class Apps
     { 
         public override int TableId { get { return 3694;} }

@@ -13,7 +13,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 using System.Xml;
 using System.Configuration;
@@ -23,7 +22,6 @@ using System.Security.Cryptography;
 using System.Text;
 
 using Profiles.Framework.Utilities;
-using System.Data.SqlTypes;
 
 namespace Profiles.Search.Utilities
 {

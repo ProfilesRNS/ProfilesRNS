@@ -12,16 +12,8 @@
 */
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml;
-using System.Xml.Xsl;
-using System.Data.SqlClient;
-
-
-using Profiles.Profile.Utilities;
 using Profiles.Framework.Utilities;
 namespace Profiles.History.Modules.HistoryList
 {

@@ -12,15 +12,10 @@
 */
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml;
 using System.Web.UI.HtmlControls;
-using System.Configuration;
-
-using Profiles.Login.Utilities;
 using Profiles.Framework.Utilities;
 
 namespace Profiles.Login.Modules.Login

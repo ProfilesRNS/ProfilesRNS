@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.IO;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Xml.Linq;
-using System.Net;
 
 namespace Profiles.ORCID.Utilities.ProfilesRNSDLL.BLL.ORCID
 {

@@ -1,11 +1,8 @@
-using System; 
-using System.Collections.Generic; 
-using System.Text; 
-using System.Runtime.Serialization; 
-using System.ComponentModel; 
- 
+using System;
+using System.Collections.Generic;
+
 namespace Profiles.ORCID.Utilities.ProfilesRNSDLL.BO.RDF
-{ 
+{
     public partial class Node : ProfilesRNSBaseClassBO, BO.Interfaces.RDF.INode, IEqualityComparer<Node>, IEquatable<Node> 
     { 
         # region Private variables 

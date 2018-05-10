@@ -10,13 +10,8 @@
     For details, see: LICENSE.txt 
   
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
-using System.Text;
 using Connects.Profiles.Service.DataContracts;
 
 namespace Connects.Profiles.Service.ServiceContracts

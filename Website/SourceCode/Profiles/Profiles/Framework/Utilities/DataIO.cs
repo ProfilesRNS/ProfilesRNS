@@ -18,9 +18,6 @@ using System.Linq;
 using System.Xml;
 using System.Configuration;
 using System.Web;
-using System.Web.Caching;
-
-using Profiles.Profile.Utilities;
 using System.Diagnostics;
 using System.Reflection;
 

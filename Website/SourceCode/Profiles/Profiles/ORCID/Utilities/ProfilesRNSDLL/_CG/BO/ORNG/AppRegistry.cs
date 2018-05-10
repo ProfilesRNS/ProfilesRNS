@@ -1,11 +1,7 @@
-using System; 
-using System.Collections.Generic; 
-using System.Text; 
-using System.Runtime.Serialization; 
-using System.ComponentModel; 
- 
+using System;
+
 namespace Profiles.ORCID.Utilities.ProfilesRNSDLL.BO.ORNG
-{ 
+{
     public partial class AppRegistry : ProfilesRNSBaseClassBO, BO.Interfaces.ORNG.IAppRegistry
     { 
         # region Private variables 

@@ -1,7 +1,5 @@
-using System; 
-using System.Collections.Generic; 
-using System.Text; 
- 
+using System;
+
 namespace Profiles.ORCID.Utilities.ProfilesRNSDLL.BLL.Profile.Data
 {
     public partial class OrganizationInstitution : ProfilesRNSDLL.DAL.Profile.Data.OrganizationInstitution

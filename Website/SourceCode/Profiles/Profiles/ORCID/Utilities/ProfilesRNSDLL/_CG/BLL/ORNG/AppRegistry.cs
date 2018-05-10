@@ -1,7 +1,5 @@
-using System; 
-using System.Collections.Generic; 
-using System.Text; 
- 
+using System;
+
 namespace Profiles.ORCID.Utilities.ProfilesRNSDLL.BLL.ORNG
 {
     public partial class AppRegistry : ProfilesRNSDLL.DAL.ORNG.AppRegistry

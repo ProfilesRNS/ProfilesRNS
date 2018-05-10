@@ -11,13 +11,8 @@
   
 */
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Xml;
-using System.Configuration;
-
-using Profiles.Framework.Utilities;
 
 namespace Profiles.ORNG.Utilities
 {

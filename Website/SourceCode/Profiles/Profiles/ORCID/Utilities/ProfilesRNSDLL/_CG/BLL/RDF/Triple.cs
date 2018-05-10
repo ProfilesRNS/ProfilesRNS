@@ -1,7 +1,5 @@
-using System; 
-using System.Collections.Generic; 
-using System.Text; 
- 
+using System;
+
 namespace Profiles.ORCID.Utilities.ProfilesRNSDLL.BLL.RDF
 {
     public partial class Triple : ProfilesRNSDLL.DAL.RDF.Triple

@@ -12,23 +12,17 @@
 */
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Xml;
-using System.Xml.Xsl;
 using Profiles.Framework.Utilities;
-using Profiles.Profile.Utilities;
 using System.Data;
 using System.Drawing;
-using System.IO;
 using System.Drawing.Imaging;
 using System.Text;
 
 namespace Profiles.Profile.Modules.NetworkTimeline
 {
-	public partial class NetworkTimeline : BaseModule
+    public partial class NetworkTimeline : BaseModule
 	{
 		public NetworkTimeline() : base()
 		{ }

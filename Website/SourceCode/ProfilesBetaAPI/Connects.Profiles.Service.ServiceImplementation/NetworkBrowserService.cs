@@ -11,15 +11,10 @@
   
 */
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Runtime.Serialization;
 using System.ServiceModel.Activation;
 using Connects.Profiles.Service.DataContracts;
 using Connects.Profiles.Service.ServiceContracts;
-using Connects.Profiles.Utility;
-
-using System.IO;
 
 namespace Connects.Profiles.Service.ServiceImplementation
 {

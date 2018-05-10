@@ -12,12 +12,10 @@
 */
 using System;
 using System.Text;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Xml;
 using System.Xml.Xsl;
 using System.Resources;
-using System.Reflection;
 using System.IO;
 
 namespace Connects.Profiles.Utility

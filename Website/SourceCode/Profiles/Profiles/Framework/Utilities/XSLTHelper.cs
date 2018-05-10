@@ -2,7 +2,6 @@
 using System.Xml;
 using System.Xml.Xsl;
 using System.IO;
-using System.Collections.Generic;
 
 namespace Profiles.Framework.Utilities
 {

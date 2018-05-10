@@ -1,14 +1,8 @@
-using System; 
-using System.Collections.Generic; 
-using System.Data; 
-using System.Data.Common; 
-using System.Linq; 
-using System.Text;
-using System.Reflection;
-using System.Diagnostics;
- 
+using System.Collections.Generic;
+using System.Data.Common;
+
 namespace Profiles.ORCID.Utilities.ProfilesRNSDLL.DAL.Profile.Import
-{ 
+{
     public partial class FreetextKeywords : DALGeneric<ProfilesRNSDLL.BO.Profile.Import.FreetextKeywords>
     { 
      

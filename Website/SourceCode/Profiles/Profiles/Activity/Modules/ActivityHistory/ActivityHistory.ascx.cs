@@ -12,17 +12,9 @@
 */
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml;
-using System.Xml.Xsl;
-using System.Data.SqlClient;
-using System.Configuration;
-
-using Profiles.Activity.Utilities;
 using Profiles.Framework.Utilities;
 using System.Web.UI.HtmlControls;
 

@@ -10,9 +10,7 @@
     For details, see: LICENSE.txt 
   
 */
-using System.Xml.Serialization;
 using System.Runtime.Serialization;
-using System.Collections.Generic;
 
 namespace Connects.Profiles.Service.DataContracts
 {

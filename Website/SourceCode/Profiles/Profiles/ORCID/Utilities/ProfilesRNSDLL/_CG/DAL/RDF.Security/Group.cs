@@ -1,14 +1,7 @@
-using System; 
-using System.Collections.Generic; 
-using System.Data; 
-using System.Data.Common; 
-using System.Linq; 
-using System.Text;
-using System.Reflection;
-using System.Diagnostics;
- 
+using System.Data.Common;
+
 namespace Profiles.ORCID.Utilities.ProfilesRNSDLL.DAL.RDF.Security
-{ 
+{
     public partial class Group : DALGeneric<ProfilesRNSDLL.BO.RDF.Security.Group>
     { 
      

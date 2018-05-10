@@ -12,7 +12,6 @@
 */
 using System;
 using System.Web;
-using System.Configuration;
 
 namespace Profiles.Framework.Utilities
 {   /// <summary>

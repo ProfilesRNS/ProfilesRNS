@@ -10,12 +10,8 @@
     For details, see: LICENSE.txt 
   
 */
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Xml;
-using System.Text;
 
 namespace Search
 {

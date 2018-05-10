@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Xml;
 using System.Configuration;
-using System.IO;
-using System.Web.UI.WebControls;
-using System.Web.UI;
-using System.Data.Common;
-using System.Web;
 
 using Profiles.Framework.Utilities;
 

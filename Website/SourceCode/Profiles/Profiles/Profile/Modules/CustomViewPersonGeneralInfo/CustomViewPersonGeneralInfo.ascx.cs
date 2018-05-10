@@ -2,17 +2,10 @@
 using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.SqlClient;
-using System.Data.Common;
-using System.Globalization;
-using System.Text;
 using System.Xml;
 using System.Xml.Xsl;
 
 using Profiles.Framework.Utilities;
-using Profiles.Profile.Utilities;
 using Profiles.ORNG.Utilities;
 
 namespace Profiles.Profile.Modules.CustomViewPersonGeneralInfo

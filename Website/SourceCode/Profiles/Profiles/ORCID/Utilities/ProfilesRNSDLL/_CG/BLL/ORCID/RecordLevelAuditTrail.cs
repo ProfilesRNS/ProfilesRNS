@@ -1,8 +1,5 @@
-using System; 
-using System.Collections.Generic; 
-using System.Text; 
-using System.Data; 
- 
+using System;
+
 namespace Profiles.ORCID.Utilities.ProfilesRNSDLL.BLL.ORCID
 {
     public partial class RecordLevelAuditTrail : ProfilesRNSDLL.DAL.ORCID.RecordLevelAuditTrail

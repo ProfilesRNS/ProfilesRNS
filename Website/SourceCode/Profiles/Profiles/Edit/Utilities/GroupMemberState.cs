@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Profiles.Edit.Utilities
+﻿namespace Profiles.Edit.Utilities
 {
     public class GroupMemberState
     {

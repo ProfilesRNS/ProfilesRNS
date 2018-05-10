@@ -1,11 +1,8 @@
-using System; 
-using System.Collections.Generic; 
-using System.Text; 
-using System.Runtime.Serialization; 
-using System.ComponentModel; 
- 
+using System;
+using System.Collections.Generic;
+
 namespace Profiles.ORCID.Utilities.ProfilesRNSDLL.BO.Profile.Import
-{ 
+{
     public partial class NIHAwards : ProfilesRNSBaseClassBO, BO.Interfaces.Profile.Import.INIHAwards, IEqualityComparer<NIHAwards>, IEquatable<NIHAwards> 
     { 
         # region Private variables 

@@ -12,7 +12,6 @@
 */
 using System;
 using System.Web;
-using System.Xml;
 using System.Web.Caching;
 
 namespace Profiles.Search.Utilities

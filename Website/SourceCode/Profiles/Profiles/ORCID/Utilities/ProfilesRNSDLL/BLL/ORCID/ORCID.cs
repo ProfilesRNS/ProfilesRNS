@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Collections.Specialized;
 using System.Net;
 using System.Text;
 using System.IO;
-using System.Web.Script.Serialization;
-using System.IO.Compression;
 
 namespace Profiles.ORCID.Utilities.ProfilesRNSDLL.BLL.ORCID
 {

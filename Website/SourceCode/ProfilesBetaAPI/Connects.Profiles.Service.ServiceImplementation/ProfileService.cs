@@ -10,9 +10,6 @@
     For details, see: LICENSE.txt 
   
 */
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Runtime.Serialization;
 using System.ServiceModel.Activation;
 using Connects.Profiles.Service.DataContracts;

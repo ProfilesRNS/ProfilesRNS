@@ -1,11 +1,8 @@
-using System; 
-using System.Collections.Generic; 
-using System.Text; 
-using System.Runtime.Serialization; 
-using System.ComponentModel; 
- 
+using System;
+using System.Collections.Generic;
+
 namespace Profiles.ORCID.Utilities.ProfilesRNSDLL.BO.ORCID
-{ 
+{
     public partial class PersonAffiliation : ProfilesRNSBaseClassBO, BO.Interfaces.ORCID.IPersonAffiliation, IEqualityComparer<PersonAffiliation>, IEquatable<PersonAffiliation> 
     { 
         # region Private variables 

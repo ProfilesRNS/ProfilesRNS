@@ -11,15 +11,7 @@
   
 */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Xml;
-using System.Web.UI.WebControls;
-using System.IO;
-
-using Profiles.Framework.Utilities;
 
 namespace Profiles.SPARQL
 {

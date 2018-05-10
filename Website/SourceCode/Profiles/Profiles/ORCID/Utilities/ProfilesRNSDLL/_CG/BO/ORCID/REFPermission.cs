@@ -1,11 +1,9 @@
-using System; 
-using System.Collections.Generic; 
-using System.Text; 
-using System.Runtime.Serialization; 
-using System.ComponentModel; 
- 
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+
 namespace Profiles.ORCID.Utilities.ProfilesRNSDLL.BO.ORCID
-{ 
+{
     public partial class REFPermission : ProfilesRNSBaseClassBO, BO.Interfaces.ORCID.IREFPermission, IEqualityComparer<REFPermission>, IEquatable<REFPermission> 
     { 
         # region Private variables 
