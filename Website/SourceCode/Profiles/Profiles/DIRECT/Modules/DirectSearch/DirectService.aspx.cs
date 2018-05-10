@@ -130,6 +130,12 @@ namespace Profiles.DIRECT.Modules.DirectSearch
 
                 case "incomingdetails":
 
+                    if (Session["DIRECTSEARCHREQUEST"] != null)
+                    {
+                        Session["DIRECTKEYWORD"] = null;
+                        Session["DIRECTSEARCHREQUEST"] = null;
+                        Session["DIRECTSEARCHTYPE"] = null;
+                    }
                     q = Request["SearchPhrase"].Trim();
 
                     // Enter log record
