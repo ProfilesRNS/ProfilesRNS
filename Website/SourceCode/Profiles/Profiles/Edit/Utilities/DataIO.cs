@@ -25,6 +25,8 @@ using System.Configuration;
 
 
 using Profiles.Framework.Utilities;
+using System.Net.Http;
+using MimeDetective;
 
 namespace Profiles.Edit.Utilities
 {
@@ -503,7 +505,7 @@ namespace Profiles.Edit.Utilities
             ActivityLog(PropertyListXML, subjectID);
             SessionManagement sm = new SessionManagement();
             string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
-
+            var originalImage = image;
             image = this.ResizeImageFile(image, 150);
 
             SqlConnection dbconnection = new SqlConnection(connstr);
@@ -535,7 +537,8 @@ namespace Profiles.Edit.Utilities
                 throw ex;
             }
 
-
+            //Upload the original image to cloud storage
+            UploadImageToCloud(originalImage, subjectID);
 
             return true;
 
@@ -573,6 +576,52 @@ namespace Profiles.Edit.Utilities
             bmPhoto.Dispose();
             grPhoto.Dispose();
             return mm.GetBuffer();
+        }
+
+        /// <summary>
+        /// Sends image to a cloud storage account via a serverless app (i.e. Azure Function)
+        /// </summary>
+        /// <param name="image"></param>
+        /// <param name="subjectID"></param>
+        public void UploadImageToCloud(byte[] image, long subjectID)
+        {
+            try
+            {
+                //Get the URL to the API that uploads and downloads images from the cloud storage account; if none then return
+                var storageURL = ConfigurationManager.AppSettings["ProfilesImageStorageURL"];
+                var storageName = ConfigurationManager.AppSettings["ProfilesImageStorageName"];
+                if (string.IsNullOrEmpty(storageURL) || string.IsNullOrEmpty(storageName))
+                {
+                    return;
+                }
+
+                //Get Photo ID for file name
+                var personID = GetPersonID(subjectID);
+                var photoID = int.MinValue;
+                var connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+                using (var reader = GetDBCommand(connstr, $"Select p.PhotoID from [ProfilesRNS].[Profile.Data].[Person.Photo] p with(nolock) where p.PersonID = {personID}", CommandType.Text, CommandBehavior.CloseConnection, null).ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        photoID = Convert.ToInt32(reader[0]);
+                    }
+                }
+
+                //Call function to upload photo
+                using (var client = new HttpClient())
+                {
+                    var content = @"{""StorageAccount"" : """ + storageName + 
+                                  @""",""ContainerName"" : """ + subjectID + 
+                                  @""",""FileName"" : """ + $"{photoID}.{image.GetFileType()}" + 
+                                  @""",""File"" : """ + Convert.ToBase64String(image) + 
+                                  @"""}";
+                    var result = client.PostAsync(storageURL, new StringContent(content, Encoding.UTF8, "application/json")).Result;
+                }
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
         }
 
         public Int64 GetStoreNode(string value)
