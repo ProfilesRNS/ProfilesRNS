@@ -612,7 +612,7 @@ namespace Profiles.Edit.Utilities
                 {
                     var content = @"{""StorageAccount"" : """ + storageName + 
                                   @""",""ContainerName"" : """ + subjectID + 
-                                  @""",""FileName"" : """ + $"{photoID}.{image.GetFileType()}" + 
+                                  @""",""FileName"" : """ + $"{photoID}" + 
                                   @""",""File"" : """ + Convert.ToBase64String(image) + 
                                   @"""}";
                     var result = client.PostAsync(storageURL, new StringContent(content, Encoding.UTF8, "application/json")).Result;
