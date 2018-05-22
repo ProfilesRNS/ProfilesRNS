@@ -1,0 +1,51 @@
+<Table Name="[RDF.Security].[Group]">
+	<Row>
+		<SecurityGroupID>-50</SecurityGroupID>
+		<Label>Admins</Label>
+		<HasSpecialViewAccess>1</HasSpecialViewAccess>
+		<HasSpecialEditAccess>1</HasSpecialEditAccess>
+		<Description>Limited to a restricted set of site administrators with special access permissions to configure the website.</Description>
+	</Row>
+	<Row>
+		<SecurityGroupID>-40</SecurityGroupID>
+		<Label>Curators</Label>
+		<HasSpecialViewAccess>1</HasSpecialViewAccess>
+		<HasSpecialEditAccess>1</HasSpecialEditAccess>
+		<Description>Limited to a small number of users whose job is to manage content on the website.</Description>
+	</Row>
+	<Row>
+		<SecurityGroupID>-30</SecurityGroupID>
+		<Label>Harvesters</Label>
+		<HasSpecialViewAccess>1</HasSpecialViewAccess>
+		<HasSpecialEditAccess>0</HasSpecialEditAccess>
+		<Description>Limited to authorized automated processes that synch data between this website and other systems.</Description>
+	</Row>
+	<Row>
+		<SecurityGroupID>-20</SecurityGroupID>
+		<Label>Users</Label>
+		<HasSpecialViewAccess>0</HasSpecialViewAccess>
+		<HasSpecialEditAccess>0</HasSpecialEditAccess>
+		<Description>Limited to people who have logged into website.</Description>
+	</Row>
+	<Row>
+		<SecurityGroupID>-10</SecurityGroupID>
+		<Label>No Search</Label>
+		<HasSpecialViewAccess>0</HasSpecialViewAccess>
+		<HasSpecialEditAccess>0</HasSpecialEditAccess>
+		<Description>Open to the general public, but blocked to certain (but not all) search engines such as Google.</Description>
+	</Row>
+	<Row>
+		<SecurityGroupID>-1</SecurityGroupID>
+		<Label>Public</Label>
+		<HasSpecialViewAccess>0</HasSpecialViewAccess>
+		<HasSpecialEditAccess>0</HasSpecialEditAccess>
+		<Description>Open to the general public and may be indexed by search engines.</Description>
+	</Row>
+	<Row>
+		<SecurityGroupID>0</SecurityGroupID>
+		<Label>Undefined</Label>
+		<HasSpecialViewAccess>0</HasSpecialViewAccess>
+		<HasSpecialEditAccess>0</HasSpecialEditAccess>
+		<Description>Cannot be accessed by any users.</Description>
+	</Row>
+</Table>

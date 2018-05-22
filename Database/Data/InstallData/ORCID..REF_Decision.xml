@@ -1,0 +1,26 @@
+<Table Name="[ORCID.].[REF_Decision]">
+	<Row>
+		<DecisionDescription>Public</DecisionDescription>
+		<DecisionDescriptionLong>Push Record with public visibility</DecisionDescriptionLong>
+	</Row>
+	<Row>
+		<DecisionDescription>Limited</DecisionDescription>
+		<DecisionDescriptionLong>Push Record with limited visibility</DecisionDescriptionLong>
+	</Row>
+	<Row>
+		<DecisionDescription>Private</DecisionDescription>
+		<DecisionDescriptionLong>Push Record with private visibility</DecisionDescriptionLong>
+	</Row>
+	<Row>
+		<DecisionDescription>Exclude</DecisionDescription>
+		<DecisionDescriptionLong>Do not push this record</DecisionDescriptionLong>
+	</Row>
+	<Row>
+		<DecisionDescription>Include</DecisionDescription>
+		<DecisionDescriptionLong>Include this record</DecisionDescriptionLong>
+	</Row>
+	<Row>
+		<DecisionDescription>Unable To Push</DecisionDescription>
+		<DecisionDescriptionLong>Data can't be pushed</DecisionDescriptionLong>
+	</Row>
+</Table>

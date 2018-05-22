@@ -1,0 +1,14 @@
+<Table Name="[Framework.].[Parameter]">
+	<Row>
+		<ParameterID>basePath</ParameterID>
+		<Value>http://localhost/profiles</Value>
+	</Row>
+	<Row>
+		<ParameterID>baseURI</ParameterID>
+		<Value>http://localhost/profiles/profile/</Value>
+	</Row>
+	<Row>
+		<ParameterID>RC4EncryptionKey</ParameterID>
+		<Value>Change Me</Value>
+	</Row>
+</Table>

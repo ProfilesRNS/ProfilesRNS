@@ -1,0 +1,42 @@
+<Table Name="[Profile.Data].[Publication.MyPub.Category]">
+	<Row>
+		<HmsPubCategory>Abstracts</HmsPubCategory>
+		<CategoryName>Abstracts</CategoryName>
+	</Row>
+	<Row>
+		<HmsPubCategory>Books/Monographs/Textbooks</HmsPubCategory>
+		<CategoryName>Books/Monographs/Textbooks</CategoryName>
+	</Row>
+	<Row>
+		<HmsPubCategory>Clinical Communications</HmsPubCategory>
+		<CategoryName>Clinical Communications</CategoryName>
+	</Row>
+	<Row>
+		<HmsPubCategory>Educational Materials</HmsPubCategory>
+		<CategoryName>Educational Materials</CategoryName>
+	</Row>
+	<Row>
+		<HmsPubCategory>Non-Print Materials</HmsPubCategory>
+		<CategoryName>Non-Print Materials</CategoryName>
+	</Row>
+	<Row>
+		<HmsPubCategory>Original Articles</HmsPubCategory>
+		<CategoryName>Original Articles</CategoryName>
+	</Row>
+	<Row>
+		<HmsPubCategory>Patents</HmsPubCategory>
+		<CategoryName>Patents</CategoryName>
+	</Row>
+	<Row>
+		<HmsPubCategory>Proceedings of Meetings</HmsPubCategory>
+		<CategoryName>Proceedings of Meetings</CategoryName>
+	</Row>
+	<Row>
+		<HmsPubCategory>Reviews/Chapters/Editorials</HmsPubCategory>
+		<CategoryName>Reviews/Chapters/Editorials</CategoryName>
+	</Row>
+	<Row>
+		<HmsPubCategory>Thesis</HmsPubCategory>
+		<CategoryName>Thesis</CategoryName>
+	</Row>
+</Table>

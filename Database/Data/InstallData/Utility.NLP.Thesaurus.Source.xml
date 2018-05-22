@@ -1,0 +1,6 @@
+<Table Name="[Utility.NLP].[Thesaurus.Source]">
+	<Row>
+		<Source>1</Source>
+		<SourceName>MeSH</SourceName>
+	</Row>
+</Table>

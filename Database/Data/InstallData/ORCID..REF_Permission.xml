@@ -1,0 +1,65 @@
+<Table Name="[ORCID.].[REF_Permission]">
+	<Row>
+		<PermissionScope>/orcid-profile/create</PermissionScope>
+		<PermissionDescription>Add an ORICD Record</PermissionDescription>
+		<MethodAndRequest>orcid-profile</MethodAndRequest>
+	</Row>
+	<Row>
+		<PermissionScope>/orcid-bio/update</PermissionScope>
+		<PermissionDescription>Update ORCID bio data</PermissionDescription>
+		<MethodAndRequest>orcid-bio</MethodAndRequest>
+		<SuccessMessage>Your biographical information was successfully transfered to ORCID</SuccessMessage>
+		<FailedMessage>Your biographical information were NOT successfully transfered to ORCID</FailedMessage>
+	</Row>
+	<Row>
+		<PermissionScope>/orcid-works/create</PermissionScope>
+		<PermissionDescription>Add works</PermissionDescription>
+		<MethodAndRequest>orcid-works</MethodAndRequest>
+		<SuccessMessage>Your publication(s) were successfully transfered to ORCID</SuccessMessage>
+		<FailedMessage>Your publication(s) were NOT successfully transfered to ORCID</FailedMessage>
+	</Row>
+	<Row>
+		<PermissionScope>/orcid-profile/read-limited</PermissionScope>
+		<PermissionDescription>Read Entire Record</PermissionDescription>
+		<MethodAndRequest>orcid-profile</MethodAndRequest>
+		<SuccessMessage>You have successfully given Boston University permission to read your ORCID record</SuccessMessage>
+	</Row>
+	<Row>
+		<PermissionScope>/orcid-bio/read-limited</PermissionScope>
+		<PermissionDescription>Read Bio</PermissionDescription>
+		<MethodAndRequest>orcid-bio</MethodAndRequest>
+	</Row>
+	<Row>
+		<PermissionScope>/orcid-works/read-limited</PermissionScope>
+		<PermissionDescription>Read Research Activities</PermissionDescription>
+		<MethodAndRequest>orcid-works</MethodAndRequest>
+	</Row>
+	<Row>
+		<PermissionScope>/orcid-bio/external-identifiers/create</PermissionScope>
+		<PermissionDescription>Add an External Identifier</PermissionDescription>
+		<MethodAndRequest>orcid-bio/external-identifiers</MethodAndRequest>
+	</Row>
+	<Row>
+		<PermissionScope>/authenticate</PermissionScope>
+		<PermissionDescription>Authenticate using ORCID credentials</PermissionDescription>
+	</Row>
+	<Row>
+		<PermissionScope>/affiliations/create</PermissionScope>
+		<PermissionDescription>Add affiliation</PermissionDescription>
+		<MethodAndRequest>affiliations</MethodAndRequest>
+		<SuccessMessage>Your affiliation(s) were successfully transfered to ORCID</SuccessMessage>
+		<FailedMessage>Your affiliation(s) were NOT successfully transfered to ORCID</FailedMessage>
+	</Row>
+	<Row>
+		<PermissionScope>/affiliations/update</PermissionScope>
+		<PermissionDescription>Update affiliation</PermissionDescription>
+		<MethodAndRequest>affiliations</MethodAndRequest>
+		<SuccessMessage>Your affiliation(s) were successfully transfered to ORCID</SuccessMessage>
+		<FailedMessage>Your affiliation(s) were NOT successfully transfered to ORCID</FailedMessage>
+	</Row>
+	<Row>
+		<PermissionScope>/read-public</PermissionScope>
+		<PermissionDescription>Read Public Info</PermissionDescription>
+		<MethodAndRequest>*</MethodAndRequest>
+	</Row>
+</Table>

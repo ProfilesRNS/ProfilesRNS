@@ -129,6 +129,11 @@ pushd "%RootPath%\Database\schema"
 call CreateSchemaInstallScript.bat > ..\ProfilesRNS_CreateSchema.sql
 popd
 
+del "%RootPath%\Database\Data\InstallData.xml"
+pushd "%RootPath%\Database\Data\InstallData"
+call CreateInstallDataScript.bat > ..\InstallData.sql
+popd
+
 copy ..\Database\ProfilesRNS_CreateSchema.sql ProfilesRNS\Database\ProfilesRNS_CreateSchema.sql
 
 call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild "..\Website\SourceCode\Profiles\Profiles\Profiles.csproj" "/p:Platform=AnyCPU;Configuration=Release;CopyDestination=..\..\..\..\Release\ProfilesRNS\Website\SourceCode\Profiles\Profiles" /t:CopySource  /p:VisualStudioVersion=14.0
