@@ -101,6 +101,7 @@ type Profile.Cache.Concept.Mesh.PersonPublication.Table.sql
 type Profile.Cache.Concept.Mesh.Person.Table.sql
 type Ontology..ClassTreeDepth.Table.sql
 type Ontology..ClassProperty.Table.sql
+type Ontology..ClassPropertyCustom.Table.sql
 type Ontology..ClassGroupClass.Table.sql
 type Ontology..ClassGroup.Table.sql
 type Profile.Data.Concept.Mesh.File.Table.sql
