@@ -1,1 +1,14 @@
-<Table Name="[User.Session].Bot"><Row><UserAgent>%bot%</UserAgent></Row><Row><UserAgent>%crawl%</UserAgent></Row><Row><UserAgent>%search%</UserAgent></Row><Row><UserAgent>%spider%</UserAgent></Row></Table>
+<Table Name="[User.Session].Bot">
+  <Row>
+    <UserAgent>%bot%</UserAgent>
+  </Row>
+  <Row>
+    <UserAgent>%crawl%</UserAgent>
+  </Row>
+  <Row>
+    <UserAgent>%search%</UserAgent>
+  </Row>
+  <Row>
+    <UserAgent>%spider%</UserAgent>
+  </Row>
+</Table>

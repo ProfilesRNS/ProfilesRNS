@@ -1,32 +1,32 @@
 <Table Name="[ORCID.].[REF_RecordStatus]">
-	<Row>
-		<RecordStatusID>1</RecordStatusID>
-		<StatusDescription>Success</StatusDescription>StatusDescription</Row>
-	<Row>
-		<RecordStatusID>2</RecordStatusID>
-		<StatusDescription>Failed</StatusDescription>StatusDescription</Row>
-	<Row>
-		<RecordStatusID>3</RecordStatusID>
-		<StatusDescription>Exclude</StatusDescription>StatusDescription</Row>
-	<Row>
-		<RecordStatusID>4</RecordStatusID>
-		<StatusDescription>Add</StatusDescription>StatusDescription</Row>
-	<Row>
-		<RecordStatusID>6</RecordStatusID>
-		<StatusDescription>Waiting to be sent to ORCID</StatusDescription>StatusDescription</Row>
-	<Row>
-		<RecordStatusID>7</RecordStatusID>
-		<StatusDescription>Waiting for ORCID User for approval</StatusDescription>StatusDescription</Row>
-	<Row>
-		<RecordStatusID>8</RecordStatusID>
-		<StatusDescription>Inserting PubMed Publications in to ORCID Work Table</StatusDescription>StatusDescription</Row>
-	<Row>
-		<RecordStatusID>9</RecordStatusID>
-		<StatusDescription>Created BIO Update ORCID Message</StatusDescription>StatusDescription</Row>
-	<Row>
-		<RecordStatusID>10</RecordStatusID>
-		<StatusDescription>Denied Access</StatusDescription>StatusDescription</Row>
-	<Row>
-		<RecordStatusID>11</RecordStatusID>
-		<StatusDescription>ORCID User Denied</StatusDescription>StatusDescription</Row>
+  <Row>
+    <RecordStatusID>1</RecordStatusID>
+    <StatusDescription>Success</StatusDescription>StatusDescription</Row>
+  <Row>
+    <RecordStatusID>2</RecordStatusID>
+    <StatusDescription>Failed</StatusDescription>StatusDescription</Row>
+  <Row>
+    <RecordStatusID>3</RecordStatusID>
+    <StatusDescription>Exclude</StatusDescription>StatusDescription</Row>
+  <Row>
+    <RecordStatusID>4</RecordStatusID>
+    <StatusDescription>Add</StatusDescription>StatusDescription</Row>
+  <Row>
+    <RecordStatusID>6</RecordStatusID>
+    <StatusDescription>Waiting to be sent to ORCID</StatusDescription>StatusDescription</Row>
+  <Row>
+    <RecordStatusID>7</RecordStatusID>
+    <StatusDescription>Waiting for ORCID User for approval</StatusDescription>StatusDescription</Row>
+  <Row>
+    <RecordStatusID>8</RecordStatusID>
+    <StatusDescription>Inserting PubMed Publications in to ORCID Work Table</StatusDescription>StatusDescription</Row>
+  <Row>
+    <RecordStatusID>9</RecordStatusID>
+    <StatusDescription>Created BIO Update ORCID Message</StatusDescription>StatusDescription</Row>
+  <Row>
+    <RecordStatusID>10</RecordStatusID>
+    <StatusDescription>Denied Access</StatusDescription>StatusDescription</Row>
+  <Row>
+    <RecordStatusID>11</RecordStatusID>
+    <StatusDescription>ORCID User Denied</StatusDescription>StatusDescription</Row>
 </Table>

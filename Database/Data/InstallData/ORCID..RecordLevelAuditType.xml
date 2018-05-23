@@ -1,17 +1,17 @@
 <Table Name="[ORCID.].[RecordLevelAuditType]">
-	<Row>
-		<AuditType>Added</AuditType>
-	</Row>
-	<Row>
-		<AuditType>Double Entered</AuditType>
-	</Row>
-	<Row>
-		<AuditType>Edited</AuditType>
-	</Row>
-	<Row>
-		<AuditType>Deleted</AuditType>
-	</Row>
-	<Row>
-		<AuditType>Viewed</AuditType>
-	</Row>
+  <Row>
+    <AuditType>Added</AuditType>
+  </Row>
+  <Row>
+    <AuditType>Double Entered</AuditType>
+  </Row>
+  <Row>
+    <AuditType>Edited</AuditType>
+  </Row>
+  <Row>
+    <AuditType>Deleted</AuditType>
+  </Row>
+  <Row>
+    <AuditType>Viewed</AuditType>
+  </Row>
 </Table>

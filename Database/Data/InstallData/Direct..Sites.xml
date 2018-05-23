@@ -1,706 +1,706 @@
 <Table Name="[Direct.].[Sites]">
-	<Row>
-		<SiteID>1</SiteID>
-		<BootstrapURL>https://einstein.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>Albert Einstein College of Medicine</SiteName>
-		<QueryURL>https://einstein.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>1</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>2</SiteID>
-		<BootstrapURL>https://asu.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>Arizona State University</SiteName>
-		<QueryURL>https://asu.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>2</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>3</SiteID>
-		<BootstrapURL>http://profiles.catalyst.harvard.edu/DIRECT/BU/DIRECT.xml</BootstrapURL>
-		<SiteName>Boston University</SiteName>
-		<QueryURL>http://profiles-ctsi.bu.edu/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
-		<SortOrder>5</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>4</SiteID>
-		<BootstrapURL>http://vivoexperts.ctsi.ufl.edu/cu_fs.php?return=desc</BootstrapURL>
-		<SiteName>Cornell University</SiteName>
-		<QueryURL>http://vivoexperts.ctsi.ufl.edu/cu_fs.php?return=xml&amp;querytext=</QueryURL>
-		<SortOrder>8</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>5</SiteID>
-		<BootstrapURL>http://connects.catalyst.harvard.edu/profiles/DIRECT.xml</BootstrapURL>
-		<SiteName>Harvard University</SiteName>
-		<QueryURL>http://connects.catalyst.harvard.edu/profiles/DirectService.asp?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
-		<SortOrder>11</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>6</SiteID>
-		<BootstrapURL>http://www.indianactsi.org/FS.xml</BootstrapURL>
-		<SiteName>Indiana CTSI</SiteName>
-		<QueryURL>http://www.indianactsi.org/memberSearch?queryString=</QueryURL>
-		<SortOrder>12</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>7</SiteID>
-		<BootstrapURL>https://indiana.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>Indiana University School of Medicine</SiteName>
-		<QueryURL>https://indiana.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>13</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>8</SiteID>
-		<BootstrapURL>https://jhu.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>Johns Hopkins University</SiteName>
-		<QueryURL>https://jhu.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>14</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>9</SiteID>
-		<BootstrapURL>http://www.experts.scival.com/kanazawa/FS.xml.asp</BootstrapURL>
-		<SiteName>Kanazawa University</SiteName>
-		<QueryURL>http://www.experts.scival.com/kanazawa/federation/aggregateQuery.asp?query=</QueryURL>
-		<SortOrder>15</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>10</SiteID>
-		<BootstrapURL>https://mdanderson.influuent.utsystem.edu/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>MD Anderson Cancer Center</SiteName>
-		<QueryURL>https://mdanderson.influuent.utsystem.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>20</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>11</SiteID>
-		<BootstrapURL>http://www.experts.scival.com/mcg/FS.xml</BootstrapURL>
-		<SiteName>Medical Collage of Georgia</SiteName>
-		<QueryURL>http://www.experts.scival.com/mcg/federation/aggregateQuery.asp?query=</QueryURL>
-		<SortOrder>21</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>12</SiteID>
-		<BootstrapURL>http://www.experts.scival.com/mmc/FS.xml</BootstrapURL>
-		<SiteName>MEHARRY Medical Collage</SiteName>
-		<QueryURL>http://www.experts.scival.com/mmc/federation/aggregateQuery.asp?query=</QueryURL>
-		<SortOrder>22</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>13</SiteID>
-		<BootstrapURL>http://www.experts.scival.com/mskcc/FS.xml</BootstrapURL>
-		<SiteName>Memorial Sloan-Kettering Cancer Center</SiteName>
-		<QueryURL>http://www.experts.scival.com/mskcc/federation/aggregateQuery.asp?query=</QueryURL>
-		<SortOrder>23</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>14</SiteID>
-		<BootstrapURL>http://www.experts.scival.com/wayne/FS.xml</BootstrapURL>
-		<SiteName>Michigan Alliance for Clinical and Translational Science</SiteName>
-		<QueryURL>http://www.experts.scival.com/wayne/federation/aggregateQuery.asp?query=</QueryURL>
-		<SortOrder>24</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>15</SiteID>
-		<BootstrapURL>http://www.experts.scival.com/nii/FS.xml.asp</BootstrapURL>
-		<SiteName>National Institute of Immunology (India)</SiteName>
-		<QueryURL>http://www.experts.scival.com/nii/federation/aggregateQuery.asp?query=</QueryURL>
-		<SortOrder>26</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>16</SiteID>
-		<BootstrapURL>http://www.scholars.northwestern.edu/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>Northwestern University</SiteName>
-		<QueryURL>https://www.scholars.northwestern.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>29</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>17</SiteID>
-		<BootstrapURL>http://latticegrid.feinberg.northwestern.edu/federation/DIRECT.xml</BootstrapURL>
-		<SiteName>Northwestern University Feinberg School of Medicine</SiteName>
-		<QueryURL>http://latticegrid.feinberg.northwestern.edu/direct_search/</QueryURL>
-		<SortOrder>30</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>18</SiteID>
-		<BootstrapURL>https://ohsu.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>Oregon Health &amp; Science University</SiteName>
-		<QueryURL>https://ohsu.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>31</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>19</SiteID>
-		<BootstrapURL>http://profiles.psu.edu/Profiles/direct.xml</BootstrapURL>
-		<SiteName>Pennsylvania State University</SiteName>
-		<QueryURL>http://profiles.psu.edu/profiles/DIRECT/Modules/DirectSearch/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
-		<SortOrder>32</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>21</SiteID>
-		<BootstrapURL>http://vivoexperts.ctsi.ufl.edu/psm_fs.php?return=desc</BootstrapURL>
-		<SiteName>Ponce School of Medicine</SiteName>
-		<QueryURL>http://vivoexperts.ctsi.ufl.edu/psm_fs.php?return=xml&amp;querytext=</QueryURL>
-		<SortOrder>33</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>22</SiteID>
-		<BootstrapURL>http://profiles.catalyst.harvard.edu/DIRECT/RTRN/DIRECT.xml</BootstrapURL>
-		<SiteName>RTRN (18 RCMI Institutions)</SiteName>
-		<QueryURL>http://t1t2.rtrn.net/profilesweb/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
-		<SortOrder>34</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>23</SiteID>
-		<BootstrapURL>http://profiles.healthsciencessc.org/DIRECT.XML</BootstrapURL>
-		<SiteName>South Carolina (HSSC/SCTR)</SiteName>
-		<QueryURL>http://profiles.healthsciencessc.org/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
-		<SortOrder>39</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>24</SiteID>
-		<BootstrapURL>http://med.stanford.edu/profiles/FS.xml</BootstrapURL>
-		<SiteName>Stanford University School of Medicine</SiteName>
-		<QueryURL>http://med.stanford.edu/profiles/frdActionServlet?choiceId=federatedAggregateQuery&amp;searchterms=</QueryURL>
-		<SortOrder>40</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>26</SiteID>
-		<BootstrapURL>http://vivoexperts.ctsi.ufl.edu/scripps_fs.php?return=desc</BootstrapURL>
-		<SiteName>The Scripps Research Institute</SiteName>
-		<QueryURL>http://vivoexperts.ctsi.ufl.edu/scripps_fs.php?return=xml&amp;querytext=</QueryURL>
-		<SortOrder>43</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>27</SiteID>
-		<BootstrapURL>http://www.experts.scival.com/uab/FS.xml</BootstrapURL>
-		<SiteName>The University of Alabama at Birmingham</SiteName>
-		<QueryURL>http://www.experts.scival.com/uab/federation/aggregateQuery.asp?query=</QueryURL>
-		<SortOrder>44</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>28</SiteID>
-		<BootstrapURL>http://www.experts.scival.com/ucdavis/FS.xml</BootstrapURL>
-		<SiteName>UCDAVIS Health System</SiteName>
-		<QueryURL>http://www.experts.scival.com/ucdavis/federation/aggregateQuery.asp?query=</QueryURL>
-		<SortOrder>51</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>29</SiteID>
-		<BootstrapURL>http://www.experts.scival.com/uabcei/FS.xml.asp</BootstrapURL>
-		<SiteName>Universitat de Barcelona Campus of International Excellence</SiteName>
-		<QueryURL>http://www.experts.scival.com/uabcei/federation/aggregateQuery.asp?query=</QueryURL>
-		<SortOrder>52</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>30</SiteID>
-		<BootstrapURL>http://profiles.ucsf.edu/DIRECT.xml</BootstrapURL>
-		<SiteName>University of California, San Francisco</SiteName>
-		<QueryURL>http://profiles.ucsf.edu/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
-		<SortOrder>56</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>31</SiteID>
-		<BootstrapURL>http://profiles.catalyst.harvard.edu/DIRECT/UConn/DIRECT.xml</BootstrapURL>
-		<SiteName>University of Connecticut Health Center</SiteName>
-		<QueryURL>http://profiles.uconn.edu/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
-		<SortOrder>59</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>33</SiteID>
-		<BootstrapURL>http://vivoexperts.ctsi.ufl.edu/uf_fs.php?return=desc</BootstrapURL>
-		<SiteName>University of Florida</SiteName>
-		<QueryURL>http://vivoexperts.ctsi.ufl.edu/uf_fs.php?return=xml&amp;querytext=</QueryURL>
-		<SortOrder>60</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>34</SiteID>
-		<BootstrapURL>https://uic.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>University of Illinois at Chicago</SiteName>
-		<QueryURL>https://uic.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>61</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>35</SiteID>
-		<BootstrapURL>http://www.icts.uiowa.edu/Loki/federation/FS.xml</BootstrapURL>
-		<SiteName>University of Iowa</SiteName>
-		<QueryURL>http://www.icts.uiowa.edu/Loki/federation/aggregateQuery.jsp?query=</QueryURL>
-		<SortOrder>62</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>36</SiteID>
-		<BootstrapURL>http://www.experts.scival.com/maryland/FS.xml</BootstrapURL>
-		<SiteName>University of Maryland</SiteName>
-		<QueryURL>http://www.experts.scival.com/maryland/federation/aggregateQuery.asp?query=</QueryURL>
-		<SortOrder>63</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>37</SiteID>
-		<BootstrapURL>https://miami.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>University of Miami</SiteName>
-		<QueryURL>https://miami.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>65</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>38</SiteID>
-		<BootstrapURL>https://experts.umich.edu/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>University of Michigan</SiteName>
-		<QueryURL>https://experts.umich.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>66</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>40</SiteID>
-		<BootstrapURL>https://experts.umn.edu/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>University of Minnesota</SiteName>
-		<QueryURL>https://experts.umn.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>67</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>41</SiteID>
-		<BootstrapURL>https://nebraska.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>University of Nebraska</SiteName>
-		<QueryURL>https://nebraska.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>68</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>42</SiteID>
-		<BootstrapURL>https://digitalvita.pitt.edu/federation/bootstrap.php</BootstrapURL>
-		<SiteName>University of Pittsburgh</SiteName>
-		<QueryURL>https://digitalvita.pitt.edu:443/federation/aggregateQuery.php?query=</QueryURL>
-		<SortOrder>70</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>43</SiteID>
-		<BootstrapURL>https://uthscsa.influuent.utsystem.edu/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>UT Health Science Center</SiteName>
-		<QueryURL>https://uthscsa.influuent.utsystem.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>81</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>44</SiteID>
-		<BootstrapURL>http://vivoexperts.ctsi.ufl.edu/wustl_fs.php?return=desc</BootstrapURL>
-		<SiteName>Washington University in St. Louis</SiteName>
-		<QueryURL>http://vivoexperts.ctsi.ufl.edu/wustl_fs.php?return=xml&amp;querytext=</QueryURL>
-		<SortOrder>85</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>45</SiteID>
-		<BootstrapURL>http://vivoexperts.ctsi.ufl.edu/weill_fs.php?return=desc</BootstrapURL>
-		<SiteName>Weill Cornell Medical College</SiteName>
-		<QueryURL>http://vivoexperts.ctsi.ufl.edu/weill_fs.php?return=xml&amp;querytext=</QueryURL>
-		<SortOrder>87</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>46</SiteID>
-		<BootstrapURL>http://profiles.umassmed.edu/profiles/Direct.xml</BootstrapURL>
-		<SiteName>University of Massachusetts Medical School</SiteName>
-		<QueryURL>http://profiles.umassmed.edu/profiles/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
-		<SortOrder>64</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>47</SiteID>
-		<BootstrapURL>http://profiles.cdrewu.edu/profiles/Direct/Direct.xml</BootstrapURL>
-		<SiteName>Charles R Drew University of Medicine and Science</SiteName>
-		<QueryURL>http://profiles.cdrewu.edu/profiles/DIRECT/Modules/DirectSearch/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
-		<SortOrder>7</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>48</SiteID>
-		<BootstrapURL>https://augusta.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>Augusta University</SiteName>
-		<QueryURL>https://augusta.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>3</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>49</SiteID>
-		<BootstrapURL>http://profiles.viictr.org/direct.xml</BootstrapURL>
-		<SiteName>Baylor College of Medicine</SiteName>
-		<QueryURL>http://profiles.viictr.org/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
-		<SortOrder>4</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>50</SiteID>
-		<BootstrapURL>https://cwru.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>Case Western Reserve University</SiteName>
-		<QueryURL>https://cwru.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>6</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>51</SiteID>
-		<BootstrapURL>http://people.ctsi.ucla.edu/institution/d2x/bootstrap.xml</BootstrapURL>
-		<SiteName>David Geffen School of Medicine at UCLA</SiteName>
-		<QueryURL>http://people.ctsi.ucla.edu/ctsi/institution/d2x/search.xml?form:id=search&amp;q=</QueryURL>
-		<SortOrder>9</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>52</SiteID>
-		<BootstrapURL>https://hungary.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>Educatio Társadalmi Szolgáltató Nonprofit Kft.</SiteName>
-		<QueryURL>https://hungary.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>10</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>53</SiteID>
-		<BootstrapURL>https://coins.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>Kawasaki (COINS)</SiteName>
-		<QueryURL>https://coins.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>16</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>54</SiteID>
-		<BootstrapURL>https://keio.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>Keio University</SiteName>
-		<QueryURL>https://keio.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>17</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>55</SiteID>
-		<BootstrapURL>https://koreauniv.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>Korea University</SiteName>
-		<QueryURL>https://koreauniv.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>18</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>56</SiteID>
-		<BootstrapURL>https://mayoclinic.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>Mayo Clinic</SiteName>
-		<QueryURL>https://mayoclinic.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>19</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>57</SiteID>
-		<BootstrapURL>https://msu.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>Michigan State University</SiteName>
-		<QueryURL>https://scholars.opb.msu.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>25</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>58</SiteID>
-		<BootstrapURL>https://ntnu.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>National Taiwan Normal University</SiteName>
-		<QueryURL>https://scholar.lib.ntnu.edu.tw/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>27</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>59</SiteID>
-		<BootstrapURL>https://nau.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>Northern Arizona University</SiteName>
-		<QueryURL>https://nau.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>28</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>60</SiteID>
-		<BootstrapURL>https://sapienza.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>Sapienza University of Rome</SiteName>
-		<QueryURL>https://sapienza.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>35</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>61</SiteID>
-		<BootstrapURL>https://shibaura.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>Shibaura Institute of Technology</SiteName>
-		<QueryURL>https://shibaura.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>37</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>62</SiteID>
-		<BootstrapURL>https://sofi-northwestern.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>SOFI Northwestern</SiteName>
-		<QueryURL>https://sofi-northwestern.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>38</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>63</SiteID>
-		<BootstrapURL>https://stephenson.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>Stephenson Cancer Center</SiteName>
-		<QueryURL>https://stephenson.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>41</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>64</SiteID>
-		<BootstrapURL>https://tmu.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>Taipei Medical University</SiteName>
-		<QueryURL>https://tmu.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>42</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>65</SiteID>
-		<BootstrapURL>https://arizona.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>The University of Arizona</SiteName>
-		<QueryURL>https://arizona.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>45</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>66</SiteID>
-		<BootstrapURL>https://uta.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>The University of Texas Arlington</SiteName>
-		<QueryURL>https://uta.influuent.utsystem.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>46</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>67</SiteID>
-		<BootstrapURL>https://utaustin.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>The University of Texas at Austin</SiteName>
-		<QueryURL>https://utexas.influuent.utsystem.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>47</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>68</SiteID>
-		<BootstrapURL>https://utdallas.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>The University of Texas at Dallas</SiteName>
-		<QueryURL>https://utdallas.influuent.utsystem.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>48</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>69</SiteID>
-		<BootstrapURL>https://utep.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>The University of Texas at El Paso</SiteName>
-		<QueryURL>https://utep.influuent.utsystem.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>49</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>70</SiteID>
-		<BootstrapURL>https://ucdavis.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>UC Davis Health System</SiteName>
-		<QueryURL>https://ucdavis.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>50</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>71</SiteID>
-		<BootstrapURL>https://ukm.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>Universiti Kebangsaan Malaysia</SiteName>
-		<QueryURL>https://ukm.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>53</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>72</SiteID>
-		<BootstrapURL>https://pure.utm.my/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>Universiti Teknologi Malaysia</SiteName>
-		<QueryURL>https://pure.utm.my/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>54</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>73</SiteID>
-		<BootstrapURL>https://uams-triprofiles.uams.edu/profiles/DIRECT/Modules/DirectSearch/Direct.xml</BootstrapURL>
-		<SiteName>University of Arkansas for Medical Sciences</SiteName>
-		<QueryURL>https://uams-triprofiles.uams.edu/profiles/DIRECT/Modules/DirectSearch/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
-		<SortOrder>55</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>74</SiteID>
-		<BootstrapURL>http://profiles.uchicago.edu/DIRECT/DIRECT.xml</BootstrapURL>
-		<SiteName>University of Chicago</SiteName>
-		<QueryURL>https://profiles.uchicago.edu/profiles/DIRECT/Modules/DirectSearch/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
-		<SortOrder>57</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>75</SiteID>
-		<BootstrapURL>https://profiles.ucdenver.edu/direct.xml</BootstrapURL>
-		<SiteName>University of Colorado Profiles</SiteName>
-		<QueryURL>https://profiles.ucdenver.edu/DIRECT/Modules/DirectSearch/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
-		<SortOrder>58</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>76</SiteID>
-		<BootstrapURL>https://ctsc.health.unm.edu/apps/d2e/unm_fs.php?return=desc</BootstrapURL>
-		<SiteName>University of New Mexico</SiteName>
-		<QueryURL>http://ctsc.health.unm.edu/apps/d2e/unm_fs.php?return=xml&amp;querytext=</QueryURL>
-		<SortOrder>69</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>77</SiteID>
-		<BootstrapURL>http://www.urmc.rochester.edu/profiles/DIRECT/direct.xml</BootstrapURL>
-		<SiteName>University of Rochester Medical Center</SiteName>
-		<QueryURL>http://www.urmc.rochester.edu/profiles/DIRECT/Modules/DirectSearch/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
-		<SortOrder>71</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>78</SiteID>
-		<BootstrapURL>http://profilesv2.sc-ctsi.org/profiles/direct.xml</BootstrapURL>
-		<SiteName>University of Southern California</SiteName>
-		<QueryURL>http://profilesv2.sc-ctsi.org/profiles/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
-		<SortOrder>72</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>79</SiteID>
-		<BootstrapURL>https://utsanantonio.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>University of Texas at San Antonio</SiteName>
-		<QueryURL>https://utsa.influuent.utsystem.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>73</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>80</SiteID>
-		<BootstrapURL>https://uttyler.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>University of Texas at UT Tyler</SiteName>
-		<QueryURL>https://uttyler.influuent.utsystem.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>74</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>81</SiteID>
-		<BootstrapURL>https://uthealth.influuent.utsystem.edu/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>University of Texas Health Science Center at Houston (UTHealth)</SiteName>
-		<QueryURL>https://uthealth.influuent.utsystem.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>75</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>82</SiteID>
-		<BootstrapURL>https://utmb.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>University of Texas Medical Branch at Galveston</SiteName>
-		<QueryURL>https://utmb.influuent.utsystem.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>76</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>83</SiteID>
-		<BootstrapURL>https://utpb.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>University of Texas of the Permian Basin</SiteName>
-		<QueryURL>https://utpb.influuent.utsystem.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>77</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>84</SiteID>
-		<BootstrapURL>https://utokyo.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>University of Tokyo</SiteName>
-		<QueryURL>https://utokyo.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>78</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>85</SiteID>
-		<BootstrapURL>https://utah.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>University of Utah</SiteName>
-		<QueryURL>https://utah.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>79</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>86</SiteID>
-		<BootstrapURL>https://uthsct.influuent.utsystem.edu/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>UT Health Northeast/UTHSC Tyler</SiteName>
-		<QueryURL>https://uthsct.influuent.utsystem.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>80</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>87</SiteID>
-		<BootstrapURL>https://utsouthwestern.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>UT Southwestern Medical Center</SiteName>
-		<QueryURL>https://utsouthwestern.influuent.utsystem.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>82</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>88</SiteID>
-		<BootstrapURL>http://profiles.tsi.wakehealth.edu/direct/direct.xml</BootstrapURL>
-		<SiteName>Wake Forest Baptist Medical Center</SiteName>
-		<QueryURL>http://profiles.tsi.wakehealth.edu/DIRECT/Modules/DirectSearch/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
-		<SortOrder>83</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>89</SiteID>
-		<BootstrapURL>https://waseda.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>WASEDA University</SiteName>
-		<QueryURL>https://waseda.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>84</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>90</SiteID>
-		<BootstrapURL>https://researchconnect.wayne.edu/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>Wayne State University's Research Connect</SiteName>
-		<QueryURL>https://researchconnect.wayne.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>86</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>91</SiteID>
-		<BootstrapURL>https://wmich.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
-		<SiteName>Western Michigan University</SiteName>
-		<QueryURL>https://wmich.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
-		<SortOrder>88</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
-	<Row>
-		<SiteID>92</SiteID>
-		<BootstrapURL>https://scholars.duke.edu/FS.xml</BootstrapURL>
-		<SiteName>Scholars@Duke</SiteName>
-		<QueryURL>https://scholars.duke.edu/ctsasearch?querytext=</QueryURL>
-		<SortOrder>36</SortOrder>
-		<IsActive>1</IsActive>
-	</Row>
+  <Row>
+    <SiteID>1</SiteID>
+    <BootstrapURL>https://einstein.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>Albert Einstein College of Medicine</SiteName>
+    <QueryURL>https://einstein.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>1</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>2</SiteID>
+    <BootstrapURL>https://asu.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>Arizona State University</SiteName>
+    <QueryURL>https://asu.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>2</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>3</SiteID>
+    <BootstrapURL>http://profiles.catalyst.harvard.edu/DIRECT/BU/DIRECT.xml</BootstrapURL>
+    <SiteName>Boston University</SiteName>
+    <QueryURL>http://profiles-ctsi.bu.edu/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
+    <SortOrder>5</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>4</SiteID>
+    <BootstrapURL>http://vivoexperts.ctsi.ufl.edu/cu_fs.php?return=desc</BootstrapURL>
+    <SiteName>Cornell University</SiteName>
+    <QueryURL>http://vivoexperts.ctsi.ufl.edu/cu_fs.php?return=xml&amp;querytext=</QueryURL>
+    <SortOrder>8</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>5</SiteID>
+    <BootstrapURL>http://connects.catalyst.harvard.edu/profiles/DIRECT.xml</BootstrapURL>
+    <SiteName>Harvard University</SiteName>
+    <QueryURL>http://connects.catalyst.harvard.edu/profiles/DirectService.asp?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
+    <SortOrder>11</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>6</SiteID>
+    <BootstrapURL>http://www.indianactsi.org/FS.xml</BootstrapURL>
+    <SiteName>Indiana CTSI</SiteName>
+    <QueryURL>http://www.indianactsi.org/memberSearch?queryString=</QueryURL>
+    <SortOrder>12</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>7</SiteID>
+    <BootstrapURL>https://indiana.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>Indiana University School of Medicine</SiteName>
+    <QueryURL>https://indiana.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>13</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>8</SiteID>
+    <BootstrapURL>https://jhu.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>Johns Hopkins University</SiteName>
+    <QueryURL>https://jhu.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>14</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>9</SiteID>
+    <BootstrapURL>http://www.experts.scival.com/kanazawa/FS.xml.asp</BootstrapURL>
+    <SiteName>Kanazawa University</SiteName>
+    <QueryURL>http://www.experts.scival.com/kanazawa/federation/aggregateQuery.asp?query=</QueryURL>
+    <SortOrder>15</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>10</SiteID>
+    <BootstrapURL>https://mdanderson.influuent.utsystem.edu/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>MD Anderson Cancer Center</SiteName>
+    <QueryURL>https://mdanderson.influuent.utsystem.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>20</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>11</SiteID>
+    <BootstrapURL>http://www.experts.scival.com/mcg/FS.xml</BootstrapURL>
+    <SiteName>Medical Collage of Georgia</SiteName>
+    <QueryURL>http://www.experts.scival.com/mcg/federation/aggregateQuery.asp?query=</QueryURL>
+    <SortOrder>21</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>12</SiteID>
+    <BootstrapURL>http://www.experts.scival.com/mmc/FS.xml</BootstrapURL>
+    <SiteName>MEHARRY Medical Collage</SiteName>
+    <QueryURL>http://www.experts.scival.com/mmc/federation/aggregateQuery.asp?query=</QueryURL>
+    <SortOrder>22</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>13</SiteID>
+    <BootstrapURL>http://www.experts.scival.com/mskcc/FS.xml</BootstrapURL>
+    <SiteName>Memorial Sloan-Kettering Cancer Center</SiteName>
+    <QueryURL>http://www.experts.scival.com/mskcc/federation/aggregateQuery.asp?query=</QueryURL>
+    <SortOrder>23</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>14</SiteID>
+    <BootstrapURL>http://www.experts.scival.com/wayne/FS.xml</BootstrapURL>
+    <SiteName>Michigan Alliance for Clinical and Translational Science</SiteName>
+    <QueryURL>http://www.experts.scival.com/wayne/federation/aggregateQuery.asp?query=</QueryURL>
+    <SortOrder>24</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>15</SiteID>
+    <BootstrapURL>http://www.experts.scival.com/nii/FS.xml.asp</BootstrapURL>
+    <SiteName>National Institute of Immunology (India)</SiteName>
+    <QueryURL>http://www.experts.scival.com/nii/federation/aggregateQuery.asp?query=</QueryURL>
+    <SortOrder>26</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>16</SiteID>
+    <BootstrapURL>http://www.scholars.northwestern.edu/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>Northwestern University</SiteName>
+    <QueryURL>https://www.scholars.northwestern.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>29</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>17</SiteID>
+    <BootstrapURL>http://latticegrid.feinberg.northwestern.edu/federation/DIRECT.xml</BootstrapURL>
+    <SiteName>Northwestern University Feinberg School of Medicine</SiteName>
+    <QueryURL>http://latticegrid.feinberg.northwestern.edu/direct_search/</QueryURL>
+    <SortOrder>30</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>18</SiteID>
+    <BootstrapURL>https://ohsu.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>Oregon Health &amp; Science University</SiteName>
+    <QueryURL>https://ohsu.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>31</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>19</SiteID>
+    <BootstrapURL>http://profiles.psu.edu/Profiles/direct.xml</BootstrapURL>
+    <SiteName>Pennsylvania State University</SiteName>
+    <QueryURL>http://profiles.psu.edu/profiles/DIRECT/Modules/DirectSearch/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
+    <SortOrder>32</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>21</SiteID>
+    <BootstrapURL>http://vivoexperts.ctsi.ufl.edu/psm_fs.php?return=desc</BootstrapURL>
+    <SiteName>Ponce School of Medicine</SiteName>
+    <QueryURL>http://vivoexperts.ctsi.ufl.edu/psm_fs.php?return=xml&amp;querytext=</QueryURL>
+    <SortOrder>33</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>22</SiteID>
+    <BootstrapURL>http://profiles.catalyst.harvard.edu/DIRECT/RTRN/DIRECT.xml</BootstrapURL>
+    <SiteName>RTRN (18 RCMI Institutions)</SiteName>
+    <QueryURL>http://t1t2.rtrn.net/profilesweb/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
+    <SortOrder>34</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>23</SiteID>
+    <BootstrapURL>http://profiles.healthsciencessc.org/DIRECT.XML</BootstrapURL>
+    <SiteName>South Carolina (HSSC/SCTR)</SiteName>
+    <QueryURL>http://profiles.healthsciencessc.org/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
+    <SortOrder>39</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>24</SiteID>
+    <BootstrapURL>http://med.stanford.edu/profiles/FS.xml</BootstrapURL>
+    <SiteName>Stanford University School of Medicine</SiteName>
+    <QueryURL>http://med.stanford.edu/profiles/frdActionServlet?choiceId=federatedAggregateQuery&amp;searchterms=</QueryURL>
+    <SortOrder>40</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>26</SiteID>
+    <BootstrapURL>http://vivoexperts.ctsi.ufl.edu/scripps_fs.php?return=desc</BootstrapURL>
+    <SiteName>The Scripps Research Institute</SiteName>
+    <QueryURL>http://vivoexperts.ctsi.ufl.edu/scripps_fs.php?return=xml&amp;querytext=</QueryURL>
+    <SortOrder>43</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>27</SiteID>
+    <BootstrapURL>http://www.experts.scival.com/uab/FS.xml</BootstrapURL>
+    <SiteName>The University of Alabama at Birmingham</SiteName>
+    <QueryURL>http://www.experts.scival.com/uab/federation/aggregateQuery.asp?query=</QueryURL>
+    <SortOrder>44</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>28</SiteID>
+    <BootstrapURL>http://www.experts.scival.com/ucdavis/FS.xml</BootstrapURL>
+    <SiteName>UCDAVIS Health System</SiteName>
+    <QueryURL>http://www.experts.scival.com/ucdavis/federation/aggregateQuery.asp?query=</QueryURL>
+    <SortOrder>51</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>29</SiteID>
+    <BootstrapURL>http://www.experts.scival.com/uabcei/FS.xml.asp</BootstrapURL>
+    <SiteName>Universitat de Barcelona Campus of International Excellence</SiteName>
+    <QueryURL>http://www.experts.scival.com/uabcei/federation/aggregateQuery.asp?query=</QueryURL>
+    <SortOrder>52</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>30</SiteID>
+    <BootstrapURL>http://profiles.ucsf.edu/DIRECT.xml</BootstrapURL>
+    <SiteName>University of California, San Francisco</SiteName>
+    <QueryURL>http://profiles.ucsf.edu/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
+    <SortOrder>56</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>31</SiteID>
+    <BootstrapURL>http://profiles.catalyst.harvard.edu/DIRECT/UConn/DIRECT.xml</BootstrapURL>
+    <SiteName>University of Connecticut Health Center</SiteName>
+    <QueryURL>http://profiles.uconn.edu/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
+    <SortOrder>59</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>33</SiteID>
+    <BootstrapURL>http://vivoexperts.ctsi.ufl.edu/uf_fs.php?return=desc</BootstrapURL>
+    <SiteName>University of Florida</SiteName>
+    <QueryURL>http://vivoexperts.ctsi.ufl.edu/uf_fs.php?return=xml&amp;querytext=</QueryURL>
+    <SortOrder>60</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>34</SiteID>
+    <BootstrapURL>https://uic.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>University of Illinois at Chicago</SiteName>
+    <QueryURL>https://uic.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>61</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>35</SiteID>
+    <BootstrapURL>http://www.icts.uiowa.edu/Loki/federation/FS.xml</BootstrapURL>
+    <SiteName>University of Iowa</SiteName>
+    <QueryURL>http://www.icts.uiowa.edu/Loki/federation/aggregateQuery.jsp?query=</QueryURL>
+    <SortOrder>62</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>36</SiteID>
+    <BootstrapURL>http://www.experts.scival.com/maryland/FS.xml</BootstrapURL>
+    <SiteName>University of Maryland</SiteName>
+    <QueryURL>http://www.experts.scival.com/maryland/federation/aggregateQuery.asp?query=</QueryURL>
+    <SortOrder>63</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>37</SiteID>
+    <BootstrapURL>https://miami.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>University of Miami</SiteName>
+    <QueryURL>https://miami.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>65</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>38</SiteID>
+    <BootstrapURL>https://experts.umich.edu/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>University of Michigan</SiteName>
+    <QueryURL>https://experts.umich.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>66</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>40</SiteID>
+    <BootstrapURL>https://experts.umn.edu/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>University of Minnesota</SiteName>
+    <QueryURL>https://experts.umn.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>67</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>41</SiteID>
+    <BootstrapURL>https://nebraska.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>University of Nebraska</SiteName>
+    <QueryURL>https://nebraska.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>68</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>42</SiteID>
+    <BootstrapURL>https://digitalvita.pitt.edu/federation/bootstrap.php</BootstrapURL>
+    <SiteName>University of Pittsburgh</SiteName>
+    <QueryURL>https://digitalvita.pitt.edu:443/federation/aggregateQuery.php?query=</QueryURL>
+    <SortOrder>70</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>43</SiteID>
+    <BootstrapURL>https://uthscsa.influuent.utsystem.edu/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>UT Health Science Center</SiteName>
+    <QueryURL>https://uthscsa.influuent.utsystem.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>81</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>44</SiteID>
+    <BootstrapURL>http://vivoexperts.ctsi.ufl.edu/wustl_fs.php?return=desc</BootstrapURL>
+    <SiteName>Washington University in St. Louis</SiteName>
+    <QueryURL>http://vivoexperts.ctsi.ufl.edu/wustl_fs.php?return=xml&amp;querytext=</QueryURL>
+    <SortOrder>85</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>45</SiteID>
+    <BootstrapURL>http://vivoexperts.ctsi.ufl.edu/weill_fs.php?return=desc</BootstrapURL>
+    <SiteName>Weill Cornell Medical College</SiteName>
+    <QueryURL>http://vivoexperts.ctsi.ufl.edu/weill_fs.php?return=xml&amp;querytext=</QueryURL>
+    <SortOrder>87</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>46</SiteID>
+    <BootstrapURL>http://profiles.umassmed.edu/profiles/Direct.xml</BootstrapURL>
+    <SiteName>University of Massachusetts Medical School</SiteName>
+    <QueryURL>http://profiles.umassmed.edu/profiles/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
+    <SortOrder>64</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>47</SiteID>
+    <BootstrapURL>http://profiles.cdrewu.edu/profiles/Direct/Direct.xml</BootstrapURL>
+    <SiteName>Charles R Drew University of Medicine and Science</SiteName>
+    <QueryURL>http://profiles.cdrewu.edu/profiles/DIRECT/Modules/DirectSearch/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
+    <SortOrder>7</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>48</SiteID>
+    <BootstrapURL>https://augusta.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>Augusta University</SiteName>
+    <QueryURL>https://augusta.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>3</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>49</SiteID>
+    <BootstrapURL>http://profiles.viictr.org/direct.xml</BootstrapURL>
+    <SiteName>Baylor College of Medicine</SiteName>
+    <QueryURL>http://profiles.viictr.org/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
+    <SortOrder>4</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>50</SiteID>
+    <BootstrapURL>https://cwru.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>Case Western Reserve University</SiteName>
+    <QueryURL>https://cwru.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>6</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>51</SiteID>
+    <BootstrapURL>http://people.ctsi.ucla.edu/institution/d2x/bootstrap.xml</BootstrapURL>
+    <SiteName>David Geffen School of Medicine at UCLA</SiteName>
+    <QueryURL>http://people.ctsi.ucla.edu/ctsi/institution/d2x/search.xml?form:id=search&amp;q=</QueryURL>
+    <SortOrder>9</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>52</SiteID>
+    <BootstrapURL>https://hungary.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>Educatio Társadalmi Szolgáltató Nonprofit Kft.</SiteName>
+    <QueryURL>https://hungary.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>10</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>53</SiteID>
+    <BootstrapURL>https://coins.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>Kawasaki (COINS)</SiteName>
+    <QueryURL>https://coins.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>16</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>54</SiteID>
+    <BootstrapURL>https://keio.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>Keio University</SiteName>
+    <QueryURL>https://keio.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>17</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>55</SiteID>
+    <BootstrapURL>https://koreauniv.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>Korea University</SiteName>
+    <QueryURL>https://koreauniv.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>18</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>56</SiteID>
+    <BootstrapURL>https://mayoclinic.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>Mayo Clinic</SiteName>
+    <QueryURL>https://mayoclinic.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>19</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>57</SiteID>
+    <BootstrapURL>https://msu.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>Michigan State University</SiteName>
+    <QueryURL>https://scholars.opb.msu.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>25</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>58</SiteID>
+    <BootstrapURL>https://ntnu.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>National Taiwan Normal University</SiteName>
+    <QueryURL>https://scholar.lib.ntnu.edu.tw/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>27</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>59</SiteID>
+    <BootstrapURL>https://nau.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>Northern Arizona University</SiteName>
+    <QueryURL>https://nau.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>28</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>60</SiteID>
+    <BootstrapURL>https://sapienza.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>Sapienza University of Rome</SiteName>
+    <QueryURL>https://sapienza.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>35</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>61</SiteID>
+    <BootstrapURL>https://shibaura.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>Shibaura Institute of Technology</SiteName>
+    <QueryURL>https://shibaura.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>37</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>62</SiteID>
+    <BootstrapURL>https://sofi-northwestern.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>SOFI Northwestern</SiteName>
+    <QueryURL>https://sofi-northwestern.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>38</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>63</SiteID>
+    <BootstrapURL>https://stephenson.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>Stephenson Cancer Center</SiteName>
+    <QueryURL>https://stephenson.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>41</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>64</SiteID>
+    <BootstrapURL>https://tmu.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>Taipei Medical University</SiteName>
+    <QueryURL>https://tmu.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>42</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>65</SiteID>
+    <BootstrapURL>https://arizona.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>The University of Arizona</SiteName>
+    <QueryURL>https://arizona.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>45</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>66</SiteID>
+    <BootstrapURL>https://uta.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>The University of Texas Arlington</SiteName>
+    <QueryURL>https://uta.influuent.utsystem.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>46</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>67</SiteID>
+    <BootstrapURL>https://utaustin.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>The University of Texas at Austin</SiteName>
+    <QueryURL>https://utexas.influuent.utsystem.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>47</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>68</SiteID>
+    <BootstrapURL>https://utdallas.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>The University of Texas at Dallas</SiteName>
+    <QueryURL>https://utdallas.influuent.utsystem.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>48</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>69</SiteID>
+    <BootstrapURL>https://utep.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>The University of Texas at El Paso</SiteName>
+    <QueryURL>https://utep.influuent.utsystem.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>49</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>70</SiteID>
+    <BootstrapURL>https://ucdavis.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>UC Davis Health System</SiteName>
+    <QueryURL>https://ucdavis.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>50</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>71</SiteID>
+    <BootstrapURL>https://ukm.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>Universiti Kebangsaan Malaysia</SiteName>
+    <QueryURL>https://ukm.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>53</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>72</SiteID>
+    <BootstrapURL>https://pure.utm.my/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>Universiti Teknologi Malaysia</SiteName>
+    <QueryURL>https://pure.utm.my/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>54</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>73</SiteID>
+    <BootstrapURL>https://uams-triprofiles.uams.edu/profiles/DIRECT/Modules/DirectSearch/Direct.xml</BootstrapURL>
+    <SiteName>University of Arkansas for Medical Sciences</SiteName>
+    <QueryURL>https://uams-triprofiles.uams.edu/profiles/DIRECT/Modules/DirectSearch/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
+    <SortOrder>55</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>74</SiteID>
+    <BootstrapURL>http://profiles.uchicago.edu/DIRECT/DIRECT.xml</BootstrapURL>
+    <SiteName>University of Chicago</SiteName>
+    <QueryURL>https://profiles.uchicago.edu/profiles/DIRECT/Modules/DirectSearch/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
+    <SortOrder>57</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>75</SiteID>
+    <BootstrapURL>https://profiles.ucdenver.edu/direct.xml</BootstrapURL>
+    <SiteName>University of Colorado Profiles</SiteName>
+    <QueryURL>https://profiles.ucdenver.edu/DIRECT/Modules/DirectSearch/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
+    <SortOrder>58</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>76</SiteID>
+    <BootstrapURL>https://ctsc.health.unm.edu/apps/d2e/unm_fs.php?return=desc</BootstrapURL>
+    <SiteName>University of New Mexico</SiteName>
+    <QueryURL>http://ctsc.health.unm.edu/apps/d2e/unm_fs.php?return=xml&amp;querytext=</QueryURL>
+    <SortOrder>69</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>77</SiteID>
+    <BootstrapURL>http://www.urmc.rochester.edu/profiles/DIRECT/direct.xml</BootstrapURL>
+    <SiteName>University of Rochester Medical Center</SiteName>
+    <QueryURL>http://www.urmc.rochester.edu/profiles/DIRECT/Modules/DirectSearch/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
+    <SortOrder>71</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>78</SiteID>
+    <BootstrapURL>http://profilesv2.sc-ctsi.org/profiles/direct.xml</BootstrapURL>
+    <SiteName>University of Southern California</SiteName>
+    <QueryURL>http://profilesv2.sc-ctsi.org/profiles/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
+    <SortOrder>72</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>79</SiteID>
+    <BootstrapURL>https://utsanantonio.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>University of Texas at San Antonio</SiteName>
+    <QueryURL>https://utsa.influuent.utsystem.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>73</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>80</SiteID>
+    <BootstrapURL>https://uttyler.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>University of Texas at UT Tyler</SiteName>
+    <QueryURL>https://uttyler.influuent.utsystem.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>74</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>81</SiteID>
+    <BootstrapURL>https://uthealth.influuent.utsystem.edu/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>University of Texas Health Science Center at Houston (UTHealth)</SiteName>
+    <QueryURL>https://uthealth.influuent.utsystem.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>75</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>82</SiteID>
+    <BootstrapURL>https://utmb.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>University of Texas Medical Branch at Galveston</SiteName>
+    <QueryURL>https://utmb.influuent.utsystem.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>76</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>83</SiteID>
+    <BootstrapURL>https://utpb.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>University of Texas of the Permian Basin</SiteName>
+    <QueryURL>https://utpb.influuent.utsystem.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>77</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>84</SiteID>
+    <BootstrapURL>https://utokyo.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>University of Tokyo</SiteName>
+    <QueryURL>https://utokyo.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>78</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>85</SiteID>
+    <BootstrapURL>https://utah.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>University of Utah</SiteName>
+    <QueryURL>https://utah.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>79</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>86</SiteID>
+    <BootstrapURL>https://uthsct.influuent.utsystem.edu/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>UT Health Northeast/UTHSC Tyler</SiteName>
+    <QueryURL>https://uthsct.influuent.utsystem.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>80</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>87</SiteID>
+    <BootstrapURL>https://utsouthwestern.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>UT Southwestern Medical Center</SiteName>
+    <QueryURL>https://utsouthwestern.influuent.utsystem.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>82</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>88</SiteID>
+    <BootstrapURL>http://profiles.tsi.wakehealth.edu/direct/direct.xml</BootstrapURL>
+    <SiteName>Wake Forest Baptist Medical Center</SiteName>
+    <QueryURL>http://profiles.tsi.wakehealth.edu/DIRECT/Modules/DirectSearch/DirectService.aspx?Request=IncomingCount&amp;SearchPhrase=</QueryURL>
+    <SortOrder>83</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>89</SiteID>
+    <BootstrapURL>https://waseda.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>WASEDA University</SiteName>
+    <QueryURL>https://waseda.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>84</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>90</SiteID>
+    <BootstrapURL>https://researchconnect.wayne.edu/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>Wayne State University's Research Connect</SiteName>
+    <QueryURL>https://researchconnect.wayne.edu/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>86</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>91</SiteID>
+    <BootstrapURL>https://wmich.pure.elsevier.com/direct2experts/fs.xhtml</BootstrapURL>
+    <SiteName>Western Michigan University</SiteName>
+    <QueryURL>https://wmich.pure.elsevier.com/direct2experts/fs_search.xhtml?search=</QueryURL>
+    <SortOrder>88</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
+  <Row>
+    <SiteID>92</SiteID>
+    <BootstrapURL>https://scholars.duke.edu/FS.xml</BootstrapURL>
+    <SiteName>Scholars@Duke</SiteName>
+    <QueryURL>https://scholars.duke.edu/ctsasearch?querytext=</QueryURL>
+    <SortOrder>36</SortOrder>
+    <IsActive>1</IsActive>
+  </Row>
 </Table>

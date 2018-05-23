@@ -1,350 +1,350 @@
 <Table Name="[Framework.].[Job]">
-	<Row>
-		<JobGroup>1</JobGroup>
-		<Step>1</Step>
-		<IsActive>1</IsActive>
-		<Script>UPDATE [Framework.].[Parameter] SET Value = (SELECT Value+'/profile/' FROM [Framework.].[Parameter] WHERE ParameterID = 'basePath') WHERE ParameterID = 'baseURI'</Script>
-	</Row>
-	<Row>
-		<JobGroup>1</JobGroup>
-		<Step>2</Step>
-		<IsActive>1</IsActive>
-		<Script>UPDATE [Ontology.Import].OWL SET Graph = 2 WHERE name = 'VIVO_1.4'</Script>
-	</Row>
-	<Row>
-		<JobGroup>1</JobGroup>
-		<Step>3</Step>
-		<IsActive>1</IsActive>
-		<Script>UPDATE [Ontology.Import].OWL SET Graph = 3 WHERE name = 'PRNS_1.3'</Script>
-	</Row>
-	<Row>
-		<JobGroup>1</JobGroup>
-		<Step>4</Step>
-		<IsActive>1</IsActive>
-		<Script>UPDATE [Ontology.Import].OWL SET Graph = 4 WHERE name = 'ORNG_1.0'</Script>
-	</Row>
-	<Row>
-		<JobGroup>1</JobGroup>
-		<Step>5</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Ontology.Import].[ConvertOWL2Triple] @OWL = 'VIVO_1.4'</Script>
-	</Row>
-	<Row>
-		<JobGroup>1</JobGroup>
-		<Step>6</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Ontology.Import].[ConvertOWL2Triple] @OWL = 'PRNS_1.3'</Script>
-	</Row>
-	<Row>
-		<JobGroup>1</JobGroup>
-		<Step>7</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Ontology.Import].[ConvertOWL2Triple] @OWL = 'ORNG_1.0'</Script>
-	</Row>
-	<Row>
-		<JobGroup>1</JobGroup>
-		<Step>8</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [RDF.Stage].[LoadTriplesFromOntology] @Truncate = 1</Script>
-	</Row>
-	<Row>
-		<JobGroup>1</JobGroup>
-		<Step>9</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [RDF.Stage].[ProcessTriples]</Script>
-	</Row>
-	<Row>
-		<JobGroup>1</JobGroup>
-		<Step>10</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Ontology.].[UpdateDerivedFields]</Script>
-	</Row>
-	<Row>
-		<JobGroup>1</JobGroup>
-		<Step>11</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Ontology.].CleanUp @action='UpdateIDs'</Script>
-	</Row>
-	<Row>
-		<JobGroup>1</JobGroup>
-		<Step>12</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Profile.Data].[Concept.Mesh.ParseMeshXML]</Script>
-	</Row>
-	<Row>
-		<JobGroup>1</JobGroup>
-		<Step>13</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Profile.Cache].[Concept.Mesh.UpdateTreeTop]</Script>
-	</Row>
-	<Row>
-		<JobGroup>1</JobGroup>
-		<Step>14</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Utility.NLP].[UpdateThesaurus]</Script>
-	</Row>
-	<Row>
-		<JobGroup>2</JobGroup>
-		<Step>1</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Framework.].[RunJobGroup] @JobGroup = 7</Script>
-	</Row>
-	<Row>
-		<JobGroup>2</JobGroup>
-		<Step>2</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Framework.].[RunJobGroup] @JobGroup = 8</Script>
-	</Row>
-	<Row>
-		<JobGroup>2</JobGroup>
-		<Step>3</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Framework.].[RunJobGroup] @JobGroup = 9</Script>
-	</Row>
-	<Row>
-		<JobGroup>2</JobGroup>
-		<Step>4</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [RDF.Stage].[ProcessDataMap] @AutoFeedOnly = 0</Script>
-	</Row>
-	<Row>
-		<JobGroup>2</JobGroup>
-		<Step>5</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Profile.Import].[Beta.SetDisplayPreferences]</Script>
-	</Row>
-	<Row>
-		<JobGroup>2</JobGroup>
-		<Step>6</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [RDF.Stage].[LoadAliases]</Script>
-	</Row>
-	<Row>
-		<JobGroup>2</JobGroup>
-		<Step>7</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Ontology.].[UpdateCounts]</Script>
-	</Row>
-	<Row>
-		<JobGroup>2</JobGroup>
-		<Step>8</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Search.Cache].[Public.UpdateCache]</Script>
-	</Row>
-	<Row>
-		<JobGroup>2</JobGroup>
-		<Step>9</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Search.Cache].[Private.UpdateCache]</Script>
-	</Row>
-	<Row>
-		<JobGroup>3</JobGroup>
-		<Step>1</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [RDF.Stage].[ProcessDataMap]</Script>
-	</Row>
-	<Row>
-		<JobGroup>3</JobGroup>
-		<Step>2</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [RDF.SemWeb].[UpdateHash2Base64]</Script>
-	</Row>
-	<Row>
-		<JobGroup>3</JobGroup>
-		<Step>3</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [RDF.Stage].[LoadAliases]</Script>
-	</Row>
-	<Row>
-		<JobGroup>3</JobGroup>
-		<Step>4</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Ontology.].[UpdateCounts]</Script>
-	</Row>
-	<Row>
-		<JobGroup>3</JobGroup>
-		<Step>5</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Search.Cache].[Public.UpdateCache]</Script>
-	</Row>
-	<Row>
-		<JobGroup>3</JobGroup>
-		<Step>6</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Search.Cache].[Private.UpdateCache]</Script>
-	</Row>
-	<Row>
-		<JobGroup>4</JobGroup>
-		<Step>2</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Profile.Import].[LoadProfilesData] </Script>
-	</Row>
-	<Row>
-		<JobGroup>4</JobGroup>
-		<Step>3</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Framework.].[RunJobGroup] @JobGroup = 7</Script>
-	</Row>
-	<Row>
-		<JobGroup>4</JobGroup>
-		<Step>4</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Framework.].[RunJobGroup] @JobGroup = 3</Script>
-	</Row>
-	<Row>
-		<JobGroup>5</JobGroup>
-		<Step>1</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Framework.].[RunJobGroup] @JobGroup = 8</Script>
-	</Row>
-	<Row>
-		<JobGroup>5</JobGroup>
-		<Step>2</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Framework.].[RunJobGroup] @JobGroup = 3</Script>
-	</Row>
-	<Row>
-		<JobGroup>6</JobGroup>
-		<Step>1</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Framework.].[RunJobGroup] @JobGroup = 9</Script>
-	</Row>
-	<Row>
-		<JobGroup>6</JobGroup>
-		<Step>2</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Framework.].[RunJobGroup] @JobGroup = 3</Script>
-	</Row>
-	<Row>
-		<JobGroup>7</JobGroup>
-		<Step>1</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Profile.Cache].[Person.UpdatePerson]</Script>
-	</Row>
-	<Row>
-		<JobGroup>7</JobGroup>
-		<Step>2</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Profile.Cache].[Person.UpdateAffiliation]</Script>
-	</Row>
-	<Row>
-		<JobGroup>7</JobGroup>
-		<Step>3</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Profile.Cache].[Person.UpdatePhysicalNeighbor]</Script>
-	</Row>
-	<Row>
-		<JobGroup>7</JobGroup>
-		<Step>4</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Profile.Cache].[Publication.PubMed.UpdateAuthorPosition]</Script>
-	</Row>
-	<Row>
-		<JobGroup>7</JobGroup>
-		<Step>5</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Profile.Data].[Publication.Entity.UpdateEntity]</Script>
-	</Row>
-	<Row>
-		<JobGroup>7</JobGroup>
-		<Step>6</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Profile.Cache].[SNA.Coauthor.UpdateCoauthor]</Script>
-	</Row>
-	<Row>
-		<JobGroup>7</JobGroup>
-		<Step>7</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Profile.Cache].[Concept.Mesh.UpdateCountTree]</Script>
-	</Row>
-	<Row>
-		<JobGroup>7</JobGroup>
-		<Step>8</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Profile.Cache].[Concept.Mesh.UpdatePersonPublication]</Script>
-	</Row>
-	<Row>
-		<JobGroup>7</JobGroup>
-		<Step>9</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Profile.Cache].[Concept.Mesh.UpdatePerson]</Script>
-	</Row>
-	<Row>
-		<JobGroup>7</JobGroup>
-		<Step>10</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Profile.Cache].[Concept.Mesh.UpdateWord2Mesh]</Script>
-	</Row>
-	<Row>
-		<JobGroup>7</JobGroup>
-		<Step>11</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Profile.Cache].[Concept.Mesh.UpdateJournal]</Script>
-	</Row>
-	<Row>
-		<JobGroup>7</JobGroup>
-		<Step>12</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Profile.Cache].[SNA.Coauthor.UpdateSummary]</Script>
-	</Row>
-	<Row>
-		<JobGroup>7</JobGroup>
-		<Step>13</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Search.Cache].[History.UpdateTopSearchPhrase]</Script>
-	</Row>
-	<Row>
-		<JobGroup>7</JobGroup>
-		<Step>14</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [User.Session].[DeleteOldSessionRDF]</Script>
-	</Row>
-	<Row>
-		<JobGroup>7</JobGroup>
-		<Step>15</Step>
-		<IsActive>1</IsActive>
-		<Script>UPDATE [Profile.Data].[Group.General] SET ViewSecurityGroup = 0 WHERE EndDate &lt; GETDATE()</Script>
-	</Row>
-	<Row>
-		<JobGroup>8</JobGroup>
-		<Step>1</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Profile.Cache].[Person.UpdateSimilarPerson]</Script>
-	</Row>
-	<Row>
-		<JobGroup>8</JobGroup>
-		<Step>2</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Profile.Cache].[Concept.Mesh.UpdateSimilarConcept]</Script>
-	</Row>
-	<Row>
-		<JobGroup>9</JobGroup>
-		<Step>1</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Profile.Cache].[SNA.Coauthor.UpdateDistance]</Script>
-	</Row>
-	<Row>
-		<JobGroup>9</JobGroup>
-		<Step>2</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Profile.Cache].[SNA.Coauthor.UpdateReach]</Script>
-	</Row>
-	<Row>
-		<JobGroup>9</JobGroup>
-		<Step>3</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Profile.Cache].[SNA.Coauthor.UpdateBetweenness]</Script>
-	</Row>
-	<Row>
-		<JobGroup>9</JobGroup>
-		<Step>4</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Profile.Cache].[SNA.Coauthor.UpdateSummary]</Script>
-	</Row>
-	<Row>
-		<JobGroup>10</JobGroup>
-		<Step>1</Step>
-		<IsActive>1</IsActive>
-		<Script>EXEC [Profile.Cache].[Concept.Mesh.UpdateWord2MeshAll]</Script>
-	</Row>
+  <Row>
+    <JobGroup>1</JobGroup>
+    <Step>1</Step>
+    <IsActive>1</IsActive>
+    <Script>UPDATE [Framework.].[Parameter] SET Value = (SELECT Value+'/profile/' FROM [Framework.].[Parameter] WHERE ParameterID = 'basePath') WHERE ParameterID = 'baseURI'</Script>
+  </Row>
+  <Row>
+    <JobGroup>1</JobGroup>
+    <Step>2</Step>
+    <IsActive>1</IsActive>
+    <Script>UPDATE [Ontology.Import].OWL SET Graph = 2 WHERE name = 'VIVO_1.4'</Script>
+  </Row>
+  <Row>
+    <JobGroup>1</JobGroup>
+    <Step>3</Step>
+    <IsActive>1</IsActive>
+    <Script>UPDATE [Ontology.Import].OWL SET Graph = 3 WHERE name = 'PRNS_1.3'</Script>
+  </Row>
+  <Row>
+    <JobGroup>1</JobGroup>
+    <Step>4</Step>
+    <IsActive>1</IsActive>
+    <Script>UPDATE [Ontology.Import].OWL SET Graph = 4 WHERE name = 'ORNG_1.0'</Script>
+  </Row>
+  <Row>
+    <JobGroup>1</JobGroup>
+    <Step>5</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Ontology.Import].[ConvertOWL2Triple] @OWL = 'VIVO_1.4'</Script>
+  </Row>
+  <Row>
+    <JobGroup>1</JobGroup>
+    <Step>6</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Ontology.Import].[ConvertOWL2Triple] @OWL = 'PRNS_1.3'</Script>
+  </Row>
+  <Row>
+    <JobGroup>1</JobGroup>
+    <Step>7</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Ontology.Import].[ConvertOWL2Triple] @OWL = 'ORNG_1.0'</Script>
+  </Row>
+  <Row>
+    <JobGroup>1</JobGroup>
+    <Step>8</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [RDF.Stage].[LoadTriplesFromOntology] @Truncate = 1</Script>
+  </Row>
+  <Row>
+    <JobGroup>1</JobGroup>
+    <Step>9</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [RDF.Stage].[ProcessTriples]</Script>
+  </Row>
+  <Row>
+    <JobGroup>1</JobGroup>
+    <Step>10</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Ontology.].[UpdateDerivedFields]</Script>
+  </Row>
+  <Row>
+    <JobGroup>1</JobGroup>
+    <Step>11</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Ontology.].CleanUp @action='UpdateIDs'</Script>
+  </Row>
+  <Row>
+    <JobGroup>1</JobGroup>
+    <Step>12</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Profile.Data].[Concept.Mesh.ParseMeshXML]</Script>
+  </Row>
+  <Row>
+    <JobGroup>1</JobGroup>
+    <Step>13</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Profile.Cache].[Concept.Mesh.UpdateTreeTop]</Script>
+  </Row>
+  <Row>
+    <JobGroup>1</JobGroup>
+    <Step>14</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Utility.NLP].[UpdateThesaurus]</Script>
+  </Row>
+  <Row>
+    <JobGroup>2</JobGroup>
+    <Step>1</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Framework.].[RunJobGroup] @JobGroup = 7</Script>
+  </Row>
+  <Row>
+    <JobGroup>2</JobGroup>
+    <Step>2</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Framework.].[RunJobGroup] @JobGroup = 8</Script>
+  </Row>
+  <Row>
+    <JobGroup>2</JobGroup>
+    <Step>3</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Framework.].[RunJobGroup] @JobGroup = 9</Script>
+  </Row>
+  <Row>
+    <JobGroup>2</JobGroup>
+    <Step>4</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [RDF.Stage].[ProcessDataMap] @AutoFeedOnly = 0</Script>
+  </Row>
+  <Row>
+    <JobGroup>2</JobGroup>
+    <Step>5</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Profile.Import].[Beta.SetDisplayPreferences]</Script>
+  </Row>
+  <Row>
+    <JobGroup>2</JobGroup>
+    <Step>6</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [RDF.Stage].[LoadAliases]</Script>
+  </Row>
+  <Row>
+    <JobGroup>2</JobGroup>
+    <Step>7</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Ontology.].[UpdateCounts]</Script>
+  </Row>
+  <Row>
+    <JobGroup>2</JobGroup>
+    <Step>8</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Search.Cache].[Public.UpdateCache]</Script>
+  </Row>
+  <Row>
+    <JobGroup>2</JobGroup>
+    <Step>9</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Search.Cache].[Private.UpdateCache]</Script>
+  </Row>
+  <Row>
+    <JobGroup>3</JobGroup>
+    <Step>1</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [RDF.Stage].[ProcessDataMap]</Script>
+  </Row>
+  <Row>
+    <JobGroup>3</JobGroup>
+    <Step>2</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [RDF.SemWeb].[UpdateHash2Base64]</Script>
+  </Row>
+  <Row>
+    <JobGroup>3</JobGroup>
+    <Step>3</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [RDF.Stage].[LoadAliases]</Script>
+  </Row>
+  <Row>
+    <JobGroup>3</JobGroup>
+    <Step>4</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Ontology.].[UpdateCounts]</Script>
+  </Row>
+  <Row>
+    <JobGroup>3</JobGroup>
+    <Step>5</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Search.Cache].[Public.UpdateCache]</Script>
+  </Row>
+  <Row>
+    <JobGroup>3</JobGroup>
+    <Step>6</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Search.Cache].[Private.UpdateCache]</Script>
+  </Row>
+  <Row>
+    <JobGroup>4</JobGroup>
+    <Step>2</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Profile.Import].[LoadProfilesData] </Script>
+  </Row>
+  <Row>
+    <JobGroup>4</JobGroup>
+    <Step>3</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Framework.].[RunJobGroup] @JobGroup = 7</Script>
+  </Row>
+  <Row>
+    <JobGroup>4</JobGroup>
+    <Step>4</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Framework.].[RunJobGroup] @JobGroup = 3</Script>
+  </Row>
+  <Row>
+    <JobGroup>5</JobGroup>
+    <Step>1</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Framework.].[RunJobGroup] @JobGroup = 8</Script>
+  </Row>
+  <Row>
+    <JobGroup>5</JobGroup>
+    <Step>2</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Framework.].[RunJobGroup] @JobGroup = 3</Script>
+  </Row>
+  <Row>
+    <JobGroup>6</JobGroup>
+    <Step>1</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Framework.].[RunJobGroup] @JobGroup = 9</Script>
+  </Row>
+  <Row>
+    <JobGroup>6</JobGroup>
+    <Step>2</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Framework.].[RunJobGroup] @JobGroup = 3</Script>
+  </Row>
+  <Row>
+    <JobGroup>7</JobGroup>
+    <Step>1</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Profile.Cache].[Person.UpdatePerson]</Script>
+  </Row>
+  <Row>
+    <JobGroup>7</JobGroup>
+    <Step>2</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Profile.Cache].[Person.UpdateAffiliation]</Script>
+  </Row>
+  <Row>
+    <JobGroup>7</JobGroup>
+    <Step>3</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Profile.Cache].[Person.UpdatePhysicalNeighbor]</Script>
+  </Row>
+  <Row>
+    <JobGroup>7</JobGroup>
+    <Step>4</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Profile.Cache].[Publication.PubMed.UpdateAuthorPosition]</Script>
+  </Row>
+  <Row>
+    <JobGroup>7</JobGroup>
+    <Step>5</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Profile.Data].[Publication.Entity.UpdateEntity]</Script>
+  </Row>
+  <Row>
+    <JobGroup>7</JobGroup>
+    <Step>6</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Profile.Cache].[SNA.Coauthor.UpdateCoauthor]</Script>
+  </Row>
+  <Row>
+    <JobGroup>7</JobGroup>
+    <Step>7</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Profile.Cache].[Concept.Mesh.UpdateCountTree]</Script>
+  </Row>
+  <Row>
+    <JobGroup>7</JobGroup>
+    <Step>8</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Profile.Cache].[Concept.Mesh.UpdatePersonPublication]</Script>
+  </Row>
+  <Row>
+    <JobGroup>7</JobGroup>
+    <Step>9</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Profile.Cache].[Concept.Mesh.UpdatePerson]</Script>
+  </Row>
+  <Row>
+    <JobGroup>7</JobGroup>
+    <Step>10</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Profile.Cache].[Concept.Mesh.UpdateWord2Mesh]</Script>
+  </Row>
+  <Row>
+    <JobGroup>7</JobGroup>
+    <Step>11</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Profile.Cache].[Concept.Mesh.UpdateJournal]</Script>
+  </Row>
+  <Row>
+    <JobGroup>7</JobGroup>
+    <Step>12</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Profile.Cache].[SNA.Coauthor.UpdateSummary]</Script>
+  </Row>
+  <Row>
+    <JobGroup>7</JobGroup>
+    <Step>13</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Search.Cache].[History.UpdateTopSearchPhrase]</Script>
+  </Row>
+  <Row>
+    <JobGroup>7</JobGroup>
+    <Step>14</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [User.Session].[DeleteOldSessionRDF]</Script>
+  </Row>
+  <Row>
+    <JobGroup>7</JobGroup>
+    <Step>15</Step>
+    <IsActive>1</IsActive>
+    <Script>UPDATE [Profile.Data].[Group.General] SET ViewSecurityGroup = 0 WHERE EndDate &lt; GETDATE()</Script>
+  </Row>
+  <Row>
+    <JobGroup>8</JobGroup>
+    <Step>1</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Profile.Cache].[Person.UpdateSimilarPerson]</Script>
+  </Row>
+  <Row>
+    <JobGroup>8</JobGroup>
+    <Step>2</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Profile.Cache].[Concept.Mesh.UpdateSimilarConcept]</Script>
+  </Row>
+  <Row>
+    <JobGroup>9</JobGroup>
+    <Step>1</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Profile.Cache].[SNA.Coauthor.UpdateDistance]</Script>
+  </Row>
+  <Row>
+    <JobGroup>9</JobGroup>
+    <Step>2</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Profile.Cache].[SNA.Coauthor.UpdateReach]</Script>
+  </Row>
+  <Row>
+    <JobGroup>9</JobGroup>
+    <Step>3</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Profile.Cache].[SNA.Coauthor.UpdateBetweenness]</Script>
+  </Row>
+  <Row>
+    <JobGroup>9</JobGroup>
+    <Step>4</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Profile.Cache].[SNA.Coauthor.UpdateSummary]</Script>
+  </Row>
+  <Row>
+    <JobGroup>10</JobGroup>
+    <Step>1</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Profile.Cache].[Concept.Mesh.UpdateWord2MeshAll]</Script>
+  </Row>
 </Table>

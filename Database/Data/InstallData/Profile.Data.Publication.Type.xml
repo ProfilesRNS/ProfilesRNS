@@ -1,1 +1,7 @@
-<Table Name="[Profile.Data].[Publication.Type]"><Row><pubidtype_id>pmid</pubidtype_id><name>PubMed ID</name><sort_order>1</sort_order></Row></Table>
+<Table Name="[Profile.Data].[Publication.Type]">
+  <Row>
+    <pubidtype_id>pmid</pubidtype_id>
+    <name>PubMed ID</name>
+    <sort_order>1</sort_order>
+  </Row>
+</Table>

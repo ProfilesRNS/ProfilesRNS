@@ -1,29 +1,29 @@
 <Table Name="[ORCID.].[REF_PersonStatusType]">
-	<Row>
-		<StatusDescription>Opt-Out</StatusDescription>
-	</Row>
-	<Row>
-		<StatusDescription>Opt-In: Push Profiles Data</StatusDescription>
-	</Row>
-	<Row>
-		<StatusDescription>Opt-In: Do Not Push Profiles Data</StatusDescription>
-	</Row>
-	<Row>
-		<StatusDescription>Awaiting Response</StatusDescription>
-	</Row>
-	<Row>
-		<StatusDescription>ORCID Created</StatusDescription>
-	</Row>
-	<Row>
-		<StatusDescription>ORCID Provided</StatusDescription>
-	</Row>
-	<Row>
-		<StatusDescription>Batch Push Failed</StatusDescription>
-	</Row>
-	<Row>
-		<StatusDescription>Unknown</StatusDescription>
-	</Row>
-	<Row>
-		<StatusDescription>User Push Failed</StatusDescription>
-	</Row>
+  <Row>
+    <StatusDescription>Opt-Out</StatusDescription>
+  </Row>
+  <Row>
+    <StatusDescription>Opt-In: Push Profiles Data</StatusDescription>
+  </Row>
+  <Row>
+    <StatusDescription>Opt-In: Do Not Push Profiles Data</StatusDescription>
+  </Row>
+  <Row>
+    <StatusDescription>Awaiting Response</StatusDescription>
+  </Row>
+  <Row>
+    <StatusDescription>ORCID Created</StatusDescription>
+  </Row>
+  <Row>
+    <StatusDescription>ORCID Provided</StatusDescription>
+  </Row>
+  <Row>
+    <StatusDescription>Batch Push Failed</StatusDescription>
+  </Row>
+  <Row>
+    <StatusDescription>Unknown</StatusDescription>
+  </Row>
+  <Row>
+    <StatusDescription>User Push Failed</StatusDescription>
+  </Row>
 </Table>

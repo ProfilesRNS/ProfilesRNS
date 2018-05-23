@@ -1,82 +1,82 @@
 <Table Name="[ORCID.].[REF_WorkExternalType]">
-	<Row>
-		<WorkExternalType>arxiv</WorkExternalType>
-		<WorkExternalDescription>ArXiv.</WorkExternalDescription>
-	</Row>
-	<Row>
-		<WorkExternalType>asin</WorkExternalType>
-		<WorkExternalDescription>Amazon Standard Identification Number.</WorkExternalDescription>
-	</Row>
-	<Row>
-		<WorkExternalType>bibcode</WorkExternalType>
-		<WorkExternalDescription>Bibcode; used by a number of astronomical data systems; example: 1924MNRAS..84..308E.</WorkExternalDescription>
-	</Row>
-	<Row>
-		<WorkExternalType>doi</WorkExternalType>
-		<WorkExternalDescription>Digital object identifier; example: 10.1038/news070508-7.</WorkExternalDescription>
-	</Row>
-	<Row>
-		<WorkExternalType>eid</WorkExternalType>
-		<WorkExternalDescription>Identifier used by Scopus.</WorkExternalDescription>
-	</Row>
-	<Row>
-		<WorkExternalType>Id</WorkExternalType>
-		<WorkExternalDescription>A unique identifier, used where none of the specialized identifiers are applicable.</WorkExternalDescription>
-	</Row>
-	<Row>
-		<WorkExternalType>isbn</WorkExternalType>
-		<WorkExternalDescription>International Standard Book Number such as 978-0812695939.</WorkExternalDescription>
-	</Row>
-	<Row>
-		<WorkExternalType>issn</WorkExternalType>
-		<WorkExternalDescription>International Standard Serial Number.</WorkExternalDescription>
-	</Row>
-	<Row>
-		<WorkExternalType>jfm</WorkExternalType>
-		<WorkExternalDescription>Jahrbuch über die Fortschritte der Mathematik.</WorkExternalDescription>
-	</Row>
-	<Row>
-		<WorkExternalType>jstor</WorkExternalType>
-		<WorkExternalDescription>JSTOR abstract</WorkExternalDescription>
-	</Row>
-	<Row>
-		<WorkExternalType>lccn</WorkExternalType>
-		<WorkExternalDescription>Library of Congress Control Number.</WorkExternalDescription>
-	</Row>
-	<Row>
-		<WorkExternalType>mr</WorkExternalType>
-		<WorkExternalDescription>Mathematical Reviews.</WorkExternalDescription>
-	</Row>
-	<Row>
-		<WorkExternalType>oclc</WorkExternalType>
-		<WorkExternalDescription>Online Computer Library Center.</WorkExternalDescription>
-	</Row>
-	<Row>
-		<WorkExternalType>ol</WorkExternalType>
-		<WorkExternalDescription>Open Library</WorkExternalDescription>
-	</Row>
-	<Row>
-		<WorkExternalType>osti</WorkExternalType>
-		<WorkExternalDescription>Office of Scientific and Technical Information.</WorkExternalDescription>
-	</Row>
-	<Row>
-		<WorkExternalType>pmc</WorkExternalType>
-		<WorkExternalDescription>PubMed Central article number for full-text free repository of an article.</WorkExternalDescription>
-	</Row>
-	<Row>
-		<WorkExternalType>pmid</WorkExternalType>
-		<WorkExternalDescription>PubMed Unique Identifier.</WorkExternalDescription>
-	</Row>
-	<Row>
-		<WorkExternalType>rfc</WorkExternalType>
-		<WorkExternalDescription>Request for Comments.</WorkExternalDescription>
-	</Row>
-	<Row>
-		<WorkExternalType>ssrn</WorkExternalType>
-		<WorkExternalDescription>Social Science Research Network.</WorkExternalDescription>
-	</Row>
-	<Row>
-		<WorkExternalType>zbl</WorkExternalType>
-		<WorkExternalDescription>Zentralblatt MATH.</WorkExternalDescription>
-	</Row>
+  <Row>
+    <WorkExternalType>arxiv</WorkExternalType>
+    <WorkExternalDescription>ArXiv.</WorkExternalDescription>
+  </Row>
+  <Row>
+    <WorkExternalType>asin</WorkExternalType>
+    <WorkExternalDescription>Amazon Standard Identification Number.</WorkExternalDescription>
+  </Row>
+  <Row>
+    <WorkExternalType>bibcode</WorkExternalType>
+    <WorkExternalDescription>Bibcode; used by a number of astronomical data systems; example: 1924MNRAS..84..308E.</WorkExternalDescription>
+  </Row>
+  <Row>
+    <WorkExternalType>doi</WorkExternalType>
+    <WorkExternalDescription>Digital object identifier; example: 10.1038/news070508-7.</WorkExternalDescription>
+  </Row>
+  <Row>
+    <WorkExternalType>eid</WorkExternalType>
+    <WorkExternalDescription>Identifier used by Scopus.</WorkExternalDescription>
+  </Row>
+  <Row>
+    <WorkExternalType>Id</WorkExternalType>
+    <WorkExternalDescription>A unique identifier, used where none of the specialized identifiers are applicable.</WorkExternalDescription>
+  </Row>
+  <Row>
+    <WorkExternalType>isbn</WorkExternalType>
+    <WorkExternalDescription>International Standard Book Number such as 978-0812695939.</WorkExternalDescription>
+  </Row>
+  <Row>
+    <WorkExternalType>issn</WorkExternalType>
+    <WorkExternalDescription>International Standard Serial Number.</WorkExternalDescription>
+  </Row>
+  <Row>
+    <WorkExternalType>jfm</WorkExternalType>
+    <WorkExternalDescription>Jahrbuch über die Fortschritte der Mathematik.</WorkExternalDescription>
+  </Row>
+  <Row>
+    <WorkExternalType>jstor</WorkExternalType>
+    <WorkExternalDescription>JSTOR abstract</WorkExternalDescription>
+  </Row>
+  <Row>
+    <WorkExternalType>lccn</WorkExternalType>
+    <WorkExternalDescription>Library of Congress Control Number.</WorkExternalDescription>
+  </Row>
+  <Row>
+    <WorkExternalType>mr</WorkExternalType>
+    <WorkExternalDescription>Mathematical Reviews.</WorkExternalDescription>
+  </Row>
+  <Row>
+    <WorkExternalType>oclc</WorkExternalType>
+    <WorkExternalDescription>Online Computer Library Center.</WorkExternalDescription>
+  </Row>
+  <Row>
+    <WorkExternalType>ol</WorkExternalType>
+    <WorkExternalDescription>Open Library</WorkExternalDescription>
+  </Row>
+  <Row>
+    <WorkExternalType>osti</WorkExternalType>
+    <WorkExternalDescription>Office of Scientific and Technical Information.</WorkExternalDescription>
+  </Row>
+  <Row>
+    <WorkExternalType>pmc</WorkExternalType>
+    <WorkExternalDescription>PubMed Central article number for full-text free repository of an article.</WorkExternalDescription>
+  </Row>
+  <Row>
+    <WorkExternalType>pmid</WorkExternalType>
+    <WorkExternalDescription>PubMed Unique Identifier.</WorkExternalDescription>
+  </Row>
+  <Row>
+    <WorkExternalType>rfc</WorkExternalType>
+    <WorkExternalDescription>Request for Comments.</WorkExternalDescription>
+  </Row>
+  <Row>
+    <WorkExternalType>ssrn</WorkExternalType>
+    <WorkExternalDescription>Social Science Research Network.</WorkExternalDescription>
+  </Row>
+  <Row>
+    <WorkExternalType>zbl</WorkExternalType>
+    <WorkExternalDescription>Zentralblatt MATH.</WorkExternalDescription>
+  </Row>
 </Table>

@@ -1,56 +1,56 @@
 <Table Name="[Framework.].[JobGroup]">
-	<Row>
-		<JobGroup>1</JobGroup>
-		<Name>Install</Name>
-		<Type>OneTime</Type>
-		<Description>Run as part of the standard install process.</Description>
-	</Row>
-	<Row>
-		<JobGroup>2</JobGroup>
-		<Name>BetaInstall</Name>
-		<Type>OneTime</Type>
-		<Description>Run as part of an upgrade from Profiles RNS Beta.</Description>
-	</Row>
-	<Row>
-		<JobGroup>3</JobGroup>
-		<Name>UpdateCore</Name>
-		<Type>HelperJob</Type>
-		<Description>Updates Core tables based on changes to Extended tables.</Description>
-	</Row>
-	<Row>
-		<JobGroup>4</JobGroup>
-		<Name>NightlyFull</Name>
-		<Type>Scheduled</Type>
-		<Description>Run approximately nightly to update Extended and Core tables.</Description>
-	</Row>
-	<Row>
-		<JobGroup>5</JobGroup>
-		<Name>WeeklyFull</Name>
-		<Type>Scheduled</Type>
-		<Description>Run approximately weekly to update Extended and Core tables.</Description>
-	</Row>
-	<Row>
-		<JobGroup>6</JobGroup>
-		<Name>MonthlyFull</Name>
-		<Type>Scheduled</Type>
-		<Description>Run approximately montly to update Extended and Core tables.</Description>
-	</Row>
-	<Row>
-		<JobGroup>7</JobGroup>
-		<Name>NightlyExtended</Name>
-		<Type>HelperJob</Type>
-		<Description>Updates Extended tables whose data change frequently.</Description>
-	</Row>
-	<Row>
-		<JobGroup>8</JobGroup>
-		<Name>WeeklyEntended</Name>
-		<Type>HelperJob</Type>
-		<Description>Updates Extended tables whose data change less often or are slow to process.</Description>
-	</Row>
-	<Row>
-		<JobGroup>9</JobGroup>
-		<Name>MonthlyExtended</Name>
-		<Type>HelperJob</Type>
-		<Description>Updates Extended tables whose data take a very long time to process.</Description>
-	</Row>
+  <Row>
+    <JobGroup>1</JobGroup>
+    <Name>Install</Name>
+    <Type>OneTime</Type>
+    <Description>Run as part of the standard install process.</Description>
+  </Row>
+  <Row>
+    <JobGroup>2</JobGroup>
+    <Name>BetaInstall</Name>
+    <Type>OneTime</Type>
+    <Description>Run as part of an upgrade from Profiles RNS Beta.</Description>
+  </Row>
+  <Row>
+    <JobGroup>3</JobGroup>
+    <Name>UpdateCore</Name>
+    <Type>HelperJob</Type>
+    <Description>Updates Core tables based on changes to Extended tables.</Description>
+  </Row>
+  <Row>
+    <JobGroup>4</JobGroup>
+    <Name>NightlyFull</Name>
+    <Type>Scheduled</Type>
+    <Description>Run approximately nightly to update Extended and Core tables.</Description>
+  </Row>
+  <Row>
+    <JobGroup>5</JobGroup>
+    <Name>WeeklyFull</Name>
+    <Type>Scheduled</Type>
+    <Description>Run approximately weekly to update Extended and Core tables.</Description>
+  </Row>
+  <Row>
+    <JobGroup>6</JobGroup>
+    <Name>MonthlyFull</Name>
+    <Type>Scheduled</Type>
+    <Description>Run approximately montly to update Extended and Core tables.</Description>
+  </Row>
+  <Row>
+    <JobGroup>7</JobGroup>
+    <Name>NightlyExtended</Name>
+    <Type>HelperJob</Type>
+    <Description>Updates Extended tables whose data change frequently.</Description>
+  </Row>
+  <Row>
+    <JobGroup>8</JobGroup>
+    <Name>WeeklyEntended</Name>
+    <Type>HelperJob</Type>
+    <Description>Updates Extended tables whose data change less often or are slow to process.</Description>
+  </Row>
+  <Row>
+    <JobGroup>9</JobGroup>
+    <Name>MonthlyExtended</Name>
+    <Type>HelperJob</Type>
+    <Description>Updates Extended tables whose data take a very long time to process.</Description>
+  </Row>
 </Table>
