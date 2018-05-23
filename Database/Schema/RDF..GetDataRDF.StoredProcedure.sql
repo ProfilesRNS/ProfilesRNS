@@ -83,6 +83,9 @@ BEGIN
 
 	declare @validURI bit
 	select @validURI = 1
+	
+	declare @includePredicates bit
+	select @includePredicates = 1
 
 	--*******************************************************************************************
 	--*******************************************************************************************
@@ -166,7 +169,8 @@ BEGIN
 		IncludeProperty bit,
 		Limit int,
 		IncludeNetwork bit,
-		IncludeDescription bit
+		IncludeDescription bit,
+		IsDetail bit
 	)
 
 	--*******************************************************************************************
@@ -452,8 +456,8 @@ BEGIN
 	--*******************************************************************************************
 
 	-- Get custom settings to override the [Ontology.].[ClassProperty] default values
-	insert into #ClassPropertyCustom (ClassPropertyID, IncludeProperty, Limit, IncludeNetwork, IncludeDescription)
-		select p.ClassPropertyID, t.IncludeProperty, t.Limit, t.IncludeNetwork, t.IncludeDescription
+	insert into #ClassPropertyCustom (ClassPropertyID, IncludeProperty, Limit, IncludeNetwork, IncludeDescription, IsDetail)
+		select p.ClassPropertyID, t.IncludeProperty, t.Limit, t.IncludeNetwork, t.IncludeDescription, t.IsDetail
 			from [Ontology.].[ClassProperty] p
 				inner join (
 					select	x.value('@Class','varchar(400)') Class,
@@ -462,11 +466,21 @@ BEGIN
 							(case x.value('@IncludeProperty','varchar(5)') when 'true' then 1 when 'false' then 0 else null end) IncludeProperty,
 							x.value('@Limit','int') Limit,
 							(case x.value('@IncludeNetwork','varchar(5)') when 'true' then 1 when 'false' then 0 else null end) IncludeNetwork,
-							(case x.value('@IncludeDescription','varchar(5)') when 'true' then 1 when 'false' then 0 else null end) IncludeDescription
+							(case x.value('@IncludeDescription','varchar(5)') when 'true' then 1 when 'false' then 0 else null end) IncludeDescription,
+							(case x.value('@IsDetail','varchar(5)') when 'true' then 1 when 'false' then 0 else null end) IsDetail
 					from @ExpandRDFListXML.nodes('//ExpandRDF') as R(x)
 				) t
 				on p.Class=t.Class and p.Property=t.Property
 					and ((p.NetworkProperty is null and t.NetworkProperty is null) or (p.NetworkProperty = t.NetworkProperty))
+
+	declare @ClassPropertyCustomTypeID int
+	select @ClassPropertyCustomTypeID = ClassPropertyCustomTypeID from (select x.value('@ClassPropertyCustomTypeID', 'int') ClassPropertyCustomTypeID from @ExpandRDFListXML.nodes('//ExpandRDFOptions') as R(x)) t
+	insert into #ClassPropertyCustom (ClassPropertyID, IncludeProperty, Limit, IncludeNetwork, IncludeDescription, IsDetail)
+		select _ClassPropertyID, IncludeProperty, Limit, IncludeNetwork, IncludeDescription, IsDetail from [Ontology.].[ClassPropertyCustom]
+		where ClassPropertyCustomTypeID=@ClassPropertyCustomTypeID and _ClassPropertyID not in (select ClassPropertyID from #ClassPropertyCustom)
+
+	if exists (select 1 from (select (case x.value('@ExpandPredicates', 'varchar(5)') when 'false' then 0 else 1 end) ExpandPredicates from @ExpandRDFListXML.nodes('//ExpandRDFOptions') as R(x)) t
+		where t.ExpandPredicates = 0) begin set @includePredicates = 0 end
 
 	-- Get properties and loop if objects need to be expanded
 	declare @numLoops int
@@ -503,17 +517,17 @@ BEGIN
 		truncate table #expand
 		insert into #expand(subject, predicate, uri, property, tagName, propertyLabel, IsDetail, limit, showStats, showSummary)
 			select p.subject, o._PropertyNode, max(p.uri) uri, o.property, o._TagName, o._PropertyLabel, min(o.IsDetail*1) IsDetail, 
-					(case when min(o.IsDetail*1) = 0 then max(case when o.IsDetail=0 then IsNull(c.limit,o.limit) else null end) else max(IsNull(c.limit,o.limit)) end) limit,
-					(case when min(o.IsDetail*1) = 0 then max(case when o.IsDetail=0 then IsNull(c.IncludeNetwork,o.IncludeNetwork)*1 else 0 end) else max(IsNull(c.IncludeNetwork,o.IncludeNetwork)*1) end) showStats,
-					(case when min(o.IsDetail*1) = 0 then max(case when o.IsDetail=0 then IsNull(c.IncludeDescription,o.IncludeDescription)*1 else 0 end) else max(IsNull(c.IncludeDescription,o.IncludeDescription)*1) end) showSummary
+					(case when min(IsNull(c.IsDetail, o.IsDetail)*1) = 0 then max(case when IsNull(c.IsDetail, o.IsDetail)=0 then IsNull(c.limit,o.limit) else null end) else max(IsNull(c.limit,o.limit)) end) limit,
+					(case when min(IsNull(c.IsDetail, o.IsDetail)*1) = 0 then max(case when IsNull(c.IsDetail, o.IsDetail)=0 then IsNull(c.IncludeNetwork,o.IncludeNetwork)*1 else 0 end) else max(IsNull(c.IncludeNetwork,o.IncludeNetwork)*1) end) showStats,
+					(case when min(IsNull(c.IsDetail, o.IsDetail)*1) = 0 then max(case when IsNull(c.IsDetail, o.IsDetail)=0 then IsNull(c.IncludeDescription,o.IncludeDescription)*1 else 0 end) else max(IsNull(c.IncludeDescription,o.IncludeDescription)*1) end) showSummary
 				from #types p
 					inner join [Ontology.].ClassProperty o
 						on p.object = o._ClassNode 
 						and ((p.predicate is null and o._NetworkPropertyNode is null) or (p.predicate = o._NetworkPropertyNode))
-						and o.IsDetail <= p.showDetail
 					left outer join #ClassPropertyCustom c
 						on o.ClassPropertyID = c.ClassPropertyID
 				where IsNull(c.IncludeProperty,1) = 1
+				and IsNull(c.IsDetail, o.IsDetail) <= showDetail
 				group by p.subject, o.property, o._PropertyNode, o._TagName, o._PropertyLabel
 		-- Get the values for each property that should be expanded
 		insert into #properties (uri,subject,predicate,object,showSummary,property,tagName,propertyLabel,Language,DataType,Value,ObjectType,SortOrder)
@@ -591,14 +605,18 @@ BEGIN
 				where showSummary = 1
 					and ObjectType = 0
 					and object not in (select subject from #subjects)
-		select @NewSubjects = @@ROWCOUNT		
-		insert into #subjects(subject,showDetail,expanded,uri)
-			select distinct predicate, 0, 0, property
-				from #properties
-				where predicate is not null
-					and predicate not in (select subject from #subjects)
+		select @NewSubjects = @@ROWCOUNT
+		if(@includePredicates = 1)
+		begin		
+			insert into #subjects(subject,showDetail,expanded,uri)
+				select distinct predicate, 0, 0, property
+					from #properties
+					where predicate is not null
+						and predicate not in (select subject from #subjects)
+			select @NewSubjects = @NewSubjects + @@ROWCOUNT
+		end
 		-- If no subjects need to be expanded, then we are done
-		if @NewSubjects + @@ROWCOUNT = 0
+		if @NewSubjects = 0
 			select @numLoops = @maxLoops
 		select @numLoops = @numLoops + 1 + @maxLoops * (1 - @expand)
 		select @actualLoops = @actualLoops + 1

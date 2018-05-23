@@ -152,6 +152,9 @@
             </Module>
           </Panel>
         </PanelList>
+        <ExpandRDFList>
+          <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="3" />
+        </ExpandRDFList>
       </Presentation>
     </presentationXML>
   </Row>
@@ -254,8 +257,7 @@
           </Panel>
         </PanelList>
         <ExpandRDFList>
-          <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#authorInAuthorship" Limit="1" />
-          <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#hasResearcherRole" Limit="1" />
+          <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="1" />
         </ExpandRDFList>
       </Presentation>
     </presentationXML>
@@ -290,6 +292,9 @@
                 <Param Name="ItemURLText">{{{rdf:Description/rdf:object/@rdf:resource}}}</Param>
                 <Param Name="ItemText" />
                 <Param Name="ItemURL">{{{rdf:Description/rdf:object/@rdf:resource}}}</Param>
+                <Param Name="ExpandRDFList">
+                  <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="2" />
+                </Param>
               </ParamList>
             </Module>
           </Panel>
@@ -319,6 +324,10 @@
               <ParamList>
                 <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
                 <Param Name="XSLTPath">~/profile/XSLT/CoAuthorDetail.xslt</Param>
+                <Param Name="ExpandRDFList">
+                  <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="2" />
+                  <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://profiles.catalyst.harvard.edu/ontology/prns#fullName" IsDetail="false" />
+                </Param>
               </ParamList>
             </Module>
           </Panel>
@@ -327,8 +336,7 @@
               <ParamList>
                 <Param Name="DataURI">rdf:RDF/rdf:Description/rdf:subject/@rdf:resource</Param>
                 <Param Name="ExpandRDFList">
-                  <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#authorInAuthorship" Limit="1" />
-                  <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#hasResearcherRole" Limit="1" />
+                  <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="1" />
                 </Param>
               </ParamList>
             </Module>
@@ -336,8 +344,7 @@
               <ParamList>
                 <Param Name="DataURI">rdf:RDF/rdf:Description/rdf:subject/@rdf:resource</Param>
                 <Param Name="ExpandRDFList">
-                  <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#authorInAuthorship" Limit="1" />
-                  <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#hasResearcherRole" Limit="1" />
+                  <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="1" />
                 </Param>
                 <Param Name="InfoCaption">Concepts</Param>
                 <Param Name="Description">Derived automatically from this person's publications.</Param>
@@ -354,8 +361,7 @@
               <ParamList>
                 <Param Name="DataURI">rdf:RDF/rdf:Description/rdf:subject/@rdf:resource</Param>
                 <Param Name="ExpandRDFList">
-                  <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#authorInAuthorship" Limit="1" />
-                  <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#hasResearcherRole" Limit="1" />
+                  <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="1" />
                 </Param>
                 <Param Name="InfoCaption">Co-Authors</Param>
                 <Param Name="MaxDisplay">5</Param>
@@ -371,8 +377,7 @@
               <ParamList>
                 <Param Name="DataURI">rdf:RDF/rdf:Description/rdf:subject/@rdf:resource</Param>
                 <Param Name="ExpandRDFList">
-                  <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#authorInAuthorship" Limit="1" />
-                  <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#hasResearcherRole" Limit="1" />
+                  <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="1" />
                 </Param>
                 <Param Name="InfoCaption">Similar People</Param>
                 <Param Name="Description">People who share similar concepts with this person.</Param>
@@ -390,8 +395,7 @@
               <ParamList>
                 <Param Name="DataURI">rdf:RDF/rdf:Description/rdf:subject/@rdf:resource</Param>
                 <Param Name="ExpandRDFList">
-                  <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#authorInAuthorship" Limit="1" />
-                  <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#hasResearcherRole" Limit="1" />
+                  <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="1" />
                 </Param>
                 <Param Name="InfoCaption">Physical Neighbors</Param>
                 <Param Name="Description">People whose addresses are nearby this person.</Param>
@@ -404,6 +408,9 @@
             </Module>
           </Panel>
         </PanelList>
+        <ExpandRDFList>
+          <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="2" />
+        </ExpandRDFList>
       </Presentation>
     </presentationXML>
   </Row>
@@ -439,6 +446,9 @@
                 <Param Name="ItemText" />
                 <Param Name="ItemURL">{{{rdf:Description/rdf:object/@rdf:resource}}}</Param>
                 <Param Name="SortBy">Weight</Param>
+                <Param Name="ExpandRDFList">
+                  <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="2" />
+                </Param>
               </ParamList>
             </Module>
           </Panel>
@@ -454,6 +464,10 @@
               <ParamList>
                 <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
                 <Param Name="XSLTPath">~/profile/XSLT/SimilarPeopleDetail.xslt</Param>
+                <Param Name="ExpandRDFList">
+                  <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="2" />
+                  <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://profiles.catalyst.harvard.edu/ontology/prns#fullName" IsDetail="false" />
+                </Param>
               </ParamList>
             </Module>
           </Panel>
@@ -462,8 +476,7 @@
               <ParamList>
                 <Param Name="DataURI">rdf:RDF/rdf:Description/rdf:subject/@rdf:resource</Param>
                 <Param Name="ExpandRDFList">
-                  <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#authorInAuthorship" Limit="1" />
-                  <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#hasResearcherRole" Limit="1" />
+                  <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="1" />
                 </Param>
               </ParamList>
             </Module>
@@ -471,8 +484,7 @@
               <ParamList>
                 <Param Name="DataURI">rdf:RDF/rdf:Description/rdf:subject/@rdf:resource</Param>
                 <Param Name="ExpandRDFList">
-                  <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#authorInAuthorship" Limit="1" />
-                  <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#hasResearcherRole" Limit="1" />
+                  <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="1" />
                 </Param>
                 <Param Name="InfoCaption">Concepts</Param>
                 <Param Name="Description">Derived automatically from this person's publications.</Param>
@@ -489,8 +501,7 @@
               <ParamList>
                 <Param Name="DataURI">rdf:RDF/rdf:Description/rdf:subject/@rdf:resource</Param>
                 <Param Name="ExpandRDFList">
-                  <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#authorInAuthorship" Limit="1" />
-                  <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#hasResearcherRole" Limit="1" />
+                  <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="1" />
                 </Param>
                 <Param Name="InfoCaption">Co-Authors</Param>
                 <Param Name="MaxDisplay">5</Param>
@@ -506,8 +517,7 @@
               <ParamList>
                 <Param Name="DataURI">rdf:RDF/rdf:Description/rdf:subject/@rdf:resource</Param>
                 <Param Name="ExpandRDFList">
-                  <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#authorInAuthorship" Limit="1" />
-                  <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#hasResearcherRole" Limit="1" />
+                  <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="1" />
                 </Param>
                 <Param Name="InfoCaption">Similar People</Param>
                 <Param Name="Description">People who share similar concepts with this person.</Param>
@@ -525,8 +535,7 @@
               <ParamList>
                 <Param Name="DataURI">rdf:RDF/rdf:Description/rdf:subject/@rdf:resource</Param>
                 <Param Name="ExpandRDFList">
-                  <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#authorInAuthorship" Limit="1" />
-                  <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#hasResearcherRole" Limit="1" />
+                  <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="1" />
                 </Param>
                 <Param Name="InfoCaption">Physical Neighbors</Param>
                 <Param Name="Description">People whose addresses are nearby this person.</Param>
@@ -539,6 +548,9 @@
             </Module>
           </Panel>
         </PanelList>
+        <ExpandRDFList>
+          <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="2" />
+        </ExpandRDFList>
       </Presentation>
     </presentationXML>
   </Row>
@@ -606,6 +618,10 @@
               <ParamList>
                 <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
                 <Param Name="XSLTPath">~/profile/XSLT/ConceptDetail.xslt</Param>
+                <Param Name="ExpandRDFList">
+                  <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="2" />
+                  <ExpandRDF Class="http://www.w3.org/2004/02/skos/core#Concept" Property="http://profiles.catalyst.harvard.edu/ontology/prns#numberOfPublications" IsDetail="false" />
+                </Param>
               </ParamList>
             </Module>
           </Panel>
@@ -615,8 +631,7 @@
               <ParamList>
                 <Param Name="DataURI">rdf:RDF/rdf:Description/rdf:subject/@rdf:resource</Param>
                 <Param Name="ExpandRDFList">
-                  <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#authorInAuthorship" Limit="1" />
-                  <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#hasResearcherRole" Limit="1" />
+                  <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="1" />
                 </Param>
                 <Param Name="InfoCaption">Concepts</Param>
                 <Param Name="Description">Derived automatically from this person's publications.</Param>
@@ -633,8 +648,7 @@
               <ParamList>
                 <Param Name="DataURI">rdf:RDF/rdf:Description/rdf:subject/@rdf:resource</Param>
                 <Param Name="ExpandRDFList">
-                  <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#authorInAuthorship" Limit="1" />
-                  <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#hasResearcherRole" Limit="1" />
+                  <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="1" />
                 </Param>
                 <Param Name="InfoCaption">Co-Authors</Param>
                 <Param Name="MaxDisplay">5</Param>
@@ -650,8 +664,7 @@
               <ParamList>
                 <Param Name="DataURI">rdf:RDF/rdf:Description/rdf:subject/@rdf:resource</Param>
                 <Param Name="ExpandRDFList">
-                  <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#authorInAuthorship" Limit="1" />
-                  <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#hasResearcherRole" Limit="1" />
+                  <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="1" />
                 </Param>
                 <Param Name="InfoCaption">Similar People</Param>
                 <Param Name="Description">People who share similar concepts with this person.</Param>
@@ -669,8 +682,7 @@
               <ParamList>
                 <Param Name="DataURI">rdf:RDF/rdf:Description/rdf:subject/@rdf:resource</Param>
                 <Param Name="ExpandRDFList">
-                  <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#authorInAuthorship" Limit="1" />
-                  <ExpandRDF Class="http://xmlns.com/foaf/0.1/Person" Property="http://vivoweb.org/ontology/core#hasResearcherRole" Limit="1" />
+                  <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="1" />
                 </Param>
                 <Param Name="InfoCaption">Physical Neighbors</Param>
                 <Param Name="Description">People whose addresses are nearby this person.</Param>
@@ -683,6 +695,9 @@
             </Module>
           </Panel>
         </PanelList>
+        <ExpandRDFList>
+          <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="2" />
+        </ExpandRDFList>
       </Presentation>
     </presentationXML>
   </Row>
@@ -739,6 +754,9 @@
             </Module>
           </Panel>
         </PanelList>
+        <ExpandRDFList>
+          <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="2" />
+        </ExpandRDFList>
       </Presentation>
     </presentationXML>
   </Row>
@@ -791,6 +809,9 @@
             </Module>
           </Panel>
         </PanelList>
+        <ExpandRDFList>
+          <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="2" />
+        </ExpandRDFList>
       </Presentation>
     </presentationXML>
   </Row>
@@ -806,21 +827,21 @@
         <PageColumns>3</PageColumns>
         <PageTitle>Connection</PageTitle>
         <PageBackLinkName>Back to Details
-  </PageBackLinkName>
+</PageBackLinkName>
         <PageBackLinkURL>{{{//rdf:RDF/rdf:Description/prns:connectionInNetwork/@rdf:resource}}}/details</PageBackLinkURL>
         <PageSubTitle>
-	{{{//rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:firstName}}} 
-	{{{//rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:lastName}}} 
-	to 
-	{{{//rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description[1]/rdf:object/@rdf:resource]/rdfs:label}}}
-  </PageSubTitle>
+{{{//rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:firstName}}} 
+{{{//rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:lastName}}} 
+to 
+{{{//rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description[1]/rdf:object/@rdf:resource]/rdfs:label}}}
+</PageSubTitle>
         <PageDescription>
-	This is a "connection" page, showing publications 
-	{{{//rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:firstName}}} 
-	{{{//rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:lastName}}} 
-	has written about 
-	{{{//rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description[1]/rdf:object/@rdf:resource]/rdfs:label}}}.
-  </PageDescription>
+This is a "connection" page, showing publications 
+{{{//rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:firstName}}} 
+{{{//rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description[1]/rdf:subject/@rdf:resource]/foaf:lastName}}} 
+has written about 
+{{{//rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description[1]/rdf:object/@rdf:resource]/rdfs:label}}}.
+</PageDescription>
         <PanelTabType>Fixed</PanelTabType>
         <PanelList>
           <Panel Type="active">
@@ -842,18 +863,21 @@
               <ParamList>
                 <Param Name="HTML">
                   <div class="passiveSectionHead">
-              Connection Strength
-            </div>
+	  Connection Strength
+	</div>
                   <br />
                   <div class="passiveSectionBody"> The connection strength for concepts is the <u>sum</u> of the scores for each matching publication.
-			<br /><br />
-				Publication scores are based on many factors, including how long ago they were written and whether the person is a first or senior author.
-			</div>
+	<br /><br />
+		Publication scores are based on many factors, including how long ago they were written and whether the person is a first or senior author.
+	</div>
                 </Param>
               </ParamList>
             </Module>
           </Panel>
         </PanelList>
+        <ExpandRDFList>
+          <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="2" />
+        </ExpandRDFList>
       </Presentation>
     </presentationXML>
   </Row>
@@ -905,6 +929,9 @@
             <Module ID="CustomViewInformationResource" />
           </Panel>
         </PanelList>
+        <ExpandRDFList>
+          <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="4" />
+        </ExpandRDFList>
       </Presentation>
     </presentationXML>
   </Row>
@@ -1030,7 +1057,7 @@
           </Panel>
         </PanelList>
         <ExpandRDFList>
-          <ExpandRDF Class="http://xmlns.com/foaf/0.1/Group" Property="http://profiles.catalyst.harvard.edu/ontology/prns#associatedInformationResource" Limit="1" />
+          <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="5" />
         </ExpandRDFList>
       </Presentation>
     </presentationXML>
@@ -1060,6 +1087,9 @@
               <ParamList>
                 <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
                 <Param Name="XSLTPath">~/profile/XSLT/ContributingRoleDetails.xslt</Param>
+                <Param Name="ExpandRDFList">
+                  <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="6" />
+                </Param>
               </ParamList>
             </Module>
           </Panel>
@@ -1068,6 +1098,9 @@
               <ParamList>
                 <Param Name="DataURI">rdf:RDF/rdf:Description/@rdf:about</Param>
                 <Param Name="XSLTPath">~/profile/XSLT/ContributingRoleRoles.xslt</Param>
+                <Param Name="ExpandRDFList">
+                  <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="6" />
+                </Param>
               </ParamList>
             </Module>
           </Panel>
@@ -1082,6 +1115,9 @@
             <Module ID="NetworkClusterGroup" />
           </Panel>
         </PanelList>
+        <ExpandRDFList>
+          <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="6" />
+        </ExpandRDFList>
       </Presentation>
     </presentationXML>
   </Row>

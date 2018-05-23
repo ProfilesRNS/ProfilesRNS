@@ -226,6 +226,37 @@ SELECT  Row_Number() OVER (ORDER BY (SELECT 1)),
   CROSS APPLY x.nodes('//Row') AS R ( x )
 
   
+    --[Ontology.].[ClassPropertyCustom]
+  INSERT INTO [Ontology.].ClassPropertyCustom
+        ( _ClassPropertyID,
+		  ClassPropertyCustomTypeID,
+          Class,
+          NetworkProperty,
+          Property,
+		  IncludeProperty,
+          IsDetail,
+          Limit,
+          IncludeDescription,
+          IncludeNetwork
+        )
+  SELECT  Row_Number() OVER (ORDER BY (SELECT 1) + 1000),
+		R.x.value('ClassPropertyCustomTypeID[1]','varchar(max)'),
+		R.x.value('Class[1]','varchar(max)'),
+		R.x.value('NetworkProperty[1]','varchar(max)'),
+		R.x.value('Property[1]','varchar(max)'),
+		R.x.value('IncludeProperty[1]','varchar(max)'),
+		R.x.value('IsDetail[1]','varchar(max)'),
+		R.x.value('Limit[1]','varchar(max)'),
+		R.x.value('IncludeDescription[1]','varchar(max)'),
+		R.x.value('IncludeNetwork[1]','varchar(max)')
+  FROM    ( SELECT
+                      @x.query
+                      ('Import[1]/Table[@Name=''[Ontology.].[ClassPropertyCustom]'']')
+                      x
+          ) t
+  CROSS APPLY x.nodes('//Row') AS R ( x )
+  
+  
   --[Ontology.].[DataMap]
   TRUNCATE TABLE [Ontology.].DataMap
   INSERT INTO [Ontology.].DataMap

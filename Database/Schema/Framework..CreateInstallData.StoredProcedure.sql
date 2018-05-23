@@ -117,6 +117,24 @@ BEGIN
 						for xml path(''), type
 					),
 					(
+						select	'[Ontology.].[ClassPropertyCustom]' 'Table/@Name',
+								(
+									select	
+											ClassPropertyCustomTypeID 'ClassPropertyCustomTypeID',
+											Class 'Class',
+											NetworkProperty 'NetworkProperty',
+											Property 'Property',
+											IncludeProperty 'IncludeProperty',
+											Limit 'Limit',
+											IncludeNetwork 'IncludeNetwork',
+											IncludeDescription 'IncludeDescription',
+											IsDetail 'IsDetail'
+									from [Ontology.].ClassPropertyCustom
+									for xml path('Row'), type
+								) 'Table'
+						for xml path(''), type
+					),
+					(
 						select	'[Ontology.].[DataMap]' 'Table/@Name',
 						
 								(

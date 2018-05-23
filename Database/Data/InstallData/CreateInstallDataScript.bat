@@ -8,6 +8,7 @@ type Framework..JobGroup.xml
 type Ontology..ClassGroup.xml
 type Ontology..ClassGroupClass.xml
 type Ontology..ClassProperty.xml
+type Ontology..ClassPropertyCustom.xml
 type Ontology..DataMap.xml
 type Ontology..Namespace.xml
 type Ontology..PropertyGroup.xml

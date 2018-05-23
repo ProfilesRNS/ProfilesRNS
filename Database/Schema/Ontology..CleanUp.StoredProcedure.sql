@@ -104,6 +104,12 @@ BEGIN
 					from [Framework.].Job
 			) y
 			where x.JobGroup = y.JobGroup and x.Step = y.Step
+			
+		update x 
+			set x._ClassPropertyID = b.ClassPropertyID 
+			from [Ontology.].ClassPropertyCustom x join [Ontology.].ClassProperty b
+				on x.Class=b.Class and x.Property=b.Property
+				and ((x.NetworkProperty is null and b.NetworkProperty is null) or (x.NetworkProperty = b.NetworkProperty))
 	end
 
 	-------------------------------------------------------------
