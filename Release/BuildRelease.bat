@@ -105,6 +105,14 @@ del MeSH.xml
 call %zip% e MeSH.xml.zip -y
 del MeSH.xml.zip
 popd
+
+del "ProfilesRNS\Database\Data\InstallData.xml"
+pushd "ProfilesRNS\Database\Data\InstallData"
+call CreateInstallDataScript.bat > ..\InstallData.xml
+popd
+
+@RD /S /Q "ProfilesRNS\Database\Data\InstallData"
+
 echo d | xcopy /s ..\Database\SQL2008 ProfilesRNS\Database\SQL2008
 echo d | xcopy /s ..\Database\SQL2012 ProfilesRNS\Database\SQL2012
 echo d | xcopy /s ..\Database\SQL2014 ProfilesRNS\Database\SQL2014
@@ -127,11 +135,6 @@ copy ..\Database\ExporterDisambiguation_GetFunding.sql ProfilesRNS\Database\Expo
 del "%RootPath%\Database\ProfilesRNS_CreateSchema.sql"
 pushd "%RootPath%\Database\schema"
 call CreateSchemaInstallScript.bat > ..\ProfilesRNS_CreateSchema.sql
-popd
-
-del "%RootPath%\Database\Data\InstallData.xml"
-pushd "%RootPath%\Database\Data\InstallData"
-call CreateInstallDataScript.bat > ..\InstallData.sql
 popd
 
 copy ..\Database\ProfilesRNS_CreateSchema.sql ProfilesRNS\Database\ProfilesRNS_CreateSchema.sql
