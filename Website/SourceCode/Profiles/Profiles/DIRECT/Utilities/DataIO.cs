@@ -145,7 +145,7 @@ namespace Profiles.DIRECT.Utilities
                 param[2] = new SqlParameter("@QueryString", queryString);
 
                 //For Output Parameters you need to pass a connection object to the framework so you can close it before reading the output params value.
-                ExecuteSQLDataCommand(GetDBCommand(ref dbconnection, "[Direct.Framework].[AddLogIncoming]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param));
+                ExecuteSQLDataCommand(GetDBCommand(ref dbconnection, "[Direct.].[AddLogIncoming]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param));
 
                 dbconnection.Close();
                 SqlConnection.ClearPool(dbconnection);
@@ -173,7 +173,7 @@ namespace Profiles.DIRECT.Utilities
                 param[1] = new SqlParameter("@SiteID", siteID);
                 param[2] = new SqlParameter("@Details", details);
                 //For Output Parameters you need to pass a connection object to the framework so you can close it before reading the output params value.
-                ExecuteSQLDataCommand(GetDBCommand(ref dbconnection, "[Direct.Framework].[AddLogOutgoing]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param));
+                ExecuteSQLDataCommand(GetDBCommand(ref dbconnection, "[Direct.].[AddLogOutgoing]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param));
 
                 dbconnection.Close();
                 SqlConnection.ClearPool(dbconnection);
@@ -204,7 +204,7 @@ namespace Profiles.DIRECT.Utilities
                 param[4] = new SqlParameter("@ResultCount", resultCount);
                 param[5] = new SqlParameter("@ResultDetailsURL", resultDetailsURL);
                 //For Output Parameters you need to pass a connection object to the framework so you can close it before reading the output params value.
-                ExecuteSQLDataCommand(GetDBCommand(ref dbconnection, "[Direct.Framework].[UpdateLogOutgoing]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param));
+                ExecuteSQLDataCommand(GetDBCommand(ref dbconnection, "[Direct.].[UpdateLogOutgoing]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param));
 
                 dbconnection.Close();
                 SqlConnection.ClearPool(dbconnection);
@@ -231,7 +231,7 @@ namespace Profiles.DIRECT.Utilities
                 param[0] = new SqlParameter("@FSID", fsid.Replace("'", ""));
                 param[1] = new SqlParameter("@ResponseState", responseState);
                 //For Output Parameters you need to pass a connection object to the framework so you can close it before reading the output params value.
-                ExecuteSQLDataCommand(GetDBCommand(ref dbconnection, "[Direct.Framework].[UpdateLogOutgoing]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param));
+                ExecuteSQLDataCommand(GetDBCommand(ref dbconnection, "[Direct.].[UpdateLogOutgoing]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param));
 
                 dbconnection.Close();
                 SqlConnection.ClearPool(dbconnection);

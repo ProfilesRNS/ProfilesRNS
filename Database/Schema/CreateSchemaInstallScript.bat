@@ -624,8 +624,8 @@ type Profile.Data.Publication.Group.DeleteAllPublications.StoredProcedure.sql
 type Profile.Data.Publication.Group.DeleteOnePublication.StoredProcedure.sql
 type Profile.Data.Publication.Group.MyPub.AddPublication.StoredProcedure.sql
 type Profile.Data.Publication.Group.MyPub.CopyExistingPublication.StoredProcedure.sql
-type Direct.Framework.UpdateLogOutgoing.StoredProcedure.sql
-type Direct.Framework.AddLogOutgoing.StoredProcedure.sql
-type Direct.Framework.AddLogIncoming.StoredProcedure.sql
+type Direct..UpdateLogOutgoing.StoredProcedure.sql
+type Direct..AddLogOutgoing.StoredProcedure.sql
+type Direct..AddLogIncoming.StoredProcedure.sql
 type Profile.Data.Publication.GetGroupOption.StoredProcedure.sql
 type Profile.Data.Publication.SetGroupOption.StoredProcedure.sql
