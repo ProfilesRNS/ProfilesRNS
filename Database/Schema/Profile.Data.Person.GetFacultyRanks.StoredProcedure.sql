@@ -25,11 +25,8 @@ BEGIN
 			LEFT OUTER JOIN [RDF.].Node n WITH (NOLOCK)
 				ON m.NodeID = n.NodeID
 					AND n.ViewSecurityGroup = -1
-		
+		ORDER BY FacultyRankSort
  
- 
-
-
 
 END
 GO
