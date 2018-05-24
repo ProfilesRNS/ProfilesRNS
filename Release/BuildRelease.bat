@@ -116,7 +116,7 @@ popd
 echo d | xcopy /s ..\Database\SQL2008 ProfilesRNS\Database\SQL2008
 echo d | xcopy /s ..\Database\SQL2012 ProfilesRNS\Database\SQL2012
 echo d | xcopy /s ..\Database\SQL2014 ProfilesRNS\Database\SQL2014
-echo d | xcopy /s ..\Database\SQL2014 ProfilesRNS\Database\SQL2016
+echo d | xcopy /s ..\Database\SQL2016 ProfilesRNS\Database\SQL2016
 echo d | xcopy /s ..\Database\VersionUpgrade_2.0.0_2.5.1 ProfilesRNS\Database\VersionUpgrade_2.0.0_2.5.1
 echo d | xcopy /s ..\Database\VersionUpgrade_2.5.1_2.6.0 ProfilesRNS\Database\VersionUpgrade_2.5.1_2.6.0
 echo d | xcopy /s ..\Database\VersionUpgrade_2.6.0_2.7.0 ProfilesRNS\Database\VersionUpgrade_2.6.0_2.7.0
