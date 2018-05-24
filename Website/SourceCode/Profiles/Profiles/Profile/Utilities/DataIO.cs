@@ -127,49 +127,61 @@ namespace Profiles.Profile.Utilities
         public XmlDocument GetPresentationData(RDFTriple request)
         {
             string xmlstr = string.Empty;
-            XmlDocument xmlrtn = new XmlDocument();           
+            XmlDocument xmlrtn = new XmlDocument();
 
             try
             {
-                xmlrtn = new XmlDocument();
+                string sessionKey = string.Empty;
+                if (request.Session.ViewSecurityGroup > -20 && request.Session.ViewSecurityGroup < 0)
+                    sessionKey = "SecurityGroup:" + request.Session.ViewSecurityGroup.ToString();
+                else
+                    sessionKey = request.Session.SessionID.ToString();
+                string key = "s" + request.Subject + "p" + request.Predicate + "o" + request.Object + "e" + (request.Edit ? 1 : 0) + sessionKey;
+                xmlrtn = Framework.Utilities.Cache.Fetch(key + "|GetPresentationData");
+                if (xmlrtn == null)
+                {
+                    xmlrtn = new XmlDocument();
 
-                string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
-                SqlConnection dbconnection = new SqlConnection(connstr);
-                SqlCommand dbcommand = new SqlCommand("[rdf.].[GetPresentationXML]");
+                    string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+                    SqlConnection dbconnection = new SqlConnection(connstr);
+                    SqlCommand dbcommand = new SqlCommand("[rdf.].[GetPresentationXML]");
 
-                SqlDataReader dbreader;
-                dbconnection.Open();
-                dbcommand.CommandType = CommandType.StoredProcedure;
-                dbcommand.CommandTimeout = base.GetCommandTimeout();
-                dbcommand.Parameters.Add(new SqlParameter("@subject", request.Subject));
-                if (request.Predicate > 0)
-                    dbcommand.Parameters.Add(new SqlParameter("@predicate", request.Predicate));
+                    SqlDataReader dbreader;
+                    dbconnection.Open();
+                    dbcommand.CommandType = CommandType.StoredProcedure;
+                    dbcommand.CommandTimeout = base.GetCommandTimeout();
+                    dbcommand.Parameters.Add(new SqlParameter("@subject", request.Subject));
+                    if (request.Predicate > 0)
+                        dbcommand.Parameters.Add(new SqlParameter("@predicate", request.Predicate));
 
-                if (request.Object > 0)
-                    dbcommand.Parameters.Add(new SqlParameter("@object", request.Object));
+                    if (request.Object > 0)
+                        dbcommand.Parameters.Add(new SqlParameter("@object", request.Object));
 
-                dbcommand.Parameters.Add(new SqlParameter("@EditMode", request.Edit ? 1 : 0));
+                    dbcommand.Parameters.Add(new SqlParameter("@EditMode", request.Edit ? 1 : 0));
 
-                dbcommand.Parameters.Add(new SqlParameter("@sessionid", request.Session.SessionID));
+                    dbcommand.Parameters.Add(new SqlParameter("@sessionid", request.Session.SessionID));
 
-                dbcommand.Connection = dbconnection;
+                    dbcommand.Connection = dbconnection;
 
-                dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
+                    dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
 
-                while (dbreader.Read())
-                    xmlstr += dbreader[0].ToString();
+                    while (dbreader.Read())
+                        xmlstr += dbreader[0].ToString();
 
-                xmlrtn.LoadXml(xmlstr);
-
-
-                xmlstr = string.Empty;
+                    xmlrtn.LoadXml(xmlstr);
 
 
-                if (!dbreader.IsClosed)
-                    dbreader.Close();
+                    xmlstr = string.Empty;
+
+
+                    if (!dbreader.IsClosed)
+                        dbreader.Close();
+
+                    Framework.Utilities.Cache.Set(key + "|GetPresentationData", xmlrtn);
+                }
 
             }
-            catch (Exception ex) { }            
+            catch (Exception ex) { }
 
             return xmlrtn;
         }
