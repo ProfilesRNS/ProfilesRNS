@@ -40,12 +40,12 @@ namespace Profiles.Profile.Modules.ProfileImage
             context.Response.ContentType = "image/jpeg";
             context.Response.Cache.SetCacheability(HttpCacheability.NoCache);
             context.Response.BufferOutput = false;
-            
+
             Int64 nodeid = -1;
 
             if (!string.IsNullOrEmpty(context.Request.QueryString["NodeID"]))
             {
-                
+
                 // get the id for the image
                 nodeid = Convert.ToInt32(context.Request.QueryString["NodeID"]);
             }
@@ -77,7 +77,7 @@ namespace Profiles.Profile.Modules.ProfileImage
 
                     request.Expand = true;
                     request.ShowDetails = true;
-                    request.ExpandRDFList = "<ExpandRDF Class=\"http://xmlns.com/foaf/0.1/Person\" Property=\"http://vivoweb.org/ontology/core#authorInAuthorship\" Limit=\"1\" />";
+                    request.ExpandRDFList = "<ExpandRDFOptions ExpandPredicates=\"false\" ClassPropertyCustomTypeID=\"1\" />";
                     Framework.Utilities.Namespace xmlnamespace = new Profiles.Framework.Utilities.Namespace();
                     XmlDocument person;
 
@@ -87,8 +87,7 @@ namespace Profiles.Profile.Modules.ProfileImage
                     byte[] rawimage = null;
                     if (person.SelectSingleNode("rdf:RDF/rdf:Description[1]/prns:mainImage/@rdf:resource", namespaces) != null)
                     {
-                        if (person.SelectSingleNode("rdf:RDF/rdf:Description[1]/rdf:type[@rdf:resource='http://xmlns.com/foaf/0.1/Person']", namespaces) != null) rawimage = data.GetUserPhotoList(nodeid);
-                        if (person.SelectSingleNode("rdf:RDF/rdf:Description[1]/rdf:type[@rdf:resource='http://xmlns.com/foaf/0.1/Group']", namespaces) != null) rawimage = data.GetGroupPhotoList(nodeid);
+                        rawimage = data.GetUserPhotoList(nodeid);
                     }
                     else if (thumbnail)
                     {
@@ -146,6 +145,6 @@ namespace Profiles.Profile.Modules.ProfileImage
                 return false;
             }
         }
-       
+
     }
 }

@@ -605,7 +605,6 @@ type Profile.Data.Group.AddUpdateGroup.StoredProcedure.sql
 type Profile.Data.Group.DeleteRestoreGroup.StoredProcedure.sql
 type Profile.Data.Group.GetGroup.StoredProcedure.sql
 type Profile.Data.Group.GetGroups.StoredProcedure.sql
-type Profile.Data.Group.GetPhotos.StoredProcedure.sql
 type Profile.Data.Group.Manager.AddManager.StoredProcedure.sql
 type Profile.Data.Group.Manager.DeleteManager.StoredProcedure.sql
 type Profile.Data.Group.Manager.GetManagers.StoredProcedure.sql

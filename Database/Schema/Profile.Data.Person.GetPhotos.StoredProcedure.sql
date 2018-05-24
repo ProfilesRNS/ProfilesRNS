@@ -6,15 +6,27 @@ CREATE procedure [Profile.Data].[Person.GetPhotos](@NodeID bigINT)
 AS
 BEGIN
 
-DECLARE @PersonID INT 
+DECLARE @InternalID INT, @InternalType NVARCHAR(300)
 
-    SELECT @PersonID = CAST(m.InternalID AS INT)
-		FROM [RDF.Stage].[InternalNodeMap] m, [RDF.].Node n
+    SELECT @InternalID = CAST(m.InternalID AS INT),
+		@InternalType = InternalType
+ 		FROM [RDF.Stage].[InternalNodeMap] m, [RDF.].Node n
 		WHERE m.Status = 3 AND m.ValueHash = n.ValueHash AND n.NodeID = @NodeID
-		
-	SELECT  photo,
-			p.PhotoID		
-		FROM [Profile.Data].[Person.Photo] p WITH(NOLOCK)
-	 WHERE PersonID=@PersonID  
+
+	IF @InternalType = 'Person'
+	BEGIN
+		SELECT  photo,
+				p.PhotoID		
+			FROM [Profile.Data].[Person.Photo] p WITH(NOLOCK)
+		 WHERE PersonID=@InternalID  
+	 END
+
+	ELSE IF @InternalType = 'Group' 
+	BEGIN
+		SELECT  photo,
+				p.PhotoID		
+			FROM [Profile.Data].[Group.Photo] p WITH(NOLOCK)
+		 WHERE GroupID=@InternalID  
+	 END
 END
 GO

@@ -301,21 +301,6 @@ namespace Profiles.Profile.Utilities
         }
 
 
-        public byte[] GetGroupPhotoList(Int64 NodeID)
-        {
-            using (SqlConnection dbconnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString))
-            {
-                dbconnection.Open();
-
-                SqlCommand dbcommand = new SqlCommand("[Profile.Data].[Group.GetPhotos]");
-                dbcommand.CommandType = CommandType.StoredProcedure;
-                dbcommand.CommandTimeout = base.GetCommandTimeout();
-                dbcommand.Parameters.Add(new SqlParameter("@NodeID", NodeID));
-                dbcommand.Connection = dbconnection;
-                return (byte[])dbcommand.ExecuteScalar();
-            }
-        }
-
         #endregion
 
         #region "CustomViewPersonSameDepartment"
