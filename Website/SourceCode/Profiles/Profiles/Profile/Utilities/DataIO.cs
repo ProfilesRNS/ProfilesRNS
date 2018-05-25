@@ -1095,6 +1095,19 @@ namespace Profiles.Profile.Utilities
             }
             return -1;
         }
+
+        public string GetNodeType(Int64 nodeid)
+        {
+            string sql = "select InternalType from [RDF.Stage].[InternalNodeMap] where nodeID = " + nodeid;
+            using (SqlDataReader sqldr = this.GetSQLDataReader("ProfilesDB", sql, CommandType.Text, CommandBehavior.CloseConnection, null))
+            {
+                if (sqldr.Read())
+                {
+                    return sqldr.GetString(0);
+                }
+            }
+            return "";
+        }
     }
 
 

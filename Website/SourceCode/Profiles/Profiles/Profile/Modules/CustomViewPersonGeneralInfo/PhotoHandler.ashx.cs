@@ -77,7 +77,9 @@ namespace Profiles.Profile.Modules.ProfileImage
 
                     request.Expand = true;
                     request.ShowDetails = true;
-                    request.ExpandRDFList = "<ExpandRDFOptions ExpandPredicates=\"false\" ClassPropertyCustomTypeID=\"1\" />";
+                    string type = data.GetNodeType(nodeid);
+                    if (type.Equals("Person")) request.ExpandRDFList = "<ExpandRDFOptions ExpandPredicates=\"false\" ClassPropertyCustomTypeID=\"1\" />";
+                    else if (type.Equals("Group")) request.ExpandRDFList = "<ExpandRDFOptions ExpandPredicates=\"false\" ClassPropertyCustomTypeID=\"5\" />";
                     Framework.Utilities.Namespace xmlnamespace = new Profiles.Framework.Utilities.Namespace();
                     XmlDocument person;
 
