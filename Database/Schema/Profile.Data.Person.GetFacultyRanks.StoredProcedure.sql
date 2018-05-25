@@ -14,7 +14,7 @@ BEGIN
 	SELECT x.FacultyRankID, x.FacultyRank,  n.NodeID, n.Value URI
 		FROM (
 				SELECT CAST(MAX(FacultyRankID) AS VARCHAR(50)) FacultyRankID,
-						LTRIM(RTRIM(FacultyRank)) FacultyRank					
+						LTRIM(RTRIM(FacultyRank)) FacultyRank, 	FacultyRankSort							
 				FROM [Profile.Data].[Person.FacultyRank] WITH (NOLOCK) where facultyrank <> ''				
 				group by FacultyRank ,FacultyRankSort
 			) x 
