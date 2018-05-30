@@ -125,6 +125,7 @@ echo d | xcopy /s ..\Database\VersionUpgrade_2.8.0_2.9.0 ProfilesRNS\Database\Ve
 echo d | xcopy /s ..\Database\VersionUpgrade_2.9.0_2.10.0 ProfilesRNS\Database\VersionUpgrade_2.9.0_2.10.0
 echo d | xcopy /s ..\Database\VersionUpgrade_2.10.0_2.10.1 ProfilesRNS\Database\VersionUpgrade_2.10.0_2.10.1
 echo d | xcopy /s ..\Database\VersionUpgrade_2.10.1_2.11.0 ProfilesRNS\Database\VersionUpgrade_2.10.1_2.11.0
+echo d | xcopy /s ..\Database\VersionUpgrade_2.10.1_2.11.0 ProfilesRNS\Database\VersionUpgrade_2.11.0_2.11.1
 copy ..\Database\ProfilesRNS_CreateAccount.sql ProfilesRNS\Database\ProfilesRNS_CreateAccount.sql
 copy ..\Database\ProfilesRNS_CreateDatabase.sql ProfilesRNS\Database\ProfilesRNS_CreateDatabase.sql
 copy ..\Database\ProfilesRNS_DataLoad_Part1.sql ProfilesRNS\Database\ProfilesRNS_DataLoad_Part1.sql
