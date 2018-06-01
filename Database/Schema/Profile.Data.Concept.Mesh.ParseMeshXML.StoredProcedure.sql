@@ -13,6 +13,7 @@ BEGIN
 	TRUNCATE TABLE [Profile.Data].[Concept.Mesh.Qualifier]
 	TRUNCATE TABLE [Profile.Data].[Concept.Mesh.Term]
 	TRUNCATE TABLE [Profile.Data].[Concept.Mesh.SemanticType]
+	TRUNCATE TABLE [Profile.Data].[Concept.Mesh.SemanticType.XML]
 	TRUNCATE TABLE [Profile.Data].[Concept.Mesh.SemanticGroupType]
 	TRUNCATE TABLE [Profile.Data].[Concept.Mesh.SemanticGroup]
 	TRUNCATE TABLE [Profile.Data].[Concept.Mesh.Tree]

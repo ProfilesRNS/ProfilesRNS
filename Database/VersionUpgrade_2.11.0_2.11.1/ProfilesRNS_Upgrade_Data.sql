@@ -20,13 +20,13 @@ to update its data to:
 
 --*****************************************************************************************
 --*****************************************************************************************
---*****************************************************************************************
 --*****
 --***** Update MeSH Definitions
 --*****
 --*****************************************************************************************
 --*****************************************************************************************
---*****************************************************************************************
+
+TRUNCATE TABLE [Profile.Data].[Concept.Mesh.File]
 
 EXEC [Framework.].[LoadXMLFile] @FilePath = '$(ProfilesRNSRootPath)\Data\SemGroups.xml', @TableDestination = '[Profile.Data].[Concept.Mesh.File]', @DestinationColumn = 'DATA', @NameValue = 'SemGroups.xml'
 EXEC [Framework.].[LoadXMLFile] @FilePath = '$(ProfilesRNSRootPath)\Data\SemTypes.xml', @TableDestination = '[Profile.Data].[Concept.Mesh.File]', @DestinationColumn = 'DATA', @NameValue = 'SemTypes.xml'
