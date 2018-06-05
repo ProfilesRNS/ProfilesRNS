@@ -26,7 +26,7 @@ using System.Configuration;
 
 using Profiles.Framework.Utilities;
 using System.Net.Http;
-using MimeDetective;
+
 
 namespace Profiles.Edit.Utilities
 {
