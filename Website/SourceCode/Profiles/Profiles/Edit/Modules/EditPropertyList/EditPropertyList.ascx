@@ -5,7 +5,8 @@
 Below are the types of content that can be included on this profile. Locked items
 <asp:Image runat="server" ID="imgLock" alt=""/>
 can be viewed but not edited. Information in the Address section of your profile,
-including your titles, affiliations, telephone, fax, and email are managed by your
+including your titles, affiliations, telephone, fax, and email, 
+as well as education and training in the Biography section, are managed by your
 Human Resources office; however, you may upload a custom photo to your profile using
 this website.
 <br />
