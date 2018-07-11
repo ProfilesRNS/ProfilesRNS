@@ -157,6 +157,7 @@ BEGIN
 
 		-- Re-sort the table
 		IF @ReSortClassProperty = 1
+		BEGIN
 			update x
 				set x.ClassPropertyID = y.k
 				from [Ontology.].ClassProperty x, (
@@ -166,6 +167,13 @@ BEGIN
 				where x.Class = y.Class and x.Property = y.Property
 					and ((x.NetworkProperty is null and y.NetworkProperty is null) or (x.NetworkProperty = y.NetworkProperty))
 
+					
+			update x 
+				set x._ClassPropertyID = b.ClassPropertyID 
+				from [Ontology.].ClassPropertyCustom x join [Ontology.].ClassProperty b
+					on x.Class=b.Class and x.Property=b.Property
+					and ((x.NetworkProperty is null and b.NetworkProperty is null) or (x.NetworkProperty = b.NetworkProperty))
+		END
 	END
 
 	---------------------------------------------------
