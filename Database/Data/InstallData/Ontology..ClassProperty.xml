@@ -5,7 +5,7 @@
     <IsDetail>0</IsDetail>
     <IncludeDescription>0</IncludeDescription>
     <IncludeNetwork>0</IncludeNetwork>
-    <SearchWeight>5.000000000000000e-001</SearchWeight>
+    <SearchWeight>0.000000000000000e+000</SearchWeight>
     <CustomDisplay>0</CustomDisplay>
     <CustomEdit>0</CustomEdit>
     <ViewSecurityGroup>-1</ViewSecurityGroup>
@@ -23,7 +23,7 @@
     <IsDetail>0</IsDetail>
     <IncludeDescription>0</IncludeDescription>
     <IncludeNetwork>0</IncludeNetwork>
-    <SearchWeight>5.000000000000000e-001</SearchWeight>
+    <SearchWeight>0.000000000000000e+000</SearchWeight>
     <CustomDisplay>0</CustomDisplay>
     <CustomEdit>0</CustomEdit>
     <ViewSecurityGroup>-1</ViewSecurityGroup>
@@ -41,7 +41,7 @@
     <IsDetail>0</IsDetail>
     <IncludeDescription>0</IncludeDescription>
     <IncludeNetwork>0</IncludeNetwork>
-    <SearchWeight>1.000000000000000e+000</SearchWeight>
+    <SearchWeight>0.000000000000000e+000</SearchWeight>
     <CustomDisplay>0</CustomDisplay>
     <CustomEdit>0</CustomEdit>
     <ViewSecurityGroup>-1</ViewSecurityGroup>
