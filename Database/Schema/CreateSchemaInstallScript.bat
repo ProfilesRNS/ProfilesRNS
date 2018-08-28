@@ -234,7 +234,10 @@ type Profile.Data.Group.Photo.Table.sql
 type Profile.Data.Publication.Group.Include.Table.sql
 type Profile.Data.Publication.Group.MyPub.General.Table.sql
 type Profile.Data.Publication.Group.Option.Table.sql
-
+type Profile.Data.Group.Websites.Table.sql
+type Profile.Data.Group.MediaLinks.Table.sql
+type Profile.Data.Person.Websites.Table.sql
+type Profile.Data.Person.MediaLinks.Table.sql
 
 type RDF..fnTripleHash.UserDefinedFunction.sql
 type Utility.Application.fnText2Bool.UserDefinedFunction.sql
@@ -312,6 +315,7 @@ type Profile.Data.vwGroup.Manager.View.sql
 type Profile.Data.vwGroup.Member.View.sql
 type Profile.Data.vwGroup.Photo.View.sql
 type Profile.Data.vwGroup.Publication.Entity.AssociatedInformationResource.View.sql
+type Profile.Data.vwURL.View.sql
 
 rem type PresentationXML.SqlAssembly.sql
 
@@ -628,3 +632,5 @@ type Direct..AddLogOutgoing.StoredProcedure.sql
 type Direct..AddLogIncoming.StoredProcedure.sql
 type Profile.Data.Publication.GetGroupOption.StoredProcedure.sql
 type Profile.Data.Publication.SetGroupOption.StoredProcedure.sql
+type Edit.Module.CustomEditWebsite.AddEditWebsite.sql
+type Edit.Module.CustomEditWebsite.GetData.sql

@@ -26,7 +26,7 @@
     <OldToolsVersion>4.0</OldToolsVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <TargetFrameworkProfile />
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -102,6 +102,7 @@
     <Content Include="Edit\Modules\CustomEditGroupSettings\CustomEditGroupSettings.ascx" />
     <Content Include="Edit\Modules\CustomEditListProperty\CustomEditListProperty.ascx" />
     <Content Include="Edit\Modules\CustomEditResearcherRole\CustomEditResearcherRole.ascx" />
+    <Content Include="Edit\Modules\CustomEditWebsite\CustomEditWebsite.ascx" />
     <Content Include="Framework\Images\listen.jpg" />
     <Content Include="Framework\Images\orcid_16x16%281%29.gif" />
     <Content Include="Framework\Images\Orcid_Logo_rgb.png" />
@@ -243,11 +244,13 @@
     </Content>
     <Content Include="Profile\XSLT\EducationalTraining.xslt" />
     <Content Include="Profile\XSLT\FreetextKeyword.xslt" />
+    <Content Include="Profile\XSLT\MediaLinks.xslt" />
     <Content Include="Profile\XSLT\MemberRoleOf.xslt">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Profile\XSLT\NetworkTable.xslt" />
     <Content Include="Profile\XSLT\NetworkTableGroup.xslt" />
+    <Content Include="Profile\XSLT\Website.xslt" />
     <Content Include="RobotsTxt.aspx" />
     <Content Include="SiteMap.aspx" />
     <Content Include="Web.config">
@@ -397,6 +400,15 @@
     <Compile Include="Edit\Modules\CustomEditResearcherRole\CustomEditResearcherRole.ascx.designer.cs">
       <DependentUpon>CustomEditResearcherRole.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Edit\Modules\CustomEditWebsite\CustomEditWebsite.ascx.cs">
+      <DependentUpon>CustomEditWebsite.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Edit\Modules\CustomEditWebsite\CustomEditWebsite.ascx.designer.cs">
+      <DependentUpon>CustomEditWebsite.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Edit\Modules\CustomEditWebsite\DataIO.cs" />
+    <Compile Include="Edit\Modules\CustomEditWebsite\WebsiteState.cs" />
     <Compile Include="Edit\Utilities\EducationalTrainingState.cs" />
     <Compile Include="Edit\Utilities\FundingState.cs" />
     <Compile Include="Edit\Utilities\GroupMemberState.cs" />
