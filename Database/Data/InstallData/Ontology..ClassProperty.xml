@@ -11485,6 +11485,43 @@
   </Row>
   <Row>
     <Class>http://vivoweb.org/ontology/core#URLLink</Class>
+    <Property>http://profiles.catalyst.harvard.edu/ontology/prns#publicationDate</Property>
+    <IsDetail>0</IsDetail>
+    <IncludeDescription>1</IncludeDescription>
+    <IncludeNetwork>0</IncludeNetwork>
+    <SearchWeight>0.000000000000000e+000</SearchWeight>
+    <CustomDisplay>0</CustomDisplay>
+    <CustomEdit>0</CustomEdit>
+    <ViewSecurityGroup>-1</ViewSecurityGroup>
+    <EditSecurityGroup>-40</EditSecurityGroup>
+    <EditPermissionsSecurityGroup>-40</EditPermissionsSecurityGroup>
+    <EditExistingSecurityGroup>-40</EditExistingSecurityGroup>
+    <EditAddNewSecurityGroup>-40</EditAddNewSecurityGroup>
+    <EditAddExistingSecurityGroup>-40</EditAddExistingSecurityGroup>
+    <EditDeleteSecurityGroup>-40</EditDeleteSecurityGroup>
+    <MinCardinality>0</MinCardinality>
+    <MaxCardinality>1</MaxCardinality>
+  </Row>
+  <Row>
+    <Class>http://vivoweb.org/ontology/core#URLLink</Class>
+    <Property>http://vivoweb.org/ontology/core#linkAnchorText</Property>
+    <IsDetail>0</IsDetail>
+    <IncludeDescription>0</IncludeDescription>
+    <IncludeNetwork>0</IncludeNetwork>
+    <SearchWeight>5.000000000000000e-001</SearchWeight>
+    <CustomDisplay>0</CustomDisplay>
+    <CustomEdit>0</CustomEdit>
+    <ViewSecurityGroup>-1</ViewSecurityGroup>
+    <EditSecurityGroup>-40</EditSecurityGroup>
+    <EditPermissionsSecurityGroup>-40</EditPermissionsSecurityGroup>
+    <EditExistingSecurityGroup>-40</EditExistingSecurityGroup>
+    <EditAddNewSecurityGroup>-40</EditAddNewSecurityGroup>
+    <EditAddExistingSecurityGroup>-40</EditAddExistingSecurityGroup>
+    <EditDeleteSecurityGroup>-40</EditDeleteSecurityGroup>
+    <MinCardinality>0</MinCardinality>
+  </Row>
+  <Row>
+    <Class>http://vivoweb.org/ontology/core#URLLink</Class>
     <Property>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</Property>
     <IsDetail>0</IsDetail>
     <IncludeDescription>1</IncludeDescription>
@@ -11518,24 +11555,6 @@
     <EditAddExistingSecurityGroup>-40</EditAddExistingSecurityGroup>
     <EditDeleteSecurityGroup>-40</EditDeleteSecurityGroup>
     <MinCardinality>1</MinCardinality>
-  </Row>
-  <Row>
-    <Class>http://vivoweb.org/ontology/core#URLLink</Class>
-    <Property>http://vivoweb.org/ontology/core#linkAnchorText</Property>
-    <IsDetail>1</IsDetail>
-    <IncludeDescription>0</IncludeDescription>
-    <IncludeNetwork>0</IncludeNetwork>
-    <SearchWeight>5.000000000000000e-001</SearchWeight>
-    <CustomDisplay>0</CustomDisplay>
-    <CustomEdit>0</CustomEdit>
-    <ViewSecurityGroup>-1</ViewSecurityGroup>
-    <EditSecurityGroup>-40</EditSecurityGroup>
-    <EditPermissionsSecurityGroup>-40</EditPermissionsSecurityGroup>
-    <EditExistingSecurityGroup>-40</EditExistingSecurityGroup>
-    <EditAddNewSecurityGroup>-40</EditAddNewSecurityGroup>
-    <EditAddExistingSecurityGroup>-40</EditAddExistingSecurityGroup>
-    <EditDeleteSecurityGroup>-40</EditDeleteSecurityGroup>
-    <MinCardinality>0</MinCardinality>
   </Row>
   <Row>
     <Class>http://vivoweb.org/ontology/core#URLLink</Class>
@@ -14187,30 +14206,6 @@
   </Row>
   <Row>
     <Class>http://xmlns.com/foaf/0.1/Group</Class>
-    <Property>http://profiles.catalyst.harvard.edu/ontology/prns#associatedInformationResource</Property>
-    <IsDetail>1</IsDetail>
-    <IncludeDescription>0</IncludeDescription>
-    <IncludeNetwork>0</IncludeNetwork>
-    <SearchWeight>5.000000000000000e-001</SearchWeight>
-    <CustomDisplay>1</CustomDisplay>
-    <CustomEdit>1</CustomEdit>
-    <ViewSecurityGroup>-1</ViewSecurityGroup>
-    <EditSecurityGroup>-20</EditSecurityGroup>
-    <EditPermissionsSecurityGroup>-20</EditPermissionsSecurityGroup>
-    <EditExistingSecurityGroup>-20</EditExistingSecurityGroup>
-    <EditAddNewSecurityGroup>-20</EditAddNewSecurityGroup>
-    <EditAddExistingSecurityGroup>-20</EditAddExistingSecurityGroup>
-    <EditDeleteSecurityGroup>-20</EditDeleteSecurityGroup>
-    <MinCardinality>0</MinCardinality>
-    <CustomDisplayModule>
-      <Module ID="CustomViewAuthorInAuthorship" />
-    </CustomDisplayModule>
-    <CustomEditModule>
-      <Module ID="CustomEditAssociatedInformationResource" />
-    </CustomEditModule>
-  </Row>
-  <Row>
-    <Class>http://xmlns.com/foaf/0.1/Group</Class>
     <Property>http://profiles.catalyst.harvard.edu/ontology/prns#hasGroupSettings</Property>
     <IsDetail>0</IsDetail>
     <IncludeDescription>0</IncludeDescription>
@@ -14249,6 +14244,64 @@
     <MinCardinality>0</MinCardinality>
     <CustomEditModule>
       <Module ID="CustomEditMainImage" />
+    </CustomEditModule>
+  </Row>
+  <Row>
+    <Class>http://xmlns.com/foaf/0.1/Group</Class>
+    <Property>http://profiles.catalyst.harvard.edu/ontology/prns#mediaLinks</Property>
+    <IsDetail>0</IsDetail>
+    <IncludeDescription>1</IncludeDescription>
+    <IncludeNetwork>0</IncludeNetwork>
+    <SearchWeight>5.000000000000000e-001</SearchWeight>
+    <CustomDisplay>1</CustomDisplay>
+    <CustomEdit>1</CustomEdit>
+    <ViewSecurityGroup>-1</ViewSecurityGroup>
+    <EditSecurityGroup>-20</EditSecurityGroup>
+    <EditPermissionsSecurityGroup>-20</EditPermissionsSecurityGroup>
+    <EditExistingSecurityGroup>-40</EditExistingSecurityGroup>
+    <EditAddNewSecurityGroup>-20</EditAddNewSecurityGroup>
+    <EditAddExistingSecurityGroup>-40</EditAddExistingSecurityGroup>
+    <EditDeleteSecurityGroup>-20</EditDeleteSecurityGroup>
+    <MinCardinality>0</MinCardinality>
+    <MaxCardinality>100</MaxCardinality>
+    <CustomDisplayModule>
+      <Module ID="ApplyXSLT">
+        <ParamList>
+          <Param Name="XSLTPath">~/profile/XSLT/MediaLinks.xslt</Param>
+        </ParamList>
+      </Module>
+    </CustomDisplayModule>
+    <CustomEditModule>
+      <Module ID="CustomEditWebsite" />
+    </CustomEditModule>
+  </Row>
+  <Row>
+    <Class>http://xmlns.com/foaf/0.1/Group</Class>
+    <Property>http://vivoweb.org/ontology/core#webpage</Property>
+    <IsDetail>0</IsDetail>
+    <IncludeDescription>1</IncludeDescription>
+    <IncludeNetwork>0</IncludeNetwork>
+    <SearchWeight>5.000000000000000e-001</SearchWeight>
+    <CustomDisplay>1</CustomDisplay>
+    <CustomEdit>1</CustomEdit>
+    <ViewSecurityGroup>-1</ViewSecurityGroup>
+    <EditSecurityGroup>-20</EditSecurityGroup>
+    <EditPermissionsSecurityGroup>-20</EditPermissionsSecurityGroup>
+    <EditExistingSecurityGroup>-40</EditExistingSecurityGroup>
+    <EditAddNewSecurityGroup>-20</EditAddNewSecurityGroup>
+    <EditAddExistingSecurityGroup>-40</EditAddExistingSecurityGroup>
+    <EditDeleteSecurityGroup>-20</EditDeleteSecurityGroup>
+    <MinCardinality>0</MinCardinality>
+    <MaxCardinality>100</MaxCardinality>
+    <CustomDisplayModule>
+      <Module ID="ApplyXSLT">
+        <ParamList>
+          <Param Name="XSLTPath">~/profile/XSLT/Website.xslt</Param>
+        </ParamList>
+      </Module>
+    </CustomDisplayModule>
+    <CustomEditModule>
+      <Module ID="CustomEditWebsite" />
     </CustomEditModule>
   </Row>
   <Row>
@@ -14457,6 +14510,30 @@
     <EditDeleteSecurityGroup>-20</EditDeleteSecurityGroup>
     <MinCardinality>0</MinCardinality>
     <MaxCardinality>1</MaxCardinality>
+  </Row>
+  <Row>
+    <Class>http://xmlns.com/foaf/0.1/Group</Class>
+    <Property>http://profiles.catalyst.harvard.edu/ontology/prns#associatedInformationResource</Property>
+    <IsDetail>1</IsDetail>
+    <IncludeDescription>0</IncludeDescription>
+    <IncludeNetwork>0</IncludeNetwork>
+    <SearchWeight>5.000000000000000e-001</SearchWeight>
+    <CustomDisplay>1</CustomDisplay>
+    <CustomEdit>1</CustomEdit>
+    <ViewSecurityGroup>-1</ViewSecurityGroup>
+    <EditSecurityGroup>-20</EditSecurityGroup>
+    <EditPermissionsSecurityGroup>-20</EditPermissionsSecurityGroup>
+    <EditExistingSecurityGroup>-20</EditExistingSecurityGroup>
+    <EditAddNewSecurityGroup>-20</EditAddNewSecurityGroup>
+    <EditAddExistingSecurityGroup>-20</EditAddExistingSecurityGroup>
+    <EditDeleteSecurityGroup>-20</EditDeleteSecurityGroup>
+    <MinCardinality>0</MinCardinality>
+    <CustomDisplayModule>
+      <Module ID="CustomViewAuthorInAuthorship" />
+    </CustomDisplayModule>
+    <CustomEditModule>
+      <Module ID="CustomEditAssociatedInformationResource" />
+    </CustomEditModule>
   </Row>
   <Row>
     <Class>http://xmlns.com/foaf/0.1/Group</Class>
@@ -15034,6 +15111,35 @@
   </Row>
   <Row>
     <Class>http://xmlns.com/foaf/0.1/Person</Class>
+    <Property>http://profiles.catalyst.harvard.edu/ontology/prns#mediaLinks</Property>
+    <IsDetail>0</IsDetail>
+    <IncludeDescription>1</IncludeDescription>
+    <IncludeNetwork>0</IncludeNetwork>
+    <SearchWeight>5.000000000000000e-001</SearchWeight>
+    <CustomDisplay>1</CustomDisplay>
+    <CustomEdit>1</CustomEdit>
+    <ViewSecurityGroup>-1</ViewSecurityGroup>
+    <EditSecurityGroup>-20</EditSecurityGroup>
+    <EditPermissionsSecurityGroup>-20</EditPermissionsSecurityGroup>
+    <EditExistingSecurityGroup>-40</EditExistingSecurityGroup>
+    <EditAddNewSecurityGroup>-20</EditAddNewSecurityGroup>
+    <EditAddExistingSecurityGroup>-40</EditAddExistingSecurityGroup>
+    <EditDeleteSecurityGroup>-20</EditDeleteSecurityGroup>
+    <MinCardinality>0</MinCardinality>
+    <MaxCardinality>100</MaxCardinality>
+    <CustomDisplayModule>
+      <Module ID="ApplyXSLT">
+        <ParamList>
+          <Param Name="XSLTPath">~/profile/XSLT/MediaLinks.xslt</Param>
+        </ParamList>
+      </Module>
+    </CustomDisplayModule>
+    <CustomEditModule>
+      <Module ID="CustomEditWebsite" />
+    </CustomEditModule>
+  </Row>
+  <Row>
+    <Class>http://xmlns.com/foaf/0.1/Person</Class>
     <Property>http://profiles.catalyst.harvard.edu/ontology/prns#personId</Property>
     <IsDetail>0</IsDetail>
     <IncludeDescription>0</IncludeDescription>
@@ -15143,6 +15249,35 @@
     <EditAddExistingSecurityGroup>-40</EditAddExistingSecurityGroup>
     <EditDeleteSecurityGroup>-40</EditDeleteSecurityGroup>
     <MinCardinality>0</MinCardinality>
+  </Row>
+  <Row>
+    <Class>http://xmlns.com/foaf/0.1/Person</Class>
+    <Property>http://vivoweb.org/ontology/core#webpage</Property>
+    <IsDetail>0</IsDetail>
+    <IncludeDescription>1</IncludeDescription>
+    <IncludeNetwork>0</IncludeNetwork>
+    <SearchWeight>5.000000000000000e-001</SearchWeight>
+    <CustomDisplay>1</CustomDisplay>
+    <CustomEdit>1</CustomEdit>
+    <ViewSecurityGroup>-1</ViewSecurityGroup>
+    <EditSecurityGroup>-20</EditSecurityGroup>
+    <EditPermissionsSecurityGroup>-20</EditPermissionsSecurityGroup>
+    <EditExistingSecurityGroup>-40</EditExistingSecurityGroup>
+    <EditAddNewSecurityGroup>-20</EditAddNewSecurityGroup>
+    <EditAddExistingSecurityGroup>-40</EditAddExistingSecurityGroup>
+    <EditDeleteSecurityGroup>-20</EditDeleteSecurityGroup>
+    <MinCardinality>0</MinCardinality>
+    <MaxCardinality>100</MaxCardinality>
+    <CustomDisplayModule>
+      <Module ID="ApplyXSLT">
+        <ParamList>
+          <Param Name="XSLTPath">~/profile/XSLT/Website.xslt</Param>
+        </ParamList>
+      </Module>
+    </CustomDisplayModule>
+    <CustomEditModule>
+      <Module ID="CustomEditWebsite" />
+    </CustomEditModule>
   </Row>
   <Row>
     <Class>http://xmlns.com/foaf/0.1/Person</Class>

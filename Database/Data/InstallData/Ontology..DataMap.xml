@@ -198,6 +198,19 @@
     <DataMapGroup>1</DataMapGroup>
     <IsAutoFeed>1</IsAutoFeed>
     <Graph>1</Graph>
+    <Class>http://vivoweb.org/ontology/core#URLLink</Class>
+    <MapTable>[Profile.Data].[vwURL]</MapTable>
+    <sInternalType>URLLink</sInternalType>
+    <sInternalID>URLID</sInternalID>
+    <oObjectType>0</oObjectType>
+    <Weight>1</Weight>
+    <ViewSecurityGroup>-1</ViewSecurityGroup>
+    <EditSecurityGroup>-40</EditSecurityGroup>
+  </Row>
+  <Row>
+    <DataMapGroup>1</DataMapGroup>
+    <IsAutoFeed>1</IsAutoFeed>
+    <Graph>1</Graph>
     <Class>http://www.w3.org/2004/02/skos/core#Concept</Class>
     <MapTable>[profile.data].[concept.mesh.descriptor]</MapTable>
     <sInternalType>MeshDescriptor</sInternalType>
@@ -1702,6 +1715,66 @@
     <DataMapGroup>1</DataMapGroup>
     <IsAutoFeed>1</IsAutoFeed>
     <Graph>1</Graph>
+    <Class>http://vivoweb.org/ontology/core#URLLink</Class>
+    <Property>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</Property>
+    <MapTable>[Profile.Data].[vwURL]</MapTable>
+    <sInternalType>URLLink</sInternalType>
+    <sInternalID>URLID</sInternalID>
+    <oValue>'http://vivoweb.org/ontology/core#URLLink'</oValue>
+    <oObjectType>0</oObjectType>
+    <Weight>1</Weight>
+    <ViewSecurityGroup>-1</ViewSecurityGroup>
+    <EditSecurityGroup>-40</EditSecurityGroup>
+  </Row>
+  <Row>
+    <DataMapGroup>1</DataMapGroup>
+    <IsAutoFeed>1</IsAutoFeed>
+    <Graph>1</Graph>
+    <Class>http://vivoweb.org/ontology/core#URLLink</Class>
+    <Property>http://www.w3.org/2000/01/rdf-schema#label</Property>
+    <MapTable>[Profile.Data].[vwURL]</MapTable>
+    <sInternalType>URLLink</sInternalType>
+    <sInternalID>URLID</sInternalID>
+    <oValue>URL</oValue>
+    <oObjectType>1</oObjectType>
+    <Weight>1</Weight>
+    <ViewSecurityGroup>-1</ViewSecurityGroup>
+    <EditSecurityGroup>-40</EditSecurityGroup>
+  </Row>
+  <Row>
+    <DataMapGroup>1</DataMapGroup>
+    <IsAutoFeed>1</IsAutoFeed>
+    <Graph>1</Graph>
+    <Class>http://vivoweb.org/ontology/core#URLLink</Class>
+    <Property>http://profiles.catalyst.harvard.edu/ontology/prns#publicationDate</Property>
+    <MapTable>[Profile.Data].[vwURL]</MapTable>
+    <sInternalType>URLLink</sInternalType>
+    <sInternalID>URLID</sInternalID>
+    <oValue>PublicationDate</oValue>
+    <oObjectType>1</oObjectType>
+    <Weight>1</Weight>
+    <ViewSecurityGroup>-1</ViewSecurityGroup>
+    <EditSecurityGroup>-40</EditSecurityGroup>
+  </Row>
+  <Row>
+    <DataMapGroup>1</DataMapGroup>
+    <IsAutoFeed>1</IsAutoFeed>
+    <Graph>1</Graph>
+    <Class>http://vivoweb.org/ontology/core#URLLink</Class>
+    <Property>http://vivoweb.org/ontology/core#linkAnchorText</Property>
+    <MapTable>[Profile.Data].[vwURL]</MapTable>
+    <sInternalType>URLLink</sInternalType>
+    <sInternalID>URLID</sInternalID>
+    <oValue>WebPageTitle</oValue>
+    <oObjectType>1</oObjectType>
+    <Weight>1</Weight>
+    <ViewSecurityGroup>-1</ViewSecurityGroup>
+    <EditSecurityGroup>-40</EditSecurityGroup>
+  </Row>
+  <Row>
+    <DataMapGroup>1</DataMapGroup>
+    <IsAutoFeed>1</IsAutoFeed>
+    <Graph>1</Graph>
     <Class>http://www.w3.org/2004/02/skos/core#Concept</Class>
     <Property>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</Property>
     <MapTable>[profile.data].[concept.mesh.descriptor]</MapTable>
@@ -1884,6 +1957,41 @@
     <sInternalID>GroupID</sInternalID>
     <oValue>GroupName</oValue>
     <oObjectType>1</oObjectType>
+    <Weight>1</Weight>
+    <ViewSecurityGroup>-1</ViewSecurityGroup>
+    <EditSecurityGroup>-40</EditSecurityGroup>
+  </Row>
+  <Row>
+    <DataMapGroup>1</DataMapGroup>
+    <IsAutoFeed>1</IsAutoFeed>
+    <Graph>1</Graph>
+    <Class>http://xmlns.com/foaf/0.1/Group</Class>
+    <Property>http://profiles.catalyst.harvard.edu/ontology/prns#mediaLinks</Property>
+    <MapTable>[Profile.Data].[Group.MediaLinks]</MapTable>
+    <sInternalType>Group</sInternalType>
+    <sInternalID>GroupID</sInternalID>
+    <oClass>http://vivoweb.org/ontology/core#URLLink</oClass>
+    <oInternalType>URLLink</oInternalType>
+    <oInternalID>URLID</oInternalID>
+    <oObjectType>0</oObjectType>
+    <Weight>1</Weight>
+    <OrderBy>SortOrder</OrderBy>
+    <ViewSecurityGroup>-1</ViewSecurityGroup>
+    <EditSecurityGroup>-40</EditSecurityGroup>
+  </Row>
+  <Row>
+    <DataMapGroup>1</DataMapGroup>
+    <IsAutoFeed>1</IsAutoFeed>
+    <Graph>1</Graph>
+    <Class>http://xmlns.com/foaf/0.1/Group</Class>
+    <Property>http://vivoweb.org/ontology/core#webpage</Property>
+    <MapTable>[Profile.Data].[Group.Websites]</MapTable>
+    <sInternalType>Group</sInternalType>
+    <sInternalID>GroupID</sInternalID>
+    <oClass>http://vivoweb.org/ontology/core#URLLink</oClass>
+    <oInternalType>URLLink</oInternalType>
+    <oInternalID>URLID</oInternalID>
+    <oObjectType>0</oObjectType>
     <Weight>1</Weight>
     <ViewSecurityGroup>-1</ViewSecurityGroup>
     <EditSecurityGroup>-40</EditSecurityGroup>
@@ -2263,6 +2371,42 @@
     <oInternalID>PersonFilterID</oInternalID>
     <oObjectType>0</oObjectType>
     <Weight>1</Weight>
+    <ViewSecurityGroup>-1</ViewSecurityGroup>
+    <EditSecurityGroup>-40</EditSecurityGroup>
+  </Row>
+  <Row>
+    <DataMapGroup>1</DataMapGroup>
+    <IsAutoFeed>1</IsAutoFeed>
+    <Graph>1</Graph>
+    <Class>http://xmlns.com/foaf/0.1/Person</Class>
+    <Property>http://profiles.catalyst.harvard.edu/ontology/prns#mediaLinks</Property>
+    <MapTable>[Profile.Data].[Person.MediaLinks]</MapTable>
+    <sInternalType>Person</sInternalType>
+    <sInternalID>PersonID</sInternalID>
+    <oClass>http://vivoweb.org/ontology/core#URLLink</oClass>
+    <oInternalType>URLLink</oInternalType>
+    <oInternalID>URLID</oInternalID>
+    <oObjectType>0</oObjectType>
+    <Weight>1</Weight>
+    <OrderBy>SortOrder</OrderBy>
+    <ViewSecurityGroup>-1</ViewSecurityGroup>
+    <EditSecurityGroup>-40</EditSecurityGroup>
+  </Row>
+  <Row>
+    <DataMapGroup>1</DataMapGroup>
+    <IsAutoFeed>1</IsAutoFeed>
+    <Graph>1</Graph>
+    <Class>http://xmlns.com/foaf/0.1/Person</Class>
+    <Property>http://vivoweb.org/ontology/core#webpage</Property>
+    <MapTable>[Profile.Data].[Person.Websites]</MapTable>
+    <sInternalType>Person</sInternalType>
+    <sInternalID>PersonID</sInternalID>
+    <oClass>http://vivoweb.org/ontology/core#URLLink</oClass>
+    <oInternalType>URLLink</oInternalType>
+    <oInternalID>URLID</oInternalID>
+    <oObjectType>0</oObjectType>
+    <Weight>1</Weight>
+    <OrderBy>SortOrder</OrderBy>
     <ViewSecurityGroup>-1</ViewSecurityGroup>
     <EditSecurityGroup>-40</EditSecurityGroup>
   </Row>

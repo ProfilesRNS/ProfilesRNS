@@ -515,4 +515,9 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
     <rdfs:label rdf:resource="about us" />
   </rdf:Description>
+    <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#mediaLinks">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+	<rdfs:range rdf:resource="http://vivoweb.org/ontology/core#URLLink" />
+    <rdfs:label rdf:resource="media links" />
+  </rdf:Description>
 </rdf:RDF>
