@@ -82,3 +82,15 @@
 /Website/SourceCode/ProfilesSPARQLAPI/obj/*
 /Website/SourceCode/ProfilesBetaAPI/Connects.Profiles.Service/ProfilesDebuggingLog.txt
 UpgradeLog.XML
+/Website/SourceCode/ProfilesDataAPI/.vs
+/Website/SourceCode/ProfilesDataAPI/bin
+/Website/SourceCode/ProfilesDataAPI/Content
+/Website/SourceCode/ProfilesDataAPI/fonts
+/Website/SourceCode/ProfilesDataAPI/Models
+/Website/SourceCode/ProfilesDataAPI/obj
+/Website/SourceCode/ProfilesDataAPI/packages
+/Website/SourceCode/ProfilesDataAPI/Properies
+/Website/SourceCode/ProfilesDataAPI/Scripts
+/Website/SourceCode/ProfilesDataAPI/Views
+/Website/SourceCode/ProfilesDataAPI/Web.Debug.config
+/Website/SourceCode/ProfilesDataAPI/Web.Release.config
