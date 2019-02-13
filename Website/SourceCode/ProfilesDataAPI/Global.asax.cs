@@ -49,6 +49,7 @@ namespace ProfilesDataAPI
         public System.Net.Http.HttpResponseMessage getPeopleByInstitutionAndDept(string keyword = null, string inst = null, string dept = null, string division = null, int count = -1, int offset = 0, string personIDs = null)
         {
             string str = string.Empty;
+            if (keyword != null && count == -1) count = 15;
 
             try
             {

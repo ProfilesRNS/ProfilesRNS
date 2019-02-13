@@ -74,7 +74,7 @@ SET nocount  ON;
 		BEGIN
 			select @searchFilters = '<SearchFiltersList>' + @searchFilters + '</SearchFiltersList>'
 		END
-		select @count = case when @count > 30 then 30 else @count end
+		select @count = case when @count > 100 then 100 else @count end
 		declare @SearchOpts varchar(max)
 		set @SearchOpts =
 			'<SearchOptions>
