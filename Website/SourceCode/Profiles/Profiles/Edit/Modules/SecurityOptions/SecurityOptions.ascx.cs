@@ -132,7 +132,7 @@ namespace Profiles.Edit.Modules.SecurityOptions
             }
         }
 
-        public XmlDataDocument SecurityGroups { get; set; }
+        public XmlDocument SecurityGroups { get; set; }
 
         public Int64 Subject { get; set; }
         public string PredicateURI { get; set; }
