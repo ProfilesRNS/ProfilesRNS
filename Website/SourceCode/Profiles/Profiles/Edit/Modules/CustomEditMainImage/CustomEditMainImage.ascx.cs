@@ -25,7 +25,7 @@ namespace Profiles.Edit.Modules.CustomEditMainImage
 
 
         protected void Page_Load(object sender, EventArgs e)
-        {            
+        {
 
             if (!IsPostBack)
             {
@@ -35,7 +35,7 @@ namespace Profiles.Edit.Modules.CustomEditMainImage
             this.DrawProfilesModule();
 
             if (Session["phAddCustomPhoto.Visible"] != null)
-                pnlUpload.Visible = true;           
+                pnlUpload.Visible = true;
 
         }
 
@@ -58,7 +58,7 @@ namespace Profiles.Edit.Modules.CustomEditMainImage
 
             this.PredicateURI = Request.QueryString["predicateuri"].Replace("!", "#");
             this.PropertyListXML = propdata.GetPropertyList(this.BaseData, base.PresentationXML, PredicateURI, false, true, false);
-            litBackLink.Text = "<a href='" + Root.Domain + "/edit/" + this.SubjectID.ToString() + "'>Edit Menu</a> &gt; <b>" + PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@Label").Value + "</b>";
+            litBackLink.Text = "<a href='" + Root.Domain + "/edit/default.aspx?subject=" + this.SubjectID + "'>Edit Menu</a> &gt; <b>" + PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@Label").Value + "</b>";
 
             securityOptions.Subject = this.SubjectID;
             securityOptions.PredicateURI = PredicateURI;
@@ -78,7 +78,7 @@ namespace Profiles.Edit.Modules.CustomEditMainImage
             {
 
                 phAddCustomPhoto.Visible = true;
-                
+
             }
             else
             {
@@ -93,9 +93,9 @@ namespace Profiles.Edit.Modules.CustomEditMainImage
             {
                 imgPhoto.ImageUrl = this.PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/Network/Connection/@ResourceURI").Value + "&rnd=" + Guid.NewGuid().ToString();
                 lblNoImage.Visible = false;
-                imgPhoto.Visible = true;                
-                
-            
+                imgPhoto.Visible = true;
+
+
             }
             else
             {

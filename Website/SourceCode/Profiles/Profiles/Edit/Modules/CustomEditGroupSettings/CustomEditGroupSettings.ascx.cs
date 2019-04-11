@@ -48,7 +48,7 @@ namespace Profiles.Edit.Modules.CustomEditGroupSettings
             else
                 Response.Redirect("~/search");
 
-            litBackLink.Text = "<a href='" + Root.Domain + "/edit/" + this.SubjectID + "'>Edit Menu</a> &gt; <b>Group Settings</b>";
+            litBackLink.Text = "<a href='" + Root.Domain + "/edit/default.aspx?subject=" + this.SubjectID + "'>Edit Menu</a> &gt; <b>Group Settings</b>";
 
             //btnEditProperty.Text = "Add " + PropertyLabel;
             imbAddArror.Visible = true;
@@ -64,7 +64,7 @@ namespace Profiles.Edit.Modules.CustomEditGroupSettings
             securityOptions.Subject = this.SubjectID;
             securityOptions.PredicateURI = predicateuri;
             //securityOptions.PrivacyCode = Convert.ToInt32(this.PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@ViewSecurityGroup").Value);
-            securityOptions.SecurityGroups = new XmlDataDocument();
+            securityOptions.SecurityGroups = new XmlDocument();
             securityOptions.SecurityGroups.LoadXml(base.PresentationXML.DocumentElement.LastChild.OuterXml);
 
             //txtLabel.Attributes.Add("data-autocomplete-url", Root.Domain + "/edit/Modules/CustomEditFreetextKeyword/keywordAutocomplete.aspx?keys=");
