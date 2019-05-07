@@ -19,7 +19,13 @@
           </Param>
         </ParamList>
       </Module>
+    </Panel>
+    <Panel Type="left">
       <Module ID="LatestUpdates">
+        <ParamList>
+          <Param Name="Show">3</Param>
+          <Param Name="SeeMore">True</Param>
+        </ParamList>
       </Module>
     </Panel>
     <Panel Name="Find People" Alias="people" Type="main" TabType="Default" TabSort="0">

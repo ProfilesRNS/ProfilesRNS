@@ -1,20 +1,7 @@
-﻿/*  
- 
-    Copyright (c) 2008-2012 by the President and Fellows of Harvard College. All rights reserved.  
-    Profiles Research Networking Software was developed under the supervision of Griffin M Weber, MD, PhD.,
-    and Harvard Catalyst: The Harvard Clinical and Translational Science Center, with support from the 
-    National Center for Research Resources and Harvard University.
-
-
-    Code licensed under a BSD License. 
-    For details, see: LICENSE.txt 
-  
-*/
+﻿
 using System;
 using System.Collections.Generic;
-using System.Web.UI.WebControls;
 using System.Xml;
-
 using Profiles.Framework.Utilities;
 
 
@@ -32,17 +19,31 @@ namespace Profiles.Framework.Modules.MainMenu
                 if (this.RDFData.InnerXml != "")
                     RecordHistory();
 
-                DrawProfilesModule();
+                if (uh.GetItems() != null)
+                {
+                    DrawProfilesModule();
+                }
+                else { lblHistoryItems.Text = "<li class='main-nav'><a href='" + Root.Domain + "/history'>History (0)</a></li>"; }
             }
         }
-
+        
         private void DrawProfilesModule()
         {
-            rptHistory.DataSource = uh.GetItems(5);
-            rptHistory.DataBind();
+            
+            int count = 0;
 
-            if (rptHistory.DataSource != null)
-                litSeeAll.Text = "<a href='" + Root.Domain + "/history'><font style='font-size:10px'>See All (" + uh.GetItems().Count.ToString() + ") pages</font></a>";
+            int total = uh.GetItems().Count;
+            lblHistoryItems.Text = "<li class='main-nav'><a href='" + Root.Domain + "/history'>History (" + total.ToString() + ")</a><ul class='drop'>";
+            foreach (HistoryItem h in uh.GetItems(5))
+            {                
+                lblHistoryItems.Text += "<li><a  style='border-left:1px solid #383737;border-right:1px solid #383737;' href='" + h.URI + "'>" + h.ItemLabel + "</a></li>";                
+                count++;
+            }
+            if (total > 1)
+                lblHistoryItems.Text += "<li style='height:39px !important;'><a style='border-top:1px solid #ffffff;border-bottom:1px solid #383737;border-left:1px solid #383737;border-right:1px solid #383737;' href='" + Root.Domain + "/history'>See All " + total.ToString() + " Pages</a></li></ul></li>";
+            else if (total ==1)
+                lblHistoryItems.Text += "<li style='height:39px !important;'><a style='border-top:1px solid #ffffff;border-bottom:1px solid #383737;border-left:1px solid #383737;border-right:1px solid #383737;' href='" + Root.Domain + "/history'>See All Pages</a></li></ul></li>";            
+
 
 
         }
@@ -54,7 +55,7 @@ namespace Profiles.Framework.Modules.MainMenu
             {
                 if (this.PresentationXML != null)
                 {
-                    if (this.PresentationXML.SelectSingleNode("Presentation/@PresentationClass").Value.ToLower() == "profile")
+                    if (this.PresentationXML.SelectSingleNode("Presentation/@PresentationClass").Value.ToLower() == "profile" && !Request.RawUrl.ToLower().Contains("/search"))
                     {
                         UserHistory uh = new UserHistory();
                         HistoryItem hi;
@@ -95,25 +96,6 @@ namespace Profiles.Framework.Modules.MainMenu
         public XmlDocument PresentationXML { get; set; }
         public XmlDocument RDFData { get; set; }
 
-        protected void rptHistoryOnItemBound(object sender, RepeaterItemEventArgs e)
-        {
-            HistoryItem userHistory = (HistoryItem)e.Item.DataItem;
-            if (userHistory != null)
-            {
-                Literal lblHistoryItem = (Literal)e.Item.FindControl("lblHistoryItem");
-                string label = string.Empty;
 
-                if (userHistory.ItemLabel.Length > 21)
-                {
-                    label = userHistory.ItemLabel.Substring(0, 22);
-                }
-                else
-                {
-                    label = userHistory.ItemLabel;
-                }
-
-                lblHistoryItem.Text = "<a href=" + userHistory.URI + ">" + label + "</a><br/>";
-            }
-        }
     }
 }

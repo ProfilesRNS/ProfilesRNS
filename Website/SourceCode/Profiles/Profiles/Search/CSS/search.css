@@ -10,64 +10,355 @@
     For details, see: LICENSE.txt 
   
 */
+
+.search-row-details{
+   font-size:12px;
+   text-align:left;
+   margin-top:14px;
+}
+.pageTitle h2{ 
+    text-align: left;
+        color: #AC1B30;
+        font-size: 28px;
+        font-weight: normal;
+        margin: 0px !important;
+
+}
+.tabContainer h2{ 
+    text-align: left;
+        color: #AC1B30;
+        font-size: 28px;
+        font-weight: normal;
+        margin: 0px !important;
+
+}
+
+.panelPassive {
+    background-color: #f7f7f7 !important;
+    border: 1px solid #ccc !important;
+}
+
+
+.dropdownx{
+    padding-left:-15px !important;
+}
+
+
+#divSearchCriteria{width:160px;}
+.btn-default {    
+    font-size: 12px;
+    text-align:left;
+    margin-bottom:10px;
+}
+
+    .btn-default .caret {
+        position: absolute !important;
+        top: calc(50% - 1px) !important;      
+        margin-right: calc(10% );
+        right:calc(-7%);
+    }
+
+/********************************************/
+/* Proxy
+/********************************************/
+.center{
+    text-align:center;
+    margin:0px !important;
+    padding:0px !important;
+
+}
+.empty-cell{
+    padding:10px;
+    text-align:left;
+    border:none !important;
+
+}
+.leftCol {
+    text-align:left;    
+    padding-left:6px;
+
+}
 /********************************************/
 /* About                                    */
 /********************************************/
-
-.profiles .profilesContentMain .searchSection h3 {
-	margin:0;
-	padding:0;
-	font-size:1.2em;
-	color:#746a42;
-	font-weight:bold;
+.form-check-label {
+    font-weight: normal;
 }
 
-.profiles .profilesContentMain .searchResults UL
-{
+.form-inline {
+    display: inline-flex;
+}
+
+.form-control {
+    padding-left: 0px;
+}
+
+.profiles .profilesContentMain .searchSection h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.2em;
+    color: #746a42;
+    font-weight: bold;
+}
+
+.profiles .profilesContentMain .searchResults UL {
     list-style-type: none;
     padding: 0px;
     margin: 15px 0px 15px 15px;
-    
 }
-.profiles .profilesContentMain .searchResults LI
-{
+
+.profiles .profilesContentMain .searchResults LI {
     margin-bottom: 8px;
     text-indent: -15px;
 }
-.searchForm td 
-{
-    font-size: 13px;
-    font-weight: normal;
-    padding: 2px;
+
+.searchResults table {
+    width: 820px;
+    border-collapse: collapse;
+}
+
+
+.SearchDetails {
+    text-align: left;
+    float: left;
+    overflow-wrap: break-word;
+    width: 170px !important;
+    position:absolute;
+    margin-top:18px;
+
+}
+
+.InLineEverythingResults {
+    display: table-row inline !important;
+}
+
+.Results-Options-Dropdown {
+    border-right: solid 1px gray;
+    border-bottom: solid 1px gray;
+    border-left: solid 1px silver;
+    padding-left: 3px;
+    margin-left: 195px;
+    width: 150px;
+    overflow: auto;
+    background-color: #ffffff;
+    z-index: 5;
+    position: absolute;
     text-align: left;
 }
-/*.searchForm a
-{
-text-decoration:none;	
-border : 0;
-}*/
+
 
 /********************************************/
-/* Replacing inline styles from SearchPerson.ascx */
+/* Search                                   */
 /********************************************/
-
-#divOtherOptions 
-{
-	position: absolute;
-	margin-top: -2px;
-	margin-left: -2px;
-	width: 255px;
-	border-right: solid 1px #000000;
-	border-bottom: solid 1px #000000;
-	border-left: solid 1px gray;
-	padding-left: 3px;
-	height: 150;
-	width: 243px;
-	overflow: auto;
-	background-color: #ffffff;
+.line {
+    margin-left: 40px;
+    display:inline-block;
+    height: 20px; 
+    background-color:#EAF0F8;
+    color:#666;
+    margin-bottom: 10px;
+padding-left: 5px;
+padding-right: 5px;
 }
-/*This helper class is to remove the inline padding styles in SearchPerson and SearchEverything to align the search forms*/
-td.pan 
-{
-	padding: 0;
+
+.parent {
+    border-bottom:2px solid #dfdfdf;
+    width: 100%;
+    height:9px;
+    margin-bottom:16px;
+    margin-top:16px;
+
+
+}
+h3{
+    font-size:28px !important;
+     color:#b23f45;
+     font-weight: bold;
+
+}
+.divlabel {
+    display: table-cell;
+    vertical-align: middle !important;
+    text-align: right !important;
+    padding-right: 12px;
+    width: 120px;
+}
+
+.threehun-width {
+    width: 300px;
+}
+.twofifty-width {
+    width: 250px;
+}
+.searchForm {
+    margin: 8px 0px;
+    color: #666;
+}
+
+    .searchForm .searchSection {
+        background-color: #EAF0F8;
+        border: 1px solid #CCC;
+        padding: 8px 24px 20px;
+        margin-bottom: 12px;
+    }
+
+    .searchForm table {
+        border-collapse: collapse;
+    }
+
+    .searchForm th {
+        text-align: right;
+        font-size: 13px;
+        font-weight: bold;
+        color: #666;
+        width: 102px;
+        padding: 5px 10px 5px 0px;
+    }
+
+
+    .searchForm a {
+        text-decoration: none;
+        border: 0;
+    }
+
+    .searchForm td {
+        font-size: 13px;
+        font-weight: normal;
+        padding: 2px;
+        margin-left: 24px;
+        text-align: left;        
+    }
+
+    .searchForm .fieldMain {
+        width: 255px;
+    }
+
+.fieldOptions {
+    padding-left: 10px;
+}
+
+.input-padding {
+    margin-bottom: 9px !important;
+    padding-left:5px;
+}
+
+.fileOptions span {
+    font-weight: normal;
+    padding-right: 5px;
+}
+
+.searchForm .inputText {
+    width: 250px;
+}
+
+.searchForm select {
+    width: 250px;
+}
+
+.searchForm .inputButton {
+    width: 70px;
+    margin: 0px 20px 0px 0px;
+}
+
+.searchForm .spacerRow {
+    height: 16px;
+    overflow: hidden;
+}
+
+.searchForm .spacerRowSmall {
+    height: 8px;
+    overflow: hidden;
+}
+
+.searchForm b {
+    color: #666;
+}
+
+.searchForm .submitTable {
+    background-color: #FFF;
+}
+
+.listTablePagination {
+    background-color: #f7f3ef;
+    padding: 6px;
+    width: 100%;
+    border-bottom: 1px solid #999999;
+    border-left:1px solid #999999;
+    border-right:1px solid #999999;
+    border-collapse: collapse;
+}
+
+    .listTablePagination table {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .listTablePagination td {
+        padding: 0px;
+        margin: 0px;
+        width: 200px;
+    }
+
+.listTablePaginationMiddle {
+    width: 205px;
+    text-align: center;
+}
+
+.listTablePaginationPN {
+    display: block;
+    float: right;    
+    text-align: center;
+    padding: 2px 6px;
+    color: #999;
+    font-weight: bold;
+    font-size: 11px;
+    line-height: 15px;
+}
+
+.listTablePagination a {
+    font-size: 11px;
+    line-height: 15px;
+    color: #3f4a9d;
+}
+
+.listTablePaginationA img {
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+}
+
+.listTablePaginationP img {
+    margin-right: 4px;
+    margin-bottom:2px;
+}
+
+.listTablePaginationN img {
+    margin-left: 4px;
+    margin-bottom:2px;
+}
+
+.listTablePaginationN {
+    margin-left: 8px;
+}
+
+.listTablePaginationFL {
+    display: block;
+    width: 19px;
+    height: 19px;
+    float: right;    
+}
+
+    .listTablePaginationFL img {
+        margin: 5px 6px;
+    }
+
+.listTablePaginationA {
+    border-color: #999;
+}
+
+.search-row-details{margin-bottom:2px;
+                    padding:0px; 
+                    margin-top:6px;
+
 }

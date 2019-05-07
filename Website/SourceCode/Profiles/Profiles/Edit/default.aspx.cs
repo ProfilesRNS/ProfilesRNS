@@ -74,6 +74,14 @@ namespace Profiles.Edit
             Displaycss.Attributes["type"] = "text/css";
             Displaycss.Attributes["media"] = "all";
             Page.Header.Controls.Add(Displaycss);
+
+            HtmlLink editcss = new HtmlLink();
+            editcss.Href = Root.Domain + "/edit/CSS/edit.css";
+            editcss.Attributes["rel"] = "stylesheet";
+            editcss.Attributes["type"] = "text/css";
+            editcss.Attributes["media"] = "all";
+            Page.Header.Controls.Add(editcss);
+
         }
 
         public void LoadPageData()

@@ -1,0 +1,378 @@
+﻿
+.editBody {
+    padding-top: 20px;
+    text-align: left;
+}
+
+    .editBody input {
+        padding-left: 2px;
+    }
+
+.EditMenuItem {
+    padding-top: 6px;
+    cursor: pointer;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.EditPanel {
+    margin-top: 8px;
+    padding: 10px;
+    background-color: #EAF0F8;
+    border: 1px solid #999999;
+}
+
+    .EditPanel input {
+        padding-left: 2px;
+    }
+
+
+.editBackLink {
+    margin-bottom: 12px;
+}
+
+.pubmed-search-results {
+    margin-top: 16px;
+}
+
+.results-total-pubs {
+    padding-top: 5px;
+    padding-left: 5px;
+    background-color: #fff;
+    padding-bottom: 5px;
+}
+
+.pub-med-search-radio {
+    padding-top: 10px;
+}
+
+    .pub-med-search-radio p {
+        font-size: 13px;
+        line-height: 20px;
+    }
+
+    .pub-med-search-radio input[type="radio"] {
+        vertical-align: top;
+        margin-right: 5px;
+    }
+
+.pub-med-search-radio-child {
+    margin-left: 10px;
+    margin-top: 6px;
+}
+
+.pub-med-search-checkbox {
+    padding-top: 10px;
+}
+
+    .pub-med-search-checkbox p {
+        font-size: 13px;
+        line-height: 13px;
+    }
+
+    .pub-med-search-checkbox input[type="checkbox"] {
+        vertical-align: top;
+        margin-right: 5px;
+    }
+
+.information-pubs {
+    background: #fff;
+    padding-left: 5px;
+    padding-top: 10px;
+}
+
+.img-information-pubs {
+    padding-bottom: 5px;
+    padding-right: 5px;
+}
+
+
+.pubHeader {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.pubSubHeader {
+    font-weight: bold;
+    color: #666666;
+}
+
+.pubSubSpacer {
+    margin-top: 10px;
+}
+
+.div-edit-buttons {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.img-delete {
+    padding-right: 10px;
+}
+
+.editLeftPaddedCol {
+    padding-left: 5px !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    text-align: left !important;
+}
+
+.actionbuttons {
+    text-align: left !important;
+    margin: 10px 0px 10px 0px;
+}
+
+    .actionbuttons span {
+        margin-left: 5px;
+    }
+
+    .actionbuttons input {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+
+
+.CenterSelect {
+    text-align: center;
+}
+
+.pubitem {
+    width: 98% !important;
+    padding-bottom: 16px;
+}
+
+.pubitemcheck {
+    vertical-align: top;
+    margin: 0px !important;
+}
+
+    .pubitemcheck.input[type="radio"],
+    input[type="checkbox"] {
+        margin-top: 0px !important;
+    }
+
+.alignLeft {
+    text-align: left !important;
+    padding-left: 6px;
+}
+
+.alignCenter {
+    text-align: center !important;
+}
+
+.alignActionButtons {
+    text-align: center !important;
+    width: 110px;
+}
+
+
+.alignCenterAction {
+    text-align: center !important;
+    width: 110px;
+}
+
+.alignAwardsDates {
+    width: 100px;
+    text-align: left;
+    padding-left: 6px;
+}
+
+    .alignAwardsDates input {
+        width: 90px;
+        padding-left: 2px;
+    }
+
+.AwardName {
+    width: 350px;
+    text-align: left;
+    padding-left: 6px;
+}
+
+    .AwardName input {
+        width: 300px;
+        padding-left: 2px;
+    }
+    
+    .EditMenuTopRow {
+    background-color: #EEEBE5;
+    color: #333;
+    font-weight: normal;
+    font-family: Arial;
+    font-size: 13px;
+    height: 26px !important;
+    padding-left: 6px;
+    width: 100%;
+    text-align: center;    
+     border-bottom:1px solid #999999 !important;
+}
+
+.editPropertyPage table {
+    border:1px solid #999999;
+}
+
+.AwardInstitution {
+    text-align: left;
+    padding-left: 6px;
+}
+
+    .AwardInstitution input {
+        padding-left: 2px;
+        width: 290px;
+    }
+
+.editPropertyPage {
+    padding-top: 16px;
+    text-align: left;
+}
+.editPropertyPage tr{
+    border:1px solid #999999;
+    height:24px;
+}
+.editPropertyPage td{
+    border:1px solid #999999;    
+}
+.editPropertyPage th{
+    border:1px solid #999999;
+ 
+}
+.editPage {
+    padding-top: 16px;
+    text-align: left;
+}
+
+    .editPage h2 {
+        color: #AC1B30;
+        font-size: 13px;
+    }
+    .editPage table {
+        border:1px solid #999999;
+
+    }
+    .editPage td th {
+        border:1px solid #999999;
+    }
+
+    .editPage .topRow td{
+        background-color: #EEEBE5;
+        font-weight: bold;
+        color: #666;
+        font-family: Arial;
+        font-size: 13px;
+        height: 24px;
+        padding-left: 6px;
+    }
+     .editPage .topRow th {
+        background-color: #EEEBE5;
+        font-weight: bold;
+        color: #333;
+        font-family: Arial;
+        font-size: 13px;
+        height: 24px;
+        padding-left: 6px;
+    }
+    .editPage input {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+.grant-checkbox {
+    margin-left: 5px;
+}
+
+.grant-checkbox-cell {
+    padding-left: 10px;
+}
+
+.grant-sub-row {
+    margin-top: 5px;
+}
+
+.grant-sub-arrow {
+    padding-top: 5px;
+    padding-left: 15px;
+}
+
+.grant-sub-col-padding {
+    padding-left: 2px;
+}
+
+.custom-grant-row {
+    margin-top: 5px;
+}
+
+.EditMenuLinkImg {
+    padding-right: 5px;
+    cursor: pointer;
+}
+
+.EditMenuLinkImgGray {
+    padding-right: 5px;
+    margin-bottom:2px;
+    cursor: pointer;
+}
+
+.lnk-edit-arrow {
+    color: #3366CC;
+}
+
+    .lnk-edit-arrow:hover {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+        .lnk-edit-arrow:hover:after {
+            text-decoration: none;
+            cursor: default;
+        }
+
+.overview {
+    resize: none;
+    width: 827px;
+    height: 400px;
+}
+
+.overviewheader {
+    height: 400px;
+    width: 847px;
+    padding: 5px;
+}
+
+.overviewheaderleft {
+    padding-left: 6px;
+    width: 847px;
+}
+
+.overviewheaderwidth {
+    width: 847px;
+}
+.modalupdate
+{
+    position: fixed;
+    z-index: 9999;
+    height: 100%;
+    width: 968px;
+    top: 0;  
+    filter: alpha(opacity=60);
+}
+.modalcenter
+{
+    z-index: 1000;
+    margin: 300px auto;
+    padding: 10px;
+    width: 230px;
+    background-color: #eee;
+    border-radius: 10px;
+    filter: alpha(opacity=100);    
+    text-align:center !important;
+    font-weight:bold;
+
+}
+.modalcenter img
+{
+    height: 128px;
+    width: 128px;
+    margin-bottom:18px;
+}

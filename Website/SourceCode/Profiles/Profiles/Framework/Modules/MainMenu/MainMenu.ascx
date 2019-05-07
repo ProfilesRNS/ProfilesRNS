@@ -1,29 +1,137 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MainMenu.ascx.cs"
-    Inherits="Profiles.Framework.Modules.MainMenu.MainMenu" %>
-<%@ Register TagName="Networks" TagPrefix="RelationshipType" Src="~/Framework/Modules/MainMenu/SetActiveNetworks.ascx" %>
-<%@ Register TagName="History" TagPrefix="HistoryItem" Src="~/Framework/Modules/MainMenu/History.ascx"  %>
-<%--
-    Copyright (c) 2008-2012 by the President and Fellows of Harvard College. All rights reserved.  
-    Profiles Research Networking Software was developed under the supervision of Griffin M Weber, MD, PhD.,
-    and Harvard Catalyst: The Harvard Clinical and Translational Science Center, with support from the 
-    National Center for Research Resources and Harvard University.
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MainMenu.ascx.cs" Inherits="Profiles.Framework.Modules.MainMenu.MainMenu" %>
+<%@ Register TagName="History" TagPrefix="HistoryItem" Src="~/Framework/Modules/MainMenu/History.ascx" %>
+<%@ Register TagName="Lists" TagPrefix="MyLists" Src="~/Framework/Modules/MainMenu/MyLists.ascx" %>
+<div id="prns-nav">
+    <!-- MAIN NAVIGATION MENU -->
+    <nav>
+        <ul class="prns-main">
+            <li class="main-nav">
+                <a href="<%=ResolveUrl("~/search")%>">Home</a>
+            </li>
+            <li class="main-nav">
+                <a href='#'>About</a>
+                <ul class="drop">
+                    <li>
+                        <a id="about" style="border-left: 1px solid  #999; border-right: 1px solid  #999; border-bottom: 1px solid #999; width: 200px !important" href="<%=ResolveUrl("~/about/default.aspx?type=About")%>">Overview</a>
+                    </li>
+                    <li>
+                        <a id="opensource" style="border-left: 1px solid  #999; border-right: 1px solid  #999; border-bottom: 1px solid #999; width: 200px !important" href="<%=ResolveUrl("~/about/default.aspx?type=OpenSourceSoftware")%>">Open Source Software</a>
+                    </li>
+                </ul>
 
-
-    Code licensed under a BSD License. 
-    For details, see: LICENSE.txt 
- --%>
-
-<div class="activeContainer" id="defaultmenu">
-    <div class="activeContainerTop"></div>
-    <div class="activeContainerCenter">
-        <div class="activeSection">
-            <div class="activeSectionHead">Menu</div>
-            <div class="activeSectionBody">
-                <div runat="server" id="panelMenu" visible="true"></div>
+            </li>
+            <li class="main-nav">
+                <a href="<%=ResolveUrl("~/about/default.aspx?type=Help")%>">Help</a>
+            </li>
+            <%-- <li class="main-nav">
+                <a href="<%=ResolveUrl("~/about/default.aspx?type=UseOurData")%>">Use Our Data</a>
+                <ul class="drop">
+                    <li>
+                        <a id="useourdata" style="border-left: 1px solid  #383737; border-right: 1px solid  #383737; border-bottom: 1px solid #383737; width: 200px !important" href="<%=ResolveUrl("~/about/default.aspx?type=UseOurData")%>">Overview</a>
+                    </li>
+                    <asp:Literal runat="server" ID="litExportRDF"></asp:Literal>
+                </ul>
+            </li>--%>
+            <HistoryItem:History runat="server" ID="ProfileHistory" Visible="true" />
+            <li class="search main-nav" style="width: 492px;">
+                <input name="search" id="menu-search" placeholder="Search Profiles (people, publications, concepts, etc.)" type="text" style="padding-left: 5px;" />
+                <img style="cursor: pointer" alt="search" id="img-mag-glass" src="<%=ResolveUrl("~/framework/images/blackMagnifyGlass.png")%>" />
+            </li>
+            <li id="search-drop" class="last main-nav" style="float: right !important; width: 25px;">
+                <a href="#" style="padding: 0px; padding-top: 9px; margin: 0px;">
+                    <img src="<%=ResolveUrl("~/framework/images/arrowDown.png") %>" /></a>
+                <ul class="drop" style="top: 39px; left: 835px;">
+                    <asp:Literal runat="server" ID="litSearchOptions"></asp:Literal>
+                </ul>
+            </li>
+        </ul>
+        <!-- USER LOGIN MSG / USER FUNCTION MENU -->
+        <div id="prns-usrnav" class="pub" class-help="class should be [pub|user]">
+            <div class="loginbar">
+                <asp:Literal runat="server" ID="litLogin"></asp:Literal>
             </div>
+            <!-- SUB NAVIGATION MENU (logged on) -->
+            <ul class="usermenu">
+                <asp:Literal runat="server" ID="litViewMyProfile"></asp:Literal>
+                <li style="margin-top: 0px !important;">
+                    <div class="divider"></div>
+                </li>
+                <asp:Literal runat="server" ID="litEditThisProfile"></asp:Literal>
+                <li>
+                    <div class="divider"></div>
+                </li>
+                <asp:Literal runat="server" ID="litProxy"></asp:Literal>               
+                <li id="ListDivider">
+                    <div class="divider"></div>
+                </li>
+                <li id="navMyLists">
+                   <a href="#">My Person List (<span id="list-count">0</span>)</a>
+                    <MyLists:Lists runat="server" ID="MyLists" Visible="false" />
+                </li>
+                 <li>
+                    <div class="divider"></div>
+                </li>
+              <%--  <li>
+                    <asp:Literal ID="litDashboard" runat="server" /></li>
+                <li>
+                    <div class="divider"></div>
+                </li>--%>
+                <asp:Literal runat="server" ID="litGroups"></asp:Literal>
+                <li id="groupListDivider" visible="false" runat="server">
+                    <div class="divider"></div>
+                </li>
+                <asp:Literal runat="server" ID="litLogOut"></asp:Literal>
+            </ul>
         </div>
-        <RelationshipType:Networks runat="server" ID="ActiveNetworkRelationshipTypes" Visible="false" />        
-        <HistoryItem:History runat="server" ID="ProfileHistory" Visible="false" />        
-    </div>
-    <div class="activeContainerBottom"></div>
+    </nav>
 </div>
+
+<asp:Literal runat="server" ID="litJs"></asp:Literal>
+<script type="text/javascript">
+
+    $(function () {
+        setNavigation();
+    });
+
+    function setNavigation() {
+        var path = $(location).attr('href');
+        path = path.replace(/\/$/, "");
+        path = decodeURIComponent(path);
+
+        $(".prns-main li").each(function () {
+
+            var href = $(this).find("a").attr('href');
+            var urlParams = window.location.search;
+
+            if ((path + urlParams).indexOf(href) >= 0) {
+                $(this).addClass('landed');
+            }
+        });
+
+
+        return true;
+    }
+    $(document).ready(function () {
+        $("#menu-search").on("keypress", function (e) {
+            if (e.which == 13) {
+                search();
+                return false;
+            }
+            return true;
+        });
+
+        $("#img-mag-glass").on("click", function () {
+            search();
+            return true;
+        });
+    });
+    function search() {
+        var keyword = $("#menu-search").val();
+        var classuri = 'http://xmlns.com/foaf/0.1/Person';
+        document.location.href = '<%=ResolveUrl("~/search/default.aspx")%>?searchtype=people&searchfor=' + keyword + '&classuri=' + classuri + '&perpage=15&offset=0&new=true';
+        return true;
+    }
+
+</script>
+
+

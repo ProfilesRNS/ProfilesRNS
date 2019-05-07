@@ -1,116 +1,3 @@
-/*  
- 
-	Copyright (c) 2008-2012 by the President and Fellows of Harvard College. All rights reserved.  
-	Profiles Research Networking Software was developed under the supervision of Griffin M Weber, MD, PhD.,
-	and Harvard Catalyst: The Harvard Clinical and Translational Science Center, with support from the 
-	National Center for Research Resources and Harvard University.
-
-
-	Code licensed under a BSD License. 
-	For details, see: LICENSE.txt 
-  
-*/
-
-body
-{
-	padding: 0px;
-	margin: 0px;
-	/*Adding in font declaration on body so it can be removed from inline styles'*/
-	font-family: Helvetica, Arial, sans-serif;
-}
-form
-{
-	padding: 0px;
-	margin: 0px;
-}
-
-.actionbuttons input
-{
-	margin: 0px 2px;
-}
-/***************************************************/
-/*Loading gif inline styling from Template.Master*/
-/**************************************************/
-#divStatus 
-{
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	width: 100%;
-	height: 100%;
-	z-index: 999999;
-	display: none;
-}
-#divStatus .loader 
-{
-	width: 400px;
-	border: 1px solid #666;
-	padding: 5px;
-	position: relative;
-	left: 50%;
-	margin-left: -200px;
-	top: 40%;
-	background-color: #FFFFFF;
-}
-/********************************************/
-/* Customize this part                      */
-/********************************************/
-
-.Searchlink
-{
-	display: block;
-	text-decoration: none;
-	color: #000000;
-}
-.Searchlink.selected:hover
-{
-	color: #ffffff;
-}
-
-.PropertyGroup
-{
-	font-weight: bold;
-	font-size: 15px;
-	color: #993333;
-	padding-bottom: 12px;
-}
-.PropertyItemHeader
-{
-	background-color: #EEEBE5;
-	color: #666;
-	font-size: 14px;
-	height: 24px;
-	font-weight: bold;
-	vertical-align: middle;
-	padding-left: 6px;
-	padding-top: 2px;
-}
-.PropertyGroupItem
-{
-	border-left: solid 1px #ccc;
-	border-right: solid 1px #ccc;
-	border-bottom: solid 1px #ccc;
-	border-top: solid 1px #ccc;
-}
-.PropertyGroupData
-{
-	padding-left: 8px;
-	padding-bottom: 12px;
-	padding-left: 6px;
-}
-.institutionHeader
-{
-	background-color: #000;
-	text-align: center;
-	padding: 4px 0px 4px 0px;
-	border-bottom: 4px solid #B23F45;
-}
-
-.activeSectionDetails
-{
-	font-size: 11px;
-	margin-left: 2px;
-}
 /********************************************/
 /* New Search button - edit the colours to match your branding*/
 /********************************************/
@@ -137,33 +24,7 @@ form
 	text-decoration: none;
 	box-shadow: 0 0 2px 2px #b23f45;
 }
-/********************************************/
-/* Profiles Shell Layout                    */
-/********************************************/
 
-.profiles
-{
-	margin-top: 15px;
-	text-align: center;
-/*these two styles have been added to replace the now obsolete html 'center' attribute from Template.Master.*/
-	margin: 30px auto;
-	max-width: 967px;
-}
-.profiles .profilesHeader
-{
-	width: 967px;
-	text-align: left;
-}
-.profiles .profilesFooter
-{
-	width: 967px;
-	text-align: left;
-}
-.profiles .profilesPage
-{
-	width: 967px;
-	text-align: left;
-}
 /*Replacing inline styles for the form headings in the main app*/
 .profiles .profilesPage .headings 
 {
@@ -172,92 +33,295 @@ form
 	font-weight: bold; 
 	margin-bottom: 3px;
 }
-.profiles .profilesPage table
-{
-	border-collapse: collapse;
-}
-.profiles .profilesPageColumnLeft
-{
-	width: 190px;
-	vertical-align: top;
-	margin: 0;
-	padding: 0 20px 0 0;
-}
-.profiles .profilesPageColumnRight
-{
-	width: 777px;
-	vertical-align: top;
-	margin: 0;
-	padding: 0;
-}
-.profiles .profilesPageColumnRightTop 
-{
-	background-color: #000000;
-	/*The below was used to add soft corners and box shadow to the app container - now replicated with CSS in profilesPageColumnRightCenter*/
-	/*background-image: url('../Images/passive_top.gif');*/
-	/*width: 777px; No longer needed*/
-	height: 12px;
-	overflow: hidden;
-	padding: 0;
-	margin: 0;
-	-ms-border-radius: 10px 10px 0px 0px;
-	border-radius: 10px 10px 0 0;
+
+
+header._ci_shared_asset.tool-page .inner .title-container h1 { 
+margin: 18px 0 6px 0; 
+} 
+
+body {
+    padding: 0px;
+    margin: 0px;
 }
 
-.profiles .profilesPageColumnRightTopLine
-{
-	border-right: 1px solid #FFF;
-	width: 625px;
-	height: 12px;
-	overflow: hidden;
-}
-.profiles .profilesPageColumnRightBottom
-{
-	/*background-image: url('../Images/passive_bottom.gif');*/
-	width: 777px;
-	height: 18px;
-	overflow: hidden;
-	padding: 0px;
-	margin: 0; /* nudge border up and to left */
-	margin-left: -1px;
-	margin-top: -2px;
-}
-.profiles .profilesPageColumnRightCenter 
-{
-	width: 777px;
-	vertical-align: top;
-	/*More unneeded background images now replicated in CSS below*/
-	/*background-image: url('../Images/passive_back.gif') repeat;*/
-	border-width: 0px 1px 1px 1px;
-	border-style: solid;
-	border-color: #cccccc;
-	-ms-border-radius: 0px 0px 10px 10px;
-	border-radius: 0px 0px 10px 10px;
-	box-shadow: 4px 5px 15px 2px #cccccc;
+form {
+    padding: 0px;
+    margin: 0px;
 }
 
-.profiles .profilesPageColumnRightCenter table
-{
-	border-collapse: collapse;
+header._ci_shared_asset.tool-page .inner .title-container h1 {
+    margin: 18px 0 6px 0 !important;
 }
-.profiles .profilesMainColumnLeft
-{
-	width: 625px;
-	vertical-align: top;
-	margin: 0px;
-	padding: 0px;
-	padding-bottom: 10px;
+
+header._ci_shared_asset.tool-page .inner .title-container {
+    float:none !important;
+    min-width: 1140px;
+     margin-left: 255px !important; 
 }
-.profilesMainColumnRight
-{
-	width: 150px;
-	vertical-align: top;
-	margin: 0px;
-	padding: 0px;
-	/*These styles are replacing inline styles from Template.Master.cs*/
-	background-color: #f5f5f5;
-	border-left: 1px solid #c9c9c9;
-	border-radius: 0px 0px 10px 0px;
+
+header._ci_shared_asset.tool-page .inner a.main-logo {
+    margin-right: 55px;
+}
+
+
+.title-container h1 {
+    text-align: left !important;
+    top: -10px !important;
+    position: relative !important;
+}
+
+.title-container h4 {
+    top: -10px !important;
+    xwidth: 400px !important;
+    position: relative !important;
+}
+
+.title-container {
+    opacity: 1 !important;
+
+}
+
+    .title-container:hover {
+        opacity: .6 !important;
+       -webkit-transition: all 1s ease-in;
+        -moz-transition: all 1s ease-in;
+        -o-transition: all 1s ease-in;
+        -ms-transition: all 1s ease-in;
+        transition: all 1s ease-in;
+    }
+
+    .title-container::after {
+        opacity: 1  !important;
+     
+    }
+
+.container {
+    text-align: left !important;
+}
+
+.clearfix {
+    text-align: left !important;
+}
+
+.SupportText {
+    font-size: 11px;
+    margin-top: 12px;
+    padding: 16px 0 0 0;
+    color: #333;
+    border-top: 1px solid #ccc;
+}
+
+div#ctsc-related-links {
+    width: 966px !important;
+}
+
+div#ctsc-spotlight-link {
+    padding: 5px 0 10px !important;
+}
+
+div.catalyst-content-container {
+    height: 50px !important;
+    border-bottom: none !important;
+}
+
+#catalyst-title-bar #catalyst-tagline {
+    border-right: 1px solid #ac1b30 !important;
+    color: #545454 !important;
+    font-size: 0.88em !important;
+    padding-right: 0 !important;
+    width: 166px !important;
+}
+
+tr#catalyst-page-title {
+    font-family: Georgia,Times,serif !important;
+    font-size: 1.6em !important;
+    padding-left: 13px !important;
+}
+
+div#catalyst-footer {
+    height: 200px !important;
+}
+
+
+.xcheckmark {
+    display: inline-block;
+    width: 5px;
+}
+
+.checkmark {
+    display: inline-block;
+}
+
+    .checkmark:after {
+        /*Add another block-level blank space*/
+        content: "";
+        display: block;
+        /*Make it a small rectangle so the border will create an L-shape*/
+        width: 5px;
+        height: 8px;
+        /*Add a white border on the bottom and left, creating that 'L' */
+        border: solid #000;
+        border-width: 0 2px 2px 0;
+        /*Rotate the L 45 degrees to turn it into a checkmark*/
+        transform: rotate(45deg);
+        left: -10px;
+        top: -3px;
+        position: relative;
+    }
+
+
+.imageUploaderField input {
+    width: 100% !important;
+}
+
+
+#rtnBtn {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: #ccc; /* Set a background color */
+    color: white; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 15px; /* Some padding */
+    border-radius: 10px; /* Rounded corners */
+}
+
+    #rtnBtn:hover {
+        background-color: #555; /* Add a dark-grey background on hover */
+    }
+
+
+
+.tog {
+    text-decoration: none;
+}
+
+/********************************************/
+/* Customize this part                      */
+/********************************************/
+
+
+.PropertyGroup {
+    font-family: Arial;
+    font-weight: bold;
+    font-size: 15px;
+    color: #993333;
+    padding-bottom: 5px;
+    text-align: left;
+    cursor: pointer;
+    border: none !important;
+    outline: none;
+}
+
+.PropertyItemHeader {
+    font-family: Arial;
+    font-weight: bold;
+    font-size: 15px;
+    color: #993333;
+    padding: 5px;
+    text-align: left;
+    cursor: pointer;
+    background-color: #EEE;
+}
+
+    .PropertyItemHeader a {
+        color: #666 !important;
+        text-decoration: none !important;
+    }
+
+        .PropertyItemHeader a:hover {
+            color: #666 !important;
+            text-decoration: none !important;
+        }
+
+.PropertyGroup a:hover {
+    color: #666 !important;
+    text-decoration: none !important;
+}
+
+.PropertyGroupItem {
+    font-weight: normal;
+    color: #666;
+    font-size: 13px;
+    text-align: left;
+    border: 1px solid #ccc !important;
+}
+
+.PropertyGroupData {
+    margin: 10px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: normal;
+    color: #000;
+    border: none !important;
+}
+
+.institutionHeader {
+    background-color: #000;
+    text-align: center;
+    padding: 30px 0px 30px 0px;
+    border-bottom: 8px solid #B23F45;
+}
+
+
+#page-container {
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+
+.network-delete-a {
+    cursor: pointer;
+    text-decoration: none;
+    padding-left: 20px;
+}
+
+/********************************************/
+/* Profiles Shell Layout                    */
+/********************************************/
+#ProfilesNotification {
+    margin-bottom: 10px;
+    border: 1px solid #333;
+    background-color: #FF9;
+    text-align: center;
+    padding: 3px;
+}
+
+.profiles {
+    padding-top: 15px;
+    padding-bottom: 24px;
+    display: inline-block;
+    width: 968px;
+    max-width: 968px;
+    overflow-y: visible;
+    text-align: center;
+}
+
+    .profiles .profilesHeader {
+        width: 968px;
+        text-align: left;
+    }
+
+    .profiles .profilesPage {
+        width: 968px;
+        margin: 0 auto;
+        overflow-y: visible;
+        left: 0;
+        right: 0;
+        text-align: center;
+        display: table;
+        padding-top: 10px;
+    }
+
+.profilesLeftCol {
+    display: table-cell;
+    text-align: left;
+    max-width: 160px;
 }
 
 /********************************************/
@@ -265,269 +329,118 @@ form
 /********************************************/
 
 
-.profiles, .profiles td, .profiles th, .profiles textarea, .profiles select, .profiles h2, .profiles h3, .profiles h4, .profiles h5, .profiles h6, .profiles ul, .profiles ol
-{
-	font-size: 13px;
-	line-height: 16px;
-}
-.profiles ul, .profiles ol
-{
-	margin-top: 0px;
-	margin-bottom: 0px;
-}
-.profiles a
-{
-	color: #3366CC;
-	text-decoration: none;
-}
-.profiles a:hover
-{
-	text-decoration: underline;
+.profiles, .profiles td, .profiles th, .profiles textarea, .profiles select, .profiles h2, .profiles h3, .profiles h4, .profiles h5, .profiles h6, .profiles ul, .profiles ol {
+    font-family: arial, sans-serif;
+    font-size: 13px;
 }
 
-/********************************************/
-/* Profiles Content Active                  */
-/********************************************/
-/* The proceeding left navigation styles have had all their width attributes removed to avoid future confusion*/
-.profiles .profilesContentActive
-{
-	/*width: 190px;*/
-	padding: 0px;
-	margin: 0px;
-}
-.profiles .profilesContentActive .activeContainer
-{
-	/*width: 188px;*/
-	margin-bottom: 8px;
-}
-.profiles .profilesContentActive .activeContainerTop
-{
-	background-color: #B23F45;
-	/*background-image: url('../Images/active_top.gif');*/
-	/*width: 180px;*/
-	height: 12px;
-	overflow: hidden;
-   	border-radius: 12px 12px 0 0;
-	box-shadow: 3px 3px 10px 0px #ccc;
-}
-.profiles .profilesContentActive .activeContainerCenter
-{
-	background-color: #FFFFFF;
-	/*background-image: url('../Images/active_center.gif');*/
-	/*width: 188px;*/
-	overflow: hidden;
-	box-shadow: 3px 3px 10px 0px #ccc;
-}
-.profiles .profilesContentActive .activeContainerBottom
-{
-	background-color: #B23F45;
-	/*background-image: url('../Images/active_bottom.gif');*/
-	/*width: 180px;*/
-	height: 12px;
-	overflow: hidden;
-	border-radius: 0 0 12px 12px;
-	box-shadow: 3px 3px 10px 0px #ccc;
-}
-.profiles .profilesContentActive .activeSection
-{
-	/*width: 174px;*/
-	/*margin-left: 1px;*/
-	border: 1px solid #c9c9c9;
-	border-width: 0 1px 0 1px;
-}
-.profiles .profilesContentActive .activeSectionHead
-{
-	background-color: #EEEBE5;
-	/*increased padding to improve look of Sectionhead*/
-	padding: 5px 8px;
-	font-weight: bold;
-	height: 100%;
-	font-size: 1.1em;
-}
-.profiles .profilesContentActive .activeSectionBody
-{
-	padding: 1px 8px;
-}
+    .profiles ul, .profiles ol {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
 
+    .profiles a {
+        color: #3366CC;
+        text-decoration: none;
+    }
 
-.profiles .profilesContentActive ul
-{
-	list-style-type: none;
-	padding: 0px;
-	margin: 4px 0px 8px 0px;
-	line-height: 18px;
-}
+        .profiles a:hover {
+            text-decoration: underline;
+        }
+
 
 
 /********************************************/
 /* Profiles Content Main                    */
 /********************************************/
 
-.profiles .profilesContentMain
-{
-	width: 604px;
-	padding: 0px;
-	margin: 10px 10px 0px 10px;
-}
-/* backLink */
-.profiles .profilesContentMain .backLink
-{
-	padding: 0px 8px 0 0;
-	float: right;
-}
-.profiles .profilesContentMain .backLink .backLinkIcon
-{
-	margin-right: 4px;
-	position: relative;
-	top: 1px;
-}
-/* pageTitle */
-.profiles .profilesContentMain .pageTitle
-{
-	display: inline;
-}
-.profiles .profilesContentMain .pageTitle h2
-{
-	display: block;
-	padding: 0px;
-	margin: 0px 0px 12px 0px;
-	color: #AC1B30;
-	font-size: 18px;
-	font-weight: normal;
-}
-.profiles .profilesContentMain .pageTitle .pageIcon
-{
-	margin-right: 4px;
-	position: relative;
-	top: 2px;
-}
-/* pageSubTitle */
-.profiles .profilesContentMain .pageSubTitle
-{
-	display: inline;
-}
-.profiles .profilesContentMain .pageSubTitle h3
-{
-	display: block;
-	padding: 0px;
-	margin: 0px 0px 12px 0px;
-	color: #666666;
-	font-weight: bold;
-}
-/* panelPage */
-.profiles .profilesContentMain .panelPage
-{
-	display: inline;
-}
-/* pageDescription */
-.profiles .profilesContentMain .pageDescription
-{
-	display: inline;
-}
-.profiles .profilesContentMain .pageDescription p
-{
-	display: block;
-	padding: 0px;
-	margin: 0px 0px 12px 0px;
-}
-/* pageTabs */
-.profiles .profilesContentMain .pageTabs .tabBack
-{
-	background-image: url('../Images/tab_back.gif');
-	height: 28px;
-	overflow: hidden;
-	margin: 12px 0 12px 0;
-	padding-left: 4px;
-}
-.profiles .profilesContentMain .pageTabs .tabBack a
-{
-	line-height: 27px;
-	font-weight: bold;
-	font-size: 12px;
-	color: #666;
-	cursor: pointer;
-}
-.profiles .profilesContentMain .pageTabs .tabBack a:hover
-{
-	text-decoration: none;
-	color: #36C;
-}
-.profiles .profilesContentMain .pageTabs .activeTab
-{
-	height: 28px;
-	display: inline;
-	float: left;
-	margin: 0px 2px;
-	line-height: 27px;
-	font-weight: bold;
-	color: #333;
-}
-.profiles .profilesContentMain .pageTabs .disabledTab
-{
-	height: 28px;
-	display: inline;
-	float: left;
-	margin: 0px 2px;
-	line-height: 27px;
-	font-weight: bold;
-	font-size: 12px;
-	color: #666;
-	cursor: pointer;
-}
-.profiles .profilesContentMain .pageTabs .activeTab .tabLeft
-{
-	background-image: url('../Images/tab_a_left.gif');
-	height: 28px;
-	width: 9px;
-	overflow: hidden;
-	float: left;
-}
-.profiles .profilesContentMain .pageTabs .activeTab .tabCenter
-{
-	background-image: url('../Images/tab_a_center.gif');
-	height: 28px;
-	overflow: hidden;
-	float: left;
-	padding: 0 4px;
-}
-.profiles .profilesContentMain .pageTabs .activeTab .tabRight
-{
-	background-image: url('../Images/tab_a_right.gif');
-	height: 28px;
-	width: 9px;
-	overflow: hidden;
-	float: left;
-}
-.profiles .profilesContentMain .pageTabs .disabledTab .tabLeft
-{
-	background-image: url('../Images/tab_d_left.gif');
-	height: 28px;
-	width: 9px;
-	overflow: hidden;
-	float: left;
-}
-.profiles .profilesContentMain .pageTabs .disabledTab .tabCenter
-{
-	background-image: url('../Images/tab_d_center.gif');
-	height: 28px;
-	overflow: hidden;
-	float: left;
-	padding: 0 4px;
-}
-.profiles .profilesContentMain .pageTabs .disabledTab .tabRight
-{
-	background-image: url('../Images/tab_d_right.gif');
-	height: 28px;
-	width: 9px;
-	overflow: hidden;
-	float: left;
+.profilesMaxWidth {
+    max-width: 968px;
 }
 
-.profiles .profilesContentMain .tabInfoText
-{
-	padding-bottom: 12px;
-	margin-bottom: 12px;
-	border-bottom: 1px dotted #999;
+.profiles .profilesContentMain {
+    padding-bottom: 15px;
+    display: table-cell;
+}
+
+.MainRow {
+    display: table-row;
+}
+/* backLink */
+.profiles .profilesContentMain .backLink {
+    text-align: right;
+    white-space: nowrap;
+}
+
+    .profiles .profilesContentMain .backLink .backLinkIcon {
+        margin-right: 4px;
+        position: relative;
+        top: 1px;
+    }
+/* pageTitle */
+.pageTitle {
+    width: 100%;
+    display: table-cell;
+    margin-top: 16px;
+}
+
+.profiles .profilesContentMain .pageTitle {
+    text-align: left;
+}
+
+    .profiles .profilesContentMain .pageTitle h2 {
+        text-align: left;
+        color: #AC1B30;
+        font-size: 28px;
+        font-weight: normal;
+        margin: 0px !important;
+    }
+
+/* pageSubTitle */
+.profiles .profilesContentMain .pageSubTitle {
+    color: #666666;
+    font-weight: bold;
+    text-align: left;
+    float: left;
+    margin-top: 12px;
+}
+
+    .profiles .profilesContentMain .pageSubTitle h3 {
+        padding: 0px;
+        color: #666666;
+        font-weight: bold;
+        text-align: left;
+    }
+/* panelPage */
+.profiles .profilesContentMain .panelPage {
+    display: inline;
+}
+
+.profiles .profilesContentMain .pageDescription {
+    text-align: left;
+    padding-top: 16px;
+}
+
+
+.panelMain {
+    width: 100%;
+    clear: both;
+}
+
+    .panelMain div {
+        text-align: left;
+    }
+
+    .panelMain table {
+        width: 100%;
+    }
+
+
+.profiles .profilesContentMain .tabInfoText {
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+    border-bottom: 1px dotted #999;
+    text-align: left;
 }
 
 
@@ -535,406 +448,577 @@ form
 /* Profiles Content Passive                 */
 /********************************************/
 
-.profiles .profilesContentPassive
-{
-	width: 136px;
-	padding: 0px;
-	margin: 0px 8px 0px 8px;
-	height: 100%;
+.panelPassive {
+    text-align: left;
+    padding-right: 8px;
+    padding-left: 8px;
+    padding-bottom: 8px;
+    margin-top: 32px;
 }
-.profiles .profilesContentPassive .passiveSectionHead
-{
-	overflow: hidden;
-	font-weight: bold;
-	margin-top: 8px;
+
+.questionImage {
+    vertical-align: top;
+    border: none;
+    text-decoration: none;
 }
-.profiles .profilesContentPassive .passiveSectionHead img
-{
-	position: relative;
-	top: 1px;
-	border: none;
+
+.passiveArrow {
+    margin-right: 2px;
+    position: relative;
+    top: 1px;
+    border: 0;
+    padding-bottom: 3px;
 }
-.profiles .profilesContentPassive .passiveSectionHead .passiveSectionHeadDescription
-{
-	font-weight: normal;
-	font-size: 10px;
-	line-height: 11px;
-	color: #333;
-	margin: 4px 0 2px 0;
-	display: none;
+
+.profilesContentPassive {
+    width: 166px;
+    height: 100%;
+    display: table-cell;
+    padding-left: 15px;
+    word-wrap: break-word;
+    overflow: auto;
+    vertical-align: top;
 }
-.profiles .profilesContentPassive .passiveSectionBody
-{
-	overflow: hidden; /* the following may or may not be needed */ /* white-space: pre; /* CSS 2.0 */ /* white-space: pre-wrap; /* CSS 2.1 */ /* white-space: pre-line; /* CSS 3.0 */ /* white-space: -pre-wrap; /* Opera 4-6 */ /* white-space: -o-pre-wrap; /* Opera 7 */ /* white-space: -moz-pre-wrap; /* Mozilla */
+
+.profiles .profilesContentPassive .passiveSectionHead {
+    overflow: hidden;
+    font-weight: bold;
+    margin-top: 8px;
+    text-align: left;
+    padding-bottom: 5px;
+    color: #333;
 }
-.profiles .profilesContentPassive .passiveSectionBody ul
-{
-	list-style-type: none;
-	margin: 0px 0px 4px 0px;
-	padding: 0px;
+
+    .profiles .profilesContentPassive .passiveSectionHead img {
+        position: relative;
+        top: 1px;
+        border: none;
+        padding-bottom: 3px;
+    }
+
+    .profiles .profilesContentPassive .passiveSectionHead .passiveSectionHeadDescription {
+        font-weight: normal;
+        font-size: 10px;
+        line-height: 11px;
+        color: #333;
+        margin: 4px 0 2px 0;
+        display: none;
+    }
+
+.profiles .profilesContentPassive .passiveSectionBody {
+    overflow: hidden;
+    text-align: left;
 }
-.profiles .profilesContentPassive .passiveSectionBody li
-{
-	padding: 4px 0 0 10px;
-	padding-left: 1em;
-	text-indent: -1em;
-	line-height: 14px;
+
+    .profiles .profilesContentPassive .passiveSectionBody ul {
+        list-style-type: none;
+        padding: 0px;
+    }
+
+    .profiles .profilesContentPassive .passiveSectionBody div {
+        padding-left: 1em;
+        text-indent: -1em;
+        text-align: left;
+        line-height: 14px;
+        xspadding-bottom: 12px;
+    }
+
+    .profiles .profilesContentPassive .passiveSectionBody li {
+        padding-left: 1em;
+        text-indent: -1em;
+        text-align: left;
+        line-height: 14px;
+        padding-bottom: 5px;
+    }
+
+.passiveHeader {
+    color: #b23f45;
+    font-weight: bold;
+    text-align: left;
+    padding-bottom: 2px;
 }
-.profiles .profilesContentPassive .passiveSectionBodyDetails
-{
-	font-size: 11px;
-	color: #666;
+
+.passiveHeaderInfo {
+    font-size: 11px;
+    text-align: left;
+    padding-bottom: 6px;
 }
-.profiles .profilesContentPassive .passiveSectionBodyDetails a
-{
-	font-size: 11px;
+
+.passiveSectionBodyDetails {
+    text-align: center;
+    vertical-align: middle;
+    padding: 8px;
 }
-.profiles .profilesContentPassive .passiveSectionLine
-{
-	height: 1px;
-	overflow: hidden;
-	border-top: 1px solid #CCC;
-	margin: 8px 0 0;
+
+    .passiveSectionBodyDetails a {
+        font-size: 11px;
+    }
+
+.passiveSectionLine {
+    height: 1px;
+    overflow: hidden;
+    border-top: 1px solid #CCC;
 }
 
 
-/********************************************/
-/* Search                                   */
-/********************************************/
 
-.searchForm
-{
-	margin: 8px 0px;
-	color: #666;
-}
-.searchForm .searchSection
-{
-	background-color: #EAF0F8;
-	border: 1px solid #CCC;
-	padding: 8px 0;
-	margin-bottom: 12px;
-}
-.searchForm table
-{
-	border-collapse: collapse;
-}
-.searchForm th
-{
-	text-align: right;
-	vertical-align: center;
-	font-size: 13px;
-	font-weight: bold;
-	color: #666;
-	width: 95px;
-	padding: 5px 10px 5px 0px;
-}
-.searchForm td
-{
-	vertical-align: center;
-	font-size: 13px;
-	font-weight: normal;
-	padding: 2px;
-}
-.searchForm .fieldMain
-{
-	width: 255px;
-}
-.searchForm .fieldOptions
-{
-}
-.searchForm .inputText
-{
-	width: 250px;
-}
-.searchForm select
-{
-	/*searchForm was misaligned by one pixel*/
-	width: 249px;
-}
-.searchForm .inputButton
-{
-	width: 70px;
-	margin: 0px 20px 0px 0px;
-}
-.searchForm .spacerRow
-{
-	height: 16px;
-	overflow: hidden;
-}
-.searchForm .spacerRowSmall
-{
-	height: 8px;
-	overflow: hidden;
-}
-.searchForm b
-{
-	color: #666;
-}
-.searchForm .submitTable
-{
-	background-color: #FFF;
-}
-
-.listTable
-{
-	margin: 0px;
-}
-
-.listTable table
-{
-	border-collapse: collapse;
-	width: 602px;
-	border: 1px solid #999;
-}
-.listTable tr
-{
-	cursor: default;
-}
-.listTable th
-{
-	background-color: #f7f3ef;
-	text-align: center;
-	font-weight: bold;
-	border: 1px inset #efebde;
-	padding: 5px 5px;
-	cursor: default;
-	color: #333;
-}
-.listTable th a
-{
-	color: #333;
-	display: block;
-}
-.listTable th img
-{
-	margin-left: 3px;
-}
-.listTable td
-{
-	text-align: center;
-	border-style: inset;
-	border-color: #efebde;
-	border-width: 1px;
-	padding: 5px 5px;
-}
-.listTable td div
-{
-	/*white-space: nowrap; Removed as long text forces table width to be larger than intended. */
-	overflow: hidden;
-}
-.listTable .alignLeft
-{
-	text-align: left;
-}
-.listTable .oddRow
-{
-	background-color: #FFFFFF;
-}
-.listTable .evenRow
-{
-	background-color: #F0F4F6;
-}
-.listTable .overRow
-{
-	background-color: #5A719C;
-	color: #FFF;
-}
-.listTable .listTableLink
-{
-	color: #36C;
-}
-.listTable .overRow .listTableLink
-{
-	color: #FFF;
-}
-.listTable .overRow .listTableLink a
-{
-	text-decoration: none;
-}
-.listTable .listTableLinkOver
-{
-	background-color: #36C;
-	text-decoration: none;
-}
-.listTablePagination
-{
-	background-color: #f7f3ef;
-	border-top: none;
-	border-left: solid 1px #999;
-	border-right: solid 1px #999;
-	border-bottom: solid 1px #999;
-	padding: 6px; /* Align with results table */
-	width: 588px;
-}
-.listTablePagination table
-{
-	width: 591px;
-	border-collapse: collapse;
-	padding: 0px;
-	margin: 0px;
-}
-.listTablePagination td
-{
-	padding: 0px;
-	margin: 0px;
-	width: 200px;
-}
-.listTablePaginationMiddle
-{
-	width: 205px;
-	text-align: center;
-}
-.listTablePaginationPN
-{
-	display: block;
-	float: right;
-	margin-left: 4px;
-	text-align: center;
-	padding: 2px 6px;
-	color: #999;
-	font-weight: bold;
-	font-size: 11px;
-	line-height: 15px;
-}
-.listTablePagination a
-{
-	font-size: 11px;
-	line-height: 15px;
-	color: #3f4a9d;
-}
-.listTablePaginationA img
-{
-	border-top-width: 0px;
-	border-right-width: 0px;
-	border-bottom-width: 0px;
-	border-left-width: 0px;
-}
-.listTablePaginationP img
-{
-	margin-right: 4px;
-}
-.listTablePaginationN img
-{
-	margin-left: 4px;
-}
-.listTablePaginationN
-{
-	margin-left: 8px;
-}
-.listTablePaginationFL
-{
-	display: block;
-	width: 19px;
-	height: 19px;
-	float: right;
-	margin-left: 4px;
-}
-.listTablePaginationFL img
-{
-	margin: 5px 6px;
-}
-.listTablePaginationA
-{
-	border-color: #999;
-}
 
 /********************************************/
 /* Connection Summary                       */
 /********************************************/
 
-.connectionTableRow
-{
-	padding-left: 6px;
+.connectionTableRow {
+    display: table-row;
+    border: 1px solid #999999;
+    padding: 10px;
 }
 
-.connectionContainer
-{
-	margin: 12px 0 4px 0;
+.connectionContainer {
+    margin: 12px 0 4px 0;
 }
-.connectionContainerTable
-{
-	width: 100%;
-	border: 1px solid #999;
-	background-color: #EAF0F8;
+
+.connectionContainerItem {
+    display: table-cell;
+    text-align: center !important;
+    vertical-align: middle;
+    width: 25%;
 }
-.connectionContainerTable td
-{
-	text-align: center;
-	padding: 8px 0px;
+
+.connectionTable {
+    display: table;
+    width: 100%;
+    border: 1px solid #999999;
+    padding: 10px;
+    background-color: #eaf0f8;
 }
-.connectionContainerItem
-{
-	width: 305px;
+
+.connectionItemSubText {
+    font-size: 11px;
 }
-.connectionContainerArrow
-{
-	width: 195px;
+
+
+.connectionLineToArrow {
+    display: table-cell;
+    vertical-align: middle;
+    padding-top: 5px;
 }
-.connectionContainerTable a
-{
-	font-size: 13px;
-	text-decoration: underline;
+
+    .connectionLineToArrow hr {
+        height: 1px;
+        border: 0;
+        border-top: 1px solid #ccc;
+        margin: 1px 0;
+        padding: 0;
+        width: 400px;
+    }
+
+.connectionContainerLeftArrow {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
 }
-.connectionItemSubText
-{
-	font-size: 11px;
+
+.connectionContainerRightArrow {
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle;
 }
-.connectionArrowTable td
-{
-	padding: 0px 0px;
-}
-.connectionLine
-{
-	background-image: url('../Images/connection_center.gif');
-	height: 5px;
-	overflow: hidden;
-	padding: 0px;
-}
-.connectionLine div
-{
-	height: 5px;
-	overflow: hidden;
-}
-.connectionDescription
-{
-	font-weight: bold;
-	font-size: 12px;
-	color: #333;
-	padding: 0 4px;
-}
-.connectionSubDescription
-{
-	font-weight: normal;
-	font-size: 11px;
-	padding: 0 4px;
+
+.connectionSubDescription {
+    font-weight: normal;
+    font-size: 11px;
+    padding: 5px;
+    text-align: center !important;
 }
 
 /********************************************/
 /* Profile - Concept                        */
 /********************************************/
-.profileKwCondenseList ol, .profileKwCondenseList ul
-{
-	margin-top: 0px;
-	margin-bottom: 0px;
-	position: relative;
-	left: -25px;
-	list-style-type: none;
+.profileKwCondenseList ol, .profileKwCondenseList ul {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    position: relative;
+    left: -25px;
+    list-style-type: none;
 }
-.profileKwConcept
-{
-	display: none;
+
+.profileKwConcept {
+    display: none;
 }
-.publicationKwDesc
-{
-	margin-bottom: 5px;
+
+.publicationKwDesc {
+    margin-bottom: 5px;
 }
-.publicationKwMenuBox
-{
-	margin-bottom: 8px;
+
+.publicationKwMenuBox {
+    margin-bottom: 8px;
 }
-.profileKwMeshInfoDesc
-{
-	margin-bottom: 10px;
+
+.profileKwMeshInfoDesc {
+    margin-bottom: 10px;
+}
+
+/********************************************/
+/*        Edit Page                         */
+/********************************************/
+
+.text-edit {
+    margin: 4px;
+}
+
+.oddRow {
+    background-color: #FFFFFF;
+    border: 1px solid #999999;
+}
+
+.evenRow {
+    background-color: #F0F4F6;
+    border: 1px solid #999999;
+}
+
+
+
+
+.padding {
+    padding-left: 6px;
+}
+
+.editFieldTopMargin {
+    margin-top: 4px;
+}
+
+.edittable {
+    text-align: left;
+    margin: 12px !important;
+}
+
+.colItemCnt, .colSecurity {
+    text-align: center;
+    width: 124px;
+}
+
+
+.topRow {
+    background-color: #EEEBE5;
+    font-weight: bold;
+    color: #333;
+    font-family: Arial;
+    font-size: 13px;
+    height: 26px;
+    padding-left: 6px;
+    width: 100%;
+}
+
+
+
+.firstCol {
+    padding-left: 6px;
+}
+
+
+
+.editSpacingBottom {
+    margin-bottom: 5px;
+}
+
+
+.edit360Margin5 {
+    margin: 5px;
+}
+
+.edit360Padding10 {
+    padding: 1px;
+}
+
+/*PubMed Styles*/
+
+.textBoxSmall {
+    width: 75px;
+}
+
+.textBoxDate {
+    vertical-align: top;
+    width: 75px;
+    margin-right: 3px;
+}
+
+.textBoxBig {
+    width: 250px;
+}
+
+.textBoxBigger {
+    width: 550px;
+}
+
+
+/********************************************/
+/* Link tabs								*/
+/********************************************/
+.anchor-tab {
+    margin: 10px 0 4px 0;
+    color: #666;
+}
+
+    .anchor-tab a.selected {
+        color: #333 !important;
+        font-weight: bold;
+        cursor: default;
+    }
+
+    .anchor-tab a.disabled {
+        color: silver !important;
+        cursor: default;
+    }
+
+        .anchor-tab a.selected:hover, .anchor-tab a.disabled:hover {
+            text-decoration: none;
+        }
+
+    .anchor-tab a {
+        color: #36C;
+        cursor: pointer;
+    }
+
+    .anchor-tab a.link-visualization {
+	color:#090;
+}
+
+.ui-autocomplete {
+    position: absolute;
+    top: 100%;
+    left: 10px;
+    z-index: 1000;
+    float: left;
+    display: none;
+    min-width: 160px;
+    padding: 4px 0;
+    padding-left: 20px;
+    margin: 0px 10px 25px;
+    list-style: disc;
+    background-color: #ffffff;
+    border-color: #ccc;
+    border-color: rgba(0, 0, 0, 0.2);
+    border-style: solid;
+    border-width: 1px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+    *border-right-width: 2px;
+    *border-bottom-width: 2px;
+}
+
+
+
+.grantanchor-tab {
+    margin: 10px 0 4px 0;
+    color: #666;
+}
+
+    .grantanchor-tab a.selected {
+        color: #333 !important;
+        font-weight: bold;
+        cursor: default;
+    }
+
+    .grantanchor-tab a.disabled {
+        color: silver !important;
+        cursor: default;
+    }
+
+        .grantanchor-tab a.selected:hover, .grantanchor-tab a.disabled:hover {
+            text-decoration: none;
+        }
+
+    .grantanchor-tab a {
+        color: #36C;
+        cursor: pointer;
+    }
+
+#alignNetworkLeft {
+    padding-left: 10px;
+    text-align: left;
+    font-weight: normal;
+}
+
+#container {
+    display: table;
+}
+
+#row {
+    display: table-row;
+}
+
+#right {
+    display: table-cell;
+    text-align: left;
+}
+
+#middle {
+    display: table-cell;
+    text-align: center;
+}
+
+#left {
+    display: table-cell;
+    color: #777;
+    font-weight: bold;
+    padding: 2px 10px 0 0;
+    text-align: right;
+    vertical-align: top;
+    width: 80px;
+}
+
+.grow div {
+    padding: 5px 5px 5px 5px;
+    border-radius: 10px;
+    height: 14px;
+    margin: 5px 1% 5px 1%;
+    float: left;
+    position: relative;
+    transition: height 0.5s;
+    -webkit-transition: height 0.5s;
+    text-align: center;
+    overflow: hidden;
+    font-size: 9px;
+    font-weight: lighter;
+}
+
+.grow:hover div {
+    height: 20px;
+}
+
+
+/********************************************/
+/* About                                    */
+/********************************************/
+
+.profiles .profilesContentMain .aboutText {
+    margin-bottom: 6px;
+}
+
+    .profiles .profilesContentMain .aboutText h2 {
+        margin: 0;
+        padding: 0;
+        font-size: 1.3em;
+        color: #4c7296;
+        font-weight: bold;
+    }
+
+    .profiles .profilesContentMain .aboutText h3 {
+        margin-bottom: 15px;
+        padding: 0;
+        font-size: 1.2em;
+        color: #746a42;
+        font-weight: bold;
+    }
+
+    .profiles .profilesContentMain .aboutText h4 {
+        margin: 0;
+        padding: 0;
+        font-weight: bold;
+    }
+
+.aboutText p {
+    margin-top: 10px;
+}
+
+
+.pageBackLinkIcon {
+    padding-right: 6px;
+    margin-bottom: 3px;
+}
+
+.normalFont {
+    color: #000;
+    font-weight: normal;
+    vertical-align: bottom;
+    font-size: 13px;
+}
+
+
+
+.listTable table {
+    border: 1px solid #999999;
+}
+
+.listTable tr {
+    cursor: pointer;
+}
+
+.listTable th {
+    background-color: #f7f3ef;
+    color: #333;
+    cursor: default;
+    font-weight: bold;
+    padding: 5px;
+    text-align: center;
+    padding-bottom: 1px;
+    border-left: 1px solid #999999;
+}
+
+    .listTable th a {
+        color: #333;
+        display: block;
+    }
+
+    .listTable th img {
+        margin-left: 3px;
+        margin-bottom: 2px;
+    }
+
+.listTable td {
+    padding: 4px;
+    text-align: left;
+    border-right: 1px solid #999999;
+    border-top: 1px solid #999999;
+    border-spacing: 0px;
+    border-collapse: collapse;
+}
+
+    .listTable td div {
+        overflow: hidden;
+    }
+
+.listTable .alignLeft {
+    text-align: left;
+}
+
+.listTable .alignCenter {
+    text-align: center;
+}
+
+
+.listTable .oddRow {
+    background-color: #ffffff;
+    border: 1px solid #999999;
+}
+
+.listTable .evenRow {
+    background-color: #f0f4f6;
+    border: 1px solid #999999;
+}
+
+.listTable .overRow {
+    background-color: #5a719c;
+    color: #fff;
+}
+
+.listTable .listTableLink {
+    color: #36c;
+}
+
+.listTable .overRow .listTableLink {
+    color: #fff;
+}
+
+.listTable .listTableLinkOver {
+    background-color: #36c;
 }
 
 /********************************************/
@@ -1044,120 +1128,4 @@ table tbody .height25
 .editPage tr
 {
 	height: 24px;
-}
-
-
-/*PubMed Styles*/
-
-.textBoxSmall
-{
-	width: 75px;
-}
-
-.textBoxDate
-{
-	vertical-align: top;
-	width: 75px;
-	margin-right: 3px;
-}
-
-.textBoxBig
-{
-	width: 250px;
-}
-
-.textBoxBigger
-{
-	width: 550px;
-}
-
-.pubHeader
-{
-	margin-top: 20px;
-	font-weight: bold;
-}
-
-.pubSubHeader
-{
-	font-weight: bold;
-	color: #666666;
-}
-
-.pubSubSpacer
-{
-	margin-top: 10px;
-}
-
-/********************************************/
-/* Link tabs								*/
-/********************************************/
-.anchor-tab
-{
-	margin: 10px 0 4px 0;
-	color: #666;
-}
-.anchor-tab a.selected
-{
-	color: #333 !important;
-	font-weight: bold;
-	cursor: default;
-}
-.anchor-tab a.disabled
-{
-	color: silver !important;
-	cursor: default;
-}
-.anchor-tab a.selected:hover, .anchor-tab a.disabled:hover
-{
-	text-decoration: none;
-}
-.anchor-tab a
-{
-	color: #36C;
-	cursor: pointer;
-}
-.imageUploaderField input{
-	width:100%
-}
-
-.ui-autocomplete {
-    position: absolute;
-    top: 100%;
-    left: 10px;
-    z-index: 1000;
-    float: left;
-    display: none;
-    min-width: 160px;   
-    padding: 4px 0;
-    padding-left: 20px;
-    margin: px 0 10px 25px;
-    list-style: disc;
-    background-color: #ffffff;
-    border-color: #ccc;
-    border-color: rgba(0, 0, 0, 0.2);
-    border-style: solid;
-    border-width: 1px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    -webkit-background-clip: padding-box;
-    -moz-background-clip: padding;
-    background-clip: padding-box;
-    *border-right-width: 2px;
-    *border-bottom-width: 2px;
-}
-
-
-.ui-helper-hidden-accessible {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
 }

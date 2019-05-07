@@ -26,7 +26,7 @@
     <OldToolsVersion>4.0</OldToolsVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <TargetFrameworkProfile />
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -107,6 +107,9 @@
     <Content Include="Framework\Images\orcid_16x16%281%29.gif" />
     <Content Include="Framework\Images\Orcid_Logo_rgb.png" />
     <Content Include="Framework\Images\Orcid_symbol_rgb.png" />
+    <Content Include="Framework\Modules\MainMenu\default.aspx" />
+    <Content Include="Framework\Modules\MainMenu\MyActiveNetwork.ascx" />
+    <Content Include="Framework\Modules\MainMenu\MyLists.ascx" />
     <Content Include="Global.asax" />
     <Content Include="GroupAdmin\CSS\GroupAdmin.css" />
     <Content Include="GroupAdmin\Default.aspx" />
@@ -181,6 +184,9 @@
     <Content Include="ORNG\PresentationXML\SandboxFormPresentation.xml" />
     <Content Include="Profile\CSS\viz.css" />
     <Content Include="Profile\Images\default_img.png" />
+    <Content Include="Profile\Modules\CustomViewAuthorInAuthorship\BibliometricsSvc.aspx" />
+    <Content Include="Profile\Modules\CustomViewAuthorInAuthorship\CustomViewAuthorInAuthorship.css" />
+    <Content Include="Profile\Modules\CustomViewAuthorInAuthorship\PMC-citations.jpg" />
     <Content Include="Profile\Modules\CustomViewEagleI\CustomViewEagleI.ascx" />
     <Content Include="Profile\Modules\CustomViewEagleI\Images\logo.gif" />
     <Content Include="Profile\Modules\CustomViewGroupGeneralInfo\CustomViewGroupGeneralInfo.ascx" />
@@ -286,6 +292,7 @@
     <Compile Include="ActiveNetwork\Modules\MyNetwork\MyNetwork.ascx.designer.cs">
       <DependentUpon>MyNetwork.ascx</DependentUpon>
     </Compile>
+    <Compile Include="ActiveNetwork\Modules\MyNetwork\RelationshipType.cs" />
     <Compile Include="Activity\Modules\ActivityHistory\ActivityDetails.aspx.cs">
       <DependentUpon>ActivityDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -413,12 +420,33 @@
     <Compile Include="Edit\Utilities\FundingState.cs" />
     <Compile Include="Edit\Utilities\GroupMemberState.cs" />
     <Compile Include="Edit\Utilities\LiteralListState.cs" />
+    <Compile Include="Framework\Modules\MainMenu\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Framework\Modules\MainMenu\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Framework\Modules\MainMenu\History.ascx.cs">
       <DependentUpon>History.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Framework\Modules\MainMenu\History.ascx.designer.cs">
       <DependentUpon>History.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Modules\MainMenu\MyActiveNetwork.ascx.cs">
+      <DependentUpon>MyActiveNetwork.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Framework\Modules\MainMenu\MyActiveNetwork.ascx.designer.cs">
+      <DependentUpon>MyActiveNetwork.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Modules\MainMenu\MyLists.ascx.cs">
+      <DependentUpon>MyLists.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Framework\Modules\MainMenu\MyLists.ascx.designer.cs">
+      <DependentUpon>MyLists.ascx</DependentUpon>
     </Compile>
     <Compile Include="Framework\Utilities\UserHistory.cs" />
     <Compile Include="GroupAdmin\Default.aspx.cs">
@@ -904,9 +932,14 @@
     <Compile Include="ProfilesDisplay.aspx.designer.cs">
       <DependentUpon>ProfilesDisplay.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Profile\Modules\CustomViewAuthorInAuthorship\BibliometricsSvc.aspx.cs">
+      <DependentUpon>BibliometricsSvc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Profile\Modules\CustomViewAuthorInAuthorship\CustomViewAuthorInAuthorship.ascx.designer.cs">
       <DependentUpon>CustomViewAuthorInAuthorship.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Profile\Modules\CustomViewAuthorInAuthorship\DataIO.cs" />
     <Compile Include="Profile\Modules\CustomViewConceptMeshInfo\CustomViewConceptMeshInfo.ascx.cs">
       <DependentUpon>CustomViewConceptMeshInfo.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1879,7 +1912,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>55956</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
