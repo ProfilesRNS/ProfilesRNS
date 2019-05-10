@@ -36,24 +36,25 @@ namespace Profiles.Framework.Utilities
 
         static public string DrawTabsStart()
         {
-            return "<div class='tabBack'>";
+            return "<ul class='tabmenu'>";
         }
-        static public string DrawTabsStartMarginTop(string marginTop)
+/*        static public string DrawTabsStartMarginTop(string marginTop)
         {
             return "<div class='tabBack' style='margin-top:" + marginTop + "px;'>";
-        }
+        }*/
         static public string DrawActiveTab(string tempLabel)
         {
-            return "<div class='activeTab'><div class='tabLeft'></div><div class='tabCenter'>" + tempLabel + "</div><div class='tabRight'></div></div>";
+            return "<li  class='tab selected'>" + tempLabel + "</li>";
         }
         static public string DrawDisabledTab(string tempLabel, string tempAction)
         {
-            return "<div class='disabledTab'><a href='" + tempAction + "'><div class='tabLeft'></div><div class='tabCenter'>" + tempLabel + "</div><div class='tabRight'></div></a></div>";
+            return "<li class='tab' style='cursor:pointer;' onclick=\"window.location='" + tempAction + "';\" ><a href='" + tempAction + "'>" + tempLabel + "</a></li>";
         }
         static public string DrawTabsEnd()
         {
-            return "</div>";
-        }    
+
+            return "<li class='last'/></ul>";
+        }
 
 
     }
