@@ -184,9 +184,6 @@
     <Content Include="ORNG\PresentationXML\SandboxFormPresentation.xml" />
     <Content Include="Profile\CSS\viz.css" />
     <Content Include="Profile\Images\default_img.png" />
-    <Content Include="Profile\Modules\CustomViewAuthorInAuthorship\BibliometricsSvc.aspx" />
-    <Content Include="Profile\Modules\CustomViewAuthorInAuthorship\CustomViewAuthorInAuthorship.css" />
-    <Content Include="Profile\Modules\CustomViewAuthorInAuthorship\PMC-citations.jpg" />
     <Content Include="Profile\Modules\CustomViewEagleI\CustomViewEagleI.ascx" />
     <Content Include="Profile\Modules\CustomViewEagleI\Images\logo.gif" />
     <Content Include="Profile\Modules\CustomViewGroupGeneralInfo\CustomViewGroupGeneralInfo.ascx" />
@@ -932,14 +929,9 @@
     <Compile Include="ProfilesDisplay.aspx.designer.cs">
       <DependentUpon>ProfilesDisplay.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Profile\Modules\CustomViewAuthorInAuthorship\BibliometricsSvc.aspx.cs">
-      <DependentUpon>BibliometricsSvc.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Profile\Modules\CustomViewAuthorInAuthorship\CustomViewAuthorInAuthorship.ascx.designer.cs">
       <DependentUpon>CustomViewAuthorInAuthorship.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Profile\Modules\CustomViewAuthorInAuthorship\DataIO.cs" />
     <Compile Include="Profile\Modules\CustomViewConceptMeshInfo\CustomViewConceptMeshInfo.ascx.cs">
       <DependentUpon>CustomViewConceptMeshInfo.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
