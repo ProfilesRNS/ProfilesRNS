@@ -1,0 +1,244 @@
+/****************** main menu (logged on) ******************/
+
+
+#prns-nav {
+    position: relative;
+    display: inline-block;
+}
+
+    #prns-nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+
+        #prns-nav ul.prns-main,
+        #prns-nav ul.sub {
+            width: 968px;
+        }
+
+            #prns-nav ul.prns-main,
+            #prns-nav ul.prns-main > li {
+                background-color: #383737;
+                height: 39px;
+            }
+
+                #prns-nav ul.prns-main li {
+                    float: left;
+                    text-overflow:ellipsis;
+                }
+
+                    #prns-nav ul.prns-main li a {
+                        display: inline-block;
+                        background: #383737;
+                        padding: 10px 16px;
+                        text-decoration: none;
+                        transition: 0.2s;
+                        font-size: 14px;
+                        color: #fff;
+                        border-right: 1px solid #ccc;  
+                        height:39px;                      
+                    }
+
+                    #prns-nav ul.prns-main li.search a {
+                        border-right: none;
+                    }
+
+                    #prns-nav ul.prns-main li.landed a {
+                        background-color: #000;
+                    }
+
+                    #prns-nav ul.prns-main li a:hover {
+                        background-color: #555;
+                    }
+
+                    #prns-nav ul.prns-main li.icon {
+                        display: none;
+                    }
+
+                    #prns-nav ul.prns-main li:hover ul.drop,
+                    #prns-nav ul.prns-main li.selected ul.drop {
+                        display: block;
+                    }
+
+
+        #prns-nav ul.drop {
+            position: absolute;
+            display: none;
+            text-align: left;    
+            z-index:40000;     
+        }
+
+            #prns-nav ul.drop li {
+                float: none !important;                
+                height: 37px !important;
+                position:relative;
+                
+            }
+                #prns-nav ul.drop li a {
+                    background: #383737 none repeat scroll 0 0;                    
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    width: 250px;
+                    height:37px;
+                }
+
+#search-drop ul.drop li a {
+    background: #383737 none repeat scroll 0 0;
+    border: medium none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 134px;
+    border-left:1px solid #999;
+    border-right:1px solid #999;
+}
+
+li#search-drop a:hover {
+    background: #555 !important;
+    color: #000 !important;
+
+      
+}
+#search-drop ul.drop li:hover {
+    background: #edebeb !important;
+    color: #000 !important;
+}
+
+#prns-nav ul.drop li a:hover {
+    background: #edebeb !important;
+    color: #000 !important;
+}
+
+
+#prns-nav li.search input {
+    border: medium none;
+    height: 26px;
+    left: 22px;   
+    padding-left: 5px;
+    position: relative;
+    top: 7px;
+    vertical-align: middle;
+    width: 320px;
+    margin-left:280px; 
+    /* for when the rdf use our data comes back 145px;*/
+}
+
+#prns-nav li.search img {
+    background-color: #ffffff;
+    height: 26px;
+    /*left: 267px; for when the use our data comes back */
+    left:387px;
+    margin: 0;
+    padding: 7px;
+    position: relative;
+    top: -19px;
+    vertical-align: middle;
+}
+
+#prns-nav li.last img {   
+    position: relative;   
+    vertical-align: middle;
+    width:25px;
+    padding-left:2px;
+    padding-right:2px;
+}
+
+#prns-nav li.last ul {
+    left: 800px;
+    top:40px;
+}
+
+
+/****************** sub menu (logged on) ******************/
+
+#prns-nav ul.usermenu {
+    background: #ccc;
+    height: 33px;
+    margin-bottom:15px;
+
+}
+
+    #prns-nav ul.usermenu li {
+        float: left;
+    background: #dcdada !important;
+    }
+
+        #prns-nav ul.usermenu li a {
+            display: inline-block;
+            background: #ccc;
+            padding: 7px 12px;
+            text-decoration: none;
+            transition: 0.2s;
+            font-size: 13px;
+            color: #333;
+        }
+
+#prns-nav ul.prns-main ul.usermenu li a {
+    height: 32px;
+}
+
+#prns-nav ul.usermenu li div.divider {    
+    width: 0;
+    border-left: 1px solid #999;   
+    height: 30px;
+
+}
+
+#prns-nav ul.usermenu ul.drop a {
+    display: inline-block;   
+        background: #dcdada !important;
+    text-align: left;
+    padding: 12px 18px;
+    text-decoration: none;
+    transition: 0.2s;
+    line-height: 13px;
+    font-size: 13px;
+    color: #333;
+    cursor:pointer;
+}
+
+#prns-nav ul.usermenu li:hover > a,
+#prns-nav ul.usermenu li.selected > a,
+#prns-nav ul.usermenu li ul.drop li:hover {
+    background: #7c7b7b !important;
+    color: #fff !important;
+}
+
+#prns-nav ul.usermenu li:hover ul.drop,
+#prns-nav ul.usermenu li.selected ul.drop {
+    display: block !important;
+}
+
+.sublanded {
+    background: #7c7b7b !important;
+    color: #fff !important;
+}
+
+
+/***** select login msg or user submenu display *****/
+
+#prns-usrnav.user .loginbar {
+    display: none;
+}
+
+#prns-usrnav.pub .usermenu {
+    display: none;
+}
+
+/****************** login link ******************/
+
+#prns-usrnav .loginbar {
+    border: 0px solid red;
+    padding-top: 8px;    
+    font-size: 13px;
+    font-weight: bold;
+    color: #999;
+    text-align: left;
+}
+
+    #prns-usrnav .loginbar a {
+        color: #3366cc;
+    }
