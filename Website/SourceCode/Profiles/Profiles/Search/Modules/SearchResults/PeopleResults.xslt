@@ -233,7 +233,7 @@
                         </a>
                       </th>
                       <xsl:if test="$institution='true'">
-                        <th>
+                         <th class="alignLeft">
                           <a href="JavaScript:Sort('institution');">
                             Institution
                             <xsl:choose>
@@ -252,7 +252,7 @@
                         </th>
                       </xsl:if>
                       <xsl:if test="$department='true'">
-                        <th>
+                         <th class="alignLeft">
                           <a href="JavaScript:Sort('department');">
                             Department
                             <xsl:choose>
@@ -272,7 +272,7 @@
                       </xsl:if>
 
                       <xsl:if test="$facrank='true'">
-                        <th>
+                        <th class="alignLeft">
                           <a href="JavaScript:Sort('facrank');">
                             Faculty Rank
                             <xsl:choose>
@@ -690,8 +690,8 @@
 
       function HideDetails(obj,ord){
 
-      doListTableRowOut(obj,ord);
-      document.getElementById('divItemDetails').innerHTML = '';
+     doListTableRowOut(obj,ord);
+     document.getElementById('divItemDetails').innerHTML = '';
       }
 
 
@@ -858,7 +858,7 @@
     </xsl:variable>
 
 
-    <input type="hidden" id="{$nodeURI}" value="&lt;div class='passiveSectionHead'&gt;&lt;b&gt;Person Summary&lt;/b&gt;&lt;/div&gt;&lt;div class='passiveSectionBody'&gt;&lt;br/&gt;&lt;u&gt;Name&lt;/u&gt;&lt;br/&gt;{prns:fullName}{$titlelink}{$institutionlink}{$departmentlink}{$divisionlink}{$facranklink}&lt;/div&gt;"></input>
+    <input type="hidden" id="{$nodeURI}" value="&lt;div style='font-size:13px;font-weight:bold'&gt;{foaf:firstName} {foaf:lastName}&lt;/div&gt;{$titlelink}{$institutionlink}{$departmentlink}{$divisionlink}{$facranklink}"></input>
 
 
 
@@ -1033,7 +1033,7 @@
       </xsl:variable>
 
 
-      <input type="hidden" id="{$nodeURI}" value="&lt;b&gt;Person Summary&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;&lt;u&gt;Name&lt;/u&gt;&lt;br/&gt;{prns:fullName}{$titlelink}{$institutionlink}{$departmentlink}{$divisionlink}{$facranklink}"></input>
+      <input type="hidden" id="{$nodeURI}" value="&lt;div style='font-size:13px;font-weight:bold'&gt;{foaf:firstName} {foaf:lastName}&lt;/div&gt;{$titlelink}{$institutionlink}{$departmentlink}{$divisionlink}{$facranklink}"></input>
 
 
 

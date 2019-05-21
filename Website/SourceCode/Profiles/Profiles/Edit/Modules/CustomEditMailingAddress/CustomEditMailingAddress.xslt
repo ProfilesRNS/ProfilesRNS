@@ -3,10 +3,7 @@
   <xsl:template match="/"> 
     
     <xsl:if test="rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description/prns:hasConnection/@rdf:resource]/rdf:object/@rdf:resource]/rdfs:label !=''">
-      <table>
-       
-        <tr>
-          <td>            
+      <div>
             <xsl:if test="rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description/prns:hasConnection/@rdf:resource]/rdf:object/@rdf:resource]/vivo:addressDepartment !=''">
               <xsl:value-of select="rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description/prns:hasConnection/@rdf:resource]/rdf:object/@rdf:resource]/vivo:addressDepartment "/>
               <br/>
@@ -31,10 +28,7 @@
               <xsl:value-of select="rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description/prns:hasConnection/@rdf:resource]/rdf:object/@rdf:resource]/vivo:addressPostalCode"/>
               <br/>
             </xsl:if>
-          </td>
-        </tr>
-  
-      </table>
+      </div>
     </xsl:if>
   </xsl:template>
 </xsl:stylesheet>

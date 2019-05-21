@@ -1,69 +1,40 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SecurityOptions.ascx.cs"
+﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="SecurityOptions.ascx.cs"
     Inherits="Profiles.Edit.Modules.SecurityOptions.SecurityOptions" %>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
-
-        $(document).keypress(function(e) {
-            if (e.which != 13) {
-
-                function EndRequestHandler(sender, args) {
-
-                    $("[id*=rdoSecurityOption]").click(function() {
-                        $("[id*=rdoSecurityOption]").removeAttr('checked');
-                        $(this).attr('checked', 'checked');
-                    });
-
-                }
-                $("[id*=rdoSecurityOption]").click(function() {
+<script type="text/javascript">           
+    $("[id*=pnlSecurityOptions]").keypress(function (e) {
+        if (e.which == 13) {
+                $("[id*=rdoSecurityOption]").click(function () {
                     $("[id*=rdoSecurityOption]").removeAttr('checked');
-                    $(this).attr(':checked');
+                    $(this).attr('checked');
                 });
             }
-
-
-            if (document.getElementById("<%= pnlSecurityOptions.ClientID %>")) {
-                if (e.which == 13) {
-                    document.getElementById("enterkey").value = 'true';
-                    e.target.checked = true;
-                    e.preventDefault();
-                    __doPostBack('<%= lbSecurityOptions.ClientID  %>', '')
-                }
-            }
-
-        });
-
-    });
+        });    
 </script>
-<input type='hidden' id='enterkey' value='' name='enterkey' />
-<asp:LinkButton runat="server" ID="lbSecurityOptions" OnClick="imbSecurityOptions_OnClick">
-    <asp:Image runat="server" ID="imbSecurityOptions" AlternateText=" " ImageUrl="~/Framework/Images/icon_squareArrow.gif"/>&nbsp;Edit Visibility
-    <asp:Literal runat="server" ID="litVisibility"></asp:Literal>
-</asp:LinkButton> 
-    <br />
-<asp:Panel runat="server" ID="pnlSecurityOptions" CssClass="editPage" Visible="false">
-<br />
-    <asp:GridView  CellSpacing="-1" runat="server" ID="grdSecurityGroups" AutoGenerateColumns="false"
-        OnRowDataBound="grdSecurityGroups_OnDataBound" Width="100%">
-        <HeaderStyle BorderStyle="None" CssClass="EditMenuTopRow" />
-        <RowStyle BorderColor="#ccc" Width="1px" VerticalAlign="Middle" />
+<div class="EditMenuItem">
+    <asp:ImageButton ID="imbAddArrow" CssClass="EditMenuLinkImg" runat="server" ImageUrl="~/Edit/Images/icon_squareArrow.gif" OnClick="imbSecurityOptions_OnClick" AlternateText=" " />
+    <asp:LinkButton ID="imbSecurityOptions" runat="server" OnClick="imbSecurityOptions_OnClick"/>                    
+</div>
+<asp:Panel runat="server" ID="pnlSecurityOptions" ClientIDMode="static" CssClass="editPage EditMenuItem" Visible="false">
+    <asp:GridView runat="server" ID="grdSecurityGroups" AutoGenerateColumns="false"
+        OnRowDataBound="grdSecurityGroups_OnDataBound">
         <AlternatingRowStyle CssClass="evenRow" />
+        <HeaderStyle CssClass="topRow" />
         <Columns>
-            <asp:TemplateField HeaderStyle-HorizontalAlign="Center"  ItemStyle-HorizontalAlign="Center" HeaderText="Select" ItemStyle-Width="50px">
+            <asp:TemplateField HeaderText="Select" ItemStyle-Width="50px" HeaderStyle-CssClass="CenterSelect" ItemStyle-CssClass="CenterSelect">
                 <ItemTemplate>
-                    <asp:RadioButton runat="server" ID="rdoSecurityOption" GroupName="SecurityOption" AutoPostBack="true" OnCheckedChanged="rdoSecurityOption_OnCheckedChanged" />
+                    <asp:RadioButton runat="server" ID="rdoSecurityOption" GroupName="SecurityOption"
+                        AutoPostBack="true" OnCheckedChanged="rdoSecurityOption_OnCheckedChanged" />
                     <asp:HiddenField runat="server" ID="hdnPrivacyCode" />
                 </ItemTemplate>
             </asp:TemplateField>
-                            <asp:TemplateField  HeaderStyle-HorizontalAlign="Center" HeaderText="Privacy" HeaderStyle-CssClass="padding" ItemStyle-CssClass="padding" 
-                ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px" >
-                 <ItemTemplate>
-                    <asp:Literal runat="server" ID="rdoSecurityOptionLabel" ></asp:Literal>
-                    <asp:HiddenField runat="server" ID="hdnLabel" />
-                </ItemTemplate>               
-                </asp:TemplateField>
-            <asp:BoundField HeaderStyle-HorizontalAlign="Center" HeaderText="Description" ItemStyle-HorizontalAlign="left" DataField="Description" ItemStyle-Width="500px" />
+            <asp:BoundField HeaderText="Privacy" HeaderStyle-CssClass="alignLeft"
+                ItemStyle-CssClass="alignLeft" DataField="Label"
+                ItemStyle-Width="50px" />
+            <asp:BoundField HeaderStyle-CssClass="alignLeft" HeaderText="Description" ItemStyle-CssClass="alignLeft"
+                DataField="Description" ItemStyle-Width="500px" ControlStyle-BorderStyle="None" />
         </Columns>
     </asp:GridView>
 </asp:Panel>
+<div runat="server" id="divHidden" style='border: 1px solid #333; background-color: #FFD; text-align: left; font-weight: bold; padding: 5px; margin-top: 8px;'>
+    Note: This feature's visibility is currently set to Hidden and is not visible on your profile.
+</div>

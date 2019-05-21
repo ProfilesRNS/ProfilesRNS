@@ -129,10 +129,7 @@ namespace Profiles.Search.Modules.SearchCriteria
         private string Department { get; set; }
         private string Division { get; set; }
         private string Rank { get; set; }
-        private string Keyword { get; set; }
-        private string Fname { get; set; }
-        private string Lname { get; set; }
-        private string Filters { get; set; }
+            private string Filters { get; set; }
 
 
 

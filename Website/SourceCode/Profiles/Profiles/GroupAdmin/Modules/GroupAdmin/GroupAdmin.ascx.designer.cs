@@ -13,15 +13,6 @@ namespace Profiles.GroupAdmin.Modules.GroupAdmin {
     public partial class GroupAdmin {
         
         /// <summary>
-        /// litBackLink control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litBackLink;
-        
-        /// <summary>
         /// phAddGroups control.
         /// </summary>
         /// <remarks>
@@ -29,6 +20,15 @@ namespace Profiles.GroupAdmin.Modules.GroupAdmin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder phAddGroups;
+        
+        /// <summary>
+        /// btnImgAddGroup control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton btnImgAddGroup;
         
         /// <summary>
         /// btnAddGroups control.
@@ -40,13 +40,31 @@ namespace Profiles.GroupAdmin.Modules.GroupAdmin {
         protected global::System.Web.UI.WebControls.LinkButton btnAddGroups;
         
         /// <summary>
-        /// btnImgAddGroups control.
+        /// phDeletedGroups control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image btnImgAddGroups;
+        protected global::System.Web.UI.WebControls.PlaceHolder phDeletedGroups;
+        
+        /// <summary>
+        /// btnImgDeletedGroups control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton btnImgDeletedGroups;
+        
+        /// <summary>
+        /// btnDeletedGroups control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnDeletedGroups;
         
         /// <summary>
         /// pnlAddGroup control.
@@ -83,24 +101,6 @@ namespace Profiles.GroupAdmin.Modules.GroupAdmin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtGroupName;
-        
-        /// <summary>
-        /// ddVisibility control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddVisibility;
-        
-        /// <summary>
-        /// txtEndDateLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtEndDateLabel;
         
         /// <summary>
         /// txtEndDate control.
@@ -157,33 +157,6 @@ namespace Profiles.GroupAdmin.Modules.GroupAdmin {
         protected global::System.Web.UI.WebControls.LinkButton btnInsertCancel;
         
         /// <summary>
-        /// phDeletedGroups control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder phDeletedGroups;
-        
-        /// <summary>
-        /// btnDeletedGroups control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnDeletedGroups;
-        
-        /// <summary>
-        /// btnImgDeletedGroups control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image btnImgDeletedGroups;
-        
-        /// <summary>
         /// pnlDeletedGroups control.
         /// </summary>
         /// <remarks>
@@ -202,13 +175,13 @@ namespace Profiles.GroupAdmin.Modules.GroupAdmin {
         protected global::System.Web.UI.WebControls.GridView gvDeletedGroups;
         
         /// <summary>
-        /// upnlEditSection control.
+        /// lblNoGroups control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upnlEditSection;
+        protected global::System.Web.UI.WebControls.Label lblNoGroups;
         
         /// <summary>
         /// gvGroups control.
@@ -218,32 +191,5 @@ namespace Profiles.GroupAdmin.Modules.GroupAdmin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvGroups;
-        
-        /// <summary>
-        /// pnlAddProxy control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlAddProxy;
-        
-        /// <summary>
-        /// imgAdd control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgAdd;
-        
-        /// <summary>
-        /// lnkAddProxyTmp control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal lnkAddProxyTmp;
     }
 }

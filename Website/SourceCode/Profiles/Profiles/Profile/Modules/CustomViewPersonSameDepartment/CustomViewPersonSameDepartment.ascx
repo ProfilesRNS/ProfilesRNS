@@ -19,12 +19,9 @@
         <asp:Literal runat="server" ID="litListItem"></asp:Literal>
     </ItemTemplate>
     <FooterTemplate>
-        </ul>
-        <div class='passiveSectionBodyDetails'>
-            <asp:Literal runat="server" ID="litFooter"></asp:Literal>
+         </ul>   
         </div>
-        <div class="passiveSectionLine">
-        </div>
-        </div>
+           <asp:HyperLink runat="server" ID="moreurl" Text="Explore" CssClass="prns-explore-btn"></asp:HyperLink>
+        <div class="passiveSectionLine">_</div>
     </FooterTemplate>
 </asp:Repeater>

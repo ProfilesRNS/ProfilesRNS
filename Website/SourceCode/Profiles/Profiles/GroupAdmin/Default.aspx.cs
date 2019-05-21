@@ -56,6 +56,15 @@ namespace Profiles.GroupAdmin
             Aboutcss.Attributes["type"] = "text/css";
             Aboutcss.Attributes["media"] = "all";
             Page.Header.Controls.Add(Aboutcss);
+
+
+            HtmlLink editcss = new HtmlLink();
+            editcss.Href = Root.Domain + "/edit/CSS/edit.css";
+            editcss.Attributes["rel"] = "stylesheet";
+            editcss.Attributes["type"] = "text/css";
+            editcss.Attributes["media"] = "all";
+            Page.Header.Controls.Add(editcss);
+
         }
     }
 }

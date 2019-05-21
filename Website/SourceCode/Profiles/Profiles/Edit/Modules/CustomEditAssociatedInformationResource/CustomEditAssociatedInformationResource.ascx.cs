@@ -409,7 +409,7 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
             ListItem lstItem = new ListItem();
             ddl.Items.Insert(0, lstItem);
             ddl.Attributes.Add("title", "Display Name");
-            ddl.Width = new Unit(250);
+            ddl.Width = new Unit(248);
             ddl.Height = new Unit(20);
             ddl.Attributes.Add("onclick", "showdivonClick()");
             ddl.Attributes.Add("onkeypress", "showdivonClick()");
@@ -465,7 +465,7 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
             div.Style.Add("position", "absolute");
             div.Style.Add("fload", "left");
             div.Style.Add("border", "black 1px solid");
-            div.Style.Add("width", "249px");
+            div.Style.Add("width", "248px");
             div.Style.Add("height", "180px");
             div.Style.Add("overflow", "AUTO");
             div.Style.Add("display", "none");

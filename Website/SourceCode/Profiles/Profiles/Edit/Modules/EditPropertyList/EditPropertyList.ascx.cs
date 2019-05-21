@@ -50,7 +50,6 @@ namespace Profiles.Edit.Modules.EditPropertyList
             this.SecurityGroups = new XmlDocument();
             this.SecurityGroups.LoadXml(base.PresentationXML.DocumentElement.LastChild.OuterXml);
 
-            litBackLink.Text = "<h2>Edit Menu</h2>";
 
             foreach (XmlNode group in this.PropertyList.SelectNodes("//PropertyList/PropertyGroup"))
             {
@@ -207,27 +206,18 @@ namespace Profiles.Edit.Modules.EditPropertyList
         }
         protected void BuildSecurityKey(List<GenericListItem> gli)
         {
-            System.Text.StringBuilder table = new StringBuilder();                        
-            
-            //<AlternatingRowStyle CssClass="evenRow" />
+            System.Text.StringBuilder table = new StringBuilder();
 
-            table.Append("<table style='width:100%;'>");
-            table.Append("<tr class='EditMenuTopRow' ><td style='padding-left:10px;' align='right'><b>Level</b></td><td style='padding-left:10px;' align='left'><b>Description</b></td></tr>");
+            table.Append("<table style='width:100%;border:1px solid #999999;'>");
+            table.Append("<tr class='EditMenuTopRow'><td style='font-weight:bold;text-align:right;'>Level</td><td style='font-weight:bold;text-align:left;padding-left:15px;'>Description</td></tr>");
 
             foreach (GenericListItem item in gli)
             {
-                table.Append("<tr>");
-                table.Append("<td class='height25' style='padding-left:6px;white-space:nowrap'>");
-                table.Append("<p align='right'>");
-                table.Append("<b>");
+                table.Append("<tr style='height:25px;'><td style='font-weight:bold;text-align:right;'>");
                 table.Append(item.Text);
-                table.Append("</b>");
-                table.Append("</p>");
-                table.Append("</td>");
-                table.Append("<td style='padding-left:10px;' align='left'>");
+                table.Append("</td><td style='text-align:left;padding-left:15px;'>");
                 table.Append(item.Value);
-                table.Append("</td>");
-                table.Append("</tr>");
+                table.Append("</td></tr>");
             }
 
             table.Append("</table>");

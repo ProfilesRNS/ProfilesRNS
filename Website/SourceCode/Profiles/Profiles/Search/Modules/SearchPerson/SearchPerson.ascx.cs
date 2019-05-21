@@ -273,7 +273,7 @@ namespace Profiles.Search.Modules.SearchPerson
             div.Style.Add("position", "absolute");
             div.Style.Add("fload", "left");
             div.Style.Add("border", "black 1px solid");
-            div.Style.Add("width", "249px");
+            div.Style.Add("width", "248px");
             div.Style.Add("height", "180px");
             div.Style.Add("overflow", "AUTO");
             div.Style.Add("display", "none");

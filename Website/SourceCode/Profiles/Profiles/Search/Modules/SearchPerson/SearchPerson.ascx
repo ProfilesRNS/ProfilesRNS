@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SearchPerson.ascx.cs"
-    Inherits="Profiles.Search.Modules.SearchPerson.SearchPerson" EnableViewState="true"  %>
+    Inherits="Profiles.Search.Modules.SearchPerson.SearchPerson" EnableViewState="true" %>
 <%@ Register Src="ComboTreeCheck.ascx" TagName="ComboTreeCheck" TagPrefix="uc1" %>
 
 <script type="text/javascript">
@@ -7,7 +7,7 @@
 
     function runScript(e) {
         if (e.keyCode == 13) {
-            search();            
+            search();
         }
         return false;
     }
@@ -29,7 +29,7 @@
     function showdivonClick() {
         var objDLL = $('[id$=divChkList]').attr('id');// document.getElementById("divChkList");
 
-        if (document.getElementById(objDLL).style.display  == "block")
+        if (document.getElementById(objDLL).style.display == "block")
             document.getElementById(objDLL).style.display = "none";
         else
             document.getElementById(objDLL).style.display = "block";
@@ -39,7 +39,7 @@
 
 
         var noItemChecked = 0;
-        var ddlChkList =  document.getElementById($('[id$=ddlChkList]').attr('id'));
+        var ddlChkList = document.getElementById($('[id$=ddlChkList]').attr('id'));
         var selectedItems = "";
         var selectedValues = "";
         var arr = document.getElementById($('[id$=chkLstItem]').attr('id')).getElementsByTagName('input');
@@ -59,7 +59,7 @@
                 }
             }
 
-            if (checkbox.checked) {                
+            if (checkbox.checked) {
 
                 var buffer;
                 if (arrlbl[i].innerText == undefined)
@@ -85,7 +85,7 @@
         else
             ddlChkList.options[ddlChkList.selectedIndex].text = "";
 
-		var hidList =  document.getElementById($('[id$=hidList]').attr('id'));
+        var hidList = document.getElementById($('[id$=hidList]').attr('id'));
         hidList.value = ddlChkList.options[ddlChkList.selectedIndex].text;
 
 
@@ -117,135 +117,119 @@
 <div class="content_container">
     <div class="tabContainer">
         <div class="searchForm">
+
             <table onkeypress="JavaScript:runScript(event);" width="100%">
                 <tbody align="left">
                     <tr>
                         <td colspan='3'>
                             <%-- New class to replace inline heading styles --%>
                             <div class="headings">
-                                Find people by keyword</div>
+                                Find people by keyword
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="3">
                             <div class="searchSection" id="divSearchSection">
-                                <table width="100%" class='searchForm'>
+                                <table class='searchForm'>
                                     <tr>
-                                        <th>
-                                            Keywords
+                                        <th>Keywords
                                         </th>
                                         <td colspan="2" class="fieldOptions">
                                             <asp:TextBox runat="server" ID="txtSearchFor" CssClass="inputText" title="Keywords"></asp:TextBox>
-                                            <asp:CheckBox runat="server" ID="chkExactphrase" text="&nbsp;Search for exact phrase" />
+                                            <asp:CheckBox runat="server" ID="chkExactphrase" Text="&nbsp;Search for exact phrase" />
 
                                         </td>
                                     </tr>
                                     <tr>
-                                        <tr>
-                                            <th>
-                                            </th>
-                                            <td colspan="2">
-                                                <div class="search-button-container">
-                                                    <%--Inline styles on this is no longer needed as the button is now all CSS--%>
-                                                    <a href="JavaScript:search();" class="search-button">
+                                        <th></th>
+                                        <td colspan="2">
+                                            <div class="search-button-container">
+                                                <%--Inline styles on this is no longer needed as the button is now all CSS--%>
+                                                <a href="JavaScript:search();" class="search-button">
                                                     <%--    No longer need a search button as an image--%>
-                                                        <%--<img src="<%=GetURLDomain()%>/Search/Images/search.jpg" style="border: 0;" alt="Search" />--%>
+                                                    <%--<img src="<%=GetURLDomain()%>/Search/Images/search.jpg" style="border: 0;" alt="Search" />--%>
                                                         Search
                                                     </a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                            </div>
+                                        </td>
                                     </tr>
                                 </table>
                             </div>
                         </td>
                     </tr>
             </table>
-            <table width="100%">
+            <table>
                 <tr>
                     <td colspan='3'>
                         <div class="headings">
-                            Find people by name/organization</div>
+                            Find people by name/organization
+                        </div>
                     </td>
                 </tr>
                 <tr>
                     <td colspan='3'>
                         <div class="searchSection" id="div1">
-                            <table width="100%" class='searchForm'>
+                            <table class='searchForm'>
                                 <tr>
-                                    <th>
-                                        Last Name
+                                    <th>Last Name
                                     </th>
                                     <td colspan="2">
-                                        <asp:TextBox runat="server" ID="txtLname" CssClass="inputText"  title="Last Name"></asp:TextBox>
+                                        <asp:TextBox runat="server" ID="txtLname" CssClass="inputText" title="Last Name"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>
-                                        First Name
+                                    <th>First Name
                                     </th>
                                     <td colspan="2">
                                         <asp:TextBox runat="server" ID="txtFname" CssClass="inputText" title="First Name"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr runat="server" id="trInstitution">
-                                    <th>
-                                        Institution
+                                    <th>Institution
                                     </th>
                                     <td colspan="2">
                                         <asp:Literal runat="server" ID="litInstitution"></asp:Literal>
-                                        <asp:CheckBox runat="server" ID="institutionallexcept" text="&nbsp;All <b>except</b> the one selected" />
+                                        <asp:CheckBox runat="server" ID="institutionallexcept" Text="&nbsp;All <b>except</b> the one selected" />
 
 
                                     </td>
                                 </tr>
                                 <tr runat="server" id="trDepartment">
-                                    <th>
-                                        Department
+                                    <th>Department
                                     </th>
                                     <td colspan="2">
                                         <asp:Literal runat="server" ID="litDepartment"></asp:Literal>
-                                        <asp:CheckBox runat="server" ID="departmentallexcept" label="except department" text="&nbsp;All <b>except</b> the one selected" />
+                                        <asp:CheckBox runat="server" ID="departmentallexcept" label="except department" Text="&nbsp;All <b>except</b> the one selected" />
 
 
                                     </td>
                                 </tr>
                                 <tr runat="server" id="trDivision">
-                                    <th>
-                                        Division
+                                    <th>Division
                                     </th>
                                     <td colspan="2">
                                         <asp:Literal runat="server" ID="litDivision"></asp:Literal>
-                                        <asp:CheckBox runat="server" id="divisionallexcept" text="&nbsp;All <b>except</b> the one selected" />
-
-
+                                        <asp:CheckBox runat="server" ID="divisionallexcept" Text="&nbsp;All <b>except</b> the one selected" />
                                     </td>
                                 </tr>
                                 <tr runat="server" id="trFacultyType">
-                                    <th>
-                                        Faculty Type
+                                    <th>Faculty Type
                                     </th>
-                                    <td class="pan" colspan="2">
-                                        <table cellpadding="0">
-                                            <tr>
-                                                <td>
-                                                    <asp:PlaceHolder ID="phDDLCHK" runat="server"></asp:PlaceHolder>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <asp:PlaceHolder ID="phDDLList" runat="server"></asp:PlaceHolder>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                    <td colspan="2">
+                                        <div>
+                                            <asp:PlaceHolder ID="phDDLCHK" runat="server"></asp:PlaceHolder>
+                                        </div>
+                                        <div>
+                                            <asp:PlaceHolder ID="phDDLList" runat="server"></asp:PlaceHolder>
+                                        </div>
                                         <asp:Label ID="lblSelectedItem" runat="server"></asp:Label>
                                         <asp:HiddenField ID="hidList" runat="server" />
                                         <asp:HiddenField ID="hidURIs" runat="server" />
                                     </td>
                                 </tr>
-                                <tr  runat="server" id="trOtherOptions">
-                                    <th>
-                                        Other Options
+                                <tr runat="server" id="trOtherOptions">
+                                    <th>Other Options
                                     </th>
                                     <td colspan='2'>
                                         <input type="hidden" id="hiddenToggle" value="off" />
@@ -265,14 +249,10 @@
                                     </td>
                                 </tr>
                                 <tr>
-
-
-
-
-                                    <td>
-                                    </td>
+                                    <td></td>
                                     <td colspan="2">
-                                        <div class="search-button-container"><%--Inline styles on this is no longer needed as the button is now all CSS--%>
+                                        <div class="search-button-container">
+                                            <%--Inline styles on this is no longer needed as the button is now all CSS--%>
                                             <a href="JavaScript:search();" class="search-button">
                                                 <%--<img src="<%=GetURLDomain()%>/Search/Images/search.jpg" style="border: 0;" alt="Search" />--%>
                                                 Search
@@ -282,11 +262,17 @@
                                 </tr>
                             </table>
                             <asp:Literal runat="server" ID="litFacRankScript"></asp:Literal>
-                            
+
                         </div>
                     </td>
                 </tr>
             </table>
         </div>
+
     </div>
 </div>
+<script>$(document).ready(function () {
+    $("[id*=ddlChkList]").css("width", "249px");
+    $("select").css("height", "25px");
+
+});</script>

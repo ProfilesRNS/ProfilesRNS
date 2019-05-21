@@ -1,0 +1,43 @@
+div.prns-main .header {
+  height: 132px;
+}
+
+
+/****************** footer stuff  ******************/
+
+#prns-footer {
+  border: 0px solid grey;
+  border-top: 0px solid red;
+  padding-top: 16px;
+  margin-top: 4px;
+  margin-bottom: 12px;
+}
+
+#prns-footer h2 {
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 16px;
+  margin-top: 0px;
+  margin-bottom: 4px;
+}
+
+#prns-footer table {
+  width: 100%;
+}
+
+#prns-footer table td:last-child {
+  border-right: none;
+}
+
+[id^="prns-footer-col"] {
+  border-right: 1px solid red;
+  vertical-align: top;
+  padding: 10px 16px;
+}
+
+#prns-footer-col1 { width:176px }
+
+/* #prns-footer-col2 { width:310px } */
+
+#prns-footer-col3 { width:238px }
+#prns-footer-col4 { width:276px }

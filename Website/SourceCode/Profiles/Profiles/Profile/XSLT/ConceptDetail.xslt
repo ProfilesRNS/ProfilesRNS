@@ -117,27 +117,27 @@
                 </a>
               </td>
               <td>
-                <div >
+                <div  style="text-align:center;">
                   <xsl:value-of select="/rdf:RDF/rdf:Description[@rdf:about=$connectionResource]/prns:numberOfPublications"/>
                 </div>
               </td>
               <td>
-                <div>
+                <div style="text-align:center;">
                   <xsl:value-of select="substring-before(/rdf:RDF/rdf:Description[@rdf:about=$connectionResource]/prns:endDate,'-')"/>
                 </div>
               </td>
               <td>
-                <div>
+                <div style="text-align:center;">
                   <xsl:value-of select="/rdf:RDF/rdf:Description[@rdf:about=$objectResource]/prns:numberOfPublications"/>
                 </div>
               </td>
               <td>
-                <div>
+                <div style="text-align:center;">
                   <xsl:variable name="score" select="/rdf:RDF/rdf:Description/prns:hasConnectionDetails[@rdf:resource=$detailsResource]/../prns:connectionWeight"/>
                   <xsl:value-of select='format-number( round(100*$score) div 100 ,"##0.000" )' />
                 </div>
               </td>
-              <td>
+              <td style="text-align:center;">
                 <a class="listTableLink"  href="{$whyLink}">
                   Why?
                 </a>

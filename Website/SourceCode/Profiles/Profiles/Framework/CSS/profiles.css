@@ -322,6 +322,7 @@ div#catalyst-footer {
     display: table-cell;
     text-align: left;
     max-width: 160px;
+    padding-right:10px;
 }
 
 /********************************************/
@@ -425,6 +426,7 @@ div#catalyst-footer {
 .panelMain {
     width: 100%;
     clear: both;
+    margin-top:5px;
 }
 
     .panelMain div {
@@ -442,7 +444,12 @@ div#catalyst-footer {
     border-bottom: 1px dotted #999;
     text-align: left;
 }
-
+.profiles .profilesContentMain .keywordCategories td, .profiles .profilesContentMain .keywordCategories th {
+    font-size: 12px;
+    padding: 2px 5px;
+    text-align: left;
+    border: none;
+}
 
 /********************************************/
 /* Profiles Content Passive                 */

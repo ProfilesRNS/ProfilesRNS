@@ -1,201 +1,149 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CustomEditEducationalTraining.ascx.cs"
-    Inherits="Profiles.Edit.Modules.CustomEditEducationalTraining.CustomEditEducationalTraining" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CustomEditEducationalTraining.ascx.cs" Inherits="Profiles.Edit.Modules.CustomEditEducationalTraining.CustomEditEducationalTraining" %>
 <%@ Register TagName="Options" TagPrefix="security" Src="~/Edit/Modules/SecurityOptions/SecurityOptions.ascx" %>
 <asp:UpdatePanel ID="upnlEditSection" runat="server" UpdateMode="Conditional">
-    <ContentTemplate>   
-        <asp:UpdateProgress ID="updateProgress" runat="server">
+    <ContentTemplate>
+          <asp:UpdateProgress ID="updateProgress" runat="server" DynamicLayout="true" DisplayAfter="1000">
             <ProgressTemplate>
-                <div class="progress">
-                    <span><img alt="Loading..." src="../edit/images/loader.gif" width="400" height="213"/></span>
+                <div class="modalupdate">
+                    <div class="modalcenter">
+                        <img alt="Updating..." src="<%=Profiles.Framework.Utilities.Root.Domain%>/edit/images/loader.gif" />
+                        <br />
+                        <i>Updating...</i>
+                    </div>
                 </div>
-            </ProgressTemplate>                        
+            </ProgressTemplate>
         </asp:UpdateProgress>
         <asp:HiddenField ID="hiddenSubjectID" runat="server" />
-        
-        <table id="tblEditEducationalTraining" width="100%">
-            <tr>
-                <td>
-                    <asp:Literal runat="server" ID="litBackLink"></asp:Literal>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div style="padding: 10px 0px;">
-                        <asp:Panel runat="server" ID="pnlSecurityOptions">
-                            <security:Options runat="server" ID="securityOptions"></security:Options>
-                        </asp:Panel>
-                        <br />
-                        <asp:Panel runat="server" ID="pnlEditEducation">
-                            <asp:LinkButton ID="btnEditEducation" runat="server" OnClick="btnEditEducation_OnClick"
-                                CssClass="profileHypLinks"><asp:Image runat="server" ID="imbAddArror" AlternateText=" " ImageUrl="~/Framework/Images/icon_squareArrow.gif"/>&nbsp;Add Education and Training</asp:LinkButton>
-                        </asp:Panel>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>                   
-                    <asp:Repeater ID="RptrEditEducation" runat="server" Visible="false">
-                        <ItemTemplate>
-                            <asp:Label ID="lblEditEducation" runat="server" Text='<%#Eval("EducationalTraining").ToString() %>' />
-                            <br />
-                        </ItemTemplate>
-                    </asp:Repeater>
-                    <asp:Panel ID="pnlInsertEducationalTraining" runat="server" Style="background-color: #EEE; margin-bottom: 5px;
-                        border: solid 1px #ccc;" Visible="false" >
-                        <table border="0" cellspacing="2" cellpadding="4">
-                            <tr style="vertical-align:bottom;">
-                                <td>
-                                    <b>Institution</b><br />
-                                    <asp:TextBox ID="txtInstitution" runat="server" MaxLength="100" Width="190px"></asp:TextBox>
-                                </td>
-                                <td>
-                                    <b>Location<b><br />
-                                    <asp:TextBox ID="txtLocation" runat="server" MaxLength="100" Width="130px"></asp:TextBox>
-                                </td>
-                                <td>
-                                    <b>Degree</b><br />(if applicable)<br />
-                                    <asp:TextBox ID="txtEducationalTrainingDegree" runat="server" MaxLength="100" Width="100px"></asp:TextBox>
-                                </td>
-                                <!--<td>
-                                    <b>School or Department</b><br />
-                                    <asp:TextBox ID="txtEducationalTrainingSchool" runat="server" MaxLength="100" TabIndex="3" Width="210px"></asp:TextBox>
-                                </td>-->
-                                <td>
-                                    <b>Completion Date</b> (MM/YYYY)<br />
-                                    <asp:TextBox ID="txtEndYear" runat="server" MaxLength="7" Width="80px"></asp:TextBox>
-                                </td>
-                                <td>
-                                    <b>Field Of Study<b><br />
-                                    <asp:TextBox ID="txtFieldOfStudy" runat="server" MaxLength="100" Width="175px"></asp:TextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="5">
-                                    <div style="padding-bottom: 5px; text-align: left;">
-                                        <asp:LinkButton ID="btnInsertEducationalTraining" runat="server" CausesValidation="False" OnClick="btnInsert_OnClick"
-                                            Text="Save and add another"></asp:LinkButton>
-                                        &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;
-                                        <asp:LinkButton ID="btnInsertEducationalTraining2" runat="server" CausesValidation="False" OnClick="btnInsertClose_OnClick"
-                                            Text="Save and Close"></asp:LinkButton>
-                                        &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;
+        <div class="editBackLink">
+            <asp:Literal runat="server" ID="litBackLink"></asp:Literal>
+        </div>
+        <asp:Panel runat="server" ID="pnlSecurityOptions">
+            <security:Options runat="server" ID="securityOptions"></security:Options>
+        </asp:Panel>
+        <asp:Panel runat="server" ID="pnlEditEducation">
+            <div class="EditMenuItem">
+                <asp:ImageButton CssClass="EditMenuLinkImg" runat="server" OnClick="btnEditEducation_OnClick" ID="imbAddArrow" AlternateText=" " ImageUrl="~/Edit/Images/icon_squareArrow.gif" />
+                <asp:LinkButton ID="btnEditEducation" runat="server" OnClick="btnEditEducation_OnClick">Add Education and Training</asp:LinkButton>
+            </div>
+        </asp:Panel>      
+        <asp:Panel ID="pnlInsertEducationalTraining" runat="server" CssClass="EditPanel" Visible="false">
+            <div style="display: inline-flex;">
+                <div>
+                    <div style="font-weight: bold;">Institution</div>
+                    <asp:TextBox ID="txtInstitution" runat="server" MaxLength="100" Width="190px" />
+                </div>
+                <div style="margin-left: 10px;">
+                    <div style="font-weight: bold;">Location</div>
+                    <asp:TextBox ID="txtLocation" runat="server" MaxLength="100" Width="130px" />
+                </div>
+                <div style="margin-left: 10px;">
+                    <div style="font-weight: bold;">Degree (if applicable)</div>
+                    <asp:TextBox ID="txtEducationalTrainingDegree" runat="server" MaxLength="100" Width="55px" />
+                </div>
+                <div style="margin-left: 10px;">
+                    <div style="font-weight: bold;">Completion Date (MM/YYYY)</div>
+                    <asp:TextBox ID="txtEndYear" runat="server" MaxLength="7" Width="80px" />
+                </div>
+                <div style="margin-left: 20px;">
+                    <div style="font-weight: bold;">Field Of Study</div>
+                    <asp:TextBox ID="txtFieldOfStudy" runat="server" MaxLength="100" Width="175px" />
+                </div>
+            </div>
+            <div class="actionbuttons">
+                <asp:LinkButton ID="btnInsertEducationalTraining2" runat="server" CausesValidation="False" OnClick="btnInsertClose_OnClick"
+                    Text="Save"/>
+                &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;
+                                         <asp:LinkButton ID="btnInsertEducationalTraining" runat="server" CausesValidation="False" OnClick="btnInsert_OnClick"
+                                             Text="Save and add another"/>
+                &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;
                                         <asp:LinkButton ID="btnInsertCancel" runat="server" CausesValidation="False" OnClick="btnInsertCancel_OnClick"
-                                            Text="Close"></asp:LinkButton>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </asp:Panel>
-                    <div>
-                        <asp:GridView ID="GridViewEducation" runat="server" AutoGenerateColumns="False" CellPadding="4"
-                            DataKeyNames="SubjectURI,Predicate, Object" GridLines="Both"
-                            OnRowCancelingEdit="GridViewEducation_RowCancelingEdit" OnRowDataBound="GridViewEducation_RowDataBound"
-                            OnRowDeleting="GridViewEducation_RowDeleting" OnRowEditing="GridViewEducation_RowEditing"
-                            OnRowUpdated="GridViewEducation_RowUpdated" OnRowUpdating="GridViewEducation_RowUpdating"
-                            Width="100%">
-                            <HeaderStyle CssClass="topRow" BorderStyle="Solid" BorderWidth="1px" />
-                            <RowStyle BorderStyle="Solid" BorderWidth="1px" />
-                            <Columns>
-                                <asp:TemplateField HeaderText="Institution">
-                                    <EditItemTemplate>
-                                        <asp:TextBox ID="txtEducationalTrainingInst" runat="server" MaxLength="100" Text='<%# Bind("Institution") %>'></asp:TextBox>
-                                        <asp:HiddenField runat="server" ID="hdURI" />
-                                    </EditItemTemplate>
-                                    <ItemTemplate>
-                                        <asp:Label ID="Label5" runat="server" Text='<%# Bind("Institution") %>'></asp:Label>
-                                        <asp:HiddenField runat="server" ID="hdURI" />
-                                    </ItemTemplate>
-                                    <ItemStyle Wrap="true" />
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Location">
-                                    <EditItemTemplate>
-                                        <asp:TextBox ID="txtEducationalTrainingLocation" runat="server" MaxLength="100" Text='<%# Bind("Location") %>'></asp:TextBox>
-                                    </EditItemTemplate>
-                                    <ItemTemplate>
-                                        <asp:Label ID="Label6" runat="server" Text='<%# Bind("Location") %>'></asp:Label>
-                                    </ItemTemplate>
-                                    <ControlStyle Width="100px" />
-                                    <ItemStyle Wrap="true" />
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Degree">
-                                    <EditItemTemplate>
-                                        <asp:TextBox ID="txtEducationalTrainingDegree" runat="server" MaxLength="100" Text='<%# Bind("Degree") %>'></asp:TextBox>
-                                    </EditItemTemplate>
-                                    <ItemTemplate>
-                                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("Degree") %>'></asp:Label>
-                                    </ItemTemplate>
-                                    <ControlStyle Width="100px" />
-                                    <ItemStyle Wrap="true" />
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Completion Date">
-                                    <EditItemTemplate>
-                                        <asp:TextBox ID="txtYr2" runat="server" MaxLength="7" Text='<%# Bind("EndDate") %>'></asp:TextBox>
-                                    </EditItemTemplate>
-                                    <ItemTemplate>
-                                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("EndDate") %>'></asp:Label>
-                                    </ItemTemplate>
-                                    <ControlStyle Width="60px" />
-                                    <HeaderStyle HorizontalAlign="Center" />
-                                    <ItemStyle HorizontalAlign="Center" />
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Field of Study">
-                                    <EditItemTemplate>
-                                        <asp:TextBox ID="txtEducationalTrainingFieldOfStudy" runat="server" MaxLength="100" Text='<%# Bind("FieldOfStudy") %>'></asp:TextBox>
-                                    </EditItemTemplate>
-                                    <ItemTemplate>
-                                        <asp:Label ID="Label4" runat="server" Text='<%# Bind("FieldOfStudy") %>'></asp:Label>
-                                    </ItemTemplate>
-                                    <ItemStyle Wrap="true" />
-                                </asp:TemplateField>
-                                <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="100px" HeaderText="Action"
-                                    ShowHeader="False">
-                                    <EditItemTemplate>
-                                        <table class="actionbuttons">
-                                            <tr>
-                                                <td>
-                                                    <asp:ImageButton ID="lnkUpdate" runat="server" ImageUrl="~/Edit/Images/button_save.gif"
-                                                        CausesValidation="True" CommandName="Update" Text="Update"></asp:ImageButton>
-                                                </td>
-                                                <td>
-                                                    <asp:ImageButton ID="lnkCancel" runat="server" ImageUrl="~/Edit/Images/button_cancel.gif"
-                                                        CausesValidation="False" CommandName="Cancel" Text="Cancel"></asp:ImageButton>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </EditItemTemplate>
-                                    <ItemTemplate>
-                                    </ItemTemplate>
-                                    <ItemTemplate>
-                                        <div class="actionbuttons">
-                                            <table>
-                                                <tr>
-                                                    <td>
-                                                        <asp:ImageButton OnClick="ibUp_Click" runat="server" CommandArgument="up" CommandName="action"
-                                                            ID="ibUp" ImageUrl="~/Edit/Images/icon_up.gif" />
-                                                    </td>
-                                                    <td>
-                                                        <asp:ImageButton runat="server" OnClick="ibDown_Click" ID="ibDown" CommandArgument="down"
-                                                            CommandName="action" ImageUrl="~/Edit/Images/icon_down.gif" />
-                                                    </td>
-                                                    <td>
-                                                        <asp:ImageButton ID="lnkEdit" runat="server" ImageUrl="~/Edit/Images/icon_edit.gif"
-                                                            CausesValidation="False" CommandName="Edit" Text="Edit"></asp:ImageButton>
-                                                    </td>
-                                                    <td>
-                                                        <asp:ImageButton ID="lnkDelete" runat="server" ImageUrl="~/Edit/Images/icon_delete.gif"
-                                                            CausesValidation="False" CommandName="Delete" OnClientClick="Javascript:return confirm('Are you sure you want to delete this entry?');"
-                                                            Text="X"></asp:ImageButton>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                            </Columns>
-                        </asp:GridView>                        
-                    </div>
-                    <i><asp:Label runat="server" ID="lblNoEducation" Text="No education or training has been added." Visible ="false"></asp:Label></i>
-                </td>
-            </tr>
-        </table>
+                                            Text="Cancel"/>
+            </div>
+
+        </asp:Panel>
+        <div class="editPage">
+            <asp:GridView ID="GridViewEducation" runat="server" AutoGenerateColumns="False" DataKeyNames="SubjectURI,Predicate, Object" GridLines="Both"
+                OnRowCancelingEdit="GridViewEducation_RowCancelingEdit" OnRowDataBound="GridViewEducation_RowDataBound"
+                OnRowDeleting="GridViewEducation_RowDeleting" OnRowEditing="GridViewEducation_RowEditing"
+                OnRowUpdated="GridViewEducation_RowUpdated" OnRowUpdating="GridViewEducation_RowUpdating"
+                CssClass="editBody">
+                <HeaderStyle CssClass="topRow" />
+                <Columns>
+                    <asp:TemplateField HeaderText="Institution" ItemStyle-CssClass="alignLeft" HeaderStyle-CssClass="alignLeft">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtEducationalTrainingInst" runat="server" MaxLength="100" Width="250px" Text='<%# Bind("Institution") %>'/>
+                            <asp:HiddenField runat="server" ID="hdURI" />
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label5" runat="server" Text='<%# Bind("Institution") %>'></asp:Label>
+                            <asp:HiddenField runat="server" ID="hdURI" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Location" HeaderStyle-CssClass="alignLeft" ItemStyle-CssClass="alignLeft">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtEducationalTrainingLocation" runat="server" MaxLength="100" Text='<%# Bind("Location") %>'/>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label6" runat="server" Text='<%# Bind("Location") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Degree" HeaderStyle-CssClass="alignLeft" ItemStyle-CssClass="alignLeft">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtEducationalTrainingDegree" runat="server" Width="55px" MaxLength="100" Text='<%# Bind("Degree") %>'/>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label3" runat="server" Text='<%# Bind("Degree") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Completion Date" HeaderStyle-CssClass="alignLeft" ItemStyle-CssClass="alignLeft">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtEndDate" runat="server" MaxLength="7" Width="70px" Text='<%# Bind("EndDate") %>'/>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label2" runat="server" Text='<%# Bind("EndDate") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Field of Study" HeaderStyle-CssClass="alignLeft" ItemStyle-CssClass="alignLeft">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtEducationalTrainingFieldOfStudy" runat="server" MaxLength="100" Text='<%# Bind("FieldOfStudy") %>'/>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label4" runat="server" Text='<%# Bind("FieldOfStudy") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderStyle-CssClass="alignCenterAction" HeaderText="Action" ItemStyle-CssClass="alignCenterAction">
+                        <EditItemTemplate>                            
+                                <asp:LinkButton ID="lnkUpdate" runat="server"
+                                    CausesValidation="True" CommandName="Update" Text="Save"/>
+                                &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp
+                                <asp:LinkButton ID="lnkCancel" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel"/>                            
+                        </EditItemTemplate>
+                        <ItemTemplate>                            
+                                <span>
+                                    <asp:ImageButton OnClick="ibUp_Click" runat="server" CommandArgument="up" CommandName="action"
+                                        ID="ibUp" ImageUrl="~/Edit/Images/icon_up.gif" AlternateText="Move Up" />
+                                    <asp:ImageButton runat="server" ID="ibUpGray" Enabled="false" Visible="false" ImageUrl="~/Edit/Images/Icon_rounded_ArrowGrayUp.png" AlternateText="Move Up" />
+                                </span>
+                                <span>
+                                    <asp:ImageButton runat="server" OnClick="ibDown_Click" ID="ibDown" CommandArgument="down"
+                                        CommandName="action" ImageUrl="~/Edit/Images/icon_down.gif" AlternateText="Move Down" />
+                                    <asp:ImageButton runat="server" ID="ibDownGray" Enabled="false" Visible="false" ImageUrl="~/Edit/Images/Icon_rounded_ArrowGrayDown.png" AlternateText="Move Down" />
+                                </span>
+                                <span>
+                                    <asp:ImageButton ID="lnkEdit" runat="server" ImageUrl="~/Edit/Images/icon_edit.gif"
+                                        CausesValidation="False" CommandName="Edit" AlternateText="Edit"></asp:ImageButton>
+                                </span>
+                                <span>
+                                    <asp:ImageButton ID="lnkDelete" runat="server" ImageUrl="~/Edit/Images/icon_delete.gif"
+                                        CommandName="Delete" OnClientClick="Javascript:return confirm('Are you sure you want to delete this entry?');"
+                                        AlternateText="Delete"></asp:ImageButton>
+                                </span>                            
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+            </asp:GridView>
+            <div class="editBody">
+                <asp:Label runat="server" ID="lblNoEducation" Text="No education or training has been added." Visible="false"></asp:Label>
+            </div>
     </ContentTemplate>
 </asp:UpdatePanel>

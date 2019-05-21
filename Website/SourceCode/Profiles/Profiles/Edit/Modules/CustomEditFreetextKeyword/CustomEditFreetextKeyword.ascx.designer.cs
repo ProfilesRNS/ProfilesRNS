@@ -13,15 +13,6 @@ namespace Profiles.Edit.Modules.CustomEditFreetextKeyword {
     public partial class CustomEditFreetextKeyword {
         
         /// <summary>
-        /// litBackLink control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litBackLink;
-        
-        /// <summary>
         /// upnlEditSection control.
         /// </summary>
         /// <remarks>
@@ -29,15 +20,6 @@ namespace Profiles.Edit.Modules.CustomEditFreetextKeyword {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel upnlEditSection;
-        
-        /// <summary>
-        /// hiddenSubjectID control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hiddenSubjectID;
         
         /// <summary>
         /// updateProgress control.
@@ -49,13 +31,22 @@ namespace Profiles.Edit.Modules.CustomEditFreetextKeyword {
         protected global::System.Web.UI.UpdateProgress updateProgress;
         
         /// <summary>
-        /// Literal1 control.
+        /// hiddenSubjectID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal Literal1;
+        protected global::System.Web.UI.WebControls.HiddenField hiddenSubjectID;
+        
+        /// <summary>
+        /// litBackLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litBackLink;
         
         /// <summary>
         /// phSecurityOptions control.
@@ -64,7 +55,7 @@ namespace Profiles.Edit.Modules.CustomEditFreetextKeyword {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder phSecurityOptions;
+        protected global::System.Web.UI.WebControls.Panel phSecurityOptions;
         
         /// <summary>
         /// securityOptions control.
@@ -82,7 +73,16 @@ namespace Profiles.Edit.Modules.CustomEditFreetextKeyword {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder phEditProperty;
+        protected global::System.Web.UI.WebControls.Panel phEditProperty;
+        
+        /// <summary>
+        /// imbAddArrow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imbAddArrow;
         
         /// <summary>
         /// btnEditProperty control.
@@ -94,22 +94,22 @@ namespace Profiles.Edit.Modules.CustomEditFreetextKeyword {
         protected global::System.Web.UI.WebControls.LinkButton btnEditProperty;
         
         /// <summary>
-        /// imbAddArror control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imbAddArror;
-        
-        /// <summary>
         /// phDelAll control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder phDelAll;
+        protected global::System.Web.UI.WebControls.Panel phDelAll;
+        
+        /// <summary>
+        /// imbDelArrow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imbDelArrow;
         
         /// <summary>
         /// btnDelAll control.
@@ -119,15 +119,6 @@ namespace Profiles.Edit.Modules.CustomEditFreetextKeyword {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnDelAll;
-        
-        /// <summary>
-        /// imbDelArrow control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imbDelArrow;
         
         /// <summary>
         /// RptrEditProperty control.
@@ -148,15 +139,6 @@ namespace Profiles.Edit.Modules.CustomEditFreetextKeyword {
         protected global::System.Web.UI.WebControls.Panel pnlInsertProperty;
         
         /// <summary>
-        /// btnBulkInsert control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnBulkInsert;
-        
-        /// <summary>
         /// txtLabel control.
         /// </summary>
         /// <remarks>
@@ -166,15 +148,6 @@ namespace Profiles.Edit.Modules.CustomEditFreetextKeyword {
         protected global::System.Web.UI.WebControls.TextBox txtLabel;
         
         /// <summary>
-        /// btnInsertAward control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnInsertAward;
-        
-        /// <summary>
         /// btnInsertProperty control.
         /// </summary>
         /// <remarks>
@@ -182,6 +155,15 @@ namespace Profiles.Edit.Modules.CustomEditFreetextKeyword {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnInsertProperty;
+        
+        /// <summary>
+        /// btnInsertAward control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnInsertAward;
         
         /// <summary>
         /// btnInsertCancel control.

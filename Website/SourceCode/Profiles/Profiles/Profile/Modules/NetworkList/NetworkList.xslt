@@ -33,7 +33,7 @@
 				<xsl:value-of select="ListView/@InfoCaption"/>
 			</div>
 		</xsl:if>
-		<table>
+    <table class="NetworkList" style="text-align:left">
 			<tbody>
 				<xsl:choose>
 					<xsl:when test="$columns = 1">

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions">
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions"  exclude-result-prefixes="prns rdf bibo skco owl2 swvs rdfs scirr vivo vitro07 event obo pvs foaf skos owl dcterms vann dcelem afn geo vitro xsd">
 	<xsl:output method="html"/>
 	<xsl:variable name="totalCount" select="count(//@Category)"/>
 	<xsl:template match="/">
@@ -7,7 +7,7 @@
       <xsl:value-of select="Items/@InfoCaption"/>
     </div>
     <div class="keywordCategories">
-			<table>
+			<table style="text-align:left;">
 				<tr>
 					<td valign="top">
 						<xsl:call-template name="column1"/>

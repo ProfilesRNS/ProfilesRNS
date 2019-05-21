@@ -23,7 +23,7 @@
       <Module ID="HTMLBlock">
         <ParamList>
           <Param Name="HTML">
-            <div id="divItemDetails"></div>
+            <div id="divItemDetails" class="SearchDetails"></div>
           </Param>          
         </ParamList>        
       </Module>

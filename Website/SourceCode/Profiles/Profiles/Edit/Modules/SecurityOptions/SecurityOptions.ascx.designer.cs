@@ -13,13 +13,13 @@ namespace Profiles.Edit.Modules.SecurityOptions {
     public partial class SecurityOptions {
         
         /// <summary>
-        /// lbSecurityOptions control.
+        /// imbAddArrow control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbSecurityOptions;
+        protected global::System.Web.UI.WebControls.ImageButton imbAddArrow;
         
         /// <summary>
         /// imbSecurityOptions control.
@@ -28,16 +28,7 @@ namespace Profiles.Edit.Modules.SecurityOptions {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imbSecurityOptions;
-        
-        /// <summary>
-        /// litVisibility control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litVisibility;
+        protected global::System.Web.UI.WebControls.LinkButton imbSecurityOptions;
         
         /// <summary>
         /// pnlSecurityOptions control.
@@ -56,5 +47,14 @@ namespace Profiles.Edit.Modules.SecurityOptions {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grdSecurityGroups;
+        
+        /// <summary>
+        /// divHidden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divHidden;
     }
 }

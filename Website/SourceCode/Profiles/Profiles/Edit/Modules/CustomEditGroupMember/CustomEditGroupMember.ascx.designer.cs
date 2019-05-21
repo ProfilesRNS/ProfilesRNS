@@ -28,7 +28,16 @@ namespace Profiles.Edit.Modules.CustomEditGroupMember {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder phAddPubMed;
+        protected global::System.Web.UI.WebControls.Panel phAddPubMed;
+        
+        /// <summary>
+        /// btnImgAddGroupMembers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton btnImgAddGroupMembers;
         
         /// <summary>
         /// btnAddGroupMembers control.
@@ -38,15 +47,6 @@ namespace Profiles.Edit.Modules.CustomEditGroupMember {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnAddGroupMembers;
-        
-        /// <summary>
-        /// btnImgAddGroupMembers control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image btnImgAddGroupMembers;
         
         /// <summary>
         /// btnLitAddGroupMembers control.
@@ -145,7 +145,7 @@ namespace Profiles.Edit.Modules.CustomEditGroupMember {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnProxySearch;
+        protected global::System.Web.UI.WebControls.LinkButton btnProxySearch;
         
         /// <summary>
         /// btnSearchReset control.
@@ -154,7 +154,7 @@ namespace Profiles.Edit.Modules.CustomEditGroupMember {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearchReset;
+        protected global::System.Web.UI.WebControls.LinkButton btnSearchReset;
         
         /// <summary>
         /// btnSearchCancel control.
@@ -163,7 +163,7 @@ namespace Profiles.Edit.Modules.CustomEditGroupMember {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearchCancel;
+        protected global::System.Web.UI.WebControls.LinkButton btnSearchCancel;
         
         /// <summary>
         /// pnlProxySearchResults control.
@@ -173,15 +173,6 @@ namespace Profiles.Edit.Modules.CustomEditGroupMember {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlProxySearchResults;
-        
-        /// <summary>
-        /// Image1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image1;
         
         /// <summary>
         /// gridSearchResults control.
@@ -217,7 +208,7 @@ namespace Profiles.Edit.Modules.CustomEditGroupMember {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel pnlGridViewMembers;
+        protected global::System.Web.UI.WebControls.Panel pnlGridViewMembers;
         
         /// <summary>
         /// GridViewMembers control.
@@ -244,7 +235,7 @@ namespace Profiles.Edit.Modules.CustomEditGroupMember {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel pnlGridViewManagers;
+        protected global::System.Web.UI.WebControls.Panel pnlGridViewManagers;
         
         /// <summary>
         /// GridViewManagers control.

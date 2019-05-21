@@ -106,7 +106,7 @@
                   </a>
                 </td>
                 <td>
-                  <div style="width: 98px;">
+                  <div style="text-align:center;width: 98px;">
 					  <xsl:choose>
 						  <xsl:when test="$isCoAuthor">
 							Yes
@@ -115,13 +115,13 @@
 					  </xsl:choose>
                   </div>
                 </td>
-                <td align="center">
+                <td style="text-align:center;">
                   
                     <xsl:value-of select="substring(/rdf:RDF/rdf:Description[@rdf:about=$connectionResource]/prns:connectionWeight,1,5)"/>
                   
                 </td>
-                <td onclick="doListTableCellClick(this);document.location = '{@rdf:about}';" onkeypress="if (event.keyCode == 13) document.location = '{@rdf:about}';" onmouseout="doListTableCellOut(this);" onmouseover="doListTableCellOver(this);" onblur="doListTableCellOut(this);" onfocus="doListTableCellOver(this);" tabindex="0">
-                  <div class="listTableLink" style="width: 38px; color: rgb(51, 102, 204);">Why?</div>
+                <td  onclick="doListTableCellClick(this);document.location = '{@rdf:about}';" onkeypress="if (event.keyCode == 13) document.location = '{@rdf:about}';" onmouseout="doListTableCellOut(this);" onmouseover="doListTableCellOver(this);" onblur="doListTableCellOut(this);" onfocus="doListTableCellOver(this);" tabindex="0">
+                  <div class="listTableLink" style="width: 38px; color: rgb(51, 102, 204);text-align:center;">Why?</div>
                 </td>
               </tr>
             </xsl:for-each>
