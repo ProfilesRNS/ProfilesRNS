@@ -9,20 +9,18 @@
 
     Code licensed under a BSD License. 
     For details, see: LICENSE.txt 
- --%>
-<div id="divSearchCriteria" style="padding-top: 10px">
+--%>
+<div id="divSearchCriteria">
     <div class="passiveSectionHead">
         <div style="white-space: nowrap; display: inline">
             Search Criteria
         </div>
-    </div>
-    <div class="passiveSectionBody">
+    </div>    
+    <div class="passiveSectionBody">        
         <ul>
-            <asp:Literal runat="server" ID="litSearchCriteria"></asp:Literal>
-            <asp:Literal runat="server" ID="litSearchOtherInstitutions"></asp:Literal>
-        </ul>
-        <div class="passiveSectionLine">
+            <asp:Literal runat="server" ID="litSearchCriteria"></asp:Literal>           
+        </ul>    <div class="passiveSectionLine">
         </div>
+          <asp:Literal runat="server" ID="litWhyText"></asp:Literal>    
     </div>
 </div>
-</div> 

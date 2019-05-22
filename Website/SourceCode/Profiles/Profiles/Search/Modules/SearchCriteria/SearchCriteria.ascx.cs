@@ -36,6 +36,17 @@ namespace Profiles.Search.Modules.SearchCriteria
         private void DrawProfilesModule()
         {
             string output = string.Empty;
+            string tab = string.Empty;
+            tab = Request.QueryString["tab"];
+
+            if (Request.QueryString["searchtype"] == "everything")
+            {
+                tab = "all";
+            }
+            if (Request.QueryString["searchtype"] == "people")
+            {
+                tab = "people";
+            }
             Utilities.DataIO data = new Profiles.Search.Utilities.DataIO();
 
             if (base.BaseData.SelectSingleNode("rdf:RDF/rdf:Description/vivo:overview/SearchOptions/MatchOptions/SearchString", base.Namespaces) != null)
@@ -120,6 +131,16 @@ namespace Profiles.Search.Modules.SearchCriteria
                     }
                 }
             }
+            if (base.BaseData.SelectNodes("rdf:RDF/rdf:Description/vivo:overview/SearchDetails/SearchPhraseList", base.Namespaces).Count > 0 && tab == "people")
+            {
+                litWhyText.Text = "<div style='margin-top:5px;'>Click \"Why?\" to see why a" + (tab == "people" ? " person" : "n item") + " matched the search.</div>";                
+
+            }
+            else
+            {
+                litWhyText.Visible = false;
+            }
+
 
             litSearchCriteria.Text = output;
 
