@@ -8,7 +8,7 @@
           
     }
 </script>
-<div id="divSearchCriteria" style="padding-top: 10px">
+<div id="divSearchCriteria">
     <div class="passiveSectionHead">
         <div style="white-space: nowrap; display: inline">
             Search Options            
