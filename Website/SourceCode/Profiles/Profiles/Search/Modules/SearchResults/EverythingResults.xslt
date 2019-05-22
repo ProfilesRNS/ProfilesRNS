@@ -74,10 +74,7 @@
             <input type="hidden" id="searchtype" name="searchtype" value="everything"/>
           </form>
         </div>
-        <div style="width:380px;font-size:11px;padding:1px;text-align:left;">
-          Click the <b>Why</b> column to see why an item matched the search.
-        </div>
-        <br></br>
+      
         <div class="listTable" style="margin-top:0px;float: left;z-index:1;">
           <table id="tblSearchResults" class="SearchResults" style="width:775px;">
             <tbody>
