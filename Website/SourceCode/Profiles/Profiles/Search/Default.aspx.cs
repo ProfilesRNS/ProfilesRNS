@@ -130,6 +130,12 @@ namespace Profiles.Search
             Searchcss.Attributes["media"] = "all";
             Page.Header.Controls.Add(Searchcss);
 
+            HtmlLink Activitycss = new HtmlLink();
+            Activitycss.Href = Root.Domain + "/Activity/CSS/activity.css";
+            Activitycss.Attributes["rel"] = "stylesheet";
+            Activitycss.Attributes["type"] = "text/css";
+            Activitycss.Attributes["media"] = "all";
+            Page.Header.Controls.Add(Activitycss);
 
             HtmlLink Checkboxcss = new HtmlLink();
             Checkboxcss.Href = Root.Domain + "/Search/CSS/comboTreeCheck.css";
