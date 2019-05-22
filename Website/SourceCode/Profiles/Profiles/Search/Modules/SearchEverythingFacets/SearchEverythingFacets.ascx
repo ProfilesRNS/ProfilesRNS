@@ -1,2 +1,2 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SearchEverythingFacets.ascx.cs" Inherits="Profiles.Search.Modules.SearchEverythingFacets.SearchEverythingFacets" %>
-<asp:Literal runat="server" ID="litEverythingPassiveResults"></asp:Literal>
+<asp:Literal runat="server" ID="litEverythingPassiveResults"></asp:Literal><div class="passiveSectionLine">_</div><div style="border-top:1px solid #ccc;padding-top:6px;">Click "Why?" to see why an item matched the search.</div>
