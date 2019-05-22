@@ -25,8 +25,7 @@
       </Module>
     </Panel>
     <Panel Type="passive">
-      <Module ID="SearchCriteria"></Module>
-      <Module ID="SearchOptions"></Module>
+      <Module ID="SearchCriteria"></Module>      
       <Module ID="SearchEverythingFacets">
       </Module>      
     </Panel>
