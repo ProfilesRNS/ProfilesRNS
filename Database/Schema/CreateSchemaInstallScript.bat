@@ -238,6 +238,9 @@ type Profile.Data.Group.Websites.Table.sql
 type Profile.Data.Group.MediaLinks.Table.sql
 type Profile.Data.Person.Websites.Table.sql
 type Profile.Data.Person.MediaLinks.Table.sql
+type Profile.Data.Publication.PubMed.Bibliometrics.Table.sql
+type Profile.Data.Publication.PubMed.JournalHeading.Table.sql
+type Profile.Data.Job.Log.Table.sql
 
 type RDF..fnTripleHash.UserDefinedFunction.sql
 type Utility.Application.fnText2Bool.UserDefinedFunction.sql
@@ -632,5 +635,11 @@ type Direct..AddLogOutgoing.StoredProcedure.sql
 type Direct..AddLogIncoming.StoredProcedure.sql
 type Profile.Data.Publication.GetGroupOption.StoredProcedure.sql
 type Profile.Data.Publication.SetGroupOption.StoredProcedure.sql
-type Edit.Module.CustomEditWebsite.AddEditWebsite.sql
-type Edit.Module.CustomEditWebsite.GetData.sql
+rem type Edit.Module.CustomEditWebsite.AddEditWebsite.sql
+rem type Edit.Module.CustomEditWebsite.GetData.sql
+type Profile.Data.Publication.Pubmed.GetPMIDsForBibliometrics.StoredProcedure.sql
+type Profile.Data.Publication.Pubmed.ParseBibliometricResults.StoredProcedure.sql
+type Profile.Data.Job.GetPostData.StoredProcedure.sql
+type Profile.Data.Job.ImportData.StoredProcedure.sql
+type Profile.Data.Job.AddLog.StoredProcedure.sql
+type Profile.Module.CustomViewAuthorInAuthorship.GetJournalHeadings.StoredProcedure.sql
