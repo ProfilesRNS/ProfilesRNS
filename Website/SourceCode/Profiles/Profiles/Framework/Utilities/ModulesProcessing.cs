@@ -105,7 +105,7 @@ namespace Profiles.Framework.Utilities
                     {
 
 
-                        modulelist.Add(new Module(ModuleCatalogueCache.Instance.GetModule(key).Path, key, moduleparams, displayrule));
+                        modulelist.Add(new Module(ModuleCatalogueCache.Instance.GetModule(key).Path, key, moduleparams, displayrule, ModuleCatalogueCache.Instance.GetModule(key).css));
                     }
                 }
             }

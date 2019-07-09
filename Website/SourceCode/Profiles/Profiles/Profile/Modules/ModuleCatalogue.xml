@@ -20,7 +20,7 @@ For details, see: LICENSE.txt
   <Module ModulePath="Modules" NameSpace="CustomViewPersonSameDepartment" FileName="CustomViewPersonSameDepartment.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="CustomViewInformationResource" FileName="CustomViewInformationResource.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="PassiveHeader" FileName="PassiveHeader.ascx" Enabled="true"/>
-  <Module ModulePath="Modules" NameSpace="CustomViewAuthorInAuthorship" FileName="CustomViewAuthorInAuthorship.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="CustomViewAuthorInAuthorship" FileName="CustomViewAuthorInAuthorship.ascx" Enabled="true" CSS="CustomViewAuthorInAuthorship.css"/>
   <Module ModulePath="Modules" NameSpace="CustomViewConceptSimilarMesh" FileName="CustomViewConceptSimilarMesh.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="CustomViewConceptTopJournal" FileName="CustomViewConceptTopJournal.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="CustomViewConceptPublication" FileName="CustomViewConceptPublication.ascx" Enabled="true"/>

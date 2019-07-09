@@ -134,6 +134,29 @@ namespace Profiles.Profile.Modules.PropertyList
                                     itembuffer.Append("<div id='" + propertyitem.SelectSingleNode("@URI").Value + "'>");
                                     
                                     foreach(XmlNode node in propertyitem.SelectNodes("CustomModule")){
+                                        Framework.Utilities.ModulesProcessing mp = new ModulesProcessing();
+                                        XmlDocument modules = new XmlDocument();
+                                        modules.LoadXml(node.OuterXml);
+
+                                        foreach (XmlNode module in modules)
+                                        {
+                                            this.Modules = mp.FetchModules(module);
+
+                                            foreach (Module m in this.Modules)
+                                            {
+                                                if(m.css != null)
+                                                {
+                                                    System.Web.UI.HtmlControls.HtmlLink css = new System.Web.UI.HtmlControls.HtmlLink();
+                                                    css.Href = m.css;
+                                                    css.Attributes["rel"] = "stylesheet";
+                                                    css.Attributes["type"] = "text/css";
+                                                    css.Attributes["media"] = "all";
+                                                    Page.Header.Controls.Add(css);
+                                                }
+
+                                            }
+                                            this.Modules = null;
+                                        }
                                         hasitems = true;
                                         itembuffer.Append(base.RenderCustomControl(node.OuterXml,base.BaseData));
                                     }

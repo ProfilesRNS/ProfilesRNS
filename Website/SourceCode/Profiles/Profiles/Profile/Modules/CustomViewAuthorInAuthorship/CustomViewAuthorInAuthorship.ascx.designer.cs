@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Profiles.Profile.Modules {
-    
-    
-    public partial class CustomViewAuthorInAuthorship {
-        
+namespace Profiles.Profile.Modules.CustomViewAuthorInAuthorship
+{
+
+
+    public partial class CustomViewAuthorInAuthorship
+    {
+
         /// <summary>
         /// divPubHeaderText control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace Profiles.Profile.Modules {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPubHeaderText;
-        
+
         /// <summary>
         /// loginLiteral control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace Profiles.Profile.Modules {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal loginLiteral;
-        
+
         /// <summary>
         /// rpPublication control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace Profiles.Profile.Modules {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rpPublication;
-        
+
         /// <summary>
         /// timelineBar control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace Profiles.Profile.Modules {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlImage timelineBar;
-        
+
         /// <summary>
         /// litTimelineTable control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace Profiles.Profile.Modules {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litTimelineTable;
-        
+
         /// <summary>
         /// supportText control.
         /// </summary>

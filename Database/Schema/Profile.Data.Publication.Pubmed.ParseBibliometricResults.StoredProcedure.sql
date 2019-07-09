@@ -70,13 +70,13 @@ BEGIN
 
 	;
 	with abbs as (
-		SELECT t2.MedlineTA, weight, STUFF((SELECT ',' + '["' + CAST([Abbreviation] AS varchar) + '",#' + CAST([Color] as varchar) + ']' FROM [Profile.Data].[Publication.Pubmed.JournalHeading] t1  where t1.MedlineTA =t2.MedlineTA FOR XML PATH('')), 1 ,1, '') AS ValueList
+		SELECT t2.MedlineTA, weight, STUFF((SELECT '|' + CAST([Abbreviation] AS varchar) + ',' + CAST([Color] as varchar) +  ',' + CAST(DisplayName as varchar)  FROM [Profile.Data].[Publication.Pubmed.JournalHeading] t1  where t1.MedlineTA =t2.MedlineTA FOR XML PATH('')), 1 ,1, '') AS ValueList
 		FROM #tmpJournalHeading t2
 		GROUP BY t2.MedlineTA, t2.Weight
 	)
 	insert into [Profile.Data].[Publication.Pubmed.Bibliometrics] 
 		(PMID, PMCCitations, MedlineTA, Fields, TranslationHumans, TranslationAnimals, TranslationCells, TranslationPublicHealth, TranslationClinicalTrial)
-	select PMID, PMCCitations, a.MedlineTA, '{' + ValueList +  '}', TranslationHumans, TranslationAnimals, TranslationCells, TranslationPublicHealth, TranslationClinicalTrial
+	select PMID, PMCCitations, a.MedlineTA, ValueList , TranslationHumans, TranslationAnimals, TranslationCells, TranslationPublicHealth, TranslationClinicalTrial
 		from #tmp a join abbs b on a.MedlineTA = b.MedlineTA
 
 END

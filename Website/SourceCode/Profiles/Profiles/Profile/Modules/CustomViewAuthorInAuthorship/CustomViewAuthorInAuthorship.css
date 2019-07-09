@@ -1,0 +1,141 @@
+﻿li .article-metrics {
+	padding-top:8px;
+	padding-bottom:5px;
+	font-weight:bold;
+	color:#666;
+	line-height:15px;
+}
+.publication-filter {
+	font-size:11px;
+	color:#333;
+	display:inline-block;
+	border:1px solid #999;
+	border-radius:3px;
+	font-weight:normal;
+	padding:1px 2px 1px 2px;
+	line-height:11px;
+	cursor:pointer;
+	margin-left:4px;
+	position:relative;
+	top:-1px;
+	text-align:center;
+    width:30px;
+}
+
+a.publication-filter {
+	text-decoration:none;
+    color:#000000;
+}
+
+a.publication-filter:hover {
+	text-decoration:none;
+}
+
+a.publication-filter .tooltiptext {
+  visibility: hidden;
+/*  width: 120px;*/
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 10px;
+
+  /* Position the tooltip */
+  position: absolute;
+  /*z-index: 1;*/
+  top: 100%;
+  left: 50%;
+  margin-left: -60px; 
+}
+
+a.publication-filter:hover .tooltiptext {
+  visibility: visible;
+}
+
+a.publication-field {
+	width:26px;
+	padding:1px 0px 1px 0px;
+}
+
+a.publication-cells {
+	border-color:#BB3333
+}
+a.publication-animals {
+	border-color:#33AA33;
+    width:50px;
+}
+a.publication-humans {
+	border-color:#3333CC;
+    width:50px;
+}
+a.publication-clinical-trial {
+	color:#00C;
+	font-weight:bold;
+	font-family:Times;
+	font-style: italic;
+}
+a.publication-public-health {
+	color:#609;
+	font-weight:bold;
+	font-family:Times;
+	font-style: italic;
+}
+
+.PMC-citations {
+	margin-left:8px;
+	width:82px;
+	height:15px;
+	padding:0px;
+	background-image: url("PMC-citations.jpg");
+	display:inline-block;
+	text-decoration:none;
+	line-height:13px;
+}
+a.PMC-citations {
+    cursor:pointer;
+}
+.PMC-citation-count {
+	margin-left:50px;
+	width:30px;
+	text-align:center;
+	font-size:10px;
+	font-weight:normal;
+	color:#333;
+	display:inline-block;
+}
+.info-text {
+	font-weight:bold;
+	color:#888;
+	padding:5px 0px;
+}
+.details-text {
+	font-size:12px;
+	color:#333;
+	text-align:justify !important;
+    text-justify: inter-word;
+	xline-height:16px;
+    padding-top:8px;
+    padding-bottom:8px;
+}
+.details-text-highlight {
+	xcolor:#333;
+	font-weight:bold;
+}
+
+.publications-plain-text-options {
+	color:#333;
+    padding-top:4px;
+}
+.publications-plain-text-options label {
+	font-weight:bold;
+	color:#666;
+}
+.publications-plain-text-box {
+	margin-top:15px;
+	margin-left:2px;
+	width:700px;
+	height:200px;
+}
+.publications-plain-text-options input {
+	margin-left:8px;
+}

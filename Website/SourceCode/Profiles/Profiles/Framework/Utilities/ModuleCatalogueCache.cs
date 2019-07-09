@@ -35,10 +35,20 @@ namespace Profiles.Framework.Utilities
             this.DisplayRule = displayrule;
         }
 
+        public Module(string path, string key, List<ModuleParams> paramlist, string displayrule, string css)
+        {
+            this.Path = path;
+            this.Key = key;
+            this.ParamList = paramlist;
+            this.DisplayRule = displayrule;
+            this.css = css;
+        }
+
         public string Path { get { return _path.Replace("\r\n", "").Trim(); } set { _path = value; } }
         public string Key { get { return _key.Replace("\r\n", "").Trim(); } set { _key = value; } }
         public List<ModuleParams> ParamList { get { return _paramlist; } set { _paramlist = value; } }
         public string DisplayRule { get; set; }
+        public string css { get; set; }
 
     }
 
@@ -89,11 +99,13 @@ namespace Profiles.Framework.Utilities
                         {
                             if (module.SelectSingleNode("@Enabled").Value == "true")
                             {
+                                string css = null;
+                                if (module.SelectSingleNode("@CSS") != null) css = "~/" + app.SelectSingleNode("@ApplicaitonPath").Value + "/" + module.SelectSingleNode("@ModulePath").Value + "/" + module.SelectSingleNode("@NameSpace").Value + "/" + module.SelectSingleNode("@CSS").Value;
                                 modulepath = "~/" + app.SelectSingleNode("@ApplicaitonPath").Value + "/" + module.SelectSingleNode("@ModulePath").Value + "/" + module.SelectSingleNode("@NameSpace").Value + "/" + module.SelectSingleNode("@FileName").Value;
                                 if (this.GetModule(module.SelectSingleNode("@NameSpace").Value)==null){
-                                    _modules.Add(new Module(modulepath, module.SelectSingleNode("@NameSpace").Value, null, ""));
+                                    _modules.Add(new Module(modulepath, module.SelectSingleNode("@NameSpace").Value, null, "", css));
                                 }
-                                _modules.Add(new Module(modulepath, app.SelectSingleNode("@ApplicaitonPath").Value+"."+module.SelectSingleNode("@NameSpace").Value, null, ""));
+                                _modules.Add(new Module(modulepath, app.SelectSingleNode("@ApplicaitonPath").Value+"."+module.SelectSingleNode("@NameSpace").Value, null, "", css));
                                 moduleparams = new List<ModuleParams>();
                             }
                         }
