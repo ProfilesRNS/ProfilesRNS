@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
 using System.Xml;
-
+using System.Configuration;
 
 using Profiles.Framework.Utilities;
 using System.Text.RegularExpressions;
@@ -12,6 +12,17 @@ namespace Profiles.Profile.Modules.NetworkMap
 {
     public partial class NetworkMap : BaseModule
     {
+        protected string googleKey {
+            get {
+                if (ConfigurationManager.AppSettings["Login.PresentationXML"] != null)
+                {
+                    if (ConfigurationManager.AppSettings["Login.PresentationXML"].ToString().Trim().Length > 0)
+                        return "?key=" + ConfigurationManager.AppSettings["GoogleMapsKey"].ToString().Trim();
+                }
+                return "" ;
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
 

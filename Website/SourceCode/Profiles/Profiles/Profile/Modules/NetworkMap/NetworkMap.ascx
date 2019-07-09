@@ -23,7 +23,7 @@
 </script>
 
 
-<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="//maps.googleapis.com/maps/api/js<%= googleKey %>"></script>
 
 <asp:Literal ID="litGoogleCode" runat="server"></asp:Literal>
 
