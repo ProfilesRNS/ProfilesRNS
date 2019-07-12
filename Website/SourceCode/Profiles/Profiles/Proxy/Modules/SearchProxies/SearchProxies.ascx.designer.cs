@@ -13,15 +13,6 @@ namespace Profiles.Proxy.Modules.SearchProxies {
     public partial class SearchProxies {
         
         /// <summary>
-        /// litBackLink control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litBackLink;
-        
-        /// <summary>
         /// pnlProxySearch control.
         /// </summary>
         /// <remarks>
@@ -40,15 +31,6 @@ namespace Profiles.Proxy.Modules.SearchProxies {
         protected global::System.Web.UI.WebControls.TextBox txtLastName;
         
         /// <summary>
-        /// Label1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
-        
-        /// <summary>
         /// txtFirstName control.
         /// </summary>
         /// <remarks>
@@ -58,15 +40,6 @@ namespace Profiles.Proxy.Modules.SearchProxies {
         protected global::System.Web.UI.WebControls.TextBox txtFirstName;
         
         /// <summary>
-        /// Label2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
-        
-        /// <summary>
         /// drpInstitution control.
         /// </summary>
         /// <remarks>
@@ -74,15 +47,6 @@ namespace Profiles.Proxy.Modules.SearchProxies {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList drpInstitution;
-        
-        /// <summary>
-        /// Label3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
         
         /// <summary>
         /// drpDepartment control.
@@ -100,7 +64,7 @@ namespace Profiles.Proxy.Modules.SearchProxies {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnProxySearch;
+        protected global::System.Web.UI.WebControls.LinkButton btnProxySearch;
         
         /// <summary>
         /// btnSearchReset control.
@@ -109,7 +73,7 @@ namespace Profiles.Proxy.Modules.SearchProxies {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearchReset;
+        protected global::System.Web.UI.WebControls.LinkButton btnSearchReset;
         
         /// <summary>
         /// btnSearchCancel control.
@@ -118,7 +82,7 @@ namespace Profiles.Proxy.Modules.SearchProxies {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearchCancel;
+        protected global::System.Web.UI.WebControls.LinkButton btnSearchCancel;
         
         /// <summary>
         /// pnlProxySearchResults control.

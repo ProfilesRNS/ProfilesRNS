@@ -13,15 +13,6 @@ namespace Profiles.Proxy.Modules.ManageProxies {
     public partial class ManageProxies {
         
         /// <summary>
-        /// litBackLink control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litBackLink;
-        
-        /// <summary>
         /// upnlEditSection control.
         /// </summary>
         /// <remarks>
@@ -38,15 +29,6 @@ namespace Profiles.Proxy.Modules.ManageProxies {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hiddenSubjectID;
-        
-        /// <summary>
-        /// updateProgress control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdateProgress updateProgress;
         
         /// <summary>
         /// gvMyProxies control.

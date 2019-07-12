@@ -29,7 +29,7 @@ namespace Profiles.Proxy.Modules.SearchProxies
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            LoadAssets();
+       
             DrawProfilesModule();
 
         }
@@ -49,7 +49,7 @@ namespace Profiles.Proxy.Modules.SearchProxies
             if (sm.Session().UserID == 0)
                 Response.Redirect(Root.Domain + "/search");
 
-            litBackLink.Text = "<b>Search Proxies</b>";
+            
 
             if (Request.QueryString["fname"] != null)
             {
@@ -249,55 +249,33 @@ namespace Profiles.Proxy.Modules.SearchProxies
 
                     e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink((GridView)sender, "Select$" + e.Row.RowIndex);
 
-                    e.Row.Cells[0].Attributes.Add("style", "border-left:#999 1px solid;padding-left:6px;");
-                    e.Row.Cells[1].Attributes.Add("style", "border-right:#999 1px solid;padding-left:6px;");
+                    e.Row.Cells[0].Attributes.Add("style", "padding-left:6px;");
+                    e.Row.Cells[1].Attributes.Add("style", "padding-left:6px;");
 
                     break;
-                case DataControlRowType.Footer:
-
-                    e.Row.Style.Add("style", "border:none");
-                    break;
-                case DataControlRowType.Header:
-
-                    e.Row.Style.Add("style", "border-right:#999 1px solid;border-left:#999 1px solid;border-top:#999 1px solid;");
-                    break;
+            
                 case DataControlRowType.Pager:
 
                     Literal litFirst = (Literal)e.Row.FindControl("litFirst");
-
                     Literal litLast = (Literal)e.Row.FindControl("litLast");
-
                     Literal litPage = (Literal)e.Row.FindControl("litPage");
 
-
-
-
                     if (CurrentPage > 1)
-                        litFirst.Text = "<a href='JavaScript:GotoPreviousPage();' class='listTablePaginationPN listTablePaginationP listTablePaginationA'><img src='" + Root.Domain + "/framework/images/arrow_prev.gif'/>Prev</a>" +
-                        "<a href='JavaScript:GotoFirstPage();' class='listTablePaginationFL listTablePaginationA'><img src='" + Root.Domain + "/framework/images/arrow_first.gif'/></a>";
+                        litFirst.Text = "<a onClick='JavaScript:GotoFirstPage(); return false;'><img style='margin-left:5px;margin-bottom:2px;' src='" + Root.Domain + "/framework/images/arrow_first.gif" + "'/></a><a href='JavaScript:GotoPreviousPage();'><img style='margin-left:5px;;margin-bottom:2px;' src='" + Root.Domain + "/framework/images/arrow_prev.gif" + "'/><span style='padding-left:5px;font-size:11px;'>Prev</span></a>";
                     else
-                        litFirst.Text = "<div class='listTablePaginationPN listTablePaginationP'><img src='" + Root.Domain + "/framework/images/arrow_prev_d.gif'/>Prev</div><div class='listTablePaginationFL'>" +
-                        "<img src='" + Root.Domain + "/framework/images/arrow_first_d.gif'/></div>";
+                        litFirst.Text = "<img style='margin-left:5px;margin-bottom:2px;' src='" + Root.Domain + "/framework/images/arrow_first_d.gif" + "' /> <img style='margin-left:5px;margin-bottom:2px;' src='" + Root.Domain + "/framework/images/arrow_prev_d.gif" + "' /><span style='padding-left:5px;font-size:11px;'>Prev</span>";
 
 
                     if (this.CurrentPage <= (this.TotalPages - 1))
-                    {
-                        litLast.Text = "<a href='JavaScript:GotoLastPage();' class='listTablePaginationFL listTablePaginationA'><img src='" + Root.Domain + "/framework/images/arrow_last.gif'/></a>" +
-                        "<a href='javascript:GotoNextPage();' class='listTablePaginationPN listTablePaginationN listTablePaginationA'>Next<img src='" + Root.Domain + "/framework/images/arrow_next.gif'/></a>";
-                    }
+                        litLast.Text = "<a onClick='javascript:GotoNextPage();return false;'>Next<img style='margin-left:5px;margin-bottom:2px;' src='" + Root.Domain + "/framework/images/arrow_next.gif'/></a><a href='JavaScript:GotoLastPage();' ><img style='margin-left:5px;margin-bottom:2px;' src='" + Root.Domain + "/framework/images/arrow_last.gif'/></a>";
                     else
-                    {
-                        litLast.Text = "<div class='listTablePaginationFL'><img src='" + Root.Domain + "/framework/images/arrow_last_d.gif'/></div><div class='listTablePaginationPN listTablePaginationN'>" +
-                        "Next<img src='" + Root.Domain + "/framework/images/arrow_next_d.gif'/></div>";
-                    }
+                        litLast.Text = "<img style='margin-left:5px;margin-bottom:2px;' src='" + Root.Domain + "/framework/images/arrow_next_d.gif" + "'/><img style='margin-left:5px;margin-bottom:2px;'  src='" + Root.Domain + "/framework/images/arrow_last_d.gif" + "'/><span style='padding-left:5px;font-size:11px;'>Next</span>";
+
                     int displaypage = 1;
                     if (this.CurrentPage != 0)
                         displaypage = this.CurrentPage;
 
-
-                    litPage.Text = (displaypage).ToString() + " of " + (this.TotalPages).ToString() + " pages";
-
-
+                    litPage.Text = "<span style='padding-left:20px;padding-right:20px;'>" + (displaypage).ToString() + " of " + (this.TotalPages).ToString() + " pages</span>";
 
                     break;
             }
@@ -319,15 +297,7 @@ namespace Profiles.Proxy.Modules.SearchProxies
         }
 
 
-        private void LoadAssets()
-        {
-            HtmlLink Searchcss = new HtmlLink();
-            Searchcss.Href = Root.Domain + "/Search/CSS/search.css";
-            Searchcss.Attributes["rel"] = "stylesheet";
-            Searchcss.Attributes["type"] = "text/css";
-            Searchcss.Attributes["media"] = "all";
-            Page.Header.Controls.Add(Searchcss);
-        }
+        
 
         private Int32 TotalRowCount { get; set; }
         private Int32 CurrentPage { get; set; }

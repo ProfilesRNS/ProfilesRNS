@@ -83,6 +83,13 @@ namespace Profiles.Proxy
             Searchcss.Attributes["type"] = "text/css";
             Searchcss.Attributes["media"] = "all";
             Page.Header.Controls.Add(Searchcss);
+
+            HtmlLink Editcss = new HtmlLink();
+            Editcss.Href = Root.Domain + "/Edit/CSS/edit.css";
+            Editcss.Attributes["rel"] = "stylesheet";
+            Editcss.Attributes["type"] = "text/css";
+            Editcss.Attributes["media"] = "all";
+            Page.Header.Controls.Add(Editcss);
         }
         public XmlDocument PresentationXML { get; set; }
 

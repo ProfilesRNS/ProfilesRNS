@@ -35,9 +35,7 @@ namespace Profiles.Proxy.Modules.ManageProxies
             Utilities.DataIO data = new Profiles.Proxy.Utilities.DataIO();
 
             imgAdd.ImageUrl = Root.Domain + "/framework/images/icon_roundArrow.gif";
-
-
-            litBackLink.Text = "<b>Manage Proxies</b>";
+                      
 
             SqlDataReader reader;
             List<Proxy> proxies = new List<Proxy>();
@@ -54,8 +52,8 @@ namespace Profiles.Proxy.Modules.ManageProxies
 
             gvMyProxies.DataSource = proxies;
             gvMyProxies.DataBind();
-            gvMyProxies.CellPadding = 2;
-            proxies = null;
+            
+            
             proxies = new List<Proxy>();
             reader = data.ManageProxies("GetDesignatedUsersWhoseNodesICanEdit");
 
@@ -69,9 +67,9 @@ namespace Profiles.Proxy.Modules.ManageProxies
 
             gvWhoCanIEdit.DataSource = proxies;
             gvWhoCanIEdit.DataBind();
-            gvWhoCanIEdit.CellPadding = 2;
+            
 
-            proxies = null;
+            
             proxies = new List<Proxy>();
             reader = data.ManageProxies("GetDefaultUsersWhoseNodesICanEdit");
             string yorn = string.Empty;           
@@ -89,7 +87,7 @@ namespace Profiles.Proxy.Modules.ManageProxies
 
             gvYouCanEdit.DataSource = proxies;
             gvYouCanEdit.DataBind();
-            gvYouCanEdit.CellPadding = 2;
+            
             reader.Close();
 
             if (sm.Session().NodeID > 0)
