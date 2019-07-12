@@ -139,7 +139,7 @@ namespace Profiles.Framework.Modules.MainMenu
 
             litJs.Text += "<script type='text/javascript'> var NAME = document.getElementById('prns-usrnav'); NAME.className = '" + loginclass + "';";
 
-          
+/*          
             if (sm.Session().UserID > 0 )
             {                
               
@@ -151,7 +151,7 @@ namespace Profiles.Framework.Modules.MainMenu
                 MyLists.Visible = false;
                 litJs.Text += " $('#navMyLists').remove(); $('#ListDivider').remove();";
             }
-
+*/
 
             litJs.Text += "</script>";
             UserHistory uh = new UserHistory();

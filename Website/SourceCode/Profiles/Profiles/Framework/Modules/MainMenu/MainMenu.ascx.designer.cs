@@ -67,15 +67,6 @@ namespace Profiles.Framework.Modules.MainMenu {
         protected global::System.Web.UI.WebControls.Literal litProxy;
         
         /// <summary>
-        /// MyLists control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Profiles.Framework.Modules.MainMenu.MyLists MyLists;
-        
-        /// <summary>
         /// litGroups control.
         /// </summary>
         /// <remarks>
