@@ -200,6 +200,7 @@
             <Module ID="PassiveList">
               <ParamList>
                 <Param Name="InfoCaption">Concepts</Param>
+                <Param Name="TotalCount">{{{rdf:RDF/rdf:Description[rdf:predicate/@rdf:resource="http://vivoweb.org/ontology/core#hasResearchArea"][@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:hasNetwork/@rdf:resource]/prns:numberOfConnections}}}</Param>
                 <Param Name="Description">Derived automatically from this person's publications.</Param>
                 <Param Name="MaxDisplay">5</Param>
                 <Param Name="ListNode">/rdf:RDF[1]/rdf:Description[1]/vivo:hasResearchArea/@rdf:resource</Param>
@@ -213,6 +214,7 @@
             <Module ID="PassiveList">
               <ParamList>
                 <Param Name="InfoCaption">Co-Authors</Param>
+                <Param Name="TotalCount">{{{rdf:RDF/rdf:Description[rdf:predicate/@rdf:resource="http://profiles.catalyst.harvard.edu/ontology/prns#coAuthorOf"][@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:hasNetwork/@rdf:resource]/prns:numberOfConnections}}}</Param>
                 <Param Name="MaxDisplay">5</Param>
                 <Param Name="Description">People in Profiles who have published with this person.</Param>
                 <Param Name="ListNode">/rdf:RDF[1]/rdf:Description[1]/prns:coAuthorOf/@rdf:resource</Param>
@@ -225,6 +227,7 @@
             <Module ID="PassiveList">
               <ParamList>
                 <Param Name="InfoCaption">Similar People</Param>
+                <Param Name="TotalCount">{{{rdf:RDF/rdf:Description[rdf:predicate/@rdf:resource="http://profiles.catalyst.harvard.edu/ontology/prns#similarTo"][@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:hasNetwork/@rdf:resource]/prns:numberOfConnections}}}</Param>
                 <Param Name="Description">People who share similar concepts with this person.</Param>
                 <Param Name="MaxDisplay">11</Param>
                 <Param Name="ListNode">/rdf:RDF[1]/rdf:Description[1]/prns:similarTo/@rdf:resource</Param>
@@ -347,6 +350,7 @@
                   <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="1" />
                 </Param>
                 <Param Name="InfoCaption">Concepts</Param>
+                <Param Name="TotalCount">{{{rdf:RDF/rdf:Description[rdf:predicate/@rdf:resource="http://vivoweb.org/ontology/core#hasResearchArea"][@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:hasNetwork/@rdf:resource]/prns:numberOfConnections}}}</Param>
                 <Param Name="Description">Derived automatically from this person's publications.</Param>
                 <Param Name="MaxDisplay">5</Param>
                 <Param Name="ListNode">/rdf:RDF[1]/rdf:Description[1]/vivo:hasResearchArea/@rdf:resource</Param>
@@ -364,6 +368,7 @@
                   <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="1" />
                 </Param>
                 <Param Name="InfoCaption">Co-Authors</Param>
+                <Param Name="TotalCount">{{{rdf:RDF/rdf:Description[rdf:predicate/@rdf:resource="http://profiles.catalyst.harvard.edu/ontology/prns#coAuthorOf"][@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:hasNetwork/@rdf:resource]/prns:numberOfConnections}}}</Param>
                 <Param Name="MaxDisplay">5</Param>
                 <Param Name="Description">People in Profiles who have published with this person.</Param>
                 <Param Name="ListNode">/rdf:RDF[1]/rdf:Description[1]/prns:coAuthorOf/@rdf:resource</Param>
@@ -380,6 +385,7 @@
                   <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="1" />
                 </Param>
                 <Param Name="InfoCaption">Similar People</Param>
+                <Param Name="TotalCount">{{{rdf:RDF/rdf:Description[rdf:predicate/@rdf:resource="http://profiles.catalyst.harvard.edu/ontology/prns#similarTo"][@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:hasNetwork/@rdf:resource]/prns:numberOfConnections}}}</Param>
                 <Param Name="Description">People who share similar concepts with this person.</Param>
                 <Param Name="MaxDisplay">11</Param>
                 <Param Name="ListNode">/rdf:RDF[1]/rdf:Description[1]/prns:similarTo/@rdf:resource</Param>
@@ -487,6 +493,7 @@
                   <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="1" />
                 </Param>
                 <Param Name="InfoCaption">Concepts</Param>
+                <Param Name="TotalCount">{{{rdf:RDF/rdf:Description[rdf:predicate/@rdf:resource="http://vivoweb.org/ontology/core#hasResearchArea"][@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:hasNetwork/@rdf:resource]/prns:numberOfConnections}}}</Param>
                 <Param Name="Description">Derived automatically from this person's publications.</Param>
                 <Param Name="MaxDisplay">5</Param>
                 <Param Name="ListNode">/rdf:RDF[1]/rdf:Description[1]/vivo:hasResearchArea/@rdf:resource</Param>
@@ -504,6 +511,7 @@
                   <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="1" />
                 </Param>
                 <Param Name="InfoCaption">Co-Authors</Param>
+                <Param Name="TotalCount">{{{rdf:RDF/rdf:Description[rdf:predicate/@rdf:resource="http://profiles.catalyst.harvard.edu/ontology/prns#coAuthorOf"][@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:hasNetwork/@rdf:resource]/prns:numberOfConnections}}}</Param>
                 <Param Name="MaxDisplay">5</Param>
                 <Param Name="Description">People in Profiles who have published with this person.</Param>
                 <Param Name="ListNode">/rdf:RDF[1]/rdf:Description[1]/prns:coAuthorOf/@rdf:resource</Param>
@@ -520,6 +528,7 @@
                   <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="1" />
                 </Param>
                 <Param Name="InfoCaption">Similar People</Param>
+                <Param Name="TotalCount">{{{rdf:RDF/rdf:Description[rdf:predicate/@rdf:resource="http://profiles.catalyst.harvard.edu/ontology/prns#similarTo"][@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:hasNetwork/@rdf:resource]/prns:numberOfConnections}}}</Param>
                 <Param Name="Description">People who share similar concepts with this person.</Param>
                 <Param Name="MaxDisplay">11</Param>
                 <Param Name="ListNode">/rdf:RDF[1]/rdf:Description[1]/prns:similarTo/@rdf:resource</Param>
@@ -634,6 +643,7 @@
                   <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="1" />
                 </Param>
                 <Param Name="InfoCaption">Concepts</Param>
+                <Param Name="TotalCount">{{{rdf:RDF/rdf:Description[rdf:predicate/@rdf:resource="http://vivoweb.org/ontology/core#hasResearchArea"][@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:hasNetwork/@rdf:resource]/prns:numberOfConnections}}}</Param>
                 <Param Name="Description">Derived automatically from this person's publications.</Param>
                 <Param Name="MaxDisplay">5</Param>
                 <Param Name="ListNode">/rdf:RDF[1]/rdf:Description[1]/vivo:hasResearchArea/@rdf:resource</Param>
@@ -651,6 +661,7 @@
                   <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="1" />
                 </Param>
                 <Param Name="InfoCaption">Co-Authors</Param>
+                <Param Name="TotalCount">{{{rdf:RDF/rdf:Description[rdf:predicate/@rdf:resource="http://profiles.catalyst.harvard.edu/ontology/prns#coAuthorOf"][@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:hasNetwork/@rdf:resource]/prns:numberOfConnections}}}</Param>
                 <Param Name="MaxDisplay">5</Param>
                 <Param Name="Description">People in Profiles who have published with this person.</Param>
                 <Param Name="ListNode">/rdf:RDF[1]/rdf:Description[1]/prns:coAuthorOf/@rdf:resource</Param>
@@ -667,6 +678,7 @@
                   <ExpandRDFOptions ExpandPredicates="false" ClassPropertyCustomTypeID="1" />
                 </Param>
                 <Param Name="InfoCaption">Similar People</Param>
+                <Param Name="TotalCount">{{{rdf:RDF/rdf:Description[rdf:predicate/@rdf:resource="http://profiles.catalyst.harvard.edu/ontology/prns#similarTo"][@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:hasNetwork/@rdf:resource]/prns:numberOfConnections}}}</Param>
                 <Param Name="Description">People who share similar concepts with this person.</Param>
                 <Param Name="MaxDisplay">11</Param>
                 <Param Name="ListNode">/rdf:RDF[1]/rdf:Description[1]/prns:similarTo/@rdf:resource</Param>
@@ -1044,6 +1056,7 @@ has written about
             <Module ID="PassiveList">
               <ParamList>
                 <Param Name="InfoCaption">Group Members</Param>
+                <Param Name="TotalCount">{{{rdf:RDF/rdf:Description[rdf:predicate/@rdf:resource="http://vivoweb.org/ontology/core#contributingRole"][@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:hasNetwork/@rdf:resource]/prns:numberOfConnections}}}</Param>
                 <Param Name="Description">Members of this Group.</Param>
                 <Param Name="MaxDisplay">20</Param>
                 <Param Name="ListNode">/rdf:RDF[1]/rdf:Description[1]/vivo:contributingRole/@rdf:resource</Param>
