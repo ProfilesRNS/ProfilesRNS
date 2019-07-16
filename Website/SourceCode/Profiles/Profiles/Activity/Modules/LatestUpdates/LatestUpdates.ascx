@@ -6,7 +6,7 @@
     <div class="activeContainerTop"></div>
     <div class="activeContainerCenter">
         <div class="activeSection">
-            <div class="activeSectionHead">Live Updates</div>
+            <div class="act-heading">Profiles Stats</div>
             <div class="activeSectionBody">
                 <Statistics:Statistics runat="server" ID="Statistics" Visible="true" />  
                 <ActivityHistory:Activity runat="server" ID="ActivityHistory" Visible="true" />  

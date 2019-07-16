@@ -14,6 +14,12 @@
     {
         top: -7px !important;
     }
+
+    #map_canvas {
+        height: 500px;
+        border: 1px solid #999;
+        text-align: center;
+    }
 </style>
 
 <script type="text/javascript">
@@ -44,7 +50,7 @@
             <asp:Label ID="lblPerson" runat="server"></asp:Label><br />
             <span style="color: #00C; font-weight: bold;">Blue lines</span> connect people who
             have published papers together.</div>
-        <div style="background-color: #999; width: 590px; height: 1px; overflow: hidden;
+        <div style="background-color: #999; height: 1px; overflow: hidden;
             margin: 5px 0px;">
         </div>
         <div style="margin-bottom: 5px;">
@@ -58,8 +64,7 @@
                     &nbsp;|&nbsp;</SeparatorTemplate>
             </asp:DataList>
         </div>
-        <div id="map_canvas" style="width: 590px; height: 500px; border: 1px solid #999;
-            text-align: center;">
+        <div id="map_canvas">
         </div>
             <br />
         To see the data from this visualization as text, <a id="divShowTimelineTable" tabindex="0" class="jQueryLink">click here.</a>

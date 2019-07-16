@@ -4,7 +4,7 @@
     <asp:Literal runat="server" ID="litLname"></asp:Literal>'s Networks
 </div>
 <div style='font-size: 11px;'>
-Click the "See All" links for more information and interactive visualizations!
+Click the <div style="color:#090;display:inline;font-weight:bold;">Explore</div> buttons for more information and interactive visualizations!
 </div>
 <div class="passiveSectionBody"><!-- needed --></div>
 <div class="passiveSectionLine"><!-- needed --></div>

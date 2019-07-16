@@ -12,16 +12,19 @@
                 <a href='#'>About</a>
                 <ul class="drop">
                     <li>
-                        <a id="about" style="border-left: 1px solid  #999; border-right: 1px solid  #999; border-bottom: 1px solid #999; width: 200px !important" href="<%=ResolveUrl("~/about/default.aspx?type=About")%>">Overview</a>
+                        <a id="about" style="border-left: 1px solid  #999; border-right: 1px solid  #999; border-bottom: 1px solid #999; width: 200px !important" href="<%=ResolveUrl("~/about/default.aspx?tab=overview")%>">Overview</a>
                     </li>
                     <li>
-                        <a id="opensource" style="border-left: 1px solid  #999; border-right: 1px solid  #999; border-bottom: 1px solid #999; width: 200px !important" href="<%=ResolveUrl("~/about/default.aspx?type=OpenSourceSoftware")%>">Open Source Software</a>
+                        <a id="data" style="border-left: 1px solid  #999; border-right: 1px solid  #999; border-bottom: 1px solid #999; width: 200px !important" href="<%=ResolveUrl("~/about/default.aspx?tab=data")%>">Sharing Data</a>
+                    </li>
+                    <li>
+                        <a id="orcid" style="border-left: 1px solid  #999; border-right: 1px solid  #999; border-bottom: 1px solid #999; width: 200px !important" href="<%=ResolveUrl("~/about/default.aspx?tab=orcid")%>">ORCID</a>
                     </li>
                 </ul>
 
             </li>
             <li class="main-nav">
-                <a href="<%=ResolveUrl("~/about/default.aspx?type=Help")%>">Help</a>
+                <a href="<%=ResolveUrl("~/about/default.aspx?tab=faq")%>">Help</a>
             </li>
             <%-- <li class="main-nav">
                 <a href="<%=ResolveUrl("~/about/default.aspx?type=UseOurData")%>">Use Our Data</a>

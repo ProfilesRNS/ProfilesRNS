@@ -323,6 +323,8 @@ div#catalyst-footer {
     text-align: left;
     max-width: 160px;
     padding-right:10px;
+    padding-top: 30px;
+    vertical-align: top;
 }
 
 /********************************************/

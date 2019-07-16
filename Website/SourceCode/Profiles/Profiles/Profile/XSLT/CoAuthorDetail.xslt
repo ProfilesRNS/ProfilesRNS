@@ -67,7 +67,9 @@
 
 </xsl:text>
     </script>
-    Co-Authors are listed by decreasing relevence which is based on the number of co-publications and the years which they were written.
+    <div class="tabInfoText">
+      Co-Authors are listed by decreasing relevence which is based on the number of co-publications and the years which they were written.
+    </div>
     <br></br>
     <br></br>
     <div class="listTable" style="margin-top: 12px, margin-bottom:8px ">

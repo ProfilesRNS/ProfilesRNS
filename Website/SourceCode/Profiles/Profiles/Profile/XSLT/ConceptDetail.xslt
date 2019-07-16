@@ -54,7 +54,9 @@
 
 </xsl:text>
     </script>
-    Concepts are listed by decreasing relevance which is based on many factors, including how many publications the person wrote about that topic, how long ago those publications were written, and how many publications other people have written on that same topic.
+    <div class="tabInfoText">
+      Concepts are listed by decreasing relevance which is based on many factors, including how many publications the person wrote about that topic, how long ago those publications were written, and how many publications other people have written on that same topic.
+    </div>
     <br></br>
     <br></br>
     <div class="listTable" style="margin-top: 12px, margin-bottom:8px ">

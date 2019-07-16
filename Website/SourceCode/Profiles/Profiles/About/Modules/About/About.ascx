@@ -1,7 +1,4 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="About.ascx.cs" Inherits="Profiles.About.Modules.About.About" %>
-<div class="pageTabs">
-    <asp:Literal runat="server" ID="litTabs"></asp:Literal>
-</div>
 <div class="aboutText">
     <asp:Panel runat="server" ID="pnlOverview" Visible="false">
         <table>

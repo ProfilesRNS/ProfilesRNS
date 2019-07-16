@@ -81,8 +81,8 @@ namespace Profiles.About.Modules.About
 
             }
 
-            tabs += Tabs.DrawTabsEnd();
-            litTabs.Text = tabs;
+            //tabs += Tabs.DrawTabsEnd();
+            //litTabs.Text = tabs;
 
 
             imgProfilesIcon.ImageUrl = Root.Domain + "/framework/images/icon_profile.gif";

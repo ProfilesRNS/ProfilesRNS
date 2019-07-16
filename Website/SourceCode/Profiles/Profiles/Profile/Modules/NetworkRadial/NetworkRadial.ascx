@@ -26,20 +26,20 @@
             view are listed below the graph.
         </div>
 <div id="divRadialGraph">
-        <div style="width: 600px; font-size: 12px; line-height: 16px; border-bottom: 1px dotted #999;
-            padding-bottom: 12px; margin-bottom: 6px;"></div>
+    <div style="width: 100%; font-size: 12px; line-height: 16px; border-bottom: 1px dotted #999; padding-bottom: 12px; margin-bottom: 6px;">
+    </div>
     <div>
-        <div style="margin-top: 8px; font-weight: bold; color: #BD2F3C; border-bottom: none;
-            width: 600px; height: 20px; text-align: center;">
+        <div style="margin-top: 8px; font-weight: bold; color: #BD2F3C; border-bottom: none; height: 20px; text-align: center;">
             <div id="graph_info">
                 <b></b>
             </div>
         </div>
     </div>
-
-    <%--<div runat="server" id="divSwfScript" style="width: 600px; height: 600px; position: relative; top: 35px;">--%>
-    <div runat="server" id="divSwfScript" style="height: 510px;" class="clusterView">
-        <svg  id="radial_view" height="100%" width="100%" fill="#999900" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="visibility:hidden;"></svg>
+    <div runat="server" id="div1" style="height: 610px;" class="clusterView">
+        <svg id="radial_view" height="610px" width="100%" fill="#999900" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" style="visibility: hidden;"
+            viewBox="-10 -20 900 700">
+        </svg>
     </div>
 
     <%--<div style="padding: 0px; width: 600px; text-align: center; position: absolute; top: 770px; z-index: 999;">--%>
@@ -82,18 +82,14 @@
                     </div>
                 </td>
             </tr>
-            <tr style="line-height: 10px; text-align: right; color: #555; font-size: 10px; margin-top: 12px;
-                padding-top: 0px;">
-                <td style="padding-right: 16px; font-size:11px" id="lbl_pubs">
-                    any number
-                </td>
-                <td style="padding-right: 16px; font-size:11px" id="lbl_copubs">
-                    any collaboration
-                </td>
-                <td style="padding-right: 16px; font-size:11px" id="lbl_recent">
-                    any year
-                </td>
-            </tr>
+                <tr style="line-height: 10px; text-align: right; color: #555; font-size: 10px; margin-top: 12px; padding-top: 0px;">
+                    <td style="padding-right: 84px; font-size: 11px" id="lbl_pubs">any number
+                    </td>
+                    <td style="padding-right: 86px; font-size: 11px" id="lbl_copubs">any collaboration
+                    </td>
+                    <td style="padding-right: 86px; font-size: 11px" id="lbl_recent">any year
+                    </td>
+                </tr>
         </table>
         <div id="viz_instructions" style="border-top: 1px dotted #999; font-size: 12px; line-height: 16px; padding-top: 12px;
             margin-top: 8px; text-align: left;" >
@@ -109,8 +105,8 @@
         </div>
         <br />
         To see the data from this visualization as text, <a id="divShowTimelineTable" tabindex="0" class="jQueryLink">click here.</a>
-        <br />
-        To view this visualization using Flash (for older browsers), <a id="divShowFlash" tabindex="0" class="jQueryLink">click here.</a>                    
+        <!--<br />
+        To view this visualization using Flash (for older browsers), <a id="divShowFlash" tabindex="0" class="jQueryLink">click here.</a>-->
     </div>
 </div>
     <div id="divTimelineTable" class="listTable" style="display:none;margin-top:12px;margin-bottom:8px;">

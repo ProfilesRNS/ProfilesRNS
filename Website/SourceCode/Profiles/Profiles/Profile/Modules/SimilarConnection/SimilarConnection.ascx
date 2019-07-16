@@ -1,44 +1,28 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SimilarConnection.ascx.cs" Inherits="Profiles.Profile.Modules.SimilarConnection.SimilarConnection" %>
 	
-	<div class="content_container">					
-		<div class="connectionContainer">
-			<table class="connectionContainerTable">
-			<tbody>
-			<tr>
-				<td class="connectionContainerItem">
-					<div><a href="<%= this.Subject.Uri%>"><%= this.Subject.Name %></a></div>
-					<%--<div class="connectionItemSubText">25 Total Publications</div>--%>
-				</td>
-				<td class="connectionContainerArrow">
-					<table class="connectionArrowTable">
-					<tbody>
-					<tr>
-						<td>&nbsp;</td>
-						<td><div class="connectionSubDescription">Connection Strength</div></td>
-						<td>&nbsp;</td>
-					</tr>
-					<tr>
-						<td class="connectionLine"><img src="<%= this.GetRootDomain() %>/Framework/Images/connection_left.gif" alt=""></td>
-						<td class="connectionLine"><div>&nbsp;</div></td>
-						<td class="connectionLine"><img src="<%= this.GetRootDomain() %>/Framework/Images/connection_right.gif" alt=""></td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-						<td><div class="connectionSubDescription"><%= String.Format("{0:0.000}", this.ConnectionStrength) %></div></td>
-						<td>&nbsp;</td>
-					</tr>
-					</tbody>
-					</table>
-				</td>
-				<td class="connectionContainerItem">
-					<div><a href="<%= this.Object.Uri %>"><%= this.Object.Name %></a></div>
-					<%--<div class="connectionItemSubText">229 Total Publications</div>--%>
-				</td>
-			</tr>
-			</tbody>
-			</table>
-		</div>
-	</div>	
+<div class="connectionTable">
+    <div class="connectionTableRow">
+        <div class="connectionContainerItem">
+            <a href="<%= this.Subject.Uri%>"><%= this.Subject.Name %></a>
+        </div>
+        <div class="connectionContainerLeftArrow">
+            <img style="vertical-align: unset;" src="<%=GetRootDomain()%>/Framework/Images/connection_left.gif" alt="" />
+        </div>
+        <div>
+            <div class="connectionSubDescription">Connection Strength</div>
+            <div class="connectionLineToArrow">
+                <hr />
+            </div>
+            <div class="connectionSubDescription" style="position: relative;"><%= String.Format("{0:0.000}", this.ConnectionStrength) %></div>
+        </div>
+        <div class="connectionContainerRightArrow">
+            <img style="vertical-align: unset;" src="<%=GetRootDomain()%>/Framework/Images/connection_right.gif" alt="" />
+        </div>
+        <div class="connectionContainerItem">
+            <a href="<%= this.Object.Uri %>"><%= this.Object.Name %></a>
+        </div>
+    </div>
+</div>
 	<script type="text/javascript">
 		function doGoMesh(uri) {
 			if (!hasClickedListTable) {

@@ -27,7 +27,6 @@
 <input type="hidden" id="classuri" name="classuri" value="" />
 <input type="hidden" id="searchtype" name="searchtype" value="everything" />
 <input type="hidden" id="txtSearchFor" name="txtSearchFor" value="" />
-Search or browse for people, publications, concepts, and other items in Profiles.
 <div class="content_container">
     <div class="tabContainer" style="margin-top: 0px;">
         <div class="searchForm">
@@ -36,7 +35,7 @@ Search or browse for people, publications, concepts, and other items in Profiles
                     <td colspan='3'>
                         <%-- Replaced inline styles with class below --%>
                         <div class="headings">
-                            Search by keywords
+                            Find publications, research, concepts and more
                         </div>
                     </td>
                 </tr>

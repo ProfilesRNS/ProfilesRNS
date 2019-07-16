@@ -1,11 +1,11 @@
 
 /* Metrics & Activity Stream */
 .panelActive { padding: 0 0 0 12px; }
-.metrics { margin-bottom: 20px; margin-top: 10px; padding: 0 0 12px; border-bottom: 1px solid #ccc; font-size: 12px;}
+.metrics { margin-bottom: 12px; padding: 0 0 12px; border-bottom: 1px solid #ccc; font-size: 12px;}
 .metrics span { display: inline-block; width: 4em; text-align: right; font-family: courier, serif;}
 .activities { max-width: 600px; padding-bottom: 0; margin-bottom: 0; }
 .act { margin-bottom: 10px; padding: 0 0 8px; clear: left; border-bottom: 1px solid #ccc; min-height: 48px; }
-.act-heading { padding-bottom: 12px; }
+.act-heading {    padding-bottom: 8px;    font-weight: bold;}
 .act-user { line-height: 15px; }
 .act-userdate .date { color: #506380; font-size: 11px; overflow: hidden;}
 .act-image { float: left; height: 45px; padding-right: 5px; overflow-y: hidden; }
@@ -14,3 +14,4 @@
 .panelMain .act-heading { display: none; }
 .panelMain .act-userdate { float: left; width: 160px; padding-right: 10px; }
 .panelMain .act-msg { clear: none; float: left; width: 360px; padding: 0; margin-top: -2px; }
+.act-heading-live-updates { font-weight: bold; margin-bottom: 10px; }

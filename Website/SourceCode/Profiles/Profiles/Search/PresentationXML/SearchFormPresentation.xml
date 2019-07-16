@@ -1,7 +1,6 @@
 ﻿<Presentation PresentationClass="profile">
   <PageOptions Columns="3"/>
   <WindowName>Search</WindowName>
-  <PageTitle>Search</PageTitle>
   <PageBackLinkName></PageBackLinkName>
   <PageBackLinkURL></PageBackLinkURL>
   <PageSubTitle></PageSubTitle>
