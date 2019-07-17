@@ -117,21 +117,21 @@
     $(document).ready(function () {
         $("#menu-search").on("keypress", function (e) {
             if (e.which == 13) {
-                search();
+                quicksearch();
                 return false;
             }
             return true;
         });
 
         $("#img-mag-glass").on("click", function () {
-            search();
+            quicksearch();
             return true;
         });
     });
-    function search() {
+    function quicksearch() {
         var keyword = $("#menu-search").val();
         var classuri = 'http://xmlns.com/foaf/0.1/Person';
-        document.location.href = '<%=ResolveUrl("~/search/default.aspx")%>?searchtype=people&searchfor=' + keyword + '&classuri=' + classuri + '&perpage=15&offset=0&new=true';
+        document.location.href = '<%=ResolveUrl("~/search/default.aspx")%>?searchtype=people&searchfor=' + keyword + '&classuri=' + classuri;
         return true;
     }
 

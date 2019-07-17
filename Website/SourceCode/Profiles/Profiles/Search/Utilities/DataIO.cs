@@ -140,7 +140,7 @@ namespace Profiles.Search.Utilities
             search.Append("<SearchOptions>");
             search.Append("<MatchOptions>");
             if (string.IsNullOrEmpty(exactphrase))
-               exactphrase = string.Empty;
+               exactphrase = "false";
 
            // if (exactphrase.IsNullOrEmpty())
                // exactphrase = string.Empty;
