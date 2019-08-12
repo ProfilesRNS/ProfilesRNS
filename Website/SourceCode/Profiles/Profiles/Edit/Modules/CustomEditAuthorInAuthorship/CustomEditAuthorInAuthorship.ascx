@@ -401,11 +401,14 @@
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Action" ItemStyle-CssClass="alignCenterAction" HeaderStyle-CssClass="alignCenterAction">
                         <ItemTemplate>
-                            <span>
-                                <asp:ImageButton ID="lnkDelete" runat="server" ImageUrl="~/Edit/Images/icon_delete.gif"
-                                    CausesValidation="False" OnClick="deleteOne_Onclick" CommandName="Delete" AlternateText="delete"
-                                    OnClientClick="Javascript:return confirm('Are you sure you want to delete this citation?');"></asp:ImageButton></span>
 
+                            <asp:ImageButton ID="lnkEdit" runat="server" ImageUrl="~/Edit/Images/icon_edit.gif"
+                                CausesValidation="False" CommandName="Select" Text="Edit" AlternateText="edit" Visible="false"></asp:ImageButton>
+
+                            <asp:ImageButton ID="lnkDelete" runat="server" ImageUrl="~/Edit/Images/icon_delete.gif" 
+                                CausesValidation="False" OnClick="deleteOne_Onclick" CommandName="Delete" Text="X" AlternateText="delete"
+                                OnClientClick="Javascript:return confirm('Are you sure you want to delete this citation?');">
+                            </asp:ImageButton>
                             <asp:HiddenField ID="hdnMPID" runat="server" Value='<%# Bind("mpid") %>' />
                             <asp:HiddenField ID="hdnPMID" runat="server" Value='<%# Bind("pmid") %>' />
                         </ItemTemplate>

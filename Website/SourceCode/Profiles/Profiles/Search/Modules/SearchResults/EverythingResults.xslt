@@ -346,7 +346,7 @@
       </xsl:choose>
     </td>
     <td>
-      <a href="{rdf:object/@rdf:resource}">
+      <a class="listTableLink" href="{rdf:object/@rdf:resource}">
         <xsl:value-of select="vivo:overview"/>
       </a>
     </td>

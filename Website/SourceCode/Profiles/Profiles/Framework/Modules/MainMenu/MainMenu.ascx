@@ -117,18 +117,18 @@
     $(document).ready(function () {
         $("#menu-search").on("keypress", function (e) {
             if (e.which == 13) {
-                quicksearch();
+                minisearch();
                 return false;
             }
             return true;
         });
 
         $("#img-mag-glass").on("click", function () {
-            quicksearch();
+            minisearch();
             return true;
         });
     });
-    function quicksearch() {
+    function minisearch() {
         var keyword = $("#menu-search").val();
         var classuri = 'http://xmlns.com/foaf/0.1/Person';
         document.location.href = '<%=ResolveUrl("~/search/default.aspx")%>?searchtype=people&searchfor=' + keyword + '&classuri=' + classuri;
