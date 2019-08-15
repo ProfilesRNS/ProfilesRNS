@@ -229,18 +229,16 @@
                                     </td>
                                 </tr>
                                 <tr runat="server" id="trOtherOptions">
-                                    <th>Other Options
+                                    <th style="vertical-align:top">Other Options
                                     </th>
                                     <td colspan='2'>
-                                        <input type="hidden" id="hiddenToggle" value="off" />
-                                        <select id="selOtherOptions" style="width: 249px; height: 20px" title="other options">
+                                        <select onmousedown="(function(e){ e.preventDefault(); })(event, this)" id="selOtherOptions" style="width: 249px; height: 20px" title="other options">
                                             <option value=""></option>
                                         </select>
                                         <table>
                                             <tr>
                                                 <td>
                                                     <div id="divOtherOptions">
-                                                        <br />
                                                         <uc1:ComboTreeCheck ID="ctcFirst" runat="server" Width="255px" />
                                                     </div>
                                                 </td>
@@ -274,5 +272,5 @@
 <script>$(document).ready(function () {
     $("[id*=ddlChkList]").css("width", "249px");
     $("select").css("height", "25px");
-
+    
 });</script>

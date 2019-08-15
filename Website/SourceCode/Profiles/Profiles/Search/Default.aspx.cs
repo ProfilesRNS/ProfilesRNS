@@ -142,7 +142,7 @@ namespace Profiles.Search
             Checkboxcss.Attributes["rel"] = "stylesheet";
             Checkboxcss.Attributes["type"] = "text/css";
             Checkboxcss.Attributes["media"] = "all";
-            Page.Header.Controls.Add(Searchcss);
+            Page.Header.Controls.Add(Checkboxcss);
 
             HtmlGenericControl jsscript = new HtmlGenericControl("script");
             jsscript.Attributes.Add("type", "text/javascript");

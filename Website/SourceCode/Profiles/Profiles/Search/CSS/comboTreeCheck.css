@@ -26,9 +26,7 @@
 }
 .comboTreeCheckBox
 {
-    border:1px solid #aaaaaa;
-    height:18px
-    
+  
 }
 .comboTreeCheckBox span
 {
@@ -66,10 +64,11 @@
     padding-left:4px;
     overflow:hidden;
     background:white;
-    width:244px;
+    width:248px;
     line-height:18px;
     height:153px;
-    overflow-y:auto
+    overflow-y:auto;
+    padding-top:15px;
 }
 #divMasterContent img
 {
@@ -80,6 +79,7 @@
 {
     padding-left:10px
 }
+
 .CTCprefixExpanded
 {
     background-image:url('~/framework/images/collapse.gif')

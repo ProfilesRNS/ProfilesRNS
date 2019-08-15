@@ -64,7 +64,7 @@
         </td>
       </tr>
     </xsl:if>
-    <xsl:if test="rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/vivo:mailingAddress/@rdf:resource]/rdf:type/@rdf:resource !=''">
+    <xsl:if test="rdf:RDF[1]/rdf:Description[1]/vivo:mailingAddress/@rdf:resource !=''">
       <tr>
         <th>Address</th>
         <td>

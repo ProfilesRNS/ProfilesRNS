@@ -12,8 +12,8 @@
               <xsl:value-of select="rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description/prns:hasConnection/@rdf:resource]/rdf:object/@rdf:resource]/vivo:address1 "/>
               <br/>
             </xsl:if>
-            <xsl:if test="rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description[@rdf:about=rdf:RDF/rdf:Description/prns:hasConnection/@rdf:resource]/rdf:object/@rdf:resource]/vivo:address2 !=''">
-              <xsl:value-of select="rdf:RDF/rdf:Description[@rdf:about=rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description/prns:hasConnection/@rdf:resource]/rdf:object/@rdf:resource]/vivo:address2 "/>
+            <xsl:if test="rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description/prns:hasConnection/@rdf:resource]/rdf:object/@rdf:resource]/vivo:address2 !=''">
+              <xsl:value-of select="rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description/prns:hasConnection/@rdf:resource]/rdf:object/@rdf:resource]/vivo:address2 "/>
               <br/>
             </xsl:if>
             <xsl:if test="rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description[@rdf:about=/rdf:RDF/rdf:Description/prns:hasConnection/@rdf:resource]/rdf:object/@rdf:resource]/vivo:address3 !=''">

@@ -73,7 +73,7 @@ namespace Profiles.Profile.Modules.CustomViewPersonSameDepartment
             if (e.Item.ItemType == ListItemType.Footer)
             {
                 HyperLink moreurl = (HyperLink)e.Item.FindControl("moreurl");
-                moreurl.NavigateUrl = Root.Domain + "/search/default.aspx?searchtype=people&searchfor=&action=department";
+                moreurl.NavigateUrl = Root.Domain + "/search/default.aspx?searchtype=people&searchfor=&SearchRequest=" + this.SearchRequest;
 
             }
 
