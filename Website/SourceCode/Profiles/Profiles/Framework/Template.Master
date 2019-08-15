@@ -20,13 +20,8 @@
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=GvmEgwGnON">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png?v=GvmEgwGnON">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=GvmEgwGnON">
-    <link rel="mask-icon" href="safari-pinned-tab.svg?v=GvmEgwGnON" color="#a41c2f">
-    <link rel="shortcut icon" href="favicon.ico?v=GvmEgwGnON">
-    <meta name="apple-mobile-web-app-title" content="Harvard Catalyst">
-    <meta name="application-name" content="Harvard Catalyst">
+    <meta name="apple-mobile-web-app-title" content="Profiles RNS">
+    <meta name="application-name" content="Profiles RNS">
     <meta name="msapplication-TileColor" content="#a41c2f">
     <meta name="theme-color" content="#a41c2f">
 </head>

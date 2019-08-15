@@ -92,6 +92,8 @@
     <Content Include="Activity\PresentationXML\ActivityDetails.xml" />
     <Content Include="DirectService.aspx" />
     <Content Include="Edit\CSS\Edit.css" />
+    <Content Include="Edit\Images\cal.png" />
+    <Content Include="Edit\Images\icon_alert.gif" />
     <Content Include="Edit\Images\icon_squareArrow.gif" />
     <Content Include="Edit\Images\icon_squareDownArrow.gif" />
     <Content Include="Edit\Images\Icon_square_ArrowGray.png" />
@@ -111,6 +113,10 @@
     <Content Include="Framework\CSS\hms-catalyst.css" />
     <Content Include="Framework\CSS\prns-theme-menus-top.css" />
     <Content Include="Framework\CSS\prns-theme.css" />
+    <Content Include="Framework\Images\arrowDown.png" />
+    <Content Include="Framework\Images\arrowLeft.png" />
+    <Content Include="Framework\Images\arrowRight.png" />
+    <Content Include="Framework\Images\blackMagnifyGlass.png" />
     <Content Include="Framework\Images\listen.jpg" />
     <Content Include="Framework\Images\orcid_16x16%281%29.gif" />
     <Content Include="Framework\Images\Orcid_Logo_rgb.png" />
