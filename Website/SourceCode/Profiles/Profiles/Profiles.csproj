@@ -253,6 +253,7 @@
     <Content Include="Profile\Modules\NetworkRadial\JavaScript\sliders.js" />
     <Content Include="Profile\Modules\NetworkRadial\JavaScript\viz.js" />
     <Content Include="Profile\Modules\NetworkRadial\JavaScript\watchdog.js" />
+    <Content Include="Profile\Modules\PassiveList\Images\info.png" />
     <Content Include="Profile\XSLT\ContributingRole.xslt">
       <SubType>Designer</SubType>
     </Content>

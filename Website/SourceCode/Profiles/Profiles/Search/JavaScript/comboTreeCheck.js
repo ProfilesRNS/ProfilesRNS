@@ -160,14 +160,14 @@ $(document).ready(function() {
     $("#divOtherOptions").hide();
 
     // hide/show event occurs on click of dropdown
-    $("#selOtherOptions").click(function() {
+    $("#selOtherOptions").click(function () {
         if ($("#divOtherOptions").is(":visible")) {
             $("#divOtherOptions").hide();
             $("*[@id='divSearchSection']/descendant::input[@type='submit']").focus();
 
         } else {
             $("#divOtherOptions").show();
-            // $("*[id*=chkVisiting]").focus();
+            $("#divMasterContent").css("display", "block");
         }
     });
 
