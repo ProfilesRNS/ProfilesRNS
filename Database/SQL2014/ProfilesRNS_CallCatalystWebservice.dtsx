@@ -12,8 +12,8 @@
   DTS:MaxErrorCount="100"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="365"
-  DTS:VersionGUID="{7A959C0E-43F2-48BD-BD77-1FF2DD34C652}">
+  DTS:VersionBuild="367"
+  DTS:VersionGUID="{11D1A805-125D-496D-8AEC-42490C8CED9B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1059,7 +1059,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{D58CC66A-8C9E-44E9-8BB2-7F5B8E539FE8}"
               SQLTask:IsStoredProc="True"
-              SQLTask:SqlStatementSource="[Profile.Data].[Job.AddLog]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              SQLTask:SqlStatementSource="[Profile.Import].[HMSWebservice.AddLog]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="@logID"
                 SQLTask:DtsVariableName="User::LogID"
@@ -1102,7 +1102,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{D58CC66A-8C9E-44E9-8BB2-7F5B8E539FE8}"
               SQLTask:IsStoredProc="True"
-              SQLTask:SqlStatementSource="[Profile.Data].[Job.AddLog]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              SQLTask:SqlStatementSource="[Profile.Import].[HMSWebservice.AddLog]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="@logID"
                 SQLTask:DtsVariableName="User::LogID"
@@ -1145,7 +1145,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{D58CC66A-8C9E-44E9-8BB2-7F5B8E539FE8}"
               SQLTask:IsStoredProc="True"
-              SQLTask:SqlStatementSource="[Profile.Data].[Job.AddLog]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              SQLTask:SqlStatementSource="[Profile.Import].[HMSWebservice.AddLog]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="@batchID"
                 SQLTask:DtsVariableName="User::BatchID"
@@ -1206,7 +1206,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{D58CC66A-8C9E-44E9-8BB2-7F5B8E539FE8}"
               SQLTask:IsStoredProc="True"
-              SQLTask:SqlStatementSource="[Profile.Data].[Job.AddLog]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              SQLTask:SqlStatementSource="[Profile.Import].[HMSWebservice.AddLog]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="@logID"
                 SQLTask:DtsVariableName="User::LogID"
@@ -1261,11 +1261,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{D58CC66A-8C9E-44E9-8BB2-7F5B8E539FE8}"
               SQLTask:IsStoredProc="True"
-              SQLTask:SqlStatementSource="[Profile.Data].[Job.ImportData]"
-              SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
-              <SQLTask:ResultBinding
-                SQLTask:ResultName="0"
-                SQLTask:DtsVariableName="User::PMIDDownloadList" />
+              SQLTask:SqlStatementSource="[Profile.Import].[HMSWebservice.ImportData]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="@Job"
                 SQLTask:DtsVariableName="User::Job"
@@ -2063,7 +2059,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{D58CC66A-8C9E-44E9-8BB2-7F5B8E539FE8}"
           SQLTask:IsStoredProc="True"
-          SQLTask:SqlStatementSource="[Profile.Data].[Job.GetPostData]"
+          SQLTask:SqlStatementSource="[Profile.Import].[HMSWebservice.GetPostData]"
           SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ResultBinding
             SQLTask:ResultName="0"
@@ -2113,7 +2109,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           Id="Package\Foreach Row Call HMS WebService\Log EndService"
           TopLeft="155.471698113207,214.433962264151" />
         <NodeLayout
-          Size="118,44"
+          Size="123,42"
           Id="Package\Foreach Row Call HMS WebService\Log Error"
           TopLeft="399.66037735849,38.3584905660377" />
         <NodeLayout
@@ -2254,33 +2250,33 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="210.276729559748,-73.1698113207543"
+              EndConnector="211.943396226415,-75.1698113207543"
               Start="0,0"
-              End="210.276729559748,-65.6698113207543">
+              End="211.943396226415,-67.6698113207543">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,-32.3816185387229" />
+                    End="0,-33.4011245605087" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,-32.3816185387229"
-                    Point2="0,-36.3816185387229"
-                    Point3="4,-36.3816185387229" />
+                    Point1="0,-33.4011245605087"
+                    Point2="0,-37.4011245605087"
+                    Point3="4,-37.4011245605087" />
                   <mssgle:LineSegment
-                    End="206.276729559748,-36.3816185387229" />
+                    End="207.943396226415,-37.4011245605087" />
                   <mssgle:CubicBezierSegment
-                    Point1="206.276729559748,-36.3816185387229"
-                    Point2="210.276729559748,-36.3816185387229"
-                    Point3="210.276729559748,-40.3816185387229" />
+                    Point1="207.943396226415,-37.4011245605087"
+                    Point2="211.943396226415,-37.4011245605087"
+                    Point3="211.943396226415,-41.4011245605087" />
                   <mssgle:LineSegment
-                    End="210.276729559748,-65.6698113207543" />
+                    End="211.943396226415,-67.6698113207543" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="89.897017123624,-31.3816185387229,30.4826953125,9.7490234375"
+              BoundingBox="90.7303504569575,-32.4011245605087,30.4826953125,9.7490234375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -2290,33 +2286,33 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="186.138364779874,-196.905660377358"
+              EndConnector="189.471698113207,-198.905660377358"
               Start="0,0"
-              End="186.138364779874,-189.405660377358">
+              End="189.471698113207,-191.405660377358">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,-93.7963685771527" />
+                    End="0,-94.8560177175517" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,-93.7963685771527"
-                    Point2="0,-97.7963685771527"
-                    Point3="4,-97.7963685771527" />
+                    Point1="0,-94.8560177175517"
+                    Point2="0,-98.8560177175517"
+                    Point3="4,-98.8560177175517" />
                   <mssgle:LineSegment
-                    End="182.138364779874,-97.7963685771527" />
+                    End="185.471698113207,-98.8560177175517" />
                   <mssgle:CubicBezierSegment
-                    Point1="182.138364779874,-97.7963685771527"
-                    Point2="186.138364779874,-97.7963685771527"
-                    Point3="186.138364779874,-101.796368577153" />
+                    Point1="185.471698113207,-98.8560177175517"
+                    Point2="189.471698113207,-98.8560177175517"
+                    Point3="189.471698113207,-102.856017717552" />
                   <mssgle:LineSegment
-                    End="186.138364779874,-189.405660377358" />
+                    End="189.471698113207,-191.405660377358" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="77.8278347336869,-92.7963685771527,30.4826953125,9.7490234375"
+              BoundingBox="79.4945014003535,-93.8560177175517,30.4826953125,9.7490234375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
