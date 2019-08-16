@@ -351,13 +351,6 @@
   </Row>
   <Row>
     <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupOverview</PropertyGroupURI>
-    <PropertyURI>http://profiles.catalyst.harvard.edu/ontology/prns#mediaLinks</PropertyURI>
-    <SortOrder>226</SortOrder>
-    <_TagName>prns:mediaLinks</_TagName>
-    <_PropertyLabel>media links</_PropertyLabel>
-  </Row>
-  <Row>
-    <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupOverview</PropertyGroupURI>
     <PropertyURI>http://profiles.catalyst.harvard.edu/ontology/prns#medlineTA</PropertyURI>
     <SortOrder>155</SortOrder>
     <_TagName>prns:medlineTA</_TagName>
@@ -2639,9 +2632,9 @@
     <_PropertyLabel>valid in</_PropertyLabel>
   </Row>
   <Row>
-    <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupOverview</PropertyGroupURI>
+    <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupAddress</PropertyGroupURI>
     <PropertyURI>http://vivoweb.org/ontology/core#webpage</PropertyURI>
-    <SortOrder>225</SortOrder>
+    <SortOrder>21</SortOrder>
     <_TagName>vivo:webpage</_TagName>
     <_PropertyLabel>webpage</_PropertyLabel>
   </Row>
