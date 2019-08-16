@@ -240,7 +240,7 @@ type Profile.Data.Person.Websites.Table.sql
 type Profile.Data.Person.MediaLinks.Table.sql
 type Profile.Data.Publication.PubMed.Bibliometrics.Table.sql
 type Profile.Data.Publication.PubMed.JournalHeading.Table.sql
-type Profile.Data.Job.Log.Table.sql
+type Profile.Import.HMSWebservice.Log.Table.sql
 
 type RDF..fnTripleHash.UserDefinedFunction.sql
 type Utility.Application.fnText2Bool.UserDefinedFunction.sql
@@ -639,7 +639,7 @@ rem type Edit.Module.CustomEditWebsite.AddEditWebsite.sql
 rem type Edit.Module.CustomEditWebsite.GetData.sql
 type Profile.Data.Publication.Pubmed.GetPMIDsForBibliometrics.StoredProcedure.sql
 type Profile.Data.Publication.Pubmed.ParseBibliometricResults.StoredProcedure.sql
-type Profile.Data.Job.GetPostData.StoredProcedure.sql
-type Profile.Data.Job.ImportData.StoredProcedure.sql
-type Profile.Data.Job.AddLog.StoredProcedure.sql
+type Profile.Import.HMSWebservice.GetPostData.StoredProcedure.sql
+type Profile.Import.HMSWebservice.ImportData.StoredProcedure.sql
+type Profile.Import.HMSWebservice.AddLog.StoredProcedure.sql
 type Profile.Module.CustomViewAuthorInAuthorship.GetJournalHeadings.StoredProcedure.sql
