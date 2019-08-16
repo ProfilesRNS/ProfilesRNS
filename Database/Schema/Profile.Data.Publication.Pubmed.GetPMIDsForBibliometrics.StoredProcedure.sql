@@ -21,7 +21,7 @@ BEGIN
 	declare @batchID varchar(100)
 	select @batchID = NEWID()
 	select @batchID batchID, n, (
-	select pmid "PMID" FROM #tmp order by pmid offset n ROWS FETCH NEXT @BatchSize ROWS ONLY FOR XML path(''), ELEMENTS, ROOT('PMIDS')) x
+	select pmid "PMID" FROM #tmp order by pmid offset n * @BatchSize ROWS FETCH NEXT @BatchSize ROWS ONLY FOR XML path(''), ELEMENTS, ROOT('PMIDS')) x
 	from [Utility.Math].N where n <= @c / @BatchSize
 END
 GO
