@@ -113,7 +113,6 @@ popd
 
 @RD /S /Q "ProfilesRNS\Database\Data\InstallData"
 
-echo d | xcopy /s ..\Database\SQL2008 ProfilesRNS\Database\SQL2008
 echo d | xcopy /s ..\Database\SQL2012 ProfilesRNS\Database\SQL2012
 echo d | xcopy /s ..\Database\SQL2014 ProfilesRNS\Database\SQL2014
 echo d | xcopy /s ..\Database\SQL2016 ProfilesRNS\Database\SQL2016
