@@ -30,6 +30,8 @@ namespace ProfilesDataAPI
 
     public class ProfilesAPIController : ApiController
     {
+        [Route("getPeople/Everyone")]
+        [Route("getPeople/Everyone/Count/{count:int}/Offset/{offset:int}")]
         [Route("getPeople/Institution/{inst}")]
         [Route("getPeople/Institution/{inst}/Department/{dept}")]
         [Route("getPeople/Institution/{inst}/Department/{dept}/Division/{div}")]
@@ -45,6 +47,23 @@ namespace ProfilesDataAPI
         [Route("getPeople/Keyword/{keyword}/Institution/{inst}/Department/{dept}/Count/{count:int}/Offset/{offset:int}")]
         [Route("getPeople/Keyword/{keyword}/Institution/{inst}/Department/{dept}/Division/{div}/Count/{count:int}/Offset/{offset:int}")]
         [Route("getPeople/PersonIDs/{personIDs}")]
+        [Route("getPeople/Everyone/Columns/{cols}")]
+        [Route("getPeople/Everyone/Count/{count:int}/Offset/{offset:int}/Columns/{cols}")]
+        [Route("getPeople/Institution/{inst}/Columns/{cols}")]
+        [Route("getPeople/Institution/{inst}/Department/{dept}/Columns/{cols}")]
+        [Route("getPeople/Institution/{inst}/Department/{dept}/Division/{div}/Columns/{cols}")]
+        [Route("getPeople/Institution/{inst}/Count/{count:int}/Offset/{offset:int}/Columns/{cols}")]
+        [Route("getPeople/Institution/{inst}/Department/{dept}/Count/{count:int}/Offset/{offset:int}/Columns/{cols}")]
+        [Route("getPeople/Institution/{inst}/Department/{dept}/Division/{div}/Count/{count:int}/Offset/{offset:int}/Columns/{cols}")]
+        [Route("getPeople/Keyword/{keyword}/Columns/{cols}")]
+        [Route("getPeople/Keyword/{keyword}/Count/{count:int}/Offset/{offset:int}/Columns/{cols}")]
+        [Route("getPeople/Keyword/{keyword}/Institution/{inst}/Columns/{cols}")]
+        [Route("getPeople/Keyword/{keyword}/Institution/{inst}/Department/{dept}/Columns/{cols}")]
+        [Route("getPeople/Keyword/{keyword}/Institution/{inst}/Department/{dept}/Division/{div}/Columns/{cols}")]
+        [Route("getPeople/Keyword/{keyword}/Institution/{inst}/Count/{count:int}/Offset/{offset:int}/Columns/{cols}")]
+        [Route("getPeople/Keyword/{keyword}/Institution/{inst}/Department/{dept}/Count/{count:int}/Offset/{offset:int}/Columns/{cols}")]
+        [Route("getPeople/Keyword/{keyword}/Institution/{inst}/Department/{dept}/Division/{div}/Count/{count:int}/Offset/{offset:int}/Columns/{cols}")]
+        [Route("getPeople/PersonIDs/{personIDs}/Columns/{cols}")]
         [HttpGet]
         public System.Net.Http.HttpResponseMessage getPeopleByInstitutionAndDept(string keyword = null, string inst = null, string dept = null, string division = null, int count = -1, int offset = 0, string personIDs = null)
         {
