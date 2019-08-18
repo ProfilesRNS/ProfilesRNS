@@ -589,19 +589,6 @@
                 <Param Name="Cloud">true</Param>
               </ParamList>
             </Module>
-            <!--<Module ID="NetworkList">
-        <ParamList>
-          <Param Name="DataURI">rdf:RDF/rdf:Description[1]/@rdf:about</Param>
-          <Param Name="InfoCaption">In this concept 'cloud', the sizes of the concepts are based not only on the number of corresponding publications, but also how relevant the concepts are to the overall topics of the publications, how long ago the publications were written, whether the person was the first or senior author, and how many other people have written about the same topic. The largest concepts are those that are most unique to this person.</Param>
-          <Param Name="BulletType" />
-          <Param Name="Columns">2</Param>
-          <Param Name="NetworkListNode">rdf:RDF/rdf:Description[@rdf:about= /rdf:RDF[1]/rdf:Description[1]/prns:hasConnection/@rdf:resource]</Param>
-          <Param Name="CloudWeightNode">prns:connectionWeight</Param>
-          <Param Name="ItemURLText">{{{rdf:Description[1]/rdf:object/@rdf:resource}}}</Param>
-          <Param Name="ItemText" />
-          <Param Name="ItemURL">{{{rdf:Description[1]/rdf:object/@rdf:resource}}}</Param>
-        </ParamList>
-      </Module>-->
           </Panel>
           <Panel Type="main" TabSort="1" Alias="categories" Name="Categories">
             <Module ID="NetworkCategories">
