@@ -35,8 +35,8 @@ EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'PubMedDi
 		@on_fail_step_id=0, 
 		@retry_attempts=0, 
 		@retry_interval=0, 
-		@os_run_priority=0, @subsystem=N'CmdExec', 
-		@command=N'C:\Program Files\Microsoft SQL Server\120\DTS\Binn\DTEXEC.EXE /SQL "\PubMedDisambiguation_GetPubs" /SERVER $(YourProfilesServerName)  /MAXCONCURRENT " -1 " /CHECKPOINTING OFF /SET "\Package.Variables[ServerName].Value";$(YourProfilesServerName) /SET "\Package.Variables[DatabaseName].Value";$(YourProfilesDatabaseName) /SET "\Package.Variables[HMSPubMedWebService].Value";http://profiles.catalyst.harvard.edu/services/GetPMIDs/default.asp /SET "\Package.Variables[HMSPubMedXMLWebService].Value";http://profiles.catalyst.harvard.edu/services/GetPMIDs/GetPubMedXML.asp /REPORTING E', 
+		@os_run_priority=0, @subsystem=N'SSIS', 
+		@command=N'/SQL "\PubMedDisambiguation_GetPubs" /SERVER $(YourProfilesServerName)  /MAXCONCURRENT " -1 " /CHECKPOINTING OFF /SET "\Package.Variables[ServerName].Value";$(YourProfilesServerName) /SET "\Package.Variables[DatabaseName].Value";$(YourProfilesDatabaseName) /SET "\Package.Variables[HMSPubMedWebService].Value";http://profiles.catalyst.harvard.edu/services/GetPMIDs/default.asp /SET "\Package.Variables[HMSPubMedXMLWebService].Value";http://profiles.catalyst.harvard.edu/services/GetPMIDs/GetPubMedXML.asp /REPORTING E', 
 		@flags=0
 IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
 /****** Object:  Step [PubMedDisambiguation_GetPubMEDXML]    Script Date: 02/07/2013 12:48:49 ******/
@@ -49,8 +49,8 @@ EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'PubMedDi
 		@on_fail_step_id=0, 
 		@retry_attempts=0, 
 		@retry_interval=0, 
-		@os_run_priority=0, @subsystem=N'CmdExec', 
-		@command=N'C:\Program Files\Microsoft SQL Server\120\DTS\Binn\DTEXEC.EXE /SQL "\PubMedDisambiguation_GetPubMEDXML" /SERVER $(YourProfilesServerName)  /MAXCONCURRENT " -1 " /CHECKPOINTING OFF /SET "\Package.Variables[ServerName].Value";$(YourProfilesServerName) /SET "\Package.Variables[DatabaseName].Value";$(YourProfilesDatabaseName) /SET "\Package.Variables[GetOnlyNewXML].Value";"TRUE" /SET "\Package.Variables[HMSPubMedWebService].Value";http://profiles.catalyst.harvard.edu/services/GetPMIDs/default.asp /SET "\Package.Variables[HMSPubMedXMLWebService].Value";http://profiles.catalyst.harvard.edu/services/GetPMIDs/GetPubMedXML.asp /REPORTING E', 
+		@os_run_priority=0, @subsystem=N'SSIS', 
+		@command=N'/SQL "\PubMedDisambiguation_GetPubMEDXML" /SERVER $(YourProfilesServerName)  /MAXCONCURRENT " -1 " /CHECKPOINTING OFF /SET "\Package.Variables[ServerName].Value";$(YourProfilesServerName) /SET "\Package.Variables[DatabaseName].Value";$(YourProfilesDatabaseName) /SET "\Package.Variables[GetOnlyNewXML].Value";"TRUE" /SET "\Package.Variables[HMSPubMedWebService].Value";http://profiles.catalyst.harvard.edu/services/GetPMIDs/default.asp /SET "\Package.Variables[HMSPubMedXMLWebService].Value";http://profiles.catalyst.harvard.edu/services/GetPMIDs/GetPubMedXML.asp /REPORTING E', 
 		@flags=0
 IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
 /****** Object:  Step [Load Pubs]    Script Date: 02/07/2013 12:48:49 ******/
