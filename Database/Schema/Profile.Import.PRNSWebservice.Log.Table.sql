@@ -4,7 +4,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_PADDING ON
 GO
-CREATE TABLE [Profile.Import].[HMSWebservice.Log](
+CREATE TABLE [Profile.Import].[PRNSWebservice.Log](
 	LogID int IDENTITY(1,1) Primary key not null,
 	Job varchar(55) not null,
 	BatchID varchar(100) null,

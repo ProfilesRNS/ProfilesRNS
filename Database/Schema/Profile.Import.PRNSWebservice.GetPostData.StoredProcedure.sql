@@ -2,7 +2,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [Profile.Import].[HMSWebservice.GetPostData]
+CREATE PROCEDURE [Profile.Import].[PRNSWebservice.GetPostData]
 	@Job varchar(55),
 	@BatchSize int = 0
 AS

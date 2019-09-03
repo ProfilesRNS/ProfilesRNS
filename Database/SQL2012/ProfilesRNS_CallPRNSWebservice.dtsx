@@ -12,8 +12,8 @@
   DTS:MaxErrorCount="100"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="367"
-  DTS:VersionGUID="{11D1A805-125D-496D-8AEC-42490C8CED9B}">
+  DTS:VersionBuild="368"
+  DTS:VersionGUID="{CE9ADDA9-31B6-41F4-9D42-E0DD81F0A71E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -129,15 +129,6 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{AA185713-1295-4CBA-A416-E47C2D2431DC}"
-      DTS:IncludeInDebugDump="2345"
-      DTS:Namespace="User"
-      DTS:ObjectName="HMSWebService">
-      <DTS:VariableValue
-        DTS:DataType="8">http://profiles.catalyst.harvard.edu/services/GetPMIDs/GetBibliometricData2.asp</DTS:VariableValue>
-    </DTS:Variable>
-    <DTS:Variable
-      DTS:CreationName=""
       DTS:DTSID="{6968077C-7C45-4D2D-ABC0-32891CF41250}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
@@ -220,6 +211,15 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
+      DTS:DTSID="{AA185713-1295-4CBA-A416-E47C2D2431DC}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="PRNSWebService">
+      <DTS:VariableValue
+        DTS:DataType="8">http://profiles.catalyst.harvard.edu/services/GetPMIDs/GetBibliometricData2.asp</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
       DTS:DTSID="{E8B8364D-78FB-4B44-BDB4-AEC5A7EE539C}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
@@ -267,14 +267,14 @@
   </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\Foreach Row Call HMS WebService"
+      DTS:refId="Package\Foreach Row Call PRNS WebService"
       DTS:CreationName="STOCK:FOREACHLOOP"
       DTS:Description="Foreach Loop Container"
       DTS:DTSID="{D07A9943-5ABE-44C4-BB57-8E0A1C61D867}"
       DTS:ExecutableType="STOCK:FOREACHLOOP"
       DTS:LocaleID="-1"
       DTS:MaxErrorCount="100"
-      DTS:ObjectName="Foreach Row Call HMS WebService">
+      DTS:ObjectName="Foreach Row Call PRNS WebService">
       <DTS:ForEachEnumerator
         DTS:CreationName="Microsoft.SqlServer.Dts.Runtime.Enumerators.ADO.ForEachADOEnumerator, Microsoft.SqlServer.ForEachADOEnumerator, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
         DTS:DTSID="{FC5B1246-3F97-4576-A6AB-4CED707DF55D}"
@@ -282,20 +282,20 @@
         <DTS:ObjectData>
           <FEEADO
             EnumType="EnumerateRowsInFirstTable"
-            VarName="DataRows" />
+            VarName="" />
         </DTS:ObjectData>
       </DTS:ForEachEnumerator>
       <DTS:Variables />
       <DTS:Executables>
         <DTS:Executable
-          DTS:refId="Package\Foreach Row Call HMS WebService\Call HMS Webservice"
+          DTS:refId="Package\Foreach Row Call PRNS WebService\Call PRNS Webservice"
           DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ScriptTask.ScriptTask, Microsoft.SqlServer.ScriptTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:Description="Script Task"
           DTS:DTSID="{26B82C81-D8DB-4B30-8BCB-CA0D5A6BAC99}"
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ScriptTask.ScriptTask, Microsoft.SqlServer.ScriptTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:MaxErrorCount="10"
-          DTS:ObjectName="Call HMS Webservice"
+          DTS:ObjectName="Call PRNS Webservice"
           DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
@@ -304,7 +304,7 @@
               VSTAMajorVersion="3"
               VSTAMinorVersion="0"
               Language="VisualBasic"
-              ReadOnlyVariables="PostData,HMSWebService"
+              ReadOnlyVariables="PostData,PRNSWebService"
               ReadWriteVariables="ApiResults,User::ErrorText">
               <ProjectItem
                 Name="scripttask_50b00a323bc749db93a308f0425f4835.vbproj"
@@ -463,113 +463,6 @@
   </ProjectExtensions>
 </Project>]]></ProjectItem>
               <ProjectItem
-                Name="My Project\AssemblyInfo.vb"
-                Encoding="UTF8"><![CDATA[Imports System
-Imports System.Reflection
-Imports System.Runtime.InteropServices
-
-' General Information about an assembly is controlled through the following 
-' set of attributes. Change these attribute values to modify the information
-' associated with an assembly.
-
-' Review the values of the assembly attributes
-
-<Assembly: AssemblyTitle("ScriptTask_50b00a323bc749db93a308f0425f4835.vbproj")> 
-<Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("")> 
-<Assembly: AssemblyProduct("ScriptTask_50b00a323bc749db93a308f0425f4835.vbproj")> 
-<Assembly: AssemblyCopyright("Copyright @  2011")> 
-<Assembly: AssemblyTrademark("")> 
-<Assembly: CLSCompliant(True)> 
-
-<Assembly: ComVisible(False)> 
-
-'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("05ae17cd-dd85-40a2-a502-0a7b81e65689")> 
-
-' Version information for an assembly consists of the following four values:
-'
-'      Major Version
-'      Minor Version 
-'      Build Number
-'      Revision
-'
-' You can specify all the values or you can default the Build and Revision Numbers 
-' by using the '*' as shown below:
-' <Assembly: AssemblyVersion("1.0.*")>
-
-<Assembly: AssemblyVersion("1.0.0.0")> 
-<Assembly: AssemblyFileVersion("1.0.0.0")> ]]></ProjectItem>
-              <ProjectItem
-                Name="My Project\Settings.settings"
-                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)" GeneratedClassNamespace="$safeprojectname" GeneratedClassName="MySettings">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
-</SettingsFile>]]></ProjectItem>
-              <ProjectItem
-                Name="My Project\Settings.Designer.vb"
-                Encoding="UTF8"><![CDATA['------------------------------------------------------------------------------
-' <autogenerated>
-'     This code was generated by a tool.
-'
-'     Changes to this file may cause incorrect behavior and will be lost if
-'     the code is regenerated.
-' </autogenerated>
-'------------------------------------------------------------------------------
-
-Option Strict Off
-Option Explicit On
-
-
-
-Partial Friend NotInheritable Class MySettings
-    Inherits System.Configuration.ApplicationSettingsBase
-
-    Private Shared m_Value As MySettings
-
-    Private Shared m_SyncObject As Object = New Object
-
-    <System.Diagnostics.DebuggerNonUserCode()> _
-    Public Shared ReadOnly Property Value() As MySettings
-        Get
-            If (MySettings.m_Value Is Nothing) Then
-                System.Threading.Monitor.Enter(MySettings.m_SyncObject)
-                If (MySettings.m_Value Is Nothing) Then
-                    Try
-                        MySettings.m_Value = New MySettings
-                    Finally
-                        System.Threading.Monitor.Exit(MySettings.m_SyncObject)
-                    End Try
-                End If
-            End If
-            Return MySettings.m_Value
-        End Get
-    End Property
-End Class]]></ProjectItem>
-              <ProjectItem
-                Name="Project"
-                Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
-<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
-	<msb:PropertyGroup>
-		<msb:CodeName>scripttask_50b00a323bc749db93a308f0425f4835</msb:CodeName>
-		<msb:ProjectId>{936A5E9E-5A01-46D3-8529-C053171D65C4}</msb:ProjectId>
-		<msb:Language>msBuild</msb:Language>
-		<msb:DisplayName>scripttask_50b00a323bc749db93a308f0425f4835</msb:DisplayName>
-	</msb:PropertyGroup>
-	<msb:ItemGroup>
-		<msb:Project Include="scripttask_50b00a323bc749db93a308f0425f4835.vbproj"/>
-		<msb:File Include="My Project\Settings.Designer.vb"/>
-		<msb:File Include="My Project\Resources.Designer.vb"/>
-		<msb:File Include="My Project\AssemblyInfo.vb"/>
-		<msb:File Include="ScriptMain.vb"/>
-		<msb:File Include="My Project\Resources.resx"/>
-		<msb:File Include="My Project\Settings.settings"/>
-	</msb:ItemGroup>
-</c:Project>]]></ProjectItem>
-              <ProjectItem
                 Name="ScriptMain.vb"
                 Encoding="UTF8"><![CDATA[' Microsoft SQL Server Integration Services user script component
 ' This is your new script component in Microsoft Visual Basic .NET
@@ -609,7 +502,7 @@ Partial Public Class ScriptMain
         Dim readStream As StreamReader
         Dim AuthorXML As String = Dts.Variables("PostData").Value.ToString
         Dim PmidXml As String = ""
-        Dim url As String = Dts.Variables("HMSWebService").Value.ToString
+        Dim url As String = Dts.Variables("PRNSWebService").Value.ToString
         Dim response As HttpWebResponse
         Try
             Dim bytes As Byte() = Encoding.UTF8.GetBytes(AuthorXML)
@@ -669,6 +562,113 @@ Partial Public Class ScriptMain
     End Sub
 
 End Class]]></ProjectItem>
+              <ProjectItem
+                Name="My Project\Settings.settings"
+                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)" GeneratedClassNamespace="$safeprojectname" GeneratedClassName="MySettings">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
+              <ProjectItem
+                Name="My Project\AssemblyInfo.vb"
+                Encoding="UTF8"><![CDATA[Imports System
+Imports System.Reflection
+Imports System.Runtime.InteropServices
+
+' General Information about an assembly is controlled through the following 
+' set of attributes. Change these attribute values to modify the information
+' associated with an assembly.
+
+' Review the values of the assembly attributes
+
+<Assembly: AssemblyTitle("ScriptTask_50b00a323bc749db93a308f0425f4835.vbproj")> 
+<Assembly: AssemblyDescription("")> 
+<Assembly: AssemblyCompany("")> 
+<Assembly: AssemblyProduct("ScriptTask_50b00a323bc749db93a308f0425f4835.vbproj")> 
+<Assembly: AssemblyCopyright("Copyright @  2011")> 
+<Assembly: AssemblyTrademark("")> 
+<Assembly: CLSCompliant(True)> 
+
+<Assembly: ComVisible(False)> 
+
+'The following GUID is for the ID of the typelib if this project is exposed to COM
+<Assembly: Guid("05ae17cd-dd85-40a2-a502-0a7b81e65689")> 
+
+' Version information for an assembly consists of the following four values:
+'
+'      Major Version
+'      Minor Version 
+'      Build Number
+'      Revision
+'
+' You can specify all the values or you can default the Build and Revision Numbers 
+' by using the '*' as shown below:
+' <Assembly: AssemblyVersion("1.0.*")>
+
+<Assembly: AssemblyVersion("1.0.0.0")> 
+<Assembly: AssemblyFileVersion("1.0.0.0")> ]]></ProjectItem>
+              <ProjectItem
+                Name="My Project\Settings.Designer.vb"
+                Encoding="UTF8"><![CDATA['------------------------------------------------------------------------------
+' <autogenerated>
+'     This code was generated by a tool.
+'
+'     Changes to this file may cause incorrect behavior and will be lost if
+'     the code is regenerated.
+' </autogenerated>
+'------------------------------------------------------------------------------
+
+Option Strict Off
+Option Explicit On
+
+
+
+Partial Friend NotInheritable Class MySettings
+    Inherits System.Configuration.ApplicationSettingsBase
+
+    Private Shared m_Value As MySettings
+
+    Private Shared m_SyncObject As Object = New Object
+
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Public Shared ReadOnly Property Value() As MySettings
+        Get
+            If (MySettings.m_Value Is Nothing) Then
+                System.Threading.Monitor.Enter(MySettings.m_SyncObject)
+                If (MySettings.m_Value Is Nothing) Then
+                    Try
+                        MySettings.m_Value = New MySettings
+                    Finally
+                        System.Threading.Monitor.Exit(MySettings.m_SyncObject)
+                    End Try
+                End If
+            End If
+            Return MySettings.m_Value
+        End Get
+    End Property
+End Class]]></ProjectItem>
+              <ProjectItem
+                Name="Project"
+                Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
+	<msb:PropertyGroup>
+		<msb:CodeName>scripttask_50b00a323bc749db93a308f0425f4835</msb:CodeName>
+		<msb:Language>msBuild</msb:Language>
+		<msb:ProjectId>{936A5E9E-5A01-46D3-8529-C053171D65C4}</msb:ProjectId>
+		<msb:DisplayName>scripttask_50b00a323bc749db93a308f0425f4835</msb:DisplayName>
+	</msb:PropertyGroup>
+	<msb:ItemGroup>
+		<msb:Project Include="scripttask_50b00a323bc749db93a308f0425f4835.vbproj"/>
+		<msb:File Include="My Project\AssemblyInfo.vb"/>
+		<msb:File Include="My Project\Resources.Designer.vb"/>
+		<msb:File Include="My Project\Settings.Designer.vb"/>
+		<msb:File Include="ScriptMain.vb"/>
+		<msb:File Include="My Project\Resources.resx"/>
+		<msb:File Include="My Project\Settings.settings"/>
+	</msb:ItemGroup>
+</c:Project>]]></ProjectItem>
               <ProjectItem
                 Name="My Project\Resources.resx"
                 Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -854,14 +854,14 @@ End Namespace]]></ProjectItem>
               <BinaryItem
                 Name="ScriptTask_50b00a323bc749db93a308f0425f4835.vbproj.dll">TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
-ZGUuDQ0KJAAAAAAAAABQRQAATAEDAIdW8VwAAAAAAAAAAOAAAiELAQsAACAAAAAIAAAAAAAA7j8A
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDAEYlaV0AAAAAAAAAAOAAAiELAQsAACAAAAAIAAAAAAAA7j8A
 AAAgAAAAQAAAAAAAEAAgAAAAAgAABAAAAAAAAAAEAAAAAAAAAACAAAAAAgAAAAAAAAIAQIUAABAA
-ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAJQ/AABXAAAAAEAAAFgEAAAAAAAAAAAAAAAAAAAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAJg/AABTAAAAAEAAAFgEAAAAAAAAAAAAAAAAAAAA
 AAAAAGAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAA9B8AAAAgAAAAIAAAAAIA
 AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAFgEAAAAQAAAAAYAAAAiAAAAAAAAAAAAAAAAAABAAABA
 LnJlbG9jAAAMAAAAAGAAAAACAAAAKAAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAADQ
-PwAAAAAAAEgAAAACAAUA3CUAALgZAAABAAAAAAAAACQlAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+PwAAAAAAAEgAAAACAAUA3CUAALwZAAABAAAAAAAAACQlAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4CKAEAAAoqHgIoBAAACiqmcwYAAAqAAQAABHMHAAAKgAIA
 AARzCAAACoADAAAEcwkAAAqABAAABCoAABMwAQALAAAAAQAAEX4BAAAEbwoAAAoqABMwAQALAAAA
 AgAAEX4CAAAEbwsAAAoqABMwAQALAAAAAwAAEX4DAAAEbwwAAAoqABMwAQALAAAABAAAEX4EAAAE
@@ -875,20 +875,20 @@ gAkAAAQqAAAAHgIoIAAACiobMAEAPwAAAA4AABF+CAAABC0yfgkAAAQoEQAACighAAAKfggAAAQt
 HHMWAAAGgAgAAATeEH4JAAAEKBEAAAooIgAACtx+CAAABCoAARAAAAIAHQAMKQAQAAAAAB4CKCQA
 AAoqGzAEABoCAAAPAAARAm8lAAAKbyYAAApyMwAAcG8nAAAKbygAAApvFQAACgpyRQAAcAsCbyUA
 AApvJgAACnJHAABwbycAAApvKAAACm8VAAAKEwQoKQAACgZvKgAAChMFEQQoKwAACnQfAAABEwoR
-CnJjAABwbywAAAoRChEFjrdqby0AAAoRCnJtAABwby4AAAoRCiAQCQUAby8AAAoRCm8wAAAKEwwR
-DBEFFhEFjrdvMQAACt4MEQwsBxEMbzIAAArcEQpvMwAACnQcAAABDQlvNAAACiDIAAAALh9yfwAA
-cAlvNAAACownAAABKDUAAAoTDRENczYAAAp6EQpvMwAACnQcAAABEwsRC283AAAKEwlyvQAAcCg4
+CnJlAABwbywAAAoRChEFjrdqby0AAAoRCnJvAABwby4AAAoRCiAQCQUAby8AAAoRCm8wAAAKEwwR
+DBEFFhEFjrdvMQAACt4MEQwsBxEMbzIAAArcEQpvMwAACnQcAAABDQlvNAAACiDIAAAALh9ygQAA
+cAlvNAAACownAAABKDUAAAoTDRENczYAAAp6EQpvMwAACnQcAAABEwsRC283AAAKEwlyvwAAcCg4
 AAAKEwcRCREHczkAAAoMIKlhAACNKgAAARMICBEIFiCoYQAAbzoAAAoTBislEQgWEQZzOwAAChMO
-BxEOKDwAAAoLCBEIFiCoYQAAbzoAAAoTBhEGFjDWCG89AAAKEQtvPgAACgJvJQAACm8mAAAKcskA
+BxEOKDwAAAoLCBEIFiCoYQAAbzoAAAoTBhEGFjDWCG89AAAKEQtvPgAACgJvJQAACm8mAAAKcssA
 AHBvJwAACgdvPwAACghvPQAACglvPgAACgJvJQAAChZvQAAACt5yJShBAAAKEw8gYOoAAChCAAAK
-EQ9vQwAACihEAAAKAm8lAAAKbyYAAApy3wAAcG8nAAAKAm8lAAAKbyYAAApy3wAAcG8nAAAKbygA
+EQ9vQwAACihEAAAKAm8lAAAKbyYAAApy4QAAcG8nAAAKAm8lAAAKbyYAAApy4QAAcG8nAAAKbygA
 AAoRD29DAAAKKEUAAApvPwAACgJvJQAAChdvQAAACihGAAAK3gHcKgAAQUwAAAIAAACbAAAAEAAA
 AKsAAAAMAAAAAAAAAAAAAABHAAAAYAEAAKcBAABxAAAAIAAAAQIAAABHAAAA0QEAABgCAAABAAAA
 AAAAALQAAADOyu++AQAAAJEAAABsU3lzdGVtLlJlc291cmNlcy5SZXNvdXJjZVJlYWRlciwgbXNj
 b3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1i
 NzdhNWM1NjE5MzRlMDg5I1N5c3RlbS5SZXNvdXJjZXMuUnVudGltZVJlc291cmNlU2V0AgAAAAAA
 AAAAAAAAUEFEUEFEULQAAABCU0pCAQABAAAAAAAMAAAAdjQuMC4zMDMxOQAAAAAFAGwAAAC8CAAA
-I34AACgJAABcCwAAI1N0cmluZ3MAAAAAhBQAAPQAAAAjVVMAeBUAABAAAAAjR1VJRAAAAIgVAAAw
+I34AACgJAABcCwAAI1N0cmluZ3MAAAAAhBQAAPgAAAAjVVMAfBUAABAAAAAjR1VJRAAAAIwVAAAw
 BAAAI0Jsb2IAAAAAAAAAAgAAAVcdogkJDwAAAPolMwAWAAABAAAAOwAAAAoAAAAMAAAAGQAAAAQA
 AABTAAAAAgAAADYAAAAPAAAABAAAAAgAAAAJAAAACQAAAAEAAAAFAAAAAQAAAAMAAAADAAAAAgAA
 AAAAJQsBAAAAAAAKAHgBTgEKAKwBjgEGALwBtQEKABQCTgEGAJICtQEKABQD6gIGAEoDOQMGAHcD
@@ -980,30 +980,30 @@ cmtBdHRyaWJ1dGUAQXNzZW1ibHlDb3B5cmlnaHRBdHRyaWJ1dGUAQXNzZW1ibHlQcm9kdWN0QXR0
 cmlidXRlAEFzc2VtYmx5Q29tcGFueUF0dHJpYnV0ZQBBc3NlbWJseURlc2NyaXB0aW9uQXR0cmli
 dXRlAEFzc2VtYmx5VGl0bGVBdHRyaWJ1dGUAU2NyaXB0VGFza181MGIwMGEzMjNiYzc0OWRiOTNh
 MzA4ZjA0MjVmNDgzNS52YnByb2ouZGxsAAAxTQB5AC4AUgBlAHMAbwB1AHIAYwBlAHMALgBNAHkA
-UgBlAHMAbwB1AHIAYwBlAHMAABFQAG8AcwB0AEQAYQB0AGEAAAEAG0gATQBTAFcAZQBiAFMAZQBy
-AHYAaQBjAGUAAAlQAE8AUwBUAAARdABlAHgAdAAvAHgAbQBsAAA9UABPAFMAVAAgAGYAYQBpAGwA
-ZQBkAC4AIABSAGUAYwBlAGkAdgBlAGQAIABIAFQAVABQACAAewAwAH0AAAt1AHQAZgAtADgAARVB
-AHAAaQBSAGUAcwB1AGwAdABzAAATRQByAHIAbwByAFQAZQB4AHQAAAAoPRZbz3i3T6vEC7gju92U
-AAi3elxWGTTgiQiwP19/EdUKOgMgAAEDAAABBAAAEgwHBhUSGAESDAQAABIIBwYVEhgBEggEAAAS
-EQcGFRIYARIRBAAAEhQHBhUSGAESFAQIABIMBAgAEggECAASEQQIABIUBCABAhwDIAAIBCAAEhUD
-IAAOAh4ABxABAR4AHgAHMAEBARAeAAITAAQgABMABwYVEhkBEwAEKAATAAMGEh0DBhIhBAAAEh0E
-AAASIQUAAQESIQQIABIdBAgAEiEDBhIgAgYcBAAAEiAECAASIAiJhF3NgIDMkQIGCAMGESgEAAAA
-AAQBAAAABSABARE1CAEAAQAAAAAABSACAQ4OGAEACk15VGVtcGxhdGUIMTAuMC4wLjAAAAYVEhgB
-EgwGFRIYARIIBhUSGAESEQYVEhgBEhQEBwESDAQHARIIBAcBEhEEBwESFAQgAQEOEAEAC015LkNv
-bXB1dGVyAAAMAQAHTXkuVXNlcgAAEwEADk15LkFwcGxpY2F0aW9uAAATAQAOTXkuV2ViU2Vydmlj
-ZXMAAAQAARwcAwcBAgMHAQgGAAESFRFRBAcBEhUDBwEOBRABAB4ABAoBHgAEBwEeAAcgBAEODg4O
-YQEANFN5c3RlbS5XZWIuU2VydmljZXMuUHJvdG9jb2xzLlNvYXBIdHRwQ2xpZW50UHJvdG9jb2wS
-Q3JlYXRlX19JbnN0YW5jZV9fE0Rpc3Bvc2VfX0luc3RhbmNlX18AAAAGFRIYARMABhUSGQETAAQK
-ARMABSABARMACAcDEwATABMABCABAQIFAQAAAAAEIAASYQYgAgEOEmEGBwISHRIdBAcBEiEIAQAC
-AAAAAAAEAAEBHAQHARIgBSAAEoCFBSAAEoCJBiABEoCNHAMgABwEAAASdQUgAR0FDgYAARKAkQ4E
-IAEBCgQgAQEIBCAAEnkHIAMBHQUICAUgABKAmQUgABGAnQUAAg4OHAUAARJ1DgcgAgESeRJ1ByAD
-CB0DCAgHIAMBHQMICAUAAg4ODgQgAQEcBgABARKAgQQAAQEIBAABAQ4FAAIcHBwdBxAODhJtEnEO
-HQUIEnUdAxJ5En0ScRJ5Dg4SgIEIAQAIAAAAAAAeAQABAFQCFldyYXBOb25FeGNlcHRpb25UaHJv
-d3MBRwEAGi5ORVRGcmFtZXdvcmssVmVyc2lvbj12NC4wAQBUDhRGcmFtZXdvcmtEaXNwbGF5TmFt
-ZRAuTkVUIEZyYW1ld29yayA0DAEABzEuMC4wLjAAACkBACQwNWFlMTdjZC1kZDg1LTQwYTItYTUw
-Mi0wYTdiODFlNjU2ODkAAAUBAAEAABYBABFDb3B5cmlnaHQgQCAgMjAxMQAANwEAMlNjcmlwdFRh
-c2tfNTBiMDBhMzIzYmM3NDlkYjkzYTMwOGYwNDI1ZjQ4MzUudmJwcm9qAAAAALw/AAAAAAAAAAAA
-AN4/AAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAADQPwAAAAAAAAAAAAAAAAAAAAAAAAAAX0NvckRs
+UgBlAHMAbwB1AHIAYwBlAHMAABFQAG8AcwB0AEQAYQB0AGEAAAEAHVAAUgBOAFMAVwBlAGIAUwBl
+AHIAdgBpAGMAZQAACVAATwBTAFQAABF0AGUAeAB0AC8AeABtAGwAAD1QAE8AUwBUACAAZgBhAGkA
+bABlAGQALgAgAFIAZQBjAGUAaQB2AGUAZAAgAEgAVABUAFAAIAB7ADAAfQAAC3UAdABmAC0AOAAB
+FUEAcABpAFIAZQBzAHUAbAB0AHMAABNFAHIAcgBvAHIAVABlAHgAdAAAAAAAiMYiIyikLUSRylSO
+4gOFtAAIt3pcVhk04IkIsD9ffxHVCjoDIAABAwAAAQQAABIMBwYVEhgBEgwEAAASCAcGFRIYARII
+BAAAEhEHBhUSGAESEQQAABIUBwYVEhgBEhQECAASDAQIABIIBAgAEhEECAASFAQgAQIcAyAACAQg
+ABIVAyAADgIeAAcQAQEeAB4ABzABAQEQHgACEwAEIAATAAcGFRIZARMABCgAEwADBhIdAwYSIQQA
+ABIdBAAAEiEFAAEBEiEECAASHQQIABIhAwYSIAIGHAQAABIgBAgAEiAIiYRdzYCAzJECBggDBhEo
+BAAAAAAEAQAAAAUgAQERNQgBAAEAAAAAAAUgAgEODhgBAApNeVRlbXBsYXRlCDEwLjAuMC4wAAAG
+FRIYARIMBhUSGAESCAYVEhgBEhEGFRIYARIUBAcBEgwEBwESCAQHARIRBAcBEhQEIAEBDhABAAtN
+eS5Db21wdXRlcgAADAEAB015LlVzZXIAABMBAA5NeS5BcHBsaWNhdGlvbgAAEwEADk15LldlYlNl
+cnZpY2VzAAAEAAEcHAMHAQIDBwEIBgABEhURUQQHARIVAwcBDgUQAQAeAAQKAR4ABAcBHgAHIAQB
+Dg4ODmEBADRTeXN0ZW0uV2ViLlNlcnZpY2VzLlByb3RvY29scy5Tb2FwSHR0cENsaWVudFByb3Rv
+Y29sEkNyZWF0ZV9fSW5zdGFuY2VfXxNEaXNwb3NlX19JbnN0YW5jZV9fAAAABhUSGAETAAYVEhkB
+EwAECgETAAUgAQETAAgHAxMAEwATAAQgAQECBQEAAAAABCAAEmEGIAIBDhJhBgcCEh0SHQQHARIh
+CAEAAgAAAAAABAABARwEBwESIAUgABKAhQUgABKAiQYgARKAjRwDIAAcBAAAEnUFIAEdBQ4GAAES
+gJEOBCABAQoEIAEBCAQgABJ5ByADAR0FCAgFIAASgJkFIAARgJ0FAAIODhwFAAESdQ4HIAIBEnkS
+dQcgAwgdAwgIByADAR0DCAgFAAIODg4EIAEBHAYAAQESgIEEAAEBCAQAAQEOBQACHBwcHQcQDg4S
+bRJxDh0FCBJ1HQMSeRJ9EnESeQ4OEoCBCAEACAAAAAAAHgEAAQBUAhZXcmFwTm9uRXhjZXB0aW9u
+VGhyb3dzAUcBABouTkVURnJhbWV3b3JrLFZlcnNpb249djQuMAEAVA4URnJhbWV3b3JrRGlzcGxh
+eU5hbWUQLk5FVCBGcmFtZXdvcmsgNAwBAAcxLjAuMC4wAAApAQAkMDVhZTE3Y2QtZGQ4NS00MGEy
+LWE1MDItMGE3YjgxZTY1Njg5AAAFAQABAAAWAQARQ29weXJpZ2h0IEAgIDIwMTEAADcBADJTY3Jp
+cHRUYXNrXzUwYjAwYTMyM2JjNzQ5ZGI5M2EzMDhmMDQyNWY0ODM1LnZicHJvagAAAADAPwAAAAAA
+AAAAAADePwAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA0D8AAAAAAAAAAAAAAAAAAAAAX0NvckRs
 bE1haW4AbXNjb3JlZS5kbGwAAAAAAP8lACAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAQ
 AAAAGAAAgAAAAAAAAAAAAAAAAAAAAQABAAAAMAAAgAAAAAAAAAAAAAAAAAAAAQAAAAAASAAAAFhA
 AAAABAAAAAAAAAAAAAAABDQAAABWAFMAXwBWAEUAUgBTAEkATwBOAF8ASQBOAEYATwAAAAAAvQTv
@@ -1045,7 +1045,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
-          DTS:refId="Package\Foreach Row Call HMS WebService\Log Completion"
+          DTS:refId="Package\Foreach Row Call PRNS WebService\Log Completion"
           DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:Description="Execute SQL Task"
           DTS:DTSID="{bd92bacc-6303-4c3e-a5a0-ff73d0813531}"
@@ -1059,7 +1059,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{D58CC66A-8C9E-44E9-8BB2-7F5B8E539FE8}"
               SQLTask:IsStoredProc="True"
-              SQLTask:SqlStatementSource="[Profile.Import].[HMSWebservice.AddLog]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              SQLTask:SqlStatementSource="[Profile.Import].[PRNSWebservice.AddLog]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="@logID"
                 SQLTask:DtsVariableName="User::LogID"
@@ -1088,7 +1088,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
-          DTS:refId="Package\Foreach Row Call HMS WebService\Log EndService"
+          DTS:refId="Package\Foreach Row Call PRNS WebService\Log EndService"
           DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:Description="Execute SQL Task"
           DTS:DTSID="{a56c19ba-895e-41e0-8b27-3bb5923e74bc}"
@@ -1102,7 +1102,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{D58CC66A-8C9E-44E9-8BB2-7F5B8E539FE8}"
               SQLTask:IsStoredProc="True"
-              SQLTask:SqlStatementSource="[Profile.Import].[HMSWebservice.AddLog]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              SQLTask:SqlStatementSource="[Profile.Import].[PRNSWebservice.AddLog]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="@logID"
                 SQLTask:DtsVariableName="User::LogID"
@@ -1131,7 +1131,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
-          DTS:refId="Package\Foreach Row Call HMS WebService\Log Error"
+          DTS:refId="Package\Foreach Row Call PRNS WebService\Log Error"
           DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:Description="Execute SQL Task"
           DTS:DTSID="{b615eef3-3e8a-4922-808b-d68c2d32947e}"
@@ -1145,7 +1145,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{D58CC66A-8C9E-44E9-8BB2-7F5B8E539FE8}"
               SQLTask:IsStoredProc="True"
-              SQLTask:SqlStatementSource="[Profile.Import].[HMSWebservice.AddLog]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              SQLTask:SqlStatementSource="[Profile.Import].[PRNSWebservice.AddLog]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="@batchID"
                 SQLTask:DtsVariableName="User::BatchID"
@@ -1192,7 +1192,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
-          DTS:refId="Package\Foreach Row Call HMS WebService\Log StartService"
+          DTS:refId="Package\Foreach Row Call PRNS WebService\Log StartService"
           DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:Description="Execute SQL Task"
           DTS:DTSID="{8B96D077-4FE3-465B-A2F2-9D6069725DB4}"
@@ -1206,7 +1206,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{D58CC66A-8C9E-44E9-8BB2-7F5B8E539FE8}"
               SQLTask:IsStoredProc="True"
-              SQLTask:SqlStatementSource="[Profile.Import].[HMSWebservice.AddLog]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              SQLTask:SqlStatementSource="[Profile.Import].[PRNSWebservice.AddLog]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="@logID"
                 SQLTask:DtsVariableName="User::LogID"
@@ -1247,7 +1247,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
-          DTS:refId="Package\Foreach Row Call HMS WebService\Store Webservice Results"
+          DTS:refId="Package\Foreach Row Call PRNS WebService\Store Webservice Results"
           DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:Description="Execute SQL Task"
           DTS:DTSID="{fe87dbf6-bfa6-46d1-ab45-a8229f953e49}"
@@ -1261,7 +1261,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{D58CC66A-8C9E-44E9-8BB2-7F5B8E539FE8}"
               SQLTask:IsStoredProc="True"
-              SQLTask:SqlStatementSource="[Profile.Import].[HMSWebservice.ImportData]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              SQLTask:SqlStatementSource="[Profile.Import].[PRNSWebservice.ImportData]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="@Job"
                 SQLTask:DtsVariableName="User::Job"
@@ -1280,57 +1280,57 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
       </DTS:Executables>
       <DTS:PrecedenceConstraints>
         <DTS:PrecedenceConstraint
-          DTS:refId="Package\Foreach Row Call HMS WebService.PrecedenceConstraints[Constraint]"
+          DTS:refId="Package\Foreach Row Call PRNS WebService.PrecedenceConstraints[Constraint]"
           DTS:CreationName=""
           DTS:DTSID="{797EC0C5-F0C3-42FD-8C74-B6F2A4E11672}"
-          DTS:From="Package\Foreach Row Call HMS WebService\Call HMS Webservice"
+          DTS:From="Package\Foreach Row Call PRNS WebService\Call PRNS Webservice"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint"
-          DTS:To="Package\Foreach Row Call HMS WebService\Log EndService" />
+          DTS:To="Package\Foreach Row Call PRNS WebService\Log EndService" />
         <DTS:PrecedenceConstraint
-          DTS:refId="Package\Foreach Row Call HMS WebService.PrecedenceConstraints[Constraint 1]"
+          DTS:refId="Package\Foreach Row Call PRNS WebService.PrecedenceConstraints[Constraint 1]"
           DTS:CreationName=""
           DTS:DTSID="{AD6F4F0F-FACD-4F71-B23C-FBDCDCFD02F7}"
-          DTS:From="Package\Foreach Row Call HMS WebService\Store Webservice Results"
+          DTS:From="Package\Foreach Row Call PRNS WebService\Store Webservice Results"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 1"
-          DTS:To="Package\Foreach Row Call HMS WebService\Log Completion" />
+          DTS:To="Package\Foreach Row Call PRNS WebService\Log Completion" />
         <DTS:PrecedenceConstraint
-          DTS:refId="Package\Foreach Row Call HMS WebService.PrecedenceConstraints[Constraint 2]"
+          DTS:refId="Package\Foreach Row Call PRNS WebService.PrecedenceConstraints[Constraint 2]"
           DTS:CreationName=""
           DTS:DTSID="{BFE8F278-79EC-42CD-B18D-CA10952891A3}"
-          DTS:From="Package\Foreach Row Call HMS WebService\Log StartService"
+          DTS:From="Package\Foreach Row Call PRNS WebService\Log StartService"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 2"
-          DTS:To="Package\Foreach Row Call HMS WebService\Call HMS Webservice" />
+          DTS:To="Package\Foreach Row Call PRNS WebService\Call PRNS Webservice" />
         <DTS:PrecedenceConstraint
-          DTS:refId="Package\Foreach Row Call HMS WebService.PrecedenceConstraints[Constraint 3]"
+          DTS:refId="Package\Foreach Row Call PRNS WebService.PrecedenceConstraints[Constraint 3]"
           DTS:CreationName=""
           DTS:DTSID="{E91C6FCA-EA56-4770-91F0-E9CE7D98349B}"
-          DTS:From="Package\Foreach Row Call HMS WebService\Log EndService"
+          DTS:From="Package\Foreach Row Call PRNS WebService\Log EndService"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 3"
-          DTS:To="Package\Foreach Row Call HMS WebService\Store Webservice Results" />
+          DTS:To="Package\Foreach Row Call PRNS WebService\Store Webservice Results" />
         <DTS:PrecedenceConstraint
-          DTS:refId="Package\Foreach Row Call HMS WebService.PrecedenceConstraints[Constraint 6]"
+          DTS:refId="Package\Foreach Row Call PRNS WebService.PrecedenceConstraints[Constraint 6]"
           DTS:CreationName=""
           DTS:DTSID="{006E65DF-E9ED-40CB-9CED-7A9AC247BC7A}"
-          DTS:From="Package\Foreach Row Call HMS WebService\Call HMS Webservice"
+          DTS:From="Package\Foreach Row Call PRNS WebService\Call PRNS Webservice"
           DTS:ObjectName="Constraint 6"
-          DTS:To="Package\Foreach Row Call HMS WebService\Log Error"
+          DTS:To="Package\Foreach Row Call PRNS WebService\Log Error"
           DTS:Value="1" />
         <DTS:PrecedenceConstraint
-          DTS:refId="Package\Foreach Row Call HMS WebService.PrecedenceConstraints[Constraint 7]"
+          DTS:refId="Package\Foreach Row Call PRNS WebService.PrecedenceConstraints[Constraint 7]"
           DTS:CreationName=""
           DTS:DTSID="{BF90CEA4-A98E-4BF5-883D-FEC4ED56F6AB}"
-          DTS:From="Package\Foreach Row Call HMS WebService\Store Webservice Results"
+          DTS:From="Package\Foreach Row Call PRNS WebService\Store Webservice Results"
           DTS:ObjectName="Constraint 7"
-          DTS:To="Package\Foreach Row Call HMS WebService\Log Error"
+          DTS:To="Package\Foreach Row Call PRNS WebService\Log Error"
           DTS:Value="1" />
       </DTS:PrecedenceConstraints>
       <DTS:EventHandlers>
         <DTS:EventHandler
-          DTS:refId="Package\Foreach Row Call HMS WebService.EventHandlers[OnError]"
+          DTS:refId="Package\Foreach Row Call PRNS WebService.EventHandlers[OnError]"
           DTS:CreationName="OnError"
           DTS:DTSID="{FAB6634A-8979-4E31-9455-EF966734ED0B}"
           DTS:EventID="4587528"
@@ -1350,7 +1350,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           </DTS:Variables>
           <DTS:Executables>
             <DTS:Executable
-              DTS:refId="Package\Foreach Row Call HMS WebService.EventHandlers[OnError]\Store Error"
+              DTS:refId="Package\Foreach Row Call PRNS WebService.EventHandlers[OnError]\Store Error"
               DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ScriptTask.ScriptTask, Microsoft.SqlServer.ScriptTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
               DTS:Description="Script Task"
               DTS:DTSID="{F7D115B6-0896-4632-B793-94BFE9221875}"
@@ -2026,20 +2026,20 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
       <DTS:ForEachVariableMappings>
         <DTS:ForEachVariableMapping
           DTS:CreationName=""
-          DTS:DTSID="{EB213339-0AF1-43EE-BA0A-444AC2BE31F7}"
-          DTS:ObjectName="{EB213339-0AF1-43EE-BA0A-444AC2BE31F7}"
+          DTS:DTSID="{B18CF0E5-E2C1-42EE-8915-32B158779700}"
+          DTS:ObjectName="{B18CF0E5-E2C1-42EE-8915-32B158779700}"
           DTS:ValueIndex="1"
           DTS:VariableName="User::n" />
         <DTS:ForEachVariableMapping
           DTS:CreationName=""
-          DTS:DTSID="{9FB44F45-E8C5-4958-BED5-B1929B8A2133}"
-          DTS:ObjectName="{9FB44F45-E8C5-4958-BED5-B1929B8A2133}"
+          DTS:DTSID="{A3BAFF9E-EDF0-4581-A451-C2BBE8EB7E89}"
+          DTS:ObjectName="{A3BAFF9E-EDF0-4581-A451-C2BBE8EB7E89}"
           DTS:ValueIndex="0"
           DTS:VariableName="User::BatchID" />
         <DTS:ForEachVariableMapping
           DTS:CreationName=""
-          DTS:DTSID="{199FB3E6-96A0-498E-AE0F-5925533A52B8}"
-          DTS:ObjectName="{199FB3E6-96A0-498E-AE0F-5925533A52B8}"
+          DTS:DTSID="{E2535D60-5A13-4FE3-9F97-0CF88B8CC32C}"
+          DTS:ObjectName="{E2535D60-5A13-4FE3-9F97-0CF88B8CC32C}"
           DTS:ValueIndex="2"
           DTS:VariableName="User::PostData" />
       </DTS:ForEachVariableMappings>
@@ -2059,7 +2059,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{D58CC66A-8C9E-44E9-8BB2-7F5B8E539FE8}"
           SQLTask:IsStoredProc="True"
-          SQLTask:SqlStatementSource="[Profile.Import].[HMSWebservice.GetPostData]"
+          SQLTask:SqlStatementSource="[Profile.Import].[PRNSWebservice.GetPostData]"
           SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ResultBinding
             SQLTask:ResultName="0"
@@ -2082,7 +2082,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
       DTS:From="Package\Get API Post Data"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
-      DTS:To="Package\Foreach Row Call HMS WebService" />
+      DTS:To="Package\Foreach Row Call PRNS WebService" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -2097,49 +2097,49 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="178,42"
-          Id="Package\Foreach Row Call HMS WebService\Call HMS Webservice"
-          TopLeft="112.716981132075,155.528301886792" />
+          Size="182,42"
+          Id="Package\Foreach Row Call PRNS WebService\Call PRNS Webservice"
+          TopLeft="110.716981132075,154.528301886792" />
         <NodeLayout
           Size="205,44"
-          Id="Package\Foreach Row Call HMS WebService\Log Completion"
+          Id="Package\Foreach Row Call PRNS WebService\Log Completion"
           TopLeft="156.566037735849,339.603773584906" />
         <NodeLayout
           Size="169,44"
-          Id="Package\Foreach Row Call HMS WebService\Log EndService"
+          Id="Package\Foreach Row Call PRNS WebService\Log EndService"
           TopLeft="155.471698113207,214.433962264151" />
         <NodeLayout
           Size="123,42"
-          Id="Package\Foreach Row Call HMS WebService\Log Error"
+          Id="Package\Foreach Row Call PRNS WebService\Log Error"
           TopLeft="399.66037735849,38.3584905660377" />
         <NodeLayout
           Size="136,44"
-          Id="Package\Foreach Row Call HMS WebService\Log StartService"
+          Id="Package\Foreach Row Call PRNS WebService\Log StartService"
           TopLeft="153.849056603774,17.9811320754717" />
         <NodeLayout
           Size="198,42"
-          Id="Package\Foreach Row Call HMS WebService\Store Webservice Results"
+          Id="Package\Foreach Row Call PRNS WebService\Store Webservice Results"
           TopLeft="160.188679245283,279.264150943396" />
         <EdgeLayout
-          Id="Package\Foreach Row Call HMS WebService.PrecedenceConstraints[Constraint]"
-          TopLeft="290.716981132075,176.528301886792">
+          Id="Package\Foreach Row Call PRNS WebService.PrecedenceConstraints[Constraint]"
+          TopLeft="292.716981132075,175.528301886792">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-50.745283018868,37.905660377359"
+              EndConnector="-52.745283018868,38.905660377359"
               Start="0,0"
-              End="-50.745283018868,30.405660377359">
+              End="-52.745283018868,31.405660377359">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="-46.745283018868,0" />
+                    End="-48.745283018868,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="-46.745283018868,0"
-                    Point2="-50.745283018868,0"
-                    Point3="-50.745283018868,4" />
+                    Point1="-48.745283018868,0"
+                    Point2="-52.745283018868,0"
+                    Point3="-52.745283018868,4" />
                   <mssgle:LineSegment
-                    End="-50.745283018868,30.405660377359" />
+                    End="-52.745283018868,31.405660377359" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2149,7 +2149,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Foreach Row Call HMS WebService.PrecedenceConstraints[Constraint 1]"
+          Id="Package\Foreach Row Call PRNS WebService.PrecedenceConstraints[Constraint 1]"
           TopLeft="358.188679245283,300.264150943396">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -2183,31 +2183,31 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Foreach Row Call HMS WebService.PrecedenceConstraints[Constraint 2]"
+          Id="Package\Foreach Row Call PRNS WebService.PrecedenceConstraints[Constraint 2]"
           TopLeft="221.849056603774,61.9811320754717">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-48.4654088050323,93.5471698113203"
+              EndConnector="-49.132075471699,92.5471698113203"
               Start="0,0"
-              End="-48.4654088050323,86.0471698113203">
+              End="-49.132075471699,85.0471698113203">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,51.6282724713197" />
+                    End="0,51.0443951165369" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,51.6282724713197"
-                    Point2="0,55.6282724713197"
-                    Point3="-4,55.6282724713197" />
+                    Point1="0,51.0443951165369"
+                    Point2="0,55.0443951165369"
+                    Point3="-4,55.0443951165369" />
                   <mssgle:LineSegment
-                    End="-44.4654088050323,55.6282724713197" />
+                    End="-45.132075471699,55.0443951165369" />
                   <mssgle:CubicBezierSegment
-                    Point1="-44.4654088050323,55.6282724713197"
-                    Point2="-48.4654088050323,55.6282724713197"
-                    Point3="-48.4654088050323,59.6282724713197" />
+                    Point1="-45.132075471699,55.0443951165369"
+                    Point2="-49.132075471699,55.0443951165369"
+                    Point3="-49.132075471699,59.0443951165369" />
                   <mssgle:LineSegment
-                    End="-48.4654088050323,86.0471698113203" />
+                    End="-49.132075471699,85.0471698113203" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2217,7 +2217,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Foreach Row Call HMS WebService.PrecedenceConstraints[Constraint 3]"
+          Id="Package\Foreach Row Call PRNS WebService.PrecedenceConstraints[Constraint 3]"
           TopLeft="324.471698113207,236.433962264151">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -2245,43 +2245,43 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Foreach Row Call HMS WebService.PrecedenceConstraints[Constraint 6]"
-          TopLeft="230.050314465408,155.528301886792">
+          Id="Package\Foreach Row Call PRNS WebService.PrecedenceConstraints[Constraint 6]"
+          TopLeft="230.716981132075,154.528301886792">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="211.943396226415,-75.1698113207543"
+              EndConnector="211.276729559748,-74.1698113207543"
               Start="0,0"
-              End="211.943396226415,-67.6698113207543">
+              End="211.276729559748,-66.6698113207543">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,-33.4011245605087" />
+                    End="0,-32.8946108757222" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,-33.4011245605087"
-                    Point2="0,-37.4011245605087"
-                    Point3="4,-37.4011245605087" />
+                    Point1="0,-32.8946108757222"
+                    Point2="0,-36.8946108757222"
+                    Point3="4,-36.8946108757222" />
                   <mssgle:LineSegment
-                    End="207.943396226415,-37.4011245605087" />
+                    End="207.276729559748,-36.8946108757222" />
                   <mssgle:CubicBezierSegment
-                    Point1="207.943396226415,-37.4011245605087"
-                    Point2="211.943396226415,-37.4011245605087"
-                    Point3="211.943396226415,-41.4011245605087" />
+                    Point1="207.276729559748,-36.8946108757222"
+                    Point2="211.276729559748,-36.8946108757222"
+                    Point3="211.276729559748,-40.8946108757222" />
                   <mssgle:LineSegment
-                    End="211.943396226415,-67.6698113207543" />
+                    End="211.276729559748,-66.6698113207543" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="90.7303504569575,-32.4011245605087,30.4826953125,9.7490234375"
+              BoundingBox="90.3970171236242,-31.8946108757222,30.4826953125,9.7490234375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Foreach Row Call HMS WebService.PrecedenceConstraints[Constraint 7]"
+          Id="Package\Foreach Row Call PRNS WebService.PrecedenceConstraints[Constraint 7]"
           TopLeft="290.85534591195,279.264150943396">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -2321,7 +2321,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           IsExpanded="True"
           PanelSize="549,505"
           Size="549,549"
-          Id="Package\Foreach Row Call HMS WebService"
+          Id="Package\Foreach Row Call PRNS WebService"
           TopLeft="5.5,68.5943396226415" />
         <NodeLayout
           Size="164,42"
@@ -2359,13 +2359,13 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
     </LayoutInfo>
   </Package>
   <DtsEventHandler
-    design-time-name="Package\Foreach Row Call HMS WebService.EventHandlers[OnError]">
+    design-time-name="Package\Foreach Row Call PRNS WebService.EventHandlers[OnError]">
     <LayoutInfo>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
           Size="135.773584905661,43.9245283018868"
-          Id="Package\Foreach Row Call HMS WebService.EventHandlers[OnError]\Store Error"
+          Id="Package\Foreach Row Call PRNS WebService.EventHandlers[OnError]\Store Error"
           TopLeft="5.5,5.5" />
       </GraphLayout>
     </LayoutInfo>

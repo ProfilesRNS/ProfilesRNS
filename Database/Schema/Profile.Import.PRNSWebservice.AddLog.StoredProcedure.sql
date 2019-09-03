@@ -2,7 +2,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [Profile.Import].[HMSWebservice.AddLog]
+CREATE PROCEDURE [Profile.Import].[PRNSWebservice.AddLog]
 	@logID BIGINT = -1,
 	@batchID varchar(100) = null,
 	@rowID int = -1,
@@ -15,27 +15,27 @@ BEGIN
 	IF @action='StartService'
 		BEGIN
 			DECLARE @LogIDTable TABLE (logID BIGINT)
-			INSERT INTO [Profile.Import].[HMSWebservice.Log] (Job, BatchID, RowID, ServiceCallStart)
+			INSERT INTO [Profile.Import].[PRNSWebservice.Log] (Job, BatchID, RowID, ServiceCallStart)
 			OUTPUT Inserted.LogID INTO @LogIDTable
 			VALUES (@job, @batchID, @rowID, GETDATE())
 			select @logID = LogID from @LogIDTable
 		END
 	IF @action='EndService'
 		BEGIN
-			UPDATE [Profile.Import].[HMSWebservice.Log]
+			UPDATE [Profile.Import].[PRNSWebservice.Log]
 			   SET ServiceCallEnd = GETDATE()
 			 WHERE LogID = @logID
 		END
 	IF @action='RowComplete'
 		BEGIN
-			UPDATE [Profile.Import].[HMSWebservice.Log]
+			UPDATE [Profile.Import].[PRNSWebservice.Log]
 			   SET ProcessEnd  =GETDATE(),
 				   Success= 1
 			 WHERE LogID = @logID
 		END
 	IF @action='Error'
 		BEGIN
-			UPDATE [Profile.Import].[HMSWebservice.Log]
+			UPDATE [Profile.Import].[PRNSWebservice.Log]
 			   SET ErrorText = @actionText,
 				   ProcessEnd  =GETDATE(),
 				   Success=0

@@ -3,7 +3,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE [Profile.Import].[HMSWebservice.ImportData]
+CREATE PROCEDURE [Profile.Import].[PRNSWebservice.ImportData]
 	@Job varchar(55),
 	@Data xml
 AS
