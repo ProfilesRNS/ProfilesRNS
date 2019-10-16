@@ -241,6 +241,9 @@ rem type Profile.Data.Person.MediaLinks.Table.sql
 type Profile.Data.Publication.PubMed.Bibliometrics.Table.sql
 type Profile.Data.Publication.PubMed.JournalHeading.Table.sql
 type Profile.Import.PRNSWebservice.Log.Table.sql
+type Profile.Module.GenericRDF.Data.Table.sql
+type Profile.Module.GenericRDF.Plugins.Table.sql
+
 
 type RDF..fnTripleHash.UserDefinedFunction.sql
 type Utility.Application.fnText2Bool.UserDefinedFunction.sql
@@ -643,3 +646,8 @@ type Profile.Import.PRNSWebservice.GetPostData.StoredProcedure.sql
 type Profile.Import.PRNSWebservice.ImportData.StoredProcedure.sql
 type Profile.Import.PRNSWebservice.AddLog.StoredProcedure.sql
 type Profile.Module.CustomViewAuthorInAuthorship.GetJournalHeadings.StoredProcedure.sql
+type Profile.Module.GenericRDF.AddEditPluginData.StoredProcedure.sql
+type Profile.Module.GenericRDF.AddPluginToProfile.StoredProcedure.sql
+type Profile.Module.GenericRDF.AddUpdateOntology.StoredProcedure.sql
+type Profile.Module.GenericRDF.GetPluginData.StoredProcedure.sql
+type Profile.Module.GenericRDF.RemovePluginFromProfile.StoredProcedure.sql
