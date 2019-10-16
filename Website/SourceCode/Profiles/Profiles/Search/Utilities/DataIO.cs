@@ -720,9 +720,10 @@ namespace Profiles.Search.Utilities
                 try
                 {
 
-                    string sql = "EXEC [Profile.Data].[Organization.GetInstitutions]";
+                    string sql = "EXEC [Profile.Data].[Organization.GetInstitutions] @OnlyActivePrimaryAffiliation=1";
 
-                    SqlDataReader sqldr = this.GetSQLDataReader("", sql, CommandType.Text, CommandBehavior.CloseConnection, null);
+                    using (SqlDataReader sqldr = this.GetSQLDataReader(sql, CommandType.Text, CommandBehavior.CloseConnection, null))
+                    {
 
                     while (sqldr.Read())
                         institutions.Add(new GenericListItem(sqldr["InstitutionName"].ToString(), sqldr["URI"].ToString()));
@@ -730,7 +731,7 @@ namespace Profiles.Search.Utilities
                     //Always close your readers
                     if (!sqldr.IsClosed)
                         sqldr.Close();
-
+                    }
                     //Defaulted this to be one hour
                     Framework.Utilities.Cache.SetWithTimeout("GetInstitutions", institutions, 3600);
 
