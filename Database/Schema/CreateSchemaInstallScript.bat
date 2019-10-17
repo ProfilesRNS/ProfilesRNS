@@ -243,6 +243,10 @@ type Profile.Data.Publication.PubMed.JournalHeading.Table.sql
 type Profile.Import.PRNSWebservice.Log.Table.sql
 type Profile.Module.GenericRDF.Data.Table.sql
 type Profile.Module.GenericRDF.Plugins.Table.sql
+type Profile.Cache.List.Export.Publications.Table.sql
+type Profile.Data.List.Admin.Table.sql
+type Profile.Data.List.General.Table.sql
+type Profile.Data.List.Member.Table.sql
 
 
 type RDF..fnTripleHash.UserDefinedFunction.sql
@@ -651,3 +655,16 @@ type Profile.Module.GenericRDF.AddPluginToProfile.StoredProcedure.sql
 type Profile.Module.GenericRDF.AddUpdateOntology.StoredProcedure.sql
 type Profile.Module.GenericRDF.GetPluginData.StoredProcedure.sql
 type Profile.Module.GenericRDF.RemovePluginFromProfile.StoredProcedure.sql
+type Profile.Data.List.AddRemove.Filter.StoredProcedure.sql
+type Profile.Data.List.AddRemove.Person.StoredProcedure.sql
+type Profile.Data.List.AddRemove.SelectedPeople.StoredProcedure.sql
+type Profile.Data.List.AddRemove.Search.StoredProcedure.sql
+type Profile.Data.List.ExportCoAuthorConnections.StoredProcedure.sql
+type Profile.Data.List.ExportPersonList.StoredProcedure.sql
+type Profile.Data.List.ExportPersonPublicationsList.StoredProcedure.sql
+type Profile.Data.List.GetList.StoredProcedure.sql
+type Profile.Data.List.GetPeople.StoredProcedure.sql
+type Profile.Data.List.GetSummary.StoredProcedure.sql
+type Profile.Module.NetworkMap.GetList.StoredProcedure.sql
+type Profile.Module.NetworkRadial.List.GetCoAuthors.StoredProcedure.sql
+type Profile.Cache.List.Export.UpdatePublications.StoredProcedure.sql

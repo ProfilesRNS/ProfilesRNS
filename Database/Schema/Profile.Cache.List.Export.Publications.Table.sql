@@ -1,0 +1,14 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [Profile.Cache].[List.Export.Publications] (
+    [PersonID] INT           NOT NULL,
+    [Data]     VARCHAR (MAX) NULL,
+    PRIMARY KEY CLUSTERED ([PersonID] ASC)
+)
+
+GO

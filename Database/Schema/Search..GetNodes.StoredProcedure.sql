@@ -6,7 +6,8 @@ CREATE PROCEDURE [Search.].[GetNodes]
 	@SearchOptions XML,
 	@SessionID UNIQUEIDENTIFIER = NULL,
 	@Lookup BIT = 0,
-	@UseCache VARCHAR(50) = 'Public'
+	@UseCache VARCHAR(50) = 'Public',
+	@NoRDF BIT =0
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -55,7 +56,7 @@ BEGIN
 		END
 		-- Run the search based on the cache type
 		IF @UseCache = 'Public'
-			EXEC [Search.Cache].[Public.GetNodes] @SearchOptions = @SearchOptions, @SessionID = @SessionID
+			EXEC [Search.Cache].[Public.GetNodes] @SearchOptions = @SearchOptions, @SessionID = @SessionID, @NoRDF=@NoRDF
 		ELSE IF @UseCache = 'Private'
 			EXEC [Search.Cache].[Private.GetNodes] @SearchOptions = @SearchOptions, @SessionID = @SessionID
 	END
