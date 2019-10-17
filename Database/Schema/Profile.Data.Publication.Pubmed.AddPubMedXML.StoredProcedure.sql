@@ -35,7 +35,7 @@ BEGIN
 		IF @@TRANCOUNT > 0  ROLLBACK
  
 		-- Raise an error with the details of the exception
-		SELECT @ErrMsg = '[Profile.Data].[Publication.Pubmed.AddPubMedXML] FAILED WITH : ' + ERROR_MESSAGE(),
+		SELECT @ErrMsg = '[Profile.Data].[Publication.Pubmed.AddPubMedXML] FAILED for PMID: ' + cast(@PMID as varchar(50)) + ' WITH : ' + ERROR_MESSAGE(),
 					 @ErrSeverity = ERROR_SEVERITY()
  
 		RAISERROR(@ErrMsg, @ErrSeverity, 1)
