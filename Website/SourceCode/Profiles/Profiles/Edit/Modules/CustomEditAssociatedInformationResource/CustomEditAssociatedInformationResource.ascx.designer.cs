@@ -220,6 +220,15 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource {
         protected global::System.Web.UI.WebControls.PlaceHolder phDeletePub;
         
         /// <summary>
+        /// btnImgDeletePub2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image btnImgDeletePub2;
+        
+        /// <summary>
         /// btnDeletePub control.
         /// </summary>
         /// <remarks>
@@ -236,6 +245,15 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image btnImgDeletePub;
+        
+        /// <summary>
+        /// btnDeleteGray control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal btnDeleteGray;
         
         /// <summary>
         /// pnlSyncMemberPubs control.
@@ -490,15 +508,6 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource {
         protected global::System.Web.UI.WebControls.TextBox txtGroupMemberFiltersStartDate;
         
         /// <summary>
-        /// FilteredTextBoxExtender1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.FilteredTextBoxExtender FilteredTextBoxExtender1;
-        
-        /// <summary>
         /// btnGroupMemberFiltersStartCalendar control.
         /// </summary>
         /// <remarks>
@@ -524,15 +533,6 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtGroupMemberFiltersEndDate;
-        
-        /// <summary>
-        /// FilteredTextBoxExtender2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.FilteredTextBoxExtender FilteredTextBoxExtender2;
         
         /// <summary>
         /// btnGroupMemberFiltersEndCalendar control.

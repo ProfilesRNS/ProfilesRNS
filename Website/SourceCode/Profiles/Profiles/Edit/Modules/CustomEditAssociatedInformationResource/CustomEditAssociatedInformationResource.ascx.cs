@@ -57,7 +57,7 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
         {
 
             SessionManagement sm = new SessionManagement();
-            Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
+            DataIO data = new DataIO();
             propdata = new Profiles.Profile.Utilities.DataIO();
 
             this._subject = Convert.ToInt64(Request.QueryString["subject"]);
@@ -72,7 +72,7 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
             securityOptions.Subject = this._subject;
             securityOptions.PredicateURI = this._predicateuri;
             securityOptions.PrivacyCode = Convert.ToInt32(this.PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@ViewSecurityGroup").Value);
-            securityOptions.SecurityGroups = new XmlDataDocument();
+            securityOptions.SecurityGroups = new XmlDocument();
             securityOptions.SecurityGroups.LoadXml(base.PresentationXML.DocumentElement.LastChild.OuterXml);
 
             securityOptions.BubbleClick += SecurityDisplayed;
@@ -87,7 +87,8 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
             if (Session["pnl.Visible"] != null &&
                 !(
                     buttonID.Equals("btnGroupMemberFiltersReset") ||
-                    buttonID.Equals("btnGroupMemberFiltersApply")
+                    buttonID.Equals("btnGroupMemberFiltersApply") ||
+                    buttonID.Equals("btnPubMedReset")
                 )
                )
             {
@@ -132,7 +133,14 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
             }
 
 
-            if (buttonID.Equals("btnAddPubMed") || buttonID.Equals("btnPubMedById")) {
+            if (buttonID.Equals("btnAddPubMed") || buttonID.Equals("btnPubMedById") || buttonID.Equals("btnPubMedReset")) {
+                txtSearchAffiliation.Text = "";
+                txtSearchAuthor.Text = "";
+                //txtSearchTitle.Text = "";
+                txtSearchKeyword.Text = "";
+                txtPubMedQuery.Text = "";
+                rdoPubMedQuery.Checked = false;
+                rdoPubMedKeyword.Checked = true;
                 phAddPubMed.Visible = true;
                 phAddMemberPubs.Visible = false;
                 pnlAddPubMed.Visible = true;
@@ -158,7 +166,7 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
                     {
                         string[] selectedRowStringArray = selectedRows.Split(',');
 
-                        Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
+                        DataIO data = new DataIO();
                         System.Data.SqlClient.SqlDataReader sqldr = data.GetGroupMembers(_subject);
                         personIDs = "<PersonIDs>";
                         int i = 0;
@@ -269,7 +277,7 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
             btnImgAddCustom.ImageUrl = Root.Domain + "/Framework/images/icon_squareArrow.gif";
             btnImgDeletePub.ImageUrl = Root.Domain + "/Framework/images/icon_squareArrow.gif";
 
-            Edit.Utilities.DataIO data = new Edit.Utilities.DataIO();
+            DataIO data = new DataIO();
             if (data.GetGroupPublicationOption(_personId)) litSyncMemberPubs.Text = "(<b>On</b> / Off)";
             else litSyncMemberPubs.Text = "(On / <b>Off</b>)";
 
@@ -321,7 +329,7 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
                 hf.Value = gpi.Code.ToString();
                 l.Text = gpi.Label;
 
-                Edit.Utilities.DataIO data = new Edit.Utilities.DataIO();
+                DataIO data = new DataIO();
                 int groupPublicationOption = 0;
                 if (data.GetGroupPublicationOption(_personId)) groupPublicationOption = 1;
                 if (groupPublicationOption == gpi.Code) rb.Checked = true;
@@ -343,8 +351,8 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
             ((RadioButton)row.FindControl("rdoGroupPublicationOption")).Checked = true;
 
             int o = Convert.ToInt32(((HiddenField)row.Cells[0].FindControl("hdnGroupPublicationOption")).Value);
-            Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
-            data.SetGroupPublicationOption(_personId, o);
+            DataIO data = new DataIO();
+            data.SetGroupPublicationOption(_personId, _subject, o);
             reset();
         }
 
@@ -380,12 +388,12 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
             else
                 Session["CurrentPersonEditing"] = _personId;
 
-            Edit.Utilities.DataIO data;
-            data = new Edit.Utilities.DataIO();
+            DataIO data;
+            data = new DataIO();
 
             string predicateuri = Request.QueryString["predicateuri"].Replace("!", "#");
             this.PropertyListXML = propdata.GetPropertyList(this.BaseData, base.PresentationXML, predicateuri, false, true, false);
-            litBackLink.Text = "<a href='" + Root.Domain + "/edit/" + _subject + "'>Edit Menu</a>" + " &gt; <b>" + PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@Label").Value + "</b>";
+            litBackLink.Text = "<a href='" + Root.Domain + "/edit/default.aspx?subject=" + _subject + "'>Edit Menu</a>" + " &gt; <b>" + PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@Label").Value + "</b>";
             if (data.GetGroupPublicationOption(_personId)) litSyncMemberPubs.Text = "(<b>On</b> / Off)";
             else litSyncMemberPubs.Text = "(On / <b>Off</b>)";
 
@@ -400,16 +408,34 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
             BuildPersonFilterList();
         }
 
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            if (grdEditPublications.Rows.Count == 0)
+            {
+                btnDeleteGray.Visible = true;
+                btnDeletePub.Visible = false;
+                btnDeletePub.Enabled = false;
+                btnImgDeletePub.Visible = false;
+                btnImgDeletePub2.Visible = true;
+
+                btnDeletePubMedOnly.Enabled = false;
+                btnDeleteCustomOnly.Enabled = false;
+                btnDeleteAll.Enabled = false;
+                btnDeletePubMedClose.Enabled = false;
+            }
+
+        }
+
         private void BuildPersonFilterList()
         {
-            Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
+            DataIO data = new DataIO();
 
             DropDownList ddl = new DropDownList();
             ddl.ID = "ddlChkList";
             ListItem lstItem = new ListItem();
             ddl.Items.Insert(0, lstItem);
             ddl.Attributes.Add("title", "Display Name");
-            ddl.Width = new Unit(248);
+            ddl.Width = new Unit(250);
             ddl.Height = new Unit(20);
             ddl.Attributes.Add("onclick", "showdivonClick()");
             ddl.Attributes.Add("onkeypress", "showdivonClick()");
@@ -465,7 +491,7 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
             div.Style.Add("position", "absolute");
             div.Style.Add("fload", "left");
             div.Style.Add("border", "black 1px solid");
-            div.Style.Add("width", "248px");
+            div.Style.Add("width", "249px");
             div.Style.Add("height", "180px");
             div.Style.Add("overflow", "AUTO");
             div.Style.Add("display", "none");
@@ -543,11 +569,11 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
             IDataReader reader = null;
             try
             {
-                Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
+                DataIO data = new DataIO();
 
                 HiddenField hdn = (HiddenField)grdEditPublications.Rows[grdEditPublications.SelectedIndex].FindControl("hdnMPID");
 
-                reader = data.GetCustomPub(hdn.Value);
+                reader = data.GetGroupCustomPub(hdn.Value);
 
                 if (reader.Read())
                 {
@@ -612,7 +638,7 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
             string key = lb.CommandArgument;
 
             //string key = grdEditPublications.DataKeys[0].Value.ToString();
-            Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
+            DataIO data = new DataIO();
 
 
             data.DeleteOneGroupPublication(Convert.ToInt32(Session["ProfileUsername"]), Convert.ToInt64(Session["NodeID"]), key, this.PropertyListXML);
@@ -693,7 +719,7 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
             myXml.LoadXml(this.HttpPost(uri, "Catalyst", "text/plain"));
             XmlNodeList nodes = myXml.SelectNodes("PubmedArticleSet/PubmedArticle");
 
-            Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
+            DataIO data = new DataIO();
 
             foreach (XmlNode node in nodes)
             {
@@ -744,8 +770,8 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
 
         protected void showMemberPublications(DateTime startDate, DateTime endDate, string personIDs)
         {
-            Edit.Utilities.DataIO data;
-            data = new Edit.Utilities.DataIO();
+            DataIO data;
+            data = new DataIO();
             List<PublicationState> memberPubs = data.GetGroupMemberPubs(_personId, startDate, endDate, personIDs);
 
             PubMedResults.Tables.Clear();
@@ -957,7 +983,7 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
         {
             string value = "";
             string seperator = "";
-            Edit.Utilities.DataIO data = new Edit.Utilities.DataIO();
+            DataIO data = new DataIO();
 
             foreach (GridViewRow row in grdPubMedSearchResults.Rows)
             {
@@ -1181,7 +1207,7 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
             pnlAddCustomPubMed.Visible = true;
             drpPublicationType.Enabled = true;
             phMain.Visible = false;
-
+            CalendarExtender1.SelectedDate = DateTime.Today;
             Session["pnl.Visible"] = true;
 
             if (drpPublicationType.SelectedIndex < 1)
@@ -1203,7 +1229,7 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
         protected void btnPubMedSaveCustom_OnClick(object sender, EventArgs e)
         {
             Hashtable myParameters = new Hashtable();
-            Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
+            DataIO data = new DataIO();
 
             myParameters.Add("@HMS_PUB_CATEGORY", drpPublicationType.SelectedValue);
             myParameters.Add("@ADDITIONAL_INFO", txtPubMedAdditionalInfo.Text);
@@ -1239,7 +1265,7 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
                 HiddenField hdn = (HiddenField)grdEditPublications.Rows[grdEditPublications.SelectedIndex].FindControl("hdnMPID");
                 myParameters.Add("@mpid", hdn.Value);
 
-                data.EditCustomPublication(myParameters, _subject, this.PropertyListXML);
+                data.EditGroupCustomPublication(myParameters, _subject, this.PropertyListXML);
                 grdEditPublications.SelectedIndex = -1;
             }
             else
@@ -1282,7 +1308,7 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
         {
             // PRG: Double-check we're using the correct username variable here
             //myParameters.Add("@username", (string)Session["ProfileUsername"]));
-            Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
+            DataIO data = new DataIO();
             data.DeleteGroupPublications(_personId, _subject, true, false);
             this.Counter = 0;
             phAddPub.Visible = true;
@@ -1301,7 +1327,7 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
         {
             // PRG: Double-check we're using the correct username variable here
             //myParameters.Add("@username", (string)Session["ProfileUsername"]));
-            Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
+            DataIO data = new DataIO();
             data.DeleteGroupPublications(_personId, _subject, false, true);
             this.Counter = 0;
             phAddPub.Visible = true;
@@ -1320,7 +1346,7 @@ namespace Profiles.Edit.Modules.CustomEditAssociatedInformationResource
         {
             // PRG: Double-check we're using the correct username variable here
             //myParameters.Add("@username", (string)Session["ProfileUsername"]));
-            Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
+            DataIO data = new DataIO();
             data.DeleteGroupPublications(_personId, _subject, true, true);
             this.Counter = 0;
             phAddPub.Visible = true;

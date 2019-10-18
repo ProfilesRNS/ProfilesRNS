@@ -6,28 +6,17 @@
 <script type="text/javascript">
     var checkBoxSelector = '#<%=grdPubMedSearchResults.ClientID%> input[id*="chkPubMed"]:checkbox';
 
-    $(document).ready(function () {
-        $('#btnCheckAll').live('click', function () {
-            $(checkBoxSelector).attr('checked', true);
-        });
+    function checkall() {
+        $("[id*='chkPubMed']").attr('checked', true);
+        $("[id*='chkPubMed']").prop('checked', true);
 
-        $('#btnUncheckAll').live('click', function () {
-            $(checkBoxSelector).attr('checked', false);
-        });
-
-        $('#btnCheckAll').live('keypress', function (e) {
-            if (e.keyCode == 13) {
-                $(checkBoxSelector).attr('checked', true);
-            };
-        });
-
-        $('#btnUncheckAll').live('keypress', function (e) {
-            if (e.keyCode == 13) {
-                $(checkBoxSelector).attr('checked', false);
-            };
-        });
-
-    });
+        return false;
+    }
+    function uncheckall() {
+        $("[id*='chkPubMed']").attr('checked', false);
+        $("[id*='chkPubMed']").prop('checked', false);
+        return false;
+    }
 
     function showdiv() {
         var divChkList = $('[id$=divChkList]').attr('id');
@@ -202,7 +191,9 @@
                         </asp:PlaceHolder>
                         <asp:PlaceHolder ID="phDeletePub" runat="server">
                             <div style="padding-bottom: 10px;">
+                                <asp:Image CssClass="EditMenuLinkImg" runat="server" ID="btnImgDeletePub2" AlternateText=" " ImageUrl="~/Edit/Images/Icon_square_ArrowGray.png" Visible="false" />
                                 <asp:LinkButton ID="btnDeletePub" runat="server" OnClick="menuBtn_OnClick" CssClass="profileHypLinks"><asp:Image runat="server" ID="btnImgDeletePub" AlternateText=" " ImageUrl="~/Framework/Images/icon_squareArrow.gif"/>&nbsp;Delete</asp:LinkButton>
+                                <asp:Literal runat="server" ID="btnDeleteGray" Visible="false" Text="Delete"></asp:Literal>
                                 &nbsp;(Remove manually added publications from this profile.)
                             </div>
                         </asp:PlaceHolder>
@@ -315,7 +306,7 @@
                                     <asp:LinkButton ID="btnPubMedSearch" runat="server" CausesValidation="False" OnClick="btnPubMedSearch_OnClick"
                                         Text="Search"></asp:LinkButton>
                                     &nbsp;&nbsp;|&nbsp;&nbsp;
-                                    <asp:LinkButton ID="btnPubMedReset" runat="server" CausesValidation="False" OnClick="btnPubMedReset_OnClick"
+                                    <asp:LinkButton ID="btnPubMedReset" runat="server" CausesValidation="False" OnClick="menuBtn_OnClick"
                                         Text="Reset"></asp:LinkButton>
                                     &nbsp;&nbsp;|&nbsp;&nbsp;
                                     <asp:LinkButton ID="btnPubMedClose" runat="server" CausesValidation="False" OnClick="reset"
@@ -338,13 +329,13 @@
                                         <asp:Label ID="lblGroupMemberFiltersDate" runat="server" AssociatedControlID="txtGroupMemberFiltersStartDate"><b>Date:</b></asp:Label>
                                     </div>
                                     <asp:TextBox ID="txtGroupMemberFiltersStartDate" runat="server" CssClass="textBoxDate" MaxLength="10"></asp:TextBox>
-                                    <asp:ImageButton ID="btnGroupMemberFiltersStartCalendar" runat="server" ImageUrl="~/Edit/Images/cal.gif" AlternateText="Calendar picker" />
+                                    <asp:ImageButton ID="btnGroupMemberFiltersStartCalendar" runat="server" width="15px" ImageUrl="~/Edit/Images/cal.png" AlternateText="Calendar picker" />
                                     <asp:CalendarExtender ID="calExtGroupMemberFiltersStart" runat="server" TargetControlID="txtGroupMemberFiltersStartDate"
                                         PopupButtonID="btnGroupMemberFiltersStartCalendar">
                                     </asp:CalendarExtender>
                                     &nbsp;&nbsp;<sup>-</sup>&nbsp;&nbsp;
                                     <asp:TextBox ID="txtGroupMemberFiltersEndDate" runat="server" CssClass="textBoxDate"></asp:TextBox>
-                                    <asp:ImageButton ID="btnGroupMemberFiltersEndCalendar" runat="server" ImageUrl="~/Edit/Images/cal.gif" AlternateText="Calendar picker" />
+                                    <asp:ImageButton ID="btnGroupMemberFiltersEndCalendar" runat="server" width="15px" ImageUrl="~/Edit/Images/cal.png" AlternateText="Calendar picker" />
                                     <asp:CalendarExtender ID="calExtGroupMemberFiltersEnd" runat="server" TargetControlID="txtGroupMemberFiltersEndDate"
                                         PopupButtonID="btnGroupMemberFiltersEndCalendar">
                                     </asp:CalendarExtender>
@@ -401,8 +392,8 @@
                                 </div>
                                 <asp:Panel runat="server" ID="pnlAddAll">
                                     <div style="padding: 10px 0px 5px 5px; background-color: #E2E6E8;">
-                                        <b>Select:</b>&nbsp;&nbsp; <a tabindex="0" style="cursor: pointer" id="btnCheckAll">All</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-                                        <a tabindex="0" style="cursor: pointer" id="btnUncheckAll">None</a>
+                                        <b>Select:</b>&nbsp;&nbsp; <a tabindex="0" style="cursor: pointer" id="btnCheckAll" onclick="javascript:checkall();">All</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+                                        <a tabindex="0" style="cursor: pointer" id="btnUncheckAll" onclick="javascript:uncheckall();">None</a>
                                     </div>
                                 </asp:Panel>
                                 <div>
@@ -504,7 +495,7 @@
                                         <div style="float: left; padding-right: 20px;">
                                             <asp:Label ID="Label9" runat="server" Text="Date (MM/DD/YYYY)" CssClass="pubSubHeader" AssociatedControlID="txtPubMedPublicationDate"></asp:Label><br />
                                             <asp:TextBox ID="txtPubMedPublicationDate" runat="server" MaxLength="10" CssClass="textBoxDate"></asp:TextBox>
-                                            <asp:ImageButton ID="btnCalendar" runat="server" ImageUrl="~/Edit/Images/cal.gif" AlternateText="Calendar picker" />
+                                            <asp:ImageButton ID="btnCalendar" runat="server" width="15px"  ImageUrl="~/Edit/Images/cal.png" AlternateText="Calendar picker" />
                                             <asp:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="txtPubMedPublicationDate"
                                                 PopupButtonID="btnCalendar">
                                             </asp:CalendarExtender>
@@ -696,7 +687,7 @@
                                         <HeaderStyle/>
                                         <ItemStyle HorizontalAlign="Right" />
                                     </asp:TemplateField>
-                                    <asp:BoundField DataField="Reference" ReadOnly="true" SortExpression="Reference" />
+                                    <asp:BoundField ItemStyle-VerticalAlign="Top" DataField="Reference" ReadOnly="true" SortExpression="Reference" />
                                     <asp:TemplateField ShowHeader="False" ItemStyle-HorizontalAlign="Right" ItemStyle-Width="100px">
                                         <ItemTemplate>
                                             <div class="actionbuttons">

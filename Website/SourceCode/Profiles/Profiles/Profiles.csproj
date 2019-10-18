@@ -33,6 +33,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -359,6 +360,7 @@
     <Compile Include="Edit\Modules\CustomEditAssociatedInformationResource\CustomEditAssociatedInformationResource.ascx.designer.cs">
       <DependentUpon>CustomEditAssociatedInformationResource.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Edit\Modules\CustomEditAssociatedInformationResource\DataIO.cs" />
     <Compile Include="Edit\Modules\CustomEditEagleI\CustomEditEagleI.ascx.cs">
       <DependentUpon>CustomEditEagleI.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
