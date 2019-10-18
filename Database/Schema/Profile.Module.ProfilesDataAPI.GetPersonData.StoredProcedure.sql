@@ -1,8 +1,30 @@
+drop procedure [Profile.Module].[ProfilesDataAPI.GetPersonData] 
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE procedure [Profile.Module].[ProfilesDataAPI.GetPersonData] 
+	@Param1name varchar(max) = null,
+	@Param1value varchar(max) = null,
+	@Param2name varchar(max) = null,
+	@Param2value varchar(max) = null,
+	@Param3name varchar(max) = null,
+	@Param3value varchar(max) = null,
+	@Param4name varchar(max) = null,
+	@Param4value varchar(max) = null,
+	@Param5name varchar(max) = null,
+	@Param5value varchar(max) = null,
+	@Param6name varchar(max) = null,
+	@Param6value varchar(max) = null,
+	@Param7name varchar(max) = null,
+	@Param7value varchar(max) = null,
+	@Param8name varchar(max) = null,
+	@Param8value varchar(max) = null,
+	@Param9name varchar(max) = null,
+	@Param9value varchar(max) = null,
+	@Param10name varchar(max) = null,
+	@Param10value varchar(max) = null,
 	@PersonList varchar(max) = null,
 	@Institution varchar(max) = null,
 	@InstitutionAbbr varchar(max) = null,
@@ -18,6 +40,38 @@ AS
 BEGIN
 SET nocount  ON;
 
+	declare @years varchar(max)
+	
+	create table #params(
+		n varchar(max),
+		v varchar(max)
+	)
+
+	insert into #params (n,v) values (@param1name, @Param1value)
+	insert into #params (n,v) values (@param2name, @Param2value)
+	insert into #params (n,v) values (@param3name, @Param3value)
+	insert into #params (n,v) values (@param4name, @Param4value)
+	insert into #params (n,v) values (@param5name, @Param5value)
+	insert into #params (n,v) values (@param6name, @Param6value)
+	insert into #params (n,v) values (@param7name, @Param7value)
+	insert into #params (n,v) values (@param8name, @Param8value)
+	insert into #params (n,v) values (@param9name, @Param9value)
+	insert into #params (n,v) values (@param10name, @Param10value)
+--        [Route("getPeople/Keyword/{keyword}/Institution/{inst}/Department/{dept}/Division/{div}/Count/{count:int}/Offset/{offset:int}/Columns/{cols}")]
+
+	select @personList = isnull(v, @personList) from #params where n = 'PersonIDs'
+	select @Institution = isnull(v, @Institution) from #params where n = 'Institution'
+	select @InstitutionAbbr = isnull(v, @InstitutionAbbr) from #params where n = 'InstitutionAbbr'
+	select @Department = isnull(v, @Department) from #params where n = 'Department'
+	select @Division = isnull(v, @Division) from #params where n = 'Division'
+	select @FacultyRank = isnull(v, @FacultyRank) from #params where n = 'FacultyRank'
+	select @SearchString = isnull(v, @SearchString) from #params where n = 'Keyword'
+	select @Offset = isnull(v, cast(@Offset as int)) from #params where n = 'Offset'
+	select @count = isnull(v, cast(@count as int)) from #params where n = 'Count'
+	select @IncludeSecondary = isnull(v, @IncludeSecondary) from #params where n = 'IncludeSecondary'
+	select @columns = isnull(v, @columns) from #params where n = 'Columns'
+	select @years = v from #params where n = 'Years'
+
 	declare @overview varchar(max)
 	select @overview = nodeID from [RDF.].Node where valuehash = [RDF.].fnValueHash(null, null, 'http://vivoweb.org/ontology/core#overview')
 
@@ -30,14 +84,21 @@ SET nocount  ON;
 	select @DivisionID = DivisionID from [Profile.Data].[Organization.Division] where DivisionName = @Division
 	select @FacultyRankID = FacultyRankID from [Profile.Data].[Person.FacultyRank] where FacultyRank = @FacultyRank
 
-	declare @includeAddress bit = 1, @includeAffiliation bit = 1, @includeOverview bit = 1, @includePublications bit = 1, @includeConcepts bit = 1
+	declare @includeAddress bit = 0, @includeAffiliation bit = 0, @includeOverview bit = 0, @includePublications bit = 0, @includeConcepts bit = 0
+	if not exists (select 1 from #params)
+	BEGIN
+		set @includeAddress = 1
+		set @includeAffiliation = 1
+		set @includeOverview = 1
+		set @includePublications = 1
+	END
 	if @columns is not null
 	BEGIN
-		if @columns not like '%address%' set @includeAddress = 0
-		if @columns not like '%affiliation%' set @includeAffiliation = 0
-		if @columns not like '%overview%' set @includeOverview = 0
-		if @columns not like '%publications%' set @includePublications = 0
-		if @columns not like '%concepts%' set @includeConcepts = 0
+		if @columns like '%address%' set @includeAddress = 1
+		if @columns like '%affiliation%' set @includeAffiliation = 1
+		if @columns like '%overview%' set @includeOverview = 1
+		if @columns like '%publications%' set @includePublications = 1
+		if @columns like '%concepts%' set @includeConcepts = 1
 	END
 	CREATE TABLE #tmpPerson (
 		PersonID int PRIMARY KEY,
@@ -53,6 +114,25 @@ SET nocount  ON;
 		PhotoURL nvarchar(max),
 		ConnectionWeight float
 	)
+	
+	CREATE TABLE #years (
+		y int
+	)
+	if @years is not null
+	begin
+		if @years like '%-%'
+		begin
+			INSERT INTO #years (y) 
+			select n from [Utility.Math].n where n >= cast(substring(@years, 1, 4) as int) and n <= cast(substring(@years, 6, 4) as int)
+		end
+		else
+		begin
+			INSERT INTO #years (y) 
+			select z.value('.','int') y
+				from (select cast('<x>'+replace(@years,',','</x><x>')+'</x>' as xml ) x) t cross apply x.nodes('x') as r(z)
+		end
+	end
+
 
 	IF @PersonList is not null
 	BEGIN
@@ -255,6 +335,11 @@ SET nocount  ON;
                                                            AND PL.PersonID in (select PersonID from #tmpPerson WHERE ShowPublications = 'Y')
                                 ) T0
                     ) T0
+
+		if @years is not null
+		begin
+			delete from #pubmedGeneral where not exists (select 1 from #years where y = substring(pubdate, 1, 4))
+		end
 
 		update g set g.EntityID = i.EntityID
 			from #pubmedGeneral g
