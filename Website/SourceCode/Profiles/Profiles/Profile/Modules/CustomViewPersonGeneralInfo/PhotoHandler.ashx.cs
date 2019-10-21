@@ -75,23 +75,10 @@ namespace Profiles.Profile.Modules.ProfileImage
                     // stuff below this and if statement is what makes it slow
                     Framework.Utilities.RDFTriple request = new Profiles.Framework.Utilities.RDFTriple(nodeid);
 
-                    request.Expand = true;
-                    request.ShowDetails = true;
-                    string type = data.GetNodeType(nodeid);
-                    if (type.Equals("Person")) request.ExpandRDFList = "<ExpandRDFOptions ExpandPredicates=\"false\" ClassPropertyCustomTypeID=\"1\" />";
-                    else if (type.Equals("Group")) request.ExpandRDFList = "<ExpandRDFOptions ExpandPredicates=\"false\" ClassPropertyCustomTypeID=\"5\" />";
-                    Framework.Utilities.Namespace xmlnamespace = new Profiles.Framework.Utilities.Namespace();
-                    XmlDocument person;
-
-                    person = data.GetRDFData(request);
-                    XmlNamespaceManager namespaces = xmlnamespace.LoadNamespaces(person);
-
                     byte[] rawimage = null;
-                    if (person.SelectSingleNode("rdf:RDF/rdf:Description[1]/prns:mainImage/@rdf:resource", namespaces) != null)
-                    {
-                        rawimage = data.GetUserPhotoList(nodeid);
-                    }
-                    else if (thumbnail)
+                    rawimage = data.GetUserPhotoList(nodeid, request.Session.SessionID);
+
+                    if (thumbnail && rawimage == null)
                     {
                         rawimage = silhouetteImage;
                     }

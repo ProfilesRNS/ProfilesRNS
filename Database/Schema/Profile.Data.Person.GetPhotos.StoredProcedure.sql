@@ -17,7 +17,7 @@ BEGIN
 	DECLARE @ViewSecurityGroup BIGINT
 	SELECT @ViewSecurityGroup = isnull(ViewSecurityGroup, -100) from [RDF.].Triple where Subject = @NodeID AND Predicate = @PredicateID
 
-	IF (@ViewSecurityGroup BETWEEN @SecurityGroupID AND -1) OR (@ViewSecurityGroup > 0 AND @HasSpecialViewAccess = 1) OR (@ViewSecurityGroup IN (SELECT * FROM #SecurityGroupNodes))
+	IF @SessionID is null OR (@ViewSecurityGroup BETWEEN @SecurityGroupID AND -1) OR (@ViewSecurityGroup > 0 AND @HasSpecialViewAccess = 1) OR (@ViewSecurityGroup IN (SELECT * FROM #SecurityGroupNodes))
 	BEGIN
 		DECLARE @InternalID INT, @InternalType NVARCHAR(300)
 
