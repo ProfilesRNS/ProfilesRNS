@@ -247,6 +247,9 @@ type Profile.Cache.List.Export.Publications.Table.sql
 type Profile.Data.List.Admin.Table.sql
 type Profile.Data.List.General.Table.sql
 type Profile.Data.List.Member.Table.sql
+type Profile.Data.Publication.PubMed.DisambiguationExclude.Table.sql
+type Profile.Data.Publication.PubMed.DisambiguationSettings.Table.sql
+type Profile.Data.Publication.Funding.DisambiguationSettings.Table.sql
 
 
 type RDF..fnTripleHash.UserDefinedFunction.sql
@@ -668,3 +671,7 @@ type Profile.Data.List.GetSummary.StoredProcedure.sql
 type Profile.Module.NetworkMap.GetList.StoredProcedure.sql
 type Profile.Module.NetworkRadial.List.GetCoAuthors.StoredProcedure.sql
 type Profile.Cache.List.Export.UpdatePublications.StoredProcedure.sql
+type Profile.Data.Publication.Pubmed.UpdateDisambiguationSettings.StoredProcedure.sql
+type Profile.Data.Publication.Pubmed.GetDisambiguationSettings.StoredProcedure.sql
+type Profile.Data.Funding.UpdateDisambiguationSettings.StoredProcedure.sql
+type Profile.Data.Funding.GetDisambiguationSettings.StoredProcedure.sql

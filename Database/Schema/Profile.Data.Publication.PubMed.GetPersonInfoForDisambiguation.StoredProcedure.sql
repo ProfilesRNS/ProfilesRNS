@@ -108,7 +108,7 @@ SELECT personid,
                         
                         FOR XML PATH(''),ROOT('FindPMIDs')) XML--as xml)
   INTO #batch
-  FROM [Profile.Data].vwperson  p2
+  FROM [Profile.Data].vwperson  p2 where PersonID not in (select PersonID from [Profile.Data].[Publication.Pubmed.DisambiguationSettings] where Enabled = 0)
   
    
 SELECT @batchcount=@@ROWCOUNT

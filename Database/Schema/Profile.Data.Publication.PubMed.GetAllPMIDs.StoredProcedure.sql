@@ -17,18 +17,18 @@ BEGIN
 				SELECT distinct pmid
 				  FROM [Profile.Data].[Publication.PubMed.Disambiguation]
 				 WHERE pmid NOT IN(SELECT PMID FROM [Profile.Data].[Publication.PubMed.General])
-				   AND pmid IS NOT NULL 
+				   AND pmid IS NOT NULL AND pmid not in (select pmid from [Profile.Data].[Publication.PubMed.DisambiguationExclude])
 			END
 		ELSE 
 		-- FULL REFRESH
 			BEGIN
 				SELECT pmid
 				  FROM [Profile.Data].[Publication.PubMed.Disambiguation]
-				 WHERE pmid IS NOT NULL 
+				 WHERE pmid IS NOT NULL AND pmid not in (select pmid from [Profile.Data].[Publication.PubMed.DisambiguationExclude]) 
 				 UNION   
 				SELECT pmid
 				  FROM [Profile.Data].[Publication.Person.Include]
-				 WHERE pmid IS NOT NULL 
+				 WHERE pmid IS NOT NULL AND pmid not in (select pmid from [Profile.Data].[Publication.PubMed.DisambiguationExclude]) 
 			END 
 
 	END TRY
