@@ -72,16 +72,12 @@ namespace Profiles.Edit.Modules.CustomEditResearcherRole
             if (Session["pnlSecurityOptions.Visible"] == null)
             {
 
-                phAddGrant.Visible = true;
-                phAddCustom.Visible = true;
-                phDeleteGrant.Visible = true;
+                updatePanelVisibility(openPanel.none);
 
             }
             else
             {
-                phAddGrant.Visible = false;
-                phAddCustom.Visible = false;
-                phDeleteGrant.Visible = false;
+                updatePanelVisibility(openPanel.security);
 
             }
         }
@@ -188,6 +184,7 @@ namespace Profiles.Edit.Modules.CustomEditResearcherRole
                 Session["pnlAddGrant.Visible"] = null;
                 Session["pnlAddCustomGrant.Visible"] = null;
                 Session["pnlDeleteGrant.Visible"] = null;
+                Session["pnlDisableDisambig.Visible"] = null;
             }
 
             if (_personId == 0)
@@ -199,8 +196,8 @@ namespace Profiles.Edit.Modules.CustomEditResearcherRole
                 Session["CurrentPersonEditing"] = _personId;
 
 
-            Edit.Utilities.DataIO data;
-            data = new Edit.Utilities.DataIO();
+            Profiles.Edit.Modules.CustomEditResearcherRole.DataIO data;
+            data = new Profiles.Edit.Modules.CustomEditResearcherRole.DataIO();
             string predicateuri = Request.QueryString["predicateuri"].Replace("!", "#");
             this.PropertyListXML = propdata.GetPropertyList(this.BaseData, base.PresentationXML, predicateuri, false, true, false);
             litBackLink.Text = "<a Title='Edit Menu' href='" + Root.Domain + "/edit/default.aspx?subject=" + _subject + "'>Edit Menu</a>" + " &gt; <b>" + PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@Label").Value + "</b>";
@@ -219,6 +216,11 @@ namespace Profiles.Edit.Modules.CustomEditResearcherRole
                 btnDeleteGrantClose.Enabled = false;
 
             }
+
+            Boolean disambig = data.GetDisambiguationSettings(_personId);
+            rblDisambiguationSettings.SelectedValue = disambig ? "enable" : "disable";
+            lblDisambigStatus.Text = disambig ? "Automatically adding funding to my profile." : "Disabled and not automatically adding funding to my profile.";
+
 
             InitUpDownArrows(ref GridViewResearcherRole);
             upnlEditSection.Update();
@@ -252,11 +254,7 @@ namespace Profiles.Edit.Modules.CustomEditResearcherRole
             grdGrantSearchResults.DataBind();
 
             btnImgAddGrant.ImageUrl = Root.Domain + "/Framework/images/icon_squareDownArrow.gif";
-            phAddCustom.Visible = false;
-            phDeleteGrant.Visible = false;
-            pnlAddGrantResults.Visible = false;
-            pnlAddCustomGrant.Visible = false;
-            phSecuritySettings.Visible = false;
+            updatePanelVisibility(openPanel.nih_results);
             Session["pnlAddGrant.Visible"] = true;
 
             pnlAddGrantResults.Visible = true;
@@ -278,18 +276,14 @@ namespace Profiles.Edit.Modules.CustomEditResearcherRole
             if (Session["pnlAddGrant.Visible"] == null)
             {
                 btnImgAddGrant.ImageUrl = Root.Domain + "/Framework/images/icon_squareDownArrow.gif";
-                phAddCustom.Visible = false;
-                phDeleteGrant.Visible = false;
-                pnlAddGrant.Visible = true;
-                pnlAddGrantResults.Visible = false;
-                pnlAddCustomGrant.Visible = false;
-                phSecuritySettings.Visible = false;
+                updatePanelVisibility(openPanel.nih);
                 Session["pnlAddGrant.Visible"] = true;
             }
             else
             {
                 btnGrantClose_OnClick(sender, e);
                 Session["pnlAddGrant.Visible"] = null;
+                updatePanelVisibility(openPanel.none);
             }
 
             upnlEditSection.Update();
@@ -298,12 +292,7 @@ namespace Profiles.Edit.Modules.CustomEditResearcherRole
         {
             ResetGrantSearch();
             btnImgAddGrant.ImageUrl = Root.Domain + "/Framework/images/icon_squareDownArrow.gif";
-            phAddCustom.Visible = false;
-            phDeleteGrant.Visible = false;
-            pnlAddGrant.Visible = true;
-            pnlAddGrantResults.Visible = false;
-            pnlAddCustomGrant.Visible = false;
-            phSecuritySettings.Visible = false;
+            updatePanelVisibility(openPanel.nih);
             Session["pnlAddGrant.Visible"] = true;
 
             upnlEditSection.Update();
@@ -312,6 +301,7 @@ namespace Profiles.Edit.Modules.CustomEditResearcherRole
         protected void btnClose_OnClick(object sender, EventArgs e)
         {
             btnAddNewGrant_OnClick(sender, e);
+            updatePanelVisibility(openPanel.none);
         }
         private void ResetGrantSearch()
         {
@@ -331,10 +321,7 @@ namespace Profiles.Edit.Modules.CustomEditResearcherRole
         protected void btnGrantClose_OnClick(object sender, EventArgs e)
         {
             ResetGrantSearch();
-            pnlAddGrant.Visible = false;
-            phAddCustom.Visible = true;
-            phDeleteGrant.Visible = true;
-            phSecuritySettings.Visible = true;
+            updatePanelVisibility(openPanel.none);
             btnImgAddGrant.ImageUrl = Root.Domain + "/Framework/images/icon_squareArrow.gif";
             upnlEditSection.Update();
         }
@@ -644,19 +631,12 @@ namespace Profiles.Edit.Modules.CustomEditResearcherRole
             if (Session["pnlAddCustomGrant.Visible"] == null)
             {
                 btnEditGrant.ImageUrl = Root.Domain + "/Framework/images/icon_squareDownArrow.gif";
-                phAddGrant.Visible = false;
-                phDeleteGrant.Visible = false;
-                pnlAddCustomGrant.Visible = true;
-                phSecuritySettings.Visible = false;
+                updatePanelVisibility(openPanel.custom);
                 Session["pnlAddCustomGrant.Visible"] = true;
             }
             else
             {
-
-                phAddGrant.Visible = true;
-                phDeleteGrant.Visible = true;
-                pnlAddCustomGrant.Visible = false;
-                phSecuritySettings.Visible = true;
+                updatePanelVisibility(openPanel.none);
                 Session["pnlAddCustomGrant.Visible"] = null;
             }
 
@@ -982,20 +962,14 @@ namespace Profiles.Edit.Modules.CustomEditResearcherRole
             if (Session["pnlDeleteGrant.Visible"] == null)
             {
                 btnImgDeleteGrant.ImageUrl = Root.Domain + "/Framework/images/icon_squareDownArrow.gif";
-                phAddCustom.Visible = false;
-                phAddGrant.Visible = false;
-                pnlDeleteGrant.Visible = true;
-                pnlAddGrant.Visible = false;
-                pnlAddGrantResults.Visible = false;
-                pnlAddCustomGrant.Visible = false;
-                phSecuritySettings.Visible = false;
+                updatePanelVisibility(openPanel.delete);
                 Session["pnlDeleteGrant.Visible"] = true;
             }
             else
             {
                 Session["pnlDeleteGrant.Visible"] = null;
                 btnDeleteGrantClose_OnClick(sender, e);
-
+                updatePanelVisibility(openPanel.none);
             }
             upnlEditSection.Update();
         }
@@ -1023,10 +997,7 @@ namespace Profiles.Edit.Modules.CustomEditResearcherRole
                 throw new Exception(ex.Message);
             }
 
-            phAddGrant.Visible = true;
-            phAddCustom.Visible = true;
-            phSecuritySettings.Visible = true;
-            pnlDeleteGrant.Visible = false;
+            updatePanelVisibility(openPanel.none);
             btnImgDeleteGrant.ImageUrl = Root.Domain + "/Framework/images/icon_squareArrow.gif";
             FillResearchGrid(true);
 
@@ -1034,11 +1005,7 @@ namespace Profiles.Edit.Modules.CustomEditResearcherRole
         }
         protected void btnDeleteGrantClose_OnClick(object sender, EventArgs e)
         {
-            phAddGrant.Visible = true;
-            phAddCustom.Visible = true;
-            phDeleteGrant.Visible = true;
-            phSecuritySettings.Visible = true;
-            pnlDeleteGrant.Visible = false;
+            updatePanelVisibility(openPanel.none);
             btnImgDeleteGrant.ImageUrl = Root.Domain + "/Framework/images/icon_squareArrow.gif";
             FillResearchGrid(true);
 
@@ -1093,6 +1060,93 @@ namespace Profiles.Edit.Modules.CustomEditResearcherRole
 
 
         #endregion
+
+        #region Disable Disambiguation
+        protected void btnDisableDisambig_OnClick(object sender, EventArgs e)
+        {
+            if (Session["pnlDisableDisambig.Visible"] == null)
+            {
+                updatePanelVisibility(openPanel.disambiguation);
+                btnImgDisableDisambig.ImageUrl = Root.Domain + "/Framework/images/icon_squareDownArrow.gif";
+                Session["pnlDisableDisambig.Visible"] = true;
+            }
+            else
+            {
+                Session["pnlDisableDisambig.Visible"] = null;
+                updatePanelVisibility(openPanel.none);
+            }
+            
+            upnlEditSection.Update();
+
+
+        }
+
+
+        protected enum openPanel { none, security, nih, nih_results, custom, delete, disambiguation}
+
+        protected void updatePanelVisibility(openPanel o)
+        {
+            if (o == openPanel.none)
+            {
+                phSecuritySettings.Visible = true;
+                phAddGrant.Visible = true;
+                phAddCustom.Visible = true;
+                phDeleteGrant.Visible = true;
+                phDisableDisambig.Visible = true;
+
+                pnlAddGrant.Visible = false;
+                pnlAddGrantResults.Visible = false;
+                pnlAddCustomGrant.Visible = false;
+                pnlDeleteGrant.Visible = false;
+                pnlDisableDisambig.Visible = false;
+            }
+            else
+            {
+                phSecuritySettings.Visible = o == openPanel.security;
+                phAddGrant.Visible = o == openPanel.nih || o == openPanel.nih_results;
+                phAddCustom.Visible = o == openPanel.custom;
+                phDeleteGrant.Visible = o == openPanel.delete;
+                phDisableDisambig.Visible = o == openPanel.disambiguation;
+
+                pnlAddGrant.Visible = o == openPanel.nih;
+                pnlAddGrantResults.Visible = o == openPanel.nih_results;
+                pnlAddCustomGrant.Visible = o == openPanel.custom;
+                pnlDeleteGrant.Visible = o == openPanel.delete;
+                pnlDisableDisambig.Visible = o == openPanel.disambiguation;
+            }
+        }
+
+        protected void btnSaveDisambig_OnClick(object sender, EventArgs e)
+        {
+            Profiles.Edit.Modules.CustomEditResearcherRole.DataIO data = new Profiles.Edit.Modules.CustomEditResearcherRole.DataIO();
+            if (rblDisambiguationSettings.SelectedValue == "disable")
+            {
+                Session["disambig"] = "false";
+                data.UpdateDisambiguationSettings(_personId, false);
+            }
+            else
+            {
+                Session["disambig"] = null;
+                data.UpdateDisambiguationSettings(_personId, true);
+            }
+
+            Boolean disambig = data.GetDisambiguationSettings(_personId);
+            rblDisambiguationSettings.SelectedValue = disambig ? "enable" : "disable";
+            lblDisambigStatus.Text = disambig ? "Automatically adding funding to my profile." : "Not automatically adding funding to my profile.";
+
+            upnlEditSection.Update();
+            Session["pnlDisableDisambig.Visible"] = null;
+            pnlDisableDisambig.Visible = false;
+
+        }
+        protected void btnCancel_OnClick(object sender, EventArgs e)
+        {
+            Session["pnlDisableDisambig.Visible"] = null;
+            pnlDisableDisambig.Visible = false;
+        }
+
+        #endregion
+
 
         #region State
 

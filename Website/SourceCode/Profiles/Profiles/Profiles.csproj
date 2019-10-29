@@ -361,6 +361,7 @@
       <DependentUpon>CustomEditAssociatedInformationResource.ascx</DependentUpon>
     </Compile>
     <Compile Include="Edit\Modules\CustomEditAssociatedInformationResource\DataIO.cs" />
+    <Compile Include="Edit\Modules\CustomEditAuthorInAuthorship\DataIO.cs" />
     <Compile Include="Edit\Modules\CustomEditEagleI\CustomEditEagleI.ascx.cs">
       <DependentUpon>CustomEditEagleI.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -424,6 +425,7 @@
     <Compile Include="Edit\Modules\CustomEditResearcherRole\CustomEditResearcherRole.ascx.designer.cs">
       <DependentUpon>CustomEditResearcherRole.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Edit\Modules\CustomEditResearcherRole\DataIO.cs" />
     <Compile Include="Edit\Modules\CustomEditWebsite\CustomEditWebsite.ascx.cs">
       <DependentUpon>CustomEditWebsite.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

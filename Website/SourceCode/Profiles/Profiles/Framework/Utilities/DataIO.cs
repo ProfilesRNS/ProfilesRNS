@@ -415,6 +415,37 @@ namespace Profiles.Framework.Utilities
             return sqlcmd;
         }
 
+        public SqlCommand GetDBCommand(String CmdText, CommandType CmdType, CommandBehavior CmdBehavior, SqlParameter[] sqlParam)
+        {
+
+            SqlCommand sqlcmd = null;
+
+            try
+            {
+                string Connectionstring = this.GetConnectionString();
+                sqlcmd = new SqlCommand(CmdText, GetDBConnection(Connectionstring));
+                sqlcmd.CommandType = CmdType;
+                sqlcmd.CommandTimeout = GetCommandTimeout();
+                Framework.Utilities.DebugLogging.Log("CONNECTION STRING " + Connectionstring);
+                Framework.Utilities.DebugLogging.Log("COMMAND TEXT " + CmdText);
+                Framework.Utilities.DebugLogging.Log("COMMAND TYPE " + CmdType.ToString());
+                if (sqlParam != null)
+                    Framework.Utilities.DebugLogging.Log("NUMBER OF PARAMS " + sqlParam.Length);
+
+
+                if (sqlParam != null)
+                    AddSQLParameters(sqlcmd, sqlParam);
+
+
+            }
+            catch (Exception ex)
+            {
+                Framework.Utilities.DebugLogging.Log(ex.Message);
+                Framework.Utilities.DebugLogging.Log(ex.StackTrace);
+            }
+            return sqlcmd;
+        }
+
         public SqlCommand GetDBCommand(string SqlConnectionString, String CmdText, CommandType CmdType, CommandBehavior CmdBehavior, SqlParameter[] sqlParam)
         {
 

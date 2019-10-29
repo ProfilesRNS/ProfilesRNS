@@ -33,6 +33,13 @@
                 <asp:LinkButton ID="btnEditGrant2" runat="server" OnClick="btnAddCustom_OnClick">Add Custom Funding</asp:LinkButton>&nbsp;(Enter your own funding information using an online form.) 
             </div>
         </asp:Panel>
+        <asp:Panel ID="phDisableDisambig" runat="server">
+            <div class="EditMenuItem">                      
+                <asp:ImageButton CssClass="EditMenuLinkImg" OnClick="btnDisableDisambig_OnClick" runat="server" ID="btnImgDisableDisambig" AlternateText=" " ImageUrl="~/Edit/Images/icon_squareArrow.gif" Visible="true" />
+                <asp:LinkButton ID="btnDisableDisambig" runat="server" OnClick="btnDisableDisambig_OnClick" Enabled="true">Configure Automatic Import</asp:LinkButton>
+                (<asp:Label runat="server" ID="lblDisambigStatus" />)
+            </div>
+        </asp:Panel>
         <asp:Panel ID="phDeleteGrant" runat="server">
             <div class="EditMenuItem">
                 <asp:Image runat="server" CssClass="EditMenuLinkImg" ID="btnImgDeleteGrant2" AlternateText=" " ImageUrl="~/Edit/Images/Icon_square_ArrowGray.png" Visible="false" />
@@ -102,7 +109,7 @@
                 <Columns>
                     <asp:TemplateField ItemStyle-BorderStyle="None" ItemStyle-Width="20px">
                         <ItemTemplate>
-                            <img alt="" style="cursor: pointer; padding-bottom: 7px; padding-left: 13px;" src="<%=Profiles.Framework.Utilities.Root.Domain%>/framework/images/expand.gif" />
+                            <img alt="" style="cursor: pointer; padding-bottom: 7px; padding-left: 13px;" src="<%=GetURLDomain()%>/framework/images/expand.gif" />
                             <div class="grant-sub-row" style="display: none;">
                                 <asp:GridView EnableViewState="true" ShowHeader="false" ID="grdSubGrantSearchResults"
                                     runat="server" GridLines="None" DataKeyNames="FullFundingID"
@@ -239,6 +246,24 @@
             </div>
         </asp:Panel>
         <%--End Delete grants--%>
+        <%--Start Disable disambiguation--%>
+        <asp:Panel ID="pnlDisableDisambig" runat="server" CssClass="EditPanel" Visible="false">      
+            <div style="margin-top: 10px" class="disambig-radio-label">
+                <asp:RadioButtonList ID="rblDisambiguationSettings" runat="server">
+                    <asp:ListItem Text="" Value="enable">Automatically add funding to my profile.</asp:ListItem>
+                    <asp:ListItem Text="" Value="disable" >Do not automatically add funding to my profile.</asp:ListItem>
+                </asp:RadioButtonList>
+            </div>
+            <div class="actionbuttons">               
+                                    <asp:LinkButton ID="btnSaveDisambig" runat="server" CausesValidation="False" OnClick="btnSaveDisambig_OnClick"
+                                        Text="Save"/>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <asp:LinkButton ID="btnCancelDisambig" runat="server" CausesValidation="False"
+                                        OnClick="btnCancel_OnClick" Text="Cancel" />
+            </div>
+          
+        </asp:Panel>
+        <%--End Disable disambiguation--%>
         <div class="editPage">
             <asp:GridView ID="GridViewResearcherRole" runat="server" DataKeyNames="FundingRoleID"
                 AutoGenerateColumns="False" OnRowDataBound="GridViewResearcherRole_RowDataBound">
@@ -280,17 +305,17 @@
         $("[id*='_chkGrant']").prop('checked', false);
         return false;
     }
-
+   
 </script>
 
 <script type="text/javascript">
     var $jQuery_1_4_2 = $.noConflict(true);
     $jQuery_1_4_2("[src*=expand]").live("click", function () {
         $(this).closest("tr").after("<tr><td colspan = '999'>" + $(this).next().html() + "</td></tr>")
-        $(this).attr("src", "<%=Profiles.Framework.Utilities.Root.Domain%>/framework/images/collapse.gif");
+        $(this).attr("src", "<%=GetURLDomain()%>/framework/images/collapse.gif");
     });
     $jQuery_1_4_2("[src*=collapse]").live("click", function () {
-        $(this).attr("src", "<%=Profiles.Framework.Utilities.Root.Domain%>/framework/images/expand.gif");
+        $(this).attr("src", "<%=GetURLDomain()%>/framework/images/expand.gif");
         $(this).closest("tr").next().remove();
     });
 </script>

@@ -41,11 +41,18 @@
                 (Enter your own publication using an online form.)
             </div>
         </asp:Panel>
+        <asp:Panel ID="phDisableDisambig" runat="server">
+            <div class="EditMenuItem">
+                <asp:ImageButton CssClass="EditMenuLinkImg" OnClick="btnDisableDisambig_OnClick" runat="server" ID="btnImgDisableDisambig" AlternateText=" " ImageUrl="~/Edit/Images/icon_squareArrow.gif" Visible="true" />
+                <asp:LinkButton ID="btnDisableDisambig" runat="server" OnClick="btnDisableDisambig_OnClick" Enabled="true">Configure Automatic Import</asp:LinkButton>
+                (<asp:Label runat="server" ID="lblDisambigStatus" />)
+            </div>
+        </asp:Panel>
         <asp:Panel ID="phDeletePub" runat="server">
             <div class="EditMenuItem">
                 <asp:Image CssClass="EditMenuLinkImg" runat="server" ID="btnImgDeletePub2" AlternateText=" " ImageUrl="~/Edit/Images/Icon_square_ArrowGray.png" Visible="true" />
                 <asp:ImageButton CssClass="EditMenuLinkImg" OnClick="btnDeletePub_OnClick" runat="server" ID="btnImgDeletePub" AlternateText=" " ImageUrl="~/Edit/Images/icon_squareArrow.gif" Visible="false" />
-                <asp:LinkButton ID="btnDeletePub" runat="server" OnClick="btnDeletePub_OnClick" Enabled="false">Delete</asp:LinkButton><asp:Literal runat="server" ID="btnDeleteGray" Visible="false" Text="Delete"></asp:Literal>
+                <asp:LinkButton ID="btnDeletePub" runat="server" OnClick="btnDeletePub_OnClick" Enabled="false">Delete Publication(s)</asp:LinkButton><asp:Literal runat="server" ID="btnDeleteGray" Visible="false" Text="Delete Publication(s)"></asp:Literal>
                 (Remove multiple publications from your profile.)
             </div>
         </asp:Panel>
@@ -377,6 +384,24 @@
             </div>
         </asp:Panel>
         <%--End Delete Publications--%>
+        <%--Start Disable Publications disambiguation--%>
+        <asp:Panel ID="pnlDisableDisambig" runat="server" CssClass="EditPanel" Visible="false">
+            <div style="margin-top: 10px" class="disambig-radio-label">
+                <asp:RadioButtonList ID="rblDisambiguationSettings" runat="server">
+                    <asp:ListItem Text="" Value="enable">Automatically add publications to my profile.</asp:ListItem>
+                    <asp:ListItem Text="" Value="disable">Do not automatically add publications to my profile.</asp:ListItem>
+                </asp:RadioButtonList>
+            </div>
+            <div class="actionbuttons">
+                <asp:LinkButton ID="btnSaveDisambig" runat="server" CausesValidation="False" OnClick="btnSaveDisambig_OnClick"
+                    Text="Save" />
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <asp:LinkButton ID="btnCancelDisambig" runat="server" CausesValidation="False"
+                                        OnClick="btnCancel_OnClick" Text="Cancel" />
+            </div>
+           
+        </asp:Panel>
+        <%--End Disable Publications--%>
         <%--Start Publications List--%>
         <div class="editPage">
             <asp:GridView ID="grdEditPublications" runat="server" AutoGenerateColumns="False"
@@ -401,14 +426,13 @@
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Action" ItemStyle-CssClass="alignCenterAction" HeaderStyle-CssClass="alignCenterAction">
                         <ItemTemplate>
-
-                            <asp:ImageButton ID="lnkEdit" runat="server" ImageUrl="~/Edit/Images/icon_edit.gif"
-                                CausesValidation="False" CommandName="Select" Text="Edit" AlternateText="edit" Visible="false"></asp:ImageButton>
-
-                            <asp:ImageButton ID="lnkDelete" runat="server" ImageUrl="~/Edit/Images/icon_delete.gif" 
-                                CausesValidation="False" OnClick="deleteOne_Onclick" CommandName="Delete" Text="X" AlternateText="delete"
-                                OnClientClick="Javascript:return confirm('Are you sure you want to delete this citation?');">
-                            </asp:ImageButton>
+                            <span>
+                                <asp:ImageButton ID="lnkDelete" runat="server" ImageUrl="~/Edit/Images/icon_delete.gif"
+                                    CausesValidation="False" OnClick="deleteOne_Onclick" CommandName="Delete" AlternateText="delete"
+                                    OnClientClick="Javascript:return confirm('Are you sure you want to delete this citation?');"></asp:ImageButton></span>
+                            <span>
+                                <asp:ImageButton ID="lnkEdit" runat="server" ImageUrl="~/Edit/Images/icon_blank.gif"
+                                    CausesValidation="False" CommandName="Select" AlternateText="edit" Enabled="false"></asp:ImageButton></span>
                             <asp:HiddenField ID="hdnMPID" runat="server" Value='<%# Bind("mpid") %>' />
                             <asp:HiddenField ID="hdnPMID" runat="server" Value='<%# Bind("pmid") %>' />
                         </ItemTemplate>
@@ -453,6 +477,6 @@
             $("#div-contract-number").html("Contract Number");
         }
     }, 500);
-
+    
 </script>
 
