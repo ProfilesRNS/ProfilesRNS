@@ -515,4 +515,22 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
     <rdfs:label rdf:resource="about us" />
   </rdf:Description>
+    <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#mediaLinks">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+	<rdfs:range rdf:resource="http://vivoweb.org/ontology/core#URLLink" />
+    <rdfs:label rdf:resource="media links" />
+  </rdf:Description>
+    <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#PluginInstance">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="ProfilesRNS Plugin Instance" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#pluginSearchableData">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:label rdf:resource="ProfilesRNS Plugin Searchable Data" />
+  </rdf:Description>
+    <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#pluginInstanceFor">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+	<rdfs:domain rdf:resource="http://profiles.catalyst.harvard.edu/ontology/prns#PluginInstance" />
+    <rdfs:label rdf:resource="ProfilesRNS Plugin Instance For Person or Group" />
+  </rdf:Description>
 </rdf:RDF>
