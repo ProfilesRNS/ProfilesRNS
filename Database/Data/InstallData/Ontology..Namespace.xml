@@ -12,6 +12,10 @@
     <Prefix>orng</Prefix>
   </Row>
   <Row>
+    <URI>http://profiles.catalyst.harvard.edu/ontology/plugins#</URI>
+    <Prefix>plugins</Prefix>
+  </Row>
+  <Row>
     <URI>http://profiles.catalyst.harvard.edu/ontology/prns#</URI>
     <Prefix>prns</Prefix>
   </Row>
