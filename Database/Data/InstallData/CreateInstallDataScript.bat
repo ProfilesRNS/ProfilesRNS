@@ -29,6 +29,5 @@ type ORCID..REF_Decision.xml
 type ORCID..REF_WorkExternalType.xml
 type ORCID..RecordLevelAuditType.xml
 type ORCID..DefaultORCIDDecisionIDMapping.xml
-type ORNG..Apps.xml
-type ORNG..AppViews.xml
+type Profile.Module.GenericRDF.Plugins.xml
 echo ^</Import^>

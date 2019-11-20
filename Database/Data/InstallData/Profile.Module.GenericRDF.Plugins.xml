@@ -1,0 +1,29 @@
+<Table Name="[Profile.Module].[GenericRDF.Plugins]">
+  <Row>
+    <Name>FeaturedPresentations</Name>
+	<EnabledForPerson>1</EnabledForPerson>
+	<EnabledForGroup>1</EnabledForGroup>
+	<Label>Featured Presentations</Label>
+	<PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupOverview</PropertyGroupURI>
+	<CustomDisplayModule>FeaturedPresentations</CustomDisplayModule>
+	<CustomEditModule>EditFeaturedPresentations</CustomEditModule>
+  </Row>
+  <Row>
+    <Name>FeaturedVideos</Name>
+	<EnabledForPerson>1</EnabledForPerson>
+	<EnabledForGroup>1</EnabledForGroup>
+	<Label>Featured Videos</Label>
+	<PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupOverview</PropertyGroupURI>
+	<CustomDisplayModule>FeaturedVideos</CustomDisplayModule>
+	<CustomEditModule>EditFeaturedVideos</CustomEditModule>
+  </Row>
+  <Row>
+    <Name>Twitter</Name>
+	<EnabledForPerson>1</EnabledForPerson>
+	<EnabledForGroup>1</EnabledForGroup>
+	<Label>Twitter</Label>
+	<PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupOverview</PropertyGroupURI>
+	<CustomDisplayModule>Twitter</CustomDisplayModule>
+	<CustomEditModule>EditTwitter</CustomEditModule>
+  </Row>
+</Table>
