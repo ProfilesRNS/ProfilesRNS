@@ -201,20 +201,21 @@ namespace Profiles.Framework.Utilities
             if (Framework.Utilities.Cache.FetchObject("GetRESTBasePath") == null)
             {
 
-                string sql = "select [value] from [Framework.].[parameter] with(nolock) where parameterid = 'basepath'";
+                string sql = "exec [FRAMEWORK.].[GetBasePath]";
 
-                SqlDataReader sqldr = this.GetSQLDataReader("", sql, CommandType.Text, CommandBehavior.CloseConnection, null);
-
-                while (sqldr.Read())
+                using (SqlDataReader sqldr = this.GetSQLDataReader(sql, CommandType.Text, CommandBehavior.CloseConnection, null))
                 {
-                    rtn = sqldr[0].ToString();
+
+                    while (sqldr.Read())
+                    {
+                        rtn = sqldr[0].ToString();
+                    }
+
+                    if (!sqldr.IsClosed)
+                        sqldr.Close();
+
                 }
-
-
-                if (!sqldr.IsClosed)
-                    sqldr.Close();
-
-                Framework.Utilities.Cache.SetWithTimeout("GetRESTBasePath", rtn, 10000);
+                Framework.Utilities.Cache.Set("GetRESTBasePath", rtn);
             }
             else
             {
@@ -224,6 +225,7 @@ namespace Profiles.Framework.Utilities
             return rtn;
         }
 
+
         public string GetRESTBaseURI()
         {
             string rtn = string.Empty;
@@ -231,19 +233,20 @@ namespace Profiles.Framework.Utilities
             if (Framework.Utilities.Cache.FetchObject("GetRESTBaseURI") == null)
             {
 
-                string sql = "select [value] from [Framework.].[parameter] with(nolock) where parameterid = 'baseuri'";
+                string sql = "exec [FRAMEWORK.].[GetBaseURI]";
 
-                SqlDataReader sqldr = this.GetSQLDataReader("", sql, CommandType.Text, CommandBehavior.CloseConnection, null);
-
-                while (sqldr.Read())
+                using (SqlDataReader sqldr = this.GetSQLDataReader(sql, CommandType.Text, CommandBehavior.CloseConnection, null))
                 {
-                    rtn = sqldr[0].ToString();
+
+                    while (sqldr.Read())
+                    {
+                        rtn = sqldr[0].ToString();
+                    }
+
+                    if (!sqldr.IsClosed)
+                        sqldr.Close();
                 }
-
-                if (!sqldr.IsClosed)
-                    sqldr.Close();
-
-                Framework.Utilities.Cache.SetWithTimeout("GetRESTBaseURI", rtn, 10000);
+                Framework.Utilities.Cache.Set("GetRESTBaseURI", rtn);
             }
             else
             {

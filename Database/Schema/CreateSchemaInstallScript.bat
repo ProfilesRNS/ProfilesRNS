@@ -328,6 +328,8 @@ type Profile.Data.vwGroup.Manager.View.sql
 type Profile.Data.vwGroup.Member.View.sql
 type Profile.Data.vwGroup.Photo.View.sql
 type Profile.Data.vwGroup.Publication.Entity.AssociatedInformationResource.View.sql
+type Framework..GetBasePath.StoredProcedure.sql
+type Framework..GetBaseURI.StoredProcedure.sql
 rem type Profile.Data.vwURL.View.sql
 
 rem type PresentationXML.SqlAssembly.sql
