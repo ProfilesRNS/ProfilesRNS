@@ -250,7 +250,7 @@ type Profile.Data.List.Member.Table.sql
 type Profile.Data.Publication.PubMed.DisambiguationExclude.Table.sql
 type Profile.Data.Publication.PubMed.DisambiguationSettings.Table.sql
 type Profile.Data.Publication.Funding.DisambiguationSettings.Table.sql
-
+type Profile.Import.GeocodingWebservice.Table.sql
 
 type RDF..fnTripleHash.UserDefinedFunction.sql
 type Utility.Application.fnText2Bool.UserDefinedFunction.sql
@@ -677,3 +677,4 @@ type Profile.Data.Publication.Pubmed.UpdateDisambiguationSettings.StoredProcedur
 type Profile.Data.Publication.Pubmed.GetDisambiguationSettings.StoredProcedure.sql
 type Profile.Data.Funding.UpdateDisambiguationSettings.StoredProcedure.sql
 type Profile.Data.Funding.GetDisambiguationSettings.StoredProcedure.sql
+type Profile.Import.GeocodingWebservice.AddLog.StoredProcedure.sql
