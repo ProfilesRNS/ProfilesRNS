@@ -655,11 +655,11 @@ type Profile.Import.PRNSWebservice.GetPostData.StoredProcedure.sql
 type Profile.Import.PRNSWebservice.ImportData.StoredProcedure.sql
 type Profile.Import.PRNSWebservice.AddLog.StoredProcedure.sql
 type Profile.Module.CustomViewAuthorInAuthorship.GetJournalHeadings.StoredProcedure.sql
-type Profile.Module.GenericRDF.AddEditPluginData.StoredProcedure.sql
 type Profile.Module.GenericRDF.AddPluginToProfile.StoredProcedure.sql
+type Profile.Module.GenericRDF.RemovePluginFromProfile.StoredProcedure.sql
+type Profile.Module.GenericRDF.AddEditPluginData.StoredProcedure.sql
 type Profile.Module.GenericRDF.AddUpdateOntology.StoredProcedure.sql
 type Profile.Module.GenericRDF.GetPluginData.StoredProcedure.sql
-type Profile.Module.GenericRDF.RemovePluginFromProfile.StoredProcedure.sql
 type Profile.Data.List.AddRemove.Filter.StoredProcedure.sql
 type Profile.Data.List.AddRemove.Person.StoredProcedure.sql
 type Profile.Data.List.AddRemove.SelectedPeople.StoredProcedure.sql
