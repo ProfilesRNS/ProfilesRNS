@@ -190,7 +190,7 @@ namespace Profiles
                       "\nSTACKTRACE: " + ex.StackTrace,
                       EventLogEntryType.Error);
                 }
-                catch (Exception f) { }
+                catch (Exception) { }
 
                 //After the error is written to the event log, a copy of the same message is loaded into a session variable and then
                 //displayed in the ErrorPage.aspx file.     

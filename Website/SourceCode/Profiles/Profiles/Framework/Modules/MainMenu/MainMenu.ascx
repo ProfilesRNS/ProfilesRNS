@@ -67,13 +67,13 @@
                 <li id="ListDivider">
                     <div class="divider"></div>
                 </li>
-                <%--<li id="navMyLists">
+                <li id="navMyLists">
                    <a href="#">My Person List (<span id="list-count">0</span>)</a>
                     <MyLists:Lists runat="server" ID="MyLists" Visible="false" />
                 </li>
                  <li>
                     <div class="divider"></div>
-                </li>--%>
+                </li>
               <%--  <li>
                     <asp:Literal ID="litDashboard" runat="server" /></li>
                 <li>

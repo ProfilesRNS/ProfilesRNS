@@ -87,6 +87,11 @@ namespace Profiles.Search.Modules.SearchResults
                 searchrequest = data.DecryptRequest(Request.QueryString["searchrequest"]);
                 xmlsearchrequest.LoadXml(searchrequest);
             }
+            else if (Session["searchrequest"] != null)
+            {
+                searchrequest = Session["searchrequest"].ToString();
+                xmlsearchrequest.LoadXml(searchrequest);
+            }
             else if (string.IsNullOrEmpty(base.MasterPage.SearchRequest) == false)
             {
                 searchrequest = data.DecryptRequest(base.MasterPage.SearchRequest);
@@ -332,7 +337,8 @@ namespace Profiles.Search.Modules.SearchResults
                         break;
 
                     default:
-                        xmlsearchrequest = data.SearchRequest(searchfor, exactphrase, fname, lname, institution, institutionallexcept, department, departmentallexcept, division, divisionallexcept,  "http://xmlns.com/foaf/0.1/Person", perpage.ToString(), (startrecord - 1).ToString(), sort, sortdirection, otherfilters, "",ref searchrequest);                    
+                        xmlsearchrequest = data.SearchRequest(searchfor, exactphrase, fname, lname, institution, institutionallexcept, department, departmentallexcept, division, divisionallexcept,  "http://xmlns.com/foaf/0.1/Person", perpage.ToString(), (startrecord - 1).ToString(), sort, sortdirection, otherfilters, "", true,ref searchrequest);
+                        HttpContext.Current.Session["PERSON-SEARCH-ADD"] = "true";
                         break;
                 }
                 

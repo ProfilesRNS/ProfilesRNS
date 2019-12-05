@@ -302,6 +302,7 @@ namespace Profiles.Profile.Modules.NetworkMap
             public string DefaultLevel { get; set; }
             public string PersonsAtagString { get; set; }
             public string ZoomLevel { get; set; }
+            public string PersonName { get; set; }
         }
 
 

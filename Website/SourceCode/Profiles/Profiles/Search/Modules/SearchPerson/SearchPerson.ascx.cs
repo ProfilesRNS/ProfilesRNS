@@ -357,7 +357,7 @@ namespace Profiles.Search.Modules.SearchPerson
 
 
             data.SearchRequest(searchfor, exactphrase, fname, lname, institution, institutionallexcept,
-                department, departmentallexcept, division, divisionallexcept, classuri, "15", "0", "", "", otherfilters, facrank, ref searchrequest);
+                department, departmentallexcept, division, divisionallexcept, classuri, "15", "0", "", "", otherfilters, facrank, true, ref searchrequest);
 
             Response.Redirect(Root.Domain + "/search/default.aspx?showcolumns=1&searchtype=people&otherfilters=" + otherfilters + "&searchrequest=" + searchrequest, true);
 

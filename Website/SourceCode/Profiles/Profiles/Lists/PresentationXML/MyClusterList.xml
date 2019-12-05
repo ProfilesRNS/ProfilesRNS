@@ -1,0 +1,23 @@
+﻿<Presentation PresentationClass="network">
+  <PageOptions Columns="1"/>
+  <WindowName>My Person List</WindowName>
+  <PageTitle>My Person List</PageTitle>
+  <PageBackLinkName></PageBackLinkName>
+  <PageBackLinkURL></PageBackLinkURL>
+  <PageSubTitle></PageSubTitle>
+  <PageDescription>        
+  </PageDescription>
+  <PanelList>
+    <Panel type="header"  />
+    <Panel type="page" />
+    <Panel Type="active">
+      <Module ID="MainMenu">
+      </Module>
+    </Panel>
+    <Panel Name="" Alias="" Type="main" TabType="Default" TabSort="0">
+      <Module ID="NetworkClusterList">
+      </Module>
+    </Panel>    
+  </PanelList>
+</Presentation>
+

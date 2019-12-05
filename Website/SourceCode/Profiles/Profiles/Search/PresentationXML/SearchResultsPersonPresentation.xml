@@ -11,7 +11,11 @@
     <Panel type="page" />
     <Panel Type="active">
       <Module ID="MiniSearch"  />
-      <Module ID="MainMenu"  />
+      <Module ID="MainMenu">
+        <ParamList>
+          <Param Name="PageType">SearchResults</Param>
+        </ParamList>
+      </Module>
     </Panel>
     <Panel Type="main" TabType="Fixed" TabSort="0" >
       <Module ID="SearchResults">        

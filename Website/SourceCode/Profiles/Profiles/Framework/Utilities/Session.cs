@@ -34,6 +34,8 @@ namespace Profiles.Framework.Utilities
 
             this.UserAgent = HttpContext.Current.Request.UserAgent;
         }
+        public string ListID { get; set; }
+        public string ListSize { get; set; }
         public string SessionID { get; set; }
         public string SessionSequence { get; set; }
         public string CreateDate { get; set; }

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ModuleList>  
+  <Module ModulePath="Modules" NameSpace="Lists" FileName="ManageLists.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="Lists" FileName="SearchResultsList.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="NetworkClusterList" FileName="NetworkClusterList.ascx" Enabled="true"/>  
+</ModuleList>
+
+

@@ -1,0 +1,27 @@
+﻿.throw {
+	background-color: #f7f3ef !important;
+	color: #333 !important;
+	cursor: default !important;
+	font-weight: bold !important;
+	padding: 5px !important;
+	text-align: center !important;	
+	border-bottom: 1px solid #999999 !important;
+	border-top: 1px solid #999999 !important;
+	display: table-cell !important;
+}
+
+.tdrow {
+	padding: 5px !important;
+	border-bottom: 1px solid #999999 !important;
+	display: table-cell !important;
+}
+
+.tdborderleft {
+	border-left: 1px solid #999999 !important;
+}
+
+.thborderright {
+	border-right: 1px solid #999999 !important;
+}
+
+

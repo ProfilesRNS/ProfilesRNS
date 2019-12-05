@@ -13,7 +13,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Web;
 using System.Xml;
 using System.Configuration;
 using System.Data;
@@ -88,7 +88,7 @@ namespace Profiles.Search.Utilities
             search.Append("</SearchOptions>");
 
             searchxml.LoadXml(search.ToString());
-
+            HttpContext.Current.Session["searchrequest"] = search.ToString();
             return searchxml;
 
         }
@@ -98,7 +98,7 @@ namespace Profiles.Search.Utilities
             string division, string divisionallexcept,
             string classuri, string limit, string offset,
             string sortby, string sortdirection,
-            string otherfilters, string facrank, ref string searchrequest)
+            string otherfilters, string facrank, bool cacheinsession, ref string searchrequest)
         {
 
             System.Text.StringBuilder search = new System.Text.StringBuilder();
@@ -325,6 +325,9 @@ namespace Profiles.Search.Utilities
             searchrequest = this.EncryptRequest(search.ToString());
             searchxml.LoadXml(search.ToString());
 
+            if (cacheinsession)
+                HttpContext.Current.Session["searchrequest"] = search.ToString();
+
             return searchxml;
 
         }
@@ -520,8 +523,6 @@ namespace Profiles.Search.Utilities
             byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
             tDes.Clear();
             return Convert.ToBase64String(resultArray, 0, resultArray.Length);
-
-
         }
 
         public string DecryptRequest(string request)
@@ -553,7 +554,6 @@ namespace Profiles.Search.Utilities
             {
                 throw ex;
             }
-
         }
 
         private string NameSort(string direction)

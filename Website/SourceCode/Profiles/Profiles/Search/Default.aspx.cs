@@ -55,7 +55,7 @@ namespace Profiles.Search
 
                 Utilities.DataIO data = new Profiles.Search.Utilities.DataIO();
 
-                data.SearchRequest("", "", "", "", "", "", "", "", "", "", "", "15", "0", "", "", "", "", ref searchrequest);
+                data.SearchRequest("", "", "", "", "", "", "", "", "", "", "", "15", "0", "", "", "", "", true, ref searchrequest);
 
                 Response.Redirect(Root.Domain + "/search/default.aspx?searchtype=" + this.SearchType + "&searchrequest=" + searchrequest, true);
 
@@ -275,8 +275,12 @@ namespace Profiles.Search
             if (Request.QueryString["sortdirection"].IsNullOrEmpty() == false)
                 sortdirection = Request.QueryString["sortdirection"];
 
+
+
             if (Request.QueryString["searchrequest"].IsNullOrEmpty() == false)
                 searchrequest = Request.QueryString["searchrequest"];
+            else if (Session["searchrequest"] != null)
+                searchrequest = data.EncryptRequest(Session["searchrequest"].ToString());
             else if (masterpage.SearchRequest.IsNullOrEmpty() == false)
                 searchrequest = masterpage.SearchRequest;
 
@@ -315,10 +319,12 @@ namespace Profiles.Search
                     if (searchrequest != string.Empty)
                         xml.LoadXml(data.DecryptRequest(searchrequest));
                     else
-                        xml = data.SearchRequest(searchfor, exactphrase, fname, lname, institution, institutionallexcept, department, departmentallexcept, division, divisionallexcept, classuri, perpage, offset, sortby, sortdirection, otherfilters, "", ref searchrequest);
+                        xml = data.SearchRequest(searchfor, exactphrase, fname, lname, institution, institutionallexcept, department, departmentallexcept, division, divisionallexcept, classuri, perpage, offset, sortby, sortdirection, otherfilters, "", true, ref searchrequest);
                     break;
             }
 
+            searchrequest = xml.OuterXml;
+            Session["SearchRequest"] = searchrequest;
 
             if (nodeuri != string.Empty && nodeid != string.Empty)
                 masterpage.RDFData = data.WhySearch(xml, nodeuri, Convert.ToInt64(nodeid));

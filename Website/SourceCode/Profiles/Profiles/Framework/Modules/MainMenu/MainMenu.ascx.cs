@@ -139,19 +139,26 @@ namespace Profiles.Framework.Modules.MainMenu
 
             litJs.Text += "<script type='text/javascript'> var NAME = document.getElementById('prns-usrnav'); NAME.className = '" + loginclass + "';";
 
-/*          
+          
             if (sm.Session().UserID > 0 )
             {                
               
                 //Change this to show two drop down items based on the count.
                 MyLists.Visible = true;
+                if(base.GetModuleParamString("pageType") != null)
+                {
+                    string pt = base.GetModuleParamString("PageType");
+                    if (pt.Equals("Person")) MyLists.pageType = MyLists.pageTypes.Person;
+                    else if (pt.Equals("SearchResults")) MyLists.pageType = MyLists.pageTypes.SearchResults;
+                }
+
             }
             else if (sm.Session().UserID == 0)
             {
                 MyLists.Visible = false;
                 litJs.Text += " $('#navMyLists').remove(); $('#ListDivider').remove();";
             }
-*/
+
 
             litJs.Text += "</script>";
             UserHistory uh = new UserHistory();
