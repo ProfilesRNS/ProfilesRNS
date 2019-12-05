@@ -70,7 +70,7 @@ BEGIN
 
 	-- Turn off real-time indexing
 	IF @IsRunningInLoop = 0
-		ALTER FULLTEXT INDEX ON [RDF.].Node SET CHANGE_TRACKING OFF 
+		ALTER FULLTEXT INDEX ON [RDF.].vwLiteral SET CHANGE_TRACKING OFF 
 
 
 	--*******************************************************************************************
@@ -106,9 +106,9 @@ BEGIN
 		end
 
 		-- Turn on real-time indexing
-		ALTER FULLTEXT INDEX ON [RDF.].Node SET CHANGE_TRACKING AUTO;
+		ALTER FULLTEXT INDEX ON [RDF.].vwLiteral SET CHANGE_TRACKING AUTO;
 		-- Kick off population FT Catalog and index
-		ALTER FULLTEXT INDEX ON [RDF.].Node START FULL POPULATION 
+		ALTER FULLTEXT INDEX ON [RDF.].vwLiteral START FULL POPULATION 
 
 		return
 
@@ -621,10 +621,10 @@ BEGIN
 	IF @IsRunningInLoop = 0
 	BEGIN
 		-- Turn on real-time indexing
-		ALTER FULLTEXT INDEX ON [RDF.].Node SET CHANGE_TRACKING AUTO;
+		ALTER FULLTEXT INDEX ON [RDF.].vwLiteral SET CHANGE_TRACKING AUTO;
 	 
 		-- Kick off population FT Catalog and index
-		ALTER FULLTEXT INDEX ON [RDF.].Node START FULL POPULATION 
+		ALTER FULLTEXT INDEX ON [RDF.].vwLiteral START FULL POPULATION 
 	END
 	 
 END

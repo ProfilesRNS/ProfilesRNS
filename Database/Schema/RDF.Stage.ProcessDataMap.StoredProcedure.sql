@@ -49,7 +49,7 @@ BEGIN
 
 	-- Turn off real-time indexing
 	IF @TurnOffIndexing = 1
-		ALTER FULLTEXT INDEX ON [RDF.].Node SET CHANGE_TRACKING OFF 
+		ALTER FULLTEXT INDEX ON [RDF.].vwLiteral SET CHANGE_TRACKING OFF 
 
 	-- Do the loop	
 	WHILE (SELECT COUNT(*) FROM #Queue) > 0
@@ -845,9 +845,9 @@ BEGIN
 	IF @TurnOffIndexing = 1
 	BEGIN
 		-- Turn on real-time indexing
-		ALTER FULLTEXT INDEX ON [RDF.].Node SET CHANGE_TRACKING AUTO;
+		ALTER FULLTEXT INDEX ON [RDF.].vwLiteral SET CHANGE_TRACKING AUTO;
 		-- Kick off population FT Catalog and index
-		ALTER FULLTEXT INDEX ON [RDF.].Node START FULL POPULATION 
+		ALTER FULLTEXT INDEX ON [RDF.].vwLiteral START FULL POPULATION 
 	END
 	
 	-- select * from [Ontology.].DataMap
