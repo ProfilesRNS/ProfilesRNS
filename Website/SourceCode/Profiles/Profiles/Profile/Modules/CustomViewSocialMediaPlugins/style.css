@@ -1,0 +1,51 @@
+﻿.profile-view-slideshare { 
+
+  display: inline-flex; 
+  height: 400px; } 
+
+.profile-view-slideshare .ss_list { 
+  position: relative; 
+  list-style:none;
+  height: 400px; 
+  width: 300px;
+  overflow-y: scroll;
+  margin: 0px 0px 0px 8px; 
+  padding: 0px;
+  float:right;  
+  
+}
+
+  
+.profile-view-slideshare .ss_list li { 
+  cursor: pointer;
+  height: 90px;
+  padding: 0px; 
+  margin-bottom: 6px }
+  
+.profile-view-slideshare .ss_list li img { float:left ; }
+.profile-view-slideshare .ss_list li div { margin-left: 130px; }
+
+.youtube { 
+  position: relative; 
+  display: inline-flex; 
+  height: 400px; } 
+
+.youtube .yt_div { width: 440px; }
+
+.youtube .yt_list { 
+  height: 400px;   
+  overflow-y: scroll;
+  margin: 0px 0px 0px 68px; 
+  padding: 0px;
+  padding-right:5px;
+  width:280px;
+}
+  
+.youtube .yt_list li { 
+  cursor: pointer;
+  height: 90px;
+  padding: 0px; 
+  margin-bottom: 6px }
+  
+.youtube .yt_list li img { float:left ; }
+.youtube .yt_list li div { margin-left: 130px; }

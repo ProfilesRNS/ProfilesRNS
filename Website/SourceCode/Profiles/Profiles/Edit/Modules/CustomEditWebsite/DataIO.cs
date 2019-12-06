@@ -72,7 +72,10 @@ namespace Profiles.Edit.Modules.CustomEditWebsite
         {
             try
             {
-
+                if (HttpContext.Current.Request.QueryString["subject"] != null)
+                {
+                    Framework.Utilities.Cache.AlterDependency(HttpContext.Current.Request.QueryString["subject"].ToString());
+                }
                 string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
                 SqlConnection dbconnection = new SqlConnection(connstr);
 
@@ -103,7 +106,10 @@ namespace Profiles.Edit.Modules.CustomEditWebsite
         {
             try
             {
-
+                if (HttpContext.Current.Request.QueryString["subject"] != null)
+                {
+                    Framework.Utilities.Cache.AlterDependency(HttpContext.Current.Request.QueryString["subject"].ToString());
+                }
                 string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
                 SqlConnection dbconnection = new SqlConnection(connstr);
 
@@ -134,7 +140,10 @@ namespace Profiles.Edit.Modules.CustomEditWebsite
         {
             try
             {
-
+                if (HttpContext.Current.Request.QueryString["subject"] != null)
+                {
+                    Framework.Utilities.Cache.AlterDependency(HttpContext.Current.Request.QueryString["subject"].ToString());
+                }
                 string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
                 SqlConnection dbconnection = new SqlConnection(connstr);
 

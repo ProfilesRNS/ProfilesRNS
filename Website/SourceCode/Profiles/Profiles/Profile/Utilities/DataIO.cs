@@ -181,7 +181,7 @@ namespace Profiles.Profile.Utilities
                 }
 
             }
-            catch (Exception ex) { }
+            catch (Exception) { }
 
             return xmlrtn;
         }

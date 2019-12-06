@@ -712,7 +712,7 @@ namespace Profiles.Framework.Utilities
 
 
             }
-            catch (Exception ex) { }
+            catch (Exception) { }
 
             try
             {
@@ -728,7 +728,7 @@ namespace Profiles.Framework.Utilities
                 session.UserURI = param[5].Value.ToString();
                 //session.ShortDisplayName = param[6].Value.ToString();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
 

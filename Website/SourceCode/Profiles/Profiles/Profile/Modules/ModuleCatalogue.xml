@@ -38,5 +38,8 @@ For details, see: LICENSE.txt
   <Module ModulePath="Modules" NameSpace="CustomViewEagleI" FileName="CustomViewEagleI.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="CustomViewResearcherRole" FileName="CustomViewResearcherRole.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="CustomViewGroupGeneralInfo" FileName="CustomViewGroupGeneralInfo.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="CustomViewSocialMediaPlugins" FileName="FeaturedPresentations.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="CustomViewSocialMediaPlugins" FileName="FeaturedVideos.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="CustomViewSocialMediaPlugins" FileName="twitter.ascx" Enabled="true"/>
 </ModuleList>
 

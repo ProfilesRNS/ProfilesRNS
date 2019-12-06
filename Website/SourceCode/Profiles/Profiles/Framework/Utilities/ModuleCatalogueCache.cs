@@ -88,6 +88,8 @@ namespace Profiles.Framework.Utilities
                 XmlDocument modulecache = new XmlDocument();
                 List<ModuleParams> moduleparams = new List<ModuleParams>();
                 string modulepath = string.Empty;
+                string ModuleFileName = string.Empty;
+                string ModuleName = string.Empty;
 
                 foreach (XmlNode app in applicationcatalogue.SelectNodes("ApplicationList/Application"))
                 {
@@ -99,13 +101,15 @@ namespace Profiles.Framework.Utilities
                         {
                             if (module.SelectSingleNode("@Enabled").Value == "true")
                             {
+                                ModuleFileName = module.SelectSingleNode("@FileName").Value;
+                                ModuleName = ModuleFileName.Remove(ModuleFileName.LastIndexOf('.'));
                                 string css = null;
                                 if (module.SelectSingleNode("@CSS") != null) css = "~/" + app.SelectSingleNode("@ApplicaitonPath").Value + "/" + module.SelectSingleNode("@ModulePath").Value + "/" + module.SelectSingleNode("@NameSpace").Value + "/" + module.SelectSingleNode("@CSS").Value;
                                 modulepath = "~/" + app.SelectSingleNode("@ApplicaitonPath").Value + "/" + module.SelectSingleNode("@ModulePath").Value + "/" + module.SelectSingleNode("@NameSpace").Value + "/" + module.SelectSingleNode("@FileName").Value;
                                 if (this.GetModule(module.SelectSingleNode("@NameSpace").Value)==null){
-                                    _modules.Add(new Module(modulepath, module.SelectSingleNode("@NameSpace").Value, null, "", css));
+                                    _modules.Add(new Module(modulepath, ModuleName, null, "", css));
                                 }
-                                _modules.Add(new Module(modulepath, app.SelectSingleNode("@ApplicaitonPath").Value+"."+module.SelectSingleNode("@NameSpace").Value, null, "", css));
+                                _modules.Add(new Module(modulepath, app.SelectSingleNode("@ApplicaitonPath").Value+"."+ ModuleName, null, "", css));
                                 moduleparams = new List<ModuleParams>();
                             }
                         }
@@ -130,7 +134,7 @@ namespace Profiles.Framework.Utilities
                 rtnmodule = modules.Find(delegate(Module module) { return module.Key == modulekey; });
 
             }
-            catch (Exception ex) { }
+            catch (Exception) { }
 
             return rtnmodule;
         }

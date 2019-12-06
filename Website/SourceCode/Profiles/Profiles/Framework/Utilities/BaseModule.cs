@@ -13,6 +13,8 @@
 using System;
 using System.Collections.Generic;
 using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using System.Xml;
 
 
@@ -320,5 +322,89 @@ namespace Profiles.Framework.Utilities
 
         private List<Module> Modules { get; set; }
 
+        public void InitUpDownArrows(ref GridView gv)
+        {
+
+
+            ImageButton ibLastUp = null;
+            ImageButton ibLastUpGray = null;
+            ImageButton ibLastDown = null;
+            ImageButton ibLastDownGray = null;
+
+
+            ImageButton ibFirstUp = null;
+            ImageButton ibFirstUpGray = null;
+            ImageButton ibFirstDown = null;
+            ImageButton ibFirstDownGray = null;
+
+            GridViewRow lastrow = null;
+            GridViewRow firstrow = null;
+
+            bool firstrowOnly = false;
+
+            try
+            {
+                if (gv.Rows.Count > 0)
+                {
+                    lastrow = gv.Rows[gv.Rows.Count - 1];
+                    firstrow = gv.Rows[0];
+                }
+
+                if (firstrow == lastrow && firstrow != null)
+                    firstrowOnly = true;
+
+                ibLastUp = (ImageButton)lastrow.FindControl("ibUp");
+                ibLastUpGray = (ImageButton)lastrow.FindControl("ibUpGray");
+                ibLastDown = (ImageButton)lastrow.FindControl("ibDown");
+                ibLastDownGray = (ImageButton)lastrow.FindControl("ibDownGray");
+
+                ibFirstUp = (ImageButton)firstrow.FindControl("ibUp");
+                ibFirstUpGray = (ImageButton)firstrow.FindControl("ibUpGray");
+                ibFirstDown = (ImageButton)firstrow.FindControl("ibDown");
+                ibFirstDownGray = (ImageButton)firstrow.FindControl("ibDownGray");
+
+
+                if (!firstrowOnly)
+                {
+                    try
+                    {
+                        ibLastUp.Visible = true;
+                        ibLastDown.Visible = false;
+                        ibLastUpGray.Visible = false;
+                        ibLastDownGray.Style.Add(HtmlTextWriterStyle.Cursor, "default");
+                        ibLastDownGray.Visible = true;
+                    }
+                    catch (Exception) { } //Its in edit mode on the last row.
+                    try
+                    {
+                        ibFirstUp.Visible = false;
+                        ibFirstDown.Visible = true;
+                        ibFirstUpGray.Visible = true;
+                        ibFirstUpGray.Style.Add(HtmlTextWriterStyle.Cursor, "default");
+                        ibFirstDownGray.Visible = false;
+                    }
+                    catch (Exception) { } //Its in edit mode on the first row.
+                }
+                if (firstrowOnly)
+                {
+                    ibFirstUp.Visible = false;
+                    ibFirstDown.Visible = false;
+                    ibFirstUpGray.Visible = true;
+                    ibFirstUpGray.Style.Add(HtmlTextWriterStyle.Cursor, "default");
+                    ibFirstDownGray.Visible = true;
+                    ibFirstDownGray.Style.Add(HtmlTextWriterStyle.Cursor, "default");
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        protected string jsStart { get { return "<script type=\"text/javascript\">"; } }
+
+        protected string jsEnd { get { return "</script>"; } }
     }
 }

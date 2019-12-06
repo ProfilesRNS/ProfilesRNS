@@ -27,7 +27,7 @@ namespace Profiles.Edit.Modules.CustomEditWebsite
         Profiles.Edit.Modules.CustomEditWebsite.DataIO data;
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.FillAwardGrid(false);
+            this.FillAwardGrid(true);
             
             if (!IsPostBack)
                 Session["pnlInsertAward.Visible"] = null;
@@ -57,15 +57,15 @@ namespace Profiles.Edit.Modules.CustomEditWebsite
 
             base.GetNetworkProfile(this.SubjectID, this.PredicateID);
 
-            litBackLink.Text = "<a href='" + Root.Domain + "/edit/" + this.SubjectID.ToString() + "'>Edit Menu</a> &gt; <b>" + PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@Label").Value + "</b>";
+            litBackLink.Text = "<a href='" + Root.Domain + "/edit/default.aspx?subject=" + this.SubjectID.ToString() + "'>Edit Menu</a> &gt; <b>" + PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@Label").Value + "</b>";
 
-            litAddAwardsText.Text = "Add " + PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@Label").Value + "(s)";
+            btnEditAwards.Text = "Add " + PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@Label").Value + "(s)";
             lblNoAwards.Text = "No " + PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@Label").Value + "s have been added.";
 
             securityOptions.Subject = this.SubjectID;
             securityOptions.PredicateURI = Predicate;
             securityOptions.PrivacyCode = Convert.ToInt32(this.PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@ViewSecurityGroup").Value);
-            securityOptions.SecurityGroups = new XmlDataDocument();
+            securityOptions.SecurityGroups = new XmlDocument();
             securityOptions.SecurityGroups.LoadXml(base.PresentationXML.DocumentElement.LastChild.OuterXml);
 
             if (Request.QueryString["new"] != null && Session["new"] != null)
@@ -115,7 +115,7 @@ namespace Profiles.Edit.Modules.CustomEditWebsite
                 btnInsertCancel_OnClick(sender, e);
                 pnlSecurityOptions.Visible = false;
                 pnlInsertAward.Visible = true;
-                imbAddArror.ImageUrl = "~/Framework/Images/icon_squareDownArrow.gif";
+                imbAddArrow.ImageUrl = "~/Framework/Images/icon_squareDownArrow.gif";
                 Session["pnlInsertAward.Visible"] = true;
             }
             else
@@ -123,7 +123,7 @@ namespace Profiles.Edit.Modules.CustomEditWebsite
                 Session["pnlInsertAward.Visible"] = null;
                 pnlSecurityOptions.Visible = true;
                 pnlInsertAward.Visible = false;
-                imbAddArror.ImageUrl = "~/Framework/Images/icon_squareArrow.gif";
+                imbAddArrow.ImageUrl = "~/Framework/Images/icon_squareArrow.gif";
 
             }
             upnlEditSection.Update();
@@ -142,13 +142,14 @@ namespace Profiles.Edit.Modules.CustomEditWebsite
             try
             {
                 e.Row.Cells[4].Attributes.Add("style", "border-left:0px;");
+                e.Row.Cells[0].Attributes.Add("style", "width:400px;");
             }
-            catch (Exception ex) { }
+            catch (Exception) { }
 
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
 
-                txtTitle = (TextBox)e.Row.Cells[0].FindControl("txtTitle");
+                txtTitle = (TextBox)e.Row.Cells[0].FindControl("txtTitleEdit");
                 txtURL = (TextBox)e.Row.Cells[1].FindControl("txtURL");
                 txtDate = (TextBox)e.Row.Cells[2].FindControl("txtDate");
 
@@ -156,13 +157,7 @@ namespace Profiles.Edit.Modules.CustomEditWebsite
                 lnkDelete = (ImageButton)e.Row.Cells[3].FindControl("lnkDelete");
 
                 websitestate = (WebsiteState)e.Row.DataItem;
-/*
-                if (websitestate.EditDelete == false)
-                    lnkDelete.Visible = false;
 
-                if (websitestate.EditExisting == false)
-                    lnkEdit.Visible = false;
-*/
             }
 
             if (e.Row.RowType == DataControlRowType.DataRow && (e.Row.RowState & DataControlRowState.Edit) == DataControlRowState.Edit)
@@ -184,7 +179,7 @@ namespace Profiles.Edit.Modules.CustomEditWebsite
 
         protected void GridViewAwards_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            TextBox txtTitle = (TextBox)GridViewWebsites.Rows[e.RowIndex].FindControl("txtTitle");
+            TextBox txtTitle = (TextBox)GridViewWebsites.Rows[e.RowIndex].FindControl("txtTitleEdit");
             TextBox txtURL = (TextBox)GridViewWebsites.Rows[e.RowIndex].FindControl("txtURL");
             TextBox txtDate = (TextBox)GridViewWebsites.Rows[e.RowIndex].FindControl("txtDate");
 
@@ -289,6 +284,8 @@ namespace Profiles.Edit.Modules.CustomEditWebsite
                 if (GridViewWebsites.Rows.Count == 1)
                 {
                     Session["new"] = true;
+                    Session["newclose"] = true;
+                    //btnEditAwards_OnClick(sender, e);
                     //stupid update panel bug we cant figure out.
                     Response.Redirect(Request.Url.ToString() + "&new=true");
                 }

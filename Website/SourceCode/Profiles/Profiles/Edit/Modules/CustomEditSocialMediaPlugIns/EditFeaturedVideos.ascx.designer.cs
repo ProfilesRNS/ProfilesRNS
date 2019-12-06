@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Profiles.Edit.Modules.CustomEditWebsite {
+namespace Profiles.Edit.Modules.CustomEditSocialMediaPlugIns {
     
     
-    public partial class CustomEditWebsite {
+    public partial class FeaturedVideos {
         
         /// <summary>
         /// upnlEditSection control.
@@ -31,13 +31,13 @@ namespace Profiles.Edit.Modules.CustomEditWebsite {
         protected global::System.Web.UI.UpdateProgress updateProgress;
         
         /// <summary>
-        /// hiddenSubjectID control.
+        /// hdnURL control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hiddenSubjectID;
+        protected global::System.Web.UI.WebControls.HiddenField hdnURL;
         
         /// <summary>
         /// litBackLink control.
@@ -49,13 +49,13 @@ namespace Profiles.Edit.Modules.CustomEditWebsite {
         protected global::System.Web.UI.WebControls.Literal litBackLink;
         
         /// <summary>
-        /// pnlSecurityOptions control.
+        /// phSecuritySettings control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlSecurityOptions;
+        protected global::System.Web.UI.WebControls.Panel phSecuritySettings;
         
         /// <summary>
         /// securityOptions control.
@@ -67,13 +67,13 @@ namespace Profiles.Edit.Modules.CustomEditWebsite {
         protected global::Profiles.Edit.Modules.SecurityOptions.SecurityOptions securityOptions;
         
         /// <summary>
-        /// pnlEditAwards control.
+        /// pnlAddEdit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlEditAwards;
+        protected global::System.Web.UI.WebControls.Panel pnlAddEdit;
         
         /// <summary>
         /// imbAddArrow control.
@@ -85,49 +85,31 @@ namespace Profiles.Edit.Modules.CustomEditWebsite {
         protected global::System.Web.UI.WebControls.ImageButton imbAddArrow;
         
         /// <summary>
-        /// btnEditAwards control.
+        /// btnAddEditEdit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnEditAwards;
+        protected global::System.Web.UI.WebControls.LinkButton btnAddEditEdit;
         
         /// <summary>
-        /// pnlInsertAward control.
+        /// pnlImportYouTube control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlInsertAward;
+        protected global::System.Web.UI.WebControls.Panel pnlImportYouTube;
         
         /// <summary>
-        /// litMediaText control.
+        /// txtName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litMediaText;
-        
-        /// <summary>
-        /// litWebsiteText control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litWebsiteText;
-        
-        /// <summary>
-        /// txtTitle control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTitle;
+        protected global::System.Web.UI.WebControls.TextBox txtName;
         
         /// <summary>
         /// txtURL control.
@@ -139,66 +121,48 @@ namespace Profiles.Edit.Modules.CustomEditWebsite {
         protected global::System.Web.UI.WebControls.TextBox txtURL;
         
         /// <summary>
-        /// litPubDateLabel control.
+        /// btnSaveAndClose control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litPubDateLabel;
+        protected global::System.Web.UI.WebControls.LinkButton btnSaveAndClose;
         
         /// <summary>
-        /// txtPubDate control.
+        /// btnCancel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPubDate;
+        protected global::System.Web.UI.WebControls.LinkButton btnCancel;
         
         /// <summary>
-        /// btnInsertAward control.
+        /// GridViewVideos control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnInsertAward;
+        protected global::System.Web.UI.WebControls.GridView GridViewVideos;
         
         /// <summary>
-        /// btnInsertAward2 control.
+        /// divNoVideos control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnInsertAward2;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divNoVideos;
         
         /// <summary>
-        /// btnInsertCancel control.
+        /// lblNoVideos control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnInsertCancel;
-        
-        /// <summary>
-        /// GridViewWebsites control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewWebsites;
-        
-        /// <summary>
-        /// lblNoAwards control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNoAwards;
+        protected global::System.Web.UI.WebControls.Label lblNoVideos;
     }
 }
