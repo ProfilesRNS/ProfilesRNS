@@ -40,6 +40,6 @@ For details, see: LICENSE.txt
   <Module ModulePath="Modules" NameSpace="CustomViewGroupGeneralInfo" FileName="CustomViewGroupGeneralInfo.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="CustomViewSocialMediaPlugins" FileName="FeaturedPresentations.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="CustomViewSocialMediaPlugins" FileName="FeaturedVideos.ascx" Enabled="true"/>
-  <Module ModulePath="Modules" NameSpace="CustomViewSocialMediaPlugins" FileName="twitter.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="CustomViewSocialMediaPlugins" FileName="Twitter.ascx" Enabled="true"/>
 </ModuleList>
 
