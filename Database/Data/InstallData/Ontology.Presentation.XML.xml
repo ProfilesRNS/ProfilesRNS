@@ -175,7 +175,11 @@
         <PanelList>
           <Panel Type="active">
             <Module ID="MiniSearch" />
-            <Module ID="MainMenu" />
+			<Module ID="MainMenu">
+			  <ParamList>
+				<Param Name="PageType">Person</Param>
+			  </ParamList>
+			</Module>
           </Panel>
           <Panel Type="main" TabType="Fixed">
             <Module ID="CustomViewPersonGeneralInfo" />
@@ -283,7 +287,11 @@
         <PanelList>
           <Panel Type="active">
             <Module ID="MiniSearch" />
-            <Module ID="MainMenu" />
+			<Module ID="MainMenu">
+			  <ParamList>
+				<Param Name="PageType">Person</Param>
+			  </ParamList>
+			</Module>
           </Panel>
           <Panel Type="main" TabSort="0" TabType="Default" Alias="list" Name="List">
             <Module ID="NetworkList">
@@ -438,7 +446,11 @@
         <PanelList>
           <Panel Type="active">
             <Module ID="MiniSearch" />
-            <Module ID="MainMenu" />
+			<Module ID="MainMenu">
+			  <ParamList>
+				<Param Name="PageType">Person</Param>
+			  </ParamList>
+			</Module>
           </Panel>
           <Panel Type="main" TabSort="0" TabType="Default" Alias="list" Name="List">
             <Module ID="NetworkList">
@@ -581,7 +593,11 @@
         <PanelList>
           <Panel Type="active">
             <Module ID="MiniSearch" />
-            <Module ID="MainMenu" />
+			<Module ID="MainMenu">
+			  <ParamList>
+				<Param Name="PageType">Person</Param>
+			  </ParamList>
+			</Module>
           </Panel>
           <Panel Type="main" TabSort="0" TabType="Default" Alias="cloud" Name="Cloud">
             <Module ID="NetworkList">
@@ -723,7 +739,11 @@
         <PanelList>
           <Panel Type="active">
             <Module ID="MiniSearch" />
-            <Module ID="MainMenu" />
+			<Module ID="MainMenu">
+			  <ParamList>
+				<Param Name="PageType">Person</Param>
+			  </ParamList>
+			</Module>
           </Panel>
           <Panel Type="main" TabSort="0" TabType="Default">
             <Module ID="CoAuthorConnection">
@@ -782,7 +802,11 @@
         <PanelList>
           <Panel Type="active">
             <Module ID="MiniSearch" />
-            <Module ID="MainMenu" />
+			<Module ID="MainMenu">
+			  <ParamList>
+				<Param Name="PageType">Person</Param>
+			  </ParamList>
+			</Module>
           </Panel>
           <Panel Type="main" TabSort="0" TabType="Default">
             <Module ID="SimilarConnection">
@@ -845,7 +869,11 @@ has written about
         <PanelList>
           <Panel Type="active">
             <Module ID="MiniSearch" />
-            <Module ID="MainMenu" />
+			<Module ID="MainMenu">
+			  <ParamList>
+				<Param Name="PageType">Person</Param>
+			  </ParamList>
+			</Module>
           </Panel>
           <Panel Type="main" TabSort="0" TabType="Default">
             <Module ID="ConceptConnection">
