@@ -678,3 +678,5 @@ type Profile.Data.Publication.Pubmed.GetDisambiguationSettings.StoredProcedure.s
 type Profile.Data.Funding.UpdateDisambiguationSettings.StoredProcedure.sql
 type Profile.Data.Funding.GetDisambiguationSettings.StoredProcedure.sql
 type Profile.Import.GeocodingWebservice.AddLog.StoredProcedure.sql
+type Profile.Data.Publication.Group.MyPub.GetPublication.StoredProcedure.sql
+type Profile.Data.Publication.Group.MyPub.UpdatePublication.StoredProcedure.sql
