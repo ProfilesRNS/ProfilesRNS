@@ -23,6 +23,7 @@ using Profiles.Edit.Utilities;
 
 
 using Profiles.Framework.Utilities;
+using System.Web;
 
 namespace Profiles.Edit.Modules.CustomEditGroupMember
 {
@@ -69,6 +70,7 @@ namespace Profiles.Edit.Modules.CustomEditGroupMember
             else
                 Response.Redirect("~/search");
 
+            Edit.Utilities.DataIO data2 = new Edit.Utilities.DataIO();
             Proxy.Utilities.DataIO data = new Proxy.Utilities.DataIO();
             SessionManagement sm = new SessionManagement();
             string subject = sm.Session().SessionID.ToString();
@@ -80,7 +82,7 @@ namespace Profiles.Edit.Modules.CustomEditGroupMember
             string predicateName;
             if (isManagerPage) predicateName = "Group Managers";
             else predicateName = "Group Members";
-            litBackLink.Text = "<a href='" + Root.Domain + "/edit/" + this.SubjectID.ToString() + "'>Edit Menu</a> &gt; <b>" + predicateName + "</b>";
+            litBackLink.Text = "<a href='" + Root.Domain + "/edit/default.aspx?subject=" + this.SubjectID.ToString() + "'>Edit Menu</a> &gt; <b>" + predicateName + "</b>";
             btnLitAddGroupMembers.Text = "Add " + predicateName;
 
             if (Request.QueryString["fname"] != null)
@@ -95,7 +97,7 @@ namespace Profiles.Edit.Modules.CustomEditGroupMember
                 this.Lname = Request.QueryString["lname"];
             }
 
-            drpInstitution.DataSource = data.GetInstitutions();
+            drpInstitution.DataSource = data2.GetInstitutions(isManagerPage);
             drpInstitution.DataTextField = "Text";
             drpInstitution.DataValueField = "Value";
             drpInstitution.DataBind();
@@ -294,10 +296,7 @@ namespace Profiles.Edit.Modules.CustomEditGroupMember
         private void ExecuteSearch(bool button)
         {
             Utilities.DataIO data = new Profiles.Edit.Utilities.DataIO();
-
-
-            Int32 totalpageremainder = 0;
-
+                       
             if (drpDepartment.SelectedItem.Text != "--Select--")
                 this.Department = drpDepartment.SelectedItem.Value;
             else
@@ -311,74 +310,21 @@ namespace Profiles.Edit.Modules.CustomEditGroupMember
             this.Fname = txtFirstName.Text;
             this.Lname = txtLastName.Text;
 
-            if (!button)
-            {
-                if (Request.QueryString["offset"] != null)
-                    this.Offset = Convert.ToInt32(Request.QueryString["offset"]);
-
-                if (Request.QueryString["totalrows"] != null)
-                    this.TotalRowCount = Convert.ToInt32(Request.QueryString["totalrows"]);
-
-                if (Request.QueryString["CurrentPage"] != null)
-                    this.CurrentPage = Convert.ToInt32(Request.QueryString["CurrentPage"]);
-
-                if (Request.QueryString["TotalPages"] != null)
-                    this.TotalPages = Convert.ToInt32(Request.QueryString["TotalPages"]);
-
-            }
+            
 
             if (this.TotalPages == 0)
             {
-                MyDataSet = data.SearchPeople(Lname, Fname, Institution, Department, 0, 1000000);
+                MyDataSet = data.SearchPeople(Lname, Fname, Institution, Department, isManagerPage, 0, 1000000);
                 this.TotalRowCount = MyDataSet.Tables[0].Rows.Count;
             }
-
-            if (this.CurrentPage <= 0)
-            {
-                this.CurrentPage = 1;
-            }
             
-            this.TotalPages = Math.DivRem(this.TotalRowCount, 25, out totalpageremainder);
-
-            if (totalpageremainder > 0) { this.TotalPages = this.TotalPages + 1; }
-
-            if (this.CurrentPage > this.TotalPages)
-                this.CurrentPage = this.TotalPages;
-
-            this.Offset = ((Convert.ToInt32(this.CurrentPage) * 25) + 1) - 25;         
-
-            if (this.Offset < 0)
-                this.Offset = 0;
-
-
-            MyDataSet = data.SearchPeople(Lname, Fname, Institution, Department, this.Offset - 1, 100);
-
-            gridSearchResults.PageIndex = 0;
             gridSearchResults.DataSource = MyDataSet;
             gridSearchResults.DataBind();
-
-            if (MyDataSet.Tables[0].Rows.Count > 0)
-                gridSearchResults.BottomPagerRow.Visible = true;
+                      
 
             pnlProxySearchResults.Visible = true;
 
-     
-            litPagination.Text = "<script type='text/javascript'>" +
-                "_page = " + this.CurrentPage + ";" +
-                "_offset = " + this.Offset + ";" +
-                "_totalrows = " + this.TotalRowCount + ";" +
-                "_totalpages =" + this.TotalPages + ";" +
-                "_root = '" + Root.Domain + "';" +
-                "_subject = '" + Subject + "';" +
-                "_fname = '" + this.Fname + "';" +
-                "_lname = '" + this.Lname.Replace("'", "\\'") + "';" +
-                "_department = '" + this.Department.Replace("'","\\'") + "';" +
-                "_institution = '" + this.Institution.Replace("'", "\\'") + "';" +
-
-                "</script>";
-
-            //pnlProxySearchResults.Update();
-        }
+             }
 
 
         protected void btnSearchReset_Click(object sender, EventArgs e)
@@ -400,11 +346,14 @@ namespace Profiles.Edit.Modules.CustomEditGroupMember
 
         protected void btnSearchCancel_Click(object sender, EventArgs e)
         {
-            Response.Redirect(Root.Domain + "/proxy/default.aspx?subject=" + Request.QueryString["subject"]);
+            Session["pnlAddGroupMembers.Visible"] = null;
+            searchReset();
+            pnlProxySearch.Visible = false;
         }
 
         protected void gridSearchResults_RowDataBound(Object sender, GridViewRowEventArgs e)
         {
+
             switch (e.Row.RowType)
             {
                 case DataControlRowType.DataRow:
@@ -421,61 +370,12 @@ namespace Profiles.Edit.Modules.CustomEditGroupMember
                         e.Row.Attributes.Add("onmouseout", "doListTableRowOut(this,1);");
                         e.Row.Attributes.Add("class", "oddRow");
                     }
-
-                    e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink((GridView)sender, "Select$" + e.Row.RowIndex);
-
-                    e.Row.Cells[0].Attributes.Add("style", "border-left:#999 1px solid;padding-left:6px;");
-                    e.Row.Cells[1].Attributes.Add("style", "border-right:#999 1px solid;padding-left:6px;");
-
-                    break;
-                case DataControlRowType.Footer:
-
-                    e.Row.Style.Add("style", "border:none");
-                    break;
-                case DataControlRowType.Header:
-
-                    e.Row.Style.Add("style", "border-right:#999 1px solid;border-left:#999 1px solid;border-top:#999 1px solid;");
-                    break;
-                case DataControlRowType.Pager:
-
-                    Literal litFirst = (Literal)e.Row.FindControl("litFirst");
-
-                    Literal litLast = (Literal)e.Row.FindControl("litLast");
-
-                    Literal litPage = (Literal)e.Row.FindControl("litPage");
-
-
-
-
-                    if (CurrentPage > 1)
-                        litFirst.Text = "<a href='JavaScript:GotoPreviousPage();' class='listTablePaginationPN listTablePaginationP listTablePaginationA'><img src='" + Root.Domain + "/framework/images/arrow_prev.gif'/>Prev</a>" +
-                        "<a href='JavaScript:GotoFirstPage();' class='listTablePaginationFL listTablePaginationA'><img src='" + Root.Domain + "/framework/images/arrow_first.gif'/></a>";
-                    else
-                        litFirst.Text = "<div class='listTablePaginationPN listTablePaginationP'><img src='" + Root.Domain + "/framework/images/arrow_prev_d.gif'/>Prev</div><div class='listTablePaginationFL'>" +
-                        "<img src='" + Root.Domain + "/framework/images/arrow_first_d.gif'/></div>";
-
-
-                    if (this.CurrentPage <= (this.TotalPages - 1))
-                    {
-                        litLast.Text = "<a href='JavaScript:GotoLastPage();' class='listTablePaginationFL listTablePaginationA'><img src='" + Root.Domain + "/framework/images/arrow_last.gif'/></a>" +
-                        "<a href='javascript:GotoNextPage();' class='listTablePaginationPN listTablePaginationN listTablePaginationA'>Next<img src='" + Root.Domain + "/framework/images/arrow_next.gif'/></a>";
-                    }
-                    else
-                    {
-                        litLast.Text = "<div class='listTablePaginationFL'><img src='" + Root.Domain + "/framework/images/arrow_last_d.gif'/></div><div class='listTablePaginationPN listTablePaginationN'>" +
-                        "Next<img src='" + Root.Domain + "/framework/images/arrow_next_d.gif'/></div>";
-                    }
-                    int displaypage = 1;
-                    if (this.CurrentPage != 0)
-                        displaypage = this.CurrentPage;
-
-
-                    litPage.Text = (displaypage).ToString() + " of " + (this.TotalPages).ToString() + " pages";
-
-
-
+                    e.Row.Cells[0].Attributes.Add("style", "padding-top:3px !important");
+                 
                     break;
 
+                    
+                
             }
 
         }
@@ -500,16 +400,8 @@ namespace Profiles.Edit.Modules.CustomEditGroupMember
             if (isManagerPage) Response.Redirect(Root.Domain + "/edit/default.aspx?subject=" + Request.QueryString["subject"] + "&predicateuri=http://profiles.catalyst.harvard.edu/ontology/prns!hasGroupManager&module=DisplayItemToEdit&ObjectType=Entity");
             else Response.Redirect(Root.Domain + "/edit/default.aspx?subject=" + Request.QueryString["subject"] + "&predicateuri=http%3a%2f%2fvivoweb.org%2fontology%2fcore!contributingRole&module=DisplayItemToEdit&ObjectType=Entity");
         }
-/*
-        protected void gridSearchResults_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Edit.Utilities.DataIO data = new Edit.Utilities.DataIO();
-            int userID = Convert.ToInt32(gridSearchResults.DataKeys[gridSearchResults.SelectedIndex].Values[0].ToString());
-            if (isManagerPage) data.AddGroupManager(userID, Subject);
-            else data.AddGroupMember(userID, Subject);
-            Response.Redirect(Root.Domain + "/proxy/default.aspx?subject=" + HttpContext.Current.Request.QueryString["subject"]);
-        }
-*/
+
+       
         protected void btnAddGroupMembers_OnClick(object sender, EventArgs e)
         {
             if (Session["pnlAddGroupMembers.Visible"] == null)

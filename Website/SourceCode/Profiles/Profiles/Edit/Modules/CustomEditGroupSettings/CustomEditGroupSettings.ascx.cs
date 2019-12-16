@@ -50,7 +50,7 @@ namespace Profiles.Edit.Modules.CustomEditGroupSettings
 
             litBackLink.Text = "<a href='" + Root.Domain + "/edit/default.aspx?subject=" + this.SubjectID + "'>Edit Menu</a> &gt; <b>Group Settings</b>";
 
-            //btnEditProperty.Text = "Add " + PropertyLabel;
+            
             imbAddArror.Visible = true;
 
             SqlDataReader reader = data.GetGroup(SubjectID);
@@ -58,20 +58,32 @@ namespace Profiles.Edit.Modules.CustomEditGroupSettings
             securityOptions.PrivacyCode = Convert.ToInt32(reader["ViewSecurityGroup"].ToString());
             reader.Close();
 
-            //this.PropertyListXML = propdata.GetPropertyList(this.BaseData, base.PresentationXML, predicateuri, false, true, false);
-
-            //this.PropertyListXML = propdata.GetPropertyList(this.BaseData, base.PresentationXML, predicateuri, false, true, false);
+            
             securityOptions.Subject = this.SubjectID;
             securityOptions.PredicateURI = predicateuri;
-            //securityOptions.PrivacyCode = Convert.ToInt32(this.PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@ViewSecurityGroup").Value);
+            
             securityOptions.SecurityGroups = new XmlDocument();
             securityOptions.SecurityGroups.LoadXml(base.PresentationXML.DocumentElement.LastChild.OuterXml);
 
-            //txtLabel.Attributes.Add("data-autocomplete-url", Root.Domain + "/edit/Modules/CustomEditFreetextKeyword/keywordAutocomplete.aspx?keys=");
+            securityOptions.BubbleClick += SecurityDisplayed;
         }
 
         #region Property
 
+        private void SecurityDisplayed(object sender, EventArgs e)
+        {
+
+
+            if (Session["pnlSecurityOptions.Visible"] == null)
+            {
+                phEditProperty.Visible = true;
+
+            }
+            else
+            {
+                phEditProperty.Visible = false;                
+            }
+        }
 
         protected void btnUpdateDateCancel_OnClick(object sender, EventArgs e)
         {

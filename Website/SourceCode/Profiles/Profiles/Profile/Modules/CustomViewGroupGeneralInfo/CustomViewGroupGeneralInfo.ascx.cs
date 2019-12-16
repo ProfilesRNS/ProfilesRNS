@@ -28,6 +28,7 @@ namespace Profiles.Profile.Modules.CustomViewGroupGeneralInfo
             {
                 string imageurl = base.BaseData.SelectSingleNode("//rdf:RDF/rdf:Description[1]/prns:mainImage/@rdf:resource", base.Namespaces).Value;
                 imgPhoto.ImageUrl = imageurl + "&cachekey=" + Guid.NewGuid().ToString() + "&width=500";
+                imgPhoto.Attributes.Add("style", "margin-top:25px");
             }
             else
             {

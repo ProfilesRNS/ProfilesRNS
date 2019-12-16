@@ -2215,8 +2215,50 @@ namespace Profiles.Edit.Utilities
 
         #region Groups
 
+        public List<GenericListItem> GetInstitutions(bool isManagerPage)
+        {
+
+            SqlDataReader dbreader = null;
+            SessionManagement sm = new SessionManagement();
+            List<GenericListItem> institutions = new List<GenericListItem>();
+
+            try
+            {
+
+                string connstr = this.GetConnectionString();
+                SqlConnection dbconnection = new SqlConnection(connstr);
+
+                dbconnection.Open();
+
+                SqlCommand dbcommand = new SqlCommand();
+                dbcommand.CommandType = CommandType.Text;
+
+                if (isManagerPage) dbcommand.CommandText = "select distinct institution,count(institution) as count from [User.Account].[User] where isnull(institution,'')<>'' and CanBeProxy = 1 and IsActive = 1 group by institution order by institution";
+                else dbcommand.CommandText = "select distinct institution,count(institution) as count from [User.Account].[User] where isnull(institution,'')<>'' and CanBeProxy = 1 and IsActive = 1 and PersonID is not null group by institution order by institution";
+                dbcommand.CommandTimeout = base.GetCommandTimeout();
+
+                dbcommand.Connection = dbconnection;
+                dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
+
+                while (dbreader.Read())
+                    institutions.Add(new GenericListItem(dbreader["institution"].ToString() + " (" + dbreader["count"].ToString() + ")", dbreader["institution"].ToString()));
+
+                //Always close your readers
+                if (!dbreader.IsClosed)
+                    dbreader.Close();
+
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return institutions;
+        }
+
         public DataSet SearchPeople(string lastname, string firstname,
-    string institution, string department, int offset, int limit)
+    string institution, string department, bool includeUsers, int offset, int limit)
         {
             DataSet ds = new DataSet();
             SqlDataAdapter da;
@@ -2238,7 +2280,7 @@ namespace Profiles.Edit.Utilities
                 dbcommand.Parameters.Add(new SqlParameter("@FirstName", firstname));
                 dbcommand.Parameters.Add(new SqlParameter("@Institution", institution));
                 dbcommand.Parameters.Add(new SqlParameter("@Department", department));
-
+                dbcommand.Parameters.Add(new SqlParameter("@includeUsers", includeUsers ? 1 : 0));
                 dbcommand.Parameters.Add(new SqlParameter("@offset", offset));
                 dbcommand.Parameters.Add(new SqlParameter("@limit", limit));
                 dbcommand.Connection = dbconnection;
