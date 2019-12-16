@@ -11,6 +11,9 @@
   
 */
 
+tr.website-table > td {
+    padding-bottom: 1em;
+}
 
 /********************************************/
 /* Sections Headers                         */
