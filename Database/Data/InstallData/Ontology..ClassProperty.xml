@@ -11395,6 +11395,24 @@
   </Row>
   <Row>
     <Class>http://vivoweb.org/ontology/core#URLLink</Class>
+    <Property>http://profiles.catalyst.harvard.edu/ontology/prns#publicationDate</Property>
+    <IsDetail>0</IsDetail>
+    <IncludeDescription>1</IncludeDescription>
+    <IncludeNetwork>0</IncludeNetwork>
+    <SearchWeight>0.000000000000000e+000</SearchWeight>
+    <CustomDisplay>0</CustomDisplay>
+    <CustomEdit>0</CustomEdit>
+    <ViewSecurityGroup>-1</ViewSecurityGroup>
+    <EditSecurityGroup>-40</EditSecurityGroup>
+    <EditPermissionsSecurityGroup>-40</EditPermissionsSecurityGroup>
+    <EditExistingSecurityGroup>-40</EditExistingSecurityGroup>
+    <EditAddNewSecurityGroup>-40</EditAddNewSecurityGroup>
+    <EditAddExistingSecurityGroup>-40</EditAddExistingSecurityGroup>
+    <EditDeleteSecurityGroup>-40</EditDeleteSecurityGroup>
+    <MinCardinality>0</MinCardinality>
+  </Row>
+  <Row>
+    <Class>http://vivoweb.org/ontology/core#URLLink</Class>
     <Property>http://vivoweb.org/ontology/core#webpageOf</Property>
     <IsDetail>1</IsDetail>
     <IncludeDescription>1</IncludeDescription>
