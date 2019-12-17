@@ -21,76 +21,6 @@
     <_PropertyLabel>source modified</_PropertyLabel>
   </Row>
   <Row>
-    <PropertyGroupURI>http://orng.info/ontology/orng#PropertyGroupORNGApplications</PropertyGroupURI>
-    <PropertyURI>http://orng.info/ontology/orng#applicationId</PropertyURI>
-    <SortOrder>1</SortOrder>
-    <_TagName>orng:applicationId</_TagName>
-    <_PropertyLabel>ORNG Application Id</_PropertyLabel>
-  </Row>
-  <Row>
-    <PropertyGroupURI>http://orng.info/ontology/orng#PropertyGroupORNGApplications</PropertyGroupURI>
-    <PropertyURI>http://orng.info/ontology/orng#applicationInstanceDataValue</PropertyURI>
-    <SortOrder>5</SortOrder>
-    <_TagName>orng:applicationInstanceDataValue</_TagName>
-    <_PropertyLabel>ORNG Application Instance Data value</_PropertyLabel>
-  </Row>
-  <Row>
-    <PropertyGroupURI>http://orng.info/ontology/orng#PropertyGroupORNGApplications</PropertyGroupURI>
-    <PropertyURI>http://orng.info/ontology/orng#applicationInstanceForPerson</PropertyURI>
-    <SortOrder>4</SortOrder>
-    <_TagName>orng:applicationInstanceForPerson</_TagName>
-    <_PropertyLabel>ORNG Application Instance for Person</_PropertyLabel>
-  </Row>
-  <Row>
-    <PropertyGroupURI>http://orng.info/ontology/orng#PropertyGroupORNGApplications</PropertyGroupURI>
-    <PropertyURI>http://orng.info/ontology/orng#applicationInstanceOfApplication</PropertyURI>
-    <SortOrder>3</SortOrder>
-    <_TagName>orng:applicationInstanceOfApplication</_TagName>
-    <_PropertyLabel>ORNG Application Instance of Application</_PropertyLabel>
-  </Row>
-  <Row>
-    <PropertyGroupURI>http://orng.info/ontology/orng#PropertyGroupORNGApplications</PropertyGroupURI>
-    <PropertyURI>http://orng.info/ontology/orng#applicationURL</PropertyURI>
-    <SortOrder>2</SortOrder>
-    <_TagName>orng:applicationURL</_TagName>
-    <_PropertyLabel>ORNG Application URL</_PropertyLabel>
-  </Row>
-  <Row>
-    <PropertyGroupURI>http://orng.info/ontology/orng#PropertyGroupORNGApplications</PropertyGroupURI>
-    <PropertyURI>http://orng.info/ontology/orng#hasApplicationInstanceData</PropertyURI>
-    <SortOrder>6</SortOrder>
-    <_TagName>orng:hasApplicationInstanceData</_TagName>
-    <_PropertyLabel>has ORNG Application Instance Data</_PropertyLabel>
-  </Row>
-  <Row>
-    <PropertyGroupURI>http://orng.info/ontology/orng#PropertyGroupORNGApplications</PropertyGroupURI>
-    <PropertyURI>http://orng.info/ontology/orng#hasLinks</PropertyURI>
-    <SortOrder>8</SortOrder>
-    <_TagName>orng:hasLinks</_TagName>
-    <_PropertyLabel>Websites</_PropertyLabel>
-  </Row>
-  <Row>
-    <PropertyGroupURI>http://orng.info/ontology/orng#PropertyGroupORNGApplications</PropertyGroupURI>
-    <PropertyURI>http://orng.info/ontology/orng#hasSlideShare</PropertyURI>
-    <SortOrder>7</SortOrder>
-    <_TagName>orng:hasSlideShare</_TagName>
-    <_PropertyLabel>Featured Presentations</_PropertyLabel>
-  </Row>
-  <Row>
-    <PropertyGroupURI>http://orng.info/ontology/orng#PropertyGroupORNGApplications</PropertyGroupURI>
-    <PropertyURI>http://orng.info/ontology/orng#hasTwitter</PropertyURI>
-    <SortOrder>9</SortOrder>
-    <_TagName>orng:hasTwitter</_TagName>
-    <_PropertyLabel>Twitter</_PropertyLabel>
-  </Row>
-  <Row>
-    <PropertyGroupURI>http://orng.info/ontology/orng#PropertyGroupORNGApplications</PropertyGroupURI>
-    <PropertyURI>http://orng.info/ontology/orng#hasYouTube</PropertyURI>
-    <SortOrder>10</SortOrder>
-    <_TagName>orng:hasYouTube</_TagName>
-    <_PropertyLabel>Featured Videos</_PropertyLabel>
-  </Row>
-  <Row>
     <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupIntroduction</PropertyGroupURI>
     <PropertyURI>http://profiles.catalyst.harvard.edu/ontology/prns#aboutUs</PropertyURI>
     <SortOrder>2</SortOrder>
@@ -348,6 +278,13 @@
     <SortOrder>169</SortOrder>
     <_TagName>prns:maxWeight</_TagName>
     <_PropertyLabel>maximum weight</_PropertyLabel>
+  </Row>
+    <Row>
+    <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupOverview</PropertyGroupURI>
+    <PropertyURI>http://profiles.catalyst.harvard.edu/ontology/prns#mediaLinks</PropertyURI>
+    <SortOrder>229</SortOrder>
+    <_TagName>prns:mediaLinks</_TagName>
+    <_PropertyLabel>media links</_PropertyLabel>
   </Row>
   <Row>
     <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupOverview</PropertyGroupURI>
@@ -2632,9 +2569,9 @@
     <_PropertyLabel>valid in</_PropertyLabel>
   </Row>
   <Row>
-    <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupAddress</PropertyGroupURI>
+    <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupOverview</PropertyGroupURI>
     <PropertyURI>http://vivoweb.org/ontology/core#webpage</PropertyURI>
-    <SortOrder>21</SortOrder>
+    <SortOrder>228</SortOrder>
     <_TagName>vivo:webpage</_TagName>
     <_PropertyLabel>webpage</_PropertyLabel>
   </Row>
