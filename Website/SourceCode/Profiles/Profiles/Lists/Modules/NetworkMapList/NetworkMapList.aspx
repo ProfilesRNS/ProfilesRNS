@@ -43,7 +43,7 @@
 
     </script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key="></script>
+    <script type="text/javascript" src="//maps.googleapis.com/maps/api/js<%= googleKey %>"></script>
     <script type="text/javascript">
         function zoomMap(zoom, latitude, longitude) {
             ProfilesRNS.currentPage.gmap.setCenter(new google.maps.LatLng(latitude, longitude));
