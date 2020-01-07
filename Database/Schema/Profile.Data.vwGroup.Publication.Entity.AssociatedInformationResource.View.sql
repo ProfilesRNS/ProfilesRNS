@@ -10,7 +10,7 @@ AS
 	UNION
 	SELECT g.GroupID, InformationResourceID, EntityDate FROM [Profile.Data].[Publication.Group.Option] o
 		JOIN [Profile.Data].[Group.Member] g
-		ON o.GroupID = g.GroupID and o.IncludeMemberPublications = 1
+		ON o.GroupID = g.GroupID and o.IncludeMemberPublications = 1 and g.IsActive = 1
 		JOIN [User.Account].[User] u
 		ON g.UserID = u.UserID
 		JOIN [Profile.Data].[vwPublication.Entity.Authorship] a
