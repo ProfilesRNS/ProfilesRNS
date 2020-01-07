@@ -1993,6 +1993,7 @@
     <oInternalID>URLID</oInternalID>
     <oObjectType>0</oObjectType>
     <Weight>1</Weight>
+    <OrderBy>SortOrder</OrderBy>
     <ViewSecurityGroup>-1</ViewSecurityGroup>
     <EditSecurityGroup>-40</EditSecurityGroup>
   </Row>
