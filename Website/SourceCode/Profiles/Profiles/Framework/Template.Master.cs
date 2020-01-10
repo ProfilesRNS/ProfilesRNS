@@ -382,7 +382,7 @@ namespace Profiles.Framework
             // Window Title
             buffer = GetStringFromPresentationXML("Presentation/WindowName");
 
-            Page.Header.Title = buffer + " | Harvard Catalyst Profiles | Harvard Catalyst";
+            Page.Header.Title = buffer + " | Profiles RNS";
             litJS.Text += js;
 
         }
