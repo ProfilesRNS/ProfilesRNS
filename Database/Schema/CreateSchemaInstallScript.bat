@@ -39,7 +39,6 @@ type Direct..Schema.sql
 type ORNG..Schema.sql
 type ORCID..Schema.sql
 
-
 type ft.FullTextCatalog.sql
 
 type Profile.Import.Person.Table.sql
@@ -647,8 +646,8 @@ type Direct..AddLogOutgoing.StoredProcedure.sql
 type Direct..AddLogIncoming.StoredProcedure.sql
 type Profile.Data.Publication.GetGroupOption.StoredProcedure.sql
 type Profile.Data.Publication.SetGroupOption.StoredProcedure.sql
-type Edit.Module.CustomEditWebsite.AddEditWebsite.sql
-type Edit.Module.CustomEditWebsite.GetData.sql
+type Edit.Module.CustomEditWebsite.AddEditWebsite.StoredProcedure.sql
+type Edit.Module.CustomEditWebsite.GetData.StoredProcedure.sql
 type Profile.Data.Publication.Pubmed.GetPMIDsForBibliometrics.StoredProcedure.sql
 type Profile.Data.Publication.Pubmed.ParseBibliometricResults.StoredProcedure.sql
 type Profile.Import.PRNSWebservice.GetPostData.StoredProcedure.sql
@@ -670,6 +669,7 @@ type Profile.Data.List.ExportPersonPublicationsList.StoredProcedure.sql
 type Profile.Data.List.GetList.StoredProcedure.sql
 type Profile.Data.List.GetPeople.StoredProcedure.sql
 type Profile.Data.List.GetSummary.StoredProcedure.sql
+type Profile.Data.List.UpdateAllLists.StoredProcedure.sql
 type Profile.Module.NetworkMap.GetList.StoredProcedure.sql
 type Profile.Module.NetworkRadial.List.GetCoAuthors.StoredProcedure.sql
 type Profile.Cache.List.Export.UpdatePublications.StoredProcedure.sql
