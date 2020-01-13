@@ -56,7 +56,7 @@ BEGIN
 				SELECT @SortOrder = CASE WHEN @SortOrder < 1 THEN 1 
 						WHEN @SortOrder > (SELECT MAX(SortOrder) FROM  [Profile.Data].[Person.MediaLinks] WHERE PersonID = @InternalID) THEN (SELECT MAX(SortOrder) FROM  [Profile.Data].[Person.MediaLinks] WHERE PersonID = @InternalID)
 						ELSE @SortOrder END
-				SELECT @ExistingOrder = SortOrder FROM [Profile.Data].[Person.Websites] WHERE UrlID = @ExistingURLID
+				SELECT @ExistingOrder = SortOrder FROM [Profile.Data].[Person.MediaLinks] WHERE UrlID = @ExistingURLID
 
 				IF @SortOrder < @ExistingOrder UPDATE [Profile.Data].[Person.MediaLinks] SET SortOrder = SortOrder + 1 WHERE PersonID = @InternalID AND SortOrder >= @SortOrder AND SortOrder < @ExistingOrder
 				ELSE IF @SortOrder > @ExistingOrder UPDATE [Profile.Data].[Person.MediaLinks] SET SortOrder = SortOrder - 1 WHERE PersonID = @InternalID AND SortOrder <= @SortOrder AND SortOrder > @ExistingOrder			
@@ -141,7 +141,7 @@ BEGIN
 		IF @InternalType = 'Person' AND @Predicate = 'http://profiles.catalyst.harvard.edu/ontology/prns#mediaLinks'
 		BEGIN
 			INSERT INTO [Profile.Data].[Person.MediaLinks] (UrlID, PersonID, URL, WebPageTitle, PublicationDate, SortOrder) 
-			VALUES(@ExistingURLID, @InternalID, @URL, @WebPageTitle, @PublicationDate, ISNULL((SELECT MAX(SortOrder) FROM  [Profile.Data].[Person.MediaLinks] WHERE PersonID = @InternalID), 1))
+			VALUES(@ExistingURLID, @InternalID, @URL, @WebPageTitle, @PublicationDate, ISNULL((SELECT MAX(SortOrder) + 1 FROM  [Profile.Data].[Person.MediaLinks] WHERE PersonID = @InternalID), 1))
 
 			SELECT @DataMapID = DataMapID FROM [Ontology.].DataMap WHERE MapTable = '[Profile.Data].[Person.MediaLinks]'
 		END
@@ -157,7 +157,7 @@ BEGIN
 		IF @InternalType = 'Group' AND @Predicate = 'http://profiles.catalyst.harvard.edu/ontology/prns#mediaLinks'
 		BEGIN
 			INSERT INTO [Profile.Data].[Group.MediaLinks] (UrlID, GroupID, URL, WebPageTitle, PublicationDate, SortOrder) 
-			VALUES(@ExistingURLID, @InternalID, @URL, @WebPageTitle, @PublicationDate, ISNULL((SELECT MAX(SortOrder) FROM  [Profile.Data].[Group.MediaLinks] WHERE GroupID = @InternalID), 1))
+			VALUES(@ExistingURLID, @InternalID, @URL, @WebPageTitle, @PublicationDate, ISNULL((SELECT MAX(SortOrder) + 1 FROM  [Profile.Data].[Group.MediaLinks] WHERE GroupID = @InternalID), 1))
 
 			SELECT @DataMapID = DataMapID FROM [Ontology.].DataMap WHERE MapTable = '[Profile.Data].[Group.MediaLinks]'
 		END
