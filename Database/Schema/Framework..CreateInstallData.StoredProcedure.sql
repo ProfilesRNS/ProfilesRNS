@@ -405,7 +405,7 @@ BEGIN
 					-- [Profile.Module].[GenericRDF.Plugins]
 					--------------------------------------------------------					
 					(
-						select '[ORNG.].[Apps]' 'Table/@Name',
+						select '[Profile.Module].[GenericRDF.Plugins]' 'Table/@Name',
 						(
 							SELECT	Name 'Name',
 									EnabledForPerson 'EnabledForPerson',
@@ -424,29 +424,6 @@ BEGIN
 		for xml path(''), type
 	)
 
-	/*	INSERT INTO [Profile.Module].[GenericRDF.Plugins]
-		(
-			[Name],
-			[EnabledForPerson],
-			[EnabledForGroup],
-			[Label],
-			[PropertyGroupURI],
-			[CustomDisplayModule],
-			[CustomEditModule]
-		)
-   SELECT	R.x.value('Name[1]','varchar(max)'),
-			R.x.value('EnabledForPerson[1]','int'),
-			R.x.value('EnabledForGroup[1]','int'),
-			R.x.value('Label[1]','varchar(max)'),
-			R.x.value('PropertyGroupURI[1]','varchar(max)'),
-			R.x.value('CustomDisplayModule[1]','varchar(max)'),
-			R.x.value('CustomEditModule[1]','varchar(max)')
-	 FROM    (SELECT
-                      @x.query
-                      ('Import[1]/Table[@Name=''[Profile.Module].[GenericRDF.Plugins]'']')
-                      x
-          ) t
-  CROSS APPLY x.nodes('//Row') AS R ( x )*/
 
 	insert into [Framework.].[InstallData] (Data)
 		select @x
