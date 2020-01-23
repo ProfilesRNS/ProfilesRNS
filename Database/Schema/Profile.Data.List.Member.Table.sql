@@ -6,9 +6,9 @@ SET ANSI_PADDING ON
 GO
 
 CREATE TABLE [Profile.Data].[List.Member] (
-    [ListID]   INT NOT NULL,
-    [PersonID] INT NOT NULL,
-    PRIMARY KEY CLUSTERED ([ListID] ASC, [PersonID] ASC)
+	[UserID] [int] NOT NULL,
+	[PersonID] [int] NOT NULL,
+    PRIMARY KEY CLUSTERED ([UserID] ASC, [PersonID] ASC)
 )
 
 GO

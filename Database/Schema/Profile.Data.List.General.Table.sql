@@ -5,16 +5,9 @@ GO
 SET ANSI_PADDING ON
 GO
 
-CREATE TABLE [Profile.Data].[List.General] (
-    [ListID]     INT      IDENTITY (1, 1) NOT NULL,
-    [UserID]     INT      NULL,
-    [CreateDate] DATETIME NULL,
-    [Size]       INT      NULL,
-    PRIMARY KEY CLUSTERED ([ListID] ASC)
+CREATE TABLE [Profile.Data].[List.General](
+	[UserID] [int] PRIMARY KEY,
+	[CreateDate] [datetime] NULL,
+	[Size] [int] NULL,
 )
-
-GO
-CREATE UNIQUE NONCLUSTERED INDEX [IDX_User_List]
-    ON [Profile.Data].[List.General]([UserID] ASC, [ListID] ASC)
-
 GO

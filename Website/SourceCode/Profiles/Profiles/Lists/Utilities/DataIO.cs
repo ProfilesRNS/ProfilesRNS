@@ -76,7 +76,7 @@ namespace Profiles.Lists.Utilities
 
                 SqlCommand dbcommand = new SqlCommand();
                 dbcommand.CommandType = CommandType.Text;
-                dbcommand.CommandText = string.Format("exec [Profile.Data].[List.GetSummary]  @listid = {0}", listid);
+                dbcommand.CommandText = string.Format("exec [Profile.Data].[List.GetSummary]  @UserID = {0}", listid);
                 dbcommand.CommandTimeout = dataio.GetCommandTimeout();
 
                 dbcommand.Connection = dbconnection;
@@ -122,7 +122,7 @@ namespace Profiles.Lists.Utilities
 
                 SqlCommand dbcommand = new SqlCommand();
                 dbcommand.CommandType = CommandType.Text;
-                dbcommand.CommandText = string.Format("exec [Profile.Data].[List.GetSummary]  @listid = {0}", listid);
+                dbcommand.CommandText = string.Format("exec [Profile.Data].[List.GetSummary]  @UserID = {0}", listid);
                 dbcommand.CommandTimeout = dataio.GetCommandTimeout();
 
                 dbcommand.Connection = dbconnection;
@@ -219,7 +219,7 @@ namespace Profiles.Lists.Utilities
             {
                 SqlCommand cmd = new SqlCommand("[Profile.Data].[List.AddRemove.Person]", sqlconnection);
                 cmd.CommandType = CommandType.StoredProcedure;
-                SqlParameter parm = new SqlParameter("@ListID", SqlDbType.Int);
+                SqlParameter parm = new SqlParameter("@UserID", SqlDbType.Int);
                 parm.Direction = ParameterDirection.Input;
                 parm.Value = listid;
                 cmd.Parameters.Add(parm);
@@ -257,7 +257,7 @@ namespace Profiles.Lists.Utilities
                 dbconnection.Open();
                 SqlCommand dbcommand = new SqlCommand();
                 dbcommand.CommandType = CommandType.Text;
-                dbcommand.CommandText = string.Format("select count(*) as count from [Profile.Data].[List.Member]  where listid = {0} and personid = {1}", listid, personid);
+                dbcommand.CommandText = string.Format("select count(*) as count from [Profile.Data].[List.Member]  where UserID = {0} and personid = {1}", listid, personid);
                 dbcommand.CommandTimeout = dataio.GetCommandTimeout();
 
                 dbcommand.Connection = dbconnection;
@@ -294,7 +294,7 @@ namespace Profiles.Lists.Utilities
                 SqlCommand cmd = new SqlCommand("[Profile.Data].[List.AddRemove.Filter]", sqlconnection);
                 cmd.CommandTimeout = dataio.GetCommandTimeout();
                 cmd.CommandType = CommandType.StoredProcedure;
-                SqlParameter parm = new SqlParameter("@ListID", SqlDbType.Int);
+                SqlParameter parm = new SqlParameter("@UserID", SqlDbType.Int);
                 parm.Direction = ParameterDirection.Input;
                 parm.Value = listid;
                 cmd.Parameters.Add(parm);
@@ -336,7 +336,7 @@ namespace Profiles.Lists.Utilities
                     SqlCommand cmd = new SqlCommand("[Profile.Data].[List.AddRemove.SelectedPeople]", sqlconnection);
                     cmd.CommandTimeout = dataio.GetCommandTimeout();
                     cmd.CommandType = CommandType.StoredProcedure;
-                    SqlParameter parm = new SqlParameter("@ListID", SqlDbType.Int);
+                    SqlParameter parm = new SqlParameter("@UserID", SqlDbType.Int);
                     parm.Direction = ParameterDirection.Input;
                     parm.Value = ListID;
                     cmd.Parameters.Add(parm);
@@ -420,7 +420,7 @@ namespace Profiles.Lists.Utilities
 
                 SqlCommand cmd = new SqlCommand("[Profile.Data].[List.GetPeople]", sqlconnection);
                 cmd.CommandType = CommandType.StoredProcedure;
-                SqlParameter parm = new SqlParameter("@ListID", SqlDbType.Int);
+                SqlParameter parm = new SqlParameter("@UserID", SqlDbType.Int);
                 parm.Direction = ParameterDirection.Input;
                 parm.Value = listid;
                 cmd.Parameters.Add(parm);
@@ -513,7 +513,7 @@ namespace Profiles.Lists.Utilities
                 parm.Value = Guid.Parse(sm.Session().SessionID);
                 parm.Direction = ParameterDirection.Input;
                 cmd.Parameters.Add(parm);
-                parm = new SqlParameter("@ListID", SqlDbType.Int);
+                parm = new SqlParameter("@UserID", SqlDbType.Int);
                 parm.Direction = ParameterDirection.Input;
                 parm.Value = listid;
                 cmd.Parameters.Add(parm);
@@ -574,7 +574,7 @@ namespace Profiles.Lists.Utilities
 
                 SqlCommand dbcommand = new SqlCommand();
                 dbcommand.CommandType = CommandType.Text;
-                dbcommand.CommandText = string.Format("exec [Profile.Data].[List.ExportPersonList] @ListID={0}", listid);
+                dbcommand.CommandText = string.Format("exec [Profile.Data].[List.ExportPersonList] @UserID={0}", listid);
                 dbcommand.CommandTimeout = dataio.GetCommandTimeout();
 
                 dbcommand.Connection = dbconnection;
@@ -612,7 +612,7 @@ namespace Profiles.Lists.Utilities
 
                 SqlCommand dbcommand = new SqlCommand();
                 dbcommand.CommandType = CommandType.Text;
-                dbcommand.CommandText = string.Format("exec [Profile.Data].[List.ExportPersonPublicationsList] @ListID={0}", listid);
+                dbcommand.CommandText = string.Format("exec [Profile.Data].[List.ExportPersonPublicationsList] @UserID={0}", listid);
                 dbcommand.CommandTimeout = 5000;
 
                 dbcommand.Connection = dbconnection;
@@ -650,7 +650,7 @@ namespace Profiles.Lists.Utilities
 
                 SqlCommand dbcommand = new SqlCommand();
                 dbcommand.CommandType = CommandType.Text;
-                dbcommand.CommandText = string.Format("exec [Profile.Data].[List.ExportCoAuthorConnections] @ListID={0}", listid);
+                dbcommand.CommandText = string.Format("exec [Profile.Data].[List.ExportCoAuthorConnections] @UserID={0}", listid);
                 dbcommand.CommandTimeout = dataio.GetCommandTimeout();
 
                 dbcommand.Connection = dbconnection;
@@ -689,7 +689,7 @@ namespace Profiles.Lists.Utilities
 
                 SqlCommand dbcommand = new SqlCommand();
                 dbcommand.CommandType = CommandType.Text;
-                dbcommand.CommandText = string.Format("exec [Profile.Module].[NetworkRadial.List.GetCoAuthors] @OutputFormat='JSON', @ListID={0}", listid);
+                dbcommand.CommandText = string.Format("exec [Profile.Module].[NetworkRadial.List.GetCoAuthors] @OutputFormat='JSON', @UserID={0}", listid);
                 dbcommand.CommandTimeout = dataio.GetCommandTimeout();
 
                 dbcommand.Connection = dbconnection;
@@ -772,7 +772,7 @@ namespace Profiles.Lists.Utilities
 
                 SqlCommand dbcommand = new SqlCommand();
                 dbcommand.CommandType = CommandType.Text;
-                dbcommand.CommandText = string.Format("exec [Profile.Module].[NetworkMap.GetList] @listid = {0}, @which ={1},@sessionid = '{2}'", listid, which, sessionid);
+                dbcommand.CommandText = string.Format("exec [Profile.Module].[NetworkMap.GetList] @UserID = {0}, @which ={1},@sessionid = '{2}'", listid, which, sessionid);
                 dbcommand.CommandTimeout = dataio.GetCommandTimeout();
                 dbcommand.Connection = dbconnection;
                 dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
