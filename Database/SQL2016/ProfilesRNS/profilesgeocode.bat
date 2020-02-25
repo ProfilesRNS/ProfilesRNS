@@ -1,0 +1,2 @@
+"C:\Program Files (x86)\Microsoft SQL Server\130\DTS\Binn\dtexec" /file ProfilesRNS_CallPRNSWebservice.dtsx /MAXCONCURRENT " -1 " /CHECKPOINTING OFF /SET "\Package.Variables[ServerName].Value";. /SET "\Package.Variables[DatabaseName].Value";ProfilesRNS_OS /SET "\Package.Variables[Job].Value";Geocode /REPORTING E
+pause
