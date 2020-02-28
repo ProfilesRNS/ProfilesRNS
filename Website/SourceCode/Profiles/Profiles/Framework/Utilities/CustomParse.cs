@@ -46,6 +46,8 @@ namespace Profiles.Framework.Utilities
             if (custom == null) { return ""; }
             if (custom == string.Empty) { return ""; }
 
+            custom = custom.Replace("[[[Root]]]", Root.Domain);
+
             start = custom.IndexOf("{{{");
             while (start >= 0)
             {

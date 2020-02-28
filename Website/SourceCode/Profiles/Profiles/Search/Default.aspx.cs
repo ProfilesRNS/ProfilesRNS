@@ -27,12 +27,20 @@ namespace Profiles.Search
     {
         Profiles.Framework.Template masterpage;
 
+
+
         //public void Page_Load(object sender, EventArgs e)
         override protected void OnInit(EventArgs e)
         {
             masterpage = (Framework.Template)base.Master;
 
-            
+            if (Request.UrlReferrer == null || !Request.UrlReferrer.ToString().ToLower().Contains("/search"))
+            {
+                Session["DIRECTSEARCHTYPE"] = null;
+                Session["SEARCHREQUEST"] = null;
+                masterpage.SearchRequest = null;
+            }
+
             string tab = string.Empty;
 
 
@@ -189,6 +197,12 @@ namespace Profiles.Search
             string nodeuri = string.Empty;
             string nodeid = string.Empty;
 
+
+            if (Request.QueryString["new"] == "true")
+            {
+                Session["searchrequest"] = null;
+                masterpage.SearchRequest = null;
+            }
 
             if (this.SearchType.IsNullOrEmpty() == false)
                 searchtype = this.SearchType;

@@ -101,7 +101,7 @@ BEGIN
 		SELECT @sql = ''
 		SELECT @sql = @sql + '
 				INSERT INTO #Msg 
-					SELECT ''ERROR: '+tableName+'.'+columnName+' must contain only NULL values. It currently has at least one NOT NULL value.''
+					SELECT ''ERROR: '+tableName+'.'+columnName+' must contain only NOT NULL values. It currently has at least one NULL value.''
 					FROM '+tableName+'
 					HAVING MAX(CASE WHEN '+columnName+' IS NULL THEN 1 ELSE 0 END)=1;'
 			FROM @columns
@@ -127,6 +127,7 @@ BEGIN
 					FROM '+tableName+'
 					HAVING MAX(CASE WHEN '+columnName+' IS NULL THEN 1 ELSE 0 END) <> MIN(CASE WHEN '+columnName+' IS NULL THEN 1 ELSE 0 END);'
 			FROM @columns
+			WHERE columnType = 'Optional'
 		EXEC sp_executesql @sql 			 
 
 
