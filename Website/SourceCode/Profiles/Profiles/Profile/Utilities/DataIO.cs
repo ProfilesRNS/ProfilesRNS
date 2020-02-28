@@ -177,7 +177,7 @@ namespace Profiles.Profile.Utilities
                     if (!dbreader.IsClosed)
                         dbreader.Close();
 
-                    Framework.Utilities.Cache.Set(key + "|GetPresentationData", xmlrtn);
+                    Framework.Utilities.Cache.Set(key + "|GetPresentationData", xmlrtn, request.Subject, request.Session.SessionID);
                 }
 
             }

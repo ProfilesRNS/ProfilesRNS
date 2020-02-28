@@ -1669,7 +1669,7 @@ namespace Profiles.Edit.Utilities
 
         public bool UpdateSecuritySetting(Int64 subjectid, Int64 predicateid, int securitygroup)
         {
-            EditActivityLog(subjectid, GetProperty(predicateid), "" + securitygroup);
+            EditActivityLog(subjectid, predicateid, "" + securitygroup);
 
             string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
             SqlConnection dbconnection = new SqlConnection(connstr);
