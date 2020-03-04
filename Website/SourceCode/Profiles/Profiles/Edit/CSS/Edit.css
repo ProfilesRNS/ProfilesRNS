@@ -376,3 +376,7 @@
     width: 128px;
     margin-bottom:18px;
 }
+.disambig-radio-label label {
+    font-weight: normal !important;
+    margin-left: 5px !important;
+}
