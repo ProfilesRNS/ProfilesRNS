@@ -335,6 +335,10 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
     <rdfs:label rdf:resource="Time" />
   </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupFeaturedContent">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="Featured Content" />
+  </rdf:Description>
   <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#publicationDate">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
     <rdfs:label rdf:resource="publication date" />

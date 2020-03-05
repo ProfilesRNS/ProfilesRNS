@@ -1,10 +1,5 @@
 <Table Name="[Ontology.].[PropertyGroup]">
   <Row>
-    <PropertyGroupURI>http://orng.info/ontology/orng#PropertyGroupORNGApplications</PropertyGroupURI>
-    <SortOrder>5</SortOrder>
-    <_PropertyGroupLabel>ORNG Applications</_PropertyGroupLabel>
-  </Row>
-  <Row>
     <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupAddress</PropertyGroupURI>
     <SortOrder>2</SortOrder>
     <_PropertyGroupLabel>Address</_PropertyGroupLabel>
@@ -16,32 +11,32 @@
   </Row>
   <Row>
     <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupBibliographic</PropertyGroupURI>
-    <SortOrder>15</SortOrder>
+    <SortOrder>14</SortOrder>
     <_PropertyGroupLabel>Bibliographic</_PropertyGroupLabel>
   </Row>
   <Row>
     <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupBibliographiconline</PropertyGroupURI>
-    <SortOrder>16</SortOrder>
+    <SortOrder>15</SortOrder>
     <_PropertyGroupLabel>Bibliographiconline</_PropertyGroupLabel>
   </Row>
   <Row>
     <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupBibmapping</PropertyGroupURI>
-    <SortOrder>18</SortOrder>
+    <SortOrder>17</SortOrder>
     <_PropertyGroupLabel>Bibmapping</_PropertyGroupLabel>
   </Row>
   <Row>
     <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupBibobscure</PropertyGroupURI>
-    <SortOrder>17</SortOrder>
+    <SortOrder>16</SortOrder>
     <_PropertyGroupLabel>Bibobscure</_PropertyGroupLabel>
   </Row>
   <Row>
     <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupBiography</PropertyGroupURI>
-    <SortOrder>8</SortOrder>
+    <SortOrder>7</SortOrder>
     <_PropertyGroupLabel>Biography</_PropertyGroupLabel>
   </Row>
   <Row>
     <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupIdentifiers</PropertyGroupURI>
-    <SortOrder>19</SortOrder>
+    <SortOrder>18</SortOrder>
     <_PropertyGroupLabel>Identifiers</_PropertyGroupLabel>
   </Row>
   <Row>
@@ -51,32 +46,32 @@
   </Row>
   <Row>
     <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupLinks</PropertyGroupURI>
-    <SortOrder>6</SortOrder>
+    <SortOrder>5</SortOrder>
     <_PropertyGroupLabel>Links</_PropertyGroupLabel>
   </Row>
   <Row>
     <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupLocation</PropertyGroupURI>
-    <SortOrder>7</SortOrder>
+    <SortOrder>6</SortOrder>
     <_PropertyGroupLabel>Location</_PropertyGroupLabel>
   </Row>
   <Row>
     <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupMapping</PropertyGroupURI>
-    <SortOrder>20</SortOrder>
+    <SortOrder>19</SortOrder>
     <_PropertyGroupLabel>Mapping</_PropertyGroupLabel>
   </Row>
   <Row>
     <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupOutreach</PropertyGroupURI>
-    <SortOrder>14</SortOrder>
+    <SortOrder>12</SortOrder>
     <_PropertyGroupLabel>Outreach</_PropertyGroupLabel>
   </Row>
   <Row>
     <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupOverview</PropertyGroupURI>
-    <SortOrder>9</SortOrder>
+    <SortOrder>8</SortOrder>
     <_PropertyGroupLabel>Overview</_PropertyGroupLabel>
   </Row>
   <Row>
     <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupResearch</PropertyGroupURI>
-    <SortOrder>13</SortOrder>
+    <SortOrder>11</SortOrder>
     <_PropertyGroupLabel>Research</_PropertyGroupLabel>
   </Row>
   <Row>
@@ -86,12 +81,17 @@
   </Row>
   <Row>
     <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupTeaching</PropertyGroupURI>
-    <SortOrder>12</SortOrder>
+    <SortOrder>10</SortOrder>
     <_PropertyGroupLabel>Teaching</_PropertyGroupLabel>
   </Row>
   <Row>
     <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupTime</PropertyGroupURI>
-    <SortOrder>11</SortOrder>
+    <SortOrder>9</SortOrder>
     <_PropertyGroupLabel>Time</_PropertyGroupLabel>
+  </Row>
+  <Row>
+    <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupFeaturedContent</PropertyGroupURI>
+    <SortOrder>13</SortOrder>
+    <_PropertyGroupLabel>Featured Content</_PropertyGroupLabel>
   </Row>
 </Table>

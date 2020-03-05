@@ -4,7 +4,7 @@
 	<EnabledForPerson>1</EnabledForPerson>
 	<EnabledForGroup>1</EnabledForGroup>
 	<Label>Featured Presentations</Label>
-	<PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupOverview</PropertyGroupURI>
+	<PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupFeaturedContent</PropertyGroupURI>
 	<CustomDisplayModule>FeaturedPresentations</CustomDisplayModule>
 	<CustomEditModule>EditFeaturedPresentations</CustomEditModule>
   </Row>
@@ -13,7 +13,7 @@
 	<EnabledForPerson>1</EnabledForPerson>
 	<EnabledForGroup>1</EnabledForGroup>
 	<Label>Featured Videos</Label>
-	<PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupOverview</PropertyGroupURI>
+	<PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupFeaturedContent</PropertyGroupURI>
 	<CustomDisplayModule>FeaturedVideos</CustomDisplayModule>
 	<CustomEditModule>EditFeaturedVideos</CustomEditModule>
   </Row>
@@ -22,7 +22,7 @@
 	<EnabledForPerson>1</EnabledForPerson>
 	<EnabledForGroup>1</EnabledForGroup>
 	<Label>Twitter</Label>
-	<PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupOverview</PropertyGroupURI>
+	<PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupFeaturedContent</PropertyGroupURI>
 	<CustomDisplayModule>Twitter</CustomDisplayModule>
 	<CustomEditModule>EditTwitter</CustomEditModule>
   </Row>
