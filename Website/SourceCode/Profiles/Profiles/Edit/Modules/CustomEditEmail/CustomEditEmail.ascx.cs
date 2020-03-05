@@ -27,8 +27,8 @@ namespace Profiles.Edit.Modules.CustomEditEmail
         {
             DrawProfilesModule();
 
-            if (IsPostBack)
-                UpdateVisibility();
+ //           if (IsPostBack)
+ //               UpdateVisibility();
 
         }
 

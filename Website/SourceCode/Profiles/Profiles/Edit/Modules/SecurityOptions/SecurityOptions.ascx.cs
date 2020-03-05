@@ -127,10 +127,16 @@ namespace Profiles.Edit.Modules.SecurityOptions
                 {
                     data.UpdateGroupSecurity(this.Subject, Convert.ToInt32(securitygroup));
                 }
-                //else
-                //{
+                else if (this.PredicateURI.Equals("http://profiles.catalyst.harvard.edu/ontology/prns#emailEncrypted"))
+                {
+                    if (Convert.ToInt32(securitygroup) >= -10 && Convert.ToInt32(securitygroup) < 0)
+                        data.UpdateSecuritySetting(this.Subject, data.GetStoreNode("http://vivoweb.org/ontology/core#email"), -20);
+                    else
+                        data.UpdateSecuritySetting(this.Subject, data.GetStoreNode("http://vivoweb.org/ontology/core#email"), Convert.ToInt32(securitygroup));
+                }
+
                 data.UpdateSecuritySetting(this.Subject, data.GetStoreNode(this.PredicateURI), Convert.ToInt32(securitygroup));
-                //}
+
                 divHidden.Visible = false;
             }
             Framework.Utilities.Cache.AlterDependency(this.Subject.ToString());
