@@ -3,20 +3,16 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE PROCEDURE [Profile.Import].[PRNSWebservice.GetPostData]
-	@Job varchar(55),
-	@BatchSize int = 0
+	@Job varchar(55)
 AS
 BEGIN
 	if @Job = 'Bibliometrics'
 	begin
-		select @BatchSize = case when @BatchSize = 0 then 10000 else @BatchSize end
-		exec [Profile.Data].[Publication.Pubmed.GetPMIDsforBibliometrics] @BatchSize=@BatchSize
+		exec [Profile.Data].[Publication.Pubmed.GetPMIDsforBibliometrics]
 	end
-/*	if @Job = 'GetPubMedXML'
+	if @Job = 'Geocode'
 	begin
-		select @BatchSize = case when @BatchSize = 0 then 20 else @BatchSize end
-		exec [Profile.Data].[Publication.Pubmed.GetAllPMIDsBatch] @BatchSize=@BatchSize
+		exec [Profile.Import].[GoogleWebservice.GetGeocodeAPIData] 
 	end
-	*/
 END
 GO

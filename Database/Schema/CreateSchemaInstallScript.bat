@@ -250,6 +250,7 @@ type Profile.Data.Publication.PubMed.DisambiguationExclude.Table.sql
 type Profile.Data.Publication.PubMed.DisambiguationSettings.Table.sql
 type Profile.Data.Publication.Funding.DisambiguationSettings.Table.sql
 type Profile.Import.GeocodingWebservice.Table.sql
+type Profile.Import.PRNSWebservice.Options.Table.sql
 
 type RDF..fnTripleHash.UserDefinedFunction.sql
 type Utility.Application.fnText2Bool.UserDefinedFunction.sql
@@ -626,6 +627,7 @@ type Profile.Data.Group.GetGroups.StoredProcedure.sql
 type Profile.Data.Group.Manager.AddManager.StoredProcedure.sql
 type Profile.Data.Group.Manager.DeleteManager.StoredProcedure.sql
 type Profile.Data.Group.Manager.GetManagers.StoredProcedure.sql
+type Profile.Data.Publication.Entity.UpdateEntityOneGroup.StoredProcedure.sql
 type Profile.Data.Group.Member.AddUpdateMember.StoredProcedure.sql
 type Profile.Data.Group.Member.DeleteMember.StoredProcedure.sql
 type Profile.Data.Group.Member.GetMembers.StoredProcedure.sql
@@ -636,7 +638,6 @@ type Profile.Module.CustomViewAuthorInAuthorship.GetGroupList.StoredProcedure.sq
 type Profile.Module.NetworkAuthorshipTimeline.Group.GetData.StoredProcedure.sql
 type Profile.Module.NetworkRadial.Group.GetCoauthors.StoredProcedure.sql
 type Profile.Module.NetworkMap.GetGroup.StoredProcedure.sql
-type Profile.Data.Publication.Entity.UpdateEntityOneGroup.StoredProcedure.sql
 type Profile.Data.Publication.Group.DeleteAllPublications.StoredProcedure.sql
 type Profile.Data.Publication.Group.DeleteOnePublication.StoredProcedure.sql
 type Profile.Data.Publication.Group.MyPub.AddPublication.StoredProcedure.sql
@@ -680,3 +681,6 @@ type Profile.Data.Funding.GetDisambiguationSettings.StoredProcedure.sql
 type Profile.Import.GeocodingWebservice.AddLog.StoredProcedure.sql
 type Profile.Data.Publication.Group.MyPub.GetPublication.StoredProcedure.sql
 type Profile.Data.Publication.Group.MyPub.UpdatePublication.StoredProcedure.sql
+type Profile.Import.PRNSWebservice.GetGeocodeAPIData.StoredProcedure.sql
+type Profile.Import.PRNSWebservice.ParseGeocodeResults.StoredProcedure.sql
+type Profile.Import.PRNSWebservice.CheckForErrors.StoredProcedure.sql
