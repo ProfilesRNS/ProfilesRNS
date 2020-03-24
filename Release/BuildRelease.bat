@@ -53,7 +53,7 @@ REM
 REM Office interop won't work headlessly, so we just copy the word files when running from jenkins
 REM 
 REM 
-call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild ConvertToPDF\ConvertToPDF.csproj "/p:Platform=AnyCPU;Configuration=Release"
+call "C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild" ConvertToPDF\ConvertToPDF.csproj "/p:Platform=AnyCPU;Configuration=Release"
 call ConvertToPDF\bin\Release\ConvertToPDF.exe
 if !errorlevel! equ 1 (
 	Echo An error occured while building the release.
@@ -88,11 +88,11 @@ rem call C:\Windows\Microsoft.NET\Framework64\v3.5\MSBuild.exe ProfilesRNSSearch
 rem call C:\Windows\Microsoft.NET\Framework64\v3.5\MSBuild.exe ProfilesRNSSPARQLAPI_AutomatedBuildConfiguration.xml /target:publish
 rem call C:\Windows\Microsoft.NET\Framework64\v3.5\MSBuild.exe ProfilesRNSBetaAPI_AutomatedBuildConfiguration.xml /target:publish
 
-call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild "..\Website\SourceCode\Profiles\Profiles\Profiles.csproj" "/p:Platform=AnyCPU;Configuration=Release;PublishDestination=..\..\..\..\Release\ProfilesRNS\Website\Binary\Profiles" /t:PublishToFileSystem /p:VisualStudioVersion=14.0
-call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild "..\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service\Connects.Profiles.Service.csproj" "/p:Platform=AnyCPU;Configuration=Release;PublishDestination=..\..\..\..\Release\ProfilesRNS\Website\Binary\ProfilesBetaAPI" /t:PublishToFileSystem /p:VisualStudioVersion=14.0
-call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild "..\Website\SourceCode\ProfilesSearchAPI\ProfilesSearchAPI.csproj" "/p:Platform=AnyCPU;Configuration=Release;PublishDestination=..\..\..\Release\ProfilesRNS\Website\Binary\ProfilesSearchAPI" /t:PublishToFileSystem /p:VisualStudioVersion=14.0
+call "C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild" "..\Website\SourceCode\Profiles\Profiles\Profiles.csproj" "/p:Platform=AnyCPU;Configuration=Release;PublishDestination=..\..\..\..\Release\ProfilesRNS\Website\Binary\Profiles" /t:PublishToFileSystem /p:VisualStudioVersion=14.0
+call "C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild" "..\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service\Connects.Profiles.Service.csproj" "/p:Platform=AnyCPU;Configuration=Release;PublishDestination=..\..\..\..\Release\ProfilesRNS\Website\Binary\ProfilesBetaAPI" /t:PublishToFileSystem /p:VisualStudioVersion=14.0
+call "C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild" "..\Website\SourceCode\ProfilesSearchAPI\ProfilesSearchAPI.csproj" "/p:Platform=AnyCPU;Configuration=Release;PublishDestination=..\..\..\Release\ProfilesRNS\Website\Binary\ProfilesSearchAPI" /t:PublishToFileSystem /p:VisualStudioVersion=14.0
 copy ..\Website\SourceCode\SemWeb\src\bin\sparql-core.dll ..\Website\SourceCode\ProfilesSPARQLAPI\bin\
-call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild "..\Website\SourceCode\ProfilesSPARQLAPI\ProfilesSPARQLAPI.csproj" "/p:Platform=AnyCPU;Configuration=Release;PublishDestination=..\..\..\Release\ProfilesRNS\Website\Binary\ProfilesSPARQLAPI" /t:PublishToFileSystem /p:VisualStudioVersion=14.0
+call "C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild" "..\Website\SourceCode\ProfilesSPARQLAPI\ProfilesSPARQLAPI.csproj" "/p:Platform=AnyCPU;Configuration=Release;PublishDestination=..\..\..\Release\ProfilesRNS\Website\Binary\ProfilesSPARQLAPI" /t:PublishToFileSystem /p:VisualStudioVersion=14.0
 
 copy ..\Website\SourceCode\Profiles\Profiles\web.config ProfilesRNS\Website\Binary\Profiles\web.config
 copy ..\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service\web.config ProfilesRNS\Website\Binary\ProfilesBetaAPI\web.config
@@ -142,20 +142,20 @@ popd
 
 copy ..\Database\ProfilesRNS_CreateSchema.sql ProfilesRNS\Database\ProfilesRNS_CreateSchema.sql
 
-call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild "..\Website\SourceCode\Profiles\Profiles\Profiles.csproj" "/p:Platform=AnyCPU;Configuration=Release;CopyDestination=..\..\..\..\Release\ProfilesRNS\Website\SourceCode\Profiles\Profiles" /t:CopySource  /p:VisualStudioVersion=14.0
+call "C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild" "..\Website\SourceCode\Profiles\Profiles\Profiles.csproj" "/p:Platform=AnyCPU;Configuration=Release;CopyDestination=..\..\..\..\Release\ProfilesRNS\Website\SourceCode\Profiles\Profiles" /t:CopySource  /p:VisualStudioVersion=14.0
 
-call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild "..\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service\Connects.Profiles.Service.csproj" "/p:Platform=AnyCPU;Configuration=Release;CopyDestination=..\..\..\..\Release\ProfilesRNS\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service" /t:CopySource /p:VisualStudioVersion=14.0
+call "C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild" "..\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service\Connects.Profiles.Service.csproj" "/p:Platform=AnyCPU;Configuration=Release;CopyDestination=..\..\..\..\Release\ProfilesRNS\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service" /t:CopySource /p:VisualStudioVersion=14.0
 copy "..\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service\bin\microsoft.ServiceModel.Web.dll" "ProfilesRNS\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service\bin\microsoft.ServiceModel.Web.dll"
-call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild "..\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service.DataContracts\Connects.Profiles.Service.DataContracts.csproj" "/p:Platform=AnyCPU;Configuration=Release;CopyDestination=..\..\..\..\Release\ProfilesRNS\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service.DataContracts" /t:CopySource /p:VisualStudioVersion=14.0
-call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild "..\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service.ServiceContracts\Connects.Profiles.Service.ServiceContracts.csproj" "/p:Platform=AnyCPU;Configuration=Release;CopyDestination=..\..\..\..\Release\ProfilesRNS\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service.ServiceContracts" /t:CopySource /p:VisualStudioVersion=14.0
-call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild "..\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service.ServiceImplementation\Connects.Profiles.Service.ServiceImplementation.csproj" "/p:Platform=AnyCPU;Configuration=Release;CopyDestination=..\..\..\..\Release\ProfilesRNS\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service.ServiceImplementation" /t:CopySource /p:VisualStudioVersion=14.0
-call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild "..\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Utility\Connects.Profiles.Utility.csproj" "/p:Platform=AnyCPU;Configuration=Release;CopyDestination=..\..\..\..\Release\ProfilesRNS\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Utility" /t:CopySource /p:VisualStudioVersion=14.0
-call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild "..\Website\SourceCode\ProfilesBetaAPI\Profiles.Common\Connects.Profiles.Common.csproj" "/p:Platform=AnyCPU;Configuration=Release;CopyDestination=..\..\..\..\Release\ProfilesRNS\Website\SourceCode\ProfilesBetaAPI\Profiles.Common" /t:CopySource /p:VisualStudioVersion=14.0
+call "C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild" "..\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service.DataContracts\Connects.Profiles.Service.DataContracts.csproj" "/p:Platform=AnyCPU;Configuration=Release;CopyDestination=..\..\..\..\Release\ProfilesRNS\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service.DataContracts" /t:CopySource /p:VisualStudioVersion=14.0
+call "C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild" "..\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service.ServiceContracts\Connects.Profiles.Service.ServiceContracts.csproj" "/p:Platform=AnyCPU;Configuration=Release;CopyDestination=..\..\..\..\Release\ProfilesRNS\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service.ServiceContracts" /t:CopySource /p:VisualStudioVersion=14.0
+call "C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild" "..\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service.ServiceImplementation\Connects.Profiles.Service.ServiceImplementation.csproj" "/p:Platform=AnyCPU;Configuration=Release;CopyDestination=..\..\..\..\Release\ProfilesRNS\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Service.ServiceImplementation" /t:CopySource /p:VisualStudioVersion=14.0
+call "C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild" "..\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Utility\Connects.Profiles.Utility.csproj" "/p:Platform=AnyCPU;Configuration=Release;CopyDestination=..\..\..\..\Release\ProfilesRNS\Website\SourceCode\ProfilesBetaAPI\Connects.Profiles.Utility" /t:CopySource /p:VisualStudioVersion=14.0
+call "C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild" "..\Website\SourceCode\ProfilesBetaAPI\Profiles.Common\Connects.Profiles.Common.csproj" "/p:Platform=AnyCPU;Configuration=Release;CopyDestination=..\..\..\..\Release\ProfilesRNS\Website\SourceCode\ProfilesBetaAPI\Profiles.Common" /t:CopySource /p:VisualStudioVersion=14.0
 
-call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild "..\Website\SourceCode\ProfilesSearchAPI\ProfilesSearchAPI.csproj" "/p:Platform=AnyCPU;Configuration=Release;CopyDestination=..\..\..\Release\ProfilesRNS\Website\SourceCode\ProfilesSearchAPI" /t:CopySource /p:VisualStudioVersion=14.0
-call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild "..\Website\SourceCode\ProfilesSPARQLAPI\ProfilesSPARQLAPI.csproj" "/p:Platform=AnyCPU;Configuration=Release;CopyDestination=..\..\..\Release\ProfilesRNS\Website\SourceCode\ProfilesSPARQLAPI" /t:CopySource /p:VisualStudioVersion=14.0
+call "C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild" "..\Website\SourceCode\ProfilesSearchAPI\ProfilesSearchAPI.csproj" "/p:Platform=AnyCPU;Configuration=Release;CopyDestination=..\..\..\Release\ProfilesRNS\Website\SourceCode\ProfilesSearchAPI" /t:CopySource /p:VisualStudioVersion=14.0
+call "C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild" "..\Website\SourceCode\ProfilesSPARQLAPI\ProfilesSPARQLAPI.csproj" "/p:Platform=AnyCPU;Configuration=Release;CopyDestination=..\..\..\Release\ProfilesRNS\Website\SourceCode\ProfilesSPARQLAPI" /t:CopySource /p:VisualStudioVersion=14.0
 
-call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild "..\Website\SourceCode\SemWeb\src\SemWeb.csproj" "/p:Platform=AnyCPU;Configuration=Release;CopyDestination=..\..\..\..\Release\ProfilesRNS\Website\SourceCode\SemWeb\src" /t:CopySource /p:VisualStudioVersion=14.0
+call "C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild" "..\Website\SourceCode\SemWeb\src\SemWeb.csproj" "/p:Platform=AnyCPU;Configuration=Release;CopyDestination=..\..\..\..\Release\ProfilesRNS\Website\SourceCode\SemWeb\src" /t:CopySource /p:VisualStudioVersion=14.0
 
 copy ..\Website\SourceCode\Profiles\Profiles.sln ProfilesRNS\Website\SourceCode\Profiles\Profiles.sln
 echo d | xcopy /s ..\Website\ORNG ProfilesRNS\Website\ORNG
