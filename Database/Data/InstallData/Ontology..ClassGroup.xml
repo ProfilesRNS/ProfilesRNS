@@ -1,10 +1,5 @@
 <Table Name="[Ontology.].[ClassGroup]">
   <Row>
-    <ClassGroupURI>http://orng.info/ontology/orng#ClassGroupORNGApplications</ClassGroupURI>
-    <SortOrder>7</SortOrder>
-    <IsVisible>1</IsVisible>
-  </Row>
-  <Row>
     <ClassGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#ClassGroupAwards</ClassGroupURI>
     <SortOrder>6</SortOrder>
     <IsVisible>1</IsVisible>
