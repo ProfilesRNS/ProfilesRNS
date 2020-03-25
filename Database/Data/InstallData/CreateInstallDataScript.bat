@@ -22,6 +22,7 @@ type User.Session.Bot.xml
 type Direct..Sites.xml
 type Profile.Data.Publication.Type.xml
 type Profile.Data.Publication.MyPub.Category.xml
+type Profile.Import.PRNSWebservice.Options.xml
 type ORCID..REF_Permission.xml
 type ORCID..REF_PersonStatusType.xml
 type ORCID..REF_RecordStatus.xml

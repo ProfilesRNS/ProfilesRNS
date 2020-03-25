@@ -1,0 +1,14 @@
+<Table Name="[Profile.Import].[PRNSWebservice.Options]">
+  <Row>
+    <job>bibliometrics</job>
+	<url>http://profiles.catalyst.harvard.edu/services/GetPMIDs/GetBibliometricData.asp</url>
+	<logLevel>0</logLevel>
+	<batchSize>10000</batchSize>
+  </Row>
+  <Row>
+    <job>geocode</job>
+	<url>https://maps.googleapis.com/maps/api/geocode/xml?address=</url>
+	<apiKey>Change_Me</apiKey>
+	<logLevel>1</logLevel>
+  </Row>
+</Table>
