@@ -3,7 +3,6 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE PROCEDURE [Profile.Data].[Publication.Pubmed.GetPMIDsforBibliometrics]
-	@BatchSize int = 10000
 AS
 BEGIN
 	SET NOCOUNT ON;	

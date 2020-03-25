@@ -46,7 +46,7 @@ EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'Run Pack
 		@retry_attempts=0, 
 		@retry_interval=0, 
 		@os_run_priority=0, @subsystem=N'SSIS', 
-		@command=N'/SQL "\ProfilesRNS_CallPRNSWebservice" /SERVER $(YourProfilesServerName) /MAXCONCURRENT " -1 " /CHECKPOINTING OFF /SET "\Package.Variables[ServerName].Value";$(YourProfilesServerName) /SET "\Package.Variables[DatabaseName].Value";$(YourProfilesDatabaseName) /SET "\Package.Variables[Job].Value";Bibliometrics /SET "\Package.Variables[PRNSWebService].Value";"http://profiles.catalyst.harvard.edu/services/GetPMIDs/GetBibliometricData.asp" /REPORTING E', 
+		@command=N'/SQL "\ProfilesRNS_CallPRNSWebservice" /SERVER $(YourProfilesServerName) /MAXCONCURRENT " -1 " /CHECKPOINTING OFF /SET "\Package.Variables[ServerName].Value";$(YourProfilesServerName) /SET "\Package.Variables[DatabaseName].Value";$(YourProfilesDatabaseName) /SET "\Package.Variables[Job].Value";Bibliometrics /REPORTING E', 
 		@database_name=N'master', 
 		@flags=0
 IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback

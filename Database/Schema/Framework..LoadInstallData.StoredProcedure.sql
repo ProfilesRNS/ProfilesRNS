@@ -703,6 +703,29 @@ SELECT  Row_Number() OVER (ORDER BY (SELECT 1)),
   CROSS APPLY x.nodes('//Row') AS R ( x )
 
 
+   ---------------------------------------------------------------
+-- [Profile.Import].[PRNSWebservice.*]
+---------------------------------------------------------------
+	INSERT INTO [Profile.Import].[PRNSWebservice.Options]
+		(
+			[job],
+			[url],
+			[apiKey],
+			[logLevel],
+			[batchSize]
+		)
+   SELECT	R.x.value('job[1]','varchar(max)'),
+			R.x.value('url[1]','varchar(max)'),
+			R.x.value('apiKey[1]','varchar(max)'),
+			R.x.value('logLevel[1]','int'),
+			R.x.value('batchSize[1]','int')
+	 FROM    (SELECT
+                      @x.query
+                      ('Import[1]/Table[@Name=''[Profile.Import].[PRNSWebservice.Options]'']')
+                      x
+          ) t
+  CROSS APPLY x.nodes('//Row') AS R ( x )
+
   -- Use to generate select lists for new tables
   -- SELECT   'R.x.value(''' + c.name +  '[1]'',' + '''varchar(max)'')'+ ',' ,* 
   -- FROM sys.columns c 

@@ -651,6 +651,9 @@ type Edit.Module.CustomEditWebsite.AddEditWebsite.StoredProcedure.sql
 type Edit.Module.CustomEditWebsite.GetData.StoredProcedure.sql
 type Profile.Data.Publication.Pubmed.GetPMIDsForBibliometrics.StoredProcedure.sql
 type Profile.Data.Publication.Pubmed.ParseBibliometricResults.StoredProcedure.sql
+type Profile.Import.PRNSWebservice.GetGeocodeAPIData.StoredProcedure.sql
+type Profile.Import.PRNSWebservice.ParseGeocodeResults.StoredProcedure.sql
+type Profile.Import.PRNSWebservice.CheckForErrors.StoredProcedure.sql
 type Profile.Import.PRNSWebservice.GetPostData.StoredProcedure.sql
 type Profile.Import.PRNSWebservice.ImportData.StoredProcedure.sql
 type Profile.Import.PRNSWebservice.AddLog.StoredProcedure.sql
@@ -681,6 +684,4 @@ type Profile.Data.Funding.GetDisambiguationSettings.StoredProcedure.sql
 type Profile.Import.GeocodingWebservice.AddLog.StoredProcedure.sql
 type Profile.Data.Publication.Group.MyPub.GetPublication.StoredProcedure.sql
 type Profile.Data.Publication.Group.MyPub.UpdatePublication.StoredProcedure.sql
-type Profile.Import.PRNSWebservice.GetGeocodeAPIData.StoredProcedure.sql
-type Profile.Import.PRNSWebservice.ParseGeocodeResults.StoredProcedure.sql
-type Profile.Import.PRNSWebservice.CheckForErrors.StoredProcedure.sql
+
