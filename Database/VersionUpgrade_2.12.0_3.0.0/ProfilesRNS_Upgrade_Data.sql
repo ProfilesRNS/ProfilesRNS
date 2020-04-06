@@ -161,6 +161,13 @@ update [Ontology.Presentation].[XML] set  PresentationXML =  '<Presentation Pres
 
 
 
+GO
+INSERT [Profile.Import].[PRNSWebservice.Options] ([job], [url], [apiKey], [logLevel], [batchSize]) VALUES (N'bibliometrics', N'http://profiles.catalyst.harvard.edu/services/GetPMIDs/GetBibliometricData.asp', NULL, 1, 10000)
+GO
+INSERT [Profile.Import].[PRNSWebservice.Options] ([job], [url], [apiKey], [logLevel], [batchSize]) VALUES (N'geocode', N'https://maps.googleapis.com/maps/api/geocode/xml?address=', N'InvalidKey', 2, NULL)
+GO
+
+
 /******************************
 *
 *   Update all derived fields

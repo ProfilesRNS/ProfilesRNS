@@ -26,7 +26,6 @@ set zip="C:\Program Files\7-Zip\7z.exe"
 mkdir ProfilesRNS
 mkdir ProfilesRNS\Database
 mkdir ProfilesRNS\Documentation
-mkdir ProfilesRNS\Documentation\ORNG
 mkdir ProfilesRNS\Website
 mkdir ProfilesRNS\Website\Binary
 mkdir ProfilesRNS\Website\Binary\Profiles
@@ -60,12 +59,8 @@ if !errorlevel! equ 1 (
 	exit /b 1
 )
 if !errorlevel! equ 2 (
-	copy ..\Documentation\ORNG\ORNGArchitecturalDiagram.pptx ProfilesRNS\Documentation\ORNG\ORNGArchitecturalDiagram_%Version%.pptx
 	copy ..\Documentation\ProfilesRNS_DataFlowDiagram.pptx ProfilesRNS\Documentation\ProfilesRNS_DataFlowDiagram_%Version%.pptx
 	copy ..\Documentation\ProfilesRNS_OntologyDiagram.pptx ProfilesRNS\Documentation\ProfilesRNS_OntologyDiagram_%Version%.pptx
-	copy ..\Documentation\ORNG\ORNG_GadgetDevelopment.docx ProfilesRNS\Documentation\ORNG\ORNG_GadgetDevelopment_%Version%.docx
-	copy ..\Documentation\ORNG\ORNG_InstallationGuide.docx ProfilesRNS\Documentation\ORNG\ORNG_InstallationGuide_%Version%.docx
-	copy ..\Documentation\ORNG\ORNG_TroubleShootingGuide.docx ProfilesRNS\Documentation\ORNG\ORNG_TroubleShootingGuide_%Version%.docx
 	copy ..\Documentation\ProfilesRNS_APIGuide.doc ProfilesRNS\Documentation\ProfilesRNS_APIGuide_%Version%.doc
 	copy ..\Documentation\ProfilesRNS_ArchitectureGuide.docx ProfilesRNS\Documentation\ProfilesRNS_ArchitectureGuide_%Version%.docx
 	copy ..\Documentation\ProfilesRNS_InstallGuide.docx ProfilesRNS\Documentation\ProfilesRNS_InstallGuide_%Version%.docx
@@ -76,10 +71,6 @@ if !errorlevel! equ 2 (
 
 echo d | xcopy /s ..\Documentation\API_Examples ProfilesRNS\Documentation\API_Examples
 echo d | xcopy /s ..\Documentation\SQL_Examples ProfilesRNS\Documentation\SQL_Examples
-copy ..\Documentation\ORNG\screenshot-apache.JPG ProfilesRNS\Documentation\ORNG\screenshot-apache.JPG
-copy ..\Documentation\ORNG\screenshot-isapi.JPG ProfilesRNS\Documentation\ORNG\screenshot-isapi.JPG
-copy ..\Documentation\ORNG\uriworkermap.properties ProfilesRNS\Documentation\ORNG\uriworkermap.properties
-copy ..\Documentation\ORNG\workers.properties ProfilesRNS\Documentation\ORNG\workers.properties
 copy ..\LICENSE.txt ProfilesRNS\LICENSE.txt
 
 
@@ -159,5 +150,4 @@ call "C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild" "..\Website\SourceCode\Pr
 call "C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild" "..\Website\SourceCode\SemWeb\src\SemWeb.csproj" "/p:Platform=AnyCPU;Configuration=Release;CopyDestination=..\..\..\..\Release\ProfilesRNS\Website\SourceCode\SemWeb\src" /t:CopySource /p:VisualStudioVersion=14.0
 
 copy ..\Website\SourceCode\Profiles\Profiles.sln ProfilesRNS\Website\SourceCode\Profiles\Profiles.sln
-echo d | xcopy /s ..\Website\ORNG ProfilesRNS\Website\ORNG
 call %zip% a -tzip ProfilesRNS-%Version%.zip ProfilesRNS
