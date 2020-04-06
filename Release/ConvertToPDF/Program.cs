@@ -44,7 +44,7 @@ namespace ConvertToPDF
                     doc = app.Documents.Open(path + "..\\Documentation\\ProfilesRNS_ReleaseNotes.docx");
                     doc.SaveAs2(path + "ProfilesRNS\\Documentation\\ProfilesRNS_ReleaseNotes.pdf", word.WdSaveFormat.wdFormatPDF);
                     doc.Close();
-
+/*
                     doc = app.Documents.Open(path + "..\\Documentation\\ORNG\\ORNG_GadgetDevelopment.docx");
                     doc.SaveAs2(path + "ProfilesRNS\\Documentation\\ORNG\\ORNG_GadgetDevelopment.pdf", word.WdSaveFormat.wdFormatPDF);
                     doc.Close();
@@ -56,7 +56,7 @@ namespace ConvertToPDF
                     doc = app.Documents.Open(path + "..\\Documentation\\ORNG\\ORNG_TroubleShootingGuide.docx");
                     doc.SaveAs2(path + "ProfilesRNS\\Documentation\\ORNG\\ORNG_TroubleShootingGuide.pdf", word.WdSaveFormat.wdFormatPDF);
                     doc.Close();
-
+*/
                     app.Quit();
 
 
@@ -70,11 +70,11 @@ namespace ConvertToPDF
                     presentation = pptApp.Presentations.Open(path + "..\\Documentation\\ProfilesRNS_OntologyDiagram.pptx");
                     presentation.SaveAs(path + "ProfilesRNS\\Documentation\\ProfilesRNS_OntologyDiagram.pdf", Microsoft.Office.Interop.PowerPoint.PpSaveAsFileType.ppSaveAsPDF);
                     presentation.Close();
-
+/*
                     presentation = pptApp.Presentations.Open(path + "..\\Documentation\\ORNG\\ORNGArchitecturalDiagram.pptx");
                     presentation.SaveAs(path + "ProfilesRNS\\Documentation\\ORNG\\ORNGArchitecturalDiagram.pdf", Microsoft.Office.Interop.PowerPoint.PpSaveAsFileType.ppSaveAsPDF);
                     presentation.Close();
-
+*/
                     pptApp.Quit();
                 }
                 else
