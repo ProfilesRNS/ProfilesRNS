@@ -30,49 +30,87 @@ namespace ProfilesDataAPI
 
     public class ProfilesAPIController : ApiController
     {
-        [Route("getPeople/Everyone")]
-        [Route("getPeople/Everyone/Count/{count:int}/Offset/{offset:int}")]
-        [Route("getPeople/Institution/{inst}")]
-        [Route("getPeople/Institution/{inst}/Department/{dept}")]
-        [Route("getPeople/Institution/{inst}/Department/{dept}/Division/{div}")]
-        [Route("getPeople/Institution/{inst}/Count/{count:int}/Offset/{offset:int}")]
-        [Route("getPeople/Institution/{inst}/Department/{dept}/Count/{count:int}/Offset/{offset:int}")]
-        [Route("getPeople/Institution/{inst}/Department/{dept}/Division/{div}/Count/{count:int}/Offset/{offset:int}")]
-        [Route("getPeople/Keyword/{keyword}")]
-        [Route("getPeople/Keyword/{keyword}/Count/{count:int}/Offset/{offset:int}")]
-        [Route("getPeople/Keyword/{keyword}/Institution/{inst}")]
-        [Route("getPeople/Keyword/{keyword}/Institution/{inst}/Department/{dept}")]
-        [Route("getPeople/Keyword/{keyword}/Institution/{inst}/Department/{dept}/Division/{div}")]
-        [Route("getPeople/Keyword/{keyword}/Institution/{inst}/Count/{count:int}/Offset/{offset:int}")]
-        [Route("getPeople/Keyword/{keyword}/Institution/{inst}/Department/{dept}/Count/{count:int}/Offset/{offset:int}")]
-        [Route("getPeople/Keyword/{keyword}/Institution/{inst}/Department/{dept}/Division/{div}/Count/{count:int}/Offset/{offset:int}")]
-        [Route("getPeople/PersonIDs/{personIDs}")]
-        [Route("getPeople/Everyone/Columns/{cols}")]
-        [Route("getPeople/Everyone/Count/{count:int}/Offset/{offset:int}/Columns/{cols}")]
-        [Route("getPeople/Institution/{inst}/Columns/{cols}")]
-        [Route("getPeople/Institution/{inst}/Department/{dept}/Columns/{cols}")]
-        [Route("getPeople/Institution/{inst}/Department/{dept}/Division/{div}/Columns/{cols}")]
-        [Route("getPeople/Institution/{inst}/Count/{count:int}/Offset/{offset:int}/Columns/{cols}")]
-        [Route("getPeople/Institution/{inst}/Department/{dept}/Count/{count:int}/Offset/{offset:int}/Columns/{cols}")]
-        [Route("getPeople/Institution/{inst}/Department/{dept}/Division/{div}/Count/{count:int}/Offset/{offset:int}/Columns/{cols}")]
-        [Route("getPeople/Keyword/{keyword}/Columns/{cols}")]
-        [Route("getPeople/Keyword/{keyword}/Count/{count:int}/Offset/{offset:int}/Columns/{cols}")]
-        [Route("getPeople/Keyword/{keyword}/Institution/{inst}/Columns/{cols}")]
-        [Route("getPeople/Keyword/{keyword}/Institution/{inst}/Department/{dept}/Columns/{cols}")]
-        [Route("getPeople/Keyword/{keyword}/Institution/{inst}/Department/{dept}/Division/{div}/Columns/{cols}")]
-        [Route("getPeople/Keyword/{keyword}/Institution/{inst}/Count/{count:int}/Offset/{offset:int}/Columns/{cols}")]
-        [Route("getPeople/Keyword/{keyword}/Institution/{inst}/Department/{dept}/Count/{count:int}/Offset/{offset:int}/Columns/{cols}")]
-        [Route("getPeople/Keyword/{keyword}/Institution/{inst}/Department/{dept}/Division/{div}/Count/{count:int}/Offset/{offset:int}/Columns/{cols}")]
-        [Route("getPeople/PersonIDs/{personIDs}/Columns/{cols}")]
-        [HttpGet]
-        public System.Net.Http.HttpResponseMessage getPeopleByInstitutionAndDept(string keyword = null, string inst = null, string dept = null, string division = null, int count = -1, int offset = 0, string personIDs = null)
-        {
-            string str = string.Empty;
-            if (keyword != null && count == -1) count = 15;
 
+        [Route("")]
+        [HttpGet]
+        public System.Net.Http.HttpResponseMessage rootPage()
+        {
+
+            string str = string.Empty;
             try
             {
-                string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+                string connstr = ConfigurationManager.ConnectionStrings["ProfilesDataAPIDB"].ConnectionString;
+                SqlConnection dbconnection = new SqlConnection(connstr);
+                SqlCommand dbcommand = new SqlCommand("[Profile.Module].[ProfilesDataAPI.GetInstructionText]");
+                dbcommand.CommandTimeout = Convert.ToInt32(ConfigurationSettings.AppSettings["COMMANDTIMEOUT"]);
+
+                SqlDataReader dbreader;
+                dbconnection.Open();
+                dbcommand.CommandType = CommandType.StoredProcedure;
+
+                dbcommand.Connection = dbconnection;
+                dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
+
+                while (dbreader.Read())
+                    str += dbreader[0].ToString();
+
+
+                if (!dbreader.IsClosed)
+                    dbreader.Close();
+
+            }
+            catch (Exception ex)
+            {
+                return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError)
+                {
+                    ReasonPhrase = "An Error Occurred",
+                    Content = new StringContent(ex.Message, System.Text.Encoding.UTF8, "text/plain")
+                };
+            }
+            return new HttpResponseMessage()
+            {
+                Content = new StringContent(str, System.Text.Encoding.UTF8, "text/html")
+            };
+        }
+
+
+        [Route("getPeople/{param1name}/{param1value}")]
+        [Route("getPeople/{param1name}/{param1value}/{param2name}/{param2value}")]
+        [Route("getPeople/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}")]
+        [Route("getPeople/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}/{param4name}/{param4value}")]
+        [Route("getPeople/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}/{param4name}/{param4value}/{param5name}/{param5value}")]
+        [Route("getPeople/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}/{param4name}/{param4value}/{param5name}/{param5value}/{param6name}/{param6value}")]
+        [Route("getPeople/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}/{param4name}/{param4value}/{param5name}/{param5value}/{param6name}/{param6value}/{param7name}/{param7value}")]
+        [Route("getPeople/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}/{param4name}/{param4value}/{param5name}/{param5value}/{param6name}/{param6value}/{param7name}/{param7value}/{param8name}/{param8value}")]
+        [Route("getPeople/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}/{param4name}/{param4value}/{param5name}/{param5value}/{param6name}/{param6value}/{param7name}/{param7value}/{param8name}/{param8value}/{param9name}/{param9value}")]
+        [Route("getPeople/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}/{param4name}/{param4value}/{param5name}/{param5value}/{param6name}/{param6value}/{param7name}/{param7value}/{param8name}/{param8value}/{param9name}/{param9value}/{param10name}/{param10value}")]
+        [Route("getPeople/xml/{param1name}/{param1value}")]
+        [Route("getPeople/xml/{param1name}/{param1value}/{param2name}/{param2value}")]
+        [Route("getPeople/xml/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}")]
+        [Route("getPeople/xml/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}/{param4name}/{param4value}")]
+        [Route("getPeople/xml/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}/{param4name}/{param4value}/{param5name}/{param5value}")]
+        [Route("getPeople/xml/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}/{param4name}/{param4value}/{param5name}/{param5value}/{param6name}/{param6value}")]
+        [Route("getPeople/xml/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}/{param4name}/{param4value}/{param5name}/{param5value}/{param6name}/{param6value}/{param7name}/{param7value}")]
+        [Route("getPeople/xml/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}/{param4name}/{param4value}/{param5name}/{param5value}/{param6name}/{param6value}/{param7name}/{param7value}/{param8name}/{param8value}")]
+        [Route("getPeople/xml/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}/{param4name}/{param4value}/{param5name}/{param5value}/{param6name}/{param6value}/{param7name}/{param7value}/{param8name}/{param8value}/{param9name}/{param9value}")]
+        [Route("getPeople/xml/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}/{param4name}/{param4value}/{param5name}/{param5value}/{param6name}/{param6value}/{param7name}/{param7value}/{param8name}/{param8value}/{param9name}/{param9value}/{param10name}/{param10value}")]
+        [Route("getPeople/xml/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}/{param4name}/{param4value}/{param5name}/{param5value}/{param6name}/{param6value}/{param7name}/{param7value}/{param8name}/{param8value}/{param9name}/{param9value}/{param10name}/{param10value}/{param11name}/{param11value}")]
+        [Route("getPeople/xml/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}/{param4name}/{param4value}/{param5name}/{param5value}/{param6name}/{param6value}/{param7name}/{param7value}/{param8name}/{param8value}/{param9name}/{param9value}/{param10name}/{param10value}/{param11name}/{param11value}/{param12name}/{param12value}")]
+        [Route("getPeople/xml/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}/{param4name}/{param4value}/{param5name}/{param5value}/{param6name}/{param6value}/{param7name}/{param7value}/{param8name}/{param8value}/{param9name}/{param9value}/{param10name}/{param10value}/{param11name}/{param11value}/{param12name}/{param12value}/{param13name}/{param13value}")]
+        [Route("getPeople/xml/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}/{param4name}/{param4value}/{param5name}/{param5value}/{param6name}/{param6value}/{param7name}/{param7value}/{param8name}/{param8value}/{param9name}/{param9value}/{param10name}/{param10value}/{param11name}/{param11value}/{param12name}/{param12value}/{param13name}/{param13value}/{param14name}/{param14value}")]
+        [HttpGet]
+        public System.Net.Http.HttpResponseMessage xmlAPI(string param1name = null, string param1value = null, string param2name = null, string param2value = null,
+                                                            string param3name = null, string param3value = null, string param4name = null, string param4value = null,
+                                                            string param5name = null, string param5value = null, string param6name = null, string param6value = null,
+                                                            string param7name = null, string param7value = null, string param8name = null, string param8value = null,
+                                                            string param9name = null, string param9value = null, string param10name = null, string param10value = null,
+                                                            string param11name = null, string param11value = null, string param12name = null, string param12value = null,
+                                                            string param13name = null, string param13value = null, string param14name = null, string param14value = null)
+        {
+            string str = string.Empty;
+            try
+            {
+                string connstr = ConfigurationManager.ConnectionStrings["ProfilesDataAPIDB"].ConnectionString;
                 SqlConnection dbconnection = new SqlConnection(connstr);
                 SqlCommand dbcommand = new SqlCommand("[Profile.Module].[ProfilesDataAPI.GetPersonData]");
                 dbcommand.CommandTimeout = Convert.ToInt32(ConfigurationSettings.AppSettings["COMMANDTIMEOUT"]);
@@ -81,19 +119,35 @@ namespace ProfilesDataAPI
                 dbconnection.Open();
                 dbcommand.CommandType = CommandType.StoredProcedure;
                 //dbcommand.CommandTimeout = base.GetCommandTimeout();
-                dbcommand.Parameters.Add(new SqlParameter("@PersonList", personIDs));
-                dbcommand.Parameters.Add(new SqlParameter("@Institution", inst));
-                //dbcommand.Parameters.Add(new SqlParameter("@InstitutionAbbr", pmid));
-                dbcommand.Parameters.Add(new SqlParameter("@Department", dept));
-                dbcommand.Parameters.Add(new SqlParameter("@Division", division));
-                //dbcommand.Parameters.Add(new SqlParameter("@FacultyRank", pmid));
-                dbcommand.Parameters.Add(new SqlParameter("@SearchString", keyword));
-                if (count > 0)
-                {
-                    dbcommand.Parameters.Add(new SqlParameter("@offset", offset));
-                    dbcommand.Parameters.Add(new SqlParameter("@count", count));
-                }
-                dbcommand.Parameters.Add(new SqlParameter("@IncludeSecondary", 0));
+                dbcommand.Parameters.Add(new SqlParameter("@Format", "XML"));
+                dbcommand.Parameters.Add(new SqlParameter("@param1name", param1name));
+                dbcommand.Parameters.Add(new SqlParameter("@param1value", param1value));
+                dbcommand.Parameters.Add(new SqlParameter("@param2name", param2name));
+                dbcommand.Parameters.Add(new SqlParameter("@param2value", param2value));
+                dbcommand.Parameters.Add(new SqlParameter("@param3name", param3name));
+                dbcommand.Parameters.Add(new SqlParameter("@param3value", param3value));
+                dbcommand.Parameters.Add(new SqlParameter("@param4name", param4name));
+                dbcommand.Parameters.Add(new SqlParameter("@param4value", param4value));
+                dbcommand.Parameters.Add(new SqlParameter("@param5name", param5name));
+                dbcommand.Parameters.Add(new SqlParameter("@param5value", param5value));
+                dbcommand.Parameters.Add(new SqlParameter("@param6name", param6name));
+                dbcommand.Parameters.Add(new SqlParameter("@param6value", param6value));
+                dbcommand.Parameters.Add(new SqlParameter("@param7name", param7name));
+                dbcommand.Parameters.Add(new SqlParameter("@param7value", param7value));
+                dbcommand.Parameters.Add(new SqlParameter("@param8name", param8name));
+                dbcommand.Parameters.Add(new SqlParameter("@param8value", param8value));
+                dbcommand.Parameters.Add(new SqlParameter("@param9name", param9name));
+                dbcommand.Parameters.Add(new SqlParameter("@param9value", param9value));
+                dbcommand.Parameters.Add(new SqlParameter("@param10name", param10name));
+                dbcommand.Parameters.Add(new SqlParameter("@param10value", param10value));
+                dbcommand.Parameters.Add(new SqlParameter("@param11name", param11name));
+                dbcommand.Parameters.Add(new SqlParameter("@param11value", param11value));
+                dbcommand.Parameters.Add(new SqlParameter("@param12name", param13name));
+                dbcommand.Parameters.Add(new SqlParameter("@param12value", param13value));
+                dbcommand.Parameters.Add(new SqlParameter("@param13name", param13name));
+                dbcommand.Parameters.Add(new SqlParameter("@param13value", param13value));
+                dbcommand.Parameters.Add(new SqlParameter("@param14name", param14name));
+                dbcommand.Parameters.Add(new SqlParameter("@param14value", param14value));
 
                 dbcommand.Connection = dbconnection;
                 dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
@@ -101,16 +155,18 @@ namespace ProfilesDataAPI
                 while (dbreader.Read())
                     str += dbreader[0].ToString();
 
-                //               Framework.Utilities.DebugLogging.Log(str);
 
                 if (!dbreader.IsClosed)
                     dbreader.Close();
 
-                //                   Framework.Utilities.Cache.Set(request.Key + "GetJournalHeadingsForProfile", str);
             }
             catch (Exception ex)
             {
-                //                Framework.Utilities.DebugLogging.Log(ex.Message + " ++ " + ex.StackTrace);
+                return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError)
+                {
+                    ReasonPhrase = "An Error Occurred",
+                    Content = new StringContent(ex.Message, System.Text.Encoding.UTF8, "text/plain")
+                };
             }
             return new HttpResponseMessage()
             {
@@ -118,12 +174,94 @@ namespace ProfilesDataAPI
             };
         }
 
-        [Route("")]
+        [Route("getPeople/json/{param1name}/{param1value}")]
+        [Route("getPeople/json/{param1name}/{param1value}/{param2name}/{param2value}")]
+        [Route("getPeople/json/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}")]
+        [Route("getPeople/json/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}/{param4name}/{param4value}")]
+        [Route("getPeople/json/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}/{param4name}/{param4value}/{param5name}/{param5value}")]
+        [Route("getPeople/json/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}/{param4name}/{param4value}/{param5name}/{param5value}/{param6name}/{param6value}")]
+        [Route("getPeople/json/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}/{param4name}/{param4value}/{param5name}/{param5value}/{param6name}/{param6value}/{param7name}/{param7value}")]
+        [Route("getPeople/json/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}/{param4name}/{param4value}/{param5name}/{param5value}/{param6name}/{param6value}/{param7name}/{param7value}/{param8name}/{param8value}")]
+        [Route("getPeople/json/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}/{param4name}/{param4value}/{param5name}/{param5value}/{param6name}/{param6value}/{param7name}/{param7value}/{param8name}/{param8value}/{param9name}/{param9value}")]
+        [Route("getPeople/json/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}/{param4name}/{param4value}/{param5name}/{param5value}/{param6name}/{param6value}/{param7name}/{param7value}/{param8name}/{param8value}/{param9name}/{param9value}/{param10name}/{param10value}")]
+        [Route("getPeople/json/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}/{param4name}/{param4value}/{param5name}/{param5value}/{param6name}/{param6value}/{param7name}/{param7value}/{param8name}/{param8value}/{param9name}/{param9value}/{param10name}/{param10value}/{param11name}/{param11value}")]
+        [Route("getPeople/json/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}/{param4name}/{param4value}/{param5name}/{param5value}/{param6name}/{param6value}/{param7name}/{param7value}/{param8name}/{param8value}/{param9name}/{param9value}/{param10name}/{param10value}/{param11name}/{param11value}/{param12name}/{param12value}")]
+        [Route("getPeople/json/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}/{param4name}/{param4value}/{param5name}/{param5value}/{param6name}/{param6value}/{param7name}/{param7value}/{param8name}/{param8value}/{param9name}/{param9value}/{param10name}/{param10value}/{param11name}/{param11value}/{param12name}/{param12value}/{param13name}/{param13value}")]
+        [Route("getPeople/json/{param1name}/{param1value}/{param2name}/{param2value}/{param3name}/{param3value}/{param4name}/{param4value}/{param5name}/{param5value}/{param6name}/{param6value}/{param7name}/{param7value}/{param8name}/{param8value}/{param9name}/{param9value}/{param10name}/{param10value}/{param11name}/{param11value}/{param12name}/{param12value}/{param13name}/{param13value}/{param14name}/{param14value}")]
         [HttpGet]
-        public string rootPage()
+        public System.Net.Http.HttpResponseMessage jsonAPI(string param1name = null, string param1value = null, string param2name = null, string param2value = null,
+                                                    string param3name = null, string param3value = null, string param4name = null, string param4value = null,
+                                                    string param5name = null, string param5value = null, string param6name = null, string param6value = null,
+                                                    string param7name = null, string param7value = null, string param8name = null, string param8value = null,
+                                                    string param9name = null, string param9value = null, string param10name = null, string param10value = null,
+                                                    string param11name = null, string param11value = null, string param12name = null, string param12value = null,
+                                                    string param13name = null, string param13value = null, string param14name = null, string param14value = null)
         {
+            string str = string.Empty;
+            try
+            {
+                string connstr = ConfigurationManager.ConnectionStrings["ProfilesDataAPIDB"].ConnectionString;
+                SqlConnection dbconnection = new SqlConnection(connstr);
+                SqlCommand dbcommand = new SqlCommand("[Profile.Module].[ProfilesDataAPI.GetPersonData]");
+                dbcommand.CommandTimeout = Convert.ToInt32(ConfigurationSettings.AppSettings["COMMANDTIMEOUT"]);
 
-            return "";
+                SqlDataReader dbreader;
+                dbconnection.Open();
+                dbcommand.CommandType = CommandType.StoredProcedure;
+                //dbcommand.CommandTimeout = base.GetCommandTimeout();
+                dbcommand.Parameters.Add(new SqlParameter("@Format", "JSON"));
+                dbcommand.Parameters.Add(new SqlParameter("@param1name", param1name));
+                dbcommand.Parameters.Add(new SqlParameter("@param1value", param1value));
+                dbcommand.Parameters.Add(new SqlParameter("@param2name", param2name));
+                dbcommand.Parameters.Add(new SqlParameter("@param2value", param2value));
+                dbcommand.Parameters.Add(new SqlParameter("@param3name", param3name));
+                dbcommand.Parameters.Add(new SqlParameter("@param3value", param3value));
+                dbcommand.Parameters.Add(new SqlParameter("@param4name", param4name));
+                dbcommand.Parameters.Add(new SqlParameter("@param4value", param4value));
+                dbcommand.Parameters.Add(new SqlParameter("@param5name", param5name));
+                dbcommand.Parameters.Add(new SqlParameter("@param5value", param5value));
+                dbcommand.Parameters.Add(new SqlParameter("@param6name", param6name));
+                dbcommand.Parameters.Add(new SqlParameter("@param6value", param6value));
+                dbcommand.Parameters.Add(new SqlParameter("@param7name", param7name));
+                dbcommand.Parameters.Add(new SqlParameter("@param7value", param7value));
+                dbcommand.Parameters.Add(new SqlParameter("@param8name", param8name));
+                dbcommand.Parameters.Add(new SqlParameter("@param8value", param8value));
+                dbcommand.Parameters.Add(new SqlParameter("@param9name", param9name));
+                dbcommand.Parameters.Add(new SqlParameter("@param9value", param9value));
+                dbcommand.Parameters.Add(new SqlParameter("@param10name", param10name));
+                dbcommand.Parameters.Add(new SqlParameter("@param10value", param10value));
+                dbcommand.Parameters.Add(new SqlParameter("@param11name", param11name));
+                dbcommand.Parameters.Add(new SqlParameter("@param11value", param11value));
+                dbcommand.Parameters.Add(new SqlParameter("@param12name", param13name));
+                dbcommand.Parameters.Add(new SqlParameter("@param12value", param13value));
+                dbcommand.Parameters.Add(new SqlParameter("@param13name", param13name));
+                dbcommand.Parameters.Add(new SqlParameter("@param13value", param13value));
+                dbcommand.Parameters.Add(new SqlParameter("@param14name", param14name));
+                dbcommand.Parameters.Add(new SqlParameter("@param14value", param14value));
+
+                dbcommand.Connection = dbconnection;
+                dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
+
+                while (dbreader.Read())
+                    str += dbreader[0].ToString();
+
+
+                if (!dbreader.IsClosed)
+                    dbreader.Close();
+
+            }
+            catch (Exception ex)
+            {
+                return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError)
+                {
+                    ReasonPhrase = "An Error Occurred",
+                    Content = new StringContent(ex.Message, System.Text.Encoding.UTF8, "text/plain")
+                };
+            }
+            return new HttpResponseMessage()
+            {
+                Content = new StringContent(str, System.Text.Encoding.UTF8, "application/xml")
+            };
         }
     }
 }
