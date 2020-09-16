@@ -260,7 +260,7 @@ namespace ProfilesDataAPI
             }
             return new HttpResponseMessage()
             {
-                Content = new StringContent(str, System.Text.Encoding.UTF8, "application/xml")
+                Content = new StringContent(str, System.Text.Encoding.UTF8, "application/json")
             };
         }
     }
