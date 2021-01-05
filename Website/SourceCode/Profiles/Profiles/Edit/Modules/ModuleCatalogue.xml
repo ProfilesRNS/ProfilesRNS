@@ -30,4 +30,5 @@ For details, see: LICENSE.txt
   <Module ModulePath="Modules" NameSpace="CustomEditFreetextKeyword" FileName="CustomEditFreetextKeyword.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="CustomEditEducationalTraining" FileName="CustomEditEducationalTraining.ascx" Enabled="true"/>
   <Module ModulePath="Modules" NameSpace="CustomEditSummary" FileName="CustomEditSummary.ascx" Enabled="true"/>
+  <Module ModulePath="Modules" NameSpace="CustomEditLabUrl" FileName="CustomEditLabUrl.ascx" Enabled="true"/>
 </ModuleList>
