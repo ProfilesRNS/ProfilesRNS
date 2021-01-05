@@ -84,7 +84,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Edit\Modules\CustomEditLabUrl\CustomEditLabUrl.ascx" />
     <Content Include="Edit\Modules\CustomEditSummary\CustomEditSummary.ascx" />
     <Content Include="Framework\JavaScript\tinymce\themes\mobile\theme.min.js" />
     <Content Include="ProfileDetailsError\CSS\ProfileDetailsError.css" />
@@ -316,13 +315,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Edit\Modules\CustomEditLabUrl\CustomEditLabUrl.ascx.cs">
-      <DependentUpon>CustomEditLabUrl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Edit\Modules\CustomEditLabUrl\CustomEditLabUrl.ascx.designer.cs">
-      <DependentUpon>CustomEditLabUrl.ascx</DependentUpon>
-    </Compile>
     <Compile Include="Edit\Modules\CustomEditSummary\CustomEditSummary.ascx.cs">
       <DependentUpon>CustomEditSummary.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
