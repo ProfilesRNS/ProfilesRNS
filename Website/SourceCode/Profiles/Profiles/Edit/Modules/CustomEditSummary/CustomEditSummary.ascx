@@ -9,19 +9,21 @@
     function endRequestHandler(sender, args) {
 
         if (sender._postBackSettings.sourceElement.id.endsWith("Edit")) {
-            // wire up the events for tracking keystrokes
+            
             // and initialize the character count
+            doTextCount($("#txtSummaryInput").val().length);	
 
-            doTextCount($("#txtSummaryInput").val().length);
-
-            $("#txtSummaryInput").keypress(function (evt) {
-                doTextCount($("#txtSummaryInput").val().length);
-            });
-
-            $("#txtSummaryInput").bind('paste', function (evt) {
-                doTextCount($("#txtSummaryInput").val().length);
+            // wire up the events for tracking input
+            // Seems like input handles all the cases we need to deal with: Cut, Paste, and KeyUp
+            document.querySelector("#txtSummaryInput").addEventListener("input", function (evt) {
+                // this timeout is necessary so the value gets updated
+                window.setTimeout(getTextAreaValue, 100);
             });	
         }
+    }
+
+    function getTextAreaValue() {
+        doTextCount($("#txtSummaryInput").val().length);
     }
 
     function doTextCount(count) {
@@ -67,7 +69,7 @@
             </tr>
             <tr>
                 <td>
-                    <table style="width: 100%;" border="0" cellspacing="2" cellpadding="4">
+                    <table style="width: 100%;" border="1" cellspacing="2" cellpadding="4" style="border-collapse:collapse">
                         <tr class="topRow" style="border-width: 1px; border-style: solid">
                             <td>Summary</td>
                             <td>Actions</td>
