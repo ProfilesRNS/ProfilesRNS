@@ -146,8 +146,13 @@ namespace Profiles.Edit.Modules.CustomEditSummary
             litBackLink.Text = "<a href='" + Root.Domain + "/edit/" + this.SubjectID + "'>Edit Menu</a> &gt; <b>" + PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@Label").Value + "</b>";
 
             XmlNode connectionNode = this.PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/Network/Connection");
-            string propertyConnectionValue = connectionNode.InnerText;
-            OriginalSummary = connectionNode.InnerText;
+            string propertyConnectionValue = "";
+            if (connectionNode != null)
+            {
+                propertyConnectionValue = connectionNode.InnerText;
+            }
+             
+            OriginalSummary = propertyConnectionValue;
 
             txtSummaryInput.Text = propertyConnectionValue;
             litSummaryText.Text = propertyConnectionValue;

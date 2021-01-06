@@ -146,8 +146,13 @@ namespace Profiles.Edit.Modules.CustomEditLabUrl
             litBackLink.Text = "<a href='" + Root.Domain + "/edit/" + this.SubjectID + "'>Edit Menu</a> &gt; <b>" + PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@Label").Value + "</b>";
 
             XmlNode connectionNode = this.PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/Network/Connection");
-            string propertyConnectionValue = connectionNode.InnerText;
-            OriginalLabUrl = connectionNode.InnerText;
+            string propertyConnectionValue = "";
+            if (connectionNode != null)
+            {
+                propertyConnectionValue = connectionNode.InnerText;
+            }
+            
+            OriginalLabUrl = propertyConnectionValue;
 
             txtLabUrlInput.Text = propertyConnectionValue;
             litLabUrlText.Text = propertyConnectionValue;
