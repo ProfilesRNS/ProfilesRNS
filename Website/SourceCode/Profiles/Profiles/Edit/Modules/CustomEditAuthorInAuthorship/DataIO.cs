@@ -102,5 +102,40 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
 
 
         }
-	}
+        public void AddPubmedBookArticle(int personID, long subjectID, int pmid, XmlDocument PropertyListXML)
+        {
+            ActivityLog(PropertyListXML, subjectID, "PMID", "" + pmid);
+            SessionManagement sm = new SessionManagement();
+            string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+
+            SqlConnection dbconnection = new SqlConnection(connstr);
+
+            SqlParameter[] param = new SqlParameter[2];
+
+            try
+            {
+                dbconnection.Open();
+
+                param[0] = new SqlParameter("@personID", personID);
+
+                param[1] = new SqlParameter("@pmid", pmid);
+
+
+                //For Output Parameters you need to pass a connection object to the framework so you can close it before reading the output params value.
+                ExecuteSQLDataCommand(GetDBCommand(dbconnection, "[Profile.Data].[Publication.Pubmed.AddPubmedBookArticle]", CommandType.StoredProcedure, CommandBehavior.CloseConnection, param));
+
+                dbconnection.Close();
+
+
+            }
+            catch (Exception e)
+            {
+                Framework.Utilities.DebugLogging.Log(e.Message + e.StackTrace);
+                throw new Exception(e.Message);
+            }
+
+
+        }
+
+    }
 }
