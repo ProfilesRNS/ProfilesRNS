@@ -284,6 +284,7 @@ type Profile.Data.fnPublication.Person.GetPublications.UserDefinedFunction.sql
 type Utility.NLP.fnPorterAlgorithm.UserDefinedFunction.sql
 type Utility.NLP.fnNormalizeSplitStem.UserDefinedFunction.sql
 type Utility.NLP.fnQuoteNormalizeSplitStem.UserDefinedFunction.sql
+type RDF..fnNodeID2TypeID.UserDefinedFunction.sql
 
 type Framework..vwBufferObjects.View.sql
 type Framework..vwBufferDatabases.View.sql
@@ -330,7 +331,7 @@ type Profile.Data.vwGroup.Publication.Entity.AssociatedInformationResource.View.
 type Framework..GetBasePath.StoredProcedure.sql
 type Framework..GetBaseURI.StoredProcedure.sql
 type Profile.Data.vwURL.View.sql
-
+type Profile.Data.vwPublication.PubMed.AllXML.PubmedBookArticle.View.sql
 rem type PresentationXML.SqlAssembly.sql
 
 type Framework..LoadXMLFile.StoredProcedure.sql
@@ -682,4 +683,7 @@ type Profile.Data.Funding.UpdateDisambiguationSettings.StoredProcedure.sql
 type Profile.Data.Funding.GetDisambiguationSettings.StoredProcedure.sql
 type Profile.Data.Publication.Group.MyPub.GetPublication.StoredProcedure.sql
 type Profile.Data.Publication.Group.MyPub.UpdatePublication.StoredProcedure.sql
-
+type Profile.Data.Publication.Pubmed.ParsePubmedBookArticle.StoredProcedure.sql
+type Profile.Data.Publication.Pubmed.AddPubmedBookArticle.StoredProcedure.sql
+type RDF.Security.CanEditNode.StoredProcedure.sql
+type RDF..GetPresentationXMLByType.StoredProcedure.sql

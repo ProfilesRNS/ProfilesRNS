@@ -30,12 +30,12 @@ namespace Profiles.Framework
 
                 if (this.RDFData == null) { this.RDFData = new XmlDocument(); }
                 if (this.RDFNamespaces == null) { this.RDFNamespaces = new XmlNamespaceManager(this.RDFData.NameTable); }
-
+/*
                 if (this.GetStringFromPresentationXML("Presentation/PageOptions/@CanEdit") == "true")
                     this.CanEdit = true;
                 else
                     this.CanEdit = false;
-
+*/
                 this.LoadAssets();
 
                 this.InitFrameworkPanels();

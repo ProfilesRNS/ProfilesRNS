@@ -90,6 +90,7 @@ namespace Profiles.Edit
 
             Profiles.Profile.Utilities.DataIO data = new Profiles.Profile.Utilities.DataIO();
             this.PresentationXML = data.GetPresentationData(this.RDFTriple);
+            this.masterpage.CanEdit = data.canEdit(this.RDFTriple);
 
             XmlNode x = this.PresentationXML.SelectSingleNode("Presentation[1]/ExpandRDFList[1]");
 

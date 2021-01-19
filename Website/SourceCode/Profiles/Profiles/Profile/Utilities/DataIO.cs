@@ -124,7 +124,152 @@ namespace Profiles.Profile.Utilities
             return xmlrtn;
         }
 
+        public bool canEdit(RDFTriple request)
+        {
+            if (request.Session.ViewSecurityGroup > -20 && request.Session.ViewSecurityGroup < 0)
+                return false;
+
+            string canEdit = "";
+            String sessionKey = "SecurityGroup:" + request.Session.ViewSecurityGroup.ToString();
+            string key = "s" + request.Subject + sessionKey;
+            canEdit = (string)Framework.Utilities.Cache.FetchObject(key + "|canEdit");
+
+            if (canEdit == null)
+            {
+                string connstr = this.GetConnectionString();
+                using (var dbconnection = new SqlConnection(connstr))
+                {
+                    SqlCommand dbcommand = new SqlCommand("[RDF.Security].[CanEditNode]");
+
+                    SqlDataReader dbreader;
+                    dbconnection.Open();
+                    dbcommand.CommandType = CommandType.StoredProcedure;
+                    dbcommand.CommandTimeout = base.GetCommandTimeout();
+                    dbcommand.Parameters.Add(new SqlParameter("@NodeID", request.Subject));
+                    dbcommand.Parameters.Add(new SqlParameter("@SessionID", request.Session.SessionID));
+
+                    dbcommand.Connection = dbconnection;
+
+                    dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
+                    while (dbreader.Read())
+                        canEdit = dbreader[0].ToString();
+
+                    if (!dbreader.IsClosed)
+                        dbreader.Close();
+
+                    Framework.Utilities.Cache.Set(key + "|canEdit", canEdit, request.Subject, request.Session.SessionID);
+                }
+            }
+            return canEdit == "True";
+        }
+
         public XmlDocument GetPresentationData(RDFTriple request)
+        {
+            if (request == null) return new XmlDocument();
+            if (request.Edit) return GetPresentationDataEdit(request);
+            return GetPresentationDataDisplay(request);
+        }
+
+        public XmlDocument GetPresentationDataDisplay(RDFTriple request)
+        {
+            string xmlstr = string.Empty;
+            XmlDocument xmlrtn = new XmlDocument();
+            string connstr = this.GetConnectionString();
+            try
+            {
+                string subjectType = "0";
+
+                using (var conn = new SqlConnection(connstr))
+                {
+                    conn.Open();
+
+                    using (var cmd = new SqlCommand("[RDF.].[fnNodeID2TypeID]", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandTimeout = 30;
+                        SqlCommandBuilder.DeriveParameters(cmd);
+
+                        cmd.Parameters["@NodeID"].Value = request.Subject;
+
+
+                        cmd.ExecuteNonQuery();
+
+                        subjectType = (string)cmd.Parameters["@RETURN_VALUE"].Value;
+                    }
+                }
+
+                string objectType = "0";
+                if (request.Object != 0)
+                {
+                    using (var conn = new SqlConnection(connstr))
+                    {
+                        conn.Open();
+
+                        using (var cmd = new SqlCommand("[RDF.].[fnNodeID2TypeID]", conn))
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.CommandTimeout = 30;
+                            SqlCommandBuilder.DeriveParameters(cmd);
+
+                            cmd.Parameters["@NodeID"].Value = request.Object;
+
+
+                            cmd.ExecuteNonQuery();
+
+                            objectType = (string)cmd.Parameters["@RETURN_VALUE"].Value;
+                        }
+                    }
+                }
+                string key = "s" + subjectType + "p" + request.Predicate + "o" + objectType + "e" + (request.Edit ? 1 : 0);
+                xmlrtn = Framework.Utilities.Cache.Fetch(key + "|GetPresentationDataByType");
+                if (xmlrtn == null)
+                {
+                    xmlrtn = new XmlDocument();
+
+                    SqlConnection dbconnection = new SqlConnection(connstr);
+                    SqlCommand dbcommand = new SqlCommand("[rdf.].[GetPresentationXMLByType]");
+
+                    SqlDataReader dbreader;
+                    dbconnection.Open();
+                    dbcommand.CommandType = CommandType.StoredProcedure;
+                    dbcommand.CommandTimeout = base.GetCommandTimeout();
+                    dbcommand.Parameters.Add(new SqlParameter("@subjectType", subjectType));
+                    if (request.Predicate > 0)
+                        dbcommand.Parameters.Add(new SqlParameter("@predicate", request.Predicate));
+
+                    if (request.Object > 0)
+                        dbcommand.Parameters.Add(new SqlParameter("@objectType", objectType));
+
+                    dbcommand.Connection = dbconnection;
+
+                    dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
+
+                    while (dbreader.Read())
+                        xmlstr += dbreader[0].ToString();
+
+                    xmlrtn.LoadXml(xmlstr);
+
+
+                    xmlstr = string.Empty;
+
+
+                    if (!dbreader.IsClosed)
+                        dbreader.Close();
+
+                    Framework.Utilities.Cache.Set(key + "|GetPresentationDataByType", xmlrtn, request.Subject, request.Session.SessionID);
+                }
+
+
+
+            }
+            catch (Exception e) 
+            {
+            }
+            return xmlrtn;
+        }
+
+
+        public XmlDocument GetPresentationDataEdit(RDFTriple request)
         {
             string xmlstr = string.Empty;
             XmlDocument xmlrtn = new XmlDocument();
@@ -142,7 +287,7 @@ namespace Profiles.Profile.Utilities
                 {
                     xmlrtn = new XmlDocument();
 
-                    string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+                    string connstr = this.GetConnectionString();
                     SqlConnection dbconnection = new SqlConnection(connstr);
                     SqlCommand dbcommand = new SqlCommand("[rdf.].[GetPresentationXML]");
 

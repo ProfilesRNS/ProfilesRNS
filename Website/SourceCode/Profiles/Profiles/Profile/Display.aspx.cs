@@ -94,6 +94,7 @@ namespace Profiles.Profile
         {
             Profiles.Profile.Utilities.DataIO data = new Profiles.Profile.Utilities.DataIO();
             this.PresentationXML = data.GetPresentationData(this.RDFTriple);
+            this.masterpage.CanEdit = data.canEdit(this.RDFTriple);
         }
 
         public XmlDocument PresentationXML { get; set; }
