@@ -120,11 +120,11 @@ namespace Profiles.Framework.Modules.MainMenu
             string loginclass = string.Empty;
             if (sm.Session().UserID == 0)
             {
-                if (!Root.AbsolutePath.Contains("login"))
+                if (!Root.AbsolutePath.Contains("login") && !System.Configuration.ConfigurationManager.AppSettings["Login.PresentationXML"].ToString().Trim().Equals("DisabledLoginPresentation"))
                 {
                     litLogin.Text = "<a href='" + Root.Domain + "/login/default.aspx?method=login&redirectto=" + Root.Domain + Root.AbsolutePath + "'>Login</a> to edit your profile (add a photo, awards, links to other websites, etc.)";
-                    loginclass = "pub";
                 }
+                loginclass = "pub";
             }
             else
             {
