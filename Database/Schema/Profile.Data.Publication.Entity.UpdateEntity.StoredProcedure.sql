@@ -28,6 +28,7 @@ BEGIN
 		MPID NVARCHAR(50) NULL ,
 		PMCID NVARCHAR(55) NULL,
 		EntityDate DATETIME NULL ,
+		authors VARCHAR(MAX) NULL,
 		Reference VARCHAR(MAX) NULL ,
 		Source VARCHAR(25) NULL ,
 		URL VARCHAR(1000) NULL ,
@@ -40,6 +41,7 @@ BEGIN
             ( PMID ,
 			  PMCID,
               EntityDate ,
+			  Authors,
               Reference ,
               Source ,
               URL ,
@@ -49,6 +51,10 @@ BEGIN
                     PG.PMID ,
 					PG.PMCID,
                     EntityDate = PG.PubDate,
+					authors = case when right(PG.Authors,5) = 'et al' then PG.Authors+'. '
+								when PG.AuthorListCompleteYN = 'N' then PG.Authors+', et al. '
+								when PG.Authors <> '' then PG.Authors+'. '
+								else '' end,
                     Reference = REPLACE([Profile.Cache].[fnPublication.Pubmed.General2Reference](PG.PMID,
                                                               PG.ArticleDay,
                                                               PG.ArticleMonth,
@@ -82,6 +88,7 @@ BEGIN
 	INSERT  INTO #Publications
             ( MPID ,
               EntityDate ,
+			  authors,
 			  Reference ,
 			  Source ,
               URL ,
@@ -89,8 +96,8 @@ BEGIN
             )
             SELECT  MPID ,
                     EntityDate ,
-                    Reference = REPLACE(authors
-										+ (CASE WHEN IsNull(article,'') <> '' THEN article + '. ' ELSE '' END)
+					authors = REPLACE(authors, CHAR(11), '') ,
+                    Reference = REPLACE( (CASE WHEN IsNull(article,'') <> '' THEN article + '. ' ELSE '' END)
 										+ (CASE WHEN IsNull(pub,'') <> '' THEN pub + '. ' ELSE '' END)
 										+ y
                                         + CASE WHEN y <> ''
@@ -209,6 +216,7 @@ BEGIN
 	UPDATE e
 		SET e.EntityDate = p.EntityDate,
 			e.pmcid = p.pmcid,
+			e.Authors = p.authors,
 			e.Reference = p.Reference,
 			e.Source = p.Source,
 			e.URL = p.URL,
@@ -229,6 +237,7 @@ BEGIN
 			MPID,
 			EntityName,
 			EntityDate,
+			Authors,
 			Reference,
 			Source,
 			URL,
@@ -241,6 +250,7 @@ BEGIN
 				MPID,
 				Title,
 				EntityDate,
+				Authors,
 				Reference,
 				Source,
 				URL,
@@ -278,7 +288,8 @@ BEGIN
 		InformationResourceID INT NULL,
 		PMID INT NULL,
 		IsActive BIT,
-		EntityID INT
+		EntityID INT,
+		AuthorsString varchar(max)
 	)
  
 	INSERT INTO #Authorship (EntityDate, PersonID, InformationResourceID, PMID, IsActive)
@@ -320,6 +331,30 @@ BEGIN
 							end)
 		WHERE YearWeight IS NULL
 
+		declare @baseURI varchar(255)
+		select @baseURI = Value From [Framework.].Parameter where ParameterID = 'baseURI'
+		select a.PmPubsAuthorID, a.pmid, a2p.personID, Lastname + ' ' + Initials as Name, case when nodeID is not null then'<a href="' + @baseURI + cast(i.nodeID as varchar(55)) + '">'+ Lastname + ' ' + Initials + '</a>' else Lastname + ' ' + Initials END as link into  #tmp from [Profile.Data].[Publication.PubMed.Author] a 
+		left outer join [Profile.Data].[Publication.PubMed.Author2Person] a2p on a.PmPubsAuthorID = a2p.PmPubsAuthorID
+		left outer join [RDF.Stage].InternalNodeMap i on a2p.PersonID = i.InternalID and i.class = 'http://xmlns.com/foaf/0.1/Person'
+
+
+		select pmid, personID, [Profile.Data].[fnPublication.Pubmed.ShortenAuthorLengthString](replace(replace(isnull(cast((
+		select ', '+case when p.personID = q.personID then '<b>' + name + '</b>' else link end
+		from #tmp q
+		where q.pmid = p.pmid
+		order by PmPubsAuthorID
+		for xml path(''), type
+	) as nvarchar(max)),''), '&lt;' , '<'), '&gt;', '>')) s
+	into #tmp2 from #Authorship p where pmid is not null
+
+	update a set a.s = case when right(a.s,5) = 'et al' then a.s+'. '
+								when g.AuthorListCompleteYN = 'N' then a.s+', et al. '
+								when a.s <> '' then a.s+'. '
+								else '' end
+		from #tmp2 a join [Profile.Data].[Publication.PubMed.General] g on a.PMID = g.PMID
+
+
+	update a set a.AuthorsString = b.s from #Authorship a join #tmp2 b on a.pmid = b.PMID and a.PersonID = b.PersonID
 	----------------------------------------------------------------------
 	-- Update the Publication.Authorship table
 	----------------------------------------------------------------------
@@ -347,7 +382,8 @@ BEGIN
 			e.authorPosition = a.authorPosition,
 			e.PubYear = a.PubYear,
 			e.YearWeight = a.YearWeight,
-			e.IsActive = 1
+			e.IsActive = 1,
+			e.AuthorsString = a.AuthorsString
 		FROM #authorship a, [Profile.Data].[Publication.Entity.Authorship] e
 		WHERE a.EntityID = e.EntityID and a.EntityID is not null
 
@@ -363,7 +399,8 @@ BEGIN
 			YearWeight,
 			PersonID,
 			InformationResourceID,
-			IsActive
+			IsActive,
+			AuthorsString
 		)
 		SELECT 	EntityDate,
 				authorRank,
@@ -375,7 +412,8 @@ BEGIN
 				YearWeight,
 				PersonID,
 				InformationResourceID,
-				IsActive
+				IsActive,
+				AuthorsString
 		FROM #authorship a
 		WHERE EntityID IS NULL
 

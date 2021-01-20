@@ -19,6 +19,7 @@ CREATE TABLE [Profile.Data].[Publication.Entity.Authorship](
 	[InformationResourceID] [int] NULL,
 	[SummaryXML] [xml] NULL,
 	[IsActive] [bit] NULL,
+	[AuthorsString] VARCHAR(MAX),
  CONSTRAINT [PK__Publication.Enti__6B6EFF16] PRIMARY KEY CLUSTERED 
 (
 	[EntityID] ASC

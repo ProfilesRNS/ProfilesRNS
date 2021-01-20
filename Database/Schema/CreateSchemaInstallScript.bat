@@ -285,6 +285,7 @@ type Utility.NLP.fnPorterAlgorithm.UserDefinedFunction.sql
 type Utility.NLP.fnNormalizeSplitStem.UserDefinedFunction.sql
 type Utility.NLP.fnQuoteNormalizeSplitStem.UserDefinedFunction.sql
 type RDF..fnNodeID2TypeID.UserDefinedFunction.sql
+type Profile.Data.fnPublication.Pubmed.ShortenAuthorLengthString.UserDefinedFunction.sql
 
 type Framework..vwBufferObjects.View.sql
 type Framework..vwBufferDatabases.View.sql
@@ -687,3 +688,4 @@ type Profile.Data.Publication.Pubmed.ParsePubmedBookArticle.StoredProcedure.sql
 type Profile.Data.Publication.Pubmed.AddPubmedBookArticle.StoredProcedure.sql
 type RDF.Security.CanEditNode.StoredProcedure.sql
 type RDF..GetPresentationXMLByType.StoredProcedure.sql
+type Profile.Data.Publication.Pubmed.UpdateAuthor2Person.StoredProcedure.sql

@@ -27,11 +27,11 @@ BEGIN
 
 	DECLARE @Reference NVARCHAR(MAX)
 
-	SET @Reference = (case when right(@Authors,5) = 'et al' then @Authors+'. '
+	SET @Reference = /*(case when right(@Authors,5) = 'et al' then @Authors+'. '
 								when @AuthorListCompleteYN = 'N' then @Authors+', et al. '
 								when @Authors <> '' then @Authors+'. '
 								else '' end)
-					+ CASE WHEN @encode_html=1 THEN '<a href="'+'http'+'://www.ncbi.nlm.nih.gov/pubmed/'+cast(@pmid as varchar(50))+'" target="_blank">'+coalesce(@ArticleTitle,'')+'</a>' + ' '
+					+*/ CASE WHEN @encode_html=1 THEN '<a href="'+'http'+'://www.ncbi.nlm.nih.gov/pubmed/'+cast(@pmid as varchar(50))+'" target="_blank">'+coalesce(@ArticleTitle,'')+'</a>' + ' '
 								 ELSE coalesce(@ArticleTitle,'') + ' '
 						END
 					+ coalesce(@MedlineTA,'') + '. '

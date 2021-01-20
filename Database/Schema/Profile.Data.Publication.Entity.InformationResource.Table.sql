@@ -18,6 +18,7 @@ CREATE TABLE [Profile.Data].[Publication.Entity.InformationResource](
 	[YearWeight] [float] NULL,
 	[SummaryXML] [xml] NULL,
 	[IsActive] [bit] NULL,
+	[Authors] VARCHAR(MAX),
  CONSTRAINT [PK__Publication.Enti__6892926B] PRIMARY KEY CLUSTERED 
 (
 	[EntityID] ASC
