@@ -710,15 +710,19 @@ SELECT  Row_Number() OVER (ORDER BY (SELECT 1)),
 		(
 			[job],
 			[url],
-			[apiKey],
+			[options],
 			[logLevel],
-			[batchSize]
+			[batchSize],
+			[GetPostDataProc],
+			[ImportDataProc]
 		)
    SELECT	R.x.value('job[1]','varchar(max)'),
 			R.x.value('url[1]','varchar(max)'),
-			R.x.value('apiKey[1]','varchar(max)'),
+			R.x.value('options[1]','varchar(max)'),
 			R.x.value('logLevel[1]','int'),
-			R.x.value('batchSize[1]','int')
+			R.x.value('batchSize[1]','int'),
+			R.x.value('GetPostDataProc[1]','varchar(max)'),
+			R.x.value('ImportDataProc[1]','varchar(max)')
 	 FROM    (SELECT
                       @x.query
                       ('Import[1]/Table[@Name=''[Profile.Import].[PRNSWebservice.Options]'']')

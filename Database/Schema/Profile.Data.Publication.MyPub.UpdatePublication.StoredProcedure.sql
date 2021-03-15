@@ -2,7 +2,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE  procedure [Profile.Data].[Publication.MyPub.UpdatePublication]
+CREATE procedure [Profile.Data].[Publication.MyPub.UpdatePublication]
 	@mpid nvarchar(50),
 	@HMS_PUB_CATEGORY nvarchar(60) = '',
 	@PUB_TITLE nvarchar(2000) = '',
@@ -103,8 +103,8 @@ BEGIN
 				)
 				SELECT  MPID ,
 						EntityDate ,
-						Reference = REPLACE(authors
-											+ (CASE WHEN IsNull(article,'') <> '' THEN article + '. ' ELSE '' END)
+						Reference = REPLACE(--authors +
+											(CASE WHEN IsNull(article,'') <> '' THEN article + '. ' ELSE '' END)
 											+ (CASE WHEN IsNull(pub,'') <> '' THEN pub + '. ' ELSE '' END)
 											+ y
 											+ CASE WHEN y <> ''
@@ -147,9 +147,9 @@ BEGIN
 															   THEN ''
 															   WHEN RIGHT(COALESCE(MPG.authors,
 																  ''), 1) = '.'
-																THEN  COALESCE(MPG.authors,
+																THEN  COALESCE([Profile.Data].[fnPublication.MyPub.HighlightAuthors] (MPG.authors, p.FirstName, p.MiddleName, p.LastName),
 																  '') + ' '
-															   ELSE COALESCE(MPG.authors,
+															   ELSE COALESCE([Profile.Data].[fnPublication.MyPub.HighlightAuthors] (MPG.authors, p.FirstName, p.MiddleName, p.LastName),
 																  '') + '. '
 														  END ,
 												url = CASE WHEN COALESCE(MPG.url,
@@ -188,6 +188,7 @@ BEGIN
 												  END + COALESCE(MPG.paginationpub,
 																 '')
 									  FROM      [Profile.Data].[Publication.MyPub.General] MPG
+									  join [Profile.Data].Person p on MPG.PersonID = p.PersonID
 									  WHERE MPID = @mpid
 									) T0
 						) T0

@@ -418,7 +418,26 @@ BEGIN
 									for xml path('Row'), type
 						) 'Table'  
 						for xml path(''), type
-					)					
+					),
+ 				    ---------------------------------------------------------------
+					-- [Profile.Import].[PRNSWebservice.*]
+					---------------------------------------------------------------
+					(					(
+						select '[Profile.Import].[PRNSWebservice.Options]' 'Table/@Name',
+						(
+							SELECT	job 'job',
+									url 'url',
+									options 'options',
+									logLevel 'logLevel',
+									batchSize 'batchSize',
+									GetPostDataProc 'GetPostDataProc',
+									ImportDataProc 'ImportDataProc'
+								from [Profile.Import].[PRNSWebservice.Options]
+									for xml path('Row'), type
+						) 'Table'  
+						for xml path(''), type
+					)
+				)
 				for xml path(''), type
 			) 'Import'
 		for xml path(''), type

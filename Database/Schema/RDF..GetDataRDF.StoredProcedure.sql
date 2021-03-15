@@ -709,7 +709,7 @@ BEGIN
 
 	select @dataStr = IsNull(@dataStr,@description)
 
-	declare @x as varchar(max)
+	declare @x as nvarchar(max)
 	select @x = '<rdf:RDF'
 	select @x = @x + ' xmlns:'+Prefix+'="'+URI+'"' 
 		from [Ontology.].Namespace

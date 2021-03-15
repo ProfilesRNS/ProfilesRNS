@@ -14,6 +14,10 @@ CREATE TABLE [Profile.Data].[Publication.PubMed.Author.Stage](
 	[Suffix] [varchar](20) NULL,
 	[Initials] [varchar](20) NULL,
 	[Affiliation] [varchar](8000) NULL,
+	[CollectiveName] [nvarchar](1000) NULL,
+    [ORCID] [varchar](50) NULL,
+	[ExistingPmPubsAuthorID] [int] NULL,
+    [ValueHash] [varbinary](32) NULL,
  CONSTRAINT [PK__pm_pubs_authors_stage] PRIMARY KEY CLUSTERED 
 (
 	[PmPubsAuthorID] ASC

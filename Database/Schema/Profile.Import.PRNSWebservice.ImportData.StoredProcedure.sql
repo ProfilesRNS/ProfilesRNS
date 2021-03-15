@@ -2,7 +2,6 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
 CREATE PROCEDURE [Profile.Import].[PRNSWebservice.ImportData]
 	@Job varchar(55),
 	@BatchID varchar(100) = '',
@@ -32,19 +31,16 @@ BEGIN
 
 	if @HttpResponseCode = 200
 	begin
-		if @Job = 'Bibliometrics'
-		begin
-			exec [Profile.Data].[Publication.Pubmed.ParseBibliometricResults] @data=@data
-		end
-		if @Job = 'Geocode'
-		begin
-			exec [Profile.Import].[GoogleWebservice.ParseGeocodeResults] @data=@data, @URL=@URL, @BatchID=@BatchID, @RowID=@RowID, @LogID=@LogID
-		end
-	end
-/*	if @Job = 'GetPubMedXML'
-	begin
-		exec [Profile.Data].[Publication.Pubmed.AddPubMedXMLBatch] @data=@data
-	end
-*/
+		declare @proc varchar(100), @sql nvarchar(2000)
+		select @proc = ImportDataProc from [Profile.Import].[PRNSWebservice.Options] where job = @job
+		if @proc is null
+		BEGIN
+			RAISERROR('Job doesn''t exist', 16, -1)
+			return
+		END
+
+		exec @proc @data=@data, @URL=@URL, @BatchID=@BatchID, @RowID=@RowID, @LogID=@LogID, @Job=@Job
+	END
 END
+
 GO

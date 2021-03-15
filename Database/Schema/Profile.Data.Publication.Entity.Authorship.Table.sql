@@ -6,7 +6,7 @@ SET ANSI_PADDING ON
 GO
 CREATE TABLE [Profile.Data].[Publication.Entity.Authorship](
 	[EntityID] [int] IDENTITY(1,1) NOT NULL,
-	[EntityName] [varchar](4000) NULL,
+	[EntityName] [nvarchar](4000) NULL,
 	[EntityDate] [datetime] NULL,
 	[authorRank] [int] NULL,
 	[numberOfAuthors] [int] NULL,

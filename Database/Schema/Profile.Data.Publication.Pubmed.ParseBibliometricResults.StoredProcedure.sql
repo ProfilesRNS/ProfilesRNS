@@ -3,7 +3,12 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE PROCEDURE [Profile.Data].[Publication.Pubmed.ParseBibliometricResults]
-	@Data xml
+	@Job varchar(55) = '',
+	@BatchID varchar(100) = '',
+	@RowID int = -1,
+	@LogID int = -1,
+	@URL varchar (500) = '',
+	@Data varchar(max)
 AS
 BEGIN
 	create table #tmp(
@@ -33,6 +38,8 @@ BEGIN
 	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 	)
 
+	declare @x xml
+	select @x = cast(@Data as xml)
 
 	insert into #tmp
 	select t.x.value('PMID[1]', 'int') as PMID,
@@ -43,7 +50,7 @@ BEGIN
 	t.x.value('TranslationHumans[1]', 'int') as TranslationHumans,
 	t.x.value('TranslationPublicHealth[1]', 'int') as TranslationPublicHealth,
 	t.x.value('TranslationClinicalTrial[1]', 'int') as TranslationClinicalTrial
-	from @data.nodes('/Bibliometrics/ArticleSummary') t(x)
+	from @x.nodes('/Bibliometrics/ArticleSummary') t(x)
 
 	insert into #tmpJournalHeading (MedlineTA, BroadJournalHeading, DisplayName, Abbreviation, Color, Angle, Arc)
 		select 
@@ -55,7 +62,7 @@ BEGIN
 		t.x.value('Color[1]', 'varchar(6)') as Color,
 		t.x.value('Angle[1]', 'float') as Angle,
 		t.x.value('Arc[1]', 'float') as Arc
-		from @data.nodes('/Bibliometrics/JournalHeading') t(x)
+		from @x.nodes('/Bibliometrics/JournalHeading') t(x)
 
 	;with counts as (
 		select MedlineTA, count(*) c from #tmpJournalHeading

@@ -55,4 +55,5 @@ GRANT EXECUTE ON [Utility.Application].[fnEncryptBase64RC4] TO App_Profiles10
 GO
 GRANT EXECUTE ON [RDF.].[fnValueHash] TO App_Profiles10
 GO
-
+GRANT EXECUTE ON [RDF.].[fnNodeID2TypeID] TO App_Profiles10
+GO

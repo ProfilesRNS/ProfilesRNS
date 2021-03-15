@@ -12,6 +12,7 @@ SELECT DISTINCT addressstring
  WHERE (ISNULL(latitude ,0)=0
  		OR geoscore = 0)
 and addressstring<>''
+and IsActive = 1
 
 
 END

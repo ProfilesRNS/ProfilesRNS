@@ -28,10 +28,12 @@ BEGIN
 		MPID NVARCHAR(50) NULL ,
 		PMCID NVARCHAR(55) NULL,
 		EntityDate DATETIME NULL ,
-		Reference VARCHAR(MAX) NULL ,
+		Authors NVARCHAR(4000) NULL,
+		Reference NVARCHAR(MAX) NULL ,
 		Source VARCHAR(25) NULL ,
 		URL VARCHAR(1000) NULL ,
-		Title VARCHAR(4000) NULL
+		Title NVARCHAR(4000) NULL ,
+		EntityID INT NULL
 	)
  
 	-- Add PMIDs to the publications temp table
@@ -39,6 +41,7 @@ BEGIN
             ( PMID ,
 			  PMCID,
               EntityDate ,
+			  Authors,
               Reference ,
               Source ,
               URL ,
@@ -48,6 +51,10 @@ BEGIN
                     PG.PMID ,
 					PG.PMCID,
                     EntityDate = PG.PubDate,
+					authors = case when right(PG.Authors,5) = 'et al' then PG.Authors+'. '
+						when PG.AuthorListCompleteYN = 'N' then PG.Authors+', et al. '
+						when PG.Authors <> '' then PG.Authors+'. '
+						else '' end,
                     Reference = REPLACE([Profile.Cache].[fnPublication.Pubmed.General2Reference](PG.PMID,
                                                               PG.ArticleDay,
                                                               PG.ArticleMonth,
@@ -76,13 +83,13 @@ BEGIN
 					AND PG.PMID NOT IN (
 						SELECT PMID
 						FROM [Profile.Data].[Publication.Entity.InformationResource]
-						WHERE PMID IS NOT NULL
-					)
+						WHERE PMID IS NOT NULL)
  
 	-- Add MPIDs to the publications temp table
 	INSERT  INTO #Publications
             ( MPID ,
               EntityDate ,
+			  Authors,
 			  Reference ,
 			  Source ,
               URL ,
@@ -90,10 +97,8 @@ BEGIN
             )
             SELECT  MPID ,
                     EntityDate ,
- 
- 
-                     Reference = REPLACE(authors
-										+ (CASE WHEN IsNull(article,'') <> '' THEN article + '. ' ELSE '' END)
+					Authors = REPLACE(authors, CHAR(11), '') ,
+                    Reference = REPLACE( (CASE WHEN IsNull(article,'') <> '' THEN article + '. ' ELSE '' END)
 										+ (CASE WHEN IsNull(pub,'') <> '' THEN pub + '. ' ELSE '' END)
 										+ y
                                         + CASE WHEN y <> ''
@@ -130,15 +135,15 @@ BEGIN
                                 y ,
                                 vip
                       FROM      ( SELECT    MPG.mpid ,
-                                            EntityDate = MPG.publicationdt ,
+											EntityDate = MPG.publicationdt ,
                                             authors = CASE WHEN RTRIM(LTRIM(COALESCE(MPG.authors,
                                                               ''))) = ''
                                                            THEN ''
                                                            WHEN RIGHT(COALESCE(MPG.authors,
                                                               ''), 1) = '.'
-                                                            THEN  COALESCE(MPG.authors,
+                                                            THEN  COALESCE([Profile.Data].[fnPublication.MyPub.HighlightAuthors] (MPG.authors, p.FirstName, p.MiddleName, p.LastName),
                                                               '') + ' '
-                                                           ELSE COALESCE(MPG.authors,
+                                                           ELSE COALESCE([Profile.Data].[fnPublication.MyPub.HighlightAuthors] (MPG.authors, p.FirstName, p.MiddleName, p.LastName),
                                                               '') + '. '
                                                       END ,
                                             url = CASE WHEN COALESCE(MPG.url,
@@ -182,6 +187,7 @@ BEGIN
                                                            AND PL.mpid NOT LIKE 'ISI%'
                                                            AND PL.pmid IS NULL
                                                            AND PL.PersonID = @PersonID
+									join [Profile.Data].Person p on pl.PersonID = p.PersonID
 									WHERE MPG.MPID NOT IN (
 										SELECT MPID
 										FROM [Profile.Data].[Publication.Entity.InformationResource]
@@ -193,10 +199,64 @@ BEGIN
 	CREATE NONCLUSTERED INDEX idx_pmid on #publications(pmid)
 	CREATE NONCLUSTERED INDEX idx_mpid on #publications(mpid)
 
+	declare @baseURI varchar(255)
+	select @baseURI = Value From [Framework.].Parameter where ParameterID = 'baseURI'
+	select a.PmPubsAuthorID, a.pmid, a2p.personID, isnull(Lastname + ' ' + Initials, CollectiveName) as Name, case when nodeID is not null then'<a href="' + @baseURI + cast(i.nodeID as varchar(55)) + '">'+ Lastname + ' ' + Initials + '</a>' else isnull(Lastname + ' ' + Initials, CollectiveName) END as link into #tmpAuthorLinks from [Profile.Data].[Publication.PubMed.Author] a
+		join #publications p on a.pmid = p.pmid
+		left outer join [Profile.Data].[Publication.PubMed.Author2Person] a2p on a.PmPubsAuthorID = a2p.PmPubsAuthorID
+		left outer join [RDF.Stage].InternalNodeMap i on a2p.PersonID = i.InternalID and i.class = 'http://xmlns.com/foaf/0.1/Person'
+
+	select pmid, [Profile.Data].[fnPublication.Pubmed.ShortenAuthorLengthString](replace(replace(isnull(cast((
+		select ', '+ link
+		from #tmpAuthorLinks q
+		where q.pmid = p.pmid
+		order by PmPubsAuthorID
+		for xml path(''), type
+		) as nvarchar(max)),''), '&lt;' , '<'), '&gt;', '>')) s
+		into #tmpPublicationLinks from #publications p where pmid is not null
+
+	update g set g.Authors = t.s from #publications g
+		join #tmpPublicationLinks t on g.PMID = t.PMID
 	----------------------------------------------------------------------
 	-- Update the Publication.Entity.InformationResource table
+	--
+	-- Commented out, we don't update publications in the one person/group version
 	----------------------------------------------------------------------
- 
+ /*
+	-- Determine which publications already exist
+	UPDATE p
+		SET p.EntityID = e.EntityID
+		FROM #publications p, [Profile.Data].[Publication.Entity.InformationResource] e
+		WHERE p.PMID = e.PMID and p.PMID is not null
+	UPDATE p
+		SET p.EntityID = e.EntityID
+		FROM #publications p, [Profile.Data].[Publication.Entity.InformationResource] e
+		WHERE p.MPID = e.MPID and p.MPID is not null
+	CREATE NONCLUSTERED INDEX idx_entityid on #publications(EntityID)
+
+	-- Deactivate old publications
+	UPDATE e
+		SET e.IsActive = 0
+		FROM [Profile.Data].[Publication.Entity.InformationResource] e
+		WHERE e.EntityID NOT IN (SELECT EntityID FROM #publications)											  
+	-- Update the data for existing publications
+	UPDATE e
+		SET e.EntityDate = p.EntityDate,
+			e.pmcid = p.pmcid,
+			e.Authors = p.Authors,
+			e.Reference = p.Reference,
+			e.Source = p.Source,
+			e.URL = p.URL,
+			e.EntityName = p.Title,
+			e.IsActive = 1,
+			e.PubYear = year(p.EntityDate),
+            e.YearWeight = (case when p.EntityDate is null then 0.5
+                when year(p.EntityDate) <= 1901 then 0.5
+                else power(cast(0.5 as float),cast(datediff(d,p.EntityDate,GetDate()) as float)/365.25/10)
+                end)
+		FROM #publications p, [Profile.Data].[Publication.Entity.InformationResource] e
+		WHERE p.EntityID = e.EntityID and p.EntityID is not null
+*/
 	-- Insert new publications
 	INSERT INTO [Profile.Data].[Publication.Entity.InformationResource] (
 			PMID,
@@ -204,32 +264,31 @@ BEGIN
 			MPID,
 			EntityName,
 			EntityDate,
+			Authors,
 			Reference,
 			Source,
 			URL,
-			IsActive
+			IsActive,
+			PubYear,
+			YearWeight
 		)
 		SELECT 	PMID,
 				PMCID,
 				MPID,
 				Title,
 				EntityDate,
+				Authors,
 				Reference,
 				Source,
 				URL,
-				1 IsActive
+				1 IsActive,
+				PubYear = year(EntityDate),
+				YearWeight = (case when EntityDate is null then 0.5
+								when year(EntityDate) <= 1901 then 0.5
+								else power(cast(0.5 as float),cast(datediff(d,EntityDate,GetDate()) as float)/365.25/10)
+								end)
 		FROM #publications
-	-- Assign an EntityName, PubYear, and YearWeight
-	UPDATE e
-		SET --e.EntityName = 'Publication ' + CAST(e.EntityID as VARCHAR(50)),
-			e.PubYear = year(e.EntityDate),
-			e.YearWeight = (case when e.EntityDate is null then 0.5
-							when year(e.EntityDate) <= 1901 then 0.5
-							else power(cast(0.5 as float),cast(datediff(d,e.EntityDate,GetDate()) as float)/365.25/10)
-							end)
-		FROM [Profile.Data].[Publication.Entity.InformationResource] e,
-			#publications p
-		WHERE ((e.PMID = p.PMID) OR (e.MPID = p.MPID))
+		WHERE EntityID IS NULL
  
 	-- *******************************************************************
 	-- *******************************************************************
@@ -254,7 +313,9 @@ BEGIN
 		PersonID INT NULL ,
 		InformationResourceID INT NULL,
 		PMID INT NULL,
-		IsActive BIT
+		IsActive BIT,
+		EntityID INT,			   
+		AuthorsString varchar(max)	   
 	)
  
 	INSERT INTO #Authorship (EntityDate, PersonID, InformationResourceID, PMID, IsActive)
@@ -296,16 +357,42 @@ BEGIN
 							end)
 		WHERE YearWeight IS NULL
 
+																												select pmid, personID, [Profile.Data].[fnPublication.Pubmed.ShortenAuthorLengthString](replace(replace(isnull(cast((
+		select ', '+case when p.personID = q.personID then '<b>' + name + '</b>' else link end
+		from #tmpAuthorLinks q
+		where q.pmid = p.pmid
+		order by PmPubsAuthorID
+		for xml path(''), type
+	) as nvarchar(max)),''), '&lt;' , '<'), '&gt;', '>')) s
+	into #tmp2 from #Authorship p where pmid is not null
+
+	update a set a.s = case when right(a.s,5) = 'et al' then a.s+'. '
+								when g.AuthorListCompleteYN = 'N' then a.s+', et al. '
+								when a.s <> '' then a.s+'. '
+								else '' end
+		from #tmp2 a join [Profile.Data].[Publication.PubMed.General] g on a.PMID = g.PMID
+
+
+	update a set a.AuthorsString = b.s from #Authorship a join #tmp2 b on a.pmid = b.PMID and a.PersonID = b.PersonID																																																											   
 	----------------------------------------------------------------------
 	-- Update the Publication.Authorship table
 	----------------------------------------------------------------------
  
-	-- Set IsActive = 0 for Authorships that no longer exist
-	UPDATE [Profile.Data].[Publication.Entity.Authorship]
-		SET IsActive = 0
-		WHERE PersonID = @PersonID
-			AND InformationResourceID NOT IN (SELECT InformationResourceID FROM #authorship)
-	-- Set IsActive = 1 for current Authorships and update data
+	-- Determine which authorships already exist
+	UPDATE a
+		SET a.EntityID = e.EntityID
+		FROM #authorship a, [Profile.Data].[Publication.Entity.Authorship] e
+		WHERE a.PersonID = e.PersonID and a.InformationResourceID = e.InformationResourceID
+ 	CREATE NONCLUSTERED INDEX idx_entityid on #authorship(EntityID)											 
+
+	-- Deactivate old authorships				
+	UPDATE a
+		SET a.IsActive = 0
+		FROM [Profile.Data].[Publication.Entity.Authorship] a							
+		WHERE a.EntityID NOT IN (SELECT EntityID FROM #authorship)
+			and PersonID = @PersonID
+
+	-- Update the data for existing authorships										
 	UPDATE e
 		SET e.EntityDate = a.EntityDate,
 			e.authorRank = a.authorRank,
@@ -315,9 +402,10 @@ BEGIN
 			e.authorPosition = a.authorPosition,
 			e.PubYear = a.PubYear,
 			e.YearWeight = a.YearWeight,
-			e.IsActive = 1
+			e.IsActive = 1,
+			e.AuthorsString = a.AuthorsString						
 		FROM #authorship a, [Profile.Data].[Publication.Entity.Authorship] e
-		WHERE a.PersonID = e.PersonID and a.InformationResourceID = e.InformationResourceID
+		WHERE a.EntityID = e.EntityID and a.EntityID is not null
 	-- Insert new Authorships
 	INSERT INTO [Profile.Data].[Publication.Entity.Authorship] (
 			EntityDate,
@@ -330,7 +418,8 @@ BEGIN
 			YearWeight,
 			PersonID,
 			InformationResourceID,
-			IsActive
+			IsActive,
+			AuthorsString
 		)
 		SELECT 	EntityDate,
 				authorRank,
@@ -342,13 +431,11 @@ BEGIN
 				YearWeight,
 				PersonID,
 				InformationResourceID,
-				IsActive
+				IsActive,
+				AuthorsString
 		FROM #authorship a
-		WHERE NOT EXISTS (
-			SELECT *
-			FROM [Profile.Data].[Publication.Entity.Authorship] e
-			WHERE a.PersonID = e.PersonID and a.InformationResourceID = e.InformationResourceID
-		)
+		WHERE EntityID IS NULL
+		
 	-- Assign an EntityName
 	UPDATE [Profile.Data].[Publication.Entity.Authorship]
 		SET EntityName = 'Authorship ' + CAST(EntityID as VARCHAR(50))
@@ -403,299 +490,6 @@ BEGIN
 			FROM #sql
 			WHERE i = (SELECT MIN(i) FROM #sql)
 	END
-
-	--select * from [Ontology.].DataMap
-
-
-/*
-
-	--------------------------------------------------------------
-	-- Version 1 : Create all RDF using ProcessDataMap
-	--------------------------------------------------------------
-
-	CREATE TABLE #sql (
-		i INT IDENTITY(0,1) PRIMARY KEY,
-		s NVARCHAR(MAX)
-	)
-	INSERT INTO #sql (s)
-		SELECT	'EXEC [RDF.Stage].ProcessDataMap '
-					+'  @DataMapID = '+CAST(DataMapID AS VARCHAR(50))
-					+', @InternalIdIn = '+InternalIdIn
-					+', @TurnOffIndexing=0, @SaveLog=0; '
-		FROM (
-			SELECT *, '''SELECT CAST(InformationResourceID AS VARCHAR(50)) FROM [Profile.Data].[Publication.Entity.Authorship] WHERE PersonID = '+CAST(@PersonID AS VARCHAR(50))+'''' InternalIdIn
-				FROM [Ontology.].DataMap
-				WHERE class = 'http://vivoweb.org/ontology/core#InformationResource' 
-					AND IsNull(property,'') <> 'http://vivoweb.org/ontology/core#informationResourceInAuthorship'
-					AND NetworkProperty IS NULL
-			UNION ALL
-			SELECT *, '''SELECT CAST(EntityID AS VARCHAR(50)) FROM [Profile.Data].[Publication.Entity.Authorship] WHERE PersonID = '+CAST(@PersonID AS VARCHAR(50))+'''' InternalIdIn
-				FROM [Ontology.].DataMap
-				WHERE class = 'http://vivoweb.org/ontology/core#Authorship'
-					AND IsNull(property,'') NOT IN ('http://vivoweb.org/ontology/core#linkedAuthor','http://vivoweb.org/ontology/core#linkedInformationResource')
-					AND NetworkProperty IS NULL
-			UNION ALL
-			SELECT *, '''SELECT CAST(InformationResourceID AS VARCHAR(50)) FROM [Profile.Data].[Publication.Entity.Authorship] WHERE PersonID = '+CAST(@PersonID AS VARCHAR(50))+'''' InternalIdIn
-				FROM [Ontology.].DataMap
-				WHERE class = 'http://vivoweb.org/ontology/core#InformationResource' 
-					AND property = 'http://vivoweb.org/ontology/core#informationResourceInAuthorship'
-					AND NetworkProperty IS NULL
-			UNION ALL
-			SELECT *, '''' + CAST(@PersonID AS VARCHAR(50)) + '''' InternalIdIn
-				FROM [Ontology.].DataMap
-				WHERE class = 'http://xmlns.com/foaf/0.1/Person' 
-					AND property = 'http://vivoweb.org/ontology/core#authorInAuthorship'
-					AND NetworkProperty IS NULL
-		) t
-		ORDER BY DataMapID
-
-	DECLARE @s NVARCHAR(MAX)
-	WHILE EXISTS (SELECT * FROM #sql)
-	BEGIN
-		SELECT @s = s
-			FROM #sql
-			WHERE i = (SELECT MIN(i) FROM #sql)
-		--print @s
-		EXEC sp_executesql @s
-		DELETE
-			FROM #sql
-			WHERE i = (SELECT MIN(i) FROM #sql)
-	END
-
-*/
-
-
-/*
-
-	---------------------------------------------------------------------------------
-	-- Version 2 : Create new entities using ProcessDataMap, and triples manually
-	---------------------------------------------------------------------------------
-
-	CREATE TABLE #sql (
-		i INT IDENTITY(0,1) PRIMARY KEY,
-		s NVARCHAR(MAX)
-	)
-	INSERT INTO #sql (s)
-		SELECT	'EXEC [RDF.Stage].ProcessDataMap '
-					+'  @DataMapID = '+CAST(DataMapID AS VARCHAR(50))
-					+', @InternalIdIn = '+InternalIdIn
-					+', @TurnOffIndexing=0, @SaveLog=0; '
-		FROM (
-			SELECT *, '''SELECT CAST(InformationResourceID AS VARCHAR(50)) FROM [Profile.Data].[Publication.Entity.Authorship] WHERE PersonID = '+CAST(@PersonID AS VARCHAR(50))+'''' InternalIdIn
-				FROM [Ontology.].DataMap
-				WHERE class = 'http://vivoweb.org/ontology/core#InformationResource' 
-					AND IsNull(property,'') <> 'http://vivoweb.org/ontology/core#informationResourceInAuthorship'
-					AND NetworkProperty IS NULL
-			UNION ALL
-			SELECT *, '''SELECT CAST(EntityID AS VARCHAR(50)) FROM [Profile.Data].[Publication.Entity.Authorship] WHERE PersonID = '+CAST(@PersonID AS VARCHAR(50))+'''' InternalIdIn
-				FROM [Ontology.].DataMap
-				WHERE class = 'http://vivoweb.org/ontology/core#Authorship'
-					AND IsNull(property,'') NOT IN ('http://vivoweb.org/ontology/core#linkedAuthor','http://vivoweb.org/ontology/core#linkedInformationResource')
-					AND NetworkProperty IS NULL
-		) t
-		ORDER BY DataMapID
-
-	--select * from #sql
-	--return
-
-	DECLARE @s NVARCHAR(MAX)
-	WHILE EXISTS (SELECT * FROM #sql)
-	BEGIN
-		SELECT @s = s
-			FROM #sql
-			WHERE i = (SELECT MIN(i) FROM #sql)
-		--print @s
-		EXEC sp_executesql @s
-		DELETE
-			FROM #sql
-			WHERE i = (SELECT MIN(i) FROM #sql)
-	END
-
-
-	CREATE TABLE #a (
-		PersonID INT,
-		AuthorshipID INT,
-		InformationResourceID INT,
-		IsActive BIT,
-		PersonNodeID BIGINT,
-		AuthorshipNodeID BIGINT,
-		InformationResourceNodeID BIGINT,
-		AuthorInAuthorshipTripleID BIGINT,
-		LinkedAuthorTripleID BIGINT,
-		LinkedInformationResourceTripleID BIGINT,
-		InformationResourceInAuthorshipTripleID BIGINT,
-		AuthorRank INT,
-		EntityDate DATETIME,
-		TripleWeight FLOAT,
-		AuthorRecord INT
-	)
-	-- Get authorship records
-	INSERT INTO #a (PersonID, AuthorshipID, InformationResourceID, IsActive, AuthorRank, EntityDate, TripleWeight, AuthorRecord)
-		SELECT PersonID, EntityID, InformationResourceID, IsActive, 
-				AuthorRank, EntityDate, IsNull(authorweight * yearweight,0),
-				0
-			FROM [Profile.Data].[Publication.Entity.Authorship]
-			WHERE PersonID = @PersonID
-		UNION ALL
-		SELECT PersonID, EntityID, InformationResourceID, IsActive, 
-				AuthorRank, EntityDate, IsNull(authorweight * yearweight,0),
-				1
-			FROM [Profile.Data].[Publication.Entity.Authorship]
-			WHERE PersonID <> @PersonID 
-				AND IsActive = 1
-				AND InformationResourceID IN (
-					SELECT InformationResourceID
-					FROM [Profile.Data].[Publication.Entity.Authorship]
-					WHERE PersonID = @PersonID
-				)
-	-- Get entity IDs
-	UPDATE a
-		SET a.PersonNodeID = m.NodeID
-		FROM #a a, [RDF.Stage].InternalNodeMap m
-		WHERE m.Class = 'http://xmlns.com/foaf/0.1/Person'
-			AND m.InternalType = 'Person'
-			AND m.InternalID = CAST(a.PersonID AS VARCHAR(50))
-	UPDATE a
-		SET a.AuthorshipNodeID = m.NodeID
-		FROM #a a, [RDF.Stage].InternalNodeMap m
-		WHERE m.Class = 'http://vivoweb.org/ontology/core#Authorship'
-			AND m.InternalType = 'Authorship'
-			AND m.InternalID = CAST(a.AuthorshipID AS VARCHAR(50))
-	UPDATE a
-		SET a.InformationResourceNodeID = m.NodeID
-		FROM #a a, [RDF.Stage].InternalNodeMap m
-		WHERE m.Class = 'http://vivoweb.org/ontology/core#InformationResource'
-			AND m.InternalType = 'InformationResource'
-			AND m.InternalID = CAST(a.InformationResourceID AS VARCHAR(50))
-	-- Get triple IDs
-	UPDATE a
-		SET a.AuthorInAuthorshipTripleID = t.TripleID
-		FROM #a a, [RDF.].Triple t
-		WHERE a.PersonNodeID IS NOT NULL AND a.AuthorshipNodeID IS NOT NULL
-			AND t.subject = a.PersonNodeID
-			AND t.predicate = [RDF.].fnURI2NodeID('http://vivoweb.org/ontology/core#authorInAuthorship')
-			AND t.object = a.AuthorshipNodeID
-	UPDATE a
-		SET a.LinkedAuthorTripleID = t.TripleID
-		FROM #a a, [RDF.].Triple t
-		WHERE a.PersonNodeID IS NOT NULL AND a.AuthorshipNodeID IS NOT NULL
-			AND t.subject = a.AuthorshipNodeID
-			AND t.predicate = [RDF.].fnURI2NodeID('http://vivoweb.org/ontology/core#linkedAuthor')
-			AND t.object = a.PersonNodeID
-	UPDATE a
-		SET a.LinkedInformationResourceTripleID = t.TripleID
-		FROM #a a, [RDF.].Triple t
-		WHERE a.AuthorshipNodeID IS NOT NULL AND a.InformationResourceID IS NOT NULL
-			AND t.subject = a.AuthorshipNodeID
-			AND t.predicate = [RDF.].fnURI2NodeID('http://vivoweb.org/ontology/core#linkedInformationResource')
-			AND t.object = a.InformationResourceNodeID
-	UPDATE a
-		SET a.InformationResourceInAuthorshipTripleID = t.TripleID
-		FROM #a a, [RDF.].Triple t
-		WHERE a.AuthorshipNodeID IS NOT NULL AND a.InformationResourceID IS NOT NULL
-			AND t.subject = a.InformationResourceNodeID
-			AND t.predicate = [RDF.].fnURI2NodeID('http://vivoweb.org/ontology/core#informationResourceInAuthorship')
-			AND t.object = a.AuthorshipNodeID
-	
-	--select * from #a
-	--return
-	--select * from [ontology.].datamap
-
-
-
-	SELECT a.IsActive, a.subject, m._PropertyNode predicate, a.object, 
-			a.TripleWeight, 0 ObjectType, a.SortOrder,
-			IsNull(s.ViewSecurityGroup, m.ViewSecurityGroup) ViewSecurityGroup,
-			a.TripleID, t.SortOrder ExistingSortOrder, X
-		INTO #b
-		FROM (
-				SELECT AuthorshipNodeID subject, InformationResourceNodeID object, TripleWeight, 
-						'http://vivoweb.org/ontology/core#Authorship' Class,
-						'http://vivoweb.org/ontology/core#linkedInformationResource' Property,
-						1 SortOrder,
-						IsActive,
-						LinkedInformationResourceTripleID TripleID,
-						1 X
-					FROM #a
-					WHERE AuthorRecord = 0
-					--WHERE IsActive = 1
-				UNION ALL
-				SELECT AuthorshipNodeID subject, PersonNodeID object, 1 TripleWeight,
-						'http://vivoweb.org/ontology/core#Authorship' Class,
-						'http://vivoweb.org/ontology/core#linkedAuthor' Property,
-						1 SortOrder,
-						IsActive,
-						LinkedAuthorTripleID TripleID,
-						2 X
-					FROM #a
-					WHERE AuthorRecord = 0
-					--WHERE IsActive = 1
-				UNION ALL
-				SELECT InformationResourceNodeID subject, AuthorshipNodeID object, TripleWeight, 
-						'http://vivoweb.org/ontology/core#InformationResource' Class,
-						'http://vivoweb.org/ontology/core#informationResourceInAuthorship' Property,
-						row_number() over (partition by InformationResourceNodeID, IsActive order by AuthorRank, t.SortOrder, AuthorshipNodeID) SortOrder,
-						IsActive,
-						InformationResourceInAuthorshipTripleID TripleID,
-						3 X
-					FROM #a a
-						LEFT OUTER JOIN [RDF.].[Triple] t
-						ON a.InformationResourceInAuthorshipTripleID = t.TripleID
-					--WHERE IsActive = 1
-				UNION ALL
-				SELECT PersonNodeID subject, AuthorshipNodeID object, 1 TripleWeight, 
-						'http://xmlns.com/foaf/0.1/Person' Class,
-						'http://vivoweb.org/ontology/core#authorInAuthorship' Property,
-						row_number() over (partition by PersonNodeID, IsActive order by EntityDate desc) SortOrder,
-						IsActive,
-						AuthorInAuthorshipTripleID TripleID,
-						4 X
-					FROM #a
-					WHERE AuthorRecord = 0
-					--WHERE IsActive = 1
-			) a
-			INNER JOIN [Ontology.].[DataMap] m
-				ON m.Class = a.Class AND m.NetworkProperty IS NULL AND m.Property = a.Property
-			LEFT OUTER JOIN [RDF.].[Triple] t
-				ON a.TripleID = t.TripleID
-			LEFT OUTER JOIN [RDF.Security].[NodeProperty] s
-				ON s.NodeID = a.subject
-					AND s.Property = m._PropertyNode
-
-	--SELECT * FROM #b ORDER BY X, subject, property, IsActive, sortorder
-
-	-- Delete
-	DELETE
-		FROM [RDF.].Triple
-		WHERE TripleID IN (
-			SELECT TripleID
-			FROM #b
-			WHERE IsActive = 0 AND TripleID IS NOT NULL
-		)
-	--select @@ROWCOUNT
-
-	-- Update
-	UPDATE t
-		SET t.SortOrder = b.SortOrder
-		FROM [RDF.].Triple t
-			INNER JOIN #b b
-			ON t.TripleID = b.TripleID
-				AND b.IsActive = 1 
-				AND b.TripleID IS NOT NULL
-				AND b.SortOrder <> b.ExistingSortOrder
-	--select @@ROWCOUNT
-
-	-- Insert
-	INSERT INTO [RDF.].Triple (Subject,Predicate,Object,TripleHash,Weight,Reitification,ObjectType,SortOrder,ViewSecurityGroup,Graph)
-		SELECT Subject,Predicate,Object,
-				[RDF.].fnTripleHash(Subject,Predicate,Object),
-				TripleWeight,NULL,0,SortOrder,ViewSecurityGroup,1
-			FROM #b
-			WHERE IsActive = 1 AND TripleID IS NULL
-	--select @@ROWCOUNT
-
-*/
-
 
 END
 GO

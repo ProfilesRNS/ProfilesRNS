@@ -53,7 +53,7 @@ BEGIN
 		IF @action='Error'
 			BEGIN
 				UPDATE [Profile.Import].[PRNSWebservice.Log]
-				   SET ErrorText = @actionText,
+				   SET ErrorText = isnull(ErrorText + ' ', '') + @actionText,
 					   ProcessEnd  =GETDATE(),
 					   Success=0
 				 WHERE LogID = @logID

@@ -250,6 +250,7 @@ type Profile.Data.Publication.PubMed.DisambiguationExclude.Table.sql
 type Profile.Data.Publication.PubMed.DisambiguationSettings.Table.sql
 type Profile.Data.Publication.Funding.DisambiguationSettings.Table.sql
 type Profile.Import.PRNSWebservice.Options.Table.sql
+type Profile.Import.PRNSWebservice.Log.Summary.Table.sql
 
 type RDF..fnTripleHash.UserDefinedFunction.sql
 type Utility.Application.fnText2Bool.UserDefinedFunction.sql
@@ -286,6 +287,7 @@ type Utility.NLP.fnNormalizeSplitStem.UserDefinedFunction.sql
 type Utility.NLP.fnQuoteNormalizeSplitStem.UserDefinedFunction.sql
 type RDF..fnNodeID2TypeID.UserDefinedFunction.sql
 type Profile.Data.fnPublication.Pubmed.ShortenAuthorLengthString.UserDefinedFunction.sql
+type Profile.Data.fnPublication.MyPub.HighlightAuthors.UserDefinedFunction.sql
 
 type Framework..vwBufferObjects.View.sql
 type Framework..vwBufferDatabases.View.sql
@@ -417,6 +419,7 @@ type Profile.Data.Person.GetPhotos.StoredProcedure.sql
 type RDF..SetNodePropertySecurity.StoredProcedure.sql
 type User.Account.Relationship.SetRelationship.StoredProcedure.sql
 type User.Account.Relationship.GetRelationship.StoredProcedure.sql
+type Profile.Data.Publication.Pubmed.UpdateAuthor2Person.StoredProcedure.sql
 type Profile.Data.Publication.Pubmed.ParsePubMedXML.StoredProcedure.sql
 type Profile.Data.Publication.Pubmed.ParseAllPubMedXML.StoredProcedure.sql
 type User.Session.UpdateSession.StoredProcedure.sql
@@ -652,8 +655,8 @@ type Edit.Module.CustomEditWebsite.AddEditWebsite.StoredProcedure.sql
 type Edit.Module.CustomEditWebsite.GetData.StoredProcedure.sql
 type Profile.Data.Publication.Pubmed.GetPMIDsForBibliometrics.StoredProcedure.sql
 type Profile.Data.Publication.Pubmed.ParseBibliometricResults.StoredProcedure.sql
-type Profile.Import.PRNSWebservice.GetGeocodeAPIData.StoredProcedure.sql
-type Profile.Import.PRNSWebservice.ParseGeocodeResults.StoredProcedure.sql
+type Profile.Import.GoogleWebservice.GetGeocodeAPIData.StoredProcedure.sql
+type Profile.Import.GoogleWebservice.ParseGeocodeResults.StoredProcedure.sql
 type Profile.Import.PRNSWebservice.CheckForErrors.StoredProcedure.sql
 type Profile.Import.PRNSWebservice.GetPostData.StoredProcedure.sql
 type Profile.Import.PRNSWebservice.ImportData.StoredProcedure.sql
@@ -687,5 +690,10 @@ type Profile.Data.Publication.Group.MyPub.UpdatePublication.StoredProcedure.sql
 type Profile.Data.Publication.Pubmed.ParsePubmedBookArticle.StoredProcedure.sql
 type Profile.Data.Publication.Pubmed.AddPubmedBookArticle.StoredProcedure.sql
 type RDF.Security.CanEditNode.StoredProcedure.sql
+type Profile.Import.PRNSWebservice.PubMed.GetPersonInfoForDisambiguation.StoredProcedure.sql
+type Profile.Import.PRNSWebservice.PubMed.ImportDisambiguationResults.StoredProcedure.sql
+type Profile.Import.PRNSWebservice.PubMed.GetAllPMIDs.StoredProcedure.sql
+type Profile.Import.PRNSWebservice.PubMed.AddPubMedXML.StoredProcedure.sql
+type Profile.Import.PRNSWebservice.Funding.ParseDisambiguationXML.StoredProcedure.sql
+type Profile.Import.PRNSWebservice.Funding.GetPersonInfoForDisambiguation.StoredProcedure.sql
 type RDF..GetPresentationXMLByType.StoredProcedure.sql
-type Profile.Data.Publication.Pubmed.UpdateAuthor2Person.StoredProcedure.sql

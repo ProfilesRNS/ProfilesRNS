@@ -3,6 +3,8 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE PROCEDURE [Profile.Data].[Publication.Pubmed.GetPMIDsforBibliometrics]
+	@Job varchar(55) = 'Bibliometrics',
+	@BatchID varchar(100)
 AS
 BEGIN
 	SET NOCOUNT ON;	
@@ -19,14 +21,18 @@ BEGIN
 		FROM [Profile.Data].[Publication.Person.Include]
 		WHERE pmid IS NOT NULL 
 
-	declare @c int,	@BatchSize int, @batchID varchar(100), @URL varchar(500), @logLevel int
+	declare @c int,	@BatchSize int, @rowsCount int, @URL varchar(500), @logLevel int
 	select @c = count(1) from #tmp2
-	select @batchID = NEWID()
-	select @URL = URL, @BatchSize = batchSize, @logLevel = logLevel from [Profile.Import].[PRNSWebservice.Options] where job = 'bibliometrics'
+	--select @batchID = NEWID()
+	select @URL = URL, @BatchSize = batchSize, @logLevel = logLevel from [Profile.Import].[PRNSWebservice.Options] where job = @Job
 	insert into #tmp(LogID, BatchID, RowID, HttpMethod, URL, PostData)
 	select -1, @batchID batchID, n, 'POST', @URL, (
 	select pmid "PMID" FROM #tmp2 order by pmid offset n * @BatchSize ROWS FETCH NEXT @BatchSize ROWS ONLY FOR XML path(''), ELEMENTS, ROOT('PMIDS')) x
 	from [Utility.Math].N where n <= @c / @BatchSize
+
+	select @rowsCount = @@ROWCOUNT
+
+	Update [Profile.Import].[PRNSWebservice.Log.Summary]  set RecordsCount = @BatchSize, RowsCount = @rowsCount where BatchID = @BatchID
 
 	DECLARE @LogIDTable TABLE (LogID int, RowID int)
 	IF @logLevel = 1

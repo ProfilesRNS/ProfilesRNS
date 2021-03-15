@@ -594,73 +594,92 @@ SET nocount  ON;
 		create index idx_tmp_pubmedgeneral on #pubmedGeneral (EntityID)
 	END
 
-
-	/*****************************
-	*
-	* Generate XML
-	*
-	*****************************/
-	
-	if exists (select top 1 1 from #tmpPerson)
+	if @Format = 'XML'
 	BEGIN
-		select (
-			select getDate() as "PersonList/@Date",  (
-				select p.PersonID "@PersonID", 
-				Case when p.IncludeDetails = 0 then 'false' else null end "@ChangedSinceLastUpdated", 
-				p.ConnectionWeight "ConnectionWeight", 
-				Case when p.IncludeDetails = 1 then p.Name else null end "Name", 
-				Case when p.IncludeDetails = 1 then p.emailAddr else null end "emailAddr", 
-				Case when p.IncludeDetails = 1  and @includeAddress = 1 then p.Address else null end "Address", 
-				Case when p.IncludeDetails = 1  and @includeAffiliation = 1 then p.Affiliation else null end "AffiliationList", 
-				Case when p.IncludeDetails = 1  and @includeOverview = 1 then p.Overview else null end "Overview", 
-				Case when p.IncludeDetails = 1 and ShowPhoto = 1 then p.PhotoUrl else null end "PhotoUrl", 
-				Case when p.IncludeDetails = 1 then p.Twitter else null end "Twitter", 
-				Case when p.IncludeDetails = 1 then p.FeaturedPresentations else null end "Slideshare", 
-				Case when p.IncludeDetails = 1 then p.FeaturedVideos else null end "FeaturedVideos", 
-				Case when p.IncludeDetails = 1 and ShowWebsites = 1 then (
-					select [URL] "Website/URL", WebPageTitle "Website/Title" ,SortOrder "Website/SortOrder" from [Profile.Data].[Person.Websites] w where w.PersonID = p.PersonID order by sortorder for xml path(''), type
-				) else null end "Websites", 
-				Case when p.IncludeDetails = 1 and ShowMediaLinks = 1 then (
-					select [URL] "MediaLink/URL", WebPageTitle "MediaLink/Title" ,SortOrder "MediaLink/SortOrder", PublicationDate "MediaLink/PublicationDate" from [Profile.Data].[Person.MediaLinks] w where w.PersonID = p.PersonID order by sortorder for xml path(''), type
-				) else null end "MediaLinks", 
-				Case when p.IncludeDetails = 1 and ShowAwards = 1 then (
-					select w.AwardName "Award/Title", w.Institution "Award/AwardingInstitution" ,w.StartYear "Award/StartDate", w.EndYear "Award/EndDate" from #awards w where w.PersonNodeID = p.NodeID order by StartYear for xml path(''), type
-				) else null end "AwardAndHonors", 
-				Case when p.IncludeDetails = 1 and ShowEducation = 1 then (
-					select w.Institution "Education/TrainingAtOrganization", w.Location "Education/TrainingLocation", w.Degree "Education/DegreeEarned", w.CompletionDate "Education/CompletionDate", w.Field "Education/MajorField" from #education w where w.PersonNodeID = p.NodeID order by CompletionDate for xml path(''), type
-				) else null end "EducationAndTraining", 
-				Case when p.IncludeDetails = 1 and ShowEducation = 1 then (
-					select r.RoleLabel "Funding/RoleLabel", r.RoleDescription "Funding/RoleDescription", a.AgreementLabel "Funding/AgreementLabel", a.GrantAwardedBy "Funding/GrantAwardedBy" ,StartDate "Funding/StartDate", EndDate "Funding/EndDate", a.PrincipalInvestigatorName "Funding/PrincipalInvestigatorName", a.Abstract "Funding/Abstract" from [Profile.Data].[Funding.Role] r
-						join [Profile.Data].[Funding.Agreement] a on r.FundingAgreementID = a.FundingAgreementID 
-						and r.PersonID = p.PersonID 
-						order by StartDate 
-						for xml path(''), type
-				) else null end "FundingList", 
-				Case when p.IncludeDetails = 1 then (
-					 select i.Source "Publication/@Source", i.pmid "Publication/@PMID", i.pmcid "Publication/@PMCID", CASE WHEN i.URL <> '' THEN i.URL ELSE null END "Publication/URL", i.Reference "Publication/PublicationReference"--, @basePath + '/profile/' + cast(inm.NodeID as varchar(max)) "PublicationID"
-					 , g.Title "Publication/Title", g.Authors as "Publication/Authors", g.Journal as "Publication/Journal",
-					 g.PubDate as "Publication/Date", g.IssueInfo as "Publication/IssueInfo"
-					 from [Profile.Data].[Publication.Entity.Authorship] a
-						 inner join [Profile.Data].[Publication.Entity.InformationResource] i
-						 on a.InformationResourceID=i.EntityID
-						 and a.PersonID=p.PersonID
-						 join #pubmedGeneral g
-						 on g.EntityID = i.EntityID
-						 where i.IsActive = 1 and p.ShowPublications = 'Y'
-						 order by i.EntityDate desc
-						 for xml path(''), type
-					) else null end "PublicationList", 
-					Case when p.IncludeDetails = 1 then (select [MeshHeader]  "Concept/MeshHeader", NumPubsThis "Concept/NumPubs", Weight "Concept/Weight", FirstPubDate "Concept/FirstPubDate", LastPubDate "Concept/LastPubDate"
-					from [Profile.Cache].[Concept.Mesh.Person]cmp
-					where cmp.PersonID=p.PersonID and @includeConcepts = 1 order by Weight desc for xml path(''), type ) else null end "ConceptList"
-				from #tmpPerson p
-				order by p.ConnectionWeight desc, p.Lastname, p.Firstname, p.PersonID
-				for xml path('Person'), type
-			) PersonList
-			for xml path(''), type
-		) x
+		/*****************************
+		*
+		* Generate XML
+		*
+		*****************************/
+	
+		if exists (select top 1 1 from #tmpPerson)
+		BEGIN
+			select (
+				select getDate() as "PersonList/@Date",  (
+					select p.PersonID "@PersonID", 
+					Case when p.IncludeDetails = 0 then 'false' else null end "@ChangedSinceLastUpdated", 
+					p.ConnectionWeight "ConnectionWeight", 
+					Case when p.IncludeDetails = 1 then p.Name else null end "Name", 
+					Case when p.IncludeDetails = 1 then p.emailAddr else null end "emailAddr", 
+					Case when p.IncludeDetails = 1  and @includeAddress = 1 then p.Address else null end "Address", 
+					Case when p.IncludeDetails = 1  and @includeAffiliation = 1 then p.Affiliation else null end "AffiliationList", 
+					Case when p.IncludeDetails = 1  and @includeOverview = 1 then p.Overview else null end "Overview", 
+					Case when p.IncludeDetails = 1 and ShowPhoto = 1 then p.PhotoUrl else null end "PhotoUrl", 
+					Case when p.IncludeDetails = 1 then p.Twitter else null end "Twitter", 
+					Case when p.IncludeDetails = 1 then p.FeaturedPresentations else null end "Slideshare", 
+					Case when p.IncludeDetails = 1 then p.FeaturedVideos else null end "FeaturedVideos", 
+					Case when p.IncludeDetails = 1 and ShowWebsites = 1 then (
+						select [URL] "Website/URL", WebPageTitle "Website/Title" ,SortOrder "Website/SortOrder" from [Profile.Data].[Person.Websites] w where w.PersonID = p.PersonID order by sortorder for xml path(''), type
+					) else null end "Websites", 
+					Case when p.IncludeDetails = 1 and ShowMediaLinks = 1 then (
+						select [URL] "MediaLink/URL", WebPageTitle "MediaLink/Title" ,SortOrder "MediaLink/SortOrder", PublicationDate "MediaLink/PublicationDate" from [Profile.Data].[Person.MediaLinks] w where w.PersonID = p.PersonID order by sortorder for xml path(''), type
+					) else null end "MediaLinks", 
+					Case when p.IncludeDetails = 1 and ShowAwards = 1 then (
+						select w.AwardName "Award/Title", w.Institution "Award/AwardingInstitution" ,w.StartYear "Award/StartDate", w.EndYear "Award/EndDate" from #awards w where w.PersonNodeID = p.NodeID order by StartYear for xml path(''), type
+					) else null end "AwardAndHonors", 
+					Case when p.IncludeDetails = 1 and ShowEducation = 1 then (
+						select w.Institution "Education/TrainingAtOrganization", w.Location "Education/TrainingLocation", w.Degree "Education/DegreeEarned", w.CompletionDate "Education/CompletionDate", w.Field "Education/MajorField" from #education w where w.PersonNodeID = p.NodeID order by CompletionDate for xml path(''), type
+					) else null end "EducationAndTraining", 
+					Case when p.IncludeDetails = 1 and ShowEducation = 1 then (
+						select r.RoleLabel "Funding/RoleLabel", r.RoleDescription "Funding/RoleDescription", a.AgreementLabel "Funding/AgreementLabel", a.GrantAwardedBy "Funding/GrantAwardedBy" ,StartDate "Funding/StartDate", EndDate "Funding/EndDate", a.PrincipalInvestigatorName "Funding/PrincipalInvestigatorName", a.Abstract "Funding/Abstract" from [Profile.Data].[Funding.Role] r
+							join [Profile.Data].[Funding.Agreement] a on r.FundingAgreementID = a.FundingAgreementID 
+							and r.PersonID = p.PersonID 
+							order by StartDate 
+							for xml path(''), type
+					) else null end "FundingList", 
+					Case when p.IncludeDetails = 1 then (
+						 select i.Source "Publication/@Source", i.pmid "Publication/@PMID", i.pmcid "Publication/@PMCID", CASE WHEN i.URL <> '' THEN i.URL ELSE null END "Publication/URL", i.Reference "Publication/PublicationReference"--, @basePath + '/profile/' + cast(inm.NodeID as varchar(max)) "PublicationID"
+						 , g.Title "Publication/Title", g.Authors as "Publication/Authors", g.Journal as "Publication/Journal",
+						 g.PubDate as "Publication/Date", g.IssueInfo as "Publication/IssueInfo"
+						 from [Profile.Data].[Publication.Entity.Authorship] a
+							 inner join [Profile.Data].[Publication.Entity.InformationResource] i
+							 on a.InformationResourceID=i.EntityID
+							 and a.PersonID=p.PersonID
+							 join #pubmedGeneral g
+							 on g.EntityID = i.EntityID
+							 where i.IsActive = 1 and p.ShowPublications = 'Y'
+							 order by i.EntityDate desc
+							 for xml path(''), type
+						) else null end "PublicationList", 
+						Case when p.IncludeDetails = 1 then (select [MeshHeader]  "Concept/MeshHeader", NumPubsThis "Concept/NumPubs", Weight "Concept/Weight", FirstPubDate "Concept/FirstPubDate", LastPubDate "Concept/LastPubDate"
+						from [Profile.Cache].[Concept.Mesh.Person]cmp
+						where cmp.PersonID=p.PersonID and @includeConcepts = 1 order by Weight desc for xml path(''), type ) else null end "ConceptList"
+					from #tmpPerson p
+					order by p.ConnectionWeight desc, p.Lastname, p.Firstname, p.PersonID
+					for xml path('Person'), type
+				) PersonList
+				for xml path(''), type
+			) x
+		END
+		ELSE 
+			select '<PersonList></PersonList>'
 	END
-	ELSE 
-		select '<PersonList></PersonList>'
+
+	if @Format = 'JSON'
+	BEGIN
+					select getDate() as [Date],
+					(select p.PersonID as [Person.PersonID]--, 
+					from #tmpPerson p
+					order by p.ConnectionWeight desc, p.Lastname, p.Firstname, p.PersonID
+					for JSON path
+				) PersonList
+				for JSON path, root('APIData')
+
+	END
+
+	if @Format = 'table'
+	BEGIN
+		SELECT * From #tmpPerson
+	END
 END 
 GO
