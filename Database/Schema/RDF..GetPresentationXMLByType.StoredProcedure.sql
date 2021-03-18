@@ -20,9 +20,21 @@ BEGIN
 	create table #subjectTypes ( st bigint)
 	create table #objectTypes (ot bigint)
 
+	insert into #subjectTypes
+		SELECT Split.a.value('.', 'VARCHAR(100)')
+		FROM ( select CAST('<c>' + REPLACE(@subjectType, ',', '</c><c>') + '</c>' as XML) as A) AS A CROSS APPLY A.nodes ('/c') AS Split(a); 
+
+	if @objectType is not null
+		insert into #subjectTypes
+			SELECT Split.a.value('.', 'VARCHAR(100)')
+			FROM ( select CAST('<c>' + REPLACE(@objectType, ',', '</c><c>') + '</c>' as XML) as A) AS A CROSS APPLY A.nodes ('/c') AS Split(a); 
+
+	/* --This is cleaner for SQL Server 2016 and above
+
 	insert into #subjectTypes SELECT cast(value as bigint) from string_split(@subjectType, ',')
 	if @objectType is not null
 		insert into #objectTypes SELECT cast(value as bigint) from string_split(@objectType, ',')
+	*/
 
 	declare @SecurityGroupListXML xml
 	select @SecurityGroupListXML = NULL

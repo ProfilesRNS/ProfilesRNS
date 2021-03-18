@@ -124,7 +124,7 @@ BEGIN
 		
 		declare @asText varchar(max)
 		set @asText = '<table style="width:592px"><tr><th>Year</th><th>Publications</th></tr>'
-		select @asText = @asText + '<tr><td>' + cast(y as varchar(50)) + '</td><td>' + cast(t as varchar(50)) + '</td></tr>'
+		select @asText = @asText + '<tr><td style="text-align:center;">' + cast(y as varchar(50)) + '</td><td style="text-align:center;">' + cast(t as varchar(50)) + '</td></tr>'
 			from @y
 			where t > 0
 			order by y 

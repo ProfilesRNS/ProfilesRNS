@@ -8,6 +8,8 @@ CREATE procedure [Profile.Data].[Publication.Pubmed.ParsePubmedBookArticle]
 AS
 BEGIN
 	SET NOCOUNT ON;
+	update [Profile.Data].[Publication.PubMed.AllXML] set ParseDT = GETDATE() where pmid = @pmid
+
 	DECLARE @ErrMsg nvarchar(4000), @ErrSeverity int,@proc VARCHAR(200),@date DATETIME,@auditid UNIQUEIDENTIFIER 
 	SELECT @proc = OBJECT_NAME(@@PROCID),@date=GETDATE() 	
 

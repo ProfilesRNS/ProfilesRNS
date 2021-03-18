@@ -15,14 +15,14 @@ BEGIN
 		FROM (
 			SELECT p.PersonID, i.EntityID, FirstName, LastName, DisplayName, i.PMID, i.EntityDate, g.MedlineTA Source, i.EntityName Item, i.Reference, i.URL
 				FROM [Profile.Cache].[Person] p 
-					INNER JOIN [Profile.Data].[Publication.Entity.Authorship] a on p.PersonID = a.PersonID
+					INNER JOIN [Profile.Data].[Publication.Entity.Authorship] a on p.PersonID = a.PersonID and a.IsActive = 1
 					INNER JOIN [Profile.Data].[Publication.Entity.InformationResource] i on a.InformationResourceID = i.EntityID
 					INNER JOIN [Profile.Data].[Publication.PubMed.General] g on i.PMID=g.PMID
 				WHERE i.PMID IS NOT NULL
 			UNION ALL
 			SELECT p.PersonID, i.EntityID, FirstName, LastName, DisplayName, i.PMID, i.EntityDate, g.PubTitle Source, i.EntityName Item, i.Reference, i.URL
 				FROM [Profile.Cache].[Person] p 
-					INNER JOIN [Profile.Data].[Publication.Entity.Authorship] a on p.PersonID = a.PersonID
+					INNER JOIN [Profile.Data].[Publication.Entity.Authorship] a on p.PersonID = a.PersonID and a.IsActive = 1
 					INNER JOIN [Profile.Data].[Publication.Entity.InformationResource] i on a.InformationResourceID = i.EntityID
 					INNER JOIN [Profile.Data].[Publication.MyPub.General] g on i.MPID=g.MPID
 				WHERE i.PMID IS NULL AND i.MPID IS NOT NULL
