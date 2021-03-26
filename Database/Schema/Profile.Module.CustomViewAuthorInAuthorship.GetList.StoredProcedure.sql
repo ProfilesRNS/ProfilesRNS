@@ -22,7 +22,7 @@ BEGIN
 
 	select i.NodeID, p.EntityID, i.Value rdf_about, p.EntityName rdfs_label, 
 		isnull(e.AuthorsString, p.Authors) + p.Reference prns_informationResourceReference, p.EntityDate prns_publicationDate,
-		year(p.EntityDate) prns_year, p.pmid bibo_pmid, p.pmcid vivo_pmcid, p.mpid prns_mpid, p.URL vivo_webpage, 
+		year(p.EntityDate) prns_year, p.pmid bibo_pmid, p.pmcid vivo_pmcid, p.doi bibo_doi, p.mpid prns_mpid, p.URL vivo_webpage, 
 		isnull(b.PMCCitations, -1) as PMCCitations, isnull(Fields, '') as Fields, isnull(TranslationHumans , 0) as TranslationHumans, isnull(TranslationAnimals , 0) as TranslationAnimals, 
 		isnull(TranslationCells , 0) as TranslationCells, isnull(TranslationPublicHealth , 0) as TranslationPublicHealth, isnull(TranslationClinicalTrial , 0) as TranslationClinicalTrial
 	from [RDF.].[Triple] t

@@ -84,7 +84,7 @@ BEGIN
 	insert into [Profile.Data].[Publication.Pubmed.Bibliometrics] 
 		(PMID, PMCCitations, MedlineTA, Fields, TranslationHumans, TranslationAnimals, TranslationCells, TranslationPublicHealth, TranslationClinicalTrial)
 	select PMID, PMCCitations, a.MedlineTA, ValueList , TranslationHumans, TranslationAnimals, TranslationCells, TranslationPublicHealth, TranslationClinicalTrial
-		from #tmp a join abbs b on a.MedlineTA = b.MedlineTA
+		from #tmp a left join abbs b on a.MedlineTA = b.MedlineTA
 
 END
 GO

@@ -14800,15 +14800,18 @@
     <SearchWeight>5.000000000000000e-001</SearchWeight>
     <CustomDisplay>1</CustomDisplay>
     <CustomEdit>1</CustomEdit>
-    <ViewSecurityGroup>-50</ViewSecurityGroup>
-    <EditSecurityGroup>-50</EditSecurityGroup>
-    <EditPermissionsSecurityGroup>-50</EditPermissionsSecurityGroup>
-    <EditExistingSecurityGroup>-50</EditExistingSecurityGroup>
-    <EditAddNewSecurityGroup>-50</EditAddNewSecurityGroup>
+    <ViewSecurityGroup>-1</ViewSecurityGroup>
+    <EditSecurityGroup>-20</EditSecurityGroup>
+    <EditPermissionsSecurityGroup>-20</EditPermissionsSecurityGroup>
+    <EditExistingSecurityGroup>-20</EditExistingSecurityGroup>
+    <EditAddNewSecurityGroup>-20</EditAddNewSecurityGroup>
     <EditAddExistingSecurityGroup>-50</EditAddExistingSecurityGroup>
     <EditDeleteSecurityGroup>-50</EditDeleteSecurityGroup>
     <MinCardinality>0</MinCardinality>
     <MaxCardinality>1</MaxCardinality>
+	<CustomDisplayModule>
+      <Module ID="CustomEditBasicORCID"/>
+    </CustomDisplayModule>
     <CustomEditModule>
       <Module ID="CustomEditORCID" />
     </CustomEditModule>
@@ -15053,6 +15056,13 @@
     <EditAddExistingSecurityGroup>-40</EditAddExistingSecurityGroup>
     <EditDeleteSecurityGroup>-20</EditDeleteSecurityGroup>
     <MinCardinality>0</MinCardinality>
+	<CustomDisplayModule>
+      <Module ID="ApplyXSLT">
+        <ParamList>
+          <Param Name="XSLTPath">~/profile/XSLT/Awards.xslt</Param>
+        </ParamList>
+      </Module>
+    </CustomDisplayModule>
     <CustomEditModule>
       <Module ID="CustomEditAwardOrHonor" />
     </CustomEditModule>
@@ -15110,6 +15120,13 @@
     <EditAddExistingSecurityGroup>-20</EditAddExistingSecurityGroup>
     <EditDeleteSecurityGroup>-20</EditDeleteSecurityGroup>
     <MinCardinality>0</MinCardinality>
+	<CustomDisplayModule>
+      <Module ID="ApplyXSLT">
+        <ParamList>
+          <Param Name="XSLTPath">~/profile/XSLT/EducationalTraining.xslt</Param>
+        </ParamList>
+      </Module>
+    </CustomDisplayModule>
     <CustomEditModule>
       <Module ID="CustomEditEducationalTraining" />
     </CustomEditModule>

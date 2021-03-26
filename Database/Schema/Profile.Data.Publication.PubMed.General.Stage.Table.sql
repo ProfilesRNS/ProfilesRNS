@@ -7,6 +7,7 @@ GO
 CREATE TABLE [Profile.Data].[Publication.PubMed.General.Stage](
 	[PMID] [int] NOT NULL,
 	[PMCID] [nvarchar](55) NULL,
+	[doi] [varchar](100) NULL,
 	[Owner] [varchar](50) NULL,
 	[Status] [varchar](50) NULL,
 	[PubModel] [varchar](50) NULL,
@@ -31,7 +32,6 @@ CREATE TABLE [Profile.Data].[Publication.PubMed.General.Stage](
 	[GrantListCompleteYN] [varchar](1) NULL,
 	[PubDate] [datetime] NULL,
 	[Authors] [nvarchar](4000) NULL,
-	[doi] [varchar](100) NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[PMID] ASC

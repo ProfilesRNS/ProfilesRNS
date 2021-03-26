@@ -61,7 +61,7 @@ BEGIN
 					FROM #p b
 					WHERE b.PersonID=a.PersonID
 					FOR XML PATH(''), TYPE
-				) AS VARCHAR(MAX)) Data
+				) AS NVARCHAR(MAX)) Data
 			FROM a
 		) t
 

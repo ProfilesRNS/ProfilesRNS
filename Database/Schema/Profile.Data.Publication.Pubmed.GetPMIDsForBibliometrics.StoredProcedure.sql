@@ -32,7 +32,7 @@ BEGIN
 
 	select @rowsCount = @@ROWCOUNT
 
-	Update [Profile.Import].[PRNSWebservice.Log.Summary]  set RecordsCount = @BatchSize, RowsCount = @rowsCount where BatchID = @BatchID
+	Update [Profile.Import].[PRNSWebservice.Log.Summary]  set RecordsCount = @c, RowsCount = @rowsCount where BatchID = @BatchID
 
 	DECLARE @LogIDTable TABLE (LogID int, RowID int)
 	IF @logLevel = 1

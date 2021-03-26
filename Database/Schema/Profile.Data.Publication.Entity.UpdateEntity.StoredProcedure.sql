@@ -27,6 +27,7 @@ BEGIN
 		PMID INT NULL ,
 		MPID NVARCHAR(50) NULL ,
 		PMCID NVARCHAR(55) NULL,
+		doi [varchar](100) NULL,
 		EntityDate DATETIME NULL ,
 		Authors NVARCHAR(4000) NULL,
 		Reference NVARCHAR(MAX) NULL ,
@@ -40,6 +41,7 @@ BEGIN
 	INSERT  INTO #Publications
             ( PMID ,
 			  PMCID,
+			  doi,
               EntityDate ,
 			  Authors,
               Reference ,
@@ -50,6 +52,7 @@ BEGIN
             SELECT -- Get Pub Med pubs
                     PG.PMID ,
 					PG.PMCID,
+					PG.doi,
                     EntityDate = PG.PubDate,
 					authors = case when right(PG.Authors,5) = 'et al' then PG.Authors+'. '
 								when PG.AuthorListCompleteYN = 'N' then PG.Authors+', et al. '
@@ -235,6 +238,7 @@ BEGIN
 	UPDATE e
 		SET e.EntityDate = p.EntityDate,
 			e.pmcid = p.pmcid,
+			e.doi = p.doi,
 			e.Authors = p.Authors,
 			e.Reference = p.Reference,
 			e.Source = p.Source,
@@ -253,6 +257,7 @@ BEGIN
 	INSERT INTO [Profile.Data].[Publication.Entity.InformationResource] (
 			PMID,
 			PMCID,
+			doi,
 			MPID,
 			EntityName,
 			EntityDate,
@@ -266,6 +271,7 @@ BEGIN
 		)
 		SELECT 	PMID,
 				PMCID,
+				doi,
 				MPID,
 				Title,
 				EntityDate,

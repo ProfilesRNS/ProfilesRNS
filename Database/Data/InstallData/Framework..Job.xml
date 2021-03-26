@@ -255,71 +255,77 @@
     <JobGroup>7</JobGroup>
     <Step>5</Step>
     <IsActive>1</IsActive>
-    <Script>EXEC [Profile.Data].[Publication.Entity.UpdateEntity]</Script>
+    <Script>EXEC [Profile.Data].[Publication.Pubmed.UpdateAuthor2Person]</Script>
   </Row>
   <Row>
     <JobGroup>7</JobGroup>
     <Step>6</Step>
     <IsActive>1</IsActive>
-    <Script>EXEC [Profile.Cache].[SNA.Coauthor.UpdateCoauthor]</Script>
+    <Script>EXEC [Profile.Data].[Publication.Entity.UpdateEntity]</Script>
   </Row>
   <Row>
     <JobGroup>7</JobGroup>
     <Step>7</Step>
     <IsActive>1</IsActive>
-    <Script>EXEC [Profile.Cache].[Concept.Mesh.UpdateCountTree]</Script>
+    <Script>EXEC [Profile.Cache].[SNA.Coauthor.UpdateCoauthor]</Script>
   </Row>
   <Row>
     <JobGroup>7</JobGroup>
     <Step>8</Step>
     <IsActive>1</IsActive>
-    <Script>EXEC [Profile.Cache].[Concept.Mesh.UpdatePersonPublication]</Script>
+    <Script>EXEC [Profile.Cache].[Concept.Mesh.UpdateCountTree]</Script>
   </Row>
   <Row>
     <JobGroup>7</JobGroup>
     <Step>9</Step>
     <IsActive>1</IsActive>
-    <Script>EXEC [Profile.Cache].[Concept.Mesh.UpdatePerson]</Script>
+    <Script>EXEC [Profile.Cache].[Concept.Mesh.UpdatePersonPublication]</Script>
   </Row>
   <Row>
     <JobGroup>7</JobGroup>
     <Step>10</Step>
     <IsActive>1</IsActive>
-    <Script>EXEC [Profile.Cache].[Concept.Mesh.UpdateWord2Mesh]</Script>
+    <Script>EXEC [Profile.Cache].[Concept.Mesh.UpdatePerson]</Script>
   </Row>
   <Row>
     <JobGroup>7</JobGroup>
     <Step>11</Step>
     <IsActive>1</IsActive>
-    <Script>EXEC [Profile.Cache].[Concept.Mesh.UpdateJournal]</Script>
+    <Script>EXEC [Profile.Cache].[Concept.Mesh.UpdateWord2Mesh]</Script>
   </Row>
   <Row>
     <JobGroup>7</JobGroup>
     <Step>12</Step>
     <IsActive>1</IsActive>
-    <Script>EXEC [Profile.Cache].[SNA.Coauthor.UpdateSummary]</Script>
+    <Script>EXEC [Profile.Cache].[Concept.Mesh.UpdateJournal]</Script>
   </Row>
   <Row>
     <JobGroup>7</JobGroup>
     <Step>13</Step>
     <IsActive>1</IsActive>
-    <Script>EXEC [Search.Cache].[History.UpdateTopSearchPhrase]</Script>
+    <Script>EXEC [Profile.Cache].[SNA.Coauthor.UpdateSummary]</Script>
   </Row>
   <Row>
     <JobGroup>7</JobGroup>
     <Step>14</Step>
     <IsActive>1</IsActive>
-    <Script>EXEC [User.Session].[DeleteOldSessionRDF]</Script>
+    <Script>EXEC [Search.Cache].[History.UpdateTopSearchPhrase]</Script>
   </Row>
   <Row>
     <JobGroup>7</JobGroup>
     <Step>15</Step>
     <IsActive>1</IsActive>
-    <Script>UPDATE [Profile.Data].[Group.General] SET ViewSecurityGroup = 0 WHERE EndDate &lt; GETDATE()</Script>
+    <Script>EXEC [User.Session].[DeleteOldSessionRDF]</Script>
   </Row>
   <Row>
     <JobGroup>7</JobGroup>
     <Step>16</Step>
+    <IsActive>1</IsActive>
+    <Script>UPDATE [Profile.Data].[Group.General] SET ViewSecurityGroup = 0 WHERE EndDate &lt; GETDATE()</Script>
+  </Row>
+  <Row>
+    <JobGroup>7</JobGroup>
+    <Step>17</Step>
     <IsActive>1</IsActive>
     <Script>EXEC [Profile.Cache].[List.Export.UpdatePublications]</Script>
   </Row>

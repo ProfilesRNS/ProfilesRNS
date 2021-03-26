@@ -27,6 +27,7 @@ BEGIN
 		PMID INT NULL ,
 		MPID NVARCHAR(50) NULL ,
 		PMCID NVARCHAR(55) NULL,
+		doi [varchar](100) NULL,				  
 		EntityDate DATETIME NULL ,
 		Authors NVARCHAR(4000) NULL,
 		Reference NVARCHAR(MAX) NULL ,
@@ -243,6 +244,7 @@ BEGIN
 	UPDATE e
 		SET e.EntityDate = p.EntityDate,
 			e.pmcid = p.pmcid,
+			e.doi = p.doi,	 
 			e.Authors = p.Authors,
 			e.Reference = p.Reference,
 			e.Source = p.Source,

@@ -1137,13 +1137,6 @@
     <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupBiography</PropertyGroupURI>
     <PropertyURI>http://vivoweb.org/ontology/core#awardOrHonor</PropertyURI>
     <SortOrder>4</SortOrder>
-    <CustomDisplayModule>
-      <Module ID="ApplyXSLT">
-        <ParamList>
-          <Param Name="XSLTPath">~/profile/XSLT/Awards.xslt</Param>
-        </ParamList>
-      </Module>
-    </CustomDisplayModule>
     <_TagName>vivo:awardOrHonor</_TagName>
     <_PropertyLabel>awards and honors</_PropertyLabel>
   </Row>
@@ -1389,13 +1382,6 @@
     <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupBiography</PropertyGroupURI>
     <PropertyURI>http://vivoweb.org/ontology/core#educationalTraining</PropertyURI>
     <SortOrder>1</SortOrder>
-    <CustomDisplayModule>
-      <Module ID="ApplyXSLT">
-        <ParamList>
-          <Param Name="XSLTPath">~/profile/XSLT/EducationalTraining.xslt</Param>
-        </ParamList>
-      </Module>
-    </CustomDisplayModule>
     <_TagName>vivo:educationalTraining</_TagName>
     <_PropertyLabel>education and training</_PropertyLabel>
   </Row>
