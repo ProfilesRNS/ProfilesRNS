@@ -14809,11 +14809,8 @@
     <EditDeleteSecurityGroup>-50</EditDeleteSecurityGroup>
     <MinCardinality>0</MinCardinality>
     <MaxCardinality>1</MaxCardinality>
-	<CustomDisplayModule>
-      <Module ID="CustomEditBasicORCID"/>
-    </CustomDisplayModule>
     <CustomEditModule>
-      <Module ID="CustomEditORCID" />
+      <Module ID="CustomEditBasicORCID" />
     </CustomEditModule>
   </Row>
   <Row>
