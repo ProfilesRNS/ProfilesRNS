@@ -39,15 +39,6 @@
       <ImportDataProc>[Profile.Import].[Publication.Pubmed.AddPubMedXML]</ImportDataProc>
     </Row>
     <Row>
-      <job>GetPubMedXMLBatch</job>
-      <url>http://profiles.catalyst.harvard.edu/services/GetPMIDs/GetPubMedXMLBatch.asp</url>
-      <options>GetOnlyNewXML=True</options>
-      <logLevel>0</logLevel>
-      <batchSize>10</batchSize>
-      <GetPostDataProc>[Profile.Import].[Publication.Pubmed.GetPMIDsBatch]</GetPostDataProc>
-      <ImportDataProc>[Profile.Import].[Publication.Pubmed.AddPubMedXMLBatch]</ImportDataProc>
-    </Row>
-    <Row>
       <job>PubMedDisambiguation_GetPubs</job>
       <url>http://profiles.catalyst.harvard.edu/services/GetPMIDs/default.asp</url>
       <logLevel>0</logLevel>

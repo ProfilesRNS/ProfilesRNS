@@ -34,6 +34,22 @@ select @stepID = step from [Framework.].Job where JobGroup = 7 and Script = 'EXE
 update [Framework.].Job set step = step + 1 where step >= @stepID and JobGroup = 7
 insert into [Framework.].Job (JobID, JobGroup, Step, IsActive, Script) select max(JobID) + 1, 7, @stepID, 1, 'EXEC [Profile.Data].[Publication.Pubmed.UpdateAuthor2Person]'  from [Framework.].Job
 
+
+-- Populate the PRNSWebservice.Options table
+update [Profile.Import].[PRNSWebservice.Options]  set [batchSize] = 10000, [GetPostDataProc] = '[Profile.Data].[Publication.Pubmed.GetPMIDsforBibliometrics]', [ImportDataProc] = '[Profile.Data].[Publication.Pubmed.ParseBibliometricResults]' where [job] = 'bibliometrics'
+
+update [Profile.Import].[PRNSWebservice.Options]  set [GetPostDataProc] = '[Profile.Import].[GoogleWebservice.GetGeocodeAPIData]', [ImportDataProc] = '[Profile.Import].[GoogleWebservice.ParseGeocodeResults]' where [job] = 'geocode'
+
+INSERT [Profile.Import].[PRNSWebservice.Options] ([job], [url], [options], [apiKey], [logLevel], [batchSize], [GetPostDataProc], [ImportDataProc]) VALUES (N'Funding', N'http://profiles.catalyst.harvard.edu/services/NIHGrants/FindFunding.asp', NULL, NULL, 0, 100, N'[Profile.Import].[PRNSWebservice.Funding.GetPersonInfoForDisambiguation]', N'[Profile.Import].[PRNSWebservice.Funding.ParseDisambiguationXML]')
+GO
+INSERT [Profile.Import].[PRNSWebservice.Options] ([job], [url], [options], [apiKey], [logLevel], [batchSize], [GetPostDataProc], [ImportDataProc]) VALUES (N'GetPubMedXML', N'http://profiles.catalyst.harvard.edu/services/GetPMIDs/GetPubMedXML.asp', N'GetOnlyNewXML=True', NULL, 0, NULL, N'[Profile.Import].[PRNSWebservice.PubMed.GetAllPMIDs]', N'[Profile.Import].[Publication.Pubmed.AddPubMedXML]')
+GO
+INSERT [Profile.Import].[PRNSWebservice.Options] ([job], [url], [options], [apiKey], [logLevel], [batchSize], [GetPostDataProc], [ImportDataProc]) VALUES (N'GetPubMedXML_All', N'http://profiles.catalyst.harvard.edu/services/GetPMIDs/GetPubMedXML.asp', N'GetOnlyNewXML=FALSE', NULL, 0, NULL, N'[Profile.Import].[PRNSWebservice.PubMed.GetAllPMIDs]', N'[Profile.Import].[Publication.Pubmed.AddPubMedXML]')
+GO
+INSERT [Profile.Import].[PRNSWebservice.Options] ([job], [url], [options], [apiKey], [logLevel], [batchSize], [GetPostDataProc], [ImportDataProc]) VALUES (N'PubMedDisambiguation_GetPubs', N'http://profiles.catalyst.harvard.edu/services/GetPMIDs/default.asp', NULL, NULL, 0, NULL, N'[Profile.Import].[PRNSWebservice.PubMed.GetPersonInfoForDisambiguation]', N'[Profile.Import].[PRNSWebservice.PubMed.ImportDisambiguationResults]')
+GO
+
+
 /******************************
 *
 *   Update all derived fields
