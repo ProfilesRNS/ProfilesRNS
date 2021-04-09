@@ -46,7 +46,7 @@
             Please enter a word or phrase that describes your research, academic or clinical interests.<br />
             Set the visibility to Public to display your Interests to others and make them searchable.                    
             <div style="margin-top: 8px;">
-                <asp:TextBox ID="txtLabel" runat="server" Rows="1" MaxLength="100" Width="600px" TextMode="SingleLine" />
+                <asp:TextBox ID="txtLabel" runat="server" Rows="1" MaxLength="100" Width="600px" TextMode="SingleLine" onfocus="updateDropdown(this)" onkeyup="updateDropdown(this)"/>
             </div>
             <div class="actionbuttons">
                 <asp:LinkButton ID="btnInsertProperty" runat="server" CausesValidation="False" OnClick="btnInsertClose_OnClick" Text="Save" />&nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;
