@@ -25,7 +25,7 @@ BEGIN
 		FROM ( select CAST('<c>' + REPLACE(@subjectType, ',', '</c><c>') + '</c>' as XML) as A) AS A CROSS APPLY A.nodes ('/c') AS Split(a); 
 
 	if @objectType is not null
-		insert into #subjectTypes
+		insert into #objectTypes
 			SELECT Split.a.value('.', 'VARCHAR(100)')
 			FROM ( select CAST('<c>' + REPLACE(@objectType, ',', '</c><c>') + '</c>' as XML) as A) AS A CROSS APPLY A.nodes ('/c') AS Split(a); 
 
