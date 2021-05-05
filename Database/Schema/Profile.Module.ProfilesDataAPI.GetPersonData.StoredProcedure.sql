@@ -401,7 +401,7 @@ SET nocount  ON;
 		update p set p.ShowEducation = case when (s.ViewSecurityGroup = -1 or s.ViewSecurityGroup is null) and p.IncludeDetails = 1 then 1 else 0 end from #tmpPerson p left join [RDF.Security].[NodeProperty] s on p.NodeID = s.NodeID and s.Property = @education
 
 		insert into #education (PersonNodeID, EducationNodeID)
-		select Subject, Object from [RDF.].[Triple] t join #tmpPerson p on t.Subject = p.NodeID and p.IncludeDetails = 1 and p.ShowAwards = 1 and Predicate = @education and ViewSecurityGroup = -1
+		select Subject, Object from [RDF.].[Triple] t join #tmpPerson p on t.Subject = p.NodeID and p.IncludeDetails = 1 and p.ShowEducation = 1 and Predicate = @education and ViewSecurityGroup = -1
 
 		update a set a.Field = nn.Value, a.Institution = ni.Value, a.Location = nl.Value, a.Degree = nd.Value, a.CompletionDate = ne.Value
 			from #education a left join [RDF.].Triple tn on a.EducationNodeID = tn.Subject and tn.Predicate = [RDF.].[fnURI2NodeID] ('http://vivoweb.org/ontology/core#majorField') and tn.ViewSecurityGroup = -1

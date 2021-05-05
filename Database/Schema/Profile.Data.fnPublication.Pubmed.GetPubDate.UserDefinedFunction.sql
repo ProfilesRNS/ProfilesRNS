@@ -133,7 +133,7 @@ BEGIN
 						end)
 
 	set @ad = (select case when @ArticleYear is not null then
-							cast(coalesce(@ArticleMonth,'1') + '/' + coalesce(@ArticleDay,'1') + '/' + @ArticleYear as datetime)
+							cast(coalesce(@ArticleMonth,'1') + '/' + coalesce(nullif(@ArticleDay,''),'1') + '/' + @ArticleYear as datetime)
 						else
 							null
 						end)

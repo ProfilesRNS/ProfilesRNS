@@ -87,6 +87,7 @@ BEGIN
 			PMID INT NULL ,
 			MPID NVARCHAR(50) NULL ,
 			EntityDate DATETIME NULL ,
+			Authors NVARCHAR(4000) NULL,
 			Reference VARCHAR(MAX) NULL ,
 			Source VARCHAR(25) NULL ,
 			URL VARCHAR(1000) NULL ,
@@ -96,6 +97,7 @@ BEGIN
 		INSERT  INTO #Publications
 				( MPID ,
 				  EntityDate ,
+				  Authors,
 				  Reference ,
 				  Source ,
 				  URL ,
@@ -103,6 +105,7 @@ BEGIN
 				)
 				SELECT  MPID ,
 						EntityDate ,
+						Authors = REPLACE(authors, CHAR(11), '') ,
 						Reference = REPLACE(--authors +
 											(CASE WHEN IsNull(article,'') <> '' THEN article + '. ' ELSE '' END)
 											+ (CASE WHEN IsNull(pub,'') <> '' THEN pub + '. ' ELSE '' END)
@@ -197,6 +200,7 @@ BEGIN
 		DECLARE @EntityID INT		
 		UPDATE e
 			SET e.EntityDate = p.EntityDate,
+				e.Authors = p.Authors,
 				e.Reference = p.Reference,
 				e.Source = p.Source,
 				e.URL = p.URL,

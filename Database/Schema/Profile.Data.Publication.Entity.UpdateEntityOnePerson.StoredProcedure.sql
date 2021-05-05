@@ -203,7 +203,7 @@ BEGIN
 	declare @baseURI varchar(255)
 	select @baseURI = Value From [Framework.].Parameter where ParameterID = 'baseURI'
 	select a.PmPubsAuthorID, a.pmid, a2p.personID, isnull(Lastname + ' ' + Initials, CollectiveName) as Name, case when nodeID is not null then'<a href="' + @baseURI + cast(i.nodeID as varchar(55)) + '">'+ Lastname + ' ' + Initials + '</a>' else isnull(Lastname + ' ' + Initials, CollectiveName) END as link into #tmpAuthorLinks from [Profile.Data].[Publication.PubMed.Author] a
-		join #publications p on a.pmid = p.pmid
+		join [Profile.Data].[Publication.Person.Include] p on a.pmid = p.pmid and p.PersonID = @personID
 		left outer join [Profile.Data].[Publication.PubMed.Author2Person] a2p on a.PmPubsAuthorID = a2p.PmPubsAuthorID
 		left outer join [RDF.Stage].InternalNodeMap i on a2p.PersonID = i.InternalID and i.class = 'http://xmlns.com/foaf/0.1/Person'
 
