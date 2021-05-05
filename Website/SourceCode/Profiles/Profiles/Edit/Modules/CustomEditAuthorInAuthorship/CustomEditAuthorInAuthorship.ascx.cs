@@ -573,7 +573,7 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
 
             Hashtable MyParameters = new Hashtable();
 
-            string uri = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&usehistory=y&retmax=100&retmode=xml&term=" + value;
+            string uri = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&usehistory=y&retmax=1&retmode=xml&term=" + value;
             System.Xml.XmlDocument myXml = new System.Xml.XmlDocument();
             myXml.LoadXml(this.HttpPost(uri, "Catalyst", "text/plain"));
 
@@ -598,7 +598,9 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
             }
 
 			System.Threading.Thread.Sleep(1000);
-            uri = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?retmin=0&retmax=100&retmode=xml&db=Pubmed&query_key=" + queryKey + "&webenv=" + webEnv;
+            int pubscount = 100;
+            if (chkPubMedExclude.Checked) pubscount += Convert.ToInt32(this.PropertyListXML.SelectSingleNode("PropertyList/PropertyGroup/Property/@NumberOfConnections").Value) + 100;
+            uri = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?retmin=0&retmax="+ pubscount + "&retmode=xml&db=Pubmed&query_key=" + queryKey + "&webenv=" + webEnv;
             myXml.LoadXml(this.HttpPost(uri, "Catalyst", "text/plain"));
 
             string pubMedAuthors = "";
@@ -613,6 +615,7 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
             PubMedResults.Tables["Results"].Columns.Add(new System.Data.DataColumn("citation"));
             PubMedResults.Tables["Results"].Columns.Add(new System.Data.DataColumn("checked"));
 
+            int MaxPubs = 100;
             XmlNodeList docSums = myXml.SelectNodes("eSummaryResult/DocSum");
             foreach (XmlNode docSum in docSums)
             {
@@ -639,7 +642,9 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
                     myDataRow["citation"] = pubMedAuthors + "; " + pubMedTitle + "; " + pubMedSO;
                     PubMedResults.Tables["Results"].Rows.Add(myDataRow);
                     PubMedResults.AcceptChanges();
+                    MaxPubs--;
                 }
+                if (MaxPubs <= 0) break;
             }
 
             grdPubMedSearchResults.DataSource = PubMedResults;
@@ -677,7 +682,7 @@ namespace Profiles.Edit.Modules.CustomEditAuthorInAuthorship
 
             CheckBox cb = (CheckBox)e.Row.FindControl("chkPubMed");
 
-            cb.Attributes.Add("cheked", "");
+            cb.Attributes.Add("checked", "");
 
             if (drv["checked"].ToString() == "0")
                 cb.Checked = false;

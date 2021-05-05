@@ -126,7 +126,7 @@ namespace Profiles.Edit.Modules.CustomEditSocialMediaPlugIns
 
         protected void btnSaveAndClose_OnClick(object sender, EventArgs e)
         {
-            Profiles.Framework.Utilities.GenericRDFDataIO.AddEditPluginData(this.PlugInName, this.SubjectID, txtUsername.Text.Trim(), "Twitter Tweets Harvard Tweets");
+            Profiles.Framework.Utilities.GenericRDFDataIO.AddEditPluginData(this.PlugInName, this.SubjectID, txtUsername.Text.Trim(), "Twitter " + txtUsername.Text.Trim());
             Response.Redirect(Request.Url.AbsoluteUri);
             Response.End();
         }
