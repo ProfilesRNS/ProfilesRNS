@@ -66,6 +66,7 @@ if !errorlevel! equ 2 (
 	copy ..\Documentation\ProfilesRNS_InstallGuide.docx ProfilesRNS\Documentation\ProfilesRNS_InstallGuide_%Version%.docx
 	copy ..\ProfilesRNS_ReadMeFirst.docx ProfilesRNS\ProfilesRNS_ReadMeFirst.docx
 	copy ..\Documentation\ProfilesRNS_ReleaseNotes.docx ProfilesRNS\Documentation\ProfilesRNS_ReleaseNotes_%Version%.docx
+	copy ..\Documentation\ProfilesRNS_v2.x.x_UpgradeGuide.docx ProfilesRNS\Documentation\ProfilesRNS_v2.x.x_UpgradeGuide.docx
 )
 
 
@@ -119,6 +120,7 @@ echo d | xcopy /s ..\Database\VersionUpgrade_2.10.1_2.11.0 ProfilesRNS\Database\
 echo d | xcopy /s ..\Database\VersionUpgrade_2.11.0_2.11.1 ProfilesRNS\Database\VersionUpgrade_2.11.0_2.11.1
 echo d | xcopy /s ..\Database\VersionUpgrade_2.11.1_2.12.0 ProfilesRNS\Database\VersionUpgrade_2.11.1_2.12.0
 echo d | xcopy /s ..\Database\VersionUpgrade_2.12.0_3.0.0 ProfilesRNS\Database\VersionUpgrade_2.12.0_3.0.0
+echo d | xcopy /s ..\Database\VersionUpgrade_2.12.0_3.0.0 ProfilesRNS\Database\VersionUpgrade_3.0.0_3.1.0
 copy ..\Database\ProfilesRNS_CreateAccount.sql ProfilesRNS\Database\ProfilesRNS_CreateAccount.sql
 copy ..\Database\ProfilesRNS_CreateDatabase.sql ProfilesRNS\Database\ProfilesRNS_CreateDatabase.sql
 copy ..\Database\ProfilesRNS_DataLoad_Part1.sql ProfilesRNS\Database\ProfilesRNS_DataLoad_Part1.sql

@@ -44,19 +44,23 @@ namespace ConvertToPDF
                     doc = app.Documents.Open(path + "..\\Documentation\\ProfilesRNS_ReleaseNotes.docx");
                     doc.SaveAs2(path + "ProfilesRNS\\Documentation\\ProfilesRNS_ReleaseNotes.pdf", word.WdSaveFormat.wdFormatPDF);
                     doc.Close();
-/*
-                    doc = app.Documents.Open(path + "..\\Documentation\\ORNG\\ORNG_GadgetDevelopment.docx");
-                    doc.SaveAs2(path + "ProfilesRNS\\Documentation\\ORNG\\ORNG_GadgetDevelopment.pdf", word.WdSaveFormat.wdFormatPDF);
-                    doc.Close();
 
-                    doc = app.Documents.Open(path + "..\\Documentation\\ORNG\\ORNG_InstallationGuide.docx");
-                    doc.SaveAs2(path + "ProfilesRNS\\Documentation\\ORNG\\ORNG_InstallationGuide.pdf", word.WdSaveFormat.wdFormatPDF);
+                    doc = app.Documents.Open(path + "..\\Documentation\\ProfilesRNS_v2.x.x_UpgradeGuide.docx");
+                    doc.SaveAs2(path + "ProfilesRNS\\Documentation\\ProfilesRNS_v2.x.x_UpgradeGuide.pdf", word.WdSaveFormat.wdFormatPDF);
                     doc.Close();
+                    /*
+                                        doc = app.Documents.Open(path + "..\\Documentation\\ORNG\\ORNG_GadgetDevelopment.docx");
+                                        doc.SaveAs2(path + "ProfilesRNS\\Documentation\\ORNG\\ORNG_GadgetDevelopment.pdf", word.WdSaveFormat.wdFormatPDF);
+                                        doc.Close();
 
-                    doc = app.Documents.Open(path + "..\\Documentation\\ORNG\\ORNG_TroubleShootingGuide.docx");
-                    doc.SaveAs2(path + "ProfilesRNS\\Documentation\\ORNG\\ORNG_TroubleShootingGuide.pdf", word.WdSaveFormat.wdFormatPDF);
-                    doc.Close();
-*/
+                                        doc = app.Documents.Open(path + "..\\Documentation\\ORNG\\ORNG_InstallationGuide.docx");
+                                        doc.SaveAs2(path + "ProfilesRNS\\Documentation\\ORNG\\ORNG_InstallationGuide.pdf", word.WdSaveFormat.wdFormatPDF);
+                                        doc.Close();
+
+                                        doc = app.Documents.Open(path + "..\\Documentation\\ORNG\\ORNG_TroubleShootingGuide.docx");
+                                        doc.SaveAs2(path + "ProfilesRNS\\Documentation\\ORNG\\ORNG_TroubleShootingGuide.pdf", word.WdSaveFormat.wdFormatPDF);
+                                        doc.Close();
+                    */
                     app.Quit();
 
 
