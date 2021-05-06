@@ -28,7 +28,7 @@
       <options>GetOnlyNewXML=True</options>
       <logLevel>0</logLevel>
       <GetPostDataProc>[Profile.Import].[PRNSWebservice.PubMed.GetAllPMIDs]</GetPostDataProc>
-      <ImportDataProc>[Profile.Import].[Publication.Pubmed.AddPubMedXML]</ImportDataProc>
+      <ImportDataProc>[Profile.Import].[PRNSWebservice.Pubmed.AddPubMedXML]</ImportDataProc>
     </Row>
     <Row>
       <job>GetPubMedXML_All</job>
@@ -36,7 +36,7 @@
       <options>GetOnlyNewXML=FALSE</options>
       <logLevel>0</logLevel>
       <GetPostDataProc>[Profile.Import].[PRNSWebservice.PubMed.GetAllPMIDs]</GetPostDataProc>
-      <ImportDataProc>[Profile.Import].[Publication.Pubmed.AddPubMedXML]</ImportDataProc>
+      <ImportDataProc>[Profile.Import].[PRNSWebservice.Pubmed.AddPubMedXML]</ImportDataProc>
     </Row>
     <Row>
       <job>PubMedDisambiguation_GetPubs</job>
