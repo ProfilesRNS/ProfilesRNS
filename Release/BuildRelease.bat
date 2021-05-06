@@ -128,6 +128,8 @@ copy ..\Database\ProfilesRNS_DataLoad_Part3.sql ProfilesRNS\Database\ProfilesRNS
 copy ..\Database\ProfilesRNS_GeoCodeJob.sql ProfilesRNS\Database\ProfilesRNS_GeoCodeJob.sql
 copy ..\Database\ExporterDisambiguation_GetFunding.sql ProfilesRNS\Database\ExporterDisambiguation_GetFunding.sql
 copy ..\Database\ProfilesRNS_BibliometricsJob.sql ProfilesRNS\Database\ProfilesRNS_BibliometricsJob.sql
+copy ..\Database\PubMedDisambiguation_GetPubs.sql ProfilesRNS\Database\PubMedDisambiguation_GetPubs.sql
+copy ..\Database\PubMedDisambiguation_GetPubMEDXML.sql ProfilesRNS\Database\PubMedDisambiguation_GetPubMEDXML.sql
 
 del "%RootPath%\Database\ProfilesRNS_CreateSchema.sql"
 pushd "%RootPath%\Database\schema"
