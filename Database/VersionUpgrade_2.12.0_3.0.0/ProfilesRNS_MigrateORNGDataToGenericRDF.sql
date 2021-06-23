@@ -13,7 +13,7 @@ select @wNodeID = NodeID from [RDF.].[Node] where value in ('http://profiles.cat
 select @orngwNodeID = NodeID from [RDF.].[Node] where value in ('http://orng.info/ontology/orng#hasYouTube')
 insert into [RDF.Security].NodeProperty (NodeID, Property, ViewSecurityGroup)
 	select nodeID, @wNodeID, ViewSecurityGroup from [RDF.Security].NodeProperty where Property = @orngwNodeID
-update [RDF.].Triple set ViewSecurityGroup = -50 where Predicate = @orngwNodeID
+--update [RDF.].Triple set ViewSecurityGroup = -50 where Predicate = @orngwNodeID
 
 update [Ontology.].ClassProperty set
 	ViewSecurityGroup = -50,
@@ -26,7 +26,7 @@ update [Ontology.].ClassProperty set
 	where property = 'http://orng.info/ontology/orng#hasYouTube'
 
 
-USE [ProfilesRNS_2_12_0]
+
 GO
 
 /****** Object:  Table [ORNG.].[AppData]    Script Date: 4/10/2020 4:44:03 PM ******/
@@ -71,7 +71,7 @@ select @wNodeID = NodeID from [RDF.].[Node] where value in ('http://profiles.cat
 select @orngwNodeID = NodeID from [RDF.].[Node] where value in ('http://orng.info/ontology/orng#hasTwitter')
 insert into [RDF.Security].NodeProperty (NodeID, Property, ViewSecurityGroup)
 	select nodeID, @wNodeID, ViewSecurityGroup from [RDF.Security].NodeProperty where Property = @orngwNodeID
-update [RDF.].Triple set ViewSecurityGroup = -50 where Predicate = @orngwNodeID
+--update [RDF.].Triple set ViewSecurityGroup = -50 where Predicate = @orngwNodeID
 
 update [Ontology.].ClassProperty set
 	ViewSecurityGroup = -50,
@@ -88,7 +88,7 @@ select @wNodeID = NodeID from [RDF.].[Node] where value in ('http://profiles.cat
 select @orngwNodeID = NodeID from [RDF.].[Node] where value in ('http://orng.info/ontology/orng#hasSlideShare')
 insert into [RDF.Security].NodeProperty (NodeID, Property, ViewSecurityGroup)
 	select nodeID, @wNodeID, ViewSecurityGroup from [RDF.Security].NodeProperty where Property = @orngwNodeID
-update [RDF.].Triple set ViewSecurityGroup = -50 where Predicate = @orngwNodeID
+--update [RDF.].Triple set ViewSecurityGroup = -50 where Predicate = @orngwNodeID
 
 update [Ontology.].ClassProperty set
 	ViewSecurityGroup = -50,
@@ -160,3 +160,33 @@ OPEN @curSlideShare
 CLOSE @curSlideShare
 DEALLOCATE @curSlideShare
 GO
+
+
+declare @videoOldNodeID bigint, @videoNewNodeID bigint, @slideshareOldNodeID bigint, @slideshareNewNodeID bigint, @twitterOldNodeID bigint, @twitterNewNodeID bigint
+select @twitterNewNodeID = nodeID from [RDF.].Node where value = 'http://profiles.catalyst.harvard.edu/ontology/plugins#Twitter'
+select @slideshareNewNodeID = nodeID from [RDF.].Node where value = 'http://profiles.catalyst.harvard.edu/ontology/plugins#FeaturedPresentations'
+select @videoNewNodeID = nodeID from [RDF.].Node where value = 'http://profiles.catalyst.harvard.edu/ontology/plugins#FeaturedVideos'
+select @twitterOldNodeID = nodeID from [RDF.].Node where value = 'http://orng.info/ontology/orng#hasTwitter'
+select @slideshareOldNodeID = nodeID from [RDF.].Node where value = 'http://orng.info/ontology/orng#hasSlideShare'
+select @videoOldNodeID = nodeID from [RDF.].Node where value = 'http://orng.info/ontology/orng#hasYouTube'
+
+update t1 set t1.ViewSecurityGroup = isnull(t2.ViewSecurityGroup, 0) from [RDF.].Triple t1 
+left join [RDF.].Triple t2
+on t1.Subject = t2.Subject and t1.Predicate = @twitterNewNodeID and t2.Predicate = @twitterOldNodeID
+where t1.Predicate = @twitterNewNodeID
+
+update [RDF.].Triple set ViewSecurityGroup = -50 where Predicate = @twitterOldNodeID
+
+update t1 set t1.ViewSecurityGroup = isnull(t2.ViewSecurityGroup, 0) from [RDF.].Triple t1 
+left join [RDF.].Triple t2
+on t1.Subject = t2.Subject and t1.Predicate = @slideshareNewNodeID and t2.Predicate = @slideshareOldNodeID
+where t1.Predicate = @slideshareNewNodeID
+ 
+update [RDF.].Triple set ViewSecurityGroup = -50 where Predicate = @slideshareOldNodeID
+
+update t1 set t1.ViewSecurityGroup = isnull(t2.ViewSecurityGroup, 0) from [RDF.].Triple t1 
+left join [RDF.].Triple t2
+on t1.Subject = t2.Subject and t1.Predicate = @videoNewNodeID and t2.Predicate = @videoOldNodeID
+where t1.Predicate = @videoNewNodeID
+
+update [RDF.].Triple set ViewSecurityGroup = -50 where Predicate = @videoOldNodeID

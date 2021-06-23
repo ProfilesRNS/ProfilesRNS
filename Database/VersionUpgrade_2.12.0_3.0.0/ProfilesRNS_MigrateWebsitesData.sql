@@ -77,7 +77,7 @@ select @orngwNodeID = NodeID from [RDF.].[Node] where value in ('http://orng.inf
 insert into [RDF.Security].NodeProperty (NodeID, Property, ViewSecurityGroup)
 select nodeID, @wNodeID, ViewSecurityGroup from [RDF.Security].NodeProperty where Property = @orngwNodeID
 
-update [RDF.].Triple set ViewSecurityGroup = -50 where Predicate = @orngwNodeID
+--update [RDF.].Triple set ViewSecurityGroup = -50 where Predicate = @orngwNodeID
 
 update [Ontology.].ClassProperty set
 	ViewSecurityGroup = -50,
@@ -112,6 +112,22 @@ EXEC [RDF.Stage].[ProcessDataMap] @DataMapID = @d4, @ShowCounts = 1
 EXEC [RDF.Stage].[ProcessDataMap] @DataMapID = @d5, @ShowCounts = 1
 EXEC [RDF.Stage].[ProcessDataMap] @DataMapID = @d6, @ShowCounts = 1
 EXEC [RDF.Stage].[ProcessDataMap] @DataMapID = @d7, @ShowCounts = 1
+
+
+declare @webpageOldNodeID bigint, @webpageNewNodeID bigint, @mediaOldNodeID bigint, @mediaNewNodeID bigint
+select @webpageOldNodeID = nodeID from [RDF.].Node where value = 'http://orng.info/ontology/orng#hasLinks'
+select @webpageNewNodeID = nodeID from [RDF.].Node where value = 'http://vivoweb.org/ontology/core#webpag'
+ 
+update t1 set t1.ViewSecurityGroup = isnull(t2.ViewSecurityGroup, 0) from [RDF.].Triple t1 
+left join [RDF.].Triple t2
+on t1.Subject = t2.Subject and t1.Predicate = @webpageNewNodeID and t2.Predicate = @webpageOldNodeID
+where t1.Predicate = @webpageNewNodeID
+
+update [RDF.].Triple set ViewSecurityGroup = -50 where Predicate = @webpageOldNodeID
+
+
+
+
 
 /***********************
 * End of Section 3
