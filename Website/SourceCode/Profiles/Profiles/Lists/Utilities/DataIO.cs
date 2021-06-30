@@ -676,43 +676,51 @@ namespace Profiles.Lists.Utilities
         }
         public static string GetNetworkRadialCoAuthors(string listid)
         {
+            string str = string.Empty;
 
-            StringBuilder data = new StringBuilder();
-            Framework.Utilities.DataIO dataio = new Framework.Utilities.DataIO();
-            try
+
+            if (Framework.Utilities.Cache.FetchObject(listid + "LISTGetNetworkRadialCoAuthors") == null)
             {
-                string connstr = dataio.GetConnectionString();
-                SqlConnection dbconnection = new SqlConnection(connstr);
-
-                dbconnection.Open();
-
-
-                SqlCommand dbcommand = new SqlCommand();
-                dbcommand.CommandType = CommandType.Text;
-                dbcommand.CommandText = string.Format("exec [Profile.Module].[NetworkRadial.List.GetCoAuthors] @OutputFormat='JSON', @UserID={0}", listid);
-                dbcommand.CommandTimeout = dataio.GetCommandTimeout();
-
-                dbcommand.Connection = dbconnection;
-                using (SqlDataReader dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection))
+                Framework.Utilities.DataIO dataio = new Framework.Utilities.DataIO();
+                try
                 {
+                    string connstr = dataio.GetConnectionString();
+                    SqlConnection dbconnection = new SqlConnection(connstr);
+                    SqlCommand dbcommand = new SqlCommand("[Profile.Module].[NetworkRadial.List.GetCoAuthors]");
+
+                    SqlDataReader dbreader;
+                    dbconnection.Open();
+                    dbcommand.CommandType = CommandType.StoredProcedure;
+                    dbcommand.CommandTimeout = dataio.GetCommandTimeout();
+                    dbcommand.Parameters.Add(new SqlParameter("@OutputFormat", "JSON"));
+                    dbcommand.Parameters.Add(new SqlParameter("@UserID", listid));
+
+                    dbcommand.Connection = dbconnection;
+                    dbreader = dbcommand.ExecuteReader(CommandBehavior.CloseConnection);
+
                     while (dbreader.Read())
-                        data.AppendLine(dbreader[0].ToString());
+                        str += dbreader[0].ToString();
+
+                    Framework.Utilities.DebugLogging.Log(str);
 
                     if (!dbreader.IsClosed)
                         dbreader.Close();
 
+                    Framework.Utilities.Cache.Set(listid + "LISTGetNetworkRadialCoAuthors", str);
                 }
-
+                catch (Exception ex)
+                {
+                    Framework.Utilities.DebugLogging.Log(ex.Message + " ++ " + ex.StackTrace);
+                }
             }
-            catch (Exception e)
+            else
             {
-                throw new Exception(e.Message);
+                str = (string)Framework.Utilities.Cache.FetchObject(listid + "LISTGetNetworkRadialCoAuthors");
             }
 
-
-            return data.ToString();
-
+            return str;
         }
+
 
         #region "GoogleMaps"
 
