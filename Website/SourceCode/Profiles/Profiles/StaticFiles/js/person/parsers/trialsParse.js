@@ -155,7 +155,7 @@ function setupTrialToggleDots(dots, target, i) {
     //let togglingDiv = target.find(`.toggle-${i}`);
     let togglingDiv = dots.parent().next();
     dots.on("click", function () {
-        toggleVisibility(togglingDiv, function () {
+        toggleEltVisibility(togglingDiv, function () {
             if (togglingDiv.is(":visible")) {
                 dots.attr("data-bs-original-title", "Show Less").tooltip('update').tooltip('show');
             } else {

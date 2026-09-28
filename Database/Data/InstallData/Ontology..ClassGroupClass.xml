@@ -44,4 +44,9 @@
     <ClassURI>http://vivoweb.org/ontology/core#Grant</ClassURI>
     <SortOrder>2</SortOrder>
   </Row>
+  <Row>
+    <ClassGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#ClassGroupResearch</ClassGroupURI>
+    <ClassURI>http://profiles.catalyst.harvard.edu/ontology/prns#MentoringJobOpportunity</ClassURI>
+    <SortOrder>3</SortOrder>
+  </Row>
 </Table>

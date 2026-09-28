@@ -100,7 +100,7 @@ function emitRhsSkeleton(target, title, blurb, innerKey) {
 
     blurbDiv.hide();
     info.on('click', function () {
-        toggleVisibility(blurbDiv);
+        toggleEltVisibility(blurbDiv);
     });
 }
 

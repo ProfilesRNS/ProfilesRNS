@@ -57,6 +57,7 @@ function ellipsizeToFit(text, target, extraWidth) {
     }
     return result;
 }
+// capitalize
 function initialCapital(input) {
     return input.charAt(0).toUpperCase() + input.substring(1);
 }

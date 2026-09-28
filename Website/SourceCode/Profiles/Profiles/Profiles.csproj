@@ -121,9 +121,11 @@
     <Content Include="Activity\Modules\ModuleCatalogue.xml" />
     <Content Include="Activity\Modules\Statistics\Statistics.ascx" />
     <Content Include="Activity\PresentationXML\ActivityDetails.xml" />
-    <Content Include="Branding\GoogleAnalytics.js" />
+    <Content Include="Branding\AnalyticsTrackingInsert.html" />
     <Content Include="DirectService.aspx" />
+    <Content Include="DIRECT\DIRECTSVC.aspx" />
     <Content Include="Edit\CSS\Edit.css" />
+    <Content Include="Edit\EditSVC.aspx" />
     <Content Include="Edit\Images\cal.png" />
     <Content Include="Edit\Images\icon_alert.gif" />
     <Content Include="Edit\Images\Icon_rounded_ArrowGrayDown.png" />
@@ -147,6 +149,7 @@
     <Content Include="Edit\Modules\CustomEditSocialMediaPlugIns\EditFeaturedVideos.ascx" />
     <Content Include="Edit\Modules\CustomEditSocialMediaPlugIns\EditTwitter.ascx" />
     <Content Include="Edit\Modules\CustomEditWebsite\CustomEditWebsite.ascx" />
+    <Content Include="Edit\UI\Default.aspx" />
     <Content Include="Framework\CSS\hms-catalyst.css" />
     <Content Include="Framework\CSS\prns-theme-menus-top.css" />
     <Content Include="Framework\CSS\prns-theme.css" />
@@ -314,6 +317,7 @@
     <Content Include="StaticFiles\css\common\map.css" />
     <Content Include="StaticFiles\css\common\parse.css" />
     <Content Include="StaticFiles\css\common\timeline.css" />
+    <Content Include="StaticFiles\css\edit\edit.css" />
     <Content Include="StaticFiles\css\helpAbout\helpAbout.css" />
     <Content Include="StaticFiles\css\paging\paging.css" />
     <Content Include="StaticFiles\css\person\person.css" />
@@ -328,6 +332,7 @@
     <Content Include="StaticFiles\html-templates\concept.html" />
     <Content Include="StaticFiles\html-templates\connection.html" />
     <Content Include="StaticFiles\html-templates\default.html" />
+    <Content Include="StaticFiles\html-templates\EditProperty.html" />
     <Content Include="StaticFiles\html-templates\group.html" />
     <Content Include="StaticFiles\html-templates\groupRole.html" />
     <Content Include="StaticFiles\html-templates\groupRoleByRole.html" />
@@ -522,6 +527,8 @@
     <Content Include="StaticFiles\js\connections\personCoauthorConnection.js" />
     <Content Include="StaticFiles\js\connections\personConceptConnection.js" />
     <Content Include="StaticFiles\js\connections\personSimilarConnection.js" />
+    <Content Include="StaticFiles\js\edit\editCommon.js" />
+    <Content Include="StaticFiles\js\edit\mentorOverviewEditing.js" />
     <Content Include="StaticFiles\js\group\groupPage.js" />
     <Content Include="StaticFiles\js\group\groupRolePage.js" />
     <Content Include="StaticFiles\js\helpAbout\aboutAndHelp.js" />
@@ -541,6 +548,7 @@
     <Content Include="StaticFiles\js\person\parsers\keyword.js" />
     <Content Include="StaticFiles\js\person\parsers\memberRoleParse.js" />
     <Content Include="StaticFiles\js\person\parsers\opportunityParse.js" />
+    <Content Include="StaticFiles\js\person\parsers\mentorJobAndOverviewParse.js" />
     <Content Include="StaticFiles\js\person\parsers\overviewParse.js" />
     <Content Include="StaticFiles\js\person\parsers\researchParse.js" />
     <Content Include="StaticFiles\js\person\parsers\trialsParse.js" />
@@ -640,6 +648,20 @@
     </Compile>
     <Compile Include="DirectService.aspx.designer.cs">
       <DependentUpon>DirectService.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DIRECT\DIRECTSVC.aspx.cs">
+      <DependentUpon>DIRECTSVC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DIRECT\DIRECTSVC.aspx.designer.cs">
+      <DependentUpon>DIRECTSVC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Edit\EditSVC.aspx.cs">
+      <DependentUpon>EditSVC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Edit\EditSVC.aspx.designer.cs">
+      <DependentUpon>EditSVC.aspx</DependentUpon>
     </Compile>
     <Compile Include="Edit\Modules\CustomEditAssociatedInformationResource\CustomEditAssociatedInformationResource.ascx.cs">
       <DependentUpon>CustomEditAssociatedInformationResource.ascx</DependentUpon>
@@ -744,6 +766,13 @@
     </Compile>
     <Compile Include="Edit\Modules\CustomEditWebsite\DataIO.cs" />
     <Compile Include="Edit\Modules\CustomEditWebsite\WebsiteState.cs" />
+    <Compile Include="Edit\UI\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Edit\UI\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Edit\Utilities\EducationalTrainingState.cs" />
     <Compile Include="Edit\Utilities\FundingState.cs" />
     <Compile Include="Edit\Utilities\GroupMemberState.cs" />

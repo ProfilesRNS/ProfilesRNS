@@ -1,9 +1,13 @@
 function prepareDropdownData(data) {
     let result = [];
-    let sortedOptionsData = prepareOtherOptionsData(data.OtherOptions);
-    if ( ! sortedOptionsData.length) {
-        $('#otherOptionsUlDiv').hide(); // hide does not work here
+    let sortedOtherOptionsData = prepareTwoLevelOptionsData(data.OtherOptions);
+    let sortedHasSectionsData = prepareTwoLevelOptionsData(data.HasSections);
+
+    if (sortedOtherOptionsData && ! sortedOtherOptionsData.length) {
         $('#otherOptionsUlDiv').addClass('d-none');
+    }
+    if (sortedHasSectionsData && ! sortedHasSectionsData.length) {
+        $('#hasSectionsUlDiv').addClass('d-none');
     }
     result.push ({
         label: 'Institution',
@@ -24,31 +28,41 @@ function prepareDropdownData(data) {
         list: data.FacultyType,
         useMultiCheckbox: true});
     result.push({
+        label: 'Profile Contains',
+        prefix: 'hasSections',
+        displayProperty: "PersonFilter",
+        list: sortedHasSectionsData,
+        useMultiCheckbox: true,
+        categoryProperty: "PersonFilterCategory"});
+    result.push({
         label: 'Other Options',
         prefix: 'otherOptions',
         displayProperty: "PersonFilter",
-        list: sortedOptionsData,
+        list: sortedOtherOptionsData,
         useMultiCheckbox: true,
         categoryProperty: "PersonFilterCategory"});
 
     return result;
 }
-function prepareOtherOptionsData(data) {
+function prepareTwoLevelOptionsData(data) {
     let result = [];
-    let categories = sortArrayViaSortLabel(data, 'CategorySort');
 
-    for (let i=0; i<categories.length; i++) {
-        let category = categories[i];
-        let categoryName = category.PersonFilterCategory;
-        let filters = sortArrayViaSortLabel(category.PersonFilters, "PersonFilterSort");
-        for (let i=0; i<filters.length; i++) {
-            let filter = filters[i];
-            let item = {
-                "NodeID": filter.NodeID,
-                "PersonFilter": filter.PersonFilter,
-                "PersonFilterCategory": categoryName,
-            };
-            result.push(item);
+    if (data) {
+        let categories = sortArrayViaSortLabel(data, 'CategorySort');
+
+        for (let i = 0; i < categories.length; i++) {
+            let category = categories[i];
+            let categoryName = category.PersonFilterCategory;
+            let filters = sortArrayViaSortLabel(category.PersonFilters, "PersonFilterSort");
+            for (let i = 0; i < filters.length; i++) {
+                let filter = filters[i];
+                let item = {
+                    "NodeID": filter.NodeID,
+                    "PersonFilter": filter.PersonFilter,
+                    "PersonFilterCategory": categoryName,
+                };
+                result.push(item);
+            }
         }
     }
     return result;
@@ -210,6 +224,10 @@ function setupDropdowns() {
     }
     hideLiItems();
     dropdownVisibilityAdjustToOverlaps();
+
+    // tighten up selectDisplay box
+    $('#hasSectionsUlDiv').find('.gradient').addClass('mt-1 pt-0 pb-0');
+    $('#peopleBox').find('#dropbox4Row').addClass('mt-3');
 }
 function showSearchFilterSelections(dropdownPrefix, target) {
     let displayProperty = gSearch[dropdownPrefix].displayProperty;
@@ -224,6 +242,7 @@ function showSearchFilterSelections(dropdownPrefix, target) {
     let list = selectedIndices.map(i => items[i][displayProperty]);
     let howMuch = list.length;
     let result = gSearch.selectedSt;
+    let addEllipsis = false;
 
     if (howMuch == 0) {
         result = gSearch.noneSt + result;
@@ -232,10 +251,20 @@ function showSearchFilterSelections(dropdownPrefix, target) {
         result = howMuch + result;
     }
     else {
-        result = list.join(', ');
+        let joinStr = `<span class="bold"> ${(dropdownPrefix == 'facultyTypes' ? 'or ' : 'and ')}</span>`;
+        let truncateAt = 65;
+        let fullResult = list.join(joinStr);
+        let truncatedResult = fullResult.substring(0, truncateAt);
+        if (fullResult != truncatedResult) {
+            addEllipsis = true;
+        }
+        result = truncatedResult;
     }
 
     target.html(result);
+    if (addEllipsis) {
+        target.append($('<span class="bold">...</span>'))
+    }
 }
 function indicesToItems(items, indices) {
     let result = indices.map(i => items[i]);
@@ -244,8 +273,9 @@ function indicesToItems(items, indices) {
 function collectDropdownSelections(selections) {
     for (let dropdownPrefix of gSearch.dropdownPrefixes) {
         let items = gSearch[dropdownPrefix].items;
+
         let jsonNodeIDLabel = gSearch.prefix2jsonLabel[dropdownPrefix];
-        let jsonNameLabel = gSearch.prefix2jsonLabel[dropdownPrefix] + 'Name';
+        let jsonNameLabel = jsonNodeIDLabel + 'Name';
         let singular = gSearch.prefix2singular[dropdownPrefix];
 
         let indices = gSearch[dropdownPrefix].selectedIndices;
@@ -258,8 +288,23 @@ function collectDropdownSelections(selections) {
             selectedNames = selectedItems.length > 0 ? `${selectedNames[0]}` : '';
             let allExceptCheckbox = gSearch[dropdownPrefix].allExceptCheckbox;
             selections[`${jsonNodeIDLabel}Except`] = allExceptCheckbox.is(':checked');
+
+            selections[jsonNodeIDLabel] = selectedNodeIDs;
+            selections[jsonNameLabel] = selectedNames;
         }
-        selections[jsonNodeIDLabel] = selectedNodeIDs;
-        selections[jsonNameLabel] = selectedNames;
+        else {
+            // post ProfileContains piggy-backed on OtherOptions
+            if (jsonNodeIDLabel == "ProfileContains") {
+                jsonNodeIDLabel = "OtherOptions";
+                jsonNameLabel = "OtherOptionsName";
+            }
+            // in case we process ProfileContains before seeing OtherOptions
+            if (!selections[jsonNodeIDLabel]) {
+                selections[jsonNodeIDLabel] = [];
+                selections[jsonNameLabel] = [];
+            }
+            selections[jsonNodeIDLabel] = selections[jsonNodeIDLabel].concat(selectedNodeIDs);
+            selections[jsonNameLabel] = selections[jsonNameLabel].concat(selectedNames);
+        }
     }
 }

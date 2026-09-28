@@ -22,6 +22,8 @@ const AccordionNestingOption = Object.freeze({
 ///////////////////////////////////////
 
 let gCommon = {};
+gCommon.twitter = 'X_formerlyKnownAsTwitter';
+
 gCommon.historyKey = 'profilesNavHistory';
 gCommon.undefined = 'undefined';
 
@@ -127,7 +129,7 @@ gCommon.schemaPlaceholder2 = "%%FOO2%%";
 gCommon.loginUrlSchema = `${g.profilesPath}/Login/default.aspx?method=login&redirectto=${gCommon.schemaPlaceholder}&sessionid=`;
 gCommon.seeAllPagesAUrl = `${g.profilesPath}/history`;
 gCommon.logoutUrl = `${g.profilesPath}/login/default.aspx?method=logout&redirectto=${encodeURIComponent(g.profilesRootURL)}`;
-gCommon.editMyProfileUrl = `${g.profilesPath}/edit/default.aspx?subject=`;
+gCommon.editProfileUrl = `${g.profilesPath}/edit/default.aspx?subject=`;
 gCommon.viewMyListUrl = `${g.profilesPath}/lists/default.aspx`;
 gCommon.dashboardUrl = `${g.profilesPath}/dashboard/default.aspx?subject=`
 gCommon.manageProxiesUrl = `${g.profilesPath}/proxy/default.aspx?subject=`;
@@ -296,6 +298,16 @@ let gPreloadable = {};
 gPreloadable.main = "MAIN";
 gPreloadable.rhs = "RHS";
 gPreloadable.none = "NONE";
+
+gDirect = {
+    timeout: 10000, // ms
+    directWebsite: 'http://direct2experts.org/'
+};
+gDirect.exactPhrase = 'exactPhrase';
+gDirect.searchFor = 'searchFor';
+
+let gEditProp = {};
+
 
 
 

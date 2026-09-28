@@ -2,7 +2,10 @@
 async function getPageJSON() {
     try {
         let json = JSON.parse(g.dataURLs);
-        let dataPath = json[0].dataURL; // data-existence sanity test
+
+        // you say tomato-array, I might say tomahto-object
+        let dataPath = Array.isArray(json) ? json[0].dataURL : json;
+
         let r = "";
         if (sessionInfo.canEditPage) r = "&r=" + Math.random().toString(36).slice(2, 5);;
 

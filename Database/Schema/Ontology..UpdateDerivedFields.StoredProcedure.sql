@@ -192,6 +192,9 @@ BEGIN
 	UPDATE a set a.PresentationID = x.PresentationID FROM [Display.].[DataPath] a 
 		JOIN [Ontology.Presentation].XML x ON a.PresentationType = x.Type AND ISNULL(a.PresentationSubject, '') = ISNULL(x.Subject, '') AND ISNULL(a.PresentationPredicate, '') = ISNULL(x.Predicate, '') AND ISNULL(a.PresentationObject, '') = ISNULL(x.Object, '')
 	
+	UPDATE a set a._ClassNode = n1.NodeID, a._PropertyNode = n2.NodeID FROM [Edit.Module].[EditClassProperty] a 
+		LEFT JOIN [RDF.].Node n1 ON [RDF.].fnValueHash(null, null, a.class) = n1.ValueHash
+		LEFT JOIN [RDF.].Node n2 ON [RDF.].fnValueHash(null, null, a.Property) = n2.ValueHash
 	
 
 	-- Funding

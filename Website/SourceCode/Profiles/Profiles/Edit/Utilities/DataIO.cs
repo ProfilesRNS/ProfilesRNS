@@ -23,13 +23,43 @@ using System.Data.SqlClient;
 using System.Xml;
 using System.Configuration;
 
-
 using Profiles.Framework.Utilities;
 
 namespace Profiles.Edit.Utilities
 {
     public class DataIO : Framework.Utilities.DataIO
     {
+
+        public string[] GetNewUIPredicates()
+        {
+            SessionManagement sm = new SessionManagement();
+            string connstr = ConfigurationManager.ConnectionStrings["ProfilesDB"].ConnectionString;
+
+            using (SqlConnection dbconnection = new SqlConnection(connstr))
+            {
+                List<string> predicates = new List<string>();
+
+                try
+                {
+                    dbconnection.Open();
+                    //For Output Parameters you need to pass a connection object to the framework so you can close it before reading the output params value.
+                    using (SqlDataReader reader = GetDBCommand(connstr, "select Property from [Edit.Module].[EditClassProperty]", CommandType.Text, CommandBehavior.CloseConnection, null).ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            predicates.Add(reader[0].ToString());
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Framework.Utilities.DebugLogging.Log(e.Message + e.StackTrace);
+                    throw new Exception(e.Message);
+                }
+
+                return predicates.ToArray();
+            }
+        }
         public int GetPersonID(Int64 nodeid)
         {
             SessionManagement sm = new SessionManagement();

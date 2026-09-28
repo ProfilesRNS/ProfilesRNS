@@ -1,1 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Framework/Template.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Profiles.DIRECT.Default" %>
+﻿<%@ Page  Language="C#"  AutoEventWireup="true"
+        MasterPageFile="~/Framework/Template.Master" 
+    CodeBehind="Default.aspx.cs"  Inherits="Profiles.DIRECT.Default" EnableViewState="true"
+    EnableEventValidation="false" EnableViewStateMac="false" ValidateRequest="false" %>

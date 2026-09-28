@@ -537,4 +537,26 @@
 	<rdfs:domain rdf:resource="http://profiles.catalyst.harvard.edu/ontology/prns#PluginInstance" />
     <rdfs:label rdf:resource="ProfilesRNS Plugin Instance For Person or Group" />
   </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupMentoring">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="Mentoring" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#hasMentoringJobOpportunity">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="job opportunities" />
+    <rdfs:range rdf:resource="http://profiles.catalyst.harvard.edu/ontology/prns#MentoringJobOpportunity" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#MentoringJobOpportunity">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label rdf:resource="MentoringJobOpportunity" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#mentoringJobOpportunityOf">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:domain rdf:resource="http://profiles.catalyst.harvard.edu/ontology/prns#MentoringJobOpportunity" />
+    <rdfs:label rdf:resource="mentoring job opportunities for" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://profiles.catalyst.harvard.edu/ontology/prns#mentoringOverview">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label rdf:resource="mentoring overview" />
+  </rdf:Description>
 </rdf:RDF>

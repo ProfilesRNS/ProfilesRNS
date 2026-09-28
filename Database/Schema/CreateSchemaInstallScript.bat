@@ -260,6 +260,10 @@ type Display..GetJsonLog.Table.sql
 type Display..ModuleMapping.Table.sql
 type Display..SearchEverything.Filters.Table.sql
 type Profile.Cache.Concept.Mesh.URL.Table.sql
+type Edit.Module.AddUpdateDataLog.Table.sql
+type Edit.Module.EditClassProperty.Table.sql
+type Profile.Data.Person.Mentoring.Overview.Table.sql
+type Profile.Data.Person.Mentoring.JobOpportunities.Table.sql
 
 
 type RDF..fnTripleHash.UserDefinedFunction.sql
@@ -800,3 +804,15 @@ type Profile.Cache.Person.UpdatePreferredPath.StoredProcedure.sql
 type Profile.Cache.Concept.UpdatePreferredPath.StoredProcedure.sql
 type Profile.Data.Group.GetPhotos.StoredProcedure.sql
 type Profile.Import.PRNSWebservice.Pubmed.ParseBibliometricResults.StoredProcedure.sql
+type Edit.Module.AddUpdateData.StoredProcedure.sql
+type Edit.Module.GetData.StoredProcedure.sql
+type Edit.Module.GetEditPropertyParams.StoredProcedure.sql
+type Edit.Module.SetVisibility.StoredProcedure.sql
+type Display.Module.Person.Mentoring.Overview.StoredProcedure.sql
+type Edit.Module.Person.Mentoring.Overview.getData.StoredProcedure.sql
+type Edit.Module.Person.Mentoring.Overview.StoredProcedure.sql
+type Display.Module.Person.Mentoring.JobOpportunities.StoredProcedure.sql
+type Edit.Module.Person.Mentoring.JobOpportunities.StoredProcedure.sql
+type Edit.Module.Person.Mentoring.JobOpportunities.getData.StoredProcedure.sql
+type Profile.Data.Person.Filter.UpdateFilters.StoredProcedure.sql
+

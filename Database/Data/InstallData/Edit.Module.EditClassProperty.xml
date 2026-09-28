@@ -1,0 +1,14 @@
+  <Table Name="[Edit.Module].[EditClassProperty]">
+    <Row>
+      <Class>http://xmlns.com/foaf/0.1/Person</Class>
+      <Property>http://profiles.catalyst.harvard.edu/ontology/prns#hasMentoringJobOpportunity</Property>
+      <AddUpdateStoredProcedure>[Edit.Module].[Person.Mentoring.JobOpportunities]</AddUpdateStoredProcedure>
+      <GetDataStoredProcedure>[Edit.Module].[Person.Mentoring.JobOpportunities.getData]</GetDataStoredProcedure>
+    </Row>
+    <Row>
+      <Class>http://xmlns.com/foaf/0.1/Person</Class>
+      <Property>http://profiles.catalyst.harvard.edu/ontology/prns#mentoringOverview</Property>
+      <AddUpdateStoredProcedure>[Edit.Module].[Person.Mentoring.Overview]</AddUpdateStoredProcedure>
+      <GetDataStoredProcedure>[Edit.Module].[Person.Mentoring.Overview.getData]</GetDataStoredProcedure>
+    </Row>
+  </Table>

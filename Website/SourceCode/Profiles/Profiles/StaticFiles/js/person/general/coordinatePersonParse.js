@@ -29,6 +29,9 @@ function parsePerson(jsonArray, lhsModules, rhsModules, andThen) {
     });
 }
 
+// todo We might nuke this fn, IFF (modules are mapped by
+//    getParser() in personPageSkeleton.js, and all modules
+//    come with a sortOrder in the Json)
 function whichParserInfo(moduleTitle, defaultTarget) {
     let parser = defaultLeftSideParser;
     let sort = 2000; // high number
@@ -37,6 +40,14 @@ function whichParserInfo(moduleTitle, defaultTarget) {
     let misc = { bannerText: "", blurb: ""};
 
     switch (moduleTitle) {
+        case "Mentoring_JobOpportunities":
+            parser = mentorJobOpportunityParser;
+            sort = 66;
+            break;
+        case "Mentoring_Overview":
+            parser = mentorOverviewParser;
+            sort = 65;
+            break;
         case "GeneralInfo":
             parser = generalInfoParser;
             sort = 1;
@@ -119,11 +130,11 @@ function whichParserInfo(moduleTitle, defaultTarget) {
             parentContainerName = "Featured Content";
             misc.bannerText = "videos";
             break;
-        case "Twitter":
+        case gCommon.twitter:
             parser = twitterParser;
             sort = 151;
             parentContainerName = "Featured Content";
-            misc.bannerText = "twitter";
+            misc.bannerText = gCommon.twitter;
             break;
         case "AuthorInAuthorship":
             parser = authorshipParser;

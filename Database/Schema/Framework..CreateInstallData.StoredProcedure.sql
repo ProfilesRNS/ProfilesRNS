@@ -515,6 +515,39 @@ BEGIN
 								for xml path('Row'), type
 							) 'Table'
 						for xml path(''), type
+					),
+ 				    ---------------------------------------------------------------
+					-- [Profile.Data].[Person.Filter]
+					---------------------------------------------------------------
+					(
+						select	'[Profile.Data].[Person.Filter]' 'Table/@Name',
+								(
+									select	PersonFilter 'PersonFilter',
+											PersonFilterCategory 'PersonFilterCategory',
+											PersonFilterSort 'PersonFilterSort',
+											ETLProcedure 'ETLProcedure',
+											ETLParams 'ETLParams',
+											IsActive 'IsActive',
+											SearchDropdown 'SearchDropdown'
+									from [Profile.Data].[Person.Filter]
+									for xml path('Row'), type
+								) 'Table'
+						for xml path(''), type
+					),
+					---------------------------------------------------------------
+					-- [Edit.Module].[EditClassProperty]
+					---------------------------------------------------------------
+					(
+						select	'[Edit.Module].[EditClassProperty]' 'Table/@Name',
+								(
+									select	Class 'Class',
+											Property 'Property',
+											AddUpdateStoredProcedure 'AddUpdateStoredProcedure',
+											GetDataStoredProcedure 'GetDataStoredProcedure'
+									from [Edit.Module].[EditClassProperty]
+									for xml path('Row'), type
+								) 'Table'
+						for xml path(''), type
 					)
 				for xml path(''), type
 			) 'Import'

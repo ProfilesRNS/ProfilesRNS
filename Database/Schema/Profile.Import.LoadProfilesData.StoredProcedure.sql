@@ -257,7 +257,7 @@ AS
             INTO    #filter
             FROM    [Profile.Data].[Person.FilterRelationship] pfr
                     JOIN [Profile.Data].Person p ON p.personid = pfr.personid
-                    JOIN [Profile.Data].[Person.Filter] pf ON pf.personfilterid = pfr.personfilterid
+                    JOIN [Profile.Data].[Person.Filter] pf ON pf.personfilterid = pfr.personfilterid AND ETLProcedure = '[Profile.Import].[LoadProfilesData]'
             CREATE CLUSTERED INDEX tmp ON #filter(internalusername)
             DELETE  FROM [Profile.Data].[Person.FilterRelationship]
             WHERE   personid IN (
@@ -272,6 +272,7 @@ AS
                                                            AND a.personfilter = pf.personfilter
                             WHERE   a.internalusername IS NULL
                                     OR p.internalusername IS NULL ) )
+					AND PersonFilterID in (select PersonFilterID from [Profile.Data].[Person.Filter] where ETLProcedure = '[Profile.Import].[LoadProfilesData]')
 
 
 

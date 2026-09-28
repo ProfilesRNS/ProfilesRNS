@@ -34,6 +34,8 @@ async function personPreload() {
     return [lhModules, rhModules, hiddenModules];
 }
 function partitionSkeletonModules(jsonArray) {
+    renameTwitter(jsonArray);
+
     // patch data -- nicer if data came with Panels, and those with uppercase
     jsonArray.forEach(m => { if (m.Panel) m.Panel = m.Panel.toUpperCase(); });
 
@@ -54,7 +56,19 @@ function partitionSkeletonModules(jsonArray) {
 
     return [lhModules, rhModules, hiddenModules];
 }
-function partitionFullModules(jsonArray) {
+function renameTwitter(jsonArray) {
+    jsonArray.forEach(m => {
+        if (m.DisplayModule.match(/\.Twitter$/)) {
+            m.DisplayModule = m.DisplayModule.replace(/Twitter$/, gCommon.twitter);
+        }
+        if (m.PropertyLabel) {
+            m.PropertyLabel = m.PropertyLabel.replace(/twitter/i, gCommon.twitter);
+        }
+    });
+}
+function  partitionFullModules(jsonArray) {
+    renameTwitter(jsonArray);
+
     let lhModules = jsonArray.filter(m => gPreloadable.modulePanels.get(m.DisplayModule) == gPreloadable.main);
     let rhModules = jsonArray.filter(m => gPreloadable.modulePanels.get(m.DisplayModule) == gPreloadable.rhs);
     let hiddenModules = jsonArray.filter(m => gPreloadable.modulePanels.get(m.DisplayModule) == gPreloadable.none);
@@ -66,6 +80,8 @@ function getParser(moduleTitle) {
         gPerson.parserMap = new Map();
         
         let map = gPerson.parserMap;
+        map.set("Mentoring_JobOpportunities", mentorJobOpportunityParser);
+        map.set("Mentoring_Overview", mentorOverviewParser);
         map.set("GeneralInfo", generalInfoParser);
         map.set("CurrentStudentOpportunities", opportunityParser);
         map.set("CompletedStudentProjects", completedProjectParser);
@@ -80,7 +96,7 @@ function getParser(moduleTitle) {
         map.set("ClinicalTrialRole", trialsParser);
         map.set("FeaturedPresentations", presentationsParser);
         map.set("FeaturedVideos", videosParser);
-        map.set("Twitter", twitterParser);
+        map.set(gCommon.twitter, twitterParser);
         map.set("AuthorInAuthorship", authorshipParser);
     }
     let candidate = gPerson.parserMap.get(moduleTitle);
@@ -177,7 +193,7 @@ function skeletonRhsParser(moduleJson) {
         .append(moreInfoButton);
 
     moreInfoButton.on("click", function() {
-        toggleVisibility(blurbDiv);
+        toggleEltVisibility(blurbDiv);
     })
 
     targetDiv.append(dataDiv);

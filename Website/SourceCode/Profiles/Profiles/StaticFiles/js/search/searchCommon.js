@@ -152,7 +152,7 @@ function minimalPeopleSearchByTerm(term) {
     selections.FirstName = "";
     selections.InstitutionName = "";
     selections.DepartmentName = "";
-    selections.FacultyTypeName = "";
+    selections.FacultyTypeName = [];
     selections.OtherOptionsName = [];
 
     selections.KeywordExact = false;
@@ -176,7 +176,7 @@ function minimalPeopleSearchByDept(institution, dept, deptName) {
     selections.LastName = "";
     selections.FirstName = "";
     selections.InstitutionName = "";
-    selections.FacultyTypeName = "";
+    selections.FacultyTypeName = [];
     selections.OtherOptionsName = [];
 
     selections.KeywordExact = false;
@@ -213,17 +213,13 @@ function emitCriteriaOnRhs(results, withWhy) {
         target: target, klass: klass, eltType: eltType, except: results.SearchQuery.InstitutionExcept}));
     addedBreaks.push(addIfPresent({text: results.SearchQuery.DepartmentName,
         target: target, klass: klass, eltType: eltType, except: results.SearchQuery.DepartmentExcept}));
-    addedBreaks.push(addIfPresent({text: results.SearchQuery.FacultyTypeName,
-        target: target, klass: klass, eltType: eltType}));
-    addedBreaks.push(addIfPresent({text: results.SearchQuery.OtherOptionsName,
-        target: target, klass: klass, eltType: eltType}));
 
-    addedBreaks = addedBreaks.filter(lb => lb); // ie, keep non-empties
-    if (addedBreaks.length) {
-        let lastBreak = addedBreaks[addedBreaks.length - 1];
-        lastBreak.remove();
+    for (let whichDropdown of ['FacultyTypeName', 'OtherOptionsName']) {
+        for (let item of results.SearchQuery[whichDropdown]) {
+            addedBreaks.push(addIfPresent({text: item,
+                target: target, klass: klass, eltType: eltType}));
+        }
     }
-
     if (withWhy) {
         target.append($('<hr class="tightHr"/>'));
         divSpanifyTo('Click "Why?" to see why a person matched the search.',

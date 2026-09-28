@@ -9,10 +9,20 @@ function setupParseResultAndOverallResultDivs(moduleJson, moduleTitle, miscInfo)
     }
     return [parseResultDiv, overallResultDiv];
 }
-function defaultLeftSideParser(moduleJson, moduleTitle, miscInfo) {
+function teaserDefaultParser(json, moduleTitle, miscInfo, explicitTarget, teaser) {
+    let payloadDiv = getTargetUntentavizeIfSo(moduleTitle, explicitTarget);
+    let resultDiv = defaultLeftSideParser(json, moduleTitle, miscInfo);
+    payloadDiv.append(`<div><h4>${teaser}</h4></div>`);
+    payloadDiv.append(resultDiv);
+    return payloadDiv;
+}
+function defaultLeftSideParser(moduleJson, moduleTitle, miscInfo, teaser) {
     let [parseResultDiv, overallResultDiv] =
         setupParseResultAndOverallResultDivs(moduleJson, moduleTitle, miscInfo);
 
+    if (teaser) {
+        parseResultDiv.append(`<div><h2>${teaser}</h2></div>`)
+    }
     let thisIsWhereDiv = $(`<div class="bold green">
         The following data (if any) is what we will display (nicely) for Module: ${moduleTitle}</div>`)
     parseResultDiv.append(thisIsWhereDiv);

@@ -16,6 +16,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Text;
 using System.Xml;
+using System.Linq;
 
 using Profiles.Framework.Utilities;
 
@@ -23,6 +24,8 @@ namespace Profiles.Edit.Modules.EditPropertyList
 {
     public partial class EditPropertyList : BaseModule
     {
+        string[] newUIpredicates;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             DrawProfilesModule();
@@ -37,6 +40,9 @@ namespace Profiles.Edit.Modules.EditPropertyList
 
         private void DrawProfilesModule()
         {
+            Edit.Utilities.DataIO editData = new Profiles.Edit.Utilities.DataIO();
+            newUIpredicates = editData.GetNewUIPredicates();
+
             List<GenericListItem> gli = new List<GenericListItem>();
             bool canedit = false;
             Profile.Utilities.DataIO data = new Profiles.Profile.Utilities.DataIO();
@@ -153,10 +159,10 @@ namespace Profiles.Edit.Modules.EditPropertyList
 
                 //ddl.Attributes.Add("onchange", "JavaScript:showstatus()");
                 hf.Value = si.ItemURI;
-                if (si.ItemURI.StartsWith(Profiles.ORNG.Utilities.OpenSocialManager.ORNG_ONTOLOGY_PREFIX))
-                {
-                    ((Control)e.Row.FindControl("imgOrng")).Visible = true ;
-                }
+//                if (si.ItemURI.StartsWith(Profiles.ORNG.Utilities.OpenSocialManager.ORNG_ONTOLOGY_PREFIX))
+//                {
+//                    ((Control)e.Row.FindControl("imgOrng")).Visible = true ;
+//                }
 
 
                 switch (si.ObjectType)
@@ -170,7 +176,8 @@ namespace Profiles.Edit.Modules.EditPropertyList
                 }
 
                 string editlink = "javascript:GoTo('" + Root.Domain + "/edit/default.aspx?subject=" + this.Subject.ToString() + "&predicateuri=" + hf.Value.Replace("#", "!") + "&module=DisplayItemToEdit&ObjectType=" + objecttype + "')";
-
+                if (newUIpredicates.Any(p => p.Equals(hf.Value)))
+                    editlink = "javascript:GoTo('" + Root.Domain + "/edit/ui/default.aspx?subject=" + this.Subject.ToString() + "&predicateuri=" + hf.Value.Replace("#", "!") + "&module=DisplayItemToEdit&ObjectType=" + objecttype + "')";
                 if (e.Row.RowState == DataControlRowState.Alternate)
                 {
                     e.Row.Attributes.Add("onmouseover", "doListTableRowOver(this);");

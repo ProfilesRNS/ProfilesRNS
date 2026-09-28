@@ -1,0 +1,332 @@
+<Table Name="[Profile.Data].[Person.Filter]">
+  <Row>
+    <PersonFilter>Awards and Honors</PersonFilter>
+    <PersonFilterCategory>OLD Find Profile pages with these sections:</PersonFilterCategory>
+    <PersonFilterSort>1</PersonFilterSort>
+    <ETLProcedure>[Profile.Import].[LoadProfilesData]</ETLProcedure>
+    <IsActive>1</IsActive>
+    <SearchDropdown>OtherOptions</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>Education and Training</PersonFilter>
+    <PersonFilterCategory>OLD Find Profile pages with these sections:</PersonFilterCategory>
+    <PersonFilterSort>2</PersonFilterSort>
+    <ETLProcedure>[Profile.Import].[LoadProfilesData]</ETLProcedure>
+    <IsActive>1</IsActive>
+    <SearchDropdown>OtherOptions</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>Photo</PersonFilter>
+    <PersonFilterCategory>OLD Find Profile pages with these sections:</PersonFilterCategory>
+    <PersonFilterSort>6</PersonFilterSort>
+    <ETLProcedure>[Profile.Import].[LoadProfilesData]</ETLProcedure>
+    <IsActive>1</IsActive>
+    <SearchDropdown>OtherOptions</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>Overview</PersonFilter>
+    <PersonFilterCategory>OLD Find Profile pages with these sections:</PersonFilterCategory>
+    <PersonFilterSort>5</PersonFilterSort>
+    <ETLProcedure>[Profile.Import].[LoadProfilesData]</ETLProcedure>
+    <IsActive>1</IsActive>
+    <SearchDropdown>OtherOptions</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>Freetext Keywords</PersonFilter>
+    <PersonFilterCategory>OLD Find Profile pages with these sections:</PersonFilterCategory>
+    <PersonFilterSort>3</PersonFilterSort>
+    <ETLProcedure>[Profile.Import].[LoadProfilesData]</ETLProcedure>
+    <IsActive>1</IsActive>
+    <SearchDropdown>OtherOptions</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>Research Activities and Funding</PersonFilter>
+    <PersonFilterCategory>OLD Find Profile pages with these sections:</PersonFilterCategory>
+    <PersonFilterSort>7</PersonFilterSort>
+    <ETLProcedure>[Profile.Import].[LoadProfilesData]</ETLProcedure>
+    <IsActive>1</IsActive>
+    <SearchDropdown>OtherOptions</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>ORCID</PersonFilter>
+    <PersonFilterCategory>OLD Find Profile pages with these sections:</PersonFilterCategory>
+    <PersonFilterSort>4</PersonFilterSort>
+    <ETLProcedure>[Profile.Import].[LoadProfilesData]</ETLProcedure>
+    <IsActive>1</IsActive>
+    <SearchDropdown>OtherOptions</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>0 Publications</PersonFilter>
+    <PersonFilterCategory>Publications:</PersonFilterCategory>
+    <PersonFilterSort>8</PersonFilterSort>
+    <ETLProcedure>[Profile.Import].[LoadProfilesData]</ETLProcedure>
+    <IsActive>1</IsActive>
+    <SearchDropdown>OtherOptions</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>1-9 Publications</PersonFilter>
+    <PersonFilterCategory>Publications:</PersonFilterCategory>
+    <PersonFilterSort>9</PersonFilterSort>
+    <ETLProcedure>[Profile.Import].[LoadProfilesData]</ETLProcedure>
+    <IsActive>1</IsActive>
+    <SearchDropdown>OtherOptions</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>10-49 Publications</PersonFilter>
+    <PersonFilterCategory>Publications:</PersonFilterCategory>
+    <PersonFilterSort>10</PersonFilterSort>
+    <ETLProcedure>[Profile.Import].[LoadProfilesData]</ETLProcedure>
+    <IsActive>1</IsActive>
+    <SearchDropdown>OtherOptions</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>50-99 Publications</PersonFilter>
+    <PersonFilterCategory>Publications:</PersonFilterCategory>
+    <PersonFilterSort>11</PersonFilterSort>
+    <ETLProcedure>[Profile.Import].[LoadProfilesData]</ETLProcedure>
+    <IsActive>1</IsActive>
+    <SearchDropdown>OtherOptions</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>100 or Greater Publications</PersonFilter>
+    <PersonFilterCategory>Publications:</PersonFilterCategory>
+    <PersonFilterSort>12</PersonFilterSort>
+    <ETLProcedure>[Profile.Import].[LoadProfilesData]</ETLProcedure>
+    <IsActive>1</IsActive>
+    <SearchDropdown>OtherOptions</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>Photo</PersonFilter>
+    <PersonFilterCategory>Address</PersonFilterCategory>
+    <PersonFilterSort>1</PersonFilterSort>
+    <ETLProcedure>[Profile.Data].[Person.Filter.UpdateFilters]/Sections</ETLProcedure>
+    <ETLParams>http://profiles.catalyst.harvard.edu/ontology/prns#mainImage</ETLParams>
+    <IsActive>1</IsActive>
+    <SearchDropdown>Sections</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>Education and Training</PersonFilter>
+    <PersonFilterCategory>Biography</PersonFilterCategory>
+    <PersonFilterSort>2</PersonFilterSort>
+    <ETLProcedure>[Profile.Data].[Person.Filter.UpdateFilters]/Sections</ETLProcedure>
+    <ETLParams>http://vivoweb.org/ontology/core#educationalTraining</ETLParams>
+    <IsActive>1</IsActive>
+    <SearchDropdown>Sections</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>Awards and Honors</PersonFilter>
+    <PersonFilterCategory>Biography</PersonFilterCategory>
+    <PersonFilterSort>3</PersonFilterSort>
+    <ETLProcedure>[Profile.Data].[Person.Filter.UpdateFilters]/Sections</ETLProcedure>
+    <ETLParams>http://vivoweb.org/ontology/core#awardOrHonor</ETLParams>
+    <IsActive>1</IsActive>
+    <SearchDropdown>Sections</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>Overview</PersonFilter>
+    <PersonFilterCategory>Overview</PersonFilterCategory>
+    <PersonFilterSort>4</PersonFilterSort>
+    <ETLProcedure>[Profile.Data].[Person.Filter.UpdateFilters]/Sections</ETLProcedure>
+    <ETLParams>http://vivoweb.org/ontology/core#overview</ETLParams>
+    <IsActive>1</IsActive>
+    <SearchDropdown>Sections</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>Freetext Keywords</PersonFilter>
+    <PersonFilterCategory>Overview</PersonFilterCategory>
+    <PersonFilterSort>5</PersonFilterSort>
+    <ETLProcedure>[Profile.Data].[Person.Filter.UpdateFilters]/Sections</ETLProcedure>
+    <ETLParams>http://vivoweb.org/ontology/core#freetextKeyword</ETLParams>
+    <IsActive>1</IsActive>
+    <SearchDropdown>Sections</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>Webpage</PersonFilter>
+    <PersonFilterCategory>Overview</PersonFilterCategory>
+    <PersonFilterSort>6</PersonFilterSort>
+    <ETLProcedure>[Profile.Data].[Person.Filter.UpdateFilters]/Sections</ETLProcedure>
+    <ETLParams>http://vivoweb.org/ontology/core#webpage</ETLParams>
+    <IsActive>1</IsActive>
+    <SearchDropdown>Sections</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>Media Links</PersonFilter>
+    <PersonFilterCategory>Overview</PersonFilterCategory>
+    <PersonFilterSort>7</PersonFilterSort>
+    <ETLProcedure>[Profile.Data].[Person.Filter.UpdateFilters]/Sections</ETLProcedure>
+    <ETLParams>http://profiles.catalyst.harvard.edu/ontology/prns#mediaLinks</ETLParams>
+    <IsActive>1</IsActive>
+    <SearchDropdown>Sections</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>Available to Mentor - Students on Research</PersonFilter>
+    <PersonFilterCategory>Mentoring</PersonFilterCategory>
+    <PersonFilterSort>8</PersonFilterSort>
+    <ETLProcedure>[Profile.Data].[Person.Filter.UpdateFilters]/MentoringOverview</ETLProcedure>
+    <ETLParams>studentsOnResearch</ETLParams>
+    <IsActive>1</IsActive>
+    <SearchDropdown>Sections</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>Available to Mentor - Students on Career Development</PersonFilter>
+    <PersonFilterCategory>Mentoring</PersonFilterCategory>
+    <PersonFilterSort>9</PersonFilterSort>
+    <ETLProcedure>[Profile.Data].[Person.Filter.UpdateFilters]/MentoringOverview</ETLProcedure>
+    <ETLParams>studentsOnCareerDevelopment</ETLParams>
+    <IsActive>1</IsActive>
+    <SearchDropdown>Sections</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>Available to Mentor - Students on Work Life Balance</PersonFilter>
+    <PersonFilterCategory>Mentoring</PersonFilterCategory>
+    <PersonFilterSort>10</PersonFilterSort>
+    <ETLProcedure>[Profile.Data].[Person.Filter.UpdateFilters]/MentoringOverview</ETLProcedure>
+    <ETLParams>studentsOnWorkLifeBalance</ETLParams>
+    <IsActive>1</IsActive>
+    <SearchDropdown>Sections</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>Available to Mentor - Faculty on Research</PersonFilter>
+    <PersonFilterCategory>Mentoring</PersonFilterCategory>
+    <PersonFilterSort>11</PersonFilterSort>
+    <ETLProcedure>[Profile.Data].[Person.Filter.UpdateFilters]/MentoringOverview</ETLProcedure>
+    <ETLParams>facultyOnResearch</ETLParams>
+    <IsActive>1</IsActive>
+    <SearchDropdown>Sections</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>Available to Mentor - Faculty on Career Development</PersonFilter>
+    <PersonFilterCategory>Mentoring</PersonFilterCategory>
+    <PersonFilterSort>12</PersonFilterSort>
+    <ETLProcedure>[Profile.Data].[Person.Filter.UpdateFilters]/MentoringOverview</ETLProcedure>
+    <ETLParams>facultyOnCareerDevelopment</ETLParams>
+    <IsActive>1</IsActive>
+    <SearchDropdown>Sections</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>Available to Mentor - Faculty on Work Life Balance</PersonFilter>
+    <PersonFilterCategory>Mentoring</PersonFilterCategory>
+    <PersonFilterSort>13</PersonFilterSort>
+    <ETLProcedure>[Profile.Data].[Person.Filter.UpdateFilters]/MentoringOverview</ETLProcedure>
+    <ETLParams>facultyOnWorkLifeBalance</ETLParams>
+    <IsActive>1</IsActive>
+    <SearchDropdown>Sections</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>Available to Mentor - Residents and Fellows on Research</PersonFilter>
+    <PersonFilterCategory>Mentoring</PersonFilterCategory>
+    <PersonFilterSort>14</PersonFilterSort>
+    <ETLProcedure>[Profile.Data].[Person.Filter.UpdateFilters]/MentoringOverview</ETLProcedure>
+    <ETLParams>residentsAndFellowsOnResearch</ETLParams>
+    <IsActive>1</IsActive>
+    <SearchDropdown>Sections</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>Available to Mentor - Residents and Fellows on Career Development</PersonFilter>
+    <PersonFilterCategory>Mentoring</PersonFilterCategory>
+    <PersonFilterSort>15</PersonFilterSort>
+    <ETLProcedure>[Profile.Data].[Person.Filter.UpdateFilters]/MentoringOverview</ETLProcedure>
+    <ETLParams>residentsAndFellowsOnCareerDevelopment</ETLParams>
+    <IsActive>1</IsActive>
+    <SearchDropdown>Sections</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>Available to Mentor - Residents and Fellows on Work Life Balance</PersonFilter>
+    <PersonFilterCategory>Mentoring</PersonFilterCategory>
+    <PersonFilterSort>16</PersonFilterSort>
+    <ETLProcedure>[Profile.Data].[Person.Filter.UpdateFilters]/MentoringOverview</ETLProcedure>
+    <ETLParams>residentsAndFellowsOnWorkLifeBalance</ETLParams>
+    <IsActive>1</IsActive>
+    <SearchDropdown>Sections</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>Job Opportunities - Hiring Students</PersonFilter>
+    <PersonFilterCategory>Mentoring</PersonFilterCategory>
+    <PersonFilterSort>17</PersonFilterSort>
+    <ETLProcedure>[Profile.Data].[Person.Filter.UpdateFilters]/Mentoring</ETLProcedure>
+    <ETLParams>Students</ETLParams>
+    <IsActive>1</IsActive>
+    <SearchDropdown>Sections</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>Job Opportunities - Hiring Faculty</PersonFilter>
+    <PersonFilterCategory>Mentoring</PersonFilterCategory>
+    <PersonFilterSort>18</PersonFilterSort>
+    <ETLProcedure>[Profile.Data].[Person.Filter.UpdateFilters]/Mentoring</ETLProcedure>
+    <ETLParams>Faculty</ETLParams>
+    <IsActive>1</IsActive>
+    <SearchDropdown>Sections</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>Job Opportunities - Hiring Fellows and Postdocs</PersonFilter>
+    <PersonFilterCategory>Mentoring</PersonFilterCategory>
+    <PersonFilterSort>19</PersonFilterSort>
+    <ETLProcedure>[Profile.Data].[Person.Filter.UpdateFilters]/Mentoring</ETLProcedure>
+    <ETLParams>Fellows</ETLParams>
+    <IsActive>1</IsActive>
+    <SearchDropdown>Sections</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>Job Opportunities - Hiring Research Staff</PersonFilter>
+    <PersonFilterCategory>Mentoring</PersonFilterCategory>
+    <PersonFilterSort>20</PersonFilterSort>
+    <ETLProcedure>[Profile.Data].[Person.Filter.UpdateFilters]/Mentoring</ETLProcedure>
+    <ETLParams>Staff</ETLParams>
+    <IsActive>1</IsActive>
+    <SearchDropdown>Sections</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>Research Activities and Funding</PersonFilter>
+    <PersonFilterCategory>Research</PersonFilterCategory>
+    <PersonFilterSort>21</PersonFilterSort>
+    <ETLProcedure>[Profile.Data].[Person.Filter.UpdateFilters]/Sections</ETLProcedure>
+    <ETLParams>http://vivoweb.org/ontology/core#hasResearcherRole</ETLParams>
+    <IsActive>1</IsActive>
+    <SearchDropdown>Sections</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>Featured Presentations</PersonFilter>
+    <PersonFilterCategory>Featured Content</PersonFilterCategory>
+    <PersonFilterSort>22</PersonFilterSort>
+    <ETLProcedure>[Profile.Data].[Person.Filter.UpdateFilters]/Sections</ETLProcedure>
+    <ETLParams>http://profiles.catalyst.harvard.edu/ontology/plugins#FeaturedPresentations</ETLParams>
+    <IsActive>1</IsActive>
+    <SearchDropdown>Sections</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>Featured Videos</PersonFilter>
+    <PersonFilterCategory>Featured Content</PersonFilterCategory>
+    <PersonFilterSort>23</PersonFilterSort>
+    <ETLProcedure>[Profile.Data].[Person.Filter.UpdateFilters]/Sections</ETLProcedure>
+    <ETLParams>http://profiles.catalyst.harvard.edu/ontology/plugins#FeaturedVideos</ETLParams>
+    <IsActive>1</IsActive>
+    <SearchDropdown>Sections</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>Twitter</PersonFilter>
+    <PersonFilterCategory>Featured Content</PersonFilterCategory>
+    <PersonFilterSort>24</PersonFilterSort>
+    <ETLProcedure>[Profile.Data].[Person.Filter.UpdateFilters]/Sections</ETLProcedure>
+    <ETLParams>http://profiles.catalyst.harvard.edu/ontology/plugins#Twitter</ETLParams>
+    <IsActive>1</IsActive>
+    <SearchDropdown>Sections</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>Publications</PersonFilter>
+    <PersonFilterCategory>Bibliographic</PersonFilterCategory>
+    <PersonFilterSort>25</PersonFilterSort>
+    <ETLProcedure>[Person.Data].[Person.Filter.UpdateFilters]/Sections</ETLProcedure>
+    <ETLParams>http://vivoweb.org/ontology/core#authorInAuthorship</ETLParams>
+    <IsActive>1</IsActive>
+    <SearchDropdown>Sections</SearchDropdown>
+  </Row>
+  <Row>
+    <PersonFilter>ORCID</PersonFilter>
+    <PersonFilterCategory>Identifiers</PersonFilterCategory>
+    <PersonFilterSort>26</PersonFilterSort>
+    <ETLProcedure>[Profile.Data].[Person.Filter.UpdateFilters]/Sections</ETLProcedure>
+    <ETLParams>http://vivoweb.org/ontology/core#orcidId</ETLParams>
+    <IsActive>1</IsActive>
+    <SearchDropdown>Sections</SearchDropdown>
+  </Row>
+</Table>

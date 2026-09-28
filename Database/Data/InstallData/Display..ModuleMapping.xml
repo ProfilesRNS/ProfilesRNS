@@ -151,20 +151,6 @@
 		<PresentationSubject>http://xmlns.com/foaf/0.1/Person</PresentationSubject>
 	</Row>
 	<Row>
-		<ClassProperty>http://profiles.catalyst.harvard.edu/ontology/catalyst#advisorInMentoringCurrentStudentOpportunity</ClassProperty>
-		<DisplayModule>Person.CatalystMentoringCurrentStudentOpportunity</DisplayModule>
-		<DataStoredProc>[Catalyst.Display].[Person.MentoringCurrentStudentOpportunity]</DataStoredProc>
-		<Tab>data</Tab>
-		<LayoutModule>1</LayoutModule>
-		<GroupLabel>Mentoring</GroupLabel>
-		<PropertyLabel>current student opportunities</PropertyLabel>
-		<Panel>main</Panel>
-		<SortOrder>51</SortOrder>
-		<LayoutDataModule>0</LayoutDataModule>
-		<PresentationType>P</PresentationType>
-		<PresentationSubject>http://xmlns.com/foaf/0.1/Person</PresentationSubject>
-	</Row>
-	<Row>
 		<ClassProperty>http://vivoweb.org/ontology/core#hasResearcherRole</ClassProperty>
 		<DisplayModule>Person.ResearcherRole</DisplayModule>
 		<DataStoredProc>[Display.Module].[Person.ResearcherRole]</DataStoredProc>
@@ -921,4 +907,32 @@
 		<PresentationType>P</PresentationType>
 		<PresentationSubject>http://www.w3.org/2004/02/skos/core#Concept</PresentationSubject>
 	</Row>
+	<Row>
+		<ClassProperty>http://profiles.catalyst.harvard.edu/ontology/prns#hasMentoringJobOpportunity</ClassProperty>
+		<DisplayModule>Person.Mentoring.JobOpportunities</DisplayModule>
+		<DataStoredProc>[Display.Module].[Person.Mentoring.JobOpportunities]</DataStoredProc>
+		<Tab>data</Tab>
+		<LayoutModule>1</LayoutModule>
+		<GroupLabel>Mentoring</GroupLabel>
+		<PropertyLabel>job opportunities</PropertyLabel>
+		<Panel>main</Panel>
+		<SortOrder>51</SortOrder>
+		<LayoutDataModule>0</LayoutDataModule>
+		<PresentationType>P</PresentationType>
+		<PresentationSubject>http://xmlns.com/foaf/0.1/Person</PresentationSubject>
+    </Row>
+    <Row>
+		<ClassProperty>http://profiles.catalyst.harvard.edu/ontology/prns#mentoringOverview</ClassProperty>
+		<DisplayModule>Person.Mentoring.Overview</DisplayModule>
+		<DataStoredProc>[Display.Module].[Person.Mentoring.Overview]</DataStoredProc>
+		<Tab>data</Tab>
+		<LayoutModule>1</LayoutModule>
+		<GroupLabel>Mentoring</GroupLabel>
+		<PropertyLabel>mentoring overview</PropertyLabel>
+		<Panel>main</Panel>
+		<SortOrder>52</SortOrder>
+		<LayoutDataModule>0</LayoutDataModule>
+		<PresentationType>P</PresentationType>
+		<PresentationSubject>http://xmlns.com/foaf/0.1/Person</PresentationSubject>
+    </Row>
 </Table>

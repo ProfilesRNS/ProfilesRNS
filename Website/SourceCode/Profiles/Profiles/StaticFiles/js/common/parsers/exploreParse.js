@@ -41,7 +41,7 @@ function exploreFullParser(moduleJson, postSkeleton) {
             .append(moreInfoButton);
 
         moreInfoButton.on("click", function() {
-            toggleVisibility(blurbDiv);
+            toggleEltVisibility(blurbDiv);
         })
     }
 

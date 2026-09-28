@@ -52,26 +52,35 @@ async function commonSetup(title) {
     console.log("g values upon 'ready': ", g);
     console.log("sessionInfo values upon 'ready': ", sessionInfo);
 
-    if (g.preLoad) {
+    if (title) {
+        h2Title(title);
+    }
+    else {
         addTitleFromPreLoad();
     }
 }
+
 function addTitleFromPreLoad() {
     let preLoadTitle;
 
     try {
-        let preLoad = JSON.parse(g.preLoad).filter(m => m.DisplayModule.match(/Person.Label$/));
-        let moduleData = preLoad[0].ModuleData[0];
-        preLoadTitle = orNaProperty(moduleData, 'DisplayName',
-            `DisplayName in? ${JSON.stringify(moduleData)}`);
-        //preLoadTitle = ;
-        $('div.topOfPageItems').append($(`<h2 class="preloaded page-title">${preLoadTitle}</h2>`));
+        if (g.preLoad) {
+            let preLoad = JSON.parse(g.preLoad).filter(m => m.DisplayModule.match(/Person.Label$/));
+            let moduleData = preLoad[0].ModuleData[0];
+            preLoadTitle = orNaProperty(moduleData, 'DisplayName',
+                `DisplayName in? ${JSON.stringify(moduleData)}`);
+            //preLoadTitle = ;
+            h2Title(preLoadTitle);
+            return preLoadTitle;
+        }
     }
     catch (e) {
         console.log("=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* Error: " + e);
     }
 }
-
+function h2Title(title) {
+    $('div.topOfPageItems').append($(`<h2 class="preloaded page-title">${title}</h2>`));
+}
 async function setupJson(moduleCompareFn, doCurtainMainModuleRow) {
     if (doCurtainMainModuleRow) {
         let curtainTarget = getMainModuleRow();
@@ -308,7 +317,7 @@ function divEltTo(elt, target, divClass) {
     return div;
 }
 
-function toggleVisibility(togglingDiv, andThen) {
+function toggleEltVisibility(togglingDiv, andThen) {
 
     if (togglingDiv.is(":visible")) {
         // may not need both of these two
@@ -324,9 +333,33 @@ function toggleVisibility(togglingDiv, andThen) {
     }
 }
 
+function getNodeId() {
+    let result = '';
+
+    try {
+        let preLoad = JSON.parse(g.preLoad);
+        let label = findModuleDataByName(preLoad, 'Label');
+        if (label) {
+            if (Array.isArray(label)) {
+                label = label[0];
+            }
+            result = label.NodeID;
+            if (!result) {
+                throw "no label NodeID";
+            }
+        }
+    }
+    catch (error) {
+        let sessionNI = sessionInfo.personNodeID;
+        if (sessionNI) {
+            result = sessionNI;
+        }
+    }
+    return result;
+}
 function findModuleByName(modulesJson, displayName) {
     let result = modulesJson
-            .find(m => m.DisplayModule == displayName);
+            .find(m => m.DisplayModule.match(displayName));
     return result;
 }
 function findModuleDataByName(modulesJson, displayName) {
@@ -509,8 +542,12 @@ function emitTopAndTabs(params) {
 }
 
 function createAnchorElement(text, url, klass) {
+    if (!url) {
+        url = text;
+    }
     let addClass = klass ? klass : "";
     let result = $(`<a class="link-ish ${addClass}" href="${url}">${text}</a>`);
+
     return result;
 }
 
@@ -644,7 +681,9 @@ function getTargetUntentavizeIfSo(title, fallbackDiv) {
 }
 function getModuleEltTitle(moduleJson) {
     let displayModule = moduleJson.DisplayModule;
-    let moduleTitle = displayModule.replace(/^\w+\./, "");
+    let moduleTitle = displayModule
+        .replace(/^\w+\./, "")
+        .replace(/\./g, "_");
     return moduleTitle;
 }
 function setupAnchorDivs(target) {
@@ -737,4 +776,9 @@ function initialCurtainsUp() {
     $('.topOfPageItems').removeClass("d-none");
 
     $('#main-data-container').removeClass("d-none");
+}
+function initialCap(string) {
+    // https://stackoverflow.com/questions/18379254/regex-to-split-camel-case
+    let result = string.replace(/^./, function(str){ return str.toUpperCase(); });
+    return result;
 }

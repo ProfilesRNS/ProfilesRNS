@@ -106,7 +106,7 @@
         margin-right: 25px;
     }
 
-    #otherOptionsUlDiv {
+    #otherOptionsUlDiv, #hasSectionsUlDiv {
         margin-left: 25px;
         margin-right: 25px;
     }
@@ -191,10 +191,15 @@
         border-bottom: 1px solid #ccc;
     }
 
+.dropdown-no-bullet.gradient {
+    line-height: 16px;
+    font-size: 11px;
+    font-weight: 450;
+}
 .dropdown-no-bullet {
     list-style-type: none;
     border: 1px solid #ccc;
-    padding: 5px;
+    padding: 2px 5px;
     cursor: pointer;
 }
 

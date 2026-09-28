@@ -14,19 +14,20 @@ function setupTopNav() {
 
     $('#logoutA').on('click', emptyHistory);
 
+    let nodeId;
     if (sessionInfo.canEditPage) {
-        var firstPass = JSON.parse(g.dataURLs)[0].dataURL.split('=');
-        var nodeId = firstPass[1].slice(0, -2);
-        setUrlByAnchorId("editThisProfileA", gCommon.editMyProfileUrl + nodeId);
+        let firstPass = JSON.parse(g.dataURLs)[0].dataURL.split('=');
+        nodeId = firstPass[1].slice(0, -2);
+        setUrlByAnchorId("editThisProfileA", gCommon.editProfileUrl + nodeId);
     } else {
-        $("#topNav2EditThis").remove(); 
+        $("#topNav2EditThis").remove();
     }
 
-    if (nodeId === sessionInfo.personNodeID.toString()) {
+    if (sessionInfo.personNodeID.toString() === nodeId) {
         $("#topNav2EditThis").remove(); 
     }
-    setUrlByAnchorId("editMyProfileA", gCommon.editMyProfileUrl + sessionInfo.personNodeID);
-    setUrlByAnchorId("manageProxiesA", gCommon.manageProxiesUrl);
+    setUrlByAnchorId("editMyProfileA", gCommon.editProfileUrl + sessionInfo.personNodeID);
+    setUrlByAnchorId("manageProxiesA", gCommon.manageProxiesUrl + "0");
     setUrlByAnchorId("dashboardA", gCommon.dashboardUrl + sessionInfo.personNodeID)
     setUrlByAnchorId("opportunitySearchA", gCommon.opportunitySearch);
     setUrlByAnchorId("viewMyListA", gCommon.viewMyListUrl)
@@ -46,9 +47,6 @@ function setupTopNav() {
 
     $(`#topNav2White`).addClass(`${gCommon.cols3or12}`);
 
-    if (!sessionInfo.canEditPage) {
-        $("#topNav2EditThis").remove();       
-    }
     //if person does not have a profile they will not see the following menu items
     if (!sessionInfo.personNodeID>0) {
         $("#topNav2Edit").remove();        

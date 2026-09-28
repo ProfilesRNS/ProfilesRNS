@@ -341,6 +341,12 @@
     <IsActive>1</IsActive>
     <Script>EXEC [Profile.Cache].[List.Export.UpdatePublications]</Script>
   </Row>
+    <Row>
+    <JobGroup>7</JobGroup>
+    <Step>18</Step>
+    <IsActive>1</IsActive>
+    <Script>EXEC [Profile.Data].[Person.Filter.UpdateFilters]</Script>
+  </Row>
   <Row>
     <JobGroup>8</JobGroup>
     <Step>1</Step>

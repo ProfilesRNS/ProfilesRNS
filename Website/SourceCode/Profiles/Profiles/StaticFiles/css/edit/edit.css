@@ -1,0 +1,131 @@
+﻿html, body {
+    font-family: Arial, sans-serif;
+}
+.pageTitle h2 {
+    text-align: left;
+    color: #AC1B30;
+    font-size: 28px;
+    font-weight: normal;
+    margin: 0px !important;
+}
+b {font-size:13px;}
+a {
+    text-decoration: none;
+    color:#3366CC;
+    font-size:13px;
+}
+
+.h2 {
+    color: #AC1B30;
+    font-size: 13px;
+}
+
+.ebordT {
+    border-top: 1px solid #999999 !important;
+}
+.ebordB {
+    border-bottom: 1px solid #999999 !important;
+}
+.ebordS {
+    border-left: 1px solid #999999 !important;
+}
+.ebordE {
+    border-right: 1px solid #999999 !important;
+}
+
+md_ebordE {
+}
+@media (min-width: 768px) {
+    .md_ebordE {
+        border-right: 1px solid #999999 !important;
+    }
+}
+
+.topRow {
+    background-color: #EEEBE5;
+    font-weight: bold;
+    color: #333;
+    font-family: Arial;
+    font-size: 13px;
+}
+.CenterSelect {
+    text-align: center;
+    width:75px;
+}
+
+.editPanel {
+    margin-top: 8px;
+    padding: 10px;
+    background-color: #EAF0F8;
+    border: 1px solid #999999;
+}
+.alignLeft {
+    text-align: left !important;
+    padding-left: 6px;
+}
+
+.oddRow {
+    background-color: #FFFFFF;
+   
+}
+
+.evenRow {
+    background-color: #F0F4F6;
+    
+}
+
+.alignCenter {
+    text-align: center !important;
+}
+.editMenuGT{margin-top:2px;}
+.editMenuLink {
+    display: contents;   
+}
+#editMenu {
+    margin-bottom: 16px;
+}
+#editMenu img {
+    vertical-align: unset;
+}
+#editTopNav {
+    padding-left: 0px;
+    margin-bottom: 12px;    
+}
+#editVisibility{display:none;}
+.moduleOptions {
+    color: #333;
+    font-family: Arial;
+    font-size: 13px;
+    padding-left:5px;
+}
+.save{margin-right:10px;}
+.inputLabel{margin-top:5px; font-weight:700;}
+#tableJobOpportunities {
+    /*border: 1px solid #999999;  */
+}
+.jobOpportunitiesFirstCell {
+    padding-left: 5px;
+}
+.pipe{margin:5px;}
+.alignCenterAction {
+    text-align: center !important;
+}
+.alignCenterAction img{cursor:pointer;
+                       margin:2px;
+}
+.jobCategoryDisplayLabel{
+                         font-weight:700;
+                         font-size:12px;
+}
+#moduleBody{padding-left:0px;}
+
+.w18 {
+    width: 18px !important;
+    height: 18px !important;
+}
+.italics {
+    font-style: italic;
+}
+.red {
+    color: red;
+}

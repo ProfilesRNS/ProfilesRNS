@@ -9,6 +9,10 @@ CREATE TABLE [Profile.Data].[Person.Filter](
 	[PersonFilter] [varchar](200) NULL,
 	[PersonFilterCategory] [varchar](200) NULL,
 	[PersonFilterSort] [int] NULL,
+	[ETLProcedure] [varchar](100) NULL,
+	[ETLParams] [varchar](max) NULL,
+	[IsActive] [bit] NULL,
+	[SearchDropdown] [varchar](max) NULL,
  CONSTRAINT [PK__PersonFilter__1CF15040] PRIMARY KEY CLUSTERED 
 (
 	[PersonFilterID] ASC
@@ -16,4 +20,7 @@ CREATE TABLE [Profile.Data].[Person.Filter](
 ) ON [PRIMARY]
 GO
 SET ANSI_PADDING OFF
+
+
+ALTER TABLE [Profile.Data].[Person.Filter] ADD  DEFAULT ((1)) FOR [IsActive]
 GO

@@ -2806,4 +2806,18 @@
     <_TagName>foaf:lastName</_TagName>
     <_PropertyLabel>last name</_PropertyLabel>
   </Row>
+  <Row>
+    <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupMentoring</PropertyGroupURI>
+    <PropertyURI>http://profiles.catalyst.harvard.edu/ontology/prns#hasMentoringJobOpportunity</PropertyURI>
+    <SortOrder>2</SortOrder>
+    <_TagName>prns:hasMentoringJobOpportunity</_TagName>
+    <_PropertyLabel>job opportunities</_PropertyLabel>
+  </Row>
+  <Row>
+    <PropertyGroupURI>http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupMentoring</PropertyGroupURI>
+    <PropertyURI>http://profiles.catalyst.harvard.edu/ontology/prns#mentoringOverview</PropertyURI>
+    <SortOrder>1</SortOrder>
+    <_TagName>prns:mentoringOverview</_TagName>
+    <_PropertyLabel>mentoring overview</_PropertyLabel>
+  </Row>
 </Table>

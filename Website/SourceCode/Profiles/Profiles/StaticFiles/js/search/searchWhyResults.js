@@ -107,7 +107,7 @@ function emitWhyResultsHeader(target, title1, title2) {
     let colspecsBold = makeWhyColspecs(true);
 
     let rowId = `whyResultsHeader`;
-    let row = makeRowWithColumns(target, rowId, colspecsBold, "borderOneSolid bordTop mt-3");
+    let row = makeRowWithColumns(target, rowId, colspecsBold, "borderOneSolid bordT mt-3");
 
     row.find(`#${rowId}Col0`).html(title1);
     row.find(`#${rowId}Col1`).html("<span class='whyResultsHeaderCol1'>" + title2 + "</span>");

@@ -45,12 +45,18 @@ async function setupSearchForm() {
 function respectPriorCriteria(prefix) {
     let priorResultsKey = makeSearchResultsKey(prefix);
     let priorResults = JSON.parse(fromSession(priorResultsKey));
-    if (priorResults && priorResults.SearchQuery) { // bullet-proofing, in case results were json error}
-        let searchInput = priorResults.SearchQuery.Keyword;
-        let exactCheckbox = priorResults.SearchQuery.KeywordExact;
 
-        restoreText(`${prefix}SearchInput`, searchInput);
-        restoreCheck(`${prefix}ExactCheckbox`, exactCheckbox);
+    // search input might come from session, or perhaps from traffic related to 'search other institutions'
+    let searchInput = tryMatchPathParam(`(/${gDirect.searchFor})$`);
+    let exactCheckbox = !! tryMatchPathParam(`(/${gDirect.exactPhrase})$`);
+
+    if (priorResults && priorResults.SearchQuery) { // bullet-proofing, in case results were json error}
+        searchInput = priorResults.SearchQuery.Keyword;
+        exactCheckbox = priorResults.SearchQuery.KeywordExact;
+        if (searchInput) {
+            restoreText(`${prefix}SearchInput`, searchInput);
+            restoreCheck(`${prefix}ExactCheckbox`, !! exactCheckbox);
+        }
 
         if (prefix == gSearch.people) {
             let lnameInput = priorResults.SearchQuery.LastName;
@@ -61,6 +67,7 @@ function respectPriorCriteria(prefix) {
             let departmentAllExcept = priorResults.SearchQuery.DepartmentExcept;
             let facultyTypes = priorResults.SearchQuery.FacultyType;
             let otherOptions = priorResults.SearchQuery.OtherOptions;
+            let profileContains = priorResults.SearchQuery.ProfileContains;
 
             restoreText('lnameInput', lnameInput);
             restoreText('fnameInput', fnameInput);
@@ -73,6 +80,7 @@ function respectPriorCriteria(prefix) {
             pushForRestore(department, nodesToClick);
             pushForRestore(facultyTypes, nodesToClick);
             pushForRestore(otherOptions, nodesToClick);
+            pushForRestore(profileContains, nodesToClick);
 
             restoreDropdowns(nodesToClick);
         }
@@ -93,7 +101,9 @@ function pushForRestore(candidate, target) {
 function restoreDropdowns(nodesToClick) {
     for (let i = 0; i < nodesToClick.length; i++) {
         let node = nodesToClick[i];
-        $(`#${node}`).closest('li').click();
+        if (node) {
+            $(`#${node}`).closest('li').click();
+        }
     }
     $('#dropbox2Col2').click(); // close the dropdowns by clicking outside
 }

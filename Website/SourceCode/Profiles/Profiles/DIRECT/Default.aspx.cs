@@ -17,7 +17,7 @@ using System.Xml;
 namespace Profiles.DIRECT
 {
     public partial class Default : System.Web.UI.Page
-    {     
+    {
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -27,8 +27,8 @@ namespace Profiles.DIRECT
             LoadPresentationXML();
             masterpage.PresentationXML = this.PresentationXML;
             masterpage.RDFData = null;
-            
-            if(Request.QueryString["searchrequest"]!=null)
+
+            if (Request.QueryString["searchrequest"] != null)
                 masterpage.SearchRequest = Request.QueryString["searchrequest"];
 
             masterpage.RDFNamespaces = null;
