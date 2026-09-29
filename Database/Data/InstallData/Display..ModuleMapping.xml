@@ -916,7 +916,7 @@
 		<GroupLabel>Mentoring</GroupLabel>
 		<PropertyLabel>job opportunities</PropertyLabel>
 		<Panel>main</Panel>
-		<SortOrder>51</SortOrder>
+		<SortOrder>52</SortOrder>
 		<LayoutDataModule>0</LayoutDataModule>
 		<PresentationType>P</PresentationType>
 		<PresentationSubject>http://xmlns.com/foaf/0.1/Person</PresentationSubject>
@@ -930,7 +930,7 @@
 		<GroupLabel>Mentoring</GroupLabel>
 		<PropertyLabel>mentoring overview</PropertyLabel>
 		<Panel>main</Panel>
-		<SortOrder>52</SortOrder>
+		<SortOrder>51</SortOrder>
 		<LayoutDataModule>0</LayoutDataModule>
 		<PresentationType>P</PresentationType>
 		<PresentationSubject>http://xmlns.com/foaf/0.1/Person</PresentationSubject>
