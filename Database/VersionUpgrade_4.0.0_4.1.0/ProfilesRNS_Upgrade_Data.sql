@@ -129,7 +129,6 @@ INSERT INTO #sql (s)
 	) t
 	ORDER BY DataMapID
 
-	select * from #sql
 
 DECLARE @s NVARCHAR(MAX)
 WHILE EXISTS (SELECT * FROM #sql)
@@ -209,14 +208,14 @@ EXEC [Ontology.].[UpdateDerivedFields]
 *******/
 
 update [Ontology.].PropertyGroup set SortOrder = SortOrder + 1 where SortOrder > (select SortOrder from [Ontology.].PropertyGroup where PropertyGroupURI = 'http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupOverview')
-insert into [Ontology.].PropertyGroup (PropertyGroupURI, SortOrder) values ('http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupMentoring', (select SortOrder from [Ontology.].PropertyGroup where PropertyGroupURI = 'http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupOverview'))
+insert into [Ontology.].PropertyGroup (PropertyGroupURI, SortOrder) values ('http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupMentoring', (select SortOrder + 1 from [Ontology.].PropertyGroup where PropertyGroupURI = 'http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupOverview'))
 
 INSERT INTO [Ontology.].[ClassGroupClass] (ClassGroupURI, ClassURI, SortOrder) 
-	VALUES ('http://profiles.catalyst.harvard.edu/ontology/catalyst#ClassGroupMentoring', 'http://profiles.catalyst.harvard.edu/ontology/prns#MentoringJobOpportunity',1)
+	VALUES ('http://profiles.catalyst.harvard.edu/ontology/prns#ClassGroupMentoring', 'http://profiles.catalyst.harvard.edu/ontology/prns#MentoringJobOpportunity',1)
 GO
 
-Insert into [Ontology.].PropertyGroupProperty (PropertyGroupURI, PropertyURI, SortOrder) values ('http://profiles.catalyst.harvard.edu/ontology/catalyst#PropertyGroupMentoring', 'http://profiles.catalyst.harvard.edu/ontology/prns#hasMentoringJobOpportunity', 2)
-Insert into [Ontology.].PropertyGroupProperty (PropertyGroupURI, PropertyURI, SortOrder) values ('http://profiles.catalyst.harvard.edu/ontology/catalyst#PropertyGroupMentoring', 'http://profiles.catalyst.harvard.edu/ontology/prns#mentoringOverview', 1)
+Insert into [Ontology.].PropertyGroupProperty (PropertyGroupURI, PropertyURI, SortOrder) values ('http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupMentoring', 'http://profiles.catalyst.harvard.edu/ontology/prns#hasMentoringJobOpportunity', 2)
+Insert into [Ontology.].PropertyGroupProperty (PropertyGroupURI, PropertyURI, SortOrder) values ('http://profiles.catalyst.harvard.edu/ontology/prns#PropertyGroupMentoring', 'http://profiles.catalyst.harvard.edu/ontology/prns#mentoringOverview', 1)
 
 EXEC [Ontology.].[UpdateDerivedFields]
 GO
@@ -373,9 +372,9 @@ BEGIN
 	update [Display.].[ModuleMapping] set SortOrder = SortOrder + 10 where SortOrder > @sortOrder and PresentationID = @PresentationID and tab = 'data'
 END
 insert into [Display.].[ModuleMapping] (PresentationID, ClassProperty, DisplayModule, DataStoredProc, Tab, LayoutModule, GroupLabel, PropertyLabel, ToolTip, Panel, SortOrder, LayoutDataModule, PresentationType, PresentationSubject, PresentationPredicate, PresentationObject)
-	values (@PresentationID, 'http://profiles.catalyst.harvard.edu/ontology/prns#hasMentoringJobOpportunity', 'Person.Mentoring.JobOpportunities', '[Display.Module].[Person.Mentoring.JobOpportunities]', 'data', 1, 'Mentoring', 'job opportunities', null, 'main', @sortOrder + 1, 0, 'P', 'http://xmlns.com/foaf/0.1/Person', null, null)
+	values (@PresentationID, 'http://profiles.catalyst.harvard.edu/ontology/prns#hasMentoringJobOpportunity', 'Person.Mentoring.JobOpportunities', '[Display.Module].[Person.Mentoring.JobOpportunities]', 'data', 1, 'Mentoring', 'job opportunities', null, 'main', @sortOrder + 2, 0, 'P', 'http://xmlns.com/foaf/0.1/Person', null, null)
 insert into [Display.].[ModuleMapping] (PresentationID, ClassProperty, DisplayModule, DataStoredProc, Tab, LayoutModule, GroupLabel, PropertyLabel, ToolTip, Panel, SortOrder, LayoutDataModule, PresentationType, PresentationSubject, PresentationPredicate, PresentationObject)
-	values (@PresentationID, 'http://profiles.catalyst.harvard.edu/ontology/prns#mentoringOverview', 'Person.Mentoring.Overview', '[Display.Module].[Person.Mentoring.Overview]', 'data', 1, 'Mentoring', 'mentoring overview', null, 'main', @sortOrder + 2, 0, 'P', 'http://xmlns.com/foaf/0.1/Person', null, null)
+	values (@PresentationID, 'http://profiles.catalyst.harvard.edu/ontology/prns#mentoringOverview', 'Person.Mentoring.Overview', '[Display.Module].[Person.Mentoring.Overview]', 'data', 1, 'Mentoring', 'mentoring overview', null, 'main', @sortOrder + 1, 0, 'P', 'http://xmlns.com/foaf/0.1/Person', null, null)
 
 update a set a._ClassPropertyID = b.NodeID from [Display.].[ModuleMapping] a join [RDF.].Node b on [RDF.].fnValueHash(null, null, ClassProperty) = ValueHash and a.ClassProperty is not null
 GO
