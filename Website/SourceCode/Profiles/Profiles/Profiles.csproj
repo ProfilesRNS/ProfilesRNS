@@ -528,6 +528,7 @@
     <Content Include="StaticFiles\js\connections\personConceptConnection.js" />
     <Content Include="StaticFiles\js\connections\personSimilarConnection.js" />
     <Content Include="StaticFiles\js\edit\editCommon.js" />
+    <Content Include="StaticFiles\js\edit\jobOppsEditing.js" />
     <Content Include="StaticFiles\js\edit\mentorOverviewEditing.js" />
     <Content Include="StaticFiles\js\group\groupPage.js" />
     <Content Include="StaticFiles\js\group\groupRolePage.js" />

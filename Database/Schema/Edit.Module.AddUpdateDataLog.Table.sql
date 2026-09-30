@@ -12,6 +12,7 @@ CREATE TABLE [Edit.Module].[AddUpdateDataLog](
 	[Json] [nvarchar](max) NULL,
 	[SessionID] [uniqueidentifier] NULL,
 	[Status] [varchar](max) NULL,
+	ViewSecurityGroup bigint NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[AddUpdateDataLogID] ASC

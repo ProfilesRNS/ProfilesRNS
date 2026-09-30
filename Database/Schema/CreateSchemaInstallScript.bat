@@ -807,6 +807,7 @@ type Profile.Import.PRNSWebservice.Pubmed.ParseBibliometricResults.StoredProcedu
 type Edit.Module.AddUpdateData.StoredProcedure.sql
 type Edit.Module.GetData.StoredProcedure.sql
 type Edit.Module.GetEditPropertyParams.StoredProcedure.sql
+type Edit.Module.SetVisibility.StoredProcedure.sql
 type Display.Module.Person.Mentoring.Overview.StoredProcedure.sql
 type Edit.Module.Person.Mentoring.Overview.getData.StoredProcedure.sql
 type Edit.Module.Person.Mentoring.Overview.StoredProcedure.sql
