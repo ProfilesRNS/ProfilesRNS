@@ -26,11 +26,11 @@ function loadJobOpportunitiesDiv(target) {
                 <div class="jobCategories mt-2" class="jobEditReq" aria-required="true">
                     <span class="inputLabel"><span class="red">*</span>Job Category</span>
                     <div class="mt-2">
-                        <div class="ms-2"><input type="checkbox" id="students" class="jobEditReq /><span class="ms-1">Students</span></div>
-                        <div class="ms-2"><input type="checkbox" id="faculty" class="jobEditReq /><span class="ms-1">Faculty</span></div>
+                        <div class="ms-2"><input type="checkbox" id="students" class="jobEditReq" /><span class="ms-1">Students</span></div>
+                        <div class="ms-2"><input type="checkbox" id="faculty" class="jobEditReq" /><span class="ms-1">Faculty</span></div>
  
-                        <div class="ms-2"><input type="checkbox" id="fellowsAndPostDocs" class="jobEditReq /><span class="ms-1">Fellows and PostDocs</span></div>
-                        <div class="ms-2"><input type="checkbox" id="researchStaff" class="jobEditReq /><span class="ms-1">Research Staff</span></div>
+                        <div class="ms-2"><input type="checkbox" id="fellowsAndPostDocs" class="jobEditReq" /><span class="ms-1">Fellows and PostDocs</span></div>
+                        <div class="ms-2"><input type="checkbox" id="researchStaff" class="jobEditReq" /><span class="ms-1">Research Staff</span></div>
                     </div>
                 </div>
                 <div class="red mt-2"><span>*</span> indicates required field</div>
@@ -46,7 +46,7 @@ function loadJobOpportunitiesDiv(target) {
         </div> <!-- jobOpportunitiesOuterDiv -->
     `);
     target.append(div);
-    div.find('.jobEditReq').on('change', validateJobOpp);
+    div.find('.jobEditReq').on('input', validateJobOpp);
 }
 function validateJobOpp() {
     let title =         $('#jobTitle').val()                       != '';

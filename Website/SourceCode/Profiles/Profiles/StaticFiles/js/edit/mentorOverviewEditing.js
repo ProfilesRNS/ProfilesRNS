@@ -28,7 +28,7 @@ function loadMentorOverviewDiv(target) {
         </div>
         <div id="mentoringEdit" class="editPanel mentoringAlternateDivs d-none">
 <!--                            <h2>edit</h2>-->
-                <div class="mt-1 ms-2">Enter mentor information below:</div>
+                <div class="mt-1 ms-2" aria-required="true"><span class="red">*</span> Enter mentor information below:</div>
                 <div class="editPanel container mt-2 mb-2 pt-0">
                     <div>
                         <span id="makeBold" title="bold the selection" class="italics link-ish ms-2">B</span>
@@ -43,24 +43,27 @@ function loadMentorOverviewDiv(target) {
                         </div>
                     </div>
                    <div class="row">
-                        <div class="col-12 ps-1 pt-1"><textarea rows="8" id="mentoringOverviewText"></textarea></div>
+                        <div class="col-12 ps-1 pt-1"> 
+                            <textarea rows="8" id="mentoringOverviewText" class="mentorOverviewEditReq"></textarea>
+                        </div>
                     </div>
                     
-                    <div class="ms-1 mb-1">I'm available to mentor:</div>
-                    <div class="ms-2"><input type="checkbox" id="studentsOnResearch" /> Students on Research</div>
-                    <div class="ms-2"><input type="checkbox" id="studentsOnCareerDevelopment" /> Students on Career Development</div>
-                    <div class="ms-2"><input type="checkbox" id="studentsOnWorkLifeBalance" /> Students on Work/Life Balance</div>
-                    <div class="ms-2"><input type="checkbox" id="facultyOnResearch" /> Faculty on Research</div>
-                    <div class="ms-2"><input type="checkbox" id="facultyOnCareerDevelopment" /> Faculty on Career Development</div>
-                    <div class="ms-2"><input type="checkbox" id="facultyOnWorkLifeBalance" /> Faculty on Work/Life Balance</div>
-                    <div class="ms-2"><input type="checkbox" id="residentsAndFellowsOnResearch" /> Residents and Fellows on Research</div>
-                    <div class="ms-2"><input type="checkbox" id="residentsAndFellowsOnCareerDevelopment" /> Residents and Fellows on Career Development</div>
-                    <div class="ms-2"><input type="checkbox" id="residentsAndFellowsOnWorkLifeBalance" /> Residents and Fellows on Work/Life Balance</div>
+                    <div class="ms-1 mb-1" aria-required="true"><span class="red">*</span> I'm available to mentor:</div>
+                    <div class="ms-2"><input type="checkbox" class="mentorOverviewEditReq" id="studentsOnResearch" /> Students on Research</div>
+                    <div class="ms-2"><input type="checkbox" class="mentorOverviewEditReq" id="studentsOnCareerDevelopment" /> Students on Career Development</div>
+                    <div class="ms-2"><input type="checkbox" class="mentorOverviewEditReq" id="studentsOnWorkLifeBalance" /> Students on Work/Life Balance</div>
+                    <div class="ms-2"><input type="checkbox" class="mentorOverviewEditReq" id="facultyOnResearch" /> Faculty on Research</div>
+                    <div class="ms-2"><input type="checkbox" class="mentorOverviewEditReq" id="facultyOnCareerDevelopment" /> Faculty on Career Development</div>
+                    <div class="ms-2"><input type="checkbox" class="mentorOverviewEditReq" id="facultyOnWorkLifeBalance" /> Faculty on Work/Life Balance</div>
+                    <div class="ms-2"><input type="checkbox" class="mentorOverviewEditReq" id="residentsAndFellowsOnResearch" /> Residents and Fellows on Research</div>
+                    <div class="ms-2"><input type="checkbox" class="mentorOverviewEditReq" id="residentsAndFellowsOnCareerDevelopment" /> Residents and Fellows on Career Development</div>
+                    <div class="ms-2"><input type="checkbox" class="mentorOverviewEditReq" id="residentsAndFellowsOnWorkLifeBalance" /> Residents and Fellows on Work/Life Balance</div>
                     
+                    <div class="red mt-2"><span>*</span> indicates required field</div>
                     <div>
                         <button class="cancelEdit link-ish">Cancel</a></button>
                         <span class="ms-1 me-1">|</span>
-                        <button class="saveMentorOverview link-ish save">Save</a></button>                    
+                        <button id="saveMentorOverview" class="link-ish save" disabled="true">Save</a></button>                    
                     </div>
                 </div>
             </div>
@@ -84,7 +87,16 @@ function loadMentorOverviewDiv(target) {
     $('#makeLinkAdd').on('click', makeLinkAdd);
     $('#makeLinkCancel').on('click', makeLinkCancel);
 
+    div.find('.mentorOverviewEditReq').on('input', validateMentorOverview);
     return div;
+}
+function validateMentorOverview() {
+    let mentoringOverviewText = $('#mentoringOverviewText').val()                       != '';
+    let categories =            $('input[type="checkbox"]:checked').length  > 0;
+
+    let valid = mentoringOverviewText && categories;
+
+    $('#saveMentorOverview').attr('disabled', valid ? false : true);
 }
 
 function makeLinkInvalidities(text, candidateUrl) {
@@ -122,12 +134,12 @@ async function setupMentorOverview(target) {
 
     let mentoringJson = await getDataViaPost(url, emitMentor);
 
-    $('.deleteMentorOverview').on('click', confirmDeleteMentorOverview);
-    $('.saveMentorOverview').on('click', saveMentorOverview);
+    $('.deleteMentorOverview').on('click', confirmDeleteMentorOverview); // maybe it should be id, not class
+    $('#saveMentorOverview').on('click', saveMentorOverview);
     $('.cancelEdit').on('click', function() {
         setupMentorOverview(target)});
     $('.editMentorOverview').on('click', function() {
-        emitMentorOverviewEdit(mentoringJson)});
+        editMentorOverview(mentoringJson)});
 }
 function emitMentor(mentoringJson) {
     emitMentorOverviewDisplay(mentoringJson);
@@ -190,7 +202,7 @@ function emitMentorOverviewDisplay(mentoringJson, target) {
         }
     }
 }
-function emitMentorOverviewEdit(mentoringOverview) {
+function editMentorOverview(mentoringOverview) {
     let newVsUpdate = mentoringIsEmpty(mentoringOverview);
 
     $('.mentoringAlternateDivs').hide();
@@ -215,6 +227,8 @@ function emitMentorOverviewEdit(mentoringOverview) {
     $("#residentsAndFellowsOnResearchProjects").prop("checked", mentoringOverview.residentsAndFellowsOnResearchProjects);
     $("#residentsAndFellowsOnCareerDevelopment").prop("checked", mentoringOverview.residentsAndFellowsOnCareerDevelopment);
     $("#residentsAndFellowsOnWorkLifeBalance").prop("checked", mentoringOverview.residentsAndFellowsOnWorkLifeBalance);
+
+    validateMentorOverview();
 }
 function confirmDeleteMentorOverview() {
     if (confirm("Are you sure you want to delete the Mentor information?")) {
