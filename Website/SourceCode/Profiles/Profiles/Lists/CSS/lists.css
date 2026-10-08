@@ -24,24 +24,4 @@
 	border-right: 1px solid #999999 !important;
 }
 
-.act-heading {
-	padding-bottom: 8px;
-	font-weight: bold;
-}
 
-
-/* The Modal (background) */
-.modal {
-	display: none; /* Hidden by default */
-	position: fixed; /* Stay in place */
-	z-index: 1; /* Sit on top */	
-	left: 25%;
-	
-}
-
-/* Modal Content */
-.modal-content {
-	padding: 25px;
-	position: absolute;
-	top: 50%;
-}
