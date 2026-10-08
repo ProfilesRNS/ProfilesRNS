@@ -14,7 +14,6 @@ namespace Profiles.Lists.Modules.Lists
     public partial class ManageLists : System.Web.UI.UserControl
     {
         SessionManagement sm;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             int page = (string.IsNullOrEmpty(Request.QueryString["page"]) ? 1 : Convert.ToInt32(Request.QueryString["page"]));
@@ -23,10 +22,9 @@ namespace Profiles.Lists.Modules.Lists
             this.FacultyRank = (string.IsNullOrEmpty(Request.QueryString["facultyrank"]) ? "" : Request.QueryString["facultyrank"].ToString());
 
             this.ProfilesList = new Utilities.DataIO.ProfilesList();
-
             this.ProfilesList = Profiles.Lists.Utilities.DataIO.GetPeople(this.Institution, this.FacultyRank);
 
-            litJS.Text += string.Format("<script>$('.pageTitle').children('h2').html('My Person List ({0})');userid ='{1}';</script>", Profiles.Lists.Utilities.DataIO.GetListCount(), sm.Session().UserID.ToString());
+            litJS.Text += string.Format("<script>$('.pageTitle').children('h2').html('My Person List ({0})')</script>", Profiles.Lists.Utilities.DataIO.GetListCount());
 
             this.Institution = (this.Institution.ToLower() == "(all institutions)" ? "" : this.Institution);
             this.FacultyRank = (this.FacultyRank.ToLower() == "(all faculty ranks)" ? "" : this.FacultyRank);
@@ -35,46 +33,18 @@ namespace Profiles.Lists.Modules.Lists
             switch (Request.QueryString["type"])
             {
                 case "map":
-                    SetTabs("map");
                     if (Profiles.Lists.Utilities.DataIO.GetListCount() == "0")
                     {
-                        NoList("Map view displays where the people in your list are located.");
+                        NoList();
                     }
                     else
                     {
                         pnlMap.Visible = true;
                         GetMap();
-
+                        SetTabs("map");
                     }
 
                     break;
-                case "saved":
-                   
-                    SetTabs("saved");
-                    this.ProfilesLists = new List<Utilities.DataIO.ProfilesList>();
-                    this.ProfilesLists = Utilities.DataIO.GetLists();
-
-                    if (Profiles.Lists.Utilities.DataIO.GetListCount() == "0")                    
-                        litJS.Text += "<script type='text/javascript'>$('#div-row-1').hide();$('#div-row-4').hide();$('#div-row-5').hide();$('#div-row-3-col-1').html('');$('#div-save-list-as').hide();$('.modalupdate').hide();</script>";
-                    
-                    if (this.ProfilesLists.Count == 0) 
-                        NoSavedLists(); 
-
-                    if (this.ProfilesLists.Count == 0 && Profiles.Lists.Utilities.DataIO.GetListCount() == "0")
-                    {
-                        NoList("On this page you can save your person list, view previously saved person lists, and combine person lists in different ways.");
-                    }
-                    else
-                    {
-                        gridSaved.DataSource = this.ProfilesLists;
-                        gridSaved.DataBind();
-
-                        cmdSaveListName.Attributes.Add("onclick", "Save(" + sm.Session().UserID.ToString() + ")");
-                        pnlSaved.Visible = true;
-                    }
-
-                    break;
-              
 
                 case "removefromsearch":
 
@@ -97,11 +67,10 @@ namespace Profiles.Lists.Modules.Lists
 
                     break;
                 case "summary":
-                    SetTabs("summary");
+
                     if (Profiles.Lists.Utilities.DataIO.GetListCount() == "0")
                     {
-                        NoList("Reports provide aggregate summaries of the institutions, departments, and faculty ranks of the people in your list.");
-
+                        NoList();
                     }
                     else
                     {
@@ -113,23 +82,24 @@ namespace Profiles.Lists.Modules.Lists
 
                         BuildStatForDimension(summarytype);
                         GetSummary(summarytype);
+                        SetTabs("summary");
                     }
 
 
                     break;
                 case "view":
                 default:
-                    SetTabs("view");
+
                     if (Profiles.Lists.Utilities.DataIO.GetListCount() == "0")
                     {
-                        NoList("");
+                        NoList();
                     }
                     else
                     {
                         pnlPeople.Visible = true;
 
                         EditList(page);
-
+                        SetTabs("view");
                     }
 
                     break;
@@ -137,7 +107,7 @@ namespace Profiles.Lists.Modules.Lists
                 case "deletefilter":
                     ApplyFilters();
 
-                    Profiles.Lists.Utilities.DataIO.DeleteFiltered(ListID, (this.Institution == "" ? null : this.Institution), (this.FacultyRank == "" ? null : this.FacultyRank));
+                    Profiles.Lists.Utilities.DataIO.DeleteFildered(ListID, (this.Institution == "" ? null : this.Institution), (this.FacultyRank == "" ? null : this.FacultyRank));
 
                     Response.Redirect(Root.Domain + "/lists/default.aspx?type=view");
                     break;
@@ -151,50 +121,44 @@ namespace Profiles.Lists.Modules.Lists
                     Response.Redirect(Root.Domain + "/lists/default.aspx?type=view");
                     break;
                 case "export":
-                    if (Profiles.Lists.Utilities.DataIO.GetListCount() == "0")
+
+                    if (!string.IsNullOrEmpty(Request.QueryString["ok"]))
                     {
-                        NoList("Download data about the people in your list as comma separated text files (*.csv), which you can open in Microsoft Excel and other programs.");
-                    }
-                    else
-                    {
-                        if (!string.IsNullOrEmpty(Request.QueryString["ok"]))
+                        switch (Request.QueryString["exporttype"])
                         {
-                            switch (Request.QueryString["exporttype"])
-                            {
 
-                                case "persons":
-                                    Profiles.Lists.Utilities.DataIO.GetPersons(ListID);
-                                    break;
+                            case "persons":
+                                Profiles.Lists.Utilities.DataIO.GetPersons(ListID);
+                                break;
 
-                                case "publications":
-                                    Profiles.Lists.Utilities.DataIO.GetPublications(ListID);
-                                    break;
-                                case "coconnections":
-                                    Profiles.Lists.Utilities.DataIO.GetCoauthorConnections(ListID);
-                                    break;
-                            }
-
-
+                            case "publications":
+                                Profiles.Lists.Utilities.DataIO.GetPublications(ListID);
+                                break;
+                            case "coconnections":
+                                Profiles.Lists.Utilities.DataIO.GetCoauthorConnections(ListID);
+                                break;
                         }
 
-                        SetTabs("export");
-                        pnlExport.Visible = true;
+
                     }
+
+                    SetTabs("export");
+                    pnlExport.Visible = true;
                     break;
 
 
 
                 case "coviz":
 
-                    SetTabs("coviz");
+
                     if (Profiles.Lists.Utilities.DataIO.GetListCount() == "0")
                     {
-                        NoList("The cluster graph shows the coauthor relationships among the people in your list.");
+                        NoList();
                     }
                     else
                     {
                         pnlCluster.Visible = true;
-
+                        SetTabs("coviz");
                         GetCoViz();
                     }
                     break;
@@ -222,12 +186,12 @@ namespace Profiles.Lists.Modules.Lists
         }
 
         private void ApplyFilters()
-        {
+        {            
             if (!string.IsNullOrEmpty(this.Institution))
                 this.ProfilesList.ListItems = this.ProfilesList.ListItems.FindAll(x => x.InstitutionName == this.Institution).ToList();
             if (!string.IsNullOrEmpty(this.FacultyRank))
                 this.ProfilesList.ListItems = this.ProfilesList.ListItems.FindAll(x => x.FacultyRank == (this.FacultyRank == "--" ? "" : this.FacultyRank)).ToList();
-
+            
         }
 
         private void BuildStatForDimension(string dimension)
@@ -281,21 +245,8 @@ namespace Profiles.Lists.Modules.Lists
 
 
             this.ListPager = new Pager(this.ProfilesList.ListItems.Count, page, 15);
-            string areis = "are";
-            string personpeople = "people";
-            string removepersonpeople = "Remove all";
-            if (totalitems == 1)
-            {
-                areis = "is";
-                personpeople = "person";
-                removepersonpeople = "Remove the";
-            }
-            if (totalfiltered == 1)
-            {
-                removepersonpeople = "Remove the";
-            }
-            litListStats.Text = string.Format("There {0} currently <span style='font-weight:bold; color:#900;'>{1}</span> {2} in your list.  Filter the list by institution or faculty rank.  <a href='#' onclick=\"$('.modalupdate').show(); removefilter();\">{3} {4} {2} shown</a> or just the selected people from your list.", areis, totalitems.ToString(), personpeople, removepersonpeople, totalfiltered.ToString());
-            litListStats.Text += "<div><a href='" + Root.Domain + "/lists/default.aspx?type=saved'>Save a copy</a> of your list so you can view it later or combine it with other lists; <a href='#' onclick=\"$('.modalupdate').show(); removecoauthors();\">replace the people</a> on your list with their coauthors; or,<a href='#' onclick=\"$('.modalupdate').show(); addcoauthors();\"> add their coauthors to your list.</a></div>";
+            litListStats.Text = string.Format("There are currently <span style='font-weight:bold; color:#900;'>{0}</span> people in your list.  Filter the list by institution or faculty rank.  <a href='#' onclick=\"$('.modalupdate').show(); removefilter();\">Remove all {1} people shown</a> or just the selected people from your list.", totalitems.ToString(), totalfiltered.ToString());
+
 
             litPagination.Text = "<script type='text/javascript'>" +
                     "_page = " + this.ListPager.CurrentPage + ";" +
@@ -312,7 +263,7 @@ namespace Profiles.Lists.Modules.Lists
             else
             {
 
-                NoList("");
+                NoList();
             }
         }
 
@@ -407,47 +358,7 @@ namespace Profiles.Lists.Modules.Lists
 
         }
 
-        protected void gridSaved_RowDataBound(Object sender, GridViewRowEventArgs e)
-        {
 
-            //ListID = dbreader["ListID"].ToString(),
-            //ListName = dbreader["ListName"].ToString(),
-            //                   Size = dbreader["size"].ToString(),
-            //                  CreateDate
-            switch (e.Row.RowType)
-            {
-                case DataControlRowType.Header:
-                    e.Row.Cells[4].Attributes.Add("style", "text-align:center;");
-                    e.Row.Cells[0].Attributes.Add("style", "width:400px;");
-                    break;
-                case DataControlRowType.DataRow:
-
-                    if (e.Row.RowState == DataControlRowState.Alternate)
-                    {
-                        e.Row.Attributes.Add("onmouseover", "doListTableRowOver(this);");
-                        e.Row.Attributes.Add("onmouseout", "doListTableRowOut(this,0);");
-                        e.Row.Attributes.Add("class", "evenRow");
-                    }
-                    else
-                    {
-                        e.Row.Attributes.Add("onmouseover", "doListTableRowOver(this);");
-                        e.Row.Attributes.Add("onmouseout", "doListTableRowOut(this,1);");
-                        e.Row.Attributes.Add("class", "oddRow");
-                    }
-
-                    e.Row.Cells[4].Attributes.Add("style", "text-align:center;");
-                    e.Row.Cells[3].Attributes.Add("style", "text-align:center;");
-                    e.Row.Cells[2].Attributes.Add("style", "padding-left:6px;");
-                    e.Row.Cells[0].Attributes.Add("style", "padding-left:6px;width:400px;");
-
-                    CheckBox ck = (CheckBox)e.Row.Cells[4].FindControl("chkRemove");
-                    ck.Attributes.Add("name", ((Profiles.Lists.Utilities.DataIO.ProfilesList)e.Row.DataItem).ListID);
-
-                    break;
-
-            }
-
-        }
 
         private void LoadAssets()
         {
@@ -485,23 +396,13 @@ namespace Profiles.Lists.Modules.Lists
         {
             litMap.Text = "<script>$(window).on('load', function() {" + string.Format("$('#iframe-map').attr('src','{0}/lists/modules/NetworkMapList/NetworkMapList.aspx?listid={1}');", Root.Domain, this.ListID) + "});</script>";
         }
-        private void NoSavedLists()
+        private void NoList()
         {
-            pnlSavedLists.Visible = false;
-        }
-        private void NoList(string msg)
-        {
-
-
-            string div = string.Format("<div style='float:left;margin-top:16px;width:100%;font-size:12px;line-height:16px;border-bottom:1px dotted #999;padding-bottom:12px;margin-bottom:6px;'>{0}</div>", msg);
-            if (msg == "") div = "";
-
-            NoLists.Text = string.Format("{0}<div style='margin-top:16px;font-weight:bold;text-align:left;float:left;'>You currently have no people in your list.</div>", div);
+            NoLists.Text = "<script>$('.content-main').remove();</script> <div style='margin-top:16px;font-weight:bold;text-align:left;float:left;'>You currently have no people on your list.</div>";
             NoLists.Visible = true;
         }
 
         private Profiles.Lists.Utilities.DataIO.ProfilesList ProfilesList { get; set; }
-        private List<Profiles.Lists.Utilities.DataIO.ProfilesList> ProfilesLists { get; set; }
         public string ListID { get; set; }
 
         private Pager ListPager { get; set; }

@@ -16,7 +16,7 @@ namespace Profiles.Lists.Modules.NetworkClusterList
         protected void InitAssets(string listid)
         {
             System.Web.UI.HtmlControls.HtmlLink NetworkBrowsercss = new System.Web.UI.HtmlControls.HtmlLink();
-            NetworkBrowsercss.Href = Root.Domain + "/profile/CSS/NetworkBrowser.css";
+            NetworkBrowsercss.Href = Root.Domain + "/Lists/Modules/NetworkClusterList/CSS/NetworkBrowser.css";
             NetworkBrowsercss.Attributes["rel"] = "stylesheet";
             NetworkBrowsercss.Attributes["type"] = "text/css";
             NetworkBrowsercss.Attributes["media"] = "all";            
@@ -24,17 +24,17 @@ namespace Profiles.Lists.Modules.NetworkClusterList
 
             HtmlGenericControl jsscript0 = new HtmlGenericControl("script");
             jsscript0.Attributes.Add("type", "text/javascript");
-            jsscript0.Attributes.Add("src", Root.Domain + "/profile/Modules/NetworkCluster/JavaScript/watchdog.js");
+            jsscript0.Attributes.Add("src", Root.Domain + "/Lists/Modules/NetworkClusterList/JavaScript/watchdog.js");
             Head1.Controls.Add(jsscript0);
 
             HtmlGenericControl jsscript1 = new HtmlGenericControl("script");
             jsscript1.Attributes.Add("type", "text/javascript");
-			jsscript1.Attributes.Add("src", Root.Domain + "/profile/Modules/NetworkCluster/scriptaculous/lib/prototype.js");
+			jsscript1.Attributes.Add("src", Root.Domain + "/Lists/Modules/NetworkClusterList/JavaScript/scriptaculous/lib/prototype.js");
             Head1.Controls.Add(jsscript1);
 
             HtmlGenericControl jsscript2 = new HtmlGenericControl("script");
             jsscript2.Attributes.Add("type", "text/javascript");
-			jsscript2.Attributes.Add("src", Root.Domain + "/profile/Modules/NetworkCluster/scriptaculous/src/scriptaculous.js");
+			jsscript2.Attributes.Add("src", Root.Domain + "/Lists/Modules/NetworkClusterList/JavaScript/scriptaculous/src/scriptaculous.js");
             Head1.Controls.Add(jsscript2);
 
             HtmlGenericControl jsscript3 = new HtmlGenericControl("script");

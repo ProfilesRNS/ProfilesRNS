@@ -7,13 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Profiles.Lists.Modules.Lists
-{
-
-
-    public partial class ManageLists
-    {
-
+namespace Profiles.Lists.Modules.Lists {
+    
+    
+    public partial class ManageLists {
+        
         /// <summary>
         /// pnlPeople control.
         /// </summary>
@@ -22,7 +20,7 @@ namespace Profiles.Lists.Modules.Lists
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlPeople;
-
+        
         /// <summary>
         /// litListStats control.
         /// </summary>
@@ -31,7 +29,7 @@ namespace Profiles.Lists.Modules.Lists
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litListStats;
-
+        
         /// <summary>
         /// ddlInstitution control.
         /// </summary>
@@ -40,7 +38,7 @@ namespace Profiles.Lists.Modules.Lists
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal ddlInstitution;
-
+        
         /// <summary>
         /// ddlFacultyRank control.
         /// </summary>
@@ -49,7 +47,7 @@ namespace Profiles.Lists.Modules.Lists
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal ddlFacultyRank;
-
+        
         /// <summary>
         /// gridSearchResults control.
         /// </summary>
@@ -58,7 +56,7 @@ namespace Profiles.Lists.Modules.Lists
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gridSearchResults;
-
+        
         /// <summary>
         /// litPagination control.
         /// </summary>
@@ -67,7 +65,7 @@ namespace Profiles.Lists.Modules.Lists
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litPagination;
-
+        
         /// <summary>
         /// pnlExport control.
         /// </summary>
@@ -76,7 +74,7 @@ namespace Profiles.Lists.Modules.Lists
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlExport;
-
+        
         /// <summary>
         /// pnlCluster control.
         /// </summary>
@@ -85,7 +83,7 @@ namespace Profiles.Lists.Modules.Lists
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlCluster;
-
+        
         /// <summary>
         /// litCluster control.
         /// </summary>
@@ -94,7 +92,7 @@ namespace Profiles.Lists.Modules.Lists
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litCluster;
-
+        
         /// <summary>
         /// pnlSummary control.
         /// </summary>
@@ -103,7 +101,7 @@ namespace Profiles.Lists.Modules.Lists
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlSummary;
-
+        
         /// <summary>
         /// litSumHeader control.
         /// </summary>
@@ -112,7 +110,7 @@ namespace Profiles.Lists.Modules.Lists
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litSumHeader;
-
+        
         /// <summary>
         /// litSumItem control.
         /// </summary>
@@ -121,7 +119,7 @@ namespace Profiles.Lists.Modules.Lists
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litSumItem;
-
+        
         /// <summary>
         /// litSummaryJS control.
         /// </summary>
@@ -130,7 +128,7 @@ namespace Profiles.Lists.Modules.Lists
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litSummaryJS;
-
+        
         /// <summary>
         /// pnlMap control.
         /// </summary>
@@ -139,7 +137,7 @@ namespace Profiles.Lists.Modules.Lists
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlMap;
-
+        
         /// <summary>
         /// litMap control.
         /// </summary>
@@ -148,61 +146,7 @@ namespace Profiles.Lists.Modules.Lists
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litMap;
-
-        /// <summary>
-        /// pnlSaved control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlSaved;
-
-        /// <summary>
-        /// txtListName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtListName;
-
-        /// <summary>
-        /// cmdSaveListName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button cmdSaveListName;
-
-        /// <summary>
-        /// pnlSavedLists control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlSavedLists;
-
-        /// <summary>
-        /// gridSaved control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gridSaved;
-
-        /// <summary>
-        /// txtRenameList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtRenameList;
-
+        
         /// <summary>
         /// NoLists control.
         /// </summary>
@@ -211,7 +155,7 @@ namespace Profiles.Lists.Modules.Lists
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal NoLists;
-
+        
         /// <summary>
         /// litJS control.
         /// </summary>

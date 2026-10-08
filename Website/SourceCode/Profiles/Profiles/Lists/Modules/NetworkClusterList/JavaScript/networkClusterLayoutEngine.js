@@ -55,127 +55,15 @@ ProfilesRNS_ClusterView = {
         // create force engine
         var force = ProfilesRNS_ClusterView.cfg.forces;
         ProfilesRNS_ClusterView.data.d3_force = d3.layout.force()
-            .charge(force.charge)
-            .gravity(force.gravity)
-            .linkDistance(force.linkDist)
-            .size([width, height]);
+			.charge(force.charge)
+			.gravity(force.gravity)
+			.linkDistance(force.linkDist)
+			.size([width, height]);
         // create display element for the graph
         ProfilesRNS_ClusterView.data.d3_svg = d3.select(targetElement).append("svg")
-            .attr("xmlns", "http://www.w3.org/2000/svg")
-            .attr("width", width)
-            .attr("height", height);
-    },
-    // =========================== PRIVATE FUNCTION ===========================
-    _materializeSvgStyles: function(svgEl) {
-        // need to get styles of classes that are defined in other style scripts and we need to inject that into a
-        // new svg document and then save that document (with the materialized styles)
-
-        function getStyle(className) {
-            for (var cssFile=0; cssFile < document.styleSheets.length; cssFile++) {
-                try {
-                    var classes = document.styleSheets[cssFile].rules || document.styleSheets[cssFile].cssRules
-                    for(var x=0;x<classes.length;x++) {
-                        if(classes[x].selectorText==className) {
-                            // build the style string
-                            return classes[x].style;
-                        }
-                    }
-                } catch(e) {}
-            }
-        }
-
-        // Need to copy the styles from the class definition to the node's style attribute
-        // 1) get a list of all classses found in the SVG
-        var targetClasses = {};
-        svgEl.querySelectorAll('*[class]').forEach((node)=>{
-            for(var [i, className] of node.classList.entries()) {
-                targetClasses[className] = true;
-            }
-        });
-        // 2) get the style definitions for each class
-        for (var className in targetClasses) {
-            targetClasses[className] = getStyle('.' + className);
-        }
-        // 3) replace all classes with their style definitions in a non-overriding manner
-        svgEl.querySelectorAll('*[class]').forEach((node)=>{
-            // for each class copy its style definition to the node
-            for(var [i, className] of node.classList.entries()) {
-                var targetClassDef = targetClasses[className];
-                for (var styleIdx = 0; styleIdx < targetClassDef.length; styleIdx++) {
-                    var styleName = targetClassDef[styleIdx];
-                    if (!node.style[styleName]) {
-                        node.style[styleName] = targetClassDef[styleName];
-                    }
-                }
-            }
-        });
-    },
-    // =========================== PUBLIC FUNCTION ===========================
-    save: function () {
-        const svgEl = ProfilesRNS_ClusterView.data.d3_svg[0][0];
-        // materialize the CSS styles into SVG elements
-        ProfilesRNS_ClusterView._materializeSvgStyles(svgEl);
-
-        const svg = (new XMLSerializer()).serializeToString(svgEl);
-        const element = document.createElement('a');
-        const mimeType = 'image/svg+xml'; // 'image/svg+xml;utf8';
-        const blob = new Blob([svg.toString()]);
-        element.style.display = "none";
-        element.href = window.URL.createObjectURL(blob);
-        element.target = '_blank';
-        element.mimeType = mimeType;
-        element.download = 'cluster-view.svg';
-        element.id = 'downloader';
-        document.body.appendChild(element);
-        element.click();
-        element.remove();
-    },
-    // =========================== PUBLIC FUNCTION ===========================
-    saveImg: function (scale) {
-        const svg = ProfilesRNS_ClusterView.data.d3_svg[0][0];
-        // materialize the CSS styles into SVG elements
-        ProfilesRNS_ClusterView._materializeSvgStyles(svg);
-
-        if (!scale) { scale = 2; }
-
-        const origWidth = svg.width.baseVal.value;
-        const origHeight = svg.height.baseVal.value;
-        const canvas = document.createElement('canvas');
-        canvas.style.width = origWidth;
-        canvas.style.height = origHeight;
-        const ctx = canvas.getContext('2d');
-        ctx.canvas.width = origWidth * scale;
-        ctx.canvas.height = origWidth * scale;
-
-        const data = (new XMLSerializer()).serializeToString(svg);
-        const DOMURL = window.URL || window.webkitURL || window;
-
-        function triggerDownload (imgURI) {
-            let evt = new MouseEvent('click', {
-                view: window,
-                bubbles: false,
-                cancelable: true
-            });
-            const a = document.createElement('a');
-            a.setAttribute('download', 'cluster-view.png');
-            a.setAttribute('href', imgURI);
-            a.setAttribute('target', '_blank');
-            a.dispatchEvent(evt);
-        }
-
-        const img = new Image();
-        const svgBlob = new Blob([data], {type: 'image/svg+xml;charset=utf-8'});
-        const url = DOMURL.createObjectURL(svgBlob);
-        img.onload = function () {
-            ctx.drawImage(img, 0, 0, this.width * scale, this.height * scale);
-            DOMURL.revokeObjectURL(url);
-
-            const imgURI = canvas
-                .toDataURL('image/png')
-                .replace('image/png', 'image/octet-stream');
-            triggerDownload(imgURI);
-        };
-        img.src = url;
+			.attr("xmlns", "http://www.w3.org/2000/svg")
+			.attr("width", width)
+			.attr("height", height);
     },
     // =========================== PUBLIC FUNCTION ===========================
     loadNetwork: function (baseURL, centerID) {
@@ -210,9 +98,9 @@ ProfilesRNS_ClusterView = {
 
             // at this point the graph should already be initialized so just start the animation
             ProfilesRNS_ClusterView.data.d3_force
-                .nodes(ProfilesRNS_ClusterView.data.nodes)
-                .links(ProfilesRNS_ClusterView.data.links)
-                .start();
+				.nodes(ProfilesRNS_ClusterView.data.nodes)
+				.links(ProfilesRNS_ClusterView.data.links)
+				.start();
 
             // < Draw the visualization elements >
 
@@ -220,40 +108,40 @@ ProfilesRNS_ClusterView = {
             var tPubs = ProfilesRNS_ClusterView.getDataAttributeRange("NODE", "pubs");
             // draw the links
             ProfilesRNS_ClusterView.data.d3_svg.selectAll(".link")
-                .data(ProfilesRNS_ClusterView.data.links)
-                .enter().append("line")
-                .attr("class", "link")
-                .style("stroke-width", function (d) {
-                    return 1 + (d.n - tSharedPubs.min + 0.1) / (tSharedPubs.max - tSharedPubs.min + 0.1) * 9;
-                });
+				.data(ProfilesRNS_ClusterView.data.links)
+				.enter().append("line")
+				.attr("class", "link")
+				.style("stroke-width", function (d) {
+				    return 1 + (d.n - tSharedPubs.min + 0.1) / (tSharedPubs.max - tSharedPubs.min + 0.1) * 9;
+				});
 
             //					return (d.n / tSharedPubs.max) * 10 + 0.5; });
             //				.style("stroke-width", function (d) { return 0.5 + Math.min(Math.pow(d.w, 0.75), 15); });
             // draw the nodes
             var gnodes = ProfilesRNS_ClusterView.data.d3_svg.selectAll("g.gnode")
-                .data(ProfilesRNS_ClusterView.data.nodes)
-                .enter()
-                .append('g')
-                .classed('gnode', true)
-                .attr('id', function (d) { return d.nodeid; })
+				.data(ProfilesRNS_ClusterView.data.nodes)
+				.enter()
+				.append('g')
+				.classed('gnode', true)
+				.attr('id', function (d) { return d.nodeid; })
                 .on("dblclick", function (d) { window.open(d.uri, "_parent"); })
-                .call(ProfilesRNS_ClusterView.data.d3_force.drag);
+				.call(ProfilesRNS_ClusterView.data.d3_force.drag);
             // Add a circle to each node group
             gnodes.append("circle")
-                .attr("class", "node")
-                .attr("r", function (d) {
-                    return 5 + (d.pubs - tPubs.min + 0.1) / (tPubs.max - tPubs.min + 0.1) * 12;
-                })
+				.attr("class", "node")
+				.attr("r", function (d) {
+				    return 5 + (d.pubs - tPubs.min + 0.1) / (tPubs.max - tPubs.min + 0.1) * 12;
+				})
             //				.attr("r", function (d) { return 3 + Math.sqrt(d.pubs) / 2; })
-                .style("stroke", function (d) { return ProfilesRNS_ClusterView.data.colors_border(d.d); })
-                .style("fill-opacity", function (d) { return 0.8; })
-                .style("fill", function (d) { return ProfilesRNS_ClusterView.data.colors_fill(d.d); });
+				.style("stroke", function (d) { return ProfilesRNS_ClusterView.data.colors_border(d.d); })
+				.style("fill-opacity", function (d) { return 0.8; })
+				.style("fill", function (d) { return ProfilesRNS_ClusterView.data.colors_fill(d.d); });
 
             // Add a label to each node group.
             gnodes.append("text")
-                .text(function (d) { return d.nodeText; })
-                .attr("dy", "3px")
-                .attr("text-anchor", "middle");
+				.text(function (d) { return d.nodeText; })
+				.attr("dy", "3px")
+				.attr("text-anchor", "middle");
 
             // </ Draw the visualization elements >
 
@@ -273,15 +161,15 @@ ProfilesRNS_ClusterView = {
 
             // connect event handler (for nodes)
             ProfilesRNS_ClusterView.data.d3_svg.selectAll("g.gnode")
-                .on("mouseover", ProfilesRNS_ClusterView._eventRouter_mouseover)
-                .on("mouseout", ProfilesRNS_ClusterView._eventRouter_mouseout)
-                .on("mousedown", ProfilesRNS_ClusterView._eventRouter_mousedown);
+				.on("mouseover", ProfilesRNS_ClusterView._eventRouter_mouseover)
+				.on("mouseout", ProfilesRNS_ClusterView._eventRouter_mouseout)
+				.on("mousedown", ProfilesRNS_ClusterView._eventRouter_mousedown);
 
             // connect event handler (for links)
             ProfilesRNS_ClusterView.data.d3_svg.selectAll(".link")
-                .on("mouseover", ProfilesRNS_ClusterView._eventRouter_mouseover)
-                .on("mouseout", ProfilesRNS_ClusterView._eventRouter_mouseout)
-                .on("mousedown", ProfilesRNS_ClusterView._eventRouter_mousedown);
+				.on("mouseover", ProfilesRNS_ClusterView._eventRouter_mouseover)
+				.on("mouseout", ProfilesRNS_ClusterView._eventRouter_mouseout)
+				.on("mousedown", ProfilesRNS_ClusterView._eventRouter_mousedown);
 
 
             // ++++ SEND EVENT SIGNAL TO USER CALLBACK FOR ADDITIONAL FUNCTIONALITY AND PROPER SEPARATION OF CODE ++++
@@ -382,15 +270,15 @@ ProfilesRNS_ClusterView = {
         if (ProfilesRNS_ClusterView.data.active === false) { return; }
         // update link positions
         ProfilesRNS_ClusterView.data.d3_svg.selectAll('.link')
-            .attr("x1", function (d) { return Math.max(Math.min(d.source.x, ProfilesRNS_ClusterView.cfg.width - 50), 50); })
-            .attr("y1", function (d) { return Math.max(Math.min(d.source.y, ProfilesRNS_ClusterView.cfg.height - 20), 20); })
-            .attr("x2", function (d) { return Math.max(Math.min(d.target.x, ProfilesRNS_ClusterView.cfg.width - 50), 50); })
-            .attr("y2", function (d) { return Math.max(Math.min(d.target.y, ProfilesRNS_ClusterView.cfg.height - 20), 20); });
+			.attr("x1", function (d) { return Math.max(Math.min(d.source.x, ProfilesRNS_ClusterView.cfg.width - 50), 50); })
+			.attr("y1", function (d) { return Math.max(Math.min(d.source.y, ProfilesRNS_ClusterView.cfg.height - 20), 20); })
+			.attr("x2", function (d) { return Math.max(Math.min(d.target.x, ProfilesRNS_ClusterView.cfg.width - 50), 50); })
+			.attr("y2", function (d) { return Math.max(Math.min(d.target.y, ProfilesRNS_ClusterView.cfg.height - 20), 20); });
         // update node positions (specialized to force circlular orbits)
         ProfilesRNS_ClusterView.data.d3_svg.selectAll('g.gnode')
-            .attr("transform", function (d) {
-                return 'translate(' + [Math.max(Math.min(d.x, ProfilesRNS_ClusterView.cfg.width - 50), 50), Math.max(Math.min(d.y, ProfilesRNS_ClusterView.cfg.height - 20), 20)] + ')';
-            });
+			.attr("transform", function (d) {
+			    return 'translate(' + [Math.max(Math.min(d.x, ProfilesRNS_ClusterView.cfg.width - 50), 50), Math.max(Math.min(d.y, ProfilesRNS_ClusterView.cfg.height - 20), 20)] + ')';
+			});
     },
     // =========================== PRIVATE FUNCTION (INTERACTION EVENT HANDLERS) ===========================
     _extractKeys: function (mouseEvent) {
@@ -442,11 +330,11 @@ ProfilesRNS_ClusterView = {
             case "NODE_ALT_IN":
             case "NODE_SHIFT_IN":
                 ProfilesRNS_ClusterView.data.d3_svg.selectAll(".link")
-                    .style('stroke', function (l) { return (obj === l.source || obj === l.target) ? '#F00' : '#BBB'; })
-                    .style('stroke-opacity', function (l) { return (obj === l.source || obj === l.target) ? 1 : 0.45; });
+					.style('stroke', function (l) { return (obj === l.source || obj === l.target) ? '#F00' : '#BBB'; })
+					.style('stroke-opacity', function (l) { return (obj === l.source || obj === l.target) ? 1 : 0.45; });
                 ProfilesRNS_ClusterView.data.d3_svg.selectAll("g.gnode circle")
-                    .style('stroke', function (d) { return ProfilesRNS_ClusterView._neighboring(d, obj) ? '#F00' : ProfilesRNS_ClusterView.data.colors_border(d.d); })
-                    .style('stroke-width', function (d) { return ProfilesRNS_ClusterView._neighboring(d, obj) ? '2px' : '1px'; });
+					.style('stroke', function (d) { return ProfilesRNS_ClusterView._neighboring(d, obj) ? '#F00' : ProfilesRNS_ClusterView.data.colors_border(d.d); })
+					.style('stroke-width', function (d) { return ProfilesRNS_ClusterView._neighboring(d, obj) ? '2px' : '1px'; });
                 break;
             case "NODE_OUT":
             case "EDGE_OUT":
@@ -457,11 +345,11 @@ ProfilesRNS_ClusterView = {
             case "NODE_SHIFT_OUT":
             case "EDGE_SHIFT_OUT":
                 ProfilesRNS_ClusterView.data.d3_svg.selectAll("g.gnode circle")
-                    .style('stroke', function (d) { return ProfilesRNS_ClusterView.data.colors_border(d.d); })
-                    .style('stroke-width', '1px');
+					.style('stroke', function (d) { return ProfilesRNS_ClusterView.data.colors_border(d.d); })
+					.style('stroke-width', '1px');
                 ProfilesRNS_ClusterView.data.d3_svg.selectAll(".link")
-                    .style('stroke', '#BBB')
-                    .style('stroke-opacity', 0.45);
+					.style('stroke', '#BBB')
+					.style('stroke-opacity', 0.45);
                 break;
             case "EDGE_IN":
             case "EDGE_CTRL_IN":
@@ -470,15 +358,15 @@ ProfilesRNS_ClusterView = {
             case "EDGE_CLICK":
                 // highlight link
                 d3.select(el)
-                    .style('stroke', '#F00')
-                    .style('stroke-opacity', 1);
+					.style('stroke', '#F00')
+					.style('stroke-opacity', 1);
                 // highlight the two nodes
                 d3.select($("" + obj.nodeid1)).selectAll('circle')
-                    .style('stroke', '#F00')
-                    .style('stroke-width', '2px');
+					.style('stroke', '#F00')
+					.style('stroke-width', '2px');
                 d3.select($("" + obj.nodeid2)).selectAll('circle')
-                    .style('stroke', '#F00')
-                    .style('stroke-width', '2px');
+					.style('stroke', '#F00')
+					.style('stroke-width', '2px');
                 break;
             case "NODE_CLICK":
             case "NODE_DRAGSTART":

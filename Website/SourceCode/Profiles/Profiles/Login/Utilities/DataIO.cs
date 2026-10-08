@@ -78,6 +78,7 @@ namespace Profiles.Login.Utilities
                     sm.Session().ViewSecurityGroup = -20;
                     Session session = sm.Session();
                     SessionUpdate(ref session);
+                    Lists.Utilities.DataIO.GetList();
                     SessionActivityLog();
                 }
 

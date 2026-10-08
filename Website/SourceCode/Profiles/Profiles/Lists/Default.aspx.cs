@@ -31,7 +31,7 @@ namespace Profiles.Lists
 
             this.PresentationXML = new XmlDocument();
 
-            this.PresentationXML.LoadXml(System.IO.File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "/Lists/PresentationXML/MyLists.xml"));
+            this.PresentationXML.LoadXml(System.IO.File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "/Lists/PresentationXML/MyLists.xml"));            
             masterpage.PresentationXML = this.PresentationXML;
         }
 
@@ -52,7 +52,7 @@ namespace Profiles.Lists
         public static string DeleteSingle(string listid, string personid)
         {
 
-            Lists.Utilities.DataIO.AddRemovePerson(listid, personid, true);
+            Lists.Utilities.DataIO.AddRemovePerson(listid, personid,true);
             return Lists.Utilities.DataIO.GetListCount();
         }
         [System.Web.Services.WebMethod]
@@ -62,60 +62,11 @@ namespace Profiles.Lists
             Lists.Utilities.DataIO.DeleteSelected(listid, personids);
             return Lists.Utilities.DataIO.GetListCount();
         }
-
-        [System.Web.Services.WebMethod]
-        public static void AddCoauthors()
-        {
-            Lists.Utilities.DataIO.AddRemoveCoAuthors("Add");
-        }
-
-        [System.Web.Services.WebMethod]
-        public static void RemoveCoauthors()
-        {
-            Lists.Utilities.DataIO.AddRemoveCoAuthors("Replace");
-        }
-
-        //AddUpdateList Proc
-        [System.Web.Services.WebMethod]
-        public static void Save(string listid, string name)
-        {
-            Profiles.Lists.Utilities.DataIO.AddUpdateList("Save", listid, name);
-        }
-
-        [System.Web.Services.WebMethod]
-        public static void AddUpdateList(string action,string listid)
-        {
-            List<string> listids = listid.Split(',').ToList();
-            if (action == "Delete")
-                foreach (string lid in listids)
-                {
-                    Lists.Utilities.DataIO.AddUpdateList(action, lid, "");
-                }
-            else
-                Lists.Utilities.DataIO.AddUpdateList(action,listid , "");
-        }
-        [System.Web.Services.WebMethod]
-        public static void RenameList(string listid, string name)
-        {
-            Lists.Utilities.DataIO.AddUpdateList("Rename", listid, name);
-        }
-
-
-        //ModifyActiveList       
-        [System.Web.Services.WebMethod]
-        public static void ModifyActiveList(string action,string listids)
-        {
-            Lists.Utilities.DataIO.ModifyActiveList(action, listids);
-        }
-
         [System.Web.Services.WebMethod]
         public static void ClearList(string ListID)
         {
-            Profiles.Lists.Utilities.DataIO.DeleteFiltered(ListID, null, null);
+            Profiles.Lists.Utilities.DataIO.DeleteFildered(ListID, null,null);
         }
-
-
-
         public XmlDocument PresentationXML { get; set; }
 
     }
