@@ -32,12 +32,12 @@
 
         <div class="researcherprofiles--ucdstudentprojects-edit--header">
             <h2 class="researcherprofiles--ucdstudentprojects-edit--heading">
-                Student Projects. 
+                Student Projects
             </h2>
 
             <asp:Panel runat="server" ID="pnlAdd" Visible="true">
                 <div class="EditMenuItem">
-                    <asp:LinkButton ID="btnAdd" runat="server" OnClick="btnAdd_OnClick">Add Student Projects to Your Profile</asp:LinkButton>
+                    <asp:LinkButton ID="btnAdd" runat="server" OnClick="btnAdd_OnClick" CssClass="researcherprofiles--ucdstudentprojects-edit--btn-primary">Add student projects to your profile</asp:LinkButton>
                 </div>
             </asp:Panel>
         </div>
@@ -50,7 +50,7 @@
                 </p>
                 <div class="researcherprofiles--ucdstudentprojects-edit--available-group">
                     <p class="researcherprofiles--ucdstudentprojects-edit--subhead">
-                        <strong>Type of research</strong> (check all that apply)
+                        <strong>Type of research</strong> <span class="researcherprofiles--ucdstudentprojects-edit--hint">(check all that apply)</span>
                     </p>
 
                     <div class="researcherprofiles--ucdstudentprojects-edit--checkbox-group">
@@ -68,74 +68,73 @@
                         </div>
                         <div class="researcherprofiles--ucdstudentprojects-edit--option-row">
                             <label class="researcherprofiles--ucdstudentprojects-edit--other-field">
-                                <span class="researcherprofiles--ucdstudentprojects-edit--assistant-field-label">Name</span>
+                                <span class="researcherprofiles--ucdstudentprojects-edit--field-label">Other (please specify):</span>
                                 <asp:TextBox ID="txtOther" runat="server" OnTextChanged="itmChanged" CssClass="researcherprofiles--ucdstudentprojects-edit--text-input"></asp:TextBox>
                             </label>
                         </div>
                     </div>
                     <div class="EditMenuItem">
-                        <asp:LinkButton ID="btnSaveResearchType" runat="server" OnClick="btnSaveResearchType_OnClick" CausesValidation="false">Save Type of Research</asp:LinkButton>
+                        <asp:LinkButton ID="btnSaveResearchType" runat="server" OnClick="btnSaveResearchType_OnClick" CausesValidation="false" CssClass="researcherprofiles--ucdstudentprojects-edit--btn-primary">Save type of research</asp:LinkButton>
                     </div>
                 </div>
 
                 <div class="researcherprofiles--ucdstudentprojects-edit--project-fields" id="projectFields">
                     <p class="researcherprofiles--ucdstudentprojects-edit--subhead">
-                        Add/Edit Student Projects
+                        Add/edit student projects
                     </p>
                     <asp:HiddenField ID="hdnProjectKey" runat="server" />
                     <div class="researcherprofiles--ucdstudentprojects-edit--project-field-row">
                         <label class="researcherprofiles--ucdstudentprojects-edit--project-field">
-                            <span class="researcherprofiles--ucdstudentprojects-edit--project-field-label">Project Name:</span>
+                            <span class="researcherprofiles--ucdstudentprojects-edit--field-label">Project name:</span>
                             <asp:TextBox ID="txtProjectName" runat="server" CssClass="researcherprofiles--ucdstudentprojects-edit--text-input"></asp:TextBox>
                         </label>
                         <label class="researcherprofiles--ucdstudentprojects-edit--project-field">
-                            <span class="researcherprofiles--ucdstudentprojects-edit--project-field-label">Location:</span>
+                            <span class="researcherprofiles--ucdstudentprojects-edit--field-label">Location:</span>
                             <asp:TextBox ID="txtProjectLocation" runat="server" CssClass="researcherprofiles--ucdstudentprojects-edit--text-input"></asp:TextBox>
                         </label>
                         <label class="researcherprofiles--ucdstudentprojects-edit--project-field">
-                            <span class="researcherprofiles--ucdstudentprojects-edit--assisprojecttant-field-label">Objectives:</span>
+                            <span class="researcherprofiles--ucdstudentprojects-edit--field-label">Objectives:</span>
                             <asp:TextBox ID="txtProjectObjectives" runat="server" CssClass="researcherprofiles--ucdstudentprojects-edit--text-input"></asp:TextBox>
                         </label>
                         <label class="researcherprofiles--ucdstudentprojects-edit--project-field">
-                            <span class="researcherprofiles--ucdstudentprojects-edit--assisprojecttant-field-label">Student Responsibilities:</span>
+                            <span class="researcherprofiles--ucdstudentprojects-edit--field-label">Student responsibilities:</span>
                             <asp:TextBox ID="txtStudentResponsibilities" runat="server" CssClass="researcherprofiles--ucdstudentprojects-edit--text-input"></asp:TextBox>
                         </label>
 
                         <label class="researcherprofiles--ucdstudentprojects-edit--project-field">
-                            <span class="researcherprofiles--ucdstudentprojects-edit--assisprojecttant-field-label">Estimated Start Date:</span>
+                            <span class="researcherprofiles--ucdstudentprojects-edit--field-label">Estimated start date:</span>
                             <asp:TextBox ID="txtStartDate" runat="server" CssClass="researcherprofiles--ucdstudentprojects-edit--text-input" TextMode="Date"></asp:TextBox>
                         </label>
                         <label class="researcherprofiles--ucdstudentprojects-edit--project-field">
-                            <span class="researcherprofiles--ucdstudentprojects-edit--assisprojecttant-field-label">Estimated End Data:</span>
+                            <span class="researcherprofiles--ucdstudentprojects-edit--field-label">Estimated end date:</span>
                             <asp:TextBox ID="txtEndDate" runat="server" CssClass="researcherprofiles--ucdstudentprojects-edit--text-input" TextMode="Date"></asp:TextBox>
                         </label>
 
                         <label class="researcherprofiles--ucdstudentprojects-edit--project-field">
-                            <span class="researcherprofiles--ucdstudentprojects-edit--assisprojecttant-field-label">Link to related information:</span>
+                            <span class="researcherprofiles--ucdstudentprojects-edit--field-label">Link to related information:</span>
                             <asp:TextBox ID="txtLink" runat="server" CssClass="researcherprofiles--ucdstudentprojects-edit--text-input"></asp:TextBox>
                         </label>
                         <label class="researcherprofiles--ucdstudentprojects-edit--project-field">
-                            <span class="researcherprofiles--ucdstudentprojects-edit--assisprojecttant-field-label">Optional Contact information if different than UC Davis Profile:</span>
+                            <span class="researcherprofiles--ucdstudentprojects-edit--field-label">Optional contact information if different than UC Davis profile:</span>
                             <asp:TextBox ID="txtContactInfo" runat="server" CssClass="researcherprofiles--ucdstudentprojects-edit--text-input"></asp:TextBox>
                         </label>
 
-                        <div style="padding-bottom: 5px; text-align: left;">
+                        <div class="researcherprofiles--ucdstudentprojects-edit--actions">
                             <asp:LinkButton ID="btnAddProject" runat="server" CausesValidation="False" OnClick="btnAddProject_OnClick"
-                                Text="Add Student Project" ></asp:LinkButton>
-                            &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;
+                                CssClass="researcherprofiles--ucdstudentprojects-edit--btn-primary" Text="Add student project" ></asp:LinkButton>
                             <asp:LinkButton ID="btnCancel" runat="server" CausesValidation="False" OnClick="btnCancel_OnClick"
-                                Text="Cancel"></asp:LinkButton>
+                                CssClass="researcherprofiles--ucdstudentprojects-edit--btn-cancel" Text="Cancel"></asp:LinkButton>
                         </div>
 
                     </div>
                 </div>
 
                 <p class="researcherprofiles--ucdstudentprojects-edit--subhead">
-                    Current Student Projects
+                    Current student projects
                 </p>
 
                 <asp:GridView ID="GridViewPlugin" runat="server" AutoGenerateColumns="False" CellPadding="4"
-                    DataKeyNames="Name, Location" GridLines="Both"
+                    CssClass="researcherprofiles--ucdstudentprojects-edit--table" DataKeyNames="Name, Location" GridLines="Both"
                     OnRowCancelingEdit="GridViewPlugin_RowCancelingEdit" OnRowDataBound="GridViewPlugin_RowDataBound"
                     OnRowDeleting="GridViewPlugin_RowDeleting" OnRowEditing="GridViewPlugin_RowEditing"
                     OnRowUpdated="GridViewPlugin_RowUpdated" OnRowUpdating="GridViewPlugin_RowUpdating"
@@ -143,7 +142,7 @@
                     <HeaderStyle CssClass="topRow" BorderStyle="Solid" BorderWidth="1px" />
                     <RowStyle BorderStyle="Solid" BorderWidth="1px" />
                     <Columns>
-                        <asp:TemplateField HeaderText="Project Name">
+                        <asp:TemplateField HeaderText="Project name">
                             <ItemTemplate>
                                 <asp:Label ID="lblName" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
                             </ItemTemplate>
@@ -162,13 +161,13 @@
                                         <tr>
                                             <td>
                                                 <asp:ImageButton OnClick="ibUp_Click" runat="server" CommandArgument="up" CommandName="action"
-                                                    ID="ibUp" ImageUrl="~/Edit/Images/icon_up.gif" AlternateText="Move Up" />
-                                                <asp:ImageButton runat="server" ID="ibUpGray" Enabled="false" Visible="false" ImageUrl="~/Edit/Images/Icon_rounded_ArrowGrayUp.png" AlternateText="Move Up" />
+                                                    ID="ibUp" ImageUrl="~/Edit/Images/icon_up.gif" AlternateText="Move up" />
+                                                <asp:ImageButton runat="server" ID="ibUpGray" Enabled="false" Visible="false" ImageUrl="~/Edit/Images/Icon_rounded_ArrowGrayUp.png" AlternateText="Move up" />
                                             </td>
                                             <td>
                                                 <asp:ImageButton runat="server" OnClick="ibDown_Click" ID="ibDown" CommandArgument="down"
-                                                    CommandName="action" ImageUrl="~/Edit/Images/icon_down.gif" AlternateText="Move Down" />
-                                                <asp:ImageButton runat="server" ID="ibDownGray" Enabled="false" Visible="false" ImageUrl="~/Edit/Images/Icon_rounded_ArrowGrayDown.png" AlternateText="Move Down" />
+                                                    CommandName="action" ImageUrl="~/Edit/Images/icon_down.gif" AlternateText="Move down" />
+                                                <asp:ImageButton runat="server" ID="ibDownGray" Enabled="false" Visible="false" ImageUrl="~/Edit/Images/Icon_rounded_ArrowGrayDown.png" AlternateText="Move down" />
                                             </td>
                                             <td>
                                                 <asp:ImageButton ID="lnkEdit" runat="server" ImageUrl="~/Edit/Images/icon_edit.gif"
@@ -191,9 +190,10 @@
         </asp:Panel>
 
         <asp:Panel runat="server" ID="pnlDeleteAll" Visible="false">
-            <div class="EditMenuItem">
-                <asp:LinkButton ID="btnDeleteAll" runat="server" OnClick="btnDeleteAll_OnClick" CausesValidation="false" 
-                    OnClientClick="Javascript:return confirm('Are you sure you want to delete all Student Project data?');" >Delete All Student Project data from Your Profile</asp:LinkButton>
+            <div class="EditMenuItem researcherprofiles--ucdstudentprojects-edit--delete-all">
+                <asp:LinkButton ID="btnDeleteAll" runat="server" OnClick="btnDeleteAll_OnClick" CausesValidation="false"
+                    CssClass="researcherprofiles--ucdstudentprojects-edit--delete-all-link"
+                    OnClientClick="Javascript:return confirm('Are you sure you want to delete all student project data?');" >Delete all student project data from your profile</asp:LinkButton>
             </div>
         </asp:Panel>
 
